@@ -17,9 +17,10 @@
 package io.vertx.scala.core
 
 import io.vertx.lang.scala.HandlerOps._
+
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
-import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.lang.scala.{AsyncResultWrapper, ScalaVerticle}
 import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.scala.core.http.HttpClient
 import io.vertx.scala.core.dns.DnsClientOptions
@@ -65,7 +66,7 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
 
 /**
   * The entry point into the Vert.x Core API.
-  * 
+  *
   * You use an instance of this class for functionality including:
   * <ul>
   *   <li>Creating TCP clients and servers</li>
@@ -78,12 +79,12 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
   *   <li>Getting a reference to the shared data API</li>
   *   <li>Deploying and undeploying verticles</li>
   * </ul>
-  * 
+  *
   * Most functionality in Vert.x core is fairly low level.
-  * 
+  *
   * To create an instance of this class you can use the static factory methods: [[io.vertx.scala.core.Vertx#vertx]],
   * [[io.vertx.scala.core.Vertx#vertx]] and [[io.vertx.scala.core.Vertx#clusteredVertxFuture]].
-  * 
+  *
   * Please see the user manual for more detailed usage information.
   */
 class Vertx(private val _asJava: Object)
@@ -334,9 +335,9 @@ class Vertx(private val _asJava: Object)
 
   /**
     * Stop the the Vertx instance and release any resources held by it.
-    * 
+    *
     * The instance cannot be used after it has been closed.
-    * 
+    *
     * The actual close is asynchronous and may not complete until after the call has returned.
     */
   def close(): Unit = {
@@ -352,10 +353,61 @@ class Vertx(private val _asJava: Object)
   }
 
   /**
+    * Deploy a verticle instance that you have created yourself.
+    * <p>
+    * Vert.x will assign the verticle a context and start the verticle.
+    * <p>
+    * The actual deploy happens asynchronously and may not complete until after the call has returned.
+    *
+    * @param verticle the verticle instance to deploy.
+    */
+  def deployVerticle(verticle: ScalaVerticle): Unit = {
+    asJava.asInstanceOf[JVertx].deployVerticle(verticle.asJava)
+  }
+
+  /**
+    * Like {@link #deployVerticle(Verticle)} but the completionHandler will be notified when the deployment is complete.
+    * <p>
+    * If the deployment is successful the result will contain a string representing the unique deployment ID of the
+    * deployment.
+    * <p>
+    * This deployment ID can subsequently be used to undeploy the verticle.
+    *
+    * @param verticle          the verticle instance to deploy
+    * @param completionHandler a handler which will be notified when the deployment is complete
+    */
+  def deployVerticle(verticle: ScalaVerticle, completionHandler: Handler[AsyncResult[String]]): Unit = {
+    asJava.asInstanceOf[JVertx].deployVerticle(verticle.asJava, completionHandler)
+  }
+
+  /**
+    * Like {@link #deployVerticle(Verticle)} but {@link io.vertx.core.DeploymentOptions} are provided to configure the
+    * deployment.
+    *
+    * @param verticle the verticle instance to deploy
+    * @param options  the deployment options.
+    */
+  def deployVerticle(verticle: ScalaVerticle, options: DeploymentOptions): Unit = {
+    asJava.asInstanceOf[JVertx].deployVerticle(verticle.asJava, options.asJava)
+  }
+
+  /**
+    * Like {@link #deployVerticle(Verticle, Handler)} but {@link io.vertx.core.DeploymentOptions} are provided to configure the
+    * deployment.
+    *
+    * @param verticle          the verticle instance to deploy
+    * @param options           the deployment options.
+    * @param completionHandler a handler which will be notified when the deployment is complete
+    */
+  def deployVerticle(verticle: ScalaVerticle, options: DeploymentOptions, completionHandler: Handler[AsyncResult[String]]): Unit = {
+    asJava.asInstanceOf[JVertx].deployVerticle(verticle.asJava, options.asJava, completionHandler)
+  }
+
+  /**
     * Deploy a verticle instance given a name.
-    * 
+    *
     * Given the name, Vert.x selects a  instance to use to instantiate the verticle.
-    * 
+    *
     * For the rules on how factories are selected please consult the user manual.
     * @param name the name.
     */
@@ -365,10 +417,10 @@ class Vertx(private val _asJava: Object)
 
   /**
     * Like [[io.vertx.scala.core.Vertx#deployVerticle]] but the completionHandler will be notified when the deployment is complete.
-    * 
+    *
     * If the deployment is successful the result will contain a String representing the unique deployment ID of the
     * deployment.
-    * 
+    *
     * This deployment ID can subsequently be used to undeploy the verticle.
     * @param name The identifier
     * @param completionHandler a handler which will be notified when the deployment is complete
@@ -400,7 +452,7 @@ class Vertx(private val _asJava: Object)
 
   /**
     * Undeploy a verticle deployment.
-    * 
+    *
     * The actual undeployment happens asynchronously and may not complete until after the method has returned.
     * @param deploymentID the deployment ID
     */
@@ -525,7 +577,7 @@ class Vertx(private val _asJava: Object)
 }
 
 object Vertx {
-  def apply(asJava: JVertx) = new Vertx(asJava)  
+  def apply(asJava: JVertx) = new Vertx(asJava)
   /**
     * Creates a non clustered instance using default options.
     * @return the instance
@@ -545,7 +597,7 @@ object Vertx {
 
   /**
     * Creates a clustered instance using the specified options.
-    * 
+    *
     * The instance is created asynchronously and the resultHandler is called with the result when it is ready.
     * @param options the options to usesee <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a>
     * @param resultHandler the result handler that will receive the result
