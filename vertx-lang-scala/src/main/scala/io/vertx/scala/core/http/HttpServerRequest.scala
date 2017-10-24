@@ -62,6 +62,7 @@ class HttpServerRequest(private val _asJava: Object)
   private var cached_6: Option[MultiMap] = None
   private var cached_7: Option[HttpConnection] = None
 
+
   /**
     * @return the response. Each instance of this class has an HttpServerResponse instance attached to it. This is used to send the response back to the client.
     */

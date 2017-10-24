@@ -45,6 +45,7 @@ class SharedData(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Get the cluster wide map with the specified name. The map is accessible to all nodes in the cluster and data
     * put into the map from any node is visible to to any other node.

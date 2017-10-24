@@ -45,6 +45,7 @@ class MongoService(private val _asJava: Object)
     extends MongoClient(_asJava)   {
 
 
+
   override def save(collection: String, document: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[String]]): MongoService = {
     asJava.asInstanceOf[JMongoService].save(collection.asInstanceOf[java.lang.String], document, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
     this

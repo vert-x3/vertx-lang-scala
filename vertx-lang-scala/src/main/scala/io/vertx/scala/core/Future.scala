@@ -33,6 +33,7 @@ class Future[T: TypeTag](private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[Handler[AsyncResult[T]]] = None
 
+
   /**
     * @return an handler completing this future
     */

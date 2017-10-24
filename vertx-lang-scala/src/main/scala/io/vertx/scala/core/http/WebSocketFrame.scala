@@ -38,6 +38,7 @@ class WebSocketFrame(private val _asJava: Object) {
   private var cached_0: Option[String] = None
   private var cached_1: Option[io.vertx.core.buffer.Buffer] = None
 
+
   /**
     * @return the content of this frame as a UTF-8 string and returns the converted string. Only use this for text frames.
     */

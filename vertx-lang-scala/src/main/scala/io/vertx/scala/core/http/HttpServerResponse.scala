@@ -58,6 +58,7 @@ class HttpServerResponse(private val _asJava: Object)
   private var cached_0: Option[MultiMap] = None
   private var cached_1: Option[MultiMap] = None
 
+
   /**
     * @return The HTTP headers
     */

@@ -41,6 +41,7 @@ class SQLRowStream(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   override def exceptionHandler(handler: Handler[Throwable]): SQLRowStream = {
     asJava.asInstanceOf[JSQLRowStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this

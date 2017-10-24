@@ -30,6 +30,7 @@ class ConcreteHandlerUserTypeExtension(private val _asJava: Object)
     with io.vertx.core.Handler[RefedInterface1]  {
 
 
+
   override def handle(arg0: RefedInterface1): Unit = {
     asJava.asInstanceOf[JConcreteHandlerUserTypeExtension].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }

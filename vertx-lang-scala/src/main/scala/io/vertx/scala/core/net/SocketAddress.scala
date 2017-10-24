@@ -31,6 +31,7 @@ class SocketAddress(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @return the address host or `null` for a domain socket
     */

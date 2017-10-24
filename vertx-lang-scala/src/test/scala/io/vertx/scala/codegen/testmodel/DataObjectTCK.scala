@@ -37,6 +37,7 @@ class DataObjectTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   def getDataObjectWithValues(): DataObjectWithValues = {
     DataObjectWithValues(asJava.asInstanceOf[JDataObjectTCK].getDataObjectWithValues())
   }

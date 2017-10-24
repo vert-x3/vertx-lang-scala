@@ -30,6 +30,7 @@ class ConcreteHandlerUserType(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   override def handle(arg0: RefedInterface1): Unit = {
     asJava.asInstanceOf[JConcreteHandlerUserType].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }

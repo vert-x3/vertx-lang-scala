@@ -32,6 +32,7 @@ class Factory(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
 }
 
 object Factory {

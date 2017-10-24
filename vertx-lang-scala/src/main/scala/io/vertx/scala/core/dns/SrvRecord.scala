@@ -28,6 +28,7 @@ class SrvRecord(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Returns the priority for this service record.
     */

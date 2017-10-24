@@ -43,6 +43,7 @@ class AsyncFile(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   override def handler(handler: Handler[io.vertx.core.buffer.Buffer]): AsyncFile = {
     asJava.asInstanceOf[JAsyncFile].handler({x: Buffer => handler.handle(x)})
     this

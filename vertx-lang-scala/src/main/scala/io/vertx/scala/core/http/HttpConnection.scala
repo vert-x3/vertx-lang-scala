@@ -45,6 +45,7 @@ class HttpConnection(private val _asJava: Object) {
   private var cached_0: Option[SocketAddress] = None
   private var cached_1: Option[SocketAddress] = None
 
+
   /**
     * @return the remote address for this connection
     */

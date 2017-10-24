@@ -42,6 +42,7 @@ object MqttMessage {
       def asJava = _asJava
   private var cached_0: Option[Int] = None
 
+
   /**
     * @return Message identifier
     */

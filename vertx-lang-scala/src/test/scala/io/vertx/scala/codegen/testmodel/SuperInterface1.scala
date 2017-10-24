@@ -27,6 +27,7 @@ class SuperInterface1(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   def superMethodWithBasicParams(b: Byte, s: Short, i: Int, l: Long, f: Float, d: Double, bool: Boolean, ch: Char, str: String): Unit = {
     asJava.asInstanceOf[JSuperInterface1].superMethodWithBasicParams(b.asInstanceOf[java.lang.Byte], s.asInstanceOf[java.lang.Short], i.asInstanceOf[java.lang.Integer], l.asInstanceOf[java.lang.Long], f.asInstanceOf[java.lang.Float], d.asInstanceOf[java.lang.Double], bool.asInstanceOf[java.lang.Boolean], ch.asInstanceOf[java.lang.Character], str.asInstanceOf[java.lang.String])
   }

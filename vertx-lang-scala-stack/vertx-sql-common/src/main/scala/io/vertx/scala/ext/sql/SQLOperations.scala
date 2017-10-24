@@ -119,6 +119,7 @@ object SQLOperations {
 
       def asJava = _asJava
 
+
   /**
     * Executes the given SQL <code>SELECT</code> statement which returns the results of the query.
     * @param sql the SQL to execute. For example <code>SELECT * FROM table ...</code>.

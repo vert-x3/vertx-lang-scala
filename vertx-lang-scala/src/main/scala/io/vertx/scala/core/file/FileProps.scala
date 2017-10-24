@@ -29,6 +29,7 @@ class FileProps(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * The date the file was created
     */

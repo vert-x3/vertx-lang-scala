@@ -32,6 +32,7 @@ class MultiMap(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Adds a new value with the specified name and value.
     * @param name The name

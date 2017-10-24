@@ -64,6 +64,7 @@ class Context(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Set an exception handler called when the context runs an action throwing an uncaught throwable.<p/>
     *

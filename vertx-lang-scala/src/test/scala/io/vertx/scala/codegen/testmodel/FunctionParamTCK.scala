@@ -34,6 +34,7 @@ class FunctionParamTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   def methodWithBasicParam(byteFunc: Byte => String, shortFunc: Short => String, integerFunc: Int => String, longFunc: Long => String, floatFunc: Float => String, doubleFunc: Double => String, booleanFunc: Boolean => String, charFunc: Char => String, stringFunc: String => String): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JFunctionParamTCK].methodWithBasicParam({x: java.lang.Byte => byteFunc(x.asInstanceOf[Byte]).asInstanceOf[java.lang.String]}, {x: java.lang.Short => shortFunc(x.asInstanceOf[Short]).asInstanceOf[java.lang.String]}, {x: java.lang.Integer => integerFunc(x.asInstanceOf[Int]).asInstanceOf[java.lang.String]}, {x: java.lang.Long => longFunc(x.asInstanceOf[Long]).asInstanceOf[java.lang.String]}, {x: java.lang.Float => floatFunc(x.asInstanceOf[Float]).asInstanceOf[java.lang.String]}, {x: java.lang.Double => doubleFunc(x.asInstanceOf[Double]).asInstanceOf[java.lang.String]}, {x: java.lang.Boolean => booleanFunc(x.asInstanceOf[Boolean]).asInstanceOf[java.lang.String]}, {x: java.lang.Character => charFunc(x.asInstanceOf[Char]).asInstanceOf[java.lang.String]}, {x: java.lang.String => stringFunc(x.asInstanceOf[String]).asInstanceOf[java.lang.String]}).asScala.map(x => x.asInstanceOf[String])
   }

@@ -40,6 +40,7 @@ object AbstractHandlerUserType {
 
       def asJava = _asJava
 
+
   override def handle(arg0: RefedInterface1): Unit = {
     asJava.asInstanceOf[JAbstractHandlerUserType].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }

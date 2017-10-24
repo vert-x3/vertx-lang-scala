@@ -34,6 +34,7 @@ class AuthProvider(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Authenticate a user.
     * 

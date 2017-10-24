@@ -36,6 +36,7 @@ class DnsClient(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Try to lookup the A (ipv4) or AAAA (ipv6) record for the given name. The first found will be used.
     * @param name the name to resolve

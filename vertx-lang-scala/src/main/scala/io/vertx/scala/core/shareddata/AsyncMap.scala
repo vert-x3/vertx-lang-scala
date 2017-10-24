@@ -33,6 +33,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Get a value from the map, asynchronously.
     * @param k the key

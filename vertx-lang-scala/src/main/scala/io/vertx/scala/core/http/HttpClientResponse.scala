@@ -52,6 +52,7 @@ class HttpClientResponse(private val _asJava: Object)
   private var cached_3: Option[NetSocket] = None
   private var cached_4: Option[HttpClientRequest] = None
 
+
   /**
     * @return the headers
     */

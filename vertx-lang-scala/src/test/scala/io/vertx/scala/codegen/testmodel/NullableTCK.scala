@@ -38,6 +38,7 @@ class NullableTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   def methodWithNonNullableByteParam(param: Byte): Boolean = {
     asJava.asInstanceOf[JNullableTCK].methodWithNonNullableByteParam(param.asInstanceOf[java.lang.Byte]).asInstanceOf[Boolean]
   }

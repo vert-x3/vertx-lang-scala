@@ -43,6 +43,7 @@ class GenericsTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   def methodWithByteParameterizedReturn(): GenericRefedInterface[Byte] = {
     GenericRefedInterface[Byte](asJava.asInstanceOf[JGenericsTCK].methodWithByteParameterizedReturn())
   }

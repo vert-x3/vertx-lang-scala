@@ -38,6 +38,7 @@ class NetServer(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Start listening on the port and host as configured in the <a href="../../../../../../../cheatsheet/NetServerOptions.html">NetServerOptions</a> used when
     * creating the server.

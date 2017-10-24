@@ -334,7 +334,7 @@ request.endHandler((v: java.lang.Void) => {
 
 ----
 
-This is such a common case, that Vert.x provides a `link:../../scaladocs/io/vertx/scala/core/http/HttpServerRequest.html#bodyHandler(io.vertx.core.Handler))[bodyHandler]` to do this
+This is such a common case, that Vert.x provides a `link:../../scaladocs/io/vertx/scala/core/http/HttpServerRequest.html#bodyHandler(io.vertx.core.Handler)[bodyHandler]` to do this
 for you. The body handler is called once when all the body has been received:
 
 [source,scala]
@@ -387,7 +387,7 @@ server.requestHandler((request: io.vertx.scala.core.http.HttpServerRequest) => {
 Vert.x can also handle file uploads which are encoded in a multi-part request body.
 
 To receive file uploads you tell Vert.x to expect a multi-part form and set an
-`link:../../scaladocs/io/vertx/scala/core/http/HttpServerRequest.html#uploadHandler(io.vertx.core.Handler))[uploadHandler]` on the request.
+`link:../../scaladocs/io/vertx/scala/core/http/HttpServerRequest.html#uploadHandler(io.vertx.core.Handler)[uploadHandler]` on the request.
 
 This handler will be called once for every
 upload that arrives on the server.
@@ -1421,7 +1421,7 @@ request.exceptionHandler((err: java.lang.Throwable) => {
 
 ----
 
-=== Handling http responses
+=== Handling HTTP responses
 
 You receive an instance of `link:../../scaladocs/io/vertx/scala/core/http/HttpClientResponse.html[HttpClientResponse]` into the handler that you specify in of
 the request methods or by setting a handler directly on the `link:../../scaladocs/io/vertx/scala/core/http/HttpClientRequest.html[HttpClientRequest]` object.
@@ -1635,7 +1635,7 @@ The idea here is it allows the server to authorise and accept/reject the request
 Sending large amounts of data if the request might not be accepted is a waste of bandwidth and ties up the server
 in reading data that it will just discard.
 
-Vert.x allows you to set a `link:../../scaladocs/io/vertx/scala/core/http/HttpClientRequest.html#continueHandler(io.vertx.core.Handler))[continueHandler]` on the
+Vert.x allows you to set a `link:../../scaladocs/io/vertx/scala/core/http/HttpClientRequest.html#continueHandler(io.vertx.core.Handler)[continueHandler]` on the
 client request object
 
 This will be called if the server sends back a `Status: 100 (Continue)` response to signify that it is ok to send
@@ -2040,7 +2040,7 @@ connection.shutdown()
 
 ----
 
-The `link:../../scaladocs/io/vertx/scala/core/http/HttpConnection.html#shutdownHandler(io.vertx.core.Handler))[shutdownHandler]` notifies when all streams have been closed, the
+The `link:../../scaladocs/io/vertx/scala/core/http/HttpConnection.html#shutdownHandler(io.vertx.core.Handler)[shutdownHandler]` notifies when all streams have been closed, the
 connection is not yet closed.
 
 It's possible to just send a `GOAWAY` frame, the main difference with a shutdown is that
@@ -2063,7 +2063,7 @@ connection.goAwayHandler((goAway: io.vertx.scala.core.http.GoAway) => {
 
 ----
 
-The `link:../../scaladocs/io/vertx/scala/core/http/HttpConnection.html#shutdownHandler(io.vertx.core.Handler))[shutdownHandler]` will be called when all current streams
+The `link:../../scaladocs/io/vertx/scala/core/http/HttpConnection.html#shutdownHandler(io.vertx.core.Handler)[shutdownHandler]` will be called when all current streams
 have been closed and the connection can be closed:
 
 [source,scala]

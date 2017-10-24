@@ -37,6 +37,7 @@ class SQLClient(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Execute a one shot SQL statement that returns a single SQL row. This method will reduce the boilerplate code by
     * getting a connection from the pool (this object) and return it back after the execution. Only the first result

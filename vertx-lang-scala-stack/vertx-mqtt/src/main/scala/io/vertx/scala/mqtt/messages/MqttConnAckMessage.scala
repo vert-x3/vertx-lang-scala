@@ -31,6 +31,7 @@ class MqttConnAckMessage(private val _asJava: Object) {
   private var cached_0: Option[io.netty.handler.codec.mqtt.MqttConnectReturnCode] = None
   private var cached_1: Option[Boolean] = None
 
+
   /**
     * @return return code from the connection request
     */

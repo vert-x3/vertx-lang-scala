@@ -37,6 +37,7 @@ class WebSocket(private val _asJava: Object)
   private var cached_0: Option[SocketAddress] = None
   private var cached_1: Option[SocketAddress] = None
 
+
   /**
     * @return the remote address for this socket
     */
@@ -94,7 +95,7 @@ class WebSocket(private val _asJava: Object)
 
   /**
     * Set a text message handler on the connection. This handler will be called similar to the
-    * , but the buffer will be converted to a String first
+    * [[io.vertx.scala.core.http.WebSocketBase#binaryMessageHandler]], but the buffer will be converted to a String first
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */

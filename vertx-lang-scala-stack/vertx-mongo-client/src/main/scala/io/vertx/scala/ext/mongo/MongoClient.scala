@@ -47,6 +47,7 @@ class MongoClient(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Save a document in the specified collection
     * 

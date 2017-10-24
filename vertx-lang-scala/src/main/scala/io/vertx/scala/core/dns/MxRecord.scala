@@ -28,6 +28,7 @@ class MxRecord(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * The priority of the MX record.
     */

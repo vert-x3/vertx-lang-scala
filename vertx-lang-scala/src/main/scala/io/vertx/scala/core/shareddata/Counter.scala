@@ -32,6 +32,7 @@ class Counter(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Get the current value of the counter
     * @param resultHandler handler which will be passed the value

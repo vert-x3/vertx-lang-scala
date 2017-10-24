@@ -36,6 +36,7 @@ class VertxContextPRNG(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Returns a Base64 mime encoded String of random data with the given length. The length parameter refers to the length
     * of the String before the encoding step.

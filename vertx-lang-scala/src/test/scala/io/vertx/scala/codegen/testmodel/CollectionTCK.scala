@@ -37,6 +37,7 @@ class CollectionTCK(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   def methodWithListParams(listString: scala.collection.mutable.Buffer[String], listByte: scala.collection.mutable.Buffer[Byte], listShort: scala.collection.mutable.Buffer[Short], listInt: scala.collection.mutable.Buffer[Int], listLong: scala.collection.mutable.Buffer[Long], listJsonObject: scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject], listJsonArray: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray], listVertxGen: scala.collection.mutable.Buffer[RefedInterface1], listDataObject: scala.collection.mutable.Buffer[TestDataObject], listEnum: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]): Unit = {
     asJava.asInstanceOf[JCollectionTCK].methodWithListParams(listString.map(x => x.asInstanceOf[java.lang.String]).asJava, listByte.map(x => x.asInstanceOf[java.lang.Byte]).asJava, listShort.map(x => x.asInstanceOf[java.lang.Short]).asJava, listInt.map(x => x.asInstanceOf[java.lang.Integer]).asJava, listLong.map(x => x.asInstanceOf[java.lang.Long]).asJava, listJsonObject.asJava, listJsonArray.asJava, listVertxGen.map(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava, listDataObject.map(x => x.asJava).asJava, listEnum.asJava)
   }

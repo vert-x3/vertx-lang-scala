@@ -32,6 +32,7 @@ class SelfSignedCertificate(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Provides the [[io.vertx.scala.core.net.KeyCertOptions]] RSA private key file in PEM format corresponding to the [[io.vertx.scala.core.net.SelfSignedCertificate#privateKeyPath]]
     * @return a PemKeyCertOptions based on the generated certificate.see <a href="../../../../../../../cheatsheet/PemKeyCertOptions.html">PemKeyCertOptions</a>

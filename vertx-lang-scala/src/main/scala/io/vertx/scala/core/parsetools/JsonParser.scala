@@ -44,6 +44,7 @@ class JsonParser(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Handle a `Buffer`, pretty much like calling [[io.vertx.scala.core.Handler#handle]].
     * @return a reference to this, so the API can be used fluently

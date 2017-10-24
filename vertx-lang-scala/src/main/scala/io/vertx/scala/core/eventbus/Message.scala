@@ -42,6 +42,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[T] = None
 
+
   /**
     * The body of the message. Can be null.
     * @return the body, or null.

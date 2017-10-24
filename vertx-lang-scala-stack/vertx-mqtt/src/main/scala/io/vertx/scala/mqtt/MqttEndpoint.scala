@@ -53,6 +53,7 @@ class MqttEndpoint(private val _asJava: Object) {
   private var cached_8: Option[Int] = None
   private var cached_9: Option[Int] = None
 
+
   /**
     * @return the remote address for this socket
     */
