@@ -46,6 +46,7 @@ class PostgreSQLClient(private val _asJava: Object)
     extends AsyncSQLClient(_asJava)   {
 
 
+
   override def querySingle(sql: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): SQLOperations = {
     asJava.asInstanceOf[JPostgreSQLClient].querySingle(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
     this

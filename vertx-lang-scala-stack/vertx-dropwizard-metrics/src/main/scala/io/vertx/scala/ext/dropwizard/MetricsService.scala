@@ -34,6 +34,7 @@ class MetricsService(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @param measured the measure object
     * @return the base name of the measured object

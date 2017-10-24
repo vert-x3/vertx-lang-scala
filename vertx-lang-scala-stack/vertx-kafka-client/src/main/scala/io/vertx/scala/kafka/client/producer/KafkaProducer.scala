@@ -43,6 +43,7 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   def asJava = _asJava
 
+
   override def exceptionHandler(handler: Handler[Throwable]): KafkaProducer[K, V] = {
     asJava.asInstanceOf[JKafkaProducer[Object, Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this

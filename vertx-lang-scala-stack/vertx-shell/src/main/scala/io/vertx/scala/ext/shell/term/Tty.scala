@@ -29,6 +29,7 @@ class Tty(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Set a stream handler on the standard input to read the data.
     * @param handler the standard input

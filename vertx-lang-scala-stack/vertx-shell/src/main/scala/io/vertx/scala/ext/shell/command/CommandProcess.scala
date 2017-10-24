@@ -40,6 +40,7 @@ class CommandProcess(private val _asJava: Object)
     extends Tty(_asJava)   {
 
 
+
   override def stdinHandler(handler: Handler[String]): CommandProcess = {
     asJava.asInstanceOf[JCommandProcess].stdinHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
     this

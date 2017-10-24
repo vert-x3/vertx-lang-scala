@@ -60,6 +60,7 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
   private var cached_9: Option[scala.Option[io.vertx.core.json.JsonObject]] = None
   private var cached_10: Option[scala.Option[io.vertx.core.json.JsonArray]] = None
 
+
   /**
     * @return the version of the response
     */

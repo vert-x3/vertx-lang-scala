@@ -37,6 +37,7 @@ class CSRFHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Set the cookie name. By default XSRF-TOKEN is used as it is the expected name by AngularJS however other frameworks
     * might use other names.

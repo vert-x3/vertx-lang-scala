@@ -28,6 +28,7 @@ class Script(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   def getScript(): String = {
     asJava.asInstanceOf[JScript].getScript().asInstanceOf[String]
   }

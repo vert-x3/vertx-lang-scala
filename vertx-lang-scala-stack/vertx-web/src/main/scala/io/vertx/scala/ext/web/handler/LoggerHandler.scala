@@ -33,6 +33,7 @@ class LoggerHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JLoggerHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }

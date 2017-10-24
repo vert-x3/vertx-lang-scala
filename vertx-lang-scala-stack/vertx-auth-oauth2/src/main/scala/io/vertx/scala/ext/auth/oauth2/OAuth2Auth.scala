@@ -39,6 +39,7 @@ class OAuth2Auth(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Decode a token to a [[io.vertx.scala.ext.auth.oauth2.AccessToken]] object. This is useful to handle bearer JWT tokens.
     * @param token the access token (base64 string)

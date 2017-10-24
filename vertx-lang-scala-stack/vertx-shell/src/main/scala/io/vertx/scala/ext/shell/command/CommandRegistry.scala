@@ -38,6 +38,7 @@ class CommandRegistry(private val _asJava: Object)
     extends CommandResolver(_asJava)   {
 
 
+
   /**
     * Like [[io.vertx.scala.ext.shell.command.CommandRegistry#registerCommandFuture]], without a completion handler.
     */

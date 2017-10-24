@@ -38,6 +38,7 @@ class Destination(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Dispatches the given frame.
     * @param connection the connection

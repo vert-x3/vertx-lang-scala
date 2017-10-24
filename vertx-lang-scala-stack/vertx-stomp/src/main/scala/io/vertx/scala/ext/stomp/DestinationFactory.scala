@@ -31,6 +31,7 @@ class DestinationFactory(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Creates a destination for the given <em>address</em>.
     * @param vertx the vert.x instance used by the STOMP server.

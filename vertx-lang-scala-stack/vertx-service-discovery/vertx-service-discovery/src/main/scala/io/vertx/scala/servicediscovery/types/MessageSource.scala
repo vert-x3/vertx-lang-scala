@@ -38,6 +38,7 @@ class MessageSource(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
 }
 
 object MessageSource {

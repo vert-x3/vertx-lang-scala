@@ -53,6 +53,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   def asJava = _asJava
 
+
   override def exceptionHandler(handler: Handler[Throwable]): KafkaConsumer[K, V] = {
     asJava.asInstanceOf[JKafkaConsumer[Object, Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this

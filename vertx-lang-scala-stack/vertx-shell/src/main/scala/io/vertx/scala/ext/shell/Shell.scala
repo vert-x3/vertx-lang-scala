@@ -39,6 +39,7 @@ class Shell(private val _asJava: Object) {
   private var cached_0: Option[JobController] = None
   private var cached_1: Option[Session] = None
 
+
   /**
     * @return the shell's job controller
     */

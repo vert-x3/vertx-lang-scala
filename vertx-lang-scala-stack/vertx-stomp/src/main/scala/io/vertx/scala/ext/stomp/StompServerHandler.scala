@@ -49,6 +49,7 @@ class StompServerHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Configures a handler that get notified when a STOMP frame is received by the server.
     * This handler can be used for logging, debugging or ad-hoc behavior.

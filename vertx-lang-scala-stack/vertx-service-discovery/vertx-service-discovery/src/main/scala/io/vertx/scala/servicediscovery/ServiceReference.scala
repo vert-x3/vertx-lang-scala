@@ -35,6 +35,7 @@ class ServiceReference(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[Record] = None
 
+
   /**
     * @return the service record.see <a href="../../../../../../cheatsheet/Record.html">Record</a>
     */

@@ -34,6 +34,7 @@ class StompServerConnection(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Writes the given frame to the socket.
     * @param frame the frame, must not be `null`.see <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>

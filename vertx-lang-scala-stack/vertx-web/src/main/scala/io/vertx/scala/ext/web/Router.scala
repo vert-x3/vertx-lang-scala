@@ -40,6 +40,7 @@ class Router(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Remove all the routes from this router
     * @return a reference to this, so the API can be used fluently

@@ -41,6 +41,7 @@ class StompServer(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Configures the [[io.vertx.scala.ext.stomp.StompServerHandler]]. You must calls this method before calling the [[io.vertx.scala.ext.stomp.StompServer#listen]] method.
     * @param handler the handler

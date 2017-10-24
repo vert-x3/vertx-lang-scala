@@ -37,6 +37,7 @@ class Acknowledgement(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @return the subscription framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     */

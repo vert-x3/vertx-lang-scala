@@ -37,6 +37,7 @@ class OAuth2Response(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * the returned status code from the HTTP layer.
     * @return HTTP status code

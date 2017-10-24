@@ -34,6 +34,7 @@ class SockJSTermHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   def termHandler(handler: Handler[Term]): SockJSTermHandler = {
     asJava.asInstanceOf[JSockJSTermHandler].termHandler({x: JTerm => handler.handle(Term(x))})
     this

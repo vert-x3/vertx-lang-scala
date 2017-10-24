@@ -74,6 +74,7 @@ class RoutingContext(private val _asJava: Object) {
   private var cached_8: Option[Locale] = None
   private var cached_9: Option[LanguageHeader] = None
 
+
   /**
     * @return the HTTP request object
     */

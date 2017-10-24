@@ -35,6 +35,7 @@ class RabbitMQClient(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Acknowledge one or several received messages. Supply the deliveryTag from the AMQP.Basic.GetOk or AMQP.Basic.Deliver
     * method containing the received message being acknowledged.

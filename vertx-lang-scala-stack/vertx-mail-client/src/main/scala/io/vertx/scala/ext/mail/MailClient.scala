@@ -38,6 +38,7 @@ class MailClient(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * send a single mail via MailClient
     * @param email MailMessage object containing the mail text, from/to, attachments etcsee <a href="../../../../../../../cheatsheet/MailMessage.html">MailMessage</a>

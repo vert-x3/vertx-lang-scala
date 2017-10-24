@@ -38,6 +38,7 @@ class StompClient(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Connects to the server.
     * @param port the server port

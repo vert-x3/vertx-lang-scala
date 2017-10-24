@@ -36,6 +36,7 @@ class FormLoginHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Set the name of the form param used to submit the username
     * @param usernameParam the name of the param

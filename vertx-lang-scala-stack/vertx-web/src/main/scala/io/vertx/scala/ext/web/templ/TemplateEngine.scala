@@ -36,6 +36,7 @@ class TemplateEngine(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Render the template
     * @param context the routing context

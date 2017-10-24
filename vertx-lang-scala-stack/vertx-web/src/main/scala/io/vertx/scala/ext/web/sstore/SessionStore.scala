@@ -33,6 +33,7 @@ class SessionStore(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * The retry timeout value in milli seconds used by the session handler when it retrieves a value from the store.<p/>
     *

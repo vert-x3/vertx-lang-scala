@@ -41,6 +41,7 @@ class SessionHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Set the session timeout
     * @param timeout the timeout, in ms.

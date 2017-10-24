@@ -38,6 +38,7 @@ class AmqpBridge(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Starts the bridge, establishing the underlying connection.
     * @param hostname the host name to connect to

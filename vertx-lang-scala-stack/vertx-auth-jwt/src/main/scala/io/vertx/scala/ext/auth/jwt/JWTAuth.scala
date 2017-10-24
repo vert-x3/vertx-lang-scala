@@ -40,6 +40,7 @@ class JWTAuth(private val _asJava: Object)
     extends AuthProvider(_asJava)   {
 
 
+
   /**
     * Generate a new JWT token.
     * @param claims Json with user defined claims for a list of official claims

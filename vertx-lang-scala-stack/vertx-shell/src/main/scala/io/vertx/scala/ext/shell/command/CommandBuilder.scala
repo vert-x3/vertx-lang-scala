@@ -37,6 +37,7 @@ class CommandBuilder(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Set the command process handler, the process handler is called when the command is executed.
     * @param handler the process handler

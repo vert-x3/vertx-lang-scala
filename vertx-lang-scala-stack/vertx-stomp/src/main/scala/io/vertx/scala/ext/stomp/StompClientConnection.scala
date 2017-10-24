@@ -33,6 +33,7 @@ class StompClientConnection(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Sends a `SEND` frame to the server.
     * @param headers the headers, must not be `null`

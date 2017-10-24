@@ -40,6 +40,7 @@ class ResponseContentTypeHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   override def handle(arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JResponseContentTypeHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }

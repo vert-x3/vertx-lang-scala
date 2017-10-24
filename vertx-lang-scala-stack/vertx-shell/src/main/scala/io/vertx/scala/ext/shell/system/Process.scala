@@ -36,6 +36,7 @@ class Process(private val _asJava: Object) {
   private var cached_0: Option[Tty] = None
   private var cached_1: Option[Session] = None
 
+
   /**
     * @return the process tty
     */
