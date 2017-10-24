@@ -43,6 +43,7 @@ class MqttClient(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Connects to an MQTT server calling connectHandler after connection
     * @param port port of the MQTT server

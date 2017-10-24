@@ -40,6 +40,7 @@ class MqttServer(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Start the server listening for incoming connections using the specified options
     * through the constructor

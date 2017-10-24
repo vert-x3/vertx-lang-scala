@@ -33,6 +33,7 @@ class HttpServerFileUpload(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   override def exceptionHandler(handler: Handler[Throwable]): HttpServerFileUpload = {
     asJava.asInstanceOf[JHttpServerFileUpload].exceptionHandler({x: Throwable => handler.handle(x)})
     this

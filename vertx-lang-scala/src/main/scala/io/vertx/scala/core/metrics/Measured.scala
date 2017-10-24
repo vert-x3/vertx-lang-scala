@@ -41,6 +41,7 @@ object Measured {
 
       def asJava = _asJava
 
+
   /**
     * Whether the metrics are enabled for this measured object
     * @return true if the metrics are enabled

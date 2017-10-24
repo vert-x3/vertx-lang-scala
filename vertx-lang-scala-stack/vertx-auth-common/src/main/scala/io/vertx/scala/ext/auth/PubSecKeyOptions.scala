@@ -48,6 +48,17 @@ class PubSecKeyOptions(private val _asJava: JPubSecKeyOptions) {
   def getType: String = {
     asJava.getType().asInstanceOf[String]
   }
+  def addX509Certificate(value: String) = {
+    asJava.addX509Certificate(value)
+    this
+  }
+  def setX509Certificates(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setX509Certificates(value.asJava)
+    this
+  }
+  def getX509Certificates: scala.collection.mutable.Buffer[String] = {
+    asJava.getX509Certificates().asScala.map(x => x.asInstanceOf[String])
+  }
 }
 
 object PubSecKeyOptions {

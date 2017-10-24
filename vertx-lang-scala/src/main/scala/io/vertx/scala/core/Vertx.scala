@@ -19,6 +19,7 @@ package io.vertx.scala.core
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
+  import io.vertx.lang.scala.ScalaVerticle
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.net.{NetServer => JNetServer}
 import io.vertx.scala.core.http.HttpClient
@@ -65,7 +66,7 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
 
 /**
   * The entry point into the Vert.x Core API.
-  * 
+  *
   * You use an instance of this class for functionality including:
   * <ul>
   *   <li>Creating TCP clients and servers</li>
@@ -78,12 +79,12 @@ import io.vertx.core.{TimeoutStream => JTimeoutStream}
   *   <li>Getting a reference to the shared data API</li>
   *   <li>Deploying and undeploying verticles</li>
   * </ul>
-  * 
+  *
   * Most functionality in Vert.x core is fairly low level.
-  * 
+  *
   * To create an instance of this class you can use the static factory methods: [[io.vertx.scala.core.Vertx#vertx]],
   * [[io.vertx.scala.core.Vertx#vertx]] and [[io.vertx.scala.core.Vertx#clusteredVertxFuture]].
-  * 
+  *
   * Please see the user manual for more detailed usage information.
   */
 class Vertx(private val _asJava: Object)
@@ -94,6 +95,49 @@ class Vertx(private val _asJava: Object)
   private var cached_1: Option[EventBus] = None
   private var cached_2: Option[SharedData] = None
   private var cached_3: Option[Boolean] = None
+
+  /**
+    * Deploy a verticle instance that you have created yourself.
+    * <p>
+    * Vert.x will assign the verticle a context and start the verticle.
+    * <p>
+    * The actual deploy happens asynchronously and may not complete until after the call has returned.
+    *
+    * @param verticle the verticle instance to deploy.
+    */
+  def deployVerticle(verticle: ScalaVerticle): Unit = {
+    asJava.asInstanceOf[JVertx].deployVerticle(verticle.asJava)
+  }
+
+  /**
+    * Like [[deployVerticle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+    */
+  def deployVerticleFuture(verticle: ScalaVerticle): scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JVertx].deployVerticle(verticle.asJava(), promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  /**
+    * Like {@link #deployVerticle(Verticle)} but {@link io.vertx.core.DeploymentOptions} are provided to configure the
+    * deployment.
+    *
+    * @param verticle the verticle instance to deploy
+    * @param options  the deployment options.
+    */
+  def deployVerticle(verticle: ScalaVerticle, options: DeploymentOptions): Unit = {
+    asJava.asInstanceOf[JVertx].deployVerticle(verticle.asJava, options.asJava)
+  }
+
+  /**
+    * Like [[deployVerticle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+    */
+  def deployVerticleFuture(verticle: ScalaVerticle, options: DeploymentOptions): scala.concurrent.Future[String] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JVertx].deployVerticle(verticle.asJava(), options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
   /**
     * Get the filesystem object. There is a single instance of FileSystem per Vertx instance.
@@ -143,7 +187,7 @@ class Vertx(private val _asJava: Object)
   }
 
   /**
-    * Set a default exception handler for [[io.vertx.scala.core.Context]], set on  at creation.
+    * Set a default exception handler for [[io.vertx.scala.core.Context]], set on [[io.vertx.scala.core.Context#exceptionHandler]] at creation.
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
@@ -334,9 +378,9 @@ class Vertx(private val _asJava: Object)
 
   /**
     * Stop the the Vertx instance and release any resources held by it.
-    * 
+    *
     * The instance cannot be used after it has been closed.
-    * 
+    *
     * The actual close is asynchronous and may not complete until after the call has returned.
     */
   def close(): Unit = {
@@ -353,9 +397,9 @@ class Vertx(private val _asJava: Object)
 
   /**
     * Deploy a verticle instance given a name.
-    * 
+    *
     * Given the name, Vert.x selects a  instance to use to instantiate the verticle.
-    * 
+    *
     * For the rules on how factories are selected please consult the user manual.
     * @param name the name.
     */
@@ -365,10 +409,10 @@ class Vertx(private val _asJava: Object)
 
   /**
     * Like [[io.vertx.scala.core.Vertx#deployVerticle]] but the completionHandler will be notified when the deployment is complete.
-    * 
+    *
     * If the deployment is successful the result will contain a String representing the unique deployment ID of the
     * deployment.
-    * 
+    *
     * This deployment ID can subsequently be used to undeploy the verticle.
     * @param name The identifier
     * @param completionHandler a handler which will be notified when the deployment is complete
@@ -400,7 +444,7 @@ class Vertx(private val _asJava: Object)
 
   /**
     * Undeploy a verticle deployment.
-    * 
+    *
     * The actual undeployment happens asynchronously and may not complete until after the method has returned.
     * @param deploymentID the deployment ID
     */
@@ -525,7 +569,7 @@ class Vertx(private val _asJava: Object)
 }
 
 object Vertx {
-  def apply(asJava: JVertx) = new Vertx(asJava)  
+  def apply(asJava: JVertx) = new Vertx(asJava)
   /**
     * Creates a non clustered instance using default options.
     * @return the instance
@@ -545,7 +589,7 @@ object Vertx {
 
   /**
     * Creates a clustered instance using the specified options.
-    * 
+    *
     * The instance is created asynchronously and the resultHandler is called with the result when it is ready.
     * @param options the options to usesee <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a>
     * @param resultHandler the result handler that will receive the result

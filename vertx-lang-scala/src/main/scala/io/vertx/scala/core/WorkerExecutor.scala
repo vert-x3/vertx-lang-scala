@@ -38,6 +38,7 @@ class WorkerExecutor(private val _asJava: Object)
 
   def asJava = _asJava
 
+
    /**
     * Safely execute some blocking code.
     *

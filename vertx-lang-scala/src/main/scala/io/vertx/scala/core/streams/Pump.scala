@@ -47,6 +47,7 @@ class Pump(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Set the write queue max size to `maxSize`
     * @param maxSize the max size

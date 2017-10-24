@@ -31,6 +31,7 @@ class MqttTopicSubscription(private val _asJava: Object) {
   private var cached_0: Option[String] = None
   private var cached_1: Option[io.netty.handler.codec.mqtt.MqttQoS] = None
 
+
   /**
     * @return Subscription topic name
     */

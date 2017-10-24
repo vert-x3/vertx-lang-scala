@@ -27,6 +27,7 @@ class GenericNullableRefedInterface[T: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   def getValue(): scala.Option[T] = {
     scala.Option(toScala[T](asJava.asInstanceOf[JGenericNullableRefedInterface[Object]].getValue()))
   }

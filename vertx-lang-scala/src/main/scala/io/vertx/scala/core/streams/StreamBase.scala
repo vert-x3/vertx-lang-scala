@@ -44,6 +44,7 @@ object StreamBase {
 
       def asJava = _asJava
 
+
   /**
     * Set an exception handler.
     * @param handler the handler

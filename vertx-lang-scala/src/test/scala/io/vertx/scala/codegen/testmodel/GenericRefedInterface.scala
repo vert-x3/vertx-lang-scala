@@ -27,6 +27,7 @@ class GenericRefedInterface[T: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   def setValue(value: T): GenericRefedInterface[T] = {
     asJava.asInstanceOf[JGenericRefedInterface[Object]].setValue(toJava[T](value))
     this

@@ -67,6 +67,7 @@ class HttpClient(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Sends an HTTP GET request to the server with the specified options, specifying a response handler to receive
     * the response

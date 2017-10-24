@@ -32,6 +32,7 @@ class HttpFrame(private val _asJava: Object) {
   private var cached_1: Option[Int] = None
   private var cached_2: Option[io.vertx.core.buffer.Buffer] = None
 
+
   /**
     * @return the 8-bit type of the frame
     */

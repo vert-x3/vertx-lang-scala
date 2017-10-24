@@ -43,6 +43,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object)
 
   def asJava = _asJava
 
+
   override def exceptionHandler(handler: Handler[Throwable]): MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this

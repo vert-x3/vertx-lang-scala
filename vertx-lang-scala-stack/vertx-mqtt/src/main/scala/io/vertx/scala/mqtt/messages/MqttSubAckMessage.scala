@@ -33,6 +33,7 @@ class MqttSubAckMessage(private val _asJava: Object)
   private var cached_0: Option[Int] = None
   private var cached_1: Option[scala.collection.mutable.Buffer[Int]] = None
 
+
   /**
     * @return Message identifier
     */

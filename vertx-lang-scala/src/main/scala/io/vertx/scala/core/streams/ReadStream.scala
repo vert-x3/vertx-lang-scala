@@ -73,6 +73,7 @@ object ReadStream {
 
       def asJava = _asJava
 
+
   /**
     * Set an exception handler on the read stream.
     * @param handler the exception handler

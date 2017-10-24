@@ -28,6 +28,7 @@ class FileSystemProps(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @return The total space on the file system, in bytes
     */

@@ -46,6 +46,7 @@ class EventBus(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Sends a message.
     * 

@@ -62,6 +62,7 @@ class RecordParser(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   override def exceptionHandler(handler: Handler[Throwable]): RecordParser = {
     asJava.asInstanceOf[JRecordParser].exceptionHandler({x: Throwable => handler.handle(x)})
     this

@@ -44,6 +44,7 @@ class CLI(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Sets the name of the CLI.
     * @param name the name

@@ -35,6 +35,7 @@ class ChainAuth(private val _asJava: Object)
     extends AuthProvider(_asJava)   {
 
 
+
   /**
     * Appends a auth provider to the chain.
     * @param other auth provider

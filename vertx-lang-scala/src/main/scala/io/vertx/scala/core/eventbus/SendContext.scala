@@ -30,6 +30,7 @@ class SendContext[T: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @return The message being sent
     */

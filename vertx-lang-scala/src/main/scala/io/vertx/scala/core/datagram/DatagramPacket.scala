@@ -31,6 +31,7 @@ class DatagramPacket(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Returns the [[io.vertx.scala.core.net.SocketAddress]] of the sender that sent
     * this [[io.vertx.scala.core.datagram.DatagramPacket]].

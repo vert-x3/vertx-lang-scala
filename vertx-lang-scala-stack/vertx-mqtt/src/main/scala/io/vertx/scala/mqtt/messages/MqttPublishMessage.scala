@@ -38,6 +38,7 @@ class MqttPublishMessage(private val _asJava: Object)
   private var cached_4: Option[String] = None
   private var cached_5: Option[io.vertx.core.buffer.Buffer] = None
 
+
   /**
     * @return Message identifier
     */

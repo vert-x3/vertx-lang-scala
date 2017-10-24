@@ -41,6 +41,7 @@ class NetClient(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Open a connection to a server at the specific `port` and `host`.
     * 

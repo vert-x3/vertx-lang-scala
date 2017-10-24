@@ -101,6 +101,7 @@ object WriteStream {
 
       def asJava = _asJava
 
+
   /**
     * Set an exception handler on the write stream.
     * @param handler the exception handler

@@ -28,6 +28,7 @@ class InterfaceWithVariableArg[T: TypeTag, U: TypeTag](private val _asJava: Obje
     extends GenericRefedInterface[U](_asJava)   {
 
 
+
   override def setValue(value: U): GenericRefedInterface[U] = {
     asJava.asInstanceOf[JInterfaceWithVariableArg[Object, Object]].setValue(toJava[U](value))
     this

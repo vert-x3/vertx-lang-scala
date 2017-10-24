@@ -47,6 +47,7 @@ class TestInterface(private val _asJava: Object)
   private var cached_1: Option[Int] = None
   private var cached_2: Option[scala.collection.mutable.Buffer[RefedInterface1]] = None
 
+
   def methodWithCachedReturn(foo: String): RefedInterface1 = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JTestInterface].methodWithCachedReturn(foo.asInstanceOf[java.lang.String])

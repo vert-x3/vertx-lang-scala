@@ -40,6 +40,7 @@ class ShiroAuth(private val _asJava: Object)
     extends AuthProvider(_asJava)   {
 
 
+
   /**
     * Set the role prefix to distinguish from permissions when checking for isPermitted requests.
     * @param rolePrefix a Prefix e.g.: "role:"

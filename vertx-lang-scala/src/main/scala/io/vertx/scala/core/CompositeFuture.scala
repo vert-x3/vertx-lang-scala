@@ -36,6 +36,7 @@ class CompositeFuture(private val _asJava: Object)
 
   private var cached_0: Option[Handler[AsyncResult[CompositeFuture]]] = None
 
+
   /**
     * @return an handler completing this future
     */

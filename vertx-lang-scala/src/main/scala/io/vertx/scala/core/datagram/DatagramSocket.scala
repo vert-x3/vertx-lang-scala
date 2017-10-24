@@ -53,6 +53,7 @@ class DatagramSocket(private val _asJava: Object)
   def asJava = _asJava
   private var cached_0: Option[SocketAddress] = None
 
+
   /**
     * Return the [[io.vertx.scala.core.net.SocketAddress]] to which
     * this [[io.vertx.scala.core.datagram.DatagramSocket]] is bound.

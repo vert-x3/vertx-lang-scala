@@ -32,6 +32,7 @@ class JsonEvent(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @return the type of the event
     */

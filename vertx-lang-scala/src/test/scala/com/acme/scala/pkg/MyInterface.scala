@@ -31,6 +31,7 @@ class MyInterface(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   def sub(): SubInterface = {
     SubInterface(asJava.asInstanceOf[JMyInterface].sub())
   }

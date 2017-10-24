@@ -34,6 +34,7 @@ class CommandLine(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Gets the raw values of the given option. Raw values are simple "String", not converted to the option type.
     * @param option the optionsee <a href="../../../../../../../cheatsheet/Option.html">Option</a>
