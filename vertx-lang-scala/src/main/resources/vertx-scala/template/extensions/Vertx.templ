@@ -1,0 +1,50 @@
+  /**
+    * Deploy a verticle instance that you have created yourself.
+    * <p>
+    * Vert.x will assign the verticle a context and start the verticle.
+    * <p>
+    * The actual deploy happens asynchronously and may not complete until after the call has returned.
+    *
+    * @param verticle the verticle instance to deploy.
+    */
+  def deployVerticle(verticle: ScalaVerticle): Unit = {
+    asJava.asInstanceOf[JVertx].deployVerticle(verticle.asJava)
+  }
+
+  /**
+    * Like {@link #deployVerticle(Verticle)} but the completionHandler will be notified when the deployment is complete.
+    * <p>
+    * If the deployment is successful the result will contain a string representing the unique deployment ID of the
+    * deployment.
+    * <p>
+    * This deployment ID can subsequently be used to undeploy the verticle.
+    *
+    * @param verticle          the verticle instance to deploy
+    * @param completionHandler a handler which will be notified when the deployment is complete
+    */
+  def deployVerticle(verticle: ScalaVerticle, completionHandler: Handler[AsyncResult[String]]): Unit = {
+    asJava.asInstanceOf[JVertx].deployVerticle(verticle.asJava, completionHandler)
+  }
+
+  /**
+    * Like {@link #deployVerticle(Verticle)} but {@link io.vertx.core.DeploymentOptions} are provided to configure the
+    * deployment.
+    *
+    * @param verticle the verticle instance to deploy
+    * @param options  the deployment options.
+    */
+  def deployVerticle(verticle: ScalaVerticle, options: DeploymentOptions): Unit = {
+    asJava.asInstanceOf[JVertx].deployVerticle(verticle.asJava, options.asJava)
+  }
+
+  /**
+    * Like {@link #deployVerticle(Verticle, Handler)} but {@link io.vertx.core.DeploymentOptions} are provided to configure the
+    * deployment.
+    *
+    * @param verticle          the verticle instance to deploy
+    * @param options           the deployment options.
+    * @param completionHandler a handler which will be notified when the deployment is complete
+    */
+  def deployVerticle(verticle: ScalaVerticle, options: DeploymentOptions, completionHandler: Handler[AsyncResult[String]]): Unit = {
+    asJava.asInstanceOf[JVertx].deployVerticle(verticle.asJava, options.asJava, completionHandler)
+  }
