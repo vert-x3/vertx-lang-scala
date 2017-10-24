@@ -32,6 +32,7 @@ class CommandResolver(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Returns a single command by its name.
     * @param name the command name

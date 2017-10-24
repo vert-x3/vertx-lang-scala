@@ -29,6 +29,7 @@ class FileUpload(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @return the name of the upload as provided in the form submission
     */

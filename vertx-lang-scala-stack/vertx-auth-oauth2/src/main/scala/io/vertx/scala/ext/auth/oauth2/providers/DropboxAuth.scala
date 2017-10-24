@@ -34,6 +34,7 @@ class DropboxAuth(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
 }
 
 object DropboxAuth {

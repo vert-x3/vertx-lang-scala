@@ -29,6 +29,7 @@ class CliToken(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @return the token value
     */

@@ -41,6 +41,7 @@ class ParsedHeaderValues(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @return List of MIME values in the `Accept` header
     */

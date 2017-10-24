@@ -34,6 +34,7 @@ class CorsHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Add an allowed method
     * @param method the method to add

@@ -29,6 +29,7 @@ class KafkaConsumerRecords[K: TypeTag, V: TypeTag](private val _asJava: Object) 
 
   def asJava = _asJava
 
+
   /**
     * @return the total number of records in this batch
     */

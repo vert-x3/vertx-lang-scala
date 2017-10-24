@@ -43,6 +43,7 @@ class BridgeEvent(private val _asJava: Object)
   private var cached_0: Option[Handler[AsyncResult[Boolean]]] = None
   private var cached_1: Option[NetSocket] = None
 
+
   override def completer(): Handler[AsyncResult[Boolean]] = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JBridgeEvent].completer()

@@ -35,6 +35,7 @@ class Term(private val _asJava: Object)
     extends Tty(_asJava)   {
 
 
+
   override def resizehandler(handler: Handler[Unit]): Term = {
     asJava.asInstanceOf[JTerm].resizehandler({x: Void => handler.handle(x)})
     this

@@ -30,6 +30,7 @@ class KeycloakHelper(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
 }
 
 object KeycloakHelper {

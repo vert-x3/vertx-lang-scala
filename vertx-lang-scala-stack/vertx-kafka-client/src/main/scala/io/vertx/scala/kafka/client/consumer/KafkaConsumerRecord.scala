@@ -29,6 +29,7 @@ class KafkaConsumerRecord[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @return the topic this record is received from
     */

@@ -40,6 +40,7 @@ class MongoAuth(private val _asJava: Object)
     extends AuthProvider(_asJava)   {
 
 
+
   /**
     * Set the name of the collection to be used. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
     * @param collectionName the name of the collection to be used for storing and reading user data

@@ -69,6 +69,7 @@ class RedisClient(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Append a value to a key
     * @param key Key string

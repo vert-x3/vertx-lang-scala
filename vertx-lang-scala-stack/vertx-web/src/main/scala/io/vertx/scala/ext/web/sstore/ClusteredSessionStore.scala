@@ -36,6 +36,7 @@ class ClusteredSessionStore(private val _asJava: Object)
     extends SessionStore(_asJava)   {
 
 
+
 }
 
 object ClusteredSessionStore {

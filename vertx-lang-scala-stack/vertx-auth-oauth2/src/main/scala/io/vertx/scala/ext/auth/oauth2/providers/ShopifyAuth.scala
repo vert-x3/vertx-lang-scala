@@ -34,6 +34,7 @@ class ShopifyAuth(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
 }
 
 object ShopifyAuth {

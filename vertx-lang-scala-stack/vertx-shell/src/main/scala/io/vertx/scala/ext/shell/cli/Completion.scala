@@ -34,6 +34,7 @@ class Completion(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @return the current Vert.x instance
     */

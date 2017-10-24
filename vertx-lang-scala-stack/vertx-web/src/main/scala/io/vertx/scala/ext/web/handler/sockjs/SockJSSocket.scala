@@ -50,6 +50,7 @@ class SockJSSocket(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   override def exceptionHandler(handler: Handler[Throwable]): SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this

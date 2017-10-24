@@ -38,6 +38,7 @@ class HtdigestAuth(private val _asJava: Object)
     extends AuthProvider(_asJava)   {
 
 
+
   /**
     * Return the currently used realm
     * @return the realm

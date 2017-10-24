@@ -41,6 +41,7 @@ class TermServer(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Set the term handler that will receive incoming client connections. When a remote terminal connects
     * the `handler` will be called with the [[io.vertx.scala.ext.shell.term.Term]] which can be used to interact with the remote

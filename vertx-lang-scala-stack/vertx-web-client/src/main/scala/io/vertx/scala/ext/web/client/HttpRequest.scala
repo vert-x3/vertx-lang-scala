@@ -69,6 +69,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[MultiMap] = None
 
+
   /**
     * @return The HTTP headers
     */

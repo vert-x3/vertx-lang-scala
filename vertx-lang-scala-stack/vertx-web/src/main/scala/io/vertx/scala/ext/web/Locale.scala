@@ -27,6 +27,7 @@ class Locale(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Returns the language as reported by the HTTP client.
     * @return language

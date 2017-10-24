@@ -36,6 +36,7 @@ class ThymeleafTemplateEngine(private val _asJava: Object)
     extends TemplateEngine(_asJava)   {
 
 
+
   /**
     * Set the mode for the engine
     * @param mode the mode

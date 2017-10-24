@@ -44,6 +44,7 @@ class OAuth2AuthHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Add a required authority for this auth handler
     * @param authority the authority

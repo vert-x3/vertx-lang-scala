@@ -33,6 +33,7 @@ class ServicePublisher(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Publishes a record.
     * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>

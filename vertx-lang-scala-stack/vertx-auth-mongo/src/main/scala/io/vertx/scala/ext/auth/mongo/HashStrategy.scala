@@ -32,6 +32,7 @@ class HashStrategy(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Compute the hashed password given the unhashed password and the user
     * @param password the unhashed password

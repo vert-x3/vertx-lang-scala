@@ -38,6 +38,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Listen on default port 7000
     * @return self

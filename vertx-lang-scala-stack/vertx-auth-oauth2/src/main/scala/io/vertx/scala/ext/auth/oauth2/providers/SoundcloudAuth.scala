@@ -34,6 +34,7 @@ class SoundcloudAuth(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
 }
 
 object SoundcloudAuth {

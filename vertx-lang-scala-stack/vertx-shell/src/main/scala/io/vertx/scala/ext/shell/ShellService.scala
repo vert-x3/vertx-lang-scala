@@ -39,6 +39,7 @@ class ShellService(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Start the shell service, this is an asynchronous start.
     */

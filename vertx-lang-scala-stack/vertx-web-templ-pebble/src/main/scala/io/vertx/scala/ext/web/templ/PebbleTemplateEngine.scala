@@ -37,6 +37,7 @@ class PebbleTemplateEngine(private val _asJava: Object)
     extends TemplateEngine(_asJava)   {
 
 
+
   /**
     * Set the extension for the engine
     * @param extension the extension

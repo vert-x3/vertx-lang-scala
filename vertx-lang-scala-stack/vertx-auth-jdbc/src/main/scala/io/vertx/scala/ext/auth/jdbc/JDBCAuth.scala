@@ -41,6 +41,7 @@ class JDBCAuth(private val _asJava: Object)
     extends AuthProvider(_asJava)   {
 
 
+
   /**
     * Set the authentication query to use. Use this if you want to override the default authentication query.
     * @param authenticationQuery the authentication query

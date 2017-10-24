@@ -32,6 +32,7 @@ class LanguageHeader(private val _asJava: Object)
     extends Locale(_asJava) with ParsedHeaderValue  {
 
 
+
   /**
     * Contains the raw value that was received from the user agent
     */

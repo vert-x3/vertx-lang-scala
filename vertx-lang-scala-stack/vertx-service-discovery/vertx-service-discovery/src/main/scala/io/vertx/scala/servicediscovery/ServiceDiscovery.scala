@@ -72,6 +72,7 @@ class ServiceDiscovery(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Gets a service reference from the given record.
     * @param record the chosen recordsee <a href="../../../../../../cheatsheet/Record.html">Record</a>

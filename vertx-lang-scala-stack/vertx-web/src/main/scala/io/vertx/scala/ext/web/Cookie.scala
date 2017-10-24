@@ -32,6 +32,7 @@ class Cookie(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Sets the value of this cookie
     * @param value The value to set

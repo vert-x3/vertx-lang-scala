@@ -32,6 +32,7 @@ class JobController(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @return the current foreground job
     */

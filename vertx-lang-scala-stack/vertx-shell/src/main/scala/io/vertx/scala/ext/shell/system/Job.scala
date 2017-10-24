@@ -39,6 +39,7 @@ class Job(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[Process] = None
 
+
   /**
     * @return the first process in the job
     */

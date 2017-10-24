@@ -31,6 +31,7 @@ class ServerFrame(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * @return the received framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
     */

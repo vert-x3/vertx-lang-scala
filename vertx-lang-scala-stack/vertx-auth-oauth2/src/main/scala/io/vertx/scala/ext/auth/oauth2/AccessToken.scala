@@ -39,6 +39,7 @@ class AccessToken(private val _asJava: Object)
     extends User(_asJava)   {
 
 
+
   /**
     * Refresh the access token
     * @param callback - The callback function returning the results.
@@ -124,6 +125,14 @@ class AccessToken(private val _asJava: Object)
     */
   def expired(): Boolean = {
     asJava.asInstanceOf[JAccessToken].expired().asInstanceOf[Boolean]
+  }
+
+  /**
+    * The Access Token if present parsed as a JsonObject
+    * @return JSON
+    */
+  def accessToken(): io.vertx.core.json.JsonObject = {
+    asJava.asInstanceOf[JAccessToken].accessToken()
   }
 
  /**

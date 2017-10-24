@@ -43,6 +43,7 @@ class ConfigRetriever(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[ReadStream[io.vertx.core.json.JsonObject]] = None
 
+
   /**
     * @return the stream of configurations. It's single stream (unicast) and that delivers the last known config and the successors periodically.
     */

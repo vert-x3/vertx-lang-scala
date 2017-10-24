@@ -50,6 +50,7 @@ class WebClient(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Create an HTTP request to send to the server at the specified host and port.
     * @param method the HTTP method

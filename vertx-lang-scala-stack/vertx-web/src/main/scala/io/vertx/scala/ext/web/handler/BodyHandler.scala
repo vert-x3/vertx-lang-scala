@@ -34,6 +34,7 @@ class BodyHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Set the maximum body size -1 means unlimited
     * @param bodyLimit the max size

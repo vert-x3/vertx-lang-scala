@@ -27,6 +27,7 @@ class SignalHandler(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   def deliver(key: Int): Boolean = {
     asJava.asInstanceOf[JSignalHandler].deliver(key.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }

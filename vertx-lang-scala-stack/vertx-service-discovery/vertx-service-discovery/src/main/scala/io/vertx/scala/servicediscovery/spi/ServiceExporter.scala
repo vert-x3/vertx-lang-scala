@@ -39,6 +39,7 @@ class ServiceExporter(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Starts the exporter.
     * @param vertx the vertx instance

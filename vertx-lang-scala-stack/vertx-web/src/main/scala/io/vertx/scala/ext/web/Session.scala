@@ -36,6 +36,7 @@ class Session(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Put some data in a session
     * @param key the key for the data

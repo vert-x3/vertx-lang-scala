@@ -38,6 +38,7 @@ class LocalSessionStore(private val _asJava: Object)
     extends SessionStore(_asJava)   {
 
 
+
 }
 
 object LocalSessionStore {

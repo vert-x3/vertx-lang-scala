@@ -49,6 +49,7 @@ class ShellServer(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Register a command resolver for this server.
     * @param resolver the resolver

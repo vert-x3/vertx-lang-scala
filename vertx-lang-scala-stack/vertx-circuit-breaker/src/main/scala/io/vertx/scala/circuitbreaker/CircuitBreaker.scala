@@ -38,6 +38,7 @@ class CircuitBreaker(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[String] = None
 
+
   /**
     * @return the name of the circuit breaker.
     */

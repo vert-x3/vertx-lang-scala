@@ -34,6 +34,7 @@ class AdminUtils(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Creates a new Kafka topic on all Brokers managed by the given Zookeeper instance(s)
     * @param topicName Name of the to-be-created topic

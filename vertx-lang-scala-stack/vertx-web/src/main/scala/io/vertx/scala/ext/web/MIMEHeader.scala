@@ -28,6 +28,7 @@ class MIMEHeader(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Contains the raw value that was received from the user agent
     */

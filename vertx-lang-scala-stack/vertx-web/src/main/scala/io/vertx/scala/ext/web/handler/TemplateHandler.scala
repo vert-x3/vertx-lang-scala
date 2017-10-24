@@ -36,6 +36,7 @@ class TemplateHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Set the index template
     * @param indexTemplate the index template

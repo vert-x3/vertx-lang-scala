@@ -31,6 +31,7 @@ class Pty(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Set the standard out handler of the pseudo terminal.
     * @param handler the standard output

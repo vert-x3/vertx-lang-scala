@@ -44,6 +44,7 @@ class SockJSHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Set a SockJS socket handler. This handler will be called with a SockJS socket whenever a SockJS connection
     * is made from a client

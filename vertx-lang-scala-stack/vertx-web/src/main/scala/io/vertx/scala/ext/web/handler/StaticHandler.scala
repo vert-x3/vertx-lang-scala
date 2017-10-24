@@ -32,6 +32,7 @@ class StaticHandler(private val _asJava: Object)
 
   def asJava = _asJava
 
+
   /**
     * Enable/Disable access to the root of the filesystem
     * @param allowRootFileSystemAccess whether root access is allowed

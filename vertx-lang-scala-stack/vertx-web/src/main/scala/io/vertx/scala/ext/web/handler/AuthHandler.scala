@@ -90,6 +90,7 @@ object AuthHandler {
 
       def asJava = _asJava
 
+
   /**
     * Add a required authority for this auth handler
     * @param authority the authority

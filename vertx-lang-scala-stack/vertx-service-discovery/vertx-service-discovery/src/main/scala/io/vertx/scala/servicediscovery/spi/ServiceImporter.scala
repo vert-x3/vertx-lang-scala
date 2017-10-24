@@ -37,6 +37,7 @@ class ServiceImporter(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
   /**
     * Closes the importer
     * @param closeHandler the handle to be notified when importer is closed, may be `null`
