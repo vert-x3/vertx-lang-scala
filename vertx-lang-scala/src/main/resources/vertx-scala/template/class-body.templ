@@ -12,6 +12,10 @@
 @code{cached_counter++}
 @end{}
 \n
+@if{className = 'Vertx'}
+@includeNamed{'extensions/Vertx.templ'}
+@end{}
+\n
 @code{var cached_method_counter = 0}
 @foreach{method : cacheReturnMethods}
 	@if{method.doc != null}@{methodDoc(method, '  ', false)}@end{}
