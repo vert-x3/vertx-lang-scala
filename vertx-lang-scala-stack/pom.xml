@@ -325,6 +325,8 @@
     <module>vertx-auth-mongo</module>
     <module>vertx-auth-jwt</module>
     <module>vertx-auth-jdbc</module>
+    <module>vertx-consul-client</module>
+    <module>vertx-consul-service</module>
     <module>vertx-web</module>
     <module>vertx-web-common</module>
     <module>vertx-web-client</module>

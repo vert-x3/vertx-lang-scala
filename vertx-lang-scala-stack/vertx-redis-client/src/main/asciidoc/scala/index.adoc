@@ -244,3 +244,22 @@ return 10
 ```
 
 In this case the return value will be a json array with the value 10 on index 0.
+
+== Redis Sentinel
+
+This client support the Redis Sentinel API with the API interface:
+`link:../../scaladocs/io/vertx/scala/redis/sentinel/RedisSentinel.html[RedisSentinel]`.
+
+The API exposes the sentinel commands:
+
+* masters
+* master
+* slaves
+* sentinels
+* get-master-addr-by-name
+* reset
+* failover
+* ckquorum
+* flushconfig
+
+For more information please read the redis official documentation: https://redis.io/topics/sentinel
