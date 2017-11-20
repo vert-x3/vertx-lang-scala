@@ -425,8 +425,8 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
   }
 
   /**
-    * Set the handler to be used when batches of messages are fetched 
-    * from the Kafka server. Batch handlers need to take care not to block 
+    * Set the handler to be used when batches of messages are fetched
+    * from the Kafka server. Batch handlers need to take care not to block
     * the event loop when dealing with large batches. It is better to process
     * records individually using the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer]].
     * @param handler handler called when batches of messages are fetched
@@ -521,6 +521,17 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
     */
   def endOffsets(topicPartition: TopicPartition, handler: Handler[AsyncResult[Long]]): Unit = {
     asJava.asInstanceOf[JKafkaConsumer[Object, Object]].endOffsets(topicPartition.asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+  }
+
+  /**
+    * Sets the poll timeout (in ms) for the underlying native Kafka Consumer. Defaults to 1000.
+    * Setting timeout to a lower value results in a more 'responsive' client, because it will block for a shorter period
+    * if no data is available in the assigned partition and therefore allows subsequent actions to be executed with a shorter
+    * delay. At the same time, the client will poll more frequently and thus will potentially create a higher load on the Kafka Broker.
+    * @param timeout The time, in milliseconds, spent waiting in poll if data is not available in the buffer. If 0, returns immediately with any records that are available currently in the native Kafka consumer's buffer, else returns empty. Must not be negative.
+    */
+  def pollTimeout(timeout: Long): KafkaConsumer[K, V] = {
+    KafkaConsumer[K, V](asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pollTimeout(timeout.asInstanceOf[java.lang.Long]))
   }
 
  /**
