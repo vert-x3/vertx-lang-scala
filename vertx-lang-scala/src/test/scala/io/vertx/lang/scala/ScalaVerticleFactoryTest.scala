@@ -3,9 +3,10 @@ package io.vertx.lang.scala
 import java.io.File
 import java.nio.file.Files
 
-import io.vertx.core.{Handler, AsyncResult, Vertx => JVertx}
+import io.vertx.core.{AsyncResult, Handler, Vertx => JVertx}
 import io.vertx.scala.core.Vertx
 import org.junit.runner.RunWith
+import org.scalatest.concurrent.ScalaFutures.whenReady
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{AsyncFlatSpec, Matchers}
 
@@ -27,7 +28,7 @@ class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
         override def handle(event: AsyncResult[String]): Unit = promise.success(event.result())
       })
 
-    promise.future.map(res => res shouldNot be(null))
+    whenReady(promise.future) {_ shouldNot be(null)}
   }
 
   "A bare Scala-Verticle from the classpath" should "compile and deploy on the fly" in {
@@ -39,6 +40,6 @@ class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
         override def handle(event: AsyncResult[String]): Unit = promise.success(event.result())
       })
 
-    promise.future.map(res => res shouldNot be(null))
+    whenReady(promise.future) {_ shouldNot be(null)}
   }
 }
