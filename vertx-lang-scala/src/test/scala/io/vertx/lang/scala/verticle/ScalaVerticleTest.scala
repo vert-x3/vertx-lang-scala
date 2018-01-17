@@ -6,6 +6,7 @@ import org.scalatest.junit.JUnitRunner
 import org.scalatest.{AsyncFlatSpec, Matchers}
 import io.vertx.lang.scala.ScalaVerticle._
 import io.vertx.lang.scala.{ScalaVerticle, VertxExecutionContext}
+import org.scalatest.concurrent.ScalaFutures.whenReady
 
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success}
@@ -21,7 +22,7 @@ class ScalaVerticleTest extends AsyncFlatSpec with Matchers{
       .localConsumer[String]("startMethod")
       .handler(m => result.success(m.body()))
     vertx.deployVerticle(nameForVerticle[StartFutureVerticle])
-    result.future.map(r => r should equal("startFuture"))
+    whenReady(result.future) {_ should equal("startFuture")}
   }
 
   "StartVerticle" should "use start to start" in {
@@ -34,7 +35,7 @@ class ScalaVerticleTest extends AsyncFlatSpec with Matchers{
       .handler(m => result.success(m.body()))
 
     vertx.deployVerticle(nameForVerticle[StartFutureVerticle])
-    result.future.map(r => r should equal("startFuture"))
+    whenReady(result.future) {_ should equal("startFuture")}
   }
 
   "StartFailVerticle" should "fail correctly if start throws an exception" in {
@@ -59,7 +60,7 @@ class ScalaVerticleTest extends AsyncFlatSpec with Matchers{
 
     vertx.deployVerticleFuture(nameForVerticle[StopFutureVerticle])
         .map(depId => vertx.undeploy(depId))
-    result.future.map(r => r should equal("stopFuture"))
+    whenReady(result.future) {_ should equal("stopFuture")}
   }
 
   "StopVerticle" should "use stop to stop" in {
@@ -72,7 +73,7 @@ class ScalaVerticleTest extends AsyncFlatSpec with Matchers{
 
     vertx.deployVerticleFuture(nameForVerticle[StopVerticle])
       .map(depId => vertx.undeploy(depId))
-    result.future.map(r => r should equal("stop"))
+    whenReady(result.future) {_ should equal("stop")}
   }
 
   "StopFailVerticle" should "fail correctly if stop throws an exception" in {
