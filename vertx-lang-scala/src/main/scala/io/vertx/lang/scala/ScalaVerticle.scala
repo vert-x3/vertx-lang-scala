@@ -131,6 +131,9 @@ abstract class ScalaVerticle {
 }
 
 object ScalaVerticle {
+  private val Log = ScalaLogger.getLogger(classOf[ScalaVerticle].getName)
+  Log.trace("Loaded logger to initialize Json-registration.")
+
   def nameForVerticle[A <: ScalaVerticle: TypeTag]():String = {
     "scala:"+implicitly[TypeTag[A]].tpe.typeSymbol.fullName
   }

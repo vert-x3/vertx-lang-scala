@@ -29,12 +29,6 @@ class OpenSSLEngineOptions(private val _asJava: JOpenSSLEngineOptions) {
   def asJava = _asJava
 
   /**
-    */
-
-  /**
-    */
-
-  /**
     * Set whether session cache is enabled in open SSL session server context
     */
   def setSessionCacheEnabled(value: Boolean) = {

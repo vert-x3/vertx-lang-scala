@@ -1474,7 +1474,7 @@ class HttpClient(private val _asJava: Object)
   /**
     * Create a WebSocket stream with the specified options
     * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(options: RequestOptions): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(options.asJava))
@@ -1485,7 +1485,7 @@ class HttpClient(private val _asJava: Object)
     * @param port the port
     * @param host the host
     * @param requestURI the relative URI
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(port: Int, host: String, requestURI: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
@@ -1495,7 +1495,7 @@ class HttpClient(private val _asJava: Object)
     * Create a WebSocket stream to the specified host, relative request URI and default port
     * @param host the host
     * @param requestURI the relative URI
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(host: String, requestURI: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
@@ -1505,7 +1505,7 @@ class HttpClient(private val _asJava: Object)
     * Create a WebSocket stream with the specified options, and with the specified headers
     * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
     * @param headers the headers
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(options: RequestOptions, headers: MultiMap): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(options.asJava, headers.asJava.asInstanceOf[JMultiMap]))
@@ -1517,7 +1517,7 @@ class HttpClient(private val _asJava: Object)
     * @param host the host
     * @param requestURI the relative URI
     * @param headers the headers
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(port: Int, host: String, requestURI: String, headers: MultiMap): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap]))
@@ -1528,7 +1528,7 @@ class HttpClient(private val _asJava: Object)
     * @param host the host
     * @param requestURI the relative URI
     * @param headers the headers
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(host: String, requestURI: String, headers: MultiMap): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap]))
@@ -1540,7 +1540,7 @@ class HttpClient(private val _asJava: Object)
     * @param options the request optionssee <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
     * @param headers the headers
     * @param version the websocket version
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version))
@@ -1554,7 +1554,7 @@ class HttpClient(private val _asJava: Object)
     * @param requestURI the relative URI
     * @param headers the headers
     * @param version the websocket version
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version))
@@ -1567,7 +1567,7 @@ class HttpClient(private val _asJava: Object)
     * @param requestURI the relative URI
     * @param headers the headers
     * @param version the websocket version
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version))
@@ -1580,7 +1580,7 @@ class HttpClient(private val _asJava: Object)
     * @param headers the headers
     * @param version the websocket version
     * @param subProtocols the subprotocols to use
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStreamAbs(url: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStreamAbs(url.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String]))
@@ -1593,7 +1593,7 @@ class HttpClient(private val _asJava: Object)
     * @param headers the headers
     * @param version the websocket version
     * @param subProtocols the subprotocols to use
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String]))
@@ -1608,7 +1608,7 @@ class HttpClient(private val _asJava: Object)
     * @param headers the headers
     * @param version the websocket version
     * @param subProtocols the subprotocols to use
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String]))
@@ -1622,7 +1622,7 @@ class HttpClient(private val _asJava: Object)
     * @param headers the headers
     * @param version the websocket version
     * @param subProtocols the subprotocols to use
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String]))
@@ -1631,7 +1631,7 @@ class HttpClient(private val _asJava: Object)
   /**
     * Create a WebSocket stream at the relative request URI using the default host and port and the specified headers
     * @param requestURI the relative URI
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(requestURI: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(requestURI.asInstanceOf[java.lang.String]))
@@ -1641,7 +1641,7 @@ class HttpClient(private val _asJava: Object)
     * Create a WebSocket stream at the relative request URI using the default host and port and the specified headers
     * @param requestURI the relative URI
     * @param headers the headers
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(requestURI: String, headers: MultiMap): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap]))
@@ -1653,7 +1653,7 @@ class HttpClient(private val _asJava: Object)
     * @param requestURI the relative URI
     * @param headers the headers
     * @param version the websocket version
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version))
@@ -1666,7 +1666,7 @@ class HttpClient(private val _asJava: Object)
     * @param headers the headers
     * @param version the websocket version
     * @param subProtocols the subprotocols
-    * @return a reference to this, so the API can be used fluently
+    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
     */
   def websocketStream(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String]))

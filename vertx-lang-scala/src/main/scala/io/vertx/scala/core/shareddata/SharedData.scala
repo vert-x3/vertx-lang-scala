@@ -33,12 +33,16 @@ import io.vertx.core.shareddata.{SharedData => JSharedData}
   * 
   * Shared data provides:
   * <ul>
-  *   <li>Cluster wide maps which can be accessed from any node of the cluster</li>
-  *   <li>Cluster wide locks which can be used to give exclusive access to resources across the cluster</li>
-  *   <li>Cluster wide counters used to maintain counts consistently across the cluster</li>
-  *   <li>Local maps for sharing data safely in the same Vert.x instance</li>
+  *   <li>synchronous shared maps (local)</li>
+  *   <li>asynchronous maps (local or cluster-wide)</li>
+  *   <li>asynchronous locks (local or cluster-wide)</li>
+  *   <li>asynchronous counters (local or cluster-wide)</li>
   * </ul>
   * 
+  * 
+  *   <strong>WARNING</strong>: In clustered mode, asynchronous maps/locks/counters rely on distributed data structures provided by the cluster manager.
+  *   Beware that the latency relative to asynchronous maps/locks/counters operations can be much higher in clustered than in local mode.
+  * </p>
   * Please see the documentation for more information.
   */
 class SharedData(private val _asJava: Object) {
@@ -57,7 +61,21 @@ class SharedData(private val _asJava: Object) {
   }
 
   /**
-    * Get a cluster wide lock with the specified name. The lock will be passed to the handler when it is available.
+    * Get the [[io.vertx.scala.core.shareddata.AsyncMap]] with the specified name. When clustered, the map is accessible to all nodes in the cluster
+    * and data put into the map from any node is visible to to any other node.
+    * 
+    *   <strong>WARNING</strong>: In clustered mode, asynchronous shared maps rely on distributed data structures provided by the cluster manager.
+    *   Beware that the latency relative to asynchronous shared maps operations can be much higher in clustered than in local mode.
+    * </p>
+    * @param name the name of the map
+    * @param resultHandler the map will be returned asynchronously in this handler
+    */
+  def getAsyncMap[K: TypeTag, V: TypeTag](name: String, resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]): Unit = {
+    asJava.asInstanceOf[JSharedData].getAsyncMap[Object, Object](name.asInstanceOf[java.lang.String], {x: AsyncResult[JAsyncMap[Object, Object]] => resultHandler.handle(AsyncResultWrapper[JAsyncMap[Object, Object], AsyncMap[K, V]](x, a => AsyncMap[K, V](a)))})
+  }
+
+  /**
+    * Get an asynchronous lock with the specified name. The lock will be passed to the handler when it is available.
     * @param name the name of the lock
     * @param resultHandler the handler
     */
@@ -77,7 +95,7 @@ class SharedData(private val _asJava: Object) {
   }
 
   /**
-    * Get a cluster wide counter. The counter will be passed to the handler.
+    * Get an asynchronous counter. The counter will be passed to the handler.
     * @param name the name of the counter.
     * @param resultHandler the handler
     */
@@ -100,6 +118,15 @@ class SharedData(private val _asJava: Object) {
   def getClusterWideMapFuture[K: TypeTag, V: TypeTag](name: String): scala.concurrent.Future[AsyncMap[K, V]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAsyncMap[Object, Object], AsyncMap[K, V]](x => AsyncMap[K, V](x))
     asJava.asInstanceOf[JSharedData].getClusterWideMap[Object, Object](name.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[getAsyncMap]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def getAsyncMapFuture[K: TypeTag, V: TypeTag](name: String): scala.concurrent.Future[AsyncMap[K, V]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JAsyncMap[Object, Object], AsyncMap[K, V]](x => AsyncMap[K, V](x))
+    asJava.asInstanceOf[JSharedData].getAsyncMap[Object, Object](name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

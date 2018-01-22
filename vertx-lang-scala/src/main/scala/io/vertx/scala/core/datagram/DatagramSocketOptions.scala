@@ -31,7 +31,7 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions)
   def asJava = _asJava
 
   /**
-    * Set if the socket can receive broadcast packets
+    * Set if the socket can send or receive broadcast packets
     */
   def setBroadcast(value: Boolean) = {
     asJava.setBroadcast(value)
