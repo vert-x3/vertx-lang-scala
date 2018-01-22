@@ -27,9 +27,6 @@ import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 class JdkSSLEngineOptions(private val _asJava: JJdkSSLEngineOptions) {
 
   def asJava = _asJava
-
-  /**
-    */
 }
 
 object JdkSSLEngineOptions {

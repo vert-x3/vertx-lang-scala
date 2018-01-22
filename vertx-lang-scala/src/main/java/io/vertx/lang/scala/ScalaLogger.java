@@ -16,6 +16,8 @@
 
 package io.vertx.lang.scala;
 
+import com.fasterxml.jackson.module.scala.DefaultScalaModule$;
+import io.vertx.core.json.Json;
 import io.vertx.core.logging.Logger;
 import io.vertx.core.logging.LoggerFactory;
 import io.vertx.core.spi.logging.LogDelegate;
@@ -28,6 +30,10 @@ import io.vertx.core.spi.logging.LogDelegate;
  */
 public class ScalaLogger{
     private final Logger log;
+
+    static {
+      Json.mapper.registerModule(DefaultScalaModule$.MODULE$);
+    }
 
     public static ScalaLogger getLogger(String name) {
         return new ScalaLogger(LoggerFactory.getLogger(name));

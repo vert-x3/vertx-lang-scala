@@ -307,6 +307,16 @@ class Vertx(private val _asJava: Object)
   }
 
   /**
+    * Create a DNS client to connect to the DNS server configured by <a href="../../../../../../cheatsheet/VertxOptions.html">VertxOptions</a>
+    * 
+    * DNS client takes the first configured resolver address provided by `
+    * @return the DNS client
+    */
+  def createDnsClient(): DnsClient = {
+    DnsClient(asJava.asInstanceOf[JVertx].createDnsClient())
+  }
+
+  /**
     * Create a DNS client to connect to a DNS server
     * @param options the client optionssee <a href="../../../../../../cheatsheet/DnsClientOptions.html">DnsClientOptions</a>
     * @return the DNS client

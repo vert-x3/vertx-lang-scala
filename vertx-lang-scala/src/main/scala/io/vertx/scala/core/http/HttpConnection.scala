@@ -83,7 +83,7 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   /**
-    * Like [[io.vertx.scala.core.http.HttpConnection#goAway]] with a last stream id `2^31-1`.
+    * Like [[io.vertx.scala.core.http.HttpConnection#goAway]] with a last stream id `-1` which means to disallow any new stream creation.
     */
   def goAway(errorCode: Long): HttpConnection = {
     asJava.asInstanceOf[JHttpConnection].goAway(errorCode.asInstanceOf[java.lang.Long])
