@@ -273,6 +273,14 @@ class WebSocket(private val _asJava: Object)
     asJava.asInstanceOf[JWebSocket].close()
   }
 
+  override def close(statusCode: Short): Unit = {
+    asJava.asInstanceOf[JWebSocket].close(statusCode.asInstanceOf[java.lang.Short])
+  }
+
+  override def close(statusCode: Short, reason: scala.Option[String]): Unit = {
+    asJava.asInstanceOf[JWebSocket].close(statusCode.asInstanceOf[java.lang.Short], reason.map(x => x.asInstanceOf[java.lang.String]).orNull)
+  }
+
   /**
     * @return true if this io.vertx.scala.core.http.HttpConnection is encrypted via SSL/TLS.
     */

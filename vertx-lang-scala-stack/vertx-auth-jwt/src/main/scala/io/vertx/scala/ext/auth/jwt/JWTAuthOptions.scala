@@ -21,6 +21,8 @@ import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
 import io.vertx.ext.auth.jwt.{JWTAuthOptions => JJWTAuthOptions}
 import io.vertx.ext.auth.{PubSecKeyOptions => JPubSecKeyOptions}
+import io.vertx.scala.ext.jwt.JWTOptions
+import io.vertx.ext.jwt.{JWTOptions => JJWTOptions}
 import io.vertx.ext.auth.{SecretOptions => JSecretOptions}
 import io.vertx.scala.ext.auth.SecretOptions
 import io.vertx.scala.ext.auth.KeyStoreOptions
@@ -33,64 +35,21 @@ import io.vertx.ext.auth.{KeyStoreOptions => JKeyStoreOptions}
 class JWTAuthOptions(private val _asJava: JJWTAuthOptions) {
 
   def asJava = _asJava
-
-  /**
-    * Set the audience list
-    */
-  def setAudience(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setAudience(value.asJava)
+  def setJWTOptions(value: JWTOptions) = {
+    asJava.setJWTOptions(value.asJava)
     this
   }
-  def getAudience: scala.collection.mutable.Buffer[String] = {
-    asJava.getAudience().asScala.map(x => x.asInstanceOf[String])
+  
+  def getJWTOptions: io.vertx.scala.ext.jwt.JWTOptions = {
+    io.vertx.scala.ext.jwt.JWTOptions(asJava.getJWTOptions())
   }
-
-  /**
-    * Set the audience list
-    */
-  def addAudience(value: String) = {
-    asJava.addAudience(value)
-    this
-  }
-
-  /**
-    * Set whether expiration is ignored
-    */
-  def setIgnoreExpiration(value: Boolean) = {
-    asJava.setIgnoreExpiration(value)
-    this
-  }
-  def isIgnoreExpiration: Boolean = {
-    asJava.isIgnoreExpiration().asInstanceOf[Boolean]
-  }
-
-  /**
-    * Set the issuer
-    */
-  def setIssuer(value: String) = {
-    asJava.setIssuer(value)
-    this
-  }
-  def getIssuer: String = {
-    asJava.getIssuer().asInstanceOf[String]
-  }
+  
   def setKeyStore(value: KeyStoreOptions) = {
     asJava.setKeyStore(value.asJava)
     this
   }
   def getKeyStore: KeyStoreOptions = {
     KeyStoreOptions(asJava.getKeyStore())
-  }
-
-  /**
-    * Set the leeway in seconds
-    */
-  def setLeeway(value: Int) = {
-    asJava.setLeeway(value)
-    this
-  }
-  def getLeeway: Int = {
-    asJava.getLeeway().asInstanceOf[Int]
   }
   def setPermissionsClaimKey(value: String) = {
     asJava.setPermissionsClaimKey(value)

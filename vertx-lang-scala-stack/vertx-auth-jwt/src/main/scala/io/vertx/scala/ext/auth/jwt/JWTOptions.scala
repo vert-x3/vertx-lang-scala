@@ -19,6 +19,7 @@ package io.vertx.scala.ext.auth.jwt
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.scala.ext.jwt.{JWTOptions => ExtJWTOptions}
 import io.vertx.ext.auth.jwt.{JWTOptions => JJWTOptions}
 import io.vertx.core.json.JsonObject
 
@@ -30,108 +31,90 @@ import io.vertx.core.json.JsonObject
   *
   * Generated JWTs will include an iat claim by default unless noTimestamp is specified.
   */
-class JWTOptions(private val _asJava: JJWTOptions) {
+class JWTOptions(private val _asJava: JJWTOptions) 
+    extends ExtJWTOptions(_asJava) {
 
-  def asJava = _asJava
-
-  /**
-    * The algorithm to use, it should be one of the alias [HS256, HS384, HS512, RS256, RS384, RS512, ES256, ES384, ES512]
-    */
-  def setAlgorithm(value: String) = {
+  override def asJava = _asJava
+  override def setAlgorithm(value: String) = {
     asJava.setAlgorithm(value)
     this
   }
-  def getAlgorithm: String = {
+  override def getAlgorithm: String = {
     asJava.getAlgorithm().asInstanceOf[String]
   }
-
-  /**
-    * The target audience of this token
-    */
-  def setAudience(value: scala.collection.mutable.Buffer[String]) = {
+  override def setAudience(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setAudience(value.asJava)
     this
   }
-  def getAudience: scala.collection.mutable.Buffer[String] = {
+  override def getAudience: scala.collection.mutable.Buffer[String] = {
     asJava.getAudience().asScala.map(x => x.asInstanceOf[String])
   }
-
-  /**
-    * The target audience of this token
-    */
-  def addAudience(value: String) = {
+  override def addAudience(value: String) = {
     asJava.addAudience(value)
     this
   }
-
-  /**
-    * The expiration time for the token in minutes
-    */
-  def setExpiresInMinutes(value: Long) = {
+  override def setExpiresInMinutes(value: Int) = {
     asJava.setExpiresInMinutes(value)
     this
   }
-  def getExpiresInMinutes: Long = {
-    asJava.getExpiresInMinutes().asInstanceOf[Long]
-  }
-
-  /**
-    * The expiration time for the token in seconds
-    */
-  def setExpiresInSeconds(value: Long) = {
+  override def setExpiresInSeconds(value: Int) = {
     asJava.setExpiresInSeconds(value)
     this
   }
-  def getExpiresInSeconds: Long = {
-    asJava.getExpiresInSeconds().asInstanceOf[Long]
+  override def getExpiresInSeconds: Int = {
+    asJava.getExpiresInSeconds().asInstanceOf[Int]
   }
-  def addHeader(key: String, value: String) = {
-    asJava.addHeader(key, value.asInstanceOf[java.lang.String])
+  override def setHeader(value: io.vertx.core.json.JsonObject) = {
+    asJava.setHeader(value)
     this
   }
-
-  /**
-    * The issuer of this token
-    */
-  def setIssuer(value: String) = {
+  override def getHeader: io.vertx.core.json.JsonObject = {
+    asJava.getHeader()
+  }
+  override def setIgnoreExpiration(value: Boolean) = {
+    asJava.setIgnoreExpiration(value)
+    this
+  }
+  override def isIgnoreExpiration: Boolean = {
+    asJava.isIgnoreExpiration().asInstanceOf[Boolean]
+  }
+  override def setIssuer(value: String) = {
     asJava.setIssuer(value)
     this
   }
-  def getIssuer: String = {
+  override def getIssuer: String = {
     asJava.getIssuer().asInstanceOf[String]
   }
-
-  /**
-    * Disable the generation of issued at claim
-    */
-  def setNoTimestamp(value: Boolean) = {
+  override def setLeeway(value: Int) = {
+    asJava.setLeeway(value)
+    this
+  }
+  override def getLeeway: Int = {
+    asJava.getLeeway().asInstanceOf[Int]
+  }
+  override def setNoTimestamp(value: Boolean) = {
     asJava.setNoTimestamp(value)
     this
   }
-  def getNoTimestamp: Boolean = {
-    asJava.getNoTimestamp().asInstanceOf[Boolean]
+  override def isNoTimestamp: Boolean = {
+    asJava.isNoTimestamp().asInstanceOf[Boolean]
   }
-
-  /**
-    * The permissions of this token.
-    */
-  def addPermission(value: String) = {
+  override def addPermission(value: String) = {
     asJava.addPermission(value)
     this
   }
-  def setPermissions(value: scala.collection.mutable.Buffer[String]) = {
+  override def setPermissions(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setPermissions(value.asJava)
     this
   }
-
-  /**
-    * The subject of this token
-    */
-  def setSubject(value: String) = {
+  override def getPermissions: scala.collection.mutable.Buffer[String] = {
+    asJava.getPermissions().asScala.map(x => x.asInstanceOf[String])
+  }
+  override def setSubject(value: String) = {
     asJava.setSubject(value)
     this
   }
-  def getSubject: String = {
+  override def getSubject: String = {
     asJava.getSubject().asInstanceOf[String]
   }
 }

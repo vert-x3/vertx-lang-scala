@@ -75,24 +75,5 @@ An example on how to get started with this bridge could be:
 
 [source,scala]
 ----
-
-var bridge = TcpEventBusBridge.create(vertx, BridgeOptions()
-  .setInboundPermitteds(Set(PermittedOptions()
-    .setAddress("in")
-  ))
-  .setOutboundPermitteds(Set(PermittedOptions()
-    .setAddress("out")
-  ))
-)
-
-bridge.listenFuture(7000).onComplete{
-  case Success(result) => {
-    // succeed...
-  }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
-
-
+`example1`
 ----

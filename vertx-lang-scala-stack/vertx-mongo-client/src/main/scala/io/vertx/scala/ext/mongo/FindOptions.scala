@@ -30,6 +30,17 @@ class FindOptions(private val _asJava: JFindOptions) {
   def asJava = _asJava
 
   /**
+    * Set the batch size for methods loading found data in batches.
+    */
+  def setBatchSize(value: Int) = {
+    asJava.setBatchSize(value)
+    this
+  }
+  def getBatchSize: Int = {
+    asJava.getBatchSize().asInstanceOf[Int]
+  }
+
+  /**
     * Set the fields
     */
   def setFields(value: io.vertx.core.json.JsonObject) = {

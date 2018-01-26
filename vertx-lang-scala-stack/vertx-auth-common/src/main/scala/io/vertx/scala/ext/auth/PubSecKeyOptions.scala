@@ -27,6 +27,20 @@ import io.vertx.ext.auth.{PubSecKeyOptions => JPubSecKeyOptions}
 class PubSecKeyOptions(private val _asJava: JPubSecKeyOptions) {
 
   def asJava = _asJava
+  def setAlgorithm(value: String) = {
+    asJava.setAlgorithm(value)
+    this
+  }
+  def getAlgorithm: String = {
+    asJava.getAlgorithm().asInstanceOf[String]
+  }
+  def setCertificate(value: Boolean) = {
+    asJava.setCertificate(value)
+    this
+  }
+  def isCertificate: Boolean = {
+    asJava.isCertificate().asInstanceOf[Boolean]
+  }
   def setPublicKey(value: String) = {
     asJava.setPublicKey(value)
     this
@@ -41,23 +55,12 @@ class PubSecKeyOptions(private val _asJava: JPubSecKeyOptions) {
   def getSecretKey: String = {
     asJava.getSecretKey().asInstanceOf[String]
   }
-  def setType(value: String) = {
-    asJava.setType(value)
+  def setSymmetric(value: Boolean) = {
+    asJava.setSymmetric(value)
     this
   }
-  def getType: String = {
-    asJava.getType().asInstanceOf[String]
-  }
-  def addX509Certificate(value: String) = {
-    asJava.addX509Certificate(value)
-    this
-  }
-  def setX509Certificates(value: scala.collection.mutable.Buffer[String]) = {
-    asJava.setX509Certificates(value.asJava)
-    this
-  }
-  def getX509Certificates: scala.collection.mutable.Buffer[String] = {
-    asJava.getX509Certificates().asScala.map(x => x.asInstanceOf[String])
+  def isSymmetric: Boolean = {
+    asJava.isSymmetric().asInstanceOf[Boolean]
   }
 }
 

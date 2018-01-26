@@ -172,7 +172,7 @@ endpoint.publishHandler((message: io.vertx.scala.mqtt.messages.MqttPublishMessag
   if (message.qosLevel() == MqttQoS.AT_LEAST_ONCE) {
     endpoint.publishAcknowledge(message.messageId())
   } else if (message.qosLevel() == MqttQoS.EXACTLY_ONCE) {
-    endpoint.publishRelease(message.messageId())
+    endpoint.publishReceived(message.messageId())
   }
 
 }).publishReleaseHandler((messageId: java.lang.Integer) => {

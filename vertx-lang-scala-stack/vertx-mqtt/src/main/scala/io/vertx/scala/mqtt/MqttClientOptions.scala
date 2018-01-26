@@ -122,6 +122,10 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
+  override def setEnabledSecureTransportProtocols(value: Set[String]) = {
+    asJava.setEnabledSecureTransportProtocols(value.asJava)
+    this
+  }
   override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
     asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
@@ -132,6 +136,10 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions)
   override def getHostnameVerificationAlgorithm: String = {
     asJava.getHostnameVerificationAlgorithm().asInstanceOf[String]
   }
+
+  /**
+    * Do the same thing as <a href="../../../../../../cheatsheet/MqttClientOptions.html">MqttClientOptions</a>. Use it instead.
+    */
   override def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this

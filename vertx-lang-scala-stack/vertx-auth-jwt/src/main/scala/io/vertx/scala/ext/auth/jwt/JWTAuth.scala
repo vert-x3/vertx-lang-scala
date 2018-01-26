@@ -21,13 +21,14 @@ import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.auth.jwt.{JWTAuthOptions => JJWTAuthOptions}
-import io.vertx.ext.auth.jwt.{JWTOptions => JJWTOptions}
+import io.vertx.scala.ext.jwt.JWTOptions
 import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.ext.auth.AuthProvider
 import io.vertx.scala.ext.auth.User
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import io.vertx.ext.jwt.{JWTOptions => JJWTOptions}
 import io.vertx.ext.auth.{User => JUser}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult

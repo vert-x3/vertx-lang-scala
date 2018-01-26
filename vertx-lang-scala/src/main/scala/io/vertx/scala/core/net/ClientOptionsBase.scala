@@ -55,9 +55,10 @@ trait ClientOptionsBase
   def getEnabledCipherSuites: scala.collection.mutable.Set[String] 
 
   /**
-    * Add an enabled SSL/TLS protocols, appended to the ordered protocols.
+    * Sets the list of enabled SSL/TLS protocols.
     */
   def addEnabledSecureTransportProtocol(value: String): ClientOptionsBase
+  def setEnabledSecureTransportProtocols(value: Set[String]): ClientOptionsBase
   def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] 
 
   /**

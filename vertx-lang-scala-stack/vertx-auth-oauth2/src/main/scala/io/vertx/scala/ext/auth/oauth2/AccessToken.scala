@@ -40,6 +40,11 @@ class AccessToken(private val _asJava: Object)
 
 
 
+  def setTrustJWT(trust: Boolean): AccessToken = {
+    asJava.asInstanceOf[JAccessToken].setTrustJWT(trust.asInstanceOf[java.lang.Boolean])
+    this
+  }
+
   /**
     * Refresh the access token
     * @param callback - The callback function returning the results.
@@ -133,6 +138,38 @@ class AccessToken(private val _asJava: Object)
     */
   def accessToken(): io.vertx.core.json.JsonObject = {
     asJava.asInstanceOf[JAccessToken].accessToken()
+  }
+
+  /**
+    * The Refresh Token if present parsed as a JsonObject
+    * @return JSON
+    */
+  def refreshToken(): io.vertx.core.json.JsonObject = {
+    asJava.asInstanceOf[JAccessToken].refreshToken()
+  }
+
+  /**
+    * The Id Token if present parsed as a JsonObject
+    * @return JSON
+    */
+  def idToken(): io.vertx.core.json.JsonObject = {
+    asJava.asInstanceOf[JAccessToken].idToken()
+  }
+
+  def opaqueAccessToken(): String = {
+    asJava.asInstanceOf[JAccessToken].opaqueAccessToken().asInstanceOf[String]
+  }
+
+  def opaqueRefreshToken(): String = {
+    asJava.asInstanceOf[JAccessToken].opaqueRefreshToken().asInstanceOf[String]
+  }
+
+  def opaqueIdToken(): String = {
+    asJava.asInstanceOf[JAccessToken].opaqueIdToken().asInstanceOf[String]
+  }
+
+  def tokenType(): String = {
+    asJava.asInstanceOf[JAccessToken].tokenType().asInstanceOf[String]
   }
 
  /**

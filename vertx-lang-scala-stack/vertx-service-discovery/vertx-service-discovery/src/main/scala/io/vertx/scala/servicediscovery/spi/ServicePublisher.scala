@@ -52,6 +52,15 @@ class ServicePublisher(private val _asJava: Object) {
     asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
+  /**
+    * Updates an existing record.
+    * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
+    * @param resultHandler handler called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
+    */
+  def update(record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
+    asJava.asInstanceOf[JServicePublisher].update(record.asJava, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
+  }
+
  /**
    * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
@@ -67,6 +76,15 @@ class ServicePublisher(private val _asJava: Object) {
   def unpublishFuture(id: String): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[update]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def updateFuture(record: Record): scala.concurrent.Future[Record] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord, Record](x => Record(x))
+    asJava.asInstanceOf[JServicePublisher].update(record.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

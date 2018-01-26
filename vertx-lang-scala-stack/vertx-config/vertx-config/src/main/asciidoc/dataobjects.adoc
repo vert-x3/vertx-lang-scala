@@ -33,6 +33,7 @@ Sets the previous configuration.
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[includeDefaultStores]]`includeDefaultStores`|`Boolean`|-
 |[[scanPeriod]]`scanPeriod`|`Number (long)`|-
 |[[stores]]`stores`|`Array of link:dataobjects.html#ConfigStoreOptions[ConfigStoreOptions]`|-
 |===
@@ -59,6 +60,11 @@ Sets the configuration of the store
 |[[format]]`format`|`String`|
 +++
 Sets the format of the configuration that is retrieved from the store.
++++
+|[[optional]]`optional`|`Boolean`|
++++
+Sets whether or not the store is optional. When the configuration is retrieve, if an optional store
+ returns a failure, the failure is ignored and an empty json object is used instead (for this store).
 +++
 |[[type]]`type`|`String`|
 +++

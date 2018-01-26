@@ -62,6 +62,21 @@ class CircuitBreakerOptions(private val _asJava: JCircuitBreakerOptions) {
   }
 
   /**
+    * Sets the configured number of buckets the rolling window is divided into.
+    *
+    * The following must be true - metrics.rollingStats.timeInMilliseconds % metrics.rollingStats.numBuckets == 0 - otherwise it will throw an exception.
+    *
+    * In other words, 10000/10 is okay, so is 10000/20 but 10000/7 is not.
+    */
+  def setMetricsRollingBuckets(value: Int) = {
+    asJava.setMetricsRollingBuckets(value)
+    this
+  }
+  def getMetricsRollingBuckets: Int = {
+    asJava.getMetricsRollingBuckets().asInstanceOf[Int]
+  }
+
+  /**
     * Sets the rolling window used for metrics.
     */
   def setMetricsRollingWindow(value: Long) = {

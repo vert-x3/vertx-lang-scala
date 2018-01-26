@@ -99,10 +99,14 @@ class NetServerOptions(private val _asJava: JNetServerOptions)
   }
 
   /**
-    * Add an enabled SSL/TLS protocols, appended to the ordered protocols.
+    * Sets the list of enabled SSL/TLS protocols.
     */
   override def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
+    this
+  }
+  override def setEnabledSecureTransportProtocols(value: Set[String]) = {
+    asJava.setEnabledSecureTransportProtocols(value.asJava)
     this
   }
   override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {

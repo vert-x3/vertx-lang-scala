@@ -174,6 +174,10 @@ class ConsulClientOptions(private val _asJava: JConsulClientOptions)
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
+  override def setEnabledSecureTransportProtocols(value: Set[String]) = {
+    asJava.setEnabledSecureTransportProtocols(value.asJava)
+    this
+  }
   override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
     asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }

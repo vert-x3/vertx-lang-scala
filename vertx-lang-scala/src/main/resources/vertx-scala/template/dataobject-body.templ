@@ -87,9 +87,13 @@
 	@end{}
 	@comment{Some necessary filtering as PropertyInfo has no information about static methods}
 	@if{(property.setter || property.adder) && property.getterMethod != null}
-	  @if{!property.isDeclared && !superTypes.isEmpty}override @end{}def @{property.getterMethod}: @{fromPropertyInfoToScala(property)} = {\n
-	    @{fromPropertyInfoToScalaTypeWithConversion('asJava.' + property.getterMethod + '()', property)}\n
-	  }\n
+		@if{className == "JWTAuthOptions" && property.getterMethod == "getJWTOptions"}
+			@includeNamed{'extensions/JWTAuthOptions.templ'}
+		@else{}
+		  @if{!property.isDeclared && !superTypes.isEmpty}override @end{}def @{property.getterMethod}: @{fromPropertyInfoToScala(property)} = {\n
+		    @{fromPropertyInfoToScalaTypeWithConversion('asJava.' + property.getterMethod + '()', property)}\n
+		  }\n
+		@end{}
 	@end{}
 @end{}
 }\n

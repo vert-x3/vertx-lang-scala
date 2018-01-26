@@ -26,6 +26,13 @@ import io.vertx.config.{ConfigRetrieverOptions => JConfigRetrieverOptions}
 class ConfigRetrieverOptions(private val _asJava: JConfigRetrieverOptions) {
 
   def asJava = _asJava
+  def setIncludeDefaultStores(value: Boolean) = {
+    asJava.setIncludeDefaultStores(value)
+    this
+  }
+  def isIncludeDefaultStores: Boolean = {
+    asJava.isIncludeDefaultStores().asInstanceOf[Boolean]
+  }
   def setScanPeriod(value: Long) = {
     asJava.setScanPeriod(value)
     this

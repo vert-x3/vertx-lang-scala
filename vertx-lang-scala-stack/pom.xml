@@ -316,8 +316,10 @@
     <module>vertx-sql-common</module>
     <module>vertx-bridge-common</module>
     <module>vertx-jdbc-client</module>
+    <module>vertx-proton</module>
     <module>vertx-mongo-client</module>
     <module>vertx-mongo-service</module>
+    <module>vertx-jwt</module>
     <module>vertx-auth-common</module>
     <module>vertx-auth-shiro</module>
     <module>vertx-auth-htdigest</module>

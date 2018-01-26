@@ -49,9 +49,10 @@ trait TCPSSLOptions
   def getEnabledCipherSuites: scala.collection.mutable.Set[String] 
 
   /**
-    * Add an enabled SSL/TLS protocols, appended to the ordered protocols.
+    * Sets the list of enabled SSL/TLS protocols.
     */
   def addEnabledSecureTransportProtocol(value: String): TCPSSLOptions
+  def setEnabledSecureTransportProtocols(value: Set[String]): TCPSSLOptions
   def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] 
 
   /**

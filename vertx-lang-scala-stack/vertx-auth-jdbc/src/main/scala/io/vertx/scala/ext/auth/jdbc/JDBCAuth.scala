@@ -35,7 +35,11 @@ import io.vertx.core.Handler
 import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
 
 /**
-  * Factory interface for creating [[io.vertx.scala.ext.auth.AuthProvider]] instances that use the Vert.x JDBC client
+  * Factory interface for creating [[io.vertx.scala.ext.auth.AuthProvider]] instances that use the Vert.x JDBC client.
+  *
+  * By default the hashing strategy is SHA-512. If you're already running in production this is backwards
+  * compatible, however for new deployments or security upgrades it is recommended to use the PBKDF2 strategy
+  * as it is the current OWASP recommendation for password storage.
   */
 class JDBCAuth(private val _asJava: Object)
     extends AuthProvider(_asJava)   {

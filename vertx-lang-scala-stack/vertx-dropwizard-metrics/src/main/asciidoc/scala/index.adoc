@@ -9,7 +9,7 @@ A fairly simple API to retrieve metrics via the `link:../../scaladocs/io/vertx/s
 interface which is implemented by various Vert.x components like `link:../../scaladocs/io/vertx/scala/core/http/HttpServer.html[HttpServer]`,
 `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html[NetServer]`, and even `link:../../scaladocs/io/vertx/scala/core/Vertx.html[Vertx]` itself.
 
-Confiugrable JMX reporting based on Dropwizard implementation, exposing Vert.x as JMX MBeans.
+Configurable JMX reporting based on Dropwizard implementation, exposing Vert.x as JMX MBeans.
 
 == Getting started
 
