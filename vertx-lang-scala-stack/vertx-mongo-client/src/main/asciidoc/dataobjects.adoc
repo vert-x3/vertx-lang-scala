@@ -68,6 +68,10 @@ Set the write option
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[batchSize]]`batchSize`|`Number (int)`|
++++
+Set the batch size for methods loading found data in batches.
++++
 |[[fields]]`fields`|`Json object`|
 +++
 Set the fields

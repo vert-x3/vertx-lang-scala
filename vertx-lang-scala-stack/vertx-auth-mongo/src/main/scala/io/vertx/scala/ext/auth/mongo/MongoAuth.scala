@@ -20,6 +20,7 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.ext.auth.mongo.HashAlgorithm
 import io.vertx.ext.mongo.{MongoClient => JMongoClient}
 import scala.collection.JavaConverters._
 import io.vertx.scala.ext.auth.AuthProvider
@@ -137,6 +138,16 @@ class MongoAuth(private val _asJava: Object)
   }
 
   /**
+    * The Hash Algorithm which is used by the current instance
+    * @param hashAlgorithm the HashAlgorithm to be set
+    * @return the current instance itself for fluent calls
+    */
+  def setHashAlgorithm(hashAlgorithm: io.vertx.ext.auth.mongo.HashAlgorithm): MongoAuth = {
+    asJava.asInstanceOf[JMongoAuth].setHashAlgorithm(hashAlgorithm)
+    this
+  }
+
+  /**
     * The name of the collection used to store User objects inside. Defaults to [[io.vertx.scala.ext.auth.mongo.MongoAuth]]
     * @return the collectionName
     */
@@ -241,7 +252,7 @@ object MongoAuth {
   /**
     * Creates an instance of MongoAuth by using the given  and configuration object. An example for a
     * configuration object:
-    * 
+    *
     * <pre>
     * JsonObject js = new JsonObject();
     * js.put(MongoAuth.PROPERTY_COLLECTION_NAME, createCollectionName(MongoAuth.DEFAULT_COLLECTION_NAME));

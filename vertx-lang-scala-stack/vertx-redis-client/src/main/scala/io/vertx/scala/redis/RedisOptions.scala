@@ -118,6 +118,28 @@ class RedisOptions(private val _asJava: JRedisOptions)
   override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
     asJava.getCrlValues().asScala.map(x => x)
   }
+
+  /**
+    * Set the domain socket enabled option, default `false`.
+    */
+  def setDomainSocket(value: Boolean) = {
+    asJava.setDomainSocket(value)
+    this
+  }
+  def isDomainSocket: Boolean = {
+    asJava.isDomainSocket().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Set the domain socket address where the Redis server is listening.
+    */
+  def setDomainSocketAddress(value: String) = {
+    asJava.setDomainSocketAddress(value)
+    this
+  }
+  def getDomainSocketAddress: String = {
+    asJava.getDomainSocketAddress().asInstanceOf[String]
+  }
   override def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
@@ -127,6 +149,10 @@ class RedisOptions(private val _asJava: JRedisOptions)
   }
   override def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
+    this
+  }
+  override def setEnabledSecureTransportProtocols(value: Set[String]) = {
+    asJava.setEnabledSecureTransportProtocols(value.asJava)
     this
   }
   override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {

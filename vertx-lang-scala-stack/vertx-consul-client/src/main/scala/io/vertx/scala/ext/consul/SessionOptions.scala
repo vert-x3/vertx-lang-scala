@@ -86,7 +86,15 @@ class SessionOptions(private val _asJava: JSessionOptions) {
 
   /**
     * Set the TTL interval. When TTL interval expires without being renewed, the session has expired
-    * and an invalidation is triggered. If specified, it must be between 10s and 86400s currently.
+    * and an invalidation is triggered. If specified, it must be between `10s` and `86400s` currently.
+    *
+    * The contract of a TTL is that it represents a lower bound for invalidation; that is,
+    * Consul will not expire the session before the TTL is reached, but it is allowed to delay
+    * the expiration past the TTL.
+    *
+    * The lowest practical TTL should be used to keep the number of managed sessions low.
+    * When locks are forcibly expired, such as during a leader election, sessions may not be reaped for
+    * up to double this TTL, so long TTL values (&gt; 1 hour) should be avoided.
     */
   def setTtl(value: Long) = {
     asJava.setTtl(value)

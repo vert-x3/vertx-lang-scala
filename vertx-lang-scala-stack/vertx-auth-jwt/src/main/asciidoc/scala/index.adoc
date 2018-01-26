@@ -138,7 +138,7 @@ case all you need to have is a public key im PEM format.
 
 var config = JWTAuthOptions()
   .setPubSecKeys(Set(PubSecKeyOptions()
-    .setType("RS256")
+    .setAlgorithm("RS256")
     .setPublicKey("BASE64-ENCODED-PUBLIC_KEY")
   ))
 

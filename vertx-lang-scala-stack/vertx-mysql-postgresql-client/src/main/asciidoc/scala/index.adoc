@@ -217,7 +217,9 @@ Both the PostgreSql and MySql clients take the same configuration:
   "password" : <your-password>,
   "database" : <name-of-your-database>,
   "charset" : <name-of-the-character-set>,
-  "queryTimeout" : <timeout-in-milliseconds>
+  "queryTimeout" : <timeout-in-milliseconds>,
+  "sslMode" : <"disable"|"prefer"|"require"|"verify-ca"|"verify-full">,
+  "sslRootCert" : <path to file with certificate>
 }
 ----
 
@@ -229,3 +231,15 @@ Both the PostgreSql and MySql clients take the same configuration:
 `database`:: The name of the database you want to connect to. Defaults to `testdb`.
 `charset`:: The name of the character set you want to use for the connection. Defaults to `UTF-8`.
 `queryTimeout`:: The timeout to wait for a query in milliseconds. Defaults to `10000` (= 10 seconds).
+`sslMode` :: If you want to enable SSL support you should enable this parameter.
+             For example to connect Heroku you will need to use *prefer*.
+
+   "disable" ::: only try a non-SSL connection
+   "prefer"  ::: first try an SSL connection; if that fails, try a non-SSL connection
+   "require"  ::: only try an SSL connection, but don't verify Certificate Authority
+   "verify-ca"  ::: only try an SSL connection, and verify that the server certificate is issued by a trusted
+                    certificate authority (CA)
+   "verify-full"  ::: only try an SSL connection, verify that the server certificate is issued by a trusted CA and
+                      that the server host name matches that in the certificate
+`sslRootCert` :: Path to SSL root certificate file. Is used if you want to verify privately issued certificate.
+                 Refer to https://github.com/mauricio/postgresql-async[postgresql-async] documentation for more details.

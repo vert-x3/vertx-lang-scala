@@ -49,7 +49,7 @@ class ServiceImporter(private val _asJava: Object) {
   /**
     * Starts the importer.
     * @param vertx the vertx instance
-    * @param publisher the service discovery instance
+    * @param publisher the service publisher instance
     * @param configuration the bridge configuration if any
     * @param future a future on which the bridge must report the completion of the starting
     */

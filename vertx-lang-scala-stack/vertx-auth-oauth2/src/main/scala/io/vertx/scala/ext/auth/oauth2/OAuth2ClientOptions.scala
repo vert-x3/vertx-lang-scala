@@ -20,21 +20,10 @@ import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
 import io.vertx.scala.core.http.{HttpClientOptions => ExtHttpClientOptions}
-import io.vertx.scala.core.http.Http2Settings
-import io.vertx.ext.auth.{PubSecKeyOptions => JPubSecKeyOptions}
 import io.vertx.scala.core.net.PemKeyCertOptions
-import io.vertx.core.net.{PfxOptions => JPfxOptions}
-import io.vertx.scala.core.net.PemTrustOptions
-import io.vertx.scala.core.net.PfxOptions
-import io.vertx.ext.auth.oauth2.{OAuth2ClientOptions => JOAuth2ClientOptions}
 import io.vertx.scala.core.net.JdkSSLEngineOptions
-import io.vertx.core.buffer.Buffer
 import io.vertx.scala.core.net.JksOptions
 import io.vertx.core.http.HttpVersion
-import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
-import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
-import io.vertx.scala.core.net.OpenSSLEngineOptions
-import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
 import io.vertx.core.json.JsonObject
 import io.vertx.scala.core.net.ProxyOptions
 import io.vertx.core.http.{Http2Settings => JHttp2Settings}
@@ -42,6 +31,19 @@ import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.core.net.{JksOptions => JJksOptions}
 import io.vertx.scala.ext.auth.PubSecKeyOptions
+import io.vertx.scala.core.http.Http2Settings
+import io.vertx.ext.auth.{PubSecKeyOptions => JPubSecKeyOptions}
+import io.vertx.scala.ext.jwt.JWTOptions
+import io.vertx.core.net.{PfxOptions => JPfxOptions}
+import io.vertx.scala.core.net.PemTrustOptions
+import io.vertx.scala.core.net.PfxOptions
+import io.vertx.ext.auth.oauth2.{OAuth2ClientOptions => JOAuth2ClientOptions}
+import io.vertx.core.buffer.Buffer
+import io.vertx.ext.jwt.{JWTOptions => JJWTOptions}
+import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
+import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
+import io.vertx.scala.core.net.OpenSSLEngineOptions
+import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
 
 /**
   * Options describing how an OAuth2  will make connections.
@@ -154,6 +156,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
+  override def setEnabledSecureTransportProtocols(value: Set[String]) = {
+    asJava.setEnabledSecureTransportProtocols(value.asJava)
+    this
+  }
   override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
     asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
@@ -246,16 +252,26 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getJdkSslEngineOptions: JdkSSLEngineOptions = {
     JdkSSLEngineOptions(asJava.getJdkSslEngineOptions())
   }
-
-  /**
-    * Signal that this provider tokens are in JWT format
-    */
-  def setJwtToken(value: Boolean) = {
-    asJava.setJwtToken(value)
+  def setJwkPath(value: String) = {
+    asJava.setJwkPath(value)
     this
   }
-  def isJwtToken: Boolean = {
-    asJava.isJwtToken().asInstanceOf[Boolean]
+  def getJwkPath: String = {
+    asJava.getJwkPath().asInstanceOf[String]
+  }
+  def setJWTOptions(value: JWTOptions) = {
+    asJava.setJWTOptions(value.asJava)
+    this
+  }
+  def getJWTOptions: JWTOptions = {
+    JWTOptions(asJava.getJWTOptions())
+  }
+  def setJWTToken(value: Boolean) = {
+    asJava.setJWTToken(value)
+    this
+  }
+  def isJWTToken: Boolean = {
+    asJava.isJWTToken().asInstanceOf[Boolean]
   }
   override def setKeepAlive(value: Boolean) = {
     asJava.setKeepAlive(value)
@@ -426,9 +442,16 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   /**
     * The provider PubSec key options
     */
-  def setPubSecKeyOptions(value: PubSecKeyOptions) = {
-    asJava.setPubSecKeyOptions(value.asJava)
+  def addPubSecKey(value: PubSecKeyOptions) = {
+    asJava.addPubSecKey(value.asJava)
     this
+  }
+  def setPubSecKeys(value: scala.collection.mutable.Buffer[PubSecKeyOptions]) = {
+    asJava.setPubSecKeys(value.map(_.asJava).asJava)
+    this
+  }
+  def getPubSecKeys: scala.collection.mutable.Buffer[PubSecKeyOptions] = {
+    asJava.getPubSecKeys().asScala.map(x => PubSecKeyOptions(x))
   }
   override def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)

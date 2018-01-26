@@ -49,4 +49,5 @@ You can configure the:
 
 * agent host using the `host` property, it defaults to `localhost`
 * agent port using the `port` property, it defaults to 8500
+* acl token using the `acl_token` property, it defaults to null
 * scan period using the `scan-period` property. The time is set in ms, and is 2000 ms by default

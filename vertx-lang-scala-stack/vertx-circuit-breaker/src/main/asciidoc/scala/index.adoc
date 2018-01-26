@@ -166,6 +166,9 @@ If you set this to something higher than 0 your code gets executed several times
 in the last execution. If the code succeeded in one of the retries your handler gets notified and any
 retries left are skipped. Retries are only supported when the circuit is closed.
 
+Notice that is you set `maxRetries` to 2 for instance, your operation may be called 3 times: the initial attempt
+and 2 retries.
+
 == Callbacks
 
 You can also configures callbacks invoked when the circuit is opened or closed:

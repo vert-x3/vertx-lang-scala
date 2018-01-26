@@ -59,7 +59,8 @@ this order):
 * The Vert.x verticle `config()`
 * The system properties
 * The environment variables
-
+* A `conf/config.json` file. This path can be overridden using the `vertx-config-path` system property or
+`VERTX_CONFIG_PATH` environment variable.
 
 You can configure your own stores:
 
@@ -88,7 +89,29 @@ var retriever = ConfigRetriever.create(vertx, options)
 
 ----
 
-More details about the overloading rules and available stores are available below.
+More details about the overloading rules and available stores are available below. Each store can be marked as
+`optional`. If a failure is caught while retrieving (or processing) the configuration from an optional store, the failure
+is logged but the processing does not fail. Instead an empty JSON object is returned (`{}`). To mark a store as
+optional, use the `optional` attribute:
+
+[source]
+----
+var fileStore = ConfigStoreOptions()
+  .setType("file")
+  .setOptional(true)
+  .setConfig(new io.vertx.core.json.JsonObject().put("path", "my-config.json"))
+
+var sysPropsStore = ConfigStoreOptions()
+  .setType("sys")
+
+
+var options = ConfigRetrieverOptions()
+  .setStores(Set(fileStore, sysPropsStore))
+
+
+var retriever = ConfigRetriever.create(vertx, options)
+
+----
 
 Once you have the instance of the Config Retriever, _retrieve_ the configuration
 as follows:
@@ -194,6 +217,18 @@ var json = ConfigStoreOptions()
 
 You can configure the `raw-data` attribute (`false` by default). If `raw-data` is `true` no attempts to convert
 values will be made and you'll be able to get raw values using `config.getString(key)`.
+
+If you want to select the set of keys to import, use the `keys` attributes. It filters out all non selected keys. Keys
+must be listed individually:
+
+[source, scala]
+----
+var json = ConfigStoreOptions()
+  .setType("env")
+  .setConfig(new io.vertx.core.json.JsonObject().put("keys", new io.vertx.core.json.JsonArray().add("SERVICE1_HOST").add("SERVICE2_HOST")))
+
+
+----
 
 === System Properties
 

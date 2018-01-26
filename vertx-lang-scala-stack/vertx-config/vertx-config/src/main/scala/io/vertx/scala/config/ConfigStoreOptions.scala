@@ -55,6 +55,18 @@ class ConfigStoreOptions(private val _asJava: JConfigStoreOptions) {
   }
 
   /**
+    * Sets whether or not the store is optional. When the configuration is retrieve, if an optional store
+    * returns a failure, the failure is ignored and an empty json object is used instead (for this store).
+    */
+  def setOptional(value: Boolean) = {
+    asJava.setOptional(value)
+    this
+  }
+  def isOptional: Boolean = {
+    asJava.isOptional().asInstanceOf[Boolean]
+  }
+
+  /**
     * Sets the configuration type
     */
   def setType(value: String) = {

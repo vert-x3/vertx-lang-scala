@@ -21,6 +21,7 @@ import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.ext.auth.mongo.HashSaltStyle
 import io.vertx.scala.ext.auth.User
+import io.vertx.ext.auth.mongo.HashAlgorithm
 import io.vertx.ext.auth.{User => JUser}
 import io.vertx.ext.auth.mongo.{HashStrategy => JHashStrategy}
 
@@ -84,6 +85,14 @@ class HashStrategy(private val _asJava: Object) {
     */
   def getSaltStyle(): io.vertx.ext.auth.mongo.HashSaltStyle = {
     asJava.asInstanceOf[JHashStrategy].getSaltStyle()
+  }
+
+  /**
+    * Allows the selection of the hashing algorithm.
+    * @param algorithm the choosen algorithm
+    */
+  def setAlgorithm(algorithm: io.vertx.ext.auth.mongo.HashAlgorithm): Unit = {
+    asJava.asInstanceOf[JHashStrategy].setAlgorithm(algorithm)
   }
 
 }

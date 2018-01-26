@@ -31,10 +31,6 @@ import io.vertx.core.spi.logging.LogDelegate;
 public class ScalaLogger{
     private final Logger log;
 
-    static {
-      Json.mapper.registerModule(DefaultScalaModule$.MODULE$);
-    }
-
     public static ScalaLogger getLogger(String name) {
         return new ScalaLogger(LoggerFactory.getLogger(name));
     }

@@ -272,6 +272,13 @@ class MqttClient(private val _asJava: Object) {
     asJava.asInstanceOf[JMqttClient].clientId().asInstanceOf[String]
   }
 
+  /**
+    * @return if the connection between client and remote server is established/open
+    */
+  def isConnected(): Boolean = {
+    asJava.asInstanceOf[JMqttClient].isConnected().asInstanceOf[Boolean]
+  }
+
  /**
    * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */

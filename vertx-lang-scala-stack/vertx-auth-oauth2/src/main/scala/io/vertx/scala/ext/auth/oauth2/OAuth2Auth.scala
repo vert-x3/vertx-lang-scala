@@ -76,6 +76,16 @@ class OAuth2Auth(private val _asJava: Object) {
     this
   }
 
+  /**
+    * Loads a JWK Set from the remote provider.
+    *
+    * When calling this method several times, the loaded JWKs are updated in the underlying JWT object.
+    */
+  def loadJWK(handler: Handler[AsyncResult[Unit]]): OAuth2Auth = {
+    asJava.asInstanceOf[JOAuth2Auth].loadJWK({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
   def verifyIsUsingPassword(): Unit = {
     asJava.asInstanceOf[JOAuth2Auth].verifyIsUsingPassword()
   }
@@ -163,6 +173,15 @@ class OAuth2Auth(private val _asJava: Object) {
   def introspectTokenFuture(token: String, tokenType: String): scala.concurrent.Future[AccessToken] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAccessToken, AccessToken](x => AccessToken(x))
     asJava.asInstanceOf[JOAuth2Auth].introspectToken(token.asInstanceOf[java.lang.String], tokenType.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[loadJWK]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def loadJWKFuture(): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JOAuth2Auth].loadJWK(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

@@ -53,9 +53,7 @@ The simplest way to do this is as follows:
 
 [source,scala]
 ----
-
 var client = MongoClient.createShared(vertx, config)
-
 
 ----
 
@@ -70,9 +68,7 @@ You can create a client specifying a pool source name as follows
 
 [source,scala]
 ----
-
 var client = MongoClient.createShared(vertx, config, "MyPoolName")
-
 
 ----
 
@@ -96,9 +92,7 @@ In that case you can use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoCli
 
 [source,scala]
 ----
-
 var client = MongoClient.createNonShared(vertx, config)
-
 
 ----
 
@@ -114,8 +108,8 @@ The client API is represented by `link:../../scaladocs/io/vertx/scala/ext/mongo/
 
 To save a document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#save(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[save]`.
 
-If the document has no `\_id` field, it is inserted, otherwise, it is _upserted_. Upserted means it is inserted
-if it doesn't already exist, otherwise it is updated.
+If the document has no `\_id` field, it is inserted, otherwise, it is __upserted__.
+Upserted means it is inserted if it doesn't already exist, otherwise it is updated.
 
 If the document is inserted and has no id, then the id field generated will be returned to the result handler.
 
@@ -123,23 +117,17 @@ Here's an example of saving a document and getting the id back
 
 [source,scala]
 ----
-
 // Document has no id
-
 var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
-
 mongoClient.saveFuture("books", document).onComplete{
   case Success(result) => {
-
     var id = result
     println(s"Saved book with id ${id}")
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
-
 
 ----
 
@@ -147,22 +135,16 @@ And here's an example of saving a document which already has an id.
 
 [source,scala]
 ----
-
 // Document has an id already
-
 var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("_id", "123244")
-
 mongoClient.saveFuture("books", document).onComplete{
   case Success(result) => {
-
     // ...
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
-
 
 ----
 
@@ -174,56 +156,45 @@ If the document is inserted and has no id, then the id field generated will be r
 
 [source,scala]
 ----
-
 // Document has an id already
-
 var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
-
 mongoClient.insertFuture("books", document).onComplete{
   case Success(result) => {
-
     var id = result
     println(s"Inserted book with id ${id}")
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
 
-
 ----
 
-If a document is inserted with an id, and a document with that id already eists, the insert will fail:
+If a document is inserted with an id, and a document with that id already exists, the insert will fail:
 
 [source,scala]
 ----
-
 // Document has an id already
-
 var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("_id", "123244")
-
 mongoClient.insertFuture("books", document).onComplete{
   case Success(result) => {
-
     //...
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
-
 
 ----
 
 === Updating documents
 
-To update a documents you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#update(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[update]`.
+To update a documents you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#updateCollection(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[updateCollection]`.
 
-This updates one or multiple documents in a collection. The json object that is passed in the `update`
-parameter must contain http://docs.mongodb.org/manual/reference/operator/update-field/[Update Operators] and determines
-how the object is updated.
+This updates one or multiple documents in a collection.
+The json object that is passed in the `updateCollection` parameter must contain
+http://docs.mongodb.org/manual/reference/operator/update-field/[Update Operators]
+and determines how the object is updated.
 
 The json object specified in the query parameter determines which documents in the collection will be updated.
 
@@ -231,28 +202,23 @@ Here's an example of updating a document in the books collection:
 
 [source,scala]
 ----
-
 // Match any documents with title=The Hobbit
 var query = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
-
 // Set the author field
 var update = new io.vertx.core.json.JsonObject().put("$set", new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien"))
-
-mongoClient.updateFuture("books", query, update).onComplete{
+mongoClient.updateCollectionFuture("books", query, update).onComplete{
   case Success(result) => {
-
     println("Book updated !")
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
 
-
 ----
 
-To specify if the update should upsert or update multiple documents, use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#updateWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.UpdateOptions,%20io.vertx.core.Handler)[updateWithOptions]`
+To specify if the update should upsert or update multiple documents, use
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#updateCollectionWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.UpdateOptions,%20io.vertx.core.Handler)[updateCollectionWithOptions]`
 and pass in an instance of `link:../dataobjects.html#UpdateOptions[UpdateOptions]`.
 
 This has the following fields:
@@ -263,58 +229,45 @@ This has the following fields:
 
 [source,scala]
 ----
-
 // Match any documents with title=The Hobbit
 var query = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
-
 // Set the author field
 var update = new io.vertx.core.json.JsonObject().put("$set", new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien"))
-
 var options = UpdateOptions()
   .setMulti(true)
 
-
-mongoClient.updateWithOptionsFuture("books", query, update, options).onComplete{
+mongoClient.updateCollectionWithOptionsFuture("books", query, update, options).onComplete{
   case Success(result) => {
-
     println("Book updated !")
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
 
-
 ----
 
 === Replacing documents
 
-To replace documents you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#replace(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[replace]`.
+To replace documents you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#replaceDocuments(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[replaceDocuments]`.
 
-This is similar to the update operation, however it does not take any update operators like `update`.
+This is similar to the update operation, however it does not take any operator.
 Instead it replaces the entire document with the one provided.
 
 Here's an example of replacing a document in the books collection
 
 [source,scala]
 ----
-
 var query = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
-
 var replace = new io.vertx.core.json.JsonObject().put("title", "The Lord of the Rings").put("author", "J. R. R. Tolkien")
-
-mongoClient.replaceFuture("books", query, replace).onComplete{
+mongoClient.replaceDocumentsFuture("books", query, replace).onComplete{
   case Success(result) => {
-
     println("Book replaced !")
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
-
 
 ----
 
@@ -322,12 +275,13 @@ mongoClient.replaceFuture("books", query, replace).onComplete{
 
 To execute multiple insert, update, replace, or delete operations at once, use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#bulkWrite(java.lang.String,%20java.util.List,%20io.vertx.core.Handler)[bulkWrite]`.
 
-You can pass a list of `link:../dataobjects.html#BulkOperation[BulkOperations]`, with each working similiar to the matching single operations.
+You can pass a list of `link:../dataobjects.html#BulkOperation[BulkOperations]`, with each working similar to the matching single operation.
 You can pass as many operations, even of the same type, as you wish.
 
 To specify if the bulk operation should be executed in order, and with what write option, use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#bulkWriteWithOptions(java.lang.String,%20java.util.List,%20io.vertx.ext.mongo.BulkWriteOptions,%20io.vertx.core.Handler)[bulkWriteWithOptions]`
 and pass an instance of `link:../dataobjects.html#BulkWriteOptions[BulkWriteOptions]`.
-For more explanation what ordered means, see https://docs.mongodb.com/manual/reference/method/db.collection.bulkWrite/#execution-of-operations
+For more explanation what ordered means, see
+https://docs.mongodb.com/manual/reference/method/db.collection.bulkWrite/#execution-of-operations[Execution of Operations].
 
 === Finding documents
 
@@ -339,26 +293,19 @@ Here's a simple example with an empty query that will match all books:
 
 [source,scala]
 ----
-
 // empty query = match any
 var query = new io.vertx.core.json.JsonObject()
-
 mongoClient.findFuture("books", query).onComplete{
   case Success(result) => {
-
     result.foreach(json => {
-
       println(json.encode())
-
     })
-
 
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
-
 
 ----
 
@@ -366,26 +313,19 @@ Here's another example that will match all books by Tolkien:
 
 [source,scala]
 ----
-
 // will match all Tolkien books
 var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
-
 mongoClient.findFuture("books", query).onComplete{
   case Success(result) => {
-
     result.foreach(json => {
-
       println(json.encode())
-
     })
-
 
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
-
 
 ----
 
@@ -401,34 +341,49 @@ This has the following fields:
 `limit`:: The limit of the number of results to return. Default to `-1`, meaning all results will be returned.
 `skip`:: The number of documents to skip before returning the results. Defaults to `0`.
 
-----
+=== Finding documents in batches
 
+When dealing with large data sets, it is not advised to use the
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[find]` and
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.FindOptions,%20io.vertx.core.Handler)[findWithOptions]` methods.
+In order to avoid inflating the whole response into memory, use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findBatch(java.lang.String,%20io.vertx.core.json.JsonObject)[findBatch]`:
+
+[source,scala]
+----
 // will match all Tolkien books
 var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
-
-mongoClient.findBatchFuture("book", query).onComplete{
-  case Success(result) => {
-
-    if (result == null) {
-
-      println("End of research")
-
-    } else {
-
-      println(s"Found doc: ${result.encode()}")
-
-    }
-
-  }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
-
+mongoClient.findBatch("book", query).exceptionHandler((throwable: java.lang.Throwable) => {
+  throwable.printStackTrace()
+}).endHandler((v: java.lang.Void) => {
+  println("End of research")
+}).handler((doc: io.vertx.scala.core.json.JsonObject) => {
+  println(s"Found doc: ${doc.encode()}")
+})
 
 ----
 
-The matching documents are returned unitary in the result handler.
+The matching documents are emitted one by one by the `link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` handler.
+
+`link:../dataobjects.html#FindOptions[FindOptions]` has an extra parameter `batchSize` which you can use to set the number of documents to load at once:
+
+[source,scala]
+----
+// will match all Tolkien books
+var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
+var options = FindOptions()
+  .setBatchSize(100)
+
+mongoClient.findBatchWithOptions("book", query, options).exceptionHandler((throwable: java.lang.Throwable) => {
+  throwable.printStackTrace()
+}).endHandler((v: java.lang.Void) => {
+  println("End of research")
+}).handler((doc: io.vertx.scala.core.json.JsonObject) => {
+  println(s"Found doc: ${doc.encode()}")
+})
+
+----
+
+By default, `batchSize` is set to 20.
 
 === Finding a single document
 
@@ -446,20 +401,15 @@ Here's an example of removing all Tolkien books:
 
 [source,scala]
 ----
-
 var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
-
-mongoClient.removeFuture("books", query).onComplete{
+mongoClient.removeDocumentsFuture("books", query).onComplete{
   case Success(result) => {
-
     println("Never much liked Tolkien stuff!")
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
-
 
 ----
 
@@ -477,20 +427,15 @@ Here's an example that counts the number of Tolkien books. The number is passed 
 
 [source,scala]
 ----
-
 var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
-
 mongoClient.countFuture("books", query).onComplete{
   case Success(result) => {
-
     var num = result
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
-
 
 ----
 
@@ -502,18 +447,14 @@ To get a list of all collections you can use `link:../../scaladocs/io/vertx/scal
 
 [source,scala]
 ----
-
 mongoClient.getCollectionsFuture().onComplete{
   case Success(result) => {
-
     var collections = result
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
-
 
 ----
 
@@ -521,18 +462,14 @@ To create a new collection you can use `link:../../scaladocs/io/vertx/scala/ext/
 
 [source,scala]
 ----
-
 mongoClient.createCollectionFuture("mynewcollectionr").onComplete{
   case Success(result) => {
-
     // Created ok!
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
-
 
 ----
 
@@ -542,18 +479,14 @@ NOTE: Dropping a collection will delete all documents within it!
 
 [source,scala]
 ----
-
 mongoClient.dropCollectionFuture("mynewcollectionr").onComplete{
   case Success(result) => {
-
     // Dropped ok!
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
-
 
 ----
 
@@ -562,7 +495,7 @@ mongoClient.dropCollectionFuture("mynewcollectionr").onComplete{
 
 You can run arbitrary MongoDB commands with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#runCommand(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[runCommand]`.
 
-Commands can be used to run more advanced mongoDB features, such as using MapReduce.
+Commands can be used to run more advanced MongoDB features, such as using MapReduce.
 For more information see the mongo docs for supported http://docs.mongodb.org/manual/reference/command[Commands].
 
 Here's an example of running an aggregate command. Note that the command name must be specified as a parameter
@@ -572,9 +505,7 @@ of the entries in the JSON is the command name it must be specified as a paramet
 
 [source,scala]
 ----
-
 var command = new io.vertx.core.json.JsonObject().put("aggregate", "collection_name").put("pipeline", new io.vertx.core.json.JsonArray())
-
 mongoClient.runCommandFuture("aggregate", command).onComplete{
   case Success(result) => {
     var resArr = result.getValue("result")
@@ -585,42 +516,34 @@ mongoClient.runCommandFuture("aggregate", command).onComplete{
   }
 }
 
-
 ----
 
 === MongoDB Extended JSON support
 
-For now, only date, oid and binary types are supported (cf http://docs.mongodb.org/manual/reference/mongodb-extended-json )
+For now, only `date`, `oid` and `binary` types are supported
+(see http://docs.mongodb.org/manual/reference/mongodb-extended-json[MongoDB Extended JSON]).
 
-Here's an example of inserting a document with a date field
+Here's an example of inserting a document with a `date` field:
 
 [source,scala]
 ----
-
 var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("publicationDate", new io.vertx.core.json.JsonObject().put("$date", "1937-09-21T00:00:00+00:00"))
-
 mongoService.saveFuture("publishedBooks", document).onComplete{
   case Success(result) => {
-
     var id = result
-
     mongoService.findOneFuture("publishedBooks", new io.vertx.core.json.JsonObject().put("_id", id), null).onComplete{
       case Success(result) => {
-
         println(s"To retrieve ISO-8601 date : ${result.getValue("publicationDate").getValue("$date")}")
-
       }
       case Failure(cause) => {
         println(s"$cause")
       }
     }
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
-
 
 ----
 
@@ -629,31 +552,23 @@ Here's an example (in Java) of inserting a document with a binary field and read
 [source,scala]
 ----
 byte[] binaryObject = new byte[40];
-
 JsonObject document = new JsonObject()
-        .put("name", "Alan Turing")
-        .put("binaryStuff", new JsonObject().put("$binary", binaryObject));
-
+  .put("name", "Alan Turing")
+  .put("binaryStuff", new JsonObject().put("$binary", binaryObject));
 mongoService.save("smartPeople", document, res -> {
-
   if (res.succeeded()) {
-
     String id = res.result();
-
     mongoService.findOne("smartPeople", new JsonObject().put("_id", id), null, res2 -> {
-      if(res2.succeeded()) {
-
+      if (res2.succeeded()) {
         byte[] reconstitutedBinaryObject = res2.result().getJsonObject("binaryStuff").getBinary("$binary");
         //This could now be de-serialized into an object in real life
       } else {
         res2.cause().printStackTrace();
       }
     });
-
   } else {
     res.cause().printStackTrace();
   }
-
 });
 ----
 
@@ -661,20 +576,14 @@ Here's an example of inserting a base 64 encoded string, typing it as binary a b
 
 [source,scala]
 ----
-
 //This could be a the byte contents of a pdf file, etc converted to base 64
 var base64EncodedString = "a2FpbHVhIGlzIHRoZSAjMSBiZWFjaCBpbiB0aGUgd29ybGQ="
-
 var document = new io.vertx.core.json.JsonObject().put("name", "Alan Turing").put("binaryStuff", new io.vertx.core.json.JsonObject().put("$binary", base64EncodedString))
-
 mongoService.saveFuture("smartPeople", document).onComplete{
   case Success(result) => {
-
     var id = result
-
     mongoService.findOneFuture("smartPeople", new io.vertx.core.json.JsonObject().put("_id", id), null).onComplete{
       case Success(result) => {
-
         var reconstitutedBase64EncodedString = result.getValue("binaryStuff").getValue("$binary")
         //This could now converted back to bytes from the base 64 string
       }
@@ -682,30 +591,24 @@ mongoService.saveFuture("smartPeople", document).onComplete{
         println(s"$cause")
       }
     }
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
 
-
 ----
 Here's an example of inserting an object ID and reading it back
 
 [source,scala]
 ----
-
 var individualId = new org.bson.types.ObjectId().toHexString()
-
 var document = new io.vertx.core.json.JsonObject().put("name", "Stephen Hawking").put("individualId", new io.vertx.core.json.JsonObject().put("$oid", individualId))
-
 mongoService.saveFuture("smartPeople", document).onComplete{
   case Success(result) => {
-
     var id = result
-
-    mongoService.findOneFuture("smartPeople", new io.vertx.core.json.JsonObject().put("_id", id), null).onComplete{
+    var query = new io.vertx.core.json.JsonObject().put("_id", id)
+    mongoService.findOneFuture("smartPeople", query, null).onComplete{
       case Success(result) => {
         var reconstitutedIndividualId = result.getValue("individualId").getValue("$oid")
       }
@@ -713,29 +616,27 @@ mongoService.saveFuture("smartPeople", document).onComplete{
         println(s"$cause")
       }
     }
-
   }
   case Failure(cause) => {
     println(s"$cause")
   }
 }
 
-
 ----
-Here's an example of getting disting value
+
+=== Getting distinct values
+
+Here's an example of getting distinct value
 
 [source,scala]
 ----
 var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
-
 mongoClient.saveFuture("books", document).onComplete{
   case Success(result) => {
-
     mongoClient.distinctFuture("books", "title", java.lang.String.class.getName()).onComplete{
       case Success(result) => println("Success")
       case Failure(cause) => println("Failure")
     }
-
   }
   case Failure(cause) => {
     println(s"$cause")
@@ -748,19 +649,48 @@ Here's an example of getting distinct value in batch mode
 [source,scala]
 ----
 var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
-
 mongoClient.saveFuture("books", document).onComplete{
   case Success(result) => {
-
-    mongoClient.distinctBatchFuture("books", "title", java.lang.String.class.getName()).onComplete{
-      case Success(result) => println("Success")
-      case Failure(cause) => println("Failure")
-    }
-
+    mongoClient.distinctBatch("books", "title", java.lang.String.class.getName()).handler((book: io.vertx.scala.core.json.JsonObject) => {
+      println(s"Title is : ${book.getValue("title")}")
+    })
   }
   case Failure(cause) => {
     println(s"$cause")
   }
+}
+
+----
+* Here's an example of getting distinct value with query
+
+[source,scala]
+----
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("publicationDate", new io.vertx.core.json.JsonObject().put("$date", "1937-09-21T00:00:00+00:00"))
+var query = new io.vertx.core.json.JsonObject().put("publicationDate", new io.vertx.core.json.JsonObject().put("$gte", new io.vertx.core.json.JsonObject().put("$date", "1937-09-21T00:00:00+00:00")))
+mongoClient.saveFuture("books", document).onComplete{
+  case Success(result) => {
+    mongoClient.distinctWithQueryFuture("books", "title", java.lang.String.class.getName(), query).onComplete{
+      case Success(result) => println("Success")
+      case Failure(cause) => println("Failure")
+    }
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+Here's an example of getting distinct value in batch mode with query
+
+[source,scala]
+----
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("publicationDate", new io.vertx.core.json.JsonObject().put("$date", "1937-09-21T00:00:00+00:00"))
+var query = new io.vertx.core.json.JsonObject().put("publicationDate", new io.vertx.core.json.JsonObject().put("$gte", new io.vertx.core.json.JsonObject().put("$date", "1937-09-21T00:00:00+00:00")))
+mongoClient.saveFuture("books", document).onComplete{
+  case Success(result) => {
+    mongoClient.distinctBatchWithQuery("books", "title", java.lang.String.class.getName(), query).handler((book: io.vertx.scala.core.json.JsonObject) => {
+      println(s"Title is : ${book.getValue("title")}")
+    })
+  }
+  case Failure(cause) => println("Failure")
 }
 
 ----
@@ -772,7 +702,7 @@ The client is configured with a json object.
 The following configuration is supported by the mongo client:
 
 
-`db_name`:: Name of the database in the mongoDB instance to use. Defaults to `default_db`
+`db_name`:: Name of the database in the MongoDB instance to use. Defaults to `default_db`
 `useObjectId`:: Toggle this option to support persisting and retrieving ObjectId's as strings. If `true`, hex-strings will
 be saved as native Mongodb ObjectId types in the document collection. This will allow the sorting of documents based on creation
 time. You can also derive the creation time from the hex-string using ObjectId::getDate(). Set to `false` for other types of your choosing.
@@ -789,6 +719,7 @@ For more information on the format of the connection string please consult the d
 
 *Specific driver configuration options*
 
+[source,js]
 ----
 {
   // Single Cluster Settings
@@ -852,12 +783,12 @@ For more information on the format of the connection string please consult the d
 
 *Driver option descriptions*
 
-`host`:: The host the mongoDB instance is running. Defaults to `127.0.0.1`. This is ignored if `hosts` is specified
-`port`:: The port the mongoDB instance is listening on. Defaults to `27017`. This is ignored if `hosts` is specified
-`hosts`:: An array representing the hosts and ports to support a mongoDB cluster (sharding / replication)
+`host`:: The host the MongoDB instance is running. Defaults to `127.0.0.1`. This is ignored if `hosts` is specified
+`port`:: The port the MongoDB instance is listening on. Defaults to `27017`. This is ignored if `hosts` is specified
+`hosts`:: An array representing the hosts and ports to support a MongoDB cluster (sharding / replication)
 `host`:: A host in the cluster
 `port`:: The port a host in the cluster is listening on
-`replicaSet`:: The name of the replica set, if the mongoDB instance is a member of a replica set
+`replicaSet`:: The name of the replica set, if the MongoDB instance is a member of a replica set
 `serverSelectionTimeoutMS`:: The time in milliseconds that the mongo driver will wait to select a server for an operation before raising an error.
 `maxPoolSize`:: The maximum number of connections in the connection pool. The default value is `100`
 `minPoolSize`:: The minimum number of connections in the connection pool. The default value is `0`

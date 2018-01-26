@@ -19,6 +19,7 @@ package io.vertx.scala.amqpbridge
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
+import io.vertx.proton.scala.{ProtonClientOptions => ExtProtonClientOptions}
 import io.vertx.amqpbridge.{AmqpBridgeOptions => JAmqpBridgeOptions}
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
@@ -39,14 +40,15 @@ import io.vertx.core.net.{JksOptions => JJksOptions}
 /**
   * Options for configuring the AmqpBridge.
   */
-class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
+class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) 
+    extends ExtProtonClientOptions(_asJava) {
 
-  def asJava = _asJava
-  def setConnectTimeout(value: Int) = {
+  override def asJava = _asJava
+  override def setConnectTimeout(value: Int) = {
     asJava.setConnectTimeout(value)
     this
   }
-  def getConnectTimeout: Int = {
+  override def getConnectTimeout: Int = {
     asJava.getConnectTimeout().asInstanceOf[Int]
   }
 
@@ -62,165 +64,169 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
   def getContainerId: String = {
     asJava.getContainerId().asInstanceOf[String]
   }
-  def addCrlPath(value: String) = {
+  override def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
   }
-  def getCrlPaths: scala.collection.mutable.Buffer[String] = {
+  override def getCrlPaths: scala.collection.mutable.Buffer[String] = {
     asJava.getCrlPaths().asScala.map(x => x.asInstanceOf[String])
   }
-  def addCrlValue(value: io.vertx.core.buffer.Buffer) = {
+  override def addCrlValue(value: io.vertx.core.buffer.Buffer) = {
     asJava.addCrlValue(value)
     this
   }
-  def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
+  override def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
     asJava.getCrlValues().asScala.map(x => x)
   }
-  def addEnabledCipherSuite(value: String) = {
+  override def addEnabledCipherSuite(value: String) = {
     asJava.addEnabledCipherSuite(value)
     this
   }
-  def getEnabledCipherSuites: scala.collection.mutable.Set[String] = {
+  override def getEnabledCipherSuites: scala.collection.mutable.Set[String] = {
     asJava.getEnabledCipherSuites().asScala.map(x => x.asInstanceOf[String])
   }
-  def addEnabledSaslMechanism(value: String) = {
+  override def addEnabledSaslMechanism(value: String) = {
     asJava.addEnabledSaslMechanism(value)
     this
   }
-  def getEnabledSaslMechanisms: scala.collection.mutable.Set[String] = {
+  override def getEnabledSaslMechanisms: scala.collection.mutable.Set[String] = {
     asJava.getEnabledSaslMechanisms().asScala.map(x => x.asInstanceOf[String])
   }
-  def addEnabledSecureTransportProtocol(value: String) = {
+  override def addEnabledSecureTransportProtocol(value: String) = {
     asJava.addEnabledSecureTransportProtocol(value)
     this
   }
-  def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
+  override def setEnabledSecureTransportProtocols(value: Set[String]) = {
+    asJava.setEnabledSecureTransportProtocols(value.asJava)
+    this
+  }
+  override def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
     asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
   }
-  def setHeartbeat(value: Int) = {
+  override def setHeartbeat(value: Int) = {
     asJava.setHeartbeat(value)
     this
   }
-  def getHeartbeat: Int = {
+  override def getHeartbeat: Int = {
     asJava.getHeartbeat().asInstanceOf[Int]
   }
-  def setHostnameVerificationAlgorithm(value: String) = {
+  override def setHostnameVerificationAlgorithm(value: String) = {
     asJava.setHostnameVerificationAlgorithm(value)
     this
   }
-  def getHostnameVerificationAlgorithm: String = {
+  override def getHostnameVerificationAlgorithm: String = {
     asJava.getHostnameVerificationAlgorithm().asInstanceOf[String]
   }
-  def setIdleTimeout(value: Int) = {
+  override def setIdleTimeout(value: Int) = {
     asJava.setIdleTimeout(value)
     this
   }
-  def getIdleTimeout: Int = {
+  override def getIdleTimeout: Int = {
     asJava.getIdleTimeout().asInstanceOf[Int]
   }
-  def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
+  override def setJdkSslEngineOptions(value: JdkSSLEngineOptions) = {
     asJava.setJdkSslEngineOptions(value.asJava)
     this
   }
-  def getJdkSslEngineOptions: JdkSSLEngineOptions = {
+  override def getJdkSslEngineOptions: JdkSSLEngineOptions = {
     JdkSSLEngineOptions(asJava.getJdkSslEngineOptions())
   }
-  def setKeyStoreOptions(value: JksOptions) = {
+  override def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)
     this
   }
-  def getKeyStoreOptions: JksOptions = {
+  override def getKeyStoreOptions: JksOptions = {
     JksOptions(asJava.getKeyStoreOptions())
   }
-  def setLocalAddress(value: String) = {
+  override def setLocalAddress(value: String) = {
     asJava.setLocalAddress(value)
     this
   }
-  def getLocalAddress: String = {
+  override def getLocalAddress: String = {
     asJava.getLocalAddress().asInstanceOf[String]
   }
-  def setLogActivity(value: Boolean) = {
+  override def setLogActivity(value: Boolean) = {
     asJava.setLogActivity(value)
     this
   }
-  def getLogActivity: Boolean = {
+  override def getLogActivity: Boolean = {
     asJava.getLogActivity().asInstanceOf[Boolean]
   }
-  def setMaxFrameSize(value: Int) = {
+  override def setMaxFrameSize(value: Int) = {
     asJava.setMaxFrameSize(value)
     this
   }
-  def getMaxFrameSize: Int = {
+  override def getMaxFrameSize: Int = {
     asJava.getMaxFrameSize().asInstanceOf[Int]
   }
-  def setMetricsName(value: String) = {
+  override def setMetricsName(value: String) = {
     asJava.setMetricsName(value)
     this
   }
-  def getMetricsName: String = {
+  override def getMetricsName: String = {
     asJava.getMetricsName().asInstanceOf[String]
   }
-  def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
+  override def setOpenSslEngineOptions(value: OpenSSLEngineOptions) = {
     asJava.setOpenSslEngineOptions(value.asJava)
     this
   }
-  def getOpenSslEngineOptions: OpenSSLEngineOptions = {
+  override def getOpenSslEngineOptions: OpenSSLEngineOptions = {
     OpenSSLEngineOptions(asJava.getOpenSslEngineOptions())
   }
-  def setPemKeyCertOptions(value: PemKeyCertOptions) = {
+  override def setPemKeyCertOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyCertOptions(value.asJava)
     this
   }
-  def getPemKeyCertOptions: PemKeyCertOptions = {
+  override def getPemKeyCertOptions: PemKeyCertOptions = {
     PemKeyCertOptions(asJava.getPemKeyCertOptions())
   }
-  def setPemTrustOptions(value: PemTrustOptions) = {
+  override def setPemTrustOptions(value: PemTrustOptions) = {
     asJava.setPemTrustOptions(value.asJava)
     this
   }
-  def getPemTrustOptions: PemTrustOptions = {
+  override def getPemTrustOptions: PemTrustOptions = {
     PemTrustOptions(asJava.getPemTrustOptions())
   }
-  def setPfxKeyCertOptions(value: PfxOptions) = {
+  override def setPfxKeyCertOptions(value: PfxOptions) = {
     asJava.setPfxKeyCertOptions(value.asJava)
     this
   }
-  def getPfxKeyCertOptions: PfxOptions = {
+  override def getPfxKeyCertOptions: PfxOptions = {
     PfxOptions(asJava.getPfxKeyCertOptions())
   }
-  def setPfxTrustOptions(value: PfxOptions) = {
+  override def setPfxTrustOptions(value: PfxOptions) = {
     asJava.setPfxTrustOptions(value.asJava)
     this
   }
-  def getPfxTrustOptions: PfxOptions = {
+  override def getPfxTrustOptions: PfxOptions = {
     PfxOptions(asJava.getPfxTrustOptions())
   }
-  def setProxyOptions(value: ProxyOptions) = {
+  override def setProxyOptions(value: ProxyOptions) = {
     asJava.setProxyOptions(value.asJava)
     this
   }
-  def getProxyOptions: ProxyOptions = {
+  override def getProxyOptions: ProxyOptions = {
     ProxyOptions(asJava.getProxyOptions())
   }
-  def setReceiveBufferSize(value: Int) = {
+  override def setReceiveBufferSize(value: Int) = {
     asJava.setReceiveBufferSize(value)
     this
   }
-  def getReceiveBufferSize: Int = {
+  override def getReceiveBufferSize: Int = {
     asJava.getReceiveBufferSize().asInstanceOf[Int]
   }
-  def setReconnectAttempts(value: Int) = {
+  override def setReconnectAttempts(value: Int) = {
     asJava.setReconnectAttempts(value)
     this
   }
-  def getReconnectAttempts: Int = {
+  override def getReconnectAttempts: Int = {
     asJava.getReconnectAttempts().asInstanceOf[Int]
   }
-  def setReconnectInterval(value: Long) = {
+  override def setReconnectInterval(value: Long) = {
     asJava.setReconnectInterval(value)
     this
   }
-  def getReconnectInterval: Long = {
+  override def getReconnectInterval: Long = {
     asJava.getReconnectInterval().asInstanceOf[Long]
   }
 
@@ -236,116 +242,116 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
   def isReplyHandlingSupport: Boolean = {
     asJava.isReplyHandlingSupport().asInstanceOf[Boolean]
   }
-  def setReuseAddress(value: Boolean) = {
+  override def setReuseAddress(value: Boolean) = {
     asJava.setReuseAddress(value)
     this
   }
-  def isReuseAddress: Boolean = {
+  override def isReuseAddress: Boolean = {
     asJava.isReuseAddress().asInstanceOf[Boolean]
   }
-  def setReusePort(value: Boolean) = {
+  override def setReusePort(value: Boolean) = {
     asJava.setReusePort(value)
     this
   }
-  def isReusePort: Boolean = {
+  override def isReusePort: Boolean = {
     asJava.isReusePort().asInstanceOf[Boolean]
   }
-  def setSendBufferSize(value: Int) = {
+  override def setSendBufferSize(value: Int) = {
     asJava.setSendBufferSize(value)
     this
   }
-  def getSendBufferSize: Int = {
+  override def getSendBufferSize: Int = {
     asJava.getSendBufferSize().asInstanceOf[Int]
   }
-  def setSniServerName(value: String) = {
+  override def setSniServerName(value: String) = {
     asJava.setSniServerName(value)
     this
   }
-  def getSniServerName: String = {
+  override def getSniServerName: String = {
     asJava.getSniServerName().asInstanceOf[String]
   }
-  def setSoLinger(value: Int) = {
+  override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
   }
-  def getSoLinger: Int = {
+  override def getSoLinger: Int = {
     asJava.getSoLinger().asInstanceOf[Int]
   }
-  def setSsl(value: Boolean) = {
+  override def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
-  def isSsl: Boolean = {
+  override def isSsl: Boolean = {
     asJava.isSsl().asInstanceOf[Boolean]
   }
-  def setTcpCork(value: Boolean) = {
+  override def setTcpCork(value: Boolean) = {
     asJava.setTcpCork(value)
     this
   }
-  def isTcpCork: Boolean = {
+  override def isTcpCork: Boolean = {
     asJava.isTcpCork().asInstanceOf[Boolean]
   }
-  def setTcpFastOpen(value: Boolean) = {
+  override def setTcpFastOpen(value: Boolean) = {
     asJava.setTcpFastOpen(value)
     this
   }
-  def isTcpFastOpen: Boolean = {
+  override def isTcpFastOpen: Boolean = {
     asJava.isTcpFastOpen().asInstanceOf[Boolean]
   }
-  def setTcpKeepAlive(value: Boolean) = {
+  override def setTcpKeepAlive(value: Boolean) = {
     asJava.setTcpKeepAlive(value)
     this
   }
-  def isTcpKeepAlive: Boolean = {
+  override def isTcpKeepAlive: Boolean = {
     asJava.isTcpKeepAlive().asInstanceOf[Boolean]
   }
-  def setTcpNoDelay(value: Boolean) = {
+  override def setTcpNoDelay(value: Boolean) = {
     asJava.setTcpNoDelay(value)
     this
   }
-  def isTcpNoDelay: Boolean = {
+  override def isTcpNoDelay: Boolean = {
     asJava.isTcpNoDelay().asInstanceOf[Boolean]
   }
-  def setTcpQuickAck(value: Boolean) = {
+  override def setTcpQuickAck(value: Boolean) = {
     asJava.setTcpQuickAck(value)
     this
   }
-  def isTcpQuickAck: Boolean = {
+  override def isTcpQuickAck: Boolean = {
     asJava.isTcpQuickAck().asInstanceOf[Boolean]
   }
-  def setTrafficClass(value: Int) = {
+  override def setTrafficClass(value: Int) = {
     asJava.setTrafficClass(value)
     this
   }
-  def getTrafficClass: Int = {
+  override def getTrafficClass: Int = {
     asJava.getTrafficClass().asInstanceOf[Int]
   }
-  def setTrustAll(value: Boolean) = {
+  override def setTrustAll(value: Boolean) = {
     asJava.setTrustAll(value)
     this
   }
-  def isTrustAll: Boolean = {
+  override def isTrustAll: Boolean = {
     asJava.isTrustAll().asInstanceOf[Boolean]
   }
-  def setTrustStoreOptions(value: JksOptions) = {
+  override def setTrustStoreOptions(value: JksOptions) = {
     asJava.setTrustStoreOptions(value.asJava)
     this
   }
-  def getTrustStoreOptions: JksOptions = {
+  override def getTrustStoreOptions: JksOptions = {
     JksOptions(asJava.getTrustStoreOptions())
   }
-  def setUseAlpn(value: Boolean) = {
+  override def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
   }
-  def isUseAlpn: Boolean = {
+  override def isUseAlpn: Boolean = {
     asJava.isUseAlpn().asInstanceOf[Boolean]
   }
-  def setUsePooledBuffers(value: Boolean) = {
+  override def setUsePooledBuffers(value: Boolean) = {
     asJava.setUsePooledBuffers(value)
     this
   }
-  def isUsePooledBuffers: Boolean = {
+  override def isUsePooledBuffers: Boolean = {
     asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 
@@ -360,11 +366,11 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) {
   def getVhost: String = {
     asJava.getVhost().asInstanceOf[String]
   }
-  def setVirtualHost(value: String) = {
+  override def setVirtualHost(value: String) = {
     asJava.setVirtualHost(value)
     this
   }
-  def getVirtualHost: String = {
+  override def getVirtualHost: String = {
     asJava.getVirtualHost().asInstanceOf[String]
   }
 }

@@ -24,6 +24,14 @@ Sets the maximum number of failures before opening the circuit.
 +++
 Configures the number of times the circuit breaker tries to redo the operation before failing.
 +++
+|[[metricsRollingBuckets]]`metricsRollingBuckets`|`Number (int)`|
++++
+Sets the configured number of buckets the rolling window is divided into.
+
+ The following must be true - metrics.rollingStats.timeInMilliseconds % metrics.rollingStats.numBuckets == 0 - otherwise it will throw an exception.
+
+ In other words, 10000/10 is okay, so is 10000/20 but 10000/7 is not.
++++
 |[[metricsRollingWindow]]`metricsRollingWindow`|`Number (long)`|
 +++
 Sets the rolling window used for metrics.

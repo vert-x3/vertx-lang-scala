@@ -83,10 +83,31 @@ class WebSocketFrame(private val _asJava: Object) {
   }
 
   /**
+    * @return true if it's close frame
+    */
+  def isClose(): Boolean = {
+    asJava.asInstanceOf[JWebSocketFrame].isClose().asInstanceOf[Boolean]
+  }
+
+  /**
     * @return true if this is the final frame.
     */
   def isFinal(): Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isFinal().asInstanceOf[Boolean]
+  }
+
+  /**
+    * @return status code of close frame. Only use this for close frames
+    */
+  def closeStatusCode(): Short = {
+    asJava.asInstanceOf[JWebSocketFrame].closeStatusCode().asInstanceOf[Short]
+  }
+
+  /**
+    * @return string explaining close reason. Only use this for close frames
+    */
+  def closeReason(): String = {
+    asJava.asInstanceOf[JWebSocketFrame].closeReason().asInstanceOf[String]
   }
 
 }

@@ -218,6 +218,10 @@ trait WebSocketBase
     */
   def close(): Unit
 
+  def close(statusCode: Short): Unit
+
+  def close(statusCode: Short, reason: scala.Option[String]): Unit
+
   /**
     * @return the remote address for this socket
     */
@@ -514,6 +518,14 @@ object WebSocketBase {
     */
   def close(): Unit = {
     asJava.asInstanceOf[JWebSocketBase].close()
+  }
+
+  def close(statusCode: Short): Unit = {
+    asJava.asInstanceOf[JWebSocketBase].close(statusCode.asInstanceOf[java.lang.Short])
+  }
+
+  def close(statusCode: Short, reason: scala.Option[String]): Unit = {
+    asJava.asInstanceOf[JWebSocketBase].close(statusCode.asInstanceOf[java.lang.Short], reason.map(x => x.asInstanceOf[java.lang.String]).orNull)
   }
 
   /**
