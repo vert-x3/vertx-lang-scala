@@ -14,7 +14,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-sql-common-scala_2.12</artifactId>
-  <version>3.5.1-SNAPSHOT</version>
+  <version>3.5.1</version>
 </dependency>
 ----
 
@@ -22,8 +22,41 @@ To use this project, add the following dependency to the _dependencies_ section 
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-sql-common-scala_2.12:3.5.1-SNAPSHOT'
+compile 'io.vertx:vertx-sql-common-scala_2.12:3.5.1'
 ----
+
+== Simple SQL Operations
+
+There are times when you will want to run a single SQL operation, e.g.: a single select of a row, or a update to a
+set of rows which do not require to be part of a transaction or have dependencies on the previous or next operation.
+
+For these cases, clients provide a boilerplate-less API `link:../../scaladocs/io/vertx/scala/ext/sql/SQLOperations.html[SQLOperations]`. This interface will
+perform the following steps for you:
+
+1. acquire a connection from the connection pool
+2. perform your action
+3. close and return the connection to the connection pool
+
+An example where users get loaded from the `USERS` table could be:
+
+[source,scala]
+----
+`example16`
+----
+
+You can perform the following operations as a simple one "shot" method call:
+
+* `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#query(java.lang.String,%20io.vertx.core.Handler)[query]`
+* `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#queryWithParams(java.lang.String,%20io.vertx.core.json.JsonArray,%20io.vertx.core.Handler)[queryWithParams]`
+* `link:../../scaladocs/io/vertx/scala/ext/sql/SQLOperations.html#querySingle(java.lang.String,%20io.vertx.core.Handler)[querySingle]`
+* `link:../../scaladocs/io/vertx/scala/ext/sql/SQLOperations.html#querySingleWithParams(java.lang.String,%20io.vertx.core.json.JsonArray,%20io.vertx.core.Handler)[querySingleWithParams]`
+* `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#update(java.lang.String,%20io.vertx.core.Handler)[update]`
+* `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#updateWithParams(java.lang.String,%20io.vertx.core.json.JsonArray,%20io.vertx.core.Handler)[updateWithParams]`
+* `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#call(java.lang.String,%20io.vertx.core.Handler)[call]`
+* `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#callWithParams(java.lang.String,%20io.vertx.core.json.JsonArray,%20io.vertx.core.json.JsonArray,%20io.vertx.core.Handler)[callWithParams]`
+
+For further details on these API please refer to the `link:../../scaladocs/io/vertx/scala/ext/sql/SQLOperations.html[SQLOperations]` interface.
+
 
 == The SQL Connection
 
@@ -39,7 +72,7 @@ If you wish to perform multiple operations in a single transaction you should se
 
 When the operation is complete, the handler will be called:
 
-[source,java]
+[source,scala]
 ----
 `example1`
 ----
@@ -53,7 +86,7 @@ The query string is raw SQL that is passed through without changes to the actual
 The handler will be called with the results, represented by `link:../dataobjects.html#ResultSet[ResultSet]` when the query has
 been run.
 
-[source,java]
+[source,scala]
 ----
 `example2`
 ----
@@ -65,7 +98,7 @@ available with `link:../dataobjects.html#ResultSet#getResults()[getResults]`
 
 The results are a list of `JsonArray` instances, one for each row of the results.
 
-[source,java]
+[source,scala]
 ----
 `example3`
 ----
@@ -76,7 +109,7 @@ column names - if that's the case you should use `link:../dataobjects.html#Resul
 
 Here's an example of iterating through the results as Json object instances:
 
-[source,java]
+[source,scala]
 ----
 `example3__1`
 ----
@@ -89,7 +122,7 @@ To execute a prepared statement query you can use
 This takes the query, containing the parameter place holders, and a `JsonArray` or parameter
 values.
 
-[source,java]
+[source,scala]
 ----
 `example3_1`
 ----
@@ -106,7 +139,7 @@ been run.
 The update result holds the number of rows updated with `link:../dataobjects.html#UpdateResult#getUpdated()[getUpdated]`, and
 if the update generated keys, they are available with `link:../dataobjects.html#UpdateResult#getKeys()[getKeys]`.
 
-[source,java]
+[source,scala]
 ----
 `example4`
 ----
@@ -119,7 +152,7 @@ To execute a prepared statement update you can use
 This takes the update, containing the parameter place holders, and a `JsonArray` or parameter
 values.
 
-[source,java]
+[source,scala]
 ----
 `example5`
 ----
@@ -139,7 +172,7 @@ argument then the output array must contain a null value as the first element.
 
 A SQL function returns some output using the `return` keyword, and in this case one can call it like this:
 
-[source,java]
+[source,scala]
 ----
 `example8`
 ----
@@ -147,14 +180,14 @@ A SQL function returns some output using the `return` keyword, and in this case 
 When working with Procedures you and still return values from your procedures via its arguments, in the case you do
 not return anything the usage is as follows:
 
-[source,java]
+[source,scala]
 ----
 `example9`
 ----
 
 However you can also return values like this:
 
-[source,java]
+[source,scala]
 ----
 `example10`
 ----
@@ -181,14 +214,14 @@ The SQL common interface also defines how to execute batch operations. There are
 
 A batches statement will exeucte a list of sql statements as for example:
 
-[source,java]
+[source,scala]
 ----
 `example12`
 ----
 
 While a prepared or callable statement batch will reuse the sql statement and take an list of arguments as for example:
 
-[source,java]
+[source,scala]
 ----
 `example11`
 ----
@@ -201,7 +234,7 @@ To execute any other database operation, e.g. a `CREATE TABLE` you can use
 The string is passed through without changes to the actual database. The handler is called when the operation
 is complete
 
-[source,java]
+[source,scala]
 ----
 `example6`
 ----
@@ -246,7 +279,7 @@ You then do your transactional operations and when you want to commit or rollbac
 
 Once the commit/rollback is complete the handler will be called and the next transaction will be automatically started.
 
-[source,java]
+[source,scala]
 ----
 `example7`
 ----

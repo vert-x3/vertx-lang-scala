@@ -19,9 +19,12 @@ package io.vertx.scala.ext.web.handler
 import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
+import io.vertx.ext.web.{Http2PushMapping => JHttp2PushMapping}
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.ext.web.handler.{StaticHandler => JStaticHandler}
+import io.vertx.scala.ext.web.Http2PushMapping
 import io.vertx.scala.ext.web.RoutingContext
+import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 
 /**
@@ -130,6 +133,16 @@ class StaticHandler(private val _asJava: Object)
     */
   def setMaxCacheSize(maxCacheSize: Int): StaticHandler = {
     asJava.asInstanceOf[JStaticHandler].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer])
+    this
+  }
+
+  /**
+    * Set the file mapping for http2push and link preload
+    * @param http2PushMappings the mapping for http2 push
+    * @return a reference to this, so the API can be used fluently
+    */
+  def setHttp2PushMapping(http2PushMappings: scala.collection.mutable.Buffer[Http2PushMapping]): StaticHandler = {
+    asJava.asInstanceOf[JStaticHandler].setHttp2PushMapping(http2PushMappings.map(x => x.asJava).asJava)
     this
   }
 

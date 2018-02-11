@@ -186,7 +186,7 @@ class Vertx(private val _asJava: Object)
   }
 
   /**
-    * Set a default exception handler for [[io.vertx.scala.core.Context]], set on [[io.vertx.scala.core.Context#exceptionHandler]] at creation.
+    * Set a default exception handler for [[io.vertx.scala.core.Context]], set on  at creation.
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
@@ -297,7 +297,8 @@ class Vertx(private val _asJava: Object)
   }
 
   /**
-    * Create a DNS client to connect to a DNS server at the specified host and port
+    * Create a DNS client to connect to a DNS server at the specified host and port, with the default query timeout (5 seconds)
+    * <p/>
     * @param port the port
     * @param host the host
     * @return the DNS client

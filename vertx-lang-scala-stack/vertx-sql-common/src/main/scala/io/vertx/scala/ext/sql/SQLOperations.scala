@@ -87,6 +87,30 @@ trait SQLOperations {
     */
   def updateWithParams(sql: String, params: io.vertx.core.json.JsonArray, resultHandler: Handler[AsyncResult[UpdateResult]]): SQLOperations
 
+  /**
+    * Calls the given SQL <code>PROCEDURE</code> which returns the result from the procedure.
+    * @param sql the SQL to execute. For example <code>{call getEmpName`</code>.
+    * @param resultHandler the handler which is called once the operation completes. It will return a `ResultSet`.
+    */
+  def call(sql: String, resultHandler: Handler[AsyncResult[ResultSet]]): SQLOperations
+
+  /**
+    * Calls the given SQL <code>PROCEDURE</code> which returns the result from the procedure.
+    *
+    * The index of params and outputs are important for both arrays, for example when dealing with a prodecure that
+    * takes the first 2 arguments as input values and the 3 arg as an output then the arrays should be like:
+    *
+    * <pre>
+    *   params = [VALUE1, VALUE2, null]
+    *   outputs = [null, null, "VARCHAR"]
+    * </pre>
+    * @param sql the SQL to execute. For example <code>{call getEmpName (?, ?)`</code>.
+    * @param params these are the parameters to fill the statement.
+    * @param outputs these are the outputs to fill the statement.
+    * @param resultHandler the handler which is called once the operation completes. It will return a `ResultSet`.
+    */
+  def callWithParams(sql: String, params: io.vertx.core.json.JsonArray, outputs: io.vertx.core.json.JsonArray, resultHandler: Handler[AsyncResult[ResultSet]]): SQLOperations
+
  /**
    * Like [[query]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
@@ -111,6 +135,14 @@ trait SQLOperations {
    * Like [[updateWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def updateWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray): scala.concurrent.Future[UpdateResult]
+ /**
+   * Like [[call]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def callFuture(sql: String): scala.concurrent.Future[ResultSet]
+ /**
+   * Like [[callWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def callWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray, outputs: io.vertx.core.json.JsonArray): scala.concurrent.Future[ResultSet]
 }
 
 object SQLOperations {
@@ -191,6 +223,36 @@ object SQLOperations {
     this
   }
 
+  /**
+    * Calls the given SQL <code>PROCEDURE</code> which returns the result from the procedure.
+    * @param sql the SQL to execute. For example <code>{call getEmpName`</code>.
+    * @param resultHandler the handler which is called once the operation completes. It will return a `ResultSet`.
+    */
+  def call(sql: String, resultHandler: Handler[AsyncResult[ResultSet]]): SQLOperations = {
+    asJava.asInstanceOf[JSQLOperations].call(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
+    this
+  }
+
+  /**
+    * Calls the given SQL <code>PROCEDURE</code> which returns the result from the procedure.
+    *
+    * The index of params and outputs are important for both arrays, for example when dealing with a prodecure that
+    * takes the first 2 arguments as input values and the 3 arg as an output then the arrays should be like:
+    *
+    * <pre>
+    *   params = [VALUE1, VALUE2, null]
+    *   outputs = [null, null, "VARCHAR"]
+    * </pre>
+    * @param sql the SQL to execute. For example <code>{call getEmpName (?, ?)`</code>.
+    * @param params these are the parameters to fill the statement.
+    * @param outputs these are the outputs to fill the statement.
+    * @param resultHandler the handler which is called once the operation completes. It will return a `ResultSet`.
+    */
+  def callWithParams(sql: String, params: io.vertx.core.json.JsonArray, outputs: io.vertx.core.json.JsonArray, resultHandler: Handler[AsyncResult[ResultSet]]): SQLOperations = {
+    asJava.asInstanceOf[JSQLOperations].callWithParams(sql.asInstanceOf[java.lang.String], params, outputs, {x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
+    this
+  }
+
  /**
    * Like [[query]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
@@ -242,6 +304,24 @@ object SQLOperations {
   def updateWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray): scala.concurrent.Future[UpdateResult] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JUpdateResult, UpdateResult](x => UpdateResult(x))
     asJava.asInstanceOf[JSQLOperations].updateWithParams(sql.asInstanceOf[java.lang.String], params, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[call]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def callFuture(sql: String): scala.concurrent.Future[ResultSet] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JResultSet, ResultSet](x => ResultSet(x))
+    asJava.asInstanceOf[JSQLOperations].call(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[callWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def callWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray, outputs: io.vertx.core.json.JsonArray): scala.concurrent.Future[ResultSet] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JResultSet, ResultSet](x => ResultSet(x))
+    asJava.asInstanceOf[JSQLOperations].callWithParams(sql.asInstanceOf[java.lang.String], params, outputs, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

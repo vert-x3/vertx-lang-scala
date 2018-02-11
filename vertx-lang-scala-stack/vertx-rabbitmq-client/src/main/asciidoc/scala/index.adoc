@@ -15,7 +15,7 @@ Add the following dependency to your maven project
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-rabbitmq-client-scala_2.12</artifactId>
-  <version>3.5.1-SNAPSHOT</version>
+  <version>3.5.1</version>
 </dependency>
 ----
 
@@ -26,7 +26,7 @@ Add the following dependency to your gradle project
 [source,groovy,subs="+attributes"]
 ----
 dependencies {
-  compile 'io.vertx:vertx-rabbitmq-client-scala_2.12:3.5.1-SNAPSHOT'
+  compile 'io.vertx:vertx-rabbitmq-client-scala_2.12:3.5.1'
 }
 ----
 
@@ -73,10 +73,10 @@ You can pass additional config parameters to RabbitMQ's exchangeDeclare method
 [source, scala]
 ----
 
-var config = Map()
+var config = new io.vertx.core.json.JsonObject()
 
-config + ("x-dead-letter-exchange" -> "my.deadletter.exchange")
-config + ("alternate-exchange" -> "my.alternate.exchange")
+config.put("x-dead-letter-exchange", "my.deadletter.exchange")
+config.put("alternate-exchange", "my.alternate.exchange")
 // ...
 client.exchangeDeclareFuture("my.exchange", "fanout", true, false, config).onComplete{
   case Success(result) => {
@@ -86,6 +86,27 @@ client.exchangeDeclareFuture("my.exchange", "fanout", true, false, config).onCom
     println(s"$cause")
   }
 }
+
+----
+
+=== Declare queue with additional config
+
+You can pass additional config parameters to RabbitMQs queueDeclare method
+
+[source, scala]
+----
+var config = new io.vertx.core.json.JsonObject()
+config.put("x-message-ttl", 10000)
+
+client.queueDeclareFuture("my-queue", true, false, true, config).onComplete{
+  case Success(result) => {
+    println("Queue declared!")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 
 ----
 

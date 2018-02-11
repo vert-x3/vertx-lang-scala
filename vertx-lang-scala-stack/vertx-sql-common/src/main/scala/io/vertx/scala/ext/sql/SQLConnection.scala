@@ -173,7 +173,7 @@ class SQLConnection(private val _asJava: Object)
     * @param sql the SQL to execute. For example <code>{call getEmpName`</code>.
     * @param resultHandler the handler which is called once the operation completes. It will return a `ResultSet`.
     */
-  def call(sql: String, resultHandler: Handler[AsyncResult[ResultSet]]): SQLConnection = {
+  override def call(sql: String, resultHandler: Handler[AsyncResult[ResultSet]]): SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].call(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
     this
   }
@@ -193,7 +193,7 @@ class SQLConnection(private val _asJava: Object)
     * @param outputs these are the outputs to fill the statement.
     * @param resultHandler the handler which is called once the operation completes. It will return a `ResultSet`.
     */
-  def callWithParams(sql: String, params: io.vertx.core.json.JsonArray, outputs: io.vertx.core.json.JsonArray, resultHandler: Handler[AsyncResult[ResultSet]]): SQLConnection = {
+  override def callWithParams(sql: String, params: io.vertx.core.json.JsonArray, outputs: io.vertx.core.json.JsonArray, resultHandler: Handler[AsyncResult[ResultSet]]): SQLConnection = {
     asJava.asInstanceOf[JSQLConnection].callWithParams(sql.asInstanceOf[java.lang.String], params, outputs, {x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
     this
   }
@@ -392,7 +392,7 @@ class SQLConnection(private val _asJava: Object)
  /**
    * Like [[call]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def callFuture(sql: String): scala.concurrent.Future[ResultSet] = {
+  override def callFuture(sql: String): scala.concurrent.Future[ResultSet] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JResultSet, ResultSet](x => ResultSet(x))
     asJava.asInstanceOf[JSQLConnection].call(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -401,7 +401,7 @@ class SQLConnection(private val _asJava: Object)
  /**
    * Like [[callWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
-  def callWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray, outputs: io.vertx.core.json.JsonArray): scala.concurrent.Future[ResultSet] = {
+  override def callWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray, outputs: io.vertx.core.json.JsonArray): scala.concurrent.Future[ResultSet] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JResultSet, ResultSet](x => ResultSet(x))
     asJava.asInstanceOf[JSQLConnection].callWithParams(sql.asInstanceOf[java.lang.String], params, outputs, promiseAndHandler._1)
     promiseAndHandler._2.future

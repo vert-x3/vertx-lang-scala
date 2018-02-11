@@ -95,6 +95,18 @@ class MultiMap(private val _asJava: Object) {
   }
 
   /**
+    * Check if there is a header with the specified `name` and `value`.
+    *
+    * If `caseInsensitive` is `true`, `value` is compared in a case-insensitive way.
+    * @param name the name to search for
+    * @param value the value to search for
+    * @return `true` if at least one entry is found
+    */
+  def contains(name: String, value: String, caseInsensitive: Boolean): Boolean = {
+    asJava.asInstanceOf[JMultiMap].contains(name.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], caseInsensitive.asInstanceOf[java.lang.Boolean]).asInstanceOf[Boolean]
+  }
+
+  /**
     * Returns the value of with the specified name.  If there are
     * more than one values for the specified name, the first value is returned.
     * @param name The name of the header to search

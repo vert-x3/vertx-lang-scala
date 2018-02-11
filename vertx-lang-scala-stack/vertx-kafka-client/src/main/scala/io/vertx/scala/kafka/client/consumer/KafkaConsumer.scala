@@ -101,6 +101,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   /**
     * Subscribe to the given topic to get dynamically assigned partitions.
+    * 
+    * Due to internal buffering of messages, when changing the subscribed topic  
+    * the old topic may remain in effect 
+    * (as observed by the  record handler`) 
+    * until some time <em>after</em> the given `completionHandler` 
+    * is called. In contrast, the once the given `completionHandler` 
+    * is called the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer#batchHandler]] will only see messages 
+    * consistent with the new topic.
     * @param topic topic to subscribe to
     * @param completionHandler handler called on operation completed
     * @return current KafkaConsumer instance
@@ -112,6 +120,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   /**
     * Subscribe to the given list of topics to get dynamically assigned partitions.
+    * 
+    * Due to internal buffering of messages, when changing the subscribed topics  
+    * the old set of topics may remain in effect 
+    * (as observed by the  record handler`) 
+    * until some time <em>after</em> the given `completionHandler` 
+    * is called. In contrast, the once the given `completionHandler` 
+    * is called the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer#batchHandler]] will only see messages 
+    * consistent with the new set of topics.
     * @param topics topics to subscribe to
     * @param completionHandler handler called on operation completed
     * @return current KafkaConsumer instance
@@ -143,6 +159,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   /**
     * Manually assign a partition to this consumer.
+    * 
+    * Due to internal buffering of messages, when reassigning
+    * the old partition may remain in effect 
+    * (as observed by the  record handler)` 
+    * until some time <em>after</em> the given `completionHandler` 
+    * is called. In contrast, the once the given `completionHandler` 
+    * is called the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer#batchHandler]] will only see messages 
+    * consistent with the new partition.
     * @param topicPartition partition which want assignedsee <a href="../../../../../../../../cheatsheet/TopicPartition.html">TopicPartition</a>
     * @param completionHandler handler called on operation completed
     * @return current KafkaConsumer instance
@@ -154,6 +178,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   /**
     * Manually assign a list of partition to this consumer.
+    * 
+    * Due to internal buffering of messages, when reassigning
+    * the old set of partitions may remain in effect 
+    * (as observed by the  record handler)` 
+    * until some time <em>after</em> the given `completionHandler` 
+    * is called. In contrast, the once the given `completionHandler` 
+    * is called the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer#batchHandler]] will only see messages 
+    * consistent with the new set of partitions.
     * @param topicPartitions partitions which want assigned
     * @param completionHandler handler called on operation completed
     * @return current KafkaConsumer instance
@@ -224,6 +256,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   /**
     * Suspend fetching from the requested partition.
+    * 
+    * Due to internal buffering of messages,
+    * the  will 
+    * continue to observe messages from the given `topicParation` 
+    * until some time <em>after</em> the given `completionHandler` 
+    * is called. In contrast, the once the given `completionHandler` 
+    * is called the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer#batchHandler]] will not see messages 
+    * from the given `topicParation`.
     * @param topicPartition topic partition from which suspend fetchingsee <a href="../../../../../../../../cheatsheet/TopicPartition.html">TopicPartition</a>
     * @param completionHandler handler called on operation completed
     * @return current KafkaConsumer instance
@@ -235,6 +275,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   /**
     * Suspend fetching from the requested partitions.
+    * 
+    * Due to internal buffering of messages,
+    * the  will 
+    * continue to observe messages from the given `topicParations` 
+    * until some time <em>after</em> the given `completionHandler` 
+    * is called. In contrast, the once the given `completionHandler` 
+    * is called the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer#batchHandler]] will not see messages 
+    * from the given `topicParations`.
     * @param topicPartitions topic partition from which suspend fetching
     * @param completionHandler handler called on operation completed
     * @return current KafkaConsumer instance
@@ -319,6 +367,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   /**
     * Overrides the fetch offsets that the consumer will use on the next poll.
+    * 
+    * Due to internal buffering of messages,
+    * the  will 
+    * continue to observe messages fetched with respect to the old offset  
+    * until some time <em>after</em> the given `completionHandler` 
+    * is called. In contrast, the once the given `completionHandler` 
+    * is called the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer#batchHandler]] will only see messages 
+    * consistent with the new offset.
     * @param topicPartition topic partition for which seeksee <a href="../../../../../../../../cheatsheet/TopicPartition.html">TopicPartition</a>
     * @param offset offset to seek inside the topic partition
     * @param completionHandler handler called on operation completed
@@ -351,6 +407,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   /**
     * Seek to the first offset for each of the given partition.
+    * 
+    * Due to internal buffering of messages,
+    * the  will 
+    * continue to observe messages fetched with respect to the old offset  
+    * until some time <em>after</em> the given `completionHandler` 
+    * is called. In contrast, the once the given `completionHandler` 
+    * is called the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer#batchHandler]] will only see messages 
+    * consistent with the new offset.
     * @param topicPartition topic partition for which seeksee <a href="../../../../../../../../cheatsheet/TopicPartition.html">TopicPartition</a>
     * @param completionHandler handler called on operation completed
     * @return current KafkaConsumer instance
@@ -362,6 +426,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   /**
     * Seek to the first offset for each of the given partitions.
+    * 
+    * Due to internal buffering of messages,
+    * the  will 
+    * continue to observe messages fetched with respect to the old offset  
+    * until some time <em>after</em> the given `completionHandler` 
+    * is called. In contrast, the once the given `completionHandler` 
+    * is called the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer#batchHandler]] will only see messages 
+    * consistent with the new offset.
     * @param topicPartitions topic partition for which seek
     * @param completionHandler handler called on operation completed
     * @return current KafkaConsumer instance
@@ -393,6 +465,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   /**
     * Seek to the last offset for each of the given partition.
+    * 
+    * Due to internal buffering of messages,
+    * the  will 
+    * continue to observe messages fetched with respect to the old offset  
+    * until some time <em>after</em> the given `completionHandler` 
+    * is called. In contrast, the once the given `completionHandler` 
+    * is called the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer#batchHandler]] will only see messages 
+    * consistent with the new offset.
     * @param topicPartition topic partition for which seeksee <a href="../../../../../../../../cheatsheet/TopicPartition.html">TopicPartition</a>
     * @param completionHandler handler called on operation completed
     * @return current KafkaConsumer instance
@@ -404,6 +484,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object)
 
   /**
     * Seek to the last offset for each of the given partitions.
+    * 
+    * Due to internal buffering of messages,
+    * the  will 
+    * continue to observe messages fetched with respect to the old offset  
+    * until some time <em>after</em> the given `completionHandler` 
+    * is called. In contrast, the once the given `completionHandler` 
+    * is called the [[io.vertx.scala.kafka.client.consumer.KafkaConsumer#batchHandler]] will only see messages 
+    * consistent with the new offset.
     * @param topicPartitions topic partition for which seek
     * @param completionHandler handler called on operation completed
     * @return current KafkaConsumer instance

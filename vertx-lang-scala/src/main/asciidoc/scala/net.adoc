@@ -100,7 +100,7 @@ server.listenFuture(0, "localhost").onComplete{
 
 === Getting notified of incoming connections
 
-To be notified when a connection is made you need to set a `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html#connectHandler(io.vertx.core.Handler)[connectHandler]`:
+To be notified when a connection is made you need to set a `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html#connectHandler(io.vertx.core.Handler))[connectHandler]`:
 
 [source,scala]
 ----
@@ -162,7 +162,7 @@ Write operations are asynchronous and may not occur until some time after the ca
 
 === Closed handler
 
-If you want to be notified when a socket is closed, you can set a `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html#closeHandler(io.vertx.core.Handler)[closeHandler]`
+If you want to be notified when a socket is closed, you can set a `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html#closeHandler(io.vertx.core.Handler))[closeHandler]`
 on it:
 
 [source,scala]
@@ -180,7 +180,7 @@ You can set an `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html#exce
 exceptions that happen on the socket.
 
 You can set an `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html#exceptionHandler(io.vertx.core.Handler)[exceptionHandler]` to receive any
-exceptions that happens before the connection is passed to the `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html#connectHandler(io.vertx.core.Handler)[connectHandler]`
+exceptions that happens before the connection is passed to the `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html#connectHandler(io.vertx.core.Handler))[connectHandler]`
 , e.g during the TLS handshake.
 
 === Event bus write handler

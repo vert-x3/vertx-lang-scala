@@ -102,7 +102,7 @@ class MIMEHeader(private val _asJava: Object)
   }
 
   /**
-    * Gets the parsed component part of the MIME. This is the string between the beginning and the first @{code '/'`
+    * Gets the parsed component part of the MIME. This is the string between the beginning and the first `'/'`
     * of the MIME
     * @return The component of the MIME this represents
     */
@@ -111,7 +111,8 @@ class MIMEHeader(private val _asJava: Object)
   }
 
   /**
-    * Gets the parsed subcomponent part of the MIME. This is the string between the first @{code '/'` and the
+    * Gets the parsed subcomponent part of the MIME. This is the string between the first `'/'` and the
+    * `';'` or the end of the MIME
     * @return The subcomponent of the MIME this represents
     */
   def subComponent(): String = {

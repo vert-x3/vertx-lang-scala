@@ -699,6 +699,16 @@ class RedisClient(private val _asJava: Object) {
   }
 
   /**
+    * Determine if one or many keys exist
+    * @param keys List of key strings
+    * @param handler Handler for the result of this call.
+    */
+  def existsMany(keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].existsMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    this
+  }
+
+  /**
     * Set a key's time to live in seconds
     * @param key Key string
     * @param seconds Time to live in seconds
@@ -3191,6 +3201,15 @@ class RedisClient(private val _asJava: Object) {
   def existsFuture(key: String): scala.concurrent.Future[Long] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
     asJava.asInstanceOf[JRedisClient].exists(key.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[existsMany]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def existsManyFuture(keys: scala.collection.mutable.Buffer[String]): scala.concurrent.Future[Long] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Long, Long](x => x.asInstanceOf[Long])
+    asJava.asInstanceOf[JRedisClient].existsMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
