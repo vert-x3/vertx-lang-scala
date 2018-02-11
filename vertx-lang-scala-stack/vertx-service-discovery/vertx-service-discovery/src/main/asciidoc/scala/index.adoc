@@ -7,7 +7,7 @@ These resources are called `services`. A `service` is a discoverable
 functionality. It can be qualified by its type, metadata, and location. So a `service` can be a database, a
 service proxy, a HTTP endpoint and any other resource you can imagine as soon as you can describe it, discover it
 and interact with it. It does not have to be a vert.x entity, but can be anything. Each service is described by a
-`link:../dataobjects.html#Record[Record]`.
+`link:../../apidocs/io/vertx/servicediscovery/Record.html[Record]`.
 
 The service discovery implements the interactions defined in service-oriented computing. And to some extent,
 also provides the dynamic service-oriented computing interactions. So, applications can react to arrival and
@@ -22,21 +22,21 @@ A service provider can:
 A service consumer can:
 
 * lookup services
-* bind to a selected service (it gets a `link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceReference.html[ServiceReference]`) and use it
+* bind to a selected service (it gets a `link:../../apidocs/io/vertx/servicediscovery/ServiceReference.html[ServiceReference]`) and use it
 * release the service once the consumer is done with it
 * listen for arrival, departure and modification of services.
 
 Consumer would 1) lookup a service record matching their need, 2) retrieve the
-`link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceReference.html[ServiceReference]` that give access to the service, 3) get a service object to access
+`link:../../apidocs/io/vertx/servicediscovery/ServiceReference.html[ServiceReference]` that give access to the service, 3) get a service object to access
 the service, 4) release the service object once done.
 
 The process can be simplified using _service type_ where you can directly retrieve the service object if you know
 from which type it is (JDBC client, Http client...).
 
 As stated above, the central piece of information shared by the providers and consumers are
-`link:../dataobjects.html#Record[records]`.
+`link:../../apidocs/io/vertx/servicediscovery/Record.html[records]`.
 
-Providers and consumers must create their own `link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceDiscovery.html[ServiceDiscovery]` instance. These
+Providers and consumers must create their own `link:../../apidocs/io/vertx/servicediscovery/ServiceDiscovery.html[ServiceDiscovery]` instance. These
 instances are collaborating in the background (distributed structure) to keep the set of services in sync.
 
 The service discovery supports bridges to import and export services from / to other discovery technologies.
@@ -53,7 +53,7 @@ descriptor:
 <dependency>
 <groupId>io.vertx</groupId>
 <artifactId>vertx-service-discovery-scala_2.12</artifactId>
-<version>3.5.1-SNAPSHOT</version>
+<version>3.5.1</version>
 </dependency>
 ----
 
@@ -61,7 +61,7 @@ descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-service-discovery-scala_2.12:3.5.1-SNAPSHOT'
+compile 'io.vertx:vertx-service-discovery-scala_2.12:3.5.1'
 ----
 
 == Overall concepts
@@ -70,7 +70,7 @@ The discovery mechanism is based on a few concepts explained in this section.
 
 === Service records
 
-A service `link:../dataobjects.html#Record[Record]` is an object that describes a service published by a service
+A service `link:../../apidocs/io/vertx/servicediscovery/Record.html[Record]` is an object that describes a service published by a service
 provider. It contains a name, some metadata, a location object (describing where is the service). This record is
 the only object shared by the provider (having published it) and the consumer (retrieve it when doing a lookup).
 
@@ -86,8 +86,8 @@ describing the provider. It may be a single entity (a provider publishing itself
 === Service Consumer
 
 Service consumers search for services in the service discovery. Each lookup retrieves `0..n`
-`link:../dataobjects.html#Record[Record]`. From these records, a consumer can retrieve a
-`link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceReference.html[ServiceReference]`, representing the binding between the consumer and the provider.
+`link:../../apidocs/io/vertx/servicediscovery/Record.html[Record]`. From these records, a consumer can retrieve a
+`link:../../apidocs/io/vertx/servicediscovery/ServiceReference.html[ServiceReference]`, representing the binding between the consumer and the provider.
 This reference allows the consumer to retrieve the _service object_ (to use the service),  and release the service.
 
 It is important to release service references to cleanup the objects and update the service usages.
@@ -118,8 +118,8 @@ Every time a service provider is published or withdrawn, an event is fired on th
 the record that has been modified.
 
 In addition, in order to track who is using who, every time a reference is retrieved with
-`link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceDiscovery.html#getReference(io.vertx.servicediscovery.Record)[getReference]` or released with
-`link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceReference.html#release()[release]`, events are emitted on the event bus to track the
+`link:../../apidocs/io/vertx/servicediscovery/ServiceDiscovery.html#getReference-io.vertx.servicediscovery.Record-[getReference]` or released with
+`link:../../apidocs/io/vertx/servicediscovery/ServiceReference.html#release--[release]`, events are emitted on the event bus to track the
 service usages.
 
 More details on these events below.
@@ -128,29 +128,29 @@ More details on these events below.
 
 The service discovery uses a Vert.x distributed data structure to store the records. So, all members of the cluster
 have access to all the records. This is the default backend implementation. You can implement your own by
-implementing the `ServiceDiscoveryBackend` SPI. For instance, we provide an
+implementing the `link:../../apidocs/io/vertx/servicediscovery/spi/ServiceDiscoveryBackend.html[ServiceDiscoveryBackend]` SPI. For instance, we provide an
 implementation based on Redis.
 
 Notice that the discovery does not require Vert.x clustering. In single-node mode, the structure is local. It can
-be populated with `link:../../scaladocs/io/vertx/scala/servicediscovery/spi/ServiceImporter.html[ServiceImporter]`s. Since 3.5.0, you can use a local
+be populated with `link:../../apidocs/io/vertx/servicediscovery/spi/ServiceImporter.html[ServiceImporter]`s. Since 3.5.0, you can use a local
 structure even in clustered mode by setting the system property `vertx-service-discovery-backend-local` to `true` (or
 the environment variable `VERTX-SERVICE-DISCOVERY-BACKEND-LOCAL` to `true`).
 
 == Creating a service discovery instance
 
-Publishers and consumers must create their own `link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceDiscovery.html[ServiceDiscovery]`
+Publishers and consumers must create their own `link:../../apidocs/io/vertx/servicediscovery/ServiceDiscovery.html[ServiceDiscovery]`
 instance to use the discovery infrastructure:
 
-[source,scala]
+[source,groovy]
 ----
 // Use default configuration
-var discovery = ServiceDiscovery.create(vertx)
+def discovery = ServiceDiscovery.create(vertx)
 
 // Customize the configuration
-discovery = ServiceDiscovery.create(vertx, ServiceDiscoveryOptions()
-  .setAnnounceAddress("service-announce")
-  .setName("my-name")
-)
+discovery = ServiceDiscovery.create(vertx, [
+  announceAddress:"service-announce",
+  name:"my-name"
+])
 
 // Do something...
 
@@ -174,40 +174,42 @@ Once you have a service discovery instance, you can publish services. The proces
 2. publish this record
 3. keep the published record that is used to un-publish a service or modify it.
 
-To create records, you can either use the `link:../dataobjects.html#Record[Record]` class, or use convenient methods
+To create records, you can either use the `link:../../apidocs/io/vertx/servicediscovery/Record.html[Record]` class, or use convenient methods
 from the service types.
 
-[source,scala]
+[source,groovy]
 ----
 // Manual record creation
-var record = Record()
-  .setType("eventbus-service-proxy")
-  .setLocation(new io.vertx.core.json.JsonObject().put("endpoint", "the-service-address"))
-  .setName("my-service")
-  .setMetadata(new io.vertx.core.json.JsonObject().put("some-label", "some-value"))
+def record = [
+  type:"eventbus-service-proxy",
+  location:[
+    endpoint:"the-service-address"
+  ],
+  name:"my-service",
+  metadata:[
+    'some-label':"some-value"
+  ]
+]
 
-
-discovery.publishFuture(record).onComplete{
-  case Success(result) => {
+discovery.publish(record, { ar ->
+  if (ar.succeeded()) {
     // publication succeeded
-    var publishedRecord = result
+    def publishedRecord = ar.result()
+  } else {
+    // publication failed
   }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
+})
 
 // Record creation from a type
 record = HttpEndpoint.createRecord("some-rest-api", "localhost", 8080, "/api")
-discovery.publishFuture(record).onComplete{
-  case Success(result) => {
+discovery.publish(record, { ar ->
+  if (ar.succeeded()) {
     // publication succeeded
-    var publishedRecord = result
+    def publishedRecord = ar.result()
+  } else {
+    // publication failed
   }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
+})
 
 ----
 
@@ -217,17 +219,16 @@ It is important to keep a reference on the returned records, as this record has 
 
 To withdraw (un-publish) a record, use:
 
-[source,scala]
+[source,groovy]
 ----
 
-discovery.unpublishFuture(todo-renderDataObjectMemberSelect).onComplete{
-  case Success(result) => {
+discovery.unpublish(record.registration, { ar ->
+  if (ar.succeeded()) {
     // Ok
+  } else {
+    // cannot un-publish the service, may have already been removed, or the record is not published
   }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
+})
 
 ----
 
@@ -241,7 +242,7 @@ the matching ones. In the first case, the first matching record is returned.
 
 Consumer can pass a filter to select the service. There are two ways to describe the filter:
 
-1. A function taking a `link:../dataobjects.html#Record[Record]` as parameter and returning a boolean (it's a
+1. A function taking a `link:../../apidocs/io/vertx/servicediscovery/Record.html[Record]` as parameter and returning a boolean (it's a
 predicate)
 2. This filter is a JSON object. Each entry of the given filter is checked against the record. All entries must
 exactly match the record. The entry can use the special `*` value to denote a requirement on the key, but not on
@@ -260,121 +261,119 @@ records, you must return _true_ regardless the record.
 
 Here are some examples:
 
-[source,scala]
+[source,groovy]
 ----
 // Get any record
-discovery.getRecordFuture((r: io.vertx.scala.servicediscovery.Record) => {
+discovery.getRecord({ r ->
   true
-}).onComplete{
-  case Success(result) => {
-    if (result != null) {
+}, { ar ->
+  if (ar.succeeded()) {
+    if (ar.result() != null) {
       // we have a record
     } else {
       // the lookup succeeded, but no matching service
     }
+  } else {
+    // lookup failed
   }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
+})
 
-discovery.getRecordFuture(null).onComplete{
-  case Success(result) => {
-    if (result != null) {
+discovery.getRecord(null, { ar ->
+  if (ar.succeeded()) {
+    if (ar.result() != null) {
       // we have a record
     } else {
       // the lookup succeeded, but no matching service
     }
+  } else {
+    // lookup failed
   }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
+})
 
 
 // Get a record by name
-discovery.getRecordFuture((r: io.vertx.scala.servicediscovery.Record) => {
-  todo-renderDataObjectMemberSelect == "some-name"
-}).onComplete{
-  case Success(result) => {
-    if (result != null) {
+discovery.getRecord({ r ->
+  r.name == "some-name"
+}, { ar ->
+  if (ar.succeeded()) {
+    if (ar.result() != null) {
       // we have a record
     } else {
       // the lookup succeeded, but no matching service
     }
+  } else {
+    // lookup failed
   }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
+})
 
-discovery.getRecordFuture(new io.vertx.core.json.JsonObject().put("name", "some-service")).onComplete{
-  case Success(result) => {
-    if (result != null) {
+discovery.getRecord([
+  name:"some-service"
+], { ar ->
+  if (ar.succeeded()) {
+    if (ar.result() != null) {
       // we have a record
     } else {
       // the lookup succeeded, but no matching service
     }
+  } else {
+    // lookup failed
   }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
+})
 
 // Get all records matching the filter
-discovery.getRecordsFuture((r: io.vertx.scala.servicediscovery.Record) => {
-  "some-value" == todo-renderDataObjectMemberSelect.getValue("some-label")
-}).onComplete{
-  case Success(result) => {
-    var results = result
+discovery.getRecords({ r ->
+  "some-value" == r.metadata.some-label
+}, { ar ->
+  if (ar.succeeded()) {
+    def results = ar.result()
     // If the list is not empty, we have matching record
     // Else, the lookup succeeded, but no matching service
+  } else {
+    // lookup failed
   }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
+})
 
 
-discovery.getRecordsFuture(new io.vertx.core.json.JsonObject().put("some-label", "some-value")).onComplete{
-  case Success(result) => {
-    var results = result
+discovery.getRecords([
+  'some-label':"some-value"
+], { ar ->
+  if (ar.succeeded()) {
+    def results = ar.result()
     // If the list is not empty, we have matching record
     // Else, the lookup succeeded, but no matching service
+  } else {
+    // lookup failed
   }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
+})
 
 
 
 ----
 
 You can retrieve a single record or all matching records with
-`link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceDiscovery.html#getRecords(io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[getRecords]`.
+`link:../../apidocs/io/vertx/servicediscovery/ServiceDiscovery.html#getRecords-io.vertx.core.json.JsonObject-io.vertx.core.Handler-[getRecords]`.
 By default, record lookup does include only records with a `status` set to `UP`. This can be overridden:
 
 * when using JSON filter, just set `status` to the value you want (or `*` to accept all status)
 * when using function, set the `includeOutOfService` parameter to `true` in
-`link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceDiscovery.html#getRecords(java.util.function.Function,%20boolean,%20io.vertx.core.Handler)[getRecords]`
+`link:../../apidocs/io/vertx/servicediscovery/ServiceDiscovery.html#getRecords-java.util.function.Function-boolean-io.vertx.core.Handler-[getRecords]`
 .
 
 == Retrieving a service reference
 
-Once you have chosen the `link:../dataobjects.html#Record[Record]`, you can retrieve a
-`link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceReference.html[ServiceReference]` and then the service object:
+Once you have chosen the `link:../../apidocs/io/vertx/servicediscovery/Record.html[Record]`, you can retrieve a
+`link:../../apidocs/io/vertx/servicediscovery/ServiceReference.html[ServiceReference]` and then the service object:
 
-[source,scala]
+[source,groovy]
 ----
-var reference1 = discovery.getReference(record1)
-var reference2 = discovery.getReference(record2)
+def reference1 = discovery.getReference(record1)
+def reference2 = discovery.getReference(record2)
 
 // Then, gets the service object, the returned type depends on the service type:
 // For http endpoint:
-var client = reference1.getAs(HttpClient.class)
+def client = reference1.getAs(HttpClient.class)
 // For message source
-var consumer = reference2.getAs(MessageConsumer.class)
+def consumer = reference2.getAs(MessageConsumer.class)
 
 // When done with the service
 reference1.release()
@@ -386,17 +385,17 @@ Don't forget to release the reference once done.
 
 The service reference represents a binding with the service provider.
 
-When retrieving a service reference you can pass a `JsonObject` used to configure the
+When retrieving a service reference you can pass a `link:../../apidocs/io/vertx/core/json/JsonObject.html[JsonObject]` used to configure the
 service object. It can contain various data about the service object. Some service types do not need additional
 configuration, some require configuration (as data sources):
 
-[source,scala]
+[source,groovy]
 ----
-var reference = discovery.getReferenceWithConfiguration(record, conf)
+def reference = discovery.getReferenceWithConfiguration(record, conf)
 
 // Then, gets the service object, the returned type depends on the service type:
 // For http endpoint:
-var client = reference.getAs(JDBCClient.class)
+def client = reference.getAs(JDBCClient.class)
 
 // Do something with the client...
 
@@ -406,9 +405,9 @@ reference.release()
 ----
 
 In the previous examples, the code uses
-`link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceReference.html#getAs(java.lang.Class)[getAs]`. The parameter is the type of
+`link:../../apidocs/io/vertx/servicediscovery/ServiceReference.html#getAs-java.lang.Class-[getAs]`. The parameter is the type of
 object you expect to get. If you are using Java, you can use
-`link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceReference.html#get()[get]`. However in the other language you must pass the expected
+`link:../../apidocs/io/vertx/servicediscovery/ServiceReference.html#get--[get]`. However in the other language you must pass the expected
 type.
 
 == Types of services
@@ -418,29 +417,29 @@ different services.
 
 These types are provided by default:
 
-* `link:../../scaladocs/io/vertx/scala/servicediscovery/types/HttpEndpoint.html[HttpEndpoint]` - for REST API's, the service object is a
-`link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` configured on the host and port (the location is the url).
-* `link:../../scaladocs/io/vertx/scala/servicediscovery/types/EventBusService.html[EventBusService]` - for service proxies, the service object is a proxy. Its
+* `link:../../apidocs/io/vertx/servicediscovery/types/HttpEndpoint.html[HttpEndpoint]` - for REST API's, the service object is a
+`link:../../apidocs/io/vertx/core/http/HttpClient.html[HttpClient]` configured on the host and port (the location is the url).
+* `link:../../apidocs/io/vertx/servicediscovery/types/EventBusService.html[EventBusService]` - for service proxies, the service object is a proxy. Its
 type is the proxies interface (the location is the address).
-* `link:../../scaladocs/io/vertx/scala/servicediscovery/types/MessageSource.html[MessageSource]` - for message sources (publisher), the service object is a
-`link:../../scaladocs/io/vertx/scala/core/eventbus/MessageConsumer.html[MessageConsumer]` (the location is the address).
-* `link:../../scaladocs/io/vertx/scala/servicediscovery/types/JDBCDataSource.html[JDBCDataSource]` - for JDBC data sources, the service object is a
-`link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html[JDBCClient]` (the configuration of the client is computed from the location, metadata and
+* `link:../../apidocs/io/vertx/servicediscovery/types/MessageSource.html[MessageSource]` - for message sources (publisher), the service object is a
+`link:../../apidocs/io/vertx/core/eventbus/MessageConsumer.html[MessageConsumer]` (the location is the address).
+* `link:../../apidocs/io/vertx/servicediscovery/types/JDBCDataSource.html[JDBCDataSource]` - for JDBC data sources, the service object is a
+`link:../../apidocs/io/vertx/ext/jdbc/JDBCClient.html[JDBCClient]` (the configuration of the client is computed from the location, metadata and
 consumer configuration).
-* `link:../../scaladocs/io/vertx/scala/servicediscovery/types/RedisDataSource.html[RedisDataSource]` - for Redis data sources, the service object is a
-`link:../../scaladocs/io/vertx/scala/redis/RedisClient.html[RedisClient]` (the configuration of the client is computed from the location, metadata and
+* `link:../../apidocs/io/vertx/servicediscovery/types/RedisDataSource.html[RedisDataSource]` - for Redis data sources, the service object is a
+`link:../../apidocs/io/vertx/redis/RedisClient.html[RedisClient]` (the configuration of the client is computed from the location, metadata and
 consumer configuration).
-* `link:../../scaladocs/io/vertx/scala/servicediscovery/types/MongoDataSource.html[MongoDataSource]` - for Mongo data sources, the service object is a
-`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html[MongoClient]` (the configuration of the client is computed from the location, metadata and
+* `link:../../apidocs/io/vertx/servicediscovery/types/MongoDataSource.html[MongoDataSource]` - for Mongo data sources, the service object is a
+`link:../../apidocs/io/vertx/ext/mongo/MongoClient.html[MongoClient]` (the configuration of the client is computed from the location, metadata and
 consumer configuration).
 
 This section gives details about service types in general and describes how to use the default service types.
 
 === Services with no type
 
-Some records may have no type (`link:todo[ServiceType.UNKNOWN]`). It is not possible to
+Some records may have no type (`link:../../apidocs/io/vertx/servicediscovery/spi/ServiceType.html#UNKNOWN[ServiceType.UNKNOWN]`). It is not possible to
 retrieve a reference for these records, but you can build the connection details from the `location` and
-`metadata` of the `link:../dataobjects.html#Record[Record]`.
+`metadata` of the `link:../../apidocs/io/vertx/servicediscovery/Record.html[Record]`.
 
 Using these services does not fire service usage events.
 
@@ -449,26 +448,27 @@ Using these services does not fire service usage events.
 === HTTP endpoints
 
 A HTTP endpoint represents a REST API or a service accessible using HTTP requests. The HTTP endpoint service
-objects are `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` configured with the host, port and ssl.
+objects are `link:../../apidocs/io/vertx/core/http/HttpClient.html[HttpClient]` configured with the host, port and ssl.
 
 ==== Publishing a HTTP endpoint
 
-To publish a HTTP endpoint, you need a `link:../dataobjects.html#Record[Record]`. You can create the record using
-`link:../../scaladocs/io/vertx/scala/servicediscovery/types/HttpEndpoint.html#createRecord(java.lang.String,%20java.lang.String,%20int,%20java.lang.String,%20io.vertx.core.json.JsonObject)[HttpEndpoint.createRecord]`.
+To publish a HTTP endpoint, you need a `link:../../apidocs/io/vertx/servicediscovery/Record.html[Record]`. You can create the record using
+`link:../../apidocs/io/vertx/servicediscovery/types/HttpEndpoint.html#createRecord-java.lang.String-java.lang.String-int-java.lang.String-io.vertx.core.json.JsonObject-[HttpEndpoint.createRecord]`.
 
-The next snippet illustrates hot to create a `link:../dataobjects.html#Record[Record]` from
-`link:../../scaladocs/io/vertx/scala/servicediscovery/types/HttpEndpoint.html[HttpEndpoint]`:
+The next snippet illustrates hot to create a `link:../../apidocs/io/vertx/servicediscovery/Record.html[Record]` from
+`link:../../apidocs/io/vertx/servicediscovery/types/HttpEndpoint.html[HttpEndpoint]`:
 
-[source, scala]
+[source, groovy]
 ----
-var record1 = HttpEndpoint.createRecord("some-http-service", "localhost", 8433, "/api")
+def record1 = HttpEndpoint.createRecord("some-http-service", "localhost", 8433, "/api")
 
-discovery.publishFuture(record1).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
+discovery.publish(record1, { ar ->
+  // ...
+})
 
-var record2 = HttpEndpoint.createRecord("some-other-name", true, "localhost", 8433, "/api", new io.vertx.core.json.JsonObject().put("some-metadata", "some value"))
+def record2 = HttpEndpoint.createRecord("some-other-name", true, "localhost", 8433, "/api", [
+  'some-metadata':"some value"
+])
 
 
 ----
@@ -479,30 +479,48 @@ publication must be done by another entity having this info. Generally it's a br
 ==== Consuming a HTTP endpoint
 
 Once a HTTP endpoint is published, a consumer can retrieve it. The service object is a
-`link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` with a port and host configured:
+`link:../../apidocs/io/vertx/core/http/HttpClient.html[HttpClient]` with a port and host configured:
 
-[source, scala]
+[source, groovy]
 ----
 // Get the record
-discovery.getRecordFuture(new io.vertx.core.json.JsonObject().put("name", "some-http-service")).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
+discovery.getRecord([
+  name:"some-http-service"
+], { ar ->
+  if (ar.succeeded() && ar.result() != null) {
+    // Retrieve the service reference
+    def reference = discovery.getReference(ar.result())
+    // Retrieve the service object
+    def client = reference.getAs(HttpClient.class)
+
+    // You need to path the complete path
+    client.getNow("/api/persons", { response ->
+
+      // ...
+
+      // Dont' forget to release the service
+      reference.release()
+
+    })
+  }
+})
 
 ----
 
 You can also use the
-`link:../../scaladocs/io/vertx/scala/servicediscovery/types/HttpEndpoint.html#getClient(io.vertx.servicediscovery.ServiceDiscovery,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[HttpEndpoint.getClient]`
+`link:../../apidocs/io/vertx/servicediscovery/types/HttpEndpoint.html#getClient-io.vertx.servicediscovery.ServiceDiscovery-io.vertx.core.json.JsonObject-io.vertx.core.Handler-[HttpEndpoint.getClient]`
 method to combine lookup and service retrieval in one call:
 
-[source, scala]
+[source, groovy]
 ----
-HttpEndpoint.getClient(discovery, new io.vertx.core.json.JsonObject().put("name", "some-http-service"), {
-  case Success(result) => {
-    var client = result
+HttpEndpoint.getClient(discovery, [
+  name:"some-http-service"
+], { ar ->
+  if (ar.succeeded()) {
+    def client = ar.result()
 
     // You need to path the complete path
-    client.getNow("/api/persons", (response: io.vertx.scala.core.http.HttpClientResponse) => {
+    client.getNow("/api/persons", { response ->
 
       // ...
 
@@ -511,43 +529,63 @@ HttpEndpoint.getClient(discovery, new io.vertx.core.json.JsonObject().put("name"
 
     })
   }
-  case Failure(cause) => println("Failure")
 })
 
 ----
 
 In this second version, the service object is released using
-`link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceDiscovery.html#releaseServiceObject(io.vertx.servicediscovery.ServiceDiscovery,%20java.lang.Object)[ServiceDiscovery.releaseServiceObject]`,
+`link:../../apidocs/io/vertx/servicediscovery/ServiceDiscovery.html#releaseServiceObject-io.vertx.servicediscovery.ServiceDiscovery-java.lang.Object-[ServiceDiscovery.releaseServiceObject]`,
 so you don't need to keep the service reference.
 
-Since Vert.x 3.4.0, another client has been provided. This higher-level client, named `link:../../scaladocs/io/vertx/scala/ext/web/client/WebClient.html[WebClient]`
-tends to be easier to use. You can retrieve a `link:../../scaladocs/io/vertx/scala/ext/web/client/WebClient.html[WebClient]` instances using:
+Since Vert.x 3.4.0, another client has been provided. This higher-level client, named `link:../../apidocs/io/vertx/ext/web/client/WebClient.html[WebClient]`
+tends to be easier to use. You can retrieve a `link:../../apidocs/io/vertx/ext/web/client/WebClient.html[WebClient]` instances using:
 
-[source, scala]
+[source, groovy]
 ----
 // Get the record
-discovery.getRecordFuture(new io.vertx.core.json.JsonObject().put("name", "some-http-service")).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
+discovery.getRecord([
+  name:"some-http-service"
+], { ar ->
+  if (ar.succeeded() && ar.result() != null) {
+    // Retrieve the service reference
+    def reference = discovery.getReference(ar.result())
+    // Retrieve the service object
+    def client = reference.getAs(WebClient.class)
+
+    // You need to path the complete path
+    client.get("/api/persons").send({ response ->
+
+      // ...
+
+      // Dont' forget to release the service
+      reference.release()
+
+    })
+  }
+})
 
 ----
 
 And, if you prefer the approach using the service type:
 
-[source, scala]
+[source, groovy]
 ----
-HttpEndpoint.getWebClient(discovery, new io.vertx.core.json.JsonObject().put("name", "some-http-service"), {
-  case Success(result) => {
-    var client = result
+HttpEndpoint.getWebClient(discovery, [
+  name:"some-http-service"
+], { ar ->
+  if (ar.succeeded()) {
+    def client = ar.result()
 
     // You need to path the complete path
-    client.get("/api/persons").sendFuture().onComplete{
-      case Success(result) => println("Success")
-      case Failure(cause) => println("Failure")
-    }
+    client.get("/api/persons").send({ response ->
+
+      // ...
+
+      // Dont' forget to release the service
+      ServiceDiscovery.releaseServiceObject(discovery, client)
+
+    })
   }
-  case Failure(cause) => println("Failure")
 })
 
 ----
@@ -556,22 +594,23 @@ HttpEndpoint.getWebClient(discovery, new io.vertx.core.json.JsonObject().put("na
 
 Event bus services are service proxies. They implement async-RPC services on top of the event bus. When retrieving
 a service object from an event bus service, you get a service proxy of the right type. You can access helper
-methods from `link:../../scaladocs/io/vertx/scala/servicediscovery/types/EventBusService.html[EventBusService]`.
+methods from `link:../../apidocs/io/vertx/servicediscovery/types/EventBusService.html[EventBusService]`.
 
 Notice that service proxies (service implementations and service interfaces) are developed in Java.
 
 ==== Publishing an event bus service
 
-To publish an event bus service, you need to create a `link:../dataobjects.html#Record[Record]`:
+To publish an event bus service, you need to create a `link:../../apidocs/io/vertx/servicediscovery/Record.html[Record]`:
 
-[source, scala]
+[source, groovy]
 ----
-var record = EventBusService.createRecord("some-eventbus-service", "address", "examples.MyService", new io.vertx.core.json.JsonObject().put("some-metadata", "some value"))
+def record = EventBusService.createRecord("some-eventbus-service", "address", "examples.MyService", [
+  'some-metadata':"some value"
+])
 
-discovery.publishFuture(record).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
+discovery.publish(record, { ar ->
+  // ...
+})
 
 ----
 
@@ -580,7 +619,7 @@ discovery.publishFuture(record).onComplete{
 ==== Consuming an event bus service
 
 To consume an event bus service you can either retrieve the record and then get the reference, or use the
-`link:../../scaladocs/io/vertx/scala/servicediscovery/types/EventBusService.html[EventBusService]` interface that combines the two operations in one call.
+`link:../../apidocs/io/vertx/servicediscovery/types/EventBusService.html[EventBusService]` interface that combines the two operations in one call.
 
 
 
@@ -588,12 +627,28 @@ To consume an event bus service you can either retrieve the record and then get 
 
 
 
+However, as the service is searched by (Java) interface, you need to specify the type of client you expect.
+
+[source, groovy]
+----
+EventBusService.getServiceProxyWithJsonFilter(discovery, [
+'service.interface':"org.acme.MyService"
+], examples.MyService.class, { ar ->
+if (ar.succeeded()) {
+def service = ar.result()
+
+// Dont' forget to release the service
+ServiceDiscovery.releaseServiceObject(discovery, service)
+}
+})
+
+----
 
 
 === Message source
 
 A message source is a component sending messages on the event bus on a specific address. Message source clients are
-`link:../../scaladocs/io/vertx/scala/core/eventbus/MessageConsumer.html[MessageConsumer]`.
+`link:../../apidocs/io/vertx/core/eventbus/MessageConsumer.html[MessageConsumer]`.
 
 The _location_ or a message source service is the event bus address on which messages are sent.
 
@@ -601,17 +656,16 @@ The _location_ or a message source service is the event bus address on which mes
 
 As for the other service types, publishing a message source is a 2-step process:
 
-1. create a record, using `link:../../scaladocs/io/vertx/scala/servicediscovery/types/MessageSource.html[MessageSource]`
+1. create a record, using `link:../../apidocs/io/vertx/servicediscovery/types/MessageSource.html[MessageSource]`
 2. publish the record
 
-[source, scala]
+[source, groovy]
 ----
-var record = MessageSource.createRecord("some-message-source-service", "some-address")
+def record = MessageSource.createRecord("some-message-source-service", "some-address")
 
-discovery.publishFuture(record).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
+discovery.publish(record, { ar ->
+  // ...
+})
 
 record = MessageSource.createRecord("some-other-message-source-service", "some-address", "examples.MyData")
 
@@ -624,36 +678,49 @@ In the second record, the type of payload is also indicated. This information is
 ==== Consuming a message source
 
 On the consumer side, you can retrieve the record and the reference, or use the
-`link:../../scaladocs/io/vertx/scala/servicediscovery/types/MessageSource.html[MessageSource]` class to retrieve the service is one call.
+`link:../../apidocs/io/vertx/servicediscovery/types/MessageSource.html[MessageSource]` class to retrieve the service is one call.
 
 With the first approach, the code is the following:
 
-[source, scala]
+[source, groovy]
 ----
 // Get the record
-discovery.getRecordFuture(new io.vertx.core.json.JsonObject().put("name", "some-message-source-service")).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
-
-----
-
-When, using `link:../../scaladocs/io/vertx/scala/servicediscovery/types/MessageSource.html[MessageSource]`, it becomes:
-
-[source, scala]
-----
-MessageSource.getConsumer(discovery, new io.vertx.core.json.JsonObject().put("name", "some-message-source-service"), {
-  case Success(result) => {
-    var consumer = result
+discovery.getRecord([
+  name:"some-message-source-service"
+], { ar ->
+  if (ar.succeeded() && ar.result() != null) {
+    // Retrieve the service reference
+    def reference = discovery.getReference(ar.result())
+    // Retrieve the service object
+    def consumer = reference.getAs(MessageConsumer.class)
 
     // Attach a message handler on it
-    consumer.handler((message: io.vertx.scala.core.eventbus.Message<io.vertx.scala.core.json.JsonObject>) => {
+    consumer.handler({ message ->
       // message handler
-      var payload = message.body()
+      def payload = message.body()
+    })
+  }
+})
+
+----
+
+When, using `link:../../apidocs/io/vertx/servicediscovery/types/MessageSource.html[MessageSource]`, it becomes:
+
+[source, groovy]
+----
+MessageSource.getConsumer(discovery, [
+  name:"some-message-source-service"
+], { ar ->
+  if (ar.succeeded()) {
+    def consumer = ar.result()
+
+    // Attach a message handler on it
+    consumer.handler({ message ->
+      // message handler
+      def payload = message.body()
     })
     // ...
   }
-  case Failure(cause) => println("Failure")
 })
 
 ----
@@ -661,23 +728,26 @@ MessageSource.getConsumer(discovery, new io.vertx.core.json.JsonObject().put("na
 === JDBC Data source
 
 Data sources represents databases or data stores. JDBC data sources are a specialization for databases accessible
-using a JDBC driver. The client of a JDBC data source service is a `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html[JDBCClient]`.
+using a JDBC driver. The client of a JDBC data source service is a `link:../../apidocs/io/vertx/ext/jdbc/JDBCClient.html[JDBCClient]`.
 
 ==== Publishing a JDBC service
 
 As for the other service types, publishing a JDBC data source is a 2-step process:
 
-1. create a record, using `link:../../scaladocs/io/vertx/scala/servicediscovery/types/JDBCDataSource.html[JDBCDataSource]`
+1. create a record, using `link:../../apidocs/io/vertx/servicediscovery/types/JDBCDataSource.html[JDBCDataSource]`
 2. publish the record
 
-[source, scala]
+[source, groovy]
 ----
-var record = JDBCDataSource.createRecord("some-data-source-service", new io.vertx.core.json.JsonObject().put("url", "some jdbc url"), new io.vertx.core.json.JsonObject().put("some-metadata", "some-value"))
+def record = JDBCDataSource.createRecord("some-data-source-service", [
+  url:"some jdbc url"
+], [
+  'some-metadata':"some-value"
+])
 
-discovery.publishFuture(record).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
+discovery.publish(record, { ar ->
+  // ...
+})
 
 ----
 
@@ -689,26 +759,46 @@ in front.
 ==== Consuming a JDBC service
 
 As stated in the previous section, how to access a data source depends on the data source itself. To build the
-`link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html[JDBCClient]`, you can merge configuration: the record location, the metadata and a json object provided by
+`link:../../apidocs/io/vertx/ext/jdbc/JDBCClient.html[JDBCClient]`, you can merge configuration: the record location, the metadata and a json object provided by
 the consumer:
 
-[source, scala]
+[source, groovy]
 ----
 // Get the record
-discovery.getRecordFuture(new io.vertx.core.json.JsonObject().put("name", "some-data-source-service")).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
+discovery.getRecord([
+  name:"some-data-source-service"
+], { ar ->
+  if (ar.succeeded() && ar.result() != null) {
+    // Retrieve the service reference
+    def reference = discovery.getReferenceWithConfiguration(ar.result(), [
+      username:"clement",
+      password:"*****"
+    ])
+
+    // Retrieve the service object
+    def client = reference.getAs(JDBCClient.class)
+
+    // ...
+
+    // when done
+    reference.release()
+  }
+})
 
 ----
 
-You can also use the `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html[JDBCClient]` class to the lookup and retrieval in one call:
+You can also use the `link:../../apidocs/io/vertx/ext/jdbc/JDBCClient.html[JDBCClient]` class to the lookup and retrieval in one call:
 
-[source, scala]
+[source, groovy]
 ----
-JDBCDataSource.getJDBCClient(discovery, new io.vertx.core.json.JsonObject().put("name", "some-data-source-service"), new io.vertx.core.json.JsonObject().put("username", "clement").put("password", "*****"), {
-  case Success(result) => {
-    var client = result
+JDBCDataSource.getJDBCClient(discovery, [
+  name:"some-data-source-service"
+], [
+  username:"clement",
+  password:"*****"
+], { ar ->
+  if (ar.succeeded()) {
+    def client = ar.result()
 
     // ...
 
@@ -716,7 +806,6 @@ JDBCDataSource.getJDBCClient(discovery, new io.vertx.core.json.JsonObject().put(
     ServiceDiscovery.releaseServiceObject(discovery, client)
 
   }
-  case Failure(cause) => println("Failure")
 })
 
 ----
@@ -724,23 +813,26 @@ JDBCDataSource.getJDBCClient(discovery, new io.vertx.core.json.JsonObject().put(
 === Redis Data source
 
 Redis data sources are a specialization for Redis persistence databases.
-The client of a Redis data source service is a `link:../../scaladocs/io/vertx/scala/redis/RedisClient.html[RedisClient]`.
+The client of a Redis data source service is a `link:../../apidocs/io/vertx/redis/RedisClient.html[RedisClient]`.
 
 ==== Publishing a Redis service
 
 Publishing a Redis data source is a 2-step process:
 
-1. create a record, using `link:../../scaladocs/io/vertx/scala/servicediscovery/types/RedisDataSource.html[RedisDataSource]`
+1. create a record, using `link:../../apidocs/io/vertx/servicediscovery/types/RedisDataSource.html[RedisDataSource]`
 2. publish the record
 
-[source, scala]
+[source, groovy]
 ----
-var record = RedisDataSource.createRecord("some-redis-data-source-service", new io.vertx.core.json.JsonObject().put("url", "localhost"), new io.vertx.core.json.JsonObject().put("some-metadata", "some-value"))
+def record = RedisDataSource.createRecord("some-redis-data-source-service", [
+  url:"localhost"
+], [
+  'some-metadata':"some-value"
+])
 
-discovery.publishFuture(record).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
+discovery.publish(record, { ar ->
+  // ...
+})
 
 ----
 
@@ -750,26 +842,40 @@ source (url, port...).
 ==== Consuming a Redis service
 
 As stated in the previous section, how to access a data source depends on the data source itself. To build the
-`link:../../scaladocs/io/vertx/scala/redis/RedisClient.html[RedisClient]`, you can merge configuration: the record location, the metadata and a json object provided by
+`link:../../apidocs/io/vertx/redis/RedisClient.html[RedisClient]`, you can merge configuration: the record location, the metadata and a json object provided by
 the consumer:
 
-[source, scala]
+[source, groovy]
 ----
 // Get the record
-discovery.getRecordFuture(new io.vertx.core.json.JsonObject().put("name", "some-redis-data-source-service")).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
+discovery.getRecord([
+  name:"some-redis-data-source-service"
+], { ar ->
+  if (ar.succeeded() && ar.result() != null) {
+    // Retrieve the service reference
+    def reference = discovery.getReference(ar.result())
+
+    // Retrieve the service instance
+    def client = reference.getAs(RedisClient.class)
+
+    // ...
+
+    // when done
+    reference.release()
+  }
+})
 
 ----
 
-You can also use the `link:../../scaladocs/io/vertx/scala/servicediscovery/types/RedisDataSource.html[RedisDataSource]` class to the lookup and retrieval in one call:
+You can also use the `link:../../apidocs/io/vertx/servicediscovery/types/RedisDataSource.html[RedisDataSource]` class to the lookup and retrieval in one call:
 
-[source, scala]
+[source, groovy]
 ----
-RedisDataSource.getRedisClient(discovery, new io.vertx.core.json.JsonObject().put("name", "some-redis-data-source-service"), {
-  case Success(result) => {
-    var client = result
+RedisDataSource.getRedisClient(discovery, [
+  name:"some-redis-data-source-service"
+], { ar ->
+  if (ar.succeeded()) {
+    def client = ar.result()
 
     // ...
 
@@ -777,7 +883,6 @@ RedisDataSource.getRedisClient(discovery, new io.vertx.core.json.JsonObject().pu
     ServiceDiscovery.releaseServiceObject(discovery, client)
 
   }
-  case Failure(cause) => println("Failure")
 })
 
 ----
@@ -785,23 +890,26 @@ RedisDataSource.getRedisClient(discovery, new io.vertx.core.json.JsonObject().pu
 === Mongo Data source
 
 Mongo data sources are a specialization for MongoDB databases.
-The client of a Mongo data source service is a `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html[MongoClient]`.
+The client of a Mongo data source service is a `link:../../apidocs/io/vertx/ext/mongo/MongoClient.html[MongoClient]`.
 
 ==== Publishing a Mongo service
 
 Publishing a Mongo data source is a 2-step process:
 
-1. create a record, using `link:../../scaladocs/io/vertx/scala/servicediscovery/types/MongoDataSource.html[MongoDataSource]`
+1. create a record, using `link:../../apidocs/io/vertx/servicediscovery/types/MongoDataSource.html[MongoDataSource]`
 2. publish the record
 
-[source, scala]
+[source, groovy]
 ----
-var record = MongoDataSource.createRecord("some-data-source-service", new io.vertx.core.json.JsonObject().put("connection_string", "some mongo connection"), new io.vertx.core.json.JsonObject().put("some-metadata", "some-value"))
+def record = MongoDataSource.createRecord("some-data-source-service", [
+  connection_string:"some mongo connection"
+], [
+  'some-metadata':"some-value"
+])
 
-discovery.publishFuture(record).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
+discovery.publish(record, { ar ->
+  // ...
+})
 
 ----
 
@@ -811,26 +919,46 @@ source (url, port...).
 ==== Consuming a Mongo service
 
 As stated in the previous section, how to access a data source depends on the data source itself. To build the
-`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html[MongoClient]`, you can merge configuration: the record location, the metadata and a json object
+`link:../../apidocs/io/vertx/ext/mongo/MongoClient.html[MongoClient]`, you can merge configuration: the record location, the metadata and a json object
 provided by the consumer:
 
-[source, scala]
+[source, groovy]
 ----
 // Get the record
-discovery.getRecordFuture(new io.vertx.core.json.JsonObject().put("name", "some-data-source-service")).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
+discovery.getRecord([
+  name:"some-data-source-service"
+], { ar ->
+  if (ar.succeeded() && ar.result() != null) {
+    // Retrieve the service reference
+    def reference = discovery.getReferenceWithConfiguration(ar.result(), [
+      username:"clement",
+      password:"*****"
+    ])
+
+    // Retrieve the service object
+    def client = reference.get()
+
+    // ...
+
+    // when done
+    reference.release()
+  }
+})
 
 ----
 
-You can also use the `link:../../scaladocs/io/vertx/scala/servicediscovery/types/MongoDataSource.html[MongoDataSource]` class to the lookup and retrieval in one call:
+You can also use the `link:../../apidocs/io/vertx/servicediscovery/types/MongoDataSource.html[MongoDataSource]` class to the lookup and retrieval in one call:
 
-[source, scala]
+[source, groovy]
 ----
-MongoDataSource.getMongoClient(discovery, new io.vertx.core.json.JsonObject().put("name", "some-data-source-service"), new io.vertx.core.json.JsonObject().put("username", "clement").put("password", "*****"), {
-  case Success(result) => {
-    var client = result
+MongoDataSource.getMongoClient(discovery, [
+  name:"some-data-source-service"
+], [
+  username:"clement",
+  password:"*****"
+], { ar ->
+  if (ar.succeeded()) {
+    def client = ar.result()
 
     // ...
 
@@ -838,7 +966,6 @@ MongoDataSource.getMongoClient(discovery, new io.vertx.core.json.JsonObject().pu
     ServiceDiscovery.releaseServiceObject(discovery, client)
 
   }
-  case Failure(cause) => println("Failure")
 })
 
 ----
@@ -846,7 +973,7 @@ MongoDataSource.getMongoClient(discovery, new io.vertx.core.json.JsonObject().pu
 == Listening for service arrivals and departures
 
 Every time a provider is published or removed, an event is published on the _vertx.discovery.announce_ address.
-This address is configurable from the `link:../dataobjects.html#ServiceDiscoveryOptions[ServiceDiscoveryOptions]`.
+This address is configurable from the `link:../../apidocs/io/vertx/servicediscovery/ServiceDiscoveryOptions.html[ServiceDiscoveryOptions]`.
 
 The received record has a `status` field indicating the new state of the record:
 
@@ -857,21 +984,21 @@ The received record has a `status` field indicating the new state of the record:
 == Listening for service usage
 
 Every time a service reference is retrieved (`bind`) or released (`release`), an event is published on the _vertx
-.discovery.usage_ address. This address is configurable from the `link:../dataobjects.html#ServiceDiscoveryOptions[ServiceDiscoveryOptions]`.
+.discovery.usage_ address. This address is configurable from the `link:../../apidocs/io/vertx/servicediscovery/ServiceDiscoveryOptions.html[ServiceDiscoveryOptions]`.
 
 It lets you listen for service usage and map the service bindings.
 
-The received message is a `JsonObject` containing:
+The received message is a `link:../../apidocs/io/vertx/core/json/JsonObject.html[JsonObject]` containing:
 
 * the record in the `record` field
 * the type of event in the `type` field. It's either `bind` or `release`
 * the id of the service discovery (either its name or the node id) in the `id` field
 
-This `id` is configurable from the `link:../dataobjects.html#ServiceDiscoveryOptions[ServiceDiscoveryOptions]`. By default it's "localhost" on
+This `id` is configurable from the `link:../../apidocs/io/vertx/servicediscovery/ServiceDiscoveryOptions.html[ServiceDiscoveryOptions]`. By default it's "localhost" on
 single node configuration and the id of the node in clustered mode.
 
 You can disable the service usage support by setting the usage address to `null` with
-`link:../dataobjects.html#ServiceDiscoveryOptions#setUsageAddress(java.lang.String)[usageAddress]`.
+`link:../../apidocs/io/vertx/servicediscovery/ServiceDiscoveryOptions.html#setUsageAddress-java.lang.String-[setUsageAddress]`.
 
 
 == Service discovery bridges
@@ -879,9 +1006,9 @@ You can disable the service usage support by setting the usage address to `null`
 Bridges let you import and export services from / to other discovery mechanism such as Docker, Kubernetes, Consul...
 Each bridge decides how the services are imported and exported. It does not have to be bi-directional.
 
-You can provide your own bridge by implementing the `link:../../scaladocs/io/vertx/scala/servicediscovery/spi/ServiceImporter.html[ServiceImporter]` interface and
+You can provide your own bridge by implementing the `link:../../apidocs/io/vertx/servicediscovery/spi/ServiceImporter.html[ServiceImporter]` interface and
 register it using
-`link:../../scaladocs/io/vertx/scala/servicediscovery/ServiceDiscovery.html#registerServiceImporter(io.vertx.servicediscovery.spi.ServiceImporter,%20io.vertx.core.json.JsonObject)[registerServiceImporter]`.
+`link:../../apidocs/io/vertx/servicediscovery/ServiceDiscovery.html#registerServiceImporter-io.vertx.servicediscovery.spi.ServiceImporter-io.vertx.core.json.JsonObject-[registerServiceImporter]`.
 
 The second parameter can provide an optional configuration for the bridge.
 
@@ -889,15 +1016,15 @@ When the bridge is registered the
 
 {@link io.vertx.servicediscovery.spi.ServiceImporter#start)}
 method is called. It lets you configure the bridge. When the bridge is configured, ready and has imported /
-exported the initial services, it must complete the given `link:../../scaladocs/io/vertx/scala/core/Future.html[Future]`. If the bridge starts
+exported the initial services, it must complete the given `link:../../apidocs/io/vertx/core/Future.html[Future]`. If the bridge starts
 method is blocking, it must use an
-`link:../../scaladocs/io/vertx/scala/core/Vertx.html#executeBlocking(io.vertx.core.Handler,%20boolean,%20io.vertx.core.Handler)[executeBlocking]` construct, and
+`link:../../apidocs/io/vertx/core/Vertx.html#executeBlocking-io.vertx.core.Handler-boolean-io.vertx.core.Handler-[executeBlocking]` construct, and
 complete the given future object.
 
 When the service discovery is stopped, the bridge is stopped. The
-`link:../../scaladocs/io/vertx/scala/servicediscovery/spi/ServiceImporter.html#close(io.vertx.core.Handler)[close]`
+`link:../../apidocs/io/vertx/servicediscovery/spi/ServiceImporter.html#close-io.vertx.core.Handler-[close]`
 method is called that provides the opportunity to cleanup resources, removed imported / exported services... This
-method must complete the given `link:../../scaladocs/io/vertx/scala/core/Future.html[Future]` to notify the caller of the completion.
+method must complete the given `link:../../apidocs/io/vertx/core/Future.html[Future]` to notify the caller of the completion.
 
 Notice than in a cluster, only one member needs to register the bridge as the records are accessible by all members.
 

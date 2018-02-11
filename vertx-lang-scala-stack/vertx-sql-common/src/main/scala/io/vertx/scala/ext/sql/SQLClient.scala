@@ -124,6 +124,36 @@ class SQLClient(private val _asJava: Object)
   }
 
   /**
+    * Calls the given SQL <code>PROCEDURE</code> which returns the result from the procedure.
+    * @param sql the SQL to execute. For example <code>{call getEmpName`</code>.
+    * @param handler the handler which is called once the operation completes. It will return a `ResultSet`.
+    */
+  override def call(sql: String, handler: Handler[AsyncResult[ResultSet]]): SQLClient = {
+    asJava.asInstanceOf[JSQLClient].call(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JResultSet] => handler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
+    this
+  }
+
+  /**
+    * Calls the given SQL <code>PROCEDURE</code> which returns the result from the procedure.
+    *
+    * The index of params and outputs are important for both arrays, for example when dealing with a prodecure that
+    * takes the first 2 arguments as input values and the 3 arg as an output then the arrays should be like:
+    *
+    * <pre>
+    *   params = [VALUE1, VALUE2, null]
+    *   outputs = [null, null, "VARCHAR"]
+    * </pre>
+    * @param sql the SQL to execute. For example <code>{call getEmpName (?, ?)`</code>.
+    * @param params these are the parameters to fill the statement.
+    * @param outputs these are the outputs to fill the statement.
+    * @param handler the handler which is called once the operation completes. It will return a `ResultSet`.
+    */
+  override def callWithParams(sql: String, params: io.vertx.core.json.JsonArray, outputs: io.vertx.core.json.JsonArray, handler: Handler[AsyncResult[ResultSet]]): SQLClient = {
+    asJava.asInstanceOf[JSQLClient].callWithParams(sql.asInstanceOf[java.lang.String], params, outputs, {x: AsyncResult[JResultSet] => handler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
+    this
+  }
+
+  /**
     * Close the client and release all resources.
     * Call the handler when close is complete.
     * @param handler the handler that will be called when close is complete
@@ -208,6 +238,24 @@ class SQLClient(private val _asJava: Object)
   override def updateWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray): scala.concurrent.Future[UpdateResult] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JUpdateResult, UpdateResult](x => UpdateResult(x))
     asJava.asInstanceOf[JSQLClient].updateWithParams(sql.asInstanceOf[java.lang.String], params, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[call]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  override def callFuture(sql: String): scala.concurrent.Future[ResultSet] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JResultSet, ResultSet](x => ResultSet(x))
+    asJava.asInstanceOf[JSQLClient].call(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[callWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  override def callWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray, outputs: io.vertx.core.json.JsonArray): scala.concurrent.Future[ResultSet] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JResultSet, ResultSet](x => ResultSet(x))
+    asJava.asInstanceOf[JSQLClient].callWithParams(sql.asInstanceOf[java.lang.String], params, outputs, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

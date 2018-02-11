@@ -15,12 +15,12 @@ _dependencies_ section of your build descriptor:
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-config-git-scala_2.12</artifactId>
-  <version>3.5.1-SNAPSHOT</version>
+  <version>3.5.1</version>
 </dependency>
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-config</artifactId>
-  <version>3.5.1-SNAPSHOT</version>
+  <version>3.5.1</version>
 </dependency>
 ----
 
@@ -28,8 +28,8 @@ _dependencies_ section of your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-config:3.5.1-SNAPSHOT'
-compile 'io.vertx:vertx-config-git-scala_2.12:3.5.1-SNAPSHOT'
+compile 'io.vertx:vertx-config:3.5.1'
+compile 'io.vertx:vertx-config-git-scala_2.12:3.5.1'
 ----
 
 ==== Configuring the store
