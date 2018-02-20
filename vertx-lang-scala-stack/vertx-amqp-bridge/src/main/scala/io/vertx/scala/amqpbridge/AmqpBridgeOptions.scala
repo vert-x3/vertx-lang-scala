@@ -19,7 +19,7 @@ package io.vertx.scala.amqpbridge
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.proton.scala.{ProtonClientOptions => ExtProtonClientOptions}
+import io.vertx.scala.proton.{ProtonClientOptions => ExtProtonClientOptions}
 import io.vertx.amqpbridge.{AmqpBridgeOptions => JAmqpBridgeOptions}
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}

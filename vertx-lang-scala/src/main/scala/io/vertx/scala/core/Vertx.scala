@@ -186,7 +186,7 @@ class Vertx(private val _asJava: Object)
   }
 
   /**
-    * Set a default exception handler for [[io.vertx.scala.core.Context]], set on  at creation.
+    * Set a default exception handler for [[io.vertx.scala.core.Context]], set on [[io.vertx.scala.core.Context#exceptionHandler]] at creation.
     * @param handler the exception handler
     * @return a reference to this, so the API can be used fluently
     */
