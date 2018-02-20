@@ -14,7 +14,7 @@
  * under the License.
  */
 
-package io.vertx.proton.scala
+package io.vertx.scala.proton
 
 import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject

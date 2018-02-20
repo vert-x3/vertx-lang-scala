@@ -26,7 +26,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-mongo-client-scala_2.12</artifactId>
-  <version>3.5.1</version>
+  <version>3.6.0-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -34,7 +34,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-mongo-client-scala_2.12:3.5.1'
+compile 'io.vertx:vertx-mongo-client-scala_2.12:3.6.0-SNAPSHOT'
 ----
 
 
@@ -387,7 +387,7 @@ By default, `batchSize` is set to 20.
 
 === Finding a single document
 
-To find a single document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findOne(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject),%20io.vertx.core.Handler)[findOne]`.
+To find a single document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findOne(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[findOne]`.
 
 This works just like `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[find]` but it returns just the first matching document.
 

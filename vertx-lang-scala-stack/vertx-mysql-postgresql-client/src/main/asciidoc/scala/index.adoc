@@ -15,7 +15,7 @@ application.
 
 To use this client, you need to add the following jar to your `CLASSPATH`:
 
-* vertx-mysql-postgresql-client-scala_2.12 3.5.1 (the client)
+* vertx-mysql-postgresql-client-scala_2.12 3.6.0-SNAPSHOT (the client)
 * scala-library 2.11.4
 * the postgress-async-2.11 and mysdql-async-2.11 from https://github.com/mauricio/postgresql-async
 * joda time
@@ -33,7 +33,7 @@ If you are building a _Fat-jar_ using Maven or Gradle, just add the following de
 <dependency>
   <groupId>io.vertx</groupId>
   <artifactId>vertx-mysql-postgresql-client-scala_2.12</artifactId>
-  <version>3.5.1</version>
+  <version>3.6.0-SNAPSHOT</version>
 </dependency>
 ----
 
@@ -41,7 +41,7 @@ If you are building a _Fat-jar_ using Maven or Gradle, just add the following de
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-mysql-postgresql-client-scala_2.12:3.5.1'
+compile 'io.vertx:vertx-mysql-postgresql-client-scala_2.12:3.6.0-SNAPSHOT'
 ----
 
 === In an application using a vert.x distributions
@@ -226,11 +226,13 @@ Both the PostgreSql and MySql clients take the same configuration:
 `host`:: The host of the database. Defaults to `localhost`.
 `port`:: The port of the database. Defaults to `5432` for PostgreSQL and `3306` for MySQL.
 `maxPoolSize`:: The number of connections that may be kept open. Defaults to `10`.
-`username`:: The username to connect to the database. Defaults to `postgres` for PostgreSQL and `root` for MySQL.
-`password`:: The password to connect to the database. Default is not set, i.e. it uses no password.
+`username`:: The username to connect to the database. Defaults to `vertx`.
+`password`:: The password to connect to the database. Defaults to `password`.
 `database`:: The name of the database you want to connect to. Defaults to `testdb`.
 `charset`:: The name of the character set you want to use for the connection. Defaults to `UTF-8`.
-`queryTimeout`:: The timeout to wait for a query in milliseconds. Defaults to `10000` (= 10 seconds).
+`connectTimeout`:: The timeout to wait for connecting to the database. Defaults to `10000` (= 10 seconds).
+`testTimeout`:: The timeout for connection tests performed by pools. Defaults to `10000` (= 10 seconds).
+`queryTimeout`:: The timeout to wait for a query in milliseconds. Default is not set.
 `sslMode` :: If you want to enable SSL support you should enable this parameter.
              For example to connect Heroku you will need to use *prefer*.
 
