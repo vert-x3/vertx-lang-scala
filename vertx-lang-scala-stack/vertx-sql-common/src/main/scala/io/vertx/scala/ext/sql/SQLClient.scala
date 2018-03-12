@@ -25,6 +25,7 @@ import io.vertx.ext.sql.{ResultSet => JResultSet}
 import io.vertx.ext.sql.{SQLOperations => JSQLOperations}
 import io.vertx.ext.sql.{UpdateResult => JUpdateResult}
 import io.vertx.ext.sql.{SQLClient => JSQLClient}
+import io.vertx.ext.sql.{SQLRowStream => JSQLRowStream}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
@@ -84,6 +85,27 @@ class SQLClient(private val _asJava: Object)
     */
   override def query(sql: String, handler: Handler[AsyncResult[ResultSet]]): SQLClient = {
     asJava.asInstanceOf[JSQLClient].query(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JResultSet] => handler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
+    this
+  }
+
+  /**
+    * Executes the given SQL <code>SELECT</code> statement which returns the results of the query as a read stream.
+    * @param sql the SQL to execute. For example <code>SELECT * FROM table ...</code>.
+    * @param handler the handler which is called once the operation completes. It will return a `SQLRowStream`.
+    */
+  override def queryStream(sql: String, handler: Handler[AsyncResult[SQLRowStream]]): SQLClient = {
+    asJava.asInstanceOf[JSQLClient].queryStream(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JSQLRowStream] => handler.handle(AsyncResultWrapper[JSQLRowStream, SQLRowStream](x, a => SQLRowStream(a)))})
+    this
+  }
+
+  /**
+    * Executes the given SQL <code>SELECT</code> statement which returns the results of the query as a read stream.
+    * @param sql the SQL to execute. For example <code>SELECT * FROM table ...</code>.
+    * @param params these are the parameters to fill the statement.
+    * @param handler the handler which is called once the operation completes. It will return a `SQLRowStream`.
+    */
+  override def queryStreamWithParams(sql: String, params: io.vertx.core.json.JsonArray, handler: Handler[AsyncResult[SQLRowStream]]): SQLClient = {
+    asJava.asInstanceOf[JSQLClient].queryStreamWithParams(sql.asInstanceOf[java.lang.String], params, {x: AsyncResult[JSQLRowStream] => handler.handle(AsyncResultWrapper[JSQLRowStream, SQLRowStream](x, a => SQLRowStream(a)))})
     this
   }
 
@@ -211,6 +233,24 @@ class SQLClient(private val _asJava: Object)
   override def queryFuture(sql: String): scala.concurrent.Future[ResultSet] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JResultSet, ResultSet](x => ResultSet(x))
     asJava.asInstanceOf[JSQLClient].query(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[queryStream]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  override def queryStreamFuture(sql: String): scala.concurrent.Future[SQLRowStream] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLRowStream, SQLRowStream](x => SQLRowStream(x))
+    asJava.asInstanceOf[JSQLClient].queryStream(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[queryStreamWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  override def queryStreamWithParamsFuture(sql: String, params: io.vertx.core.json.JsonArray): scala.concurrent.Future[SQLRowStream] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JSQLRowStream, SQLRowStream](x => SQLRowStream(x))
+    asJava.asInstanceOf[JSQLClient].queryStreamWithParams(sql.asInstanceOf[java.lang.String], params, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

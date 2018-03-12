@@ -20,9 +20,9 @@ To enable metrics, add the following dependency to the _dependencies_ section of
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-dropwizard-metrics-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -30,7 +30,7 @@ To enable metrics, add the following dependency to the _dependencies_ section of
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-dropwizard-metrics-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 Then when you create vertx enable metrics using the `link:../dataobjects.html#DropwizardMetricsOptions[DropwizardMetricsOptions]`:
@@ -146,7 +146,7 @@ var metricsOptions = DropwizardMetricsOptions()
 === Retrieving metrics
 
 Once enabled, the `link:../../scaladocs/io/vertx/scala/ext/dropwizard/MetricsService.html[MetricsService]` allows to retrieve metrics snapshots from any
-`link:../../scaladocs/io/vertx/scala/core/metrics/Measured.html[Measured]` object which provides a map of the metric name to the data,
+`link:../../scaladocs/io/vertx/scala/core/metrics/Measured.html[Measured]`object which provides a map of the metric name to the data,
 represented by a `JsonObject`. So for example if we were to print out all metrics
 for a particular Vert.x instance:
 [source,scala]
@@ -195,8 +195,8 @@ https://github.com/dropwizard/metrics[Dropwizard metrics] documentation for deta
 [source,javascript]
 ----
 {
-  "type"  : "gauge",
-  "value" : value // any json value
+ "type"  : "gauge",
+ "value" : value // any json value
 }
 ----
 
@@ -206,8 +206,8 @@ https://github.com/dropwizard/metrics[Dropwizard metrics] documentation for deta
 [source,scala]
 ----
 {
-  "type"  : "counter",
-  "count" : 1 // number
+ "type"  : "counter",
+ "count" : 1 // number
 }
 ----
 
@@ -217,18 +217,18 @@ https://github.com/dropwizard/metrics[Dropwizard metrics] documentation for deta
 [source,javascript]
 ----
 {
-  "type"   : "histogram",
-  "count"  : 1 // long
-  "min"    : 1 // long
-  "max"    : 1 // long
-  "mean"   : 1.0 // double
-  "stddev" : 1.0 // double
-  "median" : 1.0 // double
-  "75%"    : 1.0 // double
-  "95%"    : 1.0 // double
-  "98%"    : 1.0 // double
-  "99%"    : 1.0 // double
-  "99.9%"  : 1.0 // double
+ "type"   : "histogram",
+ "count"  : 1 // long
+ "min"    : 1 // long
+ "max"    : 1 // long
+ "mean"   : 1.0 // double
+ "stddev" : 1.0 // double
+ "median" : 1.0 // double
+ "75%"    : 1.0 // double
+ "95%"    : 1.0 // double
+ "98%"    : 1.0 // double
+ "99%"    : 1.0 // double
+ "99.9%"  : 1.0 // double
 }
 ----
 
@@ -238,13 +238,13 @@ https://github.com/dropwizard/metrics[Dropwizard metrics] documentation for deta
 [source,scala]
 ----
 {
-  "type"              : "meter",
-  "count"             : 1 // long
-  "meanRate"          : 1.0 // double
-  "oneMinuteRate"     : 1.0 // double
-  "fiveMinuteRate"    : 1.0 // double
-  "fifteenMinuteRate" : 1.0 // double
-  "rate"              : "events/second" // string representing rate
+ "type"              : "meter",
+ "count"             : 1 // long
+ "meanRate"          : 1.0 // double
+ "oneMinuteRate"     : 1.0 // double
+ "fiveMinuteRate"    : 1.0 // double
+ "fifteenMinuteRate" : 1.0 // double
+ "rate"              : "events/second" // string representing rate
 }
 ----
 
@@ -256,14 +256,14 @@ Extends a <<meter>> to provide an instant throughput.
 [source,scala]
 ----
 {
-  "type"              : "meter",
-  "count"             : 40 // long
-  "meanRate"          : 2.0 // double
-  "oneSecondRate"     : 3 // long - number of occurence for the last second
-  "oneMinuteRate"     : 1.0 // double
-  "fiveMinuteRate"    : 1.0 // double
-  "fifteenMinuteRate" : 1.0 // double
-  "rate"              : "events/second" // string representing rate
+ "type"              : "meter",
+ "count"             : 40 // long
+ "meanRate"          : 2.0 // double
+ "oneSecondRate"     : 3 // long - number of occurence for the last second
+ "oneMinuteRate"     : 1.0 // double
+ "fiveMinuteRate"    : 1.0 // double
+ "fifteenMinuteRate" : 1.0 // double
+ "rate"              : "events/second" // string representing rate
 }
 ----
 
@@ -275,27 +275,27 @@ A timer is basically a combination of Histogram + Meter.
 [source,scala]
 ----
 {
-  "type": "timer",
+ "type": "timer",
 
-  // histogram data
-  "count"  : 1 // long
-  "min"    : 1 // long
-  "max"    : 1 // long
-  "mean"   : 1.0 // double
-  "stddev" : 1.0 // double
-  "median" : 1.0 // double
-  "75%"    : 1.0 // double
-  "95%"    : 1.0 // double
-  "98%"    : 1.0 // double
-  "99%"    : 1.0 // double
-  "99.9%"  : 1.0 // double
+ // histogram data
+ "count"  : 1 // long
+ "min"    : 1 // long
+ "max"    : 1 // long
+ "mean"   : 1.0 // double
+ "stddev" : 1.0 // double
+ "median" : 1.0 // double
+ "75%"    : 1.0 // double
+ "95%"    : 1.0 // double
+ "98%"    : 1.0 // double
+ "99%"    : 1.0 // double
+ "99.9%"  : 1.0 // double
 
-  // meter data
-  "meanRate"          : 1.0 // double
-  "oneMinuteRate"     : 1.0 // double
-  "fiveMinuteRate"    : 1.0 // double
-  "fifteenMinuteRate" : 1.0 // double
-  "rate"              : "events/second" // string representing rate
+ // meter data
+ "meanRate"          : 1.0 // double
+ "oneMinuteRate"     : 1.0 // double
+ "fiveMinuteRate"    : 1.0 // double
+ "fifteenMinuteRate" : 1.0 // double
+ "rate"              : "events/second" // string representing rate
 }
 ----
 
@@ -307,28 +307,28 @@ Extends a <<timer>> to provide an instant throughput metric.
 [source,scala]
 ----
 {
-  "type": "timer",
+ "type": "timer",
 
-  // histogram data
-  "count"      : 1 // long
-  "min"        : 1 // long
-  "max"        : 1 // long
-  "mean"       : 1.0 // double
-  "stddev"     : 1.0 // double
-  "median"     : 1.0 // double
-  "75%"        : 1.0 // double
-  "95%"        : 1.0 // double
-  "98%"        : 1.0 // double
-  "99%"        : 1.0 // double
-  "99.9%"      : 1.0 // double
+ // histogram data
+ "count"      : 1 // long
+ "min"        : 1 // long
+ "max"        : 1 // long
+ "mean"       : 1.0 // double
+ "stddev"     : 1.0 // double
+ "median"     : 1.0 // double
+ "75%"        : 1.0 // double
+ "95%"        : 1.0 // double
+ "98%"        : 1.0 // double
+ "99%"        : 1.0 // double
+ "99.9%"      : 1.0 // double
 
-  // meter data
-  "meanRate"          : 1.0 // double
-  "oneSecondRate"     : 3 // long - number of occurence for the last second
-  "oneMinuteRate"     : 1.0 // double
-  "fiveMinuteRate"    : 1.0 // double
-  "fifteenMinuteRate" : 1.0 // double
-  "rate"              : "events/second" // string representing rate
+ // meter data
+ "meanRate"          : 1.0 // double
+ "oneSecondRate"     : 3 // long - number of occurence for the last second
+ "oneMinuteRate"     : 1.0 // double
+ "fiveMinuteRate"    : 1.0 // double
+ "fifteenMinuteRate" : 1.0 // double
+ "rate"              : "events/second" // string representing rate
 }
 ----
 

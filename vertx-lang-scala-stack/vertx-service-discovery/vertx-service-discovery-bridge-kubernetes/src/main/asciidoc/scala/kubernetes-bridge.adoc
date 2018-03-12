@@ -1,11 +1,10 @@
 === Kubernetes bridge
 
 This discovery bridge imports services from Kubernetes (or Openshift v3) into the Vert.x service discovery.
-
 Kubernetes services are mapped to `link:../../vertx-service-discovery/dataobjects.html#Record[Record]`. This bridge only
 supports the importation of services from kubernetes in vert.x (and not the opposite).
 
-`link:../../vertx-service-discovery/dataobjects.html#Record[Record]` are created from Kubernetes Service. The service type is deduced from the `service.type` label. If
+`link:../../vertx-service-discovery/dataobjects.html#Record[Record]`are created from Kubernetes Service. The service type is deduced from the `service.type` label. If
 not set, the service is imported as `unknown`. Only `http-endpoint` are supported for now.
 
 ==== Using the bridge
@@ -18,9 +17,9 @@ descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-service-discovery-bridge-kubernetes-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -28,7 +27,7 @@ descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-service-discovery-bridge-kubernetes-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 ==== Configuring the bridge
@@ -49,7 +48,7 @@ The record is created as follows:
 * the record's name is the service's name
 * the labels of the service are mapped to metadata
 * in addition are added: `kubernetes.uuid`, `kubernetes.namespace`, `kubernetes.name`
-* the location is deduced from the **first** port of the service
+* the location is deduced from the*first** port of the service
 
 For HTTP endpoints, the `ssl` (`https`) attribute is set to `true` if the service has the `ssl` label set to `true`.
 

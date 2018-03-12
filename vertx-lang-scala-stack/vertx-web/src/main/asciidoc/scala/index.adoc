@@ -1,9 +1,7 @@
 = Vert.x-Web
 :toc: left
 
-Vert.x-Web is a set of building blocks for building web applications with Vert.x.
-
-Think of it as a Swiss Army Knife for building
+Vert.x-Web is a set of building blocks for building web applications with Vert.x. Think of it as a Swiss Army Knife for building
 modern, scalable, web apps.
 
 Vert.x core provides a fairly low level set of functionality for handling HTTP, and for some applications
@@ -22,7 +20,7 @@ You can use Vert.x-Web to create classic server-side web applications, RESTful w
 web applications, or any other kind of web application you can think of. Vert.x-Web doesn't care. It's up to you to chose
 the type of app you prefer, not Vert.x-Web.
 
-Vert.x-Web is a great fit for writing *RESTful HTTP micro-services*, but we don't *force* you to write apps like that.
+Vert.x-Web is a great fit for writingRESTful HTTP micro-services*, but we don'tforce* you to write apps like that.
 
 Some of the key features of Vert.x-Web include:
 
@@ -74,9 +72,9 @@ To use vert.x web, add the following dependency to the _dependencies_ section of
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-web-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -85,7 +83,7 @@ To use vert.x web, add the following dependency to the _dependencies_ section of
 [source,groovy,subs="+attributes"]
 ----
 dependencies {
-  compile 'io.vertx:vertx-web-scala_2.12:3.6.0-SNAPSHOT'
+ compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 }
 ----
 
@@ -132,7 +130,7 @@ You can run this, and point your browser at `http://localhost:8080` to verify th
 Here's the 10000 foot view:
 
 A `link:../../scaladocs/io/vertx/scala/ext/web/Router.html[Router]` is one of the core concepts of Vert.x-Web. It's an object which maintains zero or more
-`link:../../scaladocs/io/vertx/scala/ext/web/Route.html[Routes]` .
+`link:../../scaladocs/io/vertx/scala/ext/web/Route.html[Routes]`.
 
 A router takes an HTTP request and finds the first matching route for that request, and passes the request to that route.
 
@@ -274,7 +272,7 @@ don't mind your blocking handlers executing in parallel you can set the blocking
 false using `link:../../scaladocs/io/vertx/scala/ext/web/Route.html#blockingHandler(io.vertx.core.Handler,%20boolean)[blockingHandler]`.
 
 Note, if you need to process multipart form data from a blocking handler, you MUST use a non-blocking handler
-      FIRST in order to call `setExpectMultipart(true)`. Here is an example:
+     FIRST in order to call {@code setExpectMultipart(true)}. Here is an example:
 
 [source,scala]
 ----
@@ -520,7 +518,7 @@ route.handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 ----
 
 If you want to route for a specific HTTP method you can also use the methods such as `link:../../scaladocs/io/vertx/scala/ext/web/Router.html#get()[get]`,
-`link:../../scaladocs/io/vertx/scala/ext/web/Router.html#post()[post]` and `link:../../scaladocs/io/vertx/scala/ext/web/Router.html#put()[put]` named after the HTTP
+`link:../../scaladocs/io/vertx/scala/ext/web/Router.html#post()[post]`and `link:../../scaladocs/io/vertx/scala/ext/web/Router.html#put()[put]` named after the HTTP
 method name. For example:
 
 [source,scala]
@@ -774,16 +772,16 @@ If omitted it defaults to 1.0.
 
 For example, the following `accept` header signifies the client will accept a MIME type of only `text/plain`:
 
- Accept: text/plain
+Accept: text/plain
 
 With the following the client will accept `text/plain` or `text/html` with no preference.
 
- Accept: text/plain, text/html
+Accept: text/plain, text/html
 
 With the following the client will accept `text/plain` or `text/html` but prefers `text/html` as it has a higher
 `q` value (the default value is q=1.0)
 
- Accept: text/plain; q=0.9, text/html
+Accept: text/plain; q=0.9, text/html
 
 If the server can provide both text/plain and text/html it should provide the text/html in this case.
 
@@ -807,13 +805,13 @@ In this case the route will match with any request with an `accept` header that 
 
 Here are some examples of `accept` headers that will match:
 
- Accept: application/json
- Accept: application/*
- Accept: application/json, text/html
- Accept: application/json;q=0.7, text/html;q=0.8, text/plain
+Accept: application/json
+Accept: application/*
+Accept: application/json, text/html
+Accept: application/json;q=0.7, text/html;q=0.8, text/plain
 
 You can also mark your route as producing more than one MIME type. If this is the case, then you use
-`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#getAcceptableContentType()[getAcceptableContentType]` to find out the actual MIME type that
+`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#getAcceptableContentType()[getAcceptableContentType]`to find out the actual MIME type that
 was accepted.
 
 [source,scala]
@@ -835,7 +833,7 @@ router.route().produces("application/json").produces("text/html").handler((routi
 
 In the above example, if you sent a request with the following `accept` header:
 
- Accept: application/json; q=0.7, text/html
+Accept: application/json; q=0.7, text/html
 
 Then the route would match and `acceptableContentType` would contain `text/html` as both are
 acceptable but that has a higher `q` value.
@@ -874,7 +872,7 @@ want to share between handlers for the lifetime of the request.
 Here's an example where one handler sets some data in the context data and a subsequent handler retrieves it:
 
 You can use the `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#put(java.lang.String,%20java.lang.Object)[put]` to put any object, and
-`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#get(java.lang.String)[get]` to retrieve any object from the context data.
+`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#get(java.lang.String)[get]`to retrieve any object from the context data.
 
 A request sent to path `/some/path/other` will match both routes.
 
@@ -1077,7 +1075,7 @@ var route = router.get("/localized").handler((rc: io.vertx.scala.ext.web.Routing
 
 The main method `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#acceptableLocales()[acceptableLocales]` will return the ordered list of locales the
 user understands, if you're only interested in the user prefered locale then the helper:
-`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#preferredLocale()[preferredLocale]` will return the 1st element of the list or `null` if no
+`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#preferredLocale()[preferredLocale]`will return the 1st element of the list or `null` if no
 locale was provided by the user.
 
 == Default 404 Handling
@@ -1116,7 +1114,7 @@ route.failureHandler((frc: io.vertx.scala.ext.web.RoutingContext) => {
 ----
 
 Failure routing will occur if a handler throws an exception, or if a handler calls
-`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#fail(int)[fail]` specifying an HTTP status code to deliberately signal a failure.
+`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#fail(int)[fail]`specifying an HTTP status code to deliberately signal a failure.
 
 If an exception is caught from a handler this will result in a failure with status code `500` being signalled.
 
@@ -1444,7 +1442,7 @@ data from the session with `link:../../scaladocs/io/vertx/scala/ext/web/Session.
 
 The keys for items in the session are always strings. The values can be any type for a local session store, and for
 a clustered session store they can be any basic type, or `link:../../scaladocs/io/vertx/scala/core/buffer/Buffer.html[Buffer]`, `JsonObject`,
-`JsonArray` or a serializable object, as the values have to serialized across the cluster.
+`JsonArray`or a serializable object, as the values have to serialized across the cluster.
 
 Here's an example of manipulating session data:
 
@@ -1670,7 +1668,7 @@ router.route("/login").handler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
 
 ----
 
-Now that your client has a token all it is required is that for *all* consequent request the HTTP header
+Now that your client has a token all it is required is that forall* consequent request the HTTP header
 `Authorization` is filled with: `Bearer <token>` e.g.:
 
 [source,scala]
@@ -1842,7 +1840,7 @@ By default the static handler will set cache headers to enable browsers to effec
 Vert.x-Web sets the headers `cache-control`,`last-modified`, and `date`.
 
 `cache-control` is set to `max-age=86400` by default. This corresponds to one day. This can be configured with
-`link:../../scaladocs/io/vertx/scala/ext/web/handler/StaticHandler.html#setMaxAgeSeconds(long)[setMaxAgeSeconds]` if required.
+`link:../../scaladocs/io/vertx/scala/ext/web/handler/StaticHandler.html#setMaxAgeSeconds(long)[setMaxAgeSeconds]`if required.
 
 If a browser sends a GET or a HEAD request with an `if-modified-since` header and the resource has not been modified
 since that date, a `304` status is returned which tells the browser to use its locally cached resource.
@@ -1939,7 +1937,7 @@ Vert.x-Web includes dynamic page generation capabilities by including out of the
 engines. You can also easily add your own.
 
 Template engines are described by `link:../../scaladocs/io/vertx/scala/ext/web/templ/TemplateEngine.html[TemplateEngine]`. In order to render a template
-`link:../../scaladocs/io/vertx/scala/ext/web/templ/TemplateEngine.html#render(io.vertx.ext.web.RoutingContext,%20java.lang.String,%20io.vertx.core.Handler)[render]` is used.
+`link:../../scaladocs/io/vertx/scala/ext/web/templ/TemplateEngine.html#render(io.vertx.ext.web.RoutingContext,%20java.lang.String,%20io.vertx.core.Handler)[render]`is used.
 
 The simplest way to use templates is not to call the template engine directly but to use the
 `link:../../scaladocs/io/vertx/scala/ext/web/handler/TemplateHandler.html[TemplateHandler]`.
@@ -1970,7 +1968,7 @@ These examples are not using the traditional "transcoding" as they use an API pr
 === MVEL template engine
 
 To use MVEL, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-mvel:3.6.0-SNAPSHOT`. Create an instance of the MVEL template engine using:
+`${maven.groupId}:vertx-web-templ-mvel:${maven.version}`. Create an instance of the MVEL template engine using:
 `io.vertx.ext.web.templ.MVELTemplateEngine#create()`
 
 When using the MVEL template engine, it will by default look for
@@ -1996,7 +1994,7 @@ MVEL templates.
 === Jade template engine
 
 To use the Jade template engine, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-jade:3.6.0-SNAPSHOT`. Create an instance of the Jade template engine using:
+`${maven.groupId}:vertx-web-templ-jade:${maven.version}`. Create an instance of the Jade template engine using:
 `io.vertx.ext.web.templ.JadeTemplateEngine#create()`.
 
 When using the Jade template engine, it will by default look for
@@ -2011,9 +2009,9 @@ Here are some examples:
 ----
 !!! 5
 html
-  head
-    title= context.get('foo') + context.request().path()
-  body
+ head
+   title= context.get('foo') + context.request().path()
+ body
 ----
 
 Please consult the https://github.com/neuland/jade4j[Jade4j documentation] for how to write
@@ -2022,7 +2020,7 @@ Jade templates.
 === Handlebars template engine
 
 To use Handlebars, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-handlebars:3.6.0-SNAPSHOT`. Create an instance of the Handlebars template engine
+`${maven.groupId}:vertx-web-templ-handlebars:${maven.version}`. Create an instance of the Handlebars template engine
 using: `io.vertx.ext.web.templ.HandlebarsTemplateEngine#create()`.
 
 When using the Handlebars template engine, it will by default look for
@@ -2060,7 +2058,7 @@ handlebars templates.
 === Thymeleaf template engine
 
 To use Thymeleaf, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-thymeleaf:3.6.0-SNAPSHOT`. Create an instance of the Thymeleaf template engine
+`${maven.groupId}:vertx-web-templ-thymeleaf:${maven.version}`. Create an instance of the Thymeleaf template engine
 using: `io.vertx.ext.web.templ.ThymeleafTemplateEngine#create()`.
 
 When using the Thymeleaf template engine, it will by default look for
@@ -2088,7 +2086,7 @@ Thymeleaf templates.
 === Apache FreeMarker template engine
 
 To use Apache FreeMarker, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-freemarker:3.6.0-SNAPSHOT`. Create an instance of the Apache FreeMarker template engine
+`${maven.groupId}:vertx-web-templ-freemarker:${maven.version}`. Create an instance of the Apache FreeMarker template engine
 using: `io.vertx.ext.web.templ.FreeMarkerTemplateEngine#create()`.
 
 When using the Apache FreeMarker template engine, it will by default look for
@@ -2116,7 +2114,7 @@ Apache FreeMarker templates.
 === Pebble template engine
 
 To use Pebble, you need to add the following _dependency_ to your project:
-`io.vertx:vertx-web-templ-pebble:3.6.0-SNAPSHOT`. Create an instance of the Pebble template engine
+`io.vertx:vertx-web-templ-pebble:${maven.version}`. Create an instance of the Pebble template engine
 using: `io.vertx.ext.web.templ.PebbleTemplateEngine#create(vertx)`.
 
 When using the Pebble template engine, it will by default look for
@@ -2196,7 +2194,7 @@ router.route("/foo/").handler(TimeoutHandler.create(5000))
 This handler sets the header `x-response-time` response header containing the time from when the request was received
 to when the response headers were written, in ms., e.g.:
 
- x-response-time: 1456ms
+x-response-time: 1456ms
 
 == Content type handler
 
@@ -2304,7 +2302,7 @@ this will be called every time a SockJS connection is made from a client:
 The object passed into the handler is a `link:../../scaladocs/io/vertx/scala/ext/web/handler/sockjs/SockJSSocket.html[SockJSSocket]`. This has a familiar
 socket-like interface which you can read and write to similarly to a `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html[NetSocket]` or
 a `link:../../scaladocs/io/vertx/scala/core/http/WebSocket.html[WebSocket]`. It also implements `link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` and
-`link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]` so you can pump it to and from other read and write streams.
+`link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]`so you can pump it to and from other read and write streams.
 
 Here's an example of a simple SockJS handler that simply echoes back any back any data that it reads:
 
@@ -2342,15 +2340,15 @@ but in summary you use it something like this:
 var sock = new SockJS('http://mydomain.com/myapp');
 
 sock.onopen = function() {
-  console.log('open');
+ console.log('open');
 };
 
 sock.onmessage = function(e) {
-  console.log('message', e.data);
+ console.log('message', e.data);
 };
 
 sock.onclose = function() {
-  console.log('close');
+ console.log('close');
 };
 
 sock.send('test');
@@ -2406,7 +2404,7 @@ A special SockJS socket handler is then installed on the `link:../../scaladocs/i
 handles the SockJS data and bridges it to and from the server side event bus.
 
 To activate the bridge you simply call
-`link:../../scaladocs/io/vertx/scala/ext/web/handler/sockjs/SockJSHandler.html#bridge(io.vertx.ext.web.handler.sockjs.BridgeOptions)[bridge]` on the
+`link:../../scaladocs/io/vertx/scala/ext/web/handler/sockjs/SockJSHandler.html#bridge(io.vertx.ext.web.handler.sockjs.BridgeOptions)[bridge]`on the
 SockJS handler.
 
 [source,scala]
@@ -2436,13 +2434,13 @@ var eb = new EventBus('http://localhost:8080/eventbus');
 
 eb.onopen = function() {
 
-  // set a handler to receive a message
-  eb.registerHandler('some-address', function(error, message) {
-    console.log('received a message: ' + JSON.stringify(message));
-  });
+ // set a handler to receive a message
+ eb.registerHandler('some-address', function(error, message) {
+   console.log('received a message: ' + JSON.stringify(message));
+ });
 
-  // send a message
-  eb.send('some-address', {name: 'tim', age: 587});
+ // send a message
+ eb.send('some-address', {name: 'tim', age: 587});
 
 }
 
@@ -2472,11 +2470,11 @@ eb.onreconnect = function() {}; // Optional, will only be called on reconnection
 
 // Alternatively, pass in an options object
 var options = {
-    vertxbus_reconnect_attempts_max: Infinity, // Max reconnect attempts
-    vertxbus_reconnect_delay_min: 1000, // Initial delay (in ms) before first reconnect attempt
-    vertxbus_reconnect_delay_max: 5000, // Max delay (in ms) between reconnect attempts
-    vertxbus_reconnect_exponent: 2, // Exponential backoff factor
-    vertxbus_randomization_factor: 0.5 // Randomization factor between 0 and 1
+   vertxbus_reconnect_attempts_max: Infinity, // Max reconnect attempts
+   vertxbus_reconnect_delay_min: 1000, // Initial delay (in ms) before first reconnect attempt
+   vertxbus_reconnect_delay_max: 5000, // Max delay (in ms) between reconnect attempts
+   vertxbus_reconnect_exponent: 2, // Exponential backoff factor
+   vertxbus_randomization_factor: 0.5 // Randomization factor between 0 and 1
 };
 
 var eb2 = new EventBus('http://localhost:8080/eventbus', options);
@@ -2491,11 +2489,11 @@ You can retrieve the client library using a dependency manager:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-web-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
-  <classifier>client</classifier>
-  <type>js</type>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
+ <classifier>client</classifier>
+ <type>js</type>
 </dependency>
 ----
 
@@ -2503,7 +2501,7 @@ You can retrieve the client library using a dependency manager:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-web-scala_2.12:3.6.0-SNAPSHOT:client'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}:client'
 ----
 
 The library is also available on:
@@ -2537,7 +2535,7 @@ In other words the bridge acts like a kind of firewall which has a default _deny
 Configuring the bridge to tell it what messages it should pass through is easy.
 
 You can specify which _matches_ you want to allow for inbound and outbound traffic using the
-`link:../dataobjects.html#BridgeOptions[BridgeOptions]` that you pass in when calling bridge.
+`link:../dataobjects.html#BridgeOptions[BridgeOptions]`that you pass in when calling bridge.
 
 Each match is a `link:../dataobjects.html#PermittedOptions[PermittedOptions]` object:
 
@@ -2626,7 +2624,7 @@ To do this, you can add extra fields to the match described in the previous sect
 required for the match.
 
 To declare that a specific authority for the logged-in user is required in order to access allow the messages you use the
-`link:../../vertx-bridge-common/dataobjects.html#PermittedOptions#setRequiredAuthority(java.lang.String)[requiredAuthority]` field.
+`link:../../vertx-bridge-common/dataobjects.html#PermittedOptions#setRequiredAuthority(java.lang.String)[requiredAuthority]`field.
 
 Here's an example:
 
@@ -2711,9 +2709,9 @@ The raw message is a JSON object with the following structure:
 
 ----
 {
-  "type": "send"|"publish"|"receive"|"register"|"unregister",
-  "address": the event bus address being sent/published/registered/unregistered
-  "body": the body of the message
+ "type": "send"|"publish"|"receive"|"register"|"unregister",
+ "address": the event bus address being sent/published/registered/unregistered
+ "body": the body of the message
 }
 ----
 
@@ -2798,13 +2796,13 @@ var eb = new EventBus('http://localhost:8080/eventbus', {"vertxbus_ping_interval
 
 eb.onopen = function() {
 
- // set a handler to receive a message
- eb.registerHandler('some-address', function(error, message) {
-   console.log('received a message: ' + JSON.stringify(message));
- });
+// set a handler to receive a message
+eb.registerHandler('some-address', function(error, message) {
+  console.log('received a message: ' + JSON.stringify(message));
+});
 
- // send a message
- eb.send('some-address', {name: 'tim', age: 587});
+// send a message
+eb.send('some-address', {name: 'tim', age: 587});
 }
 
 </script>

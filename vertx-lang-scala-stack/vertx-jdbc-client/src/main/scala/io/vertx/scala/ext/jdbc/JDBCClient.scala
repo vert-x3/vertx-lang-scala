@@ -24,12 +24,14 @@ import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.sql.{SQLOperations => JSQLOperations}
 import io.vertx.scala.ext.sql.ResultSet
 import io.vertx.ext.sql.{UpdateResult => JUpdateResult}
+import io.vertx.ext.sql.{SQLRowStream => JSQLRowStream}
 import io.vertx.scala.core.Vertx
 import io.vertx.ext.sql.{SQLConnection => JSQLConnection}
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.core.json.JsonArray
 import io.vertx.ext.sql.{ResultSet => JResultSet}
 import io.vertx.scala.ext.sql.SQLOperations
+import io.vertx.scala.ext.sql.SQLRowStream
 import io.vertx.ext.sql.{SQLClient => JSQLClient}
 import io.vertx.scala.ext.sql.UpdateResult
 import io.vertx.core.json.JsonObject

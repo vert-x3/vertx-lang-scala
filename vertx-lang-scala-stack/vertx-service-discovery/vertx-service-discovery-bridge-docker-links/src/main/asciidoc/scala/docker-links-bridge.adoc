@@ -1,8 +1,6 @@
 === Docker Links bridge
 
-This discovery bridge imports services from Docker Links into the Vert.x service discovery.
-
-When you link a Docker
+This discovery bridge imports services from Docker Links into the Vert.x service discovery. When you link a Docker
 container to another Docker container, Docker injects a set of environment variables. This bridge analyzes these
 environment variables and imports service record for each link. The service type is deduced from the `service.type`
 label. If not set, the service is imported as `unknown`. Only `http-endpoint` are supported for now.
@@ -20,9 +18,9 @@ descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-service-discovery-bridge-docker-links-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -30,7 +28,7 @@ descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-service-discovery-bridge-docker-links-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 Then, when creating the service discovery, registers this bridge as follows:

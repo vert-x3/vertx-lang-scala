@@ -1,8 +1,6 @@
 === Redis backend
 
-The service discovery has a plug-able backend using the `ServiceDiscoveryBackend` SPI.
-
-This is an implementation of the SPI based
+The service discovery has a plug-able backend using the `ServiceDiscoveryBackend` SPI. This is an implementation of the SPI based
 on Redis.
 
 ==== Using the Redis backend
@@ -15,9 +13,9 @@ descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-service-discovery-backend-redis-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -25,7 +23,7 @@ descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-service-discovery-backend-redis-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 Be aware that you can have only a single implementation of the SPI in your _classpath_. If none,

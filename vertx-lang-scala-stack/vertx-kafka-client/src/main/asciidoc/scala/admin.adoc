@@ -4,7 +4,6 @@
 :scala: scala
 
 This component provides a vert.x wrapper around the most important functions of Kafka's AdminUtils.
-
 AdminUtils are used to create, modify, and delete topics. Other functionality covered by AdminUtils,
 but not this wrapper, includes Partition Management, Broker Configuration management, etc.
 

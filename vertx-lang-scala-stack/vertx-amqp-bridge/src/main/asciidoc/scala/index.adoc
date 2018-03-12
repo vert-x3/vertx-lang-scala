@@ -14,9 +14,9 @@ To use Vert.x AMQP Bridge, add the following dependency to the _dependencies_ se
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-amqp-bridge-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -24,7 +24,7 @@ To use Vert.x AMQP Bridge, add the following dependency to the _dependencies_ se
 
 [source,groovy,subs="+attributes"]
 ----
-compile io.vertx:vertx-amqp-bridge-scala_2.12:3.6.0-SNAPSHOT
+compile ${maven.groupId}:${maven.artifactId}:${maven.version}
 ----
 
 == Getting Started
@@ -79,36 +79,36 @@ message].
 
 The top-level elements supported are:
 
-* **body**: The content for the body section of the AMQP message.
-* **body_type**: An optional String used to indicate whether the "body" element represents an AmqpValue (default), Data, or AmqpSequence section. The values used are "value", "data", and "sequence" respectively.
-* **header**: An optional  JsonObject representing the elements of the message Header section. Expanded below.
-* **properties**: An optional JsonObject representing the elements of the message Properties section. Expanded below.
-* **application_properties**: An optional JsonObject containing any application defined properties(/headers).
-* **message_annotations**: An optional JsonObject representing any message annotations.
+**body**: The content for the body section of the AMQP message.
+**body_type**: An optional String used to indicate whether the "body" element represents an AmqpValue (default), Data, or AmqpSequence section. The values used are "value", "data", and "sequence" respectively.
+**header**: An optional  JsonObject representing the elements of the message Header section. Expanded below.
+**properties**: An optional JsonObject representing the elements of the message Properties section. Expanded below.
+**application_properties**: An optional JsonObject containing any application defined properties(/headers).
+**message_annotations**: An optional JsonObject representing any message annotations.
 
 The elements of the optional "header" sub-element are:
 
-* **durable**: optional boolean indicating whether the message is durable (default false).
-* **priority**: optional short indicating the message priority (default 4).
-* **ttl**: optional long indicating ttl in milliseconds (no default). See also 'properties' absolute expiry time.
-* **first_acquirer**: boolean indicating if this is the first acquirer of the message (default false)
-* **delivery_count**: long indicating the number of previous _failed_ delivery attempts for message.
+**durable**: optional boolean indicating whether the message is durable (default false).
+**priority**: optional short indicating the message priority (default 4).
+**ttl**: optional long indicating ttl in milliseconds (no default). See also 'properties' absolute expiry time.
+**first_acquirer**: boolean indicating if this is the first acquirer of the message (default false)
+**delivery_count**: long indicating the number of previous _failed_ delivery attempts for message.
 
 The elements of the optional "properties" sub-element are:
 
-* **to**: optional string with address message is being sent to (no default).
-* **reply_to**: optional string with address for replies (no default). Set automatically when sent with reply handler.
-* **message_id**: optional string with message id (no default). Set automatically when sending with reply handler.
-* **correlation_id**: optional string with correlation id (no default). Set automatically when implicit reply is sent.
-* **subject**: optional string with message subject (no default).
-* **group_id**: optional string with message group id (no default).
-* **group_sequence**: optional long with message group sequence (no default).
-* **reply_to_group_id**: optional string with message reply to group id (no default).
-* **content_type**: optional string with message content type (no default). Only for use with Data body sections.
-* **content_encoding**: optional string with message content encoding (no default).
-* **creation_time**: optional long with message creation time in milliseconds since the unix epoch (no default).
-* **absolute_expiry_time**: optional long with absolute expiry time as milliseconds since the unix epoch (no default).
-* **user_id**: optional string with the id of the user sending the message (no default).
+**to**: optional string with address message is being sent to (no default).
+**reply_to**: optional string with address for replies (no default). Set automatically when sent with reply handler.
+**message_id**: optional string with message id (no default). Set automatically when sending with reply handler.
+**correlation_id**: optional string with correlation id (no default). Set automatically when implicit reply is sent.
+**subject**: optional string with message subject (no default).
+**group_id**: optional string with message group id (no default).
+**group_sequence**: optional long with message group sequence (no default).
+**reply_to_group_id**: optional string with message reply to group id (no default).
+**content_type**: optional string with message content type (no default). Only for use with Data body sections.
+**content_encoding**: optional string with message content encoding (no default).
+**creation_time**: optional long with message creation time in milliseconds since the unix epoch (no default).
+**absolute_expiry_time**: optional long with absolute expiry time as milliseconds since the unix epoch (no default).
+**user_id**: optional string with the id of the user sending the message (no default).
 
 === Application Properties
 
@@ -288,12 +288,12 @@ image::../../images/producer-reply-handler.png[align="center"]
 
 . The producer is used to send a message to an AMQP address, providing a reply handler.
 . The bridge send implementation populates the _reply-to_ and _message-id_ fields of the outgoing AMQP message,
-  records the handler, and sends the message to the server.
+ records the handler, and sends the message to the server.
 . The receiving application (perhaps also a Vert.x AMQP bridge) consumes the message and sends
-  a reply to its _reply-to_ address, setting its _correlation-id_ field as the original messages _message-id_.
+ a reply to its _reply-to_ address, setting its _correlation-id_ field as the original messages _message-id_.
 . The server dispatches the reply message to the internal 'reply consumer' of the bridge.
 . The bridge processes the AMQP message, creating the Vert.x Message with JsonObject body, uses the _correlation-id_
-  value to match it with the reply handler, and then invokes the handler with the reply message.
+ value to match it with the reply handler, and then invokes the handler with the reply message.
 
 The following is a basic example of sending a message and providing a reply-handler to process the response:
 
@@ -336,13 +336,13 @@ image::../../images/consumer-reply.png[align="center"]
 
 . The server sends an AMQP message to the consumer, with a reply-to value set to another address.
 . The bridge processes the AMQP message, creating the Vert.x Message with JsonObject body. The Message replyAddress
-  is set to the reply-to value from the AMQP message.
+ is set to the reply-to value from the AMQP message.
 . The Message is passed to the consumer Handler, which processes it, inspecting the replyAddress and preparing to
-  send a response.
+ send a response.
 . The handler chooses to either send a reply using an explicit producer, or call the reply method on the message
-  object.
+ object.
 . The reply message arrives at the response address on the server, ready to be sent to a reply consumer for the
-  original sending application .
+ original sending application .
 
 The following is a basic example of sending a reply using the message reply method:
 

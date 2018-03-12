@@ -1,8 +1,6 @@
 == The JWT auth provider
 
-This component contains an out of the box a JWT implementation.
-
-To use this project, add the following
+This component contains an out of the box a JWT implementation. To use this project, add the following
 dependency to the _dependencies_ section of your build descriptor:
 
 * Maven (in your `pom.xml`):
@@ -10,9 +8,9 @@ dependency to the _dependencies_ section of your build descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-auth-jwt-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -20,7 +18,7 @@ dependency to the _dependencies_ section of your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-auth-jwt-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 JSON Web Token is a simple way to send information in the clear (usually in a URL) whose contents can be
@@ -276,4 +274,8 @@ var provider = JWTAuth.create(vertx, config)
 
 So in this example we configure the JWT to work with Keycloak token format. In this case the claims will be checked
 under the path `realm_access/roles` rather than `permissions`.
-<a href="mailto:julien@julienviet.com">Julien Viet</a><a href="http://tfox.org">Tim Fox</a><a href="mailto:pmlopes@gmail.com">Paulo Lopes</a>
+
+
+@author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+@author <a href="http://tfox.org">Tim Fox</a>
+@author <a href="mailto:pmlopes@gmail.com">Paulo Lopes</a>

@@ -31,9 +31,9 @@ To use Vert.x Web Client, add the following dependency to the _dependencies_ sec
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-web-client-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -42,14 +42,14 @@ To use Vert.x Web Client, add the following dependency to the _dependencies_ sec
 [source,groovy,subs="+attributes"]
 ----
 dependencies {
-  compile 'io.vertx:vertx-web-client-scala_2.12:3.6.0-SNAPSHOT'
+ compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 }
 ----
 
 == Re-cap on Vert.x core HTTP client
 
 Vert.x Web Client uses the API from Vert.x core, so it's well worth getting familiar with the basic concepts of using
-`link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` using Vert.x core, if you're not already.
+`link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]`using Vert.x core, if you're not already.
 
 == Creating a web client
 
@@ -180,7 +180,7 @@ client.post(8080, "myserver.mycompany.com", "/some-uri").sendBufferFuture(buffer
 Sending a single buffer is useful but often you don't want to load fully the content in memory because
 it may be too large or you want to handle many concurrent requests and want to use just the minimum
 for each request. For this purpose the web client can send `ReadStream<Buffer>` (e.g a
-`link:../../scaladocs/io/vertx/scala/core/file/AsyncFile.html[AsyncFile]` is a ReadStream<Buffer>`) with the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendStream(io.vertx.core.streams.ReadStream,%20io.vertx.core.Handler)[sendStream]` method
+`link:../../scaladocs/io/vertx/scala/core/file/AsyncFile.html[AsyncFile]`is a ReadStream<Buffer>`) with the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendStream(io.vertx.core.streams.ReadStream,%20io.vertx.core.Handler)[sendStream]` method
 
 [source,scala]
 ----
@@ -413,7 +413,7 @@ to pipe the response to a write stream
 
 === Decoding responses
 
-By default the web client provides an http response body as a `Buffer` and does not apply
+By default the web client provides an http response body as a {@code Buffer} and does not apply
 any decoding.
 
 Custom response body decoding can be achieved using `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html[BodyCodec]`:
@@ -503,7 +503,7 @@ client.get(8080, "myserver.mycompany.com", "/some-uri").as(BodyCodec.none()).sen
 
 ----
 
-When you don't know in advance the content type of the http response, you can still use the `bodyAsXXX()` methods
+When you don't know in advance the content type of the http response, you can still use the {@code bodyAsXXX()} methods
 that decode the response to a specific type
 
 [source,scala]
@@ -596,81 +596,5 @@ client.getAbs("https://myserver.mycompany.com:4043/some-uri").sendFuture().onCom
 ----
 
 ifdef::java[]
-== RxJava API
-
-The RxJava `HttpRequest` provides an rx-ified version of the original API,
-the `rxSend` method returns a `Single<HttpResponse<Buffer>>` that
-makes the HTTP request upon subscription, as consequence, the `Single` can be subscribed many times.
-
-[source,scala]
-----
-
-// Create the RxJava single for an HttpRequest
-// at this point no HTTP request has been sent to the server
-var single = client.get(8080, "myserver.mycompany.com", "/some-uri").rxSend()
-
-// Send a request upon subscription of the Single
-single.subscribe((response: io.vertx.rxjava.ext.web.client.HttpResponse<io.vertx.rxjava.core.buffer.Buffer>) => {
-  println(s"Received 1st response with status code${response.statusCode()}")
-}, (error: java.lang.Throwable) => {
-  println(s"Something went wrong ${error.getMessage()}")
-})
-
-// Send another request
-single.subscribe((response: io.vertx.rxjava.ext.web.client.HttpResponse<io.vertx.rxjava.core.buffer.Buffer>) => {
-  println(s"Received 2nd response with status code${response.statusCode()}")
-}, (error: java.lang.Throwable) => {
-  println(s"Something went wrong ${error.getMessage()}")
-})
-
-----
-
-The obtained `Single` can be composed and chained naturally with the RxJava API
-
-[source,scala]
-----
-
-// Obtain an URL Single from myserver.mycompany.com
-var url = client.get(8080, "myserver.mycompany.com", "/some-uri").rxSend().map(io.vertx.rxjava.ext.web.client.HttpResponse.bodyAsString _)
-
-// Use the flatMap operator to make a request on the URL Single
-url.flatMap((u: java.lang.String) => {
-  client.getAbs(u).rxSend()
-}).subscribe((response: io.vertx.rxjava.ext.web.client.HttpResponse<io.vertx.rxjava.core.buffer.Buffer>) => {
-  println(s"Received response with status code${response.statusCode()}")
-}, (error: java.lang.Throwable) => {
-  println(s"Something went wrong ${error.getMessage()}")
-})
-
-----
-
-The same APIs is available
-
-[source,scala]
-----
-var single = client.get(8080, "myserver.mycompany.com", "/some-uri").putHeader("some-header", "header-value").addQueryParam("some-param", "param value").as(io.vertx.rxjava.ext.web.codec.BodyCodec.jsonObject()).rxSend()
-single.subscribe((resp: io.vertx.rxjava.ext.web.client.HttpResponse<io.vertx.scala.core.json.JsonObject>) => {
-  println(resp.statusCode())
-  println(resp.body())
-})
-
-----
-
-The `sendStream` shall
-be preferred for sending bodies `Observable<Buffer>`
-
-[source,scala]
-----
-
-var body = getPayload()
-
-var single = client.post(8080, "myserver.mycompany.com", "/some-uri").rxSendStream(body)
-single.subscribe((resp: io.vertx.rxjava.ext.web.client.HttpResponse<io.vertx.rxjava.core.buffer.Buffer>) => {
-  println(resp.statusCode())
-  println(resp.body())
-})
-
-----
-
-Upon subscription, the `body` will be subscribed and its content used for the request.
+include::override/rx.adoc[]
 endif::[]
