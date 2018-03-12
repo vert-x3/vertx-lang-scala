@@ -1,7 +1,6 @@
 = Vert.x Consul Client
 
 https://www.consul.io[Consul] is a tool for discovering and configuring services in your infrastructure.
-
 A Vert.x client allowing applications to interact with a Consul system via blocking and non-blocking HTTP API.
 
 == Using Vert.x Consul Client
@@ -13,9 +12,9 @@ To use this project, add the following dependency to the _dependencies_ section 
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-consul-client-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -23,7 +22,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-consul-client-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 == Creating a client
@@ -74,7 +73,7 @@ HTTP API that described in https://www.consul.io/docs/agent/http.html[Consul API
 
 === Blocking queries
 
-Certain endpoints support a feature called a "blocking query." A blocking query is used to wait for a potential
+Certain endpoints support a feature called a "blocking query". A blocking query is used to wait for a potential
 change using long polling. Any endpoint that supports blocking also provide a unique identifier (index) representing
 the current state of the requested resource. The following configuration is used to perform blocking queries:
 
@@ -901,7 +900,7 @@ consulClient.deletePreparedQueryFuture(query).onComplete{
 == Watches
 
 Watches are a way of specifying a view of data (e.g. list of nodes, KV pairs, health checks)
-which is monitored for updates. When an update is detected, an `Handler` with `AsyncResult` is invoked.
+which is monitored for updates. When an update is detected, an {@code Handler} with {@code AsyncResult} is invoked.
 As an example, you could watch the status of health checks and notify when a check is critical.
 
 [source,scala]

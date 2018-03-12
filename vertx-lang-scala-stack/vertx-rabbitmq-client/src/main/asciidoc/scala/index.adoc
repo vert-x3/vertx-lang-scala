@@ -13,9 +13,9 @@ Add the following dependency to your maven project
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-rabbitmq-client-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -26,7 +26,7 @@ Add the following dependency to your gradle project
 [source,groovy,subs="+attributes"]
 ----
 dependencies {
-  compile 'io.vertx:vertx-rabbitmq-client-scala_2.12:3.6.0-SNAPSHOT'
+ compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 }
 ----
 
@@ -113,7 +113,6 @@ client.queueDeclareFuture("my-queue", true, false, true, config).onComplete{
 == Operations
 
 The following are some examples of the operations supported by the RabbitMQService API.
-
 Consult the javadoc/documentation for detailed information on all API methods.
 
 === Publish
@@ -242,4 +241,3 @@ client.basicConsumeFuture("my.queue", "my.address", false).onComplete{
 == Running the tests
 
 You will need to have RabbitMQ installed and running with default ports on localhost for this to work.
-<a href="mailto:nscavell@redhat.com">Nick Scavelli</a>

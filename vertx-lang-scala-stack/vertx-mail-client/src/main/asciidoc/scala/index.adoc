@@ -1,9 +1,7 @@
 = Vert.x Mail client (SMTP client implementation)
 
 Vert.x client for sending SMTP emails via a local mail server
-(e.g.
-
-postfix) or by external mail server (e.g. googlemail or aol).
+(e.g. postfix) or by external mail server (e.g. googlemail or aol).
 
 The client supports a few additional auth methods like DIGEST-MD5 and has full
 support for TLS and SSL and is completely asynchronous. The client supports
@@ -16,9 +14,9 @@ To use this project, add the following dependency to the _dependencies_ section 
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-mail-client-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -26,7 +24,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-mail-client-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 == Creating a client
@@ -119,7 +117,7 @@ message.setAttachment(attachment)
 ----
 
 When using inline attachments (usually images), it is possible to reference the images within a html message
-to display html with the images included in the mail. 
+to display html with the images included in the mail.
 Images can be referenced as <img src="cid:contentid@domain"> in the html text, the corresponding image has Disposition:
 inline and the Content-ID header as "<contentid@domain>". Please note that RFC 2392 requires Content-ID values to be structured
 like a Message-ID with angle brackets and a local and domain part using URL compatible encoding. None of this is not enforced

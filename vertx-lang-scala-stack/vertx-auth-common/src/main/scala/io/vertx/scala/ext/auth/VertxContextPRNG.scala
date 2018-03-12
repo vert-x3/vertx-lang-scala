@@ -55,6 +55,15 @@ class VertxContextPRNG(private val _asJava: Object) {
     asJava.asInstanceOf[JVertxContextPRNG].nextInt().asInstanceOf[Int]
   }
 
+  /**
+    * Returns a secure random int, between 0 (inclusive) and the specified bound (exclusive).
+    * @param bound the upper bound (exclusive), which must be positive.
+    * @return random int.
+    */
+  def nextInt(bound: Int): Int = {
+    asJava.asInstanceOf[JVertxContextPRNG].nextInt(bound.asInstanceOf[java.lang.Integer]).asInstanceOf[Int]
+  }
+
 }
 
 object VertxContextPRNG {

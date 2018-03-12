@@ -12,9 +12,9 @@ To use this project, add the following dependency to the _dependencies_ section 
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-sql-common-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -22,7 +22,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-sql-common-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 == Simple SQL Operations
@@ -350,8 +350,8 @@ To avoid ambiguation the implementations are expected to follow the following ru
 
 * When a place holder in the `IN` array is `NOT NULL` it will be taken
 * When the `IN` value is NULL a check is performed on the OUT
-  * When the `OUT` value is not null it will be registered as a output parameter
-  * When the `OUT` is also null it is expected that the IN value is the `NULL` value.
+When the `OUT` value is not null it will be registered as a output parameter
+When the `OUT` is also null it is expected that the IN value is the `NULL` value.
 
 The registered `OUT` parameters will be available as an array in the result set under the output property.
 
@@ -491,7 +491,7 @@ connection.queryStreamFuture("SELECT * FROM large_table; SELECT * FROM other_tab
 To use transactions first set auto-commit to false with `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#setAutoCommit(boolean,%20io.vertx.core.Handler)[setAutoCommit]`.
 
 You then do your transactional operations and when you want to commit or rollback use
-`link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#commit(io.vertx.core.Handler)[commit]` or
+`link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#commit(io.vertx.core.Handler)[commit]`or
 `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#rollback(io.vertx.core.Handler)[rollback]`.
 
 Once the commit/rollback is complete the handler will be called and the next transaction will be automatically started.

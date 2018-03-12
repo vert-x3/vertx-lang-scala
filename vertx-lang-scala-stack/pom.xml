@@ -59,33 +59,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>io.reactivex</groupId>
-      <artifactId>rxjava</artifactId>
-      <version>1.3.0</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-rx-java</artifactId>
-      <version>${stack.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.reactivex.rxjava2</groupId>
-      <artifactId>rxjava</artifactId>
-      <version>2.1.1</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.reactivestreams</groupId>
       <artifactId>reactive-streams</artifactId>
       <version>1.0.0</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-rx-java2</artifactId>
-      <version>${stack.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
@@ -167,7 +143,7 @@
                 <includeArtifactIds>${vertx-module}</includeArtifactIds>
                 <includeTypes>jar</includeTypes>
                 <includeClassifiers>sources</includeClassifiers>
-                <includes>**/*.java</includes>
+                <includes>**/*.java,**/*.adoc</includes>
                 <excludes>**/rxjava/**/*.*</excludes>
                 <outputDirectory>${project.build.directory}/sources/vertx</outputDirectory>
               </configuration>
@@ -182,12 +158,10 @@
               <configuration>
                 <annotationProcessors>
                   <annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
-                  <annotationProcessor>io.vertx.docgen.JavaDocGenProcessor</annotationProcessor>
-                  <annotationProcessor>io.vertx.docgen.DocGenProcessor</annotationProcessor>
                 </annotationProcessors>
                 <generatedSourcesDirectory>${project.basedir}/src/main/generated</generatedSourcesDirectory>
                 <compilerArgs>
-                  <arg>-AoutputDirectory=${project.basedir}/src/main</arg>
+                  <arg>-Acodegen.output=${project.basedir}/src/main</arg>
                   <!-- $lang is replaced by the docgen processor to the target lang -->
                   <arg>-Adocgen.output=${asciidoc.dir}/$lang</arg>
 
@@ -225,6 +199,7 @@
                 </processors>
                 <optionMap>
                   <outputDirectory>${project.basedir}/src/main</outputDirectory>
+                  <docgen.source>${project.build.directory}/sources/vertx/*.adoc</docgen.source>
                   <docgen.output>${asciidoc.dir}/scala</docgen.output>
                 </optionMap>
                 <sourceDirectory>${project.build.directory}/sources/vertx</sourceDirectory>

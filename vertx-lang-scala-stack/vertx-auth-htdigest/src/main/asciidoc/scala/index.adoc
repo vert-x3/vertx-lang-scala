@@ -1,9 +1,7 @@
 == .htdigest Auth Provider implementation
 
 We provide an implementation of `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` which uses the .digest file format
-to perform authentication.
-
-The provider will not watch for updates to the file after loading. If you need dynamic
+to perform authentication. The provider will not watch for updates to the file after loading. If you need dynamic
 user management it would be more convenient to use dynamic providers such as jdbc or mongo providers.
 
 To use this project, add the following
@@ -14,9 +12,9 @@ dependency to the _dependencies_ section of your build descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-auth-htdigest-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -24,7 +22,7 @@ dependency to the _dependencies_ section of your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-auth-htdigest-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 To create an instance you first need an .htdigest file. This file is created using the apache htdigest tool.

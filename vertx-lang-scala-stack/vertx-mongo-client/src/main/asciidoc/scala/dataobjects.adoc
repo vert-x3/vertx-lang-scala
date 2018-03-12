@@ -1,0 +1,285 @@
+= Cheatsheets
+
+[[BulkOperation]]
+== BulkOperation
+
+++++
+Contains all data needed for one operation of a bulk write operation.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[document]]`document`|`Json object`|
++++
+Sets the document, used by insert, replace, and update operations
++++
+|[[filter]]`filter`|`Json object`|
++++
+Sets the filter document, used by replace, update, and delete operations
++++
+|[[multi]]`multi`|`Boolean`|
++++
+Sets the multi flag, used by update and delete operations
++++
+|[[type]]`type`|`link:enums.html#BulkOperationType[BulkOperationType]`|
++++
+Sets the operation type
++++
+|[[upsert]]`upsert`|`Boolean`|
++++
+Sets the upsert flag, used by update and replace operations
++++
+|===
+
+[[BulkWriteOptions]]
+== BulkWriteOptions
+
+++++
+Options for configuring bulk write operations.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[ordered]]`ordered`|`Boolean`|
++++
+Set the ordered option
++++
+|[[writeOption]]`writeOption`|`link:enums.html#WriteOption[WriteOption]`|
++++
+Set the write option
++++
+|===
+
+[[FindOptions]]
+== FindOptions
+
+++++
+Options used to configure find operations.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[batchSize]]`batchSize`|`Number (int)`|
++++
+Set the batch size for methods loading found data in batches.
++++
+|[[fields]]`fields`|`Json object`|
++++
+Set the fields
++++
+|[[limit]]`limit`|`Number (int)`|
++++
+Set the limit
++++
+|[[skip]]`skip`|`Number (int)`|
++++
+Set the skip
++++
+|[[sort]]`sort`|`Json object`|
++++
+Set the sort document
++++
+|===
+
+[[IndexOptions]]
+== IndexOptions
+
+++++
+Options used to configure index.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[background]]`background`|`Boolean`|
++++
+Create the index in the background
++++
+|[[bits]]`bits`|`Number (Integer)`|
++++
+Gets the number of precision of the stored geohash value of the location data in 2d indexes.
++++
+|[[bucketSize]]`bucketSize`|`Number (Double)`|
++++
+Gets the specified the number of units within which to group the location values for geoHaystack Indexes
++++
+|[[defaultLanguage]]`defaultLanguage`|`String`|
++++
+Gets the language for a text index.
+
+<p>The language that determines the list of stop words and the rules for the stemmer and tokenizer.</p>
++++
+|[[languageOverride]]`languageOverride`|`String`|
++++
+Gets the name of the field that contains the language string.
+
+<p>For text indexes, the name of the field, in the collection's documents, that contains the override language for the document.</p>
++++
+|[[max]]`max`|`Number (Double)`|
++++
+Gets the upper inclusive boundary for the longitude and latitude values for 2d indexes..
++++
+|[[min]]`min`|`Number (Double)`|
++++
+Gets the lower inclusive boundary for the longitude and latitude values for 2d indexes..
++++
+|[[name]]`name`|`String`|
++++
+Gets the name of the index.
++++
+|[[partialFilterExpression]]`partialFilterExpression`|`Json object`|
++++
+Get the filter expression for the documents to be included in the index or null if not set
++++
+|[[sparse]]`sparse`|`Boolean`|
++++
+If true, the index only references documents with the specified field
++++
+|[[sphereVersion]]`sphereVersion`|`Number (Integer)`|
++++
+Gets the 2dsphere index version number.
++++
+|[[storageEngine]]`storageEngine`|`Json object`|
++++
+Gets the storage engine options document for this index.
++++
+|[[textVersion]]`textVersion`|`Number (Integer)`|
++++
+The text index version number.
++++
+|[[unique]]`unique`|`Boolean`|
++++
+Gets if the index should be unique.
++++
+|[[version]]`version`|`Number (Integer)`|
++++
+Gets the index version number.
++++
+|[[weights]]`weights`|`Json object`|
++++
+Gets the weighting object for use with a text index
+
+<p>A document that represents field and weight pairs. The weight is an integer ranging from 1 to 99,999 and denotes the significance
+of the field relative to the other indexed fields in terms of the score.</p>
++++
+|===
+
+[[MongoClientBulkWriteResult]]
+== MongoClientBulkWriteResult
+
+++++
+Result propagated from mongodb driver bulk write result.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[deletedCount]]`deletedCount`|`Number (long)`|
++++
+Returns the number of deleted documents
++++
+|[[insertedCount]]`insertedCount`|`Number (long)`|
++++
+Returns the number of inserted documents
++++
+|[[matchedCount]]`matchedCount`|`Number (long)`|
++++
+Returns the number of matched documents
++++
+|[[modifiedCount]]`modifiedCount`|`Number (long)`|
++++
+Returns the number of modified documents
++++
+|[[upserts]]`upserts`|`Array of Json object`|
++++
+An unmodifiable list of upsert data. Each entry has the index of the request that lead to the upsert, and the
+generated ID of the upsert.
++++
+|===
+
+[[MongoClientDeleteResult]]
+== MongoClientDeleteResult
+
+++++
+Result propagated from mongodb driver delete result.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[removedCount]]`removedCount`|`Number (long)`|
++++
+Get the number of removed documents
++++
+|===
+
+[[MongoClientUpdateResult]]
+== MongoClientUpdateResult
+
+++++
+Result propagated from mongodb driver update result.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[docMatched]]`docMatched`|`Number (long)`|
++++
+Get the number of documents that're matched
++++
+|[[docModified]]`docModified`|`Number (long)`|
++++
+Get the number of documents that're modified
++++
+|[[docUpsertedId]]`docUpsertedId`|`Json object`|
++++
+Get the document id that's upserted
++++
+|===
+
+[[UpdateOptions]]
+== UpdateOptions
+
+++++
+Options for configuring updates.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[multi]]`multi`|`Boolean`|
++++
+Set whether multi is enabled
++++
+|[[returningNewDocument]]`returningNewDocument`|`Boolean`|
++++
+Set whether new document property is enabled. Valid only on findOneAnd* methods.
++++
+|[[upsert]]`upsert`|`Boolean`|
++++
+Set whether upsert is enabled
++++
+|[[writeOption]]`writeOption`|`link:enums.html#WriteOption[WriteOption]`|
++++
+Set the write option
++++
+|===

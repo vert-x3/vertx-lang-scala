@@ -1,8 +1,6 @@
 == Vert.x Discovery Backend - Zookeeper
 
-The service discovery has a plug-able backend using the `ServiceDiscoveryBackend` SPI.
-
-This is an implementation of the SPI based
+The service discovery has a plug-able backend using the `ServiceDiscoveryBackend` SPI. This is an implementation of the SPI based
 on Apache Zookeeper.
 
 == Using the Zookeeper backend
@@ -15,9 +13,9 @@ descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-service-discovery-backend-zookeeper-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -25,7 +23,7 @@ descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-service-discovery-backend-zookeeper-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 Be aware that you can have only a single implementation of the SPI in your _classpath_. If none,
@@ -72,7 +70,7 @@ The records are stored in individual nodes structured as follows:
 [source]
 ----
 basepath (/services/)
-   |
-   |- record 1 registration id => the record 1 is the data of this node
-   |- record 2 registration id => the record 2 is the data of this node
+  |
+  |- record 1 registration id => the record 1 is the data of this node
+  |- record 2 registration id => the record 2 is the data of this node
 ----

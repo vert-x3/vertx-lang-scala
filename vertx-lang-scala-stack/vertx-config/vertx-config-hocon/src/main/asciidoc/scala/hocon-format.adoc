@@ -15,14 +15,14 @@ _dependencies_ section of your build descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-config-hocon-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-config</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>vertx-config</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -30,14 +30,14 @@ _dependencies_ section of your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-config:3.6.0-SNAPSHOT'
-compile 'io.vertx:vertx-config-hocon-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:vertx-config:${maven.version}'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 ==== Configuring the store to use HOCON
 
 Once added to your classpath or dependencies, you need to configure the
-`link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]` to use this format:
+`link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]`to use this format:
 
 [source, scala]
 ----

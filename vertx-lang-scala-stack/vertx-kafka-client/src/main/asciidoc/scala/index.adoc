@@ -21,9 +21,9 @@ To use this component, add the following dependency to the dependencies section 
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-kafka-client</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>io.vertx</groupId>
+ <artifactId>vertx-kafka-client</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -31,7 +31,7 @@ To use this component, add the following dependency to the dependencies section 
 
 [source,groovy,subs="+attributes"]
 ----
-compile io.vertx:vertx-kafka-client:3.6.0-SNAPSHOT
+compile io.vertx:vertx-kafka-client:${maven.version}
 ----
 
 == Creating Kafka clients
@@ -129,7 +129,7 @@ endif::[]
 == Receiving messages from a topic joining a consumer group
 
 In order to start receiving messages from Kafka topics, the consumer can use the
-`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#subscribe(java.util.Set)[subscribe]` method for
+`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#subscribe(java.util.Set)[subscribe]`method for
 subscribing to a set of topics being part of a consumer group (specified by the properties on creation).
 
 You also need to register a handler for handling incoming messages using the
@@ -204,7 +204,7 @@ to be assigned to other consumers) or a new consumer joins the group (so it want
 
 You can register handlers on a `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html[KafkaConsumer]` to be notified
 of the partitions revocations and assignments by the Kafka cluster using
-`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsRevokedHandler(io.vertx.core.Handler)[partitionsRevokedHandler]` and
+`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsRevokedHandler(io.vertx.core.Handler)[partitionsRevokedHandler]`and
 `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsAssignedHandler(io.vertx.core.Handler)[partitionsAssignedHandler]`.
 
 [source,scala]
@@ -330,12 +330,12 @@ the list of the current assigned partitions.
 
 == Changing the subscription or assignment
 
-You can change the subscribed topics, or assigned partitions after you have started to consume messages, simply 
-by calling `subscribe()` or `assign()` again. 
+You can change the subscribed topics, or assigned partitions after you have started to consume messages, simply
+by calling `subscribe()` or `assign()` again.
 
-Note that due to internal buffering of messages it is possible that the record handler will continue to 
-observe messages from the old subscription or assignment _after_ the `subscribe()` or `assign()` 
-method's completion handler has been called. This is not the case for messages observed by the batch handler: 
+Note that due to internal buffering of messages it is possible that the record handler will continue to
+observe messages from the old subscription or assignment _after_ the `subscribe()` or `assign()`
+method's completion handler has been called. This is not the case for messages observed by the batch handler:
 Once the completion handler has been called it will only observe messages read from the subscription or assignment.
 
 == Getting topic partition information
@@ -476,8 +476,8 @@ consumer.seekToEndFuture(java.util.Collections.singleton(topicPartition)).onComp
 
 ----
 
-Note that due to internal buffering of messages it is possible that the record handler will continue to 
-observe messages read from the original offset for a time _after_ the `seek*()` method's completion 
+Note that due to internal buffering of messages it is possible that the record handler will continue to
+observe messages read from the original offset for a time _after_ the `seek*()` method's completion
 handler has been called. This is not the case for messages observed by the batch handler: Once the
 `seek*()` completion handler has been called it will only observe messages read from the new offset.
 
@@ -571,10 +571,10 @@ to continue message processing.
 To achieve that you can use `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#pause()[pause]` and
 `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#resume()[resume]`.
 
-In the case of the partition-specific pause and resume it is possible that the record handler will continue to 
-observe messages from a paused partition for a time _after_ the `pause()` method's completion 
+In the case of the partition-specific pause and resume it is possible that the record handler will continue to
+observe messages from a paused partition for a time _after_ the `pause()` method's completion
 handler has been called. This is not the case for messages observed by the batch handler: Once the
-`pause()` completion handler has been called it will only observe messages from those partitions which 
+`pause()` completion handler has been called it will only observe messages from those partitions which
 rare not paused.
 
 [source,scala]
@@ -789,7 +789,7 @@ producer.partitionsForFuture("test").onComplete{
 == Handling errors
 
 Errors handling (e.g timeout) between a Kafka client (consumer or producer) and the Kafka cluster is done using
-`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#exceptionHandler(io.vertx.core.Handler)[exceptionHandler]` or
+`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#exceptionHandler(io.vertx.core.Handler)[exceptionHandler]`or
 `link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#exceptionHandler(io.vertx.core.Handler)[exceptionHandler]`
 
 [source,scala]
@@ -894,14 +894,7 @@ Code not translatable
 endif::[]
 
 ifdef::java[]
-== RxJava API
-
-The Kafka client provides an Rxified version of the original API.
-
-[source,scala]
-----
-Code not translatable
-----
+include::override/rx.adoc[]
 endif::[]
 
 ifdef::java,groovy,kotlin[]
@@ -918,3 +911,5 @@ stream of `ProducerRecord`.
 
 The API exposed by these interfaces is mostly the same than the polyglot version.
 endif::[]
+
+include::admin.adoc[]

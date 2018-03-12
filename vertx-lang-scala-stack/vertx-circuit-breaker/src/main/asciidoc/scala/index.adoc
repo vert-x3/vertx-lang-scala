@@ -1,8 +1,6 @@
 == Vert.x Circuit Breaker
 
-Vert.x Circuit Breaker is an implementation of the Circuit Breaker _pattern_ for Vert.x.
-
-It keeps track of the
+Vert.x Circuit Breaker is an implementation of the Circuit Breaker _pattern_ for Vert.x. It keeps track of the
 number of failures and _opens the circuit_ when a threshold is reached. Optionally, a fallback is executed.
 
 Supported failures are:
@@ -24,9 +22,9 @@ descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-circuit-breaker-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -34,7 +32,7 @@ descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-circuit-breaker-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 == Using the circuit breaker
@@ -130,9 +128,9 @@ breaker.executeWithFallback((future: io.vertx.scala.core.Future<java.lang.String
 ----
 
 The fallback is called whenever the circuit is open, or if the
-`link:../dataobjects.html#CircuitBreakerOptions#isFallbackOnFailure()[isFallbackOnFailure]` is enabled. When a fallback is
+`link:../dataobjects.html#CircuitBreakerOptions#isFallbackOnFailure()[isFallbackOnFailure]`is enabled. When a fallback is
 set, the result is using the output of the fallback function. The fallback function takes as parameter a
-`Throwable` object and returns an object of the expected type.
+`Throwable`object and returns an object of the expected type.
 
 The fallback can also be set on the `link:../../scaladocs/io/vertx/scala/circuitbreaker/CircuitBreaker.html[CircuitBreaker]` object directly:
 
@@ -219,10 +217,10 @@ Each event contains a Json Object with:
 When the circuit is "open", calls to the circuit breaker fail immediately, without any attempt to execute the real
 operation. After a suitable amount of time (configured from
 `link:../dataobjects.html#CircuitBreakerOptions#setResetTimeout(long)[resetTimeout]`, the circuit breaker decides that the
-operation has a chance of succeeding, so it goes into the `half-open` state. In this state, the next call to the
+operation has a chance of succeeding, so it goes into the {@code half-open} state. In this state, the next call to the
 circuit breaker is allowed to execute the dangerous operation. Should the call succeed, the circuit breaker resets
-and returns to the `closed` state, ready for more routine operation. If this trial call fails, however, the circuit
-breaker returns to the `open` state until another timeout elapses.
+and returns to the {@code closed} state, ready for more routine operation. If this trial call fails, however, the circuit
+breaker returns to the {@code open} state until another timeout elapses.
 
 
 == Pushing circuit breaker metrics to the Hystrix Dashboard
@@ -230,7 +228,7 @@ breaker returns to the `open` state until another timeout elapses.
 Netflix Hystrix comes with a dashboard to present the current state of the circuit breakers. The Vert.x circuit
 breakers can publish their metrics in order to be consumed by this Hystrix Dashboard. The Hystrix dashboard requires
 a SSE stream sending the metrics. This stream is provided by the
-`link:../../scaladocs/io/vertx/scala/circuitbreaker/HystrixMetricHandler.html[HystrixMetricHandler]` Vert.x Web Handler:
+`link:../../scaladocs/io/vertx/scala/circuitbreaker/HystrixMetricHandler.html[HystrixMetricHandler]`Vert.x Web Handler:
 
 
 [source,scala]

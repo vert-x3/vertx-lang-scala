@@ -19,7 +19,7 @@ The shell can be started as a service directly either from the command line or a
 .Starting a shell service available via Telnet
 [source,subs="+attributes"]
 ----
-vertx run -conf '{"telnetOptions":{"port":5000}}' maven:io.vertx:vertx-shell-scala_2.12:3.6.0-SNAPSHOT
+vertx run -conf '{"telnetOptions":{"port":5000}}' maven:${maven.groupId}:${maven.artifactId}:${maven.version}
 ----
 
 or
@@ -32,7 +32,7 @@ keytool -genkey -keyalg RSA -keystore ssh.jks -keysize 2048 -validity 1095 -dnam
 # create the auth config
 echo user.admin=password > auth.properties
 # start the shell
-vertx run -conf '{"sshOptions":{"port":4000,"keyPairOptions":{"path":"ssh.jks","password":"secret"},"authOptions":{"provider":"shiro","config":{"properties_path":"file:auth.properties"}}}}' maven:io.vertx:vertx-shell-scala_2.12:3.6.0-SNAPSHOT
+vertx run -conf '{"sshOptions":{"port":4000,"keyPairOptions":{"path":"ssh.jks","password":"secret"},"authOptions":{"provider":"shiro","config":{"properties_path":"file:auth.properties"}}}}' maven:${maven.groupId}:${maven.artifactId}:${maven.version}
 ----
 
 or
@@ -44,7 +44,7 @@ or
 keytool -genkey -keyalg RSA -keystore keystore.jks -keysize 2048 -validity 1095 -dname CN=localhost -keypass secret -storepass secret
 # create the auth config
 echo user.admin=password > auth.properties
-vertx run -conf '{"httpOptions":{"port":8080,"ssl":true,"keyStoreOptions":{"path":"keystore.jks","password":"secret"},"authOptions":{"provider":""shiro,"config":{"properties_path":"file:auth.properties"}}}}' maven:io.vertx:vertx-shell-scala_2.12:3.6.0-SNAPSHOT
+vertx run -conf '{"httpOptions":{"port":8080,"ssl":true,"keyStoreOptions":{"path":"keystore.jks","password":"secret"},"authOptions":{"provider":""shiro,"config":{"properties_path":"file:auth.properties"}}}}' maven:${maven.groupId}:${maven.artifactId}:${maven.version}
 ----
 
 You can also deploy this service inside your own verticle:
@@ -78,7 +78,7 @@ vertx.deployVerticle("maven:{maven-groupId}:{maven-artifactId}:{maven-version}",
 ----
 
 NOTE: when Vert.x Shell is already on your classpath you can use `service:io.vertx.ext.shell` instead
-or `maven:io.vertx:vertx-shell-scala_2.12:3.6.0-SNAPSHOT`
+or `maven:${maven.groupId}:${maven.artifactId}:${maven.version}`
 
 === Programmatic service
 
@@ -158,14 +158,14 @@ As for external service configuration in Json, the `authOptions` uses the `provi
 
 ----
 {
-  ...
-  "authOptions": {
-    "provider":"shiro",
-    "config": {
-      "properties_path":"file:auth.properties"
-    }
-  }
-  ...
+ ...
+ "authOptions": {
+   "provider":"shiro",
+   "config": {
+     "properties_path":"file:auth.properties"
+   }
+ }
+ ...
 }
 ----
 
@@ -418,7 +418,7 @@ command registry holds all the commands for a Vert.x instance.
 A command is registered until it is unregistered with the `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandRegistry.html#unregisterCommand(java.lang.String)[unregisterCommand]`.
 When a command is registered from a Verticle, this command is unregistered when this verticle is undeployed.
 
-NOTE: Command callbacks are invoked in the `io.vertx.core.Context` when the command is registered in the
+NOTE: Command callbacks are invoked in the {@literal io.vertx.core.Context} when the command is registered in the
 registry. Keep this in mind if you maintain state in a command.
 
 The `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandProcess.html[CommandProcess]` object can be used for interacting with the shell.
@@ -885,12 +885,12 @@ It integrates `term.js` with SockJS and needs the URL of the HTTP term server en
 [source,javascript]
 ----
 window.addEventListener('load', function () {
-  var url = 'http://localhost/shell';
-  new VertxTerm(url, {
-    cols: 80,
-    rows: 24
-   });
- });
+ var url = 'http://localhost/shell';
+ new VertxTerm(url, {
+   cols: 80,
+   rows: 24
+  });
+});
 ----
 
 Straight websockets can also be used, if so, the remote term URL should be suffixed with `/websocket`:
@@ -898,12 +898,12 @@ Straight websockets can also be used, if so, the remote term URL should be suffi
 [source,javascript]
 ----
 window.addEventListener('load', function () {
-  var url = 'ws://localhost/shell/websocket';
-  new VertxTerm(url, {
-    cols: 80,
-    rows: 24
-   });
- });
+ var url = 'ws://localhost/shell/websocket';
+ new VertxTerm(url, {
+   cols: 80,
+   rows: 24
+  });
+});
 ----
 
 For customization purpose these resources can be copied and customized, they are available in the Vert.x Shell
@@ -915,19 +915,19 @@ The command discovery can be used when new commands need to be added to Vert.x w
 
 For example, the _Dropwizard_ metrics service, adds specific metrics command to the shell service on the fly.
 
-It can be achieved via the `java.util.ServiceLoader` of a `CommandResolverFactory`.
+It can be achieved via the {@code java.util.ServiceLoader} of a `CommandResolverFactory`.
 
 [source,java]
 ----
 public class CustomCommands implements CommandResolverFactory {
 
-  public void resolver(Vertx vertx, Handler<AsyncResult<CommandResolver>> resolverHandler) {
-    resolverHandler.handler(() -> Arrays.asList(myCommand1, myCommand2));
-  }
+ public void resolver(Vertx vertx, Handler<AsyncResult<CommandResolver>> resolverHandler) {
+   resolverHandler.handler(() -> Arrays.asList(myCommand1, myCommand2));
+ }
 }
 ----
 
-The `resolver` method is async, because the resolver may need to wait some condition before commands
+The {@code resolver} method is async, because the resolver may need to wait some condition before commands
 are resolved.
 
 The shell service discovery using the service loader mechanism:

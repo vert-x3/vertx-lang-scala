@@ -12,9 +12,9 @@ To use this project, add the following dependency to the _dependencies_ section 
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-auth-common-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -22,7 +22,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-auth-common-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 == Basic concepts
@@ -50,8 +50,8 @@ on the specific implementation; for a simple username/password based authenticat
 
 ----
 {
-  "username": "tim"
-  "password": "mypassword"
+ "username": "tim"
+ "password": "mypassword"
 }
 ----
 
@@ -174,4 +174,6 @@ var token = VertxContextPRNG.current(vertx).nextString(32)
 var randomInt = VertxContextPRNG.current(vertx).nextInt()
 
 ----
-<a href="mailto:julien@julienviet.com">Julien Viet</a><a href="http://tfox.org">Tim Fox</a>
+
+@author <a href="mailto:julien@julienviet.com">Julien Viet</a>
+@author <a href="http://tfox.org">Tim Fox</a>

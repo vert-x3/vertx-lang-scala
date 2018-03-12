@@ -1,9 +1,7 @@
 === Zookeeper bridge
 
 This discovery bridge imports services from https://zookeeper.apache.org/[Apache Zookeeper] into the Vert.x service
-discovery.
-
-The bridge uses the http://curator.apache.org/curator-x-discovery/[Curator extension for service discovery].
+discovery. The bridge uses the http://curator.apache.org/curator-x-discovery/[Curator extension for service discovery].
 
 Service description are read as JSON Object (merged in the Vert.x service record metadata). The service type is
 deduced from this description by reading the `service-type`.
@@ -18,9 +16,9 @@ descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-service-discovery-bridge-zookeeper-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -28,7 +26,7 @@ descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-service-discovery-bridge-zookeeper-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 Then, when creating the service discovery registers this bridge as follows:

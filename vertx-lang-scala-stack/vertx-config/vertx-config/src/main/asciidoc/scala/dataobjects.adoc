@@ -1,0 +1,73 @@
+= Cheatsheets
+
+[[ConfigChange]]
+== ConfigChange
+
+++++
+A structure representing a configuration change.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[newConfiguration]]`newConfiguration`|`Json object`|
++++
+Sets the new configuration.
++++
+|[[previousConfiguration]]`previousConfiguration`|`Json object`|
++++
+Sets the previous configuration.
++++
+|===
+
+[[ConfigRetrieverOptions]]
+== ConfigRetrieverOptions
+
+++++
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[includeDefaultStores]]`includeDefaultStores`|`Boolean`|-
+|[[scanPeriod]]`scanPeriod`|`Number (long)`|-
+|[[stores]]`stores`|`Array of link:dataobjects.html#ConfigStoreOptions[ConfigStoreOptions]`|-
+|===
+
+[[ConfigStoreOptions]]
+== ConfigStoreOptions
+
+++++
+Data object representing the configuration of a configuration store. This object describes the configuration of a
+chunk of configuration that you retrieve. It specifies its type (type of configuration store), the format of the
+retrieved configuration chunk, and you can also configures the store if it needs configuration to
+retrieve the configuration chunk.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[config]]`config`|`Json object`|
++++
+Sets the configuration of the store
++++
+|[[format]]`format`|`String`|
++++
+Sets the format of the configuration that is retrieved from the store.
++++
+|[[optional]]`optional`|`Boolean`|
++++
+Sets whether or not the store is optional. When the configuration is retrieve, if an optional store
+returns a failure, the failure is ignored and an empty json object is used instead (for this store).
++++
+|[[type]]`type`|`String`|
++++
+Sets the configuration type
++++
+|===

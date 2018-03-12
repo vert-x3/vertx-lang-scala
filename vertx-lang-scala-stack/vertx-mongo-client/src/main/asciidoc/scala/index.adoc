@@ -1,9 +1,7 @@
 = Vert.x MongoDB Client
 
 A Vert.x client allowing applications to interact with a MongoDB instance, whether that's
-saving, retrieving, searching, or deleting documents.
-
-Mongo is a great match for persisting data in a Vert.x application
+saving, retrieving, searching, or deleting documents. Mongo is a great match for persisting data in a Vert.x application
 as it natively handles JSON (BSON) documents.
 
 *Features*
@@ -24,9 +22,9 @@ To use this project, add the following dependency to the _dependencies_ section 
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-mongo-client-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -34,7 +32,7 @@ To use this project, add the following dependency to the _dependencies_ section 
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-mongo-client-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 
@@ -344,8 +342,8 @@ This has the following fields:
 === Finding documents in batches
 
 When dealing with large data sets, it is not advised to use the
-`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[find]` and
-`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.FindOptions,%20io.vertx.core.Handler)[findWithOptions]` methods.
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[find]`and
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.FindOptions,%20io.vertx.core.Handler)[findWithOptions]`methods.
 In order to avoid inflating the whole response into memory, use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findBatch(java.lang.String,%20io.vertx.core.json.JsonObject)[findBatch]`:
 
 [source,scala]
@@ -364,7 +362,7 @@ mongoClient.findBatch("book", query).exceptionHandler((throwable: java.lang.Thro
 
 The matching documents are emitted one by one by the `link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` handler.
 
-`link:../dataobjects.html#FindOptions[FindOptions]` has an extra parameter `batchSize` which you can use to set the number of documents to load at once:
+`link:../dataobjects.html#FindOptions[FindOptions]`has an extra parameter `batchSize` which you can use to set the number of documents to load at once:
 
 [source,scala]
 ----
@@ -387,7 +385,7 @@ By default, `batchSize` is set to 20.
 
 === Finding a single document
 
-To find a single document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findOne(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[findOne]`.
+To find a single document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findOne(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject),%20io.vertx.core.Handler)[findOne]`.
 
 This works just like `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[find]` but it returns just the first matching document.
 
@@ -722,62 +720,62 @@ For more information on the format of the connection string please consult the d
 [source,js]
 ----
 {
-  // Single Cluster Settings
-  "host" : "127.0.0.1", // string
-  "port" : 27017,      // int
+ // Single Cluster Settings
+ "host" : "127.0.0.1", // string
+ "port" : 27017,      // int
 
-  // Multiple Cluster Settings
-  "hosts" : [
-    {
-      "host" : "cluster1", // string
-      "port" : 27000       // int
-    },
-    {
-      "host" : "cluster2", // string
-      "port" : 28000       // int
-    },
-    ...
-  ],
-  "replicaSet" :  "foo",    // string
-  "serverSelectionTimeoutMS" : 30000, // long
+ // Multiple Cluster Settings
+ "hosts" : [
+   {
+     "host" : "cluster1", // string
+     "port" : 27000       // int
+   },
+   {
+     "host" : "cluster2", // string
+     "port" : 28000       // int
+   },
+   ...
+ ],
+ "replicaSet" :  "foo",    // string
+ "serverSelectionTimeoutMS" : 30000, // long
 
-  // Connection Pool Settings
-  "maxPoolSize" : 50,                // int
-  "minPoolSize" : 25,                // int
-  "maxIdleTimeMS" : 300000,          // long
-  "maxLifeTimeMS" : 3600000,         // long
-  "waitQueueMultiple"  : 10,         // int
-  "waitQueueTimeoutMS" : 10000,      // long
-  "maintenanceFrequencyMS" : 2000,   // long
-  "maintenanceInitialDelayMS" : 500, // long
+ // Connection Pool Settings
+ "maxPoolSize" : 50,                // int
+ "minPoolSize" : 25,                // int
+ "maxIdleTimeMS" : 300000,          // long
+ "maxLifeTimeMS" : 3600000,         // long
+ "waitQueueMultiple"  : 10,         // int
+ "waitQueueTimeoutMS" : 10000,      // long
+ "maintenanceFrequencyMS" : 2000,   // long
+ "maintenanceInitialDelayMS" : 500, // long
 
-  // Credentials / Auth
-  "username"   : "john",     // string
-  "password"   : "passw0rd", // string
-  "authSource" : "some.db"   // string
-  // Auth mechanism
-  "authMechanism"     : "GSSAPI",        // string
-  "gssapiServiceName" : "myservicename", // string
+ // Credentials / Auth
+ "username"   : "john",     // string
+ "password"   : "passw0rd", // string
+ "authSource" : "some.db"   // string
+ // Auth mechanism
+ "authMechanism"     : "GSSAPI",        // string
+ "gssapiServiceName" : "myservicename", // string
 
-  // Socket Settings
-  "connectTimeoutMS" : 300000, // int
-  "socketTimeoutMS"  : 100000, // int
-  "sendBufferSize"    : 8192,  // int
-  "receiveBufferSize" : 8192,  // int
-  "keepAlive" : true           // boolean
+ // Socket Settings
+ "connectTimeoutMS" : 300000, // int
+ "socketTimeoutMS"  : 100000, // int
+ "sendBufferSize"    : 8192,  // int
+ "receiveBufferSize" : 8192,  // int
+ "keepAlive" : true           // boolean
 
-  // Heartbeat socket settings
-  "heartbeat.socket" : {
-  "connectTimeoutMS" : 300000, // int
-  "socketTimeoutMS"  : 100000, // int
-  "sendBufferSize"    : 8192,  // int
-  "receiveBufferSize" : 8192,  // int
-  "keepAlive" : true           // boolean
-  }
+ // Heartbeat socket settings
+ "heartbeat.socket" : {
+ "connectTimeoutMS" : 300000, // int
+ "socketTimeoutMS"  : 100000, // int
+ "sendBufferSize"    : 8192,  // int
+ "receiveBufferSize" : 8192,  // int
+ "keepAlive" : true           // boolean
+ }
 
-  // Server Settings
-  "heartbeatFrequencyMS" :    1000 // long
-  "minHeartbeatFrequencyMS" : 500 // long
+ // Server Settings
+ "heartbeatFrequencyMS" :    1000 // long
+ "minHeartbeatFrequencyMS" : 500 // long
 }
 ----
 

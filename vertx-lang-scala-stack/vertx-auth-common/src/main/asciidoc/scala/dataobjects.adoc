@@ -1,0 +1,67 @@
+= Cheatsheets
+
+[[AuthOptions]]
+== AuthOptions
+
+++++
+A common base object for authentication options.<p>
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|===
+
+[[KeyStoreOptions]]
+== KeyStoreOptions
+
+++++
+Options describing how an JWT KeyStore should behave.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[password]]`password`|`String`|-
+|[[path]]`path`|`String`|-
+|[[type]]`type`|`String`|-
+|===
+
+[[PubSecKeyOptions]]
+== PubSecKeyOptions
+
+++++
+Options describing how a Cryptographic Key.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[algorithm]]`algorithm`|`String`|-
+|[[certificate]]`certificate`|`Boolean`|-
+|[[publicKey]]`publicKey`|`String`|-
+|[[secretKey]]`secretKey`|`String`|-
+|[[symmetric]]`symmetric`|`Boolean`|-
+|===
+
+[[SecretOptions]]
+== SecretOptions
+
+++++
+Options describing a secret.
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[secret]]`secret`|`String`|-
+|[[type]]`type`|`String`|-
+|===
