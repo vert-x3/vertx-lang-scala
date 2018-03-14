@@ -31,8 +31,8 @@ _dependencies_ section of your build descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
- <groupId>${maven.groupId}</groupId>
- <artifactId>${maven.artifactId}</artifactId>
+ <groupId>io.vertx</groupId>
+ <artifactId>vertx-config</artifactId>
  <version>${maven.version}</version>
 </dependency>
 ----
@@ -40,7 +40,7 @@ _dependencies_ section of your build descriptor:
 * Gradle (in your `build.gradle` file):
 
 [source,groovy,subs="+attributes"]
-compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+compile 'io.vertx:vertx-config:${maven.version}'
 ----
 
 Once done, you first need to instantiate the `link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]`:

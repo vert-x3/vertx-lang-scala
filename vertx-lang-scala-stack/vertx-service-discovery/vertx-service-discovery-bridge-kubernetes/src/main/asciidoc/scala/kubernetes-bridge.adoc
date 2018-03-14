@@ -17,8 +17,8 @@ descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
- <groupId>${maven.groupId}</groupId>
- <artifactId>${maven.artifactId}</artifactId>
+ <groupId>io.vertx</groupId>
+ <artifactId>vertx-service-discovery-bridge-kubernetes</artifactId>
  <version>${maven.version}</version>
 </dependency>
 ----
@@ -27,7 +27,7 @@ descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+compile 'io.vertx:vertx-service-discovery-bridge-kubernetes:${maven.version}'
 ----
 
 ==== Configuring the bridge

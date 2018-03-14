@@ -13,12 +13,12 @@ _dependencies_ section of your build descriptor:
 [source,xml,subs="+attributes"]
 ----
 <dependency>
- <groupId>${maven.groupId}</groupId>
- <artifactId>${maven.artifactId}</artifactId>
+ <groupId>io.vertx</groupId>
+ <artifactId>vertx-config-git</artifactId>
  <version>${maven.version}</version>
 </dependency>
 <dependency>
- <groupId>${maven.groupId}</groupId>
+ <groupId>io.vertx</groupId>
  <artifactId>vertx-config</artifactId>
  <version>${maven.version}</version>
 </dependency>
@@ -28,8 +28,8 @@ _dependencies_ section of your build descriptor:
 
 [source,groovy,subs="+attributes"]
 ----
-compile '${maven.groupId}:vertx-config:${maven.version}'
-compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+compile 'io.vertx:vertx-config:${maven.version}'
+compile 'io.vertx:vertx-config-git:${maven.version}'
 ----
 
 ==== Configuring the store
