@@ -14,8 +14,8 @@ To use Vert.x AMQP Bridge, add the following dependency to the _dependencies_ se
 [source,xml,subs="+attributes"]
 ----
 <dependency>
- <groupId>${maven.groupId}</groupId>
- <artifactId>${maven.artifactId}</artifactId>
+ <groupId>io.vertx</groupId>
+ <artifactId>vertx-amqp-bridge</artifactId>
  <version>${maven.version}</version>
 </dependency>
 ----
@@ -24,7 +24,7 @@ To use Vert.x AMQP Bridge, add the following dependency to the _dependencies_ se
 
 [source,groovy,subs="+attributes"]
 ----
-compile ${maven.groupId}:${maven.artifactId}:${maven.version}
+compile io.vertx:vertx-amqp-bridge:${maven.version}
 ----
 
 == Getting Started

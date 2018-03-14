@@ -208,11 +208,6 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-hawkular-metrics-scala_2.12</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-shell-scala_2.12</artifactId>
       <version>${stack.version}</version>
     </dependency>
