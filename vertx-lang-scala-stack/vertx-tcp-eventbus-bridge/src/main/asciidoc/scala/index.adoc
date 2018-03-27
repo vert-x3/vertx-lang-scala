@@ -1,9 +1,7 @@
 = Vert.x-tcp-eventbus-bridge
 :toc: left
 
-Vert.x-tcp-eventbus-bridge is a TCP bridge to Vert.x EventBus.
-
-To use this project, add the following
+Vert.x-tcp-eventbus-bridge is a TCP bridge to Vert.x EventBus. To use this project, add the following
 dependency to the _dependencies_ section of your build descriptor:
 
 Maven (in your `pom.xml`):
@@ -11,9 +9,9 @@ Maven (in your `pom.xml`):
 [source,xml,subs="+attributes"]
 ----
 <dependency>
-  <groupId>io.vertx</groupId>
-  <artifactId>vertx-tcp-eventbus-bridge-scala_2.12</artifactId>
-  <version>3.6.0-SNAPSHOT</version>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
 </dependency>
 ----
 
@@ -21,7 +19,7 @@ Gradle (in your `build.gradle` file):
 
 [source,groovy,subs="+attributes"]
 ----
-compile 'io.vertx:vertx-tcp-eventbus-bridge-scala_2.12:3.6.0-SNAPSHOT'
+compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
 ----
 
 The TCP EventBus bridge is built on top of TCP, meaning that any application that can
@@ -39,11 +37,11 @@ The structure of a Frame looks like this:
 
 ----
 <Length: uInt32><{
-   type: String,
-   address: String,
-   (replyAddress: String)?,
-   headers: JsonObject,
-   body: JsonObject
+  type: String,
+  address: String,
+  (replyAddress: String)?,
+  headers: JsonObject,
+  body: JsonObject
 }: JsonObject>
 ----
 

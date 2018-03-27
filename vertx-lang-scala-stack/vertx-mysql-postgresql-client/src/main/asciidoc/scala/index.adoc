@@ -31,8 +31,8 @@ If you are building a _Fat-jar_ using Maven or Gradle, just add the following de
 [source,xml,subs="+attributes"]
 ----
 <dependency>
- <groupId>${maven.groupId}</groupId>
- <artifactId>${maven.artifactId}</artifactId>
+ <groupId>io.vertx</groupId>
+ <artifactId>vertx-mysql-postgresql-client</artifactId>
  <version>${maven.version}</version>
 </dependency>
 ----
@@ -41,7 +41,7 @@ If you are building a _Fat-jar_ using Maven or Gradle, just add the following de
 
 [source,groovy,subs="+attributes"]
 ----
-compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+compile 'io.vertx:vertx-mysql-postgresql-client:${maven.version}'
 ----
 
 === In an application using a vert.x distributions
