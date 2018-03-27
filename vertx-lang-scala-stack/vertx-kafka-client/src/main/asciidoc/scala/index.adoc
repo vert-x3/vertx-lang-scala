@@ -1,7 +1,5 @@
 = Vert.x Kafka client
 :toc: left
-:lang: scala
-:scala: scala
 
 This component provides a Kafka client for reading and sending messages from/to an link:https://kafka.apache.org/[Apache Kafka] cluster.
 
