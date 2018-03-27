@@ -36,7 +36,8 @@ import io.vertx.core.{Vertx => JVertx}
   * 
   * Routers are also used for routing failures.
   */
-class Router(private val _asJava: Object) {
+class Router(private val _asJava: Object)
+    extends io.vertx.core.Handler[HttpServerRequest] {
 
   def asJava = _asJava
 
@@ -76,10 +77,17 @@ class Router(private val _asJava: Object) {
     * This method is used to provide a request to the router. Usually you take request from the
     * [[io.vertx.scala.core.http.HttpServer#requestHandler]] and pass it to this method. The
     * router then routes it to matching routes.
+    *
+    * This method is now deprecated you can use this object directly as a request handler, which
+    * means there is no need for a method reference anymore.
     * @param request the request
     */
   def accept(request: HttpServerRequest): Unit = {
     asJava.asInstanceOf[JRouter].accept(request.asJava.asInstanceOf[JHttpServerRequest])
+  }
+
+  override def handle(arg0: HttpServerRequest): Unit = {
+    asJava.asInstanceOf[JRouter].handle(arg0.asJava.asInstanceOf[JHttpServerRequest])
   }
 
   /**

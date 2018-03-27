@@ -48,7 +48,7 @@ import io.vertx.ext.web.{FileUpload => JFileUpload}
   * Represents the context for the handling of a request in Vert.x-Web.
   * 
   * A new instance is created for each HTTP request that is received in the
-  * [[io.vertx.scala.ext.web.Router#accept]] of the router.
+  *  of the router.
   * 
   * The same instance is passed to any matching request or failure handlers during the routing of the request or
   * failure.
@@ -241,6 +241,16 @@ class RoutingContext(private val _asJava: Object) {
   }
 
   /**
+    * Expire a cookie, notifying a User Agent to remove it from its cookie jar. The context must have first been routed
+    * to a [[io.vertx.scala.ext.web.handler.CookieHandler]] for this to work.
+    * @param name the name of the cookie
+    * @return the cookie, if it existed, or null
+    */
+  def removeCookie(name: String): scala.Option[Cookie] = {
+    scala.Option(asJava.asInstanceOf[JRoutingContext].removeCookie(name.asInstanceOf[java.lang.String])).map(Cookie(_))
+  }
+
+  /**
     * Restarts the current router with a new path and reusing the original method. All path parameters are then parsed
     * and available on the params list.
     * @param path the new http path.
@@ -344,13 +354,14 @@ class RoutingContext(private val _asJava: Object) {
   }
 
   /**
-    * Expire a cookie, notifying a User Agent to remove it from its cookie jar. The context must have first been routed
-    * to a [[io.vertx.scala.ext.web.handler.CookieHandler]] for this to work.
+    * Remove a cookie from the cookie set. If invalidate is true then it will expire a cookie, notifying a User Agent to
+    * remove it from its cookie jar. The context must have first been routed to a
+    * [[io.vertx.scala.ext.web.handler.CookieHandler]] for this to work.
     * @param name the name of the cookie
     * @return the cookie, if it existed, or null
     */
-  def removeCookie(name: String): scala.Option[Cookie] = {
-    scala.Option(asJava.asInstanceOf[JRoutingContext].removeCookie(name.asInstanceOf[java.lang.String])).map(Cookie(_))
+  def removeCookie(name: String, invalidate: Boolean): scala.Option[Cookie] = {
+    scala.Option(asJava.asInstanceOf[JRoutingContext].removeCookie(name.asInstanceOf[java.lang.String], invalidate.asInstanceOf[java.lang.Boolean])).map(Cookie(_))
   }
 
   /**

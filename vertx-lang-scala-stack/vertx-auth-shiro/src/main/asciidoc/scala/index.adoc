@@ -32,7 +32,12 @@ Here's an example of creating a Shiro auth provider by specifying the type:
 
 [source,java]
 ----
-`example3`
+
+var config = new io.vertx.core.json.JsonObject().put("properties_path", "classpath:test-auth.properties")
+
+var provider = ShiroAuth.create(vertx, ShiroAuthRealmType.PROPERTIES, config)
+
+
 ----
 
 == Authentication
@@ -42,7 +47,18 @@ authentication info:
 
 [source,java]
 ----
-`example4`
+
+var authInfo = new io.vertx.core.json.JsonObject().put("username", "tim").put("password", "sausages")
+
+authProvider.authenticateFuture(authInfo).onComplete{
+  case Success(result) => {
+    var user = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 ----
 
 == Authorisation - Permission-Role Model
@@ -56,13 +72,33 @@ If validating if a user has a particular permission simply pass the permission i
 
 [source,java]
 ----
-`example5`
+
+user.isAuthorisedFuture("newsletter:edit:13").onComplete{
+  case Success(result) => {
+    var hasPermission = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+
 ----
 If validating that a user has a particular _role_ then you should prefix the argument with the role prefix.
 
 [source,java]
 ----
-`example6`
+
+user.isAuthorisedFuture("role:manager").onComplete{
+  case Success(result) => {
+    var hasRole = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+
 ----
 
 The default role prefix is `role:`. You can change this with `link:../../scaladocs/io/vertx/scala/ext/auth/shiro/ShiroAuth.html#setRolePrefix(java.lang.String)[setRolePrefix]`.
@@ -146,7 +182,10 @@ This is done as follows:
 
 [source,java]
 ----
-`example8`
+
+var provider = ShiroAuth.create(vertx, realm)
+
+
 ----
 
 The implementation currently assumes that user/password based authentication is used.
