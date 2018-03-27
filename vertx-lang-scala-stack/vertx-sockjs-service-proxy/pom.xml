@@ -49,6 +49,17 @@
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-api</id>
+            <configuration>
+              <optionMap>
+                <!-- force list otherwise it will generate Java service proxies -->
+                <codegen.generators>sockjs_service_proxies,Scala</codegen.generators>
+              </optionMap>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>net.alchim31.maven</groupId>
