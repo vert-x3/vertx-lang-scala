@@ -151,30 +151,6 @@
           </executions>
         </plugin>
         <plugin>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <executions>
-            <execution>
-              <id>default-compile</id>
-              <configuration>
-                <annotationProcessors>
-                  <annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
-                </annotationProcessors>
-                <generatedSourcesDirectory>${project.basedir}/src/main/generated</generatedSourcesDirectory>
-                <compilerArgs>
-                  <arg>-Acodegen.output=${project.basedir}/src/main</arg>
-                  <!-- $lang is replaced by the docgen processor to the target lang -->
-                  <arg>-Adocgen.output=${asciidoc.dir}/$lang</arg>
-
-                  <arg>-Amaven.groupId=${project.groupId}</arg>
-                  <arg>-Amaven.artifactId=${project.artifactId}</arg>
-                  <arg>-Amaven.version=${project.version}</arg>
-                </compilerArgs>
-              </configuration>
-            </execution>
-          </executions>
-        </plugin>
-
-        <plugin>
           <groupId>org.bsc.maven</groupId>
           <artifactId>maven-processor-plugin</artifactId>
           <version>3.2.0</version>
