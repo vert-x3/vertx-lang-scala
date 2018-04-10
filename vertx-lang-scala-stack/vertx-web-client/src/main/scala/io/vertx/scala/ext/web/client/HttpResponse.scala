@@ -39,7 +39,7 @@ import scala.collection.JavaConverters._
   *   <li>[[io.vertx.scala.ext.web.client.HttpResponse#version]] the HTTP version</li>
   * </ul>
   * 
-  * The body of the response is returned by [[io.vertx.scala.ext.web.client.HttpResponse#body]] decoded as the format specified by the  that
+  * The body of the response is returned by [[io.vertx.scala.ext.web.client.HttpResponse#body]] decoded as the format specified by the [[io.vertx.scala.ext.web.codec.BodyCodec]] that
   * built the response.
   * 
   * Keep in mind that using this `HttpResponse` impose to fully buffer the response body and should be used for payload

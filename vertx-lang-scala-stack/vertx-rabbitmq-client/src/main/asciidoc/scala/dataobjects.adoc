@@ -1,5 +1,35 @@
 = Cheatsheets
 
+[[QueueOptions]]
+== QueueOptions
+
+++++
+Aimed to specify queue consumer settings when calling link
+++++
+'''
+
+[cols=">25%,^25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[autoAck]]`autoAck`|`Boolean`|
++++
+
++++
+|[[buffer]]`buffer`|`Boolean`|
++++
+
++++
+|[[keepMostRecent]]`keepMostRecent`|`Boolean`|
++++
+
++++
+|[[maxInternalQueueSize]]`maxInternalQueueSize`|`Number (int)`|
++++
+
++++
+|===
+
 [[RabbitMQOptions]]
 == RabbitMQOptions
 

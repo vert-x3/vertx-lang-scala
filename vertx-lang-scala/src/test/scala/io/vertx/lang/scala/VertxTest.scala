@@ -4,8 +4,10 @@ import java.util.concurrent.CountDownLatch
 
 import io.vertx.scala.core.{DeploymentOptions, Vertx}
 import org.junit.runner.RunWith
+import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.concurrent.Waiters.{Waiter, _}
 import org.scalatest.junit.JUnitRunner
+import org.scalatest.time.{Millis, Span}
 import org.scalatest.{FlatSpec, Matchers}
 
 import scala.util.{Failure, Success}
@@ -22,9 +24,10 @@ class VertxTest extends FlatSpec with Matchers {
     val waiter = new Waiter()
     vertx.executeBlocking[Long](() => Thread.currentThread().getId).onComplete(s => {
       assert(s.get != Thread.currentThread().getId)
+      Thread.sleep(1000)
       waiter.dismiss()
     })
-    waiter.await(dismissals(1))
+    waiter.await(Timeout(Span(1100, Millis)), dismissals(1))
   }
 
   "Vert.x" should "deploy a preinstantiated ScalaVerticle with DefaultOptions" in {

@@ -33,9 +33,6 @@ import scala.concurrent.ExecutionContext
 class VertxExecutionContext(val ctx:Context) extends ExecutionContext{
   private val Log = ScalaLogger.getLogger(classOf[VertxExecutionContext].getName)
 
-  //Register the JSON-codec for case-classes
-  JsonInit.init()
-
   override def execute(runnable: Runnable): Unit = {
     ctx.runOnContext((_:Unit) => runnable.run())
   }

@@ -1068,7 +1068,7 @@ var route = router.get("/localized").handler((rc: io.vertx.scala.ext.web.Routing
   })
 
   // we do not know the user language so lets just inform that back:
-  rc.response().end(s"Sorry we don't speak: ${rc.preferredLocale()}")
+  rc.response().end(s"Sorry we don't speak: ${rc.preferredLanguage()}")
 })
 
 ----
@@ -1653,7 +1653,13 @@ Here's an example on how to issue tokens:
 
 var router = Router.router(vertx)
 
-var authConfig = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("type", "jceks").put("path", "keystore.jceks").put("password", "secret"))
+var authConfig = JWTAuthOptions()
+  .setKeyStore(KeyStoreOptions()
+    .setType("jceks")
+    .setPath("keystore.jceks")
+    .setPassword("secret")
+  )
+
 
 var authProvider = JWTAuth.create(vertx, authConfig)
 
@@ -1676,7 +1682,13 @@ Now that your client has a token all it is required is that forall* consequent r
 
 var router = Router.router(vertx)
 
-var authConfig = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("type", "jceks").put("path", "keystore.jceks").put("password", "secret"))
+var authConfig = JWTAuthOptions()
+  .setKeyStore(KeyStoreOptions()
+    .setType("jceks")
+    .setPath("keystore.jceks")
+    .setPassword("secret")
+  )
+
 
 var authProvider = JWTAuth.create(vertx, authConfig)
 
@@ -1695,7 +1707,13 @@ token, during the creation of the token just add data to the JsonObject paramete
 [source,scala]
 ----
 
-var authConfig = new io.vertx.core.json.JsonObject().put("keyStore", new io.vertx.core.json.JsonObject().put("type", "jceks").put("path", "keystore.jceks").put("password", "secret"))
+var authConfig = JWTAuthOptions()
+  .setKeyStore(KeyStoreOptions()
+    .setType("jceks")
+    .setPath("keystore.jceks")
+    .setPassword("secret")
+  )
+
 
 var authProvider = JWTAuth.create(vertx, authConfig)
 

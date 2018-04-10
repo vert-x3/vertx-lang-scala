@@ -20,11 +20,13 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.ext.web.multipart.{MultipartForm => JMultipartForm}
 import io.vertx.ext.web.codec.{BodyCodec => JBodyCodec}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.ext.web.client.{HttpRequest => JHttpRequest}
 import io.vertx.ext.web.client.{HttpResponse => JHttpResponse}
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.ext.web.multipart.MultipartForm
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.HttpMethod
 import io.vertx.core.{MultiMap => JMultiMap}
@@ -270,6 +272,15 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
+    * Like [[io.vertx.scala.ext.web.client.HttpRequest#sendFuture]] but with an HTTP request `body` multimap encoded as form and the content type
+    * set to `multipart/form-data`. You may use this method to send attributes and upload files.
+    * @param body the body
+    */
+  def sendMultipartForm(body: MultipartForm, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
+    asJava.asInstanceOf[JHttpRequest[Object]].sendMultipartForm(body.asJava.asInstanceOf[JMultipartForm], {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
+  }
+
+  /**
     * Send a request, the `handler` will receive the response as an [[io.vertx.scala.ext.web.client.HttpResponse]].
     */
   def send(handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
@@ -318,6 +329,15 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
   def sendFormFuture(body: MultiMap): scala.concurrent.Future[HttpResponse[T]] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
     asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[sendMultipartForm]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def sendMultipartFormFuture(body: MultipartForm): scala.concurrent.Future[HttpResponse[T]] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
+    asJava.asInstanceOf[JHttpRequest[Object]].sendMultipartForm(body.asJava.asInstanceOf[JMultipartForm], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
