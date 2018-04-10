@@ -50,7 +50,7 @@ class HttpServer(private val _asJava: Object)
 
   /**
     * Return the request stream for the server. As HTTP requests are received by the server,
-    * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to the stream .
+    * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to the stream [[io.vertx.scala.core.streams.ReadStream#handler]].
     * @return the request stream
     */
   def requestStream(): ReadStream[HttpServerRequest] = {
@@ -63,7 +63,7 @@ class HttpServer(private val _asJava: Object)
 
   /**
     * Return the websocket stream for the server. If a websocket connect handshake is successful a
-    * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream .
+    * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream [[io.vertx.scala.core.streams.ReadStream#handler]].
     * @return the websocket stream
     */
   def websocketStream(): ReadStream[ServerWebSocket] = {

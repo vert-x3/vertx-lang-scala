@@ -170,19 +170,52 @@ client.confirmSelectFuture().onComplete{
 
 === Consume
 
-Consume messages from a queue
+Consume messages from a queue.
 
 [source,scala]
 ----
-// Create the event bus handler which messages will be sent to
-// Create the event bus handler which messages will be sent to
-vertx.eventBus().consumer("my.address", (msg: io.vertx.scala.core.eventbus.Message<java.lang.Object>) => {
-  var json = msg.body()
-  println(s"Got message: ${json.getValue("body")}")
-})
+// Create a stream of messages from a queue
+client.basicConsumerFuture("my.queue").onComplete{
+  case Success(result) => {
+    println("RabbitMQ consumer created !")
+    var mqConsumer = result
+    mqConsumer.handler((message: io.vertx.scala.rabbitmq.RabbitMQMessage) => {
+      println(s"Got message: ${message.body().toString()}")
+    })
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
 
-// Setup the link between rabbitmq consumer and event bus address
-client.basicConsumeFuture("my.queue", "my.address").onComplete{
+----
+
+At any moment of time you can pause or resume the stream. When stream is paused you won't receive any message.
+
+[source,scala]
+----
+consumer.pause()
+consumer.resume()
+
+----
+
+There are actually a set of options to specify when creating a consumption stream.
+
+The `QueueOptions` lets you specify:
+
+* The size of internal queue with `setMaxInternalQueueSize`
+* Should incoming messages be stored when stream is paused with `setBuffer`
+* Should the stream keep more recent messages when queue size is exceed with `setKeepMostRecent`
+
+[source,scala]
+----
+var options = QueueOptions()
+  .setMaxInternalQueueSize(1000)
+  .setKeepMostRecent(true)
+  .setBuffer(true)
+
+
+client.basicConsumerFuture("my.queue", options).onComplete{
   case Success(result) => {
     println("RabbitMQ consumer created !")
   }
@@ -190,6 +223,51 @@ client.basicConsumeFuture("my.queue", "my.address").onComplete{
     println(s"$cause")
   }
 }
+
+----
+
+When you want to stop consuming message from a queue, you can do:
+
+[source,scala]
+----
+rabbitMQConsumer.cancelFuture().onComplete{
+  case Success(result) => {
+    println("Consumption successfully stopped")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+You can get notified by the end handler when the queue won't process any more messages:
+
+[source,scala]
+----
+rabbitMQConsumer.endHandler((v: java.lang.Void) => {
+  println("It is the end of the stream")
+})
+
+----
+
+You can set the exception handler to be notified of any error that may occur when a message is processed:
+
+[source,scala]
+----
+consumer.exceptionHandler((e: java.lang.Throwable) => {
+  println("An exception occurred in the process of message handling")
+  e.printStackTrace()
+})
+
+----
+
+And finally, you may want to retrive a related to the consumer tag:
+
+[source,scala]
+----
+var consumerTag = consumer.consumerTag()
+println(s"Consumer tag is: ${consumerTag}")
 
 ----
 

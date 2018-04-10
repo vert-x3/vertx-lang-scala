@@ -20,7 +20,9 @@ import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.rabbitmq.{RabbitMQConsumer => JRabbitMQConsumer}
 import io.vertx.rabbitmq.{RabbitMQOptions => JRabbitMQOptions}
+import io.vertx.rabbitmq.{QueueOptions => JQueueOptions}
 import io.vertx.rabbitmq.{RabbitMQClient => JRabbitMQClient}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
@@ -34,6 +36,33 @@ class RabbitMQClient(private val _asJava: Object) {
 
   def asJava = _asJava
 
+
+  /**
+    */
+  def basicConsumer(queue: String, resultHandler: Handler[AsyncResult[RabbitMQConsumer]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].basicConsumer(queue.asInstanceOf[java.lang.String], {x: AsyncResult[JRabbitMQConsumer] => resultHandler.handle(AsyncResultWrapper[JRabbitMQConsumer, RabbitMQConsumer](x, a => RabbitMQConsumer(a)))})
+  }
+
+  /**
+    * Request a specific prefetchCount "quality of service" settings
+    * for this channel.
+    * @param prefetchCount maximum number of messages that the server will deliver, 0 if unlimited
+    * @param resultHandler handler called when operation is done with a result of the operation
+    */
+  def basicQos(prefetchCount: Int, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchCount.asInstanceOf[java.lang.Integer], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
+    * Request a specific prefetchCount "quality of service" settings
+    * for this channel.
+    * @param prefetchCount maximum number of messages that the server will deliver, 0 if unlimited
+    * @param global true if the settings should be applied to the entire channel rather than each consumer
+    * @param resultHandler handler called when operation is done with a result of the operation
+    */
+  def basicQos(prefetchCount: Int, global: Boolean, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchCount.asInstanceOf[java.lang.Integer], global.asInstanceOf[java.lang.Boolean], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
 
   /**
     * Acknowledge one or several received messages. Supply the deliveryTag from the AMQP.Basic.GetOk or AMQP.Basic.Deliver
@@ -58,6 +87,8 @@ class RabbitMQClient(private val _asJava: Object) {
   }
 
   /**
+    * Use [[io.vertx.scala.rabbitmq.RabbitMQClient#basicConsumerFuture]] instead
+    * 
     * Start a non-nolocal, non-exclusive consumer, with auto acknowledgement and a server-generated consumerTag.
     */
   def basicConsume(queue: String, address: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
@@ -65,6 +96,8 @@ class RabbitMQClient(private val _asJava: Object) {
   }
 
   /**
+    * Use [[io.vertx.scala.rabbitmq.RabbitMQClient#basicConsumerFuture]] instead
+    * 
     * Start a non-nolocal, non-exclusive consumer, with a server-generated consumerTag.
     */
   def basicConsume(queue: String, address: String, autoAck: Boolean, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
@@ -72,10 +105,22 @@ class RabbitMQClient(private val _asJava: Object) {
   }
 
   /**
+    * Use [[io.vertx.scala.rabbitmq.RabbitMQClient#basicConsumerFuture]] instead
+    * 
     * Start a non-nolocal, non-exclusive consumer, with a server-generated consumerTag and error handler
     */
   def basicConsume(queue: String, address: String, autoAck: Boolean, resultHandler: Handler[AsyncResult[Unit]], errorHandler: Handler[Throwable]): Unit = {
     asJava.asInstanceOf[JRabbitMQClient].basicConsume(queue.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], autoAck.asInstanceOf[java.lang.Boolean], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}, {x: Throwable => errorHandler.handle(x)})
+  }
+
+  /**
+    * Create a consumer with the given `options`.
+    * @param queue the name of a queue
+    * @param options options for queuesee <a href="../../../../../../cheatsheet/QueueOptions.html">QueueOptions</a>
+    * @param resultHandler a handler through which you can find out the operation status; if the operation succeeds you can begin to receive messages through an instance of RabbitMQConsumer
+    */
+  def basicConsumer(queue: String, options: QueueOptions, resultHandler: Handler[AsyncResult[RabbitMQConsumer]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].basicConsumer(queue.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JRabbitMQConsumer] => resultHandler.handle(AsyncResultWrapper[JRabbitMQConsumer, RabbitMQConsumer](x, a => RabbitMQConsumer(a)))})
   }
 
   /**
@@ -111,11 +156,18 @@ class RabbitMQClient(private val _asJava: Object) {
   }
 
   /**
-    * Request specific "quality of service" settings, Limiting the number of unacknowledged messages on
-    * a channel (or connection). This limit is applied separately to each new consumer on the channel.
+    * Request specific "quality of service" settings.
+    *
+    * These settings impose limits on the amount of data the server
+    * will deliver to consumers before requiring acknowledgements.
+    * Thus they provide a means of consumer-initiated flow control.
+    * @param prefetchSize maximum amount of content (measured in octets) that the server will deliver, 0 if unlimited
+    * @param prefetchCount maximum number of messages that the server will deliver, 0 if unlimited
+    * @param global true if the settings should be applied to the entire channel rather than each consumer
+    * @param resultHandler handler called when operation is done with a result of the operation
     */
-  def basicQos(prefetchCount: Int, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchCount.asInstanceOf[java.lang.Integer], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  def basicQos(prefetchSize: Int, prefetchCount: Int, global: Boolean, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchSize.asInstanceOf[java.lang.Integer], prefetchCount.asInstanceOf[java.lang.Integer], global.asInstanceOf[java.lang.Boolean], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -278,6 +330,24 @@ class RabbitMQClient(private val _asJava: Object) {
   }
 
  /**
+   * Like [[basicConsumer]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def basicConsumerFuture(queue: String): scala.concurrent.Future[RabbitMQConsumer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRabbitMQConsumer, RabbitMQConsumer](x => RabbitMQConsumer(x))
+    asJava.asInstanceOf[JRabbitMQClient].basicConsumer(queue.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[basicConsumer]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def basicConsumerFuture(queue: String, options: QueueOptions): scala.concurrent.Future[RabbitMQConsumer] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRabbitMQConsumer, RabbitMQConsumer](x => RabbitMQConsumer(x))
+    asJava.asInstanceOf[JRabbitMQClient].basicConsumer(queue.asInstanceOf[java.lang.String], options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
    * Like [[basicPublish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
    */
   def basicPublishFuture(exchange: String, routingKey: String, message: io.vertx.core.json.JsonObject): scala.concurrent.Future[Unit] = {
@@ -319,6 +389,24 @@ class RabbitMQClient(private val _asJava: Object) {
   def basicQosFuture(prefetchCount: Int): scala.concurrent.Future[Unit] = {
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchCount.asInstanceOf[java.lang.Integer], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[basicQos]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def basicQosFuture(prefetchCount: Int, global: Boolean): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchCount.asInstanceOf[java.lang.Integer], global.asInstanceOf[java.lang.Boolean], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+   * Like [[basicQos]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+   */
+  def basicQosFuture(prefetchSize: Int, prefetchCount: Int, global: Boolean): scala.concurrent.Future[Unit] = {
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchSize.asInstanceOf[java.lang.Integer], prefetchCount.asInstanceOf[java.lang.Integer], global.asInstanceOf[java.lang.Boolean], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

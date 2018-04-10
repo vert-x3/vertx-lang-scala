@@ -20,7 +20,7 @@ The `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` 
 requests/responses is necessary.
 
 The web client does not provide a WebSocket API, the Vert.x Core `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` should
-be used.
+be used. It also does not handle cookies at the moment.
 
 == Using the web client
 
@@ -289,8 +289,22 @@ client.post(8080, "myserver.mycompany.com", "/some-uri").putHeader("content-type
 
 ----
 
-NOTE: at the moment multipart files are not supported, it will likely be supported in a later revision
-of the API.
+If you want to upload files and send attributes, you can create a `link:../../scaladocs/io/vertx/scala/ext/web/multipart/MultipartForm.html[MultipartForm]` and
+use `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendMultipartForm(io.vertx.ext.web.multipart.MultipartForm,%20io.vertx.core.Handler)[sendMultipartForm]`.
+
+[source,scala]
+----
+var form = MultipartForm.create().attribute("imageDescription", "a very nice image").binaryFileUpload("imageFile", "image.jpg", "/path/to/image", "image/jpeg")
+
+// Submit the form as a multipart form body
+client.post(8080, "myserver.mycompany.com", "/some-uri").sendMultipartFormFuture(form).onComplete{
+  case Success(result) => {
+    // Ok
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
 
 === Writing request headers
 

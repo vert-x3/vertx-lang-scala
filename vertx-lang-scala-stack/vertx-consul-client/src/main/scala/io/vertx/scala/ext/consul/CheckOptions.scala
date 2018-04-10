@@ -46,6 +46,33 @@ class CheckOptions(private val _asJava: JCheckOptions) {
   }
 
   /**
+    * Specifies a gRPC check's endpoint that supports the standard
+    * <a href="https://github.com/grpc/grpc/blob/master/doc/health-checking.md">gRPC health checking protocol</a>.
+    * The state of the check will be updated at the given Interval by probing the configured endpoint.
+    * The endpoint must be represented as `address:port/service`
+    */
+  def setGrpc(value: String) = {
+    asJava.setGrpc(value)
+    this
+  }
+  def getGrpc: String = {
+    asJava.getGrpc().asInstanceOf[String]
+  }
+
+  /**
+    * Specifies whether to use TLS for this gRPC health check.
+    * If TLS is enabled, then by default, a valid TLS certificate is expected.
+    * Certificate verification can be turned off by setting `TLSSkipVerify` to `true`.
+    */
+  def setGrpcTls(value: Boolean) = {
+    asJava.setGrpcTls(value)
+    this
+  }
+  def isGrpcTls: Boolean = {
+    asJava.isGrpcTls().asInstanceOf[Boolean]
+  }
+
+  /**
     * Set HTTP address to check. Also you should set checking interval
     */
   def setHttp(value: String) = {
@@ -142,6 +169,17 @@ class CheckOptions(private val _asJava: JCheckOptions) {
   }
   def getTcp: String = {
     asJava.getTcp().asInstanceOf[String]
+  }
+
+  /**
+    * Specifies if the certificate for an HTTPS check should not be verified.
+    */
+  def setTlsSkipVerify(value: Boolean) = {
+    asJava.setTlsSkipVerify(value)
+    this
+  }
+  def isTlsSkipVerify: Boolean = {
+    asJava.isTlsSkipVerify().asInstanceOf[Boolean]
   }
 
   /**
