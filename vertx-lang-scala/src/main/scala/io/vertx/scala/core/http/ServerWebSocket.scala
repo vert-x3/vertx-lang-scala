@@ -123,7 +123,7 @@ class ServerWebSocket(private val _asJava: Object)
 
   /**
     * Set a text message handler on the connection. This handler will be called similar to the
-    * [[io.vertx.scala.core.http.WebSocketBase#binaryMessageHandler]], but the buffer will be converted to a String first
+    * , but the buffer will be converted to a String first
     * @param handler the handler
     * @return a reference to this, so the API can be used fluently
     */
