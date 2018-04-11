@@ -206,6 +206,13 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   override def getHttp2ConnectionWindowSize: Int = {
     asJava.getHttp2ConnectionWindowSize().asInstanceOf[Int]
   }
+  override def setHttp2KeepAliveTimeout(value: Int) = {
+    asJava.setHttp2KeepAliveTimeout(value)
+    this
+  }
+  override def getHttp2KeepAliveTimeout: Int = {
+    asJava.getHttp2KeepAliveTimeout().asInstanceOf[Int]
+  }
   override def setHttp2MaxPoolSize(value: Int) = {
     asJava.setHttp2MaxPoolSize(value)
     this
@@ -279,6 +286,13 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions)
   }
   override def isKeepAlive: Boolean = {
     asJava.isKeepAlive().asInstanceOf[Boolean]
+  }
+  override def setKeepAliveTimeout(value: Int) = {
+    asJava.setKeepAliveTimeout(value)
+    this
+  }
+  override def getKeepAliveTimeout: Int = {
+    asJava.getKeepAliveTimeout().asInstanceOf[Int]
   }
   override def setKeyStoreOptions(value: JksOptions) = {
     asJava.setKeyStoreOptions(value.asJava)

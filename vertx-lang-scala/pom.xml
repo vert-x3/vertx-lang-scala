@@ -31,6 +31,7 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-lang-scala-on-the-fly_2.12</artifactId>
       <version>${project.version}</version>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>
@@ -49,15 +50,9 @@
     </dependency>
     <!-- Not needed at runtime -->
     <dependency>
-      <groupId>org.scala-lang</groupId>
-      <artifactId>scala-compiler</artifactId>
-      <scope>provided</scope>
-      <version>${scala.version}</version>
-    </dependency>
-    <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-codegen</artifactId>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>

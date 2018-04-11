@@ -231,6 +231,13 @@ class ConsulClientOptions(private val _asJava: JConsulClientOptions)
   override def getHttp2ConnectionWindowSize: Int = {
     asJava.getHttp2ConnectionWindowSize().asInstanceOf[Int]
   }
+  override def setHttp2KeepAliveTimeout(value: Int) = {
+    asJava.setHttp2KeepAliveTimeout(value)
+    this
+  }
+  override def getHttp2KeepAliveTimeout: Int = {
+    asJava.getHttp2KeepAliveTimeout().asInstanceOf[Int]
+  }
 
   /**
     * Set the maximum pool size for HTTP/2 connections
@@ -298,6 +305,13 @@ class ConsulClientOptions(private val _asJava: JConsulClientOptions)
   }
   override def isKeepAlive: Boolean = {
     asJava.isKeepAlive().asInstanceOf[Boolean]
+  }
+  override def setKeepAliveTimeout(value: Int) = {
+    asJava.setKeepAliveTimeout(value)
+    this
+  }
+  override def getKeepAliveTimeout: Int = {
+    asJava.getKeepAliveTimeout().asInstanceOf[Int]
   }
 
   /**
