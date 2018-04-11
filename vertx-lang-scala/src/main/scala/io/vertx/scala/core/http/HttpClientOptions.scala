@@ -194,6 +194,19 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
   }
 
   /**
+    * Set the keep alive timeout for HTTP/2 connections, in seconds.
+    * <p/>
+    * This value determines how long a connection remains unused in the pool before being evicted and closed.
+    */
+  def setHttp2KeepAliveTimeout(value: Int) = {
+    asJava.setHttp2KeepAliveTimeout(value)
+    this
+  }
+  def getHttp2KeepAliveTimeout: Int = {
+    asJava.getHttp2KeepAliveTimeout().asInstanceOf[Int]
+  }
+
+  /**
     * Set the maximum pool size for HTTP/2 connections
     */
   def setHttp2MaxPoolSize(value: Int) = {
@@ -259,6 +272,19 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions)
   }
   def isKeepAlive: Boolean = {
     asJava.isKeepAlive().asInstanceOf[Boolean]
+  }
+
+  /**
+    * Set the keep alive timeout for HTTP/1.x, in seconds.
+    * <p/>
+    * This value determines how long a connection remains unused in the pool before being evicted and closed.
+    */
+  def setKeepAliveTimeout(value: Int) = {
+    asJava.setKeepAliveTimeout(value)
+    this
+  }
+  def getKeepAliveTimeout: Int = {
+    asJava.getKeepAliveTimeout().asInstanceOf[Int]
   }
 
   /**
