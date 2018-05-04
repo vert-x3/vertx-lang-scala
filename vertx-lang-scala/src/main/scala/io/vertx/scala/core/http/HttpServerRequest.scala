@@ -296,6 +296,13 @@ class HttpServerRequest(private val _asJava: Object)
   }
 
   /**
+    * @return the total number of bytes read for the body of the request.
+    */
+  def bytesRead(): Long = {
+    asJava.asInstanceOf[JHttpServerRequest].bytesRead().asInstanceOf[Long]
+  }
+
+  /**
     * Return the first header value with the specified name
     * @param headerName the header name
     * @return the header value
