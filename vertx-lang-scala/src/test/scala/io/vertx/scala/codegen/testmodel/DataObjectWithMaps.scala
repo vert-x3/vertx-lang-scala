@@ -52,6 +52,10 @@ class DataObjectWithMaps(private val _asJava: JDataObjectWithMaps) {
     asJava.setGenEnumValues(value.asJava)
     this
   }
+  def setInstantValues(value: Map[String, java.time.Instant]) = {
+    asJava.setInstantValues(value.asJava)
+    this
+  }
   def setIntegerValues(value: Map[String, Int]) = {
     asJava.setIntegerValues(value.mapValues(Int.box).asJava)
     this

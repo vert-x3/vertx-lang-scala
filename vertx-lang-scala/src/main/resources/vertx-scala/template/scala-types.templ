@@ -434,6 +434,8 @@
       return  'Char';
     } else if (type.kind == CLASS_STRING) {
       return  'String';
+    } else if (type.kind == CLASS_INSTANT) {
+      return  'java.time.Instant';
     }
     return 'ERROR typeNameForPrimitiveScala unkown type (' + type + ')';
   }

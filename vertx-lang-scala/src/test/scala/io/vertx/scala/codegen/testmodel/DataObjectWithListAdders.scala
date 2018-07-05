@@ -52,6 +52,10 @@ class DataObjectWithListAdders(private val _asJava: JDataObjectWithListAdders) {
     asJava.addGenEnumValue(value)
     this
   }
+  def addInstantValue(value: java.time.Instant) = {
+    asJava.addInstantValue(value.asInstanceOf)
+    this
+  }
   def addIntegerValue(value: Int) = {
     asJava.addIntegerValue(value)
     this

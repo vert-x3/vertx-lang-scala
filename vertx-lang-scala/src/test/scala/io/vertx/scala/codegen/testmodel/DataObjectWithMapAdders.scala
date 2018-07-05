@@ -52,6 +52,10 @@ class DataObjectWithMapAdders(private val _asJava: JDataObjectWithMapAdders) {
     asJava.addGenEnumValue(key, value)
     this
   }
+  def addInstantValue(key: String, value: java.time.Instant) = {
+    asJava.addInstantValue(key, value.asInstanceOf[java.time.Instant])
+    this
+  }
   def addIntegerValue(key: String, value: Int) = {
     asJava.addIntegerValue(key, value.asInstanceOf[java.lang.Integer])
     this
