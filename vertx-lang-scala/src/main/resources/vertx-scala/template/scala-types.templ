@@ -222,6 +222,8 @@
           ret += ']';
         }
         return ret;
+    } else if (type.kind == CLASS_OTHER && type.name.equals('java.time.Instant')) {
+      return 'java.time.Instant';
     } else {
       return 'Unknown type for toScalaType '+type.name+' '+type.kind;
     }
@@ -332,6 +334,8 @@
         ret = name + '.map(' + name +' => ' + ret + ').orNull';
       }
       return ret;
+    } else if (type.kind == CLASS_OTHER && type.name.equals('java.time.Instant')) {
+      return name + '.asInstanceOf[java.time.Instant]';
     } else {
       return 'Unknown type for toJavaWithConversion '+type.name+' '+type.kind;
     }
@@ -434,8 +438,6 @@
       return  'Char';
     } else if (type.kind == CLASS_STRING) {
       return  'String';
-    } else if (type.kind == CLASS_INSTANT) {
-      return  'java.time.Instant';
     }
     return 'ERROR typeNameForPrimitiveScala unkown type (' + type + ')';
   }
