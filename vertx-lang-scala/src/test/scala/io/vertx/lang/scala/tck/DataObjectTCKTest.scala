@@ -6,6 +6,7 @@ import io.vertx.scala.codegen.testmodel._
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
+import java.time.Instant;
 
 /**
   * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
@@ -29,6 +30,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
     assert(2.2f == dataObject.getFloat("boxedFloatValue"))
     assert(2.22 == dataObject.getDouble("boxedDoubleValue"))
     assert("wibble" == dataObject.getString("stringValue"))
+    assert(Instant.parse("1984-05-27T00:05:00Z") == dataObject.getInstant("instantValue"))
     assert(Json.obj().put("foo", "eek").put("bar", "wibble") == dataObject.getJsonObject("jsonObjectValue"))
     assert(Json.arr("eek", "wibble") == dataObject.getJsonArray("jsonArrayValue"))
     assert("TIM" == dataObject.getString("enumValue"))
@@ -54,6 +56,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
       .put("boxedFloatValue", 2.2)
       .put("boxedDoubleValue", 2.22)
       .put("stringValue", "wibble")
+      .put("instantValue", Instant.parse("1984-05-27T00:05:00Z"))
       .put("jsonObjectValue", Json.obj().put("foo", "eek").put("bar", "wibble"))
       .put("jsonArrayValue", Json.arr("eek", "wibble"))
       .put("enumValue", "TIM")
@@ -78,6 +81,8 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
     assert(Json.arr(1.11, 2.22, 3.33) === dataObject.getJsonArray("doubleValues"))
     assert(dataObject.getJsonArray("stringValues") != null)
     assert(Json.arr("stringValues1", "stringValues2", "stringValues3") === dataObject.getJsonArray("stringValues"))
+    assert(dataObject.getJsonArray("instantValues") != null)
+    assert(Json.arr("1984-05-27T00:05:00Z", "2018-07-05T08:23:21Z") == dataObject.getJsonArray("instantValues"))
     assert(dataObject.getJsonArray("jsonObjectValues") != null)
     assert(Json.arr(Json.obj().put("foo", "eek"), Json.obj().put("foo", "wibble")) === dataObject.getJsonArray("jsonObjectValues"))
     assert(dataObject.getJsonArray("jsonArrayValues") != null)
@@ -108,6 +113,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
       .put("jsonObjectValues", Json.arr(mapAsJavaMap(Map("foo" -> "eek")), mapAsJavaMap(Map("foo" -> "wibble"))))
       .put("jsonArrayValues", Json.arr(Json.arr("foo"), Json.arr("bar")))
       .put("stringValues", Json.arr("stringValues1", "stringValues2", "stringValues3"))
+      .put("instantValues", Json.arr(Instant.parse("1984-05-27T00:05:00Z"), Instant.parse("2018-07-05T08:23:21Z")))
       .put("dataObjectValues", Json.arr(Json.obj().put("foo", "1").put("bar", 1).put("wibble", 1.1f), Json.obj().put("foo", "2").put("bar", 2).put("wibble", 2.2f)))
       .put("enumValues", Json.arr("TIM", "JULIEN"))
       .put("genEnumValues", Json.arr("BOB", "LAURA")))
@@ -121,6 +127,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
     assert(Json.obj().put("1", 123456).put("2", 654321) == dataObject.getJsonObject("integerValues"))
     assert(Json.obj().put("1", 123456789l).put("2", 987654321l) == dataObject.getJsonObject("longValues"))
     assert(Json.obj().put("1", "stringValues1").put("2", "stringValues2") == dataObject.getJsonObject("stringValues"))
+    assert(Json.obj().put("1", Instant.parse("1984-05-27T00:05:00Z")).put("2", Instant.parse("2018-07-05T08:23:21Z")) == dataObject.getJsonObject("instantValues"))
     assert(Json.obj().put("1", Json.obj().put("foo", "eek")).put("2", Json.obj().put("foo", "wibble")) == dataObject.getJsonObject("jsonObjectValues"))
     assert(Json.obj().put("1", Json.arr("foo")).put("2", Json.arr("bar")) == dataObject.getJsonObject("jsonArrayValues"))
     assert("1" == dataObject.getJsonObject("dataObjectValues").getJsonObject("1").getString("foo"))
@@ -143,6 +150,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
       .put("floatValues", Json.obj().put("1", 1.1).put("2", 2.2))
       .put("doubleValues", Json.obj().put("1", 1.11).put("2", 2.22))
       .put("stringValues", Json.obj().put("1", "stringValues1").put("2", "stringValues2"))
+      .put("instantValues", Json.obj().put("1", Instant.parse("1984-05-27T00:05:00Z")).put("2", Instant.parse("2018-07-05T08:23:21Z")))
       .put("jsonObjectValues", Json.obj().put("1", Json.obj().put("foo", "eek")).put("2", Json.obj().put("foo", "wibble")))
       .put("jsonArrayValues", Json.obj().put("1", Json.arr("foo")).put("2", Json.arr("bar")))
       .put("dataObjectValues", Json.obj(("1", Json.obj().put("foo", "1").put("bar", 1).put("wibble", 1.1f)), ("2", Json.obj().put("foo", "2").put("bar", 2).put("wibble", 2.2f))))

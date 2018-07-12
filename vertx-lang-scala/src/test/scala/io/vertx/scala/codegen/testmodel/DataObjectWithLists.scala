@@ -52,6 +52,10 @@ class DataObjectWithLists(private val _asJava: JDataObjectWithLists) {
     asJava.setGenEnumValues(value.asJava)
     this
   }
+  def setInstantValues(value: scala.collection.mutable.Buffer[java.time.Instant]) = {
+    asJava.setInstantValues(value.asJava)
+    this
+  }
   def setIntegerValues(value: scala.collection.mutable.Buffer[Int]) = {
     asJava.setIntegerValues(value.map(Int.box).asJava)
     this

@@ -76,6 +76,10 @@ class DataObjectWithValues(private val _asJava: JDataObjectWithValues) {
     asJava.setGenEnumValue(value)
     this
   }
+  def setInstantValue(value: java.time.Instant) = {
+    asJava.setInstantValue(value)
+    this
+  }
   def setIntValue(value: Int) = {
     asJava.setIntValue(value)
     this
