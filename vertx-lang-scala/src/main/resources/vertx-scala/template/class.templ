@@ -1,23 +1,5 @@
 @comment{"# Template for DataObject code generation"}
 
-@code{
-  /* Filter method containing java types */
-  var it = instanceMethods.iterator();
-  while (it.hasNext()) {
-    var meth = it.next();
-    if (meth.isContainingAnyJavaType()) {
-      it.remove();
-    }
-  }
-  it = staticMethods.iterator();
-  while (it.hasNext()) {
-    var meth = it.next();
-    if (meth.isContainingAnyJavaType()) {
-      it.remove();
-    }
-  }
-}
-
 @comment{"# Defines a few helper functions"}
 @includeNamed{'scala-doc.templ'}
 @includeNamed{'scala-imports.templ'}
