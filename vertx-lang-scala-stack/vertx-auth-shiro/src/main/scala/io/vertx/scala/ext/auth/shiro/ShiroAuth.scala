@@ -16,62 +16,59 @@
 
 package io.vertx.scala.ext.auth.shiro
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
-import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.scala.core.Vertx
-import io.vertx.core.{Vertx => JVertx}
 import io.vertx.scala.ext.auth.AuthProvider
-import io.vertx.scala.ext.auth.User
 import io.vertx.ext.auth.shiro.{ShiroAuthOptions => JShiroAuthOptions}
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.ext.auth.{User => JUser}
+import scala.reflect.runtime.universe._
 import io.vertx.core.json.JsonObject
-import io.vertx.core.AsyncResult
-import io.vertx.core.Handler
 import io.vertx.ext.auth.shiro.{ShiroAuth => JShiroAuth}
+import io.vertx.scala.core.Vertx
 import io.vertx.ext.auth.shiro.ShiroAuthRealmType
+import io.vertx.core.{Vertx => JVertx}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Factory interface for creating Apache Shiro based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
   */
-class ShiroAuth(private val _asJava: Object)
-    extends AuthProvider(_asJava)   {
+
+class ShiroAuth(private val _asJava: Object) extends AuthProvider (_asJava) {
+
+
+
 
 
 
   /**
-    * Set the role prefix to distinguish from permissions when checking for isPermitted requests.
-    * @param rolePrefix a Prefix e.g.: "role:"
-    * @return a reference to this for fluency
-    */
-  def setRolePrefix(rolePrefix: String): ShiroAuth = {
+   * Set the role prefix to distinguish from permissions when checking for isPermitted requests.   * @param rolePrefix a Prefix e.g.: "role:"
+   * @return a reference to this for fluency
+   */
+  def setRolePrefix (rolePrefix: String): ShiroAuth = {
     ShiroAuth(asJava.asInstanceOf[JShiroAuth].setRolePrefix(rolePrefix.asInstanceOf[java.lang.String]))
   }
+
 
 }
 
 object ShiroAuth {
-  def apply(asJava: JShiroAuth) = new ShiroAuth(asJava)  
+  def apply(asJava: JShiroAuth) = new ShiroAuth(asJava)
+  
   /**
-    * Create a Shiro auth provider
-    * @param vertx the Vert.x instance
-    * @param realmType the Shiro realm type
-    * @param config the config
-    * @return the auth provider
-    */
-  def create(vertx: Vertx, realmType: io.vertx.ext.auth.shiro.ShiroAuthRealmType, config: io.vertx.core.json.JsonObject): ShiroAuth = {
+   * Create a Shiro auth provider   * @param vertx the Vert.x instance
+   * @param realmType the Shiro realm type
+   * @param config the config
+   * @return the auth provider
+   */
+  def create(vertx: Vertx,realmType: io.vertx.ext.auth.shiro.ShiroAuthRealmType,config: io.vertx.core.json.JsonObject): ShiroAuth = {
     ShiroAuth(JShiroAuth.create(vertx.asJava.asInstanceOf[JVertx], realmType, config))
   }
 
   /**
-    * Create a Shiro auth provider
-    * @param vertx the Vert.x instance
-    * @param options the Shiro configuration optionssee <a href="../../../../../../../../cheatsheet/ShiroAuthOptions.html">ShiroAuthOptions</a>
-    * @return the auth provider
-    */
-  def create(vertx: Vertx, options: ShiroAuthOptions): ShiroAuth = {
+   * Create a Shiro auth provider   * @param vertx the Vert.x instance
+   * @param options the Shiro configuration options see <a href="../../../../../../../../cheatsheet/ShiroAuthOptions.html">ShiroAuthOptions</a>
+   * @return the auth provider
+   */
+  def create(vertx: Vertx,options: ShiroAuthOptions): ShiroAuth = {
     ShiroAuth(JShiroAuth.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 

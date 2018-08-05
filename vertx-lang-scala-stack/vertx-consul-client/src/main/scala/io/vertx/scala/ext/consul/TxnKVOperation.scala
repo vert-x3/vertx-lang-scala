@@ -16,84 +16,91 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{TxnKVOperation => JTxnKVOperation}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds operation to apply to the key/value store inside a transaction
-  */
+ * Holds operation to apply to the key/value store inside a transaction
+ */
+
 class TxnKVOperation(private val _asJava: JTxnKVOperation) {
-
   def asJava = _asJava
-
   /**
-    * Set the flags attached to this entry. Clients can choose to use this however makes sense for their application.
-    */
+   * Set the flags attached to this entry. Clients can choose to use this however makes sense for their application.
+   */
   def setFlags(value: Long) = {
     asJava.setFlags(value)
     this
   }
+
   def getFlags: Long = {
     asJava.getFlags().asInstanceOf[Long]
   }
 
   /**
-    * Set the index used for locking, unlocking, and check-and-set operations.
-    */
+   * Set the index used for locking, unlocking, and check-and-set operations.
+   */
   def setIndex(value: Long) = {
     asJava.setIndex(value)
     this
   }
+
   def getIndex: Long = {
     asJava.getIndex().asInstanceOf[Long]
   }
 
   /**
-    * Set the key
-    */
+   * Set the key
+   */
   def setKey(value: String) = {
     asJava.setKey(value)
     this
   }
+
   def getKey: String = {
     asJava.getKey().asInstanceOf[String]
   }
 
   /**
-    * Set the session used for locking, unlocking, and check-and-set operations.
-    */
+   * Set the session used for locking, unlocking, and check-and-set operations.
+   */
   def setSession(value: String) = {
     asJava.setSession(value)
     this
   }
+
   def getSession: String = {
     asJava.getSession().asInstanceOf[String]
   }
 
   /**
-    * Set the type of operation to perform
-    */
+   * Set the type of operation to perform
+   */
   def setType(value: io.vertx.ext.consul.TxnKVVerb) = {
     asJava.setType(value)
     this
   }
+
   def getType: io.vertx.ext.consul.TxnKVVerb = {
     asJava.getType()
   }
 
   /**
-    * Set the value
-    */
+   * Set the value
+   */
   def setValue(value: String) = {
     asJava.setValue(value)
     this
   }
+
   def getValue: String = {
     asJava.getValue().asInstanceOf[String]
   }
+
 }
+
 
 object TxnKVOperation {
   
@@ -117,3 +124,4 @@ object TxnKVOperation {
     }
   }
 }
+

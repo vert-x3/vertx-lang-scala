@@ -16,51 +16,55 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.consul.{ServiceQueryOptions => JServiceQueryOptions}
+import scala.collection.JavaConverters._
 
 /**
-  * Options used to requesting list of services
-  */
+ * Options used to requesting list of services
+ */
+
 class ServiceQueryOptions(private val _asJava: JServiceQueryOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set options for blocking query
-    */
+   * Set options for blocking query
+   */
   def setBlockingOptions(value: BlockingQueryOptions) = {
     asJava.setBlockingOptions(value.asJava)
     this
   }
+
   def getBlockingOptions: BlockingQueryOptions = {
     BlockingQueryOptions(asJava.getBlockingOptions())
   }
 
   /**
-    * Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
-    */
+   * Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
+   */
   def setNear(value: String) = {
     asJava.setNear(value)
     this
   }
+
   def getNear: String = {
     asJava.getNear().asInstanceOf[String]
   }
 
   /**
-    * Set tag for filtering request results
-    */
+   * Set tag for filtering request results
+   */
   def setTag(value: String) = {
     asJava.setTag(value)
     this
   }
+
   def getTag: String = {
     asJava.getTag().asInstanceOf[String]
   }
+
 }
+
 
 object ServiceQueryOptions {
   
@@ -84,3 +88,4 @@ object ServiceQueryOptions {
     }
   }
 }
+

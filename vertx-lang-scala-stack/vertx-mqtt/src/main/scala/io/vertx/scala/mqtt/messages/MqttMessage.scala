@@ -16,36 +16,37 @@
 
 package io.vertx.scala.mqtt.messages
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.mqtt.messages.{MqttMessage => JMqttMessage}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Represent the interface for each MQTT message
-  */
-trait MqttMessage {
 
+  */
+
+trait MqttMessage {
   def asJava: java.lang.Object
 
-  /**
-    * @return Message identifier
-    */
-  def messageId(): Int
+    /**
+   * @return Message identifier
+   */
+def messageId ( ): Int
+
 
 }
 
 object MqttMessage {
   def apply(asJava: JMqttMessage): MqttMessage = new MqttMessageImpl(asJava)
     private class MqttMessageImpl(private val _asJava: Object) extends MqttMessage {
-
-      def asJava = _asJava
+  def asJava = _asJava
   private var cached_0: Option[Int] = None
 
 
   /**
-    * @return Message identifier
-    */
+   * @return Message identifier
+   */
   def messageId(): Int = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttMessage].messageId()
@@ -53,6 +54,10 @@ object MqttMessage {
     }
     cached_0.get
   }
+
+
+
+
 
 }
 }

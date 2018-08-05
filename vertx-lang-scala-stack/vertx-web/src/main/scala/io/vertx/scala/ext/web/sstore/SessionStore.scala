@@ -16,143 +16,158 @@
 
 package io.vertx.scala.ext.web.sstore
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
+import scala.reflect.runtime.universe._
 import io.vertx.ext.web.{Session => JSession}
+import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.scala.ext.web.Session
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A session store is used to store sessions for an Vert.x-Web web app
   */
-class SessionStore(private val _asJava: Object) {
 
+class SessionStore(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
   /**
-    * The retry timeout value in milli seconds used by the session handler when it retrieves a value from the store.<p/>
-    *
-    * A non positive value means there is no retry at all.
-    * @return the timeout value, in ms
-    */
-  def retryTimeout(): Long = {
+   * Initialize this store.   * @param vertx the vertx instance
+   * @param options optional Json with extra configuration options
+   * @return self
+   */
+  
+  def init(vertx: Vertx, options: io.vertx.core.json.JsonObject): SessionStore = {
+    asJava.asInstanceOf[JSessionStore].init(vertx.asJava.asInstanceOf[JVertx], options)
+    this
+  }
+
+
+
+  /**
+   * The retry timeout value in milli seconds used by the session handler when it retrieves a value from the store.<p/>
+   *
+   * A non positive value means there is no retry at all.   * @return the timeout value, in ms
+   */
+  def retryTimeout (): Long = {
     asJava.asInstanceOf[JSessionStore].retryTimeout().asInstanceOf[Long]
   }
 
   /**
-    * Create a new session using the default min length.
-    * @param timeout - the session timeout, in ms
-    * @return the session
-    */
-  def createSession(timeout: Long): Session = {
+   * Create a new session using the default min length.   * @param timeout - the session timeout, in ms
+   * @return the session
+   */
+  def createSession (timeout: Long): Session = {
     Session(asJava.asInstanceOf[JSessionStore].createSession(timeout.asInstanceOf[java.lang.Long]))
   }
 
   /**
-    * Create a new session
-    * @param timeout - the session timeout, in ms
-    * @param length - the required length for the session id
-    * @return the session
-    */
-  def createSession(timeout: Long, length: Int): Session = {
+   * Create a new session   * @param timeout - the session timeout, in ms
+   * @param length - the required length for the session id
+   * @return the session
+   */
+  def createSession (timeout: Long, length: Int): Session = {
     Session(asJava.asInstanceOf[JSessionStore].createSession(timeout.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Integer]))
   }
 
   /**
-    * Get the session with the specified ID
-    * @param id the unique ID of the session
-    * @param resultHandler will be called with a result holding the session, or a failure
-    */
-  def get(id: String, resultHandler: Handler[AsyncResult[scala.Option[Session]]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String], {x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession, scala.Option[Session]](x, a => scala.Option(a).map(Session(_))))})
+   * Get the session with the specified ID   * @param cookieValue the unique ID of the session
+   * @param resultHandler will be called with a result holding the session, or a failure
+   */
+  def get (cookieValue: String, resultHandler: Handler[AsyncResult[scala.Option[Session]]]): Unit = {
+    asJava.asInstanceOf[JSessionStore].get(cookieValue.asInstanceOf[java.lang.String], {x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession, scala.Option[Session]](x, a => scala.Option(a).map(Session(_))))})
   }
 
   /**
-    * Delete the session with the specified ID
-    * @param id the unique ID of the session
-    * @param resultHandler will be called with a success or a failure
-    */
-  def delete(id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+   * Delete the session with the specified ID   * @param id the session id
+   * @param resultHandler will be called with a success or a failure
+   */
+  def delete (id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
-    * Add a session with the specified ID
-    * @param session the session
-    * @param resultHandler will be called with a success or a failure
-    */
-  def put(session: Session, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+   * Add a session with the specified ID   * @param session the session
+   * @param resultHandler will be called with a success or a failure
+   */
+  def put (session: Session, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
-    * Remove all sessions from the store
-    * @param resultHandler will be called with a success or a failure
-    */
-  def clear(resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+   * Remove all sessions from the store   * @param resultHandler will be called with a success or a failure
+   */
+  def clear (resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JSessionStore].clear({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
-    * Get the number of sessions in the store
-    * @param resultHandler will be called with the number, or a failure
-    */
-  def size(resultHandler: Handler[AsyncResult[Int]]): Unit = {
+   * Get the number of sessions in the store   * @param resultHandler will be called with the number, or a failure
+   */
+  def size (resultHandler: Handler[AsyncResult[Int]]): Unit = {
     asJava.asInstanceOf[JSessionStore].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
   }
 
   /**
-    * Close the store
-    */
-  def close(): Unit = {
+   * Close the store
+   */
+  def close (): Unit = {
     asJava.asInstanceOf[JSessionStore].close()
   }
 
+
  /**
-   * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def getFuture(id: String): scala.concurrent.Future[scala.Option[Session]] = {
+  * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getFuture (cookieValue: String): scala.concurrent.Future[scala.Option[Session]] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JSession, scala.Option[Session]](x => scala.Option(x).map(Session(_)))
-    asJava.asInstanceOf[JSessionStore].get(id.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    asJava.asInstanceOf[JSessionStore].get(cookieValue.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def deleteFuture(id: String): scala.concurrent.Future[Unit] = {
+  * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def deleteFuture (id: String): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def putFuture(session: Session): scala.concurrent.Future[Unit] = {
+  * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def putFuture (session: Session): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[clear]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def clearFuture(): scala.concurrent.Future[Unit] = {
+  * Like [[clear]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def clearFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JSessionStore].clear(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[size]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def sizeFuture(): scala.concurrent.Future[Int] = {
+  * Like [[size]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def sizeFuture (): scala.concurrent.Future[Int] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => x.asInstanceOf[Int])
     asJava.asInstanceOf[JSessionStore].size(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -161,5 +176,23 @@ class SessionStore(private val _asJava: Object) {
 }
 
 object SessionStore {
-  def apply(asJava: JSessionStore) = new SessionStore(asJava)  
+  def apply(asJava: JSessionStore) = new SessionStore(asJava)
+  
+  /**
+   * Create a Session store given a backend and configuration JSON.   * @param vertx vertx instance
+   * @return the store or runtime exception
+   */
+  def create(vertx: Vertx): SessionStore = {
+    SessionStore(JSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))
+  }
+
+  /**
+   * Create a Session store given a backend and configuration JSON.   * @param vertx vertx instance
+   * @param options extra options for initialization
+   * @return the store or runtime exception
+   */
+  def create(vertx: Vertx,options: io.vertx.core.json.JsonObject): SessionStore = {
+    SessionStore(JSessionStore.create(vertx.asJava.asInstanceOf[JVertx], options))
+  }
+
 }

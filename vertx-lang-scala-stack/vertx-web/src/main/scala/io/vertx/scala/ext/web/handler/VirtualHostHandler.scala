@@ -16,36 +16,40 @@
 
 package io.vertx.scala.ext.web.handler
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import scala.reflect.runtime.universe._
 import io.vertx.ext.web.handler.{VirtualHostHandler => JVirtualHostHandler}
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Handler that will filter requests based on the request Host name.
   */
-class VirtualHostHandler(private val _asJava: Object)
-    extends io.vertx.core.Handler[RoutingContext] {
 
+class VirtualHostHandler(private val _asJava: Object) extends io.vertx.core.Handler[RoutingContext] {
   def asJava = _asJava
 
 
-  override def handle(arg0: RoutingContext): Unit = {
+
+
+
+
+  override def handle (arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JVirtualHostHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
+
 
 }
 
 object VirtualHostHandler {
-  def apply(asJava: JVirtualHostHandler) = new VirtualHostHandler(asJava)  
+  def apply(asJava: JVirtualHostHandler) = new VirtualHostHandler(asJava)
+  
   /**
-    * Create a handler
-    * @return the handler
-    */
-  def create(hostname: String, handler: Handler[RoutingContext]): VirtualHostHandler = {
+   * Create a handler   * @return the handler
+   */
+  def create(hostname: String,handler: Handler[RoutingContext]): VirtualHostHandler = {
     VirtualHostHandler(JVirtualHostHandler.create(hostname.asInstanceOf[java.lang.String], {x: JRoutingContext => handler.handle(RoutingContext(x))}))
   }
 

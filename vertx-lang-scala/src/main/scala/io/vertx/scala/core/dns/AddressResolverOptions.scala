@@ -16,190 +16,206 @@
 
 package io.vertx.scala.core.dns
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.dns.{AddressResolverOptions => JAddressResolverOptions}
 import io.vertx.core.buffer.Buffer
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Configuration options for Vert.x hostname resolver. The resolver uses the local <i>hosts</i> file and performs
-  * DNS <i>A</i> and <i>AAAA</i> queries.
-  */
+ * Configuration options for Vert.x hostname resolver. The resolver uses the local <i>hosts</i> file and performs
+ * DNS <i>A</i> and <i>AAAA</i> queries.
+ */
+
 class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set the cache maximum TTL value in seconds. After successful resolution IP addresses are cached with their DNS response TTL,
-    * use this to set a maximum value to all responses TTL.
-    */
+   * Set the cache maximum TTL value in seconds. After successful resolution IP addresses are cached with their DNS response TTL,
+   * use this to set a maximum value to all responses TTL.
+   */
   def setCacheMaxTimeToLive(value: Int) = {
     asJava.setCacheMaxTimeToLive(value)
     this
   }
+
   def getCacheMaxTimeToLive: Int = {
     asJava.getCacheMaxTimeToLive().asInstanceOf[Int]
   }
 
   /**
-    * Set the cache minimum TTL value in seconds. After resolution successful IP addresses are cached with their DNS response TTL,
-    * use this to set a minimum value to all responses TTL.
-    */
+   * Set the cache minimum TTL value in seconds. After resolution successful IP addresses are cached with their DNS response TTL,
+   * use this to set a minimum value to all responses TTL.
+   */
   def setCacheMinTimeToLive(value: Int) = {
     asJava.setCacheMinTimeToLive(value)
     this
   }
+
   def getCacheMinTimeToLive: Int = {
     asJava.getCacheMinTimeToLive().asInstanceOf[Int]
   }
 
   /**
-    * Set the negative cache TTL value in seconds. After a failed hostname resolution, DNS queries won't be retried
-    * for a period of time equals to the negative TTL. This allows to reduce the response time of negative replies
-    * and reduce the amount of messages to DNS servers.
-    */
+   * Set the negative cache TTL value in seconds. After a failed hostname resolution, DNS queries won't be retried
+   * for a period of time equals to the negative TTL. This allows to reduce the response time of negative replies
+   * and reduce the amount of messages to DNS servers.
+   */
   def setCacheNegativeTimeToLive(value: Int) = {
     asJava.setCacheNegativeTimeToLive(value)
     this
   }
+
   def getCacheNegativeTimeToLive: Int = {
     asJava.getCacheNegativeTimeToLive().asInstanceOf[Int]
   }
 
   /**
-    * Set the path of an alternate hosts configuration file to use instead of the one provided by the os.
-    * <p/>
-    * The default value is null, so the operating system hosts config is used.
-    */
+   * Set the path of an alternate hosts configuration file to use instead of the one provided by the os.
+   * <p/>
+   * The default value is null, so the operating system hosts config is used.
+   */
   def setHostsPath(value: String) = {
     asJava.setHostsPath(value)
     this
   }
+
   def getHostsPath: String = {
     asJava.getHostsPath().asInstanceOf[String]
   }
 
   /**
-    * Set an alternate hosts configuration file to use instead of the one provided by the os.
-    * <p/>
-    * The value should contain the hosts content literaly, for instance <i>127.0.0.1 localhost</i>
-    * <p/>
-    * The default value is null, so the operating system hosts config is used.
-    */
+   * Set an alternate hosts configuration file to use instead of the one provided by the os.
+   * <p/>
+   * The value should contain the hosts content literaly, for instance <i>127.0.0.1 localhost</i>
+   * <p/>
+   * The default value is null, so the operating system hosts config is used.
+   */
   def setHostsValue(value: io.vertx.core.buffer.Buffer) = {
     asJava.setHostsValue(value)
     this
   }
+
   def getHostsValue: io.vertx.core.buffer.Buffer = {
     asJava.getHostsValue()
   }
 
   /**
-    * Set the maximum number of queries when an hostname is resolved.
-    */
+   * Set the maximum number of queries when an hostname is resolved.
+   */
   def setMaxQueries(value: Int) = {
     asJava.setMaxQueries(value)
     this
   }
+
   def getMaxQueries: Int = {
     asJava.getMaxQueries().asInstanceOf[Int]
   }
 
   /**
-    * Set the ndots value used when resolving using search domains, the default value is `-1` which
-    * determines the value from the OS on Linux or uses the value `1`.
-    */
+   * Set the ndots value used when resolving using search domains, the default value is `-1` which
+   * determines the value from the OS on Linux or uses the value `1`.
+   */
   def setNdots(value: Int) = {
     asJava.setNdots(value)
     this
   }
+
   def getNdots: Int = {
     asJava.getNdots().asInstanceOf[Int]
   }
 
   /**
-    * Set to true to enable the automatic inclusion in DNS queries of an optional record that hints
-    * the remote DNS server about how much data the resolver can read per response.
-    */
+   * Set to true to enable the automatic inclusion in DNS queries of an optional record that hints
+   * the remote DNS server about how much data the resolver can read per response.
+   */
   def setOptResourceEnabled(value: Boolean) = {
     asJava.setOptResourceEnabled(value)
     this
   }
+
   def isOptResourceEnabled: Boolean = {
     asJava.isOptResourceEnabled().asInstanceOf[Boolean]
   }
 
   /**
-    * Set the query timeout in milliseconds, i.e the amount of time after a query is considered to be failed.
-    */
+   * Set the query timeout in milliseconds, i.e the amount of time after a query is considered to be failed.
+   */
   def setQueryTimeout(value: Long) = {
     asJava.setQueryTimeout(value)
     this
   }
+
   def getQueryTimeout: Long = {
     asJava.getQueryTimeout().asInstanceOf[Long]
   }
 
   /**
-    * Set the DNS queries <i>Recursion Desired</i> flag value.
-    */
+   * Set the DNS queries <i>Recursion Desired</i> flag value.
+   */
   def setRdFlag(value: Boolean) = {
     asJava.setRdFlag(value)
     this
   }
+
   def getRdFlag: Boolean = {
     asJava.getRdFlag().asInstanceOf[Boolean]
   }
 
   /**
-    * Set to `true` to enable round-robin selection of the dns server to use. It spreads the query load
-    * among the servers and avoids all lookup to hit the first server of the list.
-    */
+   * Set to `true` to enable round-robin selection of the dns server to use. It spreads the query load
+   * among the servers and avoids all lookup to hit the first server of the list.
+   */
   def setRotateServers(value: Boolean) = {
     asJava.setRotateServers(value)
     this
   }
+
   def isRotateServers: Boolean = {
     asJava.isRotateServers().asInstanceOf[Boolean]
   }
 
   /**
-    * Set the lists of DNS search domains.
-    * <p/>
-    * When the search domain list is null, the effective search domain list will be populated using
-    * the system DNS search domains.
-    */
+   * Set the lists of DNS search domains.
+   * <p/>
+   * When the search domain list is null, the effective search domain list will be populated using
+   * the system DNS search domains.
+   */
   def addSearchDomain(value: String) = {
     asJava.addSearchDomain(value)
     this
   }
+
   def setSearchDomains(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setSearchDomains(value.asJava)
     this
   }
+
   def getSearchDomains: scala.collection.mutable.Buffer[String] = {
     asJava.getSearchDomains().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
-    * Set the list of DNS server addresses, an address is the IP  of the dns server, followed by an optional
-    * colon and a port, e.g `8.8.8.8` or {code 192.168.0.1:40000}. When the list is empty, the resolver
-    * will use the list of the system DNS server addresses from the environment, if that list cannot be retrieved
-    * it will use Google's public DNS servers `"8.8.8.8"` and `"8.8.4.4"`.
-    */
+   * Set the list of DNS server addresses, an address is the IP  of the dns server, followed by an optional
+   * colon and a port, e.g `8.8.8.8` or {code 192.168.0.1:40000}. When the list is empty, the resolver
+   * will use the list of the system DNS server addresses from the environment, if that list cannot be retrieved
+   * it will use Google's public DNS servers `"8.8.8.8"` and `"8.8.4.4"`.
+   */
   def addServer(value: String) = {
     asJava.addServer(value)
     this
   }
+
   def setServers(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setServers(value.asJava)
     this
   }
+
   def getServers: scala.collection.mutable.Buffer[String] = {
     asJava.getServers().asScala.map(x => x.asInstanceOf[String])
   }
+
 }
+
 
 object AddressResolverOptions {
   
@@ -223,3 +239,4 @@ object AddressResolverOptions {
     }
   }
 }
+

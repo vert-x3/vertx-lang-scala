@@ -16,20 +16,20 @@
 
 package io.vertx.scala.mqtt.messages
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.netty.handler.codec.mqtt.MqttQoS
 import io.vertx.core.buffer.Buffer
+import scala.reflect.runtime.universe._
 import io.vertx.mqtt.messages.{MqttMessage => JMqttMessage}
 import io.vertx.mqtt.messages.{MqttPublishMessage => JMqttPublishMessage}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Represents an MQTT PUBLISH message
-  */
-class MqttPublishMessage(private val _asJava: Object)
-    extends  MqttMessage  {
 
+  */
+
+class MqttPublishMessage(private val _asJava: Object) extends MqttMessage {
   def asJava = _asJava
   private var cached_0: Option[Int] = None
   private var cached_1: Option[io.netty.handler.codec.mqtt.MqttQoS] = None
@@ -40,8 +40,8 @@ class MqttPublishMessage(private val _asJava: Object)
 
 
   /**
-    * @return Message identifier
-    */
+   * @return Message identifier
+   */
   override def messageId(): Int = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttPublishMessage].messageId()
@@ -51,8 +51,8 @@ class MqttPublishMessage(private val _asJava: Object)
   }
 
   /**
-    * @return Quality of service level
-    */
+   * @return Quality of service level
+   */
   def qosLevel(): io.netty.handler.codec.mqtt.MqttQoS = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JMqttPublishMessage].qosLevel()
@@ -62,8 +62,8 @@ class MqttPublishMessage(private val _asJava: Object)
   }
 
   /**
-    * @return If the message is a duplicate
-    */
+   * @return If the message is a duplicate
+   */
   def isDup(): Boolean = {
     if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JMqttPublishMessage].isDup()
@@ -73,8 +73,8 @@ class MqttPublishMessage(private val _asJava: Object)
   }
 
   /**
-    * @return If the message needs to be retained
-    */
+   * @return If the message needs to be retained
+   */
   def isRetain(): Boolean = {
     if (cached_3 == None) {
       val tmp = asJava.asInstanceOf[JMqttPublishMessage].isRetain()
@@ -84,8 +84,8 @@ class MqttPublishMessage(private val _asJava: Object)
   }
 
   /**
-    * @return Topic on which the message was published
-    */
+   * @return Topic on which the message was published
+   */
   def topicName(): String = {
     if (cached_4 == None) {
       val tmp = asJava.asInstanceOf[JMqttPublishMessage].topicName()
@@ -95,8 +95,8 @@ class MqttPublishMessage(private val _asJava: Object)
   }
 
   /**
-    * @return Payload message
-    */
+   * @return Payload message
+   */
   def payload(): io.vertx.core.buffer.Buffer = {
     if (cached_5 == None) {
       val tmp = asJava.asInstanceOf[JMqttPublishMessage].payload()
@@ -105,8 +105,13 @@ class MqttPublishMessage(private val _asJava: Object)
     cached_5.get
   }
 
+
+
+
+
 }
 
 object MqttPublishMessage {
-  def apply(asJava: JMqttPublishMessage) = new MqttPublishMessage(asJava)  
+  def apply(asJava: JMqttPublishMessage) = new MqttPublishMessage(asJava)
+  
 }

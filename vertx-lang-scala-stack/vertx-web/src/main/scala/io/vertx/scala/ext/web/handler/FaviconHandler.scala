@@ -16,65 +16,66 @@
 
 package io.vertx.scala.ext.web.handler
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import scala.reflect.runtime.universe._
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.ext.web.handler.{FaviconHandler => JFaviconHandler}
 import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A handler that serves favicons.
   * 
   * If no file system path is specified it will attempt to serve a resource called `favicon.ico` from the classpath.
   */
-class FaviconHandler(private val _asJava: Object)
-    extends io.vertx.core.Handler[RoutingContext] {
 
+class FaviconHandler(private val _asJava: Object) extends io.vertx.core.Handler[RoutingContext] {
   def asJava = _asJava
 
 
-  override def handle(arg0: RoutingContext): Unit = {
+
+
+
+
+  override def handle (arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JFaviconHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
+
 
 }
 
 object FaviconHandler {
-  def apply(asJava: JFaviconHandler) = new FaviconHandler(asJava)  
+  def apply(asJava: JFaviconHandler) = new FaviconHandler(asJava)
+  
   /**
-    * Create a handler with defaults
-    * @return the handler
-    */
+   * Create a handler with defaults   * @return the handler
+   */
   def create(): FaviconHandler = {
     FaviconHandler(JFaviconHandler.create())
   }
 
   /**
-    * Create a handler attempting to load favicon file from the specified path
-    * @param path the path
-    * @return the handler
-    */
+   * Create a handler attempting to load favicon file from the specified path   * @param path the path
+   * @return the handler
+   */
   def create(path: String): FaviconHandler = {
     FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Create a handler attempting to load favicon file from the specified path, and with the specified max cache time
-    * @param path the path
-    * @param maxAgeSeconds max how long the file will be cached by browser, in seconds
-    * @return the handler
-    */
-  def create(path: String, maxAgeSeconds: Long): FaviconHandler = {
+   * Create a handler attempting to load favicon file from the specified path, and with the specified max cache time   * @param path the path
+   * @param maxAgeSeconds max how long the file will be cached by browser, in seconds
+   * @return the handler
+   */
+  def create(path: String,maxAgeSeconds: Long): FaviconHandler = {
     FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String], maxAgeSeconds.asInstanceOf[java.lang.Long]))
   }
 
   /**
-    * Create a handler with the specified max cache time
-    * @param maxAgeSeconds max how long the file will be cached by browser, in seconds
-    * @return the handler
-    */
+   * Create a handler with the specified max cache time   * @param maxAgeSeconds max how long the file will be cached by browser, in seconds
+   * @return the handler
+   */
   def create(maxAgeSeconds: Long): FaviconHandler = {
     FaviconHandler(JFaviconHandler.create(maxAgeSeconds.asInstanceOf[java.lang.Long]))
   }

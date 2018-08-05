@@ -1,7 +1,7 @@
 == The OAuth2 auth provider
 
-This component contains an out of the box OAuth2 Relay Party implementation. To use this project, add the following
-dependency to the _dependencies_ section of your build descriptor:
+This component contains an out of the box OAuth2 (and to some extent OpenID Connect) relying party implementation.
+To use this project, add the following dependency to the _dependencies_ section of your build descriptor:
 
 * Maven (in your `pom.xml`):
 
@@ -29,6 +29,10 @@ Vert.x OAuth2 supports the following flows.
 * Authorization Code Flow (for apps with servers that can store persistent information).
 * Password Credentials Flow (when previous flow can't be used or during development).
 * Client Credentials Flow (the client can request an access token using only its client credentials)
+
+The same code will work with OpenID Connect https://openid.net/connect/ servers and supports the Discovery protocol
+as specified in http://openid.net/specs/openid-connect-discovery-1_0.html .
+
 
 === Authorization Code Flow
 
@@ -207,6 +211,46 @@ oauth2.authenticateFuture(tokenConfig).onComplete{
 
 ----
 
+=== OpenID Connect Discovery
+
+There is limited support for OpenID Discovery servers. Using OIDC Discovery will simplify the configuration of your
+auth module into a single line of code, for example, consider setting up your auth using Google:
+
+[source,scala]
+----
+
+OpenIDConnectAuth.discover(vertx, OAuth2ClientOptions()
+  .setSite("https://accounts.google.com")
+  .setClientID("clientId")
+, {
+  case Success(result) => {
+    // the setup call succeeded.
+    // at this moment your auth is ready to use and
+    // google signature keys are loaded so tokens can be decoded and verified.
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+})
+
+----
+
+Behind the scenes a couple of actions are performed:
+
+1. HTTP get request to the `.well-known/openid-configuration` resource
+2. Validation of the response `issuer` field as mandated by the spec (the issuer value must match the request one)
+3. If the JWK uri is present, keys are loaded from the server and added to the auth keychain
+4. the auth module is configure and returned to the user.
+
+A couple of well known OpenID Connect Discovery providers are:
+
+* Keycloak: `http://keycloakhost:keycloakport/auth/realms/{realm}`
+* Google: `https://accounts.google.com`
+* SalesForce: `https://login.salesforce.com`
+* Microsoft: `https://login.windows.net/common`
+
+This and the given `client id` is enough to configure your auth provider object.
+
 === AccessToken object
 
 When a token expires we need to refresh it. OAuth2 offers the AccessToken class that add a couple of useful methods
@@ -301,6 +345,30 @@ var username = KeycloakHelper.preferredUsername(principal)
 
 ----
 
+Please remember that Keycloak **does** implement OpenID Connect, so you can configure it just by using it's discovery url:
+
+[source,scala]
+----
+
+OpenIDConnectAuth.discover(vertx, OAuth2ClientOptions()
+  .setSite("http://server:port/auth/realms/your_realm")
+  .setClientID("clientId")
+, {
+  case Success(result) => {
+    // the setup call succeeded.
+    // at this moment your auth is ready to use and
+    // google signature keys are loaded so tokens can be decoded and verified.
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+})
+
+----
+
+Since you can deploy your Keycloak server anywhere, just replace `server:port` with the correct value and the `your_realm`
+value with your application realm.
+
 ==== Google Server to Server
 
 The provider also supports Server to Server or the RFC7523 extension. This is a feature present on Google with their
@@ -308,7 +376,7 @@ service account.
 
 === Token Introspection
 
-Tokens can be introspected in order to assert that they are still valid. Although there is RFC7660 for this purpose
+Tokens can be introspected in order to assert that they are still valid. Although there is RFC7662 for this purpose
 not many providers implement it. Instead there are variations also known as `TokenInfo` end points. The OAuth2
 provider will accept both end points as a configuration. Currently we are known to work with `Google` and `Keycloak`.
 
@@ -358,7 +426,7 @@ oauth2.decodeTokenFuture("jwt-token").onComplete{
 
 ----
 
-Until now we covered mostly authentication, although the implementation is relay party (that means that the real
+Until now we covered mostly authentication, although the implementation is relying party (that means that the real
 authentication happens somewhere else), there is more you can do with the handler. For example you can also do
 authorization if the provider is known to support JSON web tokens. This is a common feature if your provider is a
 OpenId Connect provider or if the provider does support `access_token`s as JWTs.
@@ -366,7 +434,15 @@ OpenId Connect provider or if the provider does support `access_token`s as JWTs.
 Such provider is Keycloak that is a OpenId Connect implementation. In that case you will be able to perform
 authorization in a very easy way.
 
-== Authorization with JWT tokens
+== Role Based Access Control
+
+OAuth2 is an AuthN protocol, however OpenId Connect adds JWTs to the token format which means that AuthZ can be encoded
+at the token level. Currently there are 2 known JWT AuthZ known formats:
+
+* Keycloak
+* MicroProfile JWT 1.1 spec
+
+=== Keycloak JWT
 
 Given that Keycloak does provide `JWT` `access_token`s one can authorize at two distinct levels:
 
@@ -383,14 +459,14 @@ In order to map to keycloak's token format the following checks are performed:
 2. If the role is `realm` then the lookup happens in `realm_access` list
 3. If a role is provided then the lookup happends in the `resource_access` list under the role name
 
-=== Check for a specific authorities
+==== Check for a specific authorities
 
 Here is one example how you can perform authorization after the user has been loaded from the oauth2 handshake, for
 example you want to see if the user can `print` in the current application:
 
 [source,scala]
 ----
-user.isAuthorisedFuture("print").onComplete{
+user.isAuthorizedFuture("print").onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -401,7 +477,7 @@ However this is quite specific, you might want to verify if the user can `add-us
 
 [source,scala]
 ----
-user.isAuthorisedFuture("realm:add-user").onComplete{
+user.isAuthorizedFuture("realm:add-user").onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -412,12 +488,28 @@ Or if the user can access the `year-report` in the `finance` department:
 
 [source,scala]
 ----
-user.isAuthorisedFuture("finance:year-report").onComplete{
+user.isAuthorizedFuture("finance:year-report").onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
 
 ----
+
+=== MicroProfile JWT 1.1 spec
+
+Another format in the form of a spec is the MP-JWT 1.1. This spec defines a JSON array of strings under the property
+name `groups` that define the "groups" the token has an authority over.
+
+In order to use this spec to assert AuthZ the right handler must be set:
+
+[source,scala]
+----
+// use the MP-JWT 1.1 spec handler to
+// handle Role-Based Access Control (AuthZ)
+oauth2Auth.rbacHandler(MicroProfileRBAC.create())
+
+----
+
 
 == Token Management
 

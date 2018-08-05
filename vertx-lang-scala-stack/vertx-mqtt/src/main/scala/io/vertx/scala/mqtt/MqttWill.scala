@@ -16,24 +16,26 @@
 
 package io.vertx.scala.mqtt
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.mqtt.{MqttWill => JMqttWill}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Will information from the remote MQTT client
-  */
+ * Will information from the remote MQTT client
+
+ */
+
 class MqttWill(private val _asJava: JMqttWill) {
-
   def asJava = _asJava
-
   /**
-    */
 
+   */
   /**
-    */
+
+   */
 }
+
 
 object MqttWill {
   
@@ -57,3 +59,4 @@ object MqttWill {
     }
   }
 }
+

@@ -16,18 +16,19 @@
 
 package io.vertx.scala.core.net
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Configures a <a href="../../../../../../../cheatsheet/TCPSSLOptions.html">TCPSSLOptions</a> to use the JDK ssl engine implementation.
-  */
-class JdkSSLEngineOptions(private val _asJava: JJdkSSLEngineOptions) {
+ * Configures a <a href="../../../../../../../cheatsheet/TCPSSLOptions.html">TCPSSLOptions</a> to use the JDK ssl engine implementation.
+ */
 
+class JdkSSLEngineOptions(private val _asJava: JJdkSSLEngineOptions) {
   def asJava = _asJava
 }
+
 
 object JdkSSLEngineOptions {
   
@@ -51,3 +52,4 @@ object JdkSSLEngineOptions {
     }
   }
 }
+

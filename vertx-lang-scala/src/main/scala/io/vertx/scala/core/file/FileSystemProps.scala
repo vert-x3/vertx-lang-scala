@@ -16,42 +16,47 @@
 
 package io.vertx.scala.core.file
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.core.file.{FileSystemProps => JFileSystemProps}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Represents properties of the file system.
   */
-class FileSystemProps(private val _asJava: Object) {
 
+class FileSystemProps(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
+
+
   /**
-    * @return The total space on the file system, in bytes
-    */
-  def totalSpace(): Long = {
+   * @return The total space on the file system, in bytes
+   */
+  def totalSpace (): Long = {
     asJava.asInstanceOf[JFileSystemProps].totalSpace().asInstanceOf[Long]
   }
 
   /**
-    * @return The total un-allocated space on the file system, in bytes
-    */
-  def unallocatedSpace(): Long = {
+   * @return The total un-allocated space on the file system, in bytes
+   */
+  def unallocatedSpace (): Long = {
     asJava.asInstanceOf[JFileSystemProps].unallocatedSpace().asInstanceOf[Long]
   }
 
   /**
-    * @return The total usable space on the file system, in bytes
-    */
-  def usableSpace(): Long = {
+   * @return The total usable space on the file system, in bytes
+   */
+  def usableSpace (): Long = {
     asJava.asInstanceOf[JFileSystemProps].usableSpace().asInstanceOf[Long]
   }
+
 
 }
 
 object FileSystemProps {
-  def apply(asJava: JFileSystemProps) = new FileSystemProps(asJava)  
+  def apply(asJava: JFileSystemProps) = new FileSystemProps(asJava)
+  
 }

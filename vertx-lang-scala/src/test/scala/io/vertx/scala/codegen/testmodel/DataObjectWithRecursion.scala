@@ -16,31 +16,37 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.codegen.testmodel.{DataObjectWithRecursion => JDataObjectWithRecursion}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
-class DataObjectWithRecursion(private val _asJava: JDataObjectWithRecursion) {
 
+ */
+
+class DataObjectWithRecursion(private val _asJava: JDataObjectWithRecursion) {
   def asJava = _asJava
   def setData(value: String) = {
     asJava.setData(value)
     this
   }
+
   def getData: String = {
     asJava.getData().asInstanceOf[String]
   }
+
   def setNext(value: DataObjectWithRecursion) = {
     asJava.setNext(value.asJava)
     this
   }
+
   def getNext: DataObjectWithRecursion = {
     DataObjectWithRecursion(asJava.getNext())
   }
+
 }
+
 
 object DataObjectWithRecursion {
   
@@ -64,3 +70,4 @@ object DataObjectWithRecursion {
     }
   }
 }
+

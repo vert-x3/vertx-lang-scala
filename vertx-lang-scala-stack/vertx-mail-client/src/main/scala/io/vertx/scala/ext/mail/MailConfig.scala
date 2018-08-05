@@ -16,223 +16,240 @@
 
 package io.vertx.scala.ext.mail
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.mail.{MailConfig => JMailConfig}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * represents the configuration of a mail service with mail server hostname,
-  * port, security options, login options and login/password
-  */
+ * represents the configuration of a mail service with mail server hostname,
+ * port, security options, login options and login/password
+ */
+
 class MailConfig(private val _asJava: JMailConfig) {
-
   def asJava = _asJava
-
   /**
-    * set if sending allows rcpt errors
-    * 
-    * if true, the mail will be sent to the recipients that the server accepted, if any
-    * 
-    */
+   * set if sending allows rcpt errors
+   * 
+   * if true, the mail will be sent to the recipients that the server accepted, if any
+   * 
+   */
   def setAllowRcptErrors(value: Boolean) = {
     asJava.setAllowRcptErrors(value)
     this
   }
+
   def isAllowRcptErrors: Boolean = {
     asJava.isAllowRcptErrors().asInstanceOf[Boolean]
   }
 
   /**
-    * set string of allowed auth methods.
-    * if set only these methods will be used
-    * if the server supports them. If null or empty all supported methods may be
-    * used
-    */
+   * set string of allowed auth methods.
+   * if set only these methods will be used
+   * if the server supports them. If null or empty all supported methods may be
+   * used
+   */
   def setAuthMethods(value: String) = {
     asJava.setAuthMethods(value)
     this
   }
+
   def getAuthMethods: String = {
     asJava.getAuthMethods().asInstanceOf[String]
   }
 
   /**
-    * set if ESMTP should be tried as first command (EHLO)
-    * 
-    * rfc 1869 states that clients should always attempt EHLO as first command to determine if ESMTP
-    * is supported, if this returns an error code, HELO is tried to use old SMTP.
-    * If there is a server that does not support EHLO and does not give an error code back, the connection
-    * should be closed and retried with HELO. We do not do that and rather support turning off ESMTP with a
-    * setting. The odds of this actually happening are very small since the client will not connect to arbitrary
-    * smtp hosts on the internet. Since the client knows that is connects to a host that doesn't support ESMTP/EHLO
-    * in that way, the property has to be set to false.
-    * 
-    */
+   * set if ESMTP should be tried as first command (EHLO)
+   * 
+   * rfc 1869 states that clients should always attempt EHLO as first command to determine if ESMTP
+   * is supported, if this returns an error code, HELO is tried to use old SMTP.
+   * If there is a server that does not support EHLO and does not give an error code back, the connection
+   * should be closed and retried with HELO. We do not do that and rather support turning off ESMTP with a
+   * setting. The odds of this actually happening are very small since the client will not connect to arbitrary
+   * smtp hosts on the internet. Since the client knows that is connects to a host that doesn't support ESMTP/EHLO
+   * in that way, the property has to be set to false.
+   * 
+   */
   def setDisableEsmtp(value: Boolean) = {
     asJava.setDisableEsmtp(value)
     this
   }
+
   def isDisableEsmtp: Boolean = {
     asJava.isDisableEsmtp().asInstanceOf[Boolean]
   }
 
   /**
-    * Set the hostname of the smtp server.
-    */
+   * Set the hostname of the smtp server.
+   */
   def setHostname(value: String) = {
     asJava.setHostname(value)
     this
   }
+
   def getHostname: String = {
     asJava.getHostname().asInstanceOf[String]
   }
 
   /**
-    * set if connection pool is enabled
-    * default is true
-    * 
-    * if the connection pooling is disabled, the max number of sockets is enforced nevertheless
-    * 
-    */
+   * set if connection pool is enabled
+   * default is true
+   * 
+   * if the connection pooling is disabled, the max number of sockets is enforced nevertheless
+   * 
+   */
   def setKeepAlive(value: Boolean) = {
     asJava.setKeepAlive(value)
     this
   }
+
   def isKeepAlive: Boolean = {
     asJava.isKeepAlive().asInstanceOf[Boolean]
   }
 
   /**
-    * get the key store filename to be used when opening SMTP connections
-    * 
-    * if not set, an options object will be created based on other settings (ssl
-    * and trustAll)
-    */
+   * get the key store filename to be used when opening SMTP connections
+   * 
+   * if not set, an options object will be created based on other settings (ssl
+   * and trustAll)
+   */
   def setKeyStore(value: String) = {
     asJava.setKeyStore(value)
     this
   }
+
   def getKeyStore: String = {
     asJava.getKeyStore().asInstanceOf[String]
   }
 
   /**
-    * get the key store password to be used when opening SMTP connections
-    */
+   * get the key store password to be used when opening SMTP connections
+   */
   def setKeyStorePassword(value: String) = {
     asJava.setKeyStorePassword(value)
     this
   }
+
   def getKeyStorePassword: String = {
     asJava.getKeyStorePassword().asInstanceOf[String]
   }
 
   /**
-    * Set the login mode for the connection.
-    * 
-    * Either DISABLED, OPTIONAL or REQUIRED
-    */
+   * Set the login mode for the connection.
+   * 
+   * Either DISABLED, OPTIONAL or REQUIRED
+   */
   def setLogin(value: io.vertx.ext.mail.LoginOption) = {
     asJava.setLogin(value)
     this
   }
+
   def getLogin: io.vertx.ext.mail.LoginOption = {
     asJava.getLogin()
   }
 
   /**
-    * set the max allowed number of open connections to the mail server
-    * if not set the default is 10
-    */
+   * set the max allowed number of open connections to the mail server
+   * if not set the default is 10
+   */
   def setMaxPoolSize(value: Int) = {
     asJava.setMaxPoolSize(value)
     this
   }
+
   def getMaxPoolSize: Int = {
     asJava.getMaxPoolSize().asInstanceOf[Int]
   }
 
   /**
-    * set the hostname to be used for HELO/EHLO and the Message-ID
-    */
+   * set the hostname to be used for HELO/EHLO and the Message-ID
+   */
   def setOwnHostname(value: String) = {
     asJava.setOwnHostname(value)
     this
   }
+
   def getOwnHostname: String = {
     asJava.getOwnHostname().asInstanceOf[String]
   }
 
   /**
-    * Set the password for the login.
-    */
+   * Set the password for the login.
+   */
   def setPassword(value: String) = {
     asJava.setPassword(value)
     this
   }
+
   def getPassword: String = {
     asJava.getPassword().asInstanceOf[String]
   }
 
   /**
-    * Set the port of the smtp server.
-    */
+   * Set the port of the smtp server.
+   */
   def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
+
   def getPort: Int = {
     asJava.getPort().asInstanceOf[Int]
   }
 
   /**
-    * Set the sslOnConnect mode for the connection.
-    */
+   * Set the sslOnConnect mode for the connection.
+   */
   def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
+
   def isSsl: Boolean = {
     asJava.isSsl().asInstanceOf[Boolean]
   }
 
   /**
-    * Set the tls security mode for the connection.
-    * 
-    * Either NONE, OPTIONAL or REQUIRED
-    */
+   * Set the tls security mode for the connection.
+   * 
+   * Either NONE, OPTIONAL or REQUIRED
+   */
   def setStarttls(value: io.vertx.ext.mail.StartTLSOptions) = {
     asJava.setStarttls(value)
     this
   }
+
   def getStarttls: io.vertx.ext.mail.StartTLSOptions = {
     asJava.getStarttls()
   }
 
   /**
-    * set whether to trust all certificates on ssl connect the option is also
-    * applied to STARTTLS operation
-    */
+   * set whether to trust all certificates on ssl connect the option is also
+   * applied to STARTTLS operation
+   */
   def setTrustAll(value: Boolean) = {
     asJava.setTrustAll(value)
     this
   }
+
   def isTrustAll: Boolean = {
     asJava.isTrustAll().asInstanceOf[Boolean]
   }
 
   /**
-    * Set the username for the login.
-    */
+   * Set the username for the login.
+   */
   def setUsername(value: String) = {
     asJava.setUsername(value)
     this
   }
+
   def getUsername: String = {
     asJava.getUsername().asInstanceOf[String]
   }
+
 }
+
 
 object MailConfig {
   
@@ -256,3 +273,4 @@ object MailConfig {
     }
   }
 }
+

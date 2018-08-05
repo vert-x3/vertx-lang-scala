@@ -16,10 +16,10 @@
 
 package io.vertx.scala.core.net
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * The address of a socket, an inet socket address or a domain socket address.
@@ -27,52 +27,55 @@ import io.vertx.core.net.{SocketAddress => JSocketAddress}
   * Use [[io.vertx.scala.core.net.SocketAddress#inetSocketAddress]] to create an inet socket address and [[io.vertx.scala.core.net.SocketAddress#domainSocketAddress]]
   * to create a domain socket address
   */
-class SocketAddress(private val _asJava: Object) {
 
+class SocketAddress(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
+
+
   /**
-    * @return the address host or `null` for a domain socket
-    */
-  def host(): String = {
+   * @return the address host or `null` for a domain socket
+   */
+  def host (): String = {
     asJava.asInstanceOf[JSocketAddress].host().asInstanceOf[String]
   }
 
   /**
-    * @return the address port or `-1` for a domain socket
-    */
-  def port(): Int = {
+   * @return the address port or `-1` for a domain socket
+   */
+  def port (): Int = {
     asJava.asInstanceOf[JSocketAddress].port().asInstanceOf[Int]
   }
 
   /**
-    * @return the address path or `null` for a inet socket
-    */
-  def path(): String = {
+   * @return the address path or `null` for a inet socket
+   */
+  def path (): String = {
     asJava.asInstanceOf[JSocketAddress].path().asInstanceOf[String]
   }
+
 
 }
 
 object SocketAddress {
-  def apply(asJava: JSocketAddress) = new SocketAddress(asJava)  
+  def apply(asJava: JSocketAddress) = new SocketAddress(asJava)
+  
   /**
-    * Create a inet socket address, `host` must be non `null` and `port` must be between `0`
-    * and `65536`.
-    * @param port the address port
-    * @param host the address host
-    * @return the created socket address
-    */
-  def inetSocketAddress(port: Int, host: String): SocketAddress = {
+   * Create a inet socket address, `host` must be non `null` and `port` must be between `0`
+   * and `65536`.   * @param port the address port
+   * @param host the address host
+   * @return the created socket address
+   */
+  def inetSocketAddress(port: Int,host: String): SocketAddress = {
     SocketAddress(JSocketAddress.inetSocketAddress(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Create a domain socket address.
-    * @param path the address path
-    * @return the created socket address
-    */
+   * Create a domain socket address.   * @param path the address path
+   * @return the created socket address
+   */
   def domainSocketAddress(path: String): SocketAddress = {
     SocketAddress(JSocketAddress.domainSocketAddress(path.asInstanceOf[java.lang.String]))
   }

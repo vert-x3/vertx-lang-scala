@@ -16,17 +16,29 @@
 
 package io.vertx.scala.redis.op
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.redis.op.{LimitOptions => JLimitOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
-class LimitOptions(private val _asJava: JLimitOptions) {
 
+ */
+
+class LimitOptions(private val _asJava: JLimitOptions) {
   def asJava = _asJava
+  def setCount(value: Long) = {
+    asJava.setCount(value)
+    this
+  }
+
+  def setOffset(value: Long) = {
+    asJava.setOffset(value)
+    this
+  }
+
 }
+
 
 object LimitOptions {
   
@@ -50,3 +62,4 @@ object LimitOptions {
     }
   }
 }
+

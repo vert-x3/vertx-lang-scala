@@ -16,71 +16,85 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.{DataObjectWithMapAdders => JDataObjectWithMapAdders}
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
-class DataObjectWithMapAdders(private val _asJava: JDataObjectWithMapAdders) {
 
+ */
+
+class DataObjectWithMapAdders(private val _asJava: JDataObjectWithMapAdders) {
   def asJava = _asJava
   def addBooleanValue(key: String, value: Boolean) = {
     asJava.addBooleanValue(key, value.asInstanceOf[java.lang.Boolean])
     this
   }
+
   def addDataObjectValue(key: String, value: TestDataObject) = {
     asJava.addDataObjectValue(key, value.asJava)
     this
   }
+
   def addDoubleValue(key: String, value: Double) = {
     asJava.addDoubleValue(key, value.asInstanceOf[java.lang.Double])
     this
   }
+
   def addEnumValue(key: String, value: io.vertx.codegen.testmodel.TestEnum) = {
     asJava.addEnumValue(key, value)
     this
   }
+
   def addFloatValue(key: String, value: Float) = {
     asJava.addFloatValue(key, value.asInstanceOf[java.lang.Float])
     this
   }
+
   def addGenEnumValue(key: String, value: io.vertx.codegen.testmodel.TestGenEnum) = {
     asJava.addGenEnumValue(key, value)
     this
   }
+
   def addInstantValue(key: String, value: java.time.Instant) = {
     asJava.addInstantValue(key, value.asInstanceOf[java.time.Instant])
     this
   }
+
   def addIntegerValue(key: String, value: Int) = {
     asJava.addIntegerValue(key, value.asInstanceOf[java.lang.Integer])
     this
   }
+
   def addJsonArrayValue(key: String, value: io.vertx.core.json.JsonArray) = {
     asJava.addJsonArrayValue(key, value)
     this
   }
+
   def addJsonObjectValue(key: String, value: io.vertx.core.json.JsonObject) = {
     asJava.addJsonObjectValue(key, value)
     this
   }
+
   def addLongValue(key: String, value: Long) = {
     asJava.addLongValue(key, value.asInstanceOf[java.lang.Long])
     this
   }
+
   def addShortValue(key: String, value: Short) = {
     asJava.addShortValue(key, value.asInstanceOf[java.lang.Short])
     this
   }
+
   def addStringValue(key: String, value: String) = {
     asJava.addStringValue(key, value.asInstanceOf[java.lang.String])
     this
   }
+
 }
+
 
 object DataObjectWithMapAdders {
   
@@ -104,3 +118,4 @@ object DataObjectWithMapAdders {
     }
   }
 }
+

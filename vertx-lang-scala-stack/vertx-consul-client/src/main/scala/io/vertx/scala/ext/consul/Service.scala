@@ -16,95 +16,103 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.ext.consul.{Service => JService}
+import scala.collection.JavaConverters._
 
 /**
-  * Holds properties of service and node that its containing
-  */
+ * Holds properties of service and node that its containing
+ */
+
 class Service(private val _asJava: JService) {
-
   def asJava = _asJava
-
   /**
-    * Set service address
-    */
+   * Set service address
+   */
   def setAddress(value: String) = {
     asJava.setAddress(value)
     this
   }
+
   def getAddress: String = {
     asJava.getAddress().asInstanceOf[String]
   }
 
   /**
-    * Set ID of service
-    */
+   * Set ID of service
+   */
   def setId(value: String) = {
     asJava.setId(value)
     this
   }
+
   def getId: String = {
     asJava.getId().asInstanceOf[String]
   }
 
   /**
-    * Set service name
-    */
+   * Set service name
+   */
   def setName(value: String) = {
     asJava.setName(value)
     this
   }
+
   def getName: String = {
     asJava.getName().asInstanceOf[String]
   }
 
   /**
-    * Set node name
-    */
+   * Set node name
+   */
   def setNode(value: String) = {
     asJava.setNode(value)
     this
   }
+
   def getNode: String = {
     asJava.getNode().asInstanceOf[String]
   }
 
   /**
-    * Set node address
-    */
+   * Set node address
+   */
   def setNodeAddress(value: String) = {
     asJava.setNodeAddress(value)
     this
   }
+
   def getNodeAddress: String = {
     asJava.getNodeAddress().asInstanceOf[String]
   }
 
   /**
-    * Set service port
-    */
+   * Set service port
+   */
   def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
+
   def getPort: Int = {
     asJava.getPort().asInstanceOf[Int]
   }
 
   /**
-    * Set list of service tags
-    */
+   * Set list of service tags
+   */
   def setTags(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setTags(value.asJava)
     this
   }
+
   def getTags: scala.collection.mutable.Buffer[String] = {
     asJava.getTags().asScala.map(x => x.asInstanceOf[String])
   }
+
 }
+
 
 object Service {
   
@@ -128,3 +136,4 @@ object Service {
     }
   }
 }
+

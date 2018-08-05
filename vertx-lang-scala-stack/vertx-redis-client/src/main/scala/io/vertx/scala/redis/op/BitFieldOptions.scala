@@ -16,36 +16,43 @@
 
 package io.vertx.scala.redis.op
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.redis.op.{BitFieldOptions => JBitFieldOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
+
 
 class BitFieldOptions(private val _asJava: JBitFieldOptions) {
-
   def asJava = _asJava
   def setGet(value: BitFieldGetCommand) = {
     asJava.setGet(value.asJava)
     this
   }
+
   def getGet: BitFieldGetCommand = {
     BitFieldGetCommand(asJava.getGet())
   }
+
   def setIncrby(value: BitFieldIncrbyCommand) = {
     asJava.setIncrby(value.asJava)
     this
   }
+
   def getIncrby: BitFieldIncrbyCommand = {
     BitFieldIncrbyCommand(asJava.getIncrby())
   }
+
   def setSet(value: BitFieldSetCommand) = {
     asJava.setSet(value.asJava)
     this
   }
+
   def getSet: BitFieldSetCommand = {
     BitFieldSetCommand(asJava.getSet())
   }
+
 }
+
 
 object BitFieldOptions {
   
@@ -69,3 +76,4 @@ object BitFieldOptions {
     }
   }
 }
+

@@ -16,84 +16,91 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{Session => JSession}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds properties of Consul sessions
-  */
+ * Holds properties of Consul sessions
+ */
+
 class Session(private val _asJava: JSession) {
-
   def asJava = _asJava
-
   /**
-    * Set the list of associated health checks
-    */
+   * Set the list of associated health checks
+   */
   def setChecks(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setChecks(value.asJava)
     this
   }
+
   def getChecks: scala.collection.mutable.Buffer[String] = {
     asJava.getChecks().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
-    * Set the create index of session
-    */
+   * Set the create index of session
+   */
   def setCreateIndex(value: Long) = {
     asJava.setCreateIndex(value)
     this
   }
+
   def getCreateIndex: Long = {
     asJava.getCreateIndex().asInstanceOf[Long]
   }
 
   /**
-    * Set the ID of node
-    */
+   * Set the ID of node
+   */
   def setId(value: String) = {
     asJava.setId(value)
     this
   }
+
   def getId: String = {
     asJava.getId().asInstanceOf[String]
   }
 
   /**
-    * Set Consul index
-    */
+   * Set Consul index
+   */
   def setIndex(value: Long) = {
     asJava.setIndex(value)
     this
   }
+
   def getIndex: Long = {
     asJava.getIndex().asInstanceOf[Long]
   }
 
   /**
-    * Set the Lock delay of session
-    */
+   * Set the Lock delay of session
+   */
   def setLockDelay(value: Long) = {
     asJava.setLockDelay(value)
     this
   }
+
   def getLockDelay: Long = {
     asJava.getLockDelay().asInstanceOf[Long]
   }
 
   /**
-    * Set the ID of node
-    */
+   * Set the ID of node
+   */
   def setNode(value: String) = {
     asJava.setNode(value)
     this
   }
+
   def getNode: String = {
     asJava.getNode().asInstanceOf[String]
   }
+
 }
+
 
 object Session {
   
@@ -117,3 +124,4 @@ object Session {
     }
   }
 }
+

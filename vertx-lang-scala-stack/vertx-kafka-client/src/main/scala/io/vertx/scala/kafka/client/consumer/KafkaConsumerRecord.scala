@@ -16,78 +16,94 @@
 
 package io.vertx.scala.kafka.client.consumer
 
-import io.vertx.lang.scala.HandlerOps._
+import io.vertx.scala.kafka.client.producer.KafkaHeader
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.kafka.client.consumer.{KafkaConsumerRecord => JKafkaConsumerRecord}
+import scala.collection.JavaConverters._
+import io.vertx.kafka.client.producer.{KafkaHeader => JKafkaHeader}
 import org.apache.kafka.common.record.TimestampType
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Vert.x Kafka consumer record
-  */
-class KafkaConsumerRecord[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 
+  */
+
+class KafkaConsumerRecord[K: TypeTag, V: TypeTag](private val _asJava: Object) {
   def asJava = _asJava
 
 
+
+
+
   /**
-    * @return the topic this record is received from
-    */
-  def topic(): String = {
+   * @return the topic this record is received from
+   */
+  def topic (): String = {
     asJava.asInstanceOf[JKafkaConsumerRecord[Object, Object]].topic().asInstanceOf[String]
   }
 
   /**
-    * @return the partition from which this record is received
-    */
-  def partition(): Int = {
+   * @return the partition from which this record is received
+   */
+  def partition (): Int = {
     asJava.asInstanceOf[JKafkaConsumerRecord[Object, Object]].partition().asInstanceOf[Int]
   }
 
   /**
-    * @return the position of this record in the corresponding Kafka partition.
-    */
-  def offset(): Long = {
+   * @return the position of this record in the corresponding Kafka partition.
+   */
+  def offset (): Long = {
     asJava.asInstanceOf[JKafkaConsumerRecord[Object, Object]].offset().asInstanceOf[Long]
   }
 
   /**
-    * @return the timestamp of this record
-    */
-  def timestamp(): Long = {
+   * @return the timestamp of this record
+   */
+  def timestamp (): Long = {
     asJava.asInstanceOf[JKafkaConsumerRecord[Object, Object]].timestamp().asInstanceOf[Long]
   }
 
   /**
-    * @return the timestamp type of this record
-    */
-  def timestampType(): org.apache.kafka.common.record.TimestampType = {
+   * @return the timestamp type of this record
+   */
+  def timestampType (): org.apache.kafka.common.record.TimestampType = {
     asJava.asInstanceOf[JKafkaConsumerRecord[Object, Object]].timestampType()
   }
 
   /**
-    * @return the checksum (CRC32) of the record.
-    */
-  def checksum(): Long = {
+   * @return the checksum (CRC32) of the record.
+   */
+  def checksum (): Long = {
     asJava.asInstanceOf[JKafkaConsumerRecord[Object, Object]].checksum().asInstanceOf[Long]
   }
 
   /**
-    * @return the key (or null if no key is specified)
-    */
-  def key(): K = {
+   * @return the key (or null if no key is specified)
+   */
+  def key (): K = {
     toScala[K](asJava.asInstanceOf[JKafkaConsumerRecord[Object, Object]].key())
   }
 
   /**
-    * @return the value
-    */
-  def value(): V = {
+   * @return the value
+   */
+  def value (): V = {
     toScala[V](asJava.asInstanceOf[JKafkaConsumerRecord[Object, Object]].value())
   }
+
+  /**
+   * @return the list of consumer record headers
+   */
+  def headers (): scala.collection.mutable.Buffer[KafkaHeader] = {
+    asJava.asInstanceOf[JKafkaConsumerRecord[Object, Object]].headers().asScala.map(x => KafkaHeader(x))
+  }
+
 
 }
 
 object KafkaConsumerRecord {
-  def apply[K: TypeTag, V: TypeTag](asJava: JKafkaConsumerRecord[_, _]) = new KafkaConsumerRecord[K, V](asJava)  
+  def apply[K: TypeTag, V: TypeTag](asJava: JKafkaConsumerRecord[_, _]) = new KafkaConsumerRecord[K, V](asJava)
+  
 }

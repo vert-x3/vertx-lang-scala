@@ -16,55 +16,53 @@
 
 package io.vertx.scala.ext.web.templ.mvel
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
-import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.core.buffer.Buffer
 import io.vertx.scala.ext.web.templ.TemplateEngine
 import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
-import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.AsyncResult
 import io.vertx.ext.web.templ.mvel.{MVELTemplateEngine => JMVELTemplateEngine}
-import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A template engine that uses the Handlebars library.
   */
-class MVELTemplateEngine(private val _asJava: Object)
-    extends TemplateEngine(_asJava)   {
+
+class MVELTemplateEngine(private val _asJava: Object) extends TemplateEngine (_asJava) {
+
 
 
 
   /**
-    * Set the extension for the engine
-    * @param extension the extension
-    * @return a reference to this for fluency
-    */
+   * Set the extension for the engine   * @param extension the extension
+   * @return a reference to this for fluency
+   */
+  
   def setExtension(extension: String): MVELTemplateEngine = {
     asJava.asInstanceOf[JMVELTemplateEngine].setExtension(extension.asInstanceOf[java.lang.String])
     this
   }
 
   /**
-    * Set the max cache size for the engine
-    * @param maxCacheSize the maxCacheSize
-    * @return a reference to this for fluency
-    */
+   * Set the max cache size for the engine   * @param maxCacheSize the maxCacheSize
+   * @return a reference to this for fluency
+   */
+  
   def setMaxCacheSize(maxCacheSize: Int): MVELTemplateEngine = {
     asJava.asInstanceOf[JMVELTemplateEngine].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer])
     this
   }
 
+
+
+
 }
 
 object MVELTemplateEngine {
-  def apply(asJava: JMVELTemplateEngine) = new MVELTemplateEngine(asJava)  
+  def apply(asJava: JMVELTemplateEngine) = new MVELTemplateEngine(asJava)
+  
   /**
-    * Create a template engine using defaults
-    * @return the engine
-    */
+   * Create a template engine using defaults   * @return the engine
+   */
   def create(): MVELTemplateEngine = {
     MVELTemplateEngine(JMVELTemplateEngine.create())
   }

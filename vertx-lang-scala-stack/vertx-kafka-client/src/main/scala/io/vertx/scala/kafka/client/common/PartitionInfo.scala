@@ -16,73 +16,80 @@
 
 package io.vertx.scala.kafka.client.common
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.kafka.client.common.{PartitionInfo => JPartitionInfo}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Information about a specific Kafka topic partition
-  */
+ * Information about a specific Kafka topic partition
+
+ */
+
 class PartitionInfo(private val _asJava: JPartitionInfo) {
-
   def asJava = _asJava
-
   /**
-    * Set the subset of the replicas that are in sync
-    */
+   * Set the subset of the replicas that are in sync
+   */
   def setInSyncReplicas(value: scala.collection.mutable.Buffer[Node]) = {
     asJava.setInSyncReplicas(value.map(_.asJava).asJava)
     this
   }
+
   def getInSyncReplicas: scala.collection.mutable.Buffer[Node] = {
     asJava.getInSyncReplicas().asScala.map(x => Node(x))
   }
 
   /**
-    * Set the node id of the node currently acting as a leader
-    */
+   * Set the node id of the node currently acting as a leader
+   */
   def setLeader(value: Node) = {
     asJava.setLeader(value.asJava)
     this
   }
+
   def getLeader: Node = {
     Node(asJava.getLeader())
   }
 
   /**
-    * Set the partition id
-    */
+   * Set the partition id
+   */
   def setPartition(value: Int) = {
     asJava.setPartition(value)
     this
   }
+
   def getPartition: Int = {
     asJava.getPartition().asInstanceOf[Int]
   }
 
   /**
-    * Set the complete set of replicas for this partition
-    */
+   * Set the complete set of replicas for this partition
+   */
   def setReplicas(value: scala.collection.mutable.Buffer[Node]) = {
     asJava.setReplicas(value.map(_.asJava).asJava)
     this
   }
+
   def getReplicas: scala.collection.mutable.Buffer[Node] = {
     asJava.getReplicas().asScala.map(x => Node(x))
   }
 
   /**
-    * Set the topic name
-    */
+   * Set the topic name
+   */
   def setTopic(value: String) = {
     asJava.setTopic(value)
     this
   }
+
   def getTopic: String = {
     asJava.getTopic().asInstanceOf[String]
   }
+
 }
+
 
 object PartitionInfo {
   
@@ -106,3 +113,4 @@ object PartitionInfo {
     }
   }
 }
+

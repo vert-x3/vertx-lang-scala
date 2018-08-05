@@ -16,25 +16,29 @@
 
 package io.vertx.scala.redis.op
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.redis.op.{ScanOptions => JScanOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
-class ScanOptions(private val _asJava: JScanOptions) {
 
+ */
+
+class ScanOptions(private val _asJava: JScanOptions) {
   def asJava = _asJava
   def setCount(value: Int) = {
     asJava.setCount(value)
     this
   }
+
   def setMatch(value: String) = {
     asJava.setMatch(value)
     this
   }
+
 }
+
 
 object ScanOptions {
   
@@ -58,3 +62,4 @@ object ScanOptions {
     }
   }
 }
+

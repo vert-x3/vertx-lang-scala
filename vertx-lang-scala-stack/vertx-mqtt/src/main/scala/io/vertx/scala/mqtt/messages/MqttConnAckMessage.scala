@@ -16,25 +16,26 @@
 
 package io.vertx.scala.mqtt.messages
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.netty.handler.codec.mqtt.MqttConnectReturnCode
 import io.vertx.mqtt.messages.{MqttConnAckMessage => JMqttConnAckMessage}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Represents an MQTT CONNACK message
-  */
-class MqttConnAckMessage(private val _asJava: Object) {
 
+  */
+
+class MqttConnAckMessage(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[io.netty.handler.codec.mqtt.MqttConnectReturnCode] = None
   private var cached_1: Option[Boolean] = None
 
 
   /**
-    * @return return code from the connection request
-    */
+   * @return return code from the connection request
+   */
   def code(): io.netty.handler.codec.mqtt.MqttConnectReturnCode = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttConnAckMessage].code()
@@ -44,8 +45,8 @@ class MqttConnAckMessage(private val _asJava: Object) {
   }
 
   /**
-    * @return is an old session is present
-    */
+   * @return is an old session is present
+   */
   def isSessionPresent(): Boolean = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JMqttConnAckMessage].isSessionPresent()
@@ -54,17 +55,21 @@ class MqttConnAckMessage(private val _asJava: Object) {
     cached_1.get
   }
 
+
+
+
+
 }
 
 object MqttConnAckMessage {
-  def apply(asJava: JMqttConnAckMessage) = new MqttConnAckMessage(asJava)  
+  def apply(asJava: JMqttConnAckMessage) = new MqttConnAckMessage(asJava)
+  
   /**
-    * Create a concrete instance of a Vert.x connack message
-    * @param code return code from the connection request
-    * @param isSessionPresent is an old session is present
-    * @return 
-    */
-  def create(code: io.netty.handler.codec.mqtt.MqttConnectReturnCode, isSessionPresent: Boolean): MqttConnAckMessage = {
+   * Create a concrete instance of a Vert.x connack message   * @param code return code from the connection request
+   * @param isSessionPresent is an old session is present
+   * @return 
+   */
+  def create(code: io.netty.handler.codec.mqtt.MqttConnectReturnCode,isSessionPresent: Boolean): MqttConnAckMessage = {
     MqttConnAckMessage(JMqttConnAckMessage.create(code, isSessionPresent.asInstanceOf[java.lang.Boolean]))
   }
 

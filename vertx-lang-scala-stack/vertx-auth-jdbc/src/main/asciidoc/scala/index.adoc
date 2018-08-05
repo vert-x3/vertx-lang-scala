@@ -232,7 +232,7 @@ If validating if a user has a particular permission simply pass the permission i
 [source,scala]
 ----
 
-user.isAuthorisedFuture("commit_code").onComplete{
+user.isAuthorizedFuture("commit_code").onComplete{
   case Success(result) => {
     var hasPermission = result
   }
@@ -249,7 +249,7 @@ If validating that a user has a particular _role_ then you should prefix the arg
 [source,scala]
 ----
 
-user.isAuthorisedFuture("role:manager").onComplete{
+user.isAuthorizedFuture("role:manager").onComplete{
   case Success(result) => {
     var hasRole = result
   }

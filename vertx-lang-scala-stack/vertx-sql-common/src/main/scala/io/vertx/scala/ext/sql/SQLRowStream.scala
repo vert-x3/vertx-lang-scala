@@ -16,17 +16,17 @@
 
 package io.vertx.scala.ext.sql
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.json.JsonArray
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.streams.{ReadStream => JReadStream}
+import scala.reflect.runtime.universe._
 import io.vertx.ext.sql.{SQLRowStream => JSQLRowStream}
 import io.vertx.core.AsyncResult
 import scala.collection.JavaConverters._
 import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A ReadStream of Rows from the underlying RDBMS. This class follows the ReadStream semantics and will automatically
@@ -35,92 +35,104 @@ import io.vertx.core.Handler
   * resources.
   *
   * The interface is minimal in order to support all SQL clients not just JDBC.
-  */
-class SQLRowStream(private val _asJava: Object)
-    extends  ReadStream[io.vertx.core.json.JsonArray]  {
 
+  */
+
+class SQLRowStream(private val _asJava: Object) extends ReadStream[io.vertx.core.json.JsonArray] {
   def asJava = _asJava
 
 
-  override def exceptionHandler(handler: Handler[Throwable]): SQLRowStream = {
+
+
+  override 
+  def exceptionHandler(handler: Handler[Throwable]): SQLRowStream = {
     asJava.asInstanceOf[JSQLRowStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this
   }
 
-  override def handler(handler: Handler[io.vertx.core.json.JsonArray]): SQLRowStream = {
+
+  override 
+  def handler(handler: Handler[io.vertx.core.json.JsonArray]): SQLRowStream = {
     asJava.asInstanceOf[JSQLRowStream].handler({x: JsonArray => handler.handle(x)})
     this
   }
 
-  override def pause(): SQLRowStream = {
+
+  override 
+  def pause(): SQLRowStream = {
     asJava.asInstanceOf[JSQLRowStream].pause()
     this
   }
 
-  override def resume(): SQLRowStream = {
+
+  override 
+  def resume(): SQLRowStream = {
     asJava.asInstanceOf[JSQLRowStream].resume()
     this
   }
 
-  override def endHandler(endHandler: Handler[Unit]): SQLRowStream = {
+
+  override 
+  def endHandler(endHandler: Handler[Unit]): SQLRowStream = {
     asJava.asInstanceOf[JSQLRowStream].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
   /**
-    * Event handler when a resultset is closed. This is useful to request for more results.
-    * @param handler called when the current result set is closed
-    */
+   * Event handler when a resultset is closed. This is useful to request for more results.   * @param handler called when the current result set is closed
+   */
+  
   def resultSetClosedHandler(handler: Handler[Unit]): SQLRowStream = {
     asJava.asInstanceOf[JSQLRowStream].resultSetClosedHandler({x: Void => handler.handle(x)})
     this
   }
 
+
+
   /**
-    * Will convert the column name to the json array index.
-    * @param name the column name
-    * @return the json array index
-    */
-  def column(name: String): Int = {
+   * Will convert the column name to the json array index.   * @param name the column name
+   * @return the json array index
+   */
+  def column (name: String): Int = {
     asJava.asInstanceOf[JSQLRowStream].column(name.asInstanceOf[java.lang.String]).asInstanceOf[Int]
   }
 
   /**
-    * Returns all column names available in the underlying resultset. One needs to carefully use this method since in
-    * contrast to the singular version it does not perform case insensitive lookups or takes alias in consideration on
-    * the column names.
-    * @return the list of columns names returned by the query
-    */
-  def columns(): scala.collection.mutable.Buffer[String] = {
+   * Returns all column names available in the underlying resultset. One needs to carefully use this method since in
+   * contrast to the singular version it does not perform case insensitive lookups or takes alias in consideration on
+   * the column names.   * @return the list of columns names returned by the query
+   */
+  def columns (): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JSQLRowStream].columns().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
-    * Request for more results if available
-    */
-  def moreResults(): Unit = {
+   * Request for more results if available
+   */
+  def moreResults (): Unit = {
     asJava.asInstanceOf[JSQLRowStream].moreResults()
   }
 
   /**
-    * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
-    */
-  def close(): Unit = {
+   * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
+   */
+  def close (): Unit = {
     asJava.asInstanceOf[JSQLRowStream].close()
   }
 
   /**
-    * Closes the stream/underlying cursor(s). The actual close happens asynchronously.
-    * @param handler called when the stream/underlying cursor(s) is(are) closed
-    */
-  def close(handler: Handler[AsyncResult[Unit]]): Unit = {
+   * Closes the stream/underlying cursor(s). The actual close happens asynchronously.   * @param handler called when the stream/underlying cursor(s) is(are) closed
+   */
+  def close (handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JSQLRowStream].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
+
  /**
-   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def closeFuture(): scala.concurrent.Future[Unit] = {
+  * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def closeFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JSQLRowStream].close(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -129,5 +141,6 @@ class SQLRowStream(private val _asJava: Object)
 }
 
 object SQLRowStream {
-  def apply(asJava: JSQLRowStream) = new SQLRowStream(asJava)  
+  def apply(asJava: JSQLRowStream) = new SQLRowStream(asJava)
+  
 }

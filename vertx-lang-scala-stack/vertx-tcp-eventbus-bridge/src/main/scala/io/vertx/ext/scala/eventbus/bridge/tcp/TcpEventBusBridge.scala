@@ -16,138 +16,145 @@
 
 package io.vertx.ext.scala.eventbus.bridge.tcp
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.eventbus.bridge.tcp.{TcpEventBusBridge => JTcpEventBusBridge}
 import io.vertx.lang.scala.AsyncResultWrapper
+import scala.reflect.runtime.universe._
 import io.vertx.ext.eventbus.bridge.tcp.{BridgeEvent => JBridgeEvent}
 import io.vertx.scala.ext.bridge.BridgeOptions
 import io.vertx.ext.bridge.{BridgeOptions => JBridgeOptions}
-import io.vertx.core.AsyncResult
-import io.vertx.scala.core.net.NetServerOptions
-import io.vertx.core.Handler
 import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
+import io.vertx.lang.scala.Converter._
+import io.vertx.core.AsyncResult
+import io.vertx.scala.core.net.NetServerOptions
+import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * TCP EventBus bridge for Vert.x
   */
-class TcpEventBusBridge(private val _asJava: Object) {
 
+class TcpEventBusBridge(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
   /**
-    * Listen on default port 7000
-    * @return self
-    */
+   * Listen on default port 7000   * @return self
+   */
+  
   def listen(): TcpEventBusBridge = {
     asJava.asInstanceOf[JTcpEventBusBridge].listen()
     this
   }
 
   /**
-    * Listen on default port 7000 with a handler to report the state of the socket listen operation.
-    * @param handler the result handler
-    * @return self
-    */
+   * Listen on default port 7000 with a handler to report the state of the socket listen operation.   * @param handler the result handler
+   * @return self
+   */
+  
   def listen(handler: Handler[AsyncResult[TcpEventBusBridge]]): TcpEventBusBridge = {
     asJava.asInstanceOf[JTcpEventBusBridge].listen({x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge, TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
     this
   }
 
   /**
-    * Listen on specific port and bind to specific address
-    * @param port tcp port
-    * @param address tcp address to the bind
-    * @return self
-    */
+   * Listen on specific port and bind to specific address   * @param port tcp port
+   * @param address tcp address to the bind
+   * @return self
+   */
+  
   def listen(port: Int, address: String): TcpEventBusBridge = {
     asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], address.asInstanceOf[java.lang.String])
     this
   }
 
   /**
-    * Listen on specific port and bind to specific address
-    * @param port tcp port
-    * @param address tcp address to the bind
-    * @param handler the result handler
-    * @return self
-    */
+   * Listen on specific port and bind to specific address   * @param port tcp port
+   * @param address tcp address to the bind
+   * @param handler the result handler
+   * @return self
+   */
+  
   def listen(port: Int, address: String, handler: Handler[AsyncResult[TcpEventBusBridge]]): TcpEventBusBridge = {
     asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], address.asInstanceOf[java.lang.String], {x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge, TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
     this
   }
 
   /**
-    * Listen on specific port
-    * @param port tcp port
-    * @return self
-    */
+   * Listen on specific port   * @param port tcp port
+   * @return self
+   */
+  
   def listen(port: Int): TcpEventBusBridge = {
     asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer])
     this
   }
 
   /**
-    * Listen on specific port
-    * @param port tcp port
-    * @param handler the result handler
-    * @return self
-    */
+   * Listen on specific port   * @param port tcp port
+   * @param handler the result handler
+   * @return self
+   */
+  
   def listen(port: Int, handler: Handler[AsyncResult[TcpEventBusBridge]]): TcpEventBusBridge = {
     asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge, TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
     this
   }
 
+
+
   /**
-    * Close the current socket.
-    * @param handler the result handler
-    */
-  def close(handler: Handler[AsyncResult[Unit]]): Unit = {
+   * Close the current socket.   * @param handler the result handler
+   */
+  def close (handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JTcpEventBusBridge].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
-    * Close the current socket.
-    */
-  def close(): Unit = {
+   * Close the current socket.
+   */
+  def close (): Unit = {
     asJava.asInstanceOf[JTcpEventBusBridge].close()
   }
 
+
  /**
-   * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def listenFuture(): scala.concurrent.Future[TcpEventBusBridge] = {
+  * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def listenFuture (): scala.concurrent.Future[TcpEventBusBridge] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JTcpEventBusBridge, TcpEventBusBridge](x => TcpEventBusBridge(x))
     asJava.asInstanceOf[JTcpEventBusBridge].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def listenFuture(port: Int, address: String): scala.concurrent.Future[TcpEventBusBridge] = {
+  * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def listenFuture (port: Int, address: String): scala.concurrent.Future[TcpEventBusBridge] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JTcpEventBusBridge, TcpEventBusBridge](x => TcpEventBusBridge(x))
     asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], address.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def listenFuture(port: Int): scala.concurrent.Future[TcpEventBusBridge] = {
+  * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def listenFuture (port: Int): scala.concurrent.Future[TcpEventBusBridge] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JTcpEventBusBridge, TcpEventBusBridge](x => TcpEventBusBridge(x))
     asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def closeFuture(): scala.concurrent.Future[Unit] = {
+  * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def closeFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JTcpEventBusBridge].close(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -156,20 +163,25 @@ class TcpEventBusBridge(private val _asJava: Object) {
 }
 
 object TcpEventBusBridge {
-  def apply(asJava: JTcpEventBusBridge) = new TcpEventBusBridge(asJava)  
+  def apply(asJava: JTcpEventBusBridge) = new TcpEventBusBridge(asJava)
+  
+
   def create(vertx: Vertx): TcpEventBusBridge = {
     TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
-  def create(vertx: Vertx, options: BridgeOptions): TcpEventBusBridge = {
+
+  def create(vertx: Vertx,options: BridgeOptions): TcpEventBusBridge = {
     TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
-  def create(vertx: Vertx, options: BridgeOptions, netServerOptions: NetServerOptions): TcpEventBusBridge = {
+
+  def create(vertx: Vertx,options: BridgeOptions,netServerOptions: NetServerOptions): TcpEventBusBridge = {
     TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, netServerOptions.asJava))
   }
 
-  def create(vertx: Vertx, options: BridgeOptions, netServerOptions: NetServerOptions, eventHandler: Handler[BridgeEvent]): TcpEventBusBridge = {
+
+  def create(vertx: Vertx,options: BridgeOptions,netServerOptions: NetServerOptions,eventHandler: Handler[BridgeEvent]): TcpEventBusBridge = {
     TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, netServerOptions.asJava, {x: JBridgeEvent => eventHandler.handle(BridgeEvent(x))}))
   }
 

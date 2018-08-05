@@ -73,5 +73,6 @@
     <module>vertx-lang-scala-stack</module>
     <module>vertx-lang-scala-on-the-fly</module>
     <module>vertx-lang-scala-docs</module>
+    <module>vertx-lang-scala-codegen</module>
   </modules>
 </project>

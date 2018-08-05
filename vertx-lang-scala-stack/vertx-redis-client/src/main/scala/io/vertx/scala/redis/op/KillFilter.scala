@@ -16,50 +16,52 @@
 
 package io.vertx.scala.redis.op
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.redis.op.KillFilter.Type
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import io.vertx.redis.op.{KillFilter => JKillFilter}
+import scala.collection.JavaConverters._
 
 /**
-  */
+
+ */
+
 class KillFilter(private val _asJava: JKillFilter) {
-
   def asJava = _asJava
-
   /**
-    * Set ADDR filter
-    */
+   * Set ADDR filter
+   */
   def setAddr(value: String) = {
     asJava.setAddr(value)
     this
   }
 
   /**
-    * Set ID filter
-    */
+   * Set ID filter
+   */
   def setId(value: String) = {
     asJava.setId(value)
     this
   }
 
   /**
-    * Set SKIPME filter
-    */
+   * Set SKIPME filter
+   */
   def setSkipme(value: Boolean) = {
     asJava.setSkipme(value)
     this
   }
 
   /**
-    * Set TYPE filter
-    */
+   * Set TYPE filter
+   */
   def setType(value: io.vertx.redis.op.KillFilter.Type) = {
     asJava.setType(value)
     this
   }
+
 }
+
 
 object KillFilter {
   
@@ -83,3 +85,4 @@ object KillFilter {
     }
   }
 }
+

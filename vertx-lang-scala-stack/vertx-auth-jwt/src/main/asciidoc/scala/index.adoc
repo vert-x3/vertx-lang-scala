@@ -27,7 +27,7 @@ be trusted. JWT are well suited for scenarios as:
 
 * In a Single Sign-On scenario where you want a separate authentication server that can then send user
 information in a trusted way.
-* Stateless API servers, very well suited for simple page applications.
+* Stateless API servers, very well suited for single page applications.
 * etc...
 
 Before deciding on using JWT, it's important to note that JWT does not encrypt the payload, it only signs it. You
@@ -428,7 +428,7 @@ user has a specific authority. In this case one needs to to:
 
 [source,scala]
 ----
-user.isAuthorisedFuture("create-report").onComplete{
+user.isAuthorizedFuture("create-report").onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -443,11 +443,7 @@ configured to use something else than `permissions`, for example one can even lo
 
 [source,scala]
 ----
-
-var config = new io.vertx.core.json.JsonObject().put("public-key", "BASE64-ENCODED-PUBLIC_KEY").put("permissionsClaimKey", "realm_access/roles")
-
-var provider = JWTAuth.create(vertx, config)
-
+Code not translatable
 ----
 
 So in this example we configure the JWT to work with Keycloak token format. In this case the claims will be checked

@@ -55,6 +55,8 @@ The configuration requires:
 
 * the `url` of the repository
 * the `path` where the repository is cloned (local directory)
+* the `user` for private repository (no authentication by default)
+* the `password` of the user
 * at least `fileset` indicating the set of files to read (same behavior as the
 directory configuration store).
 

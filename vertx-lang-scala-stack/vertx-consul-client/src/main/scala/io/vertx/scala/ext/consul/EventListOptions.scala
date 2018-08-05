@@ -16,40 +16,43 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{EventListOptions => JEventListOptions}
 
 /**
-  * Holds options for events list request
-  */
+ * Holds options for events list request
+ */
+
 class EventListOptions(private val _asJava: JEventListOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set options for blocking query
-    */
+   * Set options for blocking query
+   */
   def setBlockingOptions(value: BlockingQueryOptions) = {
     asJava.setBlockingOptions(value.asJava)
     this
   }
+
   def getBlockingOptions: BlockingQueryOptions = {
     BlockingQueryOptions(asJava.getBlockingOptions())
   }
 
   /**
-    * Set event name for filtering on events
-    */
+   * Set event name for filtering on events
+   */
   def setName(value: String) = {
     asJava.setName(value)
     this
   }
+
   def getName: String = {
     asJava.getName().asInstanceOf[String]
   }
+
 }
+
 
 object EventListOptions {
   
@@ -73,3 +76,4 @@ object EventListOptions {
     }
   }
 }
+

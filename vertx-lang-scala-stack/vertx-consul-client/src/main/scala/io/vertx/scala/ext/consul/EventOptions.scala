@@ -16,62 +16,67 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{EventOptions => JEventOptions}
 
 /**
-  * Options used to trigger a new user event.
-  */
+ * Options used to trigger a new user event.
+ */
+
 class EventOptions(private val _asJava: JEventOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set regular expression to filter by node name
-    */
+   * Set regular expression to filter by node name
+   */
   def setNode(value: String) = {
     asJava.setNode(value)
     this
   }
+
   def getNode: String = {
     asJava.getNode().asInstanceOf[String]
   }
 
   /**
-    * Set payload of event
-    */
+   * Set payload of event
+   */
   def setPayload(value: String) = {
     asJava.setPayload(value)
     this
   }
+
   def getPayload: String = {
     asJava.getPayload().asInstanceOf[String]
   }
 
   /**
-    * Set regular expression to filter by service
-    */
+   * Set regular expression to filter by service
+   */
   def setService(value: String) = {
     asJava.setService(value)
     this
   }
+
   def getService: String = {
     asJava.getService().asInstanceOf[String]
   }
 
   /**
-    * Set regular expression to filter by tag
-    */
+   * Set regular expression to filter by tag
+   */
   def setTag(value: String) = {
     asJava.setTag(value)
     this
   }
+
   def getTag: String = {
     asJava.getTag().asInstanceOf[String]
   }
+
 }
+
 
 object EventOptions {
   
@@ -95,3 +100,4 @@ object EventOptions {
     }
   }
 }
+

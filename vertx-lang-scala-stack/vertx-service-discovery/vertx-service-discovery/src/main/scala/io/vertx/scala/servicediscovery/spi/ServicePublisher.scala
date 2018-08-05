@@ -16,73 +16,77 @@
 
 package io.vertx.scala.servicediscovery.spi
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.servicediscovery.{Record => JRecord}
+import scala.reflect.runtime.universe._
 import io.vertx.servicediscovery.spi.{ServicePublisher => JServicePublisher}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.scala.servicediscovery.Record
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * The publisher is used by the importer to publish or unpublish records.
   */
-class ServicePublisher(private val _asJava: Object) {
 
+class ServicePublisher(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
+
+
   /**
-    * Publishes a record.
-    * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
-    * @param resultHandler handler called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
-    */
-  def publish(record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
+   * Publishes a record.   * @param record the record see <a href="../../../../../../../cheatsheet/Record.html">Record</a>
+   * @param resultHandler handler called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
+   */
+  def publish (record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
     asJava.asInstanceOf[JServicePublisher].publish(record.asJava, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
   }
 
   /**
-    * Un-publishes a record.
-    * @param id the registration id
-    * @param resultHandler handler called when the operation has completed (successfully or not).
-    */
-  def unpublish(id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+   * Un-publishes a record.   * @param id the registration id
+   * @param resultHandler handler called when the operation has completed (successfully or not).
+   */
+  def unpublish (id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
-    * Updates an existing record.
-    * @param record the recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
-    * @param resultHandler handler called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
-    */
-  def update(record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
+   * Updates an existing record.   * @param record the record see <a href="../../../../../../../cheatsheet/Record.html">Record</a>
+   * @param resultHandler handler called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
+   */
+  def update (record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
     asJava.asInstanceOf[JServicePublisher].update(record.asJava, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
   }
 
+
  /**
-   * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def publishFuture(record: Record): scala.concurrent.Future[Record] = {
+  * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def publishFuture (record: Record): scala.concurrent.Future[Record] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord, Record](x => Record(x))
     asJava.asInstanceOf[JServicePublisher].publish(record.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[unpublish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def unpublishFuture(id: String): scala.concurrent.Future[Unit] = {
+  * Like [[unpublish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def unpublishFuture (id: String): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[update]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def updateFuture(record: Record): scala.concurrent.Future[Record] = {
+  * Like [[update]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def updateFuture (record: Record): scala.concurrent.Future[Record] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JRecord, Record](x => Record(x))
     asJava.asInstanceOf[JServicePublisher].update(record.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -91,5 +95,6 @@ class ServicePublisher(private val _asJava: Object) {
 }
 
 object ServicePublisher {
-  def apply(asJava: JServicePublisher) = new ServicePublisher(asJava)  
+  def apply(asJava: JServicePublisher) = new ServicePublisher(asJava)
+  
 }

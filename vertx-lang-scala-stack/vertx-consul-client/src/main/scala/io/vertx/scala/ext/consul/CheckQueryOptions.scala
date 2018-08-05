@@ -16,40 +16,43 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{CheckQueryOptions => JCheckQueryOptions}
 
 /**
-  * Options used to requesting list of checks
-  */
+ * Options used to requesting list of checks
+ */
+
 class CheckQueryOptions(private val _asJava: JCheckQueryOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set options for blocking query
-    */
+   * Set options for blocking query
+   */
   def setBlockingOptions(value: BlockingQueryOptions) = {
     asJava.setBlockingOptions(value.asJava)
     this
   }
+
   def getBlockingOptions: BlockingQueryOptions = {
     BlockingQueryOptions(asJava.getBlockingOptions())
   }
 
   /**
-    * Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
-    */
+   * Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
+   */
   def setNear(value: String) = {
     asJava.setNear(value)
     this
   }
+
   def getNear: String = {
     asJava.getNear().asInstanceOf[String]
   }
+
 }
+
 
 object CheckQueryOptions {
   
@@ -73,3 +76,4 @@ object CheckQueryOptions {
     }
   }
 }
+

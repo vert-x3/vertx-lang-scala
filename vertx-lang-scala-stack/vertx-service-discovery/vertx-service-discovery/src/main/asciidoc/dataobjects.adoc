@@ -9,29 +9,24 @@
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[endpoint]]`endpoint`|`String`|
-+++
+|[[endpoint]]`@endpoint`|`String`|+++
 Sets the endpoint, which is the URL of the service. The endpoint is automatically computed when you use the
  other `setX` method.
 +++
-|[[host]]`host`|`String`|
-+++
+|[[host]]`@host`|`String`|+++
 Sets the host.
 +++
-|[[port]]`port`|`Number (int)`|
-+++
+|[[port]]`@port`|`Number (int)`|+++
 Sets the port
 +++
-|[[root]]`root`|`String`|
-+++
+|[[root]]`@root`|`String`|+++
 Sets the path of the service (root)
 +++
-|[[ssl]]`ssl`|`Boolean`|
-+++
+|[[ssl]]`@ssl`|`Boolean`|+++
 Sets whether or not the HTTP service is using <code>https</code>.
 +++
 |===
@@ -45,34 +40,28 @@ Sets whether or not the HTTP service is using <code>https</code>.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[location]]`location`|`Json object`|
-+++
+|[[location]]`@location`|`Json object`|+++
 Sets the json object describing the location of the service. By convention, this json object should contain
  the link entry.
 +++
-|[[metadata]]`metadata`|`Json object`|
-+++
+|[[metadata]]`@metadata`|`Json object`|+++
 Gets the metadata attached to the record.
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 Sets the name of the service. It can reflect the service name of the name of the provider.
 +++
-|[[registration]]`registration`|`String`|
-+++
+|[[registration]]`@registration`|`String`|+++
 Sets the registration id. This method is called when the service is published.
 +++
-|[[status]]`status`|`link:enums.html#Status[Status]`|
-+++
+|[[status]]`@status`|`link:enums.html#Status[Status]`|+++
 Sets the status of the service. When published, the status is set to. When withdrawn, the
  status is set to .
 +++
-|[[type]]`type`|`String`|
-+++
+|[[type]]`@type`|`String`|+++
 Sets the type of service.
 +++
 |===
@@ -85,32 +74,27 @@ Sets the type of service.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[announceAddress]]`announceAddress`|`String`|
-+++
+|[[announceAddress]]`@announceAddress`|`String`|+++
 Sets the event bus address on which the service arrivals, departures and modifications are announced. This
  address must be consistent in the whole application.
 +++
-|[[autoRegistrationOfImporters]]`autoRegistrationOfImporters`|`Boolean`|
-+++
+|[[autoRegistrationOfImporters]]`@autoRegistrationOfImporters`|`Boolean`|+++
 Sets whether or not the registration of importers declared as SPI is enabled.
 +++
-|[[backendConfiguration]]`backendConfiguration`|`Json object`|
-+++
+|[[backendConfiguration]]`@backendConfiguration`|`Json object`|+++
 Sets the configuration passed to the .
  Refer to the backend documentation to get more details on the requirements. The default backend
  does not need any configuration.
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 Sets the service discovery name used in the service usage events.
  If not set, the node id is used.
 +++
-|[[usageAddress]]`usageAddress`|`String`|
-+++
+|[[usageAddress]]`@usageAddress`|`String`|+++
 Sets the usage address: the event bus address on which are sent the service usage events (bind / release).
 +++
 |===

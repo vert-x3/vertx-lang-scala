@@ -16,31 +16,28 @@
 
 package io.vertx.scala.ext.mongo
 
+import io.vertx.core.json.JsonObject
 import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.core.json.JsonObject
 import io.vertx.ext.mongo.{MongoClientUpdateResult => JMongoClientUpdateResult}
 
 /**
-  * Result propagated from mongodb driver update result.
-  */
+ * Result propagated from mongodb driver update result.
+ */
+
 class MongoClientUpdateResult(private val _asJava: JMongoClientUpdateResult) {
-
   def asJava = _asJava
-
   /**
-    * Get the number of documents that're matched
-    */
-
+   * Get the number of documents that're matched
+   */
   /**
-    * Get the number of documents that're modified
-    */
-
+   * Get the number of documents that're modified
+   */
   /**
-    * Get the document id that's upserted
-    */
+   * Get the document id that's upserted
+   */
 }
+
 
 object MongoClientUpdateResult {
   
@@ -64,3 +61,4 @@ object MongoClientUpdateResult {
     }
   }
 }
+

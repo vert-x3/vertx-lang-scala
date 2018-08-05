@@ -16,36 +16,43 @@
 
 package io.vertx.scala.redis.op
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.redis.op.{BitFieldSetCommand => JBitFieldSetCommand}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
+
 
 class BitFieldSetCommand(private val _asJava: JBitFieldSetCommand) {
-
   def asJava = _asJava
   def setOffset(value: Long) = {
     asJava.setOffset(value)
     this
   }
+
   def getOffset: Long = {
     asJava.getOffset().asInstanceOf[Long]
   }
+
   def setType(value: String) = {
     asJava.setType(value)
     this
   }
+
   def getType: String = {
     asJava.getType().asInstanceOf[String]
   }
+
   def setValue(value: Long) = {
     asJava.setValue(value)
     this
   }
+
   def getValue: Long = {
     asJava.getValue().asInstanceOf[Long]
   }
+
 }
+
 
 object BitFieldSetCommand {
   
@@ -69,3 +76,4 @@ object BitFieldSetCommand {
     }
   }
 }
+
