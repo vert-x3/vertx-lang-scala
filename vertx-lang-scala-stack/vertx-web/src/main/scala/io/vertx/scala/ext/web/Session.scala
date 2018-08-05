@@ -16,10 +16,10 @@
 
 package io.vertx.scala.ext.web
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{Session => JSession}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Represents a browser session.
@@ -32,105 +32,122 @@ import io.vertx.ext.web.{Session => JSession}
   * The context must have first been routed to a [[io.vertx.scala.ext.web.handler.SessionHandler]]
   * for sessions to be available.
   */
-class Session(private val _asJava: Object) {
 
+class Session(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
   /**
-    * Put some data in a session
-    * @param key the key for the data
-    * @param obj the data
-    * @return a reference to this, so the API can be used fluently
-    */
+   * Put some data in a session   * @param key the key for the data
+   * @param obj the data
+   * @return a reference to this, so the API can be used fluently
+   */
+  
   def put(key: String, obj: AnyRef): Session = {
     asJava.asInstanceOf[JSession].put(key.asInstanceOf[java.lang.String], obj)
     this
   }
 
+
   /**
-    * @return The new unique ID of the session.
-    */
-  def regenerateId(): Session = {
+   * The short representation of the session to be added to the session cookie. By default is the session id.   * @return short representation string.
+   */
+  def value(): String = {
+    asJava.asInstanceOf[JSession].value().asInstanceOf[String]
+  }
+
+
+  /**
+   * @return The new unique ID of the session.
+   */
+  def regenerateId (): Session = {
     Session(asJava.asInstanceOf[JSession].regenerateId())
   }
 
   /**
-    * @return The unique ID of the session. This is generated using a random secure UUID.
-    */
-  def id(): String = {
+   * @return The unique ID of the session. This is generated using a random secure UUID.
+   */
+  def id (): String = {
     asJava.asInstanceOf[JSession].id().asInstanceOf[String]
   }
 
   /**
-    * Get some data from the session
-    * @param key the key of the data
-    * @return the data
-    */
-  def get[T: TypeTag](key: String): T = {
+   * Get some data from the session   * @param key the key of the data
+   * @return the data
+   */
+  def get [T: TypeTag](key: String): T = {
     toScala[T](asJava.asInstanceOf[JSession].get[Object](key.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Remove some data from the session
-    * @param key the key of the data
-    * @return the data that was there or null if none there
-    */
-  def remove[T: TypeTag](key: String): T = {
+   * Remove some data from the session   * @param key the key of the data
+   * @return the data that was there or null if none there
+   */
+  def remove [T: TypeTag](key: String): T = {
     toScala[T](asJava.asInstanceOf[JSession].remove[Object](key.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * @return the time the session was last accessed
-    */
-  def lastAccessed(): Long = {
+   * @return true if the session has data
+   */
+  def isEmpty (): Boolean = {
+    asJava.asInstanceOf[JSession].isEmpty().asInstanceOf[Boolean]
+  }
+
+  /**
+   * @return the time the session was last accessed
+   */
+  def lastAccessed (): Long = {
     asJava.asInstanceOf[JSession].lastAccessed().asInstanceOf[Long]
   }
 
   /**
-    * Destroy the session
-    */
-  def destroy(): Unit = {
+   * Destroy the session
+   */
+  def destroy (): Unit = {
     asJava.asInstanceOf[JSession].destroy()
   }
 
   /**
-    * @return has the session been destroyed?
-    */
-  def isDestroyed(): Boolean = {
+   * @return has the session been destroyed?
+   */
+  def isDestroyed (): Boolean = {
     asJava.asInstanceOf[JSession].isDestroyed().asInstanceOf[Boolean]
   }
 
   /**
-    * @return has the session been renewed?
-    */
-  def isRegenerated(): Boolean = {
+   * @return has the session been renewed?
+   */
+  def isRegenerated (): Boolean = {
     asJava.asInstanceOf[JSession].isRegenerated().asInstanceOf[Boolean]
   }
 
   /**
-    * @return old ID if renewed
-    */
-  def oldId(): String = {
+   * @return old ID if renewed
+   */
+  def oldId (): String = {
     asJava.asInstanceOf[JSession].oldId().asInstanceOf[String]
   }
 
   /**
-    * @return the amount of time in ms, after which the session will expire, if not accessed.
-    */
-  def timeout(): Long = {
+   * @return the amount of time in ms, after which the session will expire, if not accessed.
+   */
+  def timeout (): Long = {
     asJava.asInstanceOf[JSession].timeout().asInstanceOf[Long]
   }
 
   /**
-    * Mark the session as being accessed.
-    */
-  def setAccessed(): Unit = {
+   * Mark the session as being accessed.
+   */
+  def setAccessed (): Unit = {
     asJava.asInstanceOf[JSession].setAccessed()
   }
+
 
 }
 
 object Session {
-  def apply(asJava: JSession) = new Session(asJava)  
+  def apply(asJava: JSession) = new Session(asJava)
+  
 }

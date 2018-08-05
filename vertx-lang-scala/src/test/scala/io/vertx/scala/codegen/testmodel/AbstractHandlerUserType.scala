@@ -16,34 +16,40 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{AbstractHandlerUserType => JAbstractHandlerUserType}
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
+import scala.reflect.runtime.universe._
 import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
-  */
-trait AbstractHandlerUserType
-    extends io.vertx.core.Handler[RefedInterface1] {
 
+  */
+
+trait AbstractHandlerUserType extends io.vertx.core.Handler[RefedInterface1] {
   def asJava: java.lang.Object
 
-  override def handle(arg0: RefedInterface1): Unit
+  
+override def handle ( arg0: RefedInterface1): Unit
+
 
 }
 
 object AbstractHandlerUserType {
   def apply(asJava: JAbstractHandlerUserType): AbstractHandlerUserType = new AbstractHandlerUserTypeImpl(asJava)
     private class AbstractHandlerUserTypeImpl(private val _asJava: Object) extends AbstractHandlerUserType {
+  def asJava = _asJava
 
-      def asJava = _asJava
 
 
-  override def handle(arg0: RefedInterface1): Unit = {
+
+
+
+  override def handle (arg0: RefedInterface1): Unit = {
     asJava.asInstanceOf[JAbstractHandlerUserType].handle(arg0.asJava.asInstanceOf[JRefedInterface1])
   }
+
 
 }
 }

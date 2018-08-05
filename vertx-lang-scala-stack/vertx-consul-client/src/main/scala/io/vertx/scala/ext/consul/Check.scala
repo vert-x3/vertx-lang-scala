@@ -16,106 +16,115 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{Check => JCheck}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds check properties
-  */
+ * Holds check properties
+ */
+
 class Check(private val _asJava: JCheck) {
-
   def asJava = _asJava
-
   /**
-    * Set the ID of check
-    */
+   * Set the ID of check
+   */
   def setId(value: String) = {
     asJava.setId(value)
     this
   }
+
   def getId: String = {
     asJava.getId().asInstanceOf[String]
   }
 
   /**
-    * Set the name of check
-    */
+   * Set the name of check
+   */
   def setName(value: String) = {
     asJava.setName(value)
     this
   }
+
   def getName: String = {
     asJava.getName().asInstanceOf[String]
   }
 
   /**
-    * Set the name of node
-    */
+   * Set the name of node
+   */
   def setNodeName(value: String) = {
     asJava.setNodeName(value)
     this
   }
+
   def getNodeName: String = {
     asJava.getNodeName().asInstanceOf[String]
   }
 
   /**
-    * Set the human-readable note of check
-    */
+   * Set the human-readable note of check
+   */
   def setNotes(value: String) = {
     asJava.setNotes(value)
     this
   }
+
   def getNotes: String = {
     asJava.getNotes().asInstanceOf[String]
   }
 
   /**
-    * Set the output of check
-    */
+   * Set the output of check
+   */
   def setOutput(value: String) = {
     asJava.setOutput(value)
     this
   }
+
   def getOutput: String = {
     asJava.getOutput().asInstanceOf[String]
   }
 
   /**
-    * Set the ID of service with which this check associated
-    */
+   * Set the ID of service with which this check associated
+   */
   def setServiceId(value: String) = {
     asJava.setServiceId(value)
     this
   }
+
   def getServiceId: String = {
     asJava.getServiceId().asInstanceOf[String]
   }
 
   /**
-    * Set the name of service with which this check associated
-    */
+   * Set the name of service with which this check associated
+   */
   def setServiceName(value: String) = {
     asJava.setServiceName(value)
     this
   }
+
   def getServiceName: String = {
     asJava.getServiceName().asInstanceOf[String]
   }
 
   /**
-    * Set the status of check
-    */
+   * Set the status of check
+   */
   def setStatus(value: io.vertx.ext.consul.CheckStatus) = {
     asJava.setStatus(value)
     this
   }
+
   def getStatus: io.vertx.ext.consul.CheckStatus = {
     asJava.getStatus()
   }
+
 }
+
 
 object Check {
   
@@ -139,3 +148,4 @@ object Check {
     }
   }
 }
+

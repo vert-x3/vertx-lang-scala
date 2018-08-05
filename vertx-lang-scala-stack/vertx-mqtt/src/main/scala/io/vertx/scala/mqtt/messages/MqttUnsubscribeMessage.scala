@@ -16,27 +16,27 @@
 
 package io.vertx.scala.mqtt.messages
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.mqtt.messages.{MqttMessage => JMqttMessage}
 import scala.collection.JavaConverters._
 import io.vertx.mqtt.messages.{MqttUnsubscribeMessage => JMqttUnsubscribeMessage}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Represents an MQTT UNSUBSCRIBE message
-  */
-class MqttUnsubscribeMessage(private val _asJava: Object)
-    extends  MqttMessage  {
 
+  */
+
+class MqttUnsubscribeMessage(private val _asJava: Object) extends MqttMessage {
   def asJava = _asJava
   private var cached_0: Option[Int] = None
   private var cached_1: Option[scala.collection.mutable.Buffer[String]] = None
 
 
   /**
-    * @return Message identifier
-    */
+   * @return Message identifier
+   */
   override def messageId(): Int = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttUnsubscribeMessage].messageId()
@@ -46,8 +46,8 @@ class MqttUnsubscribeMessage(private val _asJava: Object)
   }
 
   /**
-    * @return List of topics to unsubscribe
-    */
+   * @return List of topics to unsubscribe
+   */
   def topics(): scala.collection.mutable.Buffer[String] = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JMqttUnsubscribeMessage].topics()
@@ -56,8 +56,13 @@ class MqttUnsubscribeMessage(private val _asJava: Object)
     cached_1.get
   }
 
+
+
+
+
 }
 
 object MqttUnsubscribeMessage {
-  def apply(asJava: JMqttUnsubscribeMessage) = new MqttUnsubscribeMessage(asJava)  
+  def apply(asJava: JMqttUnsubscribeMessage) = new MqttUnsubscribeMessage(asJava)
+  
 }

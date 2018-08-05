@@ -16,67 +16,71 @@
 
 package io.vertx.scala.config
 
+import io.vertx.core.json.JsonObject
 import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
 import scala.collection.JavaConverters._
-import io.vertx.core.json.JsonObject
 import io.vertx.config.{ConfigStoreOptions => JConfigStoreOptions}
 
 /**
-  * Data object representing the configuration of a configuration store. This object describes the configuration of a
-  * chunk of configuration that you retrieve. It specifies its type (type of configuration store), the format of the
-  * retrieved configuration chunk, and you can also configures the store if it needs configuration to
-  * retrieve the configuration chunk.
-  */
+ * Data object representing the configuration of a configuration store. This object describes the configuration of a
+ * chunk of configuration that you retrieve. It specifies its type (type of configuration store), the format of the
+ * retrieved configuration chunk, and you can also configures the store if it needs configuration to
+ * retrieve the configuration chunk.
+ */
+
 class ConfigStoreOptions(private val _asJava: JConfigStoreOptions) {
-
   def asJava = _asJava
-
   /**
-    * Sets the configuration of the store
-    */
+   * Sets the configuration of the store
+   */
   def setConfig(value: io.vertx.core.json.JsonObject) = {
     asJava.setConfig(value)
     this
   }
+
   def getConfig: io.vertx.core.json.JsonObject = {
     asJava.getConfig()
   }
 
   /**
-    * Sets the format of the configuration that is retrieved from the store.
-    */
+   * Sets the format of the configuration that is retrieved from the store.
+   */
   def setFormat(value: String) = {
     asJava.setFormat(value)
     this
   }
+
   def getFormat: String = {
     asJava.getFormat().asInstanceOf[String]
   }
 
   /**
-    * Sets whether or not the store is optional. When the configuration is retrieve, if an optional store
-    * returns a failure, the failure is ignored and an empty json object is used instead (for this store).
-    */
+   * Sets whether or not the store is optional. When the configuration is retrieve, if an optional store
+   * returns a failure, the failure is ignored and an empty json object is used instead (for this store).
+   */
   def setOptional(value: Boolean) = {
     asJava.setOptional(value)
     this
   }
+
   def isOptional: Boolean = {
     asJava.isOptional().asInstanceOf[Boolean]
   }
 
   /**
-    * Sets the configuration type
-    */
+   * Sets the configuration type
+   */
   def setType(value: String) = {
     asJava.setType(value)
     this
   }
+
   def getType: String = {
     asJava.getType().asInstanceOf[String]
   }
+
 }
+
 
 object ConfigStoreOptions {
   
@@ -100,3 +104,4 @@ object ConfigStoreOptions {
     }
   }
 }
+

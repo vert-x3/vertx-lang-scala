@@ -16,24 +16,31 @@
 
 package io.vertx.scala.ext.shell.term
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.shell.term.{SignalHandler => JSignalHandler}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
-  */
-class SignalHandler(private val _asJava: Object) {
 
+  */
+
+class SignalHandler(private val _asJava: Object) {
   def asJava = _asJava
 
 
-  def deliver(key: Int): Boolean = {
+
+
+
+
+  def deliver (key: Int): Boolean = {
     asJava.asInstanceOf[JSignalHandler].deliver(key.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
+
 
 }
 
 object SignalHandler {
-  def apply(asJava: JSignalHandler) = new SignalHandler(asJava)  
+  def apply(asJava: JSignalHandler) = new SignalHandler(asJava)
+  
 }

@@ -16,106 +16,115 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{Event => JEvent}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds properties of Consul event
-  */
+ * Holds properties of Consul event
+ */
+
 class Event(private val _asJava: JEvent) {
-
   def asJava = _asJava
-
   /**
-    * Set ID of event
-    */
+   * Set ID of event
+   */
   def setId(value: String) = {
     asJava.setId(value)
     this
   }
+
   def getId: String = {
     asJava.getId().asInstanceOf[String]
   }
 
   /**
-    * Set the Lamport clock time
-    */
+   * Set the Lamport clock time
+   */
   def setLTime(value: Int) = {
     asJava.setLTime(value)
     this
   }
+
   def getLTime: Int = {
     asJava.getLTime().asInstanceOf[Int]
   }
 
   /**
-    * Set name of event
-    */
+   * Set name of event
+   */
   def setName(value: String) = {
     asJava.setName(value)
     this
   }
+
   def getName: String = {
     asJava.getName().asInstanceOf[String]
   }
 
   /**
-    * Set regular expression to filter by node name
-    */
+   * Set regular expression to filter by node name
+   */
   def setNode(value: String) = {
     asJava.setNode(value)
     this
   }
+
   def getNode: String = {
     asJava.getNode().asInstanceOf[String]
   }
 
   /**
-    * Set payload of event
-    */
+   * Set payload of event
+   */
   def setPayload(value: String) = {
     asJava.setPayload(value)
     this
   }
+
   def getPayload: String = {
     asJava.getPayload().asInstanceOf[String]
   }
 
   /**
-    * Set regular expression to filter by service
-    */
+   * Set regular expression to filter by service
+   */
   def setService(value: String) = {
     asJava.setService(value)
     this
   }
+
   def getService: String = {
     asJava.getService().asInstanceOf[String]
   }
 
   /**
-    * Set regular expression to filter by tag
-    */
+   * Set regular expression to filter by tag
+   */
   def setTag(value: String) = {
     asJava.setTag(value)
     this
   }
+
   def getTag: String = {
     asJava.getTag().asInstanceOf[String]
   }
 
   /**
-    * Set version
-    */
+   * Set version
+   */
   def setVersion(value: Int) = {
     asJava.setVersion(value)
     this
   }
+
   def getVersion: Int = {
     asJava.getVersion().asInstanceOf[Int]
   }
+
 }
+
 
 object Event {
   
@@ -139,3 +148,4 @@ object Event {
     }
   }
 }
+

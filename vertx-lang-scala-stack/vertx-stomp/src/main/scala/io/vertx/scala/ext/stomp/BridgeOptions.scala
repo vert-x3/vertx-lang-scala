@@ -16,51 +16,59 @@
 
 package io.vertx.scala.ext.stomp
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
-import io.vertx.scala.ext.bridge.{BridgeOptions => ExtBridgeOptions}
 import io.vertx.scala.ext.bridge.PermittedOptions
+import io.vertx.scala.ext.bridge.{BridgeOptions => ExtBridgeOptions}
 import io.vertx.ext.stomp.{BridgeOptions => JBridgeOptions}
 import io.vertx.ext.bridge.{PermittedOptions => JPermittedOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Specify the event bus bridge options.
-  */
-class BridgeOptions(private val _asJava: JBridgeOptions) 
-    extends ExtBridgeOptions(_asJava) {
+ * Specify the event bus bridge options.
+ */
 
+class BridgeOptions(private val _asJava: JBridgeOptions) extends ExtBridgeOptions(_asJava) {
   override def asJava = _asJava
   override def addInboundPermitted(value: PermittedOptions) = {
     asJava.addInboundPermitted(value.asJava)
     this
   }
+
   override def setInboundPermitteds(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
     asJava.setInboundPermitteds(value.map(_.asJava).asJava)
     this
   }
+
   override def getInboundPermitteds: scala.collection.mutable.Buffer[PermittedOptions] = {
     asJava.getInboundPermitteds().asScala.map(x => PermittedOptions(x))
   }
+
   override def addOutboundPermitted(value: PermittedOptions) = {
     asJava.addOutboundPermitted(value.asJava)
     this
   }
+
   override def setOutboundPermitteds(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
     asJava.setOutboundPermitteds(value.map(_.asJava).asJava)
     this
   }
+
   override def getOutboundPermitteds: scala.collection.mutable.Buffer[PermittedOptions] = {
     asJava.getOutboundPermitteds().asScala.map(x => PermittedOptions(x))
   }
+
   def setPointToPoint(value: Boolean) = {
     asJava.setPointToPoint(value)
     this
   }
+
   def isPointToPoint: Boolean = {
     asJava.isPointToPoint().asInstanceOf[Boolean]
   }
+
 }
+
 
 object BridgeOptions {
   
@@ -84,3 +92,4 @@ object BridgeOptions {
     }
   }
 }
+

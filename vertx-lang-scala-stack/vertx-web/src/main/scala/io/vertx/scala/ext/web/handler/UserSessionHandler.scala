@@ -16,15 +16,15 @@
 
 package io.vertx.scala.ext.web.handler
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.auth.AuthProvider
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import scala.reflect.runtime.universe._
 import io.vertx.ext.web.handler.{UserSessionHandler => JUserSessionHandler}
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   *
@@ -36,25 +36,29 @@ import io.vertx.core.Handler
   * It requires an Auth provider so, if the user is deserialized from a clustered session it knows which Auth provider
   * to associate the session with.
   */
-class UserSessionHandler(private val _asJava: Object)
-    extends io.vertx.core.Handler[RoutingContext] {
 
+class UserSessionHandler(private val _asJava: Object) extends io.vertx.core.Handler[RoutingContext] {
   def asJava = _asJava
 
 
-  override def handle(arg0: RoutingContext): Unit = {
+
+
+
+
+  override def handle (arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JUserSessionHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
+
 
 }
 
 object UserSessionHandler {
-  def apply(asJava: JUserSessionHandler) = new UserSessionHandler(asJava)  
+  def apply(asJava: JUserSessionHandler) = new UserSessionHandler(asJava)
+  
   /**
-    * Create a new handler
-    * @param authProvider The auth provider to use
-    * @return the handler
-    */
+   * Create a new handler   * @param authProvider The auth provider to use
+   * @return the handler
+   */
   def create(authProvider: AuthProvider): UserSessionHandler = {
     UserSessionHandler(JUserSessionHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }

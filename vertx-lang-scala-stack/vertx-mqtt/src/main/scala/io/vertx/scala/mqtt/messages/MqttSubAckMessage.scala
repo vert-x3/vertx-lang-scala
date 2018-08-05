@@ -16,27 +16,27 @@
 
 package io.vertx.scala.mqtt.messages
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.mqtt.messages.{MqttSubAckMessage => JMqttSubAckMessage}
+import scala.reflect.runtime.universe._
 import io.vertx.mqtt.messages.{MqttMessage => JMqttMessage}
 import scala.collection.JavaConverters._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Represents an MQTT SUBACK message
-  */
-class MqttSubAckMessage(private val _asJava: Object)
-    extends  MqttMessage  {
 
+  */
+
+class MqttSubAckMessage(private val _asJava: Object) extends MqttMessage {
   def asJava = _asJava
   private var cached_0: Option[Int] = None
   private var cached_1: Option[scala.collection.mutable.Buffer[Int]] = None
 
 
   /**
-    * @return Message identifier
-    */
+   * @return Message identifier
+   */
   override def messageId(): Int = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttSubAckMessage].messageId()
@@ -46,8 +46,8 @@ class MqttSubAckMessage(private val _asJava: Object)
   }
 
   /**
-    * @return list of granted QoS levels
-    */
+   * @return list of granted QoS levels
+   */
   def grantedQoSLevels(): scala.collection.mutable.Buffer[Int] = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JMqttSubAckMessage].grantedQoSLevels()
@@ -56,8 +56,13 @@ class MqttSubAckMessage(private val _asJava: Object)
     cached_1.get
   }
 
+
+
+
+
 }
 
 object MqttSubAckMessage {
-  def apply(asJava: JMqttSubAckMessage) = new MqttSubAckMessage(asJava)  
+  def apply(asJava: JMqttSubAckMessage) = new MqttSubAckMessage(asJava)
+  
 }

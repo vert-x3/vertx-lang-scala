@@ -12,20 +12,16 @@
 [frame="topbot"]
 |===
 ^|Name | Description
-|[[UP]]`UP`|
-+++
+|[[UP]]`UP`|+++
 The service is published and is accessible.
 +++
-|[[DOWN]]`DOWN`|
-+++
+|[[DOWN]]`DOWN`|+++
 The service has been withdrawn, it is not accessible anymore.
 +++
-|[[OUT_OF_SERVICE]]`OUT_OF_SERVICE`|
-+++
+|[[OUT_OF_SERVICE]]`OUT_OF_SERVICE`|+++
 The service is still published, but not accessible (maintenance).
 +++
-|[[UNKNOWN]]`UNKNOWN`|
-+++
+|[[UNKNOWN]]`UNKNOWN`|+++
 Unknown status.
 +++
 |===

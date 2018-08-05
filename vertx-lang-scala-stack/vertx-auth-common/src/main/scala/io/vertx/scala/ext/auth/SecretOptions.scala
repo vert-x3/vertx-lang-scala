@@ -16,32 +16,37 @@
 
 package io.vertx.scala.ext.auth
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.auth.{SecretOptions => JSecretOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options describing a secret.
-  */
-class SecretOptions(private val _asJava: JSecretOptions) {
+ * Options describing a secret.
+ */
 
+class SecretOptions(private val _asJava: JSecretOptions) {
   def asJava = _asJava
   def setSecret(value: String) = {
     asJava.setSecret(value)
     this
   }
+
   def getSecret: String = {
     asJava.getSecret().asInstanceOf[String]
   }
+
   def setType(value: String) = {
     asJava.setType(value)
     this
   }
+
   def getType: String = {
     asJava.getType().asInstanceOf[String]
   }
+
 }
+
 
 object SecretOptions {
   
@@ -65,3 +70,4 @@ object SecretOptions {
     }
   }
 }
+

@@ -16,40 +16,43 @@
 
 package io.vertx.scala.ext.mongo
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.mongo.{BulkWriteOptions => JBulkWriteOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options for configuring bulk write operations.
-  */
+ * Options for configuring bulk write operations.
+ */
+
 class BulkWriteOptions(private val _asJava: JBulkWriteOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set the ordered option
-    */
+   * Set the ordered option
+   */
   def setOrdered(value: Boolean) = {
     asJava.setOrdered(value)
     this
   }
+
   def isOrdered: Boolean = {
     asJava.isOrdered().asInstanceOf[Boolean]
   }
 
   /**
-    * Set the write option
-    */
+   * Set the write option
+   */
   def setWriteOption(value: io.vertx.ext.mongo.WriteOption) = {
     asJava.setWriteOption(value)
     this
   }
+
   def getWriteOption: io.vertx.ext.mongo.WriteOption = {
     asJava.getWriteOption()
   }
+
 }
+
 
 object BulkWriteOptions {
   
@@ -73,3 +76,4 @@ object BulkWriteOptions {
     }
   }
 }
+

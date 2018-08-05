@@ -16,42 +16,45 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{PreparedQueryExecuteOptions => JPreparedQueryExecuteOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options used to execute prepared query
-  */
+ * Options used to execute prepared query
+ */
+
 class PreparedQueryExecuteOptions(private val _asJava: JPreparedQueryExecuteOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set the size of the list to the given number of nodes. This is applied after any sorting or shuffling.
-    */
+   * Set the size of the list to the given number of nodes. This is applied after any sorting or shuffling.
+   */
   def setLimit(value: Int) = {
     asJava.setLimit(value)
     this
   }
+
   def getLimit: Int = {
     asJava.getLimit().asInstanceOf[Int]
   }
 
   /**
-    * Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
-    * Passing `_agent` will use the agent's node for the sort. If this is not present,
-    * the default behavior will shuffle the nodes randomly each time the query is executed.
-    */
+   * Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
+   * Passing `_agent` will use the agent's node for the sort. If this is not present,
+   * the default behavior will shuffle the nodes randomly each time the query is executed.
+   */
   def setNear(value: String) = {
     asJava.setNear(value)
     this
   }
+
   def getNear: String = {
     asJava.getNear().asInstanceOf[String]
   }
+
 }
+
 
 object PreparedQueryExecuteOptions {
   
@@ -75,3 +78,4 @@ object PreparedQueryExecuteOptions {
     }
   }
 }
+

@@ -127,7 +127,18 @@ You can add query parameters to the request URI in a fluent fashion
 
 [source,scala]
 ----
-Code not translatable
+client.get(8080, "myserver.mycompany.com", "/some-uri").addQueryParam("param", "param_value").sendFuture().onComplete{
+  case Success(result) => {
+    // Obtain response
+    var response = result
+
+    println(s"Received response with status code${response.statusCode()}")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
 ----
 
 Any request URI parameter will pre-populate the request
@@ -184,7 +195,14 @@ for each request. For this purpose the web client can send `ReadStream<Buffer>` 
 
 [source,scala]
 ----
-Code not translatable
+// When the stream len is unknown sendStream sends the file to the server using chunked transfer encoding
+client.post(8080, "myserver.mycompany.com", "/some-uri").sendStreamFuture(stream).onComplete{
+  case Success(result) => {
+    // Ok
+  }
+  case Failure(cause) => println("Failure")
+}
+
 ----
 
 The web client takes care of setting up the transfer pump for you. Since the length of the stream is not know

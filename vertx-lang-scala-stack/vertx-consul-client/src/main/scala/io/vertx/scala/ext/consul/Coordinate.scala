@@ -16,73 +16,79 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{Coordinate => JCoordinate}
 
 /**
-  * Holds network coordinates of node
-  */
+ * Holds network coordinates of node
+ */
+
 class Coordinate(private val _asJava: JCoordinate) {
-
   def asJava = _asJava
-
   /**
-    * Set adjustment
-    */
+   * Set adjustment
+   */
   def setAdj(value: Float) = {
     asJava.setAdj(value)
     this
   }
+
   def getAdj: Float = {
     asJava.getAdj().asInstanceOf[Float]
   }
 
   /**
-    * Set error
-    */
+   * Set error
+   */
   def setErr(value: Float) = {
     asJava.setErr(value)
     this
   }
+
   def getErr: Float = {
     asJava.getErr().asInstanceOf[Float]
   }
 
   /**
-    * Set height
-    */
+   * Set height
+   */
   def setHeight(value: Float) = {
     asJava.setHeight(value)
     this
   }
+
   def getHeight: Float = {
     asJava.getHeight().asInstanceOf[Float]
   }
 
   /**
-    * Set name of node
-    */
+   * Set name of node
+   */
   def setNode(value: String) = {
     asJava.setNode(value)
     this
   }
+
   def getNode: String = {
     asJava.getNode().asInstanceOf[String]
   }
 
   /**
-    * Set vector
-    */
+   * Set vector
+   */
   def setVec(value: scala.collection.mutable.Buffer[Float]) = {
     asJava.setVec(value.map(Float.box).asJava)
     this
   }
+
   def getVec: scala.collection.mutable.Buffer[Float] = {
     asJava.getVec().asScala.map(x => x.asInstanceOf[Float])
   }
+
 }
+
 
 object Coordinate {
   
@@ -106,3 +112,4 @@ object Coordinate {
     }
   }
 }
+

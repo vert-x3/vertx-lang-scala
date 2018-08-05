@@ -16,60 +16,73 @@
 
 package io.vertx.scala.ext.web.handler.sockjs
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.web.handler.sockjs.{SockJSHandlerOptions => JSockJSHandlerOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options for configuring a SockJS handler
-  */
-class SockJSHandlerOptions(private val _asJava: JSockJSHandlerOptions) {
+ * Options for configuring a SockJS handler
+ */
 
+class SockJSHandlerOptions(private val _asJava: JSockJSHandlerOptions) {
   def asJava = _asJava
   def addDisabledTransport(value: String) = {
     asJava.addDisabledTransport(value)
     this
   }
+
   def getDisabledTransports: scala.collection.mutable.Set[String] = {
     asJava.getDisabledTransports().asScala.map(x => x.asInstanceOf[String])
   }
+
   def setHeartbeatInterval(value: Long) = {
     asJava.setHeartbeatInterval(value)
     this
   }
+
   def getHeartbeatInterval: Long = {
     asJava.getHeartbeatInterval().asInstanceOf[Long]
   }
+
   def setInsertJSESSIONID(value: Boolean) = {
     asJava.setInsertJSESSIONID(value)
     this
   }
+
   def isInsertJSESSIONID: Boolean = {
     asJava.isInsertJSESSIONID().asInstanceOf[Boolean]
   }
+
   def setLibraryURL(value: String) = {
     asJava.setLibraryURL(value)
     this
   }
+
   def getLibraryURL: String = {
     asJava.getLibraryURL().asInstanceOf[String]
   }
+
   def setMaxBytesStreaming(value: Int) = {
     asJava.setMaxBytesStreaming(value)
     this
   }
+
   def getMaxBytesStreaming: Int = {
     asJava.getMaxBytesStreaming().asInstanceOf[Int]
   }
+
   def setSessionTimeout(value: Long) = {
     asJava.setSessionTimeout(value)
     this
   }
+
   def getSessionTimeout: Long = {
     asJava.getSessionTimeout().asInstanceOf[Long]
   }
+
 }
+
 
 object SockJSHandlerOptions {
   
@@ -93,3 +106,4 @@ object SockJSHandlerOptions {
     }
   }
 }
+

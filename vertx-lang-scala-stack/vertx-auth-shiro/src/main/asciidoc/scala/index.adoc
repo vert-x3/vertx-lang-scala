@@ -35,7 +35,10 @@ Here's an example of creating a Shiro auth provider by specifying the type:
 
 var config = new io.vertx.core.json.JsonObject().put("properties_path", "classpath:test-auth.properties")
 
-var provider = ShiroAuth.create(vertx, ShiroAuthRealmType.PROPERTIES, config)
+var provider = ShiroAuth.create(vertx, ShiroAuthOptions()
+  .setType(ShiroAuthRealmType.PROPERTIES)
+  .setConfig(config)
+)
 
 
 ----
@@ -73,7 +76,7 @@ If validating if a user has a particular permission simply pass the permission i
 [source,java]
 ----
 
-user.isAuthorisedFuture("newsletter:edit:13").onComplete{
+user.isAuthorizedFuture("newsletter:edit:13").onComplete{
   case Success(result) => {
     var hasPermission = result
   }
@@ -89,7 +92,7 @@ If validating that a user has a particular _role_ then you should prefix the arg
 [source,java]
 ----
 
-user.isAuthorisedFuture("role:manager").onComplete{
+user.isAuthorizedFuture("role:manager").onComplete{
   case Success(result) => {
     var hasRole = result
   }

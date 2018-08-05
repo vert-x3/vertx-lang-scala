@@ -222,6 +222,12 @@ circuit breaker is allowed to execute the dangerous operation. Should the call s
 and returns to the {@code closed} state, ready for more routine operation. If this trial call fails, however, the circuit
 breaker returns to the {@code open} state until another timeout elapses.
 
+== Reported exceptions
+
+The fallback receives a:
+
+* `OpenCircuitException` when the circuit breaker is opened
+* `TimeoutException` when the operation timed out
 
 == Pushing circuit breaker metrics to the Hystrix Dashboard
 

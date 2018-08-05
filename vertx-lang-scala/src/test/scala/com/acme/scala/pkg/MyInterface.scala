@@ -16,34 +16,43 @@
 
 package com.acme.scala.pkg
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import com.acme.pkg.sub.{SubInterface => JSubInterface}
+import scala.reflect.runtime.universe._
 import com.acme.pkg.{MyInterface => JMyInterface}
 import com.acme.scala.pkg.sub.SubInterface
 import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
 import io.vertx.scala.codegen.testmodel.TestInterface
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
-  */
-class MyInterface(private val _asJava: Object) {
 
+  */
+
+class MyInterface(private val _asJava: Object) {
   def asJava = _asJava
 
 
-  def sub(): SubInterface = {
+
+
+
+
+  def sub (): SubInterface = {
     SubInterface(asJava.asInstanceOf[JMyInterface].sub())
   }
 
-  def method(): TestInterface = {
+
+  def method (): TestInterface = {
     TestInterface(asJava.asInstanceOf[JMyInterface].method())
   }
+
 
 }
 
 object MyInterface {
-  def apply(asJava: JMyInterface) = new MyInterface(asJava)  
+  def apply(asJava: JMyInterface) = new MyInterface(asJava)
+  
+
   def create(): MyInterface = {
     MyInterface(JMyInterface.create())
   }

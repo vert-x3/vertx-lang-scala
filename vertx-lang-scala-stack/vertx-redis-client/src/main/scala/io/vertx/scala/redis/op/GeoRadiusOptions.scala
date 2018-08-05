@@ -16,49 +16,51 @@
 
 package io.vertx.scala.redis.op
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.redis.op.{GeoRadiusOptions => JGeoRadiusOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
+
+ */
+
 class GeoRadiusOptions(private val _asJava: JGeoRadiusOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set the radius options limit the result count.
-    */
+   * Set the radius options limit the result count.
+   */
   def setCount(value: Long) = {
     asJava.setCount(value)
     this
   }
 
   /**
-    * Set the radius options to be coordinate based.
-    */
+   * Set the radius options to be coordinate based.
+   */
   def setWithCoord(value: Boolean) = {
     asJava.setWithCoord(value)
     this
   }
 
   /**
-    * Set the radius options to be distance based.
-    */
+   * Set the radius options to be distance based.
+   */
   def setWithDist(value: Boolean) = {
     asJava.setWithDist(value)
     this
   }
 
   /**
-    * Set the radius options to be hash based.
-    */
+   * Set the radius options to be hash based.
+   */
   def setWithHash(value: Boolean) = {
     asJava.setWithHash(value)
     this
   }
+
 }
+
 
 object GeoRadiusOptions {
   
@@ -82,3 +84,4 @@ object GeoRadiusOptions {
     }
   }
 }
+

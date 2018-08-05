@@ -16,40 +16,43 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{EventList => JEventList}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds result of events query
-  */
+ * Holds result of events query
+ */
+
 class EventList(private val _asJava: JEventList) {
-
   def asJava = _asJava
-
   /**
-    * Set Consul index, a unique identifier representing the current state of the requested events
-    */
+   * Set Consul index, a unique identifier representing the current state of the requested events
+   */
   def setIndex(value: Long) = {
     asJava.setIndex(value)
     this
   }
+
   def getIndex: Long = {
     asJava.getIndex().asInstanceOf[Long]
   }
 
   /**
-    * Set list of events
-    */
+   * Set list of events
+   */
   def setList(value: scala.collection.mutable.Buffer[Event]) = {
     asJava.setList(value.map(_.asJava).asJava)
     this
   }
+
   def getList: scala.collection.mutable.Buffer[Event] = {
     asJava.getList().asScala.map(x => Event(x))
   }
+
 }
+
 
 object EventList {
   
@@ -73,3 +76,4 @@ object EventList {
     }
   }
 }
+

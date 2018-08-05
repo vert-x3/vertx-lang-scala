@@ -16,124 +16,146 @@
 
 package io.vertx.scala.circuitbreaker
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.circuitbreaker.{CircuitBreakerOptions => JCircuitBreakerOptions}
 
 /**
-  * Circuit breaker configuration options. All time are given in milliseconds.
-  */
-class CircuitBreakerOptions(private val _asJava: JCircuitBreakerOptions) {
+ * Circuit breaker configuration options. All time are given in milliseconds.
+ */
 
+class CircuitBreakerOptions(private val _asJava: JCircuitBreakerOptions) {
   def asJava = _asJava
+  /**
+   * Sets the rolling window used for metrics.
+   */
+  def setFailuresRollingWindow(value: Long) = {
+    asJava.setFailuresRollingWindow(value)
+    this
+  }
+
+  def getFailuresRollingWindow: Long = {
+    asJava.getFailuresRollingWindow().asInstanceOf[Long]
+  }
 
   /**
-    * Sets whether or not the fallback is executed on failure, even when the circuit is closed.
-    */
+   * Sets whether or not the fallback is executed on failure, even when the circuit is closed.
+   */
   def setFallbackOnFailure(value: Boolean) = {
     asJava.setFallbackOnFailure(value)
     this
   }
+
   def isFallbackOnFailure: Boolean = {
     asJava.isFallbackOnFailure().asInstanceOf[Boolean]
   }
 
   /**
-    * Sets the maximum number of failures before opening the circuit.
-    */
+   * Sets the maximum number of failures before opening the circuit.
+   */
   def setMaxFailures(value: Int) = {
     asJava.setMaxFailures(value)
     this
   }
+
   def getMaxFailures: Int = {
     asJava.getMaxFailures().asInstanceOf[Int]
   }
 
   /**
-    * Configures the number of times the circuit breaker tries to redo the operation before failing.
-    */
+   * Configures the number of times the circuit breaker tries to redo the operation before failing.
+   */
   def setMaxRetries(value: Int) = {
     asJava.setMaxRetries(value)
     this
   }
+
   def getMaxRetries: Int = {
     asJava.getMaxRetries().asInstanceOf[Int]
   }
 
   /**
-    * Sets the configured number of buckets the rolling window is divided into.
-    *
-    * The following must be true - metrics.rollingStats.timeInMilliseconds % metrics.rollingStats.numBuckets == 0 - otherwise it will throw an exception.
-    *
-    * In other words, 10000/10 is okay, so is 10000/20 but 10000/7 is not.
-    */
+   * Sets the configured number of buckets the rolling window is divided into.
+   *
+   * The following must be true - metrics.rollingStats.timeInMilliseconds % metrics.rollingStats.numBuckets == 0 - otherwise it will throw an exception.
+   *
+   * In other words, 10000/10 is okay, so is 10000/20 but 10000/7 is not.
+   */
   def setMetricsRollingBuckets(value: Int) = {
     asJava.setMetricsRollingBuckets(value)
     this
   }
+
   def getMetricsRollingBuckets: Int = {
     asJava.getMetricsRollingBuckets().asInstanceOf[Int]
   }
 
   /**
-    * Sets the rolling window used for metrics.
-    */
+   * Sets the rolling window used for metrics.
+   */
   def setMetricsRollingWindow(value: Long) = {
     asJava.setMetricsRollingWindow(value)
     this
   }
+
   def getMetricsRollingWindow: Long = {
     asJava.getMetricsRollingWindow().asInstanceOf[Long]
   }
 
   /**
-    * Sets the event bus address on which the circuit breaker publish its state change.
-    */
+   * Sets the event bus address on which the circuit breaker publish its state change.
+   */
   def setNotificationAddress(value: String) = {
     asJava.setNotificationAddress(value)
     this
   }
+
   def getNotificationAddress: String = {
     asJava.getNotificationAddress().asInstanceOf[String]
   }
 
   /**
-    * Configures the period in milliseconds where the circuit breaker send a notification on the event bus with its
-    * current state.
-    */
+   * Configures the period in milliseconds where the circuit breaker send a notification on the event bus with its
+   * current state.
+   */
   def setNotificationPeriod(value: Long) = {
     asJava.setNotificationPeriod(value)
     this
   }
+
   def getNotificationPeriod: Long = {
     asJava.getNotificationPeriod().asInstanceOf[Long]
   }
 
   /**
-    * Sets the time in ms before it attempts to re-close the circuit (by going to the half-open state). If the circuit
-    * is closed when the timeout is reached, nothing happens. `-1` disables this feature.
-    */
+   * Sets the time in ms before it attempts to re-close the circuit (by going to the half-open state). If the circuit
+   * is closed when the timeout is reached, nothing happens. `-1` disables this feature.
+   */
   def setResetTimeout(value: Long) = {
     asJava.setResetTimeout(value)
     this
   }
+
   def getResetTimeout: Long = {
     asJava.getResetTimeout().asInstanceOf[Long]
   }
 
   /**
-    * Sets the timeout in milliseconds. If an action is not completed before this timeout, the action is considered as
-    * a failure.
-    */
+   * Sets the timeout in milliseconds. If an action is not completed before this timeout, the action is considered as
+   * a failure.
+   */
   def setTimeout(value: Long) = {
     asJava.setTimeout(value)
     this
   }
+
   def getTimeout: Long = {
     asJava.getTimeout().asInstanceOf[Long]
   }
+
 }
+
 
 object CircuitBreakerOptions {
   
@@ -157,3 +179,4 @@ object CircuitBreakerOptions {
     }
   }
 }
+

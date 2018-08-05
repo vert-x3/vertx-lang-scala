@@ -16,55 +16,64 @@
 
 package io.vertx.scala.rabbitmq
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.rabbitmq.{QueueOptions => JQueueOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Aimed to specify queue consumer settings when calling [[io.vertx.scala.rabbitmq.RabbitMQClient]]
-  */
+ * Aimed to specify queue consumer settings when calling [[io.vertx.scala.rabbitmq.RabbitMQClient]]
+
+ */
+
 class QueueOptions(private val _asJava: JQueueOptions) {
-
   def asJava = _asJava
-
   /**
-    */
+
+   */
   def setAutoAck(value: Boolean) = {
     asJava.setAutoAck(value)
     this
   }
+
   def isAutoAck: Boolean = {
     asJava.isAutoAck().asInstanceOf[Boolean]
   }
 
   /**
-    */
+
+   */
   def setBuffer(value: Boolean) = {
     asJava.setBuffer(value)
     this
   }
+
   def isBuffer: Boolean = {
     asJava.isBuffer().asInstanceOf[Boolean]
   }
 
   /**
-    */
+
+   */
   def setKeepMostRecent(value: Boolean) = {
     asJava.setKeepMostRecent(value)
     this
   }
+
   def isKeepMostRecent: Boolean = {
     asJava.isKeepMostRecent().asInstanceOf[Boolean]
   }
 
   /**
-    */
+
+   */
   def setMaxInternalQueueSize(value: Int) = {
     asJava.setMaxInternalQueueSize(value)
     this
   }
+
 }
+
 
 object QueueOptions {
   
@@ -88,3 +97,4 @@ object QueueOptions {
     }
   }
 }
+

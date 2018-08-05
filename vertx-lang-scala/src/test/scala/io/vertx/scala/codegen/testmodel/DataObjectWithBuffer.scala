@@ -16,25 +16,29 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.buffer.Buffer
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import io.vertx.codegen.testmodel.{DataObjectWithBuffer => JDataObjectWithBuffer}
+import scala.collection.JavaConverters._
 
 /**
-  */
-class DataObjectWithBuffer(private val _asJava: JDataObjectWithBuffer) {
 
+ */
+
+class DataObjectWithBuffer(private val _asJava: JDataObjectWithBuffer) {
   def asJava = _asJava
   def setBuffer(value: io.vertx.core.buffer.Buffer) = {
     asJava.setBuffer(value)
     this
   }
+
   def getBuffer: io.vertx.core.buffer.Buffer = {
     asJava.getBuffer()
   }
+
 }
+
 
 object DataObjectWithBuffer {
   
@@ -58,3 +62,4 @@ object DataObjectWithBuffer {
     }
   }
 }
+

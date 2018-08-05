@@ -16,45 +16,49 @@
 
 package io.vertx.scala.proton
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.proton.{ProtonTransportOptions => JProtonTransportOptions}
 
 /**
-  * Options for configuring transport layer
-  */
+ * Options for configuring transport layer
+
+ */
+
 class ProtonTransportOptions(private val _asJava: JProtonTransportOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set the heart beat as maximum delay between sending frames for the remote peers.
-    * If no frames are received within 2 * heart beat, the connection is closed
-    */
+   * Set the heart beat as maximum delay between sending frames for the remote peers.
+   * If no frames are received within 2 * heart beat, the connection is closed
+   */
   def setHeartbeat(value: Int) = {
     asJava.setHeartbeat(value)
     this
   }
+
   def getHeartbeat: Int = {
     asJava.getHeartbeat().asInstanceOf[Int]
   }
 
   /**
-    * Sets the maximum frame size to announce in the AMQP <em>OPEN</em> frame.
-    * 
-    * If this property is not set explicitly, a reasonable default value is used.
-    * 
-    * Setting this property to a negative value will result in no maximum frame size being announced at all.
-    */
+   * Sets the maximum frame size for the connection.
+   * 
+   * If this property is not set explicitly, a reasonable default value is used.
+   * 
+   * Setting this property to a negative value will result in no maximum frame size being announced at all.
+   */
   def setMaxFrameSize(value: Int) = {
     asJava.setMaxFrameSize(value)
     this
   }
+
   def getMaxFrameSize: Int = {
     asJava.getMaxFrameSize().asInstanceOf[Int]
   }
+
 }
+
 
 object ProtonTransportOptions {
   
@@ -78,3 +82,4 @@ object ProtonTransportOptions {
     }
   }
 }
+

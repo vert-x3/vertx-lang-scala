@@ -16,50 +16,53 @@
 
 package io.vertx.scala.circuitbreaker
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import scala.reflect.runtime.universe._
 import io.vertx.circuitbreaker.{HystrixMetricHandler => JHystrixMetricHandler}
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.core.Handler
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A Vert.x web handler to expose the circuit breaker to the Hystrix dasbboard. The handler listens to the circuit
   * breaker notifications sent on the event bus.
   */
-class HystrixMetricHandler(private val _asJava: Object)
-    extends io.vertx.core.Handler[RoutingContext] {
 
+class HystrixMetricHandler(private val _asJava: Object) extends io.vertx.core.Handler[RoutingContext] {
   def asJava = _asJava
 
 
-  override def handle(arg0: RoutingContext): Unit = {
+
+
+
+
+  override def handle (arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JHystrixMetricHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
+
 
 }
 
 object HystrixMetricHandler {
-  def apply(asJava: JHystrixMetricHandler) = new HystrixMetricHandler(asJava)  
+  def apply(asJava: JHystrixMetricHandler) = new HystrixMetricHandler(asJava)
+  
   /**
-    * Creates the handler, using the default notification address.
-    * @param vertx the Vert.x instance
-    * @return the handler
-    */
+   * Creates the handler, using the default notification address.   * @param vertx the Vert.x instance
+   * @return the handler
+   */
   def create(vertx: Vertx): HystrixMetricHandler = {
     HystrixMetricHandler(JHystrixMetricHandler.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
   /**
-    * Creates the handler.
-    * @param vertx the Vert.x instance
-    * @param address the address to listen on the event bus
-    * @return the handler
-    */
-  def create(vertx: Vertx, address: String): HystrixMetricHandler = {
+   * Creates the handler.   * @param vertx the Vert.x instance
+   * @param address the address to listen on the event bus
+   * @return the handler
+   */
+  def create(vertx: Vertx,address: String): HystrixMetricHandler = {
     HystrixMetricHandler(JHystrixMetricHandler.create(vertx.asJava.asInstanceOf[JVertx], address.asInstanceOf[java.lang.String]))
   }
 

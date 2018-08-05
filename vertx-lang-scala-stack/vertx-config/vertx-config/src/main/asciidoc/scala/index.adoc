@@ -3,10 +3,10 @@
 Vert.x Config provides a way to configure your Vert.x application.
 It:
 
-* offers multiple configuration syntaxes (json, properties, yaml (extension), hocon
+* offers multiple configuration syntaxes (JSON, properties, Yaml (extension), Hocon
 (extension)...
-* offers multiple configuration stores (files, directories, http, git (extension), redis
-(extension), system properties, environment properties)...
+* offers multiple configuration stores such as files, directories, HTTP, git (extension), Redis
+(extension), system properties and environment properties.
 * lets you define the processing order and overloading
 * supports runtime reconfiguration
 
@@ -16,8 +16,7 @@ The library is structured around:
 
 * a*Config Retriever** instantiated and used by the Vert.x application. It
 configures a set of configuration store
-**Configuration store** defines a location from where the configuration data is read
-and and a syntax (json by default)
+**Configuration store** defines a location from where the configuration data is read and also a format (JSON by default)
 
 The configuration is retrieved as a JSON Object.
 
@@ -51,7 +50,7 @@ var retriever = ConfigRetriever.create(vertx)
 
 ----
 
-By default the Config Retriever is configured with the following stores (in
+By default, the Config Retriever is configured with the following stores (in
 this order):
 
 * The Vert.x verticle `config()`
@@ -89,7 +88,7 @@ var retriever = ConfigRetriever.create(vertx, options)
 
 More details about the overloading rules and available stores are available below. Each store can be marked as
 `optional`. If a failure is caught while retrieving (or processing) the configuration from an optional store, the failure
-is logged but the processing does not fail. Instead an empty JSON object is returned (`{}`). To mark a store as
+is logged, but the processing does not fail. Instead, an empty JSON object is returned (`{}`). To mark a store as
 optional, use the `optional` attribute:
 
 [source]
@@ -140,12 +139,95 @@ configuration stores:
 Declared in this order (A, B), the resulting configuration would be:
 `{a:value2, b:1, c:2}`.
 
-If you declare them in the reverse order (B, A), you would get:`{a:value, b:1, c:2}`.
+If you declare them in the reverse order (B, A), you will get: `{a:value, b:1, c:2}`.
+
+== Using the retrieve configuration
+
+The retrieve configuration allows:
+
+* configuring verticles,
+* configure ports, clients, locations and so on,
+* configuring Vert.x itself
+
+This section gives a few examples of usage.
+
+=== Configuring a single verticle
+
+The following example can be placed in the `start` method of a verticle. It retrieves the configuration (using the
+default stores), and configure an HTTP server with the content of the configuration.
+
+[source]
+----
+var retriever = ConfigRetriever.create(vertx)
+retriever.getConfigFuture().onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+=== Configuring a set of verticles
+
+The following example configures 2 verticles using the configurations contained in the `verticles.json` file:
+
+[source]
+----
+var retriever = ConfigRetriever.create(vertx, ConfigRetrieverOptions()
+  .setStores(Set(ConfigStoreOptions()
+    .setType("file")
+    .setConfig(new io.vertx.core.json.JsonObject().put("path", "verticles.json"))
+  ))
+)
+
+retriever.getConfigFuture().onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+=== Configuring Vert.x itself
+
+You can also configure Vert.x directly. For this, you need a temporary Vert.x instance used to retrieve the
+configuration. Then the actual instance is created:
+
+[source]
+----
+Code not translatable
+----
+
+=== Propagating configuration changes to the event bus
+
+Vert.x Config notifies you when the configuration changes. If you want to react to this event, you need to implement
+the reaction yourself. For instance, you can un-deploy and redeploy verticle or send the new configuration on the event bus.
+The following example shows this latter case. It sends the new configuration on the event bus. Interested verticles can
+listen for this address and update themselves:
+
+[source]
+----
+var retriever = ConfigRetriever.create(vertx, ConfigRetrieverOptions()
+  .setStores(Set(ConfigStoreOptions()
+    .setType("file")
+    .setConfig(new io.vertx.core.json.JsonObject().put("path", "verticles.json"))
+  ))
+)
+
+retriever.getConfigFuture().onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+retriever.listen((change: io.vertx.scala.config.ConfigChange) => {
+  var json = todo-renderDataObjectMemberSelect
+  vertx.eventBus().publish("new-configuration", json)
+})
+
+----
 
 == Available configuration stores
 
-The Config Retriever provides a set of configuration store and format.
-Some more are available as extension and you can implement your own.
+The Config Retriever provides a set of configuration stores and formats.
+More are available as extensions, and you can also implement your own.
 
 === Structure of the configuration
 
@@ -174,7 +256,7 @@ The `path` configuration is required.
 
 === JSON
 
-The JSON configuration store just serves the given JSON config as it is.
+The JSON configuration store serves the given JSON config as it is.
 
 [source, scala]
 ----
@@ -189,7 +271,7 @@ The only supported format for this configuration store is JSON.
 
 === Environment Variables
 
-This configuration store maps environment variables to a Json Object contributed to
+This configuration store transforms environment variables to a JSON Object contributed to
 the global configuration.
 
 [source, scala]
@@ -200,8 +282,8 @@ var json = ConfigStoreOptions()
 
 ----
 
-This configuration store does not support the `format` configuration. By default, the retrieved value are
-transformed into JSON compatible structures (number, string, boolean, json object and json array). To avoid this
+This configuration store does not support the `format` configuration. By default, the retrieved value is
+transformed into JSON compatible structures (number, string, boolean, JSON object and JSON array). To avoid this
 conversion, configure the `raw-data` attribute:
 
 [source, scala]
@@ -214,7 +296,8 @@ var json = ConfigStoreOptions()
 ----
 
 You can configure the `raw-data` attribute (`false` by default). If `raw-data` is `true` no attempts to convert
-values will be made and you'll be able to get raw values using `config.getString(key)`.
+values is made, and you'll be able to get raw values using `config.getString(key)`. It is useful when manipulating
+large integers.
 
 If you want to select the set of keys to import, use the `keys` attributes. It filters out all non selected keys. Keys
 must be listed individually:
@@ -230,7 +313,7 @@ var json = ConfigStoreOptions()
 
 === System Properties
 
-This configuration store maps system properties to a Json Object contributed to the
+This configuration store transforms system properties to a JSON Object contributed to the
 global configuration.
 
 [source, scala]
@@ -247,9 +330,13 @@ This configuration store does not support the `format` configuration.
 You can configure the `cache` attribute (`true` by default) let you decide whether or
 not it caches the system properties on the first access and does not reload them.
 
+You can also configure the `raw-data` attribute (`false` by default). If `raw-data` is `true` no attempts to convert
+values is made, and you'll be able to get raw values using `config.getString(key)`. It is useful when manipulating
+large integers.
+
 === HTTP
 
-This configuration stores retrieves the configuration from a HTTP location. It can use
+This configuration store retrieves the configuration from an HTTP location. It can use
 any supported format.
 
 [source, scala]
@@ -262,7 +349,7 @@ var http = ConfigStoreOptions()
 ----
 
 It creates a Vert.x HTTP Client with the store configuration (see next snippet). To
-ease the configuration, you can also configure the `host`, `port` and `path` with the
+ease the configuration; you can also configure the `host`, `port` and `path` with the
 `host`, `port` and `path`
 properties.
 
@@ -277,7 +364,7 @@ var http = ConfigStoreOptions()
 
 === Event Bus
 
-This event bus configuration stores receives the configuration from the event bus. This
+This event bus configuration store receives the configuration from the event bus. This
 stores let you distribute your configuration among your local and distributed components.
 
 [source, scala]
@@ -289,7 +376,7 @@ var eb = ConfigStoreOptions()
 
 ----
 
-This configuration store supports any type of format.
+This configuration store supports any format.
 
 === Directory
 
@@ -300,10 +387,11 @@ This configuration store configuration requires:
 
 * a `path` - the root directory in which files are located
 * at least one `fileset` - an object to select the files
+* for properties file, you can indicate if you want to disable the type conversion using the `raw-data` attribute
 
 Each `fileset` contains:
-* a `pattern` : a Ant style pattern to select files. The pattern is applied on the
-relative path of the files location in the directory.
+* a `pattern` : a Ant-style pattern to select files. The pattern is applied on the
+relative path of the files from the current working directory.
 * an optional `format` indicating the format of the files (each fileset can use a
 different format, BUT files in a fileset must share the same format).
 
@@ -314,12 +402,33 @@ var dir = ConfigStoreOptions()
   .setConfig(new io.vertx.core.json.JsonObject().put("path", "config").put("filesets", new io.vertx.core.json.JsonArray().add(new io.vertx.core.json.JsonObject().put("pattern", "dir/*json")).add(new io.vertx.core.json.JsonObject().put("pattern", "dir/*.properties").put("format", "properties"))))
 
 
+var dirWithRawData = ConfigStoreOptions()
+  .setType("directory")
+  .setConfig(new io.vertx.core.json.JsonObject().put("path", "config").put("filesets", new io.vertx.core.json.JsonArray().add(new io.vertx.core.json.JsonObject().put("pattern", "dir/*json")).add(new io.vertx.core.json.JsonObject().put("pattern", "dir/*.properties").put("format", "properties").put("raw-data", true))))
+
+
+----
+
+=== Properties file and raw data
+
+Vert.x Config can read properties file. When reading such a file, you can pass the `raw-data` attribute to
+indicate to Vert.x to not attempt to convert values. It is useful when manipulating large integers. Values can be
+retrieved using `config.getString(key)`.
+
+[source, scala]
+----
+var propertyWithRawData = ConfigStoreOptions()
+  .setFormat("properties")
+  .setType("file")
+  .setConfig(new io.vertx.core.json.JsonObject().put("path", "raw.properties").put("raw-data", true))
+
+
 ----
 
 == Listening for configuration changes
 
-The Configuration Retriever periodically retrieve the configuration and if the outcome
-is different from the current one, your application can be reconfigured. By default the
+The Configuration Retriever periodically retrieve the configuration, and if the outcome
+is different from the current one, your application can be reconfigured. By default, the
 configuration is reloaded every 5 seconds.
 
 [source, scala]
@@ -346,7 +455,7 @@ retriever.listen((change: io.vertx.scala.config.ConfigChange) => {
 
 == Retrieving the last retrieved configuration
 
-You can retrieved the last retrieved configuration without "waiting" to be retrieved
+You can retrieve the last retrieved configuration without "waiting" to be retrieved
 using:
 
 [source, scala]
@@ -385,6 +494,15 @@ retriever.configStream().endHandler((v: java.lang.Void) => {
 
 ----
 
+== Processing the configuration
+
+You can configure a _processor_ that can validate and update the configuration. This is done using the
+`link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html#setConfigurationProcessor(java.util.function.Function)[setConfigurationProcessor]`method.
+
+The prcessing must not return `null`. It takes the retrieved configuration and returns the processed one. If the processor
+does not update the configuration, it must return the input configuration. If the processor can throw an exception (for
+example for validation purpose).
+
 == Retrieving the configuration as a Future
 
 The `link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]` provide a way to retrieve the configuration as a
@@ -415,7 +533,7 @@ configuration store (place from where the configuration data is retrieved)
 
 == Additional formats
 
-In addition of the out of the box format supported by this library, Vert.x Config provides additional
+Besides of the out of the box format supported by this library, Vert.x Config provides additional
 formats you can use in your application.
 
 include::hocon-format.adoc[]
@@ -424,7 +542,7 @@ include::yaml-format.adoc[]
 
 == Additional stores
 
-In addition of the out of the box stores supported by this library, Vert.x Config provides additional
+Besides of the out of the box stores supported by this library, Vert.x Config provides additional
 stores you can use in your application.
 
 include::git-store.adoc[]
@@ -440,5 +558,3 @@ include::consul-store.adoc[]
 include::spring-store.adoc[]
 
 include::vault-store.adoc[]
-
-include::consul-store.adoc[]

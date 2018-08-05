@@ -16,39 +16,42 @@
 
 package io.vertx.scala.core.metrics
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.core.metrics.{Measured => JMeasured}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
-  */
-trait Measured {
 
+  */
+
+trait Measured {
   def asJava: java.lang.Object
 
-  /**
-    * Whether the metrics are enabled for this measured object
-    * @return true if the metrics are enabled
-    */
-  def isMetricsEnabled(): Boolean
+    /**
+   * Whether the metrics are enabled for this measured object   * @return `true` if metrics are enabled
+   */
+def isMetricsEnabled ( ): Boolean
+
 
 }
 
 object Measured {
   def apply(asJava: JMeasured): Measured = new MeasuredImpl(asJava)
     private class MeasuredImpl(private val _asJava: Object) extends Measured {
+  def asJava = _asJava
 
-      def asJava = _asJava
+
 
 
   /**
-    * Whether the metrics are enabled for this measured object
-    * @return true if the metrics are enabled
-    */
+   * Whether the metrics are enabled for this measured object   * @return `true` if metrics are enabled
+   */
   def isMetricsEnabled(): Boolean = {
     asJava.asInstanceOf[JMeasured].isMetricsEnabled().asInstanceOf[Boolean]
   }
+
+
 
 }
 }

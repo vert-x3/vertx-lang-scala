@@ -8,24 +8,20 @@ Holds properties of Acl token
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[id]]`id`|`String`|
-+++
+|[[id]]`@id`|`String`|+++
 Set ID of token
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 Set name of token
 +++
-|[[rules]]`rules`|`String`|
-+++
+|[[rules]]`@rules`|`String`|+++
 Set rules for token
 +++
-|[[type]]`type`|`link:enums.html#AclTokenType[AclTokenType]`|
-+++
+|[[type]]`@type`|`link:enums.html#AclTokenType[AclTokenType]`|+++
 Set type of token
 +++
 |===
@@ -38,16 +34,14 @@ Options used to perform blocking query that used to wait for a potential change 
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[index]]`index`|`Number (long)`|
-+++
+|[[index]]`@index`|`Number (long)`|+++
 Set index indicating that the client wishes to wait for any changes subsequent to that index.
 +++
-|[[wait]]`wait`|`String`|
-+++
+|[[wait]]`@wait`|`String`|+++
 Specifying a maximum duration for the blocking request. This is limited to 10 minutes.
 If not set, the wait time defaults to 5 minutes. This value can be specified in the form of "10s" or "5m"
 (i.e., 10 seconds or 5 minutes, respectively).
@@ -62,40 +56,32 @@ Holds check properties
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[id]]`id`|`String`|
-+++
+|[[id]]`@id`|`String`|+++
 Set the ID of check
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 Set the name of check
 +++
-|[[nodeName]]`nodeName`|`String`|
-+++
+|[[nodeName]]`@nodeName`|`String`|+++
 Set the name of node
 +++
-|[[notes]]`notes`|`String`|
-+++
+|[[notes]]`@notes`|`String`|+++
 Set the human-readable note of check
 +++
-|[[output]]`output`|`String`|
-+++
+|[[output]]`@output`|`String`|+++
 Set the output of check
 +++
-|[[serviceId]]`serviceId`|`String`|
-+++
+|[[serviceId]]`@serviceId`|`String`|+++
 Set the ID of service with which this check associated
 +++
-|[[serviceName]]`serviceName`|`String`|
-+++
+|[[serviceName]]`@serviceName`|`String`|+++
 Set the name of service with which this check associated
 +++
-|[[status]]`status`|`link:enums.html#CheckStatus[CheckStatus]`|
-+++
+|[[status]]`@status`|`link:enums.html#CheckStatus[CheckStatus]`|+++
 Set the status of check
 +++
 |===
@@ -108,16 +94,14 @@ Holds result of checks query
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[index]]`index`|`Number (long)`|
-+++
+|[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested list of checks
 +++
-|[[list]]`list`|`Array of link:dataobjects.html#Check[Check]`|
-+++
+|[[list]]`@list`|`Array of link:dataobjects.html#Check[Check]`|+++
 Set list of checks
 +++
 |===
@@ -130,12 +114,11 @@ Options used to register checks in Consul.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[deregisterAfter]]`deregisterAfter`|`String`|
-+++
+|[[deregisterAfter]]`@deregisterAfter`|`String`|+++
 Set deregister timeout. This is optional field, which is a timeout in the same time format as Interval and TTL.
 If a check is associated with a service and has the critical state for more than this configured value,
 then its associated service (and all of its associated checks) will automatically be deregistered.
@@ -144,61 +127,48 @@ so it may take slightly longer than the configured timeout to trigger the deregi
 This should generally be configured with a timeout that's much, much longer than any expected recoverable outage
 for the given service.
 +++
-|[[grpc]]`grpc`|`String`|
-+++
+|[[grpc]]`@grpc`|`String`|+++
 Specifies a gRPC check's endpoint that supports the standard
 <a href="https://github.com/grpc/grpc/blob/master/doc/health-checking.md">gRPC health checking protocol</a>.
 The state of the check will be updated at the given Interval by probing the configured endpoint.
 The endpoint must be represented as <code>address:port/service</code>
 +++
-|[[grpcTls]]`grpcTls`|`Boolean`|
-+++
+|[[grpcTls]]`@grpcTls`|`Boolean`|+++
 Specifies whether to use TLS for this gRPC health check.
 If TLS is enabled, then by default, a valid TLS certificate is expected.
 Certificate verification can be turned off by setting <code>TLSSkipVerify</code> to <code>true</code>.
 +++
-|[[http]]`http`|`String`|
-+++
+|[[http]]`@http`|`String`|+++
 Set HTTP address to check. Also you should set checking interval
 +++
-|[[id]]`id`|`String`|
-+++
+|[[id]]`@id`|`String`|+++
 Set check ID
 +++
-|[[interval]]`interval`|`String`|
-+++
+|[[interval]]`@interval`|`String`|+++
 Set checking interval
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 Set check name. This is mandatory field
 +++
-|[[notes]]`notes`|`String`|
-+++
+|[[notes]]`@notes`|`String`|+++
 Set check notes
 +++
-|[[script]]`script`|`String`|
+|[[scriptArgs]]`@scriptArgs`|`Array of String`|+++
+Set scriptArgs. Also you should set checking interval
 +++
-Set path to checking script. Also you should set checking interval
-+++
-|[[serviceId]]`serviceId`|`String`|
-+++
+|[[serviceId]]`@serviceId`|`String`|+++
 Set the service ID to associate the registered check with an existing service provided by the agent.
 +++
-|[[status]]`status`|`link:enums.html#CheckStatus[CheckStatus]`|
-+++
+|[[status]]`@status`|`link:enums.html#CheckStatus[CheckStatus]`|+++
 Set the check status to specify the initial state of the health check.
 +++
-|[[tcp]]`tcp`|`String`|
-+++
+|[[tcp]]`@tcp`|`String`|+++
 Set TCP address to check. Also you should set checking interval
 +++
-|[[tlsSkipVerify]]`tlsSkipVerify`|`Boolean`|
-+++
+|[[tlsSkipVerify]]`@tlsSkipVerify`|`Boolean`|+++
 Specifies if the certificate for an HTTPS check should not be verified.
 +++
-|[[ttl]]`ttl`|`String`|
-+++
+|[[ttl]]`@ttl`|`String`|+++
 Set Time to Live of check.
 +++
 |===
@@ -211,16 +181,14 @@ Options used to requesting list of checks
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[blockingOptions]]`blockingOptions`|`link:dataobjects.html#BlockingQueryOptions[BlockingQueryOptions]`|
-+++
+|[[blockingOptions]]`@blockingOptions`|`link:dataobjects.html#BlockingQueryOptions[BlockingQueryOptions]`|+++
 Set options for blocking query
 +++
-|[[near]]`near`|`String`|
-+++
+|[[near]]`@near`|`String`|+++
 Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
 +++
 |===
@@ -233,18 +201,16 @@ Options used to create Consul client.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[aclToken]]`aclToken`|`String`|
-+++
+|[[aclToken]]`@aclToken`|`String`|+++
 Set the ACL token. When provided, the client will use this token when making requests to the Consul
 by providing the "?token" query parameter. When not provided, the empty token, which maps to the 'anonymous'
 ACL policy, is used.
 +++
-|[[alpnVersions]]`alpnVersions`|`Array of link:enums.html#HttpVersion[HttpVersion]`|
-+++
+|[[alpnVersions]]`@alpnVersions`|`Array of link:enums.html#HttpVersion[HttpVersion]`|+++
 Set the list of protocol versions to provide to the server during the Application-Layer Protocol Negotiation.
 When the list is empty, the client provides a best effort list according to link:
 
@@ -253,72 +219,57 @@ When the list is empty, the client provides a best effort list according to link
   <li>otherwise: [link]</li>
 </ul>
 +++
-|[[connectTimeout]]`connectTimeout`|`Number (int)`|
-+++
+|[[connectTimeout]]`@connectTimeout`|`Number (int)`|+++
 Set the connect timeout
 +++
-|[[crlPaths]]`crlPaths`|`Array of String`|
-+++
+|[[crlPaths]]`@crlPaths`|`Array of String`|+++
 Add a CRL path
 +++
-|[[crlValues]]`crlValues`|`Array of Buffer`|
-+++
+|[[crlValues]]`@crlValues`|`Array of Buffer`|+++
 Add a CRL value
 +++
-|[[dc]]`dc`|`String`|
-+++
+|[[dc]]`@dc`|`String`|+++
 Set the datacenter name. When provided, the client will use it when making requests to the Consul
 by providing the "?dc" query parameter. When not provided, the datacenter of the consul agent is queried.
 +++
-|[[decoderInitialBufferSize]]`decoderInitialBufferSize`|`Number (int)`|
-+++
+|[[decoderInitialBufferSize]]`@decoderInitialBufferSize`|`Number (int)`|+++
 set to <code>initialBufferSizeHttpDecoder</code> the initial buffer of the HttpDecoder.
 +++
-|[[defaultHost]]`defaultHost`|`String`|
-+++
+|[[defaultHost]]`@defaultHost`|`String`|+++
 Set the default host name to be used by this client in requests if none is provided when making the request.
 +++
-|[[defaultPort]]`defaultPort`|`Number (int)`|
-+++
+|[[defaultPort]]`@defaultPort`|`Number (int)`|+++
 Set the default port to be used by this client in requests if none is provided when making the request.
 +++
-|[[enabledCipherSuites]]`enabledCipherSuites`|`Array of String`|
-+++
+|[[enabledCipherSuites]]`@enabledCipherSuites`|`Array of String`|+++
 Add an enabled cipher suite, appended to the ordered suites.
 +++
-|[[enabledSecureTransportProtocols]]`enabledSecureTransportProtocols`|`Array of String`|
-+++
+|[[enabledSecureTransportProtocols]]`@enabledSecureTransportProtocols`|`Array of String`|+++
 Add an enabled SSL/TLS protocols, appended to the ordered protocols.
 +++
-|[[followRedirects]]`followRedirects`|`Boolean`|
-+++
+|[[followRedirects]]`@followRedirects`|`Boolean`|+++
 Configure the default behavior of the client to follow HTTP <code>30x</code> redirections.
 +++
-|[[forceSni]]`forceSni`|`Boolean`|
-+++
+|[[forceSni]]`@forceSni`|`Boolean`|+++
 By default, the server name is only sent for Fully Qualified Domain Name (FQDN), setting
 this property to <code>true</code> forces the server name to be always sent.
 +++
-|[[http2ClearTextUpgrade]]`http2ClearTextUpgrade`|`Boolean`|
-+++
+|[[http2ClearTextUpgrade]]`@http2ClearTextUpgrade`|`Boolean`|+++
 Set to <code>true</code> when an <i>h2c</i> connection is established using an HTTP/1.1 upgrade request, and <code>false</code>
 when an <i>h2c</i> connection is established directly (with prior knowledge).
 +++
-|[[http2ConnectionWindowSize]]`http2ConnectionWindowSize`|`Number (int)`|
-+++
+|[[http2ConnectionWindowSize]]`@http2ConnectionWindowSize`|`Number (int)`|+++
 Set the default HTTP/2 connection window size. It overrides the initial window
 size set by , so the connection window size
 is greater than for its streams, in order the data throughput.
 <p/>
 A value of <code>-1</code> reuses the initial window size setting.
 +++
-|[[http2KeepAliveTimeout]]`http2KeepAliveTimeout`|`Number (int)`|-
-|[[http2MaxPoolSize]]`http2MaxPoolSize`|`Number (int)`|
-+++
+|[[http2KeepAliveTimeout]]`@http2KeepAliveTimeout`|`Number (int)`|-
+|[[http2MaxPoolSize]]`@http2MaxPoolSize`|`Number (int)`|+++
 Set the maximum pool size for HTTP/2 connections
 +++
-|[[http2MultiplexingLimit]]`http2MultiplexingLimit`|`Number (int)`|
-+++
+|[[http2MultiplexingLimit]]`@http2MultiplexingLimit`|`Number (int)`|+++
 Set a client limit of the number concurrent streams for each HTTP/2 connection, this limits the number
 of streams the client can create for a connection. The effective number of streams for a
 connection is the min of this value and the server's initial settings.
@@ -326,198 +277,162 @@ connection is the min of this value and the server's initial settings.
 Setting the value to <code>-1</code> means to use the value sent by the server's initial settings.
 <code>-1</code> is the default value.
 +++
-|[[idleTimeout]]`idleTimeout`|`Number (int)`|
-+++
+|[[idleTimeout]]`@idleTimeout`|`Number (int)`|+++
 Set the idle timeout, in seconds. zero means don't timeout.
 This determines if a connection will timeout and be closed if no data is received within the timeout.
 +++
-|[[initialSettings]]`initialSettings`|`link:dataobjects.html#Http2Settings[Http2Settings]`|
+|[[idleTimeoutUnit]]`@idleTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|+++
+Set the idle timeout unit. If not specified, default is seconds.
 +++
+|[[initialSettings]]`@initialSettings`|`link:dataobjects.html#Http2Settings[Http2Settings]`|+++
 Set the HTTP/2 connection settings immediately sent by to the server when the client connects.
 +++
-|[[jdkSslEngineOptions]]`jdkSslEngineOptions`|`link:dataobjects.html#JdkSSLEngineOptions[JdkSSLEngineOptions]`|-
-|[[keepAlive]]`keepAlive`|`Boolean`|
-+++
+|[[jdkSslEngineOptions]]`@jdkSslEngineOptions`|`link:dataobjects.html#JdkSSLEngineOptions[JdkSSLEngineOptions]`|-
+|[[keepAlive]]`@keepAlive`|`Boolean`|+++
 Set whether keep alive is enabled on the client
 +++
-|[[keepAliveTimeout]]`keepAliveTimeout`|`Number (int)`|-
-|[[keyStoreOptions]]`keyStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|
-+++
+|[[keepAliveTimeout]]`@keepAliveTimeout`|`Number (int)`|-
+|[[keyStoreOptions]]`@keyStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|+++
 Set the key/cert options in jks format, aka Java keystore.
 +++
-|[[localAddress]]`localAddress`|`String`|
-+++
+|[[localAddress]]`@localAddress`|`String`|+++
 Set the local interface to bind for network connections. When the local address is null,
 it will pick any local address, the default local address is null.
 +++
-|[[logActivity]]`logActivity`|`Boolean`|
-+++
+|[[logActivity]]`@logActivity`|`Boolean`|+++
 Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
 +++
-|[[maxChunkSize]]`maxChunkSize`|`Number (int)`|
-+++
+|[[maxChunkSize]]`@maxChunkSize`|`Number (int)`|+++
 Set the maximum HTTP chunk size
 +++
-|[[maxHeaderSize]]`maxHeaderSize`|`Number (int)`|
-+++
+|[[maxHeaderSize]]`@maxHeaderSize`|`Number (int)`|+++
 Set the maximum length of all headers for HTTP/1.x .
 +++
-|[[maxInitialLineLength]]`maxInitialLineLength`|`Number (int)`|
-+++
+|[[maxInitialLineLength]]`@maxInitialLineLength`|`Number (int)`|+++
 Set the maximum length of the initial line for HTTP/1.x (e.g. <code>"HTTP/1.1 200 OK"</code>)
 +++
-|[[maxPoolSize]]`maxPoolSize`|`Number (int)`|
-+++
+|[[maxPoolSize]]`@maxPoolSize`|`Number (int)`|+++
 Set the maximum pool size for connections
 +++
-|[[maxRedirects]]`maxRedirects`|`Number (int)`|
-+++
+|[[maxRedirects]]`@maxRedirects`|`Number (int)`|+++
 Set to <code>maxRedirects</code> the maximum number of redirection a request can follow.
 +++
-|[[maxWaitQueueSize]]`maxWaitQueueSize`|`Number (int)`|
-+++
+|[[maxWaitQueueSize]]`@maxWaitQueueSize`|`Number (int)`|+++
 Set the maximum requests allowed in the wait queue, any requests beyond the max size will result in
 a ConnectionPoolTooBusyException.  If the value is set to a negative number then the queue will be unbounded.
 +++
-|[[maxWebsocketFrameSize]]`maxWebsocketFrameSize`|`Number (int)`|
-+++
+|[[maxWebsocketFrameSize]]`@maxWebsocketFrameSize`|`Number (int)`|+++
 Set the max websocket frame size
 +++
-|[[maxWebsocketMessageSize]]`maxWebsocketMessageSize`|`Number (int)`|
-+++
+|[[maxWebsocketMessageSize]]`@maxWebsocketMessageSize`|`Number (int)`|+++
 Set the max websocket message size
 +++
-|[[metricsName]]`metricsName`|`String`|
-+++
+|[[metricsName]]`@metricsName`|`String`|+++
 Set the metrics name identifying the reported metrics, useful for grouping metrics
 with the same name.
 +++
-|[[openSslEngineOptions]]`openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
-|[[pemKeyCertOptions]]`pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|
-+++
+|[[openSslEngineOptions]]`@openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
+|[[pemKeyCertOptions]]`@pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|+++
 Set the key/cert store options in pem format.
 +++
-|[[pemTrustOptions]]`pemTrustOptions`|`link:dataobjects.html#PemTrustOptions[PemTrustOptions]`|
-+++
+|[[pemTrustOptions]]`@pemTrustOptions`|`link:dataobjects.html#PemTrustOptions[PemTrustOptions]`|+++
 Set the trust options.
 +++
-|[[pfxKeyCertOptions]]`pfxKeyCertOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|
-+++
+|[[pfxKeyCertOptions]]`@pfxKeyCertOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|+++
 Set the key/cert options in pfx format.
 +++
-|[[pfxTrustOptions]]`pfxTrustOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|
-+++
+|[[pfxTrustOptions]]`@pfxTrustOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|+++
 Set the trust options in pfx format
 +++
-|[[pipelining]]`pipelining`|`Boolean`|
-+++
+|[[pipelining]]`@pipelining`|`Boolean`|+++
 Set whether pipe-lining is enabled on the client
 +++
-|[[pipeliningLimit]]`pipeliningLimit`|`Number (int)`|
-+++
+|[[pipeliningLimit]]`@pipeliningLimit`|`Number (int)`|+++
 Set the limit of pending requests a pipe-lined HTTP/1 connection can send.
 +++
-|[[protocolVersion]]`protocolVersion`|`link:enums.html#HttpVersion[HttpVersion]`|
-+++
+|[[poolCleanerPeriod]]`@poolCleanerPeriod`|`Number (int)`|-
+|[[protocolVersion]]`@protocolVersion`|`link:enums.html#HttpVersion[HttpVersion]`|+++
 Set the protocol version.
 +++
-|[[proxyOptions]]`proxyOptions`|`link:dataobjects.html#ProxyOptions[ProxyOptions]`|
-+++
+|[[proxyOptions]]`@proxyOptions`|`link:dataobjects.html#ProxyOptions[ProxyOptions]`|+++
 Set proxy options for connections via CONNECT proxy (e.g. Squid) or a SOCKS proxy.
 +++
-|[[receiveBufferSize]]`receiveBufferSize`|`Number (int)`|
-+++
+|[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|+++
 Set the TCP receive buffer size
 +++
-|[[reuseAddress]]`reuseAddress`|`Boolean`|
-+++
+|[[reuseAddress]]`@reuseAddress`|`Boolean`|+++
 Set the value of reuse address
 +++
-|[[reusePort]]`reusePort`|`Boolean`|
-+++
+|[[reusePort]]`@reusePort`|`Boolean`|+++
 Set the value of reuse port.
 <p/>
 This is only supported by native transports.
 +++
-|[[sendBufferSize]]`sendBufferSize`|`Number (int)`|
-+++
+|[[sendBufferSize]]`@sendBufferSize`|`Number (int)`|+++
 Set the TCP send buffer size
 +++
-|[[sendUnmaskedFrames]]`sendUnmaskedFrames`|`Boolean`|
-+++
+|[[sendUnmaskedFrames]]`@sendUnmaskedFrames`|`Boolean`|+++
 Set true when the client wants to skip frame masking.
 You may want to set it true on server by server websocket communication: In this case you are by passing RFC6455 protocol.
 It's false as default.
 +++
-|[[soLinger]]`soLinger`|`Number (int)`|
-+++
+|[[soLinger]]`@soLinger`|`Number (int)`|+++
 Set whether SO_linger keep alive is enabled
 +++
-|[[ssl]]`ssl`|`Boolean`|
-+++
+|[[ssl]]`@ssl`|`Boolean`|+++
 Set whether SSL/TLS is enabled
 +++
-|[[tcpCork]]`tcpCork`|`Boolean`|
-+++
+|[[tcpCork]]`@tcpCork`|`Boolean`|+++
 Enable the <code>TCP_CORK</code> option - only with linux native transport.
 +++
-|[[tcpFastOpen]]`tcpFastOpen`|`Boolean`|
-+++
+|[[tcpFastOpen]]`@tcpFastOpen`|`Boolean`|+++
 Enable the <code>TCP_FASTOPEN</code> option - only with linux native transport.
 +++
-|[[tcpKeepAlive]]`tcpKeepAlive`|`Boolean`|
-+++
+|[[tcpKeepAlive]]`@tcpKeepAlive`|`Boolean`|+++
 Set whether TCP keep alive is enabled
 +++
-|[[tcpNoDelay]]`tcpNoDelay`|`Boolean`|
-+++
+|[[tcpNoDelay]]`@tcpNoDelay`|`Boolean`|+++
 Set whether TCP no delay is enabled
 +++
-|[[tcpQuickAck]]`tcpQuickAck`|`Boolean`|
-+++
+|[[tcpQuickAck]]`@tcpQuickAck`|`Boolean`|+++
 Enable the <code>TCP_QUICKACK</code> option - only with linux native transport.
 +++
-|[[timeout]]`timeout`|`Number (long)`|
-+++
+|[[timeout]]`@timeout`|`Number (long)`|+++
 Sets the amount of time (in milliseconds) after which if the request does not return any data
 within the timeout period an failure will be passed to the handler and the request will be closed.
 +++
-|[[trafficClass]]`trafficClass`|`Number (int)`|
-+++
+|[[trafficClass]]`@trafficClass`|`Number (int)`|+++
 Set the value of traffic class
 +++
-|[[trustAll]]`trustAll`|`Boolean`|
-+++
+|[[trustAll]]`@trustAll`|`Boolean`|+++
 Set whether all server certificates should be trusted
 +++
-|[[trustStoreOptions]]`trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|
-+++
+|[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|+++
 Set the trust options in jks format, aka Java truststore
 +++
-|[[tryUseCompression]]`tryUseCompression`|`Boolean`|
-+++
+|[[tryUseCompression]]`@tryUseCompression`|`Boolean`|+++
 Set whether compression is enabled
 +++
-|[[useAlpn]]`useAlpn`|`Boolean`|
-+++
+|[[tryUsePerFrameWebsocketCompression]]`@tryUsePerFrameWebsocketCompression`|`Boolean`|-
+|[[tryUsePerMessageWebsocketCompression]]`@tryUsePerMessageWebsocketCompression`|`Boolean`|-
+|[[useAlpn]]`@useAlpn`|`Boolean`|+++
 Set the ALPN usage.
 +++
-|[[usePooledBuffers]]`usePooledBuffers`|`Boolean`|
-+++
+|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|+++
 Set whether Netty pooled buffers are enabled
 +++
-|[[userAgent]]`userAgent`|`String`|
-+++
+|[[userAgent]]`@userAgent`|`String`|+++
 Sets the Web Client user agent header. Defaults to Vert.x-WebClient/&lt;version&gt;.
 +++
-|[[userAgentEnabled]]`userAgentEnabled`|`Boolean`|
-+++
+|[[userAgentEnabled]]`@userAgentEnabled`|`Boolean`|+++
 Sets whether the Web Client should send a user agent header. Defaults to true.
 +++
-|[[verifyHost]]`verifyHost`|`Boolean`|
-+++
+|[[verifyHost]]`@verifyHost`|`Boolean`|+++
 Set whether hostname verification is enabled
 +++
+|[[websocketCompressionAllowClientNoContext]]`@websocketCompressionAllowClientNoContext`|`Boolean`|-
+|[[websocketCompressionLevel]]`@websocketCompressionLevel`|`Number (int)`|-
+|[[websocketCompressionRequestServerNoContext]]`@websocketCompressionRequestServerNoContext`|`Boolean`|-
 |===
 
 [[Coordinate]]
@@ -528,28 +443,23 @@ Holds network coordinates of node
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[adj]]`adj`|`Number (float)`|
-+++
+|[[adj]]`@adj`|`Number (float)`|+++
 Set adjustment
 +++
-|[[err]]`err`|`Number (float)`|
-+++
+|[[err]]`@err`|`Number (float)`|+++
 Set error
 +++
-|[[height]]`height`|`Number (float)`|
-+++
+|[[height]]`@height`|`Number (float)`|+++
 Set height
 +++
-|[[node]]`node`|`String`|
-+++
+|[[node]]`@node`|`String`|+++
 Set name of node
 +++
-|[[vec]]`vec`|`Array of Number (Float)`|
-+++
+|[[vec]]`@vec`|`Array of Number (Float)`|+++
 Set vector
 +++
 |===
@@ -562,16 +472,14 @@ Holds result of network coordinates query
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[index]]`index`|`Number (long)`|
-+++
+|[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested coordinates
 +++
-|[[list]]`list`|`Array of link:dataobjects.html#Coordinate[Coordinate]`|
-+++
+|[[list]]`@list`|`Array of link:dataobjects.html#Coordinate[Coordinate]`|+++
 Set list of coordinates
 +++
 |===
@@ -584,16 +492,14 @@ Holds coordinates of servers in datacenter
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[datacenter]]`datacenter`|`String`|
-+++
+|[[datacenter]]`@datacenter`|`String`|+++
 Set datacenter
 +++
-|[[servers]]`servers`|`Array of link:dataobjects.html#Coordinate[Coordinate]`|
-+++
+|[[servers]]`@servers`|`Array of link:dataobjects.html#Coordinate[Coordinate]`|+++
 Set list of servers in datacenter
 +++
 |===
@@ -606,40 +512,32 @@ Holds properties of Consul event
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[id]]`id`|`String`|
-+++
+|[[id]]`@id`|`String`|+++
 Set ID of event
 +++
-|[[lTime]]`lTime`|`Number (int)`|
-+++
+|[[lTime]]`@lTime`|`Number (int)`|+++
 Set the Lamport clock time
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 Set name of event
 +++
-|[[node]]`node`|`String`|
-+++
+|[[node]]`@node`|`String`|+++
 Set regular expression to filter by node name
 +++
-|[[payload]]`payload`|`String`|
-+++
+|[[payload]]`@payload`|`String`|+++
 Set payload of event
 +++
-|[[service]]`service`|`String`|
-+++
+|[[service]]`@service`|`String`|+++
 Set regular expression to filter by service
 +++
-|[[tag]]`tag`|`String`|
-+++
+|[[tag]]`@tag`|`String`|+++
 Set regular expression to filter by tag
 +++
-|[[version]]`version`|`Number (int)`|
-+++
+|[[version]]`@version`|`Number (int)`|+++
 Set version
 +++
 |===
@@ -652,16 +550,14 @@ Holds result of events query
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[index]]`index`|`Number (long)`|
-+++
+|[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested events
 +++
-|[[list]]`list`|`Array of link:dataobjects.html#Event[Event]`|
-+++
+|[[list]]`@list`|`Array of link:dataobjects.html#Event[Event]`|+++
 Set list of events
 +++
 |===
@@ -674,16 +570,14 @@ Holds options for events list request
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[blockingOptions]]`blockingOptions`|`link:dataobjects.html#BlockingQueryOptions[BlockingQueryOptions]`|
-+++
+|[[blockingOptions]]`@blockingOptions`|`link:dataobjects.html#BlockingQueryOptions[BlockingQueryOptions]`|+++
 Set options for blocking query
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 Set event name for filtering on events
 +++
 |===
@@ -696,24 +590,20 @@ Options used to trigger a new user event.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[node]]`node`|`String`|
-+++
+|[[node]]`@node`|`String`|+++
 Set regular expression to filter by node name
 +++
-|[[payload]]`payload`|`String`|
-+++
+|[[payload]]`@payload`|`String`|+++
 Set payload of event
 +++
-|[[service]]`service`|`String`|
-+++
+|[[service]]`@service`|`String`|+++
 Set regular expression to filter by service
 +++
-|[[tag]]`tag`|`String`|
-+++
+|[[tag]]`@tag`|`String`|+++
 Set regular expression to filter by tag
 +++
 |===
@@ -726,36 +616,29 @@ Represents key/value pair stored in Consul
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[createIndex]]`createIndex`|`Number (long)`|
-+++
+|[[createIndex]]`@createIndex`|`Number (long)`|+++
 Set the internal index value that represents when the entry was created.
 +++
-|[[flags]]`flags`|`Number (long)`|
-+++
+|[[flags]]`@flags`|`Number (long)`|+++
 Set the flags attached to this entry. Clients can choose to use this however makes sense for their application.
 +++
-|[[key]]`key`|`String`|
-+++
+|[[key]]`@key`|`String`|+++
 Set the key
 +++
-|[[lockIndex]]`lockIndex`|`Number (long)`|
-+++
+|[[lockIndex]]`@lockIndex`|`Number (long)`|+++
 Set the number of times this key has successfully been acquired in a lock.
 +++
-|[[modifyIndex]]`modifyIndex`|`Number (long)`|
-+++
+|[[modifyIndex]]`@modifyIndex`|`Number (long)`|+++
 Set the last index that modified this key.
 +++
-|[[session]]`session`|`String`|
-+++
+|[[session]]`@session`|`String`|+++
 Set the session that owns the lock
 +++
-|[[value]]`value`|`String`|
-+++
+|[[value]]`@value`|`String`|+++
 Set the value
 +++
 |===
@@ -768,16 +651,14 @@ Holds result of key/value pairs query
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[index]]`index`|`Number (long)`|
-+++
+|[[index]]`@index`|`Number (long)`|+++
 Set Consul index
 +++
-|[[list]]`list`|`Array of link:dataobjects.html#KeyValue[KeyValue]`|
-+++
+|[[list]]`@list`|`Array of link:dataobjects.html#KeyValue[KeyValue]`|+++
 Set list of key/value pairs
 +++
 |===
@@ -790,26 +671,22 @@ Options used to put key/value pair to Consul.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[acquireSession]]`acquireSession`|`String`|
-+++
+|[[acquireSession]]`@acquireSession`|`String`|+++
 Set session ID for lock acquisition operation.
 +++
-|[[casIndex]]`casIndex`|`Number (long)`|
-+++
+|[[casIndex]]`@casIndex`|`Number (long)`|+++
 Set the Check-And-Set index. If the index is <code>0</code>, Consul will only put the key if it does not already exist.
 If the index is non-zero, the key is only set if the index matches the ModifyIndex of that key.
 +++
-|[[flags]]`flags`|`Number (long)`|
-+++
+|[[flags]]`@flags`|`Number (long)`|+++
 Set the flags. Flags is an value between <code>0</code> and 2<sup>64</sup>-1 that can be attached to each entry.
 Clients can choose to use this however makes sense for their application.
 +++
-|[[releaseSession]]`releaseSession`|`String`|
-+++
+|[[releaseSession]]`@releaseSession`|`String`|+++
 Set session ID for lock release operation.
 +++
 |===
@@ -825,21 +702,18 @@ and will be automatically restored on agent restart.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[enable]]`enable`|`Boolean`|
-+++
+|[[enable]]`@enable`|`Boolean`|+++
 Set maintenance mode to enabled: <code>true</code> to enter maintenance mode or <code>false</code> to resume normal operation.
 This flag is required.
 +++
-|[[id]]`id`|`String`|
-+++
+|[[id]]`@id`|`String`|+++
 Set the ID of service. This field is required.
 +++
-|[[reason]]`reason`|`String`|
-+++
+|[[reason]]`@reason`|`String`|+++
 Set the reason message. If provided, its value should be a text string explaining the reason for placing
 the service into maintenance mode. This is simply to aid human operators.
 +++
@@ -852,24 +726,20 @@ the service into maintenance mode. This is simply to aid human operators.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[address]]`address`|`String`|
-+++
+|[[address]]`@address`|`String`|+++
 Set node address
 +++
-|[[lanAddress]]`lanAddress`|`String`|
-+++
+|[[lanAddress]]`@lanAddress`|`String`|+++
 Set node lan address
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 Set node name
 +++
-|[[wanAddress]]`wanAddress`|`String`|
-+++
+|[[wanAddress]]`@wanAddress`|`String`|+++
 Set node wan address
 +++
 |===
@@ -882,16 +752,14 @@ Holds result of nodes query
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[index]]`index`|`Number (long)`|
-+++
+|[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested list of nodes
 +++
-|[[list]]`list`|`Array of link:dataobjects.html#Node[Node]`|
-+++
+|[[list]]`@list`|`Array of link:dataobjects.html#Node[Node]`|+++
 Set list of nodes
 +++
 |===
@@ -904,16 +772,14 @@ Options used to requesting list of nodes
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[blockingOptions]]`blockingOptions`|`link:dataobjects.html#BlockingQueryOptions[BlockingQueryOptions]`|
-+++
+|[[blockingOptions]]`@blockingOptions`|`link:dataobjects.html#BlockingQueryOptions[BlockingQueryOptions]`|+++
 Set options for blocking query
 +++
-|[[near]]`near`|`String`|
-+++
+|[[near]]`@near`|`String`|+++
 Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
 +++
 |===
@@ -926,73 +792,60 @@ Defines a prepared query.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[dcs]]`dcs`|`Array of String`|
-+++
+|[[dcs]]`@dcs`|`Array of String`|+++
 Specifies a fixed list of remote datacenters to forward the query to if there are no healthy nodes
 in the local datacenter. Datacenters are queried in the order given in the list. If this option is combined
 with NearestN, then the NearestN queries will be performed first, followed by the list given by Datacenters.
 A given datacenter will only be queried one time during a failover, even if it is selected by both NearestN
 and is listed in Datacenters.
 +++
-|[[dnsTtl]]`dnsTtl`|`String`|
-+++
+|[[dnsTtl]]`@dnsTtl`|`String`|+++
 Set the TTL duration when query results are served over DNS. If this is specified,
 it will take precedence over any Consul agent-specific configuration.
 +++
-|[[id]]`id`|`String`|
-+++
+|[[id]]`@id`|`String`|+++
 Set ID of the query, always generated by Consul
 +++
-|[[meta]]`meta`|`String`|
-+++
+|[[meta]]`@meta`|`String`|+++
 Set a list of user-defined key/value pairs that will be used for filtering the query results to nodes
 with the given metadata values present.
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 Set an optional friendly name that can be used to execute a query instead of using its ID
 +++
-|[[nearestN]]`nearestN`|`Number (int)`|
-+++
+|[[nearestN]]`@nearestN`|`Number (int)`|+++
 Specifies that the query will be forwarded to up to NearestN other datacenters based on their estimated network
 round trip time using Network Coordinates from the WAN gossip pool. The median round trip time from the server
 handling the query to the servers in the remote datacenter is used to determine the priority.
 +++
-|[[passing]]`passing`|`Boolean`|
-+++
+|[[passing]]`@passing`|`Boolean`|+++
 Specifies the behavior of the query's health check filtering. If this is set to false, the results will include
 nodes with checks in the passing as well as the warning states. If this is set to true,
 only nodes with checks in the passing state will be returned.
 +++
-|[[service]]`service`|`String`|
-+++
+|[[service]]`@service`|`String`|+++
 Set the name of the service to query
 +++
-|[[session]]`session`|`String`|
-+++
+|[[session]]`@session`|`String`|+++
 Set the ID of an existing session. This provides a way to automatically remove a prepared query when
 the given session is invalidated. If not given the prepared query must be manually removed when no longer needed.
 +++
-|[[tags]]`tags`|`Array of String`|
-+++
+|[[tags]]`@tags`|`Array of String`|+++
 Set a list of service tags to filter the query results. For a service to pass the tag filter
 it must have all of the required tags, and none of the excluded tags (prefixed with `!`).
 +++
-|[[templateRegexp]]`templateRegexp`|`String`|
-+++
+|[[templateRegexp]]`@templateRegexp`|`String`|+++
 Set regular expression which is used to extract fields from the entire name, once this template is selected.
 +++
-|[[templateType]]`templateType`|`String`|
-+++
+|[[templateType]]`@templateType`|`String`|+++
 The template type, which must be <code>name_prefix_match</code>. This means that the template will apply to
 any query lookup with a name whose prefix matches the Name field of the template.
 +++
-|[[token]]`token`|`String`|
-+++
+|[[token]]`@token`|`String`|+++
 Set the ACL token to use each time the query is executed. This allows queries to be executed by clients
 with lesser or even no ACL Token, so this should be used with care.
 +++
@@ -1006,16 +859,14 @@ Options used to execute prepared query
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[limit]]`limit`|`Number (int)`|
-+++
+|[[limit]]`@limit`|`Number (int)`|+++
 Set the size of the list to the given number of nodes. This is applied after any sorting or shuffling.
 +++
-|[[near]]`near`|`String`|
-+++
+|[[near]]`@near`|`String`|+++
 Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
 Passing <code>_agent</code> will use the agent's node for the sort. If this is not present,
 the default behavior will shuffle the nodes randomly each time the query is executed.
@@ -1030,28 +881,23 @@ The results of executing prepared query
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[dc]]`dc`|`String`|
-+++
+|[[dc]]`@dc`|`String`|+++
 Set the datacenter that ultimately provided the list of nodes
 +++
-|[[dnsTtl]]`dnsTtl`|`String`|
-+++
+|[[dnsTtl]]`@dnsTtl`|`String`|+++
 Set the TTL duration when query results are served over DNS. If this is specified, it will take precedence over any Consul agent-specific configuration.
 +++
-|[[failovers]]`failovers`|`Number (int)`|
-+++
+|[[failovers]]`@failovers`|`Number (int)`|+++
 Set the number of remote datacenters that were queried while executing the query.
 +++
-|[[nodes]]`nodes`|`Array of link:dataobjects.html#ServiceEntry[ServiceEntry]`|
-+++
+|[[nodes]]`@nodes`|`Array of link:dataobjects.html#ServiceEntry[ServiceEntry]`|+++
 Set the list of healthy nodes providing the given service, as specified by the constraints of the prepared query.
 +++
-|[[service]]`service`|`String`|
-+++
+|[[service]]`@service`|`String`|+++
 Set the service name that the query was selecting.
 This is useful for context in case an empty list of nodes is returned.
 +++
@@ -1065,36 +911,29 @@ Holds properties of service and node that its containing
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[address]]`address`|`String`|
-+++
+|[[address]]`@address`|`String`|+++
 Set service address
 +++
-|[[id]]`id`|`String`|
-+++
+|[[id]]`@id`|`String`|+++
 Set ID of service
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 Set service name
 +++
-|[[node]]`node`|`String`|
-+++
+|[[node]]`@node`|`String`|+++
 Set node name
 +++
-|[[nodeAddress]]`nodeAddress`|`String`|
-+++
+|[[nodeAddress]]`@nodeAddress`|`String`|+++
 Set node address
 +++
-|[[port]]`port`|`Number (int)`|
-+++
+|[[port]]`@port`|`Number (int)`|+++
 Set service port
 +++
-|[[tags]]`tags`|`Array of String`|
-+++
+|[[tags]]`@tags`|`Array of String`|+++
 Set list of service tags
 +++
 |===
@@ -1107,20 +946,17 @@ Holds properties of service, node and related checks
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[checks]]`checks`|`Array of link:dataobjects.html#Check[Check]`|
-+++
+|[[checks]]`@checks`|`Array of link:dataobjects.html#Check[Check]`|+++
 Set list of checks
 +++
-|[[node]]`node`|`link:dataobjects.html#Node[Node]`|
-+++
+|[[node]]`@node`|`link:dataobjects.html#Node[Node]`|+++
 Set node
 +++
-|[[service]]`service`|`link:dataobjects.html#Service[Service]`|
-+++
+|[[service]]`@service`|`link:dataobjects.html#Service[Service]`|+++
 Set service
 +++
 |===
@@ -1133,16 +969,14 @@ Holds list of services, nodes and related checks
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[index]]`index`|`Number (long)`|
-+++
+|[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested list of services
 +++
-|[[list]]`list`|`Array of link:dataobjects.html#ServiceEntry[ServiceEntry]`|
-+++
+|[[list]]`@list`|`Array of link:dataobjects.html#ServiceEntry[ServiceEntry]`|+++
 Set list of services
 +++
 |===
@@ -1155,16 +989,14 @@ Holds result of services query
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[index]]`index`|`Number (long)`|
-+++
+|[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested list of services
 +++
-|[[list]]`list`|`Array of link:dataobjects.html#Service[Service]`|
-+++
+|[[list]]`@list`|`Array of link:dataobjects.html#Service[Service]`|+++
 Set list of services
 +++
 |===
@@ -1177,32 +1009,26 @@ Options used to register service.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[address]]`address`|`String`|
-+++
+|[[address]]`@address`|`String`|+++
 Set service address
 +++
-|[[checkOptions]]`checkOptions`|`link:dataobjects.html#CheckOptions[CheckOptions]`|
-+++
+|[[checkOptions]]`@checkOptions`|`link:dataobjects.html#CheckOptions[CheckOptions]`|+++
 Set check options of service
 +++
-|[[id]]`id`|`String`|
-+++
+|[[id]]`@id`|`String`|+++
 Set the ID of session
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 Set service name
 +++
-|[[port]]`port`|`Number (int)`|
-+++
+|[[port]]`@port`|`Number (int)`|+++
 Set service port
 +++
-|[[tags]]`tags`|`Array of String`|
-+++
+|[[tags]]`@tags`|`Array of String`|+++
 Set list of tags associated with service
 +++
 |===
@@ -1215,20 +1041,17 @@ Options used to requesting list of services
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[blockingOptions]]`blockingOptions`|`link:dataobjects.html#BlockingQueryOptions[BlockingQueryOptions]`|
-+++
+|[[blockingOptions]]`@blockingOptions`|`link:dataobjects.html#BlockingQueryOptions[BlockingQueryOptions]`|+++
 Set options for blocking query
 +++
-|[[near]]`near`|`String`|
-+++
+|[[near]]`@near`|`String`|+++
 Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
 +++
-|[[tag]]`tag`|`String`|
-+++
+|[[tag]]`@tag`|`String`|+++
 Set tag for filtering request results
 +++
 |===
@@ -1241,32 +1064,26 @@ Holds properties of Consul sessions
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[checks]]`checks`|`Array of String`|
-+++
+|[[checks]]`@checks`|`Array of String`|+++
 Set the list of associated health checks
 +++
-|[[createIndex]]`createIndex`|`Number (long)`|
-+++
+|[[createIndex]]`@createIndex`|`Number (long)`|+++
 Set the create index of session
 +++
-|[[id]]`id`|`String`|
-+++
+|[[id]]`@id`|`String`|+++
 Set the ID of node
 +++
-|[[index]]`index`|`Number (long)`|
-+++
+|[[index]]`@index`|`Number (long)`|+++
 Set Consul index
 +++
-|[[lockDelay]]`lockDelay`|`Number (long)`|
-+++
+|[[lockDelay]]`@lockDelay`|`Number (long)`|+++
 Set the Lock delay of session
 +++
-|[[node]]`node`|`String`|
-+++
+|[[node]]`@node`|`String`|+++
 Set the ID of node
 +++
 |===
@@ -1279,16 +1096,14 @@ Holds result of sessions query
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[index]]`index`|`Number (long)`|
-+++
+|[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested list of sessions
 +++
-|[[list]]`list`|`Array of link:dataobjects.html#Session[Session]`|
-+++
+|[[list]]`@list`|`Array of link:dataobjects.html#Session[Session]`|+++
 Set list of sessions
 +++
 |===
@@ -1301,33 +1116,27 @@ Options used to create session.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[behavior]]`behavior`|`link:enums.html#SessionBehavior[SessionBehavior]`|
-+++
+|[[behavior]]`@behavior`|`link:enums.html#SessionBehavior[SessionBehavior]`|+++
 Set the behavior when a session is invalidated. The release behavior is the default if none is specified.
 +++
-|[[checks]]`checks`|`Array of String`|
-+++
+|[[checks]]`@checks`|`Array of String`|+++
 Set a list of associated health checks. It is highly recommended that,
 if you override this list, you include the default "serfHealth"
 +++
-|[[lockDelay]]`lockDelay`|`Number (long)`|
-+++
+|[[lockDelay]]`@lockDelay`|`Number (long)`|+++
 Set the lock-delay period.
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 Set the human-readable name for the Session
 +++
-|[[node]]`node`|`String`|
-+++
+|[[node]]`@node`|`String`|+++
 Set the node to which the session will be assigned
 +++
-|[[ttl]]`ttl`|`Number (long)`|
-+++
+|[[ttl]]`@ttl`|`Number (long)`|+++
 Set the TTL interval. When TTL interval expires without being renewed, the session has expired
 and an invalidation is triggered. If specified, it must be between <code>10s</code> and <code>86400s</code> currently.
 
@@ -1349,16 +1158,14 @@ Holds information describing which operations failed if the transaction was roll
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[opIndex]]`opIndex`|`Number (int)`|
-+++
+|[[opIndex]]`@opIndex`|`Number (int)`|+++
 Set the index of the failed operation in the transaction
 +++
-|[[what]]`what`|`String`|
-+++
+|[[what]]`@what`|`String`|+++
 Set error message about why that operation failed.
 +++
 |===
@@ -1371,32 +1178,26 @@ Holds operation to apply to the key/value store inside a transaction
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[flags]]`flags`|`Number (long)`|
-+++
+|[[flags]]`@flags`|`Number (long)`|+++
 Set the flags attached to this entry. Clients can choose to use this however makes sense for their application.
 +++
-|[[index]]`index`|`Number (long)`|
-+++
+|[[index]]`@index`|`Number (long)`|+++
 Set the index used for locking, unlocking, and check-and-set operations.
 +++
-|[[key]]`key`|`String`|
-+++
+|[[key]]`@key`|`String`|+++
 Set the key
 +++
-|[[session]]`session`|`String`|
-+++
+|[[session]]`@session`|`String`|+++
 Set the session used for locking, unlocking, and check-and-set operations.
 +++
-|[[type]]`type`|`link:enums.html#TxnKVVerb[TxnKVVerb]`|
-+++
+|[[type]]`@type`|`link:enums.html#TxnKVVerb[TxnKVVerb]`|+++
 Set the type of operation to perform
 +++
-|[[value]]`value`|`String`|
-+++
+|[[value]]`@value`|`String`|+++
 Set the value
 +++
 |===
@@ -1409,12 +1210,11 @@ Holds list of operations in transaction
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[operationsSize]]`operationsSize`|`Number (int)`|
-+++
+|[[operationsSize]]`@operationsSize`|`Number (int)`|+++
 Returns the number of operations in this request
 +++
 |===
@@ -1427,20 +1227,17 @@ Holds results of transaction
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,75%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[errors]]`errors`|`Array of link:dataobjects.html#TxnError[TxnError]`|
-+++
+|[[errors]]`@errors`|`Array of link:dataobjects.html#TxnError[TxnError]`|+++
 Adds error to this response
 +++
-|[[errorsSize]]`errorsSize`|`Number (int)`|
-+++
+|[[errorsSize]]`@errorsSize`|`Number (int)`|+++
 Returns the number of errors in this response
 +++
-|[[resultsSize]]`resultsSize`|`Number (int)`|
-+++
+|[[resultsSize]]`@resultsSize`|`Number (int)`|+++
 Returns the number of results in this response
 +++
 |===

@@ -16,40 +16,43 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{TxnError => JTxnError}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds information describing which operations failed if the transaction was rolled back.
-  */
+ * Holds information describing which operations failed if the transaction was rolled back.
+ */
+
 class TxnError(private val _asJava: JTxnError) {
-
   def asJava = _asJava
-
   /**
-    * Set the index of the failed operation in the transaction
-    */
+   * Set the index of the failed operation in the transaction
+   */
   def setOpIndex(value: Int) = {
     asJava.setOpIndex(value)
     this
   }
+
   def getOpIndex: Int = {
     asJava.getOpIndex().asInstanceOf[Int]
   }
 
   /**
-    * Set error message about why that operation failed.
-    */
+   * Set error message about why that operation failed.
+   */
   def setWhat(value: String) = {
     asJava.setWhat(value)
     this
   }
+
   def getWhat: String = {
     asJava.getWhat().asInstanceOf[String]
   }
+
 }
+
 
 object TxnError {
   
@@ -73,3 +76,4 @@ object TxnError {
     }
   }
 }
+

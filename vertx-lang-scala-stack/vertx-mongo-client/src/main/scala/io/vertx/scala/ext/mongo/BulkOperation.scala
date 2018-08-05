@@ -16,75 +16,80 @@
 
 package io.vertx.scala.ext.mongo
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.mongo.{BulkOperation => JBulkOperation}
 import io.vertx.ext.mongo.BulkOperation.BulkOperationType
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Contains all data needed for one operation of a bulk write operation.
-  */
+ * Contains all data needed for one operation of a bulk write operation.
+ */
+
 class BulkOperation(private val _asJava: JBulkOperation) {
-
   def asJava = _asJava
-
   /**
-    * Sets the document, used by insert, replace, and update operations
-    */
+   * Sets the document, used by insert, replace, and update operations
+   */
   def setDocument(value: io.vertx.core.json.JsonObject) = {
     asJava.setDocument(value)
     this
   }
+
   def getDocument: io.vertx.core.json.JsonObject = {
     asJava.getDocument()
   }
 
   /**
-    * Sets the filter document, used by replace, update, and delete operations
-    */
+   * Sets the filter document, used by replace, update, and delete operations
+   */
   def setFilter(value: io.vertx.core.json.JsonObject) = {
     asJava.setFilter(value)
     this
   }
+
   def getFilter: io.vertx.core.json.JsonObject = {
     asJava.getFilter()
   }
 
   /**
-    * Sets the multi flag, used by update and delete operations
-    */
+   * Sets the multi flag, used by update and delete operations
+   */
   def setMulti(value: Boolean) = {
     asJava.setMulti(value)
     this
   }
+
   def isMulti: Boolean = {
     asJava.isMulti().asInstanceOf[Boolean]
   }
 
   /**
-    * Sets the operation type
-    */
+   * Sets the operation type
+   */
   def setType(value: io.vertx.ext.mongo.BulkOperation.BulkOperationType) = {
     asJava.setType(value)
     this
   }
+
   def getType: io.vertx.ext.mongo.BulkOperation.BulkOperationType = {
     asJava.getType()
   }
 
   /**
-    * Sets the upsert flag, used by update and replace operations
-    */
+   * Sets the upsert flag, used by update and replace operations
+   */
   def setUpsert(value: Boolean) = {
     asJava.setUpsert(value)
     this
   }
+
   def isUpsert: Boolean = {
     asJava.isUpsert().asInstanceOf[Boolean]
   }
+
 }
+
 
 object BulkOperation {
   
@@ -108,3 +113,4 @@ object BulkOperation {
     }
   }
 }
+

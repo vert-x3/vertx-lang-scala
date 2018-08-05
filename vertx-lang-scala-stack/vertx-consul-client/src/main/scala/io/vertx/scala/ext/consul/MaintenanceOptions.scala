@@ -16,56 +16,60 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{MaintenanceOptions => JMaintenanceOptions}
 
 /**
-  * Options used to placing a given service into "maintenance mode".
-  * During maintenance mode, the service will be marked as unavailable
-  * and will not be present in DNS or API queries. Maintenance mode is persistent
-  * and will be automatically restored on agent restart.
-  */
+ * Options used to placing a given service into "maintenance mode".
+ * During maintenance mode, the service will be marked as unavailable
+ * and will not be present in DNS or API queries. Maintenance mode is persistent
+ * and will be automatically restored on agent restart.
+ */
+
 class MaintenanceOptions(private val _asJava: JMaintenanceOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set maintenance mode to enabled: `true` to enter maintenance mode or `false` to resume normal operation.
-    * This flag is required.
-    */
+   * Set maintenance mode to enabled: `true` to enter maintenance mode or `false` to resume normal operation.
+   * This flag is required.
+   */
   def setEnable(value: Boolean) = {
     asJava.setEnable(value)
     this
   }
+
   def isEnable: Boolean = {
     asJava.isEnable().asInstanceOf[Boolean]
   }
 
   /**
-    * Set the ID of service. This field is required.
-    */
+   * Set the ID of service. This field is required.
+   */
   def setId(value: String) = {
     asJava.setId(value)
     this
   }
+
   def getId: String = {
     asJava.getId().asInstanceOf[String]
   }
 
   /**
-    * Set the reason message. If provided, its value should be a text string explaining the reason for placing
-    * the service into maintenance mode. This is simply to aid human operators.
-    */
+   * Set the reason message. If provided, its value should be a text string explaining the reason for placing
+   * the service into maintenance mode. This is simply to aid human operators.
+   */
   def setReason(value: String) = {
     asJava.setReason(value)
     this
   }
+
   def getReason: String = {
     asJava.getReason().asInstanceOf[String]
   }
+
 }
+
 
 object MaintenanceOptions {
   
@@ -89,3 +93,4 @@ object MaintenanceOptions {
     }
   }
 }
+

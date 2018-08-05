@@ -16,51 +16,55 @@
 
 package io.vertx.scala.ext.shell
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.ext.shell.{ShellServerOptions => JShellServerOptions}
 
 /**
-  * The configurations options for the shell server.
-  */
+ * The configurations options for the shell server.
+ */
+
 class ShellServerOptions(private val _asJava: JShellServerOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set the repear interval, i.e the period at which session eviction is performed.
-    */
+   * Set the repear interval, i.e the period at which session eviction is performed.
+   */
   def setReaperInterval(value: Long) = {
     asJava.setReaperInterval(value)
     this
   }
+
   def getReaperInterval: Long = {
     asJava.getReaperInterval().asInstanceOf[Long]
   }
 
   /**
-    * Set the session timeout.
-    */
+   * Set the session timeout.
+   */
   def setSessionTimeout(value: Long) = {
     asJava.setSessionTimeout(value)
     this
   }
+
   def getSessionTimeout: Long = {
     asJava.getSessionTimeout().asInstanceOf[Long]
   }
 
   /**
-    * Set the shell welcome message, i.e the message displayed in the user console when he connects to the shell.
-    */
+   * Set the shell welcome message, i.e the message displayed in the user console when he connects to the shell.
+   */
   def setWelcomeMessage(value: String) = {
     asJava.setWelcomeMessage(value)
     this
   }
+
   def getWelcomeMessage: String = {
     asJava.getWelcomeMessage().asInstanceOf[String]
   }
+
 }
+
 
 object ShellServerOptions {
   
@@ -84,3 +88,4 @@ object ShellServerOptions {
     }
   }
 }
+

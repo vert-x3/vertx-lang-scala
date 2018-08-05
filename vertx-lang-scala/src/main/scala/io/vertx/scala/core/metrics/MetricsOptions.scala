@@ -16,30 +16,32 @@
 
 package io.vertx.scala.core.metrics
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.metrics.{MetricsOptions => JMetricsOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Vert.x metrics base configuration, this class can be extended by provider implementations to configure
-  * those specific implementations.
-  */
+ * Vert.x metrics base configuration, this class can be extended by provider implementations to configure
+ * those specific implementations.
+ */
+
 class MetricsOptions(private val _asJava: JMetricsOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set whether metrics will be enabled on the Vert.x instance.
-    */
+   * Set whether metrics will be enabled on the Vert.x instance.
+   */
   def setEnabled(value: Boolean) = {
     asJava.setEnabled(value)
     this
   }
+
   def isEnabled: Boolean = {
     asJava.isEnabled().asInstanceOf[Boolean]
   }
+
 }
+
 
 object MetricsOptions {
   
@@ -63,3 +65,4 @@ object MetricsOptions {
     }
   }
 }
+

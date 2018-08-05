@@ -16,70 +16,76 @@
 
 package io.vertx.scala.kafka.client.producer
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.kafka.client.producer.{RecordMetadata => JRecordMetadata}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Metadata related to a Kafka record
-  */
+ * Metadata related to a Kafka record
+
+ */
+
 class RecordMetadata(private val _asJava: JRecordMetadata) {
-
   def asJava = _asJava
-
   /**
-    * Set the checksum (CRC32) of the record.
-    */
+   * Set the checksum (CRC32) of the record.
+   */
   def setChecksum(value: Long) = {
     asJava.setChecksum(value)
     this
   }
 
   /**
-    * Set the offset of the record in the topic/partition.
-    */
+   * Set the offset of the record in the topic/partition.
+   */
   def setOffset(value: Long) = {
     asJava.setOffset(value)
     this
   }
+
   def getOffset: Long = {
     asJava.getOffset().asInstanceOf[Long]
   }
 
   /**
-    * Set the partition the record was sent to
-    */
+   * Set the partition the record was sent to
+   */
   def setPartition(value: Int) = {
     asJava.setPartition(value)
     this
   }
+
   def getPartition: Int = {
     asJava.getPartition().asInstanceOf[Int]
   }
 
   /**
-    * Set the timestamp of the record in the topic/partition
-    */
+   * Set the timestamp of the record in the topic/partition
+   */
   def setTimestamp(value: Long) = {
     asJava.setTimestamp(value)
     this
   }
+
   def getTimestamp: Long = {
     asJava.getTimestamp().asInstanceOf[Long]
   }
 
   /**
-    * Set the topic the record was appended to
-    */
+   * Set the topic the record was appended to
+   */
   def setTopic(value: String) = {
     asJava.setTopic(value)
     this
   }
+
   def getTopic: String = {
     asJava.getTopic().asInstanceOf[String]
   }
+
 }
+
 
 object RecordMetadata {
   
@@ -103,3 +109,4 @@ object RecordMetadata {
     }
   }
 }
+

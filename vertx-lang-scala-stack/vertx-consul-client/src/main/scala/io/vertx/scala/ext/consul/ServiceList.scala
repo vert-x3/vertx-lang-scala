@@ -16,40 +16,43 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{ServiceList => JServiceList}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds result of services query
-  */
+ * Holds result of services query
+ */
+
 class ServiceList(private val _asJava: JServiceList) {
-
   def asJava = _asJava
-
   /**
-    * Set Consul index, a unique identifier representing the current state of the requested list of services
-    */
+   * Set Consul index, a unique identifier representing the current state of the requested list of services
+   */
   def setIndex(value: Long) = {
     asJava.setIndex(value)
     this
   }
+
   def getIndex: Long = {
     asJava.getIndex().asInstanceOf[Long]
   }
 
   /**
-    * Set list of services
-    */
+   * Set list of services
+   */
   def setList(value: scala.collection.mutable.Buffer[Service]) = {
     asJava.setList(value.map(_.asJava).asJava)
     this
   }
+
   def getList: scala.collection.mutable.Buffer[Service] = {
     asJava.getList().asScala.map(x => Service(x))
   }
+
 }
+
 
 object ServiceList {
   
@@ -73,3 +76,4 @@ object ServiceList {
     }
   }
 }
+

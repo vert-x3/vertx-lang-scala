@@ -16,55 +16,53 @@
 
 package io.vertx.scala.ext.web.templ.freemarker
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.templ.freemarker.{FreeMarkerTemplateEngine => JFreeMarkerTemplateEngine}
-import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.core.buffer.Buffer
+import scala.reflect.runtime.universe._
 import io.vertx.scala.ext.web.templ.TemplateEngine
 import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
-import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.AsyncResult
-import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A template engine that uses the FreeMarker library.
   */
-class FreeMarkerTemplateEngine(private val _asJava: Object)
-    extends TemplateEngine(_asJava)   {
+
+class FreeMarkerTemplateEngine(private val _asJava: Object) extends TemplateEngine (_asJava) {
+
 
 
 
   /**
-    * Set the extension for the engine
-    * @param extension the extension
-    * @return a reference to this for fluency
-    */
+   * Set the extension for the engine   * @param extension the extension
+   * @return a reference to this for fluency
+   */
+  
   def setExtension(extension: String): FreeMarkerTemplateEngine = {
     asJava.asInstanceOf[JFreeMarkerTemplateEngine].setExtension(extension.asInstanceOf[java.lang.String])
     this
   }
 
   /**
-    * Set the max cache size for the engine
-    * @param maxCacheSize the maxCacheSize
-    * @return a reference to this for fluency
-    */
+   * Set the max cache size for the engine   * @param maxCacheSize the maxCacheSize
+   * @return a reference to this for fluency
+   */
+  
   def setMaxCacheSize(maxCacheSize: Int): FreeMarkerTemplateEngine = {
     asJava.asInstanceOf[JFreeMarkerTemplateEngine].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer])
     this
   }
 
+
+
+
 }
 
 object FreeMarkerTemplateEngine {
-  def apply(asJava: JFreeMarkerTemplateEngine) = new FreeMarkerTemplateEngine(asJava)  
+  def apply(asJava: JFreeMarkerTemplateEngine) = new FreeMarkerTemplateEngine(asJava)
+  
   /**
-    * Create a template engine using defaults
-    * @return the engine
-    */
+   * Create a template engine using defaults   * @return the engine
+   */
   def create(): FreeMarkerTemplateEngine = {
     FreeMarkerTemplateEngine(JFreeMarkerTemplateEngine.create())
   }

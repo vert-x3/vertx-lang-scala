@@ -16,90 +16,74 @@
 
 package io.vertx.scala.ext.mongo
 
+import io.vertx.core.json.JsonObject
 import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
-import io.vertx.core.json.JsonObject
 import io.vertx.ext.mongo.{IndexOptions => JIndexOptions}
+import scala.collection.JavaConverters._
 
 /**
-  * Options used to configure index.
-  */
+ * Options used to configure index.
+ */
+
 class IndexOptions(private val _asJava: JIndexOptions) {
-
   def asJava = _asJava
-
   /**
-    * Create the index in the background
-    */
-
+   * Create the index in the background
+   */
   /**
-    * Gets the number of precision of the stored geohash value of the location data in 2d indexes.
-    */
-
+   * Gets the number of precision of the stored geohash value of the location data in 2d indexes.
+   */
   /**
-    * Gets the specified the number of units within which to group the location values for geoHaystack Indexes
-    */
-
+   * Gets the specified the number of units within which to group the location values for geoHaystack Indexes
+   */
   /**
-    * Gets the language for a text index.
-    *
-    * The language that determines the list of stop words and the rules for the stemmer and tokenizer.</p>
-    */
-
+   * Gets the language for a text index.
+   *
+   * The language that determines the list of stop words and the rules for the stemmer and tokenizer.</p>
+   */
   /**
-    * Gets the name of the field that contains the language string.
-    *
-    * For text indexes, the name of the field, in the collection's documents, that contains the override language for the document.</p>
-    */
-
+   * Gets the name of the field that contains the language string.
+   *
+   * For text indexes, the name of the field, in the collection's documents, that contains the override language for the document.</p>
+   */
   /**
-    * Gets the upper inclusive boundary for the longitude and latitude values for 2d indexes..
-    */
-
+   * Gets the upper inclusive boundary for the longitude and latitude values for 2d indexes..
+   */
   /**
-    * Gets the lower inclusive boundary for the longitude and latitude values for 2d indexes..
-    */
-
+   * Gets the lower inclusive boundary for the longitude and latitude values for 2d indexes..
+   */
   /**
-    * Gets the name of the index.
-    */
-
+   * Gets the name of the index.
+   */
   /**
-    * Get the filter expression for the documents to be included in the index or null if not set
-    */
-
+   * Get the filter expression for the documents to be included in the index or null if not set
+   */
   /**
-    * If true, the index only references documents with the specified field
-    */
-
+   * If true, the index only references documents with the specified field
+   */
   /**
-    * Gets the 2dsphere index version number.
-    */
-
+   * Gets the 2dsphere index version number.
+   */
   /**
-    * Gets the storage engine options document for this index.
-    */
-
+   * Gets the storage engine options document for this index.
+   */
   /**
-    * The text index version number.
-    */
-
+   * The text index version number.
+   */
   /**
-    * Gets if the index should be unique.
-    */
-
+   * Gets if the index should be unique.
+   */
   /**
-    * Gets the index version number.
-    */
-
+   * Gets the index version number.
+   */
   /**
-    * Gets the weighting object for use with a text index
-    *
-    * A document that represents field and weight pairs. The weight is an integer ranging from 1 to 99,999 and denotes the significance
-    * of the field relative to the other indexed fields in terms of the score.</p>
-    */
+   * Gets the weighting object for use with a text index
+   *
+   * A document that represents field and weight pairs. The weight is an integer ranging from 1 to 99,999 and denotes the significance
+   * of the field relative to the other indexed fields in terms of the score.</p>
+   */
 }
+
 
 object IndexOptions {
   
@@ -123,3 +107,4 @@ object IndexOptions {
     }
   }
 }
+

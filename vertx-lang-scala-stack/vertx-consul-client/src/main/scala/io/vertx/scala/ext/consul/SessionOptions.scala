@@ -16,94 +16,101 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{SessionOptions => JSessionOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options used to create session.
-  */
+ * Options used to create session.
+ */
+
 class SessionOptions(private val _asJava: JSessionOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set the behavior when a session is invalidated. The release behavior is the default if none is specified.
-    */
+   * Set the behavior when a session is invalidated. The release behavior is the default if none is specified.
+   */
   def setBehavior(value: io.vertx.ext.consul.SessionBehavior) = {
     asJava.setBehavior(value)
     this
   }
+
   def getBehavior: io.vertx.ext.consul.SessionBehavior = {
     asJava.getBehavior()
   }
 
   /**
-    * Set a list of associated health checks. It is highly recommended that,
-    * if you override this list, you include the default "serfHealth"
-    */
+   * Set a list of associated health checks. It is highly recommended that,
+   * if you override this list, you include the default "serfHealth"
+   */
   def setChecks(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setChecks(value.asJava)
     this
   }
+
   def getChecks: scala.collection.mutable.Buffer[String] = {
     asJava.getChecks().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
-    * Set the lock-delay period.
-    */
+   * Set the lock-delay period.
+   */
   def setLockDelay(value: Long) = {
     asJava.setLockDelay(value)
     this
   }
+
   def getLockDelay: Long = {
     asJava.getLockDelay().asInstanceOf[Long]
   }
 
   /**
-    * Set the human-readable name for the Session
-    */
+   * Set the human-readable name for the Session
+   */
   def setName(value: String) = {
     asJava.setName(value)
     this
   }
+
   def getName: String = {
     asJava.getName().asInstanceOf[String]
   }
 
   /**
-    * Set the node to which the session will be assigned
-    */
+   * Set the node to which the session will be assigned
+   */
   def setNode(value: String) = {
     asJava.setNode(value)
     this
   }
+
   def getNode: String = {
     asJava.getNode().asInstanceOf[String]
   }
 
   /**
-    * Set the TTL interval. When TTL interval expires without being renewed, the session has expired
-    * and an invalidation is triggered. If specified, it must be between `10s` and `86400s` currently.
-    *
-    * The contract of a TTL is that it represents a lower bound for invalidation; that is,
-    * Consul will not expire the session before the TTL is reached, but it is allowed to delay
-    * the expiration past the TTL.
-    *
-    * The lowest practical TTL should be used to keep the number of managed sessions low.
-    * When locks are forcibly expired, such as during a leader election, sessions may not be reaped for
-    * up to double this TTL, so long TTL values (&gt; 1 hour) should be avoided.
-    */
+   * Set the TTL interval. When TTL interval expires without being renewed, the session has expired
+   * and an invalidation is triggered. If specified, it must be between `10s` and `86400s` currently.
+   *
+   * The contract of a TTL is that it represents a lower bound for invalidation; that is,
+   * Consul will not expire the session before the TTL is reached, but it is allowed to delay
+   * the expiration past the TTL.
+   *
+   * The lowest practical TTL should be used to keep the number of managed sessions low.
+   * When locks are forcibly expired, such as during a leader election, sessions may not be reaped for
+   * up to double this TTL, so long TTL values (&gt; 1 hour) should be avoided.
+   */
   def setTtl(value: Long) = {
     asJava.setTtl(value)
     this
   }
+
   def getTtl: Long = {
     asJava.getTtl().asInstanceOf[Long]
   }
+
 }
+
 
 object SessionOptions {
   
@@ -127,3 +134,4 @@ object SessionOptions {
     }
   }
 }
+

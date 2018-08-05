@@ -16,38 +16,49 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{InterfaceWithVariableArg => JInterfaceWithVariableArg}
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
+
   */
-class InterfaceWithVariableArg[T: TypeTag, U: TypeTag](private val _asJava: Object)
-    extends GenericRefedInterface[U](_asJava)   {
+
+class InterfaceWithVariableArg[T: TypeTag, U: TypeTag](private val _asJava: Object) extends GenericRefedInterface[U] (_asJava) {
 
 
 
-  override def setValue(value: U): GenericRefedInterface[U] = {
+
+
+  override 
+  def setValue(value: U): GenericRefedInterface[U] = {
     asJava.asInstanceOf[JInterfaceWithVariableArg[Object, Object]].setValue(toJava[U](value))
     this
   }
 
-  override def getValue(): U = {
+
+
+
+  override def getValue (): U = {
     toScala[U](asJava.asInstanceOf[JInterfaceWithVariableArg[Object, Object]].getValue())
   }
 
-  def setOtherValue(value: T): Unit = {
+
+  def setOtherValue (value: T): Unit = {
     asJava.asInstanceOf[JInterfaceWithVariableArg[Object, Object]].setOtherValue(toJava[T](value))
   }
 
-  def getOtherValue(): T = {
+
+  def getOtherValue (): T = {
     toScala[T](asJava.asInstanceOf[JInterfaceWithVariableArg[Object, Object]].getOtherValue())
   }
+
 
 }
 
 object InterfaceWithVariableArg {
-  def apply[T: TypeTag, U: TypeTag](asJava: JInterfaceWithVariableArg[_, _]) = new InterfaceWithVariableArg[T, U](asJava)  
+  def apply[T: TypeTag, U: TypeTag](asJava: JInterfaceWithVariableArg[_, _]) = new InterfaceWithVariableArg[T, U](asJava)
+  
 }

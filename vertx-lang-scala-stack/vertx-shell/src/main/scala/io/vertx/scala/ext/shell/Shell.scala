@@ -16,33 +16,33 @@
 
 package io.vertx.scala.ext.shell
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
-import io.vertx.scala.ext.shell.session.Session
-import io.vertx.scala.ext.shell.system.Job
 import io.vertx.ext.shell.system.{JobController => JJobController}
 import io.vertx.ext.shell.{Shell => JShell}
 import scala.collection.JavaConverters._
-import io.vertx.ext.shell.system.{Job => JJob}
-import io.vertx.ext.shell.cli.{CliToken => JCliToken}
 import io.vertx.scala.ext.shell.system.JobController
 import io.vertx.ext.shell.session.{Session => JSession}
 import io.vertx.scala.ext.shell.cli.CliToken
+import io.vertx.lang.scala.Converter._
+import io.vertx.scala.ext.shell.session.Session
+import io.vertx.scala.ext.shell.system.Job
+import io.vertx.ext.shell.system.{Job => JJob}
+import io.vertx.ext.shell.cli.{CliToken => JCliToken}
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * An interactive session between a consumer and a shell.
   */
-class Shell(private val _asJava: Object) {
 
+class Shell(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[JobController] = None
   private var cached_1: Option[Session] = None
 
 
   /**
-    * @return the shell's job controller
-    */
+   * @return the shell's job controller
+   */
   def jobController(): JobController = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JShell].jobController()
@@ -52,8 +52,8 @@ class Shell(private val _asJava: Object) {
   }
 
   /**
-    * @return the current shell session
-    */
+   * @return the current shell session
+   */
   def session(): Session = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JShell].session()
@@ -62,31 +62,42 @@ class Shell(private val _asJava: Object) {
     cached_1.get
   }
 
+
+
+
   /**
-    * Create a job, the created job should then be executed with the [[io.vertx.scala.ext.shell.system.Job#run]] method.
-    * @param line the command line creating this job
-    * @return the created job
-    */
-  def createJob(line: scala.collection.mutable.Buffer[CliToken]): Job = {
+   * Create a job, the created job should then be executed with the [[io.vertx.scala.ext.shell.system.Job#run]] method.   * @param line the command line creating this job
+   * @return the created job
+   */
+  def createJob (line: scala.collection.mutable.Buffer[CliToken]): Job = {
     Job(asJava.asInstanceOf[JShell].createJob(line.map(x => x.asJava.asInstanceOf[JCliToken]).asJava))
   }
 
   /**
-    * See [[io.vertx.scala.ext.shell.Shell#createJob]]
-    */
-  def createJob(line: String): Job = {
+   * See [[io.vertx.scala.ext.shell.Shell#createJob]]
+   */
+  def createJob (line: String): Job = {
     Job(asJava.asInstanceOf[JShell].createJob(line.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Close the shell.
-    */
-  def close(): Unit = {
+   * Set a new prompt in this session.   * @param prompt the new prompt will be calculated when it's needed.
+   */
+  def setPrompt (prompt: Session => String): Unit = {
+    asJava.asInstanceOf[JShell].setPrompt({x: JSession => prompt(Session(x)).asInstanceOf[java.lang.String]})
+  }
+
+  /**
+   * Close the shell.
+   */
+  def close (): Unit = {
     asJava.asInstanceOf[JShell].close()
   }
+
 
 }
 
 object Shell {
-  def apply(asJava: JShell) = new Shell(asJava)  
+  def apply(asJava: JShell) = new Shell(asJava)
+  
 }

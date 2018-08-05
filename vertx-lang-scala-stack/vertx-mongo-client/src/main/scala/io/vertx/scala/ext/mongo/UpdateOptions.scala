@@ -16,62 +16,67 @@
 
 package io.vertx.scala.ext.mongo
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.mongo.{UpdateOptions => JUpdateOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options for configuring updates.
-  */
+ * Options for configuring updates.
+ */
+
 class UpdateOptions(private val _asJava: JUpdateOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set whether multi is enabled
-    */
+   * Set whether multi is enabled
+   */
   def setMulti(value: Boolean) = {
     asJava.setMulti(value)
     this
   }
+
   def isMulti: Boolean = {
     asJava.isMulti().asInstanceOf[Boolean]
   }
 
   /**
-    * Set whether new document property is enabled. Valid only on findOneAnd* methods.
-    */
+   * Set whether new document property is enabled. Valid only on findOneAnd* methods.
+   */
   def setReturningNewDocument(value: Boolean) = {
     asJava.setReturningNewDocument(value)
     this
   }
+
   def isReturningNewDocument: Boolean = {
     asJava.isReturningNewDocument().asInstanceOf[Boolean]
   }
 
   /**
-    * Set whether upsert is enabled
-    */
+   * Set whether upsert is enabled
+   */
   def setUpsert(value: Boolean) = {
     asJava.setUpsert(value)
     this
   }
+
   def isUpsert: Boolean = {
     asJava.isUpsert().asInstanceOf[Boolean]
   }
 
   /**
-    * Set the write option
-    */
+   * Set the write option
+   */
   def setWriteOption(value: io.vertx.ext.mongo.WriteOption) = {
     asJava.setWriteOption(value)
     this
   }
+
   def getWriteOption: io.vertx.ext.mongo.WriteOption = {
     asJava.getWriteOption()
   }
+
 }
+
 
 object UpdateOptions {
   
@@ -95,3 +100,4 @@ object UpdateOptions {
     }
   }
 }
+

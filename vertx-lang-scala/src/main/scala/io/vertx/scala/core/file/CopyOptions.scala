@@ -16,62 +16,67 @@
 
 package io.vertx.scala.core.file
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.file.{CopyOptions => JCopyOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Describes the copy (and move) options.
-  */
+ * Describes the copy (and move) options.
+ */
+
 class CopyOptions(private val _asJava: JCopyOptions) {
-
   def asJava = _asJava
-
   /**
-    * Whether move should be performed as an atomic filesystem operation. Defaults to `false`.
-    */
+   * Whether move should be performed as an atomic filesystem operation. Defaults to `false`.
+   */
   def setAtomicMove(value: Boolean) = {
     asJava.setAtomicMove(value)
     this
   }
+
   def isAtomicMove: Boolean = {
     asJava.isAtomicMove().asInstanceOf[Boolean]
   }
 
   /**
-    * Whether the file attributes should be copied. Defaults to `false`.
-    */
+   * Whether the file attributes should be copied. Defaults to `false`.
+   */
   def setCopyAttributes(value: Boolean) = {
     asJava.setCopyAttributes(value)
     this
   }
+
   def isCopyAttributes: Boolean = {
     asJava.isCopyAttributes().asInstanceOf[Boolean]
   }
 
   /**
-    * Whether symbolic links should not be followed during copy or move operations. Defaults to `false`.
-    */
+   * Whether symbolic links should not be followed during copy or move operations. Defaults to `false`.
+   */
   def setNofollowLinks(value: Boolean) = {
     asJava.setNofollowLinks(value)
     this
   }
+
   def isNofollowLinks: Boolean = {
     asJava.isNofollowLinks().asInstanceOf[Boolean]
   }
 
   /**
-    * Whether an existing file, empty directory, or link should be replaced. Defaults to `false`.
-    */
+   * Whether an existing file, empty directory, or link should be replaced. Defaults to `false`.
+   */
   def setReplaceExisting(value: Boolean) = {
     asJava.setReplaceExisting(value)
     this
   }
+
   def isReplaceExisting: Boolean = {
     asJava.isReplaceExisting().asInstanceOf[Boolean]
   }
+
 }
+
 
 object CopyOptions {
   
@@ -95,3 +100,4 @@ object CopyOptions {
     }
   }
 }
+

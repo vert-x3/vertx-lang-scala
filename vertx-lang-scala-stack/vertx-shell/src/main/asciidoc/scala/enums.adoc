@@ -12,20 +12,16 @@ The status of an execution.
 [frame="topbot"]
 |===
 ^|Name | Description
-|[[READY]]`READY`|
-+++
+|[[READY]]`READY`|+++
 The job is ready, it can be running or terminated.
 +++
-|[[RUNNING]]`RUNNING`|
-+++
+|[[RUNNING]]`RUNNING`|+++
 The job is running, it can be stopped or terminated.
 +++
-|[[STOPPED]]`STOPPED`|
-+++
+|[[STOPPED]]`STOPPED`|+++
 The job is stopped, it can be running or terminated.
 +++
-|[[TERMINATED]]`TERMINATED`|
-+++
+|[[TERMINATED]]`TERMINATED`|+++
 The job is terminated.
 +++
 |===

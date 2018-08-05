@@ -16,69 +16,72 @@
 
 package io.vertx.scala.core.net
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{PemTrustOptions => JPemTrustOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Certificate Authority options configuring certificates based on
-  * <i>Privacy-enhanced Electronic Email</i> (PEM) files. The options is configured with a list of
-  * validating certificates.
-  * 
-  * Validating certificates must contain X.509 certificates wrapped in a PEM block:
-  *
-  * <pre>
-  * -----BEGIN CERTIFICATE-----
-  * MIIDezCCAmOgAwIBAgIEVmLkwTANBgkqhkiG9w0BAQsFADBuMRAwDgYDVQQGEwdV
-  * ...
-  * z5+DuODBJUQst141Jmgq8bS543IU/5apcKQeGNxEyQ==
-  * -----END CERTIFICATE-----
-  * </pre>
-  *
-  * The certificates can either be loaded by Vert.x from the filesystem:
-  * 
-  * <pre>
-  * HttpServerOptions options = new HttpServerOptions();
-  * options.setPemTrustOptions(new PemTrustOptions().addCertPath("/cert.pem"));
-  * </pre>
-  *
-  * Or directly provided as a buffer:
-  * 
-  *
-  * <pre>
-  * Buffer cert = vertx.fileSystem().readFileSync("/cert.pem");
-  * HttpServerOptions options = new HttpServerOptions();
-  * options.setPemTrustOptions(new PemTrustOptions().addCertValue(cert));
-  * </pre>
-  */
+ * Certificate Authority options configuring certificates based on
+ * <i>Privacy-enhanced Electronic Email</i> (PEM) files. The options is configured with a list of
+ * validating certificates.
+ * 
+ * Validating certificates must contain X.509 certificates wrapped in a PEM block:
+ *
+ * <pre>
+ * -----BEGIN CERTIFICATE-----
+ * MIIDezCCAmOgAwIBAgIEVmLkwTANBgkqhkiG9w0BAQsFADBuMRAwDgYDVQQGEwdV
+ * ...
+ * z5+DuODBJUQst141Jmgq8bS543IU/5apcKQeGNxEyQ==
+ * -----END CERTIFICATE-----
+ * </pre>
+ *
+ * The certificates can either be loaded by Vert.x from the filesystem:
+ * 
+ * <pre>
+ * HttpServerOptions options = new HttpServerOptions();
+ * options.setPemTrustOptions(new PemTrustOptions().addCertPath("/cert.pem"));
+ * </pre>
+ *
+ * Or directly provided as a buffer:
+ * 
+ *
+ * <pre>
+ * Buffer cert = vertx.fileSystem().readFileSync("/cert.pem");
+ * HttpServerOptions options = new HttpServerOptions();
+ * options.setPemTrustOptions(new PemTrustOptions().addCertValue(cert));
+ * </pre>
+ */
+
 class PemTrustOptions(private val _asJava: JPemTrustOptions) {
-
   def asJava = _asJava
-
   /**
-    * Add a certificate path
-    */
+   * Add a certificate path
+   */
   def addCertPath(value: String) = {
     asJava.addCertPath(value)
     this
   }
+
   def getCertPaths: scala.collection.mutable.Buffer[String] = {
     asJava.getCertPaths().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
-    * Add a certificate value
-    */
+   * Add a certificate value
+   */
   def addCertValue(value: io.vertx.core.buffer.Buffer) = {
     asJava.addCertValue(value)
     this
   }
+
   def getCertValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer] = {
     asJava.getCertValues().asScala.map(x => x)
   }
+
 }
+
 
 object PemTrustOptions {
   
@@ -102,3 +105,4 @@ object PemTrustOptions {
     }
   }
 }
+

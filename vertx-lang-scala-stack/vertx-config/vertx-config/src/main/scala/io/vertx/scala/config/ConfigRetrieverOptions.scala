@@ -16,42 +16,51 @@
 
 package io.vertx.scala.config
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.config.{ConfigRetrieverOptions => JConfigRetrieverOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
-class ConfigRetrieverOptions(private val _asJava: JConfigRetrieverOptions) {
 
+ */
+
+class ConfigRetrieverOptions(private val _asJava: JConfigRetrieverOptions) {
   def asJava = _asJava
   def setIncludeDefaultStores(value: Boolean) = {
     asJava.setIncludeDefaultStores(value)
     this
   }
+
   def isIncludeDefaultStores: Boolean = {
     asJava.isIncludeDefaultStores().asInstanceOf[Boolean]
   }
+
   def setScanPeriod(value: Long) = {
     asJava.setScanPeriod(value)
     this
   }
+
   def getScanPeriod: Long = {
     asJava.getScanPeriod().asInstanceOf[Long]
   }
+
   def addStore(value: ConfigStoreOptions) = {
     asJava.addStore(value.asJava)
     this
   }
+
   def setStores(value: scala.collection.mutable.Buffer[ConfigStoreOptions]) = {
     asJava.setStores(value.map(_.asJava).asJava)
     this
   }
+
   def getStores: scala.collection.mutable.Buffer[ConfigStoreOptions] = {
     asJava.getStores().asScala.map(x => ConfigStoreOptions(x))
   }
+
 }
+
 
 object ConfigRetrieverOptions {
   
@@ -75,3 +84,4 @@ object ConfigRetrieverOptions {
     }
   }
 }
+

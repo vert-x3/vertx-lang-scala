@@ -16,63 +16,64 @@
 
 package io.vertx.scala.ext.web.handler
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import scala.reflect.runtime.universe._
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.core.Handler
 import io.vertx.ext.web.handler.{ErrorHandler => JErrorHandler}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A pretty error handler for rendering error pages.
   */
-class ErrorHandler(private val _asJava: Object)
-    extends io.vertx.core.Handler[RoutingContext] {
 
+class ErrorHandler(private val _asJava: Object) extends io.vertx.core.Handler[RoutingContext] {
   def asJava = _asJava
 
 
-  override def handle(arg0: RoutingContext): Unit = {
+
+
+
+
+  override def handle (arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JErrorHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
+
 
 }
 
 object ErrorHandler {
-  def apply(asJava: JErrorHandler) = new ErrorHandler(asJava)  
+  def apply(asJava: JErrorHandler) = new ErrorHandler(asJava)
+  
   /**
-    * Create an error handler using defaults
-    * @return the handler
-    */
+   * Create an error handler using defaults   * @return the handler
+   */
   def create(): ErrorHandler = {
     ErrorHandler(JErrorHandler.create())
   }
 
   /**
-    * Create an error handler
-    * @param errorTemplateName the error template name - will be looked up from the classpath
-    * @param displayExceptionDetails true if exception details should be displayed
-    * @return the handler
-    */
-  def create(errorTemplateName: String, displayExceptionDetails: Boolean): ErrorHandler = {
+   * Create an error handler   * @param errorTemplateName the error template name - will be looked up from the classpath
+   * @param displayExceptionDetails true if exception details should be displayed
+   * @return the handler
+   */
+  def create(errorTemplateName: String,displayExceptionDetails: Boolean): ErrorHandler = {
     ErrorHandler(JErrorHandler.create(errorTemplateName.asInstanceOf[java.lang.String], displayExceptionDetails.asInstanceOf[java.lang.Boolean]))
   }
 
   /**
-    * Create an error handler
-    * @param displayExceptionDetails true if exception details should be displayed
-    * @return the handler
-    */
+   * Create an error handler   * @param displayExceptionDetails true if exception details should be displayed
+   * @return the handler
+   */
   def create(displayExceptionDetails: Boolean): ErrorHandler = {
     ErrorHandler(JErrorHandler.create(displayExceptionDetails.asInstanceOf[java.lang.Boolean]))
   }
 
   /**
-    * Create an error handler
-    * @param errorTemplateName the error template name - will be looked up from the classpath
-    * @return the handler
-    */
+   * Create an error handler   * @param errorTemplateName the error template name - will be looked up from the classpath
+   * @return the handler
+   */
   def create(errorTemplateName: String): ErrorHandler = {
     ErrorHandler(JErrorHandler.create(errorTemplateName.asInstanceOf[java.lang.String]))
   }

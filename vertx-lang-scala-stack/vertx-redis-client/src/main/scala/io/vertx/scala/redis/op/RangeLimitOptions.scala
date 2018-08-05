@@ -16,19 +16,35 @@
 
 package io.vertx.scala.redis.op
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.scala.redis.op.{LimitOptions => ExtLimitOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 import io.vertx.redis.op.{RangeLimitOptions => JRangeLimitOptions}
 
 /**
-  */
-class RangeLimitOptions(private val _asJava: JRangeLimitOptions) 
-    extends ExtLimitOptions(_asJava) {
 
+ */
+
+class RangeLimitOptions(private val _asJava: JRangeLimitOptions) extends ExtLimitOptions(_asJava) {
   override def asJava = _asJava
+  override def setCount(value: Long) = {
+    asJava.setCount(value)
+    this
+  }
+
+  override def setOffset(value: Long) = {
+    asJava.setOffset(value)
+    this
+  }
+
+  def setWithscores(value: Boolean) = {
+    asJava.setWithscores(value)
+    this
+  }
+
 }
+
 
 object RangeLimitOptions {
   
@@ -52,3 +68,4 @@ object RangeLimitOptions {
     }
   }
 }
+
