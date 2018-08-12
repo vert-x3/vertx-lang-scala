@@ -7,6 +7,8 @@
 
 <#if className == 'Vertx'>
 <#include "extensions/Vertx.ftl">
+<#elseif className == 'EventBus'>
+<#include "extensions/EventBus.ftl">
 </#if>
 
 <#assign cached_method_counter=0>
