@@ -629,6 +629,137 @@ class FileSystem(private val _asJava: Object) {
     this
   }
 
+  /**
+   * Creates a new directory in the default temporary-file directory, using the given
+   * prefix to generate its name, asynchronously.
+   *
+   * 
+   * As with the `File.createTempFile` methods, this method is only
+   * part of a temporary-file facility.A #addShutdownHook shutdown-hook,
+   * or the deleteOnExit mechanism may be used to delete the directory automatically.
+   * </p>   * @param prefix the prefix string to be used in generating the directory's name; may be `null`
+   * @param handler the handler that will be called on completion
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def createTempDirectory(prefix: String, handler: Handler[AsyncResult[String]]): FileSystem = {
+    asJava.asInstanceOf[JFileSystem].createTempDirectory(prefix.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    this
+  }
+
+  /**
+   * Creates a new directory in the default temporary-file directory, using the given
+   * prefix to generate its name, asynchronously.
+   * 
+   * The new directory will be created with permissions as specified by `perms`.
+   * </p>
+   * The permission String takes the form rwxr-x--- as specified
+   * in <a href="http://download.oracle.com/javase/7/docs/api/java/nio/file/attribute/PosixFilePermissions.html">here</a>.
+   *
+   * 
+   * As with the `File.createTempFile` methods, this method is only
+   * part of a temporary-file facility.A #addShutdownHook shutdown-hook,
+   * or the deleteOnExit mechanism may be used to delete the directory automatically.
+   * </p>   * @param prefix the prefix string to be used in generating the directory's name; may be `null`
+   * @param perms the permissions string
+   * @param handler the handler that will be called on completion
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def createTempDirectory(prefix: String, perms: String, handler: Handler[AsyncResult[String]]): FileSystem = {
+    asJava.asInstanceOf[JFileSystem].createTempDirectory(prefix.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    this
+  }
+
+  /**
+   * Creates a new directory in the directory provided by the path `path`, using the given
+   * prefix to generate its name, asynchronously.
+   * 
+   * The new directory will be created with permissions as specified by `perms`.
+   * </p>
+   * The permission String takes the form rwxr-x--- as specified
+   * in <a href="http://download.oracle.com/javase/7/docs/api/java/nio/file/attribute/PosixFilePermissions.html">here</a>.
+   *
+   * 
+   * As with the `File.createTempFile` methods, this method is only
+   * part of a temporary-file facility.A #addShutdownHook shutdown-hook,
+   * or the deleteOnExit mechanism may be used to delete the directory automatically.
+   * </p>   * @param dir the path to directory in which to create the directory
+   * @param prefix the prefix string to be used in generating the directory's name; may be `null`
+   * @param perms the permissions string
+   * @param handler the handler that will be called on completion
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def createTempDirectory(dir: String, prefix: String, perms: String, handler: Handler[AsyncResult[String]]): FileSystem = {
+    asJava.asInstanceOf[JFileSystem].createTempDirectory(dir.asInstanceOf[java.lang.String], prefix.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    this
+  }
+
+  /**
+   * Creates a new file in the default temporary-file directory, using the given
+   * prefix and suffix to generate its name, asynchronously.
+   *
+   * 
+   * As with the `File.createTempFile` methods, this method is only
+   * part of a temporary-file facility.A #addShutdownHook shutdown-hook,
+   * or the deleteOnExit mechanism may be used to delete the directory automatically.
+   * </p>   * @param prefix the prefix string to be used in generating the directory's name; may be `null`
+   * @param suffix the suffix string to be used in generating the file's name; may be `null`, in which case "`.tmp`" is used
+   * @param handler the handler that will be called on completion
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def createTempFile(prefix: String, suffix: String, handler: Handler[AsyncResult[String]]): FileSystem = {
+    asJava.asInstanceOf[JFileSystem].createTempFile(prefix.asInstanceOf[java.lang.String], suffix.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    this
+  }
+
+  /**
+   * Creates a new file in the directory provided by the path `dir`, using the given
+   * prefix and suffix to generate its name, asynchronously.
+   *
+   * 
+   * As with the `File.createTempFile` methods, this method is only
+   * part of a temporary-file facility.A #addShutdownHook shutdown-hook,
+   * or the deleteOnExit mechanism may be used to delete the directory automatically.
+   * </p>   * @param prefix the prefix string to be used in generating the directory's name; may be `null`
+   * @param suffix the suffix string to be used in generating the file's name; may be `null`, in which case "`.tmp`" is used
+   * @param handler the handler that will be called on completion
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def createTempFile(prefix: String, suffix: String, perms: String, handler: Handler[AsyncResult[String]]): FileSystem = {
+    asJava.asInstanceOf[JFileSystem].createTempFile(prefix.asInstanceOf[java.lang.String], suffix.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    this
+  }
+
+  /**
+   * Creates a new file in the directory provided by the path `dir`, using the given
+   * prefix and suffix to generate its name, asynchronously.
+   * 
+   * The new directory will be created with permissions as specified by `perms`.
+   * </p>
+   * The permission String takes the form rwxr-x--- as specified
+   * in <a href="http://download.oracle.com/javase/7/docs/api/java/nio/file/attribute/PosixFilePermissions.html">here</a>.
+   *
+   * 
+   * As with the `File.createTempFile` methods, this method is only
+   * part of a temporary-file facility.A #addShutdownHook shutdown-hook,
+   * or the deleteOnExit mechanism may be used to delete the directory automatically.
+   * </p>   * @param dir the path to directory in which to create the directory
+   * @param prefix the prefix string to be used in generating the directory's name; may be `null`
+   * @param suffix the suffix string to be used in generating the file's name; may be `null`, in which case "`.tmp`" is used
+   * @param perms the permissions string
+   * @param handler the handler that will be called on completion
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def createTempFile(dir: String, prefix: String, suffix: String, perms: String, handler: Handler[AsyncResult[String]]): FileSystem = {
+    asJava.asInstanceOf[JFileSystem].createTempFile(dir.asInstanceOf[java.lang.String], prefix.asInstanceOf[java.lang.String], suffix.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    this
+  }
+
 
 
   /**
@@ -692,6 +823,48 @@ class FileSystem(private val _asJava: Object) {
    */
   def fsPropsBlocking (path: String): FileSystemProps = {
     FileSystemProps(asJava.asInstanceOf[JFileSystem].fsPropsBlocking(path.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+   * Blocking version of [[io.vertx.scala.core.file.FileSystem#createTempDirectory]]
+   */
+  def createTempDirectoryBlocking (prefix: String): String = {
+    asJava.asInstanceOf[JFileSystem].createTempDirectoryBlocking(prefix.asInstanceOf[java.lang.String]).asInstanceOf[String]
+  }
+
+  /**
+   * Blocking version of [[io.vertx.scala.core.file.FileSystem#createTempDirectory]]
+   */
+  def createTempDirectoryBlocking (prefix: String, perms: String): String = {
+    asJava.asInstanceOf[JFileSystem].createTempDirectoryBlocking(prefix.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String]).asInstanceOf[String]
+  }
+
+  /**
+   * Blocking version of [[io.vertx.scala.core.file.FileSystem#createTempDirectory]]
+   */
+  def createTempDirectoryBlocking (dir: String, prefix: String, perms: String): String = {
+    asJava.asInstanceOf[JFileSystem].createTempDirectoryBlocking(dir.asInstanceOf[java.lang.String], prefix.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String]).asInstanceOf[String]
+  }
+
+  /**
+   * Blocking version of [[io.vertx.scala.core.file.FileSystem#createTempFile]]
+   */
+  def createTempFileBlocking (prefix: String, suffix: String): String = {
+    asJava.asInstanceOf[JFileSystem].createTempFileBlocking(prefix.asInstanceOf[java.lang.String], suffix.asInstanceOf[java.lang.String]).asInstanceOf[String]
+  }
+
+  /**
+   * Blocking version of [[io.vertx.scala.core.file.FileSystem#createTempFile]]
+   */
+  def createTempFileBlocking (prefix: String, suffix: String, perms: String): String = {
+    asJava.asInstanceOf[JFileSystem].createTempFileBlocking(prefix.asInstanceOf[java.lang.String], suffix.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String]).asInstanceOf[String]
+  }
+
+  /**
+   * Blocking version of [[io.vertx.scala.core.file.FileSystem#createTempFile]]
+   */
+  def createTempFileBlocking (dir: String, prefix: String, suffix: String, perms: String): String = {
+    asJava.asInstanceOf[JFileSystem].createTempFileBlocking(dir.asInstanceOf[java.lang.String], prefix.asInstanceOf[java.lang.String], suffix.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String]).asInstanceOf[String]
   }
 
 
@@ -992,6 +1165,66 @@ class FileSystem(private val _asJava: Object) {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JFileSystemProps, FileSystemProps](x => FileSystemProps(x))
     asJava.asInstanceOf[JFileSystem].fsProps(path.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[createTempDirectory]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def createTempDirectoryFuture (prefix: String): scala.concurrent.Future[String] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JFileSystem].createTempDirectory(prefix.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[createTempDirectory]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def createTempDirectoryFuture (prefix: String, perms: String): scala.concurrent.Future[String] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JFileSystem].createTempDirectory(prefix.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[createTempDirectory]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def createTempDirectoryFuture (dir: String, prefix: String, perms: String): scala.concurrent.Future[String] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JFileSystem].createTempDirectory(dir.asInstanceOf[java.lang.String], prefix.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[createTempFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def createTempFileFuture (prefix: String, suffix: String): scala.concurrent.Future[String] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JFileSystem].createTempFile(prefix.asInstanceOf[java.lang.String], suffix.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[createTempFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def createTempFileFuture (prefix: String, suffix: String, perms: String): scala.concurrent.Future[String] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JFileSystem].createTempFile(prefix.asInstanceOf[java.lang.String], suffix.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[createTempFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def createTempFileFuture (dir: String, prefix: String, suffix: String, perms: String): scala.concurrent.Future[String] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    asJava.asInstanceOf[JFileSystem].createTempFile(dir.asInstanceOf[java.lang.String], prefix.asInstanceOf[java.lang.String], suffix.asInstanceOf[java.lang.String], perms.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

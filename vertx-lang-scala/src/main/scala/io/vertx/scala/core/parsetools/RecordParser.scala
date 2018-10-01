@@ -62,6 +62,19 @@ class RecordParser(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
 
+  /**
+   * Set the maximum allowed size for a record when using the delimited mode.
+   * The delimiter itself does not count for the record size.
+   * 
+   * If a record is longer than specified, an IllegalStateException will be thrown.   * @param size the maximum record size
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def maxRecordSize(size: Int): RecordParser = {
+    asJava.asInstanceOf[JRecordParser].maxRecordSize(size.asInstanceOf[java.lang.Integer])
+    this
+  }
+
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): RecordParser = {
@@ -80,6 +93,13 @@ class RecordParser(private val _asJava: Object) extends ReadStream[io.vertx.core
   override 
   def pause(): RecordParser = {
     asJava.asInstanceOf[JRecordParser].pause()
+    this
+  }
+
+
+  override 
+  def fetch(amount: Long): RecordParser = {
+    asJava.asInstanceOf[JRecordParser].fetch(amount.asInstanceOf[java.lang.Long])
     this
   }
 

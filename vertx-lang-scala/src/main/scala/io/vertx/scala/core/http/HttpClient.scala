@@ -19,6 +19,7 @@ package io.vertx.scala.core.http
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.http.{RequestOptions => JRequestOptions}
 import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import scala.reflect.runtime.universe._
 import io.vertx.scala.core.Future
 import io.vertx.scala.core.metrics.Measured
@@ -690,6 +691,15 @@ class HttpClient(private val _asJava: Object) extends Measured {
   
   def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
     asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    this
+  }
+
+  /**
+   * Set a connection handler for the client. This handler is called when a new connection is established.   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def connectionHandler(handler: Handler[HttpConnection]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].connectionHandler({x: JHttpConnection => handler.handle(HttpConnection(x))})
     this
   }
 

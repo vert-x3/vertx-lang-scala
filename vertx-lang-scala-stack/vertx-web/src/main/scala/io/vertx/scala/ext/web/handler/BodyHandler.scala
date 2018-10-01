@@ -36,6 +36,16 @@ class BodyHandler(private val _asJava: Object) extends io.vertx.core.Handler[Rou
 
 
   /**
+   * Set whether file uploads will be handled   * @param handleFileUploads true if they should be handled
+   * @return reference to this for fluency
+   */
+  
+  def setHandleFileUploads(handleFileUploads: Boolean): BodyHandler = {
+    asJava.asInstanceOf[JBodyHandler].setHandleFileUploads(handleFileUploads.asInstanceOf[java.lang.Boolean])
+    this
+  }
+
+  /**
    * Set the maximum body size -1 means unlimited   * @param bodyLimit the max size
    * @return reference to this for fluency
    */
@@ -104,6 +114,14 @@ object BodyHandler {
    */
   def create(): BodyHandler = {
     BodyHandler(JBodyHandler.create())
+  }
+
+  /**
+   * Create a body handler setting if it should handle file uploads   * @param handleFileUploads true if files upload should be handled
+   * @return the body handler
+   */
+  def create(handleFileUploads: Boolean): BodyHandler = {
+    BodyHandler(JBodyHandler.create(handleFileUploads.asInstanceOf[java.lang.Boolean]))
   }
 
   /**

@@ -8,7 +8,7 @@ Shiro auth configuration options, see Vert.x Auth Shiro component and/or Apache 
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description

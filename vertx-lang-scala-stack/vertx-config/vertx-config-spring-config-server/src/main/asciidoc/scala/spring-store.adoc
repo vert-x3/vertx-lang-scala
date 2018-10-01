@@ -53,7 +53,9 @@ var retriever = ConfigRetriever.create(vertx, ConfigRetrieverOptions()
 
 Configurable attributes are:
 
-* `url` - the `url` to retrieve the configuration (mandatory)
+* `url` - the `url` to retrieve the configuration (mandatory), supports two type of formats:
+** `/{application}/{environment}` which produces response with separated propertySources
+** `/{application}-{environment}.json` which produces response as JSON with unique fields and resolved Spring placeholders
 * `timeout` - the timeout (in milliseconds) to retrieve the configuration, 3000 by default
 * `user` - the `user` (no authentication by default)
 * `password` - the `password`

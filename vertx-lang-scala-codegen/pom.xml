@@ -10,7 +10,7 @@
     <relativePath>..</relativePath>
   </parent>
   <artifactId>vertx-lang-scala-codegen</artifactId>
-  <name>A name</name>
+  <name>Codegen for Scala</name>
   <dependencies>
     <!-- Not needed at runtime -->
     <dependency>

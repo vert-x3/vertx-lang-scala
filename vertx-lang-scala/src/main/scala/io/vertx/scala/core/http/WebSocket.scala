@@ -164,6 +164,13 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
 
   override 
+  def fetch(amount: Long): WebSocket = {
+    asJava.asInstanceOf[JWebSocket].fetch(amount.asInstanceOf[java.lang.Long])
+    this
+  }
+
+
+  override 
   def endHandler(endHandler: Handler[Unit]): WebSocket = {
     asJava.asInstanceOf[JWebSocket].endHandler({x: Void => endHandler.handle(x)})
     this

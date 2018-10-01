@@ -93,14 +93,20 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
   }
 
   /**
-   * Synonym for [[io.vertx.scala.core.eventbus.MessageProducer#write]].   * @param message the message to send
+   * This method actually sends a message using the send semantic regardless this producer
+   * is a sender or a publisher.   * @param message the message to send
    * @return reference to this for fluency
    */
   def send (message: T): MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send(toJava[T](message)))
   }
 
-
+  /**
+   * Like [[io.vertx.scala.core.eventbus.MessageProducer#send]] but specifying a `replyHandler` that will be called if the recipient
+   * subsequently replies to the message.   * @param message the message to send
+   * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
+   * @return reference to this for fluency
+   */
   def send [R: TypeTag](message: T, replyHandler: Handler[AsyncResult[Message[R]]]): MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message), {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}))
   }
@@ -127,7 +133,9 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
   }
 
 
-
+ /**
+  * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
   def sendFuture [R: TypeTag](message: T): scala.concurrent.Future[Message[R]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))

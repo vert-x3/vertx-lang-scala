@@ -43,18 +43,6 @@ class QueueOptions(private val _asJava: JQueueOptions) {
   /**
 
    */
-  def setBuffer(value: Boolean) = {
-    asJava.setBuffer(value)
-    this
-  }
-
-  def isBuffer: Boolean = {
-    asJava.isBuffer().asInstanceOf[Boolean]
-  }
-
-  /**
-
-   */
   def setKeepMostRecent(value: Boolean) = {
     asJava.setKeepMostRecent(value)
     this

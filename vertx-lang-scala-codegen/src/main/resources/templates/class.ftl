@@ -1,18 +1,4 @@
-/*
- * Copyright 2014 Red Hat, Inc.
- *
- * Red Hat licenses this file to you under the Apache License, version 2.0
- * (the "License"); you may not use this file except in compliance with the
- * License.  You may obtain a copy of the License at:
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
- * License for the specific language governing permissions and limitations
- * under the License.
- */
+<#include "extensions/LicenseHeader.ftl">
 
 package ${packageName}
 
@@ -33,7 +19,7 @@ class ${className}${typeHelper.assembleTypeParams(typeParams, true)}(private val
 trait ${className}${typeHelper.assembleTypeParams(typeParams, false)}
 </#if>
 <#if superTypes?has_content >
-      extends <#list classes as superType>${typeHelper.toScalaType(superType, false)} <#if superType.raw.isConcrete()>(_asJava)</#if><#sep>with </#list>
+      extends <#list classes as superType><#if type.name == "io.vertx.ext.web.templ.TemplateEngine">S</#if>${typeHelper.toScalaType(superType, false)} <#if superType.raw.isConcrete()>(_asJava)</#if><#sep>with </#list>
    <#if classes?has_content && abstractClasses?has_content>with </#if><#list abstractClasses as superType>${typeHelper.toScalaType(superType, false)}<#if superType.raw.concrete>(_asJava)</#if><#sep>with </#list>
    <#if type.handler>
       with io.vertx.core.Handler[${typeHelper.toScalaType(type.handlerArg, false)}]

@@ -96,6 +96,16 @@ public class ClassCodeGenerator extends Generator<Model> {
     imps.add("scala.reflect.runtime.universe._");
     imps.add("io.vertx.lang.scala.Converter._");
 
+    //Change
+    //import io.vertx.scala.ext.web.common.template.TemplateEngine
+
+    if(type.getName().equals("io.vertx.ext.web.templ.TemplateEngine")) {
+
+      imps.remove("io.vertx.scala.ext.web.common.template.TemplateEngine");
+      imps.add("io.vertx.scala.ext.web.common.template.{TemplateEngine => STemplateEngine}");
+      imps.remove("io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}");
+    }
+
     if(type.getName().equals("io.vertx.core.Vertx")) {
       imps.add("io.vertx.lang.scala.ScalaVerticle");
     }

@@ -16,6 +16,8 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 
+import static io.vertx.lang.scala.codegen.TypeHelper.convertTypeToAliasedType;
+
 /**
  * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
  */
@@ -86,7 +88,7 @@ public class DataObjectCodeGenerator extends Generator<Model> {
     Set<String> imps = TypeHelper.generateImports(type, importedTypes, Collections.emptyList());
     for (TypeInfo superType : superTypes) {
       imps.remove(superType.getRaw().translatePackageName("scala")+'.'+superType.getSimpleName());
-      imps.remove(superType.getRaw().getPackageName()+".{"+superType.getSimpleName()+" => J"+superType.getSimpleName()+"}");
+      imps.remove(convertTypeToAliasedType(superType));
     }
     for (TypeInfo superType : superTypes) {
       imps.add(superType.getRaw().translatePackageName("scala") + ".{" + superType.getSimpleName() + " => Ext" + superType.getSimpleName() + "}");

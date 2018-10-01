@@ -51,6 +51,7 @@ override def exceptionHandler ( handler: Handler[Throwable]): WebSocketBase
 override def handler ( handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase  
 override def pause ( ): WebSocketBase  
 override def resume ( ): WebSocketBase  
+override def fetch ( amount: Long): WebSocketBase  
 override def endHandler ( endHandler: Handler[Unit]): WebSocketBase  
 override def write ( data: io.vertx.core.buffer.Buffer): WebSocketBase  
 override def setWriteQueueMaxSize ( maxSize: Int): WebSocketBase  
@@ -228,6 +229,13 @@ object WebSocketBase {
   override 
   def resume(): WebSocketBase = {
     asJava.asInstanceOf[JWebSocketBase].resume()
+    this
+  }
+
+
+  override 
+  def fetch(amount: Long): WebSocketBase = {
+    asJava.asInstanceOf[JWebSocketBase].fetch(amount.asInstanceOf[java.lang.Long])
     this
   }
 

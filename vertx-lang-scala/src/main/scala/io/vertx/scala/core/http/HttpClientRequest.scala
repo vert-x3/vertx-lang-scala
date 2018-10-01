@@ -143,6 +143,13 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
 
 
   override 
+  def fetch(amount: Long): HttpClientRequest = {
+    asJava.asInstanceOf[JHttpClientRequest].fetch(amount.asInstanceOf[java.lang.Long])
+    this
+  }
+
+
+  override 
   def endHandler(endHandler: Handler[Unit]): HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].endHandler({x: Void => endHandler.handle(x)})
     this

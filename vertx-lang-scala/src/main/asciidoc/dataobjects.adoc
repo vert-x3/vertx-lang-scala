@@ -9,7 +9,7 @@
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -82,7 +82,7 @@ Set the list of DNS server addresses, an address is the IP  of the dns server, f
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -117,7 +117,7 @@ Sets whether or not the current link is required.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -236,7 +236,7 @@ Set whether Netty pooled buffers are enabled
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -262,7 +262,7 @@ Whether an existing file, empty directory, or link should be replaced. Defaults 
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -314,7 +314,7 @@ Set the value of traffic class
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -347,7 +347,7 @@ Set the send timeout.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -402,7 +402,7 @@ Set the maximum number of worker threads to be used by the Vert.x instance.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -431,7 +431,7 @@ Set whether or not recursion is desired
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -576,16 +576,21 @@ Set whether Netty pooled buffers are enabled
 ++++
  Vert.x file system base configuration, this class can be extended by provider implementations to configure
  those specific implementations.
-
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[classPathResolvingEnabled]]`@classPathResolvingEnabled`|`Boolean`|-
-|[[fileResolverCachingEnabled]]`@fileResolverCachingEnabled`|`Boolean`|-
+|[[classPathResolvingEnabled]]`@classPathResolvingEnabled`|`Boolean`|+++
+When vert.x cannot find the file on the filesystem it tries to resolve the
+ file from the class path when this is set to <code>true</code>.
++++
+|[[fileCachingEnabled]]`@fileCachingEnabled`|`Boolean`|+++
+Set to <code>true</code> to cache files on the real file system
+ when the filesystem performs class path resolving.
++++
 |===
 
 [[GoAway]]
@@ -596,7 +601,7 @@ Set whether Netty pooled buffers are enabled
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -622,7 +627,7 @@ Set the last stream id.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -654,7 +659,7 @@ Set the  HTTP/2 setting
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -897,7 +902,7 @@ Set the websocket compression server no context option
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1104,7 +1109,7 @@ Set the websocket subprotocols supported by the server.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1136,7 +1141,7 @@ Set the websocket subprotocols supported by the server.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1160,7 +1165,7 @@ Set the key store as a buffer
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1177,7 +1182,7 @@ Set whether metrics will be enabled on the Vert.x instance.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1306,7 +1311,7 @@ Set whether Netty pooled buffers are enabled
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1425,7 +1430,7 @@ Set whether Netty pooled buffers are enabled
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1459,7 +1464,7 @@ Set the value of traffic class
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1506,7 +1511,7 @@ Set whether the file is to be opened for writing
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1526,7 +1531,7 @@ Set whether session cache is enabled in open SSL session server context
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1645,7 +1650,7 @@ Sets whether or not this option can receive a value.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1711,7 +1716,7 @@ Set all the keys as a list of buffer
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1749,7 +1754,7 @@ Add a certificate value
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1772,7 +1777,7 @@ Set the store as a buffer
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1803,7 +1808,7 @@ Set proxy username.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1829,7 +1834,7 @@ Set the request relative URI
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -1931,7 +1936,7 @@ Set whether Netty pooled buffers are enabled
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description

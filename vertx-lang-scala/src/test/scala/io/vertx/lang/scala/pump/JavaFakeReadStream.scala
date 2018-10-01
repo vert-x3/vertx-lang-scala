@@ -55,4 +55,8 @@ class JavaFakeReadStream[T] extends ReadStream[T] {
   override def endHandler(endHandler: Handler[Void]): JavaFakeReadStream[T] = {
     this
   }
+
+  override def fetch(amount: Long): ReadStream[T] = {
+    this
+  }
 }

@@ -37,6 +37,13 @@ class RabbitMQConsumer(private val _asJava: Object) extends ReadStream[RabbitMQM
 
 
 
+
+  override 
+  def fetch(arg0: Long): ReadStream[RabbitMQMessage] = {
+    asJava.asInstanceOf[JRabbitMQConsumer].fetch(arg0.asInstanceOf[java.lang.Long])
+    this
+  }
+
   /**
    * Set an exception handler on the read stream.   * @param exceptionHandler the exception handler
    * @return a reference to this, so the API can be used fluently

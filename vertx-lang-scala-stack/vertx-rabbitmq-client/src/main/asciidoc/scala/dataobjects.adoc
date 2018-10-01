@@ -8,14 +8,11 @@ Aimed to specify queue consumer settings when calling link
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
 |[[autoAck]]`@autoAck`|`Boolean`|+++
-
-+++
-|[[buffer]]`@buffer`|`Boolean`|+++
 
 +++
 |[[keepMostRecent]]`@keepMostRecent`|`Boolean`|+++
@@ -34,7 +31,7 @@ RabbitMQ client options, most
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description

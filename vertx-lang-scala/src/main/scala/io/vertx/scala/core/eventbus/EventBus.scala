@@ -21,9 +21,9 @@ import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.eventbus.{DeliveryOptions => JDeliveryOptions}
 import scala.reflect.runtime.universe._
 import io.vertx.scala.core.metrics.Measured
+import io.vertx.core.eventbus.{DeliveryContext => JDeliveryContext}
 import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
 import io.vertx.lang.scala.Converter._
-import io.vertx.core.eventbus.{SendContext => JSendContext}
 import io.vertx.core.eventbus.{Message => JMessage}
 import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
 import io.vertx.core.AsyncResult
@@ -89,28 +89,6 @@ class EventBus(private val _asJava: Object) extends Measured {
    */
   def unregisterDefaultCodec(clazz: Class[_]): EventBus  = {
     asJava.asInstanceOf[JEventBus].unregisterDefaultCodec(clazz)
-    this
-  }
-
-  /**
-   * Add an interceptor that will be called whenever a message is sent from Vert.x
-   *
-   * @param interceptor  the interceptor
-   * @return a reference to this, so the API can be used fluently
-   */
-  def addInterceptor(interceptor: Handler[JSendContext[_]]): EventBus = {
-    asJava.asInstanceOf[JEventBus].addInterceptor(interceptor)
-    this
-  }
-
-  /**
-   * Remove an interceptor
-   *
-   * @param interceptor  the interceptor
-   * @return a reference to this, so the API can be used fluently
-   */
-  def removeInterceptor(interceptor: Handler[JSendContext[_]]): EventBus = {
-    asJava.asInstanceOf[JEventBus].removeInterceptor(interceptor)
     this
   }
 
@@ -189,6 +167,46 @@ class EventBus(private val _asJava: Object) extends Measured {
   
   def publish(address: String, message: AnyRef, options: DeliveryOptions): EventBus = {
     asJava.asInstanceOf[JEventBus].publish(address.asInstanceOf[java.lang.String], message, options.asJava)
+    this
+  }
+
+  /**
+   * Add an interceptor that will be called whenever a message is sent from Vert.x   * @param interceptor the interceptor
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def addOutboundInterceptor[T: TypeTag](interceptor: Handler[DeliveryContext[T]]): EventBus = {
+    asJava.asInstanceOf[JEventBus].addOutboundInterceptor[Object]({x: JDeliveryContext[Object] => interceptor.handle(DeliveryContext[T](x))})
+    this
+  }
+
+  /**
+   * Remove an interceptor that was added by [[io.vertx.scala.core.eventbus.EventBus#addOutboundInterceptor]]   * @param interceptor the interceptor
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def removeOutboundInterceptor[T: TypeTag](interceptor: Handler[DeliveryContext[T]]): EventBus = {
+    asJava.asInstanceOf[JEventBus].removeOutboundInterceptor[Object]({x: JDeliveryContext[Object] => interceptor.handle(DeliveryContext[T](x))})
+    this
+  }
+
+  /**
+   * Add an interceptor that will be called whenever a message is received by Vert.x   * @param interceptor the interceptor
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def addInboundInterceptor[T: TypeTag](interceptor: Handler[DeliveryContext[T]]): EventBus = {
+    asJava.asInstanceOf[JEventBus].addInboundInterceptor[Object]({x: JDeliveryContext[Object] => interceptor.handle(DeliveryContext[T](x))})
+    this
+  }
+
+  /**
+   * Remove an interceptor that was added by [[io.vertx.scala.core.eventbus.EventBus#addInboundInterceptor]]   * @param interceptor the interceptor
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def removeInboundInterceptor[T: TypeTag](interceptor: Handler[DeliveryContext[T]]): EventBus = {
+    asJava.asInstanceOf[JEventBus].removeInboundInterceptor[Object]({x: JDeliveryContext[Object] => interceptor.handle(DeliveryContext[T](x))})
     this
   }
 

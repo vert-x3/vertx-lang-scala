@@ -16,11 +16,13 @@
 
 package io.vertx.scala.ext.web.templ.thymeleaf
 
+import io.vertx.scala.ext.web.common.template.TemplateEngine
 import io.vertx.ext.web.templ.thymeleaf.{ThymeleafTemplateEngine => JThymeleafTemplateEngine}
 import scala.reflect.runtime.universe._
 import org.thymeleaf.templatemode.TemplateMode
-import io.vertx.scala.ext.web.templ.TemplateEngine
-import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
+import io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 
@@ -54,8 +56,8 @@ object ThymeleafTemplateEngine {
   /**
    * Create a template engine using defaults   * @return the engine
    */
-  def create(): ThymeleafTemplateEngine = {
-    ThymeleafTemplateEngine(JThymeleafTemplateEngine.create())
+  def create(vertx: Vertx): ThymeleafTemplateEngine = {
+    ThymeleafTemplateEngine(JThymeleafTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

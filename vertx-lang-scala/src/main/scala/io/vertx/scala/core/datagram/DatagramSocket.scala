@@ -215,6 +215,13 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
 
 
   override 
+  def fetch(amount: Long): DatagramSocket = {
+    asJava.asInstanceOf[JDatagramSocket].fetch(amount.asInstanceOf[java.lang.Long])
+    this
+  }
+
+
+  override 
   def endHandler(endHandler: Handler[Unit]): DatagramSocket = {
     asJava.asInstanceOf[JDatagramSocket].endHandler({x: Void => endHandler.handle(x)})
     this

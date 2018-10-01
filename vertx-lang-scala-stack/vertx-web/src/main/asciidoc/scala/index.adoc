@@ -1962,7 +1962,7 @@ Vert.x-Web includes dynamic page generation capabilities by including out of the
 engines. You can also easily add your own.
 
 Template engines are described by `link:../../scaladocs/io/vertx/scala/ext/web/templ/TemplateEngine.html[TemplateEngine]`. In order to render a template
-`link:../../scaladocs/io/vertx/scala/ext/web/templ/TemplateEngine.html#render(io.vertx.ext.web.RoutingContext,%20java.lang.String,%20io.vertx.core.Handler)[render]`is used.
+`link:../../scaladocs/io/vertx/scala/ext/web/common/template/TemplateEngine.html#render(io.vertx.core.json.JsonObject,%20java.lang.String,%20io.vertx.core.Handler)[render]`is used.
 
 The simplest way to use templates is not to call the template engine directly but to use the
 `link:../../scaladocs/io/vertx/scala/ext/web/handler/TemplateHandler.html[TemplateHandler]`.

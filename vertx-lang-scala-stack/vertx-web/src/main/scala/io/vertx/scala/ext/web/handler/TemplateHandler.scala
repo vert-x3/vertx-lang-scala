@@ -16,11 +16,11 @@
 
 package io.vertx.scala.ext.web.handler
 
+import io.vertx.scala.ext.web.common.template.TemplateEngine
 import io.vertx.ext.web.handler.{TemplateHandler => JTemplateHandler}
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import scala.reflect.runtime.universe._
-import io.vertx.scala.ext.web.templ.TemplateEngine
-import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
+import io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.core.Handler
 import io.vertx.lang.scala.HandlerOps._

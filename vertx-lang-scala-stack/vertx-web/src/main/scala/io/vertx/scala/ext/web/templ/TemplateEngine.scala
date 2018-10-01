@@ -20,6 +20,7 @@ import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.core.buffer.Buffer
 import scala.reflect.runtime.universe._
+import io.vertx.scala.ext.web.common.template.{TemplateEngine => STemplateEngine}
 import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.core.AsyncResult
@@ -33,8 +34,8 @@ import io.vertx.lang.scala.Converter._
   * Concrete implementations exist for several well-known template engines.
   */
 
-class TemplateEngine(private val _asJava: Object) {
-  def asJava = _asJava
+class TemplateEngine(private val _asJava: Object) extends STemplateEngine (_asJava) {
+
 
 
 
@@ -49,15 +50,6 @@ class TemplateEngine(private val _asJava: Object) {
   }
 
   /**
-   * Returns true if the template engine caches template files. If false, then template files are freshly loaded each
-   * time they are used.   * @return True if template files are cached; otherwise, false.
-   */
-  def isCachingEnabled(): Boolean = {
-    asJava.asInstanceOf[JTemplateEngine].isCachingEnabled().asInstanceOf[Boolean]
-  }
-
-
-  /**
    * Render the template
    * 
    * <b>NOTE</b> if you call method directly (i.e. not using [[io.vertx.scala.ext.web.handler.TemplateHandler]]) make sure
@@ -66,9 +58,18 @@ class TemplateEngine(private val _asJava: Object) {
    * @param templateFileName the relative template file name to use
    * @param handler the handler that will be called with a result containing the buffer or a failure.
    */
-  def render (context: RoutingContext, templateDirectory: String, templateFileName: String, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): Unit = {
+  def render(context: RoutingContext, templateDirectory: String, templateFileName: String, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): Unit = {
     asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext], templateDirectory.asInstanceOf[java.lang.String], templateFileName.asInstanceOf[java.lang.String], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))})
   }
+
+  /**
+   * Returns true if the template engine caches template files. If false, then template files are freshly loaded each
+   * time they are used.   * @return True if template files are cached; otherwise, false.
+   */
+  override def isCachingEnabled(): Boolean = {
+    asJava.asInstanceOf[JTemplateEngine].isCachingEnabled().asInstanceOf[Boolean]
+  }
+
 
 
  /**

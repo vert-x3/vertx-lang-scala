@@ -21,14 +21,12 @@ import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
 import scala.reflect.runtime.universe._
 import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.ext.web.{Router => JRouter}
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.handler.sockjs.{SockJSHandlerOptions => JSockJSHandlerOptions}
 import io.vertx.ext.web.handler.sockjs.{BridgeOptions => JBridgeOptions}
 import io.vertx.ext.web.handler.sockjs.{BridgeEvent => JBridgeEvent}
-import io.vertx.scala.ext.web.Router
 import io.vertx.core.Handler
 import io.vertx.lang.scala.HandlerOps._
 
@@ -108,14 +106,6 @@ object SockJSHandler {
    */
   def create(vertx: Vertx,options: SockJSHandlerOptions): SockJSHandler = {
     SockJSHandler(JSockJSHandler.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
-  }
-
-  /**
-   * Install SockJS test applications on a router - used when running the SockJS test suite   * @param router the router to install on
-   * @param vertx the Vert.x instance
-   */
-  def installTestApplications(router: Router,vertx: Vertx): Unit = {
-    JSockJSHandler.installTestApplications(router.asJava.asInstanceOf[JRouter], vertx.asJava.asInstanceOf[JVertx])
   }
 
 }

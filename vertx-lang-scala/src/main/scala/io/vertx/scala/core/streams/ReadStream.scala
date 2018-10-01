@@ -47,6 +47,11 @@ def pause ( ): ReadStream[T]    /**
    * Resume reading. If the `ReadStream` has been paused, reading will recommence on it.   * @return a reference to this, so the API can be used fluently
    */
 def resume ( ): ReadStream[T]    /**
+   * Fetch the specified `amount` of elements. If the `ReadStream` has been paused, reading will
+   * recommence with the specified `amount` of items, otherwise the specified `amount` will
+   * be added to the current stream demand.   * @return a reference to this, so the API can be used fluently
+   */
+def fetch ( amount: Long): ReadStream[T]    /**
    * Set an end handler. Once the stream has ended, and there is no more data to be read, this handler will be called.   * @return a reference to this, so the API can be used fluently
    */
 def endHandler ( endHandler: Handler[Unit]): ReadStream[T]
@@ -95,6 +100,17 @@ object ReadStream {
   
   def resume(): ReadStream[T] = {
     asJava.asInstanceOf[JReadStream[Object]].resume()
+    this
+  }
+
+  /**
+   * Fetch the specified `amount` of elements. If the `ReadStream` has been paused, reading will
+   * recommence with the specified `amount` of items, otherwise the specified `amount` will
+   * be added to the current stream demand.   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def fetch(amount: Long): ReadStream[T] = {
+    asJava.asInstanceOf[JReadStream[Object]].fetch(amount.asInstanceOf[java.lang.Long])
     this
   }
 

@@ -45,25 +45,3 @@
     this
   }
 
-  /**
-   * Add an interceptor that will be called whenever a message is sent from Vert.x
-   *
-   * @param interceptor  the interceptor
-   * @return a reference to this, so the API can be used fluently
-   */
-  def addInterceptor(interceptor: Handler[JSendContext[_]]): EventBus = {
-    asJava.asInstanceOf[JEventBus].addInterceptor(interceptor)
-    this
-  }
-
-  /**
-   * Remove an interceptor
-   *
-   * @param interceptor  the interceptor
-   * @return a reference to this, so the API can be used fluently
-   */
-  def removeInterceptor(interceptor: Handler[JSendContext[_]]): EventBus = {
-    asJava.asInstanceOf[JEventBus].removeInterceptor(interceptor)
-    this
-  }
-

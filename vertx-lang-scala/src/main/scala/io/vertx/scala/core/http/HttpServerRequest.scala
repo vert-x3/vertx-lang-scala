@@ -212,6 +212,13 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
 
 
   override 
+  def fetch(amount: Long): HttpServerRequest = {
+    asJava.asInstanceOf[JHttpServerRequest].fetch(amount.asInstanceOf[java.lang.Long])
+    this
+  }
+
+
+  override 
   def endHandler(endHandler: Handler[Unit]): HttpServerRequest = {
     asJava.asInstanceOf[JHttpServerRequest].endHandler({x: Void => endHandler.handle(x)})
     this

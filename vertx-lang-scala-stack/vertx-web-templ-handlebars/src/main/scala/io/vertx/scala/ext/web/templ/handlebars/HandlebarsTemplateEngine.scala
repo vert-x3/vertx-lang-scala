@@ -16,10 +16,12 @@
 
 package io.vertx.scala.ext.web.templ.handlebars
 
+import io.vertx.scala.ext.web.common.template.TemplateEngine
 import scala.reflect.runtime.universe._
-import io.vertx.scala.ext.web.templ.TemplateEngine
-import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
+import io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}
 import io.vertx.ext.web.templ.handlebars.{HandlebarsTemplateEngine => JHandlebarsTemplateEngine}
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 
@@ -33,7 +35,7 @@ class HandlebarsTemplateEngine(private val _asJava: Object) extends TemplateEngi
 
 
   /**
-   * Set the extension for the engine   * @param extension the extension
+   * @param extension the extension
    * @return a reference to this for fluency
    */
   
@@ -63,8 +65,8 @@ object HandlebarsTemplateEngine {
   /**
    * Create a template engine using defaults   * @return the engine
    */
-  def create(): HandlebarsTemplateEngine = {
-    HandlebarsTemplateEngine(JHandlebarsTemplateEngine.create())
+  def create(vertx: Vertx): HandlebarsTemplateEngine = {
+    HandlebarsTemplateEngine(JHandlebarsTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }
