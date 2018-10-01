@@ -45,6 +45,13 @@ class SQLRowStream(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
   override 
+  def fetch(arg0: Long): ReadStream[io.vertx.core.json.JsonArray] = {
+    asJava.asInstanceOf[JSQLRowStream].fetch(arg0.asInstanceOf[java.lang.Long])
+    this
+  }
+
+
+  override 
   def exceptionHandler(handler: Handler[Throwable]): SQLRowStream = {
     asJava.asInstanceOf[JSQLRowStream].exceptionHandler({x: Throwable => handler.handle(x)})
     this

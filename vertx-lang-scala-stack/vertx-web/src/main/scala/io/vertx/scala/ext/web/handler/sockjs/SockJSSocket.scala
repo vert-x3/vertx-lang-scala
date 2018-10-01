@@ -52,6 +52,13 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
   override 
+  def fetch(arg0: Long): ReadStream[io.vertx.core.buffer.Buffer] = {
+    asJava.asInstanceOf[JSockJSSocket].fetch(arg0.asInstanceOf[java.lang.Long])
+    this
+  }
+
+
+  override 
   def exceptionHandler(handler: Handler[Throwable]): SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].exceptionHandler({x: Throwable => handler.handle(x)})
     this
@@ -120,6 +127,14 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
   override def end(t: io.vertx.core.buffer.Buffer): Unit = {
     asJava.asInstanceOf[JSockJSSocket].end(t)
+  }
+
+  /**
+   * Close it giving a status code and reason. Only Applicable to RawWebSocket will downgrade to plain close for
+   * other transports.
+   */
+  def close(statusCode: Int, reason: String): Unit = {
+    asJava.asInstanceOf[JSockJSSocket].close(statusCode.asInstanceOf[java.lang.Integer], reason.asInstanceOf[java.lang.String])
   }
 
 

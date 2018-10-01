@@ -8,7 +8,7 @@
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -54,7 +54,7 @@ Set the name used for registering the metrics in the Dropwizard shared registry.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description

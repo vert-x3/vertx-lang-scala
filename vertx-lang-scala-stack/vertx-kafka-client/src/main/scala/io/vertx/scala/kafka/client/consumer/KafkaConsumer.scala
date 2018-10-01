@@ -57,6 +57,13 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
 
 
   override 
+  def fetch(arg0: Long): ReadStream[KafkaConsumerRecord[K, V]] = {
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].fetch(arg0.asInstanceOf[java.lang.Long])
+    this
+  }
+
+
+  override 
   def exceptionHandler(handler: Handler[Throwable]): KafkaConsumer[K, V] = {
     asJava.asInstanceOf[JKafkaConsumer[Object, Object]].exceptionHandler({x: Throwable => handler.handle(x)})
     this

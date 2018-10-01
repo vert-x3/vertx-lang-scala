@@ -9,7 +9,7 @@ service record.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -40,7 +40,7 @@ contains enough metadata to let consumer find the service they want.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -74,7 +74,7 @@ Options to configure the service discovery.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description

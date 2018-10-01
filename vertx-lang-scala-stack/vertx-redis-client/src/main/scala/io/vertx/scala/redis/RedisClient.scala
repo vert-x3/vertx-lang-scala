@@ -796,8 +796,8 @@ class RedisClient(private val _asJava: Object) {
    * @param handler Handler for the result of this call.
    */
   
-  def getset(key: String, value: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].getset(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def getset(key: String, value: String, handler: Handler[AsyncResult[scala.Option[String]]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].getset(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
@@ -840,8 +840,8 @@ class RedisClient(private val _asJava: Object) {
    * @param handler Handler for the result of this call.
    */
   
-  def hget(key: String, field: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hget(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def hget(key: String, field: String, handler: Handler[AsyncResult[scala.Option[String]]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].hget(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
@@ -1063,8 +1063,8 @@ class RedisClient(private val _asJava: Object) {
    * @param handler Handler for the result of this call.
    */
   
-  def lpop(key: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].lpop(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def lpop(key: String, handler: Handler[AsyncResult[scala.Option[String]]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].lpop(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
@@ -1852,8 +1852,8 @@ class RedisClient(private val _asJava: Object) {
    * @param handler Handler for the result of this call.
    */
   
-  def spop(key: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].spop(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def spop(key: String, handler: Handler[AsyncResult[scala.Option[String]]]): RedisClient = {
+    asJava.asInstanceOf[JRedisClient].spop(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
@@ -3363,9 +3363,9 @@ class RedisClient(private val _asJava: Object) {
  /**
   * Like [[getset]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def getsetFuture (key: String, value: String): scala.concurrent.Future[String] = {
+  def getsetFuture (key: String, value: String): scala.concurrent.Future[scala.Option[String]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JRedisClient].getset(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -3403,9 +3403,9 @@ class RedisClient(private val _asJava: Object) {
  /**
   * Like [[hget]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def hgetFuture (key: String, field: String): scala.concurrent.Future[String] = {
+  def hgetFuture (key: String, field: String): scala.concurrent.Future[scala.Option[String]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JRedisClient].hget(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -3613,9 +3613,9 @@ class RedisClient(private val _asJava: Object) {
  /**
   * Like [[lpop]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def lpopFuture (key: String): scala.concurrent.Future[String] = {
+  def lpopFuture (key: String): scala.concurrent.Future[scala.Option[String]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JRedisClient].lpop(key.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -4363,9 +4363,9 @@ class RedisClient(private val _asJava: Object) {
  /**
   * Like [[spop]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def spopFuture (key: String): scala.concurrent.Future[String] = {
+  def spopFuture (key: String): scala.concurrent.Future[scala.Option[String]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JRedisClient].spop(key.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }

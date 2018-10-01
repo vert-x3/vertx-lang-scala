@@ -8,7 +8,7 @@ Vert.x Dropwizard metrics configuration.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -54,7 +54,7 @@ A match for a value.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description

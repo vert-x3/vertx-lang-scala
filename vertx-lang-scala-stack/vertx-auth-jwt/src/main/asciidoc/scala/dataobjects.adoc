@@ -8,7 +8,7 @@ Options describing how an JWT Auth should behave.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -28,7 +28,7 @@ Options describing how an JWT KeyStore should behave.
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
@@ -50,7 +50,7 @@ Generated JWTs will include an iat claim by default unless noTimestamp is specif
 ++++
 '''
 
-[cols=">25%,75%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description

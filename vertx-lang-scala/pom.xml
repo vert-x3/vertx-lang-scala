@@ -37,6 +37,7 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-lang-scala-codegen</artifactId>
       <version>${project.version}</version>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>

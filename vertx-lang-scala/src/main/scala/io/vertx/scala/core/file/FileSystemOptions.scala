@@ -24,12 +24,15 @@ import scala.collection.JavaConverters._
 /**
  * Vert.x file system base configuration, this class can be extended by provider implementations to configure
  * those specific implementations.
- *
 
  */
 
 class FileSystemOptions(private val _asJava: JFileSystemOptions) {
   def asJava = _asJava
+  /**
+   * When vert.x cannot find the file on the filesystem it tries to resolve the
+   * file from the class path when this is set to `true`.
+   */
   def setClassPathResolvingEnabled(value: Boolean) = {
     asJava.setClassPathResolvingEnabled(value)
     this
@@ -39,13 +42,17 @@ class FileSystemOptions(private val _asJava: JFileSystemOptions) {
     asJava.isClassPathResolvingEnabled().asInstanceOf[Boolean]
   }
 
-  def setFileResolverCachingEnabled(value: Boolean) = {
-    asJava.setFileResolverCachingEnabled(value)
+  /**
+   * Set to `true` to cache files on the real file system
+   * when the filesystem performs class path resolving.
+   */
+  def setFileCachingEnabled(value: Boolean) = {
+    asJava.setFileCachingEnabled(value)
     this
   }
 
-  def isFileResolverCachingEnabled: Boolean = {
-    asJava.isFileResolverCachingEnabled().asInstanceOf[Boolean]
+  def isFileCachingEnabled: Boolean = {
+    asJava.isFileCachingEnabled().asInstanceOf[Boolean]
   }
 
 }

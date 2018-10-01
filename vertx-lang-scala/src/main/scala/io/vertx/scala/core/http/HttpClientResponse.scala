@@ -117,6 +117,13 @@ class HttpClientResponse(private val _asJava: Object) extends ReadStream[io.vert
 
 
   override 
+  def fetch(amount: Long): HttpClientResponse = {
+    asJava.asInstanceOf[JHttpClientResponse].fetch(amount.asInstanceOf[java.lang.Long])
+    this
+  }
+
+
+  override 
   def resume(): HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].resume()
     this

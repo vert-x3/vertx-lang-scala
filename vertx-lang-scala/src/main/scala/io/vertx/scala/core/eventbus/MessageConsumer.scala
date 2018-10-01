@@ -74,6 +74,13 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object) extends ReadStrea
 
 
   override 
+  def fetch(amount: Long): MessageConsumer[T] = {
+    asJava.asInstanceOf[JMessageConsumer[Object]].fetch(amount.asInstanceOf[java.lang.Long])
+    this
+  }
+
+
+  override 
   def endHandler(endHandler: Handler[Unit]): MessageConsumer[T] = {
     asJava.asInstanceOf[JMessageConsumer[Object]].endHandler({x: Void => endHandler.handle(x)})
     this

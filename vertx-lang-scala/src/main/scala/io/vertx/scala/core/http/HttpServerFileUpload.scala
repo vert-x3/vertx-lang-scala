@@ -69,6 +69,13 @@ class HttpServerFileUpload(private val _asJava: Object) extends ReadStream[io.ve
     this
   }
 
+
+  override 
+  def fetch(amount: Long): HttpServerFileUpload = {
+    asJava.asInstanceOf[JHttpServerFileUpload].fetch(amount.asInstanceOf[java.lang.Long])
+    this
+  }
+
   /**
    * Stream the content of this upload to the given file on storage.   * @param filename the name of the file
    */

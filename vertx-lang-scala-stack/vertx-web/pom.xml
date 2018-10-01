@@ -21,6 +21,11 @@
     <!-- RUNTIME DEPS -->
     <dependency>
       <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-common-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-htdigest-scala_2.12</artifactId>
       <version>${stack.version}</version>
       <optional>true</optional>

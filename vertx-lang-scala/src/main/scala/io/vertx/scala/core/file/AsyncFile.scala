@@ -99,6 +99,13 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
     this
   }
 
+
+  override 
+  def fetch(amount: Long): AsyncFile = {
+    asJava.asInstanceOf[JAsyncFile].fetch(amount.asInstanceOf[java.lang.Long])
+    this
+  }
+
   /**
    * Write a [[io.vertx.scala.core.buffer.Buffer]] to the file at position `position` in the file, asynchronously.
    * 

@@ -160,6 +160,13 @@ class CircuitBreaker(private val _asJava: Object) {
   }
 
 
+  
+  def retryPolicy(retryPolicy: Int => Long): CircuitBreaker = {
+    asJava.asInstanceOf[JCircuitBreaker].retryPolicy({x: java.lang.Integer => retryPolicy(x.asInstanceOf[Int]).asInstanceOf[java.lang.Long]})
+    this
+  }
+
+
   /**
    * Same as [[io.vertx.scala.circuitbreaker.CircuitBreaker#executeWithFallback]] but using a callback.   * @param command the operation
    * @param fallback the fallback

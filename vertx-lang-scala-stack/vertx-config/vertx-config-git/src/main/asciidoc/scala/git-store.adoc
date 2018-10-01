@@ -57,6 +57,7 @@ The configuration requires:
 * the `path` where the repository is cloned (local directory)
 * the `user` for private repository (no authentication by default)
 * the `password` of the user
+* the `idRsaKeyPath` for private repository and requires ssh uri
 * at least `fileset` indicating the set of files to read (same behavior as the
 directory configuration store).
 

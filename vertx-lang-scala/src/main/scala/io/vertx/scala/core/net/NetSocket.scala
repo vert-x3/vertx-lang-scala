@@ -101,6 +101,13 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
 
 
   override 
+  def fetch(amount: Long): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].fetch(amount.asInstanceOf[java.lang.Long])
+    this
+  }
+
+
+  override 
   def endHandler(endHandler: Handler[Unit]): NetSocket = {
     asJava.asInstanceOf[JNetSocket].endHandler({x: Void => endHandler.handle(x)})
     this

@@ -68,6 +68,13 @@ class TimeoutStream(private val _asJava: Object) extends ReadStream[Long] {
 
 
   override 
+  def fetch(amount: Long): TimeoutStream = {
+    asJava.asInstanceOf[JTimeoutStream].fetch(amount.asInstanceOf[java.lang.Long])
+    this
+  }
+
+
+  override 
   def endHandler(endHandler: Handler[Unit]): TimeoutStream = {
     asJava.asInstanceOf[JTimeoutStream].endHandler({x: Void => endHandler.handle(x)})
     this

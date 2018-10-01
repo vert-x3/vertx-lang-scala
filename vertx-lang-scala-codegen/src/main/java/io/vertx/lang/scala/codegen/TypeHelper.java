@@ -13,6 +13,8 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
+import static io.vertx.codegen.Helper.getNonGenericType;
+
 public class TypeHelper {
 
 
@@ -97,9 +99,9 @@ public class TypeHelper {
     } else if (kind == ClassKind.API) {
       String args = convertScalaArgListToString(type, false);
       if (nullable) {
-        return "scala.Option(" + name + ").map(" + Helper.getNonGenericType(type.getSimpleName()) + args + "(_))";
+        return "scala.Option(" + name + ").map(" + getNonGenericType(type.getSimpleName()) + args + "(_))";
       }
-      return Helper.getNonGenericType(type.getSimpleName()) + args + "(" + name + ")";
+      return getNonGenericType(type.getSimpleName()) + args + "(" + name + ")";
     } else if (kind == ClassKind.HANDLER) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       return "{x: " + toScalaType(parameterizedType.getArg(0), false) + " => " + name + ".handle(" + toJavaWithConversion("x", parameterizedType.getArg(0), typeParams, methodTypeParams) + ")}";
@@ -223,7 +225,7 @@ public class TypeHelper {
         ret += "[_]";
       return wrapInOptionIfNullable(nullable, ret);
     } else if (kind == ClassKind.API) {
-      String ret = Helper.getNonGenericType(type.getSimpleName());
+      String ret = getNonGenericType(type.getSimpleName());
       if (type instanceof io.vertx.codegen.type.ParameterizedTypeInfo) {
         ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
         if (parameterizedType.getArgs().isEmpty()) {
@@ -409,7 +411,7 @@ public class TypeHelper {
     } else if (type.getKind() == ClassKind.DATA_OBJECT) {
       return "J" + type.getSimpleName();
     } else if (type.getKind() == ClassKind.API) {
-      String ret = "J" + Helper.getNonGenericType(type.getSimpleName());
+      String ret = "J" + getNonGenericType(type.getSimpleName());
       if (type.isParameterized()) {
         ret += convertJavaArgListToString(type, convertTypeParamsToObject);
       } else if (!type.getRaw().getParams().isEmpty()) {
@@ -438,7 +440,7 @@ public class TypeHelper {
       return ret;
     } else if (type.getKind() == ClassKind.ASYNC_RESULT) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-      return Helper.getNonGenericType(type.getSimpleName()) + "["+ toJavaType(parameterizedType.getArg(0), convertTypeParamsToObject) +"]";
+      return getNonGenericType(type.getSimpleName()) + "["+ toJavaType(parameterizedType.getArg(0), convertTypeParamsToObject) +"]";
     } else {
       return "Unknown type for toJavaType "+type.getName()+" "+type.getKind();
     }
@@ -594,7 +596,7 @@ public class TypeHelper {
       ret.add(type.getRaw().toString());
     } else if (type.getKind() == ClassKind.API || type.getKind() == ClassKind.DATA_OBJECT) {
       if (!Helper.getPackageName(type.getName()).equals(packageName)) {
-        ret.add(Helper.getNonGenericType(type.getRaw().translateName("scala")));
+        ret.add(getNonGenericType(type.getRaw().translateName("scala")));
       }
       ret.add(convertTypeToAliasedType(type));
     } else if (type.getKind().collection) {
@@ -638,7 +640,7 @@ public class TypeHelper {
    * Every usage of a Vert.x-Java-type has to be aliased. This takes care of generating the required snippet.
    */
   public static String convertTypeToAliasedType(TypeInfo type) {
-    return Helper.getPackageName(Helper.getNonGenericType(type.getName())) + ".{"+Helper.getNonGenericType(type.getSimpleName())+" => J"+Helper.getNonGenericType(type.getSimpleName())+"}";
+    return Helper.getPackageName(getNonGenericType(type.getName())) + ".{"+getNonGenericType(type.getSimpleName())+" => J"+getNonGenericType(type.getSimpleName())+"}";
   }
 
 
@@ -880,7 +882,7 @@ public class TypeHelper {
       index = doc.getValue().indexOf(linkText, start);
     }
 
-    transformedDoc += doc.getValue().substring(start, doc.getValue().length());
+    transformedDoc += doc.getValue().substring(start);
     return transformedDoc;
   }
 

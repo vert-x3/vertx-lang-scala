@@ -16,10 +16,12 @@
 
 package io.vertx.scala.ext.web.templ.mvel
 
+import io.vertx.scala.ext.web.common.template.TemplateEngine
 import scala.reflect.runtime.universe._
-import io.vertx.scala.ext.web.templ.TemplateEngine
-import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
+import io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}
 import io.vertx.ext.web.templ.mvel.{MVELTemplateEngine => JMVELTemplateEngine}
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 
@@ -33,7 +35,7 @@ class MVELTemplateEngine(private val _asJava: Object) extends TemplateEngine (_a
 
 
   /**
-   * Set the extension for the engine   * @param extension the extension
+   * @param extension the extension
    * @return a reference to this for fluency
    */
   
@@ -63,8 +65,8 @@ object MVELTemplateEngine {
   /**
    * Create a template engine using defaults   * @return the engine
    */
-  def create(): MVELTemplateEngine = {
-    MVELTemplateEngine(JMVELTemplateEngine.create())
+  def create(vertx: Vertx): MVELTemplateEngine = {
+    MVELTemplateEngine(JMVELTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

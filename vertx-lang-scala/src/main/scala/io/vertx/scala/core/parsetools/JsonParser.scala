@@ -111,6 +111,13 @@ class JsonParser(private val _asJava: Object) extends ReadStream[JsonEvent] with
 
 
   override 
+  def fetch(amount: Long): JsonParser = {
+    asJava.asInstanceOf[JJsonParser].fetch(amount.asInstanceOf[java.lang.Long])
+    this
+  }
+
+
+  override 
   def endHandler(endHandler: Handler[Unit]): JsonParser = {
     asJava.asInstanceOf[JJsonParser].endHandler({x: Void => endHandler.handle(x)})
     this
