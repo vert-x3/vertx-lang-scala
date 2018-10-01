@@ -16,16 +16,17 @@
 
 package io.vertx.scala.ext.web.multipart
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.multipart.{FormDataPart => JFormDataPart}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A form data part of a [[io.vertx.scala.ext.web.multipart.MultipartForm]].
-  */
-class FormDataPart(private val _asJava: Object) {
 
+  */
+
+class FormDataPart(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[String] = None
   private var cached_1: Option[Boolean] = None
@@ -38,8 +39,8 @@ class FormDataPart(private val _asJava: Object) {
 
 
   /**
-    * @return the name
-    */
+   * @return the name
+   */
   def name(): String = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JFormDataPart].name()
@@ -49,8 +50,8 @@ class FormDataPart(private val _asJava: Object) {
   }
 
   /**
-    * @return `true` when this part is an attribute
-    */
+   * @return `true` when this part is an attribute
+   */
   def isAttribute(): Boolean = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JFormDataPart].isAttribute()
@@ -60,8 +61,8 @@ class FormDataPart(private val _asJava: Object) {
   }
 
   /**
-    * @return `true` when this part is a file upload
-    */
+   * @return `true` when this part is a file upload
+   */
   def isFileUpload(): Boolean = {
     if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JFormDataPart].isFileUpload()
@@ -71,8 +72,8 @@ class FormDataPart(private val _asJava: Object) {
   }
 
   /**
-    * @return the value when the part for a form attribute otherwise `null`
-    */
+   * @return the value when the part for a form attribute otherwise `null`
+   */
   def value(): String = {
     if (cached_3 == None) {
       val tmp = asJava.asInstanceOf[JFormDataPart].value()
@@ -82,8 +83,8 @@ class FormDataPart(private val _asJava: Object) {
   }
 
   /**
-    * @return the filename when this part is a file upload otherwise `null`
-    */
+   * @return the filename when this part is a file upload otherwise `null`
+   */
   def filename(): String = {
     if (cached_4 == None) {
       val tmp = asJava.asInstanceOf[JFormDataPart].filename()
@@ -93,8 +94,8 @@ class FormDataPart(private val _asJava: Object) {
   }
 
   /**
-    * @return the pathname when this part is a file upload otherwise `null`
-    */
+   * @return the pathname when this part is a file upload otherwise `null`
+   */
   def pathname(): String = {
     if (cached_5 == None) {
       val tmp = asJava.asInstanceOf[JFormDataPart].pathname()
@@ -104,8 +105,8 @@ class FormDataPart(private val _asJava: Object) {
   }
 
   /**
-    * @return the media type when this part is a file upload otherwise `null`
-    */
+   * @return the media type when this part is a file upload otherwise `null`
+   */
   def mediaType(): String = {
     if (cached_6 == None) {
       val tmp = asJava.asInstanceOf[JFormDataPart].mediaType()
@@ -115,8 +116,8 @@ class FormDataPart(private val _asJava: Object) {
   }
 
   /**
-    * @return whether the file upload is text or binary when this part is a file upload otherwise `null`
-    */
+   * @return whether the file upload is text or binary when this part is a file upload otherwise `null`
+   */
   def isText(): Boolean = {
     if (cached_7 == None) {
       val tmp = asJava.asInstanceOf[JFormDataPart].isText()
@@ -125,8 +126,13 @@ class FormDataPart(private val _asJava: Object) {
     cached_7.get
   }
 
+
+
+
+
 }
 
 object FormDataPart {
-  def apply(asJava: JFormDataPart) = new FormDataPart(asJava)  
+  def apply(asJava: JFormDataPart) = new FormDataPart(asJava)
+  
 }

@@ -16,11 +16,11 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.core.buffer.Buffer
+import scala.reflect.runtime.universe._
 import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A WebSocket frame that represents either text or binary data.
@@ -32,16 +32,16 @@ import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
   * If there are more than one frames in the message, then the first frame should be a text or binary frame with
   * final = false, followed by one or more continuation frames. The last continuation frame should have final = true.
   */
-class WebSocketFrame(private val _asJava: Object) {
 
+class WebSocketFrame(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[String] = None
   private var cached_1: Option[io.vertx.core.buffer.Buffer] = None
 
 
   /**
-    * @return the content of this frame as a UTF-8 string and returns the converted string. Only use this for text frames.
-    */
+   * @return the content of this frame as a UTF-8 string and returns the converted string. Only use this for text frames.
+   */
   def textData(): String = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JWebSocketFrame].textData()
@@ -51,8 +51,8 @@ class WebSocketFrame(private val _asJava: Object) {
   }
 
   /**
-    * @return the data of the frame
-    */
+   * @return the data of the frame
+   */
   def binaryData(): io.vertx.core.buffer.Buffer = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JWebSocketFrame].binaryData()
@@ -61,104 +61,104 @@ class WebSocketFrame(private val _asJava: Object) {
     cached_1.get
   }
 
+
+
+
   /**
-    * @return true if it's a text frame
-    */
-  def isText(): Boolean = {
+   * @return true if it's a text frame
+   */
+  def isText (): Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isText().asInstanceOf[Boolean]
   }
 
   /**
-    * @return true if it's a binary frame
-    */
-  def isBinary(): Boolean = {
+   * @return true if it's a binary frame
+   */
+  def isBinary (): Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isBinary().asInstanceOf[Boolean]
   }
 
   /**
-    * @return true if it's a continuation frame
-    */
-  def isContinuation(): Boolean = {
+   * @return true if it's a continuation frame
+   */
+  def isContinuation (): Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isContinuation().asInstanceOf[Boolean]
   }
 
   /**
-    * @return true if it's close frame
-    */
-  def isClose(): Boolean = {
+   * @return true if it's close frame
+   */
+  def isClose (): Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isClose().asInstanceOf[Boolean]
   }
 
   /**
-    * @return true if this is the final frame.
-    */
-  def isFinal(): Boolean = {
+   * @return true if this is the final frame.
+   */
+  def isFinal (): Boolean = {
     asJava.asInstanceOf[JWebSocketFrame].isFinal().asInstanceOf[Boolean]
   }
 
   /**
-    * @return status code of close frame. Only use this for close frames
-    */
-  def closeStatusCode(): Short = {
+   * @return status code of close frame. Only use this for close frames
+   */
+  def closeStatusCode (): Short = {
     asJava.asInstanceOf[JWebSocketFrame].closeStatusCode().asInstanceOf[Short]
   }
 
   /**
-    * @return string explaining close reason. Only use this for close frames
-    */
-  def closeReason(): String = {
+   * @return string explaining close reason. Only use this for close frames
+   */
+  def closeReason (): String = {
     asJava.asInstanceOf[JWebSocketFrame].closeReason().asInstanceOf[String]
   }
+
 
 }
 
 object WebSocketFrame {
-  def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)  
+  def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)
+  
   /**
-    * Create a binary WebSocket frame.
-    * @param data the data for the frame
-    * @param isFinal true if it's the final frame in the WebSocket message
-    * @return the frame
-    */
-  def binaryFrame(data: io.vertx.core.buffer.Buffer, isFinal: Boolean): WebSocketFrame = {
+   * Create a binary WebSocket frame.   * @param data the data for the frame
+   * @param isFinal true if it's the final frame in the WebSocket message
+   * @return the frame
+   */
+  def binaryFrame(data: io.vertx.core.buffer.Buffer,isFinal: Boolean): WebSocketFrame = {
     WebSocketFrame(JWebSocketFrame.binaryFrame(data, isFinal.asInstanceOf[java.lang.Boolean]))
   }
 
   /**
-    * Create a text WebSocket frame.
-    * @param str the string for the frame
-    * @param isFinal true if it's the final frame in the WebSocket message
-    * @return the frame
-    */
-  def textFrame(str: String, isFinal: Boolean): WebSocketFrame = {
+   * Create a text WebSocket frame.   * @param str the string for the frame
+   * @param isFinal true if it's the final frame in the WebSocket message
+   * @return the frame
+   */
+  def textFrame(str: String,isFinal: Boolean): WebSocketFrame = {
     WebSocketFrame(JWebSocketFrame.textFrame(str.asInstanceOf[java.lang.String], isFinal.asInstanceOf[java.lang.Boolean]))
   }
 
   /**
-    * Create a ping WebSocket frame.  Will be a final frame. There is no option for non final ping frames.
-    * @param data the bytes for the frame, may be at most 125 bytes
-    * @return the frame
-    */
+   * Create a ping WebSocket frame.  Will be a final frame. There is no option for non final ping frames.   * @param data the bytes for the frame, may be at most 125 bytes
+   * @return the frame
+   */
   def pingFrame(data: io.vertx.core.buffer.Buffer): WebSocketFrame = {
     WebSocketFrame(JWebSocketFrame.pingFrame(data))
   }
 
   /**
-    * Create a pong WebSocket frame.  Will be a final frame. There is no option for non final pong frames.
-    * @param data the bytes for the frame, may be at most 125 bytes
-    * @return the frame
-    */
+   * Create a pong WebSocket frame.  Will be a final frame. There is no option for non final pong frames.   * @param data the bytes for the frame, may be at most 125 bytes
+   * @return the frame
+   */
   def pongFrame(data: io.vertx.core.buffer.Buffer): WebSocketFrame = {
     WebSocketFrame(JWebSocketFrame.pongFrame(data))
   }
 
   /**
-    * Create a continuation frame
-    * @param data the data for the frame
-    * @param isFinal true if it's the final frame in the WebSocket message
-    * @return the frame
-    */
-  def continuationFrame(data: io.vertx.core.buffer.Buffer, isFinal: Boolean): WebSocketFrame = {
+   * Create a continuation frame   * @param data the data for the frame
+   * @param isFinal true if it's the final frame in the WebSocket message
+   * @return the frame
+   */
+  def continuationFrame(data: io.vertx.core.buffer.Buffer,isFinal: Boolean): WebSocketFrame = {
     WebSocketFrame(JWebSocketFrame.continuationFrame(data, isFinal.asInstanceOf[java.lang.Boolean]))
   }
 

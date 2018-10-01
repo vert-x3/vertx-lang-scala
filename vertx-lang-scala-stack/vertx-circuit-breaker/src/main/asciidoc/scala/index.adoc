@@ -158,14 +158,50 @@ breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
 
 ----
 
+== Retries
+
 You can also specify how often the circuit breaker should try your code before failing with
 `link:../dataobjects.html#CircuitBreakerOptions#setMaxRetries(int)[maxRetries]`.
 If you set this to something higher than 0 your code gets executed several times before finally failing
 in the last execution. If the code succeeded in one of the retries your handler gets notified and any
 retries left are skipped. Retries are only supported when the circuit is closed.
 
-Notice that is you set `maxRetries` to 2 for instance, your operation may be called 3 times: the initial attempt
+Notice that if you set `maxRetries` to 2 for instance, your operation may be called 3 times: the initial attempt
 and 2 retries.
+
+By default the timeout between retries is set to 0 which means that retries will be executed one after another without
+any delay. This, however, will result in increased load on the called service and may delay it's recovery.
+In order to mitigate this problem it is recommended to execute retries with delays. `link:../../scaladocs/io/vertx/scala/circuitbreaker/CircuitBreaker.html#retryPolicy(java.util.function.Function)[retryPolicy]`
+method can be used to specify retry policy. Retry policy is a function which receives retry count as single argument
+and returns timeout in milliseconds before retry is executed and allows to implement a more complex policy, e.g.
+exponential backoff with jitter. Below is an example of retry timeout which grows linearly with each retry count:
+
+[source,scala]
+----
+var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerOptions()
+  .setMaxFailures(5)
+  .setMaxRetries(5)
+  .setTimeout(2000)
+).openHandler((v: java.lang.Void) => {
+  println("Circuit opened")
+}).closeHandler((v: java.lang.Void) => {
+  println("Circuit closed")
+}).retryPolicy((retryCount: java.lang.Integer) => {
+  retryCount * 100
+})
+
+breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
+  vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
+    if (response.statusCode() != 200) {
+      future.fail("HTTP error")
+    } else {
+      // Do something with the response
+      future.complete()
+    }
+  })
+})
+
+----
 
 == Callbacks
 
@@ -222,6 +258,12 @@ circuit breaker is allowed to execute the dangerous operation. Should the call s
 and returns to the {@code closed} state, ready for more routine operation. If this trial call fails, however, the circuit
 breaker returns to the {@code open} state until another timeout elapses.
 
+== Reported exceptions
+
+The fallback receives a:
+
+* `OpenCircuitException` when the circuit breaker is opened
+* `TimeoutException` when the operation timed out
 
 == Pushing circuit breaker metrics to the Hystrix Dashboard
 

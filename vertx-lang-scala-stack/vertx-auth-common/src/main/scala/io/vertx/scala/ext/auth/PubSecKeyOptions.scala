@@ -16,53 +16,64 @@
 
 package io.vertx.scala.ext.auth
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.auth.{PubSecKeyOptions => JPubSecKeyOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options describing how a Cryptographic Key.
-  */
-class PubSecKeyOptions(private val _asJava: JPubSecKeyOptions) {
+ * Options describing how a Cryptographic Key.
+ */
 
+class PubSecKeyOptions(private val _asJava: JPubSecKeyOptions) {
   def asJava = _asJava
   def setAlgorithm(value: String) = {
     asJava.setAlgorithm(value)
     this
   }
+
   def getAlgorithm: String = {
     asJava.getAlgorithm().asInstanceOf[String]
   }
+
   def setCertificate(value: Boolean) = {
     asJava.setCertificate(value)
     this
   }
+
   def isCertificate: Boolean = {
     asJava.isCertificate().asInstanceOf[Boolean]
   }
+
   def setPublicKey(value: String) = {
     asJava.setPublicKey(value)
     this
   }
+
   def getPublicKey: String = {
     asJava.getPublicKey().asInstanceOf[String]
   }
+
   def setSecretKey(value: String) = {
     asJava.setSecretKey(value)
     this
   }
+
   def getSecretKey: String = {
     asJava.getSecretKey().asInstanceOf[String]
   }
+
   def setSymmetric(value: Boolean) = {
     asJava.setSymmetric(value)
     this
   }
+
   def isSymmetric: Boolean = {
     asJava.isSymmetric().asInstanceOf[Boolean]
   }
+
 }
+
 
 object PubSecKeyOptions {
   
@@ -86,3 +97,4 @@ object PubSecKeyOptions {
     }
   }
 }
+

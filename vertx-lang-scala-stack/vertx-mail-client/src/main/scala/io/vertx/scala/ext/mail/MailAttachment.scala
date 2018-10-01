@@ -16,93 +16,100 @@
 
 package io.vertx.scala.ext.mail
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.mail.{MailAttachment => JMailAttachment}
 import io.vertx.core.buffer.Buffer
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Represent a mail attachment that can be used in a MailMessage.
-  */
+ * Represent a mail attachment that can be used in a MailMessage.
+ */
+
 class MailAttachment(private val _asJava: JMailAttachment) {
-
   def asJava = _asJava
-
   /**
-    * set the Content-ID field to be used in the attachment
-    */
+   * set the Content-ID field to be used in the attachment
+   */
   def setContentId(value: String) = {
     asJava.setContentId(value)
     this
   }
+
   def getContentId: String = {
     asJava.getContentId().asInstanceOf[String]
   }
 
   /**
-    * set the Content-Type
-    */
+   * set the Content-Type
+   */
   def setContentType(value: String) = {
     asJava.setContentType(value)
     this
   }
+
   def getContentType: String = {
     asJava.getContentType().asInstanceOf[String]
   }
 
   /**
-    * set the data
-    */
+   * set the data
+   */
   def setData(value: io.vertx.core.buffer.Buffer) = {
     asJava.setData(value)
     this
   }
+
   def getData: io.vertx.core.buffer.Buffer = {
     asJava.getData()
   }
 
   /**
-    * set the description field to be used in the attachment
-    */
+   * set the description field to be used in the attachment
+   */
   def setDescription(value: String) = {
     asJava.setDescription(value)
     this
   }
+
   def getDescription: String = {
     asJava.getDescription().asInstanceOf[String]
   }
 
   /**
-    * set the disposition field to be used in the attachment
-    */
+   * set the disposition field to be used in the attachment
+   */
   def setDisposition(value: String) = {
     asJava.setDisposition(value)
     this
   }
+
   def getDisposition: String = {
     asJava.getDisposition().asInstanceOf[String]
   }
 
   /**
-    * Add an header to this attachment.
-    */
+   * Add an header to this attachment.
+   */
   def addHeader(key: String, value: String) = {
     asJava.addHeader(key, value.asInstanceOf[java.lang.String])
     this
   }
 
   /**
-    * set the name
-    */
+   * set the name
+   */
   def setName(value: String) = {
     asJava.setName(value)
     this
   }
+
   def getName: String = {
     asJava.getName().asInstanceOf[String]
   }
+
 }
+
 
 object MailAttachment {
   
@@ -126,3 +133,4 @@ object MailAttachment {
     }
   }
 }
+

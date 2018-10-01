@@ -16,29 +16,29 @@
 
 package io.vertx.scala.mqtt.messages
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.mqtt.messages.{MqttSubscribeMessage => JMqttSubscribeMessage}
 import io.vertx.scala.mqtt.MqttTopicSubscription
 import io.vertx.mqtt.{MqttTopicSubscription => JMqttTopicSubscription}
+import scala.reflect.runtime.universe._
 import io.vertx.mqtt.messages.{MqttMessage => JMqttMessage}
 import scala.collection.JavaConverters._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Represents an MQTT SUBSCRIBE message
-  */
-class MqttSubscribeMessage(private val _asJava: Object)
-    extends  MqttMessage  {
 
+  */
+
+class MqttSubscribeMessage(private val _asJava: Object) extends MqttMessage {
   def asJava = _asJava
   private var cached_0: Option[Int] = None
   private var cached_1: Option[scala.collection.mutable.Buffer[MqttTopicSubscription]] = None
 
 
   /**
-    * @return Message identifier
-    */
+   * @return Message identifier
+   */
   override def messageId(): Int = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttSubscribeMessage].messageId()
@@ -48,8 +48,8 @@ class MqttSubscribeMessage(private val _asJava: Object)
   }
 
   /**
-    * @return List with topics and related quolity of service levels
-    */
+   * @return List with topics and related quolity of service levels
+   */
   def topicSubscriptions(): scala.collection.mutable.Buffer[MqttTopicSubscription] = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JMqttSubscribeMessage].topicSubscriptions()
@@ -58,8 +58,13 @@ class MqttSubscribeMessage(private val _asJava: Object)
     cached_1.get
   }
 
+
+
+
+
 }
 
 object MqttSubscribeMessage {
-  def apply(asJava: JMqttSubscribeMessage) = new MqttSubscribeMessage(asJava)  
+  def apply(asJava: JMqttSubscribeMessage) = new MqttSubscribeMessage(asJava)
+  
 }

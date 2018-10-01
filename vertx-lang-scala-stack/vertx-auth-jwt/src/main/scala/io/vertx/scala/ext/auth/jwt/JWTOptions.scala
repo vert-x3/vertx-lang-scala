@@ -16,108 +16,130 @@
 
 package io.vertx.scala.ext.auth.jwt
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
-import io.vertx.scala.ext.jwt.{JWTOptions => ExtJWTOptions}
 import io.vertx.ext.auth.jwt.{JWTOptions => JJWTOptions}
 import io.vertx.core.json.JsonObject
+import io.vertx.scala.ext.jwt.{JWTOptions => ExtJWTOptions}
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options related to creation of new tokens.
-  *
-  * If any expiresInMinutes, audience, subject, issuer are not provided, there is no default.
-  * The jwt generated won't include those properties in the payload.
-  *
-  * Generated JWTs will include an iat claim by default unless noTimestamp is specified.
-  */
-class JWTOptions(private val _asJava: JJWTOptions) 
-    extends ExtJWTOptions(_asJava) {
+ * Options related to creation of new tokens.
+ *
+ * If any expiresInMinutes, audience, subject, issuer are not provided, there is no default.
+ * The jwt generated won't include those properties in the payload.
+ *
+ * Generated JWTs will include an iat claim by default unless noTimestamp is specified.
+ */
 
+class JWTOptions(private val _asJava: JJWTOptions) extends ExtJWTOptions(_asJava) {
   override def asJava = _asJava
   override def setAlgorithm(value: String) = {
     asJava.setAlgorithm(value)
     this
   }
+
   override def getAlgorithm: String = {
     asJava.getAlgorithm().asInstanceOf[String]
   }
+
   override def setAudience(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setAudience(value.asJava)
     this
   }
+
   override def getAudience: scala.collection.mutable.Buffer[String] = {
     asJava.getAudience().asScala.map(x => x.asInstanceOf[String])
   }
+
   override def addAudience(value: String) = {
     asJava.addAudience(value)
     this
   }
+
   override def setExpiresInMinutes(value: Int) = {
     asJava.setExpiresInMinutes(value)
     this
   }
+
   override def setExpiresInSeconds(value: Int) = {
     asJava.setExpiresInSeconds(value)
     this
   }
+
   override def getExpiresInSeconds: Int = {
     asJava.getExpiresInSeconds().asInstanceOf[Int]
   }
+
   override def setHeader(value: io.vertx.core.json.JsonObject) = {
     asJava.setHeader(value)
     this
   }
+
   override def getHeader: io.vertx.core.json.JsonObject = {
     asJava.getHeader()
   }
+
   override def setIgnoreExpiration(value: Boolean) = {
     asJava.setIgnoreExpiration(value)
     this
   }
+
   override def isIgnoreExpiration: Boolean = {
     asJava.isIgnoreExpiration().asInstanceOf[Boolean]
   }
+
   override def setIssuer(value: String) = {
     asJava.setIssuer(value)
     this
   }
+
   override def getIssuer: String = {
     asJava.getIssuer().asInstanceOf[String]
   }
+
   override def setLeeway(value: Int) = {
     asJava.setLeeway(value)
     this
   }
+
   override def getLeeway: Int = {
     asJava.getLeeway().asInstanceOf[Int]
   }
+
   override def setNoTimestamp(value: Boolean) = {
     asJava.setNoTimestamp(value)
     this
   }
+
   override def isNoTimestamp: Boolean = {
     asJava.isNoTimestamp().asInstanceOf[Boolean]
   }
+
   override def addPermission(value: String) = {
     asJava.addPermission(value)
     this
   }
+
   override def setPermissions(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setPermissions(value.asJava)
     this
   }
+
   override def getPermissions: scala.collection.mutable.Buffer[String] = {
     asJava.getPermissions().asScala.map(x => x.asInstanceOf[String])
   }
+
   override def setSubject(value: String) = {
     asJava.setSubject(value)
     this
   }
+
   override def getSubject: String = {
     asJava.getSubject().asInstanceOf[String]
   }
+
 }
+
 
 object JWTOptions {
   
@@ -141,3 +163,4 @@ object JWTOptions {
     }
   }
 }
+

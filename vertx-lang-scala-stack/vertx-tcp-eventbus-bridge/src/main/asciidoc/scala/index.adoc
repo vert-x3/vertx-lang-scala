@@ -54,7 +54,8 @@ The message `type` can be the following for messages sent by the TCP client:
 1. `send` to send a message to an `address`,
 2. `publish` to publish a message to an `address`,
 3. `register` to subscribe to the messages sent or published to an `address`,
-4. `unregister` to unsubscribe to the messages sent or published to an `address`.
+4. `unregister` to unsubscribe to the messages sent or published to an `address`,
+5. `ping` to send a `ping` request to the bridge.
 
 Note that the `replyAddress` field is optional and may only be used for a `send` message.
 A message with that field is expected to _eventually_ receive a message back from the server
@@ -63,7 +64,8 @@ whose `address` field will be that of the original `replyAddress` value.
 The server posts messages back to the client, and they can be of the following `type`:
 
 1. `message` for messages sent or published to an `address`, or
-2. `err` to indicate an error (the `body` shall contain details).
+2. `err` to indicate an error (the `body` shall contain details), or
+3. `pong` to respond the `ping` request sent from client.
 
 An example NodeJS client is available in the source of the project.
 This client uses the same API as the SockJS
@@ -73,5 +75,24 @@ An example on how to get started with this bridge could be:
 
 [source,scala]
 ----
-`example1`
+
+var bridge = TcpEventBusBridge.create(vertx, BridgeOptions()
+  .setInboundPermitteds(Set(PermittedOptions()
+    .setAddress("in")
+  ))
+  .setOutboundPermitteds(Set(PermittedOptions()
+    .setAddress("out")
+  ))
+)
+
+bridge.listenFuture(7000).onComplete{
+  case Success(result) => {
+    // succeed...
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+
 ----

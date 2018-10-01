@@ -16,13 +16,13 @@
 
 package io.vertx.scala.ext.stomp
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.stomp.{Frames => JFrames}
 import io.vertx.ext.stomp.{Frame => JFrame}
+import scala.reflect.runtime.universe._
 import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
 import scala.collection.JavaConverters._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Utility methods to build common <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>s. It defines a non-STOMP frame (`PING`) that is used for
@@ -30,26 +30,35 @@ import scala.collection.JavaConverters._
   * <p/>
   * This class is thread-safe.
   */
-class Frames(private val _asJava: Object) {
 
+class Frames(private val _asJava: Object) {
   def asJava = _asJava
+
+
+
+
 
 
 }
 
 object Frames {
-  def apply(asJava: JFrames) = new Frames(asJava)  
-  def createErrorFrame(message: String, headers: scala.collection.mutable.Map[String, String], body: String): Frame = {
+  def apply(asJava: JFrames) = new Frames(asJava)
+  
+
+  def createErrorFrame(message: String,headers: scala.collection.mutable.Map[String, String],body: String): Frame = {
     Frame(JFrames.createErrorFrame(message.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, body.asInstanceOf[java.lang.String]))
   }
 
-  def createReceiptFrame(receiptId: String, headers: scala.collection.mutable.Map[String, String]): Frame = {
+
+  def createReceiptFrame(receiptId: String,headers: scala.collection.mutable.Map[String, String]): Frame = {
     Frame(JFrames.createReceiptFrame(receiptId.asInstanceOf[java.lang.String], headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava))
   }
 
-  def handleReceipt(frame: Frame, connection: StompServerConnection): Unit = {
+
+  def handleReceipt(frame: Frame,connection: StompServerConnection): Unit = {
     JFrames.handleReceipt(frame.asJava, connection.asJava.asInstanceOf[JStompServerConnection])
   }
+
 
   def ping(): Frame = {
     Frame(JFrames.ping())

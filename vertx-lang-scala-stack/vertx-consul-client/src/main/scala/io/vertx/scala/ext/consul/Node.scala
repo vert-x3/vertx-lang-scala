@@ -16,61 +16,67 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{Node => JNode}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
+
+ */
+
 class Node(private val _asJava: JNode) {
-
   def asJava = _asJava
-
   /**
-    * Set node address
-    */
+   * Set node address
+   */
   def setAddress(value: String) = {
     asJava.setAddress(value)
     this
   }
+
   def getAddress: String = {
     asJava.getAddress().asInstanceOf[String]
   }
 
   /**
-    * Set node lan address
-    */
+   * Set node lan address
+   */
   def setLanAddress(value: String) = {
     asJava.setLanAddress(value)
     this
   }
+
   def getLanAddress: String = {
     asJava.getLanAddress().asInstanceOf[String]
   }
 
   /**
-    * Set node name
-    */
+   * Set node name
+   */
   def setName(value: String) = {
     asJava.setName(value)
     this
   }
+
   def getName: String = {
     asJava.getName().asInstanceOf[String]
   }
 
   /**
-    * Set node wan address
-    */
+   * Set node wan address
+   */
   def setWanAddress(value: String) = {
     asJava.setWanAddress(value)
     this
   }
+
   def getWanAddress: String = {
     asJava.getWanAddress().asInstanceOf[String]
   }
+
 }
+
 
 object Node {
   
@@ -94,3 +100,4 @@ object Node {
     }
   }
 }
+

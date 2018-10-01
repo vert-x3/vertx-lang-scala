@@ -16,78 +16,80 @@
 
 package io.vertx.scala.ext.shell.command
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
+import io.vertx.ext.shell.command.{CommandProcess => JCommandProcess}
+import io.vertx.ext.shell.cli.{Completion => JCompletion}
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.shell.cli.Completion
 import io.vertx.core.cli.{CLI => JCLI}
-import io.vertx.ext.shell.command.{CommandProcess => JCommandProcess}
 import io.vertx.ext.shell.command.{Command => JCommand}
 import io.vertx.ext.shell.command.{CommandBuilder => JCommandBuilder}
 import io.vertx.core.Handler
-import io.vertx.ext.shell.cli.{Completion => JCompletion}
 import io.vertx.scala.core.cli.CLI
-import io.vertx.scala.core.Vertx
-import io.vertx.core.{Vertx => JVertx}
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * A build for Vert.x Shell command.
   */
-class CommandBuilder(private val _asJava: Object) {
 
+class CommandBuilder(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
   /**
-    * Set the command process handler, the process handler is called when the command is executed.
-    * @param handler the process handler
-    * @return this command object
-    */
+   * Set the command process handler, the process handler is called when the command is executed.   * @param handler the process handler
+   * @return this command object
+   */
+  
   def processHandler(handler: Handler[CommandProcess]): CommandBuilder = {
     asJava.asInstanceOf[JCommandBuilder].processHandler({x: JCommandProcess => handler.handle(CommandProcess(x))})
     this
   }
 
   /**
-    * Set the command completion handler, the completion handler when the user asks for contextual command line
-    * completion, usually hitting the <i>tab</i> key.
-    * @param handler the completion handler
-    * @return this command object
-    */
+   * Set the command completion handler, the completion handler when the user asks for contextual command line
+   * completion, usually hitting the <i>tab</i> key.   * @param handler the completion handler
+   * @return this command object
+   */
+  
   def completionHandler(handler: Handler[Completion]): CommandBuilder = {
     asJava.asInstanceOf[JCommandBuilder].completionHandler({x: JCompletion => handler.handle(Completion(x))})
     this
   }
 
+
+
   /**
-    * Build the command
-    * @param vertx the vertx instance
-    * @return the built command
-    */
-  def build(vertx: Vertx): Command = {
+   * Build the command   * @param vertx the vertx instance
+   * @return the built command
+   */
+  def build (vertx: Vertx): Command = {
     Command(asJava.asInstanceOf[JCommandBuilder].build(vertx.asJava.asInstanceOf[JVertx]))
   }
+
 
 }
 
 object CommandBuilder {
-  def apply(asJava: JCommandBuilder) = new CommandBuilder(asJava)  
+  def apply(asJava: JCommandBuilder) = new CommandBuilder(asJava)
+  
   /**
-    * Create a new commmand builder, the command is responsible for managing the options and arguments via the
-    * [[io.vertx.scala.ext.shell.command.CommandProcess]].
-    * @param name the command name
-    * @return the command
-    */
+   * Create a new commmand builder, the command is responsible for managing the options and arguments via the
+   * [[io.vertx.scala.ext.shell.command.CommandProcess]].   * @param name the command name
+   * @return the command
+   */
   def command(name: String): CommandBuilder = {
     CommandBuilder(JCommandBuilder.command(name.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Create a new commmand with its [[io.vertx.scala.core.cli.CLI]] descriptor. This command can then retrieve the parsed
-    * [[io.vertx.scala.ext.shell.command.CommandProcess#commandLine]] when it executes to know get the command arguments and options.
-    * @param cli the cli to use
-    * @return the command
-    */
+   * Create a new commmand with its [[io.vertx.scala.core.cli.CLI]] descriptor. This command can then retrieve the parsed
+   * [[io.vertx.scala.ext.shell.command.CommandProcess#commandLine]] when it executes to know get the command arguments and options.   * @param cli the cli to use
+   * @return the command
+   */
   def command(cli: CLI): CommandBuilder = {
     CommandBuilder(JCommandBuilder.command(cli.asJava.asInstanceOf[JCLI]))
   }

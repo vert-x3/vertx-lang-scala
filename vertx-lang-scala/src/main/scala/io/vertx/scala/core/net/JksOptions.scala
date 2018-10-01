@@ -16,70 +16,74 @@
 
 package io.vertx.scala.core.net
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.buffer.Buffer
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
-  * Key or trust store options configuring private key and/or certificates based on Java Keystore files.
-  * 
-  * When used as a key store, it should point to a store containing a private key and its certificate.
-  * When used as a trust store, it should point to a store containing a list of trusted certificates.
-  * 
-  * The store can either be loaded by Vert.x from the filesystem:
-  * 
-  * <pre>
-  * HttpServerOptions options = HttpServerOptions.httpServerOptions();
-  * options.setKeyStore(new JKSOptions().setPath("/mykeystore.jks").setPassword("foo"));
-  * </pre>
-  *
-  * Or directly provided as a buffer:
-  * 
-  *
-  * <pre>
-  * Buffer store = vertx.fileSystem().readFileSync("/mykeystore.jks");
-  * options.setKeyStore(new JKSOptions().setValue(store).setPassword("foo"));
-  * </pre>
-  */
+ * Key or trust store options configuring private key and/or certificates based on Java Keystore files.
+ * 
+ * When used as a key store, it should point to a store containing a private key and its certificate.
+ * When used as a trust store, it should point to a store containing a list of trusted certificates.
+ * 
+ * The store can either be loaded by Vert.x from the filesystem:
+ * 
+ * <pre>
+ * HttpServerOptions options = HttpServerOptions.httpServerOptions();
+ * options.setKeyStore(new JKSOptions().setPath("/mykeystore.jks").setPassword("foo"));
+ * </pre>
+ *
+ * Or directly provided as a buffer:
+ * 
+ *
+ * <pre>
+ * Buffer store = vertx.fileSystem().readFileSync("/mykeystore.jks");
+ * options.setKeyStore(new JKSOptions().setValue(store).setPassword("foo"));
+ * </pre>
+ */
+
 class JksOptions(private val _asJava: JJksOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set the password for the key store
-    */
+   * Set the password for the key store
+   */
   def setPassword(value: String) = {
     asJava.setPassword(value)
     this
   }
+
   def getPassword: String = {
     asJava.getPassword().asInstanceOf[String]
   }
 
   /**
-    * Set the path to the key store
-    */
+   * Set the path to the key store
+   */
   def setPath(value: String) = {
     asJava.setPath(value)
     this
   }
+
   def getPath: String = {
     asJava.getPath().asInstanceOf[String]
   }
 
   /**
-    * Set the key store as a buffer
-    */
+   * Set the key store as a buffer
+   */
   def setValue(value: io.vertx.core.buffer.Buffer) = {
     asJava.setValue(value)
     this
   }
+
   def getValue: io.vertx.core.buffer.Buffer = {
     asJava.getValue()
   }
+
 }
+
 
 object JksOptions {
   
@@ -103,3 +107,4 @@ object JksOptions {
     }
   }
 }
+

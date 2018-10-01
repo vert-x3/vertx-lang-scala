@@ -16,39 +16,46 @@
 
 package io.vertx.scala.ext.auth.jwt
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.auth.jwt.{JWTKeyStoreOptions => JJWTKeyStoreOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options describing how an JWT KeyStore should behave.
-  */
-class JWTKeyStoreOptions(private val _asJava: JJWTKeyStoreOptions) {
+ * Options describing how an JWT KeyStore should behave.
+ */
 
+class JWTKeyStoreOptions(private val _asJava: JJWTKeyStoreOptions) {
   def asJava = _asJava
   def setPassword(value: String) = {
     asJava.setPassword(value)
     this
   }
+
   def getPassword: String = {
     asJava.getPassword().asInstanceOf[String]
   }
+
   def setPath(value: String) = {
     asJava.setPath(value)
     this
   }
+
   def getPath: String = {
     asJava.getPath().asInstanceOf[String]
   }
+
   def setType(value: String) = {
     asJava.setType(value)
     this
   }
+
   def getType: String = {
     asJava.getType().asInstanceOf[String]
   }
+
 }
+
 
 object JWTKeyStoreOptions {
   
@@ -72,3 +79,4 @@ object JWTKeyStoreOptions {
     }
   }
 }
+

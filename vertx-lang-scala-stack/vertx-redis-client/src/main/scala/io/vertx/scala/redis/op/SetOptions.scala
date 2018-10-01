@@ -16,33 +16,39 @@
 
 package io.vertx.scala.redis.op
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.redis.op.{SetOptions => JSetOptions}
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
-class SetOptions(private val _asJava: JSetOptions) {
 
+ */
+
+class SetOptions(private val _asJava: JSetOptions) {
   def asJava = _asJava
   def setEX(value: Long) = {
     asJava.setEX(value)
     this
   }
+
   def setNX(value: Boolean) = {
     asJava.setNX(value)
     this
   }
+
   def setPX(value: Long) = {
     asJava.setPX(value)
     this
   }
+
   def setXX(value: Boolean) = {
     asJava.setXX(value)
     this
   }
+
 }
+
 
 object SetOptions {
   
@@ -66,3 +72,4 @@ object SetOptions {
     }
   }
 }
+

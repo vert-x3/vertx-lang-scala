@@ -16,40 +16,43 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{NodeList => JNodeList}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds result of nodes query
-  */
+ * Holds result of nodes query
+ */
+
 class NodeList(private val _asJava: JNodeList) {
-
   def asJava = _asJava
-
   /**
-    * Set Consul index, a unique identifier representing the current state of the requested list of nodes
-    */
+   * Set Consul index, a unique identifier representing the current state of the requested list of nodes
+   */
   def setIndex(value: Long) = {
     asJava.setIndex(value)
     this
   }
+
   def getIndex: Long = {
     asJava.getIndex().asInstanceOf[Long]
   }
 
   /**
-    * Set list of nodes
-    */
+   * Set list of nodes
+   */
   def setList(value: scala.collection.mutable.Buffer[Node]) = {
     asJava.setList(value.map(_.asJava).asJava)
     this
   }
+
   def getList: scala.collection.mutable.Buffer[Node] = {
     asJava.getList().asScala.map(x => Node(x))
   }
+
 }
+
 
 object NodeList {
   
@@ -73,3 +76,4 @@ object NodeList {
     }
   }
 }
+

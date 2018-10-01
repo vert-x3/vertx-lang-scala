@@ -16,64 +16,69 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{KeyValueOptions => JKeyValueOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options used to put key/value pair to Consul.
-  */
+ * Options used to put key/value pair to Consul.
+ */
+
 class KeyValueOptions(private val _asJava: JKeyValueOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set session ID for lock acquisition operation.
-    */
+   * Set session ID for lock acquisition operation.
+   */
   def setAcquireSession(value: String) = {
     asJava.setAcquireSession(value)
     this
   }
+
   def getAcquireSession: String = {
     asJava.getAcquireSession().asInstanceOf[String]
   }
 
   /**
-    * Set the Check-And-Set index. If the index is `0`, Consul will only put the key if it does not already exist.
-    * If the index is non-zero, the key is only set if the index matches the ModifyIndex of that key.
-    */
+   * Set the Check-And-Set index. If the index is `0`, Consul will only put the key if it does not already exist.
+   * If the index is non-zero, the key is only set if the index matches the ModifyIndex of that key.
+   */
   def setCasIndex(value: Long) = {
     asJava.setCasIndex(value)
     this
   }
+
   def getCasIndex: Long = {
     asJava.getCasIndex().asInstanceOf[Long]
   }
 
   /**
-    * Set the flags. Flags is an value between `0` and 2<sup>64</sup>-1 that can be attached to each entry.
-    * Clients can choose to use this however makes sense for their application.
-    */
+   * Set the flags. Flags is an value between `0` and 2<sup>64</sup>-1 that can be attached to each entry.
+   * Clients can choose to use this however makes sense for their application.
+   */
   def setFlags(value: Long) = {
     asJava.setFlags(value)
     this
   }
+
   def getFlags: Long = {
     asJava.getFlags().asInstanceOf[Long]
   }
 
   /**
-    * Set session ID for lock release operation.
-    */
+   * Set session ID for lock release operation.
+   */
   def setReleaseSession(value: String) = {
     asJava.setReleaseSession(value)
     this
   }
+
   def getReleaseSession: String = {
     asJava.getReleaseSession().asInstanceOf[String]
   }
+
 }
+
 
 object KeyValueOptions {
   
@@ -97,3 +102,4 @@ object KeyValueOptions {
     }
   }
 }
+

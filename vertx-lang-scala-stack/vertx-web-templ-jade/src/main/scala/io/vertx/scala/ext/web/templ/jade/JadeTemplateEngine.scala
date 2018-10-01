@@ -16,57 +16,57 @@
 
 package io.vertx.scala.ext.web.templ.jade
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
-import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.core.buffer.Buffer
+import io.vertx.scala.ext.web.common.template.TemplateEngine
 import io.vertx.ext.web.templ.jade.{JadeTemplateEngine => JJadeTemplateEngine}
-import io.vertx.scala.ext.web.templ.TemplateEngine
-import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
-import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.AsyncResult
-import io.vertx.core.Handler
+import scala.reflect.runtime.universe._
+import io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A template engine that uses Jade.
   */
-class JadeTemplateEngine(private val _asJava: Object)
-    extends TemplateEngine(_asJava)   {
+
+class JadeTemplateEngine(private val _asJava: Object) extends TemplateEngine (_asJava) {
+
 
 
 
   /**
-    * Set the extension for the engine
-    * @param extension the extension
-    * @return a reference to this for fluency
-    */
+   * @param extension the extension
+   * @return a reference to this for fluency
+   */
+  
   def setExtension(extension: String): JadeTemplateEngine = {
     asJava.asInstanceOf[JJadeTemplateEngine].setExtension(extension.asInstanceOf[java.lang.String])
     this
   }
 
   /**
-    * Set the max cache size for the engine
-    * @param maxCacheSize the maxCacheSize
-    * @return a reference to this for fluency
-    */
+   * Set the max cache size for the engine   * @param maxCacheSize the maxCacheSize
+   * @return a reference to this for fluency
+   */
+  
   def setMaxCacheSize(maxCacheSize: Int): JadeTemplateEngine = {
     asJava.asInstanceOf[JJadeTemplateEngine].setMaxCacheSize(maxCacheSize.asInstanceOf[java.lang.Integer])
     this
   }
 
+
+
+
 }
 
 object JadeTemplateEngine {
-  def apply(asJava: JJadeTemplateEngine) = new JadeTemplateEngine(asJava)  
+  def apply(asJava: JJadeTemplateEngine) = new JadeTemplateEngine(asJava)
+  
   /**
-    * Create a template engine using defaults
-    * @return the engine
-    */
-  def create(): JadeTemplateEngine = {
-    JadeTemplateEngine(JJadeTemplateEngine.create())
+   * Create a template engine using defaults   * @return the engine
+   */
+  def create(vertx: Vertx): JadeTemplateEngine = {
+    JadeTemplateEngine(JJadeTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

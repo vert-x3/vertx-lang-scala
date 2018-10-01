@@ -16,35 +16,40 @@
 
 package io.vertx.scala.core.dns
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.core.dns.{MxRecord => JMxRecord}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Represent a Mail-Exchange-Record (MX) which was resolved for a domain.
   */
-class MxRecord(private val _asJava: Object) {
 
+class MxRecord(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
+
+
   /**
-    * The priority of the MX record.
-    */
-  def priority(): Int = {
+   * The priority of the MX record.
+   */
+  def priority (): Int = {
     asJava.asInstanceOf[JMxRecord].priority().asInstanceOf[Int]
   }
 
   /**
-    * The name of the MX record
-    */
-  def name(): String = {
+   * The name of the MX record
+   */
+  def name (): String = {
     asJava.asInstanceOf[JMxRecord].name().asInstanceOf[String]
   }
+
 
 }
 
 object MxRecord {
-  def apply(asJava: JMxRecord) = new MxRecord(asJava)  
+  def apply(asJava: JMxRecord) = new MxRecord(asJava)
+  
 }

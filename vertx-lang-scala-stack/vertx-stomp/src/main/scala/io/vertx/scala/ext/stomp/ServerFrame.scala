@@ -16,38 +16,43 @@
 
 package io.vertx.scala.ext.stomp
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.stomp.{Frame => JFrame}
+import scala.reflect.runtime.universe._
 import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
 import io.vertx.ext.stomp.{ServerFrame => JServerFrame}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Structure passed to server handler when receiving a frame. It provides a reference on the received <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
   * but also on the [[io.vertx.scala.ext.stomp.StompServerConnection]].
   */
-class ServerFrame(private val _asJava: Object) {
 
+class ServerFrame(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
+
+
   /**
-    * @return the received framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
-    */
-  def frame(): Frame = {
+   * @return the received framesee <a href="../../../../../../../cheatsheet/Frame.html">Frame</a>
+   */
+  def frame (): Frame = {
     Frame(asJava.asInstanceOf[JServerFrame].frame())
   }
 
   /**
-    * @return the connection
-    */
-  def connection(): StompServerConnection = {
+   * @return the connection
+   */
+  def connection (): StompServerConnection = {
     StompServerConnection(asJava.asInstanceOf[JServerFrame].connection())
   }
+
 
 }
 
 object ServerFrame {
-  def apply(asJava: JServerFrame) = new ServerFrame(asJava)  
+  def apply(asJava: JServerFrame) = new ServerFrame(asJava)
+  
 }

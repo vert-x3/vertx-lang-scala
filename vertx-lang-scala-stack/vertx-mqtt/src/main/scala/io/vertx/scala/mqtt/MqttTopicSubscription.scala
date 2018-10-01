@@ -16,25 +16,26 @@
 
 package io.vertx.scala.mqtt
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.netty.handler.codec.mqtt.MqttQoS
 import io.vertx.mqtt.{MqttTopicSubscription => JMqttTopicSubscription}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Represents a subscription to a topic
-  */
-class MqttTopicSubscription(private val _asJava: Object) {
 
+  */
+
+class MqttTopicSubscription(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[String] = None
   private var cached_1: Option[io.netty.handler.codec.mqtt.MqttQoS] = None
 
 
   /**
-    * @return Subscription topic name
-    */
+   * @return Subscription topic name
+   */
   def topicName(): String = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JMqttTopicSubscription].topicName()
@@ -44,8 +45,8 @@ class MqttTopicSubscription(private val _asJava: Object) {
   }
 
   /**
-    * @return Quality of Service level for the subscription
-    */
+   * @return Quality of Service level for the subscription
+   */
   def qualityOfService(): io.netty.handler.codec.mqtt.MqttQoS = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JMqttTopicSubscription].qualityOfService()
@@ -54,8 +55,13 @@ class MqttTopicSubscription(private val _asJava: Object) {
     cached_1.get
   }
 
+
+
+
+
 }
 
 object MqttTopicSubscription {
-  def apply(asJava: JMqttTopicSubscription) = new MqttTopicSubscription(asJava)  
+  def apply(asJava: JMqttTopicSubscription) = new MqttTopicSubscription(asJava)
+  
 }

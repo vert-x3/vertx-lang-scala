@@ -16,29 +16,31 @@
 
 package io.vertx.scala.core.net
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Configures a <a href="../../../../../../../cheatsheet/TCPSSLOptions.html">TCPSSLOptions</a> to use OpenSsl.
-  */
+ * Configures a <a href="../../../../../../../cheatsheet/TCPSSLOptions.html">TCPSSLOptions</a> to use OpenSsl.
+ */
+
 class OpenSSLEngineOptions(private val _asJava: JOpenSSLEngineOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set whether session cache is enabled in open SSL session server context
-    */
+   * Set whether session cache is enabled in open SSL session server context
+   */
   def setSessionCacheEnabled(value: Boolean) = {
     asJava.setSessionCacheEnabled(value)
     this
   }
+
   def isSessionCacheEnabled: Boolean = {
     asJava.isSessionCacheEnabled().asInstanceOf[Boolean]
   }
+
 }
+
 
 object OpenSSLEngineOptions {
   
@@ -62,3 +64,4 @@ object OpenSSLEngineOptions {
     }
   }
 }
+

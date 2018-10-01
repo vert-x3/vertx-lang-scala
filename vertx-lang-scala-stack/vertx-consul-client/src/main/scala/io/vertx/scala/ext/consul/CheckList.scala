@@ -16,40 +16,43 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{CheckList => JCheckList}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds result of checks query
-  */
+ * Holds result of checks query
+ */
+
 class CheckList(private val _asJava: JCheckList) {
-
   def asJava = _asJava
-
   /**
-    * Set Consul index, a unique identifier representing the current state of the requested list of checks
-    */
+   * Set Consul index, a unique identifier representing the current state of the requested list of checks
+   */
   def setIndex(value: Long) = {
     asJava.setIndex(value)
     this
   }
+
   def getIndex: Long = {
     asJava.getIndex().asInstanceOf[Long]
   }
 
   /**
-    * Set list of checks
-    */
+   * Set list of checks
+   */
   def setList(value: scala.collection.mutable.Buffer[Check]) = {
     asJava.setList(value.map(_.asJava).asJava)
     this
   }
+
   def getList: scala.collection.mutable.Buffer[Check] = {
     asJava.getList().asScala.map(x => Check(x))
   }
+
 }
+
 
 object CheckList {
   
@@ -73,3 +76,4 @@ object CheckList {
     }
   }
 }
+

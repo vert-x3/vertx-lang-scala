@@ -16,12 +16,12 @@
 
 package io.vertx.scala.core.streams
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.core.streams.{Pump => JPump}
 import io.vertx.core.streams.{ReadStream => JReadStream}
+import scala.reflect.runtime.universe._
 import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Pumps data from a [[io.vertx.scala.core.streams.ReadStream]] to a [[io.vertx.scala.core.streams.WriteStream]] and performs flow control where necessary to
@@ -43,69 +43,72 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
   * 
   * Please see the documentation for more information.
   */
-class Pump(private val _asJava: Object) {
 
+class Pump(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
   /**
-    * Set the write queue max size to `maxSize`
-    * @param maxSize the max size
-    * @return a reference to this, so the API can be used fluently
-    */
+   * Set the write queue max size to `maxSize`   * @param maxSize the max size
+   * @return a reference to this, so the API can be used fluently
+   */
+  
   def setWriteQueueMaxSize(maxSize: Int): Pump = {
     asJava.asInstanceOf[JPump].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
   }
 
   /**
-    * Start the Pump. The Pump can be started and stopped multiple times.
-    * @return a reference to this, so the API can be used fluently
-    */
+   * Start the Pump. The Pump can be started and stopped multiple times.   * @return a reference to this, so the API can be used fluently
+   */
+  
   def start(): Pump = {
     asJava.asInstanceOf[JPump].start()
     this
   }
 
   /**
-    * Stop the Pump. The Pump can be started and stopped multiple times.
-    * @return a reference to this, so the API can be used fluently
-    */
+   * Stop the Pump. The Pump can be started and stopped multiple times.   * @return a reference to this, so the API can be used fluently
+   */
+  
   def stop(): Pump = {
     asJava.asInstanceOf[JPump].stop()
     this
   }
 
+
+
   /**
-    * Return the total number of items pumped by this pump.
-    */
-  def numberPumped(): Int = {
+   * Return the total number of items pumped by this pump.
+   */
+  def numberPumped (): Int = {
     asJava.asInstanceOf[JPump].numberPumped().asInstanceOf[Int]
   }
+
 
 }
 
 object Pump {
-  def apply(asJava: JPump) = new Pump(asJava)  
+  def apply(asJava: JPump) = new Pump(asJava)
+  
   /**
-    * Create a new `Pump` with the given `ReadStream` and `WriteStream`
-    * @param rs the read stream
-    * @param ws the write stream
-    * @return the pump
-    */
-  def pump[T: TypeTag](rs: ReadStream[T], ws: WriteStream[T]): Pump = {
+   * Create a new `Pump` with the given `ReadStream` and `WriteStream`   * @param rs the read stream
+   * @param ws the write stream
+   * @return the pump
+   */
+  def pump[T: TypeTag](rs: ReadStream[T],ws: WriteStream[T]): Pump = {
     Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]], ws.asJava.asInstanceOf[JWriteStream[Object]]))
   }
 
   /**
-    * Create a new `Pump` with the given `ReadStream` and `WriteStream` and
-    * `writeQueueMaxSize`
-    * @param rs the read stream
-    * @param ws the write stream
-    * @param writeQueueMaxSize the max size of the write queue
-    * @return the pump
-    */
-  def pump[T: TypeTag](rs: ReadStream[T], ws: WriteStream[T], writeQueueMaxSize: Int): Pump = {
+   * Create a new `Pump` with the given `ReadStream` and `WriteStream` and
+   * `writeQueueMaxSize`   * @param rs the read stream
+   * @param ws the write stream
+   * @param writeQueueMaxSize the max size of the write queue
+   * @return the pump
+   */
+  def pump[T: TypeTag](rs: ReadStream[T],ws: WriteStream[T],writeQueueMaxSize: Int): Pump = {
     Pump(JPump.pump[Object](rs.asJava.asInstanceOf[JReadStream[Object]], ws.asJava.asInstanceOf[JWriteStream[Object]], writeQueueMaxSize.asInstanceOf[java.lang.Integer]))
   }
 

@@ -16,22 +16,22 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{TxnRequest => JTxnRequest}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds list of operations in transaction
-  */
+ * Holds list of operations in transaction
+ */
+
 class TxnRequest(private val _asJava: JTxnRequest) {
-
   def asJava = _asJava
-
   /**
-    * Returns the number of operations in this request
-    */
+   * Returns the number of operations in this request
+   */
 }
+
 
 object TxnRequest {
   
@@ -55,3 +55,4 @@ object TxnRequest {
     }
   }
 }
+

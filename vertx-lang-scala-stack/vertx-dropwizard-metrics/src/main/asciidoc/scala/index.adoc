@@ -636,6 +636,19 @@ var registry = com.codahale.metrics.SharedMetricRegistries.getOrCreate("my-regis
 }
 ----
 
+== Using already existing Dropwizard Registry
+Optionally, it is possible to utilize already existing https://dropwizard.github.io/metrics/3.1.0/getting-started/#the-registry[Dropwizard Registry].
+In order to do so pass `MetricRegistry` instance as parameter for `setMetricRegistry` function in `VertxOptions` object.
+
+[source,java]
+----
+MetricRegistry metricRegistry = new MetricRegistry();
+VertxOptions options = new VertxOptions().setMetricsOptions(
+   new DropwizardMetricsOptions().setEnabled(true).setMetricRegistry(metricRegistry)
+);
+Vertx vertx = Vertx.vertx(options);
+----
+
 == Using Jolokia and Hawtio
 
 https://jolokia.org/[Jolokia] is a JMX-HTTP bridge giving an alternative to JSR-160 connectors. It is an agent based

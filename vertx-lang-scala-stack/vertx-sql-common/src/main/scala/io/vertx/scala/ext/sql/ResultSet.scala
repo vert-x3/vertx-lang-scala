@@ -16,89 +16,90 @@
 
 package io.vertx.scala.ext.sql
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.json.JsonArray
 import io.vertx.ext.sql.{ResultSet => JResultSet}
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Represents the results of a SQL query.
-  * 
-  * It contains a list for the column names of the results, and a list of `JsonArray` - one for each row of the
-  * results.
-  */
+ * Represents the results of a SQL query.
+ * 
+ * It contains a list for the column names of the results, and a list of `JsonArray` - one for each row of the
+ * results.
+ */
+
 class ResultSet(private val _asJava: JResultSet) {
-
   def asJava = _asJava
-
   /**
-    * Get the column names
-    */
+   * Get the column names
+   */
   def setColumnNames(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setColumnNames(value.asJava)
     this
   }
+
   def getColumnNames: scala.collection.mutable.Buffer[String] = {
     asJava.getColumnNames().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
-    * Get the next result set
-    */
+   * Get the next result set
+   */
   def setNext(value: ResultSet) = {
     asJava.setNext(value.asJava)
     this
   }
+
   def getNext: ResultSet = {
     ResultSet(asJava.getNext())
   }
 
   /**
-    * Return the number of columns in the result set
-    */
-
+   * Return the number of columns in the result set
+   */
   /**
-    * Return the number of rows in the result set
-    */
-
+   * Return the number of rows in the result set
+   */
   /**
-    * Get the registered outputs
-    */
+   * Get the registered outputs
+   */
   def setOutput(value: io.vertx.core.json.JsonArray) = {
     asJava.setOutput(value)
     this
   }
+
   def getOutput: io.vertx.core.json.JsonArray = {
     asJava.getOutput()
   }
 
   /**
-    * Get the results
-    */
+   * Get the results
+   */
   def setResults(value: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]) = {
     asJava.setResults(value.asJava)
     this
   }
+
   def getResults: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray] = {
     asJava.getResults().asScala.map(x => x)
   }
 
   /**
-    * Get the rows - each row represented as a JsonObject where the keys are the column names and the values are
-    * the column values.
-    *
-    * Beware that it's legal for a query result in SQL to contain duplicate column names, in which case one will
-    * overwrite the other if using this method. If that's the case use <a href="../../../../../../../cheatsheet/ResultSet.html">ResultSet</a> instead.
-    *
-    * Be aware that column names are defined as returned by the database, this means that even if your SQL statement
-    * is for example: <pre>SELECT a, b FROM table</pre> the column names are not required to be: <pre>a</pre> and
-    * <pre>b</pre> and could be in fact <pre>A</pre> and <pre>B</pre>.
-    *
-    * For cases when there is the need for case insentivitity you should see <a href="../../../../../../../cheatsheet/ResultSet.html">ResultSet</a>
-    */
+   * Get the rows - each row represented as a JsonObject where the keys are the column names and the values are
+   * the column values.
+   *
+   * Beware that it's legal for a query result in SQL to contain duplicate column names, in which case one will
+   * overwrite the other if using this method. If that's the case use <a href="../../../../../../../cheatsheet/ResultSet.html">ResultSet</a> instead.
+   *
+   * Be aware that column names are defined as returned by the database, this means that even if your SQL statement
+   * is for example: <pre>SELECT a, b FROM table</pre> the column names are not required to be: <pre>a</pre> and
+   * <pre>b</pre> and could be in fact <pre>A</pre> and <pre>B</pre>.
+   *
+   * For cases when there is the need for case insentivitity you should see <a href="../../../../../../../cheatsheet/ResultSet.html">ResultSet</a>
+   */
 }
+
 
 object ResultSet {
   
@@ -122,3 +123,4 @@ object ResultSet {
     }
   }
 }
+

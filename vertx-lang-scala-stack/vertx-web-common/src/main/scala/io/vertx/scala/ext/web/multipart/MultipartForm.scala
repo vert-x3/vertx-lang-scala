@@ -16,64 +16,69 @@
 
 package io.vertx.scala.ext.web.multipart
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.multipart.{FormDataPart => JFormDataPart}
 import io.vertx.ext.web.multipart.{MultipartForm => JMultipartForm}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A multipart form.
   */
-class MultipartForm(private val _asJava: Object) {
 
+class MultipartForm(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
   /**
-    * Add an attribute form data part.
-    * @param name the name of the attribute
-    * @param value the value of the attribute
-    * @return a reference to this, so the API can be used fluently
-    */
+   * Add an attribute form data part.   * @param name the name of the attribute
+   * @param value the value of the attribute
+   * @return a reference to this, so the API can be used fluently
+   */
+  
   def attribute(name: String, value: String): MultipartForm = {
     asJava.asInstanceOf[JMultipartForm].attribute(name.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String])
     this
   }
 
   /**
-    * Add a text file upload form data part.
-    * @param name name of the parameter
-    * @param filename filename of the file
-    * @param pathname the pathname of the file
-    * @param mediaType the MIME type of the file
-    * @return a reference to this, so the API can be used fluently
-    */
+   * Add a text file upload form data part.   * @param name name of the parameter
+   * @param filename filename of the file
+   * @param pathname the pathname of the file
+   * @param mediaType the MIME type of the file
+   * @return a reference to this, so the API can be used fluently
+   */
+  
   def textFileUpload(name: String, filename: String, pathname: String, mediaType: String): MultipartForm = {
     asJava.asInstanceOf[JMultipartForm].textFileUpload(name.asInstanceOf[java.lang.String], filename.asInstanceOf[java.lang.String], pathname.asInstanceOf[java.lang.String], mediaType.asInstanceOf[java.lang.String])
     this
   }
 
   /**
-    * Add a binary file upload form data part.
-    * @param name name of the parameter
-    * @param filename filename of the file
-    * @param pathname the pathname of the file
-    * @param mediaType the MIME type of the file
-    * @return a reference to this, so the API can be used fluently
-    */
+   * Add a binary file upload form data part.   * @param name name of the parameter
+   * @param filename filename of the file
+   * @param pathname the pathname of the file
+   * @param mediaType the MIME type of the file
+   * @return a reference to this, so the API can be used fluently
+   */
+  
   def binaryFileUpload(name: String, filename: String, pathname: String, mediaType: String): MultipartForm = {
     asJava.asInstanceOf[JMultipartForm].binaryFileUpload(name.asInstanceOf[java.lang.String], filename.asInstanceOf[java.lang.String], pathname.asInstanceOf[java.lang.String], mediaType.asInstanceOf[java.lang.String])
     this
   }
 
+
+
+
 }
 
 object MultipartForm {
-  def apply(asJava: JMultipartForm) = new MultipartForm(asJava)  
+  def apply(asJava: JMultipartForm) = new MultipartForm(asJava)
+  
   /**
-    * @return a multipart form instance
-    */
+   * @return a multipart form instance
+   */
   def create(): MultipartForm = {
     MultipartForm(JMultipartForm.create())
   }

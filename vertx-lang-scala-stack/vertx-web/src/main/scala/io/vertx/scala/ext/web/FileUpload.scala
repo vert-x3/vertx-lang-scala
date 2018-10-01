@@ -16,71 +16,76 @@
 
 package io.vertx.scala.ext.web
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{FileUpload => JFileUpload}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Represents a file-upload from an HTTP multipart form submission.
   * 
   */
-class FileUpload(private val _asJava: Object) {
 
+class FileUpload(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
+
+
   /**
-    * @return the name of the upload as provided in the form submission
-    */
-  def name(): String = {
+   * @return the name of the upload as provided in the form submission
+   */
+  def name (): String = {
     asJava.asInstanceOf[JFileUpload].name().asInstanceOf[String]
   }
 
   /**
-    * @return the actual temporary file name on the server where the file was uploaded to.
-    */
-  def uploadedFileName(): String = {
+   * @return the actual temporary file name on the server where the file was uploaded to.
+   */
+  def uploadedFileName (): String = {
     asJava.asInstanceOf[JFileUpload].uploadedFileName().asInstanceOf[String]
   }
 
   /**
-    * @return the file name of the upload as provided in the form submission
-    */
-  def fileName(): String = {
+   * @return the file name of the upload as provided in the form submission
+   */
+  def fileName (): String = {
     asJava.asInstanceOf[JFileUpload].fileName().asInstanceOf[String]
   }
 
   /**
-    * @return the size of the upload, in bytes
-    */
-  def size(): Long = {
+   * @return the size of the upload, in bytes
+   */
+  def size (): Long = {
     asJava.asInstanceOf[JFileUpload].size().asInstanceOf[Long]
   }
 
   /**
-    * @return the content type (MIME type) of the upload
-    */
-  def contentType(): String = {
+   * @return the content type (MIME type) of the upload
+   */
+  def contentType (): String = {
     asJava.asInstanceOf[JFileUpload].contentType().asInstanceOf[String]
   }
 
   /**
-    * @return the content transfer encoding of the upload - this describes how the upload was encoded in the form submission.
-    */
-  def contentTransferEncoding(): String = {
+   * @return the content transfer encoding of the upload - this describes how the upload was encoded in the form submission.
+   */
+  def contentTransferEncoding (): String = {
     asJava.asInstanceOf[JFileUpload].contentTransferEncoding().asInstanceOf[String]
   }
 
   /**
-    * @return the charset of the upload
-    */
-  def charSet(): String = {
+   * @return the charset of the upload
+   */
+  def charSet (): String = {
     asJava.asInstanceOf[JFileUpload].charSet().asInstanceOf[String]
   }
+
 
 }
 
 object FileUpload {
-  def apply(asJava: JFileUpload) = new FileUpload(asJava)  
+  def apply(asJava: JFileUpload) = new FileUpload(asJava)
+  
 }

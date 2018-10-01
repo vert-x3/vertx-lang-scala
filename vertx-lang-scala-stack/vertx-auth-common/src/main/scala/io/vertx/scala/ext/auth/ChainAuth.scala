@@ -16,60 +16,59 @@
 
 package io.vertx.scala.ext.auth
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
-import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.ext.auth.{User => JUser}
+import scala.reflect.runtime.universe._
 import io.vertx.ext.auth.{ChainAuth => JChainAuth}
-import io.vertx.core.json.JsonObject
-import io.vertx.core.AsyncResult
-import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Chain several auth providers as if they were one. This is useful for cases where one want to authenticate across
   * several providers, for example, database and fallback to passwd file.
+
   */
-class ChainAuth(private val _asJava: Object)
-    extends AuthProvider(_asJava)   {
+
+class ChainAuth(private val _asJava: Object) extends AuthProvider (_asJava) {
+
 
 
 
   /**
-    * Appends a auth provider to the chain.
-    * @param other auth provider
-    * @return self
-    */
+   * Appends a auth provider to the chain.   * @param other auth provider
+   * @return self
+   */
+  
   def append(other: AuthProvider): ChainAuth = {
     asJava.asInstanceOf[JChainAuth].append(other.asJava.asInstanceOf[JAuthProvider])
     this
   }
 
+
+
   /**
-    * Removes a provider from the chain.
-    * @param other provider to remove
-    * @return true if provider was removed, false if non existent in the chain.
-    */
-  def remove(other: AuthProvider): Boolean = {
+   * Removes a provider from the chain.   * @param other provider to remove
+   * @return true if provider was removed, false if non existent in the chain.
+   */
+  def remove (other: AuthProvider): Boolean = {
     asJava.asInstanceOf[JChainAuth].remove(other.asJava.asInstanceOf[JAuthProvider]).asInstanceOf[Boolean]
   }
 
   /**
-    * Clears the chain.
-    */
-  def clear(): Unit = {
+   * Clears the chain.
+   */
+  def clear (): Unit = {
     asJava.asInstanceOf[JChainAuth].clear()
   }
+
 
 }
 
 object ChainAuth {
-  def apply(asJava: JChainAuth) = new ChainAuth(asJava)  
+  def apply(asJava: JChainAuth) = new ChainAuth(asJava)
+  
   /**
-    * Create a Chainable Auth Provider auth provider
-    * @return the auth provider
-    */
+   * Create a Chainable Auth Provider auth provider   * @return the auth provider
+   */
   def create(): ChainAuth = {
     ChainAuth(JChainAuth.create())
   }

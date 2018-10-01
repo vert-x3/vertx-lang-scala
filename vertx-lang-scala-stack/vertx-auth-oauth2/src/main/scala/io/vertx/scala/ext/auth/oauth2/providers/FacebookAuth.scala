@@ -16,45 +16,48 @@
 
 package io.vertx.scala.ext.auth.oauth2.providers
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
 import io.vertx.ext.auth.oauth2.providers.{FacebookAuth => JFacebookAuth}
+import scala.reflect.runtime.universe._
 import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
 import io.vertx.scala.core.http.HttpClientOptions
 import io.vertx.scala.core.Vertx
 import io.vertx.ext.auth.oauth2.{OAuth2Auth => JOAuth2Auth}
 import io.vertx.core.{Vertx => JVertx}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Simplified factory to create an  for Facebook.
   */
-class FacebookAuth(private val _asJava: Object) {
 
+class FacebookAuth(private val _asJava: Object) {
   def asJava = _asJava
+
+
+
+
 
 
 }
 
 object FacebookAuth {
-  def apply(asJava: JFacebookAuth) = new FacebookAuth(asJava)  
+  def apply(asJava: JFacebookAuth) = new FacebookAuth(asJava)
+  
   /**
-    * Create a OAuth2Auth provider for Facebook
-    * @param clientId the client id given to you by Facebook
-    * @param clientSecret the client secret given to you by Facebook
-    */
-  def create(vertx: Vertx, clientId: String, clientSecret: String): OAuth2Auth = {
+   * Create a OAuth2Auth provider for Facebook   * @param clientId the client id given to you by Facebook
+   * @param clientSecret the client secret given to you by Facebook
+   */
+  def create(vertx: Vertx,clientId: String,clientSecret: String): OAuth2Auth = {
     OAuth2Auth(JFacebookAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Create a OAuth2Auth provider for Facebook
-    * @param clientId the client id given to you by Facebook
-    * @param clientSecret the client secret given to you by Facebook
-    * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
-    */
-  def create(vertx: Vertx, clientId: String, clientSecret: String, httpClientOptions: HttpClientOptions): OAuth2Auth = {
+   * Create a OAuth2Auth provider for Facebook   * @param clientId the client id given to you by Facebook
+   * @param clientSecret the client secret given to you by Facebook
+   * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
+   */
+  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
     OAuth2Auth(JFacebookAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], httpClientOptions.asJava))
   }
 

@@ -16,41 +16,44 @@
 
 package io.vertx.scala.core.datagram
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.core.buffer.Buffer
+import scala.reflect.runtime.universe._
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.core.datagram.{DatagramPacket => JDatagramPacket}
 import io.vertx.scala.core.net.SocketAddress
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A received datagram packet (UDP) which contains the data and information about the sender of the data itself.
   */
-class DatagramPacket(private val _asJava: Object) {
 
+class DatagramPacket(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
+
+
   /**
-    * Returns the [[io.vertx.scala.core.net.SocketAddress]] of the sender that sent
-    * this [[io.vertx.scala.core.datagram.DatagramPacket]].
-    * @return the address of the sender
-    */
-  def sender(): SocketAddress = {
+   * Returns the [[io.vertx.scala.core.net.SocketAddress]] of the sender that sent
+   * this [[io.vertx.scala.core.datagram.DatagramPacket]].   * @return the address of the sender
+   */
+  def sender (): SocketAddress = {
     SocketAddress(asJava.asInstanceOf[JDatagramPacket].sender())
   }
 
   /**
-    * Returns the data of the [[io.vertx.scala.core.datagram.DatagramPacket]]
-    * @return the data
-    */
-  def data(): io.vertx.core.buffer.Buffer = {
+   * Returns the data of the [[io.vertx.scala.core.datagram.DatagramPacket]]   * @return the data
+   */
+  def data (): io.vertx.core.buffer.Buffer = {
     asJava.asInstanceOf[JDatagramPacket].data()
   }
+
 
 }
 
 object DatagramPacket {
-  def apply(asJava: JDatagramPacket) = new DatagramPacket(asJava)  
+  def apply(asJava: JDatagramPacket) = new DatagramPacket(asJava)
+  
 }

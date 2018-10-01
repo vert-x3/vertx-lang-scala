@@ -16,37 +16,37 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{TxnResponse => JTxnResponse}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds results of transaction
-  */
+ * Holds results of transaction
+ */
+
 class TxnResponse(private val _asJava: JTxnResponse) {
-
   def asJava = _asJava
-
   /**
-    * Adds error to this response
-    */
+   * Adds error to this response
+   */
   def addError(value: TxnError) = {
     asJava.addError(value.asJava)
     this
   }
+
   def getErrors: scala.collection.mutable.Buffer[TxnError] = {
     asJava.getErrors().asScala.map(x => TxnError(x))
   }
 
   /**
-    * Returns the number of errors in this response
-    */
-
+   * Returns the number of errors in this response
+   */
   /**
-    * Returns the number of results in this response
-    */
+   * Returns the number of results in this response
+   */
 }
+
 
 object TxnResponse {
   
@@ -70,3 +70,4 @@ object TxnResponse {
     }
   }
 }
+

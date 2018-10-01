@@ -16,71 +16,85 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.{DataObjectWithListAdders => JDataObjectWithListAdders}
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
-class DataObjectWithListAdders(private val _asJava: JDataObjectWithListAdders) {
 
+ */
+
+class DataObjectWithListAdders(private val _asJava: JDataObjectWithListAdders) {
   def asJava = _asJava
   def addBooleanValue(value: Boolean) = {
     asJava.addBooleanValue(value)
     this
   }
+
   def addDataObjectValue(value: TestDataObject) = {
     asJava.addDataObjectValue(value.asJava)
     this
   }
+
   def addDoubleValue(value: Double) = {
     asJava.addDoubleValue(value)
     this
   }
+
   def addEnumValue(value: io.vertx.codegen.testmodel.TestEnum) = {
     asJava.addEnumValue(value)
     this
   }
+
   def addFloatValue(value: Float) = {
     asJava.addFloatValue(value)
     this
   }
+
   def addGenEnumValue(value: io.vertx.codegen.testmodel.TestGenEnum) = {
     asJava.addGenEnumValue(value)
     this
   }
+
   def addInstantValue(value: java.time.Instant) = {
     asJava.addInstantValue(value.asInstanceOf)
     this
   }
+
   def addIntegerValue(value: Int) = {
     asJava.addIntegerValue(value)
     this
   }
+
   def addJsonArrayValue(value: io.vertx.core.json.JsonArray) = {
     asJava.addJsonArrayValue(value)
     this
   }
+
   def addJsonObjectValue(value: io.vertx.core.json.JsonObject) = {
     asJava.addJsonObjectValue(value)
     this
   }
+
   def addLongValue(value: Long) = {
     asJava.addLongValue(value)
     this
   }
+
   def addShortValue(value: Short) = {
     asJava.addShortValue(value)
     this
   }
+
   def addStringValue(value: String) = {
     asJava.addStringValue(value)
     this
   }
+
 }
+
 
 object DataObjectWithListAdders {
   
@@ -104,3 +118,4 @@ object DataObjectWithListAdders {
     }
   }
 }
+

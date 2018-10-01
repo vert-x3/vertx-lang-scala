@@ -96,7 +96,7 @@ Here's an example of authorising a user:
 [source,scala]
 ----
 
-user.isAuthorisedFuture("printers:printer1234").onComplete{
+user.isAuthorizedFuture("printers:printer1234").onComplete{
   case Success(result) => {
 
     var hasAuthority = result

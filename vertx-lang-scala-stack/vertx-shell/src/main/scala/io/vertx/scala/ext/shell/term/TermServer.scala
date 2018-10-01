@@ -16,15 +16,14 @@
 
 package io.vertx.scala.ext.shell.term
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.shell.term.{TelnetTermOptions => JTelnetTermOptions}
+import scala.reflect.runtime.universe._
 import io.vertx.ext.shell.term.{TermServer => JTermServer}
 import io.vertx.ext.web.{Router => JRouter}
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.auth.AuthProvider
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.ext.shell.term.{SSHTermOptions => JSSHTermOptions}
@@ -33,95 +32,100 @@ import io.vertx.core.AsyncResult
 import io.vertx.scala.ext.web.Router
 import io.vertx.core.Handler
 import io.vertx.ext.shell.term.{Term => JTerm}
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * A server for terminal based applications.
   */
-class TermServer(private val _asJava: Object) {
 
+class TermServer(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
   /**
-    * Set the term handler that will receive incoming client connections. When a remote terminal connects
-    * the `handler` will be called with the [[io.vertx.scala.ext.shell.term.Term]] which can be used to interact with the remote
-    * terminal.
-    * @param handler the term handler
-    * @return this object
-    */
+   * Set the term handler that will receive incoming client connections. When a remote terminal connects
+   * the `handler` will be called with the [[io.vertx.scala.ext.shell.term.Term]] which can be used to interact with the remote
+   * terminal.   * @param handler the term handler
+   * @return this object
+   */
+  
   def termHandler(handler: Handler[Term]): TermServer = {
     asJava.asInstanceOf[JTermServer].termHandler({x: JTerm => handler.handle(Term(x))})
     this
   }
 
   /**
-    * Set an auth provider to use, any provider configured in options will override this provider. This should be used
-    * when a custom auth provider should be used.
-    * @param provider the auth to use
-    * @return this object
-    */
+   * Set an auth provider to use, any provider configured in options will override this provider. This should be used
+   * when a custom auth provider should be used.   * @param provider the auth to use
+   * @return this object
+   */
+  
   def authProvider(provider: AuthProvider): TermServer = {
     asJava.asInstanceOf[JTermServer].authProvider(provider.asJava.asInstanceOf[JAuthProvider])
     this
   }
 
   /**
-    * Bind the term server, the [[io.vertx.scala.ext.shell.term.TermServer#termHandler]] must be set before.
-    * @return this object
-    */
+   * Bind the term server, the [[io.vertx.scala.ext.shell.term.TermServer#termHandler]] must be set before.   * @return this object
+   */
+  
   def listen(): TermServer = {
     asJava.asInstanceOf[JTermServer].listen()
     this
   }
 
   /**
-    * Bind the term server, the [[io.vertx.scala.ext.shell.term.TermServer#termHandler]] must be set before.
-    * @param listenHandler the listen handler
-    * @return this object
-    */
+   * Bind the term server, the [[io.vertx.scala.ext.shell.term.TermServer#termHandler]] must be set before.   * @param listenHandler the listen handler
+   * @return this object
+   */
+  
   def listen(listenHandler: Handler[AsyncResult[TermServer]]): TermServer = {
     asJava.asInstanceOf[JTermServer].listen({x: AsyncResult[JTermServer] => listenHandler.handle(AsyncResultWrapper[JTermServer, TermServer](x, a => TermServer(a)))})
     this
   }
 
+
+
   /**
-    * The actual port the server is listening on. This is useful if you bound the server specifying 0 as port number
-    * signifying an ephemeral port
-    * @return the actual port the server is listening on.
-    */
-  def actualPort(): Int = {
+   * The actual port the server is listening on. This is useful if you bound the server specifying 0 as port number
+   * signifying an ephemeral port   * @return the actual port the server is listening on.
+   */
+  def actualPort (): Int = {
     asJava.asInstanceOf[JTermServer].actualPort().asInstanceOf[Int]
   }
 
   /**
-    * Close the server. This will close any currently open connections. The close may not complete until after this
-    * method has returned.
-    */
-  def close(): Unit = {
+   * Close the server. This will close any currently open connections. The close may not complete until after this
+   * method has returned.
+   */
+  def close (): Unit = {
     asJava.asInstanceOf[JTermServer].close()
   }
 
   /**
-    * Like [[io.vertx.scala.ext.shell.term.TermServer#close]] but supplying a handler that will be notified when close is complete.
-    * @param completionHandler the handler to be notified when the term server is closed
-    */
-  def close(completionHandler: Handler[AsyncResult[Unit]]): Unit = {
+   * Like [[io.vertx.scala.ext.shell.term.TermServer#close]] but supplying a handler that will be notified when close is complete.   * @param completionHandler the handler to be notified when the term server is closed
+   */
+  def close (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JTermServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
+
  /**
-   * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def listenFuture(): scala.concurrent.Future[TermServer] = {
+  * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def listenFuture (): scala.concurrent.Future[TermServer] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JTermServer, TermServer](x => TermServer(x))
     asJava.asInstanceOf[JTermServer].listen(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def closeFuture(): scala.concurrent.Future[Unit] = {
+  * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def closeFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JTermServer].close(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -130,82 +134,75 @@ class TermServer(private val _asJava: Object) {
 }
 
 object TermServer {
-  def apply(asJava: JTermServer) = new TermServer(asJava)  
+  def apply(asJava: JTermServer) = new TermServer(asJava)
+  
   /**
-    * Create a term server for the SSH protocol.
-    * @param vertx the vertx instance
-    * @return the term server
-    */
+   * Create a term server for the SSH protocol.   * @param vertx the vertx instance
+   * @return the term server
+   */
   def createSSHTermServer(vertx: Vertx): TermServer = {
     TermServer(JTermServer.createSSHTermServer(vertx.asJava.asInstanceOf[JVertx]))
   }
 
   /**
-    * Create a term server for the SSH protocol.
-    * @param vertx the vertx instance
-    * @param options the ssh optionssee <a href="../../../../../../../../cheatsheet/SSHTermOptions.html">SSHTermOptions</a>
-    * @return the term server
-    */
-  def createSSHTermServer(vertx: Vertx, options: SSHTermOptions): TermServer = {
+   * Create a term server for the SSH protocol.   * @param vertx the vertx instance
+   * @param options the ssh options see <a href="../../../../../../../../cheatsheet/SSHTermOptions.html">SSHTermOptions</a>
+   * @return the term server
+   */
+  def createSSHTermServer(vertx: Vertx,options: SSHTermOptions): TermServer = {
     TermServer(JTermServer.createSSHTermServer(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
   /**
-    * Create a term server for the Telnet protocol.
-    * @param vertx the vertx instance
-    * @return the term server
-    */
+   * Create a term server for the Telnet protocol.   * @param vertx the vertx instance
+   * @return the term server
+   */
   def createTelnetTermServer(vertx: Vertx): TermServer = {
     TermServer(JTermServer.createTelnetTermServer(vertx.asJava.asInstanceOf[JVertx]))
   }
 
   /**
-    * Create a term server for the Telnet protocol.
-    * @param vertx the vertx instance
-    * @param options the term optionssee <a href="../../../../../../../../cheatsheet/TelnetTermOptions.html">TelnetTermOptions</a>
-    * @return the term server
-    */
-  def createTelnetTermServer(vertx: Vertx, options: TelnetTermOptions): TermServer = {
+   * Create a term server for the Telnet protocol.   * @param vertx the vertx instance
+   * @param options the term options see <a href="../../../../../../../../cheatsheet/TelnetTermOptions.html">TelnetTermOptions</a>
+   * @return the term server
+   */
+  def createTelnetTermServer(vertx: Vertx,options: TelnetTermOptions): TermServer = {
     TermServer(JTermServer.createTelnetTermServer(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
   /**
-    * Create a term server for the HTTP protocol.
-    * @param vertx the vertx instance
-    * @return the term server
-    */
+   * Create a term server for the HTTP protocol.   * @param vertx the vertx instance
+   * @return the term server
+   */
   def createHttpTermServer(vertx: Vertx): TermServer = {
     TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx]))
   }
 
   /**
-    * Create a term server for the HTTP protocol.
-    * @param vertx the vertx instance
-    * @param options the term optionssee <a href="../../../../../../../../cheatsheet/HttpTermOptions.html">HttpTermOptions</a>
-    * @return the term server
-    */
-  def createHttpTermServer(vertx: Vertx, options: HttpTermOptions): TermServer = {
+   * Create a term server for the HTTP protocol.   * @param vertx the vertx instance
+   * @param options the term options see <a href="../../../../../../../../cheatsheet/HttpTermOptions.html">HttpTermOptions</a>
+   * @return the term server
+   */
+  def createHttpTermServer(vertx: Vertx,options: HttpTermOptions): TermServer = {
     TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 
   /**
-    * Create a term server for the HTTP protocol, using an existing router.
-    * @param vertx the vertx instance
-    * @param router the router
-    * @return the term server
-    */
-  def createHttpTermServer(vertx: Vertx, router: Router): TermServer = {
+   * Create a term server for the HTTP protocol, using an existing router.   * @param vertx the vertx instance
+   * @param router the router
+   * @return the term server
+   */
+  def createHttpTermServer(vertx: Vertx,router: Router): TermServer = {
     TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx], router.asJava.asInstanceOf[JRouter]))
   }
 
   /**
-    * Create a term server for the HTTP protocol, using an existing router.
-    * @param vertx the vertx instance
-    * @param router the router
-    * @param options the term optionssee <a href="../../../../../../../../cheatsheet/HttpTermOptions.html">HttpTermOptions</a>
-    * @return the term server
-    */
-  def createHttpTermServer(vertx: Vertx, router: Router, options: HttpTermOptions): TermServer = {
+   * Create a term server for the HTTP protocol, using an existing router.   * @param vertx the vertx instance
+   * @param router the router
+   * @param options the term options see <a href="../../../../../../../../cheatsheet/HttpTermOptions.html">HttpTermOptions</a>
+   * @return the term server
+   */
+  def createHttpTermServer(vertx: Vertx,router: Router,options: HttpTermOptions): TermServer = {
     TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx], router.asJava.asInstanceOf[JRouter], options.asJava))
   }
 

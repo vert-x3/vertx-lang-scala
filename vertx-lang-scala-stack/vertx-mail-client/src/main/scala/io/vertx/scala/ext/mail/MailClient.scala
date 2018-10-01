@@ -16,11 +16,9 @@
 
 package io.vertx.scala.ext.mail
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.mail.{MailConfig => JMailConfig}
+import scala.reflect.runtime.universe._
 import io.vertx.ext.mail.{MailResult => JMailResult}
 import io.vertx.ext.mail.{MailClient => JMailClient}
 import io.vertx.core.AsyncResult
@@ -28,39 +26,46 @@ import io.vertx.core.Handler
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.ext.mail.{MailMessage => JMailMessage}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * SMTP mail client for Vert.x
   * 
   * A simple asynchronous API for sending mails from Vert.x applications
   */
-class MailClient(private val _asJava: Object) {
 
+class MailClient(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
   /**
-    * send a single mail via MailClient
-    * @param email MailMessage object containing the mail text, from/to, attachments etcsee <a href="../../../../../../../cheatsheet/MailMessage.html">MailMessage</a>
-    * @param resultHandler will be called when the operation is finished or it fails (may be null to ignore the result)
-    * @return this MailClient instance so the method can be used fluently
-    */
+   * send a single mail via MailClient   * @param email MailMessage object containing the mail text, from/to, attachments etc see <a href="../../../../../../../cheatsheet/MailMessage.html">MailMessage</a>
+   * @param resultHandler will be called when the operation is finished or it fails (may be null to ignore the result)
+   * @return this MailClient instance so the method can be used fluently
+   */
+  
   def sendMail(email: MailMessage, resultHandler: Handler[AsyncResult[MailResult]]): MailClient = {
     asJava.asInstanceOf[JMailClient].sendMail(email.asJava, {x: AsyncResult[JMailResult] => resultHandler.handle(AsyncResultWrapper[JMailResult, MailResult](x, a => MailResult(a)))})
     this
   }
 
+
+
   /**
-    * close the MailClient
-    */
-  def close(): Unit = {
+   * close the MailClient
+   */
+  def close (): Unit = {
     asJava.asInstanceOf[JMailClient].close()
   }
 
+
  /**
-   * Like [[sendMail]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def sendMailFuture(email: MailMessage): scala.concurrent.Future[MailResult] = {
+  * Like [[sendMail]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def sendMailFuture (email: MailMessage): scala.concurrent.Future[MailResult] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMailResult, MailResult](x => MailResult(x))
     asJava.asInstanceOf[JMailClient].sendMail(email.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -69,36 +74,34 @@ class MailClient(private val _asJava: Object) {
 }
 
 object MailClient {
-  def apply(asJava: JMailClient) = new MailClient(asJava)  
+  def apply(asJava: JMailClient) = new MailClient(asJava)
+  
   /**
-    * create a non shared instance of the mail client
-    * @param vertx the Vertx instance the operation will be run in
-    * @param config MailConfig configuration to be used for sending mailssee <a href="../../../../../../../cheatsheet/MailConfig.html">MailConfig</a>
-    * @return MailClient instance that can then be used to send multiple mails
-    */
-  def createNonShared(vertx: Vertx, config: MailConfig): MailClient = {
+   * create a non shared instance of the mail client   * @param vertx the Vertx instance the operation will be run in
+   * @param config MailConfig configuration to be used for sending mails see <a href="../../../../../../../cheatsheet/MailConfig.html">MailConfig</a>
+   * @return MailClient instance that can then be used to send multiple mails
+   */
+  def createNonShared(vertx: Vertx,config: MailConfig): MailClient = {
     MailClient(JMailClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config.asJava))
   }
 
   /**
-    * Create a Mail client which shares its data source with any other Mongo clients created with the same
-    * pool name
-    * @param vertx the Vert.x instance
-    * @param config the configurationsee <a href="../../../../../../../cheatsheet/MailConfig.html">MailConfig</a>
-    * @param poolName the pool name
-    * @return the client
-    */
-  def createShared(vertx: Vertx, config: MailConfig, poolName: String): MailClient = {
+   * Create a Mail client which shares its data source with any other Mongo clients created with the same
+   * pool name   * @param vertx the Vert.x instance
+   * @param config the configuration see <a href="../../../../../../../cheatsheet/MailConfig.html">MailConfig</a>
+   * @param poolName the pool name
+   * @return the client
+   */
+  def createShared(vertx: Vertx,config: MailConfig,poolName: String): MailClient = {
     MailClient(JMailClient.createShared(vertx.asJava.asInstanceOf[JVertx], config.asJava, poolName.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Like [[io.vertx.scala.ext.mail.MailClient#createShared]] but with the default pool name
-    * @param vertx the Vert.x instance
-    * @param config the configurationsee <a href="../../../../../../../cheatsheet/MailConfig.html">MailConfig</a>
-    * @return the client
-    */
-  def createShared(vertx: Vertx, config: MailConfig): MailClient = {
+   * Like [[io.vertx.scala.ext.mail.MailClient#createShared]] but with the default pool name   * @param vertx the Vert.x instance
+   * @param config the configuration see <a href="../../../../../../../cheatsheet/MailConfig.html">MailConfig</a>
+   * @return the client
+   */
+  def createShared(vertx: Vertx,config: MailConfig): MailClient = {
     MailClient(JMailClient.createShared(vertx.asJava.asInstanceOf[JVertx], config.asJava))
   }
 

@@ -16,113 +16,115 @@
 
 package io.vertx.scala.amqpbridge
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.amqpbridge.{AmqpBridgeOptions => JAmqpBridgeOptions}
 import io.vertx.amqpbridge.{AmqpBridge => JAmqpBridge}
-import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
+import scala.reflect.runtime.universe._
 import io.vertx.scala.core.eventbus.MessageConsumer
 import io.vertx.scala.core.eventbus.MessageProducer
-import io.vertx.core.AsyncResult
-import io.vertx.core.Handler
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
+import io.vertx.lang.scala.Converter._
+import io.vertx.core.eventbus.{MessageProducer => JMessageProducer}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * Vert.x AMQP Bridge. Facilitates sending and receiving AMQP 1.0 messages.
-  */
-class AmqpBridge(private val _asJava: Object) {
 
+  */
+
+class AmqpBridge(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
+
+
   /**
-    * Starts the bridge, establishing the underlying connection.
-    * @param hostname the host name to connect to
-    * @param port the port to connect to
-    * @param username the username
-    * @param password the password
-    * @param resultHandler the result handler
-    */
-  def start(hostname: String, port: Int, username: String, password: String, resultHandler: Handler[AsyncResult[AmqpBridge]]): Unit = {
+   * Starts the bridge, establishing the underlying connection.   * @param hostname the host name to connect to
+   * @param port the port to connect to
+   * @param username the username
+   * @param password the password
+   * @param resultHandler the result handler
+   */
+  def start (hostname: String, port: Int, username: String, password: String, resultHandler: Handler[AsyncResult[AmqpBridge]]): Unit = {
     asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], username.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String], {x: AsyncResult[JAmqpBridge] => resultHandler.handle(AsyncResultWrapper[JAmqpBridge, AmqpBridge](x, a => AmqpBridge(a)))})
   }
 
   /**
-    * Starts the bridge, establishing the underlying connection.
-    * @param hostname the host name to connect to
-    * @param port the port to connect to
-    * @param resultHandler the result handler
-    */
-  def start(hostname: String, port: Int, resultHandler: Handler[AsyncResult[AmqpBridge]]): Unit = {
+   * Starts the bridge, establishing the underlying connection.   * @param hostname the host name to connect to
+   * @param port the port to connect to
+   * @param resultHandler the result handler
+   */
+  def start (hostname: String, port: Int, resultHandler: Handler[AsyncResult[AmqpBridge]]): Unit = {
     asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JAmqpBridge] => resultHandler.handle(AsyncResultWrapper[JAmqpBridge, AmqpBridge](x, a => AmqpBridge(a)))})
   }
 
   /**
-    * Creates a consumer on the given AMQP address.
-    *
-    * This method MUST be called from the bridge Context thread, as used in the result handler callback from the start
-    * methods. The bridge MUST be successfully started before the method is called.
-    * @param amqpAddress the address to consume from
-    * @return the consumer
-    */
-  def createConsumer[T: TypeTag](amqpAddress: String): MessageConsumer[T] = {
+   * Creates a consumer on the given AMQP address.
+   *
+   * This method MUST be called from the bridge Context thread, as used in the result handler callback from the start
+   * methods. The bridge MUST be successfully started before the method is called.   * @param amqpAddress the address to consume from
+   * @return the consumer
+   */
+  def createConsumer [T: TypeTag](amqpAddress: String): MessageConsumer[T] = {
     MessageConsumer[T](asJava.asInstanceOf[JAmqpBridge].createConsumer[Object](amqpAddress.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Creates a producer to the given AMQP address.
-    *
-    * This method MUST be called from the bridge Context thread, as used in the result handler callback from the start
-    * methods. The bridge MUST be successfully started before the method is called.
-    * @param amqpAddress the address to produce to
-    * @return the producer
-    */
-  def createProducer[T: TypeTag](amqpAddress: String): MessageProducer[T] = {
+   * Creates a producer to the given AMQP address.
+   *
+   * This method MUST be called from the bridge Context thread, as used in the result handler callback from the start
+   * methods. The bridge MUST be successfully started before the method is called.   * @param amqpAddress the address to produce to
+   * @return the producer
+   */
+  def createProducer [T: TypeTag](amqpAddress: String): MessageProducer[T] = {
     MessageProducer[T](asJava.asInstanceOf[JAmqpBridge].createProducer[Object](amqpAddress.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Shuts the bridge down, closing the underlying connection.
-    * @param resultHandler the result handler
-    */
-  def close(resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+   * Shuts the bridge down, closing the underlying connection.   * @param resultHandler the result handler
+   */
+  def close (resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JAmqpBridge].close({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
-    * Set an end handler. This will fire if the underlying connection is unexpectedly disconnected or remotely closed.
-    * @param endHandler the handler
-    */
-  def endHandler(endHandler: Handler[Unit]): Unit = {
+   * Set an end handler. This will fire if the underlying connection is unexpectedly disconnected or remotely closed.   * @param endHandler the handler
+   */
+  def endHandler (endHandler: Handler[Unit]): Unit = {
     asJava.asInstanceOf[JAmqpBridge].endHandler({x: Void => endHandler.handle(x)})
   }
 
+
  /**
-   * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def startFuture(hostname: String, port: Int, username: String, password: String): scala.concurrent.Future[AmqpBridge] = {
+  * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def startFuture (hostname: String, port: Int, username: String, password: String): scala.concurrent.Future[AmqpBridge] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAmqpBridge, AmqpBridge](x => AmqpBridge(x))
     asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], username.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def startFuture(hostname: String, port: Int): scala.concurrent.Future[AmqpBridge] = {
+  * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def startFuture (hostname: String, port: Int): scala.concurrent.Future[AmqpBridge] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JAmqpBridge, AmqpBridge](x => AmqpBridge(x))
     asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  def closeFuture(): scala.concurrent.Future[Unit] = {
+  * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def closeFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAmqpBridge].close(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -131,23 +133,22 @@ class AmqpBridge(private val _asJava: Object) {
 }
 
 object AmqpBridge {
-  def apply(asJava: JAmqpBridge) = new AmqpBridge(asJava)  
+  def apply(asJava: JAmqpBridge) = new AmqpBridge(asJava)
+  
   /**
-    * Creates a Bridge.
-    * @param vertx the vertx instance to use
-    * @return the (not-yet-started) bridge.
-    */
+   * Creates a Bridge.   * @param vertx the vertx instance to use
+   * @return the (not-yet-started) bridge.
+   */
   def create(vertx: Vertx): AmqpBridge = {
     AmqpBridge(JAmqpBridge.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
   /**
-    * Creates a Bridge with the given options.
-    * @param vertx the vertx instance to use
-    * @param options the optionssee <a href="../../../../../../cheatsheet/AmqpBridgeOptions.html">AmqpBridgeOptions</a>
-    * @return the (not-yet-started) bridge.
-    */
-  def create(vertx: Vertx, options: AmqpBridgeOptions): AmqpBridge = {
+   * Creates a Bridge with the given options.   * @param vertx the vertx instance to use
+   * @param options the options see <a href="../../../../../../cheatsheet/AmqpBridgeOptions.html">AmqpBridgeOptions</a>
+   * @return the (not-yet-started) bridge.
+   */
+  def create(vertx: Vertx,options: AmqpBridgeOptions): AmqpBridge = {
     AmqpBridge(JAmqpBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
   }
 

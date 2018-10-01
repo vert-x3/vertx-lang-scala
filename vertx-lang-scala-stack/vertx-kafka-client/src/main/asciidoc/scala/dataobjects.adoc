@@ -8,40 +8,32 @@ Information about a Kafka cluster node
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[empty]]`empty`|`Boolean`|
-+++
+|[[empty]]`@empty`|`Boolean`|+++
 
 +++
-|[[hasRack]]`hasRack`|`Boolean`|
-+++
+|[[hasRack]]`@hasRack`|`Boolean`|+++
 Set if this node has a defined rack
 +++
-|[[host]]`host`|`String`|
-+++
+|[[host]]`@host`|`String`|+++
 Set the host name for this node
 +++
-|[[id]]`id`|`Number (int)`|
-+++
+|[[id]]`@id`|`Number (int)`|+++
 Set the node id of this node
 +++
-|[[idString]]`idString`|`String`|
-+++
+|[[idString]]`@idString`|`String`|+++
 Set the string representation of the node id
 +++
-|[[isEmpty]]`isEmpty`|`Boolean`|
-+++
+|[[isEmpty]]`@isEmpty`|`Boolean`|+++
 Set if this node is empty
 +++
-|[[port]]`port`|`Number (int)`|
-+++
+|[[port]]`@port`|`Number (int)`|+++
 Set the port for this node
 +++
-|[[rack]]`rack`|`String`|
-+++
+|[[rack]]`@rack`|`String`|+++
 Set the rack for this node
 +++
 |===
@@ -54,16 +46,14 @@ Provide additional metadata when an offset is committed
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[metadata]]`metadata`|`String`|
-+++
+|[[metadata]]`@metadata`|`String`|+++
 Set additional metadata for the offset committed
 +++
-|[[offset]]`offset`|`Number (long)`|
-+++
+|[[offset]]`@offset`|`Number (long)`|+++
 Set the offset to commit
 +++
 |===
@@ -76,16 +66,14 @@ Represent information related to a Offset with timestamp information
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[offset]]`offset`|`Number (long)`|
-+++
+|[[offset]]`@offset`|`Number (long)`|+++
 Set the offset
 +++
-|[[timestamp]]`timestamp`|`Number (long)`|
-+++
+|[[timestamp]]`@timestamp`|`Number (long)`|+++
 Set the timestamp
 +++
 |===
@@ -98,28 +86,23 @@ Information about a specific Kafka topic partition
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[inSyncReplicas]]`inSyncReplicas`|`Array of link:dataobjects.html#Node[Node]`|
-+++
+|[[inSyncReplicas]]`@inSyncReplicas`|`Array of link:dataobjects.html#Node[Node]`|+++
 Set the subset of the replicas that are in sync
 +++
-|[[leader]]`leader`|`link:dataobjects.html#Node[Node]`|
-+++
+|[[leader]]`@leader`|`link:dataobjects.html#Node[Node]`|+++
 Set the node id of the node currently acting as a leader
 +++
-|[[partition]]`partition`|`Number (int)`|
-+++
+|[[partition]]`@partition`|`Number (int)`|+++
 Set the partition id
 +++
-|[[replicas]]`replicas`|`Array of link:dataobjects.html#Node[Node]`|
-+++
+|[[replicas]]`@replicas`|`Array of link:dataobjects.html#Node[Node]`|+++
 Set the complete set of replicas for this partition
 +++
-|[[topic]]`topic`|`String`|
-+++
+|[[topic]]`@topic`|`String`|+++
 Set the topic name
 +++
 |===
@@ -132,28 +115,23 @@ Metadata related to a Kafka record
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[checksum]]`checksum`|`Number (long)`|
-+++
+|[[checksum]]`@checksum`|`Number (long)`|+++
 Set the checksum (CRC32) of the record.
 +++
-|[[offset]]`offset`|`Number (long)`|
-+++
+|[[offset]]`@offset`|`Number (long)`|+++
 Set the offset of the record in the topic/partition.
 +++
-|[[partition]]`partition`|`Number (int)`|
-+++
+|[[partition]]`@partition`|`Number (int)`|+++
 Set the partition the record was sent to
 +++
-|[[timestamp]]`timestamp`|`Number (long)`|
-+++
+|[[timestamp]]`@timestamp`|`Number (long)`|+++
 Set the timestamp of the record in the topic/partition
 +++
-|[[topic]]`topic`|`String`|
-+++
+|[[topic]]`@topic`|`String`|+++
 Set the topic the record was appended to
 +++
 |===
@@ -166,16 +144,14 @@ Represent information related to a partition for a topic
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[partition]]`partition`|`Number (int)`|
-+++
+|[[partition]]`@partition`|`Number (int)`|+++
 Set the partition number
 +++
-|[[topic]]`topic`|`String`|
-+++
+|[[topic]]`@topic`|`String`|+++
 Set the topic name
 +++
 |===

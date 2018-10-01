@@ -16,62 +16,67 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{AclToken => JAclToken}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds properties of Acl token
-  */
+ * Holds properties of Acl token
+ */
+
 class AclToken(private val _asJava: JAclToken) {
-
   def asJava = _asJava
-
   /**
-    * Set ID of token
-    */
+   * Set ID of token
+   */
   def setId(value: String) = {
     asJava.setId(value)
     this
   }
+
   def getId: String = {
     asJava.getId().asInstanceOf[String]
   }
 
   /**
-    * Set name of token
-    */
+   * Set name of token
+   */
   def setName(value: String) = {
     asJava.setName(value)
     this
   }
+
   def getName: String = {
     asJava.getName().asInstanceOf[String]
   }
 
   /**
-    * Set rules for token
-    */
+   * Set rules for token
+   */
   def setRules(value: String) = {
     asJava.setRules(value)
     this
   }
+
   def getRules: String = {
     asJava.getRules().asInstanceOf[String]
   }
 
   /**
-    * Set type of token
-    */
+   * Set type of token
+   */
   def setType(value: io.vertx.ext.consul.AclTokenType) = {
     asJava.setType(value)
     this
   }
+
   def getType: io.vertx.ext.consul.AclTokenType = {
     asJava.getType()
   }
+
 }
+
 
 object AclToken {
   
@@ -95,3 +100,4 @@ object AclToken {
     }
   }
 }
+

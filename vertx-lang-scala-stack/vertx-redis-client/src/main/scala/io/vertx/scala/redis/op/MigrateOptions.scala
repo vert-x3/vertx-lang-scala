@@ -16,17 +16,29 @@
 
 package io.vertx.scala.redis.op
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.redis.op.{MigrateOptions => JMigrateOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
-class MigrateOptions(private val _asJava: JMigrateOptions) {
 
+ */
+
+class MigrateOptions(private val _asJava: JMigrateOptions) {
   def asJava = _asJava
+  def setCopy(value: Boolean) = {
+    asJava.setCopy(value)
+    this
+  }
+
+  def setReplace(value: Boolean) = {
+    asJava.setReplace(value)
+    this
+  }
+
 }
+
 
 object MigrateOptions {
   
@@ -50,3 +62,4 @@ object MigrateOptions {
     }
   }
 }
+

@@ -16,62 +16,67 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.http.{RequestOptions => JRequestOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options describing how an [[io.vertx.scala.core.http.HttpClient]] will make connect to make a request.
-  */
+ * Options describing how an [[io.vertx.scala.core.http.HttpClient]] will make connect to make a request.
+ */
+
 class RequestOptions(private val _asJava: JRequestOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set the host name to be used by the client request.
-    */
+   * Set the host name to be used by the client request.
+   */
   def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
+
   def getHost: String = {
     asJava.getHost().asInstanceOf[String]
   }
 
   /**
-    * Set the port to be used by the client request.
-    */
+   * Set the port to be used by the client request.
+   */
   def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
+
   def getPort: Int = {
     asJava.getPort().asInstanceOf[Int]
   }
 
   /**
-    * Set whether SSL/TLS is enabled
-    */
+   * Set whether SSL/TLS is enabled
+   */
   def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
+
   def isSsl: Boolean = {
     asJava.isSsl().asInstanceOf[Boolean]
   }
 
   /**
-    * Set the request relative URI
-    */
+   * Set the request relative URI
+   */
   def setURI(value: String) = {
     asJava.setURI(value)
     this
   }
+
   def getURI: String = {
     asJava.getURI().asInstanceOf[String]
   }
+
 }
+
 
 object RequestOptions {
   
@@ -95,3 +100,4 @@ object RequestOptions {
     }
   }
 }
+

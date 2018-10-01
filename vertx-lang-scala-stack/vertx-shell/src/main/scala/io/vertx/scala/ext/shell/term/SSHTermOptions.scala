@@ -16,97 +16,102 @@
 
 package io.vertx.scala.ext.shell.term
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.shell.term.{SSHTermOptions => JSSHTermOptions}
 import io.vertx.scala.core.net.JksOptions
 import io.vertx.scala.core.net.PemKeyCertOptions
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
+import io.vertx.core.json.JsonObject
 import io.vertx.ext.auth.{AuthOptions => JAuthOptions}
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 import io.vertx.scala.core.net.PfxOptions
+import scala.collection.JavaConverters._
 import io.vertx.scala.ext.auth.AuthOptions
 import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
-  * The SSH term configuration options.
-  */
+ * The SSH term configuration options.
+ */
+
 class SSHTermOptions(private val _asJava: JSSHTermOptions) {
-
   def asJava = _asJava
-
   /**
-    */
 
+   */
   /**
-    * Set the default charset to use when the client does not specifies one.
-    */
+   * Set the default charset to use when the client does not specifies one.
+   */
   def setDefaultCharset(value: String) = {
     asJava.setDefaultCharset(value)
     this
   }
+
   def getDefaultCharset: String = {
     asJava.getDefaultCharset().asInstanceOf[String]
   }
 
   /**
-    * Set the host
-    */
+   * Set the host
+   */
   def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
+
   def getHost: String = {
     asJava.getHost().asInstanceOf[String]
   }
 
   /**
-    * The path of the <i>inputrc</i> config.
-    */
+   * The path of the <i>inputrc</i> config.
+   */
   def setIntputrc(value: String) = {
     asJava.setIntputrc(value)
     this
   }
+
   def getIntputrc: String = {
     asJava.getIntputrc().asInstanceOf[String]
   }
 
   /**
-    * Set the key pair options in jks format, aka Java keystore.
-    */
+   * Set the key pair options in jks format, aka Java keystore.
+   */
   def setKeyPairOptions(value: JksOptions) = {
     asJava.setKeyPairOptions(value.asJava)
     this
   }
 
   /**
-    * Set the key pair store options in pem format.
-    */
+   * Set the key pair store options in pem format.
+   */
   def setPemKeyPairOptions(value: PemKeyCertOptions) = {
     asJava.setPemKeyPairOptions(value.asJava)
     this
   }
 
   /**
-    * Set the key pair options in pfx format.
-    */
+   * Set the key pair options in pfx format.
+   */
   def setPfxKeyPairOptions(value: PfxOptions) = {
     asJava.setPfxKeyPairOptions(value.asJava)
     this
   }
 
   /**
-    * Set the port
-    */
+   * Set the port
+   */
   def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
+
   def getPort: Int = {
     asJava.getPort().asInstanceOf[Int]
   }
+
 }
+
 
 object SSHTermOptions {
   
@@ -130,3 +135,4 @@ object SSHTermOptions {
     }
   }
 }
+

@@ -4,8 +4,7 @@ This discovery bridge imports services from Kubernetes (or Openshift v3) into th
 Kubernetes services are mapped to `link:../../vertx-service-discovery/dataobjects.html#Record[Record]`. This bridge only
 supports the importation of services from kubernetes in vert.x (and not the opposite).
 
-`link:../../vertx-service-discovery/dataobjects.html#Record[Record]`are created from Kubernetes Service. The service type is deduced from the `service.type` label. If
-not set, the service is imported as `unknown`. Only `http-endpoint` are supported for now.
+`link:../../vertx-service-discovery/dataobjects.html#Record[Record]`are created from Kubernetes Service. The service type is deduced from the `service-type` label or from the port exposed by the service.
 
 ==== Using the bridge
 
@@ -54,5 +53,16 @@ For HTTP endpoints, the `ssl` (`https`) attribute is set to `true` if the servic
 
 ==== Dynamics
 
-The bridge imports all services on `start` and removes them on `stop`. In between it watches the Kubernetes
-services and add the new ones and removes the deleted ones.
+The bridge imports all services on `start` and removes them on `stop`. In between it watches the Kubernetes services and add the new ones and removes the deleted ones.
+
+==== Supported types
+
+The bridge uses the `service-type` label to induce the type. In addition it checks the port of the service. Are supported:
+
+* ports 80, 443 and from 8080 to 9000: HTTP endpoint
+* ports 5432 and 5433: JDBC data source (PostGreSQL)
+* ports 3306 and 13306: JDBC data source (MySQL)
+* port 6379: Redis data source
+* ports 27017, 27018 and 27019: MongoDB data source
+
+If present, the `service-type` overrides the port-based deduction.
