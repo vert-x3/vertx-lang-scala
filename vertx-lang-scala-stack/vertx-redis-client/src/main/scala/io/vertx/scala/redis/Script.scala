@@ -16,36 +16,46 @@
 
 package io.vertx.scala.redis
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.redis.{Script => JScript}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Container for a script and its sha1 hash.
-  */
-class Script(private val _asJava: Object) {
 
+  */
+
+class Script(private val _asJava: Object) {
   def asJava = _asJava
 
 
-  def getScript(): String = {
+
+
+
+
+  def getScript (): String = {
     asJava.asInstanceOf[JScript].getScript().asInstanceOf[String]
   }
 
-  def getSha1(): String = {
+
+  def getSha1 (): String = {
     asJava.asInstanceOf[JScript].getSha1().asInstanceOf[String]
   }
+
 
 }
 
 object Script {
-  def apply(asJava: JScript) = new Script(asJava)  
+  def apply(asJava: JScript) = new Script(asJava)
+  
+
   def create(script: String): Script = {
     Script(JScript.create(script.asInstanceOf[java.lang.String]))
   }
 
-  def create(script: String, sha1: String): Script = {
+
+  def create(script: String,sha1: String): Script = {
     Script(JScript.create(script.asInstanceOf[java.lang.String], sha1.asInstanceOf[java.lang.String]))
   }
 

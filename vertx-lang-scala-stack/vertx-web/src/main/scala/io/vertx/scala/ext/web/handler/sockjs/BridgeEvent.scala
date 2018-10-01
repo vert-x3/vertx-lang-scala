@@ -16,31 +16,32 @@
 
 package io.vertx.scala.ext.web.handler.sockjs
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.bridge.{BaseBridgeEvent => JBaseBridgeEvent}
 import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
+import scala.reflect.runtime.universe._
+import io.vertx.scala.core.Future
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.bridge.BaseBridgeEvent
 import io.vertx.core.{Future => JFuture}
 import io.vertx.ext.web.handler.sockjs.{BridgeEvent => JBridgeEvent}
 import io.vertx.ext.bridge.BridgeEventType
 import io.vertx.core.json.JsonObject
-import io.vertx.scala.core.Future
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * Represents an event that occurs on the event bus bridge.
   * 
   * Please consult the documentation for a full explanation.
   */
-class BridgeEvent(private val _asJava: Object)
-    extends BaseBridgeEvent(_asJava)   {
+
+class BridgeEvent(private val _asJava: Object) extends BaseBridgeEvent (_asJava) {
 
   private var cached_0: Option[Handler[AsyncResult[Boolean]]] = None
   private var cached_1: Option[SockJSSocket] = None
+
 
 
   override def completer(): Handler[AsyncResult[Boolean]] = {
@@ -52,9 +53,8 @@ class BridgeEvent(private val _asJava: Object)
   }
 
   /**
-    * Get the SockJSSocket instance corresponding to the event
-    * @return the SockJSSocket instance
-    */
+   * Get the SockJSSocket instance corresponding to the event   * @return the SockJSSocket instance
+   */
   def socket(): SockJSSocket = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JBridgeEvent].socket()
@@ -63,63 +63,81 @@ class BridgeEvent(private val _asJava: Object)
     cached_1.get
   }
 
-  override def setHandler(arg0: Handler[AsyncResult[Boolean]]): Future[Boolean] = {
+
+
+  override 
+  def setHandler(arg0: Handler[AsyncResult[Boolean]]): Future[Boolean] = {
     asJava.asInstanceOf[JBridgeEvent].setHandler({x: AsyncResult[java.lang.Boolean] => arg0.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
     this
   }
 
   /**
-    * Get the raw JSON message for the event. This will be null for SOCKET_CREATED or SOCKET_CLOSED events as there is
-    * no message involved.
-    * @param message the raw message
-    * @return this reference, so it can be used fluently
-    */
-  override def setRawMessage(message: io.vertx.core.json.JsonObject): BridgeEvent = {
+   * Get the raw JSON message for the event. This will be null for SOCKET_CREATED or SOCKET_CLOSED events as there is
+   * no message involved.   * @param message the raw message
+   * @return this reference, so it can be used fluently
+   */
+  override 
+  def setRawMessage(message: io.vertx.core.json.JsonObject): BridgeEvent = {
     asJava.asInstanceOf[JBridgeEvent].setRawMessage(message)
     this
   }
+
+
 
   override def compose[U: TypeTag](handler: Handler[Boolean], next: Future[U]): Future[U] = {
     Future[U](asJava.asInstanceOf[JBridgeEvent].compose[Object]({x: java.lang.Boolean => handler.handle(x.asInstanceOf[Boolean])}, next.asJava.asInstanceOf[JFuture[Object]]))
   }
 
+
   override def compose[U: TypeTag](mapper: Boolean => Future[U]): Future[U] = {
     Future[U](asJava.asInstanceOf[JBridgeEvent].compose[Object]({x: java.lang.Boolean => mapper(x.asInstanceOf[Boolean]).asJava.asInstanceOf[JFuture[Object]]}))
   }
+
 
   override def map[U: TypeTag](mapper: Boolean => U): Future[U] = {
     Future[U](asJava.asInstanceOf[JBridgeEvent].map[Object]({x: java.lang.Boolean => toJava[U](mapper(x.asInstanceOf[Boolean]))}))
   }
 
+
   override def recover(mapper: Throwable => Future[Boolean]): Future[Boolean] = {
     Future[Boolean](asJava.asInstanceOf[JBridgeEvent].recover({x: Throwable => mapper(x).asJava.asInstanceOf[JFuture[java.lang.Boolean]]}))
   }
+
 
   override def otherwise(mapper: Throwable => Boolean): Future[Boolean] = {
     Future[Boolean](asJava.asInstanceOf[JBridgeEvent].otherwise({x: Throwable => mapper(x).asInstanceOf[java.lang.Boolean]}))
   }
 
+
   override def otherwise(value: Boolean): Future[Boolean] = {
     Future[Boolean](asJava.asInstanceOf[JBridgeEvent].otherwise(value.asInstanceOf[java.lang.Boolean]))
   }
+
 
   override def otherwiseEmpty(): Future[Boolean] = {
     Future[Boolean](asJava.asInstanceOf[JBridgeEvent].otherwiseEmpty())
   }
 
-  override def complete(arg0: Boolean): Unit = {
+
+
+  override def complete (arg0: Boolean): Unit = {
     asJava.asInstanceOf[JBridgeEvent].complete(arg0.asInstanceOf[java.lang.Boolean])
   }
 
-  override def tryComplete(arg0: Boolean): Boolean = {
+
+  override def tryComplete (arg0: Boolean): Boolean = {
     asJava.asInstanceOf[JBridgeEvent].tryComplete(arg0.asInstanceOf[java.lang.Boolean]).asInstanceOf[Boolean]
   }
 
-  override def result(): Boolean = {
+
+  override def result (): Boolean = {
     asJava.asInstanceOf[JBridgeEvent].result().asInstanceOf[Boolean]
   }
 
-  override def setFuture(): scala.concurrent.Future[Boolean] = {
+
+
+  override def setFuture (): scala.concurrent.Future[Boolean] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Boolean, Boolean](x => x.asInstanceOf[Boolean])
     asJava.asInstanceOf[JBridgeEvent].setHandler(promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -128,5 +146,6 @@ class BridgeEvent(private val _asJava: Object)
 }
 
 object BridgeEvent {
-  def apply(asJava: JBridgeEvent) = new BridgeEvent(asJava)  
+  def apply(asJava: JBridgeEvent) = new BridgeEvent(asJava)
+  
 }

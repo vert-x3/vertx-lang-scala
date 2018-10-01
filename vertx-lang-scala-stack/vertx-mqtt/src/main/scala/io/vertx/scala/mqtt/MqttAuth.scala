@@ -16,18 +16,20 @@
 
 package io.vertx.scala.mqtt
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.mqtt.{MqttAuth => JMqttAuth}
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * MQTT authentication information
-  */
-class MqttAuth(private val _asJava: JMqttAuth) {
+ * MQTT authentication information
 
+ */
+
+class MqttAuth(private val _asJava: JMqttAuth) {
   def asJava = _asJava
 }
+
 
 object MqttAuth {
   
@@ -51,3 +53,4 @@ object MqttAuth {
     }
   }
 }
+

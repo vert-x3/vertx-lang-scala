@@ -16,40 +16,44 @@
 
 package io.vertx.scala.kafka.client.consumer
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.kafka.client.consumer.{OffsetAndTimestamp => JOffsetAndTimestamp}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Represent information related to a Offset with timestamp information
-  */
+ * Represent information related to a Offset with timestamp information
+
+ */
+
 class OffsetAndTimestamp(private val _asJava: JOffsetAndTimestamp) {
-
   def asJava = _asJava
-
   /**
-    * Set the offset
-    */
+   * Set the offset
+   */
   def setOffset(value: Long) = {
     asJava.setOffset(value)
     this
   }
+
   def getOffset: Long = {
     asJava.getOffset().asInstanceOf[Long]
   }
 
   /**
-    * Set the timestamp
-    */
+   * Set the timestamp
+   */
   def setTimestamp(value: Long) = {
     asJava.setTimestamp(value)
     this
   }
+
   def getTimestamp: Long = {
     asJava.getTimestamp().asInstanceOf[Long]
   }
+
 }
+
 
 object OffsetAndTimestamp {
   
@@ -73,3 +77,4 @@ object OffsetAndTimestamp {
     }
   }
 }
+

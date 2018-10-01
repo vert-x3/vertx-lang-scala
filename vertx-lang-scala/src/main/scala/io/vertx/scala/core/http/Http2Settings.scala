@@ -16,87 +16,94 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.http.{Http2Settings => JHttp2Settings}
+import scala.collection.JavaConverters._
 
 /**
-  * HTTP2 settings, the settings is initialized with the default HTTP/2 values.
-  *
-  * The settings expose the parameters defined by the HTTP/2 specification, as well as extra settings for
-  * protocol extensions.
-  */
+ * HTTP2 settings, the settings is initialized with the default HTTP/2 values.
+ *
+ * The settings expose the parameters defined by the HTTP/2 specification, as well as extra settings for
+ * protocol extensions.
+ */
+
 class Http2Settings(private val _asJava: JHttp2Settings) {
-
   def asJava = _asJava
-
   /**
-    * Set  HTTP/2 setting.
-    */
+   * Set  HTTP/2 setting.
+   */
   def setHeaderTableSize(value: Long) = {
     asJava.setHeaderTableSize(value)
     this
   }
+
   def getHeaderTableSize: Long = {
     asJava.getHeaderTableSize().asInstanceOf[Long]
   }
 
   /**
-    * Set the  HTTP/2 setting
-    */
+   * Set the  HTTP/2 setting
+   */
   def setInitialWindowSize(value: Int) = {
     asJava.setInitialWindowSize(value)
     this
   }
+
   def getInitialWindowSize: Int = {
     asJava.getInitialWindowSize().asInstanceOf[Int]
   }
 
   /**
-    * Set the  HTTP/2 setting
-    */
+   * Set the  HTTP/2 setting
+   */
   def setMaxConcurrentStreams(value: Long) = {
     asJava.setMaxConcurrentStreams(value)
     this
   }
+
   def getMaxConcurrentStreams: Long = {
     asJava.getMaxConcurrentStreams().asInstanceOf[Long]
   }
 
   /**
-    * Set the  HTTP/2 setting
-    */
+   * Set the  HTTP/2 setting
+   */
   def setMaxFrameSize(value: Int) = {
     asJava.setMaxFrameSize(value)
     this
   }
+
   def getMaxFrameSize: Int = {
     asJava.getMaxFrameSize().asInstanceOf[Int]
   }
 
   /**
-    * Set the  HTTP/2 setting
-    */
+   * Set the  HTTP/2 setting
+   */
   def setMaxHeaderListSize(value: Long) = {
     asJava.setMaxHeaderListSize(value)
     this
   }
+
   def getMaxHeaderListSize: Long = {
     asJava.getMaxHeaderListSize().asInstanceOf[Long]
   }
 
   /**
-    * Set the  HTTP/2 setting
-    */
+   * Set the  HTTP/2 setting
+   */
   def setPushEnabled(value: Boolean) = {
     asJava.setPushEnabled(value)
     this
   }
+
   def isPushEnabled: Boolean = {
     asJava.isPushEnabled().asInstanceOf[Boolean]
   }
+
 }
+
 
 object Http2Settings {
   
@@ -120,3 +127,4 @@ object Http2Settings {
     }
   }
 }
+

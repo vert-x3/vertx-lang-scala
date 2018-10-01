@@ -16,75 +16,81 @@
 
 package io.vertx.scala.core.net
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
+import scala.collection.JavaConverters._
 
 /**
-  * Proxy options for a net client or a net client.
-  */
+ * Proxy options for a net client or a net client.
+ */
+
 class ProxyOptions(private val _asJava: JProxyOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set proxy host.
-    */
+   * Set proxy host.
+   */
   def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
+
   def getHost: String = {
     asJava.getHost().asInstanceOf[String]
   }
 
   /**
-    * Set proxy password.
-    */
+   * Set proxy password.
+   */
   def setPassword(value: String) = {
     asJava.setPassword(value)
     this
   }
+
   def getPassword: String = {
     asJava.getPassword().asInstanceOf[String]
   }
 
   /**
-    * Set proxy port.
-    */
+   * Set proxy port.
+   */
   def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
+
   def getPort: Int = {
     asJava.getPort().asInstanceOf[Int]
   }
 
   /**
-    * Set proxy type.
-    *
-    * ProxyType can be HTTP, SOCKS4 and SOCKS5
-    */
+   * Set proxy type.
+   *
+   * ProxyType can be HTTP, SOCKS4 and SOCKS5
+   */
   def setType(value: io.vertx.core.net.ProxyType) = {
     asJava.setType(value)
     this
   }
+
   def getType: io.vertx.core.net.ProxyType = {
     asJava.getType()
   }
 
   /**
-    * Set proxy username.
-    */
+   * Set proxy username.
+   */
   def setUsername(value: String) = {
     asJava.setUsername(value)
     this
   }
+
   def getUsername: String = {
     asJava.getUsername().asInstanceOf[String]
   }
+
 }
+
 
 object ProxyOptions {
   
@@ -108,3 +114,4 @@ object ProxyOptions {
     }
   }
 }
+

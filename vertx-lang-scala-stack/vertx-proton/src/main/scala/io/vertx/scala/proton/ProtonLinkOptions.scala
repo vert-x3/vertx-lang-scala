@@ -16,25 +16,45 @@
 
 package io.vertx.scala.proton
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
+import io.vertx.lang.scala.json.Json._
 import io.vertx.proton.{ProtonLinkOptions => JProtonLinkOptions}
+import scala.collection.JavaConverters._
 
 /**
-  * Options for configuring link attributes.
-  */
-class ProtonLinkOptions(private val _asJava: JProtonLinkOptions) {
+ * Options for configuring link attributes.
 
+ */
+
+class ProtonLinkOptions(private val _asJava: JProtonLinkOptions) {
   def asJava = _asJava
+  /**
+   * Sets whether the link remote terminus to be used should indicate it is
+   * 'dynamic', requesting the peer names it with a dynamic address.
+   * The address provided by the peer can then be inspected using
+   * [[io.vertx.scala.proton.ProtonLink]] (or inspecting the remote
+   * terminus details directly) after the link has remotely opened.
+   */
+  def setDynamic(value: Boolean) = {
+    asJava.setDynamic(value)
+    this
+  }
+
+  def isDynamic: Boolean = {
+    asJava.isDynamic().asInstanceOf[Boolean]
+  }
+
   def setLinkName(value: String) = {
     asJava.setLinkName(value)
     this
   }
+
   def getLinkName: String = {
     asJava.getLinkName().asInstanceOf[String]
   }
+
 }
+
 
 object ProtonLinkOptions {
   
@@ -58,3 +78,4 @@ object ProtonLinkOptions {
     }
   }
 }
+

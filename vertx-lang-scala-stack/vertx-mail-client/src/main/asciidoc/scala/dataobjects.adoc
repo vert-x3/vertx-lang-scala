@@ -8,36 +8,29 @@ Represent a mail attachment that can be used in a MailMessage.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[contentId]]`contentId`|`String`|
-+++
+|[[contentId]]`@contentId`|`String`|+++
 set the Content-ID field to be used in the attachment
 +++
-|[[contentType]]`contentType`|`String`|
-+++
+|[[contentType]]`@contentType`|`String`|+++
 set the Content-Type
 +++
-|[[data]]`data`|`Buffer`|
-+++
+|[[data]]`@data`|`Buffer`|+++
 set the data
 +++
-|[[description]]`description`|`String`|
-+++
+|[[description]]`@description`|`String`|+++
 set the description field to be used in the attachment
 +++
-|[[disposition]]`disposition`|`String`|
-+++
+|[[disposition]]`@disposition`|`String`|+++
 set the disposition field to be used in the attachment
 +++
-|[[headers]]`headers`|`String`|
-+++
+|[[headers]]`@headers`|`String`|+++
 Add an header to this attachment.
 +++
-|[[name]]`name`|`String`|
-+++
+|[[name]]`@name`|`String`|+++
 set the name
 +++
 |===
@@ -51,26 +44,23 @@ port, security options, login options and login/password
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[allowRcptErrors]]`allowRcptErrors`|`Boolean`|
-+++
+|[[allowRcptErrors]]`@allowRcptErrors`|`Boolean`|+++
 set if sending allows rcpt errors
 <p>
 if true, the mail will be sent to the recipients that the server accepted, if any
 <p>
 +++
-|[[authMethods]]`authMethods`|`String`|
-+++
+|[[authMethods]]`@authMethods`|`String`|+++
 set string of allowed auth methods.
 if set only these methods will be used
 if the server supports them. If null or empty all supported methods may be
 used
 +++
-|[[disableEsmtp]]`disableEsmtp`|`Boolean`|
-+++
+|[[disableEsmtp]]`@disableEsmtp`|`Boolean`|+++
 set if ESMTP should be tried as first command (EHLO)
 <p>
 rfc 1869 states that clients should always attempt EHLO as first command to determine if ESMTP
@@ -82,69 +72,56 @@ smtp hosts on the internet. Since the client knows that is connects to a host th
 in that way, the property has to be set to false.
 <p>
 +++
-|[[hostname]]`hostname`|`String`|
-+++
+|[[hostname]]`@hostname`|`String`|+++
 Set the hostname of the smtp server.
 +++
-|[[keepAlive]]`keepAlive`|`Boolean`|
-+++
+|[[keepAlive]]`@keepAlive`|`Boolean`|+++
 set if connection pool is enabled
 default is true
 <p>
 if the connection pooling is disabled, the max number of sockets is enforced nevertheless
 <p>
 +++
-|[[keyStore]]`keyStore`|`String`|
-+++
+|[[keyStore]]`@keyStore`|`String`|+++
 get the key store filename to be used when opening SMTP connections
 <p>
 if not set, an options object will be created based on other settings (ssl
 and trustAll)
 +++
-|[[keyStorePassword]]`keyStorePassword`|`String`|
-+++
+|[[keyStorePassword]]`@keyStorePassword`|`String`|+++
 get the key store password to be used when opening SMTP connections
 +++
-|[[login]]`login`|`link:enums.html#LoginOption[LoginOption]`|
-+++
+|[[login]]`@login`|`link:enums.html#LoginOption[LoginOption]`|+++
 Set the login mode for the connection.
 <p>
 Either DISABLED, OPTIONAL or REQUIRED
 +++
-|[[maxPoolSize]]`maxPoolSize`|`Number (int)`|
-+++
+|[[maxPoolSize]]`@maxPoolSize`|`Number (int)`|+++
 set the max allowed number of open connections to the mail server
 if not set the default is 10
 +++
-|[[ownHostname]]`ownHostname`|`String`|
-+++
+|[[ownHostname]]`@ownHostname`|`String`|+++
 set the hostname to be used for HELO/EHLO and the Message-ID
 +++
-|[[password]]`password`|`String`|
-+++
+|[[password]]`@password`|`String`|+++
 Set the password for the login.
 +++
-|[[port]]`port`|`Number (int)`|
-+++
+|[[port]]`@port`|`Number (int)`|+++
 Set the port of the smtp server.
 +++
-|[[ssl]]`ssl`|`Boolean`|
-+++
+|[[ssl]]`@ssl`|`Boolean`|+++
 Set the sslOnConnect mode for the connection.
 +++
-|[[starttls]]`starttls`|`link:enums.html#StartTLSOptions[StartTLSOptions]`|
-+++
+|[[starttls]]`@starttls`|`link:enums.html#StartTLSOptions[StartTLSOptions]`|+++
 Set the tls security mode for the connection.
 <p>
 Either NONE, OPTIONAL or REQUIRED
 +++
-|[[trustAll]]`trustAll`|`Boolean`|
-+++
+|[[trustAll]]`@trustAll`|`Boolean`|+++
 set whether to trust all certificates on ssl connect the option is also
 applied to STARTTLS operation
 +++
-|[[username]]`username`|`String`|
-+++
+|[[username]]`@username`|`String`|+++
 Set the username for the login.
 +++
 |===
@@ -157,56 +134,44 @@ represent a mail message that can be sent via the MailClient
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[attachment]]`attachment`|`Array of link:dataobjects.html#MailAttachment[MailAttachment]`|
-+++
+|[[attachment]]`@attachment`|`Array of link:dataobjects.html#MailAttachment[MailAttachment]`|+++
 set the list of attachments of this mail
 +++
-|[[bcc]]`bcc`|`Array of String`|
-+++
+|[[bcc]]`@bcc`|`Array of String`|+++
 set list of bcc addresses
 +++
-|[[bounceAddress]]`bounceAddress`|`String`|
-+++
+|[[bounceAddress]]`@bounceAddress`|`String`|+++
 set bounce address of this mail
 +++
-|[[cc]]`cc`|`Array of String`|
-+++
+|[[cc]]`@cc`|`Array of String`|+++
 set list of cc addresses
 +++
-|[[fixedHeaders]]`fixedHeaders`|`Boolean`|
-+++
+|[[fixedHeaders]]`@fixedHeaders`|`Boolean`|+++
 set whether our own headers should be the only headers added to the message
 +++
-|[[from]]`from`|`String`|
-+++
+|[[from]]`@from`|`String`|+++
 set from address of this mail
 +++
-|[[headers]]`headers`|`String`|
-+++
+|[[headers]]`@headers`|`String`|+++
 Add a message header.
 +++
-|[[html]]`html`|`String`|
-+++
+|[[html]]`@html`|`String`|+++
 set the html text of this mail
 +++
-|[[inlineAttachment]]`inlineAttachment`|`Array of link:dataobjects.html#MailAttachment[MailAttachment]`|
-+++
+|[[inlineAttachment]]`@inlineAttachment`|`Array of link:dataobjects.html#MailAttachment[MailAttachment]`|+++
 set the list of inline attachments of this mail
 +++
-|[[subject]]`subject`|`String`|
-+++
+|[[subject]]`@subject`|`String`|+++
 set the subject of this mail
 +++
-|[[text]]`text`|`String`|
-+++
+|[[text]]`@text`|`String`|+++
 set the plain text of this mail
 +++
-|[[to]]`to`|`Array of String`|
-+++
+|[[to]]`@to`|`Array of String`|+++
 set list of to addresses
 +++
 |===
@@ -219,16 +184,14 @@ Represent the result of the sendMail operation
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[messageID]]`messageID`|`String`|
-+++
+|[[messageID]]`@messageID`|`String`|+++
 
 +++
-|[[recipients]]`recipients`|`Array of String`|
-+++
+|[[recipients]]`@recipients`|`Array of String`|+++
 
 +++
 |===

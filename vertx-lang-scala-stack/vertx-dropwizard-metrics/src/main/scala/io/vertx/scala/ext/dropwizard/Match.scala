@@ -16,52 +16,56 @@
 
 package io.vertx.scala.ext.dropwizard
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.dropwizard.{Match => JMatch}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * A match for a value.
-  */
+ * A match for a value.
+ */
+
 class Match(private val _asJava: JMatch) {
-
   def asJava = _asJava
-
   /**
-    * Set the alias the human readable name that will be used as a part of
-    * registry entry name when the value matches.
-    */
+   * Set the alias the human readable name that will be used as a part of
+   * registry entry name when the value matches.
+   */
   def setAlias(value: String) = {
     asJava.setAlias(value)
     this
   }
+
   def getAlias: String = {
     asJava.getAlias().asInstanceOf[String]
   }
 
   /**
-    * Set the type of matching to apply.
-    */
+   * Set the type of matching to apply.
+   */
   def setType(value: io.vertx.ext.dropwizard.MatchType) = {
     asJava.setType(value)
     this
   }
+
   def getType: io.vertx.ext.dropwizard.MatchType = {
     asJava.getType()
   }
 
   /**
-    * Set the matched value.
-    */
+   * Set the matched value.
+   */
   def setValue(value: String) = {
     asJava.setValue(value)
     this
   }
+
   def getValue: String = {
     asJava.getValue().asInstanceOf[String]
   }
+
 }
+
 
 object Match {
   
@@ -85,3 +89,4 @@ object Match {
     }
   }
 }
+

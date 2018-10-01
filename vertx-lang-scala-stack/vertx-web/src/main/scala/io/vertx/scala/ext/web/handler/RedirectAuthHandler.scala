@@ -16,14 +16,13 @@
 
 package io.vertx.scala.ext.web.handler
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import scala.reflect.runtime.universe._
 import io.vertx.ext.web.handler.{AuthHandler => JAuthHandler}
 import io.vertx.scala.ext.web.RoutingContext
 import scala.collection.JavaConverters._
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.auth.AuthProvider
 import io.vertx.scala.ext.auth.User
 import io.vertx.ext.web.handler.{RedirectAuthHandler => JRedirectAuthHandler}
@@ -32,74 +31,78 @@ import io.vertx.ext.auth.{User => JUser}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * An auth handler that's used to handle auth by redirecting user to a custom login page.
   */
-class RedirectAuthHandler(private val _asJava: Object)
-    extends  AuthHandler 
-    with io.vertx.core.Handler[RoutingContext]  {
 
+class RedirectAuthHandler(private val _asJava: Object) extends AuthHandler with io.vertx.core.Handler[RoutingContext] {
   def asJava = _asJava
 
 
+
   /**
-    * Add a required authority for this auth handler
-    * @param authority the authority
-    * @return a reference to this, so the API can be used fluently
-    */
-  override def addAuthority(authority: String): AuthHandler = {
+   * Add a required authority for this auth handler   * @param authority the authority
+   * @return a reference to this, so the API can be used fluently
+   */
+  override 
+  def addAuthority(authority: String): AuthHandler = {
     asJava.asInstanceOf[JRedirectAuthHandler].addAuthority(authority.asInstanceOf[java.lang.String])
     this
   }
 
   /**
-    * Add a set of required authorities for this auth handler
-    * @param authorities the set of authorities
-    * @return a reference to this, so the API can be used fluently
-    */
-  override def addAuthorities(authorities: scala.collection.mutable.Set[String]): AuthHandler = {
+   * Add a set of required authorities for this auth handler   * @param authorities the set of authorities
+   * @return a reference to this, so the API can be used fluently
+   */
+  override 
+  def addAuthorities(authorities: scala.collection.mutable.Set[String]): AuthHandler = {
     asJava.asInstanceOf[JRedirectAuthHandler].addAuthorities(authorities.map(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 
-  override def handle(arg0: RoutingContext): Unit = {
+
+
+
+  override def handle (arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JRedirectAuthHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
   /**
-    * Parses the credentials from the request into a JsonObject. The implementation should
-    * be able to extract the required info for the auth provider in the format the provider
-    * expects.
-    * @param context the routing context
-    * @param handler the handler to be called once the information is available.
-    */
-  override def parseCredentials(context: RoutingContext, handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
+   * Parses the credentials from the request into a JsonObject. The implementation should
+   * be able to extract the required info for the auth provider in the format the provider
+   * expects.   * @param context the routing context
+   * @param handler the handler to be called once the information is available.
+   */
+  override def parseCredentials (context: RoutingContext, handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
     asJava.asInstanceOf[JRedirectAuthHandler].parseCredentials(context.asJava.asInstanceOf[JRoutingContext], {x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
   }
 
   /**
-    * Authorizes the given user against all added authorities.
-    * @param user a user.
-    * @param handler the handler for the result.
-    */
-  override def authorize(user: User, handler: Handler[AsyncResult[Unit]]): Unit = {
+   * Authorizes the given user against all added authorities.   * @param user a user.
+   * @param handler the handler for the result.
+   */
+  override def authorize (user: User, handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JRedirectAuthHandler].authorize(user.asJava.asInstanceOf[JUser], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
+
  /**
-   * Like [[parseCredentials]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  override def parseCredentialsFuture(context: RoutingContext): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  * Like [[parseCredentials]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def parseCredentialsFuture (context: RoutingContext): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
     asJava.asInstanceOf[JRedirectAuthHandler].parseCredentials(context.asJava.asInstanceOf[JRoutingContext], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
-   * Like [[authorize]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-   */
-  override def authorizeFuture(user: User): scala.concurrent.Future[Unit] = {
+  * Like [[authorize]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def authorizeFuture (user: User): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JRedirectAuthHandler].authorize(user.asJava.asInstanceOf[JUser], promiseAndHandler._1)
     promiseAndHandler._2.future
@@ -108,34 +111,32 @@ class RedirectAuthHandler(private val _asJava: Object)
 }
 
 object RedirectAuthHandler {
-  def apply(asJava: JRedirectAuthHandler) = new RedirectAuthHandler(asJava)  
+  def apply(asJava: JRedirectAuthHandler) = new RedirectAuthHandler(asJava)
+  
   /**
-    * Create a handler
-    * @param authProvider the auth service to use
-    * @return the handler
-    */
+   * Create a handler   * @param authProvider the auth service to use
+   * @return the handler
+   */
   def create(authProvider: AuthProvider): AuthHandler = {
     AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
   }
 
   /**
-    * Create a handler
-    * @param authProvider the auth service to use
-    * @param loginRedirectURL the url to redirect the user to
-    * @return the handler
-    */
-  def create(authProvider: AuthProvider, loginRedirectURL: String): AuthHandler = {
+   * Create a handler   * @param authProvider the auth service to use
+   * @param loginRedirectURL the url to redirect the user to
+   * @return the handler
+   */
+  def create(authProvider: AuthProvider,loginRedirectURL: String): AuthHandler = {
     AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], loginRedirectURL.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Create a handler
-    * @param authProvider the auth service to use
-    * @param loginRedirectURL the url to redirect the user to
-    * @param returnURLParam the name of param used to store return url information in session
-    * @return the handler
-    */
-  def create(authProvider: AuthProvider, loginRedirectURL: String, returnURLParam: String): AuthHandler = {
+   * Create a handler   * @param authProvider the auth service to use
+   * @param loginRedirectURL the url to redirect the user to
+   * @param returnURLParam the name of param used to store return url information in session
+   * @return the handler
+   */
+  def create(authProvider: AuthProvider,loginRedirectURL: String,returnURLParam: String): AuthHandler = {
     AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], loginRedirectURL.asInstanceOf[java.lang.String], returnURLParam.asInstanceOf[java.lang.String]))
   }
 

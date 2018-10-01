@@ -16,70 +16,85 @@
 
 package io.vertx.scala.ext.web.handler.sockjs
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.scala.ext.bridge.PermittedOptions
 import io.vertx.ext.web.handler.sockjs.{BridgeOptions => JBridgeOptions}
 import io.vertx.ext.bridge.{PermittedOptions => JPermittedOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options for configuring the event bus bridge.
-  */
-class BridgeOptions(private val _asJava: JBridgeOptions) {
+ * Options for configuring the event bus bridge.
+ */
 
+class BridgeOptions(private val _asJava: JBridgeOptions) {
   def asJava = _asJava
   def setInboundPermitted(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
     asJava.setInboundPermitted(value.map(_.asJava).asJava)
     this
   }
+
   def addInboundPermitted(value: PermittedOptions) = {
     asJava.addInboundPermitted(value.asJava)
     this
   }
+
   def getInboundPermitteds: scala.collection.mutable.Buffer[PermittedOptions] = {
     asJava.getInboundPermitteds().asScala.map(x => PermittedOptions(x))
   }
+
   def setMaxAddressLength(value: Int) = {
     asJava.setMaxAddressLength(value)
     this
   }
+
   def getMaxAddressLength: Int = {
     asJava.getMaxAddressLength().asInstanceOf[Int]
   }
+
   def setMaxHandlersPerSocket(value: Int) = {
     asJava.setMaxHandlersPerSocket(value)
     this
   }
+
   def getMaxHandlersPerSocket: Int = {
     asJava.getMaxHandlersPerSocket().asInstanceOf[Int]
   }
+
   def setOutboundPermitted(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
     asJava.setOutboundPermitted(value.map(_.asJava).asJava)
     this
   }
+
   def addOutboundPermitted(value: PermittedOptions) = {
     asJava.addOutboundPermitted(value.asJava)
     this
   }
+
   def getOutboundPermitteds: scala.collection.mutable.Buffer[PermittedOptions] = {
     asJava.getOutboundPermitteds().asScala.map(x => PermittedOptions(x))
   }
+
   def setPingTimeout(value: Long) = {
     asJava.setPingTimeout(value)
     this
   }
+
   def getPingTimeout: Long = {
     asJava.getPingTimeout().asInstanceOf[Long]
   }
+
   def setReplyTimeout(value: Long) = {
     asJava.setReplyTimeout(value)
     this
   }
+
   def getReplyTimeout: Long = {
     asJava.getReplyTimeout().asInstanceOf[Long]
   }
+
 }
+
 
 object BridgeOptions {
   
@@ -103,3 +118,4 @@ object BridgeOptions {
     }
   }
 }
+

@@ -16,40 +16,43 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{DcCoordinates => JDcCoordinates}
 
 /**
-  * Holds coordinates of servers in datacenter
-  */
+ * Holds coordinates of servers in datacenter
+ */
+
 class DcCoordinates(private val _asJava: JDcCoordinates) {
-
   def asJava = _asJava
-
   /**
-    * Set datacenter
-    */
+   * Set datacenter
+   */
   def setDatacenter(value: String) = {
     asJava.setDatacenter(value)
     this
   }
+
   def getDatacenter: String = {
     asJava.getDatacenter().asInstanceOf[String]
   }
 
   /**
-    * Set list of servers in datacenter
-    */
+   * Set list of servers in datacenter
+   */
   def setServers(value: scala.collection.mutable.Buffer[Coordinate]) = {
     asJava.setServers(value.map(_.asJava).asJava)
     this
   }
+
   def getServers: scala.collection.mutable.Buffer[Coordinate] = {
     asJava.getServers().asScala.map(x => Coordinate(x))
   }
+
 }
+
 
 object DcCoordinates {
   
@@ -73,3 +76,4 @@ object DcCoordinates {
     }
   }
 }
+

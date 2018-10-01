@@ -16,35 +16,45 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
+import scala.reflect.runtime.universe._
 import io.vertx.codegen.testmodel.{InterfaceWithApiArg => JInterfaceWithApiArg}
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
+
   */
-class InterfaceWithApiArg(private val _asJava: Object)
-    extends GenericRefedInterface[RefedInterface1](_asJava)   {
+
+class InterfaceWithApiArg(private val _asJava: Object) extends GenericRefedInterface[RefedInterface1] (_asJava) {
 
 
 
-  override def setValue(value: RefedInterface1): GenericRefedInterface[RefedInterface1] = {
+
+
+  override 
+  def setValue(value: RefedInterface1): GenericRefedInterface[RefedInterface1] = {
     asJava.asInstanceOf[JInterfaceWithApiArg].setValue(value.asJava.asInstanceOf[JRefedInterface1])
     this
   }
 
-  override def getValue(): RefedInterface1 = {
+
+
+
+  override def getValue (): RefedInterface1 = {
     RefedInterface1(asJava.asInstanceOf[JInterfaceWithApiArg].getValue())
   }
 
-  def meth(): Unit = {
+
+  def meth (): Unit = {
     asJava.asInstanceOf[JInterfaceWithApiArg].meth()
   }
+
 
 }
 
 object InterfaceWithApiArg {
-  def apply(asJava: JInterfaceWithApiArg) = new InterfaceWithApiArg(asJava)  
+  def apply(asJava: JInterfaceWithApiArg) = new InterfaceWithApiArg(asJava)
+  
 }

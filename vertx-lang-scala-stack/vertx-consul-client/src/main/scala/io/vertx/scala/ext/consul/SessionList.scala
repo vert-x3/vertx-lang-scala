@@ -16,40 +16,43 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{SessionList => JSessionList}
 
 /**
-  * Holds result of sessions query
-  */
+ * Holds result of sessions query
+ */
+
 class SessionList(private val _asJava: JSessionList) {
-
   def asJava = _asJava
-
   /**
-    * Set Consul index, a unique identifier representing the current state of the requested list of sessions
-    */
+   * Set Consul index, a unique identifier representing the current state of the requested list of sessions
+   */
   def setIndex(value: Long) = {
     asJava.setIndex(value)
     this
   }
+
   def getIndex: Long = {
     asJava.getIndex().asInstanceOf[Long]
   }
 
   /**
-    * Set list of sessions
-    */
+   * Set list of sessions
+   */
   def setList(value: scala.collection.mutable.Buffer[Session]) = {
     asJava.setList(value.map(_.asJava).asJava)
     this
   }
+
   def getList: scala.collection.mutable.Buffer[Session] = {
     asJava.getList().asScala.map(x => Session(x))
   }
+
 }
+
 
 object SessionList {
   
@@ -73,3 +76,4 @@ object SessionList {
     }
   }
 }
+

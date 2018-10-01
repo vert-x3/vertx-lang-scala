@@ -16,78 +16,83 @@
 
 package io.vertx.scala.servicediscovery
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.servicediscovery.{ServiceDiscoveryOptions => JServiceDiscoveryOptions}
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options to configure the service discovery.
-  */
+ * Options to configure the service discovery.
+ */
+
 class ServiceDiscoveryOptions(private val _asJava: JServiceDiscoveryOptions) {
-
   def asJava = _asJava
-
   /**
-    * Sets the event bus address on which the service arrivals, departures and modifications are announced. This
-    * address must be consistent in the whole application.
-    */
+   * Sets the event bus address on which the service arrivals, departures and modifications are announced. This
+   * address must be consistent in the whole application.
+   */
   def setAnnounceAddress(value: String) = {
     asJava.setAnnounceAddress(value)
     this
   }
+
   def getAnnounceAddress: String = {
     asJava.getAnnounceAddress().asInstanceOf[String]
   }
 
   /**
-    * Sets whether or not the registration of importers declared as SPI is enabled.
-    */
+   * Sets whether or not the registration of importers declared as SPI is enabled.
+   */
   def setAutoRegistrationOfImporters(value: Boolean) = {
     asJava.setAutoRegistrationOfImporters(value)
     this
   }
+
   def isAutoRegistrationOfImporters: Boolean = {
     asJava.isAutoRegistrationOfImporters().asInstanceOf[Boolean]
   }
 
   /**
-    * Sets the configuration passed to the .
-    * Refer to the backend documentation to get more details on the requirements. The default backend
-    * does not need any configuration.
-    */
+   * Sets the configuration passed to the .
+   * Refer to the backend documentation to get more details on the requirements. The default backend
+   * does not need any configuration.
+   */
   def setBackendConfiguration(value: io.vertx.core.json.JsonObject) = {
     asJava.setBackendConfiguration(value)
     this
   }
+
   def getBackendConfiguration: io.vertx.core.json.JsonObject = {
     asJava.getBackendConfiguration()
   }
 
   /**
-    * Sets the service discovery name used in the service usage events.
-    * If not set, the node id is used.
-    */
+   * Sets the service discovery name used in the service usage events.
+   * If not set, the node id is used.
+   */
   def setName(value: String) = {
     asJava.setName(value)
     this
   }
+
   def getName: String = {
     asJava.getName().asInstanceOf[String]
   }
 
   /**
-    * Sets the usage address: the event bus address on which are sent the service usage events (bind / release).
-    */
+   * Sets the usage address: the event bus address on which are sent the service usage events (bind / release).
+   */
   def setUsageAddress(value: String) = {
     asJava.setUsageAddress(value)
     this
   }
+
   def getUsageAddress: String = {
     asJava.getUsageAddress().asInstanceOf[String]
   }
+
 }
+
 
 object ServiceDiscoveryOptions {
   
@@ -111,3 +116,4 @@ object ServiceDiscoveryOptions {
     }
   }
 }
+

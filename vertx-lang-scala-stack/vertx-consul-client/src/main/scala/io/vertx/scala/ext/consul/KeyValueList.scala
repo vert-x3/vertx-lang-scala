@@ -16,40 +16,43 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{KeyValueList => JKeyValueList}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds result of key/value pairs query
-  */
+ * Holds result of key/value pairs query
+ */
+
 class KeyValueList(private val _asJava: JKeyValueList) {
-
   def asJava = _asJava
-
   /**
-    * Set Consul index
-    */
+   * Set Consul index
+   */
   def setIndex(value: Long) = {
     asJava.setIndex(value)
     this
   }
+
   def getIndex: Long = {
     asJava.getIndex().asInstanceOf[Long]
   }
 
   /**
-    * Set list of key/value pairs
-    */
+   * Set list of key/value pairs
+   */
   def setList(value: scala.collection.mutable.Buffer[KeyValue]) = {
     asJava.setList(value.map(_.asJava).asJava)
     this
   }
+
   def getList: scala.collection.mutable.Buffer[KeyValue] = {
     asJava.getList().asScala.map(x => KeyValue(x))
   }
+
 }
+
 
 object KeyValueList {
   
@@ -73,3 +76,4 @@ object KeyValueList {
     }
   }
 }
+

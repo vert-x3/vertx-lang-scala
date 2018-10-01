@@ -326,6 +326,47 @@ order to only consume messages starting from a particular offset, for example.
 Calling `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#assignment(io.vertx.core.Handler)[assignment]` provides
 the list of the current assigned partitions.
 
+== Receiving messages with explicit polling
+
+Other than using the internal polling mechanism in order to receive messages from Kafka, the client can subscribe to a
+topic, avoiding to register the handler for getting the messages and then using the `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#poll(long,%20io.vertx.core.Handler)[poll]` method.
+
+In this way, the user application is in charge to execute the poll for getting messages when it needs, for example after processing
+the previous ones.
+
+[source,scala]
+----
+
+// subscribes to the topic
+consumer.subscribeFuture("test").onComplete{
+  case Success(result) => {
+    println("Consumer subscribed")
+
+    vertx.setPeriodic(1000, (timerId: java.lang.Long) => {
+
+      consumer.pollFuture(100).onComplete{
+        case Success(result) => {
+
+          var records = result
+          for ( i <- 0 until records.size()) {
+            var record = records.recordAt(i)
+            println(s"key=${record.key()},value=${record.value()},partition=${record.partition()},offset=${record.offset()}")
+          }
+
+        }
+        case Failure(cause) => println("Failure")
+      }
+
+    })
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+After subscribing successfully, the application start a periodic timer in order to execute the poll and getting messages
+from Kafka periodically.
+
 == Changing the subscription or assignment
 
 You can change the subscribed topics, or assigned partitions after you have started to consume messages, simply
@@ -599,7 +640,7 @@ consumer.handler((record: io.vertx.scala.kafka.client.consumer.KafkaConsumerReco
         // resume read operation after a specific time
         vertx.setTimer(5000, (timeId: java.lang.Long) => {
 
-          // resumi read operations
+          // resume read operations
           consumer.resume(topicPartition)
         })
       }
@@ -805,7 +846,7 @@ consumer.exceptionHandler((e: java.lang.Throwable) => {
 If you’re creating consumers and producer from inside verticles, those consumers and producers will be automatically
 closed when the verticle is undeployed.
 
-== Using Vert.x serializers/deserizaliers
+== Using Vert.x serializers/deserializers
 
 Vert.x Kafka client comes out of the box with serializers and deserializers for buffers, json object
 and json array.
@@ -873,7 +914,7 @@ config + ("acks" -> "1")
 ----
 
 ifdef::java,groovy,kotlin[]
-You can also specify the serizalizers/deserializers at creation time:
+You can also specify the serializers/deserializers at creation time:
 
 In a consumer
 

@@ -16,19 +16,20 @@
 
 package io.vertx.scala.rabbitmq
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.rabbitmq.{Envelope => JEnvelope}
 import io.vertx.core.buffer.Buffer
 import io.vertx.rabbitmq.{BasicProperties => JBasicProperties}
+import scala.reflect.runtime.universe._
 import io.vertx.rabbitmq.{RabbitMQMessage => JRabbitMQMessage}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Represent a message received message received in a rabbitmq-queue.
-  */
-class RabbitMQMessage(private val _asJava: Object) {
 
+  */
+
+class RabbitMQMessage(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[io.vertx.core.buffer.Buffer] = None
   private var cached_1: Option[String] = None
@@ -37,8 +38,8 @@ class RabbitMQMessage(private val _asJava: Object) {
 
 
   /**
-    * @return the message body
-    */
+   * @return the message body
+   */
   def body(): io.vertx.core.buffer.Buffer = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JRabbitMQMessage].body()
@@ -48,8 +49,8 @@ class RabbitMQMessage(private val _asJava: Object) {
   }
 
   /**
-    * @return the <i>consumer tag</i> associated with the consumer
-    */
+   * @return the <i>consumer tag</i> associated with the consumer
+   */
   def consumerTag(): String = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JRabbitMQMessage].consumerTag()
@@ -59,8 +60,8 @@ class RabbitMQMessage(private val _asJava: Object) {
   }
 
   /**
-    * @return packaging data for the message
-    */
+   * @return packaging data for the message
+   */
   def envelope(): Envelope = {
     if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JRabbitMQMessage].envelope()
@@ -70,8 +71,8 @@ class RabbitMQMessage(private val _asJava: Object) {
   }
 
   /**
-    * @return content header data for the message
-    */
+   * @return content header data for the message
+   */
   def properties(): BasicProperties = {
     if (cached_3 == None) {
       val tmp = asJava.asInstanceOf[JRabbitMQMessage].properties()
@@ -80,8 +81,13 @@ class RabbitMQMessage(private val _asJava: Object) {
     cached_3.get
   }
 
+
+
+
+
 }
 
 object RabbitMQMessage {
-  def apply(asJava: JRabbitMQMessage) = new RabbitMQMessage(asJava)  
+  def apply(asJava: JRabbitMQMessage) = new RabbitMQMessage(asJava)
+  
 }

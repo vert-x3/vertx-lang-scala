@@ -16,41 +16,43 @@
 
 package io.vertx.scala.config
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.config.{ConfigChange => JConfigChange}
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * A structure representing a configuration change.
-  */
+ * A structure representing a configuration change.
+ */
+
 class ConfigChange(private val _asJava: JConfigChange) {
-
   def asJava = _asJava
-
   /**
-    * Sets the new configuration.
-    */
+   * Sets the new configuration.
+   */
   def setNewConfiguration(value: io.vertx.core.json.JsonObject) = {
     asJava.setNewConfiguration(value)
     this
   }
+
   def getNewConfiguration: io.vertx.core.json.JsonObject = {
     asJava.getNewConfiguration()
   }
 
   /**
-    * Sets the previous configuration.
-    */
+   * Sets the previous configuration.
+   */
   def setPreviousConfiguration(value: io.vertx.core.json.JsonObject) = {
     asJava.setPreviousConfiguration(value)
     this
   }
+
   def getPreviousConfiguration: io.vertx.core.json.JsonObject = {
     asJava.getPreviousConfiguration()
   }
+
 }
+
 
 object ConfigChange {
   
@@ -74,3 +76,4 @@ object ConfigChange {
     }
   }
 }
+

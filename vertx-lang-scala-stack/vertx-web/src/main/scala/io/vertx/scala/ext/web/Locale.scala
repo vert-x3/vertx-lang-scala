@@ -16,59 +16,66 @@
 
 package io.vertx.scala.ext.web
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{Locale => JLocale}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
-  */
-class Locale(private val _asJava: Object) {
 
+  */
+
+class Locale(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
+
+
   /**
-    * Returns the language as reported by the HTTP client.
-    * @return language
-    */
-  def language(): String = {
+   * Returns the language as reported by the HTTP client.   * @return language
+   */
+  def language (): String = {
     asJava.asInstanceOf[JLocale].language().asInstanceOf[String]
   }
 
   /**
-    * Returns the country as reported by the HTTP client.
-    * @return variant
-    */
-  def country(): String = {
+   * Returns the country as reported by the HTTP client.   * @return variant
+   */
+  def country (): String = {
     asJava.asInstanceOf[JLocale].country().asInstanceOf[String]
   }
 
   /**
-    * Returns the variant as reported by the HTTP client.
-    * @return variant
-    */
-  def variant(): String = {
+   * Returns the variant as reported by the HTTP client.   * @return variant
+   */
+  def variant (): String = {
     asJava.asInstanceOf[JLocale].variant().asInstanceOf[String]
   }
+
 
 }
 
 object Locale {
-  def apply(asJava: JLocale) = new Locale(asJava)  
+  def apply(asJava: JLocale) = new Locale(asJava)
+  
+
   def create(): Locale = {
     Locale(JLocale.create())
   }
+
 
   def create(language: String): Locale = {
     Locale(JLocale.create(language.asInstanceOf[java.lang.String]))
   }
 
-  def create(language: String, country: String): Locale = {
+
+  def create(language: String,country: String): Locale = {
     Locale(JLocale.create(language.asInstanceOf[java.lang.String], country.asInstanceOf[java.lang.String]))
   }
 
-  def create(language: String, country: String, variant: String): Locale = {
+
+  def create(language: String,country: String,variant: String): Locale = {
     Locale(JLocale.create(language.asInstanceOf[java.lang.String], country.asInstanceOf[java.lang.String], variant.asInstanceOf[java.lang.String]))
   }
 

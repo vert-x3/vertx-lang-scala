@@ -16,52 +16,59 @@
 
 package io.vertx.scala.core.net
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.net.{NetworkOptions => JNetworkOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
+
+ */
+
 trait NetworkOptions {
 
-
   /**
-    * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
-    */
+   * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
+   */
   def setLogActivity(value: Boolean): NetworkOptions
-  def getLogActivity: Boolean 
+
+  def getLogActivity: Boolean
 
   /**
-    * Set the TCP receive buffer size
-    */
+   * Set the TCP receive buffer size
+   */
   def setReceiveBufferSize(value: Int): NetworkOptions
-  def getReceiveBufferSize: Int 
+
+  def getReceiveBufferSize: Int
 
   /**
-    * Set the value of reuse address
-    */
+   * Set the value of reuse address
+   */
   def setReuseAddress(value: Boolean): NetworkOptions
-  def isReuseAddress: Boolean 
+
+  def isReuseAddress: Boolean
 
   /**
-    * Set the value of reuse port.
-    * <p/>
-    * This is only supported by native transports.
-    */
+   * Set the value of reuse port.
+   * <p/>
+   * This is only supported by native transports.
+   */
   def setReusePort(value: Boolean): NetworkOptions
-  def isReusePort: Boolean 
+
+  def isReusePort: Boolean
 
   /**
-    * Set the TCP send buffer size
-    */
+   * Set the TCP send buffer size
+   */
   def setSendBufferSize(value: Int): NetworkOptions
-  def getSendBufferSize: Int 
+
+  def getSendBufferSize: Int
 
   /**
-    * Set the value of traffic class
-    */
+   * Set the value of traffic class
+   */
   def setTrafficClass(value: Int): NetworkOptions
-  def getTrafficClass: Int 
-}
 
+  def getTrafficClass: Int
+
+}

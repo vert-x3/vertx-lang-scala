@@ -16,36 +16,43 @@
 
 package io.vertx.scala.redis.op
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.redis.op.{BitFieldIncrbyCommand => JBitFieldIncrbyCommand}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
+
 
 class BitFieldIncrbyCommand(private val _asJava: JBitFieldIncrbyCommand) {
-
   def asJava = _asJava
   def setIncrement(value: Long) = {
     asJava.setIncrement(value)
     this
   }
+
   def getIncrement: Long = {
     asJava.getIncrement().asInstanceOf[Long]
   }
+
   def setOffset(value: Long) = {
     asJava.setOffset(value)
     this
   }
+
   def getOffset: Long = {
     asJava.getOffset().asInstanceOf[Long]
   }
+
   def setType(value: String) = {
     asJava.setType(value)
     this
   }
+
   def getType: String = {
     asJava.getType().asInstanceOf[String]
   }
+
 }
+
 
 object BitFieldIncrbyCommand {
   
@@ -69,3 +76,4 @@ object BitFieldIncrbyCommand {
     }
   }
 }
+

@@ -8,16 +8,14 @@ A structure representing a configuration change.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[newConfiguration]]`newConfiguration`|`Json object`|
-+++
+|[[newConfiguration]]`@newConfiguration`|`Json object`|+++
 Sets the new configuration.
 +++
-|[[previousConfiguration]]`previousConfiguration`|`Json object`|
-+++
+|[[previousConfiguration]]`@previousConfiguration`|`Json object`|+++
 Sets the previous configuration.
 +++
 |===
@@ -29,13 +27,13 @@ Sets the previous configuration.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[includeDefaultStores]]`includeDefaultStores`|`Boolean`|-
-|[[scanPeriod]]`scanPeriod`|`Number (long)`|-
-|[[stores]]`stores`|`Array of link:dataobjects.html#ConfigStoreOptions[ConfigStoreOptions]`|-
+|[[includeDefaultStores]]`@includeDefaultStores`|`Boolean`|-
+|[[scanPeriod]]`@scanPeriod`|`Number (long)`|-
+|[[stores]]`@stores`|`Array of link:dataobjects.html#ConfigStoreOptions[ConfigStoreOptions]`|-
 |===
 
 [[ConfigStoreOptions]]
@@ -49,25 +47,21 @@ retrieve the configuration chunk.
 ++++
 '''
 
-[cols=">25%,^25%,50%"]
+[cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[config]]`config`|`Json object`|
-+++
+|[[config]]`@config`|`Json object`|+++
 Sets the configuration of the store
 +++
-|[[format]]`format`|`String`|
-+++
+|[[format]]`@format`|`String`|+++
 Sets the format of the configuration that is retrieved from the store.
 +++
-|[[optional]]`optional`|`Boolean`|
-+++
+|[[optional]]`@optional`|`Boolean`|+++
 Sets whether or not the store is optional. When the configuration is retrieve, if an optional store
 returns a failure, the failure is ignored and an empty json object is used instead (for this store).
 +++
-|[[type]]`type`|`String`|
-+++
+|[[type]]`@type`|`String`|+++
 Sets the configuration type
 +++
 |===

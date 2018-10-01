@@ -16,45 +16,48 @@
 
 package io.vertx.scala.ext.auth.oauth2.providers
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.scala.ext.auth.oauth2.OAuth2Auth
+import scala.reflect.runtime.universe._
 import io.vertx.ext.auth.oauth2.providers.{GithubAuth => JGithubAuth}
 import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
 import io.vertx.scala.core.http.HttpClientOptions
 import io.vertx.scala.core.Vertx
 import io.vertx.ext.auth.oauth2.{OAuth2Auth => JOAuth2Auth}
 import io.vertx.core.{Vertx => JVertx}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Simplified factory to create an  for Github.
   */
-class GithubAuth(private val _asJava: Object) {
 
+class GithubAuth(private val _asJava: Object) {
   def asJava = _asJava
+
+
+
+
 
 
 }
 
 object GithubAuth {
-  def apply(asJava: JGithubAuth) = new GithubAuth(asJava)  
+  def apply(asJava: JGithubAuth) = new GithubAuth(asJava)
+  
   /**
-    * Create a OAuth2Auth provider for Gtihub
-    * @param clientId the client id given to you by Github
-    * @param clientSecret the client secret given to you by Github
-    */
-  def create(vertx: Vertx, clientId: String, clientSecret: String): OAuth2Auth = {
+   * Create a OAuth2Auth provider for Github   * @param clientId the client id given to you by Github
+   * @param clientSecret the client secret given to you by Github
+   */
+  def create(vertx: Vertx,clientId: String,clientSecret: String): OAuth2Auth = {
     OAuth2Auth(JGithubAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Create a OAuth2Auth provider for Gtihub
-    * @param clientId the client id given to you by Github
-    * @param clientSecret the client secret given to you by Github
-    * @param httpClientOptions custom http client optionssee <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
-    */
-  def create(vertx: Vertx, clientId: String, clientSecret: String, httpClientOptions: HttpClientOptions): OAuth2Auth = {
+   * Create a OAuth2Auth provider for Github   * @param clientId the client id given to you by Github
+   * @param clientSecret the client secret given to you by Github
+   * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
+   */
+  def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
     OAuth2Auth(JGithubAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], httpClientOptions.asJava))
   }
 

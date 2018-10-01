@@ -16,34 +16,44 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{InterfaceWithStringArg => JInterfaceWithStringArg}
+import scala.reflect.runtime.universe._
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
+
   */
-class InterfaceWithStringArg(private val _asJava: Object)
-    extends GenericRefedInterface[String](_asJava)   {
+
+class InterfaceWithStringArg(private val _asJava: Object) extends GenericRefedInterface[String] (_asJava) {
 
 
 
-  override def setValue(value: String): GenericRefedInterface[String] = {
+
+
+  override 
+  def setValue(value: String): GenericRefedInterface[String] = {
     asJava.asInstanceOf[JInterfaceWithStringArg].setValue(value.asInstanceOf[java.lang.String])
     this
   }
 
-  override def getValue(): String = {
+
+
+
+  override def getValue (): String = {
     asJava.asInstanceOf[JInterfaceWithStringArg].getValue().asInstanceOf[String]
   }
 
-  def meth(): Unit = {
+
+  def meth (): Unit = {
     asJava.asInstanceOf[JInterfaceWithStringArg].meth()
   }
+
 
 }
 
 object InterfaceWithStringArg {
-  def apply(asJava: JInterfaceWithStringArg) = new InterfaceWithStringArg(asJava)  
+  def apply(asJava: JInterfaceWithStringArg) = new InterfaceWithStringArg(asJava)
+  
 }

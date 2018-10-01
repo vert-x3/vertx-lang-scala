@@ -16,16 +16,17 @@
 
 package io.vertx.scala.rabbitmq
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.rabbitmq.{BasicProperties => JBasicProperties}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Like BasicProperties
-  */
-class BasicProperties(private val _asJava: Object) {
 
+  */
+
+class BasicProperties(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[String] = None
   private var cached_1: Option[String] = None
@@ -43,8 +44,8 @@ class BasicProperties(private val _asJava: Object) {
 
 
   /**
-    * @return contentType of a message, or `null` if it has not been set.
-    */
+   * @return contentType of a message, or `null` if it has not been set.
+   */
   def contentType(): String = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].contentType()
@@ -54,8 +55,8 @@ class BasicProperties(private val _asJava: Object) {
   }
 
   /**
-    * @return contentEncoding of a message, or `null` if it has not been set.
-    */
+   * @return contentEncoding of a message, or `null` if it has not been set.
+   */
   def contentEncoding(): String = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].contentEncoding()
@@ -65,8 +66,8 @@ class BasicProperties(private val _asJava: Object) {
   }
 
   /**
-    * @return deliveryMode of a message, or `null` if it has not been set.
-    */
+   * @return deliveryMode of a message, or `null` if it has not been set.
+   */
   def deliveryMode(): Int = {
     if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].deliveryMode()
@@ -76,9 +77,8 @@ class BasicProperties(private val _asJava: Object) {
   }
 
   /**
-    * Retrieve the value in the priority field.
-    * @return priority of a message, or `null` if it has not been set.
-    */
+   * Retrieve the value in the priority field.   * @return priority of a message, or `null` if it has not been set.
+   */
   def priority(): Int = {
     if (cached_3 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].priority()
@@ -88,8 +88,8 @@ class BasicProperties(private val _asJava: Object) {
   }
 
   /**
-    * @return correlationId of a message, or `null` if it has not been set.
-    */
+   * @return correlationId of a message, or `null` if it has not been set.
+   */
   def correlationId(): String = {
     if (cached_4 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].correlationId()
@@ -99,8 +99,8 @@ class BasicProperties(private val _asJava: Object) {
   }
 
   /**
-    * @return replyTo address, or `null` if it has not been set.
-    */
+   * @return replyTo address, or `null` if it has not been set.
+   */
   def replyTo(): String = {
     if (cached_5 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].replyTo()
@@ -110,8 +110,8 @@ class BasicProperties(private val _asJava: Object) {
   }
 
   /**
-    * @return expiration of a message, or `null` if it has not been set.
-    */
+   * @return expiration of a message, or `null` if it has not been set.
+   */
   def expiration(): String = {
     if (cached_6 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].expiration()
@@ -121,8 +121,8 @@ class BasicProperties(private val _asJava: Object) {
   }
 
   /**
-    * @return messageId, or `null` if it has not been set.
-    */
+   * @return messageId, or `null` if it has not been set.
+   */
   def messageId(): String = {
     if (cached_7 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].messageId()
@@ -132,8 +132,8 @@ class BasicProperties(private val _asJava: Object) {
   }
 
   /**
-    * @return timestamp of a message, or `null` if it has not been set.
-    */
+   * @return timestamp of a message, or `null` if it has not been set.
+   */
   def timestamp(): Long = {
     if (cached_8 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].timestamp()
@@ -143,8 +143,8 @@ class BasicProperties(private val _asJava: Object) {
   }
 
   /**
-    * @return type of a message, or `null` if it has not been set.
-    */
+   * @return type of a message, or `null` if it has not been set.
+   */
   def `type`(): String = {
     if (cached_9 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].`type`()
@@ -154,8 +154,8 @@ class BasicProperties(private val _asJava: Object) {
   }
 
   /**
-    * @return userId, or `null` if it has not been set.
-    */
+   * @return userId, or `null` if it has not been set.
+   */
   def userId(): String = {
     if (cached_10 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].userId()
@@ -165,8 +165,8 @@ class BasicProperties(private val _asJava: Object) {
   }
 
   /**
-    * @return appId, or `null` if it has not been set.
-    */
+   * @return appId, or `null` if it has not been set.
+   */
   def appId(): String = {
     if (cached_11 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].appId()
@@ -176,8 +176,8 @@ class BasicProperties(private val _asJava: Object) {
   }
 
   /**
-    * @return clusterId, or `null` if it has not been set.
-    */
+   * @return clusterId, or `null` if it has not been set.
+   */
   def clusterId(): String = {
     if (cached_12 == None) {
       val tmp = asJava.asInstanceOf[JBasicProperties].clusterId()
@@ -186,8 +186,13 @@ class BasicProperties(private val _asJava: Object) {
     cached_12.get
   }
 
+
+
+
+
 }
 
 object BasicProperties {
-  def apply(asJava: JBasicProperties) = new BasicProperties(asJava)  
+  def apply(asJava: JBasicProperties) = new BasicProperties(asJava)
+  
 }

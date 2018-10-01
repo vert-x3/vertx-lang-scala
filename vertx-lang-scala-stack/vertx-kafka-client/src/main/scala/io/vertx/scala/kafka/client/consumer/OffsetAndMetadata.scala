@@ -16,40 +16,44 @@
 
 package io.vertx.scala.kafka.client.consumer
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.kafka.client.consumer.{OffsetAndMetadata => JOffsetAndMetadata}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Provide additional metadata when an offset is committed
-  */
+ * Provide additional metadata when an offset is committed
+
+ */
+
 class OffsetAndMetadata(private val _asJava: JOffsetAndMetadata) {
-
   def asJava = _asJava
-
   /**
-    * Set additional metadata for the offset committed
-    */
+   * Set additional metadata for the offset committed
+   */
   def setMetadata(value: String) = {
     asJava.setMetadata(value)
     this
   }
+
   def getMetadata: String = {
     asJava.getMetadata().asInstanceOf[String]
   }
 
   /**
-    * Set the offset to commit
-    */
+   * Set the offset to commit
+   */
   def setOffset(value: Long) = {
     asJava.setOffset(value)
     this
   }
+
   def getOffset: Long = {
     asJava.getOffset().asInstanceOf[Long]
   }
+
 }
+
 
 object OffsetAndMetadata {
   
@@ -73,3 +77,4 @@ object OffsetAndMetadata {
     }
   }
 }
+

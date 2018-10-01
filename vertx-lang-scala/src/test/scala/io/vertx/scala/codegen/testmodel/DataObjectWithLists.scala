@@ -16,71 +16,85 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.json.JsonArray
 import io.vertx.codegen.testmodel.{DataObjectWithLists => JDataObjectWithLists}
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
-class DataObjectWithLists(private val _asJava: JDataObjectWithLists) {
 
+ */
+
+class DataObjectWithLists(private val _asJava: JDataObjectWithLists) {
   def asJava = _asJava
   def setBooleanValues(value: scala.collection.mutable.Buffer[Boolean]) = {
     asJava.setBooleanValues(value.map(Boolean.box).asJava)
     this
   }
+
   def setDataObjectValues(value: scala.collection.mutable.Buffer[TestDataObject]) = {
     asJava.setDataObjectValues(value.map(_.asJava).asJava)
     this
   }
+
   def setDoubleValues(value: scala.collection.mutable.Buffer[Double]) = {
     asJava.setDoubleValues(value.map(Double.box).asJava)
     this
   }
+
   def setEnumValues(value: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]) = {
     asJava.setEnumValues(value.asJava)
     this
   }
+
   def setFloatValues(value: scala.collection.mutable.Buffer[Float]) = {
     asJava.setFloatValues(value.map(Float.box).asJava)
     this
   }
+
   def setGenEnumValues(value: scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]) = {
     asJava.setGenEnumValues(value.asJava)
     this
   }
+
   def setInstantValues(value: scala.collection.mutable.Buffer[java.time.Instant]) = {
     asJava.setInstantValues(value.asJava)
     this
   }
+
   def setIntegerValues(value: scala.collection.mutable.Buffer[Int]) = {
     asJava.setIntegerValues(value.map(Int.box).asJava)
     this
   }
+
   def setJsonArrayValues(value: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]) = {
     asJava.setJsonArrayValues(value.asJava)
     this
   }
+
   def setJsonObjectValues(value: scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]) = {
     asJava.setJsonObjectValues(value.asJava)
     this
   }
+
   def setLongValues(value: scala.collection.mutable.Buffer[Long]) = {
     asJava.setLongValues(value.map(Long.box).asJava)
     this
   }
+
   def setShortValues(value: scala.collection.mutable.Buffer[Short]) = {
     asJava.setShortValues(value.map(Short.box).asJava)
     this
   }
+
   def setStringValues(value: scala.collection.mutable.Buffer[String]) = {
     asJava.setStringValues(value.asJava)
     this
   }
+
 }
+
 
 object DataObjectWithLists {
   
@@ -104,3 +118,4 @@ object DataObjectWithLists {
     }
   }
 }
+

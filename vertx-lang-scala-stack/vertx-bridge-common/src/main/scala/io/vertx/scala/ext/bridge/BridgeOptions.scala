@@ -16,48 +16,53 @@
 
 package io.vertx.scala.ext.bridge
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.bridge.{BridgeOptions => JBridgeOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Specify the event bus bridge options.
-  */
+ * Specify the event bus bridge options.
+ */
+
 class BridgeOptions(private val _asJava: JBridgeOptions) {
-
   def asJava = _asJava
-
   /**
-    * Sets the list of inbound permitted options.
-    */
+   * Sets the list of inbound permitted options.
+   */
   def addInboundPermitted(value: PermittedOptions) = {
     asJava.addInboundPermitted(value.asJava)
     this
   }
+
   def setInboundPermitteds(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
     asJava.setInboundPermitteds(value.map(_.asJava).asJava)
     this
   }
+
   def getInboundPermitteds: scala.collection.mutable.Buffer[PermittedOptions] = {
     asJava.getInboundPermitteds().asScala.map(x => PermittedOptions(x))
   }
 
   /**
-    * Sets the list of outbound permitted options.
-    */
+   * Sets the list of outbound permitted options.
+   */
   def addOutboundPermitted(value: PermittedOptions) = {
     asJava.addOutboundPermitted(value.asJava)
     this
   }
+
   def setOutboundPermitteds(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
     asJava.setOutboundPermitteds(value.map(_.asJava).asJava)
     this
   }
+
   def getOutboundPermitteds: scala.collection.mutable.Buffer[PermittedOptions] = {
     asJava.getOutboundPermitteds().asScala.map(x => PermittedOptions(x))
   }
+
 }
+
 
 object BridgeOptions {
   
@@ -81,3 +86,4 @@ object BridgeOptions {
     }
   }
 }
+

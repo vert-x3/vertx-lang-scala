@@ -16,22 +16,22 @@
 
 package io.vertx.scala.ext.mongo
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.mongo.{MongoClientDeleteResult => JMongoClientDeleteResult}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Result propagated from mongodb driver delete result.
-  */
+ * Result propagated from mongodb driver delete result.
+ */
+
 class MongoClientDeleteResult(private val _asJava: JMongoClientDeleteResult) {
-
   def asJava = _asJava
-
   /**
-    * Get the number of removed documents
-    */
+   * Get the number of removed documents
+   */
 }
+
 
 object MongoClientDeleteResult {
   
@@ -55,3 +55,4 @@ object MongoClientDeleteResult {
     }
   }
 }
+

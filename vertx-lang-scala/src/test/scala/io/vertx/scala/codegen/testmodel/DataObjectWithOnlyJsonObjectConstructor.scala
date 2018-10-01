@@ -16,17 +16,19 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.codegen.testmodel.{DataObjectWithOnlyJsonObjectConstructor => JDataObjectWithOnlyJsonObjectConstructor}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  */
-class DataObjectWithOnlyJsonObjectConstructor(private val _asJava: JDataObjectWithOnlyJsonObjectConstructor) {
 
+ */
+
+class DataObjectWithOnlyJsonObjectConstructor(private val _asJava: JDataObjectWithOnlyJsonObjectConstructor) {
   def asJava = _asJava
 }
+
 
 object DataObjectWithOnlyJsonObjectConstructor {
   
@@ -50,3 +52,4 @@ object DataObjectWithOnlyJsonObjectConstructor {
     }
   }
 }
+

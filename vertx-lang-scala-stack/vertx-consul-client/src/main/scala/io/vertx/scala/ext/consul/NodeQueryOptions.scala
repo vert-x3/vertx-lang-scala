@@ -16,40 +16,43 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{NodeQueryOptions => JNodeQueryOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Options used to requesting list of nodes
-  */
+ * Options used to requesting list of nodes
+ */
+
 class NodeQueryOptions(private val _asJava: JNodeQueryOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set options for blocking query
-    */
+   * Set options for blocking query
+   */
   def setBlockingOptions(value: BlockingQueryOptions) = {
     asJava.setBlockingOptions(value.asJava)
     this
   }
+
   def getBlockingOptions: BlockingQueryOptions = {
     BlockingQueryOptions(asJava.getBlockingOptions())
   }
 
   /**
-    * Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
-    */
+   * Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
+   */
   def setNear(value: String) = {
     asJava.setNear(value)
     this
   }
+
   def getNear: String = {
     asJava.getNear().asInstanceOf[String]
   }
+
 }
+
 
 object NodeQueryOptions {
   
@@ -73,3 +76,4 @@ object NodeQueryOptions {
     }
   }
 }
+

@@ -16,74 +16,80 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{PreparedQueryExecuteResponse => JPreparedQueryExecuteResponse}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * The results of executing prepared query
-  */
+ * The results of executing prepared query
+ */
+
 class PreparedQueryExecuteResponse(private val _asJava: JPreparedQueryExecuteResponse) {
-
   def asJava = _asJava
-
   /**
-    * Set the datacenter that ultimately provided the list of nodes
-    */
+   * Set the datacenter that ultimately provided the list of nodes
+   */
   def setDc(value: String) = {
     asJava.setDc(value)
     this
   }
+
   def getDc: String = {
     asJava.getDc().asInstanceOf[String]
   }
 
   /**
-    * Set the TTL duration when query results are served over DNS. If this is specified, it will take precedence over any Consul agent-specific configuration.
-    */
+   * Set the TTL duration when query results are served over DNS. If this is specified, it will take precedence over any Consul agent-specific configuration.
+   */
   def setDnsTtl(value: String) = {
     asJava.setDnsTtl(value)
     this
   }
+
   def getDnsTtl: String = {
     asJava.getDnsTtl().asInstanceOf[String]
   }
 
   /**
-    * Set the number of remote datacenters that were queried while executing the query.
-    */
+   * Set the number of remote datacenters that were queried while executing the query.
+   */
   def setFailovers(value: Int) = {
     asJava.setFailovers(value)
     this
   }
+
   def getFailovers: Int = {
     asJava.getFailovers().asInstanceOf[Int]
   }
 
   /**
-    * Set the list of healthy nodes providing the given service, as specified by the constraints of the prepared query.
-    */
+   * Set the list of healthy nodes providing the given service, as specified by the constraints of the prepared query.
+   */
   def setNodes(value: scala.collection.mutable.Buffer[ServiceEntry]) = {
     asJava.setNodes(value.map(_.asJava).asJava)
     this
   }
+
   def getNodes: scala.collection.mutable.Buffer[ServiceEntry] = {
     asJava.getNodes().asScala.map(x => ServiceEntry(x))
   }
 
   /**
-    * Set the service name that the query was selecting.
-    * This is useful for context in case an empty list of nodes is returned.
-    */
+   * Set the service name that the query was selecting.
+   * This is useful for context in case an empty list of nodes is returned.
+   */
   def setService(value: String) = {
     asJava.setService(value)
     this
   }
+
   def getService: String = {
     asJava.getService().asInstanceOf[String]
   }
+
 }
+
 
 object PreparedQueryExecuteResponse {
   
@@ -107,3 +113,4 @@ object PreparedQueryExecuteResponse {
     }
   }
 }
+

@@ -16,13 +16,13 @@
 
 package io.vertx.scala.ext.web.handler
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import scala.reflect.runtime.universe._
 import io.vertx.ext.web.handler.{ResponseContentTypeHandler => JResponseContentTypeHandler}
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.core.Handler
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A handler which sets the response content type automatically according to the best `Accept` header match.
@@ -35,32 +35,35 @@ import io.vertx.core.Handler
   * <li>content length header is absent or set to something different than zero</li>
   * </ul>
   */
-class ResponseContentTypeHandler(private val _asJava: Object)
-    extends io.vertx.core.Handler[RoutingContext] {
 
+class ResponseContentTypeHandler(private val _asJava: Object) extends io.vertx.core.Handler[RoutingContext] {
   def asJava = _asJava
 
 
-  override def handle(arg0: RoutingContext): Unit = {
+
+
+
+
+  override def handle (arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JResponseContentTypeHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
+
 
 }
 
 object ResponseContentTypeHandler {
-  def apply(asJava: JResponseContentTypeHandler) = new ResponseContentTypeHandler(asJava)  
+  def apply(asJava: JResponseContentTypeHandler) = new ResponseContentTypeHandler(asJava)
+  
   /**
-    * Create a response content type handler.
-    * @return the response content type handler
-    */
+   * Create a response content type handler.   * @return the response content type handler
+   */
   def create(): ResponseContentTypeHandler = {
     ResponseContentTypeHandler(JResponseContentTypeHandler.create())
   }
 
   /**
-    * Create a response content type handler with a custom disable flag.
-    * @return the response content type handler
-    */
+   * Create a response content type handler with a custom disable flag.   * @return the response content type handler
+   */
   def create(disableFlag: String): ResponseContentTypeHandler = {
     ResponseContentTypeHandler(JResponseContentTypeHandler.create(disableFlag.asInstanceOf[java.lang.String]))
   }

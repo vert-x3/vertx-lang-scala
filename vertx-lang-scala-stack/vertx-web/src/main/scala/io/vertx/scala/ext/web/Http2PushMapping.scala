@@ -16,36 +16,43 @@
 
 package io.vertx.scala.ext.web
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.web.{Http2PushMapping => JHttp2PushMapping}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
+
 
 class Http2PushMapping(private val _asJava: JHttp2PushMapping) {
-
   def asJava = _asJava
   def setExtensionTarget(value: String) = {
     asJava.setExtensionTarget(value)
     this
   }
+
   def getExtensionTarget: String = {
     asJava.getExtensionTarget().asInstanceOf[String]
   }
+
   def setFilePath(value: String) = {
     asJava.setFilePath(value)
     this
   }
+
   def getFilePath: String = {
     asJava.getFilePath().asInstanceOf[String]
   }
+
   def setNoPush(value: Boolean) = {
     asJava.setNoPush(value)
     this
   }
+
   def isNoPush: Boolean = {
     asJava.isNoPush().asInstanceOf[Boolean]
   }
+
 }
+
 
 object Http2PushMapping {
   
@@ -69,3 +76,4 @@ object Http2PushMapping {
     }
   }
 }
+

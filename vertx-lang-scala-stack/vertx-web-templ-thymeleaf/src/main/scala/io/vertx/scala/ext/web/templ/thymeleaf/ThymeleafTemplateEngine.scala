@@ -16,48 +16,48 @@
 
 package io.vertx.scala.ext.web.templ.thymeleaf
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
-import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import io.vertx.scala.ext.web.common.template.TemplateEngine
 import io.vertx.ext.web.templ.thymeleaf.{ThymeleafTemplateEngine => JThymeleafTemplateEngine}
-import io.vertx.core.buffer.Buffer
+import scala.reflect.runtime.universe._
 import org.thymeleaf.templatemode.TemplateMode
-import io.vertx.scala.ext.web.templ.TemplateEngine
-import io.vertx.ext.web.templ.{TemplateEngine => JTemplateEngine}
-import io.vertx.scala.ext.web.RoutingContext
-import io.vertx.core.AsyncResult
-import io.vertx.core.Handler
+import io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A template engine that uses the Thymeleaf library.
   */
-class ThymeleafTemplateEngine(private val _asJava: Object)
-    extends TemplateEngine(_asJava)   {
+
+class ThymeleafTemplateEngine(private val _asJava: Object) extends TemplateEngine (_asJava) {
+
 
 
 
   /**
-    * Set the mode for the engine
-    * @param mode the mode
-    * @return a reference to this for fluency
-    */
+   * Set the mode for the engine   * @param mode the mode
+   * @return a reference to this for fluency
+   */
+  
   def setMode(mode: org.thymeleaf.templatemode.TemplateMode): ThymeleafTemplateEngine = {
     asJava.asInstanceOf[JThymeleafTemplateEngine].setMode(mode)
     this
   }
 
+
+
+
 }
 
 object ThymeleafTemplateEngine {
-  def apply(asJava: JThymeleafTemplateEngine) = new ThymeleafTemplateEngine(asJava)  
+  def apply(asJava: JThymeleafTemplateEngine) = new ThymeleafTemplateEngine(asJava)
+  
   /**
-    * Create a template engine using defaults
-    * @return the engine
-    */
-  def create(): ThymeleafTemplateEngine = {
-    ThymeleafTemplateEngine(JThymeleafTemplateEngine.create())
+   * Create a template engine using defaults   * @return the engine
+   */
+  def create(vertx: Vertx): ThymeleafTemplateEngine = {
+    ThymeleafTemplateEngine(JThymeleafTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))
   }
 
 }

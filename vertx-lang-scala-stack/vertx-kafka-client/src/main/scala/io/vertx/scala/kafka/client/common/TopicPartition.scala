@@ -16,40 +16,44 @@
 
 package io.vertx.scala.kafka.client.common
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.kafka.client.common.{TopicPartition => JTopicPartition}
 
 /**
-  * Represent information related to a partition for a topic
-  */
+ * Represent information related to a partition for a topic
+
+ */
+
 class TopicPartition(private val _asJava: JTopicPartition) {
-
   def asJava = _asJava
-
   /**
-    * Set the partition number
-    */
+   * Set the partition number
+   */
   def setPartition(value: Int) = {
     asJava.setPartition(value)
     this
   }
+
   def getPartition: Int = {
     asJava.getPartition().asInstanceOf[Int]
   }
 
   /**
-    * Set the topic name
-    */
+   * Set the topic name
+   */
   def setTopic(value: String) = {
     asJava.setTopic(value)
     this
   }
+
   def getTopic: String = {
     asJava.getTopic().asInstanceOf[String]
   }
+
 }
+
 
 object TopicPartition {
   
@@ -73,3 +77,4 @@ object TopicPartition {
     }
   }
 }
+

@@ -204,7 +204,6 @@ There are actually a set of options to specify when creating a consumption strea
 The `QueueOptions` lets you specify:
 
 * The size of internal queue with `setMaxInternalQueueSize`
-* Should incoming messages be stored when stream is paused with `setBuffer`
 * Should the stream keep more recent messages when queue size is exceed with `setKeepMostRecent`
 
 [source,scala]
@@ -212,7 +211,6 @@ The `QueueOptions` lets you specify:
 var options = QueueOptions()
   .setMaxInternalQueueSize(1000)
   .setKeepMostRecent(true)
-  .setBuffer(true)
 
 
 client.basicConsumerFuture("my.queue", options).onComplete{

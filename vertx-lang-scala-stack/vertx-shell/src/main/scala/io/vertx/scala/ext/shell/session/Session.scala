@@ -16,56 +16,58 @@
 
 package io.vertx.scala.ext.shell.session
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.shell.session.{Session => JSession}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A shell session.
   */
-class Session(private val _asJava: Object) {
 
+class Session(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
   /**
-    * Put some data in a session
-    * @param key the key for the data
-    * @param obj the data
-    * @return a reference to this, so the API can be used fluently
-    */
+   * Put some data in a session   * @param key the key for the data
+   * @param obj the data
+   * @return a reference to this, so the API can be used fluently
+   */
+  
   def put(key: String, obj: AnyRef): Session = {
     asJava.asInstanceOf[JSession].put(key.asInstanceOf[java.lang.String], obj)
     this
   }
 
+
+
   /**
-    * Get some data from the session
-    * @param key the key of the data
-    * @return the data
-    */
-  def get[T: TypeTag](key: String): T = {
+   * Get some data from the session   * @param key the key of the data
+   * @return the data
+   */
+  def get [T: TypeTag](key: String): T = {
     toScala[T](asJava.asInstanceOf[JSession].get[Object](key.asInstanceOf[java.lang.String]))
   }
 
   /**
-    * Remove some data from the session
-    * @param key the key of the data
-    * @return the data that was there or null if none there
-    */
-  def remove[T: TypeTag](key: String): T = {
+   * Remove some data from the session   * @param key the key of the data
+   * @return the data that was there or null if none there
+   */
+  def remove [T: TypeTag](key: String): T = {
     toScala[T](asJava.asInstanceOf[JSession].remove[Object](key.asInstanceOf[java.lang.String]))
   }
+
 
 }
 
 object Session {
-  def apply(asJava: JSession) = new Session(asJava)  
+  def apply(asJava: JSession) = new Session(asJava)
+  
   /**
-    * Create a new empty session.
-    * @return the created session
-    */
+   * Create a new empty session.   * @return the created session
+   */
   def create(): Session = {
     Session(JSession.create())
   }

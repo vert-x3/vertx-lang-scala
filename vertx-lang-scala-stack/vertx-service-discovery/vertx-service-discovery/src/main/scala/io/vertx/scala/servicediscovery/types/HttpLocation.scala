@@ -16,75 +16,81 @@
 
 package io.vertx.scala.servicediscovery.types
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.servicediscovery.types.{HttpLocation => JHttpLocation}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Represents the location of a HTTP endpoint. This object (its json representation) will be used as "location" in a
-  * service record.
-  */
+ * Represents the location of a HTTP endpoint. This object (its json representation) will be used as "location" in a
+ * service record.
+ */
+
 class HttpLocation(private val _asJava: JHttpLocation) {
-
   def asJava = _asJava
-
   /**
-    * Sets the endpoint, which is the URL of the service. The endpoint is automatically computed when you use the
-    * other `setX` method.
-    */
+   * Sets the endpoint, which is the URL of the service. The endpoint is automatically computed when you use the
+   * other `setX` method.
+   */
   def setEndpoint(value: String) = {
     asJava.setEndpoint(value)
     this
   }
+
   def getEndpoint: String = {
     asJava.getEndpoint().asInstanceOf[String]
   }
 
   /**
-    * Sets the host.
-    */
+   * Sets the host.
+   */
   def setHost(value: String) = {
     asJava.setHost(value)
     this
   }
+
   def getHost: String = {
     asJava.getHost().asInstanceOf[String]
   }
 
   /**
-    * Sets the port
-    */
+   * Sets the port
+   */
   def setPort(value: Int) = {
     asJava.setPort(value)
     this
   }
+
   def getPort: Int = {
     asJava.getPort().asInstanceOf[Int]
   }
 
   /**
-    * Sets the path of the service (root)
-    */
+   * Sets the path of the service (root)
+   */
   def setRoot(value: String) = {
     asJava.setRoot(value)
     this
   }
+
   def getRoot: String = {
     asJava.getRoot().asInstanceOf[String]
   }
 
   /**
-    * Sets whether or not the HTTP service is using `https`.
-    */
+   * Sets whether or not the HTTP service is using `https`.
+   */
   def setSsl(value: Boolean) = {
     asJava.setSsl(value)
     this
   }
+
   def isSsl: Boolean = {
     asJava.isSsl().asInstanceOf[Boolean]
   }
+
 }
+
 
 object HttpLocation {
   
@@ -108,3 +114,4 @@ object HttpLocation {
     }
   }
 }
+

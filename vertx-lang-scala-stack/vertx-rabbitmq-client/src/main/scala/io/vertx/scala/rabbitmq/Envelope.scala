@@ -16,16 +16,17 @@
 
 package io.vertx.scala.rabbitmq
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.rabbitmq.{Envelope => JEnvelope}
+import scala.reflect.runtime.universe._
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * Like Envelope.
-  */
-class Envelope(private val _asJava: Object) {
 
+  */
+
+class Envelope(private val _asJava: Object) {
   def asJava = _asJava
   private var cached_0: Option[Long] = None
   private var cached_1: Option[Boolean] = None
@@ -34,9 +35,8 @@ class Envelope(private val _asJava: Object) {
 
 
   /**
-    * Get the delivery tag included in this parameter envelope
-    * @return the delivery tag
-    */
+   * Get the delivery tag included in this parameter envelope   * @return the delivery tag
+   */
   def deliveryTag(): Long = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JEnvelope].deliveryTag()
@@ -46,12 +46,11 @@ class Envelope(private val _asJava: Object) {
   }
 
   /**
-    * Get the redelivery flag included in this parameter envelope. This is a
-    * hint as to whether this message may have been delivered before (but not
-    * acknowledged). If the flag is not set, the message definitely has not
-    * been delivered before. If it is set, it may have been delivered before.
-    * @return the redelivery flag
-    */
+   * Get the redelivery flag included in this parameter envelope. This is a
+   * hint as to whether this message may have been delivered before (but not
+   * acknowledged). If the flag is not set, the message definitely has not
+   * been delivered before. If it is set, it may have been delivered before.   * @return the redelivery flag
+   */
   def isRedelivery(): Boolean = {
     if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JEnvelope].isRedelivery()
@@ -61,9 +60,8 @@ class Envelope(private val _asJava: Object) {
   }
 
   /**
-    * Get the name of the exchange included in this parameter envelope
-    * @return the exchange
-    */
+   * Get the name of the exchange included in this parameter envelope   * @return the exchange
+   */
   def exchange(): String = {
     if (cached_2 == None) {
       val tmp = asJava.asInstanceOf[JEnvelope].exchange()
@@ -73,9 +71,8 @@ class Envelope(private val _asJava: Object) {
   }
 
   /**
-    * Get the routing key included in this parameter envelope
-    * @return the routing key
-    */
+   * Get the routing key included in this parameter envelope   * @return the routing key
+   */
   def routingKey(): String = {
     if (cached_3 == None) {
       val tmp = asJava.asInstanceOf[JEnvelope].routingKey()
@@ -84,8 +81,13 @@ class Envelope(private val _asJava: Object) {
     cached_3.get
   }
 
+
+
+
+
 }
 
 object Envelope {
-  def apply(asJava: JEnvelope) = new Envelope(asJava)  
+  def apply(asJava: JEnvelope) = new Envelope(asJava)
+  
 }

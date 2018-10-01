@@ -16,31 +16,38 @@
 
 package io.vertx.scala.codegen.testmodel
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.codegen.testmodel.{SuperInterface2 => JSuperInterface2}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
-  */
-trait SuperInterface2 {
 
+  */
+
+trait SuperInterface2 {
   def asJava: java.lang.Object
 
-  def otherSuperMethodWithBasicParams(b: Byte, s: Short, i: Int, l: Long, f: Float, d: Double, bool: Boolean, ch: Char, str: String): Unit
+  
+def otherSuperMethodWithBasicParams ( b: Byte, s: Short, i: Int, l: Long, f: Float, d: Double, bool: Boolean, ch: Char, str: String): Unit
+
 
 }
 
 object SuperInterface2 {
   def apply(asJava: JSuperInterface2): SuperInterface2 = new SuperInterface2Impl(asJava)
     private class SuperInterface2Impl(private val _asJava: Object) extends SuperInterface2 {
+  def asJava = _asJava
 
-      def asJava = _asJava
 
 
-  def otherSuperMethodWithBasicParams(b: Byte, s: Short, i: Int, l: Long, f: Float, d: Double, bool: Boolean, ch: Char, str: String): Unit = {
+
+
+
+  def otherSuperMethodWithBasicParams (b: Byte, s: Short, i: Int, l: Long, f: Float, d: Double, bool: Boolean, ch: Char, str: String): Unit = {
     asJava.asInstanceOf[JSuperInterface2].otherSuperMethodWithBasicParams(b.asInstanceOf[java.lang.Byte], s.asInstanceOf[java.lang.Short], i.asInstanceOf[java.lang.Integer], l.asInstanceOf[java.lang.Long], f.asInstanceOf[java.lang.Float], d.asInstanceOf[java.lang.Double], bool.asInstanceOf[java.lang.Boolean], ch.asInstanceOf[java.lang.Character], str.asInstanceOf[java.lang.String])
   }
+
 
 }
 }

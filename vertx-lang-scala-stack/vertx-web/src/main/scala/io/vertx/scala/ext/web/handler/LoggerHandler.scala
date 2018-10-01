@@ -16,56 +16,58 @@
 
 package io.vertx.scala.ext.web.handler
 
-import io.vertx.lang.scala.HandlerOps._
-import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import scala.reflect.runtime.universe._
 import io.vertx.ext.web.handler.{LoggerHandler => JLoggerHandler}
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.core.Handler
 import io.vertx.ext.web.handler.LoggerFormat
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * A handler which logs request information to the Vert.x logger.
   */
-class LoggerHandler(private val _asJava: Object)
-    extends io.vertx.core.Handler[RoutingContext] {
 
+class LoggerHandler(private val _asJava: Object) extends io.vertx.core.Handler[RoutingContext] {
   def asJava = _asJava
 
 
-  override def handle(arg0: RoutingContext): Unit = {
+
+
+
+
+  override def handle (arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JLoggerHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
+
 
 }
 
 object LoggerHandler {
-  def apply(asJava: JLoggerHandler) = new LoggerHandler(asJava)  
+  def apply(asJava: JLoggerHandler) = new LoggerHandler(asJava)
+  
   /**
-    * Create a handler with default format
-    * @return the handler
-    */
+   * Create a handler with default format   * @return the handler
+   */
   def create(): LoggerHandler = {
     LoggerHandler(JLoggerHandler.create())
   }
 
   /**
-    * Create a handler with he specified format
-    * @param format the format
-    * @return the handler
-    */
+   * Create a handler with he specified format   * @param format the format
+   * @return the handler
+   */
   def create(format: io.vertx.ext.web.handler.LoggerFormat): LoggerHandler = {
     LoggerHandler(JLoggerHandler.create(format))
   }
 
   /**
-    * Create a handler with he specified format
-    * @param immediate true if logging should occur as soon as request arrives
-    * @param format the format
-    * @return the handler
-    */
-  def create(immediate: Boolean, format: io.vertx.ext.web.handler.LoggerFormat): LoggerHandler = {
+   * Create a handler with he specified format   * @param immediate true if logging should occur as soon as request arrives
+   * @param format the format
+   * @return the handler
+   */
+  def create(immediate: Boolean,format: io.vertx.ext.web.handler.LoggerFormat): LoggerHandler = {
     LoggerHandler(JLoggerHandler.create(immediate.asInstanceOf[java.lang.Boolean], format))
   }
 

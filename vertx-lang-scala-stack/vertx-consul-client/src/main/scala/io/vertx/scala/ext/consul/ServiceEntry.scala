@@ -16,51 +16,55 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
-import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{ServiceEntry => JServiceEntry}
+import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
+import scala.collection.JavaConverters._
 
 /**
-  * Holds properties of service, node and related checks
-  */
+ * Holds properties of service, node and related checks
+ */
+
 class ServiceEntry(private val _asJava: JServiceEntry) {
-
   def asJava = _asJava
-
   /**
-    * Set list of checks
-    */
+   * Set list of checks
+   */
   def setChecks(value: scala.collection.mutable.Buffer[Check]) = {
     asJava.setChecks(value.map(_.asJava).asJava)
     this
   }
+
   def getChecks: scala.collection.mutable.Buffer[Check] = {
     asJava.getChecks().asScala.map(x => Check(x))
   }
 
   /**
-    * Set node
-    */
+   * Set node
+   */
   def setNode(value: Node) = {
     asJava.setNode(value.asJava)
     this
   }
+
   def getNode: Node = {
     Node(asJava.getNode())
   }
 
   /**
-    * Set service
-    */
+   * Set service
+   */
   def setService(value: Service) = {
     asJava.setService(value.asJava)
     this
   }
+
   def getService: Service = {
     Service(asJava.getService())
   }
+
 }
+
 
 object ServiceEntry {
   
@@ -84,3 +88,4 @@ object ServiceEntry {
     }
   }
 }
+

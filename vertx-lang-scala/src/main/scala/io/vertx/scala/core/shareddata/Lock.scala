@@ -16,10 +16,10 @@
 
 package io.vertx.scala.core.shareddata
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.core.shareddata.{Lock => JLock}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
 
 /**
   * An asynchronous exclusive lock which can be obtained from any node in the cluster.
@@ -27,20 +27,25 @@ import io.vertx.core.shareddata.{Lock => JLock}
   * When the lock is obtained, no-one else in the cluster can obtain the lock with the same name until the lock
   * is released.
   */
-class Lock(private val _asJava: Object) {
 
+class Lock(private val _asJava: Object) {
   def asJava = _asJava
 
 
+
+
+
   /**
-    * Release the lock. Once the lock is released another will be able to obtain the lock.
-    */
-  def release(): Unit = {
+   * Release the lock. Once the lock is released another will be able to obtain the lock.
+   */
+  def release (): Unit = {
     asJava.asInstanceOf[JLock].release()
   }
+
 
 }
 
 object Lock {
-  def apply(asJava: JLock) = new Lock(asJava)  
+  def apply(asJava: JLock) = new Lock(asJava)
+  
 }

@@ -16,58 +16,58 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.HandlerOps._
 import scala.reflect.runtime.universe._
-import io.vertx.lang.scala.Converter._
 import io.vertx.ext.consul.{WatchResult => JWatchResult}
+import io.vertx.lang.scala.HandlerOps._
+import io.vertx.lang.scala.Converter._
+
 
 class WatchResult[T: TypeTag](private val _asJava: Object) {
-
   def asJava = _asJava
 
 
+
+
+
   /**
-    * The previous result of the operation.
-    * @return the previous result.
-    */
-  def prevResult(): T = {
+   * The previous result of the operation.   * @return the previous result.
+   */
+  def prevResult (): T = {
     toScala[T](asJava.asInstanceOf[JWatchResult[Object]].prevResult())
   }
 
   /**
-    * The next result of the operation. This will be null if the operation failed.
-    * @return the next result or null if the operation failed.
-    */
-  def nextResult(): T = {
+   * The next result of the operation. This will be null if the operation failed.   * @return the next result or null if the operation failed.
+   */
+  def nextResult (): T = {
     toScala[T](asJava.asInstanceOf[JWatchResult[Object]].nextResult())
   }
 
   /**
-    * A Throwable describing failure. This will be null if the operation succeeded.
-    * @return the cause or null if the operation succeeded.
-    */
-  def cause(): Throwable = {
+   * A Throwable describing failure. This will be null if the operation succeeded.   * @return the cause or null if the operation succeeded.
+   */
+  def cause (): Throwable = {
     asJava.asInstanceOf[JWatchResult[Object]].cause()
   }
 
   /**
-    * Did it succeed?
-    * @return true if it succeded or false otherwise
-    */
-  def succeeded(): Boolean = {
+   * Did it succeed?   * @return true if it succeded or false otherwise
+   */
+  def succeeded (): Boolean = {
     asJava.asInstanceOf[JWatchResult[Object]].succeeded().asInstanceOf[Boolean]
   }
 
   /**
-    * Did it fail?
-    * @return true if it failed or false otherwise
-    */
-  def failed(): Boolean = {
+   * Did it fail?   * @return true if it failed or false otherwise
+   */
+  def failed (): Boolean = {
     asJava.asInstanceOf[JWatchResult[Object]].failed().asInstanceOf[Boolean]
   }
+
 
 }
 
 object WatchResult {
-  def apply[T: TypeTag](asJava: JWatchResult[_]) = new WatchResult[T](asJava)  
+  def apply[T: TypeTag](asJava: JWatchResult[_]) = new WatchResult[T](asJava)
+  
 }

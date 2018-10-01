@@ -16,42 +16,45 @@
 
 package io.vertx.scala.ext.consul
 
-import io.vertx.lang.scala.json.Json._
 import io.vertx.core.json.JsonObject
+import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.ext.consul.{BlockingQueryOptions => JBlockingQueryOptions}
 
 /**
-  * Options used to perform blocking query that used to wait for a potential change using long polling.
-  */
+ * Options used to perform blocking query that used to wait for a potential change using long polling.
+ */
+
 class BlockingQueryOptions(private val _asJava: JBlockingQueryOptions) {
-
   def asJava = _asJava
-
   /**
-    * Set index indicating that the client wishes to wait for any changes subsequent to that index.
-    */
+   * Set index indicating that the client wishes to wait for any changes subsequent to that index.
+   */
   def setIndex(value: Long) = {
     asJava.setIndex(value)
     this
   }
+
   def getIndex: Long = {
     asJava.getIndex().asInstanceOf[Long]
   }
 
   /**
-    * Specifying a maximum duration for the blocking request. This is limited to 10 minutes.
-    * If not set, the wait time defaults to 5 minutes. This value can be specified in the form of "10s" or "5m"
-    * (i.e., 10 seconds or 5 minutes, respectively).
-    */
+   * Specifying a maximum duration for the blocking request. This is limited to 10 minutes.
+   * If not set, the wait time defaults to 5 minutes. This value can be specified in the form of "10s" or "5m"
+   * (i.e., 10 seconds or 5 minutes, respectively).
+   */
   def setWait(value: String) = {
     asJava.setWait(value)
     this
   }
+
   def getWait: String = {
     asJava.getWait().asInstanceOf[String]
   }
+
 }
+
 
 object BlockingQueryOptions {
   
@@ -75,3 +78,4 @@ object BlockingQueryOptions {
     }
   }
 }
+
