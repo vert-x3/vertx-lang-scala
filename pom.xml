@@ -30,7 +30,7 @@
     </license>
   </licenses>
   <properties>
-    <scala.version>2.12.4</scala.version>
+    <scala.version>2.12.7</scala.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <stack.version>${project.version}</stack.version>
@@ -69,8 +69,8 @@
     </pluginManagement>
   </build>
   <modules>
-    <module>vertx-lang-scala</module>
     <module>vertx-lang-scala-codegen</module>
+    <module>vertx-lang-scala</module>
     <module>vertx-lang-scala-stack</module>
     <module>vertx-lang-scala-on-the-fly</module>
     <module>vertx-lang-scala-docs</module>

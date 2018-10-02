@@ -35,7 +35,7 @@ import scala.tools.nsc.io.{AbstractFile, VirtualDirectory}
   *
   * We kept the original license from Twitter.
   *
-  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+  * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
 class OnTheFlyCompiler(targetDir: Option[File]) {
 

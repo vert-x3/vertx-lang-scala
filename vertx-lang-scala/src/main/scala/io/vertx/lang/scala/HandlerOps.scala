@@ -25,7 +25,7 @@ import scala.language.implicitConversions
 /**
   * Conversions between handlers and functions
   *
-  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+  * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
 object HandlerOps {
 

@@ -81,8 +81,8 @@ var postgreSQLClient = PostgreSQLClient.createShared(vertx, postgreSQLClientConf
 
 ----
 
-The first call to `link:../../scaladocs/io/vertx/scala/ext/asyncsql/MySQLClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[MySQLClient.createShared]`
-or `link:../../scaladocs/io/vertx/scala/ext/asyncsql/PostgreSQLClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[PostgreSQLClient.createShared]`
+The first call to `link:../../scaladocs/io/vertx/scala/ext/asyncsql/MySQLClient.html#createShared(io.vertx.core.Vertx)[MySQLClient.createShared]`
+or `link:../../scaladocs/io/vertx/scala/ext/asyncsql/PostgreSQLClient.html#createShared(io.vertx.core.Vertx)[PostgreSQLClient.createShared]`
 will actually create the data source, and the specified config will be used.
 
 Subsequent calls will return a new client instance that uses the same data source, so the configuration won't be used.
@@ -110,8 +110,8 @@ var postgreSQLClient = PostgreSQLClient.createShared(vertx, postgreSQLClientConf
 If different clients are created using the same Vert.x instance and specifying the same pool name, they will
 share the same data source.
 
-The first call to `link:../../scaladocs/io/vertx/scala/ext/asyncsql/MySQLClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject,%20java.lang.String)[MySQLClient.createShared]`
-or `link:../../scaladocs/io/vertx/scala/ext/asyncsql/PostgreSQLClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject,%20java.lang.String)[PostgreSQLClient.createShared]`
+The first call to `link:../../scaladocs/io/vertx/scala/ext/asyncsql/MySQLClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[MySQLClient.createShared]`
+or `link:../../scaladocs/io/vertx/scala/ext/asyncsql/PostgreSQLClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[PostgreSQLClient.createShared]`
 will actually create the data source, and the specified config will be used.
 
 Subsequent calls will return a new client instance that uses the same pool, so the configuration won't be used.
@@ -124,8 +124,8 @@ interacting with different databases.
 In most cases you will want to share a pool between different client instances.
 However, it's possible you want to create a client instance that doesn't share its pool with any other client.
 
-In that case you can use `link:../../scaladocs/io/vertx/scala/ext/asyncsql/MySQLClient.html#createNonShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[MySQLClient.createNonShared]`
-or `link:../../scaladocs/io/vertx/scala/ext/asyncsql/PostgreSQLClient.html#createNonShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[PostgreSQLClient.createNonShared]`
+In that case you can use `link:../../scaladocs/io/vertx/scala/ext/asyncsql/MySQLClient.html#createNonShared(io.vertx.core.Vertx)[MySQLClient.createNonShared]`
+or `link:../../scaladocs/io/vertx/scala/ext/asyncsql/PostgreSQLClient.html#createNonShared(io.vertx.core.Vertx)[PostgreSQLClient.createNonShared]`
 
 [source,java]
 ----
@@ -143,19 +143,19 @@ var postgreSQLClient = PostgreSQLClient.createNonShared(vertx, postgreSQLClientC
 
 ----
 
-This is equivalent to calling `link:../../scaladocs/io/vertx/scala/ext/asyncsql/MySQLClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject,%20java.lang.String)[MySQLClient.createShared]`
-or `link:../../scaladocs/io/vertx/scala/ext/asyncsql/PostgreSQLClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject,%20java.lang.String)[PostgreSQLClient.createShared]`
+This is equivalent to calling `link:../../scaladocs/io/vertx/scala/ext/asyncsql/MySQLClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[MySQLClient.createShared]`
+or `link:../../scaladocs/io/vertx/scala/ext/asyncsql/PostgreSQLClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[PostgreSQLClient.createShared]`
 with a unique pool name each time.
 
 == Closing the client
 
 You can hold on to the client for a long time (e.g. the life-time of your verticle), but once you have finished with
-it, you should close it using `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#close(io.vertx.core.Handler)[close]` or
+it, you should close it using `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#close()[close]` or
 `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#close()[close]`
 
 == Getting a connection
 
-Use `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#getConnection(io.vertx.core.Handler)[getConnection]` to get a connection.
+Use `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#getConnection()[getConnection]` to get a connection.
 
 This will return the connection in the handler when one is ready from the pool.
 
@@ -204,7 +204,7 @@ fail, which may be some time after the initial connection attempt.
 
 If `maxConnectionRetries` is set to `0`, the internal connection pool will not perform any reconnection (default). If
 `maxConnectionRetries` is set to `-1`, the internal connection pool will attempt to acquire new connections indefinitely,
-so any call to `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#getConnection(io.vertx.core.Handler)[getConnection]`
+so any call to `link:../../scaladocs/io/vertx/scala/ext/sql/SQLClient.html#getConnection()[getConnection]`
 may be indefinitely waiting for a successful acquisition.
 
 Once a full round of acquisition attempts fails, the internal connection pool will remain active, and will try

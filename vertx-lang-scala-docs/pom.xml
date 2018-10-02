@@ -25,17 +25,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-codegen</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-docgen</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-codetrans</artifactId>
+      <artifactId>vertx-lang-scala-codegen</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>
@@ -139,11 +129,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web-client-scala_2.12</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-sockjs-service-proxy-scala_2.12</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>
@@ -334,7 +319,6 @@
                   <fileset dir="../vertx-lang-scala-stack">
                     <include name="vertx-*/src/main/asciidoc/scala/**"/>
                     <exclude name="vertx-config"/>
-                    <exclude name="vertx-service-discovery"/>
                   </fileset>
                   <mapper type="regexp" from="^vertx-(.*)/src/main/asciidoc/scala/(.*)" to="vertx-\1/scala/\2"/>
                 </copy>

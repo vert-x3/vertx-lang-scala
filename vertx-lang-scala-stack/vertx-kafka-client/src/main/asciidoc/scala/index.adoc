@@ -121,17 +121,17 @@ var producer = KafkaProducer.create(vertx, config, java.lang.String.class, java.
 
 Here the `link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html[KafkaProducer]` instance is created in using a `Properties` for
 specifying Kafka nodes list to connect (just one) and the acknowledgment mode; the key and value deserializers are
-specified as parameters of `link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#create(io.vertx.core.Vertx,%20java.util.Properties,%20java.lang.Class,%20java.lang.Class)[KafkaProducer.create]`.
+specified as parameters of `link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#create(io.vertx.core.Vertx,%20java.util.Properties,%20java.lang.Class)[KafkaProducer.create]`.
 endif::[]
 
 == Receiving messages from a topic joining a consumer group
 
 In order to start receiving messages from Kafka topics, the consumer can use the
-`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#subscribe(java.util.Set)[subscribe]`method for
+`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#subscribe()[subscribe]`method for
 subscribing to a set of topics being part of a consumer group (specified by the properties on creation).
 
 You also need to register a handler for handling incoming messages using the
-`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#handler(io.vertx.core.Handler)[handler]`.
+`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#handler()[handler]`.
 
 [source,scala]
 ----
@@ -202,8 +202,8 @@ to be assigned to other consumers) or a new consumer joins the group (so it want
 
 You can register handlers on a `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html[KafkaConsumer]` to be notified
 of the partitions revocations and assignments by the Kafka cluster using
-`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsRevokedHandler(io.vertx.core.Handler)[partitionsRevokedHandler]`and
-`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsAssignedHandler(io.vertx.core.Handler)[partitionsAssignedHandler]`.
+`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsRevokedHandler()[partitionsRevokedHandler]`and
+`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsAssignedHandler()[partitionsAssignedHandler]`.
 
 [source,scala]
 ----
@@ -278,7 +278,7 @@ Besides being part of a consumer group for receiving messages from a topic, a co
 topic partition. When the consumer is not part part of a consumer group the overall application cannot
 rely on the re-balancing feature.
 
-You can use `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#assign(java.util.Set,%20io.vertx.core.Handler)[assign]`
+You can use `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#assign(java.util.Set)[assign]`
 in order to ask for specific partitions.
 
 [source,scala]
@@ -323,13 +323,13 @@ messages won't be consumed until both methods have been called. This allows you 
 `assign()`, then `seek()` and finally `handler()` in
 order to only consume messages starting from a particular offset, for example.
 
-Calling `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#assignment(io.vertx.core.Handler)[assignment]` provides
+Calling `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#assignment()[assignment]` provides
 the list of the current assigned partitions.
 
 == Receiving messages with explicit polling
 
 Other than using the internal polling mechanism in order to receive messages from Kafka, the client can subscribe to a
-topic, avoiding to register the handler for getting the messages and then using the `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#poll(long,%20io.vertx.core.Handler)[poll]` method.
+topic, avoiding to register the handler for getting the messages and then using the `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#poll(long)[poll]` method.
 
 In this way, the user application is in charge to execute the poll for getting messages when it needs, for example after processing
 the previous ones.
@@ -379,7 +379,7 @@ Once the completion handler has been called it will only observe messages read f
 
 == Getting topic partition information
 
-You can call the `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsFor(java.lang.String,%20io.vertx.core.Handler)[partitionsFor]` to get information about
+You can call the `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsFor(java.lang.String)[partitionsFor]` to get information about
 partitions for a specified topic
 
 [source,scala]
@@ -399,7 +399,7 @@ consumer.partitionsForFuture("test").onComplete{
 
 ----
 
-In addition `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#listTopics(io.vertx.core.Handler)[listTopics]` provides all available topics
+In addition `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#listTopics()[listTopics]` provides all available topics
 with related partitions
 
 [source,scala]
@@ -429,7 +429,7 @@ This is executed by the commit operation executed automatically every time a bun
 from a topic partition. The configuration parameter `enable.auto.commit` must be set to `true` when the
 consumer is created.
 
-Manual offset commit, can be achieved with `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#commit(io.vertx.core.Handler)[commit]`.
+Manual offset commit, can be achieved with `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#commit()[commit]`.
 It can be used to achieve _at least once_ delivery to be sure that the read messages are processed before committing
 the offset.
 
@@ -453,7 +453,7 @@ consumer.commitFuture().onComplete{
 Apache Kafka can retain messages for a long period of time and the consumer can seek inside a topic partition
 and obtain arbitrary access to the messages.
 
-You can use `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seek(io.vertx.kafka.client.common.TopicPartition,%20long)[seek]` to change the offset for reading at a specific
+You can use `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seek(io.vertx.kafka.client.common.TopicPartition)[seek]` to change the offset for reading at a specific
 position
 
 [source,scala]
@@ -475,7 +475,7 @@ consumer.seekFuture(topicPartition, 10).onComplete{
 
 ----
 
-When the consumer needs to re-read the stream from the beginning, it can use `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seekToBeginning(io.vertx.kafka.client.common.TopicPartition)[seekToBeginning]`
+When the consumer needs to re-read the stream from the beginning, it can use `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seekToBeginning()[seekToBeginning]`
 
 [source,scala]
 ----
@@ -495,7 +495,7 @@ consumer.seekToBeginningFuture(java.util.Collections.singleton(topicPartition)).
 
 ----
 
-Finally `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seekToEnd(io.vertx.kafka.client.common.TopicPartition)[seekToEnd]` can be used to come back at the end of the partition
+Finally `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seekToEnd()[seekToEnd]` can be used to come back at the end of the partition
 
 [source,scala]
 ----
@@ -523,7 +523,7 @@ handler has been called. This is not the case for messages observed by the batch
 == Offset lookup
 
 You can use the beginningOffsets API introduced in Kafka 0.10.1.1 to get the first offset
-for a given partition. In contrast to `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seekToBeginning(io.vertx.kafka.client.common.TopicPartition)[seekToBeginning]`,
+for a given partition. In contrast to `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seekToBeginning()[seekToBeginning]`,
 it does not change the consumer's offset.
 
 [source,scala]
@@ -559,7 +559,7 @@ consumer.beginningOffsetsFuture(topicPartition).onComplete{
 ----
 
 You can use the endOffsets API introduced in Kafka 0.10.1.1 to get the last offset
-for a given partition. In contrast to `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seekToEnd(io.vertx.kafka.client.common.TopicPartition)[seekToEnd]`,
+for a given partition. In contrast to `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#seekToEnd()[seekToEnd]`,
 it does not change the consumer's offset.
 
 [source,scala]
@@ -675,7 +675,7 @@ consumer.closeFuture().onComplete{
 
 == Sending messages to a topic
 
-You can use  `link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#write(io.vertx.kafka.client.producer.KafkaProducerRecord)[write]` to send messages (records) to a topic.
+You can use  `link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#write()[write]` to send messages (records) to a topic.
 
 The simplest way to send a message is to specify only the destination topic and the related value, omitting its key
 or partition, in this case the messages are sent in a round robin fashion across all the partitions of the topic.
@@ -762,7 +762,7 @@ shared producer usage must use the same configuration.
 
 Sometimes you want to share the same producer from within several verticles or contexts.
 
-Calling `link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#createShared(io.vertx.core.Vertx,%20java.lang.String,%20java.util.Map)[KafkaProducer.createShared]`
+Calling `link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#createShared(io.vertx.core.Vertx,%20java.lang.String)[KafkaProducer.createShared]`
 returns a producer that can be shared safely.
 
 [source,scala]
@@ -805,7 +805,7 @@ producer.closeFuture().onComplete{
 
 == Getting topic partition information
 
-You can call the `link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#partitionsFor(java.lang.String,%20io.vertx.core.Handler)[partitionsFor]` to get information about
+You can call the `link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#partitionsFor(java.lang.String)[partitionsFor]` to get information about
 partitions for a specified topic:
 
 [source,scala]
@@ -828,8 +828,8 @@ producer.partitionsForFuture("test").onComplete{
 == Handling errors
 
 Errors handling (e.g timeout) between a Kafka client (consumer or producer) and the Kafka cluster is done using
-`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#exceptionHandler(io.vertx.core.Handler)[exceptionHandler]`or
-`link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#exceptionHandler(io.vertx.core.Handler)[exceptionHandler]`
+`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#exceptionHandler()[exceptionHandler]`or
+`link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#exceptionHandler()[exceptionHandler]`
 
 [source,scala]
 ----

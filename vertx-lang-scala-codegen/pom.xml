@@ -12,21 +12,17 @@
   <artifactId>vertx-lang-scala-codegen</artifactId>
   <name>Codegen for Scala</name>
   <dependencies>
-    <!-- Not needed at runtime -->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-codegen</artifactId>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-docgen</artifactId>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-codetrans</artifactId>
-      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.freemarker</groupId>

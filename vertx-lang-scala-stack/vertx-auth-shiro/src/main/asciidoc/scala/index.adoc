@@ -71,7 +71,7 @@ implementation uses a familiar user/role/permission model, where a user can have
 can have zero or more permissions.
 
 If validating if a user has a particular permission simply pass the permission into.
-`link:../../scaladocs/io/vertx/scala/ext/auth/User.html#isAuthorised(java.lang.String,%20io.vertx.core.Handler)[isAuthorised]`as follows:
+`link:../../scaladocs/io/vertx/scala/ext/auth/User.html#isAuthorised(java.lang.String)[isAuthorised]`as follows:
 
 [source,java]
 ----
@@ -104,7 +104,7 @@ user.isAuthorizedFuture("role:manager").onComplete{
 
 ----
 
-The default role prefix is `role:`. You can change this with `link:../../scaladocs/io/vertx/scala/ext/auth/shiro/ShiroAuth.html#setRolePrefix(java.lang.String)[setRolePrefix]`.
+The default role prefix is `role:`. You can change this with `link:../../scaladocs/io/vertx/scala/ext/auth/shiro/ShiroAuth.html#setRolePrefix()[setRolePrefix]`.
 
 === The Shiro properties auth provider
 
@@ -112,7 +112,7 @@ This auth provider implementation uses Apache Shiro to get user/role/permission 
 
 Note that roles are not available directly on the API due to the fact that vertx-auth tries to be as portable as
 possible. However one can run assertions on role by using the prefix `role:` or by specifying the prefered prefix
-with `link:../../scaladocs/io/vertx/scala/ext/auth/shiro/ShiroAuth.html#setRolePrefix(java.lang.String)[setRolePrefix]`.
+with `link:../../scaladocs/io/vertx/scala/ext/auth/shiro/ShiroAuth.html#setRolePrefix()[setRolePrefix]`.
 
 The implementation will, by default, look for a file called `vertx-users.properties` on the classpath.
 

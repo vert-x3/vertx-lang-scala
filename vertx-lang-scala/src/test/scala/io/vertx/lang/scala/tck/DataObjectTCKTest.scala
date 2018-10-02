@@ -9,7 +9,7 @@ import org.scalatest.{FlatSpec, Matchers}
 import java.time.Instant;
 
 /**
-  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+  * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
 @RunWith(classOf[JUnitRunner])
 class DataObjectTCKTest extends FlatSpec with Matchers {

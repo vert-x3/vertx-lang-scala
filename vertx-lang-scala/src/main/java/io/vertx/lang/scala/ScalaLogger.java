@@ -24,7 +24,7 @@ import io.vertx.core.spi.logging.LogDelegate;
  * A logging delegate to allow {@link Logger} to be used in Scala. The Scala-Compiler can't distinguish between
  * method(Object) and method(Object,Object..). This delegate makes the leading type more specific.
  *
- * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
+ * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a>
  */
 public class ScalaLogger{
     private final Logger log;

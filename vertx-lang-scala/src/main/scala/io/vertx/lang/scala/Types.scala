@@ -21,7 +21,7 @@ import io.vertx.core.json.{JsonArray, JsonObject}
 /**
   * Type definitions for commonly used types.
   *
-  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+  * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
 object Types {
   type StringAsyncMsg = io.vertx.core.AsyncResult[io.vertx.scala.core.eventbus.Message[String]]

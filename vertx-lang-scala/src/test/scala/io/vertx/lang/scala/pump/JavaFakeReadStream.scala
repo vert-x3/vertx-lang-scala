@@ -4,7 +4,7 @@ import io.vertx.core.Handler
 import io.vertx.core.streams.ReadStream
 
 /**
-  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+  * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
 class JavaFakeReadStream[T] extends ReadStream[T] {
 

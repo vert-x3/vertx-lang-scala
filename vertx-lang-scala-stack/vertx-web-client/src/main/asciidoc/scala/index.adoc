@@ -174,7 +174,7 @@ request.uri("/some-uri?param1=param1_value&param2=param2_value")
 When you need to make a request with a body, you use the same API and call then `sendXXX` methods
 that expects a body to send.
 
-Use `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendBuffer(io.vertx.core.buffer.Buffer,%20io.vertx.core.Handler)[sendBuffer]` to send a buffer body
+Use `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendBuffer(io.vertx.core.buffer.Buffer)[sendBuffer]` to send a buffer body
 
 [source,scala]
 ----
@@ -191,7 +191,7 @@ client.post(8080, "myserver.mycompany.com", "/some-uri").sendBufferFuture(buffer
 Sending a single buffer is useful but often you don't want to load fully the content in memory because
 it may be too large or you want to handle many concurrent requests and want to use just the minimum
 for each request. For this purpose the web client can send `ReadStream<Buffer>` (e.g a
-`link:../../scaladocs/io/vertx/scala/core/file/AsyncFile.html[AsyncFile]`is a ReadStream<Buffer>`) with the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendStream(io.vertx.core.streams.ReadStream,%20io.vertx.core.Handler)[sendStream]` method
+`link:../../scaladocs/io/vertx/scala/core/file/AsyncFile.html[AsyncFile]`is a ReadStream<Buffer>`) with the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendStream(io.vertx.core.streams.ReadStream)[sendStream]` method
 
 [source,scala]
 ----
@@ -236,7 +236,7 @@ The POST will not be chunked.
 ==== Json bodies
 
 Often you’ll want to send Json body requests, to send a `JsonObject`
-use the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendJsonObject(io.vertx.core.json.JsonObject,%20io.vertx.core.Handler)[sendJsonObject]`
+use the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendJsonObject(io.vertx.core.json.JsonObject)[sendJsonObject]`
 
 [source,scala]
 ----
@@ -249,7 +249,7 @@ client.post(8080, "myserver.mycompany.com", "/some-uri").sendJsonObjectFuture(ne
 
 ----
 
-In Java, Groovy or Kotlin, you can use the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendJson(java.lang.Object,%20io.vertx.core.Handler)[sendJson]` method that maps
+In Java, Groovy or Kotlin, you can use the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendJson(java.lang.Object)[sendJson]` method that maps
 a POJO (Plain Old Java Object) to a Json object using `Json.encode`
 method
 
@@ -269,7 +269,7 @@ to Json.
 
 ==== Form submissions
 
-You can send http form submissions bodies with the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendForm(io.vertx.core.MultiMap,%20io.vertx.core.Handler)[sendForm]`
+You can send http form submissions bodies with the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendForm(io.vertx.core.MultiMap)[sendForm]`
 variant.
 
 [source,scala]
@@ -308,7 +308,7 @@ client.post(8080, "myserver.mycompany.com", "/some-uri").putHeader("content-type
 ----
 
 If you want to upload files and send attributes, you can create a `link:../../scaladocs/io/vertx/scala/ext/web/multipart/MultipartForm.html[MultipartForm]` and
-use `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendMultipartForm(io.vertx.ext.web.multipart.MultipartForm,%20io.vertx.core.Handler)[sendMultipartForm]`.
+use `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendMultipartForm(io.vertx.ext.web.multipart.MultipartForm)[sendMultipartForm]`.
 
 [source,scala]
 ----
@@ -352,7 +352,7 @@ request.putHeader("other-header", "foo")
 
 === Reusing requests
 
-The `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#send(io.vertx.core.Handler)[send]` method can be called multiple times
+The `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#send()[send]` method can be called multiple times
 safely, making it very easy to configure and reuse `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html[HttpRequest]` objects
 
 [source,scala]
@@ -400,7 +400,7 @@ get.copy().putHeader("a-header", "with-some-value").sendFuture().onComplete{
 
 === Timeouts
 
-You can set a timeout for a specific http request using `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#timeout(long)[timeout]`.
+You can set a timeout for a specific http request using `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#timeout()[timeout]`.
 
 [source,scala]
 ----
@@ -440,7 +440,7 @@ client.get(8080, "myserver.mycompany.com", "/some-uri").sendFuture().onComplete{
 
 ----
 
-WARNING: responses are fully buffered, use `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html#pipe(io.vertx.core.streams.WriteStream)[BodyCodec.pipe]`
+WARNING: responses are fully buffered, use `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html#pipe()[BodyCodec.pipe]`
 to pipe the response to a write stream
 
 === Decoding responses
@@ -496,7 +496,7 @@ client.get(8080, "myserver.mycompany.com", "/some-uri").as(BodyCodec.json(exampl
 
 ----
 
-When large response are expected, use the `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html#pipe(io.vertx.core.streams.WriteStream)[BodyCodec.pipe]`.
+When large response are expected, use the `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html#pipe()[BodyCodec.pipe]`.
 This body codec pumps the response body buffers to a `link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]`
 and signals the success or the failure of the operation in the async result response
 
