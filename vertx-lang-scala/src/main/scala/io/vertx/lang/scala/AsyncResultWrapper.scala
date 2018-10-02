@@ -19,7 +19,7 @@ package io.vertx.lang.scala
 /**
   * An implementation of [[io.vertx.core.AsyncResult]] that is used to convert a result of a Java-version into the Scala-variant.
   *
-  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a>
+  * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a>
   */
 class AsyncResultWrapper[J,S](val _java: io.vertx.core.AsyncResult[J], val converter: J => S) extends io.vertx.core.AsyncResult[S]{
 

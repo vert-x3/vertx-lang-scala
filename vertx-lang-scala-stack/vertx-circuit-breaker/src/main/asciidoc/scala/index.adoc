@@ -161,7 +161,7 @@ breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
 == Retries
 
 You can also specify how often the circuit breaker should try your code before failing with
-`link:../dataobjects.html#CircuitBreakerOptions#setMaxRetries(int)[maxRetries]`.
+`link:../dataobjects.html#CircuitBreakerOptions#setMaxRetries()[maxRetries]`.
 If you set this to something higher than 0 your code gets executed several times before finally failing
 in the last execution. If the code succeeded in one of the retries your handler gets notified and any
 retries left are skipped. Retries are only supported when the circuit is closed.
@@ -171,7 +171,7 @@ and 2 retries.
 
 By default the timeout between retries is set to 0 which means that retries will be executed one after another without
 any delay. This, however, will result in increased load on the called service and may delay it's recovery.
-In order to mitigate this problem it is recommended to execute retries with delays. `link:../../scaladocs/io/vertx/scala/circuitbreaker/CircuitBreaker.html#retryPolicy(java.util.function.Function)[retryPolicy]`
+In order to mitigate this problem it is recommended to execute retries with delays. `link:../../scaladocs/io/vertx/scala/circuitbreaker/CircuitBreaker.html#retryPolicy()[retryPolicy]`
 method can be used to specify retry policy. Retry policy is a function which receives retry count as single argument
 and returns timeout in milliseconds before retry is executed and allows to implement a more complex policy, e.g.
 exponential backoff with jitter. Below is an example of retry timeout which grows linearly with each retry count:
@@ -232,13 +232,13 @@ breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
 ----
 
 You can also be notified when the circuit breaker decides to attempt to reset (half-open state). You can register
-such a callback with `link:../../scaladocs/io/vertx/scala/circuitbreaker/CircuitBreaker.html#halfOpenHandler(io.vertx.core.Handler)[halfOpenHandler]`.
+such a callback with `link:../../scaladocs/io/vertx/scala/circuitbreaker/CircuitBreaker.html#halfOpenHandler()[halfOpenHandler]`.
 
 == Event bus notification
 
 Every time the circuit state changes, an event is published on the event bus. The address on which the events are
 sent is configurable with
-`link:../dataobjects.html#CircuitBreakerOptions#setNotificationAddress(java.lang.String)[notificationAddress]`. If `null` is
+`link:../dataobjects.html#CircuitBreakerOptions#setNotificationAddress()[notificationAddress]`. If `null` is
 passed to this method, the notifications are disabled. By default, the used address is `vertx.circuit-breaker`.
 
 Each event contains a Json Object with:
@@ -252,7 +252,7 @@ Each event contains a Json Object with:
 
 When the circuit is "open", calls to the circuit breaker fail immediately, without any attempt to execute the real
 operation. After a suitable amount of time (configured from
-`link:../dataobjects.html#CircuitBreakerOptions#setResetTimeout(long)[resetTimeout]`, the circuit breaker decides that the
+`link:../dataobjects.html#CircuitBreakerOptions#setResetTimeout()[resetTimeout]`, the circuit breaker decides that the
 operation has a chance of succeeding, so it goes into the {@code half-open} state. In this state, the next call to the
 circuit breaker is allowed to execute the dangerous operation. Should the call succeed, the circuit breaker resets
 and returns to the {@code closed} state, ready for more routine operation. If this trial call fails, however, the circuit

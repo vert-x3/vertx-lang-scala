@@ -34,12 +34,6 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-scala-codegen</artifactId>
-      <version>${project.version}</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>org.scala-lang</groupId>
       <artifactId>scala-library</artifactId>
       <version>${scala.version}</version>
@@ -53,21 +47,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-codegen</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-docgen</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-codetrans</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-codegen</artifactId>
       <scope>provided</scope>
       <classifier>sources</classifier>
     </dependency>
@@ -76,12 +55,6 @@
       <artifactId>vertx-core</artifactId>
       <scope>provided</scope>
       <classifier>sources</classifier>
-    </dependency>
-    <dependency>
-      <groupId>org.mvel</groupId>
-      <artifactId>mvel2</artifactId>
-      <version>2.3.1.Final</version>
-      <scope>provided</scope>
     </dependency>
 
     <!-- Test dependencies -->
@@ -297,6 +270,11 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
+          </dependency>
+          <dependency>
+            <groupId>io.vertx</groupId>
+            <artifactId>vertx-lang-scala-codegen</artifactId>
+            <version>${project.version}</version>
           </dependency>
         </dependencies>
       </plugin>

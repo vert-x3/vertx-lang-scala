@@ -171,27 +171,27 @@ As for external service configuration in Json, the `authOptions` uses the `provi
 
 == Telnet term configuration
 
-Telnet terms are configured by `link:../dataobjects.html#ShellServiceOptions#setTelnetOptions(io.vertx.ext.shell.term.TelnetTermOptions)[telnetOptions]`,
+Telnet terms are configured by `link:../dataobjects.html#ShellServiceOptions#setTelnetOptions()[telnetOptions]`,
 the `link:../dataobjects.html#TelnetTermOptions[TelnetTermOptions]` extends the `link:../../vertx-core/dataobjects.html#NetServerOptions[NetServerOptions]` so they
 have the exact same configuration.
 
 == SSH term configuration
 
-SSH terms are configured by `link:../dataobjects.html#ShellServiceOptions#setSSHOptions(io.vertx.ext.shell.term.SSHTermOptions)[SSHOptions]`:
+SSH terms are configured by `link:../dataobjects.html#ShellServiceOptions#setSSHOptions()[SSHOptions]`:
 
-- `link:../dataobjects.html#SSHTermOptions#setPort(int)[port]`: port
-- `link:../dataobjects.html#SSHTermOptions#setHost(java.lang.String)[host]`: host
+- `link:../dataobjects.html#SSHTermOptions#setPort()[port]`: port
+- `link:../dataobjects.html#SSHTermOptions#setHost()[host]`: host
 
 Only username/password authentication is supported at the moment, it can be configured with property file
 or LDAP, see Vert.x Auth for more info:
 
-- `link:../dataobjects.html#SSHTermOptions#setAuthOptions(io.vertx.ext.auth.AuthOptions)[authOptions]`: configures user authentication
+- `link:../dataobjects.html#SSHTermOptions#setAuthOptions()[authOptions]`: configures user authentication
 
 The server key configuration reuses the key pair store configuration scheme provided by _Vert.x Core_:
 
-- `link:../dataobjects.html#SSHTermOptions#setKeyPairOptions(io.vertx.core.net.JksOptions)[keyPairOptions]`: set `.jks` key pair store
-- `link:../dataobjects.html#SSHTermOptions#setPfxKeyPairOptions(io.vertx.core.net.PfxOptions)[pfxKeyPairOptions]`: set `.pfx` key pair store
-- `link:../dataobjects.html#SSHTermOptions#setPemKeyPairOptions(io.vertx.core.net.PemKeyCertOptions)[pemKeyPairOptions]`: set `.pem` key pair store
+- `link:../dataobjects.html#SSHTermOptions#setKeyPairOptions()[keyPairOptions]`: set `.jks` key pair store
+- `link:../dataobjects.html#SSHTermOptions#setPfxKeyPairOptions()[pfxKeyPairOptions]`: set `.pfx` key pair store
+- `link:../dataobjects.html#SSHTermOptions#setPemKeyPairOptions()[pemKeyPairOptions]`: set `.pem` key pair store
 
 
 .Deploying the Shell Service on SSH with Mongo authentication
@@ -254,14 +254,14 @@ service.start()
 
 == HTTP term configuration
 
-HTTP terms are configured by `link:../dataobjects.html#ShellServiceOptions#setHttpOptions(io.vertx.ext.shell.term.HttpTermOptions)[httpOptions]`, the http options
+HTTP terms are configured by `link:../dataobjects.html#ShellServiceOptions#setHttpOptions()[httpOptions]`, the http options
 extends the `link:../../vertx-core/dataobjects.html#HttpServerOptions[HttpServerOptions]` so they expose the exact same configuration.
 
 In addition there are extra options for configuring an HTTP term:
 
-- `link:../dataobjects.html#HttpTermOptions#setAuthOptions(io.vertx.ext.auth.AuthOptions)[authOptions]`: configures user authentication
-- `link:../dataobjects.html#HttpTermOptions#setSockJSHandlerOptions(io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions)[sockJSHandlerOptions]`: configures SockJS
-- `link:../dataobjects.html#HttpTermOptions#setSockJSPath(java.lang.String)[sockJSPath]`: the SockJS path in the router
+- `link:../dataobjects.html#HttpTermOptions#setAuthOptions()[authOptions]`: configures user authentication
+- `link:../dataobjects.html#HttpTermOptions#setSockJSHandlerOptions()[sockJSHandlerOptions]`: configures SockJS
+- `link:../dataobjects.html#HttpTermOptions#setSockJSPath()[sockJSPath]`: the SockJS path in the router
 
 .Deploying the Shell Service on HTTP with Mongo authentication
 [source,scala,subs="+attributes"]
@@ -318,9 +318,9 @@ service.start()
 The shell uses a default keymap configuration that can be overriden using the `inputrc` property of the various
 term configuration object:
 
-- `link:../dataobjects.html#TelnetTermOptions#setIntputrc(java.lang.String)[intputrc]`
-- `link:../dataobjects.html#SSHTermOptions#setIntputrc(java.lang.String)[intputrc]`
-- `link:../dataobjects.html#HttpTermOptions#setIntputrc(java.lang.String)[intputrc]`
+- `link:../dataobjects.html#TelnetTermOptions#setIntputrc()[intputrc]`
+- `link:../dataobjects.html#SSHTermOptions#setIntputrc()[intputrc]`
+- `link:../dataobjects.html#HttpTermOptions#setIntputrc()[intputrc]`
 
 The `inputrc` must point to a file available via the classloader or the filesystem.
 
@@ -389,8 +389,8 @@ Vert.x Shell, for instance Dropwizard Metrics.
 
 Vert.x Shell can be extended with custom commands in any of the languages supporting code generation.
 
-A command is created by the `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandBuilder.html#command(java.lang.String)[CommandBuilder.command]` method: the command process handler is called
-by the shell when the command is executed, this handler can be set with the `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandBuilder.html#processHandler(io.vertx.core.Handler)[processHandler]`
+A command is created by the `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandBuilder.html#command()[CommandBuilder.command]` method: the command process handler is called
+by the shell when the command is executed, this handler can be set with the `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandBuilder.html#processHandler()[processHandler]`
 method:
 
 [source,scala]
@@ -415,7 +415,7 @@ registry.registerCommand(builder.build(vertx))
 After a command is created, it needs to be registed to a `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandRegistry.html[CommandRegistry]`. The
 command registry holds all the commands for a Vert.x instance.
 
-A command is registered until it is unregistered with the `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandRegistry.html#unregisterCommand(java.lang.String)[unregisterCommand]`.
+A command is registered until it is unregistered with the `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandRegistry.html#unregisterCommand()[unregisterCommand]`.
 When a command is registered from a Verticle, this command is unregistered when this verticle is undeployed.
 
 NOTE: Command callbacks are invoked in the {@literal io.vertx.core.Context} when the command is registered in the
@@ -498,7 +498,7 @@ which is used for interacting with the terminal.
 
 ==== terminal I/O
 
-The `link:../../scaladocs/io/vertx/scala/ext/shell/term/Tty.html#stdinHandler(io.vertx.core.Handler)[stdinHandler]` handler is used to be notified when the terminal
+The `link:../../scaladocs/io/vertx/scala/ext/shell/term/Tty.html#stdinHandler()[stdinHandler]` handler is used to be notified when the terminal
 receives data, e.g the user uses his keyboard:
 
 [source,scala]
@@ -509,7 +509,7 @@ tty.stdinHandler((data: java.lang.String) => {
 
 ----
 
-A command can use the `link:../../scaladocs/io/vertx/scala/ext/shell/term/Tty.html#write(java.lang.String)[write]` to write to the standard output.
+A command can use the `link:../../scaladocs/io/vertx/scala/ext/shell/term/Tty.html#write()[write]` to write to the standard output.
 
 [source,scala]
 ----
@@ -530,7 +530,7 @@ tty.write(s"Current terminal size: (${tty.width()}, ${tty.height()})")
 
 ==== Resize event
 
-When the size of the terminal changes the `link:../../scaladocs/io/vertx/scala/ext/shell/term/Tty.html#resizehandler(io.vertx.core.Handler)[resizehandler]`
+When the size of the terminal changes the `link:../../scaladocs/io/vertx/scala/ext/shell/term/Tty.html#resizehandler()[resizehandler]`
 is called, the new terminal size can be obtained with `link:../../scaladocs/io/vertx/scala/ext/shell/term/Tty.html#width()[width]` and
 `link:../../scaladocs/io/vertx/scala/ext/shell/term/Tty.html#height()[height]`.
 
@@ -599,7 +599,7 @@ A command can subscribe to a few process events.
 
 ==== Interrupt event
 
-The `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandProcess.html#interruptHandler(io.vertx.core.Handler)[interruptHandler]` is called when the process
+The `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandProcess.html#interruptHandler()[interruptHandler]` is called when the process
 is interrupted, this event is fired when the user press _Ctrl+C_ during the execution of a command. This handler can
 be used for interrupting commands _blocking_ the CLI and gracefully ending the command process:
 
@@ -627,7 +627,7 @@ will be delayed and will likely be handled by the shell, like printing a new lin
 
 ==== Suspend/resume events
 
-The `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandProcess.html#suspendHandler(io.vertx.core.Handler)[suspendHandler]` is called when the process
+The `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandProcess.html#suspendHandler()[suspendHandler]` is called when the process
 is running and the user press _Ctrl+Z_, the command is _suspended_:
 
 - the command can receive the suspend event when it has registered an handler for this event
@@ -635,7 +635,7 @@ is running and the user press _Ctrl+Z_, the command is _suspended_:
 - the shell prompt the user for input
 - the command can receive interrupts event or end events
 
-The `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandProcess.html#resumeHandler(io.vertx.core.Handler)[resumeHandler]` is called when the process
+The `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandProcess.html#resumeHandler()[resumeHandler]` is called when the process
 is resumed, usually when the user types _fg_:
 
 - the command can receive the resume event when it has registered an handler for this event
@@ -660,7 +660,7 @@ command.processHandler((process: io.vertx.scala.ext.shell.command.CommandProcess
 
 ==== End events
 
-The `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandProcess.html#endHandler(io.vertx.core.Handler)[endHandler]` (io.vertx.core.Handler)} is
+The `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandProcess.html#endHandler()[endHandler]` (io.vertx.core.Handler)} is
 called when the process is running or suspended and the command terminates, for instance the shell session is closed,
 the command is _terminated_.
 
@@ -684,7 +684,7 @@ This handler is useful for cleaning up resources upon command termination, for i
 
 A command can provide a completion handler when it wants to provide contextual command line interface completion.
 
-Like the process handler, the `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandBuilder.html#completionHandler(io.vertx.core.Handler)[completion
+Like the process handler, the `link:../../scaladocs/io/vertx/scala/ext/shell/command/CommandBuilder.html#completionHandler()[completion
 handler]` is non blocking because the implementation may use Vert.x services, e.g the file system.
 
 The `link:../../scaladocs/io/vertx/scala/ext/shell/cli/Completion.html#lineTokens()[lineTokens]` returns a list of `link:../../scaladocs/io/vertx/scala/ext/shell/cli/CliToken.html[tokens]`
@@ -694,7 +694,7 @@ beginning of the line.
 The `link:../../scaladocs/io/vertx/scala/ext/shell/cli/Completion.html#rawLine()[rawLine]` returns the current completed from the beginning
 of the line to the cursor position, in raw format, i.e without any char escape performed.
 
-Completion ends with a call to `link:../../scaladocs/io/vertx/scala/ext/shell/cli/Completion.html#complete(java.util.List)[complete]`.
+Completion ends with a call to `link:../../scaladocs/io/vertx/scala/ext/shell/cli/Completion.html#complete()[complete]`.
 
 == Shell server
 
@@ -734,7 +734,7 @@ server.listen()
 
 Besides, the shell server can also be used for creating in process shell session: it provides a programmatic interactive shell.
 
-In process shell session can be created with `link:../../scaladocs/io/vertx/scala/ext/shell/ShellServer.html#createShell(io.vertx.ext.shell.term.Term)[createShell]`:
+In process shell session can be created with `link:../../scaladocs/io/vertx/scala/ext/shell/ShellServer.html#createShell()[createShell]`:
 
 [source,scala]
 ----
@@ -776,7 +776,7 @@ when it's running:
 - uses standard input/output for writing or reading strings
 - resize the terminal
 
-The `link:../../scaladocs/io/vertx/scala/ext/shell/system/JobController.html#close(io.vertx.core.Handler)[close]` closes the shell, it will terminate all jobs in the current shell
+The `link:../../scaladocs/io/vertx/scala/ext/shell/system/JobController.html#close()[close]` closes the shell, it will terminate all jobs in the current shell
 session.
 
 == Terminal servers
@@ -787,7 +787,7 @@ A `link:../../scaladocs/io/vertx/scala/ext/shell/term/Term.html[Term]` handler m
 handle each term when the user connects.
 
 An `link:../../vertx-auth-common/dataobjects.html#AuthOptions[AuthOptions]` can be set on `link:../dataobjects.html#SSHTermOptions[SSHTermOptions]` and `link:../dataobjects.html#HttpTermOptions[HttpTermOptions]`.
-Alternatively, an `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` can be `link:../../scaladocs/io/vertx/scala/ext/shell/term/TermServer.html#authProvider(io.vertx.ext.auth.AuthProvider)[set]`
+Alternatively, an `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` can be `link:../../scaladocs/io/vertx/scala/ext/shell/term/TermServer.html#authProvider()[set]`
 directly on the term server before starting it.
 
 === SSH term
@@ -833,7 +833,7 @@ server.listen()
 
 === HTTP term
 
-The `link:../../scaladocs/io/vertx/scala/ext/shell/term/TermServer.html#createHttpTermServer(io.vertx.core.Vertx)[TermServer.createHttpTermServer]` method creates an HTTP term server, built
+The `link:../../scaladocs/io/vertx/scala/ext/shell/term/TermServer.html#createHttpTermServer()[TermServer.createHttpTermServer]` method creates an HTTP term server, built
 on top of Vert.x Web using the SockJS protocol.
 
 [source,scala]

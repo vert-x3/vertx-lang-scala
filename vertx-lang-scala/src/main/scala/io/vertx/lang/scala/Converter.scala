@@ -7,7 +7,7 @@ import scala.util.{Success, Failure, Try}
 import scala.reflect.runtime.universe._
 
 /**
-  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+  * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
 object Converter {
 

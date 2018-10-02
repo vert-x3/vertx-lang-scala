@@ -47,7 +47,7 @@ var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx))
 
 This creates a STOMP server listening on `localhost:61613` that is compliant with the STOMP specification.
 
-You can configure the port and host in the `link:../../scaladocs/io/vertx/scala/ext/stomp/StompServer.html#listen(int,%20java.lang.String)[listen]`
+You can configure the port and host in the `link:../../scaladocs/io/vertx/scala/ext/stomp/StompServer.html#listen(int)[listen]`
 method:
 
 [source,scala]
@@ -128,7 +128,7 @@ The `link:../dataobjects.html#StompServerOptions[StompServerOptions]` let you co
 * the supported STOMP protocol versions (1.0, 1.1 and 1.2 by default)
 * the maximum number of frame allowed in a transaction (defaults to 1000)
 * the size of the transaction chunk - defaults to 1000 (see
-`link:../dataobjects.html#StompServerOptions#setTransactionChunkSize(int)[transactionChunkSize]`)
+`link:../dataobjects.html#StompServerOptions#setTransactionChunkSize()[transactionChunkSize]`)
 * the maximum number of subscriptions a client can handle - defaults to 1000
 
 The STOMP heartbeat is configured using a JSON object as follows:
@@ -218,9 +218,9 @@ providing your own `link:../../scaladocs/io/vertx/scala/ext/stomp/Destination.ht
 
 The custom destination should call the
 
-`link:../../scaladocs/io/vertx/scala/ext/stomp/StompServerHandler.html#onAck(io.vertx.ext.stomp.StompServerConnection,%20io.vertx.ext.stomp.Frame,%20java.util.List)[onAck]`
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompServerHandler.html#onAck(io.vertx.ext.stomp.StompServerConnection,%20io.vertx.ext.stomp.Frame)[onAck]`
 and
-`link:../../scaladocs/io/vertx/scala/ext/stomp/StompServerHandler.html#onNack(io.vertx.ext.stomp.StompServerConnection,%20io.vertx.ext.stomp.Frame,%20java.util.List)[onNack]`
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompServerHandler.html#onNack(io.vertx.ext.stomp.StompServerConnection,%20io.vertx.ext.stomp.Frame)[onNack]`
 method in order to let the `link:../../scaladocs/io/vertx/scala/ext/stomp/StompServerHandler.html[StompServerHandler]` customizes the behavior:
 
 [source,scala]
@@ -409,7 +409,7 @@ var client = StompClient.create(vertx, StompClientOptions()
 The client can also be notified when a connection drop has been detected. Connection failures are detected using the
 STOMP heartbeat mechanism. When the server has not sent a message in the heartbeat time window, the connection is
 closed and the `connectionDroppedHandler` is called (if set). To configure a `connectionDroppedHandler`, call
-`link:../../scaladocs/io/vertx/scala/ext/stomp/StompClientConnection.html#connectionDroppedHandler(io.vertx.core.Handler)[connectionDroppedHandler]`. The handler can
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompClientConnection.html#connectionDroppedHandler()[connectionDroppedHandler]`. The handler can
 for instance tries to reconnect to the server:
 
 [source,scala]
@@ -440,7 +440,7 @@ You can configure various aspect by passing a
 STOMP client relies on a `link:../../scaladocs/io/vertx/scala/core/net/NetClient.html[NetClient]`, you can configure the underlying Net Client from
 the `link:../dataobjects.html#StompClientOptions[StompClientOptions]`. Alternatively, you can pass the `link:../../scaladocs/io/vertx/scala/core/net/NetClient.html[NetClient]`
 you want to use in the
-`link:../../scaladocs/io/vertx/scala/ext/stomp/StompClient.html#connect(io.vertx.core.net.NetClient,%20io.vertx.core.Handler)[connect]`method:
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompClient.html#connect(io.vertx.core.net.NetClient)[connect]`method:
 
 [source,scala]
 ----
@@ -677,7 +677,7 @@ HTML page, or as an npm module (https://www.npmjs.com/package/stompjs).
 
 To achieve the first step, you would need a HTTP server, and pass the
 `link:../../scaladocs/io/vertx/scala/ext/stomp/StompServer.html#webSocketHandler()[webSocketHandler]`result to
-`link:../../scaladocs/io/vertx/scala/core/http/HttpServer.html#websocketHandler(io.vertx.core.Handler)[websocketHandler]`:
+`link:../../scaladocs/io/vertx/scala/core/http/HttpServer.html#websocketHandler()[websocketHandler]`:
 
 [source,scala]
 ----

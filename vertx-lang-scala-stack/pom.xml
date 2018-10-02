@@ -39,16 +39,6 @@
     <!-- CODEGEN -->
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-codegen</artifactId>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-docgen</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-codetrans</artifactId>
       <optional>true</optional>
     </dependency>
@@ -62,12 +52,6 @@
       <groupId>org.reactivestreams</groupId>
       <artifactId>reactive-streams</artifactId>
       <version>1.0.0</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-scala-codegen</artifactId>
-      <version>${project.version}</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>
@@ -247,6 +231,13 @@
               </configuration>
             </execution>
           </executions>
+          <dependencies>
+            <dependency>
+              <groupId>io.vertx</groupId>
+              <artifactId>vertx-lang-scala-codegen</artifactId>
+              <version>${project.version}</version>
+            </dependency>
+          </dependencies>
         </plugin>
         <plugin>
           <artifactId>maven-assembly-plugin</artifactId>
@@ -289,7 +280,6 @@
     <module>vertx-web</module>
     <module>vertx-web-common</module>
     <module>vertx-web-client</module>
-    <!--<module>vertx-sockjs-service-proxy</module>-->
     <module>vertx-web-templ-freemarker</module>
     <module>vertx-web-templ-handlebars</module>
     <module>vertx-web-templ-jade</module>

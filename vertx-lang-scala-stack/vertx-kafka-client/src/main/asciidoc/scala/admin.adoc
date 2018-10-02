@@ -11,7 +11,7 @@ but not this wrapper, includes Partition Management, Broker Configuration manage
 
 === Create a topic
 
-You can call `link:../../scaladocs/io/vertx/scala/kafka/admin/AdminUtils.html#createTopic(java.lang.String,%20int,%20int,%20io.vertx.core.Handler)[createTopic]` to create a topic.
+You can call `link:../../scaladocs/io/vertx/scala/kafka/admin/AdminUtils.html#createTopic(java.lang.String,%20int,%20int)[createTopic]` to create a topic.
 Parameters are: topic name, number of partitions, number of replicas, and the usual callback to handle the result.
 It might return an error, e.g. if the number of requested replicas is greater than the number of brokers.
 
@@ -31,7 +31,7 @@ adminUtils.createTopicFuture("myNewTopic", 2, 1).onComplete{
 
 === Delete a topic
 
-You can call `link:../../scaladocs/io/vertx/scala/kafka/admin/AdminUtils.html#deleteTopic(java.lang.String,%20io.vertx.core.Handler)[deleteTopic]` to delete a topic.
+You can call `link:../../scaladocs/io/vertx/scala/kafka/admin/AdminUtils.html#deleteTopic(java.lang.String)[deleteTopic]` to delete a topic.
 Parameters are: topic name, and the usual callback to handle the result.
 It might return an error, e.g. if the topic does not exist.
 
@@ -52,7 +52,7 @@ adminUtils.deleteTopicFuture("myNewTopic").onComplete{
 === Change a topic's configuration
 
 If you need to update the configuration of a topic, e.g., you want to update the retention policy,
-you can call `link:../../scaladocs/io/vertx/scala/kafka/admin/AdminUtils.html#changeTopicConfig(java.lang.String,%20java.util.Map,%20io.vertx.core.Handler)[changeTopicConfig]` to update a topic.
+you can call `link:../../scaladocs/io/vertx/scala/kafka/admin/AdminUtils.html#changeTopicConfig(java.lang.String,%20java.util.Map)[changeTopicConfig]` to update a topic.
 Parameters are: topic name, a Map (String -> String) with parameters to be changed,
 and the usual callback to handle the result.
 It might return an error, e.g. if the topic does not exist.
@@ -76,7 +76,7 @@ adminUtils.changeTopicConfigFuture("myNewTopic", properties).onComplete{
 
 === Check if a topic exists
 
-If you want to check if a topic exists, you can call `link:../../scaladocs/io/vertx/scala/kafka/admin/AdminUtils.html#topicExists(java.lang.String,%20io.vertx.core.Handler)[topicExists]`.
+If you want to check if a topic exists, you can call `link:../../scaladocs/io/vertx/scala/kafka/admin/AdminUtils.html#topicExists(java.lang.String)[topicExists]`.
 Parameters are: topic name, and the usual callback to handle the result.
 It might return an error, e.g. if the topic does not exist.
 

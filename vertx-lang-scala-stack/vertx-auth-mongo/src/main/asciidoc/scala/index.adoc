@@ -55,17 +55,17 @@ insert the row and fail if duplicate.
 
 You can also change all the defaults for the mongo collection and column names using any of the methods:
 
-`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setCollectionName(java.lang.String)[setCollectionName]`
-`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setUsernameField(java.lang.String)[setUsernameField]`
-`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPasswordField(java.lang.String)[setPasswordField]`
-`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPermissionField(java.lang.String)[setPermissionField]`
-`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setRoleField(java.lang.String)[setRoleField]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setCollectionName()[setCollectionName]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setUsernameField()[setUsernameField]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPasswordField()[setPasswordField]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPermissionField()[setPermissionField]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setRoleField()[setRoleField]`
 if you want to adapt that to your needs.
 
 The default implementation assumes that the password is stored in the database as a SHA-512 hash after being
 concatenated with a salt. It also assumes the salt is stored in the table too. The field, where the salt is
-stored can be set by `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setSaltField(java.lang.String)[setSaltField]`, the default is "salt".
-You are able to change this behaviour by using `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/HashStrategy.html#setSaltStyle(io.vertx.ext.auth.mongo.HashSaltStyle)[setSaltStyle]`.
+stored can be set by `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setSaltField()[setSaltField]`, the default is "salt".
+You are able to change this behaviour by using `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/HashStrategy.html#setSaltStyle()[setSaltStyle]`.
 The HashStrategy you can retrieve by  `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#getHashStrategy()[getHashStrategy]`.
 By using this, you are able to set:
 `link:todo[NO_SALT]`by which passwords are not crypted and stored
@@ -73,10 +73,10 @@ in cleartext. ( see the warning below! )
 `link:todo[COLUMN]`, which will create a salt per user and store this
 inside the defined column of the user. ( see the warning below! )
 `link:todo[EXTERNAL]`, which will store only the crypted password in the
-database and will use a salt from external, which you will have to set by `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/HashStrategy.html#setExternalSalt(java.lang.String)[setExternalSalt]`
+database and will use a salt from external, which you will have to set by `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/HashStrategy.html#setExternalSalt()[setExternalSalt]`
 
 If you want to override this behaviour you can do so by providing an alternative hash strategy and setting it with
-`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setHashStrategy(io.vertx.ext.auth.mongo.HashStrategy)[setHashStrategy]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setHashStrategy()[setHashStrategy]`
 
 WARNING: It is strongly advised to use the `link:todo[EXTERNAL]` option.
 The NO_SALT option is existing for development phase only and even the COLUMN option is not recommended, cause
@@ -157,8 +157,8 @@ authProvider.authenticateFuture(authInfo).onComplete{
 
 ----
 Instead of the `username` and `password` field names used in the previous snippet, you should use:
-`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setUsernameCredentialField(java.lang.String)[setUsernameCredentialField]`and
-`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPasswordCredentialField(java.lang.String)[setPasswordCredentialField]`
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setUsernameCredentialField()[setUsernameCredentialField]`and
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPasswordCredentialField()[setPasswordCredentialField]`
 
 == Authorisation - Permission-Role Model
 
@@ -167,7 +167,7 @@ implementation assumes a familiar user/role/permission model, where a user can h
 can have zero or more permissions.
 
 If validating if a user has a particular permission simply pass the permission into.
-`link:../../scaladocs/io/vertx/scala/ext/auth/User.html#isAuthorised(java.lang.String,%20io.vertx.core.Handler)[isAuthorised]`as follows:
+`link:../../scaladocs/io/vertx/scala/ext/auth/User.html#isAuthorised(java.lang.String)[isAuthorised]`as follows:
 
 [source,scala]
 ----

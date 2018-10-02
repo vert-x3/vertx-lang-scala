@@ -13,7 +13,7 @@ import org.scalatest.{FlatSpec, Matchers}
 import scala.util.{Failure, Success}
 
 /**
-  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+  * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
 @RunWith(classOf[JUnitRunner])
 class VertxTest extends FlatSpec with Matchers {

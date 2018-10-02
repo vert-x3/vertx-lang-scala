@@ -29,7 +29,7 @@ import scala.reflect.runtime.universe._
 /**
   * Base class for verticle implementations.
   *
-  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+  * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
 abstract class ScalaVerticle {
   protected implicit var executionContext:VertxExecutionContext = _

@@ -8,7 +8,7 @@ import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
 
 /**
-  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+  * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
 @RunWith(classOf[JUnitRunner])
 class PumpTest extends FlatSpec with Matchers {

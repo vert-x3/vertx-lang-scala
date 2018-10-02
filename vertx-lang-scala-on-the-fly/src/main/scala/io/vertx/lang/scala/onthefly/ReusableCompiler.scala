@@ -24,7 +24,7 @@ import scala.tools.nsc.{Global, Settings}
   * is checked for errors on each run and the run won't start if any error from the previous run is not cleared.
   * This class also takes of creating the required run-Instances as these aren't reuasble betwen executions.
   *
-  * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+  * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
 class ReusableCompiler(settings: Settings) {
 

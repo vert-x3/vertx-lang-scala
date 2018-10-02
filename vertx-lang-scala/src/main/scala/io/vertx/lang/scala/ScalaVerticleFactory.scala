@@ -26,7 +26,7 @@ import scala.util.Success
 /**
  * Factory for creating Verticle-Instances from a compiled class or scala source code.
  *
- * @author <a href="mailto:jochen.mader@codecentric.de">Jochen Mader</a
+ * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
  * @author <a href="http://www.campudus.com/">Joern Bernhardt</a>
  */
 class ScalaVerticleFactory extends VerticleFactory {
