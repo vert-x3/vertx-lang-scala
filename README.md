@@ -3,7 +3,7 @@ vertx-lang-scala
 
 ## CI
 
-  [![Build Status](https://vertx.ci.cloudbees.com/buildStatus/icon?job=vert.x3-lang-scala)](https://vertx.ci.cloudbees.com/view/vert.x-3/job/vert.x3-lang-scala/)
+  [![Build Status](https://travis-ci.org/vert-x3/vertx-lang-scala.svg?branch=master)](https://travis-ci.org/vert-x3/vertx-lang-scala)
 
 ## Structure
 
