@@ -52,6 +52,18 @@ class Service(private val _asJava: JService) {
   }
 
   /**
+   * Specifies arbitrary KV metadata linked to the service instance.
+   */
+  def setMeta(value: Map[String, String]) = {
+    asJava.setMeta(value.asJava)
+    this
+  }
+
+  def getMeta: scala.collection.mutable.Map[String, String] = {
+    collection.mutable.Map(asJava.getMeta().asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
+  }
+
+  /**
    * Set service name
    */
   def setName(value: String) = {

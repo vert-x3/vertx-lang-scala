@@ -121,7 +121,9 @@ def writePing ( data: io.vertx.core.buffer.Buffer): WebSocketBase    /**
    * @return a reference to this, so the API can be used fluently
    */
 def writePong ( data: io.vertx.core.buffer.Buffer): WebSocketBase    /**
-   * Set a close handler. This will be called when the WebSocket is closed.   * @param handler the handler
+   * Set a close handler. This will be called when the WebSocket is closed.
+   * <p/>
+   * After this callback, no more messages are expected.   * @param handler the handler
    * @return a reference to this, so the API can be used fluently
    */
 def closeHandler ( handler: Handler[Unit]): WebSocketBase    /**
@@ -155,7 +157,9 @@ def pongHandler ( handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase 
    * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
    */
 override def end ( ): Unit    /**
-   * Close the WebSocket.
+   * Close the WebSocket sending the default close frame.
+   * <p/>
+   * No more messages can be sent.
    */
 def close ( ): Unit  
 def close ( statusCode: Short): Unit  
@@ -353,7 +357,9 @@ object WebSocketBase {
   }
 
   /**
-   * Set a close handler. This will be called when the WebSocket is closed.   * @param handler the handler
+   * Set a close handler. This will be called when the WebSocket is closed.
+   * <p/>
+   * After this callback, no more messages are expected.   * @param handler the handler
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -471,7 +477,9 @@ object WebSocketBase {
   }
 
   /**
-   * Close the WebSocket.
+   * Close the WebSocket sending the default close frame.
+   * <p/>
+   * No more messages can be sent.
    */
   def close (): Unit = {
     asJava.asInstanceOf[JWebSocketBase].close()

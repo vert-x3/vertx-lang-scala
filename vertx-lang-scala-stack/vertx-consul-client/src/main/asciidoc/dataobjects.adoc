@@ -921,6 +921,9 @@ Set service address
 |[[id]]`@id`|`String`|+++
 Set ID of service
 +++
+|[[meta]]`@meta`|`String`|+++
+Specifies arbitrary KV metadata linked to the service instance.
++++
 |[[name]]`@name`|`String`|+++
 Set service name
 +++
@@ -1021,6 +1024,9 @@ Set check options of service
 +++
 |[[id]]`@id`|`String`|+++
 Set the ID of session
++++
+|[[meta]]`@meta`|`String`|+++
+Specifies arbitrary KV metadata linked to the service instance.
 +++
 |[[name]]`@name`|`String`|+++
 Set service name

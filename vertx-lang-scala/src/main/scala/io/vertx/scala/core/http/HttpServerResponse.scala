@@ -256,7 +256,7 @@ class HttpServerResponse(private val _asJava: Object) extends WriteStream[io.ver
    * This is a very efficient way to serve files.
    * The actual serve is asynchronous and may not complete until some time after this method has returned.   * @param filename path to the file to serve
    * @param offset offset to start serving from
-   * @param length length to serve to
+   * @param length the number of bytes to send
    * @return a reference to this, so the API can be used fluently
    */
   

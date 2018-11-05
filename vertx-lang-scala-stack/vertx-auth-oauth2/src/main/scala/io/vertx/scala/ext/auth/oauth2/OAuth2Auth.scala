@@ -25,6 +25,8 @@ import io.vertx.ext.auth.oauth2.{OAuth2Auth => JOAuth2Auth}
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.Converter._
+import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.ext.auth.oauth2.{OAuth2RBAC => JOAuth2RBAC}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
@@ -35,8 +37,8 @@ import io.vertx.lang.scala.HandlerOps._
   * Factory interface for creating OAuth2 based [[io.vertx.scala.ext.auth.AuthProvider]] instances.
   */
 
-class OAuth2Auth(private val _asJava: Object) {
-  def asJava = _asJava
+class OAuth2Auth(private val _asJava: Object) extends AuthProvider (_asJava) {
+
 
 
 
@@ -94,11 +96,6 @@ class OAuth2Auth(private val _asJava: Object) {
     this
   }
 
-
-
-  def verifyIsUsingPassword(): Unit = {
-    asJava.asInstanceOf[JOAuth2Auth].verifyIsUsingPassword()
-  }
 
 
   /**

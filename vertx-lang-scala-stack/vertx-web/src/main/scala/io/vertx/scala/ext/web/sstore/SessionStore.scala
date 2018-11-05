@@ -69,7 +69,7 @@ class SessionStore(private val _asJava: Object) {
   }
 
   /**
-   * Create a new session   * @param timeout - the session timeout, in ms
+   * Create a new session.   * @param timeout - the session timeout, in ms
    * @param length - the required length for the session id
    * @return the session
    */
@@ -78,7 +78,7 @@ class SessionStore(private val _asJava: Object) {
   }
 
   /**
-   * Get the session with the specified ID   * @param cookieValue the unique ID of the session
+   * Get the session with the specified ID.   * @param cookieValue the unique ID of the session
    * @param resultHandler will be called with a result holding the session, or a failure
    */
   def get (cookieValue: String, resultHandler: Handler[AsyncResult[scala.Option[Session]]]): Unit = {
@@ -86,7 +86,7 @@ class SessionStore(private val _asJava: Object) {
   }
 
   /**
-   * Delete the session with the specified ID   * @param id the session id
+   * Delete the session with the specified ID.   * @param id the session id
    * @param resultHandler will be called with a success or a failure
    */
   def delete (id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
@@ -94,7 +94,7 @@ class SessionStore(private val _asJava: Object) {
   }
 
   /**
-   * Add a session with the specified ID   * @param session the session
+   * Add a session with the specified ID.   * @param session the session
    * @param resultHandler will be called with a success or a failure
    */
   def put (session: Session, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
@@ -102,14 +102,16 @@ class SessionStore(private val _asJava: Object) {
   }
 
   /**
-   * Remove all sessions from the store   * @param resultHandler will be called with a success or a failure
+   * Remove all sessions from the store.   * @param resultHandler will be called with a success or a failure
    */
   def clear (resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JSessionStore].clear({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
-   * Get the number of sessions in the store   * @param resultHandler will be called with the number, or a failure
+   * Get the number of sessions in the store.
+   * 
+   * Beware of the result which is just an estimate, in particular with distributed session stores.   * @param resultHandler will be called with the number, or a failure
    */
   def size (resultHandler: Handler[AsyncResult[Int]]): Unit = {
     asJava.asInstanceOf[JSessionStore].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})

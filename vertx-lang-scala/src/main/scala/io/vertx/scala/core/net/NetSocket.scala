@@ -156,6 +156,16 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
   }
 
   /**
+   * Like  but with an `handler` called when the message has been written
+   * or failed to be written.
+   */
+  
+  def write(message: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].write(message, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+  /**
    * Tell the operating system to stream a file as specified by `filename` directly from disk to the outgoing connection,
    * bypassing userspace altogether (where supported by the underlying operating system. This is a very efficient way to stream files.   * @param filename file name of the file to send
    * @return a reference to this, so the API can be used fluently
@@ -317,6 +327,16 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
     asJava.asInstanceOf[JNetSocket].indicatedServerName().asInstanceOf[String]
   }
 
+
+ /**
+  * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def writeFuture (message: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetSocket].write(message, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
  /**
   * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
