@@ -425,6 +425,26 @@ var propertyWithRawData = ConfigStoreOptions()
 
 ----
 
+Some properties configuration maybe is hierarchical in nature.
+When reading such a file, you can pass the `hierarchical` attribute to
+indicate to Vert.x to convert the configuration to a json object while maintaining this hierarchy,
+in contrast to the previous method with a flat structure.
+
+Example:
+
+....
+server.host=localhost
+server.port=8080
+multiple.values=1,2,3
+....
+
+Get values:
+
+[source, scala]
+----
+Code not translatable
+----
+
 == Listening for configuration changes
 
 The Configuration Retriever periodically retrieve the configuration, and if the outcome

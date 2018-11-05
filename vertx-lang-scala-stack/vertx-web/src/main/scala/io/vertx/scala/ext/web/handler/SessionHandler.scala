@@ -27,14 +27,18 @@ import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 
 /**
-  * A handler that maintains a [[io.vertx.scala.ext.web.Session]] for each browser session.
+  * A handler that maintains a [[io.vertx.scala.ext.web.Session]] for each browser
+  * session.
   * 
-  * It looks up the session for each request based on a session cookie which contains a session ID. It stores the session
-  * when the response is ended in the session store.
+  * It looks up the session for each request based on a session cookie which
+  * contains a session ID. It stores the session when the response is ended in
+  * the session store.
   * 
-  * The session is available on the routing context with .
+  * The session is available on the routing context with
+  * .
   * 
-  * The session handler requires a [[io.vertx.scala.ext.web.handler.CookieHandler]] to be on the routing chain before it.
+  * The session handler requires a [[io.vertx.scala.ext.web.handler.CookieHandler]] to be on the routing
+  * chain before it.
   */
 
 class SessionHandler(private val _asJava: Object) extends io.vertx.core.Handler[RoutingContext] {
@@ -53,8 +57,8 @@ class SessionHandler(private val _asJava: Object) extends io.vertx.core.Handler[
   }
 
   /**
-   * Set whether a nagging log warning should be written if the session handler is accessed over HTTP, not
-   * HTTPS   * @param nag true to nag
+   * Set whether a nagging log warning should be written if the session handler is
+   * accessed over HTTP, not HTTPS   * @param nag true to nag
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -64,8 +68,10 @@ class SessionHandler(private val _asJava: Object) extends io.vertx.core.Handler[
   }
 
   /**
-   * Sets whether the 'secure' flag should be set for the session cookie. When set this flag instructs browsers to only
-   * send the cookie over HTTPS. Note that this will probably stop your sessions working if used without HTTPS (e.g. in development).   * @param secure true to set the secure flag on the cookie
+   * Sets whether the 'secure' flag should be set for the session cookie. When set
+   * this flag instructs browsers to only send the cookie over HTTPS. Note that
+   * this will probably stop your sessions working if used without HTTPS (e.g. in
+   * development).   * @param secure true to set the secure flag on the cookie
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -75,8 +81,9 @@ class SessionHandler(private val _asJava: Object) extends io.vertx.core.Handler[
   }
 
   /**
-   * Sets whether the 'HttpOnly' flag should be set for the session cookie. When set this flag instructs browsers to
-   * prevent Javascript access to the the cookie. Used as a line of defence against the most common XSS attacks.   * @param httpOnly true to set the HttpOnly flag on the cookie
+   * Sets whether the 'HttpOnly' flag should be set for the session cookie. When
+   * set this flag instructs browsers to prevent Javascript access to the the
+   * cookie. Used as a line of defence against the most common XSS attacks.   * @param httpOnly true to set the HttpOnly flag on the cookie
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -92,6 +99,16 @@ class SessionHandler(private val _asJava: Object) extends io.vertx.core.Handler[
   
   def setSessionCookieName(sessionCookieName: String): SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setSessionCookieName(sessionCookieName.asInstanceOf[java.lang.String])
+    this
+  }
+
+  /**
+   * Set the session cookie path   * @param sessionCookiePath the session cookie path
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def setSessionCookiePath(sessionCookiePath: String): SessionHandler = {
+    asJava.asInstanceOf[JSessionHandler].setSessionCookiePath(sessionCookiePath.asInstanceOf[java.lang.String])
     this
   }
 

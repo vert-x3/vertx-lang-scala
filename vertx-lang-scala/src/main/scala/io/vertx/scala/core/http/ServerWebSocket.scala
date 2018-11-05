@@ -325,7 +325,9 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
   }
 
   /**
-   * Close the WebSocket.
+   * Close the WebSocket sending the default close frame.
+   * <p/>
+   * No more messages can be sent.
    */
   override def close (): Unit = {
     asJava.asInstanceOf[JServerWebSocket].close()

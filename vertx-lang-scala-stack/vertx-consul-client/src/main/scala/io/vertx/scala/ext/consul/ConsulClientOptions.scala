@@ -906,6 +906,10 @@ class ConsulClientOptions(private val _asJava: JConsulClientOptions) extends Ext
     this
   }
 
+  override def getWebsocketCompressionLevel: Int = {
+    asJava.getWebsocketCompressionLevel().asInstanceOf[Int]
+  }
+
   override def setWebsocketCompressionRequestServerNoContext(value: Boolean) = {
     asJava.setWebsocketCompressionRequestServerNoContext(value)
     this

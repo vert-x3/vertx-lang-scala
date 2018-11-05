@@ -670,6 +670,10 @@ class WebClientOptions(private val _asJava: JWebClientOptions) extends ExtHttpCl
     this
   }
 
+  override def getWebsocketCompressionLevel: Int = {
+    asJava.getWebsocketCompressionLevel().asInstanceOf[Int]
+  }
+
   override def setWebsocketCompressionRequestServerNoContext(value: Boolean) = {
     asJava.setWebsocketCompressionRequestServerNoContext(value)
     this

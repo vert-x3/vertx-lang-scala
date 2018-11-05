@@ -784,7 +784,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set option to offer Deflate Frame websocket compression
+   * Set option to offer per frame WebSocket compression.
    */
   def setTryUsePerFrameWebsocketCompression(value: Boolean) = {
     asJava.setTryUsePerFrameWebsocketCompression(value)
@@ -792,7 +792,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set option to offer Permessage Deflate websocket compression
+   * Set option to offer per message WebSocket compression.
    */
   def setTryUsePerMessageWebsocketCompression(value: Boolean) = {
     asJava.setTryUsePerMessageWebsocketCompression(value)
@@ -836,7 +836,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set the websocket compression allow client no context option
+   * Set the WebSocket compression allow client no context option.
    */
   def setWebsocketCompressionAllowClientNoContext(value: Boolean) = {
     asJava.setWebsocketCompressionAllowClientNoContext(value)
@@ -848,15 +848,19 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set websocket compression level
+   * Set WebSocket compression level
    */
   def setWebsocketCompressionLevel(value: Int) = {
     asJava.setWebsocketCompressionLevel(value)
     this
   }
 
+  def getWebsocketCompressionLevel: Int = {
+    asJava.getWebsocketCompressionLevel().asInstanceOf[Int]
+  }
+
   /**
-   * Set the websocket compression server no context option
+   * Set the WebSocket compression server no context option
    */
   def setWebsocketCompressionRequestServerNoContext(value: Boolean) = {
     asJava.setWebsocketCompressionRequestServerNoContext(value)

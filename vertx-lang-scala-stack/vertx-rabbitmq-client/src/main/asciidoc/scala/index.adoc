@@ -66,6 +66,21 @@ var client = RabbitMQClient.create(vertx, config)
 
 ----
 
+You can set multiples addresses to connect to a cluster;
+
+[source,scala]
+----
+var config = RabbitMQOptions()
+config.setUser("user1")
+config.setPassword("password1")
+config.setVirtualHost("vhost1")
+
+config.setAddresses(List(com.rabbitmq.client.Address.parseAddresses("firstHost,secondHost:5672")))
+
+var client = RabbitMQClient.create(vertx, config)
+
+----
+
 === Declare exchange with additional config
 
 You can pass additional config parameters to RabbitMQ's exchangeDeclare method
@@ -106,7 +121,6 @@ client.queueDeclareFuture("my-queue", true, false, true, config).onComplete{
     println(s"$cause")
   }
 }
-
 
 ----
 
