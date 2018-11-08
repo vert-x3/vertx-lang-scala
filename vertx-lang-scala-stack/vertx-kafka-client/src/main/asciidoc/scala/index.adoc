@@ -913,7 +913,7 @@ config + ("acks" -> "1")
 
 ----
 
-ifdef::java,groovy,kotlin[]
+ifeval::["scala" == "java"]
 You can also specify the serializers/deserializers at creation time:
 
 In a consumer
@@ -932,7 +932,9 @@ Code not translatable
 
 endif::[]
 
-include::override/rxjava.adoc[]
+ifeval::["scala" == "java"]
+include::override/rxjava2.adoc[]
+endif::[]
 
 ifdef::java,groovy,kotlin[]
 == Stream implementation and native Kafka objects

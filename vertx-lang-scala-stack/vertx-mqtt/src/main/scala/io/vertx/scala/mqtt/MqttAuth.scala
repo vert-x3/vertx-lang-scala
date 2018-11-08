@@ -28,6 +28,12 @@ import scala.collection.JavaConverters._
 
 class MqttAuth(private val _asJava: JMqttAuth) {
   def asJava = _asJava
+  /**
+
+   */
+  /**
+
+   */
 }
 
 

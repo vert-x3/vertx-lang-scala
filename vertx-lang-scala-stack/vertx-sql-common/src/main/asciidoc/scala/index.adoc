@@ -518,3 +518,7 @@ connection.commitFuture().onComplete{
 === Closing connections
 
 When you've done with the connection you should return it to the pool with `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#close()[close]`.
+
+ifeval::["scala" == "java"]
+include::override/rxjava2.adoc[]
+endif::[]

@@ -53,7 +53,7 @@ class TemplateEngine(private val _asJava: Object) extends STemplateEngine (_asJa
    * Render the template
    * 
    * <b>NOTE</b> if you call method directly (i.e. not using [[io.vertx.scala.ext.web.handler.TemplateHandler]]) make sure
-   * that <i>templateFileName</i> is sanitized via [[io.vertx.scala.ext.web.impl.Utils#normalizePath]]   * @param context the routing context
+   * that <i>templateFileName</i> is sanitized via    * @param context the routing context
    * @param templateDirectory the template directory to use
    * @param templateFileName the relative template file name to use
    * @param handler the handler that will be called with a result containing the buffer or a failure.

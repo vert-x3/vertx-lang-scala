@@ -34,6 +34,15 @@ class MqttWill(private val _asJava: JMqttWill) {
   /**
 
    */
+  /**
+
+   */
+  /**
+
+   */
+  /**
+
+   */
 }
 
 

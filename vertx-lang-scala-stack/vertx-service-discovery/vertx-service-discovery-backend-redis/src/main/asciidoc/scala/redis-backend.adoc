@@ -50,5 +50,8 @@ It's important to note that the backend configuration is passed in the `setBacke
 
 [source,scala]
 ----
-Code not translatable
+ServiceDiscovery.create(vertx, ServiceDiscoveryOptions()
+  .setBackendConfiguration(new io.vertx.core.json.JsonObject().put("host", "localhost").put("port", 1234).put("key", "my-records"))
+)
+
 ----
