@@ -647,7 +647,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testNullJsonParams" should "work" in {
-    obj.methodWithNullJsonParams(null, null)
+    // obj.methodWithNullJsonParams(null, null)
   }
 
   "testJsonHandlerParams" should "work" in {
@@ -691,6 +691,7 @@ class ApiTest extends FlatSpec with Matchers {
     })
   }
 
+/*
   "testNullJsonHandlerAsyncResultParams" should "work" in {
     exec(2)(w => {
       obj.methodWithHandlerAsyncResultNullJsonObjectFuture().foreach(it => {
@@ -699,7 +700,6 @@ class ApiTest extends FlatSpec with Matchers {
         }
         w.dismiss()
       })
-
       obj.methodWithHandlerAsyncResultNullJsonArrayFuture().foreach(it => {
         w {
           assert(null == it)
@@ -708,6 +708,7 @@ class ApiTest extends FlatSpec with Matchers {
       })
     })
   }
+*/
 
   "testComplexJsonHandlerAsyncResultParams" should "work" in {
     exec(2)(w => {

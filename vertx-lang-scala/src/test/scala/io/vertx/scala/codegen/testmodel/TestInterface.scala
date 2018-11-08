@@ -407,8 +407,8 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
   }
 
 
-  def methodWithNullJsonParams (jsonObject: io.vertx.core.json.JsonObject, jsonArray: io.vertx.core.json.JsonArray): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithNullJsonParams(jsonObject, jsonArray)
+  def methodWithNullJsonParams (jsonObject: scala.Option[io.vertx.core.json.JsonObject], jsonArray: scala.Option[io.vertx.core.json.JsonArray]): Unit = {
+    asJava.asInstanceOf[JTestInterface].methodWithNullJsonParams(jsonObject.map(x => x).orNull, jsonArray.map(x => x).orNull)
   }
 
 
@@ -427,8 +427,8 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
   }
 
 
-  def methodWithHandlerAsyncResultNullJsonObject (handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonObject({x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+  def methodWithHandlerAsyncResultNullJsonObject (handler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonObject]]]): Unit = {
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonObject({x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))})
   }
 
 
@@ -442,8 +442,8 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
   }
 
 
-  def methodWithHandlerAsyncResultNullJsonArray (handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonArray({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+  def methodWithHandlerAsyncResultNullJsonArray (handler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonArray]]]): Unit = {
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonArray({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, scala.Option[io.vertx.core.json.JsonArray]](x, a => scala.Option(a)))})
   }
 
 
@@ -608,9 +608,9 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
   }
 
 
-  def methodWithHandlerAsyncResultNullJsonObjectFuture (): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  def methodWithHandlerAsyncResultNullJsonObjectFuture (): scala.concurrent.Future[scala.Option[io.vertx.core.json.JsonObject]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x => scala.Option(x))
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonObject(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -632,9 +632,9 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
   }
 
 
-  def methodWithHandlerAsyncResultNullJsonArrayFuture (): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+  def methodWithHandlerAsyncResultNullJsonArrayFuture (): scala.concurrent.Future[scala.Option[io.vertx.core.json.JsonArray]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, io.vertx.core.json.JsonArray](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonArray, scala.Option[io.vertx.core.json.JsonArray]](x => scala.Option(x))
     asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonArray(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
