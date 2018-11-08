@@ -12,6 +12,12 @@ MQTT authentication information
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[password]]`@password`|`String`|+++
+
++++
+|[[username]]`@username`|`String`|+++
+
++++
 |===
 
 [[MqttClientOptions]]
@@ -184,7 +190,16 @@ Will information from the remote MQTT client
 |[[willFlag]]`@willFlag`|`Boolean`|+++
 
 +++
+|[[willMessage]]`@willMessage`|`String`|+++
+
++++
+|[[willQos]]`@willQos`|`Number (int)`|+++
+
++++
 |[[willRetain]]`@willRetain`|`Boolean`|+++
+
++++
+|[[willTopic]]`@willTopic`|`String`|+++
 
 +++
 |===

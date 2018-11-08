@@ -627,6 +627,6 @@ client.getAbs("https://myserver.mycompany.com:4043/some-uri").sendFuture().onCom
 
 ----
 
-ifdef::java[]
-include::override/rxjava.adoc[]
+ifeval::["scala" == "java"]
+include::override/rxjava2.adoc[]
 endif::[]

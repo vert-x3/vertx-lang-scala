@@ -34,6 +34,7 @@ import io.vertx.scala.core.streams.ReadStream
 import io.vertx.ext.mongo.{BulkOperation => JBulkOperation}
 import io.vertx.ext.mongo.{BulkWriteOptions => JBulkWriteOptions}
 import io.vertx.ext.mongo.{UpdateOptions => JUpdateOptions}
+import io.vertx.ext.mongo.{AggregateOptions => JAggregateOptions}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
@@ -626,6 +627,23 @@ class MongoClient(private val _asJava: Object) {
    */
   def distinctBatchWithQuery (collection: String, fieldName: String, resultClassname: String, query: io.vertx.core.json.JsonObject, batchSize: Int): ReadStream[io.vertx.core.json.JsonObject] = {
     ReadStream[io.vertx.core.json.JsonObject](asJava.asInstanceOf[JMongoClient].distinctBatchWithQuery(collection.asInstanceOf[java.lang.String], fieldName.asInstanceOf[java.lang.String], resultClassname.asInstanceOf[java.lang.String], query, batchSize.asInstanceOf[java.lang.Integer]))
+  }
+
+  /**
+   * Run aggregate MongoDB command with default <a href="../../../../../../../cheatsheet/AggregateOptions.html">AggregateOptions</a>.   * @param collection the collection
+   * @param pipeline aggregation pipeline to be executed
+   */
+  def aggregate (collection: String, pipeline: io.vertx.core.json.JsonArray): ReadStream[io.vertx.core.json.JsonObject] = {
+    ReadStream[io.vertx.core.json.JsonObject](asJava.asInstanceOf[JMongoClient].aggregate(collection.asInstanceOf[java.lang.String], pipeline))
+  }
+
+  /**
+   * Run aggregate MongoDB command.   * @param collection the collection
+   * @param pipeline aggregation pipeline to be executed
+   * @param options options to configure the aggregation command see <a href="../../../../../../../cheatsheet/AggregateOptions.html">AggregateOptions</a>
+   */
+  def aggregateWithOptions (collection: String, pipeline: io.vertx.core.json.JsonArray, options: AggregateOptions): ReadStream[io.vertx.core.json.JsonObject] = {
+    ReadStream[io.vertx.core.json.JsonObject](asJava.asInstanceOf[JMongoClient].aggregateWithOptions(collection.asInstanceOf[java.lang.String], pipeline, options.asJava))
   }
 
   /**

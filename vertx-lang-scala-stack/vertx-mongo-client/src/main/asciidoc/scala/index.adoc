@@ -812,3 +812,7 @@ For more information on the format of the connection string please consult the d
 
 NOTE: Most of the default values listed above use the default values of the MongoDB Java Driver.
 Please consult the driver documentation for up to date information.
+
+ifeval::["scala" == "java"]
+include::override/rxjava2.adoc[]
+endif::[]

@@ -193,7 +193,22 @@ configuration. Then the actual instance is created:
 
 [source]
 ----
-Code not translatable
+// Create a first instance of Vert.x
+var vertx = Vertx.vertx()
+// Create the config retriever
+var retriever = ConfigRetriever.create(vertx, ConfigRetrieverOptions()
+  .setStores(Set(ConfigStoreOptions()
+    .setType("file")
+    .setConfig(new io.vertx.core.json.JsonObject().put("path", "vertx.json"))
+  ))
+)
+
+// Retrieve the configuration
+retriever.getConfigFuture().onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
 ----
 
 === Propagating configuration changes to the event bus
@@ -442,7 +457,27 @@ Get values:
 
 [source, scala]
 ----
-Code not translatable
+var propertyWitHierarchical = ConfigStoreOptions()
+  .setFormat("properties")
+  .setType("file")
+  .setConfig(new io.vertx.core.json.JsonObject().put("path", "hierarchical.properties").put("hierarchical", true))
+
+var options = ConfigRetrieverOptions()
+  .setStores(Set(propertyWitHierarchical))
+
+
+var configRetriever = ConfigRetriever.create(Vertx.vertx(), options)
+
+configRetriever.configStream().handler((config: io.vertx.scala.core.json.JsonObject) => {
+  var host = config.getValue("server").getValue("host")
+  var port = config.getValue("server").getValue("port")
+  var multiple = config.getValue("multiple").getValue("values")
+  for ( i <- 0 until todo-renderJsonArraySize) {
+    var value = multiple.getValue(i)
+  }
+
+})
+
 ----
 
 == Listening for configuration changes

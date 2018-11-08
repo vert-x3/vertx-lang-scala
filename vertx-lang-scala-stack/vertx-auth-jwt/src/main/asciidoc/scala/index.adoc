@@ -443,7 +443,11 @@ configured to use something else than `permissions`, for example one can even lo
 
 [source,scala]
 ----
-Code not translatable
+
+var config = new io.vertx.core.json.JsonObject().put("public-key", "BASE64-ENCODED-PUBLIC_KEY").put("permissionsClaimKey", "realm_access/roles")
+
+var provider = JWTAuth.create(vertx, todo-renderToDataObject)
+
 ----
 
 So in this example we configure the JWT to work with Keycloak token format. In this case the claims will be checked
