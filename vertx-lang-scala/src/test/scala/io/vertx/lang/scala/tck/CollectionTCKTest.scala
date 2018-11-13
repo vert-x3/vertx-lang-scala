@@ -37,7 +37,8 @@ class CollectionTCKTest extends FlatSpec with Matchers {
       mutable.Buffer(arr("foo"), arr("blah")),
       mutable.Buffer(refed1, refed2),
       mutable.Buffer(TestDataObject.fromJson(Json.obj().put("bar", 1).put("wibble", 1.1).put("foo", "String 1")), TestDataObject.fromJson(Json.obj().put("bar", 2).put("wibble", 2.2).put("foo", "String 2"))),
-      mutable.Buffer(TestEnum.JULIEN, TestEnum.TIM))
+      mutable.Buffer(TestEnum.JULIEN, TestEnum.TIM),
+      mutable.Buffer("foo", 4.asInstanceOf[AnyRef], 4.34.asInstanceOf[AnyRef], true.asInstanceOf[AnyRef], Json.obj(("wibble", "eek")), Json.arr("one", 2)))
   }
 
   "testMethodSetParams" should "work" in {
@@ -56,7 +57,8 @@ class CollectionTCKTest extends FlatSpec with Matchers {
       mutable.Set(arr("foo"), arr("blah")),
       mutable.Set(refed1, refed2),
       mutable.Set(TestDataObject.fromJson(Json.obj().put("bar", 1).put("wibble", 1.1).put("foo", "String 1")), TestDataObject.fromJson(Json.obj().put("bar", 2).put("wibble", 2.2).put("foo", "String 2"))),
-      mutable.Set(TestEnum.JULIEN, TestEnum.TIM))
+      mutable.Set(TestEnum.JULIEN, TestEnum.TIM),
+      mutable.Set("foo", 4.asInstanceOf[AnyRef], 4.34.asInstanceOf[AnyRef], true.asInstanceOf[AnyRef], Json.obj(("wibble", "eek")), Json.arr("one", 2)))
   }
 
   "testMethodMapParams" should "work" in {
@@ -72,7 +74,8 @@ class CollectionTCKTest extends FlatSpec with Matchers {
       mutable.Map("foo" -> 123l, "eek" -> 456l),
       mutable.Map("foo" -> Json.obj(("foo", "bar")), "eek" -> Json.obj(("eek", "wibble"))),
       mutable.Map("foo" -> arr("foo"), "eek" -> arr("blah")),
-      mutable.Map("foo" -> refed1, "eek" -> refed2)
+      mutable.Map("foo" -> refed1, "eek" -> refed2),
+      mutable.Map("string" -> "foo", "integer" -> 4.asInstanceOf[AnyRef], "float" -> 4.34.asInstanceOf[AnyRef], "boolean" -> true.asInstanceOf[AnyRef], "object" -> Json.obj(("wibble", "eek")), "array" -> Json.arr("one", 2))
     )
   }
 
