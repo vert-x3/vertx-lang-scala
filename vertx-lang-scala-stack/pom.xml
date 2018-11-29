@@ -266,7 +266,6 @@
     <module>vertx-jdbc-client</module>
     <module>vertx-proton</module>
     <module>vertx-mongo-client</module>
-    <module>vertx-mongo-service</module>
     <module>vertx-jwt</module>
     <module>vertx-auth-common</module>
     <module>vertx-auth-shiro</module>
@@ -276,7 +275,6 @@
     <module>vertx-auth-jwt</module>
     <module>vertx-auth-jdbc</module>
     <module>vertx-consul-client</module>
-    <module>vertx-consul-service</module>
     <module>vertx-web</module>
     <module>vertx-web-common</module>
     <module>vertx-web-client</module>
@@ -286,13 +284,11 @@
     <module>vertx-web-templ-mvel</module>
     <module>vertx-web-templ-pebble</module>
     <module>vertx-web-templ-thymeleaf</module>
-    <module>vertx-mysql-postgresql-client</module>
     <module>vertx-mail-client</module>
     <module>vertx-rabbitmq-client</module>
     <module>vertx-redis-client</module>
     <module>vertx-stomp</module>
     <module>vertx-tcp-eventbus-bridge</module>
-    <module>vertx-amqp-bridge</module>
     <module>vertx-dropwizard-metrics</module>
     <module>vertx-shell</module>
     <module>vertx-kafka-client</module>
