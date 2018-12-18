@@ -111,8 +111,10 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object) extends ReadStrea
 
   /**
    * Set the number of messages this registration will buffer when this stream is paused. The default
-   * value is <code>1000</code>. When a new value is set, buffered messages may be discarded to reach
-   * the new value.   * @param maxBufferedMessages the maximum number of messages that can be buffered
+   * value is <code>1000</code>.
+   * 
+   * When a new value is set, buffered messages may be discarded to reach the new value. The most recent
+   * messages will be kept.   * @param maxBufferedMessages the maximum number of messages that can be buffered
    * @return this registration
    */
   def setMaxBufferedMessages (maxBufferedMessages: Int): MessageConsumer[T] = {

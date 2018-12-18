@@ -22,17 +22,21 @@ import io.vertx.ext.web.codec.{BodyCodec => JBodyCodec}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
 import io.vertx.ext.web.client.{HttpRequest => JHttpRequest}
+import io.vertx.ext.web.client.predicate.{ResponsePredicate => JResponsePredicate}
 import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.client.{HttpResponse => JHttpResponse}
+import io.vertx.ext.web.client.predicate.{ResponsePredicateResult => JResponsePredicateResult}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.ext.web.multipart.MultipartForm
 import io.vertx.core.buffer.Buffer
+import io.vertx.scala.ext.web.client.predicate.ResponsePredicate
 import io.vertx.core.http.HttpMethod
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.json.JsonObject
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.scala.ext.web.client.predicate.ResponsePredicateResult
 import io.vertx.scala.ext.web.codec.BodyCodec
 import io.vertx.lang.scala.HandlerOps._
 
@@ -201,6 +205,30 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
   
   def followRedirects(value: Boolean): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].followRedirects(value.asInstanceOf[java.lang.Boolean])
+    this
+  }
+
+  /**
+   * Add an expectation that the response is valid according to the provided `predicate`.
+   * 
+   * Multiple predicates can be added.   * @param predicate the predicate
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def expect(predicate: HttpResponse[Unit] => ResponsePredicateResult): HttpRequest[T] = {
+    asJava.asInstanceOf[JHttpRequest[Object]].expect({x: JHttpResponse[Void] => predicate(HttpResponse[Unit](x)).asJava.asInstanceOf[JResponsePredicateResult]})
+    this
+  }
+
+  /**
+   * Add an expectation that the response is valid according to the provided `predicate`.
+   * 
+   * Multiple predicates can be added.   * @param predicate the predicate
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def expect(predicate: ResponsePredicate): HttpRequest[T] = {
+    asJava.asInstanceOf[JHttpRequest[Object]].expect(predicate.asJava.asInstanceOf[JResponsePredicate])
     this
   }
 

@@ -130,7 +130,16 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
   }
 
   /**
-   * Set whether the verticle(s) should be deployed as a multi-threaded worker verticle
+   * Set whether the verticle(s) should be deployed as a multi-threaded worker verticle.
+   * 
+   * <strong>WARNING</strong>: Multi-threaded worker verticles are a deprecated feature.
+   * 
+   * Most applications will have no need for them. Because of the concurrency in these verticles you have to be
+   * very careful to keep the verticle in a consistent state using standard Java techniques for multi-threaded
+   * programming.
+   * 
+   * You can read the documentation that explains how you can replace this feature by the usage of custom worker
+   * pools or `executeBlocking` calls.
    */
   def setMultiThreaded(value: Boolean) = {
     asJava.setMultiThreaded(value)

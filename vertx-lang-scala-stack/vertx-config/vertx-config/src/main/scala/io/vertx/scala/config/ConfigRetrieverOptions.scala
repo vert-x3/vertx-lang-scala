@@ -22,11 +22,14 @@ import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 
 /**
-
+ * Options to configure the `ConfigRetriever`.
  */
 
 class ConfigRetrieverOptions(private val _asJava: JConfigRetrieverOptions) {
   def asJava = _asJava
+  /**
+   * Enables or disables the inclusion of the default stored in the configuration.
+   */
   def setIncludeDefaultStores(value: Boolean) = {
     asJava.setIncludeDefaultStores(value)
     this
@@ -36,6 +39,9 @@ class ConfigRetrieverOptions(private val _asJava: JConfigRetrieverOptions) {
     asJava.isIncludeDefaultStores().asInstanceOf[Boolean]
   }
 
+  /**
+   * Configures the scan period, in ms. This is the time amount between two checks of the configuration updates.
+   */
   def setScanPeriod(value: Long) = {
     asJava.setScanPeriod(value)
     this
@@ -45,6 +51,9 @@ class ConfigRetrieverOptions(private val _asJava: JConfigRetrieverOptions) {
     asJava.getScanPeriod().asInstanceOf[Long]
   }
 
+  /**
+   * Sets the configuration stores.
+   */
   def addStore(value: ConfigStoreOptions) = {
     asJava.addStore(value.asJava)
     this

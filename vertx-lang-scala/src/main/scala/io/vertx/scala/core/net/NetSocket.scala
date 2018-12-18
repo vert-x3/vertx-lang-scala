@@ -106,7 +106,12 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
     this
   }
 
-
+  /**
+   * 
+   * 
+   * This handler might be called after the close handler when the socket is paused and there are still
+   * buffers to deliver.
+   */
   override 
   def endHandler(endHandler: Handler[Unit]): NetSocket = {
     asJava.asInstanceOf[JNetSocket].endHandler({x: Void => endHandler.handle(x)})

@@ -55,15 +55,6 @@ class MultiMap(private val _asJava: Object) {
   }
 
   /**
-   * Adds all the entries from a Map to this   * @return a reference to this, so the API can be used fluently
-   */
-  
-  def addAll(headers: scala.collection.mutable.Map[String, String]): MultiMap = {
-    asJava.asInstanceOf[JMultiMap].addAll(headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava)
-    this
-  }
-
-  /**
    * Sets a value under the specified name.
    * 
    * If there is an existing header with the same name, it is removed.   * @param name The name
@@ -82,15 +73,6 @@ class MultiMap(private val _asJava: Object) {
   
   def setAll(map: MultiMap): MultiMap = {
     asJava.asInstanceOf[JMultiMap].setAll(map.asJava.asInstanceOf[JMultiMap])
-    this
-  }
-
-  /**
-   * Cleans and set all values of the given instance   * @return a reference to this, so the API can be used fluently
-   */
-  
-  def setAll(headers: scala.collection.mutable.Map[String, String]): MultiMap = {
-    asJava.asInstanceOf[JMultiMap].setAll(headers.mapValues(x => x.asInstanceOf[java.lang.String]).asJava)
     this
   }
 

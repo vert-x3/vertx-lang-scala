@@ -21,6 +21,7 @@ import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import scala.reflect.runtime.universe._
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import io.vertx.core.http.{StreamPriority => JStreamPriority}
 import io.vertx.lang.scala.Converter._
 import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
 import io.vertx.scala.core.streams.ReadStream
@@ -267,6 +268,24 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
     this
   }
 
+  /**
+   * Set an handler for stream priority changes
+   * 
+   * This is not implemented for HTTP/1.x.   * @param handler the handler to be called when stream priority changes
+   */
+  
+  def streamPriorityHandler(handler: Handler[StreamPriority]): HttpServerRequest = {
+    asJava.asInstanceOf[JHttpServerRequest].streamPriorityHandler({x: JStreamPriority => handler.handle(StreamPriority(x))})
+    this
+  }
+
+
+  /**
+   * @return the priority of the associated HTTP/2 stream for HTTP/2 otherwise `null`see <a href="../../../../../../../cheatsheet/StreamPriority.html">StreamPriority</a>
+   */
+  def streamPriority(): StreamPriority = {
+    StreamPriority(asJava.asInstanceOf[JHttpServerRequest].streamPriority())
+  }
 
 
   /**

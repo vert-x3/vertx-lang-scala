@@ -20,6 +20,7 @@ import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
 import scala.reflect.runtime.universe._
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import io.vertx.core.http.{StreamPriority => JStreamPriority}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.WriteStream
@@ -397,6 +398,17 @@ class HttpServerResponse(private val _asJava: Object) extends WriteStream[io.ver
   
   def writeCustomFrame(frame: HttpFrame): HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].writeCustomFrame(frame.asJava.asInstanceOf[JHttpFrame])
+    this
+  }
+
+  /**
+   * Sets the priority of the associated stream
+   * <p/>
+   * This is not implemented for HTTP/1.x.   * @param streamPriority the priority for this request's stream see <a href="../../../../../../../cheatsheet/StreamPriority.html">StreamPriority</a>
+   */
+  
+  def setStreamPriority(streamPriority: StreamPriority): HttpServerResponse = {
+    asJava.asInstanceOf[JHttpServerResponse].setStreamPriority(streamPriority.asJava)
     this
   }
 

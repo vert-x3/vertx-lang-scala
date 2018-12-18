@@ -19,6 +19,7 @@ package io.vertx.scala.core.http
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import io.vertx.core.http.{StreamPriority => JStreamPriority}
 import scala.collection.JavaConverters._
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.ReadStream
@@ -176,6 +177,17 @@ class HttpClientResponse(private val _asJava: Object) extends ReadStream[io.vert
   
   def customFrameHandler(handler: Handler[HttpFrame]): HttpClientResponse = {
     asJava.asInstanceOf[JHttpClientResponse].customFrameHandler({x: JHttpFrame => handler.handle(HttpFrame(x))})
+    this
+  }
+
+  /**
+   * Set an handler for stream priority changes.
+   * <p/>
+   * This is not implemented for HTTP/1.x.   * @param handler the handler to be called when the stream priority changes
+   */
+  
+  def streamPriorityHandler(handler: Handler[StreamPriority]): HttpClientResponse = {
+    asJava.asInstanceOf[JHttpClientResponse].streamPriorityHandler({x: JStreamPriority => handler.handle(StreamPriority(x))})
     this
   }
 

@@ -25,7 +25,7 @@ A service consumer can:
 * listen for arrival, departure and modification of services.
 
 Consumer would 1) lookup a service record matching their need, 2) retrieve the
-`link:../../apidocs/io/vertx/servicediscovery/ServiceReference.html[ServiceReference]`that give access to the service, 3) get a service object to access
+`link:../../apidocs/io/vertx/servicediscovery/ServiceReference.html[ServiceReference]` that give access to the service, 3) get a service object to access
 the service, 4) release the service object once done.
 
 The process can be simplified using _service type_ where you can directly retrieve the service object if you know
@@ -116,7 +116,7 @@ Every time a service provider is published or withdrawn, an event is fired on th
 the record that has been modified.
 
 In addition, in order to track who is using who, every time a reference is retrieved with
-`link:../../apidocs/io/vertx/servicediscovery/ServiceDiscovery.html#getReference-io.vertx.servicediscovery.Record-[getReference]`or released with
+`link:../../apidocs/io/vertx/servicediscovery/ServiceDiscovery.html#getReference-io.vertx.servicediscovery.Record-[getReference]` or released with
 `link:../../apidocs/io/vertx/servicediscovery/ServiceReference.html#release--[release]`, events are emitted on the event bus to track the
 service usages.
 
@@ -254,7 +254,7 @@ Let's see an example of a JSON filter:
 { "color" = "red", "name" = "a"} => only matches records with name set to "a", and color set to "red"
 ----
 
-If the JSON filter is not set ({@code null} or empty), it accepts all records. When using functions, to accept all
+If the JSON filter is not set (`null` or empty), it accepts all records. When using functions, to accept all
 records, you must return _true_ regardless the record.
 
 Here are some examples:
@@ -360,7 +360,7 @@ By default, record lookup does include only records with a `status` set to `UP`.
 == Retrieving a service reference
 
 Once you have chosen the `link:../../apidocs/io/vertx/servicediscovery/Record.html[Record]`, you can retrieve a
-`link:../../apidocs/io/vertx/servicediscovery/ServiceReference.html[ServiceReference]`and then the service object:
+`link:../../apidocs/io/vertx/servicediscovery/ServiceReference.html[ServiceReference]` and then the service object:
 
 [source,groovy]
 ----
@@ -416,19 +416,19 @@ different services.
 These types are provided by default:
 
 * `link:../../apidocs/io/vertx/servicediscovery/types/HttpEndpoint.html[HttpEndpoint]` - for REST API's, the service object is a
-`link:../../apidocs/io/vertx/core/http/HttpClient.html[HttpClient]`configured on the host and port (the location is the url).
+`link:../../apidocs/io/vertx/core/http/HttpClient.html[HttpClient]` configured on the host and port (the location is the url).
 * `link:../../apidocs/io/vertx/servicediscovery/types/EventBusService.html[EventBusService]` - for service proxies, the service object is a proxy. Its
 type is the proxies interface (the location is the address).
 * `link:../../apidocs/io/vertx/servicediscovery/types/MessageSource.html[MessageSource]` - for message sources (publisher), the service object is a
-`link:../../apidocs/io/vertx/core/eventbus/MessageConsumer.html[MessageConsumer]`(the location is the address).
+`link:../../apidocs/io/vertx/core/eventbus/MessageConsumer.html[MessageConsumer]` (the location is the address).
 * `link:../../apidocs/io/vertx/servicediscovery/types/JDBCDataSource.html[JDBCDataSource]` - for JDBC data sources, the service object is a
-`link:../../apidocs/io/vertx/ext/jdbc/JDBCClient.html[JDBCClient]`(the configuration of the client is computed from the location, metadata and
+`link:../../apidocs/io/vertx/ext/jdbc/JDBCClient.html[JDBCClient]` (the configuration of the client is computed from the location, metadata and
 consumer configuration).
 * `link:../../apidocs/io/vertx/servicediscovery/types/RedisDataSource.html[RedisDataSource]` - for Redis data sources, the service object is a
-`link:../../apidocs/io/vertx/redis/RedisClient.html[RedisClient]`(the configuration of the client is computed from the location, metadata and
+`link:../../apidocs/io/vertx/redis/RedisClient.html[RedisClient]` (the configuration of the client is computed from the location, metadata and
 consumer configuration).
 * `link:../../apidocs/io/vertx/servicediscovery/types/MongoDataSource.html[MongoDataSource]` - for Mongo data sources, the service object is a
-`link:../../apidocs/io/vertx/ext/mongo/MongoClient.html[MongoClient]`(the configuration of the client is computed from the location, metadata and
+`link:../../apidocs/io/vertx/ext/mongo/MongoClient.html[MongoClient]` (the configuration of the client is computed from the location, metadata and
 consumer configuration).
 
 This section gives details about service types in general and describes how to use the default service types.
@@ -477,7 +477,7 @@ publication must be done by another entity having this info. Generally it's a br
 ==== Consuming a HTTP endpoint
 
 Once a HTTP endpoint is published, a consumer can retrieve it. The service object is a
-`link:../../apidocs/io/vertx/core/http/HttpClient.html[HttpClient]`with a port and host configured:
+`link:../../apidocs/io/vertx/core/http/HttpClient.html[HttpClient]` with a port and host configured:
 
 [source, groovy]
 ----
@@ -617,7 +617,7 @@ discovery.publish(record, { ar ->
 ==== Consuming an event bus service
 
 To consume an event bus service you can either retrieve the record and then get the reference, or use the
-`link:../../apidocs/io/vertx/servicediscovery/types/EventBusService.html[EventBusService]`interface that combines the two operations in one call.
+`link:../../apidocs/io/vertx/servicediscovery/types/EventBusService.html[EventBusService]` interface that combines the two operations in one call.
 
 
 
@@ -676,7 +676,7 @@ In the second record, the type of payload is also indicated. This information is
 ==== Consuming a message source
 
 On the consumer side, you can retrieve the record and the reference, or use the
-`link:../../apidocs/io/vertx/servicediscovery/types/MessageSource.html[MessageSource]`class to retrieve the service is one call.
+`link:../../apidocs/io/vertx/servicediscovery/types/MessageSource.html[MessageSource]` class to retrieve the service is one call.
 
 With the first approach, the code is the following:
 

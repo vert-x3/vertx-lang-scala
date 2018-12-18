@@ -4,7 +4,7 @@ This discovery bridge imports services from Kubernetes (or Openshift v3) into th
 Kubernetes services are mapped to `link:../../vertx-service-discovery/dataobjects.html#Record[Record]`. This bridge only
 supports the importation of services from kubernetes in vert.x (and not the opposite).
 
-`link:../../vertx-service-discovery/dataobjects.html#Record[Record]`are created from Kubernetes Service. The service type is deduced from the `service-type` label or from the port exposed by the service.
+`link:../../vertx-service-discovery/dataobjects.html#Record[Record]` are created from Kubernetes Service. The service type is deduced from the `service-type` label or from the port exposed by the service.
 
 ==== Using the bridge
 

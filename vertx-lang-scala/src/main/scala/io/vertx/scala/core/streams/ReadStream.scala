@@ -28,6 +28,20 @@ import io.vertx.lang.scala.Converter._
   * 
   * Any class that implements this interface can be used by a [[io.vertx.scala.core.streams.Pump]] to pump data from it
   * to a [[io.vertx.scala.core.streams.WriteStream]].
+  * 
+  * <h3>Streaming mode</h3>
+  * The stream is either in <i>flowing</i> or <i>fetch</i> mode.
+  * <ul>
+  *   <i>Initially the stream is in <i>flowing</i> mode.</i>
+  *   <li>When the stream is in <i>flowing</i> mode, elements are delivered to the `handler`.</li>
+  *   <li>When the stream is in <i>fetch</i> mode, only the number of requested elements will be delivered to the `handler`.</li>
+  * </ul>
+  * The mode can be changed with the [[io.vertx.scala.core.streams.ReadStream#pause]], [[io.vertx.scala.core.streams.ReadStream#resume]] and [[io.vertx.scala.core.streams.ReadStream#fetch]] methods:
+  * <ul>
+  *   <li>Calling [[io.vertx.scala.core.streams.ReadStream#resume]] sets the <i>flowing</i> mode</li>
+  *   <li>Calling [[io.vertx.scala.core.streams.ReadStream#pause]] sets the <i>fetch</i> mode and resets the demand to `0`</li>
+  *   <li>Calling [[io.vertx.scala.core.streams.ReadStream#fetch]] requests a specific amount of elements and adds it to the actual demand</li>
+  * </ul>
   */
 
 trait ReadStream[T] extends StreamBase {
@@ -41,10 +55,14 @@ override def exceptionHandler ( handler: Handler[Throwable]): ReadStream[T]    /
    * Set a data handler. As data is read, the handler will be called with the data.   * @return a reference to this, so the API can be used fluently
    */
 def handler ( handler: Handler[T]): ReadStream[T]    /**
-   * Pause the `ReadStream`. While it's paused, no data will be sent to the data `handler`   * @return a reference to this, so the API can be used fluently
+   * Pause the `ReadStream`, it sets the buffer in `fetch` mode and clears the actual demand.
+   * 
+   * While it's paused, no data will be sent to the data `handler`.   * @return a reference to this, so the API can be used fluently
    */
 def pause ( ): ReadStream[T]    /**
-   * Resume reading. If the `ReadStream` has been paused, reading will recommence on it.   * @return a reference to this, so the API can be used fluently
+   * Resume reading, and sets the buffer in `flowing` mode.
+   * <p/>
+   * If the `ReadStream` has been paused, reading will recommence on it.   * @return a reference to this, so the API can be used fluently
    */
 def resume ( ): ReadStream[T]    /**
    * Fetch the specified `amount` of elements. If the `ReadStream` has been paused, reading will
@@ -86,7 +104,9 @@ object ReadStream {
   }
 
   /**
-   * Pause the `ReadStream`. While it's paused, no data will be sent to the data `handler`   * @return a reference to this, so the API can be used fluently
+   * Pause the `ReadStream`, it sets the buffer in `fetch` mode and clears the actual demand.
+   * 
+   * While it's paused, no data will be sent to the data `handler`.   * @return a reference to this, so the API can be used fluently
    */
   
   def pause(): ReadStream[T] = {
@@ -95,7 +115,9 @@ object ReadStream {
   }
 
   /**
-   * Resume reading. If the `ReadStream` has been paused, reading will recommence on it.   * @return a reference to this, so the API can be used fluently
+   * Resume reading, and sets the buffer in `flowing` mode.
+   * <p/>
+   * If the `ReadStream` has been paused, reading will recommence on it.   * @return a reference to this, so the API can be used fluently
    */
   
   def resume(): ReadStream[T] = {

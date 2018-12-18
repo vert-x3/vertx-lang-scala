@@ -143,9 +143,9 @@ breaker.executeWithFallback((future: io.vertx.scala.core.Future<java.lang.String
 ----
 
 The fallback is called whenever the circuit is open, or if the
-`link:../dataobjects.html#CircuitBreakerOptions#isFallbackOnFailure()[isFallbackOnFailure]`is enabled. When a fallback is
+`link:../dataobjects.html#CircuitBreakerOptions#isFallbackOnFailure()[isFallbackOnFailure]` is enabled. When a fallback is
 set, the result is using the output of the fallback function. The fallback function takes as parameter a
-`Throwable`object and returns an object of the expected type.
+`Throwable` object and returns an object of the expected type.
 
 The fallback can also be set on the `link:../../scaladocs/io/vertx/scala/circuitbreaker/CircuitBreaker.html[CircuitBreaker]` object directly:
 
@@ -268,10 +268,10 @@ Each event contains a Json Object with:
 When the circuit is "open", calls to the circuit breaker fail immediately, without any attempt to execute the real
 operation. After a suitable amount of time (configured from
 `link:../dataobjects.html#CircuitBreakerOptions#setResetTimeout()[resetTimeout]`, the circuit breaker decides that the
-operation has a chance of succeeding, so it goes into the {@code half-open} state. In this state, the next call to the
+operation has a chance of succeeding, so it goes into the `half-open` state. In this state, the next call to the
 circuit breaker is allowed to execute the dangerous operation. Should the call succeed, the circuit breaker resets
-and returns to the {@code closed} state, ready for more routine operation. If this trial call fails, however, the circuit
-breaker returns to the {@code open} state until another timeout elapses.
+and returns to the `closed` state, ready for more routine operation. If this trial call fails, however, the circuit
+breaker returns to the `open` state until another timeout elapses.
 
 == Reported exceptions
 
@@ -285,7 +285,7 @@ The fallback receives a:
 Netflix Hystrix comes with a dashboard to present the current state of the circuit breakers. The Vert.x circuit
 breakers can publish their metrics in order to be consumed by this Hystrix Dashboard. The Hystrix dashboard requires
 a SSE stream sending the metrics. This stream is provided by the
-`link:../../scaladocs/io/vertx/scala/circuitbreaker/HystrixMetricHandler.html[HystrixMetricHandler]`Vert.x Web Handler:
+`link:../../scaladocs/io/vertx/scala/circuitbreaker/HystrixMetricHandler.html[HystrixMetricHandler]` Vert.x Web Handler:
 
 
 [source,scala]

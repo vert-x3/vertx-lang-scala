@@ -56,7 +56,7 @@ var server = StompServer.create(vertx).handler(StompServerHandler.create(vertx))
 
 ----
 
-If you pass {@code -1} as port, the TCP server would not be started. This is useful when using the websocket
+If you pass `-1` as port, the TCP server would not be started. This is useful when using the websocket
 bridge. To be notified when the server is ready, use a handler as follows:
 
 [source,scala]
@@ -109,7 +109,7 @@ The `link:../dataobjects.html#StompServerOptions[StompServerOptions]` let you co
 First, the STOMP server is based on a
 `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html[NetServer]`, so you can configure the underlying `link:../../scaladocs/io/vertx/scala/core/net/NetServer.html[NetServer]` from
 the `link:../dataobjects.html#StompServerOptions[StompServerOptions]`. Alternatively you can also pass the
-`link:../../scaladocs/io/vertx/scala/core/net/NetServer.html[NetServer]`you want to use:
+`link:../../scaladocs/io/vertx/scala/core/net/NetServer.html[NetServer]` you want to use:
 
 [source,scala]
 ----
@@ -279,7 +279,7 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
 ----
 
 The previous snippet creates a STOMP client connecting to "0.0.0.0:61613". Once connected, you get a
-`link:../../scaladocs/io/vertx/scala/ext/stomp/StompClientConnection.html[StompClientConnection]`that let you interact with the server. You can
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompClientConnection.html[StompClientConnection]` that let you interact with the server. You can
 configure the host and port as follows:
 
 [source,scala]
@@ -436,11 +436,11 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
 === Configuration
 
 You can configure various aspect by passing a
-`link:../dataobjects.html#StompClientOptions[StompClientOptions]`when creating the `link:../../scaladocs/io/vertx/scala/ext/stomp/StompClient.html[StompClient]`. As the
+`link:../dataobjects.html#StompClientOptions[StompClientOptions]` when creating the `link:../../scaladocs/io/vertx/scala/ext/stomp/StompClient.html[StompClient]`. As the
 STOMP client relies on a `link:../../scaladocs/io/vertx/scala/core/net/NetClient.html[NetClient]`, you can configure the underlying Net Client from
 the `link:../dataobjects.html#StompClientOptions[StompClientOptions]`. Alternatively, you can pass the `link:../../scaladocs/io/vertx/scala/core/net/NetClient.html[NetClient]`
 you want to use in the
-`link:../../scaladocs/io/vertx/scala/ext/stomp/StompClient.html#connect(io.vertx.core.net.NetClient)[connect]`method:
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompClient.html#connect(io.vertx.core.net.NetClient)[connect]` method:
 
 [source,scala]
 ----
@@ -670,13 +670,13 @@ STOMP frames on the web socket. It also receives the STOMP frame directly on the
 
 To configure the server to use StompJS, you need to:
 
-1. Enable the web socket bridge and configure the path of the listening web socket ({@code /stomp} by default).
+1. Enable the web socket bridge and configure the path of the listening web socket (`/stomp` by default).
 2. Import http://jmesnil.net/stomp-websocket/doc/#download[StompJS] in your application (as a script on an
 HTML page, or as an npm module (https://www.npmjs.com/package/stompjs).
 3. Connect to the server
 
 To achieve the first step, you would need a HTTP server, and pass the
-`link:../../scaladocs/io/vertx/scala/ext/stomp/StompServer.html#webSocketHandler()[webSocketHandler]`result to
+`link:../../scaladocs/io/vertx/scala/ext/stomp/StompServer.html#webSocketHandler()[webSocketHandler]` result to
 `link:../../scaladocs/io/vertx/scala/core/http/HttpServer.html#websocketHandler()[websocketHandler]`:
 
 [source,scala]
@@ -714,8 +714,8 @@ var subscription = client.subscribe("foo", callback);
 == Registering received and writing frame handlers
 
 STOMP clients, client's connections and server handlers support registering a received
-`link:../dataobjects.html#Frame[Frame]`handler that would be notified every time a frame is received from the wire. It lets
-you log the frames, or implement custom behavior. The handler is already called for {@code PING}
+`link:../dataobjects.html#Frame[Frame]` handler that would be notified every time a frame is received from the wire. It lets
+you log the frames, or implement custom behavior. The handler is already called for `PING`
 frames, and _illegal / unknown_ frames:
 
 [source,scala]
@@ -732,7 +732,7 @@ var client = StompClient.create(vertx).receivedFrameHandler((frame: io.vertx.sca
 
 The handler is called before the frame is processed, so you can also _modify_ the frame.
 
-Frames not using a valid STOMP command use the {@code UNKNOWN} command. The original command is written
+Frames not using a valid STOMP command use the `UNKNOWN` command. The original command is written
 in the headers using the `link:todo[Frame.STOMP_FRAME_COMMAND]` key.
 
 You can also register a handler to be notified when a frame is going to be sent (written to the wire):

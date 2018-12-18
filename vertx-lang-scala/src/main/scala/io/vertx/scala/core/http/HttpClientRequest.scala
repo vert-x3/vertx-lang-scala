@@ -20,6 +20,7 @@ import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import scala.reflect.runtime.universe._
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import io.vertx.core.http.{StreamPriority => JStreamPriority}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.ReadStream
@@ -120,35 +121,40 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
     this
   }
 
-
+  /**
+   */
   override 
   def handler(handler: Handler[HttpClientResponse]): HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].handler({x: JHttpClientResponse => handler.handle(HttpClientResponse(x))})
     this
   }
 
-
+  /**
+   */
   override 
   def pause(): HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].pause()
     this
   }
 
-
+  /**
+   */
   override 
   def resume(): HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].resume()
     this
   }
 
-
+  /**
+   */
   override 
   def fetch(amount: Long): HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].fetch(amount.asInstanceOf[java.lang.Long])
     this
   }
 
-
+  /**
+   */
   override 
   def endHandler(endHandler: Handler[Unit]): HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].endHandler({x: Void => endHandler.handle(x)})
@@ -335,6 +341,17 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
     this
   }
 
+  /**
+   * Sets the priority of the associated stream.
+   * <p/>
+   * This is not implemented for HTTP/1.x.   * @param streamPriority the priority of this request's stream see <a href="../../../../../../../cheatsheet/StreamPriority.html">StreamPriority</a>
+   */
+  
+  def setStreamPriority(streamPriority: StreamPriority): HttpClientRequest = {
+    asJava.asInstanceOf[JHttpClientRequest].setStreamPriority(streamPriority.asJava)
+    this
+  }
+
 
   /**
    * Reset this stream with the error code `0`.   */
@@ -455,6 +472,13 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    */
   def reset (code: Long): Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].reset(code.asInstanceOf[java.lang.Long]).asInstanceOf[Boolean]
+  }
+
+  /**
+   * @return the priority of the associated HTTP/2 stream for HTTP/2 otherwise `null`see <a href="../../../../../../../cheatsheet/StreamPriority.html">StreamPriority</a>
+   */
+  def getStreamPriority (): StreamPriority = {
+    StreamPriority(asJava.asInstanceOf[JHttpClientRequest].getStreamPriority())
   }
 
 

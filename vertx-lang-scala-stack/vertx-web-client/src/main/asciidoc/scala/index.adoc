@@ -49,7 +49,7 @@ dependencies {
 == Re-cap on Vert.x core HTTP client
 
 Vert.x Web Client uses the API from Vert.x core, so it's well worth getting familiar with the basic concepts of using
-`link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]`using Vert.x core, if you're not already.
+`link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` using Vert.x core, if you're not already.
 
 == Creating a web client
 
@@ -191,7 +191,7 @@ client.post(8080, "myserver.mycompany.com", "/some-uri").sendBufferFuture(buffer
 Sending a single buffer is useful but often you don't want to load fully the content in memory because
 it may be too large or you want to handle many concurrent requests and want to use just the minimum
 for each request. For this purpose the web client can send `ReadStream<Buffer>` (e.g a
-`link:../../scaladocs/io/vertx/scala/core/file/AsyncFile.html[AsyncFile]`is a ReadStream<Buffer>`) with the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendStream(io.vertx.core.streams.ReadStream)[sendStream]` method
+`link:../../scaladocs/io/vertx/scala/core/file/AsyncFile.html[AsyncFile]` is a ReadStream<Buffer>`) with the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendStream(io.vertx.core.streams.ReadStream)[sendStream]` method
 
 [source,scala]
 ----
@@ -440,12 +440,19 @@ client.get(8080, "myserver.mycompany.com", "/some-uri").sendFuture().onComplete{
 
 ----
 
-WARNING: responses are fully buffered, use `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html#pipe()[BodyCodec.pipe]`
+[CAUTION]
+====
+By default, a Vert.x Web Client request ends with an error only if something wrong happens at the network level.
+In other words, a `404 Not Found` response, or a response with the wrong content type, are *not* considered as failures.
+Use <<response-predicates, response predicates>> if you want the Web Client to perform sanity checks automatically.
+====
+
+WARNING: Responses are fully buffered, use `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html#pipe()[BodyCodec.pipe]`
 to pipe the response to a write stream
 
 === Decoding responses
 
-By default the web client provides an http response body as a {@code Buffer} and does not apply
+By default the web client provides an http response body as a `Buffer` and does not apply
 any decoding.
 
 Custom response body decoding can be achieved using `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html[BodyCodec]`:
@@ -535,7 +542,7 @@ client.get(8080, "myserver.mycompany.com", "/some-uri").as(BodyCodec.none()).sen
 
 ----
 
-When you don't know in advance the content type of the http response, you can still use the {@code bodyAsXXX()} methods
+When you don't know in advance the content type of the http response, you can still use the `bodyAsXXX()` methods
 that decode the response to a specific type
 
 [source,scala]
@@ -558,6 +565,161 @@ client.get(8080, "myserver.mycompany.com", "/some-uri").sendFuture().onComplete{
 ----
 
 WARNING: this is only valid for the response decoded as a buffer.
+
+[[response-predicates]]
+=== Response predicates
+
+By default, a Vert.x Web Client request ends with an error only if something wrong happens at the network level.
+
+In other words, you must perform sanity checks manually after the response is received:
+
+[source,scala]
+----
+client.get(8080, "myserver.mycompany.com", "/some-uri").sendFuture().onComplete{
+  case Success(result) => {
+
+    var response = result
+
+    if (response.statusCode() == 200 && response.getHeader("content-type") == "application/json") {
+
+      // Decode the body as a json object
+      var body = response.bodyAsJsonObject()
+      println(s"Received response with status code${response.statusCode()} with body ${body}")
+
+    } else {
+      println(s"Something went wrong ${response.statusCode()}")
+    }
+
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+You can trade flexibility for clarity and conciseness using _response predicates_.
+
+`link:../../scaladocs/io/vertx/scala/ext/web/client/predicate/ResponsePredicate.html[Response predicates]` can fail a request when the response does
+not match a criteria.
+
+The Web Client comes with a set of out of the box predicates ready to use:
+
+[source,scala]
+----
+client.get(8080, "myserver.mycompany.com", "/some-uri").expect(ResponsePredicate.SC_SUCCESS).expect(ResponsePredicate.JSON).sendFuture().onComplete{
+  case Success(result) => {
+
+    var response = result
+
+    // Safely decode the body as a json object
+    var body = response.bodyAsJsonObject()
+    println(s"Received response with status code${response.statusCode()} with body ${body}")
+
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+You can also create custom predicates when existing predicates don't fit your needs:
+
+[source,scala]
+----
+
+// Check CORS header allowing to do POST
+var methodsPredicate = (resp: io.vertx.scala.ext.web.client.HttpResponse<java.lang.Void>) => {
+  var methods = resp.getHeader("Access-Control-Allow-Methods")
+  if (methods != null) {
+    if (methods.contains("POST")) {
+      ResponsePredicateResult.success()
+    }
+  }
+  ResponsePredicateResult.failure("Does not work")
+}
+
+// Send pre-flight CORS request
+client.request(HttpMethod.OPTIONS, 8080, "myserver.mycompany.com", "/some-uri").putHeader("Origin", "Server-b.com").putHeader("Access-Control-Request-Method", "POST").expect(methodsPredicate).sendFuture().onComplete{
+  case Success(result) => {
+    // Process the POST request now
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+TIP: Response predicates are evaluated _before_ the response body is received. Therefore you can't inspect the response body
+in a predicate test function.
+
+==== Predefined predicates
+
+As a convenience, the Web Client ships a few predicates for common uses cases .
+
+For status codes, e.g `link:todo[ResponsePredicate.SC_SUCCESS]` to verify that the
+response has a `2xx` code, you can also create a custom one:
+
+[source,scala]
+----
+client.get(8080, "myserver.mycompany.com", "/some-uri").expect(ResponsePredicate.status(200, 202)).sendFuture().onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+For content types, e.g `link:todo[ResponsePredicate.JSON]` to verify that the
+response body contains JSON data, you can also create a custom one:
+
+[source,scala]
+----
+client.get(8080, "myserver.mycompany.com", "/some-uri").expect(ResponsePredicate.contentType("some/content-type")).sendFuture().onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+Please refer to the `link:../../scaladocs/io/vertx/scala/ext/web/client/predicate/ResponsePredicate.html[ResponsePredicate]` documentation for a full list of predefined predicates.
+
+ifeval::["scala" == "java"]
+==== Creating custom failures
+
+By default, response predicates (including the predefined ones) use a default error converter which discards
+the body and conveys a simple message. You can customize the exception class by changing the error converter:
+
+[source,scala]
+----
+Code not translatable
+----
+
+Many web APIs provide details in error responses.
+For example, the https://developer.marvel.com/docs[Marvel API] uses this JSON object format:
+
+[source,javascript]
+----
+{
+ "code": "InvalidCredentials",
+ "message": "The passed API key is invalid."
+}
+----
+
+To avoid losing this information, it is possible to wait for the response body to be fully received before the error
+converter is called:
+
+[source,scala]
+----
+Code not translatable
+----
+
+WARNING: creating exception in Java can have a performance cost when it captures a stack trace, so you might want
+        to create exceptions that do not capture the stack trace. By default exceptions are reported using the
+        an exception that does not capture the stack trace.
+
+endif::[]
 
 === Handling 30x redirections
 
@@ -626,6 +788,44 @@ client.getAbs("https://myserver.mycompany.com:4043/some-uri").sendFuture().onCom
 }
 
 ----
+
+== Sessions management
+
+Vert.x web offers a web session management facility; to use it, you create a 
+`WebClientSession` for every user (session) and use it instead of the 
+`link:../../scaladocs/io/vertx/scala/ext/web/client/WebClient.html[WebClient]`.
+
+=== Creating a WebSession
+
+You create a `WebClientSession` instance as follows
+
+[source,scala]
+----
+var client = WebClient.create(vertx)
+var session = io.vertx.ext.web.client.WebClientSession.create(client)
+
+----
+
+=== Making requests
+
+Once created, a `WebClientSession` can be used instead of a 
+`link:../../scaladocs/io/vertx/scala/ext/web/client/WebClient.html[WebClient]` to do HTTP(s) requests and automatically manage any cookies received from the server(s)
+you are calling.
+
+=== Setting session level headers
+
+You can set any session level headers to be added to every request as follows:
+
+[source,scala]
+----
+var session = io.vertx.ext.web.client.WebClientSession.create(client)
+session.addHeader("my-jwt-token", jwtToken)
+
+----
+
+The headers will then be added to every request; notice that these headers will be sent to all hosts; if you need
+to send different headers to different hosts, you have to add them manually to every single request and not to the 
+`WebClientSession`.
 
 ifeval::["scala" == "java"]
 include::override/rxjava2.adoc[]

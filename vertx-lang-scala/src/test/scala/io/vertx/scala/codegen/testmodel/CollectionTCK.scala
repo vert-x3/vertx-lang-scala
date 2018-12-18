@@ -243,11 +243,6 @@ class CollectionTCK(private val _asJava: Object) {
   }
 
 
-  def methodWithMapReturn (handler: Handler[String]): scala.collection.mutable.Map[String, String] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
-  }
-
-
   def methodWithMapStringReturn (handler: Handler[String]): scala.collection.mutable.Map[String, String] = {
     collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapStringReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
   }
@@ -313,6 +308,11 @@ class CollectionTCK(private val _asJava: Object) {
   }
 
 
+  def methodWithMapObjectReturn (handler: Handler[String]): scala.collection.mutable.Map[String, AnyRef] = {
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapObjectReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x).toSeq: _*)
+  }
+
+
   def methodWithListStringReturn (): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithListStringReturn().asScala.map(x => x.asInstanceOf[String])
   }
@@ -358,6 +358,11 @@ class CollectionTCK(private val _asJava: Object) {
   }
 
 
+  def methodWithListObjectReturn (): scala.collection.mutable.Buffer[AnyRef] = {
+    asJava.asInstanceOf[JCollectionTCK].methodWithListObjectReturn().asScala.map(x => x)
+  }
+
+
   def methodWithSetStringReturn (): scala.collection.mutable.Set[String] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithSetStringReturn().asScala.map(x => x.asInstanceOf[String])
   }
@@ -400,6 +405,11 @@ class CollectionTCK(private val _asJava: Object) {
 
   def methodWithSetEnumReturn (): scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithSetEnumReturn().asScala
+  }
+
+
+  def methodWithSetObjectReturn (): scala.collection.mutable.Set[AnyRef] = {
+    asJava.asInstanceOf[JCollectionTCK].methodWithSetObjectReturn().asScala.map(x => x)
   }
 
 
