@@ -350,6 +350,33 @@ request.putHeader("other-header", "foo")
 
 ----
 
+=== Configure the request to add authentication.
+
+Authentication can be performed manually by setting the correct headers, or, using our predefined methods
+(We strongly suggest having HTTPS enabled, especially for authenticated requests):
+
+In basic HTTP authentication, a request contains a header field of the form `Authorization: Basic <credentials>`,
+where credentials is the base64 encoding of id and password joined by a colon.
+
+You can configure the request to add basic access authentication as follows:
+
+[source,scala]
+----
+var request = client.get(8080, "myserver.mycompany.com", "/some-uri").basicAuthentication("myid", "mypassword")
+
+----
+
+In OAuth 2.0, a request contains a header field of the form `Authorization: Bearer <bearerToken>`,
+where bearerToken is the bearer token issued by an authorization server to access protected resources.
+
+You can configure the request to add bearer token authentication as follows:
+
+[source,scala]
+----
+var request = client.get(8080, "myserver.mycompany.com", "/some-uri").bearerTokenAuthentication("myBearerToken")
+
+----
+
 === Reusing requests
 
 The `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#send()[send]` method can be called multiple times

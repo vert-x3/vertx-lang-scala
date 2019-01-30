@@ -14,7 +14,7 @@
  * under the License.
  */
 
-package io.vertx.ext.scala.eventbus.bridge.tcp
+package io.vertx.scala.ext.eventbus.bridge.tcp
 
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.bridge.{BaseBridgeEvent => JBaseBridgeEvent}

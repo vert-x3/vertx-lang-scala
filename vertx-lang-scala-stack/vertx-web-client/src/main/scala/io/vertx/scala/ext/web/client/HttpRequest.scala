@@ -156,6 +156,50 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     this
   }
 
+  /**
+   * Configure the request to perform basic access authentication.
+   * 
+   * In basic HTTP authentication, a request contains a header field of the form 'Authorization: Basic &#60;credentials&#62;',
+   * where credentials is the base64 encoding of id and password joined by a colon.
+   * </p>   * @param id the id
+   * @param password the password
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def basicAuthentication(id: String, password: String): HttpRequest[T] = {
+    asJava.asInstanceOf[JHttpRequest[Object]].basicAuthentication(id.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String])
+    this
+  }
+
+  /**
+   * Configure the request to perform basic access authentication.
+   * 
+   * In basic HTTP authentication, a request contains a header field of the form 'Authorization: Basic &#60;credentials&#62;',
+   * where credentials is the base64 encoding of id and password joined by a colon.
+   * </p>   * @param id the id
+   * @param password the password
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def basicAuthentication(id: io.vertx.core.buffer.Buffer, password: io.vertx.core.buffer.Buffer): HttpRequest[T] = {
+    asJava.asInstanceOf[JHttpRequest[Object]].basicAuthentication(id, password)
+    this
+  }
+
+  /**
+   * Configure the request to perform bearer token authentication.
+   * 
+   * In OAuth 2.0, a request contains a header field of the form 'Authorization: Bearer &#60;bearerToken&#62;',
+   * where bearerToken is the bearer token issued by an authorization server to access protected resources.
+   * </p>   * @param bearerToken the bearer token
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def bearerTokenAuthentication(bearerToken: String): HttpRequest[T] = {
+    asJava.asInstanceOf[JHttpRequest[Object]].bearerTokenAuthentication(bearerToken.asInstanceOf[java.lang.String])
+    this
+  }
+
 
   
   def ssl(value: Boolean): HttpRequest[T] = {
