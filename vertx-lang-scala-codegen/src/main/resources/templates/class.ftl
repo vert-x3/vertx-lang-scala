@@ -1,44 +1,47 @@
-<#include "extensions/LicenseHeader.ftl">
-
-package ${packageName}
-
-<#list imps as imp>
-import ${imp}
-</#list>
 
 <#if doc??>
-/**
-${typeHelper.renderDoc(type, "  *", doc)}
-  */
+  /**
+${typeHelper.renderDoc(type, "    *", doc)}
+    */
 </#if>
 
-<@compress single_line=true>
-<#if concrete>
-class ${className}${typeHelper.assembleTypeParams(typeParams, true)}(private val _asJava: Object)
-<#else>
-trait ${className}${typeHelper.assembleTypeParams(typeParams, false)}
+  implicit class ${className}Scala${typeHelper.assembleTypeParams(typeParams, true)}(val asJava: ${nonGenericType}${typeHelper.assembleTypeParams(typeParams, true)}) extends AnyVal {
+<#if className == "Vertx">
+  <#include "extensions/Vertx.ftl">
+  <#include "extensions/executeblocking.ftl">
 </#if>
-<#if superTypes?has_content >
-      extends <#list classes as superType><#if type.name == "io.vertx.ext.web.templ.TemplateEngine">S</#if>${typeHelper.toScalaType(superType, false)} <#if superType.raw.isConcrete()>(_asJava)</#if><#sep>with </#list>
-   <#if classes?has_content && abstractClasses?has_content>with </#if><#list abstractClasses as superType>${typeHelper.toScalaType(superType, false)}<#if superType.raw.concrete>(_asJava)</#if><#sep>with </#list>
-   <#if type.handler>
-      with io.vertx.core.Handler[${typeHelper.toScalaType(type.handlerArg, false)}]
-   </#if>
-<#elseif type.handler>
-      extends io.vertx.core.Handler[${typeHelper.toScalaType(type.handlerArg, false)}]
-</#if>{
-</@compress>
-
-<#if concrete>
-<#include "class-body.ftl">
-
-<#include "class-object-body.ftl">
-<#else>
-<#include "class-trait-body.ftl">
-
-object ${className} {
-  def apply${typeHelper.assembleTypeParams(typeParams, true)}(asJava: J${className}${typeHelper.assembleTypeParamsAsObjects(typeParams)}): ${className}${typeHelper.assembleTypeParams(typeParams, false)} = new ${className}Impl${typeHelper.assembleTypeParams(typeParams, false)}(asJava)
-    private class ${className}Impl${typeHelper.assembleTypeParams(typeParams, true)}(private val _asJava: Object) extends ${className}${typeHelper.assembleTypeParams(typeParams, false)} {
-<#include "class-body.ftl">
-}
+<#if className == "Context">
+  <#include "extensions/executeblocking.ftl">
 </#if>
+<#if className == "WorkerExecutor">
+  <#include "extensions/executeblocking.ftl">
+</#if>
+
+<#if className != "CompositeFuture" && className != "Future" >
+  <#list nullableMethods as method>
+    <#if method.name != "executeBlocking">
+
+      <#if method.doc??>
+${typeHelper.methodDoc(type, method, "    ", true)}
+      </#if>
+    def ${method.name}<#if method.returnType.nullable>Option</#if>${typeHelper.assembleTypeParams(method.typeParams, true)}(<#list method.params as param>${typeHelper.escapeIfKeyword(param.name)}: ${typeHelper.wrapInOptionIfNullable(param.type.nullable, typeHelper.toScalaMethodParam(param.type))}<#sep>,</#list>): ${typeHelper.wrapInOptionIfNullable(method.returnType.nullable, typeHelper.toReturnType(method.returnType))} = {
+      <#if method.returnType.nullable>scala.Option(</#if>${typeHelper.invokeMethodWithoutConvertingReturn('asJava', type, method)}<#if method.returnType.nullable>)</#if>
+    }
+
+    </#if>
+  </#list>
+  <#list futureMethods as method>
+    <#if method.name != "executeBlocking">
+      <#if method.doc??>
+${typeHelper.methodDoc(type, method, "    ", true)}
+      </#if>
+    def ${typeHelper.createNameForMethodReturningAFuture(method)}${typeHelper.assembleTypeParams(method.typeParams, true)}(<#list typeHelper.removeLastParam(method.params) as param>${typeHelper.escapeIfKeyword(param.name)}: ${typeHelper.wrapInOptionIfNullable(param.type.nullable, typeHelper.toScalaMethodParam(param.type))}<#sep>,</#list>): scala.concurrent.Future[${typeHelper.toReturnType(typeHelper.typeOfReturnedFuture(method))}] = {
+      val promise = Promise[${typeHelper.toReturnType(typeHelper.typeOfReturnedFuture(method))}]()
+      ${typeHelper.invokeMethodAndUseProvidedHandler('asJava', type, method, typeParams, '{a:AsyncResult[' + typeHelper.typeOfReturnedFuture(method).getName()?replace('<', '[')?replace('>', ']') + '] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()}')?replace('<', '[')?replace('>]', ']]')}
+      promise.future
+    }
+
+    </#if>
+  </#list>
+</#if>
+  }

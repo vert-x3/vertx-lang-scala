@@ -1,7 +1,8 @@
 package io.vertx.lang.scala
 
 import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
-import io.vertx.scala.core.Vertx
+import io.vertx.core.Vertx
+import io.vertx.scala.core._
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{Assertions, AsyncFlatSpec, Matchers}

@@ -2,7 +2,7 @@ package io.vertx.lang.scala.pump
 
 import java.util.ArrayList
 
-import io.vertx.scala.core.streams.{Pump, ReadStream, WriteStream}
+import io.vertx.core.streams.Pump
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
@@ -17,10 +17,7 @@ class PumpTest extends FlatSpec with Matchers {
     val jrs = new JavaFakeReadStream[MyClass]()
     val jws = new JavaFakeWriteStream[MyClass]()
 
-    val rs = ReadStream[MyClass](jrs)
-    val ws = WriteStream[MyClass](jws)
-
-    val p = Pump.pump(rs, ws, 1001)
+    val p = Pump.pump(jrs, jws, 1001)
 
     (0 to 10).foreach(v => {
       p.start()
@@ -47,9 +44,7 @@ class PumpTest extends FlatSpec with Matchers {
     val jrs = new JavaFakeReadStream[MyClass]
     val jws = new JavaFakeWriteStream[MyClass]
 
-    val rs = ReadStream[MyClass](jrs)
-    val ws = WriteStream[MyClass](jws)
-    val p = Pump.pump(rs, ws, 5)
+    val p = Pump.pump(jrs, jws, 5)
     p.start()
 
     (0 to 10).foreach(v => {
@@ -81,28 +76,28 @@ class PumpTest extends FlatSpec with Matchers {
   "testPumpReadStreamNull" should "expect NullPointerException" in {
     val rs = new JavaFakeReadStream[MyClass]()
     intercept[NullPointerException] {
-      Pump.pump[MyClass](ReadStream[MyClass](rs), null)
+      Pump.pump[MyClass](rs, null)
     }
   }
 
   "testPumpWriteStreamNull" should "expect NullPointerException" in {
     val ws = new JavaFakeWriteStream[MyClass]()
     intercept[NullPointerException] {
-      Pump.pump[MyClass](null, WriteStream[MyClass](ws))
+      Pump.pump[MyClass](null, ws)
     }
   }
 
   "testPumpReadStreamNull2" should "expect NullPointerException" in {
     val rs = new JavaFakeReadStream[MyClass]()
     intercept[NullPointerException] {
-      Pump.pump[MyClass](ReadStream[MyClass](rs), null, 1000)
+      Pump.pump[MyClass](rs, null, 1000)
     }
   }
 
   "testPumpWriteStreamNull2" should "expect NullPointerException" in {
     val ws = new JavaFakeWriteStream[MyClass]()
     intercept[NullPointerException] {
-      Pump.pump[MyClass](null, WriteStream[MyClass](ws), 1000)
+      Pump.pump[MyClass](null, ws, 1000)
     }
   }
 

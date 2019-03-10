@@ -3,8 +3,8 @@ package io.vertx.lang.scala
 import java.io.File
 import java.nio.file.Files
 
-import io.vertx.core.{AsyncResult, Handler, Vertx => JVertx}
-import io.vertx.scala.core.Vertx
+import io.vertx.core.{AsyncResult, Handler, Vertx}
+import io.vertx.scala.core._
 import org.junit.runner.RunWith
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.time.SpanSugar._
@@ -28,8 +28,7 @@ class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
     Files.copy(rs, file.toPath)
 
     val scalaVerticleFactory = new ScalaVerticleFactory
-    vertx.asJava.asInstanceOf[JVertx]
-      .deployVerticle(scalaVerticleFactory.createVerticle(file.toPath.toString, getClass.getClassLoader), new Handler[AsyncResult[java.lang.String]] {
+    vertx.deployVerticle(scalaVerticleFactory.createVerticle(file.toPath.toString, getClass.getClassLoader), new Handler[AsyncResult[java.lang.String]] {
         override def handle(event: AsyncResult[String]): Unit = promise.success(event.result())
       })
 
@@ -40,8 +39,7 @@ class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
     val promise = Promise[String]
     val vertx = Vertx.vertx()
     val scalaVerticleFactory = new ScalaVerticleFactory
-    vertx.asJava.asInstanceOf[JVertx]
-      .deployVerticle(scalaVerticleFactory.createVerticle("ScalaTestVerticle2.scala", getClass.getClassLoader), new Handler[AsyncResult[java.lang.String]] {
+    vertx.deployVerticle(scalaVerticleFactory.createVerticle("ScalaTestVerticle2.scala", getClass.getClassLoader), new Handler[AsyncResult[java.lang.String]] {
         override def handle(event: AsyncResult[String]): Unit = promise.success(event.result())
       })
 

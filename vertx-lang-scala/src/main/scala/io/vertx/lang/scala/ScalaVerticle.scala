@@ -18,9 +18,8 @@ package io.vertx.lang.scala
 
 import io.vertx.core.json.JsonObject
 import io.vertx.core.{AbstractVerticle, Future, Verticle}
-import io.vertx.scala.core.{Context, Vertx}
+import io.vertx.core.{Context, Vertx}
 
-import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
 import scala.collection.JavaConverters._
 import scala.collection.mutable
@@ -45,8 +44,8 @@ abstract class ScalaVerticle {
     * @param context the context of the verticle
     */
   def init(vertx: io.vertx.core.Vertx, context: io.vertx.core.Context, verticle: AbstractVerticle): Unit = {
-    this.vertx = new Vertx(vertx)
-    this.ctx = new Context(context)
+    this.vertx = vertx
+    this.ctx = context
     this.javaVerticle = verticle
     this.executionContext = VertxExecutionContext(this.vertx.getOrCreateContext())
   }

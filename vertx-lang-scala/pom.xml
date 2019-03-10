@@ -94,6 +94,11 @@
       <version>3.0.0</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>org.scala-lang.modules</groupId>
+      <artifactId>scala-java8-compat_2.12</artifactId>
+      <version>0.8.0</version>
+    </dependency>
   </dependencies>
 
   <build>

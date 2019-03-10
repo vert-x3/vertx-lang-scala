@@ -2,7 +2,8 @@ package io.vertx.lang.scala
 
 import java.util.concurrent.CountDownLatch
 
-import io.vertx.scala.core.{DeploymentOptions, Vertx}
+import io.vertx.core.Vertx
+import io.vertx.scala.core._
 import org.junit.runner.RunWith
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.concurrent.Waiters.{Waiter, _}
@@ -22,7 +23,7 @@ class VertxTest extends FlatSpec with Matchers {
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
     val waiter = new Waiter()
-    vertx.executeBlocking[Long](() => Thread.currentThread().getId).onComplete(s => {
+    vertx.executeBlockingFuture[Long](() => Thread.currentThread().getId).onComplete(s => {
       assert(s.get != Thread.currentThread().getId)
       Thread.sleep(1000)
       waiter.dismiss()
