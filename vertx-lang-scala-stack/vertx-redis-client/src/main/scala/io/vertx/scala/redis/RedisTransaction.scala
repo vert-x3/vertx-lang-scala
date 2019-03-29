@@ -57,7 +57,6 @@ import io.vertx.lang.scala.HandlerOps._
 
 /**
   * This Interface represents a TX
-
   */
 
 class RedisTransaction(private val _asJava: Object) {

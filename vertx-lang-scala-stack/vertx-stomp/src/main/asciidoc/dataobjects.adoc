@@ -135,7 +135,6 @@ Sets whether or not an empty line should be appended to the written STOMP frame.
 |[[trustAll]]`@trustAll`|`Boolean`|-
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |[[useStompFrame]]`@useStompFrame`|`Boolean`|+++
 Sets whether or not the connection is made using the <code>STOMP</code> command instead of the <code>CONNECT</code> command.
  The <code>STOMP</code> command has been introduced in the 1.2 version of the protocol to ease the network analysis
@@ -161,7 +160,6 @@ Sets the virtual host that will be used as "host" header value in the `CONNECT` 
 ^|Name | Type ^| Description
 |[[acceptBacklog]]`@acceptBacklog`|`Number (int)`|-
 |[[clientAuth]]`@clientAuth`|`link:enums.html#ClientAuth[ClientAuth]`|-
-|[[clientAuthRequired]]`@clientAuthRequired`|`Boolean`|-
 |[[crlPaths]]`@crlPaths`|`Array of String`|-
 |[[crlValues]]`@crlValues`|`Array of Buffer`|-
 |[[enabledCipherSuites]]`@enabledCipherSuites`|`Array of String`|-
@@ -237,7 +235,6 @@ Sets the chunk size when replaying a transaction. To avoid blocking the event lo
 +++
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |[[websocketBridge]]`@websocketBridge`|`Boolean`|+++
 Enables or disables the web socket bridge.
 +++

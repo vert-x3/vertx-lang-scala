@@ -545,18 +545,6 @@ class EventBusOptions(private val _asJava: JEventBusOptions) extends ExtTCPSSLOp
     asJava.isUseAlpn().asInstanceOf[Boolean]
   }
 
-  /**
-   * Set whether Netty pooled buffers are enabled
-   */
-  override def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-
-  override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
-  }
-
 }
 
 

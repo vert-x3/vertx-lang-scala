@@ -22,6 +22,7 @@ import scala.reflect.runtime.universe._
 import io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
+import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._

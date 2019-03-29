@@ -16,6 +16,7 @@
 
 package io.vertx.scala.core.http
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.http.{RequestOptions => JRequestOptions}
 import io.vertx.core.streams.{ReadStream => JReadStream}
@@ -33,6 +34,7 @@ import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
 import io.vertx.core.http.{WebSocket => JWebSocket}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
+import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
 import io.vertx.lang.scala.HandlerOps._
@@ -76,8 +78,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def getNow(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].getNow(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+  def getNow(options: RequestOptions, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].getNow(options.asJava, {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))})
     this
   }
 
@@ -90,8 +92,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def getNow(port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].getNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+  def getNow(port: Int, host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].getNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))})
     this
   }
 
@@ -103,8 +105,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def getNow(host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].getNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+  def getNow(host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].getNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))})
     this
   }
 
@@ -115,8 +117,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def getNow(requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].getNow(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+  def getNow(requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].getNow(requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))})
     this
   }
 
@@ -127,8 +129,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def headNow(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].headNow(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+  def headNow(options: RequestOptions, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].headNow(options.asJava, {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))})
     this
   }
 
@@ -141,8 +143,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def headNow(port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].headNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+  def headNow(port: Int, host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].headNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))})
     this
   }
 
@@ -154,8 +156,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def headNow(host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].headNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+  def headNow(host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].headNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))})
     this
   }
 
@@ -166,8 +168,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def headNow(requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].headNow(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+  def headNow(requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].headNow(requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))})
     this
   }
 
@@ -178,8 +180,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def optionsNow(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].optionsNow(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+  def optionsNow(options: RequestOptions, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].optionsNow(options.asJava, {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))})
     this
   }
 
@@ -192,8 +194,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def optionsNow(port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].optionsNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+  def optionsNow(port: Int, host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].optionsNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))})
     this
   }
 
@@ -205,8 +207,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def optionsNow(host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].optionsNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+  def optionsNow(host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].optionsNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))})
     this
   }
 
@@ -217,8 +219,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def optionsNow(requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].optionsNow(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+  def optionsNow(requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClient = {
+    asJava.asInstanceOf[JHttpClient].optionsNow(requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))})
     this
   }
 
@@ -770,8 +772,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @return an HTTP client request object
    */
-  def request (method: io.vertx.core.http.HttpMethod, options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def request (method: io.vertx.core.http.HttpMethod, options: RequestOptions, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, options.asJava, {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -783,8 +785,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def request (method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def request (method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -795,8 +797,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def request (method: io.vertx.core.http.HttpMethod, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def request (method: io.vertx.core.http.HttpMethod, host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -815,8 +817,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def request (method: io.vertx.core.http.HttpMethod, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def request (method: io.vertx.core.http.HttpMethod, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -835,8 +837,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def requestAbs (method: io.vertx.core.http.HttpMethod, absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method, absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def requestAbs (method: io.vertx.core.http.HttpMethod, absoluteURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method, absoluteURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -872,8 +874,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def get (options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def get (options: RequestOptions, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(options.asJava, {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -884,8 +886,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def get (port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def get (port: Int, host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -895,8 +897,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def get (host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def get (host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -913,8 +915,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def get (requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def get (requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -931,8 +933,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def getAbs (absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].getAbs(absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def getAbs (absoluteURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].getAbs(absoluteURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -968,8 +970,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def post (options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def post (options: RequestOptions, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(options.asJava, {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -980,8 +982,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def post (port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def post (port: Int, host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -991,8 +993,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def post (host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def post (host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1009,8 +1011,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def post (requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def post (requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1027,8 +1029,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def postAbs (absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].postAbs(absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def postAbs (absoluteURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].postAbs(absoluteURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1064,8 +1066,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def head (options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def head (options: RequestOptions, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(options.asJava, {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1076,8 +1078,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def head (port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def head (port: Int, host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1087,8 +1089,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def head (host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def head (host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1105,8 +1107,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def head (requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def head (requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1123,8 +1125,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def headAbs (absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].headAbs(absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def headAbs (absoluteURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].headAbs(absoluteURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1160,8 +1162,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def options (options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def options (options: RequestOptions, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(options.asJava, {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1172,8 +1174,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def options (port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def options (port: Int, host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1183,8 +1185,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def options (host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def options (host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1201,8 +1203,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def options (requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def options (requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1219,8 +1221,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def optionsAbs (absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].optionsAbs(absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def optionsAbs (absoluteURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].optionsAbs(absoluteURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1256,8 +1258,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def put (options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def put (options: RequestOptions, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(options.asJava, {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1268,8 +1270,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def put (port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def put (port: Int, host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1279,8 +1281,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def put (host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def put (host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1297,8 +1299,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def put (requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def put (requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1315,8 +1317,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def putAbs (absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].putAbs(absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def putAbs (absoluteURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].putAbs(absoluteURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1352,8 +1354,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def delete (options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def delete (options: RequestOptions, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(options.asJava, {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1364,8 +1366,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def delete (port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def delete (port: Int, host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1375,8 +1377,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def delete (host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def delete (host: String, requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1393,8 +1395,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def delete (requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def delete (requestURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1411,8 +1413,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param responseHandler the response handler
    * @return an HTTP client request object
    */
-  def deleteAbs (absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].deleteAbs(absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  def deleteAbs (absoluteURI: String, responseHandler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].deleteAbs(absoluteURI.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpClientResponse] => responseHandler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -1607,6 +1609,476 @@ class HttpClient(private val _asJava: Object) extends Measured {
     asJava.asInstanceOf[JHttpClient].close()
   }
 
+
+ /**
+  * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def requestFuture (method: io.vertx.core.http.HttpMethod, options: RequestOptions): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].request(method, options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def requestFuture (method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].request(method, port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def requestFuture (method: io.vertx.core.http.HttpMethod, host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].request(method, host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def requestFuture (method: io.vertx.core.http.HttpMethod, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].request(method, requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[requestAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def requestAbsFuture (method: io.vertx.core.http.HttpMethod, absoluteURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].requestAbs(method, absoluteURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getFuture (options: RequestOptions): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].get(options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getFuture (port: Int, host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].get(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getFuture (host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].get(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getFuture (requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].get(requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[getAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getAbsFuture (absoluteURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].getAbs(absoluteURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[getNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getNowFuture (options: RequestOptions): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].getNow(options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[getNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getNowFuture (port: Int, host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].getNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[getNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getNowFuture (host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].getNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[getNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getNowFuture (requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].getNow(requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def postFuture (options: RequestOptions): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].post(options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def postFuture (port: Int, host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].post(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def postFuture (host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].post(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def postFuture (requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].post(requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[postAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def postAbsFuture (absoluteURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].postAbs(absoluteURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[head]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def headFuture (options: RequestOptions): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].head(options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[head]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def headFuture (port: Int, host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].head(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[head]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def headFuture (host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].head(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[head]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def headFuture (requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].head(requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[headAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def headAbsFuture (absoluteURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].headAbs(absoluteURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[headNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def headNowFuture (options: RequestOptions): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].headNow(options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[headNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def headNowFuture (port: Int, host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].headNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[headNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def headNowFuture (host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].headNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[headNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def headNowFuture (requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].headNow(requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[options]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def optionsFuture (options: RequestOptions): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].options(options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[options]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def optionsFuture (port: Int, host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].options(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[options]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def optionsFuture (host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].options(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[options]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def optionsFuture (requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].options(requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[optionsAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def optionsAbsFuture (absoluteURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].optionsAbs(absoluteURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[optionsNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def optionsNowFuture (options: RequestOptions): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].optionsNow(options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[optionsNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def optionsNowFuture (port: Int, host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].optionsNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[optionsNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def optionsNowFuture (host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].optionsNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[optionsNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def optionsNowFuture (requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].optionsNow(requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def putFuture (options: RequestOptions): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].put(options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def putFuture (port: Int, host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].put(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def putFuture (host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].put(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def putFuture (requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].put(requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[putAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def putAbsFuture (absoluteURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].putAbs(absoluteURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def deleteFuture (options: RequestOptions): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].delete(options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def deleteFuture (port: Int, host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].delete(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def deleteFuture (host: String, requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].delete(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def deleteFuture (requestURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].delete(requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[deleteAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def deleteAbsFuture (absoluteURI: String): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClient].deleteAbs(absoluteURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 

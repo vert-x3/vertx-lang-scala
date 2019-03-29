@@ -16,12 +16,17 @@
 
 package io.vertx.scala.core.http
 
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.streams.Pipe
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import io.vertx.core.http.{StreamPriority => JStreamPriority}
 import scala.collection.JavaConverters._
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.net.{NetSocket => JNetSocket}
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.HttpVersion
@@ -29,7 +34,9 @@ import io.vertx.scala.core.net.NetSocket
 import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
+import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
 import io.vertx.lang.scala.HandlerOps._
 
@@ -179,6 +186,45 @@ class HttpClientResponse(private val _asJava: Object) extends ReadStream[io.vert
     this
   }
 
+  /**
+   * Set an handler for stream priority changes.
+   * <p/>
+   * This is not implemented for HTTP/1.x.   * @param handler the handler to be called when the stream priority changes
+   */
+  
+  def streamPriorityHandler(handler: Handler[StreamPriority]): HttpClientResponse = {
+    asJava.asInstanceOf[JHttpClientResponse].streamPriorityHandler({x: JStreamPriority => handler.handle(StreamPriority(x))})
+    this
+  }
+
+
+  /**
+   * Pause this stream and return a  to transfer the elements of this stream to a destination .
+   * <p/>
+   * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
+   */
+  override def pipe(): Pipe[io.vertx.core.buffer.Buffer] = {
+    Pipe[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JHttpClientResponse].pipe())
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.streams.ReadStream#pipeTo]] but with no completion handler.
+   */
+  override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer]): Unit = {
+    asJava.asInstanceOf[JHttpClientResponse].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]])
+  }
+
+  /**
+   * Pipe this `ReadStream` to the `WriteStream`.
+   * 
+   * Elements emitted by this stream will be written to the write stream until this stream ends or fails.
+   * 
+   * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
+   * called with the result.   * @param dst the destination write stream
+   */
+  override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JHttpClientResponse].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
 
 
   /**
@@ -218,6 +264,16 @@ class HttpClientResponse(private val _asJava: Object) extends ReadStream[io.vert
     scala.Option(asJava.asInstanceOf[JHttpClientResponse].getTrailer(trailerName.asInstanceOf[java.lang.String]).asInstanceOf[String])
   }
 
+
+ /**
+  * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpClientResponse].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 

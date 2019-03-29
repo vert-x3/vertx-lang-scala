@@ -433,15 +433,6 @@ class ProtonClientOptions(private val _asJava: JProtonClientOptions) extends Ext
     asJava.isUseAlpn().asInstanceOf[Boolean]
   }
 
-  override def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-
-  override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
-  }
-
   /**
    * Override the hostname value used in the connection AMQP Open frame and TLS SNI server name (if TLS is in use).
    * By default, the hostname specified in [[io.vertx.scala.proton.ProtonClient]] will be used for both, with SNI performed

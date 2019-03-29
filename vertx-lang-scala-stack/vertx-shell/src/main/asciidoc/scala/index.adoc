@@ -915,7 +915,7 @@ The command discovery can be used when new commands need to be added to Vert.x w
 
 For example, the _Dropwizard_ metrics service, adds specific metrics command to the shell service on the fly.
 
-It can be achieved via the {@code java.util.ServiceLoader} of a `CommandResolverFactory`.
+It can be achieved via the `java.util.ServiceLoader` of a `CommandResolverFactory`.
 
 [source,java]
 ----
@@ -927,7 +927,7 @@ public class CustomCommands implements CommandResolverFactory {
 }
 ----
 
-The {@code resolver} method is async, because the resolver may need to wait some condition before commands
+The `resolver` method is async, because the resolver may need to wait some condition before commands
 are resolved.
 
 The shell service discovery using the service loader mechanism:

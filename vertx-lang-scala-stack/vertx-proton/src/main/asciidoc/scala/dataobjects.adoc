@@ -71,7 +71,6 @@ This method should typically only be needed to set different values for the [vir
 |[[trustAll]]`@trustAll`|`Boolean`|-
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |[[virtualHost]]`@virtualHost`|`String`|+++
 Override the hostname value used in the connection AMQP Open frame and TLS SNI server name (if TLS is in use).
 By default, the hostname specified in link will be used for both, with SNI performed
@@ -117,7 +116,6 @@ Options for configuring link creation.
 ^|Name | Type ^| Description
 |[[acceptBacklog]]`@acceptBacklog`|`Number (int)`|-
 |[[clientAuth]]`@clientAuth`|`link:enums.html#ClientAuth[ClientAuth]`|-
-|[[clientAuthRequired]]`@clientAuthRequired`|`Boolean`|-
 |[[crlPaths]]`@crlPaths`|`Array of String`|-
 |[[crlValues]]`@crlValues`|`Array of Buffer`|-
 |[[enabledCipherSuites]]`@enabledCipherSuites`|`Array of String`|-
@@ -160,7 +158,6 @@ Setting this property to a negative value will result in no maximum frame size b
 |[[trafficClass]]`@trafficClass`|`Number (int)`|-
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |===
 
 [[ProtonTransportOptions]]

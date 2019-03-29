@@ -64,6 +64,8 @@ ${typeHelper.renderDoc(type, "   *", property.doc)}
         <#lt>${"  "}<#if !property.declared && superTypes?hasContent >override </#if>def ${property.setterMethod}(value: ${typeHelper.toScalaType(property.type, false)}) = {
       <#if property.type.kind == CLASS_DATA_OBJECT>
         <#lt>${"    "}asJava.${property.setterMethod}(${typeHelper.toJavaWithConversion('value', property.type)})
+      <#elseIf property.type.kind == CLASS_API && property.type.name != 'io.vertx.core.buffer.Buffer'>
+        <#lt>${"    "}asJava.${property.setterMethod}(value.asInstanceOf[J${property.type.simpleName}])
       <#elseIf property.type.kind == CLASS_PRIMITIVE || property.type.kind == CLASS_BOXED_PRIMITIVE || property.type.kind == CLASS_STRING || property.type.kind == CLASS_JSON_OBJECT || property.type.kind == CLASS_JSON_ARRAY || property.type.kind == CLASS_ENUM || property.type.name != 'io.vertx.core.buffer.Buffer'>
         <#lt>${"    "}asJava.${property.setterMethod}(value)
       <#else>

@@ -528,7 +528,7 @@ set of handlers you are notified:
 * when a new configuration is retrieved
 * when an error occur while retrieving a configuration
 * when the configuration retriever is closed (the
-`link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html#endHandler()[endHandler]`is called).
+`link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html#endHandler()[endHandler]` is called).
 
 [source, scala]
 ----
@@ -552,7 +552,7 @@ retriever.configStream().endHandler((v: java.lang.Void) => {
 == Processing the configuration
 
 You can configure a _processor_ that can validate and update the configuration. This is done using the
-`link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html#setConfigurationProcessor()[setConfigurationProcessor]`method.
+`link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html#setConfigurationProcessor()[setConfigurationProcessor]` method.
 
 The prcessing must not return `null`. It takes the retrieved configuration and returns the processed one. If the processor
 does not update the configuration, it must return the input configuration. If the processor can throw an exception (for

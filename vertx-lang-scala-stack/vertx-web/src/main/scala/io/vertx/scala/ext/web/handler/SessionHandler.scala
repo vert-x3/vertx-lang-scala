@@ -16,8 +16,10 @@
 
 package io.vertx.scala.ext.web.handler
 
+import io.vertx.scala.ext.auth.AuthProvider
 import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import scala.reflect.runtime.universe._
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.core.Handler
@@ -119,6 +121,16 @@ class SessionHandler(private val _asJava: Object) extends io.vertx.core.Handler[
   
   def setMinLength(minLength: Int): SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setMinLength(minLength.asInstanceOf[java.lang.Integer])
+    this
+  }
+
+  /**
+   * Set an auth provider that will allow retrieving the User object from the session to the current routing context.   * @param authProvider any auth provider.
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def setAuthProvider(authProvider: AuthProvider): SessionHandler = {
+    asJava.asInstanceOf[JSessionHandler].setAuthProvider(authProvider.asJava.asInstanceOf[JAuthProvider])
     this
   }
 

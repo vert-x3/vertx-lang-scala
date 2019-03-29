@@ -57,12 +57,12 @@ class ConfigRetriever(private val _asJava: Object) {
 
 
   /**
-   * Registers a handler called before every scan. This method is mostly used for logging purpose.   * @param function the function, must not be `null`
+   * Registers a handler called before every scan. This method is mostly used for logging purpose.   * @param handler the handler, must not be `null`
    * @return the current config retriever
    */
   
-  def setBeforeScanHandler(function: Handler[Unit]): ConfigRetriever = {
-    asJava.asInstanceOf[JConfigRetriever].setBeforeScanHandler({x: Void => function.handle(x)})
+  def setBeforeScanHandler(handler: Handler[Unit]): ConfigRetriever = {
+    asJava.asInstanceOf[JConfigRetriever].setBeforeScanHandler({x: Void => handler.handle(x)})
     this
   }
 

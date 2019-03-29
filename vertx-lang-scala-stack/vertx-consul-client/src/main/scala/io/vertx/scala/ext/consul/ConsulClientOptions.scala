@@ -832,6 +832,10 @@ class ConsulClientOptions(private val _asJava: JConsulClientOptions) extends Ext
     this
   }
 
+  override def getTryUsePerMessageWebsocketCompression: Boolean = {
+    asJava.getTryUsePerMessageWebsocketCompression().asInstanceOf[Boolean]
+  }
+
   /**
    * Set the ALPN usage.
    */
@@ -842,18 +846,6 @@ class ConsulClientOptions(private val _asJava: JConsulClientOptions) extends Ext
 
   override def isUseAlpn: Boolean = {
     asJava.isUseAlpn().asInstanceOf[Boolean]
-  }
-
-  /**
-   * Set whether Netty pooled buffers are enabled
-   */
-  override def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-
-  override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 
   /**

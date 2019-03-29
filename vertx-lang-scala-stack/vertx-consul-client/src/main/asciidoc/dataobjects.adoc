@@ -415,11 +415,9 @@ Set whether compression is enabled
 +++
 |[[tryUsePerFrameWebsocketCompression]]`@tryUsePerFrameWebsocketCompression`|`Boolean`|-
 |[[tryUsePerMessageWebsocketCompression]]`@tryUsePerMessageWebsocketCompression`|`Boolean`|-
+|[[tryWebsocketDeflateFrameCompression]]`@tryWebsocketDeflateFrameCompression`|`Boolean`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|+++
 Set the ALPN usage.
-+++
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|+++
-Set whether Netty pooled buffers are enabled
 +++
 |[[userAgent]]`@userAgent`|`String`|+++
 Sets the Web Client user agent header. Defaults to Vert.x-WebClient/&lt;version&gt;.

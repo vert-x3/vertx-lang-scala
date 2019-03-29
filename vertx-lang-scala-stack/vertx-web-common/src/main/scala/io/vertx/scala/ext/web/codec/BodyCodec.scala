@@ -21,7 +21,9 @@ import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.Buffer
 import io.vertx.ext.web.codec.{BodyCodec => JBodyCodec}
 import scala.reflect.runtime.universe._
+import io.vertx.core.parsetools.{JsonParser => JJsonParser}
 import io.vertx.core.json.JsonObject
+import io.vertx.scala.core.parsetools.JsonParser
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
@@ -102,11 +104,19 @@ object BodyCodec {
   }
 
   /**
-   * A body codec that pipes the body to a write stream.   * @param stream the destination tream
+   * A body codec that pipes the body to a write stream.   * @param stream the destination stream
    * @return the body codec for a write stream
    */
   def pipe(stream: WriteStream[io.vertx.core.buffer.Buffer]): BodyCodec[Unit] = {
     BodyCodec[Unit](JBodyCodec.pipe(stream.asJava.asInstanceOf[JWriteStream[Buffer]]))
+  }
+
+  /**
+   * A body codec that parse the response as a JSON stream.   * @param parser the non-null JSON parser to emits the JSON object. The parser must be configured for the stream. Not e that you need to keep a reference on the parser to retrieved the JSON events.
+   * @return the body codec for a write stream
+   */
+  def jsonStream(parser: JsonParser): BodyCodec[Unit] = {
+    BodyCodec[Unit](JBodyCodec.jsonStream(parser.asJava.asInstanceOf[JJsonParser]))
   }
 
 }

@@ -43,6 +43,20 @@ class FileSystemOptions(private val _asJava: JFileSystemOptions) {
   }
 
   /**
+   * When vert.x reads a file that is packaged with the application it gets
+   * extracted to this directory first and subsequent reads will use the extracted
+   * file to get better IO performance.
+   */
+  def setFileCacheDir(value: String) = {
+    asJava.setFileCacheDir(value)
+    this
+  }
+
+  def getFileCacheDir: String = {
+    asJava.getFileCacheDir().asInstanceOf[String]
+  }
+
+  /**
    * Set to `true` to cache files on the real file system
    * when the filesystem performs class path resolving.
    */

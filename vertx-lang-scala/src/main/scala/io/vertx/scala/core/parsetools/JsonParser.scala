@@ -16,15 +16,21 @@
 
 package io.vertx.scala.core.parsetools
 
-import io.vertx.scala.core.streams.ReadStream
-import io.vertx.core.parsetools.{JsonEvent => JJsonEvent}
-import io.vertx.core.buffer.Buffer
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.streams.Pipe
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
 import io.vertx.core.parsetools.{JsonParser => JJsonParser}
-import io.vertx.core.Handler
-import io.vertx.lang.scala.HandlerOps._
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.lang.scala.Converter._
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.parsetools.{JsonEvent => JJsonEvent}
+import io.vertx.core.buffer.Buffer
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.core.streams.{Pipe => JPipe}
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * A parser class which allows to incrementally parse json elements and emit json parse events instead of parsing a json
@@ -138,6 +144,34 @@ class JsonParser(private val _asJava: Object) extends ReadStream[JsonEvent] with
   }
 
 
+  /**
+   * Pause this stream and return a  to transfer the elements of this stream to a destination .
+   * <p/>
+   * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
+   */
+  override def pipe(): Pipe[JsonEvent] = {
+    Pipe[JsonEvent](asJava.asInstanceOf[JJsonParser].pipe())
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.streams.ReadStream#pipeTo]] but with no completion handler.
+   */
+  override def pipeTo(dst: WriteStream[JsonEvent]): Unit = {
+    asJava.asInstanceOf[JJsonParser].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JJsonEvent]])
+  }
+
+  /**
+   * Pipe this `ReadStream` to the `WriteStream`.
+   * 
+   * Elements emitted by this stream will be written to the write stream until this stream ends or fails.
+   * 
+   * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
+   * called with the result.   * @param dst the destination write stream
+   */
+  override def pipeTo(dst: WriteStream[JsonEvent], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JJsonParser].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JJsonEvent]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
 
   /**
    * Something has happened, so handle it.   * @param event the event to handle
@@ -153,6 +187,16 @@ class JsonParser(private val _asJava: Object) extends ReadStream[JsonEvent] with
     asJava.asInstanceOf[JJsonParser].end()
   }
 
+
+ /**
+  * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def pipeToFuture (dst: WriteStream[JsonEvent]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JJsonParser].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JJsonEvent]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 

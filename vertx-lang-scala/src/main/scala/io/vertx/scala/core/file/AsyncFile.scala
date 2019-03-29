@@ -17,17 +17,19 @@
 package io.vertx.scala.core.file
 
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.streams.Pipe
+import io.vertx.core.streams.{ReadStream => JReadStream}
+import scala.reflect.runtime.universe._
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.file.{AsyncFile => JAsyncFile}
-import io.vertx.core.streams.{ReadStream => JReadStream}
-import scala.reflect.runtime.universe._
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
-import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 
 /**
   * Represents a file on the file-system which can be read from, or written to asynchronously.
@@ -180,6 +182,16 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
   }
 
   /**
+   * Sets the number of bytes that will be read when using the file as a [[io.vertx.scala.core.streams.ReadStream]].   * @param readLength the bytes that will be read from the file
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def setReadLength(readLength: Long): AsyncFile = {
+    asJava.asInstanceOf[JAsyncFile].setReadLength(readLength.asInstanceOf[java.lang.Long])
+    this
+  }
+
+  /**
    * Sets the position from which data will be written when using the file as a [[io.vertx.scala.core.streams.WriteStream]].   * @param writePos the position in the file
    * @return a reference to this, so the API can be used fluently
    */
@@ -206,6 +218,34 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   override def end(t: io.vertx.core.buffer.Buffer): Unit = {
     asJava.asInstanceOf[JAsyncFile].end(t)
+  }
+
+  /**
+   * Pause this stream and return a  to transfer the elements of this stream to a destination .
+   * <p/>
+   * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
+   */
+  override def pipe(): Pipe[io.vertx.core.buffer.Buffer] = {
+    Pipe[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JAsyncFile].pipe())
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.streams.ReadStream#pipeTo]] but with no completion handler.
+   */
+  override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer]): Unit = {
+    asJava.asInstanceOf[JAsyncFile].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]])
+  }
+
+  /**
+   * Pipe this `ReadStream` to the `WriteStream`.
+   * 
+   * Elements emitted by this stream will be written to the write stream until this stream ends or fails.
+   * 
+   * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
+   * called with the result.   * @param dst the destination write stream
+   */
+  override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JAsyncFile].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
 
@@ -238,6 +278,23 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
     asJava.asInstanceOf[JAsyncFile].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
+  /**
+   * @return the current write position the file is at
+   */
+  def getWritePos (): Long = {
+    asJava.asInstanceOf[JAsyncFile].getWritePos().asInstanceOf[Long]
+  }
+
+
+ /**
+  * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JAsyncFile].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
  /**
   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.

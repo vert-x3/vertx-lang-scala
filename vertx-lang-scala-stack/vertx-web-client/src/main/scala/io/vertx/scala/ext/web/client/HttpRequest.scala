@@ -22,17 +22,21 @@ import io.vertx.ext.web.codec.{BodyCodec => JBodyCodec}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
 import io.vertx.ext.web.client.{HttpRequest => JHttpRequest}
+import io.vertx.ext.web.client.predicate.{ResponsePredicate => JResponsePredicate}
 import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.client.{HttpResponse => JHttpResponse}
+import io.vertx.ext.web.client.predicate.{ResponsePredicateResult => JResponsePredicateResult}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.ext.web.multipart.MultipartForm
 import io.vertx.core.buffer.Buffer
+import io.vertx.scala.ext.web.client.predicate.ResponsePredicate
 import io.vertx.core.http.HttpMethod
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.json.JsonObject
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.scala.ext.web.client.predicate.ResponsePredicateResult
 import io.vertx.scala.ext.web.codec.BodyCodec
 import io.vertx.lang.scala.HandlerOps._
 
@@ -152,6 +156,50 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
     this
   }
 
+  /**
+   * Configure the request to perform basic access authentication.
+   * 
+   * In basic HTTP authentication, a request contains a header field of the form 'Authorization: Basic &#60;credentials&#62;',
+   * where credentials is the base64 encoding of id and password joined by a colon.
+   * </p>   * @param id the id
+   * @param password the password
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def basicAuthentication(id: String, password: String): HttpRequest[T] = {
+    asJava.asInstanceOf[JHttpRequest[Object]].basicAuthentication(id.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String])
+    this
+  }
+
+  /**
+   * Configure the request to perform basic access authentication.
+   * 
+   * In basic HTTP authentication, a request contains a header field of the form 'Authorization: Basic &#60;credentials&#62;',
+   * where credentials is the base64 encoding of id and password joined by a colon.
+   * </p>   * @param id the id
+   * @param password the password
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def basicAuthentication(id: io.vertx.core.buffer.Buffer, password: io.vertx.core.buffer.Buffer): HttpRequest[T] = {
+    asJava.asInstanceOf[JHttpRequest[Object]].basicAuthentication(id, password)
+    this
+  }
+
+  /**
+   * Configure the request to perform bearer token authentication.
+   * 
+   * In OAuth 2.0, a request contains a header field of the form 'Authorization: Bearer &#60;bearerToken&#62;',
+   * where bearerToken is the bearer token issued by an authorization server to access protected resources.
+   * </p>   * @param bearerToken the bearer token
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def bearerTokenAuthentication(bearerToken: String): HttpRequest[T] = {
+    asJava.asInstanceOf[JHttpRequest[Object]].bearerTokenAuthentication(bearerToken.asInstanceOf[java.lang.String])
+    this
+  }
+
 
   
   def ssl(value: Boolean): HttpRequest[T] = {
@@ -201,6 +249,30 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
   
   def followRedirects(value: Boolean): HttpRequest[T] = {
     asJava.asInstanceOf[JHttpRequest[Object]].followRedirects(value.asInstanceOf[java.lang.Boolean])
+    this
+  }
+
+  /**
+   * Add an expectation that the response is valid according to the provided `predicate`.
+   * 
+   * Multiple predicates can be added.   * @param predicate the predicate
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def expect(predicate: HttpResponse[Unit] => ResponsePredicateResult): HttpRequest[T] = {
+    asJava.asInstanceOf[JHttpRequest[Object]].expect({x: JHttpResponse[Void] => predicate(HttpResponse[Unit](x)).asJava.asInstanceOf[JResponsePredicateResult]})
+    this
+  }
+
+  /**
+   * Add an expectation that the response is valid according to the provided `predicate`.
+   * 
+   * Multiple predicates can be added.   * @param predicate the predicate
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def expect(predicate: ResponsePredicate): HttpRequest[T] = {
+    asJava.asInstanceOf[JHttpRequest[Object]].expect(predicate.asJava.asInstanceOf[JResponsePredicate])
     this
   }
 

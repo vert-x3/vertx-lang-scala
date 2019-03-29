@@ -62,15 +62,6 @@ class ProtonServerOptions(private val _asJava: JProtonServerOptions) extends Ext
     asJava.getClientAuth()
   }
 
-  override def setClientAuthRequired(value: Boolean) = {
-    asJava.setClientAuthRequired(value)
-    this
-  }
-
-  override def isClientAuthRequired: Boolean = {
-    asJava.isClientAuthRequired().asInstanceOf[Boolean]
-  }
-
   override def addCrlPath(value: String) = {
     asJava.addCrlPath(value)
     this
@@ -382,15 +373,6 @@ class ProtonServerOptions(private val _asJava: JProtonServerOptions) extends Ext
 
   override def isUseAlpn: Boolean = {
     asJava.isUseAlpn().asInstanceOf[Boolean]
-  }
-
-  override def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-
-  override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 
 }

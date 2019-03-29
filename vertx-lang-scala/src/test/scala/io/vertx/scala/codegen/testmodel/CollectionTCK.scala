@@ -53,8 +53,8 @@ class CollectionTCK(private val _asJava: Object) {
   }
 
 
-  def methodWithMapParams (mapString: scala.collection.mutable.Map[String, String], mapByte: scala.collection.mutable.Map[String, Byte], mapShort: scala.collection.mutable.Map[String, Short], mapInt: scala.collection.mutable.Map[String, Int], mapLong: scala.collection.mutable.Map[String, Long], mapJsonObject: scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject], mapJsonArray: scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray], mapVertxGen: scala.collection.mutable.Map[String, RefedInterface1], mapObject: scala.collection.mutable.Map[String, AnyRef]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithMapParams(mapString.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, mapByte.mapValues(x => x.asInstanceOf[java.lang.Byte]).asJava, mapShort.mapValues(x => x.asInstanceOf[java.lang.Short]).asJava, mapInt.mapValues(x => x.asInstanceOf[java.lang.Integer]).asJava, mapLong.mapValues(x => x.asInstanceOf[java.lang.Long]).asJava, mapJsonObject.mapValues(x => x).asJava, mapJsonArray.mapValues(x => x).asJava, mapVertxGen.mapValues(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava, mapObject.mapValues(x => x).asJava)
+  def methodWithMapParams (mapString: scala.collection.mutable.Map[String, String], mapByte: scala.collection.mutable.Map[String, Byte], mapShort: scala.collection.mutable.Map[String, Short], mapInt: scala.collection.mutable.Map[String, Int], mapLong: scala.collection.mutable.Map[String, Long], mapJsonObject: scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject], mapJsonArray: scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray], mapVertxGen: scala.collection.mutable.Map[String, RefedInterface1], mapDataObject: scala.collection.mutable.Map[String, TestDataObject], mapEnum: scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.TestEnum], mapObject: scala.collection.mutable.Map[String, AnyRef]): Unit = {
+    asJava.asInstanceOf[JCollectionTCK].methodWithMapParams(mapString.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, mapByte.mapValues(x => x.asInstanceOf[java.lang.Byte]).asJava, mapShort.mapValues(x => x.asInstanceOf[java.lang.Short]).asJava, mapInt.mapValues(x => x.asInstanceOf[java.lang.Integer]).asJava, mapLong.mapValues(x => x.asInstanceOf[java.lang.Long]).asJava, mapJsonObject.mapValues(x => x).asJava, mapJsonArray.mapValues(x => x).asJava, mapVertxGen.mapValues(x => x.asJava.asInstanceOf[JRefedInterface1]).asJava, mapDataObject.mapValues(x => x.asJava).asJava, mapEnum.mapValues(x => x).asJava, mapObject.mapValues(x => x).asJava)
   }
 
 
@@ -243,11 +243,6 @@ class CollectionTCK(private val _asJava: Object) {
   }
 
 
-  def methodWithMapReturn (handler: Handler[String]): scala.collection.mutable.Map[String, String] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
-  }
-
-
   def methodWithMapStringReturn (handler: Handler[String]): scala.collection.mutable.Map[String, String] = {
     collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapStringReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
   }
@@ -293,6 +288,21 @@ class CollectionTCK(private val _asJava: Object) {
   }
 
 
+  def methodWithMapVertxGenReturn (handler: Handler[String]): scala.collection.mutable.Map[String, RefedInterface1] = {
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapVertxGenReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => RefedInterface1(x)).toSeq: _*)
+  }
+
+
+  def methodWithMapDataObjectReturn (handler: Handler[String]): scala.collection.mutable.Map[String, TestDataObject] = {
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapDataObjectReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => TestDataObject(x)).toSeq: _*)
+  }
+
+
+  def methodWithMapEnumReturn (handler: Handler[String]): scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.TestEnum] = {
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapEnumReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.toSeq: _*)
+  }
+
+
   def methodWithMapJsonObjectReturn (handler: Handler[String]): scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject] = {
     collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapJsonObjectReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.toSeq: _*)
   }
@@ -310,6 +320,11 @@ class CollectionTCK(private val _asJava: Object) {
 
   def methodWithMapComplexJsonArrayReturn (handler: Handler[String]): scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray] = {
     collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapComplexJsonArrayReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.toSeq: _*)
+  }
+
+
+  def methodWithMapObjectReturn (handler: Handler[String]): scala.collection.mutable.Map[String, AnyRef] = {
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapObjectReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x).toSeq: _*)
   }
 
 
@@ -358,6 +373,11 @@ class CollectionTCK(private val _asJava: Object) {
   }
 
 
+  def methodWithListObjectReturn (): scala.collection.mutable.Buffer[AnyRef] = {
+    asJava.asInstanceOf[JCollectionTCK].methodWithListObjectReturn().asScala.map(x => x)
+  }
+
+
   def methodWithSetStringReturn (): scala.collection.mutable.Set[String] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithSetStringReturn().asScala.map(x => x.asInstanceOf[String])
   }
@@ -400,6 +420,11 @@ class CollectionTCK(private val _asJava: Object) {
 
   def methodWithSetEnumReturn (): scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum] = {
     asJava.asInstanceOf[JCollectionTCK].methodWithSetEnumReturn().asScala
+  }
+
+
+  def methodWithSetObjectReturn (): scala.collection.mutable.Set[AnyRef] = {
+    asJava.asInstanceOf[JCollectionTCK].methodWithSetObjectReturn().asScala.map(x => x)
   }
 
 

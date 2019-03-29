@@ -301,15 +301,6 @@ class EventBus(private val _asJava: Object) extends Measured {
     MessageProducer[T](asJava.asInstanceOf[JEventBus].publisher[Object](address.asInstanceOf[java.lang.String], options.asJava))
   }
 
-  /**
-   * Unregister a message codec.
-   *    * @param name the name of the codec
-   * @return a reference to this, so the API can be used fluently
-   */
-  def unregisterCodec (name: String): EventBus = {
-    EventBus(asJava.asInstanceOf[JEventBus].unregisterCodec(name.asInstanceOf[java.lang.String]))
-  }
-
 
  /**
   * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.

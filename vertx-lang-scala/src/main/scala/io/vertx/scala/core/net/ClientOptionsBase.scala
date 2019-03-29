@@ -264,11 +264,4 @@ trait ClientOptionsBase extends ExtTCPSSLOptions {
 
   def isUseAlpn: Boolean
 
-  /**
-   * Set whether Netty pooled buffers are enabled
-   */
-  def setUsePooledBuffers(value: Boolean): ClientOptionsBase
-
-  def isUsePooledBuffers: Boolean
-
 }

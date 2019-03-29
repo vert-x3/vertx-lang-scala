@@ -38,7 +38,7 @@ WARNING: this module has the tech preview status, this means the API can change 
 === Handling client connection/disconnection
 
 This example shows how it's possible to handle the connection request from a remote MQTT client. First, an
-`link:../../scaladocs/io/vertx/scala/mqtt/MqttServer.html[MqttServer]`instance is created and the `link:../../scaladocs/io/vertx/scala/mqtt/MqttServer.html#endpointHandler()[endpointHandler]` method is used to specify the handler called
+`link:../../scaladocs/io/vertx/scala/mqtt/MqttServer.html[MqttServer]` instance is created and the `link:../../scaladocs/io/vertx/scala/mqtt/MqttServer.html#endpointHandler()[endpointHandler]` method is used to specify the handler called
 when a remote client sends a CONNECT message for connecting to the server itself. The `link:../../scaladocs/io/vertx/scala/mqtt/MqttEndpoint.html[MqttEndpoint]`
 instance, provided as parameter to the handler, brings all main information related to the CONNECT message like client identifier,
 username/password, "will" information, clean session flag, protocol version and the "keep alive" timeout.
@@ -102,12 +102,12 @@ The server has the support for accepting connection requests through the SSL/TLS
 In order to do that, the `link:../dataobjects.html#MqttServerOptions[MqttServerOptions]` class provides the `link:../dataobjects.html#MqttServerOptions#setSsl()[ssl]` method
 for setting the usage of SSL/TLS (passing 'true' as value) and some other useful methods for providing server certificate and
 related private key (as Java key store reference, PEM or PFX format). In the following example, the
-`link:../dataobjects.html#MqttServerOptions#setKeyCertOptions()[keyCertOptions]`method is used in order to
+`link:../dataobjects.html#MqttServerOptions#setKeyCertOptions()[keyCertOptions]` method is used in order to
 pass the certificates in PEM format. This method requires an instance of the possible implementations of the
-`KeyCertOptions`interface and in this case the `link:../../vertx-core/dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]` class
+`KeyCertOptions` interface and in this case the `link:../../vertx-core/dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]` class
 is used in order to provide the path for the server certificate and the private key with the correspondent
-`link:../../vertx-core/dataobjects.html#PemKeyCertOptions#setCertPath()[certPath]`and
-`link:../../vertx-core/dataobjects.html#PemKeyCertOptions#setKeyPath()[keyPath]`methods.
+`link:../../vertx-core/dataobjects.html#PemKeyCertOptions#setCertPath()[certPath]` and
+`link:../../vertx-core/dataobjects.html#PemKeyCertOptions#setKeyPath()[keyPath]` methods.
 The MQTT server is started passing the Vert.x instance as usual and the above MQTT options instance to the creation method.
 
 [source,scala]
@@ -248,7 +248,7 @@ endpoint.publishHandler((message: io.vertx.scala.mqtt.messages.MqttPublishMessag
 === Publish message to the client
 
 The endpoint can publish a message to the remote client (sending a PUBLISH message) using the
-`link:../../scaladocs/io/vertx/scala/mqtt/MqttEndpoint.html#publish(java.lang.String,%20io.vertx.core.buffer.Buffer,%20io.netty.handler.codec.mqtt.MqttQoS,%20boolean)[publish]`method
+`link:../../scaladocs/io/vertx/scala/mqtt/MqttEndpoint.html#publish(java.lang.String,%20io.vertx.core.buffer.Buffer,%20io.netty.handler.codec.mqtt.MqttQoS,%20boolean)[publish]` method
 which takes the following input parameters : the topic to publish, the payload, the QoS level, the duplicate and retain flags.
 
 If the QoS level is 0 (AT_MOST_ONCE), the endpoint won't receiving any feedback from the client.
@@ -435,7 +435,7 @@ The right way to keep connection alive is a `link:../../scaladocs/io/vertx/scala
 IMPORTANT: by default you client keep connections with server automatically. That means that you don't need to call `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#ping()[ping]` in order to keep connections with server.
 The `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html[MqttClient]` will do it for you.
 
-If you want to disable this feature then you should call `link:../dataobjects.html#MqttClientOptions#setAutoKeepAlive()[autoKeepAlive]` with {@code false} as argument:
+If you want to disable this feature then you should call `link:../dataobjects.html#MqttClientOptions#setAutoKeepAlive()[autoKeepAlive]` with `false` as argument:
 [source,scala]
 ----
 options.setAutoKeepAlive(false)

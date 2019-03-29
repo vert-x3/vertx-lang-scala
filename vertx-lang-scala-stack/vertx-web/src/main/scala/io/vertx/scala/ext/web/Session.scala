@@ -18,6 +18,7 @@ package io.vertx.scala.ext.web
 
 import scala.reflect.runtime.universe._
 import io.vertx.ext.web.{Session => JSession}
+import scala.collection.JavaConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 

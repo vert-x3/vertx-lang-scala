@@ -16,13 +16,13 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import scala.reflect.runtime.universe._
 import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import io.vertx.core.http.{StreamPriority => JStreamPriority}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.lang.scala.Converter._
-import io.vertx.scala.core.streams.ReadStream
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.HttpVersion
@@ -30,6 +30,7 @@ import io.vertx.core.http.HttpMethod
 import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
+import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
 import io.vertx.lang.scala.HandlerOps._
@@ -62,7 +63,7 @@ import io.vertx.lang.scala.HandlerOps._
   * 
   */
 
-class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vertx.core.buffer.Buffer]with ReadStream[HttpClientResponse] {
+class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vertx.core.buffer.Buffer] {
   def asJava = _asJava
   private var cached_0: Option[MultiMap] = None
   private var cached_1: Option[HttpConnection] = None
@@ -117,41 +118,6 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
   override 
   def drainHandler(handler: Handler[Unit]): HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].drainHandler({x: Void => handler.handle(x)})
-    this
-  }
-
-
-  override 
-  def handler(handler: Handler[HttpClientResponse]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].handler({x: JHttpClientResponse => handler.handle(HttpClientResponse(x))})
-    this
-  }
-
-
-  override 
-  def pause(): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].pause()
-    this
-  }
-
-
-  override 
-  def resume(): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].resume()
-    this
-  }
-
-
-  override 
-  def fetch(amount: Long): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].fetch(amount.asInstanceOf[java.lang.Long])
-    this
-  }
-
-
-  override 
-  def endHandler(endHandler: Handler[Unit]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].endHandler({x: Void => endHandler.handle(x)})
     this
   }
 
@@ -335,6 +301,17 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
     this
   }
 
+  /**
+   * Sets the priority of the associated stream.
+   * <p/>
+   * This is not implemented for HTTP/1.x.   * @param streamPriority the priority of this request's stream see <a href="../../../../../../../cheatsheet/StreamPriority.html">StreamPriority</a>
+   */
+  
+  def setStreamPriority(streamPriority: StreamPriority): HttpClientRequest = {
+    asJava.asInstanceOf[JHttpClientRequest].setStreamPriority(streamPriority.asJava)
+    this
+  }
+
 
   /**
    * Reset this stream with the error code `0`.   */
@@ -355,6 +332,11 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    */
   override def writeQueueFull (): Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].writeQueueFull().asInstanceOf[Boolean]
+  }
+
+
+  def handler (handler: Handler[AsyncResult[HttpClientResponse]]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClientRequest].handler({x: AsyncResult[JHttpClientResponse] => handler.handle(AsyncResultWrapper[JHttpClientResponse, HttpClientResponse](x, a => HttpClientResponse(a)))}))
   }
 
   /**
@@ -457,6 +439,21 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
     asJava.asInstanceOf[JHttpClientRequest].reset(code.asInstanceOf[java.lang.Long]).asInstanceOf[Boolean]
   }
 
+  /**
+   * @return the priority of the associated HTTP/2 stream for HTTP/2 otherwise `null`see <a href="../../../../../../../cheatsheet/StreamPriority.html">StreamPriority</a>
+   */
+  def getStreamPriority (): StreamPriority = {
+    StreamPriority(asJava.asInstanceOf[JHttpClientRequest].getStreamPriority())
+  }
+
+
+
+  def handlerFuture (): scala.concurrent.Future[HttpClientResponse] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpClientResponse, HttpClientResponse](x => HttpClientResponse(x))
+    asJava.asInstanceOf[JHttpClientRequest].handler(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 

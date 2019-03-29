@@ -18,6 +18,7 @@ package io.vertx.scala.core.datagram
 
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.scala.core.streams.Pipe
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
 import io.vertx.scala.core.metrics.Measured
@@ -31,6 +32,7 @@ import io.vertx.core.buffer.Buffer
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.scala.core.net.SocketAddress
 import io.vertx.lang.scala.HandlerOps._
 
@@ -249,6 +251,34 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
     asJava.asInstanceOf[JDatagramSocket].isMetricsEnabled().asInstanceOf[Boolean]
   }
 
+  /**
+   * Pause this stream and return a  to transfer the elements of this stream to a destination .
+   * <p/>
+   * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
+   */
+  override def pipe(): Pipe[DatagramPacket] = {
+    Pipe[DatagramPacket](asJava.asInstanceOf[JDatagramSocket].pipe())
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.streams.ReadStream#pipeTo]] but with no completion handler.
+   */
+  override def pipeTo(dst: WriteStream[DatagramPacket]): Unit = {
+    asJava.asInstanceOf[JDatagramSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JDatagramPacket]])
+  }
+
+  /**
+   * Pipe this `ReadStream` to the `WriteStream`.
+   * 
+   * Elements emitted by this stream will be written to the write stream until this stream ends or fails.
+   * 
+   * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
+   * called with the result.   * @param dst the destination write stream
+   */
+  override def pipeTo(dst: WriteStream[DatagramPacket], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JDatagramSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JDatagramPacket]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
 
   /**
    * Returns a `WriteStream<Buffer>` able to send  to the
@@ -275,6 +305,16 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
     asJava.asInstanceOf[JDatagramSocket].close()
   }
 
+
+ /**
+  * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def pipeToFuture (dst: WriteStream[DatagramPacket]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JDatagramSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JDatagramPacket]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
  /**
   * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.

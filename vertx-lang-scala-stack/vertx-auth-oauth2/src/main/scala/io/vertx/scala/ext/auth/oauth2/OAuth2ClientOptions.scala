@@ -785,6 +785,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions) extends Ext
     this
   }
 
+  override def getTryUsePerMessageWebsocketCompression: Boolean = {
+    asJava.getTryUsePerMessageWebsocketCompression().asInstanceOf[Boolean]
+  }
+
   override def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
@@ -804,15 +808,6 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions) extends Ext
 
   def isUseBasicAuthorizationHeader: Boolean = {
     asJava.isUseBasicAuthorizationHeader().asInstanceOf[Boolean]
-  }
-
-  override def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-
-  override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 
   /**

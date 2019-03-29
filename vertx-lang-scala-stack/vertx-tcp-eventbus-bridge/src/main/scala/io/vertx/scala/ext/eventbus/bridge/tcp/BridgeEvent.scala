@@ -14,7 +14,7 @@
  * under the License.
  */
 
-package io.vertx.ext.scala.eventbus.bridge.tcp
+package io.vertx.scala.ext.eventbus.bridge.tcp
 
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.bridge.{BaseBridgeEvent => JBaseBridgeEvent}
@@ -40,28 +40,18 @@ import io.vertx.lang.scala.HandlerOps._
 
 class BridgeEvent(private val _asJava: Object) extends BaseBridgeEvent (_asJava) {
 
-  private var cached_0: Option[Handler[AsyncResult[Boolean]]] = None
-  private var cached_1: Option[NetSocket] = None
+  private var cached_0: Option[NetSocket] = None
 
-
-
-  override def completer(): Handler[AsyncResult[Boolean]] = {
-    if (cached_0 == None) {
-      val tmp = asJava.asInstanceOf[JBridgeEvent].completer()
-      cached_0 = Some({x: AsyncResult[Boolean] => tmp.handle(AsyncResultWrapper[Boolean, java.lang.Boolean](x, a => a.asInstanceOf[java.lang.Boolean]))})
-    }
-    cached_0.get
-  }
 
   /**
    * Get the SockJSSocket instance corresponding to the event   * @return the SockJSSocket instance
    */
   def socket(): NetSocket = {
-    if (cached_1 == None) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JBridgeEvent].socket()
-      cached_1 = Some(NetSocket(tmp))
+      cached_0 = Some(NetSocket(tmp))
     }
-    cached_1.get
+    cached_0.get
   }
 
 
@@ -119,6 +109,11 @@ class BridgeEvent(private val _asJava: Object) extends BaseBridgeEvent (_asJava)
     Future[Boolean](asJava.asInstanceOf[JBridgeEvent].otherwiseEmpty())
   }
 
+
+
+  override def getHandler (): Handler[AsyncResult[Boolean]] = {
+    {x: AsyncResult[Boolean] => asJava.asInstanceOf[JBridgeEvent].getHandler().handle(AsyncResultWrapper[Boolean, java.lang.Boolean](x, a => a.asInstanceOf[java.lang.Boolean]))}
+  }
 
 
   override def complete (arg0: Boolean): Unit = {

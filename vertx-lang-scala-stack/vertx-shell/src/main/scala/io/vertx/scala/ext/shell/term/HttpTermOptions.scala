@@ -101,15 +101,6 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions) extends ExtHttpServ
     asJava.getClientAuth()
   }
 
-  override def setClientAuthRequired(value: Boolean) = {
-    asJava.setClientAuthRequired(value)
-    this
-  }
-
-  override def isClientAuthRequired: Boolean = {
-    asJava.isClientAuthRequired().asInstanceOf[Boolean]
-  }
-
   override def setCompressionLevel(value: Int) = {
     asJava.setCompressionLevel(value)
     this
@@ -357,9 +348,17 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions) extends ExtHttpServ
     this
   }
 
+  override def getPerFrameWebsocketCompressionSupported: Boolean = {
+    asJava.getPerFrameWebsocketCompressionSupported().asInstanceOf[Boolean]
+  }
+
   override def setPerMessageWebsocketCompressionSupported(value: Boolean) = {
     asJava.setPerMessageWebsocketCompressionSupported(value)
     this
+  }
+
+  override def getPerMessageWebsocketCompressionSupported: Boolean = {
+    asJava.getPerMessageWebsocketCompressionSupported().asInstanceOf[Boolean]
   }
 
   override def setPfxKeyCertOptions(value: PfxOptions) = {
@@ -572,15 +571,6 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions) extends ExtHttpServ
     asJava.isUseAlpn().asInstanceOf[Boolean]
   }
 
-  override def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-
-  override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
-  }
-
   /**
    * Set `vertxshell.js` resource to use.
    */
@@ -605,6 +595,10 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions) extends ExtHttpServ
   override def setWebsocketCompressionLevel(value: Int) = {
     asJava.setWebsocketCompressionLevel(value)
     this
+  }
+
+  override def getWebsocketCompressionLevel: Int = {
+    asJava.getWebsocketCompressionLevel().asInstanceOf[Int]
   }
 
   override def setWebsocketPreferredClientNoContext(value: Boolean) = {
