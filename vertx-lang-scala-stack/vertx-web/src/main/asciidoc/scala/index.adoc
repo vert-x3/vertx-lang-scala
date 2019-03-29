@@ -50,6 +50,7 @@ Some of the key features of Vert.x-Web include:
 ** Thymeleaf
 ** Apache FreeMarker
 ** Pebble
+** Rocker
 * Response time handler
 * Static file serving, including caching logic and directory listing.
 * Request timeout support
@@ -1529,8 +1530,7 @@ your auth handler is before your application handlers on those paths:
 ----
 
 router.route().handler(CookieHandler.create())
-router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
-router.route().handler(UserSessionHandler.create(authProvider))
+router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setAuthProvider(authProvider))
 
 var basicAuthHandler = BasicAuthHandler.create(authProvider)
 
@@ -1610,8 +1610,7 @@ Here's an example of a simple app, using a redirect auth handler on the default 
 ----
 
 router.route().handler(CookieHandler.create())
-router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
-router.route().handler(UserSessionHandler.create(authProvider))
+router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setAuthProvider(authProvider))
 
 var redirectAuthHandler = RedirectAuthHandler.create(authProvider)
 
@@ -2164,6 +2163,36 @@ Here are some examples:
 
 Please consult the http://www.mitchellbosecke.com/pebble/home/[Pebble documentation] for how to write
 Pebble templates.
+
+=== Rocker template engine
+
+To use Rocker, then add `io.vertx:vertx-web-templ-rocker:${maven.version}` as a dependency to your project.
+You can then create a Rocker template engine instance with `io.vertx.ext.web.templ.rocker#create()`.
+
+The values of the JSON context object passed to the `render` method are then exposed as template parameters.
+Given:
+
+----
+[snip]
+final JsonObject context = new JsonObject()
+ .put("foo", "badger")
+ .put("bar", "fox")
+ .put("context", new JsonObject().put("path", "/foo/bar"));
+
+engine.render(context, "somedir/TestRockerTemplate2", render -> {
+ // (...)
+});
+[snip]
+----
+
+then the template can be as the following `somedir/TestRockerTemplate2.rocker.html` resource file:
+
+----
+@import io.vertx.core.json.JsonObject
+@args (JsonObject context, String foo, String bar)
+Hello @foo and @bar
+Request path is @context.getString("path")
+----
 
 === Disabling caching
 
@@ -3111,13 +3140,12 @@ need an application like the following snippet:
 
 // We need cookies and sessions
 router.route().handler(CookieHandler.create())
-router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
 // Simple auth service which uses a GitHub to
 // authenticate the user
 var authProvider = GithubAuth.create(vertx, "YOUR PROVIDER CLIENTID", "YOUR PROVIDER CLIENT SECRET")
 // We need a user session handler too to make sure
 // the user is stored in the session between requests
-router.route().handler(UserSessionHandler.create(authProvider))
+router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setAuthProvider(authProvider))
 // we now protect the resource under the path "/protected"
 router.route("/protected").handler(OAuth2AuthHandler.create(authProvider).setupCallback(router.route("/callback")).addAuthority("user:email"))
 // Entry point to the application, this will render

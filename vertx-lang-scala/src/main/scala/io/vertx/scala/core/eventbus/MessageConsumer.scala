@@ -17,15 +17,19 @@
 package io.vertx.scala.core.eventbus
 
 import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.Pipe
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.core.eventbus.{Message => JMessage}
 import scala.reflect.runtime.universe._
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
+import io.vertx.lang.scala.Converter._
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.eventbus.{Message => JMessage}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
-import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
+import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 
 /**
   * An event bus consumer object representing a stream of message to an [[io.vertx.scala.core.eventbus.EventBus]] address that can
@@ -86,6 +90,34 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object) extends ReadStrea
     this
   }
 
+
+  /**
+   * Pause this stream and return a  to transfer the elements of this stream to a destination .
+   * <p/>
+   * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
+   */
+  override def pipe(): Pipe[Message[T]] = {
+    Pipe[Message[T]](asJava.asInstanceOf[JMessageConsumer[Object]].pipe())
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.streams.ReadStream#pipeTo]] but with no completion handler.
+   */
+  override def pipeTo(dst: WriteStream[Message[T]]): Unit = {
+    asJava.asInstanceOf[JMessageConsumer[Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JMessage[Object]]])
+  }
+
+  /**
+   * Pipe this `ReadStream` to the `WriteStream`.
+   * 
+   * Elements emitted by this stream will be written to the write stream until this stream ends or fails.
+   * 
+   * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
+   * called with the result.   * @param dst the destination write stream
+   */
+  override def pipeTo(dst: WriteStream[Message[T]], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JMessageConsumer[Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JMessage[Object]]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
 
 
   /**
@@ -149,6 +181,16 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object) extends ReadStrea
     asJava.asInstanceOf[JMessageConsumer[Object]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
+
+ /**
+  * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def pipeToFuture (dst: WriteStream[Message[T]]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JMessageConsumer[Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JMessage[Object]]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
  /**
   * Like [[completionHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.

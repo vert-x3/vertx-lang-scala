@@ -17,9 +17,11 @@
 package io.vertx.scala.kafka.client.consumer
 
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.streams.Pipe
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
 import scala.collection.JavaConverters._
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.Vertx
 import io.vertx.kafka.client.common.{TopicPartition => JTopicPartition}
 import io.vertx.core.{Vertx => JVertx}
@@ -29,11 +31,13 @@ import io.vertx.kafka.client.consumer.{KafkaConsumer => JKafkaConsumer}
 import io.vertx.kafka.client.consumer.{OffsetAndTimestamp => JOffsetAndTimestamp}
 import io.vertx.scala.core.streams.ReadStream
 import io.vertx.kafka.client.consumer.{KafkaConsumerRecords => JKafkaConsumerRecords}
+import io.vertx.scala.core.streams.WriteStream
 import io.vertx.kafka.client.consumer.{OffsetAndMetadata => JOffsetAndMetadata}
 import io.vertx.kafka.client.common.{PartitionInfo => JPartitionInfo}
 import io.vertx.core.AsyncResult
 import io.vertx.kafka.client.consumer.{KafkaConsumerRecord => JKafkaConsumerRecord}
 import io.vertx.core.Handler
+import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.scala.kafka.client.common.TopicPartition
 import io.vertx.lang.scala.HandlerOps._
 
@@ -544,6 +548,21 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
   }
 
 
+
+  override def pipe(): Pipe[KafkaConsumerRecord[K, V]] = {
+    Pipe[KafkaConsumerRecord[K, V]](asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pipe())
+  }
+
+
+  override def pipeTo(dst: WriteStream[KafkaConsumerRecord[K, V]]): Unit = {
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JKafkaConsumerRecord[Object, Object]]])
+  }
+
+
+  override def pipeTo(dst: WriteStream[KafkaConsumerRecord[K, V]], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JKafkaConsumerRecord[Object, Object]]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
   /**
    * Close the consumer
    */
@@ -641,6 +660,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
     asJava.asInstanceOf[JKafkaConsumer[Object, Object]].poll(timeout.asInstanceOf[java.lang.Long], {x: AsyncResult[JKafkaConsumerRecords[Object, Object]] => handler.handle(AsyncResultWrapper[JKafkaConsumerRecords[Object, Object], KafkaConsumerRecords[K, V]](x, a => KafkaConsumerRecords[K, V](a)))})
   }
 
+
+
+  override def pipeToFuture (dst: WriteStream[KafkaConsumerRecord[K, V]]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JKafkaConsumerRecord[Object, Object]]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
  /**
   * Like [[subscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.

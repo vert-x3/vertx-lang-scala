@@ -16,18 +16,26 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.core.buffer.Buffer
-import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.streams.Pipe
 import scala.reflect.runtime.universe._
 import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
 import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
+import io.vertx.scala.core.Future
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.lang.scala.Converter._
+import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.buffer.Buffer
+import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
+import io.vertx.core.{Future => JFuture}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.MultiMap
+import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.scala.core.net.SocketAddress
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 
 /**
   * Represents a server side WebSocket.
@@ -89,13 +97,13 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
   }
 
   /**
-   * Writes a ping to the connection. This will be written in a single frame. Ping frames may be at most 125 bytes (octets).
+   * Writes a ping frame to the connection. This will be written in a single frame. Ping frames may be at most 125 bytes (octets).
    * 
    * This method should not be used to write application data and should only be used for implementing a keep alive or
-   * to ensure the client is still responsive, see RFC 6455 Section 5.5.2.
+   * to ensure the client is still responsive, see RFC 6455 Section <a href="https://tools.ietf.org/html/rfc6455#section-5.5.2">section 5.5.2</a>.
    * 
-   * There is no pingHandler because RFC 6455 section 5.5.2 clearly states that the only response to a ping is a pong
-   * with identical contents.   * @param data the data to write, may be at most 125 bytes
+   * There is no handler for ping frames because RFC 6455  clearly
+   * states that the only response to a ping frame is a pong frame with identical contents.   * @param data the data to write, may be at most 125 bytes
    * @return a reference to this, so the API can be used fluently
    */
   override 
@@ -105,13 +113,13 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
   }
 
   /**
-   * Writes a pong to the connection. This will be written in a single frame. Pong frames may be at most 125 bytes (octets).
+   * Writes a pong frame to the connection. This will be written in a single frame. Pong frames may be at most 125 bytes (octets).
    * 
    * This method should not be used to write application data and should only be used for implementing a keep alive or
-   * to ensure the client is still responsive, see RFC 6455 Section 5.5.2.
+   * to ensure the client is still responsive, see RFC 6455 <a href="https://tools.ietf.org/html/rfc6455#section-5.5.2">section 5.5.2</a>.
    * 
-   * There is no need to manually write a Pong, as the server and client both handle responding to a ping with a pong
-   * automatically and this is exposed to users.RFC 6455 Section 5.5.3 states that pongs may be sent unsolicited in order
+   * There is no need to manually write a pong frame, as the server and client both handle responding to a ping from with a pong from
+   * automatically and this is exposed to users. RFC 6455 <a href="https://tools.ietf.org/html/rfc6455#section-5.5.3">section 5.5.3</a> states that pongs may be sent unsolicited in order
    * to implement a one way heartbeat.   * @param data the data to write, may be at most 125 bytes
    * @return a reference to this, so the API can be used fluently
    */
@@ -145,13 +153,13 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
   }
 
   /**
-   * Set a pong message handler on the connection.  This handler will be invoked every time a pong message is received
-   * on the server, and can be used by both clients and servers since the RFC 6455 Sections 5.5.2 and 5.5.3 do not
+   * Set a pong frame handler on the connection.  This handler will be invoked every time a pong frame is received
+   * on the server, and can be used by both clients and servers since the RFC 6455 <a href="https://tools.ietf.org/html/rfc6455#section-5.5.2">section 5.5.2</a> and <a href="https://tools.ietf.org/html/rfc6455#section-5.5.3">section 5.5.3</a> do not
    * specify whether the client or server sends a ping.
    * 
    * Pong frames may be at most 125 bytes (octets).
    * 
-   * There is no ping handler since pings should immediately be responded to with a pong with identical content
+   * There is no ping handler since ping frames should immediately be responded to with a pong frame with identical content
    * 
    * Pong frames may be received unsolicited.   * @param handler the handler
    * @return a reference to this, so the API can be used fluently
@@ -275,6 +283,34 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
     asJava.asInstanceOf[JServerWebSocket].end(t)
   }
 
+  /**
+   * Pause this stream and return a  to transfer the elements of this stream to a destination .
+   * <p/>
+   * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
+   */
+  override def pipe(): Pipe[io.vertx.core.buffer.Buffer] = {
+    Pipe[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JServerWebSocket].pipe())
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.streams.ReadStream#pipeTo]] but with no completion handler.
+   */
+  override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer]): Unit = {
+    asJava.asInstanceOf[JServerWebSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]])
+  }
+
+  /**
+   * Pipe this `ReadStream` to the `WriteStream`.
+   * 
+   * Elements emitted by this stream will be written to the write stream until this stream ends or fails.
+   * 
+   * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
+   * called with the result.   * @param dst the destination write stream
+   */
+  override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JServerWebSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
 
   /**
    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.ServerWebSocket#setWriteQueueMaxSize]]   * @return true if write queue is full
@@ -284,7 +320,7 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
   }
 
   /**
-   * When a `Websocket` is created it automatically registers an event handler with the event bus - the ID of that
+   * When a `WebSocket` is created it automatically registers an event handler with the event bus - the ID of that
    * handler is given by this method.
    * 
    * Given this ID, a different event loop can send a binary frame to that event handler using the event bus and
@@ -296,7 +332,7 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
   }
 
   /**
-   * When a `Websocket` is created it automatically registers an event handler with the eventbus, the ID of that
+   * When a `WebSocket` is created it automatically registers an event handler with the eventbus, the ID of that
    * handler is given by `textHandlerID`.
    * 
    * Given this ID, a different event loop can send a text frame to that event handler using the event bus and
@@ -308,7 +344,7 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
   }
 
   /**
-   * Returns the websocket sub protocol selected by the websocket handshake.
+   * Returns the WebSocket sub protocol selected by the WebSocket handshake.
    * <p/>
    * On the server, the value will be `null` when the handler receives the websocket callback as the
    * handshake will not be completed yet.
@@ -318,27 +354,29 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
   }
 
   /**
-   * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
+   * Calls [[io.vertx.scala.core.http.ServerWebSocket#close]]
    */
   override def end (): Unit = {
     asJava.asInstanceOf[JServerWebSocket].end()
   }
 
   /**
-   * Close the WebSocket sending the default close frame.
+   * Close the WebSocket sending a close frame with specified status code. You can give a look at various close payloads
+   * here: RFC6455 <a href="https://tools.ietf.org/html/rfc6455#section-7.4.1">section 7.4.1</a>
    * <p/>
-   * No more messages can be sent.
+   * No more messages can be sent.   * @param statusCode Status code
    */
-  override def close (): Unit = {
-    asJava.asInstanceOf[JServerWebSocket].close()
-  }
-
-
   override def close (statusCode: Short): Unit = {
     asJava.asInstanceOf[JServerWebSocket].close(statusCode.asInstanceOf[java.lang.Short])
   }
 
-
+  /**
+   * Close sending a close frame with specified status code and reason. You can give a look at various close payloads
+   * here: RFC6455 <a href="https://tools.ietf.org/html/rfc6455#section-7.4.1">section 7.4.1</a>
+   * <p/>
+   * No more messages can be sent.   * @param statusCode Status code
+   * @param reason reason of closure
+   */
   override def close (statusCode: Short, reason: scala.Option[String]): Unit = {
     asJava.asInstanceOf[JServerWebSocket].close(statusCode.asInstanceOf[java.lang.Short], reason.map(x => x.asInstanceOf[java.lang.String]).orNull)
   }
@@ -372,9 +410,8 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
   /**
    * Accept the WebSocket and terminate the WebSocket handshake.
    * <p/>
-   * This method should be called from the websocket handler to explicitely accept the websocker and
-   * terminate the WebSocket handshake.
-   */
+   * This method should be called from the WebSocket handler to explicitly accept the WebSocket and
+   * terminate the WebSocket handshake.   */
   def accept (): Unit = {
     asJava.asInstanceOf[JServerWebSocket].accept()
   }
@@ -382,12 +419,11 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
   /**
    * Reject the WebSocket.
    * 
-   * Calling this method from the websocket handler when it is first passed to you gives you the opportunity to reject
-   * the websocket, which will cause the websocket handshake to fail by returning
+   * Calling this method from the WebSocket handler when it is first passed to you gives you the opportunity to reject
+   * the WebSocket, which will cause the WebSocket handshake to fail by returning
    * a  response code.
    * 
-   * You might use this method, if for example you only want to accept WebSockets with a particular path.
-   */
+   * You might use this method, if for example you only want to accept WebSockets with a particular path.   */
   def reject (): Unit = {
     asJava.asInstanceOf[JServerWebSocket].reject()
   }
@@ -399,6 +435,49 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
     asJava.asInstanceOf[JServerWebSocket].reject(status.asInstanceOf[java.lang.Integer])
   }
 
+  /**
+   * Set an asynchronous result for the handshake, upon completion of the specified `future`, the
+   * WebSocket will either be
+   *
+   * <ul>
+   *   <li>accepted when the `future` succeeds with the HTTP  status code</li>
+   *   <li>rejected when the `future` is succeeds with an HTTP status code different than </li>
+   *   <li>rejected when the `future` fails with the HTTP status code `500`</li>
+   * </ul>
+   *
+   * The provided future might be completed by the WebSocket itself, e.g calling the [[io.vertx.scala.core.http.ServerWebSocket#close]] method
+   * will try to accept the handshake and close the WebSocket afterward. Thus it is advised to try to complete
+   * the `future` with  or .
+   * 
+   * This method should be called from the WebSocket handler to explicitly set an asynchronous handshake.
+   * 
+   * Calling this method will override the `future` completion handler.   * @param future the future to complete with
+   */
+  def setHandshake (future: Future[Int]): Unit = {
+    asJava.asInstanceOf[JServerWebSocket].setHandshake(future.asJava.asInstanceOf[JFuture[java.lang.Integer]])
+  }
+
+  /**
+   * 
+   *
+   * 
+   * The WebSocket handshake will be accepted when it hasn't yet been settled or when an asynchronous handshake
+   * is in progress.
+   */
+  override def close (): Unit = {
+    asJava.asInstanceOf[JServerWebSocket].close()
+  }
+
+
+ /**
+  * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JServerWebSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 

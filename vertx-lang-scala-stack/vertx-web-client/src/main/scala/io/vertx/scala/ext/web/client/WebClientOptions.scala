@@ -605,6 +605,10 @@ class WebClientOptions(private val _asJava: JWebClientOptions) extends ExtHttpCl
     this
   }
 
+  override def getTryUsePerMessageWebsocketCompression: Boolean = {
+    asJava.getTryUsePerMessageWebsocketCompression().asInstanceOf[Boolean]
+  }
+
   override def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this

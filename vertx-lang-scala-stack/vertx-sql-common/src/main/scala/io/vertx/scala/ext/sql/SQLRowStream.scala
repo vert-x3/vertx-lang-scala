@@ -17,16 +17,20 @@
 package io.vertx.scala.ext.sql
 
 import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.core.json.JsonArray
-import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.Pipe
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
 import io.vertx.ext.sql.{SQLRowStream => JSQLRowStream}
-import io.vertx.core.AsyncResult
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
-import io.vertx.lang.scala.HandlerOps._
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.lang.scala.Converter._
+import io.vertx.core.json.JsonArray
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.core.streams.{Pipe => JPipe}
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * A ReadStream of Rows from the underlying RDBMS. This class follows the ReadStream semantics and will automatically
@@ -96,6 +100,21 @@ class SQLRowStream(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
 
+  override def pipe(): Pipe[io.vertx.core.json.JsonArray] = {
+    Pipe[io.vertx.core.json.JsonArray](asJava.asInstanceOf[JSQLRowStream].pipe())
+  }
+
+
+  override def pipeTo(dst: WriteStream[io.vertx.core.json.JsonArray]): Unit = {
+    asJava.asInstanceOf[JSQLRowStream].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JsonArray]])
+  }
+
+
+  override def pipeTo(dst: WriteStream[io.vertx.core.json.JsonArray], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JSQLRowStream].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JsonArray]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+
   /**
    * Will convert the column name to the json array index.   * @param name the column name
    * @return the json array index
@@ -134,6 +153,14 @@ class SQLRowStream(private val _asJava: Object) extends ReadStream[io.vertx.core
     asJava.asInstanceOf[JSQLRowStream].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
+
+
+  override def pipeToFuture (dst: WriteStream[io.vertx.core.json.JsonArray]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JSQLRowStream].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JsonArray]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
  /**
   * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.

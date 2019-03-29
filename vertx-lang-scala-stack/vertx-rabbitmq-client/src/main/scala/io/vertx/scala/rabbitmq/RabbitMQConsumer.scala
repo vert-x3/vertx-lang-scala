@@ -18,14 +18,18 @@ package io.vertx.scala.rabbitmq
 
 import io.vertx.rabbitmq.{RabbitMQConsumer => JRabbitMQConsumer}
 import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.Pipe
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.lang.scala.Converter._
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.WriteStream
 import io.vertx.rabbitmq.{RabbitMQMessage => JRabbitMQMessage}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 
 /**
   * A stream of messages from a rabbitmq queue.
@@ -95,6 +99,21 @@ class RabbitMQConsumer(private val _asJava: Object) extends ReadStream[RabbitMQM
 
 
 
+  override def pipe(): Pipe[RabbitMQMessage] = {
+    Pipe[RabbitMQMessage](asJava.asInstanceOf[JRabbitMQConsumer].pipe())
+  }
+
+
+  override def pipeTo(dst: WriteStream[RabbitMQMessage]): Unit = {
+    asJava.asInstanceOf[JRabbitMQConsumer].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JRabbitMQMessage]])
+  }
+
+
+  override def pipeTo(dst: WriteStream[RabbitMQMessage], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQConsumer].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JRabbitMQMessage]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+
   /**
    * @return a consumer tag
    */
@@ -127,6 +146,14 @@ class RabbitMQConsumer(private val _asJava: Object) extends ReadStream[RabbitMQM
     asJava.asInstanceOf[JRabbitMQConsumer].isPaused().asInstanceOf[Boolean]
   }
 
+
+
+  override def pipeToFuture (dst: WriteStream[RabbitMQMessage]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRabbitMQConsumer].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JRabbitMQMessage]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
  /**
   * Like [[cancel]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.

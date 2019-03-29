@@ -16,6 +16,8 @@
 
 package io.vertx.scala.core.http
 
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.streams.Pipe
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import scala.reflect.runtime.universe._
@@ -31,7 +33,9 @@ import io.vertx.core.http.HttpMethod
 import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
+import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
 import io.vertx.lang.scala.HandlerOps._
 
@@ -354,6 +358,34 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
 
 
   /**
+   * Pause this stream and return a  to transfer the elements of this stream to a destination .
+   * <p/>
+   * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
+   */
+  override def pipe(): Pipe[HttpClientResponse] = {
+    Pipe[HttpClientResponse](asJava.asInstanceOf[JHttpClientRequest].pipe())
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.streams.ReadStream#pipeTo]] but with no completion handler.
+   */
+  override def pipeTo(dst: WriteStream[HttpClientResponse]): Unit = {
+    asJava.asInstanceOf[JHttpClientRequest].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JHttpClientResponse]])
+  }
+
+  /**
+   * Pipe this `ReadStream` to the `WriteStream`.
+   * 
+   * Elements emitted by this stream will be written to the write stream until this stream ends or fails.
+   * 
+   * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
+   * called with the result.   * @param dst the destination write stream
+   */
+  override def pipeTo(dst: WriteStream[HttpClientResponse], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JHttpClientRequest].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JHttpClientResponse]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
    * Reset this stream with the error code `0`.   */
   def reset(): Boolean = {
     asJava.asInstanceOf[JHttpClientRequest].reset().asInstanceOf[Boolean]
@@ -481,6 +513,16 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
     StreamPriority(asJava.asInstanceOf[JHttpClientRequest].getStreamPriority())
   }
 
+
+ /**
+  * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def pipeToFuture (dst: WriteStream[HttpClientResponse]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpClientRequest].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JHttpClientResponse]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 

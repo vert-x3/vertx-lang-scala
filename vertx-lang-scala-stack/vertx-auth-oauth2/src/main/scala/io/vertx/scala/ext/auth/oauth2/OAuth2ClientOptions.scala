@@ -785,6 +785,10 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions) extends Ext
     this
   }
 
+  override def getTryUsePerMessageWebsocketCompression: Boolean = {
+    asJava.getTryUsePerMessageWebsocketCompression().asInstanceOf[Boolean]
+  }
+
   override def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this

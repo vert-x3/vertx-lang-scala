@@ -832,6 +832,10 @@ class ConsulClientOptions(private val _asJava: JConsulClientOptions) extends Ext
     this
   }
 
+  override def getTryUsePerMessageWebsocketCompression: Boolean = {
+    asJava.getTryUsePerMessageWebsocketCompression().asInstanceOf[Boolean]
+  }
+
   /**
    * Set the ALPN usage.
    */

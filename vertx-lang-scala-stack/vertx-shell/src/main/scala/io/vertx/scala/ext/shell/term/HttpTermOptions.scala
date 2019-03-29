@@ -357,9 +357,17 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions) extends ExtHttpServ
     this
   }
 
+  override def getPerFrameWebsocketCompressionSupported: Boolean = {
+    asJava.getPerFrameWebsocketCompressionSupported().asInstanceOf[Boolean]
+  }
+
   override def setPerMessageWebsocketCompressionSupported(value: Boolean) = {
     asJava.setPerMessageWebsocketCompressionSupported(value)
     this
+  }
+
+  override def getPerMessageWebsocketCompressionSupported: Boolean = {
+    asJava.getPerMessageWebsocketCompressionSupported().asInstanceOf[Boolean]
   }
 
   override def setPfxKeyCertOptions(value: PfxOptions) = {
@@ -605,6 +613,10 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions) extends ExtHttpServ
   override def setWebsocketCompressionLevel(value: Int) = {
     asJava.setWebsocketCompressionLevel(value)
     this
+  }
+
+  override def getWebsocketCompressionLevel: Int = {
+    asJava.getWebsocketCompressionLevel().asInstanceOf[Int]
   }
 
   override def setWebsocketPreferredClientNoContext(value: Boolean) = {

@@ -59,7 +59,6 @@ import io.vertx.scala.redis.op.SetOptions
 import io.vertx.scala.redis.op.ScanOptions
 import io.vertx.core.buffer.Buffer
 import io.vertx.redis.op.{SortOptions => JSortOptions}
-import io.vertx.redis.{RedisOptions => JRedisOptions}
 import io.vertx.scala.redis.op.LimitOptions
 import io.vertx.redis.op.{KillFilter => JKillFilter}
 import io.vertx.core.Handler
@@ -5051,8 +5050,8 @@ object RedisClient {
   }
 
 
-  def create(vertx: Vertx,config: RedisOptions): RedisClient = {
-    RedisClient(JRedisClient.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))
+  def create(vertx: Vertx,config: io.vertx.core.json.JsonObject): RedisClient = {
+    RedisClient(JRedisClient.create(vertx.asJava.asInstanceOf[JVertx], config))
   }
 
 }

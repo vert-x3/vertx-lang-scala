@@ -188,8 +188,6 @@ class VertxOptions(private val _asJava: JVertxOptions) {
 
   /**
    * Set whether the Vert.x file resolver uses caching for classpath resources.
-   *
-   * Deprecated. Use FileSystemOptions instead.
    */
   def setFileResolverCachingEnabled(value: Boolean) = {
     asJava.setFileResolverCachingEnabled(value)

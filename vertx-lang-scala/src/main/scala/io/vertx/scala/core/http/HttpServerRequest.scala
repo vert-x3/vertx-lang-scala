@@ -16,27 +16,33 @@
 
 package io.vertx.scala.core.http
 
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.streams.Pipe
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import scala.reflect.runtime.universe._
-import io.vertx.core.http.{HttpFrame => JHttpFrame}
-import io.vertx.core.http.{StreamPriority => JStreamPriority}
-import io.vertx.lang.scala.Converter._
-import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
 import io.vertx.scala.core.streams.ReadStream
-import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
-import io.vertx.core.net.{NetSocket => JNetSocket}
-import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
 import io.vertx.core.http.HttpVersion
 import io.vertx.scala.core.net.NetSocket
-import io.vertx.core.http.HttpMethod
 import io.vertx.core.{MultiMap => JMultiMap}
+import io.vertx.core.AsyncResult
+import io.vertx.scala.core.net.SocketAddress
+import io.vertx.core.http.{HttpFrame => JHttpFrame}
+import io.vertx.core.http.{StreamPriority => JStreamPriority}
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.lang.scala.Converter._
+import io.vertx.core.http.{HttpServerFileUpload => JHttpServerFileUpload}
+import io.vertx.core.http.{HttpServerRequest => JHttpServerRequest}
+import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.net.{NetSocket => JNetSocket}
+import io.vertx.core.buffer.Buffer
+import io.vertx.core.http.HttpMethod
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.Handler
-import io.vertx.scala.core.net.SocketAddress
+import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.lang.scala.HandlerOps._
 
 /**
@@ -281,6 +287,34 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
 
 
   /**
+   * Pause this stream and return a  to transfer the elements of this stream to a destination .
+   * <p/>
+   * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
+   */
+  override def pipe(): Pipe[io.vertx.core.buffer.Buffer] = {
+    Pipe[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JHttpServerRequest].pipe())
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.streams.ReadStream#pipeTo]] but with no completion handler.
+   */
+  override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer]): Unit = {
+    asJava.asInstanceOf[JHttpServerRequest].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]])
+  }
+
+  /**
+   * Pipe this `ReadStream` to the `WriteStream`.
+   * 
+   * Elements emitted by this stream will be written to the write stream until this stream ends or fails.
+   * 
+   * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
+   * called with the result.   * @param dst the destination write stream
+   */
+  override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JHttpServerRequest].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
    * @return the priority of the associated HTTP/2 stream for HTTP/2 otherwise `null`see <a href="../../../../../../../cheatsheet/StreamPriority.html">StreamPriority</a>
    */
   def streamPriority(): StreamPriority = {
@@ -399,8 +433,8 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
   /**
    * Upgrade the connection to a WebSocket connection.
    * 
-   * This is an alternative way of handling WebSockets and can only be used if no websocket handlers are set on the
-   * Http server, and can only be used during the upgrade request during the WebSocket handshake.   * @return the WebSocket
+   * This is an alternative way of handling WebSockets and can only be used if no WebSocket handler is set on the
+   * `HttpServer`, and can only be used during the upgrade request during the WebSocket handshake.   * @return the WebSocket
    */
   def upgrade (): ServerWebSocket = {
     ServerWebSocket(asJava.asInstanceOf[JHttpServerRequest].upgrade())
@@ -413,6 +447,16 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
     asJava.asInstanceOf[JHttpServerRequest].isEnded().asInstanceOf[Boolean]
   }
 
+
+ /**
+  * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpServerRequest].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 

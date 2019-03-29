@@ -19,8 +19,7 @@ package io.vertx.scala.redis.sentinel
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.json.JsonArray
 import scala.reflect.runtime.universe._
-import io.vertx.scala.redis.RedisOptions
-import io.vertx.redis.{RedisOptions => JRedisOptions}
+import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.redis.sentinel.{RedisSentinel => JRedisSentinel}
@@ -256,8 +255,13 @@ object RedisSentinel {
   def apply(asJava: JRedisSentinel) = new RedisSentinel(asJava)
   
 
-  def create(vertx: Vertx,config: RedisOptions): RedisSentinel = {
-    RedisSentinel(JRedisSentinel.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))
+  def create(vertx: Vertx): RedisSentinel = {
+    RedisSentinel(JRedisSentinel.create(vertx.asJava.asInstanceOf[JVertx]))
+  }
+
+
+  def create(vertx: Vertx,config: io.vertx.core.json.JsonObject): RedisSentinel = {
+    RedisSentinel(JRedisSentinel.create(vertx.asJava.asInstanceOf[JVertx], config))
   }
 
 }

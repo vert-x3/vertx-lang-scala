@@ -17,9 +17,13 @@
 package io.vertx.scala.core.streams
 
 import io.vertx.core.streams.{StreamBase => JStreamBase}
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
+import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.core.streams.{Pipe => JPipe}
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 
@@ -72,9 +76,28 @@ def resume ( ): ReadStream[T]    /**
 def fetch ( amount: Long): ReadStream[T]    /**
    * Set an end handler. Once the stream has ended, and there is no more data to be read, this handler will be called.   * @return a reference to this, so the API can be used fluently
    */
-def endHandler ( endHandler: Handler[Unit]): ReadStream[T]
+def endHandler ( endHandler: Handler[Unit]): ReadStream[T]    /**
+   * Pause this stream and return a [[io.vertx.scala.core.streams.Pipe]] to transfer the elements of this stream to a destination [[io.vertx.scala.core.streams.WriteStream]].
+   * <p/>
+   * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
+   */
+def pipe ( ): Pipe[T]    /**
+   * Like [[io.vertx.scala.core.streams.ReadStream#pipeTo]] but with no completion handler.
+   */
+def pipeTo ( dst: WriteStream[T]): Unit    /**
+   * Pipe this `ReadStream` to the `WriteStream`.
+   * 
+   * Elements emitted by this stream will be written to the write stream until this stream ends or fails.
+   * 
+   * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
+   * called with the result.   * @param dst the destination write stream
+   */
+def pipeTo ( dst: WriteStream[T], handler: Handler[AsyncResult[Unit]]): Unit
 
-
+   /**
+  * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+def pipeToFuture ( dst: WriteStream[T]): scala.concurrent.Future[Unit]
 }
 
 object ReadStream {
@@ -146,7 +169,45 @@ object ReadStream {
   }
 
 
+  /**
+   * Pause this stream and return a [[io.vertx.scala.core.streams.Pipe]] to transfer the elements of this stream to a destination [[io.vertx.scala.core.streams.WriteStream]].
+   * <p/>
+   * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
+   */
+  def pipe(): Pipe[T] = {
+    Pipe[T](asJava.asInstanceOf[JReadStream[Object]].pipe())
+  }
 
+  /**
+   * Like [[io.vertx.scala.core.streams.ReadStream#pipeTo]] but with no completion handler.
+   */
+  def pipeTo(dst: WriteStream[T]): Unit = {
+    asJava.asInstanceOf[JReadStream[Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Object]])
+  }
+
+  /**
+   * Pipe this `ReadStream` to the `WriteStream`.
+   * 
+   * Elements emitted by this stream will be written to the write stream until this stream ends or fails.
+   * 
+   * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
+   * called with the result.   * @param dst the destination write stream
+   */
+  def pipeTo(dst: WriteStream[T], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JReadStream[Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Object]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+
+
+ /**
+  * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def pipeToFuture (dst: WriteStream[T]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JReadStream[Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Object]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 }
