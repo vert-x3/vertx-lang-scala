@@ -491,7 +491,7 @@ connection.queryStreamFuture("SELECT * FROM large_table; SELECT * FROM other_tab
 To use transactions first set auto-commit to false with `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#setAutoCommit(boolean)[setAutoCommit]`.
 
 You then do your transactional operations and when you want to commit or rollback use
-`link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#commit()[commit]`or
+`link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#commit()[commit]` or
 `link:../../scaladocs/io/vertx/scala/ext/sql/SQLConnection.html#rollback()[rollback]`.
 
 Once the commit/rollback is complete the handler will be called and the next transaction will be automatically started.

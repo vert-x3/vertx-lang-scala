@@ -76,6 +76,17 @@ class SharedData(private val _asJava: Object) {
   }
 
   /**
+   * Get the [[io.vertx.scala.core.shareddata.AsyncMap]] with the specified name.
+   * 
+   * When clustered, the map is <b>NOT</b> accessible to all nodes in the cluster.
+   * Only the instance which created the map can put and retrieve data from this map.   * @param name the name of the map
+   * @param resultHandler the map will be returned asynchronously in this handler
+   */
+  def getLocalAsyncMap [K: TypeTag, V: TypeTag](name: String, resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]): Unit = {
+    asJava.asInstanceOf[JSharedData].getLocalAsyncMap[Object, Object](name.asInstanceOf[java.lang.String], {x: AsyncResult[JAsyncMap[Object, Object]] => resultHandler.handle(AsyncResultWrapper[JAsyncMap[Object, Object], AsyncMap[K, V]](x, a => AsyncMap[K, V](a)))})
+  }
+
+  /**
    * Get an asynchronous lock with the specified name. The lock will be passed to the handler when it is available.
    * 
    *   In general lock acquision is unordered, so that sequential attempts to acquire a lock,
@@ -102,11 +113,45 @@ class SharedData(private val _asJava: Object) {
   }
 
   /**
+   * Get an asynchronous local lock with the specified name. The lock will be passed to the handler when it is available.
+   * 
+   *   In general lock acquision is unordered, so that sequential attempts to acquire a lock,
+   *   even from a single thread, can happen in non-sequential order.
+   * </p>   * @param name the name of the lock
+   * @param resultHandler the handler
+   */
+  def getLocalLock (name: String, resultHandler: Handler[AsyncResult[Lock]]): Unit = {
+    asJava.asInstanceOf[JSharedData].getLocalLock(name.asInstanceOf[java.lang.String], {x: AsyncResult[JLock] => resultHandler.handle(AsyncResultWrapper[JLock, Lock](x, a => Lock(a)))})
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.shareddata.SharedData#getLocalLock]] but specifying a timeout. If the lock is not obtained within the timeout
+   * a failure will be sent to the handler.
+   * 
+   *   In general lock acquision is unordered, so that sequential attempts to acquire a lock,
+   *   even from a single thread, can happen in non-sequential order.
+   * </p>   * @param name the name of the lock
+   * @param timeout the timeout in ms
+   * @param resultHandler the handler
+   */
+  def getLocalLockWithTimeout (name: String, timeout: Long, resultHandler: Handler[AsyncResult[Lock]]): Unit = {
+    asJava.asInstanceOf[JSharedData].getLocalLockWithTimeout(name.asInstanceOf[java.lang.String], timeout.asInstanceOf[java.lang.Long], {x: AsyncResult[JLock] => resultHandler.handle(AsyncResultWrapper[JLock, Lock](x, a => Lock(a)))})
+  }
+
+  /**
    * Get an asynchronous counter. The counter will be passed to the handler.   * @param name the name of the counter.
    * @param resultHandler the handler
    */
   def getCounter (name: String, resultHandler: Handler[AsyncResult[Counter]]): Unit = {
     asJava.asInstanceOf[JSharedData].getCounter(name.asInstanceOf[java.lang.String], {x: AsyncResult[JCounter] => resultHandler.handle(AsyncResultWrapper[JCounter, Counter](x, a => Counter(a)))})
+  }
+
+  /**
+   * Get an asynchronous local counter. The counter will be passed to the handler.   * @param name the name of the counter.
+   * @param resultHandler the handler
+   */
+  def getLocalCounter (name: String, resultHandler: Handler[AsyncResult[Counter]]): Unit = {
+    asJava.asInstanceOf[JSharedData].getLocalCounter(name.asInstanceOf[java.lang.String], {x: AsyncResult[JCounter] => resultHandler.handle(AsyncResultWrapper[JCounter, Counter](x, a => Counter(a)))})
   }
 
   /**
@@ -139,6 +184,16 @@ class SharedData(private val _asJava: Object) {
   }
 
  /**
+  * Like [[getLocalAsyncMap]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getLocalAsyncMapFuture [K: TypeTag, V: TypeTag](name: String): scala.concurrent.Future[AsyncMap[K, V]] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JAsyncMap[Object, Object], AsyncMap[K, V]](x => AsyncMap[K, V](x))
+    asJava.asInstanceOf[JSharedData].getLocalAsyncMap[Object, Object](name.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
   * Like [[getLock]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
   def getLockFuture (name: String): scala.concurrent.Future[Lock] = {
@@ -159,12 +214,42 @@ class SharedData(private val _asJava: Object) {
   }
 
  /**
+  * Like [[getLocalLock]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getLocalLockFuture (name: String): scala.concurrent.Future[Lock] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JLock, Lock](x => Lock(x))
+    asJava.asInstanceOf[JSharedData].getLocalLock(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[getLocalLockWithTimeout]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getLocalLockWithTimeoutFuture (name: String, timeout: Long): scala.concurrent.Future[Lock] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JLock, Lock](x => Lock(x))
+    asJava.asInstanceOf[JSharedData].getLocalLockWithTimeout(name.asInstanceOf[java.lang.String], timeout.asInstanceOf[java.lang.Long], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
   * Like [[getCounter]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
   def getCounterFuture (name: String): scala.concurrent.Future[Counter] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JCounter, Counter](x => Counter(x))
     asJava.asInstanceOf[JSharedData].getCounter(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[getLocalCounter]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def getLocalCounterFuture (name: String): scala.concurrent.Future[Counter] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JCounter, Counter](x => Counter(x))
+    asJava.asInstanceOf[JSharedData].getLocalCounter(name.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

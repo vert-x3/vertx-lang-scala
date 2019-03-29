@@ -433,7 +433,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set the max websocket frame size
+   * Set the max WebSocket frame size
    */
   def setMaxWebsocketFrameSize(value: Int) = {
     asJava.setMaxWebsocketFrameSize(value)
@@ -445,7 +445,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set the max websocket message size
+   * Set the max WebSocket message size
    */
   def setMaxWebsocketMessageSize(value: Int) = {
     asJava.setMaxWebsocketMessageSize(value)
@@ -638,9 +638,12 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set true when the client wants to skip frame masking.
-   * You may want to set it true on server by server websocket communication: In this case you are by passing RFC6455 protocol.
-   * It's false as default.
+   * Set `true` when the client wants to skip frame masking.
+   * 
+   * You may want to set it `true` on server by server WebSocket communication: in this case you are by passing
+   * RFC6455 protocol.
+   * 
+   * It's `false` as default.
    */
   def setSendUnmaskedFrames(value: Boolean) = {
     asJava.setSendUnmaskedFrames(value)
@@ -784,7 +787,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set option to offer per frame WebSocket compression.
+   * Set whether the client will offer the WebSocket per-frame deflate compression extension.
    */
   def setTryUsePerFrameWebsocketCompression(value: Boolean) = {
     asJava.setTryUsePerFrameWebsocketCompression(value)
@@ -792,13 +795,20 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set option to offer per message WebSocket compression.
+   * Set whether the client will offer the WebSocket per-message deflate compression extension.
    */
   def setTryUsePerMessageWebsocketCompression(value: Boolean) = {
     asJava.setTryUsePerMessageWebsocketCompression(value)
     this
   }
 
+  def getTryUsePerMessageWebsocketCompression: Boolean = {
+    asJava.getTryUsePerMessageWebsocketCompression().asInstanceOf[Boolean]
+  }
+
+  /**
+
+   */
   /**
    * Set the ALPN usage.
    */
@@ -809,18 +819,6 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
 
   override def isUseAlpn: Boolean = {
     asJava.isUseAlpn().asInstanceOf[Boolean]
-  }
-
-  /**
-   * Set whether Netty pooled buffers are enabled
-   */
-  override def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-
-  override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 
   /**
@@ -836,7 +834,8 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set the WebSocket compression allow client no context option.
+   * Set whether the `client_no_context_takeover` parameter of the WebSocket per-message
+   * deflate compression extension will be offered.
    */
   def setWebsocketCompressionAllowClientNoContext(value: Boolean) = {
     asJava.setWebsocketCompressionAllowClientNoContext(value)
@@ -848,7 +847,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set WebSocket compression level
+   * Set the Websocket deflate compression level.
    */
   def setWebsocketCompressionLevel(value: Int) = {
     asJava.setWebsocketCompressionLevel(value)
@@ -860,7 +859,8 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set the WebSocket compression server no context option
+   * Set whether the `server_no_context_takeover` parameter of the WebSocket per-message
+   * deflate compression extension will be offered.
    */
   def setWebsocketCompressionRequestServerNoContext(value: Boolean) = {
     asJava.setWebsocketCompressionRequestServerNoContext(value)

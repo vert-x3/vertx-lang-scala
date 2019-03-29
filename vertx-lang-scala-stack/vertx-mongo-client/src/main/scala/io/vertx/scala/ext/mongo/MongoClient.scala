@@ -60,8 +60,8 @@ class MongoClient(private val _asJava: Object) {
    * @param resultHandler result handler will be provided with the id if document didn't already have one
    */
   
-  def save(collection: String, document: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[String]]): MongoClient = {
-    asJava.asInstanceOf[JMongoClient].save(collection.asInstanceOf[java.lang.String], document, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def save(collection: String, document: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.Option[String]]]): MongoClient = {
+    asJava.asInstanceOf[JMongoClient].save(collection.asInstanceOf[java.lang.String], document, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
@@ -74,8 +74,8 @@ class MongoClient(private val _asJava: Object) {
    * @param resultHandler result handler will be provided with the id if document didn't already have one
    */
   
-  def saveWithOptions(collection: String, document: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption], resultHandler: Handler[AsyncResult[String]]): MongoClient = {
-    asJava.asInstanceOf[JMongoClient].saveWithOptions(collection.asInstanceOf[java.lang.String], document, writeOption.map(x => x).orNull, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def saveWithOptions(collection: String, document: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption], resultHandler: Handler[AsyncResult[scala.Option[String]]]): MongoClient = {
+    asJava.asInstanceOf[JMongoClient].saveWithOptions(collection.asInstanceOf[java.lang.String], document, writeOption.map(x => x).orNull, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
@@ -87,8 +87,8 @@ class MongoClient(private val _asJava: Object) {
    * @param resultHandler result handler will be provided with the id if document didn't already have one
    */
   
-  def insert(collection: String, document: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[String]]): MongoClient = {
-    asJava.asInstanceOf[JMongoClient].insert(collection.asInstanceOf[java.lang.String], document, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def insert(collection: String, document: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.Option[String]]]): MongoClient = {
+    asJava.asInstanceOf[JMongoClient].insert(collection.asInstanceOf[java.lang.String], document, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
@@ -101,8 +101,8 @@ class MongoClient(private val _asJava: Object) {
    * @param resultHandler result handler will be provided with the id if document didn't already have one
    */
   
-  def insertWithOptions(collection: String, document: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption], resultHandler: Handler[AsyncResult[String]]): MongoClient = {
-    asJava.asInstanceOf[JMongoClient].insertWithOptions(collection.asInstanceOf[java.lang.String], document, writeOption.map(x => x).orNull, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+  def insertWithOptions(collection: String, document: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption], resultHandler: Handler[AsyncResult[scala.Option[String]]]): MongoClient = {
+    asJava.asInstanceOf[JMongoClient].insertWithOptions(collection.asInstanceOf[java.lang.String], document, writeOption.map(x => x).orNull, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
     this
   }
 
@@ -266,8 +266,8 @@ class MongoClient(private val _asJava: Object) {
    * @param resultHandler will be provided with the document, if any
    */
   
-  def findOne(collection: String, query: io.vertx.core.json.JsonObject, fields: scala.Option[io.vertx.core.json.JsonObject], resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): MongoClient = {
-    asJava.asInstanceOf[JMongoClient].findOne(collection.asInstanceOf[java.lang.String], query, fields.map(x => x).orNull, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+  def findOne(collection: String, query: io.vertx.core.json.JsonObject, fields: scala.Option[io.vertx.core.json.JsonObject], resultHandler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonObject]]]): MongoClient = {
+    asJava.asInstanceOf[JMongoClient].findOne(collection.asInstanceOf[java.lang.String], query, fields.map(x => x).orNull, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))})
     this
   }
 
@@ -280,8 +280,8 @@ class MongoClient(private val _asJava: Object) {
    * @param resultHandler will be provided with the document, if any
    */
   
-  def findOneAndUpdate(collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): MongoClient = {
-    asJava.asInstanceOf[JMongoClient].findOneAndUpdate(collection.asInstanceOf[java.lang.String], query, update, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+  def findOneAndUpdate(collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonObject]]]): MongoClient = {
+    asJava.asInstanceOf[JMongoClient].findOneAndUpdate(collection.asInstanceOf[java.lang.String], query, update, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))})
     this
   }
 
@@ -296,8 +296,8 @@ class MongoClient(private val _asJava: Object) {
    * @param resultHandler will be provided with the document, if any
    */
   
-  def findOneAndUpdateWithOptions(collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, findOptions: FindOptions, updateOptions: UpdateOptions, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): MongoClient = {
-    asJava.asInstanceOf[JMongoClient].findOneAndUpdateWithOptions(collection.asInstanceOf[java.lang.String], query, update, findOptions.asJava, updateOptions.asJava, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+  def findOneAndUpdateWithOptions(collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, findOptions: FindOptions, updateOptions: UpdateOptions, resultHandler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonObject]]]): MongoClient = {
+    asJava.asInstanceOf[JMongoClient].findOneAndUpdateWithOptions(collection.asInstanceOf[java.lang.String], query, update, findOptions.asJava, updateOptions.asJava, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))})
     this
   }
 
@@ -310,8 +310,8 @@ class MongoClient(private val _asJava: Object) {
    * @param resultHandler will be provided with the document, if any
    */
   
-  def findOneAndReplace(collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): MongoClient = {
-    asJava.asInstanceOf[JMongoClient].findOneAndReplace(collection.asInstanceOf[java.lang.String], query, replace, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+  def findOneAndReplace(collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonObject]]]): MongoClient = {
+    asJava.asInstanceOf[JMongoClient].findOneAndReplace(collection.asInstanceOf[java.lang.String], query, replace, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))})
     this
   }
 
@@ -326,8 +326,8 @@ class MongoClient(private val _asJava: Object) {
    * @param resultHandler will be provided with the document, if any
    */
   
-  def findOneAndReplaceWithOptions(collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, findOptions: FindOptions, updateOptions: UpdateOptions, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): MongoClient = {
-    asJava.asInstanceOf[JMongoClient].findOneAndReplaceWithOptions(collection.asInstanceOf[java.lang.String], query, replace, findOptions.asJava, updateOptions.asJava, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+  def findOneAndReplaceWithOptions(collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, findOptions: FindOptions, updateOptions: UpdateOptions, resultHandler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonObject]]]): MongoClient = {
+    asJava.asInstanceOf[JMongoClient].findOneAndReplaceWithOptions(collection.asInstanceOf[java.lang.String], query, replace, findOptions.asJava, updateOptions.asJava, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))})
     this
   }
 
@@ -339,8 +339,8 @@ class MongoClient(private val _asJava: Object) {
    * @param resultHandler will be provided with the deleted document, if any
    */
   
-  def findOneAndDelete(collection: String, query: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): MongoClient = {
-    asJava.asInstanceOf[JMongoClient].findOneAndDelete(collection.asInstanceOf[java.lang.String], query, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+  def findOneAndDelete(collection: String, query: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonObject]]]): MongoClient = {
+    asJava.asInstanceOf[JMongoClient].findOneAndDelete(collection.asInstanceOf[java.lang.String], query, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))})
     this
   }
 
@@ -353,8 +353,8 @@ class MongoClient(private val _asJava: Object) {
    * @param resultHandler will be provided with the deleted document, if any
    */
   
-  def findOneAndDeleteWithOptions(collection: String, query: io.vertx.core.json.JsonObject, findOptions: FindOptions, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): MongoClient = {
-    asJava.asInstanceOf[JMongoClient].findOneAndDeleteWithOptions(collection.asInstanceOf[java.lang.String], query, findOptions.asJava, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+  def findOneAndDeleteWithOptions(collection: String, query: io.vertx.core.json.JsonObject, findOptions: FindOptions, resultHandler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonObject]]]): MongoClient = {
+    asJava.asInstanceOf[JMongoClient].findOneAndDeleteWithOptions(collection.asInstanceOf[java.lang.String], query, findOptions.asJava, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))})
     this
   }
 
@@ -657,9 +657,9 @@ class MongoClient(private val _asJava: Object) {
  /**
   * Like [[save]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def saveFuture (collection: String, document: io.vertx.core.json.JsonObject): scala.concurrent.Future[String] = {
+  def saveFuture (collection: String, document: io.vertx.core.json.JsonObject): scala.concurrent.Future[scala.Option[String]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JMongoClient].save(collection.asInstanceOf[java.lang.String], document, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -667,9 +667,9 @@ class MongoClient(private val _asJava: Object) {
  /**
   * Like [[saveWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def saveWithOptionsFuture (collection: String, document: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption]): scala.concurrent.Future[String] = {
+  def saveWithOptionsFuture (collection: String, document: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption]): scala.concurrent.Future[scala.Option[String]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JMongoClient].saveWithOptions(collection.asInstanceOf[java.lang.String], document, writeOption.map(x => x).orNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -677,9 +677,9 @@ class MongoClient(private val _asJava: Object) {
  /**
   * Like [[insert]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def insertFuture (collection: String, document: io.vertx.core.json.JsonObject): scala.concurrent.Future[String] = {
+  def insertFuture (collection: String, document: io.vertx.core.json.JsonObject): scala.concurrent.Future[scala.Option[String]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JMongoClient].insert(collection.asInstanceOf[java.lang.String], document, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -687,9 +687,9 @@ class MongoClient(private val _asJava: Object) {
  /**
   * Like [[insertWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def insertWithOptionsFuture (collection: String, document: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption]): scala.concurrent.Future[String] = {
+  def insertWithOptionsFuture (collection: String, document: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption]): scala.concurrent.Future[scala.Option[String]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, String](x => x.asInstanceOf[String])
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.String, scala.Option[String]](x => scala.Option(x.asInstanceOf[String]))
     asJava.asInstanceOf[JMongoClient].insertWithOptions(collection.asInstanceOf[java.lang.String], document, writeOption.map(x => x).orNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -817,9 +817,9 @@ class MongoClient(private val _asJava: Object) {
  /**
   * Like [[findOne]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def findOneFuture (collection: String, query: io.vertx.core.json.JsonObject, fields: scala.Option[io.vertx.core.json.JsonObject]): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  def findOneFuture (collection: String, query: io.vertx.core.json.JsonObject, fields: scala.Option[io.vertx.core.json.JsonObject]): scala.concurrent.Future[scala.Option[io.vertx.core.json.JsonObject]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x => scala.Option(x))
     asJava.asInstanceOf[JMongoClient].findOne(collection.asInstanceOf[java.lang.String], query, fields.map(x => x).orNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -827,9 +827,9 @@ class MongoClient(private val _asJava: Object) {
  /**
   * Like [[findOneAndUpdate]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def findOneAndUpdateFuture (collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  def findOneAndUpdateFuture (collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject): scala.concurrent.Future[scala.Option[io.vertx.core.json.JsonObject]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x => scala.Option(x))
     asJava.asInstanceOf[JMongoClient].findOneAndUpdate(collection.asInstanceOf[java.lang.String], query, update, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -837,9 +837,9 @@ class MongoClient(private val _asJava: Object) {
  /**
   * Like [[findOneAndUpdateWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def findOneAndUpdateWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, findOptions: FindOptions, updateOptions: UpdateOptions): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  def findOneAndUpdateWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, findOptions: FindOptions, updateOptions: UpdateOptions): scala.concurrent.Future[scala.Option[io.vertx.core.json.JsonObject]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x => scala.Option(x))
     asJava.asInstanceOf[JMongoClient].findOneAndUpdateWithOptions(collection.asInstanceOf[java.lang.String], query, update, findOptions.asJava, updateOptions.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -847,9 +847,9 @@ class MongoClient(private val _asJava: Object) {
  /**
   * Like [[findOneAndReplace]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def findOneAndReplaceFuture (collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  def findOneAndReplaceFuture (collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject): scala.concurrent.Future[scala.Option[io.vertx.core.json.JsonObject]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x => scala.Option(x))
     asJava.asInstanceOf[JMongoClient].findOneAndReplace(collection.asInstanceOf[java.lang.String], query, replace, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -857,9 +857,9 @@ class MongoClient(private val _asJava: Object) {
  /**
   * Like [[findOneAndReplaceWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def findOneAndReplaceWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, findOptions: FindOptions, updateOptions: UpdateOptions): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  def findOneAndReplaceWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, findOptions: FindOptions, updateOptions: UpdateOptions): scala.concurrent.Future[scala.Option[io.vertx.core.json.JsonObject]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x => scala.Option(x))
     asJava.asInstanceOf[JMongoClient].findOneAndReplaceWithOptions(collection.asInstanceOf[java.lang.String], query, replace, findOptions.asJava, updateOptions.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -867,9 +867,9 @@ class MongoClient(private val _asJava: Object) {
  /**
   * Like [[findOneAndDelete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def findOneAndDeleteFuture (collection: String, query: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  def findOneAndDeleteFuture (collection: String, query: io.vertx.core.json.JsonObject): scala.concurrent.Future[scala.Option[io.vertx.core.json.JsonObject]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x => scala.Option(x))
     asJava.asInstanceOf[JMongoClient].findOneAndDelete(collection.asInstanceOf[java.lang.String], query, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -877,9 +877,9 @@ class MongoClient(private val _asJava: Object) {
  /**
   * Like [[findOneAndDeleteWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def findOneAndDeleteWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, findOptions: FindOptions): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  def findOneAndDeleteWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, findOptions: FindOptions): scala.concurrent.Future[scala.Option[io.vertx.core.json.JsonObject]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x => scala.Option(x))
     asJava.asInstanceOf[JMongoClient].findOneAndDeleteWithOptions(collection.asInstanceOf[java.lang.String], query, findOptions.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }

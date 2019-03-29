@@ -83,7 +83,6 @@ Set <code>term.js</code> resource to use.
 |[[trafficClass]]`@trafficClass`|`Number (int)`|-
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |[[vertsShellJsResource]]`@vertsShellJsResource`|`Buffer`|+++
 Set <code>vertxshell.js</code> resource to use.
 +++
@@ -245,5 +244,4 @@ allows to send data in 8 bit format and thus charset like UTF-8.
 |[[trafficClass]]`@trafficClass`|`Number (int)`|-
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |===

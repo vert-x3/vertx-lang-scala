@@ -36,28 +36,18 @@ import io.vertx.lang.scala.Converter._
 
 class BaseBridgeEvent(private val _asJava: Object) extends Future[Boolean] (_asJava) {
 
-  private var cached_0: Option[Handler[AsyncResult[Boolean]]] = None
-  private var cached_1: Option[io.vertx.ext.bridge.BridgeEventType] = None
+  private var cached_0: Option[io.vertx.ext.bridge.BridgeEventType] = None
 
-
-
-  override def completer(): Handler[AsyncResult[Boolean]] = {
-    if (cached_0 == None) {
-      val tmp = asJava.asInstanceOf[JBaseBridgeEvent].completer()
-      cached_0 = Some({x: AsyncResult[Boolean] => tmp.handle(AsyncResultWrapper[Boolean, java.lang.Boolean](x, a => a.asInstanceOf[java.lang.Boolean]))})
-    }
-    cached_0.get
-  }
 
   /**
    * @return the type of the event
    */
   def `type`(): io.vertx.ext.bridge.BridgeEventType = {
-    if (cached_1 == None) {
+    if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JBaseBridgeEvent].`type`()
-      cached_1 = Some(tmp)
+      cached_0 = Some(tmp)
     }
-    cached_1.get
+    cached_0.get
   }
 
 
@@ -115,6 +105,11 @@ class BaseBridgeEvent(private val _asJava: Object) extends Future[Boolean] (_asJ
     Future[Boolean](asJava.asInstanceOf[JBaseBridgeEvent].otherwiseEmpty())
   }
 
+
+
+  override def getHandler (): Handler[AsyncResult[Boolean]] = {
+    {x: AsyncResult[Boolean] => asJava.asInstanceOf[JBaseBridgeEvent].getHandler().handle(AsyncResultWrapper[Boolean, java.lang.Boolean](x, a => a.asInstanceOf[java.lang.Boolean]))}
+  }
 
 
   override def complete (arg0: Boolean): Unit = {

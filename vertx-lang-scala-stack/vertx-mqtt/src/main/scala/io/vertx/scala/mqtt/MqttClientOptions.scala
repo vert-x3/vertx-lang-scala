@@ -476,15 +476,6 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions) extends ExtNetC
     asJava.isUseAlpn().asInstanceOf[Boolean]
   }
 
-  override def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-
-  override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
-  }
-
   /**
    * Set the username
    */

@@ -25,7 +25,13 @@ import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 
 /**
-  * A pretty error handler for rendering error pages.
+  * A pretty error handler for rendering error pages. When working in development mode
+  * exception details will be returned in the server responses, otherwise or when
+  * manually specified no exception details are returned in the HTTP response.
+  *
+  * The reason the display of the exception details is by default dependent of the mode
+  * is to follow the security best practices:
+  * <a href="https://www.owasp.org/index.php/Improper_Error_Handling">https://www.owasp.org/index.php/Improper_Error_Handling</a>
   */
 
 class ErrorHandler(private val _asJava: Object) extends io.vertx.core.Handler[RoutingContext] {

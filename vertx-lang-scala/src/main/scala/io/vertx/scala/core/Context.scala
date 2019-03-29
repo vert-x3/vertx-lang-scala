@@ -153,13 +153,6 @@ class Context(private val _asJava: Object) {
   }
 
   /**
-   * Is the current context a multi-threaded worker context?   * @return true if the current context is a multi-threaded worker context, false otherwise
-   */
-  def isMultiThreadedWorkerContext (): Boolean = {
-    asJava.asInstanceOf[JContext].isMultiThreadedWorkerContext().asInstanceOf[Boolean]
-  }
-
-  /**
    * Get some data from the context.   * @param key the key of the data
    * @return the data
    */
@@ -183,6 +176,32 @@ class Context(private val _asJava: Object) {
    */
   def remove (key: String): Boolean = {
     asJava.asInstanceOf[JContext].remove(key.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
+  }
+
+  /**
+   * Get some local data from the context.   * @param key the key of the data
+   * @return the data
+   */
+  def getLocal [T: TypeTag](key: String): T = {
+    toScala[T](asJava.asInstanceOf[JContext].getLocal[Object](key.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+   * Put some local data in the context.
+   * 
+   * This can be used to share data between different handlers that share a context   * @param key the key of the data
+   * @param value the data
+   */
+  def putLocal (key: String, value: AnyRef): Unit = {
+    asJava.asInstanceOf[JContext].putLocal(key.asInstanceOf[java.lang.String], value)
+  }
+
+  /**
+   * Remove some local data from the context.   * @param key the key to remove
+   * @return true if removed successfully, false otherwise
+   */
+  def removeLocal (key: String): Boolean = {
+    asJava.asInstanceOf[JContext].removeLocal(key.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
   /**

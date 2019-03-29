@@ -23,7 +23,6 @@ import io.vertx.lang.scala.Converter._
 
 /**
   * Container for a script and its sha1 hash.
-
   */
 
 class Script(private val _asJava: Object) {

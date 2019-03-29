@@ -342,8 +342,8 @@ This has the following fields:
 === Finding documents in batches
 
 When dealing with large data sets, it is not advised to use the
-`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject)[find]`and
-`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.FindOptions)[findWithOptions]`methods.
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject)[find]` and
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.FindOptions)[findWithOptions]` methods.
 In order to avoid inflating the whole response into memory, use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findBatch(java.lang.String)[findBatch]`:
 
 [source,scala]
@@ -362,7 +362,7 @@ mongoClient.findBatch("book", query).exceptionHandler((throwable: java.lang.Thro
 
 The matching documents are emitted one by one by the `link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` handler.
 
-`link:../dataobjects.html#FindOptions[FindOptions]`has an extra parameter `batchSize` which you can use to set the number of documents to load at once:
+`link:../dataobjects.html#FindOptions[FindOptions]` has an extra parameter `batchSize` which you can use to set the number of documents to load at once:
 
 [source,scala]
 ----

@@ -487,15 +487,6 @@ class StompClientOptions(private val _asJava: JStompClientOptions) extends ExtNe
     asJava.isUseAlpn().asInstanceOf[Boolean]
   }
 
-  override def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-
-  override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
-  }
-
   /**
    * Sets whether or not the connection is made using the `STOMP` command instead of the `CONNECT` command.
    * The `STOMP` command has been introduced in the 1.2 version of the protocol to ease the network analysis

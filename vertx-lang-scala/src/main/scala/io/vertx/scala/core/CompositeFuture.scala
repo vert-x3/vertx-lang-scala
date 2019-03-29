@@ -34,19 +34,7 @@ import io.vertx.lang.scala.Converter._
 
 class CompositeFuture(private val _asJava: Object) extends Future[CompositeFuture] (_asJava) {
 
-  private var cached_0: Option[Handler[AsyncResult[CompositeFuture]]] = None
 
-
-  /**
-   * @return an handler completing this future
-   */
-  override def completer(): Handler[AsyncResult[CompositeFuture]] = {
-    if (cached_0 == None) {
-      val tmp = asJava.asInstanceOf[JCompositeFuture].completer()
-      cached_0 = Some({x: AsyncResult[CompositeFuture] => tmp.handle(AsyncResultWrapper[CompositeFuture, JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))})
-    }
-    cached_0.get
-  }
 
 
 
@@ -157,6 +145,13 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
     Future[CompositeFuture](asJava.asInstanceOf[JCompositeFuture].otherwiseEmpty())
   }
 
+
+  /**
+   * @return the handler for the result
+   */
+  override def getHandler (): Handler[AsyncResult[CompositeFuture]] = {
+    {x: AsyncResult[CompositeFuture] => asJava.asInstanceOf[JCompositeFuture].getHandler().handle(AsyncResultWrapper[CompositeFuture, JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))}
+  }
 
   /**
    * Set the result. Any handler will be called, if there is one, and the future will be marked as completed.   * @param result the result

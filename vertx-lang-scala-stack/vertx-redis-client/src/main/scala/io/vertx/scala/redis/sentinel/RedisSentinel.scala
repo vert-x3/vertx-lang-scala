@@ -31,7 +31,6 @@ import io.vertx.lang.scala.Converter._
 
 /**
   * Interface for sentinel commands
-
   */
 
 class RedisSentinel(private val _asJava: Object) {
@@ -256,8 +255,13 @@ object RedisSentinel {
   def apply(asJava: JRedisSentinel) = new RedisSentinel(asJava)
   
 
-  def create(vertx: Vertx,config: RedisOptions): RedisSentinel = {
-    RedisSentinel(JRedisSentinel.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))
+  def create(vertx: Vertx,handler: Handler[AsyncResult[RedisSentinel]]): Unit = {
+    JRedisSentinel.create(vertx.asJava.asInstanceOf[JVertx], {x: AsyncResult[JRedisSentinel] => handler.handle(AsyncResultWrapper[JRedisSentinel, RedisSentinel](x, a => RedisSentinel(a)))})
+  }
+
+
+  def create(vertx: Vertx,options: RedisOptions,handler: Handler[AsyncResult[RedisSentinel]]): Unit = {
+    JRedisSentinel.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, {x: AsyncResult[JRedisSentinel] => handler.handle(AsyncResultWrapper[JRedisSentinel, RedisSentinel](x, a => RedisSentinel(a)))})
   }
 
 }

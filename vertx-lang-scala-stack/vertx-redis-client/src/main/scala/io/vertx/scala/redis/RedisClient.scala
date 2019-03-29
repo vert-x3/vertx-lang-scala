@@ -65,6 +65,9 @@ import io.vertx.redis.op.{KillFilter => JKillFilter}
 import io.vertx.core.Handler
 import io.vertx.lang.scala.HandlerOps._
 
+/**
+
+  */
 
 class RedisClient(private val _asJava: Object) {
   def asJava = _asJava
@@ -5046,13 +5049,13 @@ object RedisClient {
   def apply(asJava: JRedisClient) = new RedisClient(asJava)
   
 
-  def create(vertx: Vertx): RedisClient = {
-    RedisClient(JRedisClient.create(vertx.asJava.asInstanceOf[JVertx]))
+  def create(vertx: Vertx,handler: Handler[AsyncResult[RedisClient]]): Unit = {
+    JRedisClient.create(vertx.asJava.asInstanceOf[JVertx], {x: AsyncResult[JRedisClient] => handler.handle(AsyncResultWrapper[JRedisClient, RedisClient](x, a => RedisClient(a)))})
   }
 
 
-  def create(vertx: Vertx,config: RedisOptions): RedisClient = {
-    RedisClient(JRedisClient.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))
+  def create(vertx: Vertx,options: RedisOptions,handler: Handler[AsyncResult[RedisClient]]): Unit = {
+    JRedisClient.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, {x: AsyncResult[JRedisClient] => handler.handle(AsyncResultWrapper[JRedisClient, RedisClient](x, a => RedisClient(a)))})
   }
 
 }

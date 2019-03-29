@@ -348,6 +348,18 @@ class Router(private val _asJava: Object) extends io.vertx.core.Handler[HttpServ
   }
 
   /**
+   * Specify an handler to handle an error for a particular status code. You can use to manage general errors too using status code 500.
+   * The handler will be called when the context fails and other failure handlers didn't write the reply or when an exception is thrown inside an handler.
+   * You <b>must not</b> use [[io.vertx.scala.ext.web.RoutingContext#next]] inside the error handler
+   * This does not affect the normal failure routing logic.   * @param statusCode status code the errorHandler is capable of handle
+   * @param errorHandler error handler. Note: You <b>must not</b> use RoutingContext#next() inside the provided handler
+   * @return a reference to this, so the API can be used fluently
+   */
+  def errorHandler (statusCode: Int, errorHandler: Handler[RoutingContext]): Router = {
+    Router(asJava.asInstanceOf[JRouter].errorHandler(statusCode.asInstanceOf[java.lang.Integer], {x: JRoutingContext => errorHandler.handle(RoutingContext(x))}))
+  }
+
+  /**
    * Used to route a context to the router. Used for sub-routers. You wouldn't normally call this method directly.   * @param context the routing context
    */
   def handleContext (context: RoutingContext): Unit = {

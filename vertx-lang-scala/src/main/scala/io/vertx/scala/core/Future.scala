@@ -31,19 +31,7 @@ import io.vertx.lang.scala.Converter._
 
 class Future[T: TypeTag](private val _asJava: Object) {
   def asJava = _asJava
-  private var cached_0: Option[Handler[AsyncResult[T]]] = None
 
-
-  /**
-   * @return an handler completing this future
-   */
-  def completer(): Handler[AsyncResult[T]] = {
-    if (cached_0 == None) {
-      val tmp = asJava.asInstanceOf[JFuture[Object]].completer()
-      cached_0 = Some({x: AsyncResult[T] => tmp.handle(AsyncResultWrapper[T, Object](x, a => toJava[T](a)))})
-    }
-    cached_0.get
-  }
 
 
   /**
@@ -193,6 +181,13 @@ class Future[T: TypeTag](private val _asJava: Object) {
    */
   def isComplete (): Boolean = {
     asJava.asInstanceOf[JFuture[Object]].isComplete().asInstanceOf[Boolean]
+  }
+
+  /**
+   * @return the handler for the result
+   */
+  def getHandler (): Handler[AsyncResult[T]] = {
+    {x: AsyncResult[T] => asJava.asInstanceOf[JFuture[Object]].getHandler().handle(AsyncResultWrapper[T, Object](x, a => toJava[T](a)))}
   }
 
   /**

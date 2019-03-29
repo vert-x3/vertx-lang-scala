@@ -35,7 +35,7 @@ compile 'io.vertx:vertx-config-redis:${maven.version}'
 ==== Configuring the store
 
 Once added to your classpath or dependencies, you need to configure the
-`link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]`to use this store:
+`link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetriever]` to use this store:
 
 [source, scala]
 ----

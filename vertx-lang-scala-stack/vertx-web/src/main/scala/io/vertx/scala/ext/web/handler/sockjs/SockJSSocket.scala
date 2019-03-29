@@ -16,6 +16,8 @@
 
 package io.vertx.scala.ext.web.handler.sockjs
 
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.streams.Pipe
 import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
@@ -30,8 +32,10 @@ import io.vertx.ext.web.{Session => JSession}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.MultiMap
+import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.scala.ext.web.Session
+import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.scala.core.net.SocketAddress
 import io.vertx.lang.scala.HandlerOps._
 
@@ -129,6 +133,21 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
     asJava.asInstanceOf[JSockJSSocket].end(t)
   }
 
+
+  override def pipe(): Pipe[io.vertx.core.buffer.Buffer] = {
+    Pipe[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JSockJSSocket].pipe())
+  }
+
+
+  override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer]): Unit = {
+    asJava.asInstanceOf[JSockJSSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]])
+  }
+
+
+  override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JSockJSSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
   /**
    * Close it giving a status code and reason. Only Applicable to RawWebSocket will downgrade to plain close for
    * other transports.
@@ -212,6 +231,14 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
     scala.Option(asJava.asInstanceOf[JSockJSSocket].webUser()).map(User(_))
   }
 
+
+
+  override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JSockJSSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 

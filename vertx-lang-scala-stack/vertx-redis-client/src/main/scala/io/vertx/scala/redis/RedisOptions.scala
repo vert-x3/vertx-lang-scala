@@ -58,7 +58,6 @@ import io.vertx.core.net.{JksOptions => JJksOptions}
  * database at connection time. If you define this extra properties on every connection to Redis server this client
  * will perform the authentication handshake and database selection, however if you don't do this and call [[io.vertx.scala.redis.RedisClient]]
  * yourself in case of connection failure the client will not be able to perform the correct authentication handshake.
-
  */
 
 class RedisOptions(private val _asJava: JRedisOptions) extends ExtNetClientOptions(_asJava) {
@@ -532,15 +531,6 @@ class RedisOptions(private val _asJava: JRedisOptions) extends ExtNetClientOptio
 
   override def isUseAlpn: Boolean = {
     asJava.isUseAlpn().asInstanceOf[Boolean]
-  }
-
-  override def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-
-  override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 
 }

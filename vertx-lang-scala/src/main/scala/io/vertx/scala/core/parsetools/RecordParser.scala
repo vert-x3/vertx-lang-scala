@@ -16,14 +16,20 @@
 
 package io.vertx.scala.core.parsetools
 
-import io.vertx.scala.core.streams.ReadStream
-import io.vertx.core.buffer.Buffer
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.streams.Pipe
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.lang.scala.Converter._
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.buffer.Buffer
+import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.core.parsetools.{RecordParser => JRecordParser}
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 
 /**
   * A helper class which allows you to easily parse protocols which are delimited by a sequence of bytes, or fixed
@@ -118,6 +124,34 @@ class RecordParser(private val _asJava: Object) extends ReadStream[io.vertx.core
   }
 
 
+  /**
+   * Pause this stream and return a  to transfer the elements of this stream to a destination .
+   * <p/>
+   * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
+   */
+  override def pipe(): Pipe[io.vertx.core.buffer.Buffer] = {
+    Pipe[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JRecordParser].pipe())
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.streams.ReadStream#pipeTo]] but with no completion handler.
+   */
+  override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer]): Unit = {
+    asJava.asInstanceOf[JRecordParser].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]])
+  }
+
+  /**
+   * Pipe this `ReadStream` to the `WriteStream`.
+   * 
+   * Elements emitted by this stream will be written to the write stream until this stream ends or fails.
+   * 
+   * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
+   * called with the result.   * @param dst the destination write stream
+   */
+  override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRecordParser].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
 
 
   def setOutput (output: Handler[io.vertx.core.buffer.Buffer]): Unit = {
@@ -160,6 +194,16 @@ class RecordParser(private val _asJava: Object) extends ReadStream[io.vertx.core
     asJava.asInstanceOf[JRecordParser].handle(buffer)
   }
 
+
+ /**
+  * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRecordParser].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 

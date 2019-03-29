@@ -20,6 +20,7 @@ import io.vertx.core.metrics.{MetricsOptions => JMetricsOptions}
 import io.vertx.scala.core.eventbus.EventBusOptions
 import io.vertx.core.eventbus.{EventBusOptions => JEventBusOptions}
 import io.vertx.scala.core.metrics.MetricsOptions
+import io.vertx.core.tracing.{TracingOptions => JTracingOptions}
 import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import java.util.concurrent.TimeUnit
@@ -28,6 +29,7 @@ import io.vertx.scala.core.file.FileSystemOptions
 import io.vertx.core.file.{FileSystemOptions => JFileSystemOptions}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.{VertxOptions => JVertxOptions}
+import io.vertx.scala.core.tracing.TracingOptions
 import io.vertx.scala.core.dns.AddressResolverOptions
 
 /**
@@ -187,20 +189,6 @@ class VertxOptions(private val _asJava: JVertxOptions) {
   }
 
   /**
-   * Set whether the Vert.x file resolver uses caching for classpath resources.
-   *
-   * Deprecated. Use FileSystemOptions instead.
-   */
-  def setFileResolverCachingEnabled(value: Boolean) = {
-    asJava.setFileResolverCachingEnabled(value)
-    this
-  }
-
-  def isFileResolverCachingEnabled: Boolean = {
-    asJava.isFileResolverCachingEnabled().asInstanceOf[Boolean]
-  }
-
-  /**
    * Set the file system options
    */
   def setFileSystemOptions(value: FileSystemOptions) = {
@@ -334,6 +322,15 @@ class VertxOptions(private val _asJava: JVertxOptions) {
 
   def getQuorumSize: Int = {
     asJava.getQuorumSize().asInstanceOf[Int]
+  }
+
+  def setTracingOptions(value: TracingOptions) = {
+    asJava.setTracingOptions(value.asJava)
+    this
+  }
+
+  def getTracingOptions: TracingOptions = {
+    TracingOptions(asJava.getTracingOptions())
   }
 
   /**

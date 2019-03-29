@@ -130,18 +130,6 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
   }
 
   /**
-   * Set whether the verticle(s) should be deployed as a multi-threaded worker verticle
-   */
-  def setMultiThreaded(value: Boolean) = {
-    asJava.setMultiThreaded(value)
-    this
-  }
-
-  def isMultiThreaded: Boolean = {
-    asJava.isMultiThreaded().asInstanceOf[Boolean]
-  }
-
-  /**
    * Set whether the verticle(s) should be deployed as a worker verticle
    */
   def setWorker(value: Boolean) = {

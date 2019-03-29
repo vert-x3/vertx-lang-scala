@@ -469,18 +469,6 @@ class NetClientOptions(private val _asJava: JNetClientOptions) extends ExtClient
     asJava.isUseAlpn().asInstanceOf[Boolean]
   }
 
-  /**
-   * Set whether Netty pooled buffers are enabled
-   */
-  override def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-
-  override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
-  }
-
 }
 
 

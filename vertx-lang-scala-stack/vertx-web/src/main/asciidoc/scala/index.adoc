@@ -50,6 +50,7 @@ Some of the key features of Vert.x-Web include:
 ** Thymeleaf
 ** Apache FreeMarker
 ** Pebble
+** Rocker
 * Response time handler
 * Static file serving, including caching logic and directory listing.
 * Request timeout support
@@ -130,7 +131,7 @@ You can run this, and point your browser at `http://localhost:8080` to verify th
 Here's the 10000 foot view:
 
 A `link:../../scaladocs/io/vertx/scala/ext/web/Router.html[Router]` is one of the core concepts of Vert.x-Web. It's an object which maintains zero or more
-`link:../../scaladocs/io/vertx/scala/ext/web/Route.html[Routes]`.
+`link:../../scaladocs/io/vertx/scala/ext/web/Route.html[Routes]` .
 
 A router takes an HTTP request and finds the first matching route for that request, and passes the request to that route.
 
@@ -274,7 +275,7 @@ don't mind your blocking handlers executing in parallel you can set the blocking
 false using `link:../../scaladocs/io/vertx/scala/ext/web/Route.html#blockingHandler(io.vertx.core.Handler)[blockingHandler]`.
 
 Note, if you need to process multipart form data from a blocking handler, you MUST use a non-blocking handler
-     FIRST in order to call {@code setExpectMultipart(true)}. Here is an example:
+     FIRST in order to call `setExpectMultipart(true)`. Here is an example:
 
 [source,scala]
 ----
@@ -520,7 +521,7 @@ route.handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 ----
 
 If you want to route for a specific HTTP method you can also use the methods such as `link:../../scaladocs/io/vertx/scala/ext/web/Router.html#get()[get]`,
-`link:../../scaladocs/io/vertx/scala/ext/web/Router.html#post()[post]`and `link:../../scaladocs/io/vertx/scala/ext/web/Router.html#put()[put]` named after the HTTP
+`link:../../scaladocs/io/vertx/scala/ext/web/Router.html#post()[post]` and `link:../../scaladocs/io/vertx/scala/ext/web/Router.html#put()[put]` named after the HTTP
 method name. For example:
 
 [source,scala]
@@ -813,7 +814,7 @@ Accept: application/json, text/html
 Accept: application/json;q=0.7, text/html;q=0.8, text/plain
 
 You can also mark your route as producing more than one MIME type. If this is the case, then you use
-`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#getAcceptableContentType()[getAcceptableContentType]`to find out the actual MIME type that
+`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#getAcceptableContentType()[getAcceptableContentType]` to find out the actual MIME type that
 was accepted.
 
 [source,scala]
@@ -874,7 +875,7 @@ want to share between handlers for the lifetime of the request.
 Here's an example where one handler sets some data in the context data and a subsequent handler retrieves it:
 
 You can use the `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#put(java.lang.String)[put]` to put any object, and
-`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#get()[get]`to retrieve any object from the context data.
+`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#get()[get]` to retrieve any object from the context data.
 
 A request sent to path `/some/path/other` will match both routes.
 
@@ -1077,15 +1078,16 @@ var route = router.get("/localized").handler((rc: io.vertx.scala.ext.web.Routing
 
 The main method `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#acceptableLocales()[acceptableLocales]` will return the ordered list of locales the
 user understands, if you're only interested in the user prefered locale then the helper:
-`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#preferredLocale()[preferredLocale]`will return the 1st element of the list or `null` if no
+`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#preferredLocale()[preferredLocale]` will return the 1st element of the list or `null` if no
 locale was provided by the user.
 
 == Default 404 Handling
 
 If no routes match for any particular request, Vert.x-Web will signal a 404 error.
 
-This can then be handled by your own error handler, or perhaps the augmented error handler that we supply to use,
-or if no error handler is provided Vert.x-Web will send back a basic 404 (Not Found) response.
+
+A default 404 error handler is provided by Router. Anyway you can provide your own 404 error handler with
+`link:../../scaladocs/io/vertx/scala/ext/web/Router.html#errorHandler(int)[errorHandler]`
 
 == Error handling
 
@@ -1116,7 +1118,7 @@ route.failureHandler((frc: io.vertx.scala.ext.web.RoutingContext) => {
 ----
 
 Failure routing will occur if a handler throws an exception, or if a handler calls
-`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#fail()[fail]`specifying an HTTP status code to deliberately signal a failure.
+`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#fail()[fail]` specifying an HTTP status code to deliberately signal a failure.
 
 If an exception is caught from a handler this will result in a failure with status code `500` being signalled.
 
@@ -1449,7 +1451,7 @@ data from the session with `link:../../scaladocs/io/vertx/scala/ext/web/Session.
 
 The keys for items in the session are always strings. The values can be any type for a local session store, and for
 a clustered session store they can be any basic type, or `link:../../scaladocs/io/vertx/scala/core/buffer/Buffer.html[Buffer]`, `JsonObject`,
-`JsonArray`or a serializable object, as the values have to serialized across the cluster.
+`JsonArray` or a serializable object, as the values have to serialized across the cluster.
 
 Here's an example of manipulating session data:
 
@@ -1528,8 +1530,7 @@ your auth handler is before your application handlers on those paths:
 ----
 
 router.route().handler(CookieHandler.create())
-router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
-router.route().handler(UserSessionHandler.create(authProvider))
+router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setAuthProvider(authProvider))
 
 var basicAuthHandler = BasicAuthHandler.create(authProvider)
 
@@ -1609,8 +1610,7 @@ Here's an example of a simple app, using a redirect auth handler on the default 
 ----
 
 router.route().handler(CookieHandler.create())
-router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
-router.route().handler(UserSessionHandler.create(authProvider))
+router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setAuthProvider(authProvider))
 
 var redirectAuthHandler = RedirectAuthHandler.create(authProvider)
 
@@ -1865,7 +1865,7 @@ By default the static handler will set cache headers to enable browsers to effec
 Vert.x-Web sets the headers `cache-control`,`last-modified`, and `date`.
 
 `cache-control` is set to `max-age=86400` by default. This corresponds to one day. This can be configured with
-`link:../../scaladocs/io/vertx/scala/ext/web/handler/StaticHandler.html#setMaxAgeSeconds()[setMaxAgeSeconds]`if required.
+`link:../../scaladocs/io/vertx/scala/ext/web/handler/StaticHandler.html#setMaxAgeSeconds()[setMaxAgeSeconds]` if required.
 
 If a browser sends a GET or a HEAD request with an `if-modified-since` header and the resource has not been modified
 since that date, a `304` status is returned which tells the browser to use its locally cached resource.
@@ -1962,7 +1962,7 @@ Vert.x-Web includes dynamic page generation capabilities by including out of the
 engines. You can also easily add your own.
 
 Template engines are described by `link:../../scaladocs/io/vertx/scala/ext/web/templ/TemplateEngine.html[TemplateEngine]`. In order to render a template
-`link:../../scaladocs/io/vertx/scala/ext/web/common/template/TemplateEngine.html#render(io.vertx.core.json.JsonObject,%20java.lang.String)[render]`is used.
+`link:../../scaladocs/io/vertx/scala/ext/web/common/template/TemplateEngine.html#render(io.vertx.core.json.JsonObject,%20java.lang.String)[render]` is used.
 
 The simplest way to use templates is not to call the template engine directly but to use the
 `link:../../scaladocs/io/vertx/scala/ext/web/handler/TemplateHandler.html[TemplateHandler]`.
@@ -2164,6 +2164,36 @@ Here are some examples:
 Please consult the http://www.mitchellbosecke.com/pebble/home/[Pebble documentation] for how to write
 Pebble templates.
 
+=== Rocker template engine
+
+To use Rocker, then add `io.vertx:vertx-web-templ-rocker:${maven.version}` as a dependency to your project.
+You can then create a Rocker template engine instance with `io.vertx.ext.web.templ.rocker#create()`.
+
+The values of the JSON context object passed to the `render` method are then exposed as template parameters.
+Given:
+
+----
+[snip]
+final JsonObject context = new JsonObject()
+ .put("foo", "badger")
+ .put("bar", "fox")
+ .put("context", new JsonObject().put("path", "/foo/bar"));
+
+engine.render(context, "somedir/TestRockerTemplate2", render -> {
+ // (...)
+});
+[snip]
+----
+
+then the template can be as the following `somedir/TestRockerTemplate2.rocker.html` resource file:
+
+----
+@import io.vertx.core.json.JsonObject
+@args (JsonObject context, String foo, String bar)
+Hello @foo and @bar
+Request path is @context.getString("path")
+----
+
 === Disabling caching
 
 During development you might want to disable template caching so that the template gets reevaluated on each request.
@@ -2327,7 +2357,7 @@ this will be called every time a SockJS connection is made from a client:
 The object passed into the handler is a `link:../../scaladocs/io/vertx/scala/ext/web/handler/sockjs/SockJSSocket.html[SockJSSocket]`. This has a familiar
 socket-like interface which you can read and write to similarly to a `link:../../scaladocs/io/vertx/scala/core/net/NetSocket.html[NetSocket]` or
 a `link:../../scaladocs/io/vertx/scala/core/http/WebSocket.html[WebSocket]`. It also implements `link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` and
-`link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]`so you can pump it to and from other read and write streams.
+`link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]` so you can pump it to and from other read and write streams.
 
 Here's an example of a simple SockJS handler that simply echoes back any back any data that it reads:
 
@@ -2370,6 +2400,15 @@ sock.onopen = function() {
 
 sock.onmessage = function(e) {
  console.log('message', e.data);
+};
+
+sock.onevent = function(event, message) {
+ console.log('event: %o, message:%o', event, message);
+ return true; // in order to signal that the message has been processed
+};
+
+sock.onunhandled = function(json) {
+ console.log('this message has no address:', json);
 };
 
 sock.onclose = function() {
@@ -2429,7 +2468,7 @@ A special SockJS socket handler is then installed on the `link:../../scaladocs/i
 handles the SockJS data and bridges it to and from the server side event bus.
 
 To activate the bridge you simply call
-`link:../../scaladocs/io/vertx/scala/ext/web/handler/sockjs/SockJSHandler.html#bridge()[bridge]`on the
+`link:../../scaladocs/io/vertx/scala/ext/web/handler/sockjs/SockJSHandler.html#bridge()[bridge]` on the
 SockJS handler.
 
 [source,scala]
@@ -2560,7 +2599,7 @@ In other words the bridge acts like a kind of firewall which has a default _deny
 Configuring the bridge to tell it what messages it should pass through is easy.
 
 You can specify which _matches_ you want to allow for inbound and outbound traffic using the
-`link:../dataobjects.html#BridgeOptions[BridgeOptions]`that you pass in when calling bridge.
+`link:../dataobjects.html#BridgeOptions[BridgeOptions]` that you pass in when calling bridge.
 
 Each match is a `link:../dataobjects.html#PermittedOptions[PermittedOptions]` object:
 
@@ -2649,7 +2688,7 @@ To do this, you can add extra fields to the match described in the previous sect
 required for the match.
 
 To declare that a specific authority for the logged-in user is required in order to access allow the messages you use the
-`link:../../vertx-bridge-common/dataobjects.html#PermittedOptions#setRequiredAuthority()[requiredAuthority]`field.
+`link:../../vertx-bridge-common/dataobjects.html#PermittedOptions#setRequiredAuthority()[requiredAuthority]` field.
 
 Here's an example:
 
@@ -3110,13 +3149,12 @@ need an application like the following snippet:
 
 // We need cookies and sessions
 router.route().handler(CookieHandler.create())
-router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
 // Simple auth service which uses a GitHub to
 // authenticate the user
 var authProvider = GithubAuth.create(vertx, "YOUR PROVIDER CLIENTID", "YOUR PROVIDER CLIENT SECRET")
 // We need a user session handler too to make sure
 // the user is stored in the session between requests
-router.route().handler(UserSessionHandler.create(authProvider))
+router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setAuthProvider(authProvider))
 // we now protect the resource under the path "/protected"
 router.route("/protected").handler(OAuth2AuthHandler.create(authProvider).setupCallback(router.route("/callback")).addAuthority("user:email"))
 // Entry point to the application, this will render

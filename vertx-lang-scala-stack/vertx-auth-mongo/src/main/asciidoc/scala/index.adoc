@@ -68,7 +68,7 @@ stored can be set by `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAu
 You are able to change this behaviour by using `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/HashStrategy.html#setSaltStyle()[setSaltStyle]`.
 The HashStrategy you can retrieve by  `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#getHashStrategy()[getHashStrategy]`.
 By using this, you are able to set:
-`link:todo[NO_SALT]`by which passwords are not crypted and stored
+`link:todo[NO_SALT]` by which passwords are not crypted and stored
 in cleartext. ( see the warning below! )
 `link:todo[COLUMN]`, which will create a salt per user and store this
 inside the defined column of the user. ( see the warning below! )
@@ -157,7 +157,7 @@ authProvider.authenticateFuture(authInfo).onComplete{
 
 ----
 Instead of the `username` and `password` field names used in the previous snippet, you should use:
-`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setUsernameCredentialField()[setUsernameCredentialField]`and
+`link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setUsernameCredentialField()[setUsernameCredentialField]` and
 `link:../../scaladocs/io/vertx/scala/ext/auth/mongo/MongoAuth.html#setPasswordCredentialField()[setPasswordCredentialField]`
 
 == Authorisation - Permission-Role Model
@@ -167,7 +167,7 @@ implementation assumes a familiar user/role/permission model, where a user can h
 can have zero or more permissions.
 
 If validating if a user has a particular permission simply pass the permission into.
-`link:../../scaladocs/io/vertx/scala/ext/auth/User.html#isAuthorised(java.lang.String)[isAuthorised]`as follows:
+`link:../../scaladocs/io/vertx/scala/ext/auth/User.html#isAuthorised(java.lang.String)[isAuthorised]` as follows:
 
 [source,scala]
 ----

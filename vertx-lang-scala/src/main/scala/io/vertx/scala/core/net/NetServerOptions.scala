@@ -56,18 +56,6 @@ class NetServerOptions(private val _asJava: JNetServerOptions) extends ExtTCPSSL
   }
 
   /**
-   * Set whether client auth is required
-   */
-  def setClientAuthRequired(value: Boolean) = {
-    asJava.setClientAuthRequired(value)
-    this
-  }
-
-  def isClientAuthRequired: Boolean = {
-    asJava.isClientAuthRequired().asInstanceOf[Boolean]
-  }
-
-  /**
    * Add a CRL path
    */
   override def addCrlPath(value: String) = {
@@ -441,18 +429,6 @@ class NetServerOptions(private val _asJava: JNetServerOptions) extends ExtTCPSSL
 
   override def isUseAlpn: Boolean = {
     asJava.isUseAlpn().asInstanceOf[Boolean]
-  }
-
-  /**
-   * Set whether Netty pooled buffers are enabled
-   */
-  override def setUsePooledBuffers(value: Boolean) = {
-    asJava.setUsePooledBuffers(value)
-    this
-  }
-
-  override def isUsePooledBuffers: Boolean = {
-    asJava.isUsePooledBuffers().asInstanceOf[Boolean]
   }
 
 }

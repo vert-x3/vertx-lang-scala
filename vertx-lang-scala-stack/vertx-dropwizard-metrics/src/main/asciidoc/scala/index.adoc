@@ -146,7 +146,7 @@ var metricsOptions = DropwizardMetricsOptions()
 === Retrieving metrics
 
 Once enabled, the `link:../../scaladocs/io/vertx/scala/ext/dropwizard/MetricsService.html[MetricsService]` allows to retrieve metrics snapshots from any
-`link:../../scaladocs/io/vertx/scala/core/metrics/Measured.html[Measured]`object which provides a map of the metric name to the data,
+`link:../../scaladocs/io/vertx/scala/core/metrics/Measured.html[Measured]` object which provides a map of the metric name to the data,
 represented by a `JsonObject`. So for example if we were to print out all metrics
 for a particular Vert.x instance:
 [source,scala]

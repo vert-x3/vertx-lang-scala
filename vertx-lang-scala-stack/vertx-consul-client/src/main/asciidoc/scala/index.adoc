@@ -786,7 +786,7 @@ consulClient.catalogNodesWithOptionsFuture(opts).onComplete{
 
 ----
 
-== Prepated Queries
+== Prepared Queries
 
 This endpoint creates, updates, destroys, and executes prepared queries.
 Prepared queries allow you to register a complex service query and then execute it later via its ID
@@ -900,7 +900,7 @@ consulClient.deletePreparedQueryFuture(query).onComplete{
 == Watches
 
 Watches are a way of specifying a view of data (e.g. list of nodes, KV pairs, health checks)
-which is monitored for updates. When an update is detected, an {@code Handler} with {@code WatchResult} is invoked.
+which is monitored for updates. When an update is detected, an `Handler` with `WatchResult` is invoked.
 As an example, you could watch the status of health checks and notify when a check is critical.
 
 [source,scala]

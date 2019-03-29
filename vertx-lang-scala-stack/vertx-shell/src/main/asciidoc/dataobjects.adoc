@@ -22,7 +22,6 @@
 Set the charset used for encoding / decoding text data from/to SockJS
 +++
 |[[clientAuth]]`@clientAuth`|`link:enums.html#ClientAuth[ClientAuth]`|-
-|[[clientAuthRequired]]`@clientAuthRequired`|`Boolean`|-
 |[[compressionLevel]]`@compressionLevel`|`Number (int)`|-
 |[[compressionSupported]]`@compressionSupported`|`Boolean`|-
 |[[crlPaths]]`@crlPaths`|`Array of String`|-
@@ -83,7 +82,6 @@ Set <code>term.js</code> resource to use.
 |[[trafficClass]]`@trafficClass`|`Number (int)`|-
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |[[vertsShellJsResource]]`@vertsShellJsResource`|`Buffer`|+++
 Set <code>vertxshell.js</code> resource to use.
 +++
@@ -202,7 +200,6 @@ Set the shell welcome message, i.e the message displayed in the user console whe
 Set the charset to use when binary mode is active, see link and link.
 +++
 |[[clientAuth]]`@clientAuth`|`link:enums.html#ClientAuth[ClientAuth]`|-
-|[[clientAuthRequired]]`@clientAuthRequired`|`Boolean`|-
 |[[crlPaths]]`@crlPaths`|`Array of String`|-
 |[[crlValues]]`@crlValues`|`Array of Buffer`|-
 |[[enabledCipherSuites]]`@enabledCipherSuites`|`Array of String`|-
@@ -245,6 +242,5 @@ Set the telnet connection to negociate binary data format when sending to the cl
 |[[trafficClass]]`@trafficClass`|`Number (int)`|-
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |===
 

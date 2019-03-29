@@ -59,6 +59,8 @@ import io.vertx.lang.scala.HandlerOps._
   * 
   * The context also provides access to the [[io.vertx.scala.ext.web.Session]], cookies and body for the request, given the correct handlers
   * in the application.
+  * 
+  * If you use the internal error handler
   */
 
 class RoutingContext(private val _asJava: Object) {
@@ -269,20 +271,34 @@ class RoutingContext(private val _asJava: Object) {
    * Fail the context with the specified status code.
    * 
    * This will cause the router to route the context to any matching failure handlers for the request. If no failure handlers
-   * match a default failure response will be sent.   * @param statusCode the HTTP status code
+   * match It will trigger the error handler matching the status code. You can define such error handler with
+   * [[io.vertx.scala.ext.web.Router#errorHandler]]. If no error handler is not defined, It will send a default failure response with provided status code.   * @param statusCode the HTTP status code
    */
   def fail (statusCode: Int): Unit = {
     asJava.asInstanceOf[JRoutingContext].fail(statusCode.asInstanceOf[java.lang.Integer])
   }
 
   /**
-   * Fail the context with the specified throwable.
+   * Fail the context with the specified throwable and 500 status code.
    * 
    * This will cause the router to route the context to any matching failure handlers for the request. If no failure handlers
-   * match a default failure response with status code 500 will be sent.   * @param throwable a throwable representing the failure
+   * match It will trigger the error handler matching the status code. You can define such error handler with
+   * [[io.vertx.scala.ext.web.Router#errorHandler]]. If no error handler is not defined, It will send a default failure response with 500 status code.   * @param throwable a throwable representing the failure
    */
   def fail (throwable: Throwable): Unit = {
     asJava.asInstanceOf[JRoutingContext].fail(throwable)
+  }
+
+  /**
+   * Fail the context with the specified throwable and the specified the status code.
+   * 
+   * This will cause the router to route the context to any matching failure handlers for the request. If no failure handlers
+   * match It will trigger the error handler matching the status code. You can define such error handler with
+   * [[io.vertx.scala.ext.web.Router#errorHandler]]. If no error handler is not defined, It will send a default failure response with provided status code.   * @param statusCode the HTTP status code
+   * @param throwable a throwable representing the failure
+   */
+  def fail (statusCode: Int, throwable: Throwable): Unit = {
+    asJava.asInstanceOf[JRoutingContext].fail(statusCode.asInstanceOf[java.lang.Integer], throwable)
   }
 
   /**

@@ -127,7 +127,7 @@ endif::[]
 == Receiving messages from a topic joining a consumer group
 
 In order to start receiving messages from Kafka topics, the consumer can use the
-`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#subscribe()[subscribe]`method for
+`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#subscribe()[subscribe]` method for
 subscribing to a set of topics being part of a consumer group (specified by the properties on creation).
 
 You also need to register a handler for handling incoming messages using the
@@ -202,7 +202,7 @@ to be assigned to other consumers) or a new consumer joins the group (so it want
 
 You can register handlers on a `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html[KafkaConsumer]` to be notified
 of the partitions revocations and assignments by the Kafka cluster using
-`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsRevokedHandler()[partitionsRevokedHandler]`and
+`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsRevokedHandler()[partitionsRevokedHandler]` and
 `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#partitionsAssignedHandler()[partitionsAssignedHandler]`.
 
 [source,scala]
@@ -614,7 +614,7 @@ In the case of the partition-specific pause and resume it is possible that the r
 observe messages from a paused partition for a time _after_ the `pause()` method's completion
 handler has been called. This is not the case for messages observed by the batch handler: Once the
 `pause()` completion handler has been called it will only observe messages from those partitions which
-rare not paused.
+are not paused.
 
 [source,scala]
 ----
@@ -828,7 +828,7 @@ producer.partitionsForFuture("test").onComplete{
 == Handling errors
 
 Errors handling (e.g timeout) between a Kafka client (consumer or producer) and the Kafka cluster is done using
-`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#exceptionHandler()[exceptionHandler]`or
+`link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#exceptionHandler()[exceptionHandler]` or
 `link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#exceptionHandler()[exceptionHandler]`
 
 [source,scala]

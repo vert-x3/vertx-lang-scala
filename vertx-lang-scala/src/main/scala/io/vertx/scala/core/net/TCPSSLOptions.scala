@@ -227,11 +227,4 @@ trait TCPSSLOptions extends ExtNetworkOptions {
 
   def isUseAlpn: Boolean
 
-  /**
-   * Set whether Netty pooled buffers are enabled
-   */
-  def setUsePooledBuffers(value: Boolean): TCPSSLOptions
-
-  def isUsePooledBuffers: Boolean
-
 }

@@ -16,13 +16,19 @@
 
 package io.vertx.scala.core
 
-import io.vertx.scala.core.streams.ReadStream
+import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.scala.core.streams.Pipe
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.lang.scala.Converter._
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.scala.core.streams.WriteStream
+import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.{TimeoutStream => JTimeoutStream}
+import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 
 /**
   * A timeout stream is triggered by a timer, the scala-function will be call when the timer is fired,
@@ -81,6 +87,34 @@ class TimeoutStream(private val _asJava: Object) extends ReadStream[Long] {
   }
 
 
+  /**
+   * Pause this stream and return a  to transfer the elements of this stream to a destination .
+   * <p/>
+   * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
+   */
+  override def pipe(): Pipe[Long] = {
+    Pipe[Long](asJava.asInstanceOf[JTimeoutStream].pipe())
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.streams.ReadStream#pipeTo]] but with no completion handler.
+   */
+  override def pipeTo(dst: WriteStream[Long]): Unit = {
+    asJava.asInstanceOf[JTimeoutStream].pipeTo(dst.asJava.asInstanceOf[JWriteStream[java.lang.Long]])
+  }
+
+  /**
+   * Pipe this `ReadStream` to the `WriteStream`.
+   * 
+   * Elements emitted by this stream will be written to the write stream until this stream ends or fails.
+   * 
+   * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
+   * called with the result.   * @param dst the destination write stream
+   */
+  override def pipeTo(dst: WriteStream[Long], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JTimeoutStream].pipeTo(dst.asJava.asInstanceOf[JWriteStream[java.lang.Long]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
 
   /**
    * Cancels the timeout. Note this has the same effect as calling [[io.vertx.scala.core.TimeoutStream#handler]] with a null
@@ -90,6 +124,16 @@ class TimeoutStream(private val _asJava: Object) extends ReadStream[Long] {
     asJava.asInstanceOf[JTimeoutStream].cancel()
   }
 
+
+ /**
+  * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def pipeToFuture (dst: WriteStream[Long]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JTimeoutStream].pipeTo(dst.asJava.asInstanceOf[JWriteStream[java.lang.Long]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 
