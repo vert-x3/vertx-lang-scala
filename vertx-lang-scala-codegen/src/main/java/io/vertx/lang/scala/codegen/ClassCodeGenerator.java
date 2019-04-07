@@ -26,6 +26,13 @@ public class ClassCodeGenerator extends Generator<Model> {
   public Template template;
   public Map<String, Set<String>> fileToImports = new HashMap<>();
 
+  public static final List<String> ignoredPackages;
+  static {
+    List<String> temp = new ArrayList<>();
+    temp.add("io.vertx.redis");
+    ignoredPackages = Collections.unmodifiableList(temp);
+  }
+
   public ClassCodeGenerator() {
     this.incremental = true;
   }
@@ -69,50 +76,49 @@ public class ClassCodeGenerator extends Generator<Model> {
 
   @Override
   public String render(Model model, int index, int size, Map<String, Object> session) {
-    Map<String, Object> vars = new HashMap<>();
-
     ClassTypeInfo type = ((ClassTypeInfo)model.getVars().get("type"));
-    Set<TypeInfo> importedTypes = (Set<TypeInfo>)model.getVars().get("importedTypes");
-    Collection<TypeInfo> superTypes = (Collection<TypeInfo>)model.getVars().get("superTypes");
+    if(!ignoredPackages.contains(type.getPackageName())) {
+      Map<String, Object> vars = new HashMap<>();
+      String translatedPackage = type.getModule().translatePackageName("scala");
 
-    String translatedPackage = type.getModule().translatePackageName("scala");
+      vars.putAll(TypeNameTranslator.vars(name));
+      vars.putAll(model.getVars());
+      vars.put("nonGenericType", Helper.getNonGenericType(type.toString()));
+      vars.put("modulePackage", translatedPackage.substring(0, translatedPackage.lastIndexOf('.')));
+      vars.put("moduleName", translatedPackage.substring(translatedPackage.lastIndexOf('.') + 1));
 
-    vars.putAll(TypeNameTranslator.vars(name));
-    vars.putAll(model.getVars());
-    vars.put("nonGenericType", Helper.getNonGenericType(type.toString()));
-    vars.put("modulePackage", translatedPackage.substring(0, translatedPackage.lastIndexOf('.')));
-    vars.put("moduleName", translatedPackage.substring(translatedPackage.lastIndexOf('.') + 1));
-
-    vars.put("basicMethods", TypeHelper.findBasicMethods((List<MethodInfo>)vars.get("instanceMethods")));
-    vars.put("cacheReturnMethods", TypeHelper.findCacheReturnMethods((List<MethodInfo>)vars.get("instanceMethods")));
-    vars.put("defaultMethods", TypeHelper.findDefaultMethods((List<MethodInfo>)vars.get("instanceMethods")));
-    vars.put("fluentMethods", TypeHelper.findFluentMethods((List<MethodInfo>)vars.get("instanceMethods")));
-    vars.put("futureMethods", TypeHelper.findFutureMethods((List<MethodInfo>)vars.get("instanceMethods")));
-    vars.put("nullableMethods", TypeHelper.findNullableMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("basicMethods", TypeHelper.findBasicMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("cacheReturnMethods", TypeHelper.findCacheReturnMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("defaultMethods", TypeHelper.findDefaultMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("fluentMethods", TypeHelper.findFluentMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("futureMethods", TypeHelper.findFutureMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("nullableMethods", TypeHelper.findNullableMethods((List<MethodInfo>)vars.get("instanceMethods")));
 
 
-    vars.put("typeHelper", new TypeHelper());
-    vars.put("helper", new Helper());
-    vars.put("className", Helper.getSimpleName(type.getName()));
-    vars.put("packageName", translatedPackage);
-    vars.put("imps", fileToImports.get(filenameForModel(model)));
-    vars.putAll(ClassKind.vars());
-    vars.putAll(MethodKind.vars());
-    vars.putAll(Case.vars());
-    vars.put("incrementalIndex", index);
-    vars.put("incrementalSize", size);
+      vars.put("typeHelper", new TypeHelper());
+      vars.put("helper", new Helper());
+      vars.put("className", type.getSimpleName());
+      vars.put("packageName", translatedPackage);
+      vars.put("imps", fileToImports.get(filenameForModel(model)));
+      vars.putAll(ClassKind.vars());
+      vars.putAll(MethodKind.vars());
+      vars.putAll(Case.vars());
+      vars.put("incrementalIndex", index);
+      vars.put("incrementalSize", size);
 
-    Writer writer = new StringWriter();
-    try {
-      template.process(vars, writer);
-      return writer.toString();
-    } catch (TemplateException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
-    } catch (IOException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
+      Writer writer = new StringWriter();
+      try {
+        template.process(vars, writer);
+        return writer.toString();
+      } catch (TemplateException e) {
+        e.printStackTrace();
+        throw new RuntimeException(e);
+      } catch (IOException e) {
+        e.printStackTrace();
+        throw new RuntimeException(e);
+      }
     }
+    return "";
   }
 
   public Set<String> adjustedImports(ClassTypeInfo type, Set<TypeInfo> importedTypes) {

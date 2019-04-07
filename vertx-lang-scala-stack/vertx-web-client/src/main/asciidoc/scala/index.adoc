@@ -550,6 +550,30 @@ client.get(8080, "myserver.mycompany.com", "/some-uri").as(BodyCodec.pipe(writeS
 
 ----
 
+It becomes frequent to see API returning a stream of JSON objects. For example, the Twitter API can provides a feed of
+tweets. To handle this use case you can use `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html#jsonStream()[BodyCodec.jsonStream]`.
+You pass a JSON parser that emits the read JSON streams from the HTTP response:
+
+[source,scala]
+----
+var parser = JsonParser.newParser().objectValueMode()
+parser.handler((event: io.vertx.scala.core.parsetools.JsonEvent) => {
+  var object = event.objectValue()
+  println(s"Got ${object.encode()}")
+})
+client.get(8080, "myserver.mycompany.com", "/some-uri").as(BodyCodec.jsonStream(parser)).sendFuture().onComplete{
+  case Success(result) => {
+    var response = result
+
+    println(s"Received response with status code${response.statusCode()}")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
 Finally if you are not interested at all by the response content, the `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html#none()[BodyCodec.none]`
 simply discards the entire response body
 
@@ -818,8 +842,8 @@ client.getAbs("https://myserver.mycompany.com:4043/some-uri").sendFuture().onCom
 
 == Sessions management
 
-Vert.x web offers a web session management facility; to use it, you create a 
-`WebClientSession` for every user (session) and use it instead of the 
+Vert.x web offers a web session management facility; to use it, you create a
+`WebClientSession` for every user (session) and use it instead of the
 `link:../../scaladocs/io/vertx/scala/ext/web/client/WebClient.html[WebClient]`.
 
 === Creating a WebSession
@@ -835,7 +859,7 @@ var session = io.vertx.ext.web.client.WebClientSession.create(client)
 
 === Making requests
 
-Once created, a `WebClientSession` can be used instead of a 
+Once created, a `WebClientSession` can be used instead of a
 `link:../../scaladocs/io/vertx/scala/ext/web/client/WebClient.html[WebClient]` to do HTTP(s) requests and automatically manage any cookies received from the server(s)
 you are calling.
 
@@ -851,7 +875,7 @@ session.addHeader("my-jwt-token", jwtToken)
 ----
 
 The headers will then be added to every request; notice that these headers will be sent to all hosts; if you need
-to send different headers to different hosts, you have to add them manually to every single request and not to the 
+to send different headers to different hosts, you have to add them manually to every single request and not to the
 `WebClientSession`.
 
 ifeval::["scala" == "java"]

@@ -27,8 +27,10 @@ import io.vertx.core.json.JsonArray
 import io.vertx.core.buffer.Buffer
 import io.vertx.ext.web.codec.{BodyCodec => JBodyCodec}
 import io.vertx.core.streams
+import io.vertx.core.parsetools.{JsonParser => JJsonParser}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.core.parsetools
 
 package object codec{
 

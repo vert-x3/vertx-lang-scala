@@ -23,12 +23,7 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import scala.concurrent.Promise
 
-import io.vertx.core.buffer.Buffer
-import io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}
-import io.vertx.core.json.JsonObject
-import io.vertx.core.AsyncResult
-import scala.collection.JavaConverters._
-import io.vertx.core.Handler
+import io.vertx.ext.web.common.{WebEnvironment => JWebEnvironment}
 
 package object common{
 
@@ -51,5 +46,6 @@ package object common{
     }
 
   }
+
 
 }

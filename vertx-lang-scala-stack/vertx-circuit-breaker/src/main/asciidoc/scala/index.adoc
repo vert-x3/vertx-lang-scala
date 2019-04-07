@@ -88,15 +88,21 @@ var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerO
 // ---
 
 breaker.execute((future: io.vertx.scala.core.Future<java.lang.String>) => {
-  vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
-    if (response.statusCode() != 200) {
-      future.fail("HTTP error")
-    } else {
-      response.exceptionHandler(future.fail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
-        future.complete(buffer.toString())
-      })
+  vertx.createHttpClient().getNowFuture(8080, "localhost", "/").onComplete{
+    case Success(result) => {
+      var response = result
+      if (response.statusCode() != 200) {
+        future.fail("HTTP error")
+      } else {
+        response.exceptionHandler(future.fail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
+          future.complete(buffer.toString())
+        })
+      }
     }
-  })
+    case Failure(cause) => {
+      println(s"$cause")
+    }
+  }
 }).setHandlerFuture().onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
@@ -123,15 +129,21 @@ var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerO
 // ---
 
 breaker.executeWithFallback((future: io.vertx.scala.core.Future<java.lang.String>) => {
-  vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
-    if (response.statusCode() != 200) {
-      future.fail("HTTP error")
-    } else {
-      response.exceptionHandler(future.fail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
-        future.complete(buffer.toString())
-      })
+  vertx.createHttpClient().getNowFuture(8080, "localhost", "/").onComplete{
+    case Success(result) => {
+      var response = result
+      if (response.statusCode() != 200) {
+        future.fail("HTTP error")
+      } else {
+        response.exceptionHandler(future.fail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
+          future.complete(buffer.toString())
+        })
+      }
     }
-  })
+    case Failure(cause) => {
+      println(s"$cause")
+    }
+  }
 }, (v: java.lang.Throwable) => {
   // Executed when the circuit is opened
   "Hello"
@@ -160,15 +172,21 @@ var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerO
 })
 
 breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
-  vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
-    if (response.statusCode() != 200) {
-      future.fail("HTTP error")
-    } else {
-      response.exceptionHandler(future.fail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
-        future.complete(buffer.toString())
-      })
+  vertx.createHttpClient().getNowFuture(8080, "localhost", "/").onComplete{
+    case Success(result) => {
+      var response = result
+      if (response.statusCode() != 200) {
+        future.fail("HTTP error")
+      } else {
+        response.exceptionHandler(future.fail _).bodyHandler((buffer: io.vertx.scala.core.buffer.Buffer) => {
+          future.complete(buffer.toString())
+        })
+      }
     }
-  })
+    case Failure(cause) => {
+      println(s"$cause")
+    }
+  }
 })
 
 ----
@@ -206,14 +224,20 @@ var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerO
 })
 
 breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
-  vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
-    if (response.statusCode() != 200) {
-      future.fail("HTTP error")
-    } else {
-      // Do something with the response
-      future.complete()
+  vertx.createHttpClient().getNowFuture(8080, "localhost", "/").onComplete{
+    case Success(result) => {
+      var response = result
+      if (response.statusCode() != 200) {
+        future.fail("HTTP error")
+      } else {
+        // Do something with the response
+        future.complete()
+      }
     }
-  })
+    case Failure(cause) => {
+      println(s"$cause")
+    }
+  }
 })
 
 ----
@@ -234,14 +258,20 @@ var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerO
 })
 
 breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
-  vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
-    if (response.statusCode() != 200) {
-      future.fail("HTTP error")
-    } else {
-      // Do something with the response
-      future.complete()
+  vertx.createHttpClient().getNowFuture(8080, "localhost", "/").onComplete{
+    case Success(result) => {
+      var response = result
+      if (response.statusCode() != 200) {
+        future.fail("HTTP error")
+      } else {
+        // Do something with the response
+        future.complete()
+      }
     }
-  })
+    case Failure(cause) => {
+      println(s"$cause")
+    }
+  }
 })
 
 ----

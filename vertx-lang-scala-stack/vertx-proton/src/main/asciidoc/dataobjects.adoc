@@ -71,7 +71,6 @@ Explicitly override the hostname to use for the TLS SNI server name.
 |[[trustAll]]`@trustAll`|`Boolean`|-
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |[[virtualHost]]`@virtualHost`|`String`|+++
 Override the hostname value used in the connection AMQP Open frame and TLS SNI server name (if TLS is in use).
  By default, the hostname specified in link will be used for both, with SNI performed
@@ -117,7 +116,6 @@ Sets whether the link remote terminus to be used should indicate it is
 ^|Name | Type ^| Description
 |[[acceptBacklog]]`@acceptBacklog`|`Number (int)`|-
 |[[clientAuth]]`@clientAuth`|`link:enums.html#ClientAuth[ClientAuth]`|-
-|[[clientAuthRequired]]`@clientAuthRequired`|`Boolean`|-
 |[[crlPaths]]`@crlPaths`|`Array of String`|-
 |[[crlValues]]`@crlValues`|`Array of Buffer`|-
 |[[enabledCipherSuites]]`@enabledCipherSuites`|`Array of String`|-
@@ -160,7 +158,6 @@ Sets the maximum frame size for connections.
 |[[trafficClass]]`@trafficClass`|`Number (int)`|-
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |===
 
 [[ProtonTransportOptions]]

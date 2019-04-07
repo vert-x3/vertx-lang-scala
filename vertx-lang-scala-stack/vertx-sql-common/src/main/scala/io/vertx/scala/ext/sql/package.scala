@@ -484,6 +484,12 @@ package object sql{
       asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
     }
 
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.json.JsonArray]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
     /**
      * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */

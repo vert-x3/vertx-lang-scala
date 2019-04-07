@@ -500,14 +500,10 @@ HttpEndpoint.getClient(discovery, new io.vertx.core.json.JsonObject().put("name"
     var client = result
 
     // You need to path the complete path
-    client.getNow("/api/persons", (response: io.vertx.scala.core.http.HttpClientResponse) => {
-
-      // ...
-
-      // Dont' forget to release the service
-      ServiceDiscovery.releaseServiceObject(discovery, client)
-
-    })
+    client.getNowFuture("/api/persons").onComplete{
+      case Success(result) => println("Success")
+      case Failure(cause) => println("Failure")
+    }
   }
   case Failure(cause) => println("Failure")
 })

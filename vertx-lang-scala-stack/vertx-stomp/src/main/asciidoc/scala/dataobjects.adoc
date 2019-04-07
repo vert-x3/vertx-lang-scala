@@ -135,7 +135,6 @@ default. This option is not compliant with the STOMP specification, and so is no
 |[[trustAll]]`@trustAll`|`Boolean`|-
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |[[useStompFrame]]`@useStompFrame`|`Boolean`|+++
 Sets whether or not the connection is made using the <code>STOMP</code> command instead of the <code>CONNECT</code> command.
 The <code>STOMP</code> command has been introduced in the 1.2 version of the protocol to ease the network analysis
@@ -161,7 +160,6 @@ STOMP Server options. You can also configure the Net Server used by the STOMP se
 ^|Name | Type ^| Description
 |[[acceptBacklog]]`@acceptBacklog`|`Number (int)`|-
 |[[clientAuth]]`@clientAuth`|`link:enums.html#ClientAuth[ClientAuth]`|-
-|[[clientAuthRequired]]`@clientAuthRequired`|`Boolean`|-
 |[[crlPaths]]`@crlPaths`|`Array of String`|-
 |[[crlValues]]`@crlValues`|`Array of Buffer`|-
 |[[enabledCipherSuites]]`@enabledCipherSuites`|`Array of String`|-
@@ -237,7 +235,6 @@ transactions are split into chunks, replayed one by one. This settings sets the 
 +++
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
-|[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |[[websocketBridge]]`@websocketBridge`|`Boolean`|+++
 Enables or disables the web socket bridge.
 +++

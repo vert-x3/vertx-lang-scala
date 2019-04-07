@@ -31,6 +31,15 @@ import io.vertx.kafka.client.producer.{KafkaProducerRecord => JKafkaProducerReco
 package object client{
 
 
+  type ConfigResource = io.vertx.kafka.client.common.ConfigResource
+
+  object ConfigResource {
+    def apply() = new ConfigResource()
+    def apply(json: JsonObject) = new ConfigResource(json)
+  }
+
+
+
   /**
     * Vert.x Kafka consumer.
     * 
@@ -59,6 +68,12 @@ package object client{
 
     def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.kafka.client.consumer.KafkaConsumer[K, V] = {
       asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.kafka.client.consumer.KafkaConsumerRecord[K, V]]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
     }
 
     /**
@@ -410,6 +425,15 @@ package object client{
   object TopicPartition {
     def apply() = new TopicPartition()
     def apply(json: JsonObject) = new TopicPartition(json)
+  }
+
+
+
+  type TopicPartitionInfo = io.vertx.kafka.client.common.TopicPartitionInfo
+
+  object TopicPartitionInfo {
+    def apply() = new TopicPartitionInfo()
+    def apply(json: JsonObject) = new TopicPartitionInfo(json)
   }
 
 

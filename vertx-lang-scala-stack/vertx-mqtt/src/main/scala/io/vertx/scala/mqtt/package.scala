@@ -142,6 +142,15 @@ package object mqtt{
       promise.future
     }
 
+    /**
+     * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def publishFuture(topic: java.lang.String,payload: io.vertx.core.buffer.Buffer,qosLevel: io.netty.handler.codec.mqtt.MqttQoS,isDup: java.lang.Boolean,isRetain: java.lang.Boolean,messageId: java.lang.Integer): scala.concurrent.Future[java.lang.Integer] = {
+      val promise = Promise[java.lang.Integer]()
+      asJava.publish(topic, payload, qosLevel, isDup, isRetain, messageId, {a:AsyncResult[java.lang.Integer] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
   }
 
 

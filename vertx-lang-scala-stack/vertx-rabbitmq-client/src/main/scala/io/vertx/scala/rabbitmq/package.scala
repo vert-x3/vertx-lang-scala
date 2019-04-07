@@ -29,6 +29,8 @@ import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.rabbitmq.{RabbitMQMessage => JRabbitMQMessage}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
+import io.vertx.core.streams.{Pipe => JPipe}
+import io.vertx.core.streams.{WriteStream => JWriteStream}
 
 package object rabbitmq{
 
@@ -343,6 +345,12 @@ package object rabbitmq{
      */
     def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.rabbitmq.RabbitMQConsumer = {
       asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.rabbitmq.RabbitMQMessage]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
     }
 
     /**

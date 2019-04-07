@@ -786,7 +786,7 @@ consulClient.catalogNodesWithOptionsFuture(opts).onComplete{
 
 ----
 
-== Prepated Queries
+== Prepared Queries
 
 This endpoint creates, updates, destroys, and executes prepared queries.
 Prepared queries allow you to register a complex service query and then execute it later via its ID

@@ -172,6 +172,62 @@ package object web{
 
 
 
+  /**
+    *
+    * You interact with SockJS clients through instances of SockJS socket.
+    * 
+    * The API is very similar to [[io.vertx.core.http.WebSocket]].
+    * It implements both  and 
+    * so it can be used with
+    * [[io.vertx.core.streams.Pump]] to pump data with flow control.
+    */
+
+  implicit class SockJSSocketScala(val asJava: io.vertx.ext.web.handler.sockjs.SockJSSocket) extends AnyVal {
+
+
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.ext.web.handler.sockjs.SockJSSocket = {
+      asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+
+    def handler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.ext.web.handler.sockjs.SockJSSocket = {
+      asJava.handler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.ext.web.handler.sockjs.SockJSSocket = {
+      asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    def drainHandler(handler: scala.Option[Void => Unit]): io.vertx.ext.web.handler.sockjs.SockJSSocket = {
+      asJava.drainHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[webSession]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def webSessionOption(): scala.Option[io.vertx.ext.web.Session] = {
+      scala.Option(asJava.webSession())
+    }
+
+
+    /**
+     * Like [[webUser]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def webUserOption(): scala.Option[io.vertx.ext.auth.User] = {
+      scala.Option(asJava.webUser())
+    }
+
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
 
 
   /**

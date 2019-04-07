@@ -115,6 +115,15 @@ package object core{
     }
 
     /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
      * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
@@ -425,6 +434,14 @@ package object core{
 
 
     /**
+     * Like [[putLocal]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def putLocal(key: java.lang.String,value: AnyRef): Unit = {
+      asJava.putLocal(key, value)
+    }
+
+
+    /**
      * Like [[exceptionHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.Context = {
@@ -561,6 +578,15 @@ package object core{
 
     def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.datagram.DatagramSocket = {
       asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+    /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.datagram.DatagramPacket]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
     }
 
     /**
@@ -1311,6 +1337,460 @@ package object core{
 
 
 
+  /**
+    * An asynchronous HTTP client.
+    * 
+    * It allows you to make requests to HTTP servers, and a single client can make requests to any server.
+    * 
+    * It also allows you to open WebSockets to servers.
+    * 
+    * The client can also pool HTTP connections.
+    * 
+    * For pooling to occur, keep-alive must be true on the <a href="../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a> (default is true).
+    * In this case connections will be pooled and re-used if there are pending HTTP requests waiting to get a connection,
+    * otherwise they will be closed.
+    * 
+    * This gives the benefits of keep alive when the client is loaded but means we don't keep connections hanging around
+    * unnecessarily when there would be no benefits anyway.
+    * 
+    * The client also supports pipe-lining of requests. Pipe-lining means another request is sent on the same connection
+    * before the response from the preceding one has returned. Pipe-lining is not appropriate for all requests.
+    * 
+    * To enable pipe-lining, it must be enabled on the <a href="../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a> (default is false).
+    * 
+    * When pipe-lining is enabled the connection will be automatically closed when all in-flight responses have returned
+    * and there are no outstanding pending requests to write.
+    * 
+    * The client is designed to be reused between requests.
+    */
+
+  implicit class HttpClientScala(val asJava: io.vertx.core.http.HttpClient) extends AnyVal {
+
+    /**
+     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def requestFuture(method: io.vertx.core.http.HttpMethod,options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.request(method, options, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def requestFuture(method: io.vertx.core.http.HttpMethod,port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.request(method, port, host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def requestFuture(method: io.vertx.core.http.HttpMethod,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.request(method, host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def requestFuture(method: io.vertx.core.http.HttpMethod,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.request(method, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[requestAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def requestAbsFuture(method: io.vertx.core.http.HttpMethod,absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.requestAbs(method, absoluteURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.get(options, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.get(port, host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.get(host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.get(requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[getAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getAbsFuture(absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.getAbs(absoluteURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[getNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getNowFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.getNow(options, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[getNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getNowFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.getNow(port, host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[getNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getNowFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.getNow(host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[getNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getNowFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.getNow(requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def postFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.post(options, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def postFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.post(port, host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def postFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.post(host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def postFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.post(requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[postAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def postAbsFuture(absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.postAbs(absoluteURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[head]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def headFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.head(options, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[head]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def headFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.head(port, host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[head]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def headFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.head(host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[head]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def headFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.head(requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[headAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def headAbsFuture(absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.headAbs(absoluteURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[headNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def headNowFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.headNow(options, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[headNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def headNowFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.headNow(port, host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[headNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def headNowFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.headNow(host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[headNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def headNowFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.headNow(requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[options]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def optionsFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.options(options, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[options]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def optionsFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.options(port, host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[options]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def optionsFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.options(host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[options]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def optionsFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.options(requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[optionsAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def optionsAbsFuture(absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.optionsAbs(absoluteURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[optionsNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def optionsNowFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.optionsNow(options, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[optionsNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def optionsNowFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.optionsNow(port, host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[optionsNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def optionsNowFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.optionsNow(host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[optionsNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def optionsNowFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.optionsNow(requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def putFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.put(options, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def putFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.put(port, host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def putFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.put(host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def putFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.put(requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[putAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def putAbsFuture(absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.putAbs(absoluteURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def deleteFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.delete(options, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def deleteFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.delete(port, host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def deleteFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.delete(host, requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def deleteFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.delete(requestURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[deleteAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def deleteAbsFuture(absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.deleteAbs(absoluteURI, {a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
 
   type HttpClientOptions = io.vertx.core.http.HttpClientOptions
 
@@ -1321,6 +1801,124 @@ package object core{
 
 
 
+  /**
+    * Represents a client-side HTTP request.
+    * 
+    * Instances are created by an [[io.vertx.core.http.HttpClient]] instance, via one of the methods corresponding to the
+    * specific HTTP methods, or the generic request methods. On creation the request will not have been written to the
+    * wire.
+    * 
+    * Once a request has been obtained, headers can be set on it, and data can be written to its body if required. Once
+    * you are ready to send the request, one of the [[io.vertx.core.http.HttpClientRequest#end]] methods should be called.
+    * 
+    * Nothing is actually sent until the request has been internally assigned an HTTP connection.
+    * 
+    * The [[io.vertx.core.http.HttpClient]] instance will return an instance of this class immediately, even if there are no HTTP
+    * connections available in the pool. Any requests sent before a connection is assigned will be queued
+    * internally and actually sent when an HTTP connection becomes available from the pool.
+    * 
+    * The headers of the request are queued for writing either when the [[io.vertx.core.http.HttpClientRequest#end]] method is called, or, when the first
+    * part of the body is written, whichever occurs first.
+    * 
+    * This class supports both chunked and non-chunked HTTP.
+    * 
+    * It implements [[io.vertx.core.streams.WriteStream]] so it can be used with
+    * [[io.vertx.core.streams.Pump]] to pump data with flow control.
+    * 
+    * An example of using this class is as follows:
+    * 
+    */
+
+  implicit class HttpClientRequestScala(val asJava: io.vertx.core.http.HttpClientRequest) extends AnyVal {
+
+
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.http.HttpClientRequest = {
+      asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+
+    def drainHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.HttpClientRequest = {
+      asJava.drainHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[continueHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def continueHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.HttpClientRequest = {
+      asJava.continueHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[connectionHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def connectionHandler(handler: scala.Option[io.vertx.core.http.HttpConnection => Unit]): io.vertx.core.http.HttpClientRequest = {
+      asJava.connectionHandler(handler match {case Some(t) => p:io.vertx.core.http.HttpConnection => t(p); case None => null})
+    }
+
+    def handlerFuture(): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
+      val promise = Promise[io.vertx.core.http.HttpClientResponse]()
+      asJava.handler({a:AsyncResult[io.vertx.core.http.HttpClientResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
+
+  /**
+    * Represents a client-side HTTP response.
+    * 
+    * Vert.x provides you with one of these via the handler that was provided when creating the [[io.vertx.core.http.HttpClientRequest]]
+    * or that was set on the [[io.vertx.core.http.HttpClientRequest]] instance.
+    * 
+    * It implements [[io.vertx.core.streams.ReadStream]] so it can be used with
+    * [[io.vertx.core.streams.Pump]] to pump data with flow control.
+    */
+
+  implicit class HttpClientResponseScala(val asJava: io.vertx.core.http.HttpClientResponse) extends AnyVal {
+
+
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.http.HttpClientResponse = {
+      asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+
+    def handler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.HttpClientResponse = {
+      asJava.handler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.http.HttpClientResponse = {
+      asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[getHeader]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getHeaderOption(headerName: java.lang.String): scala.Option[java.lang.String] = {
+      scala.Option(asJava.getHeader(headerName))
+    }
+
+
+    /**
+     * Like [[getTrailer]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getTrailerOption(trailerName: java.lang.String): scala.Option[java.lang.String] = {
+      scala.Option(asJava.getTrailer(trailerName))
+    }
+
+    /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
 
 
   /**
@@ -1442,6 +2040,38 @@ package object core{
   }
 
 
+  /**
+    * Represents an file upload from an HTML FORM.
+    */
+
+  implicit class HttpServerFileUploadScala(val asJava: io.vertx.core.http.HttpServerFileUpload) extends AnyVal {
+
+
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.http.HttpServerFileUpload = {
+      asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+
+    def handler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.HttpServerFileUpload = {
+      asJava.handler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.http.HttpServerFileUpload = {
+      asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+    /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
 
   type HttpServerOptions = io.vertx.core.http.HttpServerOptions
 
@@ -1451,6 +2081,118 @@ package object core{
   }
 
 
+
+  /**
+    * Represents a server-side HTTP request.
+    * 
+    * Instances are created for each request and passed to the user via a handler.
+    * 
+    * Each instance of this class is associated with a corresponding [[io.vertx.core.http.HttpServerResponse]] instance via
+    * [[io.vertx.core.http.HttpServerRequest#response]].
+    * It implements [[io.vertx.core.streams.ReadStream]] so it can be used with
+    * [[io.vertx.core.streams.Pump]] to pump data with flow control.
+    * 
+    */
+
+  implicit class HttpServerRequestScala(val asJava: io.vertx.core.http.HttpServerRequest) extends AnyVal {
+
+
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.http.HttpServerRequest = {
+      asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+
+    def handler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.HttpServerRequest = {
+      asJava.handler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.http.HttpServerRequest = {
+      asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[scheme]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def schemeOption(): scala.Option[java.lang.String] = {
+      scala.Option(asJava.scheme())
+    }
+
+
+    /**
+     * Like [[path]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pathOption(): scala.Option[java.lang.String] = {
+      scala.Option(asJava.path())
+    }
+
+
+    /**
+     * Like [[query]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def queryOption(): scala.Option[java.lang.String] = {
+      scala.Option(asJava.query())
+    }
+
+
+    /**
+     * Like [[host]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def hostOption(): scala.Option[java.lang.String] = {
+      scala.Option(asJava.host())
+    }
+
+
+    /**
+     * Like [[getHeader]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getHeaderOption(headerName: java.lang.String): scala.Option[java.lang.String] = {
+      scala.Option(asJava.getHeader(headerName))
+    }
+
+
+    /**
+     * Like [[getParam]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getParamOption(paramName: java.lang.String): scala.Option[java.lang.String] = {
+      scala.Option(asJava.getParam(paramName))
+    }
+
+
+    /**
+     * Like [[bodyHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def bodyHandler(bodyHandler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.HttpServerRequest = {
+      asJava.bodyHandler(bodyHandler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[uploadHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def uploadHandler(uploadHandler: scala.Option[io.vertx.core.http.HttpServerFileUpload => Unit]): io.vertx.core.http.HttpServerRequest = {
+      asJava.uploadHandler(uploadHandler match {case Some(t) => p:io.vertx.core.http.HttpServerFileUpload => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[getFormAttribute]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getFormAttributeOption(attributeName: java.lang.String): scala.Option[java.lang.String] = {
+      scala.Option(asJava.getFormAttribute(attributeName))
+    }
+
+    /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
 
 
   /**
@@ -1603,6 +2345,49 @@ package object core{
 
 
 
+  /**
+    * A parser class which allows to incrementally parse json elements and emit json parse events instead of parsing a json
+    * element fully. This parser is convenient for parsing large json structures.
+    * <p/>
+    * The parser also parses concatenated json streams or line delimited json streams.
+    * <p/>
+    * The parser can also parse entire object or array when it is convenient, for instance a very large array
+    * of small objects can be parsed efficiently by handling array <i>start</i>/<i>end</i> and <i>object</i>
+    * events.
+    * <p/>
+    * Whenever the parser fails to parse or process the stream, the [[io.vertx.core.parsetools.JsonParser#exceptionHandler]] is called with
+    * the cause of the failure and the current handling stops. After such event, the parser should not handle data
+    * anymore.
+    */
+
+  implicit class JsonParserScala(val asJava: io.vertx.core.parsetools.JsonParser) extends AnyVal {
+
+
+    def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.parsetools.JsonParser = {
+      asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    def handler(handler: scala.Option[io.vertx.core.parsetools.JsonEvent => Unit]): io.vertx.core.parsetools.JsonParser = {
+      asJava.handler(handler match {case Some(t) => p:io.vertx.core.parsetools.JsonEvent => t(p); case None => null})
+    }
+
+
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.parsetools.JsonParser = {
+      asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+    /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.parsetools.JsonEvent]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
 
 
 
@@ -1719,6 +2504,15 @@ package object core{
 
     def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.eventbus.MessageConsumer[T] = {
       asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+    /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.eventbus.Message[T]]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
     }
 
     /**
@@ -1987,6 +2781,15 @@ package object core{
     }
 
     /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
      * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def writeFuture(message: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
@@ -2082,6 +2885,42 @@ package object core{
 
 
 
+  /**
+    * Pipe data from a [[io.vertx.core.streams.ReadStream]] to a [[io.vertx.core.streams.WriteStream]] and performs flow control where necessary to
+    * prevent the write stream buffer from getting overfull.
+    * 
+    * Instances of this class read items from a [[io.vertx.core.streams.ReadStream]] and write them to a [[io.vertx.core.streams.WriteStream]]. If data
+    * can be read faster than it can be written this could result in the write queue of the [[io.vertx.core.streams.WriteStream]] growing
+    * without bound, eventually causing it to exhaust all available RAM.
+    * 
+    * To prevent this, after each write, instances of this class check whether the write queue of the [[io.vertx.core.streams.WriteStream]] is full, and if so, the [[io.vertx.core.streams.ReadStream]] is paused, and a `drainHandler` is set on the
+    * [[io.vertx.core.streams.WriteStream]].
+    * 
+    * When the [[io.vertx.core.streams.WriteStream]] has processed half of its backlog, the `drainHandler` will be
+    * called, which results in the pump resuming the [[io.vertx.core.streams.ReadStream]].
+    * 
+    * This class can be used to pipe from any [[io.vertx.core.streams.ReadStream]] to any [[io.vertx.core.streams.WriteStream]],
+    * e.g. from an [[io.vertx.core.http.HttpServerRequest]] to an [[io.vertx.core.file.AsyncFile]],
+    * or from [[io.vertx.core.net.NetSocket]] to a [[io.vertx.core.http.WebSocket]].
+    * 
+    * Please see the documentation for more information.
+
+    */
+
+  implicit class PipeScala[T](val asJava: io.vertx.core.streams.Pipe[T]) extends AnyVal {
+
+    /**
+     * Like [[to]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def toFuture(dst: io.vertx.core.streams.WriteStream[T]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.to(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
+
   type ProxyOptions = io.vertx.core.net.ProxyOptions
 
   object ProxyOptions {
@@ -2092,6 +2931,124 @@ package object core{
 
 
 
+  /**
+    * Represents a stream of items that can be read from.
+    * 
+    * Any class that implements this interface can be used by a [[io.vertx.core.streams.Pump]] to pump data from it
+    * to a [[io.vertx.core.streams.WriteStream]].
+    * 
+    * <h3>Streaming mode</h3>
+    * The stream is either in <i>flowing</i> or <i>fetch</i> mode.
+    * <ul>
+    *   <i>Initially the stream is in <i>flowing</i> mode.</i>
+    *   <li>When the stream is in <i>flowing</i> mode, elements are delivered to the `handler`.</li>
+    *   <li>When the stream is in <i>fetch</i> mode, only the number of requested elements will be delivered to the `handler`.</li>
+    * </ul>
+    * The mode can be changed with the [[io.vertx.core.streams.ReadStream#pause]], [[io.vertx.core.streams.ReadStream#resume]] and [[io.vertx.core.streams.ReadStream#fetch]] methods:
+    * <ul>
+    *   <li>Calling [[io.vertx.core.streams.ReadStream#resume]] sets the <i>flowing</i> mode</li>
+    *   <li>Calling [[io.vertx.core.streams.ReadStream#pause]] sets the <i>fetch</i> mode and resets the demand to `0`</li>
+    *   <li>Calling [[io.vertx.core.streams.ReadStream#fetch]] requests a specific amount of elements and adds it to the actual demand</li>
+    * </ul>
+    */
+
+  implicit class ReadStreamScala[T](val asJava: io.vertx.core.streams.ReadStream[T]) extends AnyVal {
+
+
+    /**
+     * Like [[exceptionHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.streams.ReadStream[T] = {
+      asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[handler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def handler(handler: scala.Option[T => Unit]): io.vertx.core.streams.ReadStream[T] = {
+      asJava.handler(handler match {case Some(t) => p:T => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[endHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.streams.ReadStream[T] = {
+      asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+    /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[T]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
+
+  /**
+    * A helper class which allows you to easily parse protocols which are delimited by a sequence of bytes, or fixed
+    * size records.
+    * 
+    * Instances of this class take as input [[io.vertx.core.buffer.Buffer]] instances containing raw bytes,
+    * and output records.
+    * 
+    * For example, if I had a simple ASCII text protocol delimited by '\n' and the input was the following:
+    * 
+    * <pre>
+    * buffer1:HELLO\nHOW ARE Y
+    * buffer2:OU?\nI AM
+    * buffer3: DOING OK
+    * buffer4:\n
+    * </pre>
+    * Then the output would be:
+    * <pre>
+    * buffer1:HELLO
+    * buffer2:HOW ARE YOU?
+    * buffer3:I AM DOING OK
+    * </pre>
+    * Instances of this class can be changed between delimited mode and fixed size record mode on the fly as
+    * individual records are read, this allows you to parse protocols where, for example, the first 5 records might
+    * all be fixed size (of potentially different sizes), followed by some delimited records, followed by more fixed
+    * size records.
+    * 
+    * Instances of this class can't currently be used for protocols where the text is encoded with something other than
+    * a 1-1 byte-char mapping.
+    * 
+    * Please see the documentation for more information.
+    */
+
+  implicit class RecordParserScala(val asJava: io.vertx.core.parsetools.RecordParser) extends AnyVal {
+
+
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.parsetools.RecordParser = {
+      asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+
+    def handler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.parsetools.RecordParser = {
+      asJava.handler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.parsetools.RecordParser = {
+      asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+    /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
 
 
   type RequestOptions = io.vertx.core.http.RequestOptions
@@ -2103,6 +3060,96 @@ package object core{
 
 
 
+
+  /**
+    * Represents a server side WebSocket.
+    * 
+    * Instances of this class are passed into a [[io.vertx.core.http.HttpServer#websocketHandler]] or provided
+    * when a WebSocket handshake is manually [[io.vertx.core.http.HttpServerRequest#upgrade]]ed.
+    */
+
+  implicit class ServerWebSocketScala(val asJava: io.vertx.core.http.ServerWebSocket) extends AnyVal {
+
+
+    /**
+     * Like [[textMessageHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def textMessageHandler(handler: scala.Option[java.lang.String => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.textMessageHandler(handler match {case Some(t) => p:java.lang.String => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[binaryMessageHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def binaryMessageHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.binaryMessageHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[pongHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pongHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.pongHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def close(statusCode: java.lang.Short,reason: scala.Option[java.lang.String]): Unit = {
+      asJava.close(statusCode, reason.orNull)
+    }
+
+
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.http.ServerWebSocket = {
+      asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+
+    def handler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.ServerWebSocket = {
+      asJava.handler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.http.ServerWebSocket = {
+      asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    def drainHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.ServerWebSocket = {
+      asJava.drainHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    def closeHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.ServerWebSocket = {
+      asJava.closeHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    def frameHandler(handler: scala.Option[io.vertx.core.http.WebSocketFrame => Unit]): io.vertx.core.http.ServerWebSocket = {
+      asJava.frameHandler(handler match {case Some(t) => p:io.vertx.core.http.WebSocketFrame => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[query]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def queryOption(): scala.Option[java.lang.String] = {
+      scala.Option(asJava.query())
+    }
+
+    /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
 
 
   /**
@@ -2144,6 +3191,15 @@ package object core{
     }
 
     /**
+     * Like [[getLocalAsyncMap]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getLocalAsyncMapFuture[K, V](name: java.lang.String): scala.concurrent.Future[io.vertx.core.shareddata.AsyncMap[K, V]] = {
+      val promise = Promise[io.vertx.core.shareddata.AsyncMap[K, V]]()
+      asJava.getLocalAsyncMap[K, V](name, {a:AsyncResult[io.vertx.core.shareddata.AsyncMap[K,V]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
      * Like [[getLock]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getLockFuture(name: java.lang.String): scala.concurrent.Future[io.vertx.core.shareddata.Lock] = {
@@ -2162,11 +3218,38 @@ package object core{
     }
 
     /**
+     * Like [[getLocalLock]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getLocalLockFuture(name: java.lang.String): scala.concurrent.Future[io.vertx.core.shareddata.Lock] = {
+      val promise = Promise[io.vertx.core.shareddata.Lock]()
+      asJava.getLocalLock(name, {a:AsyncResult[io.vertx.core.shareddata.Lock] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[getLocalLockWithTimeout]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getLocalLockWithTimeoutFuture(name: java.lang.String,timeout: java.lang.Long): scala.concurrent.Future[io.vertx.core.shareddata.Lock] = {
+      val promise = Promise[io.vertx.core.shareddata.Lock]()
+      asJava.getLocalLockWithTimeout(name, timeout, {a:AsyncResult[io.vertx.core.shareddata.Lock] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
      * Like [[getCounter]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getCounterFuture(name: java.lang.String): scala.concurrent.Future[io.vertx.core.shareddata.Counter] = {
       val promise = Promise[io.vertx.core.shareddata.Counter]()
       asJava.getCounter(name, {a:AsyncResult[io.vertx.core.shareddata.Counter] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[getLocalCounter]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getLocalCounterFuture(name: java.lang.String): scala.concurrent.Future[io.vertx.core.shareddata.Counter] = {
+      val promise = Promise[io.vertx.core.shareddata.Counter]()
+      asJava.getLocalCounter(name, {a:AsyncResult[io.vertx.core.shareddata.Counter] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -2186,6 +3269,52 @@ package object core{
 
 
 
+
+
+  /**
+    * A timeout stream is triggered by a timer, the scala-function will be call when the timer is fired,
+    * it can be once or several times depending on the nature of the timer related to this stream. The
+    *  will be called after the timer handler has been called.
+    * 
+    * Pausing the timer inhibits the timer shots until the stream is resumed. Setting a null handler callback cancels
+    * the timer.
+    */
+
+  implicit class TimeoutStreamScala(val asJava: io.vertx.core.TimeoutStream) extends AnyVal {
+
+
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.TimeoutStream = {
+      asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+
+    def handler(handler: scala.Option[java.lang.Long => Unit]): io.vertx.core.TimeoutStream = {
+      asJava.handler(handler match {case Some(t) => p:java.lang.Long => t(p); case None => null})
+    }
+
+
+    def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.TimeoutStream = {
+      asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+    /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[java.lang.Long]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
+
+  type TracingOptions = io.vertx.core.tracing.TracingOptions
+
+  object TracingOptions {
+    def apply() = new TracingOptions()
+    def apply(json: JsonObject) = new TracingOptions(json)
+  }
 
 
 
@@ -2336,6 +3465,173 @@ package object core{
 
 
 
+  /**
+    * Represents a client-side WebSocket.
+    */
+
+  implicit class WebSocketScala(val asJava: io.vertx.core.http.WebSocket) extends AnyVal {
+
+
+    /**
+     * Like [[textMessageHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def textMessageHandler(handler: scala.Option[java.lang.String => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.textMessageHandler(handler match {case Some(t) => p:java.lang.String => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[binaryMessageHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def binaryMessageHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.binaryMessageHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[pongHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pongHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.pongHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def close(statusCode: java.lang.Short,reason: scala.Option[java.lang.String]): Unit = {
+      asJava.close(statusCode, reason.orNull)
+    }
+
+
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.http.WebSocket = {
+      asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+
+    def handler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocket = {
+      asJava.handler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.http.WebSocket = {
+      asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    def drainHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.WebSocket = {
+      asJava.drainHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    def closeHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.WebSocket = {
+      asJava.closeHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    def frameHandler(handler: scala.Option[io.vertx.core.http.WebSocketFrame => Unit]): io.vertx.core.http.WebSocket = {
+      asJava.frameHandler(handler match {case Some(t) => p:io.vertx.core.http.WebSocketFrame => t(p); case None => null})
+    }
+
+    /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
+
+  /**
+    * Base WebSocket implementation.
+    * 
+    * It implements both  and  so it can be used with
+    * [[io.vertx.core.streams.Pipe]] to pipe data with flow control.
+    */
+
+  implicit class WebSocketBaseScala(val asJava: io.vertx.core.http.WebSocketBase) extends AnyVal {
+
+
+    def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
+    }
+
+
+    def handler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.handler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    def drainHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.drainHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[closeHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def closeHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.closeHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[frameHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def frameHandler(handler: scala.Option[io.vertx.core.http.WebSocketFrame => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.frameHandler(handler match {case Some(t) => p:io.vertx.core.http.WebSocketFrame => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[textMessageHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def textMessageHandler(handler: scala.Option[java.lang.String => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.textMessageHandler(handler match {case Some(t) => p:java.lang.String => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[binaryMessageHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def binaryMessageHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.binaryMessageHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[pongHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pongHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
+      asJava.pongHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def close(statusCode: java.lang.Short,reason: scala.Option[java.lang.String]): Unit = {
+      asJava.close(statusCode, reason.orNull)
+    }
+
+    /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
 
 
 
