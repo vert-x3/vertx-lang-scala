@@ -142,12 +142,30 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
   }
 
   /**
+   * Same as [[io.vertx.scala.core.net.NetSocket#write]] but with an `handler` called when the operation completes
+   */
+  
+  def write(str: String, handler: Handler[AsyncResult[Unit]]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+  /**
    * Write a String to the connection, encoded in UTF-8.   * @param str the string to write
    * @return a reference to this, so the API can be used fluently
    */
   
   def write(str: String): NetSocket = {
     asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String])
+    this
+  }
+
+  /**
+   * Same as [[io.vertx.scala.core.net.NetSocket#write]] but with an `handler` called when the operation completes
+   */
+  
+  def write(str: String, enc: String, handler: Handler[AsyncResult[Unit]]): NetSocket = {
+    asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -166,7 +184,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    * Like  but with an `handler` called when the message has been written
    * or failed to be written.
    */
-  
+  override 
   def write(message: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): NetSocket = {
     asJava.asInstanceOf[JNetSocket].write(message, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
@@ -280,10 +298,17 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
 
 
   /**
-   * Same as [[io.vertx.scala.core.net.NetSocket#end]] but writes some data to the stream before ending.
+   * Same as [[io.vertx.scala.core.net.NetSocket#end]] but writes some data to the stream before ending.   * @param data the data to write
    */
-  override def end(t: io.vertx.core.buffer.Buffer): Unit = {
-    asJava.asInstanceOf[JNetSocket].end(t)
+  override def end(data: io.vertx.core.buffer.Buffer): Unit = {
+    asJava.asInstanceOf[JNetSocket].end(data)
+  }
+
+  /**
+   * Same as  but with an `handler` called when the operation completes
+   */
+  override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JNetSocket].end(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -342,10 +367,24 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
   }
 
   /**
+   * Calls [[io.vertx.scala.core.net.NetSocket#end]]
+   */
+  override def end (handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JNetSocket].end({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
    * Close the NetSocket
    */
   def close (): Unit = {
     asJava.asInstanceOf[JNetSocket].close()
+  }
+
+  /**
+   * Close the NetSocket and notify the `handler` when the operation completes.
+   */
+  def close (handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JNetSocket].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -364,6 +403,16 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
 
 
  /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def endFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetSocket].end(data, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
   * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
   override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
@@ -376,7 +425,27 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
  /**
   * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def writeFuture (message: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+  def writeFuture (str: String): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def writeFuture (str: String, enc: String): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def writeFuture (message: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JNetSocket].write(message, promiseAndHandler._1)
@@ -410,6 +479,26 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Long], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def endFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetSocket].end(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def closeFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JNetSocket].close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

@@ -29,6 +29,8 @@ import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.HttpMethod
 import io.vertx.ext.web.client.{WebClientOptions => JWebClientOptions}
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
+import io.vertx.scala.core.net.SocketAddress
 import io.vertx.lang.scala.HandlerOps._
 
 /**
@@ -66,6 +68,18 @@ class WebClient(private val _asJava: Object) {
   }
 
   /**
+   * Like [[io.vertx.scala.ext.web.client.WebClient#request]] using the `serverAddress` parameter to connect to the
+   * server instead of the `port` and `host` parameters.
+   * 
+   * The request host header will still be created from the `port` and `host` parameters.
+   * 
+   * Use  to connect to a unix domain socket server.
+   */
+  def request (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, port: Int, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method, serverAddress.asJava.asInstanceOf[JSocketAddress], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
    * Create an HTTP request to send to the server at the specified host and default port.   * @param method the HTTP method
    * @param host the host
    * @param requestURI the relative URI
@@ -73,6 +87,18 @@ class WebClient(private val _asJava: Object) {
    */
   def request (method: io.vertx.core.http.HttpMethod, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
     HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method, host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+   * Like [[io.vertx.scala.ext.web.client.WebClient#request]] using the `serverAddress` parameter to connect to the
+   * server instead of the default port and `host` parameter.
+   * 
+   * The request host header will still be created from the default port and `host` parameter.
+   * 
+   * Use  to connect to a unix domain socket server.
+   */
+  def request (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method, serverAddress.asJava.asInstanceOf[JSocketAddress], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -85,6 +111,18 @@ class WebClient(private val _asJava: Object) {
   }
 
   /**
+   * Like [[io.vertx.scala.ext.web.client.WebClient#request]] using the `serverAddress` parameter to connect to the
+   * server instead of the default port and default host.
+   * 
+   * The request host header will still be created from the default port and default host.
+   * 
+   * Use  to connect to a unix domain socket server.
+   */
+  def request (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method, serverAddress.asJava.asInstanceOf[JSocketAddress], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
    * Create an HTTP request to send to the server at the specified host and port.   * @param method the HTTP method
    * @param options the request options see <a href="../../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @return an HTTP client request object
@@ -94,12 +132,36 @@ class WebClient(private val _asJava: Object) {
   }
 
   /**
+   * Like [[io.vertx.scala.ext.web.client.WebClient#request]] using the `serverAddress` parameter to connect to the
+   * server instead of the `options` parameter.
+   * 
+   * The request host header will still be created from the `options` parameter.
+   * 
+   * Use  to connect to a unix domain socket server.
+   */
+  def request (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, options: RequestOptions): HttpRequest[io.vertx.core.buffer.Buffer] = {
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].request(method, serverAddress.asJava.asInstanceOf[JSocketAddress], options.asJava))
+  }
+
+  /**
    * Create an HTTP request to send to the server using an absolute URI   * @param method the HTTP method
    * @param absoluteURI the absolute URI
    * @return an HTTP client request object
    */
   def requestAbs (method: io.vertx.core.http.HttpMethod, absoluteURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
     HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].requestAbs(method, absoluteURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+   * Like [[io.vertx.scala.ext.web.client.WebClient#requestAbs]] using the `serverAddress` parameter to connect to the
+   * server instead of the `absoluteURI` parameter.
+   * 
+   * The request host header will still be created from the `absoluteURI` parameter.
+   * 
+   * Use  to connect to a unix domain socket server.
+   */
+  def requestAbs (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, absoluteURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].requestAbs(method, serverAddress.asJava.asInstanceOf[JSocketAddress], absoluteURI.asInstanceOf[java.lang.String]))
   }
 
   /**

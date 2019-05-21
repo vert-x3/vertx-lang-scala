@@ -46,6 +46,16 @@ class CorsHandler(private val _asJava: Object) extends io.vertx.core.Handler[Rou
   }
 
   /**
+   * Add a set of  allowed methods   * @param methods the methods to add
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def allowedMethods(methods: scala.collection.mutable.Set[io.vertx.core.http.HttpMethod]): CorsHandler = {
+    asJava.asInstanceOf[JCorsHandler].allowedMethods(methods.asJava)
+    this
+  }
+
+  /**
    * Add an allowed header   * @param headerName the allowed header name
    * @return a reference to this, so the API can be used fluently
    */

@@ -464,7 +464,7 @@ Captures are denoted in regular expressions with capture groups (i.e. surroundin
 Using int index param names might be troublesome in some cases.
 It's possible to use named capture groups in the regex path.
 
-* [source,scala]
+[source,scala]
 ----
 
 // This regular expression matches paths that start with something like: "/foo/bar"
@@ -1643,7 +1643,7 @@ router.route("/private/somepath").handler((routingContext: io.vertx.scala.ext.we
 === JWT authorisation
 
 With JWT authorisation resources can be protected by means of permissions and users without enough rights are denied
-access.
+access. You need to add the `io.vertx:vertx-auth-jwt:${maven.version}` dependency to use `JWTAuthProvider`
 
 To use this handler there are 2 steps involved:
 

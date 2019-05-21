@@ -96,6 +96,15 @@ class HttpServerResponse(private val _asJava: Object) extends WriteStream[io.ver
     this
   }
 
+  /**
+   * Same as [[io.vertx.scala.core.http.HttpServerResponse#write]] but with an `handler` called when the operation completes
+   */
+  override 
+  def write(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): HttpServerResponse = {
+    asJava.asInstanceOf[JHttpServerResponse].write(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
 
   override 
   def setWriteQueueMaxSize(maxSize: Int): HttpServerResponse = {
@@ -209,12 +218,30 @@ class HttpServerResponse(private val _asJava: Object) extends WriteStream[io.ver
   }
 
   /**
+   * Same as [[io.vertx.scala.core.http.HttpServerResponse#write]] but with an `handler` called when the operation completes
+   */
+  
+  def write(chunk: String, enc: String, handler: Handler[AsyncResult[Unit]]): HttpServerResponse = {
+    asJava.asInstanceOf[JHttpServerResponse].write(chunk.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+  /**
    * Write a String to the response body, encoded in UTF-8.   * @param chunk the string to write
    * @return a reference to this, so the API can be used fluently
    */
   
   def write(chunk: String): HttpServerResponse = {
     asJava.asInstanceOf[JHttpServerResponse].write(chunk.asInstanceOf[java.lang.String])
+    this
+  }
+
+  /**
+   * Same as [[io.vertx.scala.core.http.HttpServerResponse#write]] but with an `handler` called when the operation completes
+   */
+  
+  def write(chunk: String, handler: Handler[AsyncResult[Unit]]): HttpServerResponse = {
+    asJava.asInstanceOf[JHttpServerResponse].write(chunk.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -422,6 +449,13 @@ class HttpServerResponse(private val _asJava: Object) extends WriteStream[io.ver
 
 
   /**
+   * Same as [[io.vertx.scala.core.http.HttpServerResponse#end]] but with an `handler` called when the operation completes
+   */
+  override def end (handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JHttpServerResponse].end({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.HttpServerResponse#setWriteQueueMaxSize]]   * @return true if write queue is full
    */
   override def writeQueueFull (): Boolean = {
@@ -457,6 +491,13 @@ class HttpServerResponse(private val _asJava: Object) extends WriteStream[io.ver
   }
 
   /**
+   * Same as [[io.vertx.scala.core.http.HttpServerResponse#end]] but with an `handler` called when the operation completes
+   */
+  def end (chunk: String, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
    * Same as [[io.vertx.scala.core.http.HttpServerResponse#end]] but writes a String with the specified encoding before ending the response.   * @param chunk the string to write before ending the response
    * @param enc the encoding to use
    */
@@ -465,11 +506,25 @@ class HttpServerResponse(private val _asJava: Object) extends WriteStream[io.ver
   }
 
   /**
+   * Same as [[io.vertx.scala.core.http.HttpServerResponse#end]] but with an `handler` called when the operation completes
+   */
+  def end (chunk: String, enc: String, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
    * Same as [[io.vertx.scala.core.http.HttpServerResponse#end]] but writes some data to the response body before ending. If the response is not chunked and
    * no other data has been written then the `Content-Length` header will be automatically set.   * @param chunk the buffer to write before ending the response
    */
   override def end (chunk: io.vertx.core.buffer.Buffer): Unit = {
     asJava.asInstanceOf[JHttpServerResponse].end(chunk)
+  }
+
+  /**
+   * Same as [[io.vertx.scala.core.http.HttpServerResponse#end]] but with an `handler` called when the operation completes
+   */
+  override def end (chunk: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -531,6 +586,76 @@ class HttpServerResponse(private val _asJava: Object) extends WriteStream[io.ver
     asJava.asInstanceOf[JHttpServerResponse].reset(code.asInstanceOf[java.lang.Long])
   }
 
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def endFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpServerResponse].end(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def writeFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpServerResponse].write(data, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def writeFuture (chunk: String, enc: String): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpServerResponse].write(chunk.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def writeFuture (chunk: String): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpServerResponse].write(chunk.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def endFuture (chunk: String): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def endFuture (chunk: String, enc: String): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def endFuture (chunk: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JHttpServerResponse].end(chunk, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
  /**
   * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.

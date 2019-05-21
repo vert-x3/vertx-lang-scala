@@ -130,6 +130,9 @@ In order to start receiving messages from Kafka topics, the consumer can use the
 `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#subscribe()[subscribe]` method for
 subscribing to a set of topics being part of a consumer group (specified by the properties on creation).
 
+It's also possible to use the `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#subscribe()[subscribe]` method for
+subscribing to more topics specifying a Java regex.
+
 You also need to register a handler for handling incoming messages using the
 `link:../../scaladocs/io/vertx/scala/kafka/client/consumer/KafkaConsumer.html#handler()[handler]`.
 
@@ -141,12 +144,16 @@ consumer.handler((record: io.vertx.scala.kafka.client.consumer.KafkaConsumerReco
   println(s"Processing key=${record.key()},value=${record.value()},partition=${record.partition()},offset=${record.offset()}")
 })
 
-// subscribe to several topics
+// subscribe to several topics with list
 var topics = new java.util.HashSet()
 topics.add("topic1")
 topics.add("topic2")
 topics.add("topic3")
 consumer.subscribe(topics)
+
+// or using a Java regex
+var pattern = java.util.regex.Pattern.compile("topic\\d")
+consumer.subscribe(pattern)
 
 // or just subscribe to a single topic
 consumer.subscribe("a-single-topic")
@@ -704,7 +711,7 @@ for ( i <- 0 until 5) {
   // only topic and message value are specified, round robin on destination partitions
   var record = KafkaProducerRecord.create("test", s"message_${i}")
 
-  producer.writeFuture(record).onComplete{
+  producer.sendFuture(record).onComplete{
     case Success(result) => {
 
       var recordMetadata = result

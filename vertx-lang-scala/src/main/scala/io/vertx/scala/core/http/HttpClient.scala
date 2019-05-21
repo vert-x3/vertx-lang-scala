@@ -16,22 +16,28 @@
 
 package io.vertx.scala.core.http
 
-import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.http.{RequestOptions => JRequestOptions}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.core.http.{HttpConnection => JHttpConnection}
 import scala.reflect.runtime.universe._
 import io.vertx.scala.core.Future
-import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.http.WebsocketVersion
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.core.http.{WebSocket => JWebSocket}
+import io.vertx.core.{MultiMap => JMultiMap}
+import io.vertx.core.AsyncResult
+import io.vertx.scala.core.net.SocketAddress
+import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.http.{WebSocketConnectOptions => JWebSocketConnectOptions}
+import io.vertx.scala.core.metrics.Measured
+import scala.collection.JavaConverters._
 import io.vertx.lang.scala.Converter._
 import io.vertx.core.http.{HttpClient => JHttpClient}
-import io.vertx.scala.core.streams.ReadStream
 import io.vertx.core.http.HttpMethod
 import io.vertx.core.{Future => JFuture}
 import io.vertx.core.http.{HttpClientResponse => JHttpClientResponse}
-import io.vertx.core.http.{WebSocket => JWebSocket}
-import io.vertx.core.{MultiMap => JMultiMap}
+import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.Handler
 import io.vertx.core.http.{HttpClientRequest => JHttpClientRequest}
@@ -736,6 +742,18 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
 
   /**
+   * Like [[io.vertx.scala.core.http.HttpClient#request]] using the `serverAddress` parameter to connect to the
+   * server instead of the `absoluteURI` parameter.
+   * 
+   * The request host header will still be created from the `options` parameter.
+   * 
+   * Use  to connect to a unix domain socket server.
+   */
+  def request (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, options: RequestOptions): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, serverAddress.asJava.asInstanceOf[JSocketAddress], options.asJava))
+  }
+
+  /**
    * Create an HTTP request to send to the server with the specified options.   * @param method the HTTP method
    * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @return an HTTP client request object
@@ -753,6 +771,18 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   def request (method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String): HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.http.HttpClient#request]] using the `serverAddress` parameter to connect to the
+   * server instead of the `absoluteURI` parameter.
+   * 
+   * The request host header will still be created from the `host` and `port` parameters.
+   * 
+   * Use  to connect to a unix domain socket server.
+   */
+  def request (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, port: Int, host: String, requestURI: String): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, serverAddress.asJava.asInstanceOf[JSocketAddress], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
   }
 
   /**
@@ -775,6 +805,18 @@ class HttpClient(private val _asJava: Object) extends Measured {
   }
 
   /**
+   * Like [[io.vertx.scala.core.http.HttpClient#request]] using the `serverAddress` parameter to connect to the
+   * server instead of the `absoluteURI` parameter.
+   * 
+   * The request host header will still be created from the `options` parameter.
+   * 
+   * Use  to connect to a unix domain socket server.
+   */
+  def request (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, serverAddress.asJava.asInstanceOf[JSocketAddress], options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  }
+
+  /**
    * Create an HTTP request to send to the server at the specified host and port, specifying a response handler to receive
    * the response   * @param method the HTTP method
    * @param port the port
@@ -785,6 +827,18 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   def request (method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.http.HttpClient#request]] using the `serverAddress` parameter to connect to the
+   * server instead of the `absoluteURI` parameter.
+   * 
+   * The request host header will still be created from the `host` and `port` parameters.
+   * 
+   * Use  to connect to a unix domain socket server.
+   */
+  def request (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, serverAddress.asJava.asInstanceOf[JSocketAddress], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
   /**
@@ -829,6 +883,18 @@ class HttpClient(private val _asJava: Object) extends Measured {
   }
 
   /**
+   * Like [[io.vertx.scala.core.http.HttpClient#requestAbs]] using the `serverAddress` parameter to connect to the
+   * server instead of the `absoluteURI` parameter.
+   * 
+   * The request host header will still be created from the `absoluteURI` parameter.
+   * 
+   * Use  to connect to a unix domain socket server.
+   */
+  def requestAbs (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, absoluteURI: String): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method, serverAddress.asJava.asInstanceOf[JSocketAddress], absoluteURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
    * Create an HTTP request to send to the server using an absolute URI, specifying a response handler to receive
    * the response   * @param method the HTTP method
    * @param absoluteURI the absolute URI
@@ -837,6 +903,18 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   def requestAbs (method: io.vertx.core.http.HttpMethod, absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
     HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method, absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.http.HttpClient#requestAbs]] using the `serverAddress` parameter to connect to the
+   * server instead of the `absoluteURI` parameter.
+   * 
+   * The request host header will still be created from the `absoluteURI` parameter.
+   * 
+   * Use  to connect to a unix domain socket server.
+   */
+  def requestAbs (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method, serverAddress.asJava.asInstanceOf[JSocketAddress], absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
   }
 
   /**
@@ -1416,6 +1494,52 @@ class HttpClient(private val _asJava: Object) extends Measured {
   }
 
   /**
+   * Connect a WebSocket to the specified port, host and relative request URI   * @param port the port
+   * @param host the host
+   * @param requestURI the relative URI
+   * @param handler handler that will be called with the websocket when connected
+   */
+  def webSocket (port: Int, host: String, requestURI: String, handler: Handler[AsyncResult[WebSocket]]): Unit = {
+    asJava.asInstanceOf[JHttpClient].webSocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JWebSocket] => handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))})
+  }
+
+  /**
+   * Connect a WebSocket to the host and relative request URI and default port   * @param host the host
+   * @param requestURI the relative URI
+   * @param handler handler that will be called with the websocket when connected
+   */
+  def webSocket (host: String, requestURI: String, handler: Handler[AsyncResult[WebSocket]]): Unit = {
+    asJava.asInstanceOf[JHttpClient].webSocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JWebSocket] => handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))})
+  }
+
+  /**
+   * Connect a WebSocket at the relative request URI using the default host and port   * @param requestURI the relative URI
+   * @param handler handler that will be called with the websocket when connected
+   */
+  def webSocket (requestURI: String, handler: Handler[AsyncResult[WebSocket]]): Unit = {
+    asJava.asInstanceOf[JHttpClient].webSocket(requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JWebSocket] => handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))})
+  }
+
+  /**
+   * Connect a WebSocket with the specified options.   * @param options the request options see <a href="../../../../../../../cheatsheet/WebSocketConnectOptions.html">WebSocketConnectOptions</a>
+   */
+  def webSocket (options: WebSocketConnectOptions, handler: Handler[AsyncResult[WebSocket]]): Unit = {
+    asJava.asInstanceOf[JHttpClient].webSocket(options.asJava, {x: AsyncResult[JWebSocket] => handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))})
+  }
+
+  /**
+   * Connect a WebSocket with the specified absolute url, with the specified headers, using
+   * the specified version of WebSockets, and the specified websocket sub protocols.   * @param url the absolute url
+   * @param headers the headers
+   * @param version the websocket version
+   * @param subProtocols the subprotocols to use
+   * @param handler handler that will be called if websocket connection fails
+   */
+  def webSocketAbs (url: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[WebSocket]]): Unit = {
+    asJava.asInstanceOf[JHttpClient].webSocketAbs(url.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JWebSocket] => handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))})
+  }
+
+  /**
    * Create a WebSocket stream with the specified options   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
    */
@@ -1607,6 +1731,56 @@ class HttpClient(private val _asJava: Object) extends Measured {
     asJava.asInstanceOf[JHttpClient].close()
   }
 
+
+ /**
+  * Like [[webSocket]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def webSocketFuture (port: Int, host: String, requestURI: String): scala.concurrent.Future[WebSocket] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JWebSocket, WebSocket](x => WebSocket(x))
+    asJava.asInstanceOf[JHttpClient].webSocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[webSocket]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def webSocketFuture (host: String, requestURI: String): scala.concurrent.Future[WebSocket] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JWebSocket, WebSocket](x => WebSocket(x))
+    asJava.asInstanceOf[JHttpClient].webSocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[webSocket]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def webSocketFuture (requestURI: String): scala.concurrent.Future[WebSocket] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JWebSocket, WebSocket](x => WebSocket(x))
+    asJava.asInstanceOf[JHttpClient].webSocket(requestURI.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[webSocket]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def webSocketFuture (options: WebSocketConnectOptions): scala.concurrent.Future[WebSocket] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JWebSocket, WebSocket](x => WebSocket(x))
+    asJava.asInstanceOf[JHttpClient].webSocket(options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[webSocketAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def webSocketAbsFuture (url: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: scala.collection.mutable.Buffer[String]): scala.concurrent.Future[WebSocket] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JWebSocket, WebSocket](x => WebSocket(x))
+    asJava.asInstanceOf[JHttpClient].webSocketAbs(url.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.map(x => x.asInstanceOf[java.lang.String]).asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 
