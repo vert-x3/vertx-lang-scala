@@ -28,6 +28,14 @@ import scala.collection.JavaConverters._
 class RequestOptions(private val _asJava: JRequestOptions) {
   def asJava = _asJava
   /**
+   * Add a request header.
+   */
+  def addHeader(key: String, value: String) = {
+    asJava.addHeader(key, value.asInstanceOf[java.lang.String])
+    this
+  }
+
+  /**
    * Set the host name to be used by the client request.
    */
   def setHost(value: String) = {

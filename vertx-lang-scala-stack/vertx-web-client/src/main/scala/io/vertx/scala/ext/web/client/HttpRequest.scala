@@ -146,6 +146,16 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
+   * Configure the request to add multiple HTTP headers .   * @param headers The HTTP headers
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def putHeaders(headers: MultiMap): HttpRequest[T] = {
+    asJava.asInstanceOf[JHttpRequest[Object]].putHeaders(headers.asJava.asInstanceOf[JMultiMap])
+    this
+  }
+
+  /**
    * Configure the request to add a new HTTP header.   * @param name the header name
    * @param value the header value
    * @return a reference to this, so the API can be used fluently

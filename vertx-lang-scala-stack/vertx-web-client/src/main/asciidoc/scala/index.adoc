@@ -14,15 +14,15 @@ features like:
 * unified error handling
 * form submissions
 
-The web client does not deprecate the Vert.x Core `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]`, indeed it is based on
+The Web Client does not deprecate the Vert.x Core `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]`, indeed it is based on
 this client and inherits its configuration and great features like pooling, HTTP/2 support, pipelining support, etc...
 The `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` should be used when fine grained control over the HTTP
 requests/responses is necessary.
 
-The web client does not provide a WebSocket API, the Vert.x Core `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` should
+The Web Client does not provide a WebSocket API, the Vert.x Core `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` should
 be used. It also does not handle cookies at the moment.
 
-== Using the web client
+== Using the Web Client
 
 To use Vert.x Web Client, add the following dependency to the _dependencies_ section of your build descriptor:
 
@@ -51,7 +51,7 @@ dependencies {
 Vert.x Web Client uses the API from Vert.x core, so it's well worth getting familiar with the basic concepts of using
 `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]` using Vert.x core, if you're not already.
 
-== Creating a web client
+== Creating a Web Client
 
 You create an `link:../../scaladocs/io/vertx/scala/ext/web/client/WebClient.html[WebClient]` instance with default options as follows
 
@@ -82,6 +82,9 @@ If your already have an HTTP Client in your application you can also reuse it
 var client = WebClient.wrap(httpClient)
 
 ----
+
+IMPORTANT: In most cases, a Web Client should be created once on application startup and then reused.
+Otherwise you lose a lot of benefits such as connection pooling and may leak resources if instances are not closed properly.
 
 == Making requests
 
@@ -190,7 +193,7 @@ client.post(8080, "myserver.mycompany.com", "/some-uri").sendBufferFuture(buffer
 
 Sending a single buffer is useful but often you don't want to load fully the content in memory because
 it may be too large or you want to handle many concurrent requests and want to use just the minimum
-for each request. For this purpose the web client can send `ReadStream<Buffer>` (e.g a
+for each request. For this purpose the Web Client can send `ReadStream<Buffer>` (e.g a
 `link:../../scaladocs/io/vertx/scala/core/file/AsyncFile.html[AsyncFile]` is a ReadStream<Buffer>`) with the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendStream(io.vertx.core.streams.ReadStream)[sendStream]` method
 
 [source,scala]
@@ -205,7 +208,7 @@ client.post(8080, "myserver.mycompany.com", "/some-uri").sendStreamFuture(stream
 
 ----
 
-The web client takes care of setting up the transfer pump for you. Since the length of the stream is not know
+The Web Client takes care of setting up the transfer pump for you. Since the length of the stream is not know
 the request will use chunked transfer encoding .
 
 When you know the size of the stream, you shall specify before using the `content-length` header
@@ -447,7 +450,7 @@ handler.
 
 == Handling http responses
 
-When the web client sends a request you always deal with a single async result `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpResponse.html[HttpResponse]`.
+When the Web Client sends a request you always deal with a single async result `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpResponse.html[HttpResponse]`.
 
 On a success result the callback happens after the response has been received
 
@@ -479,7 +482,7 @@ to pipe the response to a write stream
 
 === Decoding responses
 
-By default the web client provides an http response body as a `Buffer` and does not apply
+By default the Web Client provides an http response body as a `Buffer` and does not apply
 any decoding.
 
 Custom response body decoding can be achieved using `link:../../scaladocs/io/vertx/scala/ext/web/codec/BodyCodec.html[BodyCodec]`:
@@ -800,7 +803,7 @@ var client = WebClient.create(vertx, WebClientOptions()
 
 == Using HTTPS
 
-Vert.x web client can be configured to use HTTPS in exactly the same way as the Vert.x `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]`.
+Vert.x Web Client can be configured to use HTTPS in exactly the same way as the Vert.x `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]`.
 
 You can specify the behavior per request
 
@@ -881,3 +884,33 @@ to send different headers to different hosts, you have to add them manually to e
 ifeval::["scala" == "java"]
 include::override/rxjava2.adoc[]
 endif::[]
+
+== Domain sockets
+
+Since 3.7.1 the Web Client supports domain sockets, e.g you can interact with the https://docs.docker.com/engine/reference/commandline/dockerd/[local Docker daemon].
+
+To achieve this, the `link:../../scaladocs/io/vertx/scala/core/Vertx.html[Vertx]` instance must be created using a native transport, you can read
+the Vert.x core documentation that explains it clearly.
+
+[source,scala]
+----
+
+// Creates the unix domain socket address to access the Docker API
+var serverAddress = SocketAddress.domainSocketAddress("/var/run/docker.sock")
+
+// We still need to specify host and port so the request HTTP header will be localhost:8080
+// otherwise it will be a malformed HTTP request
+// the actual value does not matter much for this example
+client.request(HttpMethod.GET, serverAddress, 8080, "localhost", "/images/json").expect(ResponsePredicate.SC_ACCEPTED).as(BodyCodec.jsonObject()).sendFuture().onComplete{
+  case Success(result) => {
+    // Obtain response
+    var response = result
+
+    println(s"Current Docker images${response.body()}")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----

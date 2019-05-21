@@ -73,14 +73,31 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
     this
   }
 
+
+  override 
+  def write(data: KafkaProducerRecord[K, V], handler: Handler[AsyncResult[Unit]]): KafkaProducer[K, V] = {
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].write(data.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+  /**
+   * Asynchronously write a record to a topic   * @param record record to write
+   * @return current KafkaWriteStream instance
+   */
+  
+  def send(record: KafkaProducerRecord[K, V]): KafkaProducer[K, V] = {
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].send(record.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]])
+    this
+  }
+
   /**
    * Asynchronously write a record to a topic   * @param record record to write
    * @param handler handler called on operation completed
    * @return current KafkaWriteStream instance
    */
   
-  def write(record: KafkaProducerRecord[K, V], handler: Handler[AsyncResult[RecordMetadata]]): KafkaProducer[K, V] = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].write(record.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], {x: AsyncResult[JRecordMetadata] => handler.handle(AsyncResultWrapper[JRecordMetadata, RecordMetadata](x, a => RecordMetadata(a)))})
+  def send(record: KafkaProducerRecord[K, V], handler: Handler[AsyncResult[RecordMetadata]]): KafkaProducer[K, V] = {
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].send(record.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], {x: AsyncResult[JRecordMetadata] => handler.handle(AsyncResultWrapper[JRecordMetadata, RecordMetadata](x, a => RecordMetadata(a)))})
     this
   }
 
@@ -107,14 +124,24 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
 
 
 
+  override def end(data: KafkaProducerRecord[K, V]): Unit = {
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].end(data.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]])
+  }
+
+
+  override def end(data: KafkaProducerRecord[K, V], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].end(data.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+
 
   override def end (): Unit = {
     asJava.asInstanceOf[JKafkaProducer[Object, Object]].end()
   }
 
 
-  override def end (kafkaProducerRecord: KafkaProducerRecord[K, V]): Unit = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].end(kafkaProducerRecord.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]])
+  override def end (arg0: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].end({x: AsyncResult[Void] => arg0.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
 
@@ -145,13 +172,37 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
   }
 
 
+
+  override def endFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].end(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  override def endFuture (data: KafkaProducerRecord[K, V]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].end(data.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  override def writeFuture (data: KafkaProducerRecord[K, V]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].write(data.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
  /**
-  * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def writeFuture (record: KafkaProducerRecord[K, V]): scala.concurrent.Future[RecordMetadata] = {
+  def sendFuture (record: KafkaProducerRecord[K, V]): scala.concurrent.Future[RecordMetadata] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JRecordMetadata, RecordMetadata](x => RecordMetadata(x))
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].write(record.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], promiseAndHandler._1)
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].send(record.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

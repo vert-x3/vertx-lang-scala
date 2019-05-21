@@ -104,6 +104,22 @@ Set the sort document
 +++
 |===
 
+[[IndexModel]]
+== IndexModel
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[key]]`@key`|`Json object`|+++
+Get the index key
++++
+|[[options]]`@options`|`link:dataobjects.html#IndexOptions[IndexOptions]`|+++
+Get the index options
++++
+|===
+
 [[IndexOptions]]
 == IndexOptions
 

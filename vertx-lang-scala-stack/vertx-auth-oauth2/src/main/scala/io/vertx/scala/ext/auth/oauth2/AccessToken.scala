@@ -38,7 +38,6 @@ class AccessToken(private val _asJava: Object) extends User (_asJava) {
 
   private var cached_0: Option[io.vertx.core.json.JsonObject] = None
   private var cached_1: Option[io.vertx.core.json.JsonObject] = None
-  private var cached_2: Option[io.vertx.core.json.JsonObject] = None
 
 
   /**
@@ -53,25 +52,14 @@ class AccessToken(private val _asJava: Object) extends User (_asJava) {
   }
 
   /**
-   * The Refresh Token if present parsed as a JsonObject   * @return JSON
-   */
-  def refreshToken(): io.vertx.core.json.JsonObject = {
-    if (cached_1 == None) {
-      val tmp = asJava.asInstanceOf[JAccessToken].refreshToken()
-      cached_1 = Some(tmp)
-    }
-    cached_1.get
-  }
-
-  /**
    * The Id Token if present parsed as a JsonObject   * @return JSON
    */
   def idToken(): io.vertx.core.json.JsonObject = {
-    if (cached_2 == None) {
+    if (cached_1 == None) {
       val tmp = asJava.asInstanceOf[JAccessToken].idToken()
-      cached_2 = Some(tmp)
+      cached_1 = Some(tmp)
     }
-    cached_2.get
+    cached_1.get
   }
 
 
