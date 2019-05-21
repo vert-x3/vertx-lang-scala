@@ -553,14 +553,16 @@ class RoutingContext(private val _asJava: Object) {
   }
 
   /**
-   * Returns a map of all query parameters inside the <a href="https://en.wikipedia.org/wiki/Query_string">query string</a>   * @return the multimap of query parameters
+   * Returns a map of all query parameters inside the <a href="https://en.wikipedia.org/wiki/Query_string">query string</a><br/>
+   * The query parameters are lazily decoded: the decoding happens on the first time this method is called. If the query string is invalid
+   * it fails the context   * @return the multimap of query parameters
    */
   def queryParams (): MultiMap = {
     MultiMap(asJava.asInstanceOf[JRoutingContext].queryParams())
   }
 
   /**
-   * Gets the value of a single query parameter   * @param query The name of query parameter
+   * Gets the value of a single query parameter. For more info [[io.vertx.scala.ext.web.RoutingContext#queryParams]]   * @param query The name of query parameter
    * @return The list of all elements inside query parameter
    */
   def queryParam (query: String): scala.Option[scala.collection.mutable.Buffer[String]] = {

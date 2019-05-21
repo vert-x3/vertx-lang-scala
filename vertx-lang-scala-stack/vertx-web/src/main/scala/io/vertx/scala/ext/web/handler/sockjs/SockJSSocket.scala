@@ -115,6 +115,13 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
   override 
+  def write(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): SockJSSocket = {
+    asJava.asInstanceOf[JSockJSSocket].write(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+
+  override 
   def setWriteQueueMaxSize(maxSize: Int): SockJSSocket = {
     asJava.asInstanceOf[JSockJSSocket].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
@@ -129,8 +136,13 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
 
-  override def end(t: io.vertx.core.buffer.Buffer): Unit = {
-    asJava.asInstanceOf[JSockJSSocket].end(t)
+  override def end(data: io.vertx.core.buffer.Buffer): Unit = {
+    asJava.asInstanceOf[JSockJSSocket].end(data)
+  }
+
+
+  override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JSockJSSocket].end(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
 
@@ -148,6 +160,11 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
     asJava.asInstanceOf[JSockJSSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
+
+  def write(data: String, handler: Handler[AsyncResult[Unit]]): SockJSSocket = {
+    SockJSSocket(asJava.asInstanceOf[JSockJSSocket].write(data.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}))
+  }
+
   /**
    * Close it giving a status code and reason. Only Applicable to RawWebSocket will downgrade to plain close for
    * other transports.
@@ -156,6 +173,11 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
     asJava.asInstanceOf[JSockJSSocket].close(statusCode.asInstanceOf[java.lang.Integer], reason.asInstanceOf[java.lang.String])
   }
 
+
+
+  override def end (arg0: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JSockJSSocket].end({x: AsyncResult[Void] => arg0.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
 
 
   override def writeQueueFull (): Boolean = {
@@ -233,10 +255,42 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
 
+  override def endFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JSockJSSocket].end(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  override def endFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JSockJSSocket].end(data, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
   override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JSockJSSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  def writeFuture (data: String): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JSockJSSocket].write(data.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  override def writeFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JSockJSSocket].write(data, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

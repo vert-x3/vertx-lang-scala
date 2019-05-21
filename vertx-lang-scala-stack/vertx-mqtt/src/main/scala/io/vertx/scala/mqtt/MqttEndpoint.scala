@@ -440,6 +440,22 @@ class MqttEndpoint(private val _asJava: Object) {
   }
 
   /**
+   * Sends the PUBLISH message to the remote MQTT server explicitly specifying the messageId   * @param topic topic on which the message is published
+   * @param payload message payload
+   * @param qosLevel QoS level
+   * @param isDup if the message is a duplicate
+   * @param isRetain if the message needs to be retained
+   * @param messageId message ID
+   * @param publishSentHandler handler called after PUBLISH packet sent with a packetId
+   * @return current MQTT client instance
+   */
+  
+  def publish(topic: String, payload: io.vertx.core.buffer.Buffer, qosLevel: io.netty.handler.codec.mqtt.MqttQoS, isDup: Boolean, isRetain: Boolean, messageId: Int, publishSentHandler: Handler[AsyncResult[Int]]): MqttEndpoint = {
+    asJava.asInstanceOf[JMqttEndpoint].publish(topic.asInstanceOf[java.lang.String], payload, qosLevel, isDup.asInstanceOf[java.lang.Boolean], isRetain.asInstanceOf[java.lang.Boolean], messageId.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.Integer] => publishSentHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
+    this
+  }
+
+  /**
    * Sends the PINGRESP message to the remote MQTT client   * @return a reference to this, so the API can be used fluently
    */
   
@@ -507,6 +523,16 @@ class MqttEndpoint(private val _asJava: Object) {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => x.asInstanceOf[Int])
     asJava.asInstanceOf[JMqttEndpoint].publish(topic.asInstanceOf[java.lang.String], payload, qosLevel, isDup.asInstanceOf[java.lang.Boolean], isRetain.asInstanceOf[java.lang.Boolean], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def publishFuture (topic: String, payload: io.vertx.core.buffer.Buffer, qosLevel: io.netty.handler.codec.mqtt.MqttQoS, isDup: Boolean, isRetain: Boolean, messageId: Int): scala.concurrent.Future[Int] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => x.asInstanceOf[Int])
+    asJava.asInstanceOf[JMqttEndpoint].publish(topic.asInstanceOf[java.lang.String], payload, qosLevel, isDup.asInstanceOf[java.lang.Boolean], isRetain.asInstanceOf[java.lang.Boolean], messageId.asInstanceOf[java.lang.Integer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

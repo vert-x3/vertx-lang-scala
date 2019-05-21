@@ -54,6 +54,13 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
 
 
   override 
+  def write(data: T, handler: Handler[AsyncResult[Unit]]): MessageProducer[T] = {
+    asJava.asInstanceOf[JMessageProducer[Object]].write(toJava[T](data), {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+
+  override 
   def setWriteQueueMaxSize(maxSize: Int): MessageProducer[T] = {
     asJava.asInstanceOf[JMessageProducer[Object]].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
@@ -78,10 +85,17 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
 
 
   /**
-   * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.
+   * Same as [[io.vertx.scala.core.eventbus.MessageProducer#end]] but writes some data to the stream before ending.   * @param data the data to write
    */
-  override def end(t: T): Unit = {
-    asJava.asInstanceOf[JMessageProducer[Object]].end(toJava[T](t))
+  override def end(data: T): Unit = {
+    asJava.asInstanceOf[JMessageProducer[Object]].end(toJava[T](data))
+  }
+
+  /**
+   * Same as  but with an `handler` called when the operation completes
+   */
+  override def end(data: T, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JMessageProducer[Object]].end(toJava[T](data), {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
 
@@ -126,12 +140,36 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
   }
 
   /**
+   * Closes the producer, calls [[io.vertx.scala.core.eventbus.MessageProducer#close]]
+   */
+  override def end (handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JMessageProducer[Object]].end({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
    * Closes the producer, this method should be called when the message producer is not used anymore.
    */
   def close (): Unit = {
     asJava.asInstanceOf[JMessageProducer[Object]].close()
   }
 
+  /**
+   * Same as [[io.vertx.scala.core.eventbus.MessageProducer#close]] but with an `handler` called when the operation completes
+   */
+  def close (handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JMessageProducer[Object]].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def endFuture (data: T): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JMessageProducer[Object]].end(toJava[T](data), promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
  /**
   * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
@@ -140,6 +178,34 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
     asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message), promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  override def writeFuture (data: T): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JMessageProducer[Object]].write(toJava[T](data), promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def endFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JMessageProducer[Object]].end(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def closeFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JMessageProducer[Object]].close(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

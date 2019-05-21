@@ -191,6 +191,13 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
 
   override 
+  def write(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): WebSocket = {
+    asJava.asInstanceOf[JWebSocket].write(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+
+  override 
   def setWriteQueueMaxSize(maxSize: Int): WebSocket = {
     asJava.asInstanceOf[JWebSocket].setWriteQueueMaxSize(maxSize.asInstanceOf[java.lang.Integer])
     this
@@ -212,8 +219,22 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
 
   override 
+  def writeFrame(frame: WebSocketFrame, handler: Handler[AsyncResult[Unit]]): WebSocket = {
+    asJava.asInstanceOf[JWebSocket].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+
+  override 
   def writeFinalTextFrame(text: String): WebSocket = {
     asJava.asInstanceOf[JWebSocket].writeFinalTextFrame(text.asInstanceOf[java.lang.String])
+    this
+  }
+
+
+  override 
+  def writeFinalTextFrame(text: String, handler: Handler[AsyncResult[Unit]]): WebSocket = {
+    asJava.asInstanceOf[JWebSocket].writeFinalTextFrame(text.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -226,6 +247,13 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
 
   override 
+  def writeFinalBinaryFrame(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): WebSocket = {
+    asJava.asInstanceOf[JWebSocket].writeFinalBinaryFrame(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+
+  override 
   def writeBinaryMessage(data: io.vertx.core.buffer.Buffer): WebSocket = {
     asJava.asInstanceOf[JWebSocket].writeBinaryMessage(data)
     this
@@ -233,8 +261,22 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
 
   override 
+  def writeBinaryMessage(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): WebSocket = {
+    asJava.asInstanceOf[JWebSocket].writeBinaryMessage(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+
+  override 
   def writeTextMessage(text: String): WebSocket = {
     asJava.asInstanceOf[JWebSocket].writeTextMessage(text.asInstanceOf[java.lang.String])
+    this
+  }
+
+
+  override 
+  def writeTextMessage(text: String, handler: Handler[AsyncResult[Unit]]): WebSocket = {
+    asJava.asInstanceOf[JWebSocket].writeTextMessage(text.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -254,10 +296,17 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
 
   /**
-   * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.
+   * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.   * @param data the data to write
    */
-  override def end(t: io.vertx.core.buffer.Buffer): Unit = {
-    asJava.asInstanceOf[JWebSocket].end(t)
+  override def end(data: io.vertx.core.buffer.Buffer): Unit = {
+    asJava.asInstanceOf[JWebSocket].end(data)
+  }
+
+  /**
+   * Same as  but with an `handler` called when the operation completes
+   */
+  override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JWebSocket].end(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -338,12 +387,26 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
   }
 
   /**
+   * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
+   */
+  override def end (handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JWebSocket].end({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
    * Close the WebSocket sending the default close frame.
    * <p/>
    * No more messages can be sent.
    */
   override def close (): Unit = {
     asJava.asInstanceOf[JWebSocket].close()
+  }
+
+  /**
+   * Same as [[io.vertx.scala.core.http.WebSocketBase#close]] but with an `handler` called when the operation completes
+   */
+  override def close (handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JWebSocket].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -354,6 +417,13 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
    */
   override def close (statusCode: Short): Unit = {
     asJava.asInstanceOf[JWebSocket].close(statusCode.asInstanceOf[java.lang.Short])
+  }
+
+  /**
+   * Same as [[io.vertx.scala.core.http.WebSocketBase#close]] but with an `handler` called when the operation completes
+   */
+  override def close (statusCode: Short, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JWebSocket].close(statusCode.asInstanceOf[java.lang.Short], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
   /**
@@ -368,6 +438,13 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
   }
 
   /**
+   * Same as  but with an `handler` called when the operation completes
+   */
+  override def close (statusCode: Short, reason: scala.Option[String], handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JWebSocket].close(statusCode.asInstanceOf[java.lang.Short], reason.map(x => x.asInstanceOf[java.lang.String]).orNull, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
    * @return true if this io.vertx.scala.core.http.HttpConnection is encrypted via SSL/TLS.
    */
   override def isSsl (): Boolean = {
@@ -376,12 +453,110 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
 
  /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def endFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWebSocket].end(data, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
   * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
   override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JWebSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def endFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWebSocket].end(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def closeFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWebSocket].close(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def closeFuture (statusCode: Short): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWebSocket].close(statusCode.asInstanceOf[java.lang.Short], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def closeFuture (statusCode: Short, reason: scala.Option[String]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWebSocket].close(statusCode.asInstanceOf[java.lang.Short], reason.map(x => x.asInstanceOf[java.lang.String]).orNull, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  override def writeFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWebSocket].write(data, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  override def writeFrameFuture (frame: WebSocketFrame): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWebSocket].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  override def writeFinalTextFrameFuture (text: String): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWebSocket].writeFinalTextFrame(text.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  override def writeFinalBinaryFrameFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWebSocket].writeFinalBinaryFrame(data, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  override def writeBinaryMessageFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWebSocket].writeBinaryMessage(data, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  override def writeTextMessageFuture (text: String): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWebSocket].writeTextMessage(text.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

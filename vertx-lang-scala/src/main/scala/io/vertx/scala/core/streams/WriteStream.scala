@@ -17,7 +17,9 @@
 package io.vertx.scala.core.streams
 
 import io.vertx.core.streams.{StreamBase => JStreamBase}
+import io.vertx.lang.scala.AsyncResultWrapper
 import scala.reflect.runtime.universe._
+import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.lang.scala.HandlerOps._
@@ -27,7 +29,7 @@ import io.vertx.lang.scala.Converter._
   *
   * Represents a stream of data that can be written to.
   * 
-  * Any class that implements this interface can be used by a [[io.vertx.scala.core.streams.Pump]] to pump data from a `ReadStream`
+  * Any class that implements this interface can be used by a [[io.vertx.scala.core.streams.Pipe]] to pipe data from a `ReadStream`
   * to it.
   */
 
@@ -45,14 +47,23 @@ override def exceptionHandler ( handler: Handler[Throwable]): WriteStream[T]    
    * @return a reference to this, so the API can be used fluently
    */
 def write ( data: T): WriteStream[T]    /**
+   * Same as  but with an `handler` called when the operation completes
+   */
+def write ( data: T, handler: Handler[AsyncResult[Unit]]): WriteStream[T]    /**
    * Ends the stream.
    * 
    * Once the stream has ended, it cannot be used any more.
    */
 def end ( ): Unit    /**
-   * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
+   * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but with an `handler` called when the operation completes
    */
-def end ( t: T): Unit    /**
+def end ( handler: Handler[AsyncResult[Unit]]): Unit    /**
+   * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.   * @param data the data to write
+   */
+def end ( data: T): Unit    /**
+   * Same as  but with an `handler` called when the operation completes
+   */
+def end ( data: T, handler: Handler[AsyncResult[Unit]]): Unit    /**
    * Set the maximum size of the write queue to `maxSize`. You will still be able to write to the stream even
    * if there is more than `maxSize` items in the write queue. This is used as an indicator by classes such as
    * `Pump` to provide flow control.
@@ -75,7 +86,16 @@ def writeQueueFull ( ): Boolean    /**
    */
 def drainHandler ( handler: Handler[Unit]): WriteStream[T]
 
-
+   /**
+  * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+def writeFuture ( data: T): scala.concurrent.Future[Unit]   /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+def endFuture ( ): scala.concurrent.Future[Unit]   /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+def endFuture ( data: T): scala.concurrent.Future[Unit]
 }
 
 object WriteStream {
@@ -104,6 +124,15 @@ object WriteStream {
   
   def write(data: T): WriteStream[T] = {
     asJava.asInstanceOf[JWriteStream[Object]].write(toJava[T](data))
+    this
+  }
+
+  /**
+   * Same as  but with an `handler` called when the operation completes
+   */
+  
+  def write(data: T, handler: Handler[AsyncResult[Unit]]): WriteStream[T] = {
+    asJava.asInstanceOf[JWriteStream[Object]].write(toJava[T](data), {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -139,10 +168,17 @@ object WriteStream {
 
 
   /**
-   * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.
+   * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but writes some data to the stream before ending.   * @param data the data to write
    */
-  def end(t: T): Unit = {
-    asJava.asInstanceOf[JWriteStream[Object]].end(toJava[T](t))
+  def end(data: T): Unit = {
+    asJava.asInstanceOf[JWriteStream[Object]].end(toJava[T](data))
+  }
+
+  /**
+   * Same as  but with an `handler` called when the operation completes
+   */
+  def end(data: T, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JWriteStream[Object]].end(toJava[T](data), {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
   }
 
 
@@ -156,12 +192,49 @@ object WriteStream {
   }
 
   /**
+   * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but with an `handler` called when the operation completes
+   */
+  def end (handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JWriteStream[Object]].end({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+  }
+
+  /**
    * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.streams.WriteStream#setWriteQueueMaxSize]]   * @return true if write queue is full
    */
   def writeQueueFull (): Boolean = {
     asJava.asInstanceOf[JWriteStream[Object]].writeQueueFull().asInstanceOf[Boolean]
   }
 
+
+ /**
+  * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def writeFuture (data: T): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWriteStream[Object]].write(toJava[T](data), promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def endFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWriteStream[Object]].end(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def endFuture (data: T): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWriteStream[Object]].end(toJava[T](data), promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 }

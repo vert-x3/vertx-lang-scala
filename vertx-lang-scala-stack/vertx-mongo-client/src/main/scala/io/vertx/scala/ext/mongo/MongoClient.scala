@@ -17,26 +17,27 @@
 package io.vertx.scala.ext.mongo
 
 import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.ext.mongo.WriteOption
-import io.vertx.ext.mongo.{MongoClientBulkWriteResult => JMongoClientBulkWriteResult}
 import io.vertx.ext.mongo.{MongoClient => JMongoClient}
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
-import io.vertx.ext.mongo.{MongoClientDeleteResult => JMongoClientDeleteResult}
 import io.vertx.ext.mongo.{FindOptions => JFindOptions}
+import io.vertx.scala.core.Vertx
+import io.vertx.scala.core.streams.ReadStream
+import io.vertx.ext.mongo.{IndexModel => JIndexModel}
+import io.vertx.ext.mongo.{BulkWriteOptions => JBulkWriteOptions}
+import io.vertx.ext.mongo.{UpdateOptions => JUpdateOptions}
+import io.vertx.core.json.JsonObject
+import io.vertx.core.AsyncResult
+import io.vertx.ext.mongo.WriteOption
+import io.vertx.ext.mongo.{MongoClientBulkWriteResult => JMongoClientBulkWriteResult}
+import io.vertx.ext.mongo.{MongoClientDeleteResult => JMongoClientDeleteResult}
 import scala.collection.JavaConverters._
 import io.vertx.ext.mongo.{IndexOptions => JIndexOptions}
-import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.Converter._
 import io.vertx.core.json.JsonArray
-import io.vertx.scala.core.streams.ReadStream
 import io.vertx.ext.mongo.{BulkOperation => JBulkOperation}
-import io.vertx.ext.mongo.{BulkWriteOptions => JBulkWriteOptions}
-import io.vertx.ext.mongo.{UpdateOptions => JUpdateOptions}
 import io.vertx.ext.mongo.{AggregateOptions => JAggregateOptions}
-import io.vertx.core.json.JsonObject
-import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.ext.mongo.{MongoClientUpdateResult => JMongoClientUpdateResult}
 import io.vertx.lang.scala.HandlerOps._
@@ -510,6 +511,17 @@ class MongoClient(private val _asJava: Object) {
   
   def createIndexWithOptions(collection: String, key: io.vertx.core.json.JsonObject, options: IndexOptions, resultHandler: Handler[AsyncResult[Unit]]): MongoClient = {
     asJava.asInstanceOf[JMongoClient].createIndexWithOptions(collection.asInstanceOf[java.lang.String], key, options.asJava, {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    this
+  }
+
+  /**
+   * creates an indexes   * @param collection the collection
+   * @param indexes A model that contains pairs of document and indexOptions, document contains the field and value pairs where the field is the index key and the value describes the type of index for that field. For an ascending index on a field, specify a value of 1; for descending index, specify a value of -1.
+   * @param resultHandler will be called when complete
+   */
+  
+  def createIndexes(collection: String, indexes: scala.collection.mutable.Buffer[IndexModel], resultHandler: Handler[AsyncResult[Unit]]): MongoClient = {
+    asJava.asInstanceOf[JMongoClient].createIndexes(collection.asInstanceOf[java.lang.String], indexes.map(x => x.asJava).asJava, {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
     this
   }
 
@@ -1021,6 +1033,16 @@ class MongoClient(private val _asJava: Object) {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JMongoClient].createIndexWithOptions(collection.asInstanceOf[java.lang.String], key, options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[createIndexes]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def createIndexesFuture (collection: String, indexes: scala.collection.mutable.Buffer[IndexModel]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JMongoClient].createIndexes(collection.asInstanceOf[java.lang.String], indexes.map(x => x.asJava).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
