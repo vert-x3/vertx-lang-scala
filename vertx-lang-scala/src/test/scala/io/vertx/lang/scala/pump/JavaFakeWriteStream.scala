@@ -3,6 +3,8 @@ package io.vertx.lang.scala.pump
 import java.util.ArrayList
 
 import io.vertx.core.Handler
+import io.vertx.core.AsyncResult
+import io.vertx.core.Future
 import io.vertx.core.streams.WriteStream
 
 /**
@@ -41,9 +43,20 @@ class JavaFakeWriteStream[T] extends WriteStream[T] {
     this
   }
 
+  override def write(data: T, handler: Handler[AsyncResult[Void]]) = {
+    received.add(data)
+    handler.handle(Future.succeededFuture())
+    this
+  }
+
   override def exceptionHandler(handler: Handler[Throwable] ) = {
     this
   }
 
   override def end() {}
+
+  override def end(handler: Handler[AsyncResult[Void]]) = {
+    handler.handle(Future.succeededFuture())
+    this
+  }
 }
