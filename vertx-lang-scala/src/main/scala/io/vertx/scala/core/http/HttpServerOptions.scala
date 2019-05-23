@@ -578,6 +578,30 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions) extends ExtNetS
   }
 
   /**
+   * Set the SSL handshake timeout, default time unit is seconds.
+   */
+  override def setSslHandshakeTimeout(value: Long) = {
+    asJava.setSslHandshakeTimeout(value)
+    this
+  }
+
+  override def getSslHandshakeTimeout: Long = {
+    asJava.getSslHandshakeTimeout().asInstanceOf[Long]
+  }
+
+  /**
+   * Set the SSL handshake timeout unit. If not specified, default is seconds.
+   */
+  override def setSslHandshakeTimeoutUnit(value: java.util.concurrent.TimeUnit) = {
+    asJava.setSslHandshakeTimeoutUnit(value)
+    this
+  }
+
+  override def getSslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = {
+    asJava.getSslHandshakeTimeoutUnit()
+  }
+
+  /**
    * Enable the `TCP_CORK` option - only with linux native transport.
    */
   override def setTcpCork(value: Boolean) = {

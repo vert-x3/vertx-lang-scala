@@ -172,6 +172,20 @@ trait TCPSSLOptions extends ExtNetworkOptions {
   def isSsl: Boolean
 
   /**
+   * Set the SSL handshake timeout, default time unit is seconds.
+   */
+  def setSslHandshakeTimeout(value: Long): TCPSSLOptions
+
+  def getSslHandshakeTimeout: Long
+
+  /**
+   * Set the SSL handshake timeout unit. If not specified, default is seconds.
+   */
+  def setSslHandshakeTimeoutUnit(value: java.util.concurrent.TimeUnit): TCPSSLOptions
+
+  def getSslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit
+
+  /**
    * Enable the `TCP_CORK` option - only with linux native transport.
    */
   def setTcpCork(value: Boolean): TCPSSLOptions

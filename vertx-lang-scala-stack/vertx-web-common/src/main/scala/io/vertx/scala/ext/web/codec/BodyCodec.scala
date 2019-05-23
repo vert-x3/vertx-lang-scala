@@ -102,11 +102,22 @@ object BodyCodec {
   }
 
   /**
-   * A body codec that pipes the body to a write stream.   * @param stream the destination tream
+   * A body codec that pipes the body to a write stream.
+   * </p>
+   * Same as pipe(stream, true).   * @param stream the destination tream
    * @return the body codec for a write stream
    */
   def pipe(stream: WriteStream[io.vertx.core.buffer.Buffer]): BodyCodec[Unit] = {
     BodyCodec[Unit](JBodyCodec.pipe(stream.asJava.asInstanceOf[JWriteStream[Buffer]]))
+  }
+
+  /**
+   * A body codec that pipes the body to a write stream.   * @param stream the destination stream
+   * @param close whether the destination stream should be closed
+   * @return the body codec for a write stream
+   */
+  def pipe(stream: WriteStream[io.vertx.core.buffer.Buffer],close: Boolean): BodyCodec[Unit] = {
+    BodyCodec[Unit](JBodyCodec.pipe(stream.asJava.asInstanceOf[JWriteStream[Buffer]], close.asInstanceOf[java.lang.Boolean]))
   }
 
 }

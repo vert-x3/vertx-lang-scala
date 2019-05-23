@@ -122,6 +122,8 @@ Sets the STOMP server port. <code>61613</code> by default.
 |[[sendBufferSize]]`@sendBufferSize`|`Number (int)`|-
 |[[soLinger]]`@soLinger`|`Number (int)`|-
 |[[ssl]]`@ssl`|`Boolean`|-
+|[[sslHandshakeTimeout]]`@sslHandshakeTimeout`|`Number (long)`|-
+|[[sslHandshakeTimeoutUnit]]`@sslHandshakeTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|-
 |[[tcpCork]]`@tcpCork`|`Boolean`|-
 |[[tcpFastOpen]]`@tcpFastOpen`|`Boolean`|-
 |[[tcpKeepAlive]]`@tcpKeepAlive`|`Boolean`|-
@@ -215,6 +217,8 @@ Sets whether or not an error is sent to the client when this client sends a mess
 |[[sni]]`@sni`|`Boolean`|-
 |[[soLinger]]`@soLinger`|`Number (int)`|-
 |[[ssl]]`@ssl`|`Boolean`|-
+|[[sslHandshakeTimeout]]`@sslHandshakeTimeout`|`Number (long)`|-
+|[[sslHandshakeTimeoutUnit]]`@sslHandshakeTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|-
 |[[supportedVersions]]`@supportedVersions`|`Array of String`|+++
 Sets the STOMP protocol versions supported by the server. Versions must be given in the decreasing order.
 +++

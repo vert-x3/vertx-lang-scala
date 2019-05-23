@@ -385,6 +385,24 @@ class StompServerOptions(private val _asJava: JStompServerOptions) extends ExtNe
     asJava.isSsl().asInstanceOf[Boolean]
   }
 
+  override def setSslHandshakeTimeout(value: Long) = {
+    asJava.setSslHandshakeTimeout(value)
+    this
+  }
+
+  override def getSslHandshakeTimeout: Long = {
+    asJava.getSslHandshakeTimeout().asInstanceOf[Long]
+  }
+
+  override def setSslHandshakeTimeoutUnit(value: java.util.concurrent.TimeUnit) = {
+    asJava.setSslHandshakeTimeoutUnit(value)
+    this
+  }
+
+  override def getSslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = {
+    asJava.getSslHandshakeTimeoutUnit()
+  }
+
   /**
    * Sets the STOMP protocol versions supported by the server. Versions must be given in the decreasing order.
    */

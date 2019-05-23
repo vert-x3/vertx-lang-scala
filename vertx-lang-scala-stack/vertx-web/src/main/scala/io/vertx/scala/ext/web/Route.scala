@@ -220,6 +220,13 @@ class Route(private val _asJava: Object) {
     scala.Option(asJava.asInstanceOf[JRoute].getPath().asInstanceOf[String])
   }
 
+  /**
+   * @return the http methods accepted by this route
+   */
+  def methods (): scala.collection.mutable.Set[io.vertx.core.http.HttpMethod] = {
+    asJava.asInstanceOf[JRoute].methods().asScala
+  }
+
 
 }
 

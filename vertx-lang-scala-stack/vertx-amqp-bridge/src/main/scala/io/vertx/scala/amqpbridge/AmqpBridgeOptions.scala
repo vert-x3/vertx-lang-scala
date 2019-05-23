@@ -357,6 +357,24 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) extends ExtProt
     asJava.isSsl().asInstanceOf[Boolean]
   }
 
+  override def setSslHandshakeTimeout(value: Long) = {
+    asJava.setSslHandshakeTimeout(value)
+    this
+  }
+
+  override def getSslHandshakeTimeout: Long = {
+    asJava.getSslHandshakeTimeout().asInstanceOf[Long]
+  }
+
+  override def setSslHandshakeTimeoutUnit(value: java.util.concurrent.TimeUnit) = {
+    asJava.setSslHandshakeTimeoutUnit(value)
+    this
+  }
+
+  override def getSslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = {
+    asJava.getSslHandshakeTimeoutUnit()
+  }
+
   override def setTcpCork(value: Boolean) = {
     asJava.setTcpCork(value)
     this
