@@ -192,14 +192,14 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JHttpServerRequest].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[io.vertx.core.buffer.Buffer]): HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].handler({x: Buffer => handler.handle(x)})
+    asJava.asInstanceOf[JHttpServerRequest].handler((if (handler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {handler.handle(x)}}))
     this
   }
 
@@ -227,7 +227,7 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
 
   override 
   def endHandler(endHandler: Handler[Unit]): HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JHttpServerRequest].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -239,7 +239,7 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
    */
   
   def bodyHandler(bodyHandler: Handler[io.vertx.core.buffer.Buffer]): HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].bodyHandler({x: Buffer => bodyHandler.handle(x)})
+    asJava.asInstanceOf[JHttpServerRequest].bodyHandler((if (bodyHandler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {bodyHandler.handle(x)}}))
     this
   }
 
@@ -260,7 +260,7 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
    */
   
   def uploadHandler(uploadHandler: Handler[HttpServerFileUpload]): HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].uploadHandler({x: JHttpServerFileUpload => uploadHandler.handle(HttpServerFileUpload(x))})
+    asJava.asInstanceOf[JHttpServerRequest].uploadHandler((if (uploadHandler == null) null else new io.vertx.core.Handler[JHttpServerFileUpload]{def handle(x: JHttpServerFileUpload) {uploadHandler.handle(HttpServerFileUpload(x))}}))
     this
   }
 
@@ -270,7 +270,7 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
    */
   
   def customFrameHandler(handler: Handler[HttpFrame]): HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].customFrameHandler({x: JHttpFrame => handler.handle(HttpFrame(x))})
+    asJava.asInstanceOf[JHttpServerRequest].customFrameHandler((if (handler == null) null else new io.vertx.core.Handler[JHttpFrame]{def handle(x: JHttpFrame) {handler.handle(HttpFrame(x))}}))
     this
   }
 
@@ -281,7 +281,7 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
    */
   
   def streamPriorityHandler(handler: Handler[StreamPriority]): HttpServerRequest = {
-    asJava.asInstanceOf[JHttpServerRequest].streamPriorityHandler({x: JStreamPriority => handler.handle(StreamPriority(x))})
+    asJava.asInstanceOf[JHttpServerRequest].streamPriorityHandler((if (handler == null) null else new io.vertx.core.Handler[JStreamPriority]{def handle(x: JStreamPriority) {handler.handle(StreamPriority(x))}}))
     this
   }
 
@@ -311,7 +311,7 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
    * called with the result.   * @param dst the destination write stream
    */
   override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JHttpServerRequest].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpServerRequest].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

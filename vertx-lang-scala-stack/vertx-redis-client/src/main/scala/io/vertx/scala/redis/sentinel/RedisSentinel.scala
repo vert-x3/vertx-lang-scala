@@ -43,7 +43,7 @@ class RedisSentinel(private val _asJava: Object) {
    */
   
   def masters(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisSentinel = {
-    asJava.asInstanceOf[JRedisSentinel].masters({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisSentinel].masters((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -53,7 +53,7 @@ class RedisSentinel(private val _asJava: Object) {
    */
   
   def master(name: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisSentinel = {
-    asJava.asInstanceOf[JRedisSentinel].master(name.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisSentinel].master(name.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -63,7 +63,7 @@ class RedisSentinel(private val _asJava: Object) {
    */
   
   def slaves(name: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisSentinel = {
-    asJava.asInstanceOf[JRedisSentinel].slaves(name.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisSentinel].slaves(name.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -73,7 +73,7 @@ class RedisSentinel(private val _asJava: Object) {
    */
   
   def sentinels(name: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisSentinel = {
-    asJava.asInstanceOf[JRedisSentinel].sentinels(name.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisSentinel].sentinels(name.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -85,7 +85,7 @@ class RedisSentinel(private val _asJava: Object) {
    */
   
   def getMasterAddrByName(name: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisSentinel = {
-    asJava.asInstanceOf[JRedisSentinel].getMasterAddrByName(name.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisSentinel].getMasterAddrByName(name.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -97,7 +97,7 @@ class RedisSentinel(private val _asJava: Object) {
    */
   
   def reset(pattern: String, handler: Handler[AsyncResult[Unit]]): RedisSentinel = {
-    asJava.asInstanceOf[JRedisSentinel].reset(pattern.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisSentinel].reset(pattern.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -109,7 +109,7 @@ class RedisSentinel(private val _asJava: Object) {
    */
   
   def failover(name: String, handler: Handler[AsyncResult[String]]): RedisSentinel = {
-    asJava.asInstanceOf[JRedisSentinel].failover(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisSentinel].failover(name.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -121,7 +121,7 @@ class RedisSentinel(private val _asJava: Object) {
    */
   
   def ckquorum(name: String, handler: Handler[AsyncResult[String]]): RedisSentinel = {
-    asJava.asInstanceOf[JRedisSentinel].ckquorum(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisSentinel].ckquorum(name.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -136,7 +136,7 @@ class RedisSentinel(private val _asJava: Object) {
    */
   
   def flushConfig(handler: Handler[AsyncResult[Unit]]): RedisSentinel = {
-    asJava.asInstanceOf[JRedisSentinel].flushConfig({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisSentinel].flushConfig((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -145,7 +145,7 @@ class RedisSentinel(private val _asJava: Object) {
   /**
    * Close the client - when it is fully closed the handler will be called.   */
   def close (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRedisSentinel].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisSentinel].close((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

@@ -125,21 +125,21 @@ class JsonParser(private val _asJava: Object) extends ReadStream[JsonEvent] with
 
   override 
   def endHandler(endHandler: Handler[Unit]): JsonParser = {
-    asJava.asInstanceOf[JJsonParser].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JJsonParser].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[JsonEvent]): JsonParser = {
-    asJava.asInstanceOf[JJsonParser].handler({x: JJsonEvent => handler.handle(JsonEvent(x))})
+    asJava.asInstanceOf[JJsonParser].handler((if (handler == null) null else new io.vertx.core.Handler[JJsonEvent]{def handle(x: JJsonEvent) {handler.handle(JsonEvent(x))}}))
     this
   }
 
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): JsonParser = {
-    asJava.asInstanceOf[JJsonParser].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JJsonParser].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -169,7 +169,7 @@ class JsonParser(private val _asJava: Object) extends ReadStream[JsonEvent] with
    * called with the result.   * @param dst the destination write stream
    */
   override def pipeTo(dst: WriteStream[JsonEvent], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JJsonParser].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JJsonEvent]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JJsonParser].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JJsonEvent]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

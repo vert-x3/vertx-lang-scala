@@ -129,7 +129,7 @@ class HttpConnection(private val _asJava: Object) {
    */
   
   def goAwayHandler(handler: Handler[GoAway]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].goAwayHandler({x: JGoAway => handler.handle(GoAway(x))})
+    asJava.asInstanceOf[JHttpConnection].goAwayHandler((if (handler == null) null else new io.vertx.core.Handler[JGoAway]{def handle(x: JGoAway) {handler.handle(GoAway(x))}}))
     this
   }
 
@@ -141,7 +141,7 @@ class HttpConnection(private val _asJava: Object) {
    */
   
   def shutdownHandler(handler: Handler[Unit]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].shutdownHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JHttpConnection].shutdownHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -176,7 +176,7 @@ class HttpConnection(private val _asJava: Object) {
    */
   
   def closeHandler(handler: Handler[Unit]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].closeHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JHttpConnection].closeHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -203,7 +203,7 @@ class HttpConnection(private val _asJava: Object) {
    */
   
   def updateSettings(settings: Http2Settings, completionHandler: Handler[AsyncResult[Unit]]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpConnection].updateSettings(settings.asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -215,7 +215,7 @@ class HttpConnection(private val _asJava: Object) {
    */
   
   def remoteSettingsHandler(handler: Handler[Http2Settings]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].remoteSettingsHandler({x: JHttp2Settings => handler.handle(Http2Settings(x))})
+    asJava.asInstanceOf[JHttpConnection].remoteSettingsHandler((if (handler == null) null else new io.vertx.core.Handler[JHttp2Settings]{def handle(x: JHttp2Settings) {handler.handle(Http2Settings(x))}}))
     this
   }
 
@@ -228,7 +228,7 @@ class HttpConnection(private val _asJava: Object) {
    */
   
   def ping(data: io.vertx.core.buffer.Buffer, pongHandler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].ping(data, {x: AsyncResult[Buffer] => pongHandler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))})
+    asJava.asInstanceOf[JHttpConnection].ping(data, (if (pongHandler == null) null else new io.vertx.core.Handler[AsyncResult[Buffer]]{def handle(x: AsyncResult[Buffer]) {pongHandler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))}}))
     this
   }
 
@@ -240,7 +240,7 @@ class HttpConnection(private val _asJava: Object) {
    */
   
   def pingHandler(handler: Handler[io.vertx.core.buffer.Buffer]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].pingHandler({x: Buffer => handler.handle(x)})
+    asJava.asInstanceOf[JHttpConnection].pingHandler((if (handler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {handler.handle(x)}}))
     this
   }
 
@@ -250,7 +250,7 @@ class HttpConnection(private val _asJava: Object) {
    */
   
   def exceptionHandler(handler: Handler[Throwable]): HttpConnection = {
-    asJava.asInstanceOf[JHttpConnection].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JHttpConnection].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 

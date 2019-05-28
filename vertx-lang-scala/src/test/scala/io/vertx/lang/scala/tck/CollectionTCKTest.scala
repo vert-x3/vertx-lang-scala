@@ -381,6 +381,14 @@ class CollectionTCKTest extends FlatSpec with Matchers {
     assert(checkVar == 0)
   }
 
+  "providing a null-handler" should "cause a NPE" in {
+    //This is to test that setting null for handlers is correctly propagated.
+    //This is actually the only case where we want to do this so we can unset a Handler.
+    assertThrows[NullPointerException] {
+      obj.methodWithHandlerSetDataObject(null)
+    }
+  }
+
   "testMethodWithHandlerAsyncResultListJsonArray" should "work" in {
     exec1(w => obj.methodWithHandlerAsyncResultListJsonArrayFuture().foreach(it => { w {assert(it.diff(mutable.Buffer(arr("green", "blue"), arr("yellow", "purple"))).isEmpty)}; w.dismiss()}))
   }

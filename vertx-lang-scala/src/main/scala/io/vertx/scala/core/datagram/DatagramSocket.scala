@@ -77,7 +77,7 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
    */
   
   def send(packet: io.vertx.core.buffer.Buffer, port: Int, host: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].send(packet, port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].send(packet, port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JDatagramSocket]]{def handle(x: AsyncResult[JDatagramSocket]) {handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))}}))
     this
   }
 
@@ -91,7 +91,7 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
    */
   
   def send(str: String, port: Int, host: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JDatagramSocket]]{def handle(x: AsyncResult[JDatagramSocket]) {handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))}}))
     this
   }
 
@@ -106,7 +106,7 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
    */
   
   def send(str: String, enc: String, port: Int, host: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].send(str.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JDatagramSocket]]{def handle(x: AsyncResult[JDatagramSocket]) {handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))}}))
     this
   }
 
@@ -118,7 +118,7 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
    */
   
   def listenMulticastGroup(multicastAddress: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JDatagramSocket]]{def handle(x: AsyncResult[JDatagramSocket]) {handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))}}))
     this
   }
 
@@ -132,7 +132,7 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
    */
   
   def listenMulticastGroup(multicastAddress: String, networkInterface: String, source: scala.Option[String], handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], networkInterface.asInstanceOf[java.lang.String], source.map(x => x.asInstanceOf[java.lang.String]).orNull, {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].listenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], networkInterface.asInstanceOf[java.lang.String], source.map(x => x.asInstanceOf[java.lang.String]).orNull, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JDatagramSocket]]{def handle(x: AsyncResult[JDatagramSocket]) {handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))}}))
     this
   }
 
@@ -144,7 +144,7 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
    */
   
   def unlistenMulticastGroup(multicastAddress: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JDatagramSocket]]{def handle(x: AsyncResult[JDatagramSocket]) {handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))}}))
     this
   }
 
@@ -158,7 +158,7 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
    */
   
   def unlistenMulticastGroup(multicastAddress: String, networkInterface: String, source: scala.Option[String], handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], networkInterface.asInstanceOf[java.lang.String], source.map(x => x.asInstanceOf[java.lang.String]).orNull, {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].unlistenMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], networkInterface.asInstanceOf[java.lang.String], source.map(x => x.asInstanceOf[java.lang.String]).orNull, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JDatagramSocket]]{def handle(x: AsyncResult[JDatagramSocket]) {handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))}}))
     this
   }
 
@@ -171,7 +171,7 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
    */
   
   def blockMulticastGroup(multicastAddress: String, sourceToBlock: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], sourceToBlock.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], sourceToBlock.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JDatagramSocket]]{def handle(x: AsyncResult[JDatagramSocket]) {handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))}}))
     this
   }
 
@@ -185,7 +185,7 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
    */
   
   def blockMulticastGroup(multicastAddress: String, networkInterface: String, sourceToBlock: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], networkInterface.asInstanceOf[java.lang.String], sourceToBlock.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].blockMulticastGroup(multicastAddress.asInstanceOf[java.lang.String], networkInterface.asInstanceOf[java.lang.String], sourceToBlock.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JDatagramSocket]]{def handle(x: AsyncResult[JDatagramSocket]) {handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))}}))
     this
   }
 
@@ -197,7 +197,7 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
    */
   
   def listen(port: Int, host: String, handler: Handler[AsyncResult[DatagramSocket]]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JDatagramSocket] => handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))})
+    asJava.asInstanceOf[JDatagramSocket].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JDatagramSocket]]{def handle(x: AsyncResult[JDatagramSocket]) {handler.handle(AsyncResultWrapper[JDatagramSocket, DatagramSocket](x, a => DatagramSocket(a)))}}))
     this
   }
 
@@ -225,21 +225,21 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
 
   override 
   def endHandler(endHandler: Handler[Unit]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JDatagramSocket].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[DatagramPacket]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].handler({x: JDatagramPacket => handler.handle(DatagramPacket(x))})
+    asJava.asInstanceOf[JDatagramSocket].handler((if (handler == null) null else new io.vertx.core.Handler[JDatagramPacket]{def handle(x: JDatagramPacket) {handler.handle(DatagramPacket(x))}}))
     this
   }
 
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): DatagramSocket = {
-    asJava.asInstanceOf[JDatagramSocket].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JDatagramSocket].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -276,7 +276,7 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
    * called with the result.   * @param dst the destination write stream
    */
   override def pipeTo(dst: WriteStream[DatagramPacket], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JDatagramSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JDatagramPacket]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JDatagramSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JDatagramPacket]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -295,7 +295,7 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
    * and notifies the handler once done.   * @param handler the handler to notify once complete
    */
   def close (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JDatagramSocket].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JDatagramSocket].close((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

@@ -51,7 +51,7 @@ class AmqpBridge(private val _asJava: Object) {
    * @param resultHandler the result handler
    */
   def start (hostname: String, port: Int, username: String, password: String, resultHandler: Handler[AsyncResult[AmqpBridge]]): Unit = {
-    asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], username.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String], {x: AsyncResult[JAmqpBridge] => resultHandler.handle(AsyncResultWrapper[JAmqpBridge, AmqpBridge](x, a => AmqpBridge(a)))})
+    asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], username.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JAmqpBridge]]{def handle(x: AsyncResult[JAmqpBridge]) {resultHandler.handle(AsyncResultWrapper[JAmqpBridge, AmqpBridge](x, a => AmqpBridge(a)))}}))
   }
 
   /**
@@ -60,7 +60,7 @@ class AmqpBridge(private val _asJava: Object) {
    * @param resultHandler the result handler
    */
   def start (hostname: String, port: Int, resultHandler: Handler[AsyncResult[AmqpBridge]]): Unit = {
-    asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JAmqpBridge] => resultHandler.handle(AsyncResultWrapper[JAmqpBridge, AmqpBridge](x, a => AmqpBridge(a)))})
+    asJava.asInstanceOf[JAmqpBridge].start(hostname.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JAmqpBridge]]{def handle(x: AsyncResult[JAmqpBridge]) {resultHandler.handle(AsyncResultWrapper[JAmqpBridge, AmqpBridge](x, a => AmqpBridge(a)))}}))
   }
 
   /**
@@ -89,14 +89,14 @@ class AmqpBridge(private val _asJava: Object) {
    * Shuts the bridge down, closing the underlying connection.   * @param resultHandler the result handler
    */
   def close (resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAmqpBridge].close({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAmqpBridge].close((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Set an end handler. This will fire if the underlying connection is unexpectedly disconnected or remotely closed.   * @param endHandler the handler
    */
   def endHandler (endHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JAmqpBridge].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JAmqpBridge].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
   }
 
 

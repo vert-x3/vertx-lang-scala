@@ -77,7 +77,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def append(key: String, value: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].append(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].append(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -87,7 +87,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def auth(password: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].auth(password.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].auth(password.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -95,7 +95,7 @@ class RedisClient(private val _asJava: Object) {
    * Asynchronously rewrite the append-only file   */
   
   def bgrewriteaof(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].bgrewriteaof({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].bgrewriteaof((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -103,7 +103,7 @@ class RedisClient(private val _asJava: Object) {
    * Asynchronously save the dataset to disk   */
   
   def bgsave(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].bgsave({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].bgsave((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -113,7 +113,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def bitcount(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].bitcount(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].bitcount(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -125,7 +125,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def bitcountRange(key: String, start: Long, end: Long, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].bitcountRange(key.asInstanceOf[java.lang.String], start.asInstanceOf[java.lang.Long], end.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].bitcountRange(key.asInstanceOf[java.lang.String], start.asInstanceOf[java.lang.Long], end.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -137,7 +137,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def bitop(operation: io.vertx.redis.op.BitOperation, destkey: String, keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].bitop(operation, destkey.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].bitop(operation, destkey.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -148,7 +148,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def bitpos(key: String, bit: Int, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].bitpos(key.asInstanceOf[java.lang.String], bit.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].bitpos(key.asInstanceOf[java.lang.String], bit.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -162,7 +162,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def bitposFrom(key: String, bit: Int, start: Int, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].bitposFrom(key.asInstanceOf[java.lang.String], bit.asInstanceOf[java.lang.Integer], start.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].bitposFrom(key.asInstanceOf[java.lang.String], bit.asInstanceOf[java.lang.Integer], start.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -178,7 +178,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def bitposRange(key: String, bit: Int, start: Int, stop: Int, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].bitposRange(key.asInstanceOf[java.lang.String], bit.asInstanceOf[java.lang.Integer], start.asInstanceOf[java.lang.Integer], stop.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].bitposRange(key.asInstanceOf[java.lang.String], bit.asInstanceOf[java.lang.Integer], start.asInstanceOf[java.lang.Integer], stop.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -189,7 +189,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def blpop(key: String, seconds: Int, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].blpop(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Integer], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].blpop(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -200,7 +200,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def blpopMany(keys: scala.collection.mutable.Buffer[String], seconds: Int, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].blpopMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, seconds.asInstanceOf[java.lang.Integer], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].blpopMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, seconds.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -211,7 +211,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def brpop(key: String, seconds: Int, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].brpop(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Integer], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].brpop(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -222,7 +222,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def brpopMany(keys: scala.collection.mutable.Buffer[String], seconds: Int, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].brpopMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, seconds.asInstanceOf[java.lang.Integer], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].brpopMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, seconds.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -234,7 +234,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def brpoplpush(key: String, destkey: String, seconds: Int, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].brpoplpush(key.asInstanceOf[java.lang.String], destkey.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].brpoplpush(key.asInstanceOf[java.lang.String], destkey.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -244,7 +244,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clientKill(filter: KillFilter, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clientKill(filter.asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].clientKill(filter.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -252,7 +252,7 @@ class RedisClient(private val _asJava: Object) {
    * Get the list of client connections   */
   
   def clientList(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clientList({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].clientList((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -260,7 +260,7 @@ class RedisClient(private val _asJava: Object) {
    * Get the current connection name   */
   
   def clientGetname(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clientGetname({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].clientGetname((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -270,7 +270,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clientPause(millis: Long, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clientPause(millis.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].clientPause(millis.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -280,7 +280,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clientSetname(name: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clientSetname(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].clientSetname(name.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -289,7 +289,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterAddslots(slots: scala.collection.mutable.Buffer[Long], handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterAddslots(slots.map(x => x.asInstanceOf[java.lang.Long]).asJava, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterAddslots(slots.map(x => x.asInstanceOf[java.lang.Long]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -298,7 +298,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterCountFailureReports(nodeId: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterCountFailureReports(nodeId.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].clusterCountFailureReports(nodeId.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -307,7 +307,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterCountkeysinslot(slot: Long, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterCountkeysinslot(slot.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].clusterCountkeysinslot(slot.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -316,7 +316,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterDelslots(slot: Long, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterDelslots(slot.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterDelslots(slot.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -325,7 +325,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterDelslotsMany(slots: scala.collection.mutable.Buffer[Long], handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterDelslotsMany(slots.map(x => x.asInstanceOf[java.lang.Long]).asJava, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterDelslotsMany(slots.map(x => x.asInstanceOf[java.lang.Long]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -334,7 +334,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterFailover(handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterFailover({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterFailover((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -343,7 +343,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterFailOverWithOptions(options: io.vertx.redis.op.FailoverOptions, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterFailOverWithOptions(options, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterFailOverWithOptions(options, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -352,7 +352,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterForget(nodeId: String, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterForget(nodeId.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterForget(nodeId.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -361,7 +361,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterGetkeysinslot(slot: Long, count: Long, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterGetkeysinslot(slot.asInstanceOf[java.lang.Long], count.asInstanceOf[java.lang.Long], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterGetkeysinslot(slot.asInstanceOf[java.lang.Long], count.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -370,7 +370,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterInfo(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterInfo({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterInfo((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -379,7 +379,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterKeyslot(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterKeyslot(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].clusterKeyslot(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -388,7 +388,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterMeet(ip: String, port: Long, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterMeet(ip.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterMeet(ip.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -397,7 +397,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterNodes(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterNodes({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterNodes((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -406,7 +406,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterReplicate(nodeId: String, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterReplicate(nodeId.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterReplicate(nodeId.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -415,7 +415,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterReset(handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterReset({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterReset((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -424,7 +424,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterResetWithOptions(options: io.vertx.redis.op.ResetOptions, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterResetWithOptions(options, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterResetWithOptions(options, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -433,7 +433,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterSaveconfig(handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterSaveconfig({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterSaveconfig((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -442,7 +442,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterSetConfigEpoch(epoch: Long, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterSetConfigEpoch(epoch.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterSetConfigEpoch(epoch.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -451,7 +451,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterSetslot(slot: Long, subcommand: io.vertx.redis.op.SlotCmd, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterSetslot(slot.asInstanceOf[java.lang.Long], subcommand, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterSetslot(slot.asInstanceOf[java.lang.Long], subcommand, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -460,7 +460,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterSetslotWithNode(slot: Long, subcommand: io.vertx.redis.op.SlotCmd, nodeId: String, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterSetslotWithNode(slot.asInstanceOf[java.lang.Long], subcommand, nodeId.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterSetslotWithNode(slot.asInstanceOf[java.lang.Long], subcommand, nodeId.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -469,7 +469,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def clusterSlaves(nodeId: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterSlaves(nodeId.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterSlaves(nodeId.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -477,7 +477,7 @@ class RedisClient(private val _asJava: Object) {
    * Get array of Cluster slot to node mappings   */
   
   def clusterSlots(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clusterSlots({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].clusterSlots((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -485,7 +485,7 @@ class RedisClient(private val _asJava: Object) {
    * Get array of Redis command details   */
   
   def command(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].command({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].command((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -493,7 +493,7 @@ class RedisClient(private val _asJava: Object) {
    * Get total number of Redis commands   */
   
   def commandCount(handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].commandCount({x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].commandCount((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -501,7 +501,7 @@ class RedisClient(private val _asJava: Object) {
    * Extract keys given a full Redis command   */
   
   def commandGetkeys(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].commandGetkeys({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].commandGetkeys((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -511,7 +511,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def commandInfo(commands: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].commandInfo(commands.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].commandInfo(commands.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -521,7 +521,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def configGet(parameter: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].configGet(parameter.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].configGet(parameter.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -529,7 +529,7 @@ class RedisClient(private val _asJava: Object) {
    * Rewrite the configuration file with the in memory configuration   */
   
   def configRewrite(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].configRewrite({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].configRewrite((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -540,7 +540,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def configSet(parameter: String, value: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].configSet(parameter.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].configSet(parameter.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -548,7 +548,7 @@ class RedisClient(private val _asJava: Object) {
    * Reset the stats returned by INFO   */
   
   def configResetstat(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].configResetstat({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].configResetstat((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -556,7 +556,7 @@ class RedisClient(private val _asJava: Object) {
    * Return the number of keys in the selected database   */
   
   def dbsize(handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].dbsize({x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].dbsize((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -566,7 +566,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def debugObject(key: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].debugObject(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].debugObject(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -574,7 +574,7 @@ class RedisClient(private val _asJava: Object) {
    * Make the server crash   */
   
   def debugSegfault(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].debugSegfault({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].debugSegfault((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -584,7 +584,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def decr(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].decr(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].decr(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -595,7 +595,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def decrby(key: String, decrement: Long, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].decrby(key.asInstanceOf[java.lang.String], decrement.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].decrby(key.asInstanceOf[java.lang.String], decrement.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -605,7 +605,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def del(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].del(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].del(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -615,7 +615,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def delMany(keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].delMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].delMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -625,7 +625,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def dump(key: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].dump(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].dump(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -635,7 +635,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def echo(message: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].echo(message.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].echo(message.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -651,7 +651,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def eval(script: String, keys: scala.collection.mutable.Buffer[String], args: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].eval(script.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, args.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].eval(script.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, args.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -667,7 +667,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def evalsha(sha1: String, keys: scala.collection.mutable.Buffer[String], values: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].evalsha(sha1.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, values.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].evalsha(sha1.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, values.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -684,7 +684,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def evalScript(script: Script, keys: scala.collection.mutable.Buffer[String], args: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].evalScript(script.asJava.asInstanceOf[JScript], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, args.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].evalScript(script.asJava.asInstanceOf[JScript], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, args.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -694,7 +694,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def exists(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].exists(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].exists(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -704,7 +704,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def existsMany(keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].existsMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].existsMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -715,7 +715,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def expire(key: String, seconds: Long, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].expire(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].expire(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -726,7 +726,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def expireat(key: String, seconds: Long, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].expireat(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].expireat(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -734,7 +734,7 @@ class RedisClient(private val _asJava: Object) {
    * Remove all keys from all databases   */
   
   def flushall(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].flushall({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].flushall((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -742,7 +742,7 @@ class RedisClient(private val _asJava: Object) {
    * Remove all keys from the current database   */
   
   def flushdb(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].flushdb({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].flushdb((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -752,7 +752,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def get(key: String, handler: Handler[AsyncResult[scala.Option[String]]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].get(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
+    asJava.asInstanceOf[JRedisClient].get(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))}}))
     this
   }
 
@@ -762,7 +762,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def getBinary(key: String, handler: Handler[AsyncResult[scala.Option[io.vertx.core.buffer.Buffer]]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].getBinary(key.asInstanceOf[java.lang.String], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer, scala.Option[io.vertx.core.buffer.Buffer]](x, a => scala.Option(a)))})
+    asJava.asInstanceOf[JRedisClient].getBinary(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Buffer]]{def handle(x: AsyncResult[Buffer]) {handler.handle(AsyncResultWrapper[Buffer, scala.Option[io.vertx.core.buffer.Buffer]](x, a => scala.Option(a)))}}))
     this
   }
 
@@ -773,7 +773,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def getbit(key: String, offset: Long, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].getbit(key.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].getbit(key.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -785,7 +785,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def getrange(key: String, start: Long, end: Long, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].getrange(key.asInstanceOf[java.lang.String], start.asInstanceOf[java.lang.Long], end.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].getrange(key.asInstanceOf[java.lang.String], start.asInstanceOf[java.lang.Long], end.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -796,7 +796,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def getset(key: String, value: String, handler: Handler[AsyncResult[scala.Option[String]]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].getset(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
+    asJava.asInstanceOf[JRedisClient].getset(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))}}))
     this
   }
 
@@ -807,7 +807,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hdel(key: String, field: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hdel(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].hdel(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -818,7 +818,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hdelMany(key: String, fields: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hdelMany(key.asInstanceOf[java.lang.String], fields.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].hdelMany(key.asInstanceOf[java.lang.String], fields.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -829,7 +829,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hexists(key: String, field: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hexists(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].hexists(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -840,7 +840,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hget(key: String, field: String, handler: Handler[AsyncResult[scala.Option[String]]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hget(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
+    asJava.asInstanceOf[JRedisClient].hget(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))}}))
     this
   }
 
@@ -850,7 +850,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hgetall(key: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hgetall(key.asInstanceOf[java.lang.String], {x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].hgetall(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
     this
   }
 
@@ -862,7 +862,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hincrby(key: String, field: String, increment: Long, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hincrby(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], increment.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].hincrby(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], increment.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -874,7 +874,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hincrbyfloat(key: String, field: String, increment: Double, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hincrbyfloat(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], increment.asInstanceOf[java.lang.Double], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].hincrbyfloat(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], increment.asInstanceOf[java.lang.Double], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -884,7 +884,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hkeys(key: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hkeys(key.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].hkeys(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -894,7 +894,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hlen(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hlen(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].hlen(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -905,7 +905,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hmget(key: String, fields: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hmget(key.asInstanceOf[java.lang.String], fields.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].hmget(key.asInstanceOf[java.lang.String], fields.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -916,7 +916,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hmset(key: String, values: io.vertx.core.json.JsonObject, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hmset(key.asInstanceOf[java.lang.String], values, {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].hmset(key.asInstanceOf[java.lang.String], values, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -928,7 +928,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hset(key: String, field: String, value: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hset(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].hset(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -940,7 +940,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hsetnx(key: String, field: String, value: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hsetnx(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].hsetnx(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -950,7 +950,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hvals(key: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hvals(key.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].hvals(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -960,7 +960,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def incr(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].incr(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].incr(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -971,7 +971,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def incrby(key: String, increment: Long, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].incrby(key.asInstanceOf[java.lang.String], increment.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].incrby(key.asInstanceOf[java.lang.String], increment.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -982,7 +982,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def incrbyfloat(key: String, increment: Double, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].incrbyfloat(key.asInstanceOf[java.lang.String], increment.asInstanceOf[java.lang.Double], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].incrbyfloat(key.asInstanceOf[java.lang.String], increment.asInstanceOf[java.lang.Double], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -991,7 +991,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def info(handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].info({x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].info((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
     this
   }
 
@@ -1001,7 +1001,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def infoSection(section: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].infoSection(section.asInstanceOf[java.lang.String], {x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].infoSection(section.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
     this
   }
 
@@ -1011,7 +1011,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def keys(pattern: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].keys(pattern.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].keys(pattern.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1019,7 +1019,7 @@ class RedisClient(private val _asJava: Object) {
    * Get the UNIX time stamp of the last successful save to disk   */
   
   def lastsave(handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].lastsave({x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].lastsave((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1030,7 +1030,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def lindex(key: String, index: Int, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].lindex(key.asInstanceOf[java.lang.String], index.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].lindex(key.asInstanceOf[java.lang.String], index.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1043,7 +1043,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def linsert(key: String, option: io.vertx.redis.op.InsertOptions, pivot: String, value: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].linsert(key.asInstanceOf[java.lang.String], option, pivot.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].linsert(key.asInstanceOf[java.lang.String], option, pivot.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1053,7 +1053,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def llen(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].llen(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].llen(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1063,7 +1063,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def lpop(key: String, handler: Handler[AsyncResult[scala.Option[String]]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].lpop(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
+    asJava.asInstanceOf[JRedisClient].lpop(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))}}))
     this
   }
 
@@ -1074,7 +1074,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def lpushMany(key: String, values: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].lpushMany(key.asInstanceOf[java.lang.String], values.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].lpushMany(key.asInstanceOf[java.lang.String], values.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1085,7 +1085,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def lpush(key: String, value: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].lpush(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].lpush(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1096,7 +1096,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def lpushx(key: String, value: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].lpushx(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].lpushx(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1108,7 +1108,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def lrange(key: String, from: Long, to: Long, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].lrange(key.asInstanceOf[java.lang.String], from.asInstanceOf[java.lang.Long], to.asInstanceOf[java.lang.Long], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].lrange(key.asInstanceOf[java.lang.String], from.asInstanceOf[java.lang.Long], to.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1120,7 +1120,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def lrem(key: String, count: Long, value: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].lrem(key.asInstanceOf[java.lang.String], count.asInstanceOf[java.lang.Long], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].lrem(key.asInstanceOf[java.lang.String], count.asInstanceOf[java.lang.Long], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1132,7 +1132,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def lset(key: String, index: Long, value: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].lset(key.asInstanceOf[java.lang.String], index.asInstanceOf[java.lang.Long], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].lset(key.asInstanceOf[java.lang.String], index.asInstanceOf[java.lang.Long], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1144,7 +1144,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def ltrim(key: String, from: Long, to: Long, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].ltrim(key.asInstanceOf[java.lang.String], from.asInstanceOf[java.lang.Long], to.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].ltrim(key.asInstanceOf[java.lang.String], from.asInstanceOf[java.lang.Long], to.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1154,7 +1154,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def mget(key: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].mget(key.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].mget(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1164,7 +1164,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def mgetMany(keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].mgetMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].mgetMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1178,7 +1178,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def migrate(host: String, port: Int, key: String, destdb: Int, timeout: Long, options: MigrateOptions, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].migrate(host.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], key.asInstanceOf[java.lang.String], destdb.asInstanceOf[java.lang.Integer], timeout.asInstanceOf[java.lang.Long], options.asJava, {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].migrate(host.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], key.asInstanceOf[java.lang.String], destdb.asInstanceOf[java.lang.Integer], timeout.asInstanceOf[java.lang.Long], options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1186,7 +1186,7 @@ class RedisClient(private val _asJava: Object) {
    * Listen for all requests received by the server in real time   */
   
   def monitor(handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].monitor({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].monitor((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -1197,7 +1197,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def move(key: String, destdb: Int, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].move(key.asInstanceOf[java.lang.String], destdb.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].move(key.asInstanceOf[java.lang.String], destdb.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1207,7 +1207,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def mset(keyvals: io.vertx.core.json.JsonObject, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].mset(keyvals, {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].mset(keyvals, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1217,7 +1217,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def msetnx(keyvals: io.vertx.core.json.JsonObject, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].msetnx(keyvals, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].msetnx(keyvals, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1228,7 +1228,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def `object`(key: String, cmd: io.vertx.redis.op.ObjectCmd, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].`object`(key.asInstanceOf[java.lang.String], cmd, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].`object`(key.asInstanceOf[java.lang.String], cmd, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -1238,7 +1238,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def persist(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].persist(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].persist(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1249,7 +1249,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def pexpire(key: String, millis: Long, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].pexpire(key.asInstanceOf[java.lang.String], millis.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].pexpire(key.asInstanceOf[java.lang.String], millis.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1260,7 +1260,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def pexpireat(key: String, millis: Long, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].pexpireat(key.asInstanceOf[java.lang.String], millis.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].pexpireat(key.asInstanceOf[java.lang.String], millis.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1271,7 +1271,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def pfadd(key: String, element: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].pfadd(key.asInstanceOf[java.lang.String], element.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].pfadd(key.asInstanceOf[java.lang.String], element.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1282,7 +1282,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def pfaddMany(key: String, elements: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].pfaddMany(key.asInstanceOf[java.lang.String], elements.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].pfaddMany(key.asInstanceOf[java.lang.String], elements.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1292,7 +1292,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def pfcount(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].pfcount(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].pfcount(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1302,7 +1302,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def pfcountMany(keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].pfcountMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].pfcountMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1313,7 +1313,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def pfmerge(destkey: String, keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].pfmerge(destkey.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].pfmerge(destkey.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1321,7 +1321,7 @@ class RedisClient(private val _asJava: Object) {
    * Ping the server   */
   
   def ping(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].ping({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].ping((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1333,7 +1333,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def psetex(key: String, millis: Long, value: String, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].psetex(key.asInstanceOf[java.lang.String], millis.asInstanceOf[java.lang.Long], value.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].psetex(key.asInstanceOf[java.lang.String], millis.asInstanceOf[java.lang.Long], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -1343,7 +1343,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def psubscribe(pattern: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].psubscribe(pattern.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].psubscribe(pattern.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1353,7 +1353,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def psubscribeMany(patterns: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].psubscribeMany(patterns.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].psubscribeMany(patterns.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1363,7 +1363,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def pubsubChannels(pattern: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].pubsubChannels(pattern.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].pubsubChannels(pattern.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1373,7 +1373,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def pubsubNumsub(channels: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].pubsubNumsub(channels.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].pubsubNumsub(channels.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1382,7 +1382,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def pubsubNumpat(handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].pubsubNumpat({x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].pubsubNumpat((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1392,7 +1392,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def pttl(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].pttl(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].pttl(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1403,7 +1403,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def publish(channel: String, message: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].publish(channel.asInstanceOf[java.lang.String], message.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].publish(channel.asInstanceOf[java.lang.String], message.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1413,7 +1413,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def punsubscribe(patterns: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].punsubscribe(patterns.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].punsubscribe(patterns.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -1421,7 +1421,7 @@ class RedisClient(private val _asJava: Object) {
    * Return a random key from the keyspace   */
   
   def randomkey(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].randomkey({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].randomkey((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1432,7 +1432,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def rename(key: String, newkey: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].rename(key.asInstanceOf[java.lang.String], newkey.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].rename(key.asInstanceOf[java.lang.String], newkey.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1443,7 +1443,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def renamenx(key: String, newkey: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].renamenx(key.asInstanceOf[java.lang.String], newkey.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].renamenx(key.asInstanceOf[java.lang.String], newkey.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1455,7 +1455,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def restore(key: String, millis: Long, serialized: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].restore(key.asInstanceOf[java.lang.String], millis.asInstanceOf[java.lang.Long], serialized.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].restore(key.asInstanceOf[java.lang.String], millis.asInstanceOf[java.lang.Long], serialized.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1463,7 +1463,7 @@ class RedisClient(private val _asJava: Object) {
    * Return the role of the instance in the context of replication   */
   
   def role(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].role({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].role((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1473,7 +1473,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def rpop(key: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].rpop(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].rpop(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1484,7 +1484,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def rpoplpush(key: String, destkey: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].rpoplpush(key.asInstanceOf[java.lang.String], destkey.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].rpoplpush(key.asInstanceOf[java.lang.String], destkey.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1495,7 +1495,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def rpushMany(key: String, values: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].rpushMany(key.asInstanceOf[java.lang.String], values.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].rpushMany(key.asInstanceOf[java.lang.String], values.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1506,7 +1506,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def rpush(key: String, value: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].rpush(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].rpush(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1517,7 +1517,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def rpushx(key: String, value: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].rpushx(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].rpushx(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1528,7 +1528,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def sadd(key: String, member: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].sadd(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].sadd(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1539,7 +1539,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def saddMany(key: String, members: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].saddMany(key.asInstanceOf[java.lang.String], members.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].saddMany(key.asInstanceOf[java.lang.String], members.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1547,7 +1547,7 @@ class RedisClient(private val _asJava: Object) {
    * Synchronously save the dataset to disk   */
   
   def save(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].save({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].save((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1557,7 +1557,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def scard(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].scard(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].scard(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1567,7 +1567,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def scriptExists(script: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].scriptExists(script.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].scriptExists(script.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1577,7 +1577,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def scriptExistsMany(scripts: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].scriptExistsMany(scripts.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].scriptExistsMany(scripts.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1585,7 +1585,7 @@ class RedisClient(private val _asJava: Object) {
    * Remove all the scripts from the script cache.   */
   
   def scriptFlush(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].scriptFlush({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].scriptFlush((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1593,7 +1593,7 @@ class RedisClient(private val _asJava: Object) {
    * Kill the script currently in execution.   */
   
   def scriptKill(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].scriptKill({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].scriptKill((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1603,7 +1603,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def scriptLoad(script: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].scriptLoad(script.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].scriptLoad(script.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1614,7 +1614,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def sdiff(key: String, cmpkeys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].sdiff(key.asInstanceOf[java.lang.String], cmpkeys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].sdiff(key.asInstanceOf[java.lang.String], cmpkeys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1626,7 +1626,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def sdiffstore(destkey: String, key: String, cmpkeys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].sdiffstore(destkey.asInstanceOf[java.lang.String], key.asInstanceOf[java.lang.String], cmpkeys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].sdiffstore(destkey.asInstanceOf[java.lang.String], key.asInstanceOf[java.lang.String], cmpkeys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1636,7 +1636,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def select(dbindex: Int, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].select(dbindex.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].select(dbindex.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1647,7 +1647,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def set(key: String, value: String, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].set(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].set(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -1659,7 +1659,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def setWithOptions(key: String, value: String, options: SetOptions, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].setWithOptions(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].setWithOptions(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1670,7 +1670,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def setBinary(key: String, value: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].setBinary(key.asInstanceOf[java.lang.String], value, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].setBinary(key.asInstanceOf[java.lang.String], value, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -1682,7 +1682,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def setBinaryWithOptions(key: String, value: io.vertx.core.buffer.Buffer, options: SetOptions, handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].setBinaryWithOptions(key.asInstanceOf[java.lang.String], value, options.asJava, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].setBinaryWithOptions(key.asInstanceOf[java.lang.String], value, options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -1694,7 +1694,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def setbit(key: String, offset: Long, bit: Int, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].setbit(key.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], bit.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].setbit(key.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], bit.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1706,7 +1706,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def setex(key: String, seconds: Long, value: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].setex(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Long], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].setex(key.asInstanceOf[java.lang.String], seconds.asInstanceOf[java.lang.Long], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1717,7 +1717,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def setnx(key: String, value: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].setnx(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].setnx(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1729,7 +1729,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def setrange(key: String, offset: Int, value: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].setrange(key.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Integer], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].setrange(key.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Integer], value.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1739,7 +1739,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def sinter(keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].sinter(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].sinter(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1750,7 +1750,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def sinterstore(destkey: String, keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].sinterstore(destkey.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].sinterstore(destkey.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1761,7 +1761,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def sismember(key: String, member: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].sismember(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].sismember(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1772,7 +1772,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def slaveof(host: String, port: Int, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].slaveof(host.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].slaveof(host.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1781,7 +1781,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def slaveofNoone(handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].slaveofNoone({x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].slaveofNoone((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1791,7 +1791,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def slowlogGet(limit: Int, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].slowlogGet(limit.asInstanceOf[java.lang.Integer], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].slowlogGet(limit.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1800,7 +1800,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def slowlogLen(handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].slowlogLen({x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].slowlogLen((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1809,7 +1809,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def slowlogReset(handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].slowlogReset({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].slowlogReset((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -1819,7 +1819,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def smembers(key: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].smembers(key.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].smembers(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1831,7 +1831,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def smove(key: String, destkey: String, member: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].smove(key.asInstanceOf[java.lang.String], destkey.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].smove(key.asInstanceOf[java.lang.String], destkey.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1842,7 +1842,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def sort(key: String, options: SortOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].sort(key.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].sort(key.asInstanceOf[java.lang.String], options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1852,7 +1852,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def spop(key: String, handler: Handler[AsyncResult[scala.Option[String]]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].spop(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
+    asJava.asInstanceOf[JRedisClient].spop(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))}}))
     this
   }
 
@@ -1863,7 +1863,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def spopMany(key: String, count: Int, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].spopMany(key.asInstanceOf[java.lang.String], count.asInstanceOf[java.lang.Integer], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].spopMany(key.asInstanceOf[java.lang.String], count.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1873,7 +1873,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def srandmember(key: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].srandmember(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].srandmember(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -1884,7 +1884,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def srandmemberCount(key: String, count: Int, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].srandmemberCount(key.asInstanceOf[java.lang.String], count.asInstanceOf[java.lang.Integer], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].srandmemberCount(key.asInstanceOf[java.lang.String], count.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1895,7 +1895,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def srem(key: String, member: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].srem(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].srem(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1906,7 +1906,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def sremMany(key: String, members: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].sremMany(key.asInstanceOf[java.lang.String], members.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].sremMany(key.asInstanceOf[java.lang.String], members.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1916,7 +1916,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def strlen(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].strlen(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].strlen(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1926,7 +1926,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def subscribe(channel: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].subscribe(channel.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].subscribe(channel.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1936,7 +1936,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def subscribeMany(channels: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].subscribeMany(channels.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].subscribeMany(channels.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1946,7 +1946,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def sunion(keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].sunion(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].sunion(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1957,7 +1957,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def sunionstore(destkey: String, keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].sunionstore(destkey.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].sunionstore(destkey.asInstanceOf[java.lang.String], keys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1965,7 +1965,7 @@ class RedisClient(private val _asJava: Object) {
    * Internal command used for replication   */
   
   def sync(handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].sync({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].sync((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -1973,7 +1973,7 @@ class RedisClient(private val _asJava: Object) {
    * Return the current server time   */
   
   def time(handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].time({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].time((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -1983,7 +1983,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def ttl(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].ttl(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].ttl(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -1993,7 +1993,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def `type`(key: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].`type`(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].`type`(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -2003,7 +2003,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def unsubscribe(channels: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Unit]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].unsubscribe(channels.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].unsubscribe(channels.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -2012,7 +2012,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def wait(numSlaves: Long, timeout: Long, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].wait(numSlaves.asInstanceOf[java.lang.Long], timeout.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].wait(numSlaves.asInstanceOf[java.lang.Long], timeout.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -2024,7 +2024,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zadd(key: String, score: Double, member: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zadd(key.asInstanceOf[java.lang.String], score.asInstanceOf[java.lang.Double], member.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zadd(key.asInstanceOf[java.lang.String], score.asInstanceOf[java.lang.Double], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2035,7 +2035,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zaddMany(key: String, members: scala.collection.mutable.Map[String, Double], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zaddMany(key.asInstanceOf[java.lang.String], members.mapValues(x => x.asInstanceOf[java.lang.Double]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zaddMany(key.asInstanceOf[java.lang.String], members.mapValues(x => x.asInstanceOf[java.lang.Double]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2045,7 +2045,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zcard(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zcard(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zcard(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2057,7 +2057,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zcount(key: String, min: Double, max: Double, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zcount(key.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.Double], max.asInstanceOf[java.lang.Double], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zcount(key.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.Double], max.asInstanceOf[java.lang.Double], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2069,7 +2069,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zincrby(key: String, increment: Double, member: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zincrby(key.asInstanceOf[java.lang.String], increment.asInstanceOf[java.lang.Double], member.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].zincrby(key.asInstanceOf[java.lang.String], increment.asInstanceOf[java.lang.Double], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -2081,7 +2081,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zinterstore(destkey: String, sets: scala.collection.mutable.Buffer[String], options: io.vertx.redis.op.AggregateOptions, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zinterstore(destkey.asInstanceOf[java.lang.String], sets.map(x => x.asInstanceOf[java.lang.String]).asJava, options, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zinterstore(destkey.asInstanceOf[java.lang.String], sets.map(x => x.asInstanceOf[java.lang.String]).asJava, options, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2093,7 +2093,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zinterstoreWeighed(destkey: String, sets: scala.collection.mutable.Map[String, Double], options: io.vertx.redis.op.AggregateOptions, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zinterstoreWeighed(destkey.asInstanceOf[java.lang.String], sets.mapValues(x => x.asInstanceOf[java.lang.Double]).asJava, options, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zinterstoreWeighed(destkey.asInstanceOf[java.lang.String], sets.mapValues(x => x.asInstanceOf[java.lang.Double]).asJava, options, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2105,7 +2105,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zlexcount(key: String, min: String, max: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zlexcount(key.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zlexcount(key.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2117,7 +2117,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zrange(key: String, start: Long, stop: Long, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zrange(key.asInstanceOf[java.lang.String], start.asInstanceOf[java.lang.Long], stop.asInstanceOf[java.lang.Long], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].zrange(key.asInstanceOf[java.lang.String], start.asInstanceOf[java.lang.Long], stop.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2130,7 +2130,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zrangeWithOptions(key: String, start: Long, stop: Long, options: io.vertx.redis.op.RangeOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zrangeWithOptions(key.asInstanceOf[java.lang.String], start.asInstanceOf[java.lang.Long], stop.asInstanceOf[java.lang.Long], options, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].zrangeWithOptions(key.asInstanceOf[java.lang.String], start.asInstanceOf[java.lang.Long], stop.asInstanceOf[java.lang.Long], options, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2143,7 +2143,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zrangebylex(key: String, min: String, max: String, options: LimitOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zrangebylex(key.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].zrangebylex(key.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2156,7 +2156,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zrangebyscore(key: String, min: String, max: String, options: RangeLimitOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zrangebyscore(key.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].zrangebyscore(key.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2167,7 +2167,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zrank(key: String, member: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zrank(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zrank(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2178,7 +2178,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zrem(key: String, member: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zrem(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zrem(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2189,7 +2189,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zremMany(key: String, members: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zremMany(key.asInstanceOf[java.lang.String], members.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zremMany(key.asInstanceOf[java.lang.String], members.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2201,7 +2201,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zremrangebylex(key: String, min: String, max: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zremrangebylex(key.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zremrangebylex(key.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2213,7 +2213,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zremrangebyrank(key: String, start: Long, stop: Long, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zremrangebyrank(key.asInstanceOf[java.lang.String], start.asInstanceOf[java.lang.Long], stop.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zremrangebyrank(key.asInstanceOf[java.lang.String], start.asInstanceOf[java.lang.Long], stop.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2224,7 +2224,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zremrangebyscore(key: String, min: String, max: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zremrangebyscore(key.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zremrangebyscore(key.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2237,7 +2237,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zrevrange(key: String, start: Long, stop: Long, options: io.vertx.redis.op.RangeOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zrevrange(key.asInstanceOf[java.lang.String], start.asInstanceOf[java.lang.Long], stop.asInstanceOf[java.lang.Long], options, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].zrevrange(key.asInstanceOf[java.lang.String], start.asInstanceOf[java.lang.Long], stop.asInstanceOf[java.lang.Long], options, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2250,7 +2250,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zrevrangebylex(key: String, max: String, min: String, options: LimitOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zrevrangebylex(key.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].zrevrangebylex(key.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2263,7 +2263,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zrevrangebyscore(key: String, max: String, min: String, options: RangeLimitOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zrevrangebyscore(key.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].zrevrangebyscore(key.asInstanceOf[java.lang.String], max.asInstanceOf[java.lang.String], min.asInstanceOf[java.lang.String], options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2274,7 +2274,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zrevrank(key: String, member: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zrevrank(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zrevrank(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2285,7 +2285,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zscore(key: String, member: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zscore(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].zscore(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -2297,7 +2297,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zunionstore(destkey: String, sets: scala.collection.mutable.Buffer[String], options: io.vertx.redis.op.AggregateOptions, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zunionstore(destkey.asInstanceOf[java.lang.String], sets.map(x => x.asInstanceOf[java.lang.String]).asJava, options, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zunionstore(destkey.asInstanceOf[java.lang.String], sets.map(x => x.asInstanceOf[java.lang.String]).asJava, options, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2309,7 +2309,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zunionstoreWeighed(key: String, sets: scala.collection.mutable.Map[String, Double], options: io.vertx.redis.op.AggregateOptions, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zunionstoreWeighed(key.asInstanceOf[java.lang.String], sets.mapValues(x => x.asInstanceOf[java.lang.Double]).asJava, options, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].zunionstoreWeighed(key.asInstanceOf[java.lang.String], sets.mapValues(x => x.asInstanceOf[java.lang.Double]).asJava, options, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2320,7 +2320,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def scan(cursor: String, options: ScanOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].scan(cursor.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].scan(cursor.asInstanceOf[java.lang.String], options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2332,7 +2332,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def sscan(key: String, cursor: String, options: ScanOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].sscan(key.asInstanceOf[java.lang.String], cursor.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].sscan(key.asInstanceOf[java.lang.String], cursor.asInstanceOf[java.lang.String], options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2344,7 +2344,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hscan(key: String, cursor: String, options: ScanOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hscan(key.asInstanceOf[java.lang.String], cursor.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].hscan(key.asInstanceOf[java.lang.String], cursor.asInstanceOf[java.lang.String], options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2356,7 +2356,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def zscan(key: String, cursor: String, options: ScanOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].zscan(key.asInstanceOf[java.lang.String], cursor.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].zscan(key.asInstanceOf[java.lang.String], cursor.asInstanceOf[java.lang.String], options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2369,7 +2369,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def geoadd(key: String, longitude: Double, latitude: Double, member: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].geoadd(key.asInstanceOf[java.lang.String], longitude.asInstanceOf[java.lang.Double], latitude.asInstanceOf[java.lang.Double], member.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].geoadd(key.asInstanceOf[java.lang.String], longitude.asInstanceOf[java.lang.Double], latitude.asInstanceOf[java.lang.Double], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2380,7 +2380,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def geoaddMany(key: String, members: scala.collection.mutable.Buffer[GeoMember], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].geoaddMany(key.asInstanceOf[java.lang.String], members.map(x => x.asJava).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].geoaddMany(key.asInstanceOf[java.lang.String], members.map(x => x.asJava).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2392,7 +2392,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def geohash(key: String, member: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].geohash(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].geohash(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2404,7 +2404,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def geohashMany(key: String, members: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].geohashMany(key.asInstanceOf[java.lang.String], members.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].geohashMany(key.asInstanceOf[java.lang.String], members.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2416,7 +2416,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def geopos(key: String, member: String, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].geopos(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].geopos(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2428,7 +2428,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def geoposMany(key: String, members: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].geoposMany(key.asInstanceOf[java.lang.String], members.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].geoposMany(key.asInstanceOf[java.lang.String], members.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2440,7 +2440,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def geodist(key: String, member1: String, member2: String, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].geodist(key.asInstanceOf[java.lang.String], member1.asInstanceOf[java.lang.String], member2.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].geodist(key.asInstanceOf[java.lang.String], member1.asInstanceOf[java.lang.String], member2.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -2453,7 +2453,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def geodistWithUnit(key: String, member1: String, member2: String, unit: io.vertx.redis.op.GeoUnit, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].geodistWithUnit(key.asInstanceOf[java.lang.String], member1.asInstanceOf[java.lang.String], member2.asInstanceOf[java.lang.String], unit, {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].geodistWithUnit(key.asInstanceOf[java.lang.String], member1.asInstanceOf[java.lang.String], member2.asInstanceOf[java.lang.String], unit, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -2468,7 +2468,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def georadius(key: String, longitude: Double, latitude: Double, radius: Double, unit: io.vertx.redis.op.GeoUnit, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].georadius(key.asInstanceOf[java.lang.String], longitude.asInstanceOf[java.lang.Double], latitude.asInstanceOf[java.lang.Double], radius.asInstanceOf[java.lang.Double], unit, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].georadius(key.asInstanceOf[java.lang.String], longitude.asInstanceOf[java.lang.Double], latitude.asInstanceOf[java.lang.Double], radius.asInstanceOf[java.lang.Double], unit, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2484,7 +2484,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def georadiusWithOptions(key: String, longitude: Double, latitude: Double, radius: Double, unit: io.vertx.redis.op.GeoUnit, options: GeoRadiusOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].georadiusWithOptions(key.asInstanceOf[java.lang.String], longitude.asInstanceOf[java.lang.Double], latitude.asInstanceOf[java.lang.Double], radius.asInstanceOf[java.lang.Double], unit, options.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].georadiusWithOptions(key.asInstanceOf[java.lang.String], longitude.asInstanceOf[java.lang.Double], latitude.asInstanceOf[java.lang.Double], radius.asInstanceOf[java.lang.Double], unit, options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2499,7 +2499,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def georadiusbymember(key: String, member: String, radius: Double, unit: io.vertx.redis.op.GeoUnit, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].georadiusbymember(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], radius.asInstanceOf[java.lang.Double], unit, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].georadiusbymember(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], radius.asInstanceOf[java.lang.Double], unit, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2515,7 +2515,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def georadiusbymemberWithOptions(key: String, member: String, radius: Double, unit: io.vertx.redis.op.GeoUnit, options: GeoRadiusOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].georadiusbymemberWithOptions(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], radius.asInstanceOf[java.lang.Double], unit, options.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].georadiusbymemberWithOptions(key.asInstanceOf[java.lang.String], member.asInstanceOf[java.lang.String], radius.asInstanceOf[java.lang.Double], unit, options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2523,7 +2523,7 @@ class RedisClient(private val _asJava: Object) {
    * Instruct the server whether to reply to commands.   */
   
   def clientReply(options: io.vertx.redis.op.ClientReplyOptions, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].clientReply(options, {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].clientReply(options, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -2533,7 +2533,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def hstrlen(key: String, field: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].hstrlen(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].hstrlen(key.asInstanceOf[java.lang.String], field.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2542,7 +2542,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def touch(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].touch(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].touch(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2551,7 +2551,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def touchMany(keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].touchMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].touchMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2560,7 +2560,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def scriptDebug(scriptDebugOptions: io.vertx.redis.op.ScriptDebugOptions, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].scriptDebug(scriptDebugOptions, {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].scriptDebug(scriptDebugOptions, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -2569,7 +2569,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def bitfield(key: String, bitFieldOptions: BitFieldOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].bitfield(key.asInstanceOf[java.lang.String], bitFieldOptions.asJava, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].bitfield(key.asInstanceOf[java.lang.String], bitFieldOptions.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2578,7 +2578,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def bitfieldWithOverflow(key: String, commands: BitFieldOptions, overflow: io.vertx.redis.op.BitFieldOverflowOptions, handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].bitfieldWithOverflow(key.asInstanceOf[java.lang.String], commands.asJava, overflow, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].bitfieldWithOverflow(key.asInstanceOf[java.lang.String], commands.asJava, overflow, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
     this
   }
 
@@ -2588,7 +2588,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def unlink(key: String, handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].unlink(key.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].unlink(key.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2598,7 +2598,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def unlinkMany(keys: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[Long]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].unlinkMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRedisClient].unlinkMany(keys.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
     this
   }
 
@@ -2609,7 +2609,7 @@ class RedisClient(private val _asJava: Object) {
    */
   
   def swapdb(index1: Int, index2: Int, handler: Handler[AsyncResult[String]]): RedisClient = {
-    asJava.asInstanceOf[JRedisClient].swapdb(index1.asInstanceOf[java.lang.Integer], index2.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRedisClient].swapdb(index1.asInstanceOf[java.lang.Integer], index2.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -2618,7 +2618,7 @@ class RedisClient(private val _asJava: Object) {
   /**
    * Close the client - when it is fully closed the handler will be called.   */
   def close (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRedisClient].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedisClient].close((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

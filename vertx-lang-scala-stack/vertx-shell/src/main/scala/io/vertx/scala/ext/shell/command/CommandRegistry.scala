@@ -56,7 +56,7 @@ class CommandRegistry(private val _asJava: Object) extends CommandResolver (_asJ
    */
   
   def registerCommand(command: Command, completionHandler: Handler[AsyncResult[Command]]): CommandRegistry = {
-    asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand], {x: AsyncResult[JCommand] => completionHandler.handle(AsyncResultWrapper[JCommand, Command](x, a => Command(a)))})
+    asJava.asInstanceOf[JCommandRegistry].registerCommand(command.asJava.asInstanceOf[JCommand], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[JCommand]]{def handle(x: AsyncResult[JCommand]) {completionHandler.handle(AsyncResultWrapper[JCommand, Command](x, a => Command(a)))}}))
     this
   }
 
@@ -76,7 +76,7 @@ class CommandRegistry(private val _asJava: Object) extends CommandResolver (_asJ
    */
   
   def registerCommands(commands: scala.collection.mutable.Buffer[Command], completionHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Command]]]): CommandRegistry = {
-    asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava, {x: AsyncResult[java.util.List[JCommand]] => completionHandler.handle(AsyncResultWrapper[java.util.List[JCommand], scala.collection.mutable.Buffer[Command]](x, a => a.asScala.map(x => Command(x))))})
+    asJava.asInstanceOf[JCommandRegistry].registerCommands(commands.map(x => x.asJava.asInstanceOf[JCommand]).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JCommand]]]{def handle(x: AsyncResult[java.util.List[JCommand]]) {completionHandler.handle(AsyncResultWrapper[java.util.List[JCommand], scala.collection.mutable.Buffer[Command]](x, a => a.asScala.map(x => Command(x))))}}))
     this
   }
 
@@ -96,7 +96,7 @@ class CommandRegistry(private val _asJava: Object) extends CommandResolver (_asJ
    */
   
   def unregisterCommand(commandName: String, completionHandler: Handler[AsyncResult[Unit]]): CommandRegistry = {
-    asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JCommandRegistry].unregisterCommand(commandName.asInstanceOf[java.lang.String], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 

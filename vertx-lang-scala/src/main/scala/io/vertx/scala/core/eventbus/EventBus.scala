@@ -116,7 +116,7 @@ class EventBus(private val _asJava: Object) extends Measured {
    */
   
   def send[T: TypeTag](address: String, message: AnyRef, replyHandler: Handler[AsyncResult[Message[T]]]): EventBus = {
-    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[T]](x, a => Message[T](a)))})
+    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[T]](x, a => Message[T](a)))}}))
     this
   }
 
@@ -142,7 +142,7 @@ class EventBus(private val _asJava: Object) extends Measured {
    */
   
   def send[T: TypeTag](address: String, message: AnyRef, options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[T]]]): EventBus = {
-    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, options.asJava, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[T]](x, a => Message[T](a)))})
+    asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, options.asJava, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[T]](x, a => Message[T](a)))}}))
     this
   }
 
@@ -176,7 +176,7 @@ class EventBus(private val _asJava: Object) extends Measured {
    */
   
   def addOutboundInterceptor[T: TypeTag](interceptor: Handler[DeliveryContext[T]]): EventBus = {
-    asJava.asInstanceOf[JEventBus].addOutboundInterceptor[Object]({x: JDeliveryContext[Object] => interceptor.handle(DeliveryContext[T](x))})
+    asJava.asInstanceOf[JEventBus].addOutboundInterceptor[Object]((if (interceptor == null) null else new io.vertx.core.Handler[JDeliveryContext[Object]]{def handle(x: JDeliveryContext[Object]) {interceptor.handle(DeliveryContext[T](x))}}))
     this
   }
 
@@ -186,7 +186,7 @@ class EventBus(private val _asJava: Object) extends Measured {
    */
   
   def removeOutboundInterceptor[T: TypeTag](interceptor: Handler[DeliveryContext[T]]): EventBus = {
-    asJava.asInstanceOf[JEventBus].removeOutboundInterceptor[Object]({x: JDeliveryContext[Object] => interceptor.handle(DeliveryContext[T](x))})
+    asJava.asInstanceOf[JEventBus].removeOutboundInterceptor[Object]((if (interceptor == null) null else new io.vertx.core.Handler[JDeliveryContext[Object]]{def handle(x: JDeliveryContext[Object]) {interceptor.handle(DeliveryContext[T](x))}}))
     this
   }
 
@@ -196,7 +196,7 @@ class EventBus(private val _asJava: Object) extends Measured {
    */
   
   def addInboundInterceptor[T: TypeTag](interceptor: Handler[DeliveryContext[T]]): EventBus = {
-    asJava.asInstanceOf[JEventBus].addInboundInterceptor[Object]({x: JDeliveryContext[Object] => interceptor.handle(DeliveryContext[T](x))})
+    asJava.asInstanceOf[JEventBus].addInboundInterceptor[Object]((if (interceptor == null) null else new io.vertx.core.Handler[JDeliveryContext[Object]]{def handle(x: JDeliveryContext[Object]) {interceptor.handle(DeliveryContext[T](x))}}))
     this
   }
 
@@ -206,7 +206,7 @@ class EventBus(private val _asJava: Object) extends Measured {
    */
   
   def removeInboundInterceptor[T: TypeTag](interceptor: Handler[DeliveryContext[T]]): EventBus = {
-    asJava.asInstanceOf[JEventBus].removeInboundInterceptor[Object]({x: JDeliveryContext[Object] => interceptor.handle(DeliveryContext[T](x))})
+    asJava.asInstanceOf[JEventBus].removeInboundInterceptor[Object]((if (interceptor == null) null else new io.vertx.core.Handler[JDeliveryContext[Object]]{def handle(x: JDeliveryContext[Object]) {interceptor.handle(DeliveryContext[T](x))}}))
     this
   }
 
@@ -237,7 +237,7 @@ class EventBus(private val _asJava: Object) extends Measured {
    * @return the event bus message consumer
    */
   def consumer [T: TypeTag](address: String, handler: Handler[Message[T]]): MessageConsumer[T] = {
-    MessageConsumer[T](asJava.asInstanceOf[JEventBus].consumer[Object](address.asInstanceOf[java.lang.String], {x: JMessage[Object] => handler.handle(Message[T](x))}))
+    MessageConsumer[T](asJava.asInstanceOf[JEventBus].consumer[Object](address.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[JMessage[Object]]{def handle(x: JMessage[Object]) {handler.handle(Message[T](x))}})))
   }
 
   /**
@@ -254,7 +254,7 @@ class EventBus(private val _asJava: Object) extends Measured {
    * @return the event bus message consumer
    */
   def localConsumer [T: TypeTag](address: String, handler: Handler[Message[T]]): MessageConsumer[T] = {
-    MessageConsumer[T](asJava.asInstanceOf[JEventBus].localConsumer[Object](address.asInstanceOf[java.lang.String], {x: JMessage[Object] => handler.handle(Message[T](x))}))
+    MessageConsumer[T](asJava.asInstanceOf[JEventBus].localConsumer[Object](address.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[JMessage[Object]]{def handle(x: JMessage[Object]) {handler.handle(Message[T](x))}})))
   }
 
   /**

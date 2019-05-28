@@ -41,7 +41,7 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JMessageProducer[Object]].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -55,7 +55,7 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
 
   override 
   def write(data: T, handler: Handler[AsyncResult[Unit]]): MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer[Object]].write(toJava[T](data), {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JMessageProducer[Object]].write(toJava[T](data), (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -69,7 +69,7 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
 
   override 
   def drainHandler(handler: Handler[Unit]): MessageProducer[T] = {
-    asJava.asInstanceOf[JMessageProducer[Object]].drainHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JMessageProducer[Object]].drainHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -95,7 +95,7 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
    * Same as  but with an `handler` called when the operation completes
    */
   override def end(data: T, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JMessageProducer[Object]].end(toJava[T](data), {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JMessageProducer[Object]].end(toJava[T](data), (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -122,7 +122,7 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
    * @return reference to this for fluency
    */
   def send [R: TypeTag](message: T, replyHandler: Handler[AsyncResult[Message[R]]]): MessageProducer[T] = {
-    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message), {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}))
+    MessageProducer[T](asJava.asInstanceOf[JMessageProducer[Object]].send[Object](toJava[T](message), (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}})))
   }
 
   /**
@@ -143,7 +143,7 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
    * Closes the producer, calls [[io.vertx.scala.core.eventbus.MessageProducer#close]]
    */
   override def end (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JMessageProducer[Object]].end({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JMessageProducer[Object]].end((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -157,7 +157,7 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
    * Same as [[io.vertx.scala.core.eventbus.MessageProducer#close]] but with an `handler` called when the operation completes
    */
   def close (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JMessageProducer[Object]].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JMessageProducer[Object]].close((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

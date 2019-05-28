@@ -59,7 +59,7 @@ class SharedData(private val _asJava: Object) {
    * @param resultHandler the map will be returned asynchronously in this handler
    */
   def getClusterWideMap [K: TypeTag, V: TypeTag](name: String, resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]): Unit = {
-    asJava.asInstanceOf[JSharedData].getClusterWideMap[Object, Object](name.asInstanceOf[java.lang.String], {x: AsyncResult[JAsyncMap[Object, Object]] => resultHandler.handle(AsyncResultWrapper[JAsyncMap[Object, Object], AsyncMap[K, V]](x, a => AsyncMap[K, V](a)))})
+    asJava.asInstanceOf[JSharedData].getClusterWideMap[Object, Object](name.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JAsyncMap[Object, Object]]]{def handle(x: AsyncResult[JAsyncMap[Object, Object]]) {resultHandler.handle(AsyncResultWrapper[JAsyncMap[Object, Object], AsyncMap[K, V]](x, a => AsyncMap[K, V](a)))}}))
   }
 
   /**
@@ -72,7 +72,7 @@ class SharedData(private val _asJava: Object) {
    * @param resultHandler the map will be returned asynchronously in this handler
    */
   def getAsyncMap [K: TypeTag, V: TypeTag](name: String, resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]): Unit = {
-    asJava.asInstanceOf[JSharedData].getAsyncMap[Object, Object](name.asInstanceOf[java.lang.String], {x: AsyncResult[JAsyncMap[Object, Object]] => resultHandler.handle(AsyncResultWrapper[JAsyncMap[Object, Object], AsyncMap[K, V]](x, a => AsyncMap[K, V](a)))})
+    asJava.asInstanceOf[JSharedData].getAsyncMap[Object, Object](name.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JAsyncMap[Object, Object]]]{def handle(x: AsyncResult[JAsyncMap[Object, Object]]) {resultHandler.handle(AsyncResultWrapper[JAsyncMap[Object, Object], AsyncMap[K, V]](x, a => AsyncMap[K, V](a)))}}))
   }
 
   /**
@@ -83,7 +83,7 @@ class SharedData(private val _asJava: Object) {
    * @param resultHandler the map will be returned asynchronously in this handler
    */
   def getLocalAsyncMap [K: TypeTag, V: TypeTag](name: String, resultHandler: Handler[AsyncResult[AsyncMap[K, V]]]): Unit = {
-    asJava.asInstanceOf[JSharedData].getLocalAsyncMap[Object, Object](name.asInstanceOf[java.lang.String], {x: AsyncResult[JAsyncMap[Object, Object]] => resultHandler.handle(AsyncResultWrapper[JAsyncMap[Object, Object], AsyncMap[K, V]](x, a => AsyncMap[K, V](a)))})
+    asJava.asInstanceOf[JSharedData].getLocalAsyncMap[Object, Object](name.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JAsyncMap[Object, Object]]]{def handle(x: AsyncResult[JAsyncMap[Object, Object]]) {resultHandler.handle(AsyncResultWrapper[JAsyncMap[Object, Object], AsyncMap[K, V]](x, a => AsyncMap[K, V](a)))}}))
   }
 
   /**
@@ -95,7 +95,7 @@ class SharedData(private val _asJava: Object) {
    * @param resultHandler the handler
    */
   def getLock (name: String, resultHandler: Handler[AsyncResult[Lock]]): Unit = {
-    asJava.asInstanceOf[JSharedData].getLock(name.asInstanceOf[java.lang.String], {x: AsyncResult[JLock] => resultHandler.handle(AsyncResultWrapper[JLock, Lock](x, a => Lock(a)))})
+    asJava.asInstanceOf[JSharedData].getLock(name.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JLock]]{def handle(x: AsyncResult[JLock]) {resultHandler.handle(AsyncResultWrapper[JLock, Lock](x, a => Lock(a)))}}))
   }
 
   /**
@@ -109,7 +109,7 @@ class SharedData(private val _asJava: Object) {
    * @param resultHandler the handler
    */
   def getLockWithTimeout (name: String, timeout: Long, resultHandler: Handler[AsyncResult[Lock]]): Unit = {
-    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name.asInstanceOf[java.lang.String], timeout.asInstanceOf[java.lang.Long], {x: AsyncResult[JLock] => resultHandler.handle(AsyncResultWrapper[JLock, Lock](x, a => Lock(a)))})
+    asJava.asInstanceOf[JSharedData].getLockWithTimeout(name.asInstanceOf[java.lang.String], timeout.asInstanceOf[java.lang.Long], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JLock]]{def handle(x: AsyncResult[JLock]) {resultHandler.handle(AsyncResultWrapper[JLock, Lock](x, a => Lock(a)))}}))
   }
 
   /**
@@ -121,7 +121,7 @@ class SharedData(private val _asJava: Object) {
    * @param resultHandler the handler
    */
   def getLocalLock (name: String, resultHandler: Handler[AsyncResult[Lock]]): Unit = {
-    asJava.asInstanceOf[JSharedData].getLocalLock(name.asInstanceOf[java.lang.String], {x: AsyncResult[JLock] => resultHandler.handle(AsyncResultWrapper[JLock, Lock](x, a => Lock(a)))})
+    asJava.asInstanceOf[JSharedData].getLocalLock(name.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JLock]]{def handle(x: AsyncResult[JLock]) {resultHandler.handle(AsyncResultWrapper[JLock, Lock](x, a => Lock(a)))}}))
   }
 
   /**
@@ -135,7 +135,7 @@ class SharedData(private val _asJava: Object) {
    * @param resultHandler the handler
    */
   def getLocalLockWithTimeout (name: String, timeout: Long, resultHandler: Handler[AsyncResult[Lock]]): Unit = {
-    asJava.asInstanceOf[JSharedData].getLocalLockWithTimeout(name.asInstanceOf[java.lang.String], timeout.asInstanceOf[java.lang.Long], {x: AsyncResult[JLock] => resultHandler.handle(AsyncResultWrapper[JLock, Lock](x, a => Lock(a)))})
+    asJava.asInstanceOf[JSharedData].getLocalLockWithTimeout(name.asInstanceOf[java.lang.String], timeout.asInstanceOf[java.lang.Long], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JLock]]{def handle(x: AsyncResult[JLock]) {resultHandler.handle(AsyncResultWrapper[JLock, Lock](x, a => Lock(a)))}}))
   }
 
   /**
@@ -143,7 +143,7 @@ class SharedData(private val _asJava: Object) {
    * @param resultHandler the handler
    */
   def getCounter (name: String, resultHandler: Handler[AsyncResult[Counter]]): Unit = {
-    asJava.asInstanceOf[JSharedData].getCounter(name.asInstanceOf[java.lang.String], {x: AsyncResult[JCounter] => resultHandler.handle(AsyncResultWrapper[JCounter, Counter](x, a => Counter(a)))})
+    asJava.asInstanceOf[JSharedData].getCounter(name.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JCounter]]{def handle(x: AsyncResult[JCounter]) {resultHandler.handle(AsyncResultWrapper[JCounter, Counter](x, a => Counter(a)))}}))
   }
 
   /**
@@ -151,7 +151,7 @@ class SharedData(private val _asJava: Object) {
    * @param resultHandler the handler
    */
   def getLocalCounter (name: String, resultHandler: Handler[AsyncResult[Counter]]): Unit = {
-    asJava.asInstanceOf[JSharedData].getLocalCounter(name.asInstanceOf[java.lang.String], {x: AsyncResult[JCounter] => resultHandler.handle(AsyncResultWrapper[JCounter, Counter](x, a => Counter(a)))})
+    asJava.asInstanceOf[JSharedData].getLocalCounter(name.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JCounter]]{def handle(x: AsyncResult[JCounter]) {resultHandler.handle(AsyncResultWrapper[JCounter, Counter](x, a => Counter(a)))}}))
   }
 
   /**

@@ -47,14 +47,14 @@ class TimeoutStream(private val _asJava: Object) extends ReadStream[Long] {
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): TimeoutStream = {
-    asJava.asInstanceOf[JTimeoutStream].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JTimeoutStream].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[Long]): TimeoutStream = {
-    asJava.asInstanceOf[JTimeoutStream].handler({x: java.lang.Long => handler.handle(x.asInstanceOf[Long])})
+    asJava.asInstanceOf[JTimeoutStream].handler((if (handler == null) null else new io.vertx.core.Handler[java.lang.Long]{def handle(x: java.lang.Long) {handler.handle(x.asInstanceOf[Long])}}))
     this
   }
 
@@ -82,7 +82,7 @@ class TimeoutStream(private val _asJava: Object) extends ReadStream[Long] {
 
   override 
   def endHandler(endHandler: Handler[Unit]): TimeoutStream = {
-    asJava.asInstanceOf[JTimeoutStream].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JTimeoutStream].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -112,7 +112,7 @@ class TimeoutStream(private val _asJava: Object) extends ReadStream[Long] {
    * called with the result.   * @param dst the destination write stream
    */
   override def pipeTo(dst: WriteStream[Long], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JTimeoutStream].pipeTo(dst.asJava.asInstanceOf[JWriteStream[java.lang.Long]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JTimeoutStream].pipeTo(dst.asJava.asInstanceOf[JWriteStream[java.lang.Long]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

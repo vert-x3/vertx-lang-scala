@@ -84,7 +84,7 @@ class ChainAuthHandler(private val _asJava: Object) extends AuthHandler with io.
    * @param handler the handler to be called once the information is available.
    */
   override def parseCredentials (context: RoutingContext, handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JChainAuthHandler].parseCredentials(context.asJava.asInstanceOf[JRoutingContext], {x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JChainAuthHandler].parseCredentials(context.asJava.asInstanceOf[JRoutingContext], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
   }
 
   /**
@@ -92,7 +92,7 @@ class ChainAuthHandler(private val _asJava: Object) extends AuthHandler with io.
    * @param handler the handler for the result.
    */
   override def authorize (user: User, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JChainAuthHandler].authorize(user.asJava.asInstanceOf[JUser], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JChainAuthHandler].authorize(user.asJava.asInstanceOf[JUser], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

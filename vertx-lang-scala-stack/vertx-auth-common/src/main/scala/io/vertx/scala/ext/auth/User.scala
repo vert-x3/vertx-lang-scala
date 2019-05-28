@@ -44,7 +44,7 @@ class User(private val _asJava: Object) {
    */
   
   def isAuthorized(authority: String, resultHandler: Handler[AsyncResult[Boolean]]): User = {
-    asJava.asInstanceOf[JUser].isAuthorized(authority.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JUser].isAuthorized(authority.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))}}))
     this
   }
 
@@ -52,7 +52,7 @@ class User(private val _asJava: Object) {
    */
   
   def isAuthorised(authority: String, resultHandler: Handler[AsyncResult[Boolean]]): User = {
-    asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JUser].isAuthorised(authority.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))}}))
     this
   }
 

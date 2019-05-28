@@ -37,7 +37,7 @@ class Tty(private val _asJava: Object) {
    */
   
   def stdinHandler(handler: Handler[String]): Tty = {
-    asJava.asInstanceOf[JTty].stdinHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
+    asJava.asInstanceOf[JTty].stdinHandler((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}}))
     this
   }
 
@@ -57,7 +57,7 @@ class Tty(private val _asJava: Object) {
    */
   
   def resizehandler(handler: Handler[Unit]): Tty = {
-    asJava.asInstanceOf[JTty].resizehandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JTty].resizehandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 

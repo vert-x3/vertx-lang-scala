@@ -69,7 +69,7 @@ class Router(private val _asJava: Object) extends io.vertx.core.Handler[HttpServ
    */
   
   def exceptionHandler(exceptionHandler: Handler[Throwable]): Router = {
-    asJava.asInstanceOf[JRouter].exceptionHandler({x: Throwable => exceptionHandler.handle(x)})
+    asJava.asInstanceOf[JRouter].exceptionHandler((if (exceptionHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {exceptionHandler.handle(x)}}))
     this
   }
 
@@ -356,7 +356,7 @@ class Router(private val _asJava: Object) extends io.vertx.core.Handler[HttpServ
    * @return a reference to this, so the API can be used fluently
    */
   def errorHandler (statusCode: Int, errorHandler: Handler[RoutingContext]): Router = {
-    Router(asJava.asInstanceOf[JRouter].errorHandler(statusCode.asInstanceOf[java.lang.Integer], {x: JRoutingContext => errorHandler.handle(RoutingContext(x))}))
+    Router(asJava.asInstanceOf[JRouter].errorHandler(statusCode.asInstanceOf[java.lang.Integer], (if (errorHandler == null) null else new io.vertx.core.Handler[JRoutingContext]{def handle(x: JRoutingContext) {errorHandler.handle(RoutingContext(x))}})))
   }
 
   /**

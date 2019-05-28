@@ -39,7 +39,7 @@ class Pty(private val _asJava: Object) {
    */
   
   def stdoutHandler(handler: Handler[String]): Pty = {
-    asJava.asInstanceOf[JPty].stdoutHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
+    asJava.asInstanceOf[JPty].stdoutHandler((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}}))
     this
   }
 

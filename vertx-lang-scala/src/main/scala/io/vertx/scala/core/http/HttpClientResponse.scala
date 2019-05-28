@@ -139,14 +139,14 @@ class HttpClientResponse(private val _asJava: Object) extends ReadStream[io.vert
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JHttpClientResponse].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[io.vertx.core.buffer.Buffer]): HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].handler({x: Buffer => handler.handle(x)})
+    asJava.asInstanceOf[JHttpClientResponse].handler((if (handler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {handler.handle(x)}}))
     this
   }
 
@@ -160,7 +160,7 @@ class HttpClientResponse(private val _asJava: Object) extends ReadStream[io.vert
 
   override 
   def endHandler(endHandler: Handler[Unit]): HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClientResponse].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -172,7 +172,7 @@ class HttpClientResponse(private val _asJava: Object) extends ReadStream[io.vert
    */
   
   def bodyHandler(bodyHandler: Handler[io.vertx.core.buffer.Buffer]): HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].bodyHandler({x: Buffer => bodyHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClientResponse].bodyHandler((if (bodyHandler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {bodyHandler.handle(x)}}))
     this
   }
 
@@ -182,7 +182,7 @@ class HttpClientResponse(private val _asJava: Object) extends ReadStream[io.vert
    */
   
   def customFrameHandler(handler: Handler[HttpFrame]): HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler({x: JHttpFrame => handler.handle(HttpFrame(x))})
+    asJava.asInstanceOf[JHttpClientResponse].customFrameHandler((if (handler == null) null else new io.vertx.core.Handler[JHttpFrame]{def handle(x: JHttpFrame) {handler.handle(HttpFrame(x))}}))
     this
   }
 
@@ -193,7 +193,7 @@ class HttpClientResponse(private val _asJava: Object) extends ReadStream[io.vert
    */
   
   def streamPriorityHandler(handler: Handler[StreamPriority]): HttpClientResponse = {
-    asJava.asInstanceOf[JHttpClientResponse].streamPriorityHandler({x: JStreamPriority => handler.handle(StreamPriority(x))})
+    asJava.asInstanceOf[JHttpClientResponse].streamPriorityHandler((if (handler == null) null else new io.vertx.core.Handler[JStreamPriority]{def handle(x: JStreamPriority) {handler.handle(StreamPriority(x))}}))
     this
   }
 
@@ -223,7 +223,7 @@ class HttpClientResponse(private val _asJava: Object) extends ReadStream[io.vert
    * called with the result.   * @param dst the destination write stream
    */
   override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JHttpClientResponse].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpClientResponse].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

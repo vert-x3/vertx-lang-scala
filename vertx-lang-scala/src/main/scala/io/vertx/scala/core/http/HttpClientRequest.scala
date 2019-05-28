@@ -99,7 +99,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JHttpClientRequest].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -116,7 +116,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    */
   override 
   def write(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].write(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpClientRequest].write(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -130,7 +130,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
 
   override 
   def drainHandler(handler: Handler[Unit]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].drainHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JHttpClientRequest].drainHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -138,7 +138,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    */
   override 
   def handler(handler: Handler[HttpClientResponse]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].handler({x: JHttpClientResponse => handler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClientRequest].handler((if (handler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {handler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -170,7 +170,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    */
   override 
   def endHandler(endHandler: Handler[Unit]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClientRequest].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -237,7 +237,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    */
   
   def write(chunk: String, handler: Handler[AsyncResult[Unit]]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].write(chunk.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpClientRequest].write(chunk.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -255,7 +255,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    */
   
   def write(chunk: String, enc: String, handler: Handler[AsyncResult[Unit]]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].write(chunk.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpClientRequest].write(chunk.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -269,7 +269,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    */
   
   def continueHandler(handler: Handler[Unit]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].continueHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JHttpClientRequest].continueHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -292,7 +292,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    */
   
   def sendHead(completionHandler: Handler[io.vertx.core.http.HttpVersion]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].sendHead({x: HttpVersion => completionHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClientRequest].sendHead((if (completionHandler == null) null else new io.vertx.core.Handler[HttpVersion]{def handle(x: HttpVersion) {completionHandler.handle(x)}}))
     this
   }
 
@@ -332,7 +332,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    */
   
   def pushHandler(handler: Handler[HttpClientRequest]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].pushHandler({x: JHttpClientRequest => handler.handle(HttpClientRequest(x))})
+    asJava.asInstanceOf[JHttpClientRequest].pushHandler((if (handler == null) null else new io.vertx.core.Handler[JHttpClientRequest]{def handle(x: JHttpClientRequest) {handler.handle(HttpClientRequest(x))}}))
     this
   }
 
@@ -342,7 +342,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    */
   
   def connectionHandler(handler: Handler[HttpConnection]): HttpClientRequest = {
-    asJava.asInstanceOf[JHttpClientRequest].connectionHandler({x: JHttpConnection => handler.handle(HttpConnection(x))})
+    asJava.asInstanceOf[JHttpClientRequest].connectionHandler((if (handler == null) null else new io.vertx.core.Handler[JHttpConnection]{def handle(x: JHttpConnection) {handler.handle(HttpConnection(x))}}))
     this
   }
 
@@ -409,7 +409,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    * called with the result.   * @param dst the destination write stream
    */
   override def pipeTo(dst: WriteStream[HttpClientResponse], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JHttpClientRequest].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JHttpClientResponse]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpClientRequest].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JHttpClientResponse]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -499,7 +499,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but with an `handler` called when the operation completes
    */
   def end (chunk: String, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JHttpClientRequest].end(chunk.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpClientRequest].end(chunk.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -512,7 +512,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but with an `handler` called when the operation completes
    */
   def end (chunk: String, enc: String, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JHttpClientRequest].end(chunk.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpClientRequest].end(chunk.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -526,7 +526,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but with an `handler` called when the operation completes
    */
   override def end (chunk: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JHttpClientRequest].end(chunk, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpClientRequest].end(chunk, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -542,7 +542,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    * Same as [[io.vertx.scala.core.http.HttpClientRequest#end]] but with an `handler` called when the operation completes
    */
   override def end (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JHttpClientRequest].end({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpClientRequest].end((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

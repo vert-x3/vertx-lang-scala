@@ -49,7 +49,7 @@ class TemplateEngine(private val _asJava: Object) {
    * @param handler the handler that will be called with a result containing the buffer or a failure.
    */
   def render(context: io.vertx.core.json.JsonObject, templateFileName: String, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): Unit = {
-    asJava.asInstanceOf[JTemplateEngine].render(context, templateFileName.asInstanceOf[java.lang.String], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))})
+    asJava.asInstanceOf[JTemplateEngine].render(context, templateFileName.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Buffer]]{def handle(x: AsyncResult[Buffer]) {handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))}}))
   }
 
 

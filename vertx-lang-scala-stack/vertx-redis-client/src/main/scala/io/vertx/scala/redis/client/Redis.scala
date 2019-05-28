@@ -54,7 +54,7 @@ class Redis(private val _asJava: Object) extends ReadStream[Response] {
    */
   
   def connect(handler: Handler[AsyncResult[Redis]]): Redis = {
-    asJava.asInstanceOf[JRedis].connect({x: AsyncResult[JRedis] => handler.handle(AsyncResultWrapper[JRedis, Redis](x, a => Redis(a)))})
+    asJava.asInstanceOf[JRedis].connect((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRedis]]{def handle(x: AsyncResult[JRedis]) {handler.handle(AsyncResultWrapper[JRedis, Redis](x, a => Redis(a)))}}))
     this
   }
 
@@ -64,7 +64,7 @@ class Redis(private val _asJava: Object) extends ReadStream[Response] {
    */
   override 
   def exceptionHandler(handler: Handler[Throwable]): Redis = {
-    asJava.asInstanceOf[JRedis].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JRedis].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -73,7 +73,7 @@ class Redis(private val _asJava: Object) extends ReadStream[Response] {
    */
   override 
   def handler(handler: Handler[Response]): Redis = {
-    asJava.asInstanceOf[JRedis].handler({x: JResponse => handler.handle(Response(x))})
+    asJava.asInstanceOf[JRedis].handler((if (handler == null) null else new io.vertx.core.Handler[JResponse]{def handle(x: JResponse) {handler.handle(Response(x))}}))
     this
   }
 
@@ -115,21 +115,21 @@ class Redis(private val _asJava: Object) extends ReadStream[Response] {
    */
   override 
   def endHandler(endHandler: Handler[Unit]): Redis = {
-    asJava.asInstanceOf[JRedis].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JRedis].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
 
   
   def send(command: Request, onSend: Handler[AsyncResult[scala.Option[Response]]]): Redis = {
-    asJava.asInstanceOf[JRedis].send(command.asJava.asInstanceOf[JRequest], {x: AsyncResult[JResponse] => onSend.handle(AsyncResultWrapper[JResponse, scala.Option[Response]](x, a => scala.Option(a).map(Response(_))))})
+    asJava.asInstanceOf[JRedis].send(command.asJava.asInstanceOf[JRequest], (if (onSend == null) null else new io.vertx.core.Handler[AsyncResult[JResponse]]{def handle(x: AsyncResult[JResponse]) {onSend.handle(AsyncResultWrapper[JResponse, scala.Option[Response]](x, a => scala.Option(a).map(Response(_))))}}))
     this
   }
 
 
   
   def batch(commands: scala.collection.mutable.Buffer[Request], handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[Response]]]]): Redis = {
-    asJava.asInstanceOf[JRedis].batch(commands.map(x => x.asJava.asInstanceOf[JRequest]).asJava, {x: AsyncResult[java.util.List[JResponse]] => handler.handle(AsyncResultWrapper[java.util.List[JResponse], scala.collection.mutable.Buffer[scala.Option[Response]]](x, a => a.asScala.map(x => scala.Option(x).map(Response(_)))))})
+    asJava.asInstanceOf[JRedis].batch(commands.map(x => x.asJava.asInstanceOf[JRequest]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JResponse]]]{def handle(x: AsyncResult[java.util.List[JResponse]]) {handler.handle(AsyncResultWrapper[java.util.List[JResponse], scala.collection.mutable.Buffer[scala.Option[Response]]](x, a => a.asScala.map(x => scala.Option(x).map(Response(_)))))}}))
     this
   }
 
@@ -146,7 +146,7 @@ class Redis(private val _asJava: Object) extends ReadStream[Response] {
 
 
   override def pipeTo(dst: WriteStream[Response], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRedis].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JResponse]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRedis].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JResponse]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

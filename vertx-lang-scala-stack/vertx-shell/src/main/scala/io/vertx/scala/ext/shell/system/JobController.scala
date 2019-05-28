@@ -71,7 +71,7 @@ class JobController(private val _asJava: Object) {
    * Close the controller and terminate all the underlying jobs, a closed controller does not accept anymore jobs.
    */
   def close (completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JJobController].close({x: Void => completionHandler.handle(x)})
+    asJava.asInstanceOf[JJobController].close((if (completionHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {completionHandler.handle(x)}}))
   }
 
   /**

@@ -42,7 +42,7 @@ class ServicePublisher(private val _asJava: Object) {
    * @param resultHandler handler called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
    */
   def publish (record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
-    asJava.asInstanceOf[JServicePublisher].publish(record.asJava, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
+    asJava.asInstanceOf[JServicePublisher].publish(record.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JRecord]]{def handle(x: AsyncResult[JRecord]) {resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))}}))
   }
 
   /**
@@ -50,7 +50,7 @@ class ServicePublisher(private val _asJava: Object) {
    * @param resultHandler handler called when the operation has completed (successfully or not).
    */
   def unpublish (id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JServicePublisher].unpublish(id.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -58,7 +58,7 @@ class ServicePublisher(private val _asJava: Object) {
    * @param resultHandler handler called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
    */
   def update (record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
-    asJava.asInstanceOf[JServicePublisher].update(record.asJava, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
+    asJava.asInstanceOf[JServicePublisher].update(record.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JRecord]]{def handle(x: AsyncResult[JRecord]) {resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))}}))
   }
 
 

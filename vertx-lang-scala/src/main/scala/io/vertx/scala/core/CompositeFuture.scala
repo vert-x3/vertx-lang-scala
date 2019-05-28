@@ -43,7 +43,7 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
   override def completer(): Handler[AsyncResult[CompositeFuture]] = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JCompositeFuture].completer()
-      cached_0 = Some({x: AsyncResult[CompositeFuture] => tmp.handle(AsyncResultWrapper[CompositeFuture, JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))})
+      cached_0 = Some(if (tmp == null) null else {x: AsyncResult[CompositeFuture] => tmp.handle(AsyncResultWrapper[CompositeFuture, JCompositeFuture](x, a => a.asJava.asInstanceOf[JCompositeFuture]))})
     }
     cached_0.get
   }
@@ -52,7 +52,7 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
 
   override 
   def setHandler(handler: Handler[AsyncResult[CompositeFuture]]): CompositeFuture = {
-    asJava.asInstanceOf[JCompositeFuture].setHandler({x: AsyncResult[JCompositeFuture] => handler.handle(AsyncResultWrapper[JCompositeFuture, CompositeFuture](x, a => CompositeFuture(a)))})
+    asJava.asInstanceOf[JCompositeFuture].setHandler((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JCompositeFuture]]{def handle(x: AsyncResult[JCompositeFuture]) {handler.handle(AsyncResultWrapper[JCompositeFuture, CompositeFuture](x, a => CompositeFuture(a)))}}))
     this
   }
 
@@ -71,7 +71,7 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
    * @return the next future, used for chaining
    */
   override def compose[U: TypeTag](handler: Handler[CompositeFuture], next: Future[U]): Future[U] = {
-    Future[U](asJava.asInstanceOf[JCompositeFuture].compose[Object]({x: JCompositeFuture => handler.handle(CompositeFuture(x))}, next.asJava.asInstanceOf[JFuture[Object]]))
+    Future[U](asJava.asInstanceOf[JCompositeFuture].compose[Object]((if (handler == null) null else new io.vertx.core.Handler[JCompositeFuture]{def handle(x: JCompositeFuture) {handler.handle(CompositeFuture(x))}}), next.asJava.asInstanceOf[JFuture[Object]]))
   }
 
   /**

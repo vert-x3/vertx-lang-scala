@@ -65,7 +65,7 @@ object MongoDataSource {
    * @param resultHandler The result handler
    */
   def getMongoClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
-    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, {x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))})
+    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClient]]{def handle(x: AsyncResult[JMongoClient]) {resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))}}))
   }
 
   /**
@@ -76,7 +76,7 @@ object MongoDataSource {
    * @param resultHandler The result handler
    */
   def getMongoClient(discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
-    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))})
+    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClient]]{def handle(x: AsyncResult[JMongoClient]) {resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))}}))
   }
 
   /**
@@ -87,7 +87,7 @@ object MongoDataSource {
    * @param resultHandler the result handler
    */
   def getMongoClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
-    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, consumerConfiguration, {x: AsyncResult[JMongoClient] => resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))})
+    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, consumerConfiguration, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClient]]{def handle(x: AsyncResult[JMongoClient]) {resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))}}))
   }
 
 }

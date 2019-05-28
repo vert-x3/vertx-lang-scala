@@ -86,7 +86,7 @@ object MessageSource {
    * @param resultHandler The result handler
    */
   def getConsumer[T: TypeTag](discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MessageConsumer[T]]]): Unit = {
-    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], filter, {x: AsyncResult[JMessageConsumer[Object]] => resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object], MessageConsumer[T]](x, a => MessageConsumer[T](a)))})
+    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], filter, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessageConsumer[Object]]]{def handle(x: AsyncResult[JMessageConsumer[Object]]) {resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object], MessageConsumer[T]](x, a => MessageConsumer[T](a)))}}))
   }
 
   /**
@@ -96,7 +96,7 @@ object MessageSource {
    * @param resultHandler The result handler
    */
   def getConsumer[T: TypeTag](discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[MessageConsumer[T]]]): Unit = {
-    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JMessageConsumer[Object]] => resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object], MessageConsumer[T]](x, a => MessageConsumer[T](a)))})
+    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessageConsumer[Object]]]{def handle(x: AsyncResult[JMessageConsumer[Object]]) {resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object], MessageConsumer[T]](x, a => MessageConsumer[T](a)))}}))
   }
 
 }

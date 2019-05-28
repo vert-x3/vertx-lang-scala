@@ -55,7 +55,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
    */
   
   def listen(handler: Handler[AsyncResult[TcpEventBusBridge]]): TcpEventBusBridge = {
-    asJava.asInstanceOf[JTcpEventBusBridge].listen({x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge, TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
+    asJava.asInstanceOf[JTcpEventBusBridge].listen((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JTcpEventBusBridge]]{def handle(x: AsyncResult[JTcpEventBusBridge]) {handler.handle(AsyncResultWrapper[JTcpEventBusBridge, TcpEventBusBridge](x, a => TcpEventBusBridge(a)))}}))
     this
   }
 
@@ -78,7 +78,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
    */
   
   def listen(port: Int, address: String, handler: Handler[AsyncResult[TcpEventBusBridge]]): TcpEventBusBridge = {
-    asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], address.asInstanceOf[java.lang.String], {x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge, TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
+    asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], address.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JTcpEventBusBridge]]{def handle(x: AsyncResult[JTcpEventBusBridge]) {handler.handle(AsyncResultWrapper[JTcpEventBusBridge, TcpEventBusBridge](x, a => TcpEventBusBridge(a)))}}))
     this
   }
 
@@ -99,7 +99,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
    */
   
   def listen(port: Int, handler: Handler[AsyncResult[TcpEventBusBridge]]): TcpEventBusBridge = {
-    asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JTcpEventBusBridge] => handler.handle(AsyncResultWrapper[JTcpEventBusBridge, TcpEventBusBridge](x, a => TcpEventBusBridge(a)))})
+    asJava.asInstanceOf[JTcpEventBusBridge].listen(port.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JTcpEventBusBridge]]{def handle(x: AsyncResult[JTcpEventBusBridge]) {handler.handle(AsyncResultWrapper[JTcpEventBusBridge, TcpEventBusBridge](x, a => TcpEventBusBridge(a)))}}))
     this
   }
 
@@ -109,7 +109,7 @@ class TcpEventBusBridge(private val _asJava: Object) {
    * Close the current socket.   * @param handler the result handler
    */
   def close (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JTcpEventBusBridge].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JTcpEventBusBridge].close((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -182,7 +182,7 @@ object TcpEventBusBridge {
 
 
   def create(vertx: Vertx,options: BridgeOptions,netServerOptions: NetServerOptions,eventHandler: Handler[BridgeEvent]): TcpEventBusBridge = {
-    TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, netServerOptions.asJava, {x: JBridgeEvent => eventHandler.handle(BridgeEvent(x))}))
+    TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, netServerOptions.asJava, (if (eventHandler == null) null else new io.vertx.core.Handler[JBridgeEvent]{def handle(x: JBridgeEvent) {eventHandler.handle(BridgeEvent(x))}})))
   }
 
 }

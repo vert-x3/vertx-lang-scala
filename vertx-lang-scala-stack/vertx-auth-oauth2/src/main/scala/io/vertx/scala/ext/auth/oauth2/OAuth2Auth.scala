@@ -49,7 +49,7 @@ class OAuth2Auth(private val _asJava: Object) extends AuthProvider (_asJava) {
    */
   
   def decodeToken(token: String, handler: Handler[AsyncResult[AccessToken]]): OAuth2Auth = {
-    asJava.asInstanceOf[JOAuth2Auth].decodeToken(token.asInstanceOf[java.lang.String], {x: AsyncResult[JAccessToken] => handler.handle(AsyncResultWrapper[JAccessToken, AccessToken](x, a => AccessToken(a)))})
+    asJava.asInstanceOf[JOAuth2Auth].decodeToken(token.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JAccessToken]]{def handle(x: AsyncResult[JAccessToken]) {handler.handle(AsyncResultWrapper[JAccessToken, AccessToken](x, a => AccessToken(a)))}}))
     this
   }
 
@@ -61,7 +61,7 @@ class OAuth2Auth(private val _asJava: Object) extends AuthProvider (_asJava) {
    */
   
   def introspectToken(token: String, handler: Handler[AsyncResult[AccessToken]]): OAuth2Auth = {
-    asJava.asInstanceOf[JOAuth2Auth].introspectToken(token.asInstanceOf[java.lang.String], {x: AsyncResult[JAccessToken] => handler.handle(AsyncResultWrapper[JAccessToken, AccessToken](x, a => AccessToken(a)))})
+    asJava.asInstanceOf[JOAuth2Auth].introspectToken(token.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JAccessToken]]{def handle(x: AsyncResult[JAccessToken]) {handler.handle(AsyncResultWrapper[JAccessToken, AccessToken](x, a => AccessToken(a)))}}))
     this
   }
 
@@ -74,7 +74,7 @@ class OAuth2Auth(private val _asJava: Object) extends AuthProvider (_asJava) {
    */
   
   def introspectToken(token: String, tokenType: String, handler: Handler[AsyncResult[AccessToken]]): OAuth2Auth = {
-    asJava.asInstanceOf[JOAuth2Auth].introspectToken(token.asInstanceOf[java.lang.String], tokenType.asInstanceOf[java.lang.String], {x: AsyncResult[JAccessToken] => handler.handle(AsyncResultWrapper[JAccessToken, AccessToken](x, a => AccessToken(a)))})
+    asJava.asInstanceOf[JOAuth2Auth].introspectToken(token.asInstanceOf[java.lang.String], tokenType.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JAccessToken]]{def handle(x: AsyncResult[JAccessToken]) {handler.handle(AsyncResultWrapper[JAccessToken, AccessToken](x, a => AccessToken(a)))}}))
     this
   }
 
@@ -85,7 +85,7 @@ class OAuth2Auth(private val _asJava: Object) extends AuthProvider (_asJava) {
    */
   
   def loadJWK(handler: Handler[AsyncResult[Unit]]): OAuth2Auth = {
-    asJava.asInstanceOf[JOAuth2Auth].loadJWK({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JOAuth2Auth].loadJWK((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -110,7 +110,7 @@ class OAuth2Auth(private val _asJava: Object) extends AuthProvider (_asJava) {
    * @param handler - The handler returning the results.
    */
   def getToken (params: io.vertx.core.json.JsonObject, handler: Handler[AsyncResult[AccessToken]]): Unit = {
-    asJava.asInstanceOf[JOAuth2Auth].getToken(params, {x: AsyncResult[JAccessToken] => handler.handle(AsyncResultWrapper[JAccessToken, AccessToken](x, a => AccessToken(a)))})
+    asJava.asInstanceOf[JOAuth2Auth].getToken(params, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JAccessToken]]{def handle(x: AsyncResult[JAccessToken]) {handler.handle(AsyncResultWrapper[JAccessToken, AccessToken](x, a => AccessToken(a)))}}))
   }
 
   /**

@@ -145,7 +145,7 @@ object SQLOperations {
    */
   
   def query(sql: String, resultHandler: Handler[AsyncResult[ResultSet]]): SQLOperations = {
-    asJava.asInstanceOf[JSQLOperations].query(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
+    asJava.asInstanceOf[JSQLOperations].query(sql.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JResultSet]]{def handle(x: AsyncResult[JResultSet]) {resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))}}))
     this
   }
 
@@ -156,7 +156,7 @@ object SQLOperations {
    */
   
   def queryWithParams(sql: String, params: io.vertx.core.json.JsonArray, resultHandler: Handler[AsyncResult[ResultSet]]): SQLOperations = {
-    asJava.asInstanceOf[JSQLOperations].queryWithParams(sql.asInstanceOf[java.lang.String], params, {x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
+    asJava.asInstanceOf[JSQLOperations].queryWithParams(sql.asInstanceOf[java.lang.String], params, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JResultSet]]{def handle(x: AsyncResult[JResultSet]) {resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))}}))
     this
   }
 
@@ -166,7 +166,7 @@ object SQLOperations {
    */
   
   def queryStream(sql: String, handler: Handler[AsyncResult[SQLRowStream]]): SQLOperations = {
-    asJava.asInstanceOf[JSQLOperations].queryStream(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JSQLRowStream] => handler.handle(AsyncResultWrapper[JSQLRowStream, SQLRowStream](x, a => SQLRowStream(a)))})
+    asJava.asInstanceOf[JSQLOperations].queryStream(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JSQLRowStream]]{def handle(x: AsyncResult[JSQLRowStream]) {handler.handle(AsyncResultWrapper[JSQLRowStream, SQLRowStream](x, a => SQLRowStream(a)))}}))
     this
   }
 
@@ -177,7 +177,7 @@ object SQLOperations {
    */
   
   def queryStreamWithParams(sql: String, params: io.vertx.core.json.JsonArray, handler: Handler[AsyncResult[SQLRowStream]]): SQLOperations = {
-    asJava.asInstanceOf[JSQLOperations].queryStreamWithParams(sql.asInstanceOf[java.lang.String], params, {x: AsyncResult[JSQLRowStream] => handler.handle(AsyncResultWrapper[JSQLRowStream, SQLRowStream](x, a => SQLRowStream(a)))})
+    asJava.asInstanceOf[JSQLOperations].queryStreamWithParams(sql.asInstanceOf[java.lang.String], params, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JSQLRowStream]]{def handle(x: AsyncResult[JSQLRowStream]) {handler.handle(AsyncResultWrapper[JSQLRowStream, SQLRowStream](x, a => SQLRowStream(a)))}}))
     this
   }
 
@@ -190,7 +190,7 @@ object SQLOperations {
    */
   
   def querySingle(sql: String, handler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonArray]]]): SQLOperations = {
-    asJava.asInstanceOf[JSQLOperations].querySingle(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, scala.Option[io.vertx.core.json.JsonArray]](x, a => scala.Option(a)))})
+    asJava.asInstanceOf[JSQLOperations].querySingle(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, scala.Option[io.vertx.core.json.JsonArray]](x, a => scala.Option(a)))}}))
     this
   }
 
@@ -204,7 +204,7 @@ object SQLOperations {
    */
   
   def querySingleWithParams(sql: String, arguments: io.vertx.core.json.JsonArray, handler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonArray]]]): SQLOperations = {
-    asJava.asInstanceOf[JSQLOperations].querySingleWithParams(sql.asInstanceOf[java.lang.String], arguments, {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, scala.Option[io.vertx.core.json.JsonArray]](x, a => scala.Option(a)))})
+    asJava.asInstanceOf[JSQLOperations].querySingleWithParams(sql.asInstanceOf[java.lang.String], arguments, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, scala.Option[io.vertx.core.json.JsonArray]](x, a => scala.Option(a)))}}))
     this
   }
 
@@ -215,7 +215,7 @@ object SQLOperations {
    */
   
   def update(sql: String, resultHandler: Handler[AsyncResult[UpdateResult]]): SQLOperations = {
-    asJava.asInstanceOf[JSQLOperations].update(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JUpdateResult] => resultHandler.handle(AsyncResultWrapper[JUpdateResult, UpdateResult](x, a => UpdateResult(a)))})
+    asJava.asInstanceOf[JSQLOperations].update(sql.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JUpdateResult]]{def handle(x: AsyncResult[JUpdateResult]) {resultHandler.handle(AsyncResultWrapper[JUpdateResult, UpdateResult](x, a => UpdateResult(a)))}}))
     this
   }
 
@@ -227,7 +227,7 @@ object SQLOperations {
    */
   
   def updateWithParams(sql: String, params: io.vertx.core.json.JsonArray, resultHandler: Handler[AsyncResult[UpdateResult]]): SQLOperations = {
-    asJava.asInstanceOf[JSQLOperations].updateWithParams(sql.asInstanceOf[java.lang.String], params, {x: AsyncResult[JUpdateResult] => resultHandler.handle(AsyncResultWrapper[JUpdateResult, UpdateResult](x, a => UpdateResult(a)))})
+    asJava.asInstanceOf[JSQLOperations].updateWithParams(sql.asInstanceOf[java.lang.String], params, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JUpdateResult]]{def handle(x: AsyncResult[JUpdateResult]) {resultHandler.handle(AsyncResultWrapper[JUpdateResult, UpdateResult](x, a => UpdateResult(a)))}}))
     this
   }
 
@@ -237,7 +237,7 @@ object SQLOperations {
    */
   
   def call(sql: String, resultHandler: Handler[AsyncResult[ResultSet]]): SQLOperations = {
-    asJava.asInstanceOf[JSQLOperations].call(sql.asInstanceOf[java.lang.String], {x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
+    asJava.asInstanceOf[JSQLOperations].call(sql.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JResultSet]]{def handle(x: AsyncResult[JResultSet]) {resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))}}))
     this
   }
 
@@ -257,7 +257,7 @@ object SQLOperations {
    */
   
   def callWithParams(sql: String, params: io.vertx.core.json.JsonArray, outputs: io.vertx.core.json.JsonArray, resultHandler: Handler[AsyncResult[ResultSet]]): SQLOperations = {
-    asJava.asInstanceOf[JSQLOperations].callWithParams(sql.asInstanceOf[java.lang.String], params, outputs, {x: AsyncResult[JResultSet] => resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))})
+    asJava.asInstanceOf[JSQLOperations].callWithParams(sql.asInstanceOf[java.lang.String], params, outputs, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JResultSet]]{def handle(x: AsyncResult[JResultSet]) {resultHandler.handle(AsyncResultWrapper[JResultSet, ResultSet](x, a => ResultSet(a)))}}))
     this
   }
 

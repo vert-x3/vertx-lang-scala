@@ -76,14 +76,14 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JNetSocket].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[io.vertx.core.buffer.Buffer]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].handler({x: Buffer => handler.handle(x)})
+    asJava.asInstanceOf[JNetSocket].handler((if (handler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {handler.handle(x)}}))
     this
   }
 
@@ -116,7 +116,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   override 
   def endHandler(endHandler: Handler[Unit]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JNetSocket].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -137,7 +137,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
 
   override 
   def drainHandler(handler: Handler[Unit]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].drainHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JNetSocket].drainHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -146,7 +146,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   
   def write(str: String, handler: Handler[AsyncResult[Unit]]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -165,7 +165,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   
   def write(str: String, enc: String, handler: Handler[AsyncResult[Unit]]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].write(str.asInstanceOf[java.lang.String], enc.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -186,7 +186,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   override 
   def write(message: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].write(message, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].write(message, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -234,7 +234,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   
   def sendFile(filename: String, resultHandler: Handler[AsyncResult[Unit]]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -247,7 +247,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   
   def sendFile(filename: String, offset: Long, resultHandler: Handler[AsyncResult[Unit]]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -261,7 +261,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   
   def sendFile(filename: String, offset: Long, length: Long, resultHandler: Handler[AsyncResult[Unit]]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].sendFile(filename.asInstanceOf[java.lang.String], offset.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Long], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -271,7 +271,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   
   def closeHandler(handler: Handler[Unit]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].closeHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JNetSocket].closeHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -281,7 +281,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   
   def upgradeToSsl(handler: Handler[Unit]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].upgradeToSsl({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JNetSocket].upgradeToSsl((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -292,7 +292,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   
   def upgradeToSsl(serverName: String, handler: Handler[Unit]): NetSocket = {
-    asJava.asInstanceOf[JNetSocket].upgradeToSsl(serverName.asInstanceOf[java.lang.String], {x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JNetSocket].upgradeToSsl(serverName.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -308,7 +308,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    * Same as  but with an `handler` called when the operation completes
    */
   override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JNetSocket].end(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].end(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -336,7 +336,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    * called with the result.   * @param dst the destination write stream
    */
   override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JNetSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -370,7 +370,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    * Calls [[io.vertx.scala.core.net.NetSocket#end]]
    */
   override def end (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JNetSocket].end({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].end((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -384,7 +384,7 @@ class NetSocket(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    * Close the NetSocket and notify the `handler` when the operation completes.
    */
   def close (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JNetSocket].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JNetSocket].close((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

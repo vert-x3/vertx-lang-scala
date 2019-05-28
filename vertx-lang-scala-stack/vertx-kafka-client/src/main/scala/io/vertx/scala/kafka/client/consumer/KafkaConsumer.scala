@@ -69,14 +69,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[KafkaConsumerRecord[K, V]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].handler({x: JKafkaConsumerRecord[Object, Object] => handler.handle(KafkaConsumerRecord[K, V](x))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].handler((if (handler == null) null else new io.vertx.core.Handler[JKafkaConsumerRecord[Object, Object]]{def handle(x: JKafkaConsumerRecord[Object, Object]) {handler.handle(KafkaConsumerRecord[K, V](x))}}))
     this
   }
 
@@ -97,7 +97,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
 
   override 
   def endHandler(endHandler: Handler[Unit]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -136,7 +136,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def subscribe(topic: String, completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].subscribe(topic.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].subscribe(topic.asInstanceOf[java.lang.String], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -155,7 +155,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def subscribe(topics: scala.collection.mutable.Set[String], completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].subscribe(topics.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].subscribe(topics.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -194,7 +194,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def assign(topicPartition: TopicPartition, completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].assign(topicPartition.asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].assign(topicPartition.asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -213,7 +213,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def assign(topicPartitions: scala.collection.mutable.Set[TopicPartition], completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].assign(topicPartitions.map(x => x.asJava).asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].assign(topicPartitions.map(x => x.asJava).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -223,7 +223,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def assignment(handler: Handler[AsyncResult[scala.collection.mutable.Set[TopicPartition]]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].assignment({x: AsyncResult[java.util.Set[JTopicPartition]] => handler.handle(AsyncResultWrapper[java.util.Set[JTopicPartition], scala.collection.mutable.Set[TopicPartition]](x, a => a.asScala.map(x => TopicPartition(x))))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].assignment((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JTopicPartition]]]{def handle(x: AsyncResult[java.util.Set[JTopicPartition]]) {handler.handle(AsyncResultWrapper[java.util.Set[JTopicPartition], scala.collection.mutable.Set[TopicPartition]](x, a => a.asScala.map(x => TopicPartition(x))))}}))
     this
   }
 
@@ -242,7 +242,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def unsubscribe(completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].unsubscribe({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].unsubscribe((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -252,7 +252,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def subscription(handler: Handler[AsyncResult[scala.collection.mutable.Set[String]]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].subscription({x: AsyncResult[java.util.Set[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.String], scala.collection.mutable.Set[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].subscription((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.String]]]{def handle(x: AsyncResult[java.util.Set[java.lang.String]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.String], scala.collection.mutable.Set[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))}}))
     this
   }
 
@@ -291,7 +291,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def pause(topicPartition: TopicPartition, completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pause(topicPartition.asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pause(topicPartition.asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -310,7 +310,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def pause(topicPartitions: scala.collection.mutable.Set[TopicPartition], completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pause(topicPartitions.map(x => x.asJava).asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pause(topicPartitions.map(x => x.asJava).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -341,7 +341,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def resume(topicPartition: TopicPartition, completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].resume(topicPartition.asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].resume(topicPartition.asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -352,7 +352,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def resume(topicPartitions: scala.collection.mutable.Set[TopicPartition], completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].resume(topicPartitions.map(x => x.asJava).asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].resume(topicPartitions.map(x => x.asJava).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -362,7 +362,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def partitionsRevokedHandler(handler: Handler[scala.collection.mutable.Set[TopicPartition]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].partitionsRevokedHandler({x: java.util.Set[JTopicPartition] => handler.handle(x.asScala.map(x => TopicPartition(x)))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].partitionsRevokedHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[JTopicPartition]]{def handle(x: java.util.Set[JTopicPartition]) {handler.handle(x.asScala.map(x => TopicPartition(x)))}}))
     this
   }
 
@@ -372,7 +372,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def partitionsAssignedHandler(handler: Handler[scala.collection.mutable.Set[TopicPartition]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].partitionsAssignedHandler({x: java.util.Set[JTopicPartition] => handler.handle(x.asScala.map(x => TopicPartition(x)))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].partitionsAssignedHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[JTopicPartition]]{def handle(x: java.util.Set[JTopicPartition]) {handler.handle(x.asScala.map(x => TopicPartition(x)))}}))
     this
   }
 
@@ -403,7 +403,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def seek(topicPartition: TopicPartition, offset: Long, completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].seek(topicPartition.asJava, offset.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].seek(topicPartition.asJava, offset.asInstanceOf[java.lang.Long], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -442,7 +442,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def seekToBeginning(topicPartition: TopicPartition, completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].seekToBeginning(topicPartition.asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].seekToBeginning(topicPartition.asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -461,7 +461,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def seekToBeginning(topicPartitions: scala.collection.mutable.Set[TopicPartition], completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].seekToBeginning(topicPartitions.map(x => x.asJava).asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].seekToBeginning(topicPartitions.map(x => x.asJava).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -500,7 +500,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def seekToEnd(topicPartition: TopicPartition, completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].seekToEnd(topicPartition.asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].seekToEnd(topicPartition.asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -519,7 +519,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def seekToEnd(topicPartitions: scala.collection.mutable.Set[TopicPartition], completionHandler: Handler[AsyncResult[Unit]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].seekToEnd(topicPartitions.map(x => x.asJava).asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].seekToEnd(topicPartitions.map(x => x.asJava).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -530,7 +530,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def partitionsFor(topic: String, handler: Handler[AsyncResult[scala.collection.mutable.Buffer[PartitionInfo]]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].partitionsFor(topic.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[JPartitionInfo]] => handler.handle(AsyncResultWrapper[java.util.List[JPartitionInfo], scala.collection.mutable.Buffer[PartitionInfo]](x, a => a.asScala.map(x => PartitionInfo(x))))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].partitionsFor(topic.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JPartitionInfo]]]{def handle(x: AsyncResult[java.util.List[JPartitionInfo]]) {handler.handle(AsyncResultWrapper[java.util.List[JPartitionInfo], scala.collection.mutable.Buffer[PartitionInfo]](x, a => a.asScala.map(x => PartitionInfo(x))))}}))
     this
   }
 
@@ -543,7 +543,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def batchHandler(handler: Handler[KafkaConsumerRecords[K, V]]): KafkaConsumer[K, V] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].batchHandler({x: JKafkaConsumerRecords[Object, Object] => handler.handle(KafkaConsumerRecords[K, V](x))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].batchHandler((if (handler == null) null else new io.vertx.core.Handler[JKafkaConsumerRecords[Object, Object]]{def handle(x: JKafkaConsumerRecords[Object, Object]) {handler.handle(KafkaConsumerRecords[K, V](x))}}))
     this
   }
 
@@ -560,7 +560,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
 
 
   override def pipeTo(dst: WriteStream[KafkaConsumerRecord[K, V]], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JKafkaConsumerRecord[Object, Object]]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JKafkaConsumerRecord[Object, Object]]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -575,7 +575,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    * Get the set of partitions that were previously paused by a call to pause(Set).   * @param handler handler called on operation completed
    */
   def paused (handler: Handler[AsyncResult[scala.collection.mutable.Set[TopicPartition]]]): Unit = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].paused({x: AsyncResult[java.util.Set[JTopicPartition]] => handler.handle(AsyncResultWrapper[java.util.Set[JTopicPartition], scala.collection.mutable.Set[TopicPartition]](x, a => a.asScala.map(x => TopicPartition(x))))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].paused((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JTopicPartition]]]{def handle(x: AsyncResult[java.util.Set[JTopicPartition]]) {handler.handle(AsyncResultWrapper[java.util.Set[JTopicPartition], scala.collection.mutable.Set[TopicPartition]](x, a => a.asScala.map(x => TopicPartition(x))))}}))
   }
 
   /**
@@ -589,7 +589,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    * Commit current offsets for all the subscribed list of topics and partition.   * @param completionHandler handler called on operation completed
    */
   def commit (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].commit({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].commit((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -597,14 +597,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    * @param handler handler called on operation completed
    */
   def committed (topicPartition: TopicPartition, handler: Handler[AsyncResult[OffsetAndMetadata]]): Unit = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].committed(topicPartition.asJava, {x: AsyncResult[JOffsetAndMetadata] => handler.handle(AsyncResultWrapper[JOffsetAndMetadata, OffsetAndMetadata](x, a => OffsetAndMetadata(a)))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].committed(topicPartition.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOffsetAndMetadata]]{def handle(x: AsyncResult[JOffsetAndMetadata]) {handler.handle(AsyncResultWrapper[JOffsetAndMetadata, OffsetAndMetadata](x, a => OffsetAndMetadata(a)))}}))
   }
 
   /**
    * Close the consumer   * @param completionHandler handler called on operation completed
    */
   def close (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].close((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -612,7 +612,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    * @param handler handler called on operation completed
    */
   def position (partition: TopicPartition, handler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].position(partition.asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].position(partition.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
   }
 
   /**
@@ -622,7 +622,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    * @param handler handler called on operation completed
    */
   def offsetsForTimes (topicPartition: TopicPartition, timestamp: Long, handler: Handler[AsyncResult[OffsetAndTimestamp]]): Unit = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].offsetsForTimes(topicPartition.asJava, timestamp.asInstanceOf[java.lang.Long], {x: AsyncResult[JOffsetAndTimestamp] => handler.handle(AsyncResultWrapper[JOffsetAndTimestamp, OffsetAndTimestamp](x, a => OffsetAndTimestamp(a)))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].offsetsForTimes(topicPartition.asJava, timestamp.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOffsetAndTimestamp]]{def handle(x: AsyncResult[JOffsetAndTimestamp]) {handler.handle(AsyncResultWrapper[JOffsetAndTimestamp, OffsetAndTimestamp](x, a => OffsetAndTimestamp(a)))}}))
   }
 
   /**
@@ -630,7 +630,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    * @param handler handler called on operation completed. Returns the earliest available offset for the given partition
    */
   def beginningOffsets (topicPartition: TopicPartition, handler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].beginningOffsets(topicPartition.asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].beginningOffsets(topicPartition.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
   }
 
   /**
@@ -639,7 +639,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    * @param handler handler called on operation completed. The end offset for the given partition.
    */
   def endOffsets (topicPartition: TopicPartition, handler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].endOffsets(topicPartition.asJava, {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].endOffsets(topicPartition.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
   }
 
   /**
@@ -657,7 +657,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    * @param handler handler called after the poll with batch of records (can be empty).
    */
   def poll (timeout: Long, handler: Handler[AsyncResult[KafkaConsumerRecords[K, V]]]): Unit = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].poll(timeout.asInstanceOf[java.lang.Long], {x: AsyncResult[JKafkaConsumerRecords[Object, Object]] => handler.handle(AsyncResultWrapper[JKafkaConsumerRecords[Object, Object], KafkaConsumerRecords[K, V]](x, a => KafkaConsumerRecords[K, V](a)))})
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].poll(timeout.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JKafkaConsumerRecords[Object, Object]]]{def handle(x: AsyncResult[JKafkaConsumerRecords[Object, Object]]) {handler.handle(AsyncResultWrapper[JKafkaConsumerRecords[Object, Object], KafkaConsumerRecords[K, V]](x, a => KafkaConsumerRecords[K, V](a)))}}))
   }
 
 

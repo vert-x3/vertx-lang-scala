@@ -82,7 +82,7 @@ class SessionStore(private val _asJava: Object) {
    * @param resultHandler will be called with a result holding the session, or a failure
    */
   def get (cookieValue: String, resultHandler: Handler[AsyncResult[scala.Option[Session]]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].get(cookieValue.asInstanceOf[java.lang.String], {x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession, scala.Option[Session]](x, a => scala.Option(a).map(Session(_))))})
+    asJava.asInstanceOf[JSessionStore].get(cookieValue.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JSession]]{def handle(x: AsyncResult[JSession]) {resultHandler.handle(AsyncResultWrapper[JSession, scala.Option[Session]](x, a => scala.Option(a).map(Session(_))))}}))
   }
 
   /**
@@ -90,7 +90,7 @@ class SessionStore(private val _asJava: Object) {
    * @param resultHandler will be called with a success or a failure
    */
   def delete (id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JSessionStore].delete(id.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -98,14 +98,14 @@ class SessionStore(private val _asJava: Object) {
    * @param resultHandler will be called with a success or a failure
    */
   def put (session: Session, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JSessionStore].put(session.asJava.asInstanceOf[JSession], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Remove all sessions from the store.   * @param resultHandler will be called with a success or a failure
    */
   def clear (resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].clear({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JSessionStore].clear((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -114,7 +114,7 @@ class SessionStore(private val _asJava: Object) {
    * Beware of the result which is just an estimate, in particular with distributed session stores.   * @param resultHandler will be called with the number, or a failure
    */
   def size (resultHandler: Handler[AsyncResult[Int]]): Unit = {
-    asJava.asInstanceOf[JSessionStore].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
+    asJava.asInstanceOf[JSessionStore].size((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Integer]]{def handle(x: AsyncResult[java.lang.Integer]) {resultHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))}}))
   }
 
   /**

@@ -44,7 +44,7 @@ class BaseBridgeEvent(private val _asJava: Object) extends Future[Boolean] (_asJ
   override def completer(): Handler[AsyncResult[Boolean]] = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JBaseBridgeEvent].completer()
-      cached_0 = Some({x: AsyncResult[Boolean] => tmp.handle(AsyncResultWrapper[Boolean, java.lang.Boolean](x, a => a.asInstanceOf[java.lang.Boolean]))})
+      cached_0 = Some(if (tmp == null) null else {x: AsyncResult[Boolean] => tmp.handle(AsyncResultWrapper[Boolean, java.lang.Boolean](x, a => a.asInstanceOf[java.lang.Boolean]))})
     }
     cached_0.get
   }
@@ -64,7 +64,7 @@ class BaseBridgeEvent(private val _asJava: Object) extends Future[Boolean] (_asJ
 
   override 
   def setHandler(arg0: Handler[AsyncResult[Boolean]]): Future[Boolean] = {
-    asJava.asInstanceOf[JBaseBridgeEvent].setHandler({x: AsyncResult[java.lang.Boolean] => arg0.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JBaseBridgeEvent].setHandler((if (arg0 == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {arg0.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))}}))
     this
   }
 
@@ -82,7 +82,7 @@ class BaseBridgeEvent(private val _asJava: Object) extends Future[Boolean] (_asJ
 
 
   override def compose[U: TypeTag](handler: Handler[Boolean], next: Future[U]): Future[U] = {
-    Future[U](asJava.asInstanceOf[JBaseBridgeEvent].compose[Object]({x: java.lang.Boolean => handler.handle(x.asInstanceOf[Boolean])}, next.asJava.asInstanceOf[JFuture[Object]]))
+    Future[U](asJava.asInstanceOf[JBaseBridgeEvent].compose[Object]((if (handler == null) null else new io.vertx.core.Handler[java.lang.Boolean]{def handle(x: java.lang.Boolean) {handler.handle(x.asInstanceOf[Boolean])}}), next.asJava.asInstanceOf[JFuture[Object]]))
   }
 
 

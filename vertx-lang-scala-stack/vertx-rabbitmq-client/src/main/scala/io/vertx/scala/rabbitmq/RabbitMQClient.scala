@@ -43,7 +43,7 @@ class RabbitMQClient(private val _asJava: Object) {
   /**
    */
   def basicConsumer(queue: String, resultHandler: Handler[AsyncResult[RabbitMQConsumer]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicConsumer(queue.asInstanceOf[java.lang.String], {x: AsyncResult[JRabbitMQConsumer] => resultHandler.handle(AsyncResultWrapper[JRabbitMQConsumer, RabbitMQConsumer](x, a => RabbitMQConsumer(a)))})
+    asJava.asInstanceOf[JRabbitMQClient].basicConsumer(queue.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JRabbitMQConsumer]]{def handle(x: AsyncResult[JRabbitMQConsumer]) {resultHandler.handle(AsyncResultWrapper[JRabbitMQConsumer, RabbitMQConsumer](x, a => RabbitMQConsumer(a)))}}))
   }
 
   /**
@@ -52,7 +52,7 @@ class RabbitMQClient(private val _asJava: Object) {
    * @param resultHandler handler called when operation is done with a result of the operation
    */
   def basicQos(prefetchCount: Int, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchCount.asInstanceOf[java.lang.Integer], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchCount.asInstanceOf[java.lang.Integer], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -62,7 +62,7 @@ class RabbitMQClient(private val _asJava: Object) {
    * @param resultHandler handler called when operation is done with a result of the operation
    */
   def basicQos(prefetchCount: Int, global: Boolean, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchCount.asInstanceOf[java.lang.Integer], global.asInstanceOf[java.lang.Boolean], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchCount.asInstanceOf[java.lang.Integer], global.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -70,19 +70,19 @@ class RabbitMQClient(private val _asJava: Object) {
    * Acknowledge one or several received messages. Supply the deliveryTag from the AMQP.Basic.GetOk or AMQP.Basic.Deliver
    * method containing the received message being acknowledged.   */
   def basicAck (deliveryTag: Long, multiple: Boolean, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicAck(deliveryTag.asInstanceOf[java.lang.Long], multiple.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].basicAck(deliveryTag.asInstanceOf[java.lang.Long], multiple.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
   }
 
   /**
    * Reject one or several received messages.   */
   def basicNack (deliveryTag: Long, multiple: Boolean, requeue: Boolean, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicNack(deliveryTag.asInstanceOf[java.lang.Long], multiple.asInstanceOf[java.lang.Boolean], requeue.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].basicNack(deliveryTag.asInstanceOf[java.lang.Long], multiple.asInstanceOf[java.lang.Boolean], requeue.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
   }
 
   /**
    * Retrieve a message from a queue using AMQP.Basic.Get   */
   def basicGet (queue: String, autoAck: Boolean, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicGet(queue.asInstanceOf[java.lang.String], autoAck.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].basicGet(queue.asInstanceOf[java.lang.String], autoAck.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
   }
 
   /**
@@ -90,7 +90,7 @@ class RabbitMQClient(private val _asJava: Object) {
    * 
    * Start a non-nolocal, non-exclusive consumer, with auto acknowledgement and a server-generated consumerTag.   */
   def basicConsume (queue: String, address: String, resultHandler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicConsume(queue.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRabbitMQClient].basicConsume(queue.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
   }
 
   /**
@@ -98,7 +98,7 @@ class RabbitMQClient(private val _asJava: Object) {
    * 
    * Start a non-nolocal, non-exclusive consumer, with a server-generated consumerTag.   */
   def basicConsume (queue: String, address: String, autoAck: Boolean, resultHandler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicConsume(queue.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], autoAck.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JRabbitMQClient].basicConsume(queue.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], autoAck.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
   }
 
   /**
@@ -106,7 +106,7 @@ class RabbitMQClient(private val _asJava: Object) {
    * 
    * Start a non-nolocal, non-exclusive consumer, with a server-generated consumerTag and error handler   */
   def basicConsume (queue: String, address: String, autoAck: Boolean, resultHandler: Handler[AsyncResult[String]], errorHandler: Handler[Throwable]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicConsume(queue.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], autoAck.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}, {x: Throwable => errorHandler.handle(x)})
+    asJava.asInstanceOf[JRabbitMQClient].basicConsume(queue.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], autoAck.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}), (if (errorHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {errorHandler.handle(x)}}))
   }
 
   /**
@@ -126,7 +126,7 @@ class RabbitMQClient(private val _asJava: Object) {
    * This method should be called when you want to cancel consumption from a queue,
    * started by calling [[io.vertx.scala.rabbitmq.RabbitMQClient#basicConsume]].   */
   def basicCancel (consumerTag: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicCancel(consumerTag.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].basicCancel(consumerTag.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -135,21 +135,21 @@ class RabbitMQClient(private val _asJava: Object) {
    * @param resultHandler a handler through which you can find out the operation status; if the operation succeeds you can begin to receive messages through an instance of RabbitMQConsumer
    */
   def basicConsumer (queue: String, options: QueueOptions, resultHandler: Handler[AsyncResult[RabbitMQConsumer]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicConsumer(queue.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JRabbitMQConsumer] => resultHandler.handle(AsyncResultWrapper[JRabbitMQConsumer, RabbitMQConsumer](x, a => RabbitMQConsumer(a)))})
+    asJava.asInstanceOf[JRabbitMQClient].basicConsumer(queue.asInstanceOf[java.lang.String], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JRabbitMQConsumer]]{def handle(x: AsyncResult[JRabbitMQConsumer]) {resultHandler.handle(AsyncResultWrapper[JRabbitMQConsumer, RabbitMQConsumer](x, a => RabbitMQConsumer(a)))}}))
   }
 
   /**
    * Publish a message. Publishing to a non-existent exchange will result in a channel-level protocol exception,
    * which closes the channel. Invocations of Channel#basicPublish will eventually block if a resource-driven alarm is in effect.   */
   def basicPublish (exchange: String, routingKey: String, message: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicPublish(exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], message, {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].basicPublish(exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], message, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Enables publisher acknowledgements on this channel. Can be called once during client initialisation. Calls to basicPublish()
    * will have to be confirmed.   */
   def confirmSelect (resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].confirmSelect({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].confirmSelect((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -157,13 +157,13 @@ class RabbitMQClient(private val _asJava: Object) {
    * This will incur slight performance loss at the expense of higher write consistency.
    * If desired, multiple calls to basicPublish() can be batched before confirming.   */
   def waitForConfirms (resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].waitForConfirms({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].waitForConfirms((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Wait until all messages published since the last call have been either ack'd or nack'd by the broker; or until timeout elapses. If the timeout expires a TimeoutException is thrown.   */
   def waitForConfirms (timeout: Long, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].waitForConfirms(timeout.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].waitForConfirms(timeout.asInstanceOf[java.lang.Long], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -177,91 +177,91 @@ class RabbitMQClient(private val _asJava: Object) {
    * @param resultHandler handler called when operation is done with a result of the operation
    */
   def basicQos (prefetchSize: Int, prefetchCount: Int, global: Boolean, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchSize.asInstanceOf[java.lang.Integer], prefetchCount.asInstanceOf[java.lang.Integer], global.asInstanceOf[java.lang.Boolean], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].basicQos(prefetchSize.asInstanceOf[java.lang.Integer], prefetchCount.asInstanceOf[java.lang.Integer], global.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Declare an exchange.   */
   def exchangeDeclare (exchange: String, `type`: String, durable: Boolean, autoDelete: Boolean, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].exchangeDeclare(exchange.asInstanceOf[java.lang.String], `type`.asInstanceOf[java.lang.String], durable.asInstanceOf[java.lang.Boolean], autoDelete.asInstanceOf[java.lang.Boolean], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].exchangeDeclare(exchange.asInstanceOf[java.lang.String], `type`.asInstanceOf[java.lang.String], durable.asInstanceOf[java.lang.Boolean], autoDelete.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Declare an exchange with additional parameters such as dead lettering, an alternate exchange or TTL.   */
   def exchangeDeclare (exchange: String, `type`: String, durable: Boolean, autoDelete: Boolean, config: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].exchangeDeclare(exchange.asInstanceOf[java.lang.String], `type`.asInstanceOf[java.lang.String], durable.asInstanceOf[java.lang.Boolean], autoDelete.asInstanceOf[java.lang.Boolean], config, {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].exchangeDeclare(exchange.asInstanceOf[java.lang.String], `type`.asInstanceOf[java.lang.String], durable.asInstanceOf[java.lang.Boolean], autoDelete.asInstanceOf[java.lang.Boolean], config, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Delete an exchange, without regard for whether it is in use or not.   */
   def exchangeDelete (exchange: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].exchangeDelete(exchange.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].exchangeDelete(exchange.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Bind an exchange to an exchange.   */
   def exchangeBind (destination: String, source: String, routingKey: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].exchangeBind(destination.asInstanceOf[java.lang.String], source.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].exchangeBind(destination.asInstanceOf[java.lang.String], source.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Unbind an exchange from an exchange.   */
   def exchangeUnbind (destination: String, source: String, routingKey: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].exchangeUnbind(destination.asInstanceOf[java.lang.String], source.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].exchangeUnbind(destination.asInstanceOf[java.lang.String], source.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Actively declare a server-named exclusive, autodelete, non-durable queue.   */
   def queueDeclareAuto (resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].queueDeclareAuto({x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].queueDeclareAuto((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
   }
 
   /**
    * Declare a queue   */
   def queueDeclare (queue: String, durable: Boolean, exclusive: Boolean, autoDelete: Boolean, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].queueDeclare(queue.asInstanceOf[java.lang.String], durable.asInstanceOf[java.lang.Boolean], exclusive.asInstanceOf[java.lang.Boolean], autoDelete.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].queueDeclare(queue.asInstanceOf[java.lang.String], durable.asInstanceOf[java.lang.Boolean], exclusive.asInstanceOf[java.lang.Boolean], autoDelete.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
   }
 
   /**
    * Declare a queue with config options   */
   def queueDeclare (queue: String, durable: Boolean, exclusive: Boolean, autoDelete: Boolean, config: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].queueDeclare(queue.asInstanceOf[java.lang.String], durable.asInstanceOf[java.lang.Boolean], exclusive.asInstanceOf[java.lang.Boolean], autoDelete.asInstanceOf[java.lang.Boolean], config, {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].queueDeclare(queue.asInstanceOf[java.lang.String], durable.asInstanceOf[java.lang.Boolean], exclusive.asInstanceOf[java.lang.Boolean], autoDelete.asInstanceOf[java.lang.Boolean], config, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
   }
 
   /**
    * Delete a queue, without regard for whether it is in use or has messages on it   */
   def queueDelete (queue: String, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].queueDelete(queue.asInstanceOf[java.lang.String], {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].queueDelete(queue.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
   }
 
   /**
    * Delete a queue   */
   def queueDeleteIf (queue: String, ifUnused: Boolean, ifEmpty: Boolean, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].queueDeleteIf(queue.asInstanceOf[java.lang.String], ifUnused.asInstanceOf[java.lang.Boolean], ifEmpty.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].queueDeleteIf(queue.asInstanceOf[java.lang.String], ifUnused.asInstanceOf[java.lang.Boolean], ifEmpty.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
   }
 
   /**
    * Bind a queue to an exchange   */
   def queueBind (queue: String, exchange: String, routingKey: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].queueBind(queue.asInstanceOf[java.lang.String], exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].queueBind(queue.asInstanceOf[java.lang.String], exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Returns the number of messages in a queue ready to be delivered.   */
   def messageCount (queue: String, resultHandler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].messageCount(queue.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JRabbitMQClient].messageCount(queue.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
   }
 
   /**
    * Start the rabbitMQ client. Create the connection and the chanel.   */
   def start (resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].start({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].start((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Stop the rabbitMQ client. Close the connection and its chanel.   */
   def stop (resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQClient].stop({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQClient].stop((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

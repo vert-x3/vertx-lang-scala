@@ -314,14 +314,14 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
    * Like [[io.vertx.scala.ext.web.client.HttpRequest#send]] but with an HTTP request `body` stream.   * @param body the body
    */
   def sendStream (body: ReadStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendStream(body.asJava.asInstanceOf[JReadStream[Buffer]], {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendStream(body.asJava.asInstanceOf[JReadStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpResponse[Object]]]{def handle(x: AsyncResult[JHttpResponse[Object]]) {handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))}}))
   }
 
   /**
    * Like [[io.vertx.scala.ext.web.client.HttpRequest#send]] but with an HTTP request `body` buffer.   * @param body the body
    */
   def sendBuffer (body: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendBuffer(body, {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendBuffer(body, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpResponse[Object]]]{def handle(x: AsyncResult[JHttpResponse[Object]]) {handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))}}))
   }
 
   /**
@@ -329,7 +329,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
    * set to `application/json`.   * @param body the body
    */
   def sendJsonObject (body: io.vertx.core.json.JsonObject, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendJsonObject(body, {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendJsonObject(body, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpResponse[Object]]]{def handle(x: AsyncResult[JHttpResponse[Object]]) {handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))}}))
   }
 
   /**
@@ -337,7 +337,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
    * set to `application/json`.   * @param body the body
    */
   def sendJson (body: AnyRef, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body, {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpResponse[Object]]]{def handle(x: AsyncResult[JHttpResponse[Object]]) {handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))}}))
   }
 
   /**
@@ -347,7 +347,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
    * When the content type header is previously set to `multipart/form-data` it will be used instead.   * @param body the body
    */
   def sendForm (body: MultiMap, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap], {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendForm(body.asJava.asInstanceOf[JMultiMap], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpResponse[Object]]]{def handle(x: AsyncResult[JHttpResponse[Object]]) {handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))}}))
   }
 
   /**
@@ -355,14 +355,14 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
    * set to `multipart/form-data`. You may use this method to send attributes and upload files.   * @param body the body
    */
   def sendMultipartForm (body: MultipartForm, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendMultipartForm(body.asJava.asInstanceOf[JMultipartForm], {x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].sendMultipartForm(body.asJava.asInstanceOf[JMultipartForm], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpResponse[Object]]]{def handle(x: AsyncResult[JHttpResponse[Object]]) {handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))}}))
   }
 
   /**
    * Send a request, the `handler` will receive the response as an [[io.vertx.scala.ext.web.client.HttpResponse]].
    */
   def send (handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].send({x: AsyncResult[JHttpResponse[Object]] => handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))})
+    asJava.asInstanceOf[JHttpRequest[Object]].send((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpResponse[Object]]]{def handle(x: AsyncResult[JHttpResponse[Object]]) {handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))}}))
   }
 
 

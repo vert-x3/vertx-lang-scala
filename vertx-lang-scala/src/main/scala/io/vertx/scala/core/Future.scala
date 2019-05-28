@@ -40,7 +40,7 @@ class Future[T: TypeTag](private val _asJava: Object) {
   def completer(): Handler[AsyncResult[T]] = {
     if (cached_0 == None) {
       val tmp = asJava.asInstanceOf[JFuture[Object]].completer()
-      cached_0 = Some({x: AsyncResult[T] => tmp.handle(AsyncResultWrapper[T, Object](x, a => toJava[T](a)))})
+      cached_0 = Some(if (tmp == null) null else {x: AsyncResult[T] => tmp.handle(AsyncResultWrapper[T, Object](x, a => toJava[T](a)))})
     }
     cached_0.get
   }
@@ -55,7 +55,7 @@ class Future[T: TypeTag](private val _asJava: Object) {
    */
   
   def setHandler(handler: Handler[AsyncResult[T]]): Future[T] = {
-    asJava.asInstanceOf[JFuture[Object]].setHandler({x: AsyncResult[Object] => handler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))})
+    asJava.asInstanceOf[JFuture[Object]].setHandler((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {handler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))}}))
     this
   }
 
@@ -74,7 +74,7 @@ class Future[T: TypeTag](private val _asJava: Object) {
    * @return the next future, used for chaining
    */
   def compose[U: TypeTag](handler: Handler[T], next: Future[U]): Future[U] = {
-    Future[U](asJava.asInstanceOf[JFuture[Object]].compose[Object]({x: Object => handler.handle(toScala[T](x))}, next.asJava.asInstanceOf[JFuture[Object]]))
+    Future[U](asJava.asInstanceOf[JFuture[Object]].compose[Object]((if (handler == null) null else new io.vertx.core.Handler[Object]{def handle(x: Object) {handler.handle(toScala[T](x))}}), next.asJava.asInstanceOf[JFuture[Object]]))
   }
 
   /**
@@ -293,7 +293,7 @@ object Future {
    * @return the future.
    */
   def future[T: TypeTag](handler: Handler[Future[T]]): Future[T] = {
-    Future[T](JFuture.future[Object]({x: JFuture[Object] => handler.handle(Future[T](x))}))
+    Future[T](JFuture.future[Object]((if (handler == null) null else new io.vertx.core.Handler[JFuture[Object]]{def handle(x: JFuture[Object]) {handler.handle(Future[T](x))}})))
   }
 
   /**

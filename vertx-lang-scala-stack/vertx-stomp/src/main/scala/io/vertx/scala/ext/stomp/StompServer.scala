@@ -90,7 +90,7 @@ class StompServer(private val _asJava: Object) {
    */
   
   def listen(handler: Handler[AsyncResult[StompServer]]): StompServer = {
-    asJava.asInstanceOf[JStompServer].listen({x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer, StompServer](x, a => StompServer(a)))})
+    asJava.asInstanceOf[JStompServer].listen((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JStompServer]]{def handle(x: AsyncResult[JStompServer]) {handler.handle(AsyncResultWrapper[JStompServer, StompServer](x, a => StompServer(a)))}}))
     this
   }
 
@@ -102,7 +102,7 @@ class StompServer(private val _asJava: Object) {
    */
   
   def listen(port: Int, handler: Handler[AsyncResult[StompServer]]): StompServer = {
-    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer, StompServer](x, a => StompServer(a)))})
+    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JStompServer]]{def handle(x: AsyncResult[JStompServer]) {handler.handle(AsyncResultWrapper[JStompServer, StompServer](x, a => StompServer(a)))}}))
     this
   }
 
@@ -115,7 +115,7 @@ class StompServer(private val _asJava: Object) {
    */
   
   def listen(port: Int, host: String, handler: Handler[AsyncResult[StompServer]]): StompServer = {
-    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JStompServer] => handler.handle(AsyncResultWrapper[JStompServer, StompServer](x, a => StompServer(a)))})
+    asJava.asInstanceOf[JStompServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JStompServer]]{def handle(x: AsyncResult[JStompServer]) {handler.handle(AsyncResultWrapper[JStompServer, StompServer](x, a => StompServer(a)))}}))
     this
   }
 
@@ -126,7 +126,7 @@ class StompServer(private val _asJava: Object) {
    */
   
   def writingFrameHandler(handler: Handler[ServerFrame]): StompServer = {
-    asJava.asInstanceOf[JStompServer].writingFrameHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServer].writingFrameHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -136,7 +136,7 @@ class StompServer(private val _asJava: Object) {
    * Closes the server.   * @param completionHandler handler called once the server has been stopped
    */
   def close (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JStompServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JStompServer].close((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -188,7 +188,7 @@ class StompServer(private val _asJava: Object) {
    * `null`.   * @return the handler that can be passed to io.vertx.scala.core.http.HttpServer#websocketHandler(Handler).
    */
   def webSocketHandler (): Handler[ServerWebSocket] = {
-    {x: ServerWebSocket => asJava.asInstanceOf[JStompServer].webSocketHandler().handle(x.asJava.asInstanceOf[JServerWebSocket])}
+    if (asJava.asInstanceOf[JStompServer].webSocketHandler() == null) null else {x: ServerWebSocket => asJava.asInstanceOf[JStompServer].webSocketHandler().handle(x.asJava.asInstanceOf[JServerWebSocket])}
   }
 
 

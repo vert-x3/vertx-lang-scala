@@ -45,17 +45,17 @@ object Factory {
   
 
   def createConcreteHandlerUserType(handler: Handler[RefedInterface1]): ConcreteHandlerUserType = {
-    ConcreteHandlerUserType(JFactory.createConcreteHandlerUserType({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))
+    ConcreteHandlerUserType(JFactory.createConcreteHandlerUserType((if (handler == null) null else new io.vertx.core.Handler[JRefedInterface1]{def handle(x: JRefedInterface1) {handler.handle(RefedInterface1(x))}})))
   }
 
 
   def createAbstractHandlerUserType(handler: Handler[RefedInterface1]): AbstractHandlerUserType = {
-    AbstractHandlerUserType(JFactory.createAbstractHandlerUserType({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))
+    AbstractHandlerUserType(JFactory.createAbstractHandlerUserType((if (handler == null) null else new io.vertx.core.Handler[JRefedInterface1]{def handle(x: JRefedInterface1) {handler.handle(RefedInterface1(x))}})))
   }
 
 
   def createConcreteHandlerUserTypeExtension(handler: Handler[RefedInterface1]): ConcreteHandlerUserTypeExtension = {
-    ConcreteHandlerUserTypeExtension(JFactory.createConcreteHandlerUserTypeExtension({x: JRefedInterface1 => handler.handle(RefedInterface1(x))}))
+    ConcreteHandlerUserTypeExtension(JFactory.createConcreteHandlerUserTypeExtension((if (handler == null) null else new io.vertx.core.Handler[JRefedInterface1]{def handle(x: JRefedInterface1) {handler.handle(RefedInterface1(x))}})))
   }
 
 }

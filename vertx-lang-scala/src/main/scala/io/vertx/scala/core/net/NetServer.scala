@@ -57,7 +57,7 @@ class NetServer(private val _asJava: Object) extends Measured {
    */
   
   def listen(listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
-    asJava.asInstanceOf[JNetServer].listen({x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))})
+    asJava.asInstanceOf[JNetServer].listen((if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JNetServer]]{def handle(x: AsyncResult[JNetServer]) {listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))}}))
     this
   }
 
@@ -85,7 +85,7 @@ class NetServer(private val _asJava: Object) extends Measured {
    */
   
   def listen(port: Int, host: String, listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
-    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))})
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], (if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JNetServer]]{def handle(x: AsyncResult[JNetServer]) {listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))}}))
     this
   }
 
@@ -110,7 +110,7 @@ class NetServer(private val _asJava: Object) extends Measured {
    */
   
   def listen(port: Int, listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
-    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))})
+    asJava.asInstanceOf[JNetServer].listen(port.asInstanceOf[java.lang.Integer], (if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JNetServer]]{def handle(x: AsyncResult[JNetServer]) {listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))}}))
     this
   }
 
@@ -134,7 +134,7 @@ class NetServer(private val _asJava: Object) extends Measured {
    */
   
   def listen(localAddress: SocketAddress, listenHandler: Handler[AsyncResult[NetServer]]): NetServer = {
-    asJava.asInstanceOf[JNetServer].listen(localAddress.asJava.asInstanceOf[JSocketAddress], {x: AsyncResult[JNetServer] => listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))})
+    asJava.asInstanceOf[JNetServer].listen(localAddress.asJava.asInstanceOf[JSocketAddress], (if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JNetServer]]{def handle(x: AsyncResult[JNetServer]) {listenHandler.handle(AsyncResultWrapper[JNetServer, NetServer](x, a => NetServer(a)))}}))
     this
   }
 
@@ -162,7 +162,7 @@ class NetServer(private val _asJava: Object) extends Measured {
    * connect handler.   * @return a reference to this, so the API can be used fluently
    */
   def connectHandler (handler: Handler[NetSocket]): NetServer = {
-    NetServer(asJava.asInstanceOf[JNetServer].connectHandler({x: JNetSocket => handler.handle(NetSocket(x))}))
+    NetServer(asJava.asInstanceOf[JNetServer].connectHandler((if (handler == null) null else new io.vertx.core.Handler[JNetSocket]{def handle(x: JNetSocket) {handler.handle(NetSocket(x))}})))
   }
 
   /**
@@ -177,7 +177,7 @@ class NetServer(private val _asJava: Object) extends Measured {
    * Like [[io.vertx.scala.core.net.NetServer#close]] but supplying a handler that will be notified when close is complete.   * @param completionHandler the handler
    */
   def close (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JNetServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JNetServer].close((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

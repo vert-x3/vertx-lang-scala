@@ -45,7 +45,7 @@ class AdminUtils(private val _asJava: Object) {
    * @param completionHandler vert.x callback
    */
   def createTopic (topicName: String, partitionCount: Int, replicationFactor: Int, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAdminUtils].createTopic(topicName.asInstanceOf[java.lang.String], partitionCount.asInstanceOf[java.lang.Integer], replicationFactor.asInstanceOf[java.lang.Integer], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAdminUtils].createTopic(topicName.asInstanceOf[java.lang.String], partitionCount.asInstanceOf[java.lang.Integer], replicationFactor.asInstanceOf[java.lang.Integer], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -58,7 +58,7 @@ class AdminUtils(private val _asJava: Object) {
    * @param completionHandler vert.x callback
    */
   def createTopic (topicName: String, partitionCount: Int, replicationFactor: Int, topicConfig: scala.collection.mutable.Map[String, String], completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAdminUtils].createTopic(topicName.asInstanceOf[java.lang.String], partitionCount.asInstanceOf[java.lang.Integer], replicationFactor.asInstanceOf[java.lang.Integer], topicConfig.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAdminUtils].createTopic(topicName.asInstanceOf[java.lang.String], partitionCount.asInstanceOf[java.lang.Integer], replicationFactor.asInstanceOf[java.lang.Integer], topicConfig.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -66,7 +66,7 @@ class AdminUtils(private val _asJava: Object) {
    * @param completionHandler vert.x callback
    */
   def deleteTopic (topicName: String, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAdminUtils].deleteTopic(topicName.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAdminUtils].deleteTopic(topicName.asInstanceOf[java.lang.String], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -74,7 +74,7 @@ class AdminUtils(private val _asJava: Object) {
    * @param completionHandler vert.x callback
    */
   def topicExists (topicName: String, completionHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JAdminUtils].topicExists(topicName.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => completionHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JAdminUtils].topicExists(topicName.asInstanceOf[java.lang.String], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {completionHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))}}))
   }
 
   /**
@@ -84,7 +84,7 @@ class AdminUtils(private val _asJava: Object) {
    * @param completionHandler vert.x callback
    */
   def changeTopicConfig (topicName: String, topicConfig: scala.collection.mutable.Map[String, String], completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAdminUtils].changeTopicConfig(topicName.asInstanceOf[java.lang.String], topicConfig.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAdminUtils].changeTopicConfig(topicName.asInstanceOf[java.lang.String], topicConfig.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -92,7 +92,7 @@ class AdminUtils(private val _asJava: Object) {
    * purposes if AdminUtils was not created with autoClose set to true.   * @param completionHandler vert.x callback
    */
   def close (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAdminUtils].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAdminUtils].close((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

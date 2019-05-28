@@ -119,7 +119,7 @@ class ServiceDiscovery(private val _asJava: Object) {
    * @return the current ServiceDiscovery
    */
   def registerServiceImporter (importer: ServiceImporter, configuration: io.vertx.core.json.JsonObject, completionHandler: Handler[AsyncResult[Unit]]): ServiceDiscovery = {
-    ServiceDiscovery(asJava.asInstanceOf[JServiceDiscovery].registerServiceImporter(importer.asJava.asInstanceOf[JServiceImporter], configuration, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}))
+    ServiceDiscovery(asJava.asInstanceOf[JServiceDiscovery].registerServiceImporter(importer.asJava.asInstanceOf[JServiceImporter], configuration, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}})))
   }
 
   /**
@@ -140,7 +140,7 @@ class ServiceDiscovery(private val _asJava: Object) {
    * @return the current ServiceDiscovery
    */
   def registerServiceExporter (exporter: ServiceExporter, configuration: io.vertx.core.json.JsonObject, completionHandler: Handler[AsyncResult[Unit]]): ServiceDiscovery = {
-    ServiceDiscovery(asJava.asInstanceOf[JServiceDiscovery].registerServiceExporter(exporter.asJava.asInstanceOf[JServiceExporter], configuration, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}))
+    ServiceDiscovery(asJava.asInstanceOf[JServiceDiscovery].registerServiceExporter(exporter.asJava.asInstanceOf[JServiceExporter], configuration, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}})))
   }
 
   /**
@@ -155,7 +155,7 @@ class ServiceDiscovery(private val _asJava: Object) {
    * @param resultHandler handler called when the operation has completed (successfully or not). In case of success, the passed record has a registration id required to modify and un-register the service.
    */
   def publish (record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
-    asJava.asInstanceOf[JServiceDiscovery].publish(record.asJava, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
+    asJava.asInstanceOf[JServiceDiscovery].publish(record.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JRecord]]{def handle(x: AsyncResult[JRecord]) {resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))}}))
   }
 
   /**
@@ -163,7 +163,7 @@ class ServiceDiscovery(private val _asJava: Object) {
    * @param resultHandler handler called when the operation has completed (successfully or not).
    */
   def unpublish (id: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JServiceDiscovery].unpublish(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JServiceDiscovery].unpublish(id.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -187,7 +187,7 @@ class ServiceDiscovery(private val _asJava: Object) {
    * @param resultHandler handler called when the lookup has been completed. When there are no matching record, the operation succeeds, but the async result has no result (`null`).
    */
   def getRecord (filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.Option[Record]]]): Unit = {
-    asJava.asInstanceOf[JServiceDiscovery].getRecord(filter, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, scala.Option[Record]](x, a => scala.Option(a).map(Record(_))))})
+    asJava.asInstanceOf[JServiceDiscovery].getRecord(filter, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JRecord]]{def handle(x: AsyncResult[JRecord]) {resultHandler.handle(AsyncResultWrapper[JRecord, scala.Option[Record]](x, a => scala.Option(a).map(Record(_))))}}))
   }
 
   /**
@@ -200,7 +200,7 @@ class ServiceDiscovery(private val _asJava: Object) {
    * @param resultHandler the result handler called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has no result.
    */
   def getRecord (filter: Record => Boolean, resultHandler: Handler[AsyncResult[scala.Option[Record]]]): Unit = {
-    asJava.asInstanceOf[JServiceDiscovery].getRecord({x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, scala.Option[Record]](x, a => scala.Option(a).map(Record(_))))})
+    asJava.asInstanceOf[JServiceDiscovery].getRecord({x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JRecord]]{def handle(x: AsyncResult[JRecord]) {resultHandler.handle(AsyncResultWrapper[JRecord, scala.Option[Record]](x, a => scala.Option(a).map(Record(_))))}}))
   }
 
   /**
@@ -215,7 +215,7 @@ class ServiceDiscovery(private val _asJava: Object) {
    * @param resultHandler the result handler called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has no result.
    */
   def getRecord (filter: Record => Boolean, includeOutOfService: Boolean, resultHandler: Handler[AsyncResult[scala.Option[Record]]]): Unit = {
-    asJava.asInstanceOf[JServiceDiscovery].getRecord({x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, includeOutOfService.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, scala.Option[Record]](x, a => scala.Option(a).map(Record(_))))})
+    asJava.asInstanceOf[JServiceDiscovery].getRecord({x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, includeOutOfService.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JRecord]]{def handle(x: AsyncResult[JRecord]) {resultHandler.handle(AsyncResultWrapper[JRecord, scala.Option[Record]](x, a => scala.Option(a).map(Record(_))))}}))
   }
 
   /**
@@ -224,7 +224,7 @@ class ServiceDiscovery(private val _asJava: Object) {
    * @param resultHandler handler called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
    */
   def getRecords (filter: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Record]]]): Unit = {
-    asJava.asInstanceOf[JServiceDiscovery].getRecords(filter, {x: AsyncResult[java.util.List[JRecord]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JRecord], scala.collection.mutable.Buffer[Record]](x, a => a.asScala.map(x => Record(x))))})
+    asJava.asInstanceOf[JServiceDiscovery].getRecords(filter, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JRecord]]]{def handle(x: AsyncResult[java.util.List[JRecord]]) {resultHandler.handle(AsyncResultWrapper[java.util.List[JRecord], scala.collection.mutable.Buffer[Record]](x, a => a.asScala.map(x => Record(x))))}}))
   }
 
   /**
@@ -238,7 +238,7 @@ class ServiceDiscovery(private val _asJava: Object) {
    * @param resultHandler handler called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
    */
   def getRecords (filter: Record => Boolean, resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Record]]]): Unit = {
-    asJava.asInstanceOf[JServiceDiscovery].getRecords({x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[java.util.List[JRecord]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JRecord], scala.collection.mutable.Buffer[Record]](x, a => a.asScala.map(x => Record(x))))})
+    asJava.asInstanceOf[JServiceDiscovery].getRecords({x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JRecord]]]{def handle(x: AsyncResult[java.util.List[JRecord]]) {resultHandler.handle(AsyncResultWrapper[java.util.List[JRecord], scala.collection.mutable.Buffer[Record]](x, a => a.asScala.map(x => Record(x))))}}))
   }
 
   /**
@@ -254,7 +254,7 @@ class ServiceDiscovery(private val _asJava: Object) {
    * @param resultHandler handler called when the lookup has been completed. When there are no matching record, the operation succeed, but the async result has an empty list as result.
    */
   def getRecords (filter: Record => Boolean, includeOutOfService: Boolean, resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Record]]]): Unit = {
-    asJava.asInstanceOf[JServiceDiscovery].getRecords({x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, includeOutOfService.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[JRecord]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JRecord], scala.collection.mutable.Buffer[Record]](x, a => a.asScala.map(x => Record(x))))})
+    asJava.asInstanceOf[JServiceDiscovery].getRecords({x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, includeOutOfService.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JRecord]]]{def handle(x: AsyncResult[java.util.List[JRecord]]) {resultHandler.handle(AsyncResultWrapper[java.util.List[JRecord], scala.collection.mutable.Buffer[Record]](x, a => a.asScala.map(x => Record(x))))}}))
   }
 
   /**
@@ -262,7 +262,7 @@ class ServiceDiscovery(private val _asJava: Object) {
    * @param resultHandler handler called when the lookup has been completed.
    */
   def update (record: Record, resultHandler: Handler[AsyncResult[Record]]): Unit = {
-    asJava.asInstanceOf[JServiceDiscovery].update(record.asJava, {x: AsyncResult[JRecord] => resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))})
+    asJava.asInstanceOf[JServiceDiscovery].update(record.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JRecord]]{def handle(x: AsyncResult[JRecord]) {resultHandler.handle(AsyncResultWrapper[JRecord, Record](x, a => Record(a)))}}))
   }
 
   /**
@@ -419,7 +419,7 @@ object ServiceDiscovery {
    * @return the created instance, should not be used to retrieve services before the invocation of the completion handler.
    */
   def create(vertx: Vertx,options: ServiceDiscoveryOptions,completionHandler: Handler[ServiceDiscovery]): ServiceDiscovery = {
-    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, {x: JServiceDiscovery => completionHandler.handle(ServiceDiscovery(x))}))
+    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[JServiceDiscovery]{def handle(x: JServiceDiscovery) {completionHandler.handle(ServiceDiscovery(x))}})))
   }
 
   /**
@@ -428,7 +428,7 @@ object ServiceDiscovery {
    * @return the created instance, should not be used to retrieve services before the invocation of the completion handler.
    */
   def create(vertx: Vertx,completionHandler: Handler[ServiceDiscovery]): ServiceDiscovery = {
-    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], {x: JServiceDiscovery => completionHandler.handle(ServiceDiscovery(x))}))
+    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], (if (completionHandler == null) null else new io.vertx.core.Handler[JServiceDiscovery]{def handle(x: JServiceDiscovery) {completionHandler.handle(ServiceDiscovery(x))}})))
   }
 
   /**

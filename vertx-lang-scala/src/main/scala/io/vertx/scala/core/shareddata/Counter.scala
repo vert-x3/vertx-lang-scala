@@ -40,28 +40,28 @@ class Counter(private val _asJava: Object) {
    * Get the current value of the counter   * @param resultHandler handler which will be passed the value
    */
   def get (resultHandler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JCounter].get({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JCounter].get((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
   }
 
   /**
    * Increment the counter atomically and return the new count   * @param resultHandler handler which will be passed the value
    */
   def incrementAndGet (resultHandler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JCounter].incrementAndGet({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JCounter].incrementAndGet((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
   }
 
   /**
    * Increment the counter atomically and return the value before the increment.   * @param resultHandler handler which will be passed the value
    */
   def getAndIncrement (resultHandler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JCounter].getAndIncrement({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JCounter].getAndIncrement((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
   }
 
   /**
    * Decrement the counter atomically and return the new count   * @param resultHandler handler which will be passed the value
    */
   def decrementAndGet (resultHandler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JCounter].decrementAndGet({x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JCounter].decrementAndGet((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
   }
 
   /**
@@ -69,7 +69,7 @@ class Counter(private val _asJava: Object) {
    * @param resultHandler handler which will be passed the value
    */
   def addAndGet (value: Long, resultHandler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JCounter].addAndGet(value.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JCounter].addAndGet(value.asInstanceOf[java.lang.Long], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
   }
 
   /**
@@ -77,7 +77,7 @@ class Counter(private val _asJava: Object) {
    * @param resultHandler handler which will be passed the value
    */
   def getAndAdd (value: Long, resultHandler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JCounter].getAndAdd(value.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Long] => resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JCounter].getAndAdd(value.asInstanceOf[java.lang.Long], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {resultHandler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
   }
 
   /**
@@ -87,7 +87,7 @@ class Counter(private val _asJava: Object) {
    * @param resultHandler the handler will be passed true on success
    */
   def compareAndSet (expected: Long, value: Long, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JCounter].compareAndSet(expected.asInstanceOf[java.lang.Long], value.asInstanceOf[java.lang.Long], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JCounter].compareAndSet(expected.asInstanceOf[java.lang.Long], value.asInstanceOf[java.lang.Long], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))}}))
   }
 
 

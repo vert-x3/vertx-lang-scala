@@ -50,7 +50,7 @@ class SockJSHandler(private val _asJava: Object) extends io.vertx.core.Handler[R
    */
   
   def socketHandler(handler: Handler[SockJSSocket]): SockJSHandler = {
-    asJava.asInstanceOf[JSockJSHandler].socketHandler({x: JSockJSSocket => handler.handle(SockJSSocket(x))})
+    asJava.asInstanceOf[JSockJSHandler].socketHandler((if (handler == null) null else new io.vertx.core.Handler[JSockJSSocket]{def handle(x: JSockJSSocket) {handler.handle(SockJSSocket(x))}}))
     this
   }
 
@@ -74,7 +74,7 @@ class SockJSHandler(private val _asJava: Object) extends io.vertx.core.Handler[R
    */
   
   def bridge(bridgeOptions: BridgeOptions, bridgeEventHandler: Handler[BridgeEvent]): SockJSHandler = {
-    asJava.asInstanceOf[JSockJSHandler].bridge(bridgeOptions.asJava, {x: JBridgeEvent => bridgeEventHandler.handle(BridgeEvent(x))})
+    asJava.asInstanceOf[JSockJSHandler].bridge(bridgeOptions.asJava, (if (bridgeEventHandler == null) null else new io.vertx.core.Handler[JBridgeEvent]{def handle(x: JBridgeEvent) {bridgeEventHandler.handle(BridgeEvent(x))}}))
     this
   }
 

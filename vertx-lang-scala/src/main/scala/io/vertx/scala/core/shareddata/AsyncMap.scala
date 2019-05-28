@@ -42,7 +42,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
    * @param resultHandler - this will be called some time later with the async result.
    */
   def get (k: K, resultHandler: Handler[AsyncResult[scala.Option[V]]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object, Object]].get(toJava[K](k), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object, scala.Option[V]](x, a => scala.Option(toScala[V](a))))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].get(toJava[K](k), (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {resultHandler.handle(AsyncResultWrapper[Object, scala.Option[V]](x, a => scala.Option(toScala[V](a))))}}))
   }
 
   /**
@@ -51,7 +51,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
    * @param completionHandler - this will be called some time later to signify the value has been put
    */
   def put (k: K, v: V, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object, Object]].put(toJava[K](k), toJava[V](v), {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].put(toJava[K](k), toJava[V](v), (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -62,7 +62,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
    * @param completionHandler the handler
    */
   def put (k: K, v: V, ttl: Long, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object, Object]].put(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].put(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -72,7 +72,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
    * @param completionHandler the handler
    */
   def putIfAbsent (k: K, v: V, completionHandler: Handler[AsyncResult[scala.Option[V]]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object, Object]].putIfAbsent(toJava[K](k), toJava[V](v), {x: AsyncResult[Object] => completionHandler.handle(AsyncResultWrapper[Object, scala.Option[V]](x, a => scala.Option(toScala[V](a))))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].putIfAbsent(toJava[K](k), toJava[V](v), (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {completionHandler.handle(AsyncResultWrapper[Object, scala.Option[V]](x, a => scala.Option(toScala[V](a))))}}))
   }
 
   /**
@@ -83,7 +83,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
    * @param completionHandler the handler
    */
   def putIfAbsent (k: K, v: V, ttl: Long, completionHandler: Handler[AsyncResult[scala.Option[V]]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object, Object]].putIfAbsent(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], {x: AsyncResult[Object] => completionHandler.handle(AsyncResultWrapper[Object, scala.Option[V]](x, a => scala.Option(toScala[V](a))))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].putIfAbsent(toJava[K](k), toJava[V](v), ttl.asInstanceOf[java.lang.Long], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {completionHandler.handle(AsyncResultWrapper[Object, scala.Option[V]](x, a => scala.Option(toScala[V](a))))}}))
   }
 
   /**
@@ -91,7 +91,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
    * @param resultHandler - this will be called some time later to signify the value has been removed
    */
   def remove (k: K, resultHandler: Handler[AsyncResult[scala.Option[V]]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object, Object]].remove(toJava[K](k), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object, scala.Option[V]](x, a => scala.Option(toScala[V](a))))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].remove(toJava[K](k), (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {resultHandler.handle(AsyncResultWrapper[Object, scala.Option[V]](x, a => scala.Option(toScala[V](a))))}}))
   }
 
   /**
@@ -100,7 +100,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
    * @param resultHandler - this will be called some time later to signify the value has been removed
    */
   def removeIfPresent (k: K, v: V, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object, Object]].removeIfPresent(toJava[K](k), toJava[V](v), {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].removeIfPresent(toJava[K](k), toJava[V](v), (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))}}))
   }
 
   /**
@@ -109,7 +109,7 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
    * @param resultHandler the result handler will be passed the previous value
    */
   def replace (k: K, v: V, resultHandler: Handler[AsyncResult[scala.Option[V]]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object, Object]].replace(toJava[K](k), toJava[V](v), {x: AsyncResult[Object] => resultHandler.handle(AsyncResultWrapper[Object, scala.Option[V]](x, a => scala.Option(toScala[V](a))))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].replace(toJava[K](k), toJava[V](v), (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {resultHandler.handle(AsyncResultWrapper[Object, scala.Option[V]](x, a => scala.Option(toScala[V](a))))}}))
   }
 
   /**
@@ -119,21 +119,21 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
    * @param resultHandler the result handler
    */
   def replaceIfPresent (k: K, oldValue: V, newValue: V, resultHandler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object, Object]].replaceIfPresent(toJava[K](k), toJava[V](oldValue), toJava[V](newValue), {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].replaceIfPresent(toJava[K](k), toJava[V](oldValue), toJava[V](newValue), (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))}}))
   }
 
   /**
    * Clear all entries in the map   * @param resultHandler called on completion
    */
   def clear (resultHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object, Object]].clear({x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].clear((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Provide the number of entries in the map   * @param resultHandler handler which will receive the number of entries
    */
   def size (resultHandler: Handler[AsyncResult[Int]]): Unit = {
-    asJava.asInstanceOf[JAsyncMap[Object, Object]].size({x: AsyncResult[java.lang.Integer] => resultHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
+    asJava.asInstanceOf[JAsyncMap[Object, Object]].size((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Integer]]{def handle(x: AsyncResult[java.lang.Integer]) {resultHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))}}))
   }
 
 
