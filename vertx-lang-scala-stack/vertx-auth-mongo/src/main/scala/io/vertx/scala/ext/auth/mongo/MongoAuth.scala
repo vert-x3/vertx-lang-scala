@@ -224,7 +224,7 @@ class MongoAuth(private val _asJava: Object) extends AuthProvider (_asJava) {
    * @param resultHandler the ResultHandler will be provided with the id of the generated record
    */
   def insertUser (username: String, password: String, roles: scala.collection.mutable.Buffer[String], permissions: scala.collection.mutable.Buffer[String], resultHandler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JMongoAuth].insertUser(username.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String], roles.map(x => x.asInstanceOf[java.lang.String]).asJava, permissions.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JMongoAuth].insertUser(username.asInstanceOf[java.lang.String], password.asInstanceOf[java.lang.String], roles.map(x => x.asInstanceOf[java.lang.String]).asJava, permissions.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
   }
 
 

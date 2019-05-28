@@ -64,14 +64,14 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): SockJSSocket = {
-    asJava.asInstanceOf[JSockJSSocket].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JSockJSSocket].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[io.vertx.core.buffer.Buffer]): SockJSSocket = {
-    asJava.asInstanceOf[JSockJSSocket].handler({x: Buffer => handler.handle(x)})
+    asJava.asInstanceOf[JSockJSSocket].handler((if (handler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {handler.handle(x)}}))
     this
   }
 
@@ -92,7 +92,7 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
   override 
   def endHandler(endHandler: Handler[Unit]): SockJSSocket = {
-    asJava.asInstanceOf[JSockJSSocket].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JSockJSSocket].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -116,7 +116,7 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
   override 
   def write(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): SockJSSocket = {
-    asJava.asInstanceOf[JSockJSSocket].write(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JSockJSSocket].write(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -130,7 +130,7 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
   override 
   def drainHandler(handler: Handler[Unit]): SockJSSocket = {
-    asJava.asInstanceOf[JSockJSSocket].drainHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JSockJSSocket].drainHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -142,7 +142,7 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
   override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JSockJSSocket].end(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JSockJSSocket].end(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -157,12 +157,12 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
   override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JSockJSSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JSockJSSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
   def write(data: String, handler: Handler[AsyncResult[Unit]]): SockJSSocket = {
-    SockJSSocket(asJava.asInstanceOf[JSockJSSocket].write(data.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}))
+    SockJSSocket(asJava.asInstanceOf[JSockJSSocket].write(data.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}})))
   }
 
   /**
@@ -176,7 +176,7 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
   override def end (arg0: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JSockJSSocket].end({x: AsyncResult[Void] => arg0.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JSockJSSocket].end((if (arg0 == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {arg0.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

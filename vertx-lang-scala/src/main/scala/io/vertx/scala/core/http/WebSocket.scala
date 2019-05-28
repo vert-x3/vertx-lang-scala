@@ -106,7 +106,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
    */
   override 
   def textMessageHandler(handler: Handler[String]): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocket].textMessageHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
+    asJava.asInstanceOf[JWebSocket].textMessageHandler((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}}))
     this
   }
 
@@ -118,7 +118,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
    */
   override 
   def binaryMessageHandler(handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocket].binaryMessageHandler({x: Buffer => handler.handle(x)})
+    asJava.asInstanceOf[JWebSocket].binaryMessageHandler((if (handler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {handler.handle(x)}}))
     this
   }
 
@@ -136,21 +136,21 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
    */
   override 
   def pongHandler(handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase = {
-    asJava.asInstanceOf[JWebSocket].pongHandler({x: Buffer => handler.handle(x)})
+    asJava.asInstanceOf[JWebSocket].pongHandler((if (handler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): WebSocket = {
-    asJava.asInstanceOf[JWebSocket].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JWebSocket].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[io.vertx.core.buffer.Buffer]): WebSocket = {
-    asJava.asInstanceOf[JWebSocket].handler({x: Buffer => handler.handle(x)})
+    asJava.asInstanceOf[JWebSocket].handler((if (handler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {handler.handle(x)}}))
     this
   }
 
@@ -178,7 +178,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
   override 
   def endHandler(endHandler: Handler[Unit]): WebSocket = {
-    asJava.asInstanceOf[JWebSocket].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JWebSocket].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -192,7 +192,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
   override 
   def write(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): WebSocket = {
-    asJava.asInstanceOf[JWebSocket].write(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWebSocket].write(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -206,7 +206,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
   override 
   def drainHandler(handler: Handler[Unit]): WebSocket = {
-    asJava.asInstanceOf[JWebSocket].drainHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JWebSocket].drainHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -220,7 +220,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
   override 
   def writeFrame(frame: WebSocketFrame, handler: Handler[AsyncResult[Unit]]): WebSocket = {
-    asJava.asInstanceOf[JWebSocket].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWebSocket].writeFrame(frame.asJava.asInstanceOf[JWebSocketFrame], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -234,7 +234,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
   override 
   def writeFinalTextFrame(text: String, handler: Handler[AsyncResult[Unit]]): WebSocket = {
-    asJava.asInstanceOf[JWebSocket].writeFinalTextFrame(text.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWebSocket].writeFinalTextFrame(text.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -248,7 +248,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
   override 
   def writeFinalBinaryFrame(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): WebSocket = {
-    asJava.asInstanceOf[JWebSocket].writeFinalBinaryFrame(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWebSocket].writeFinalBinaryFrame(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -262,7 +262,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
   override 
   def writeBinaryMessage(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): WebSocket = {
-    asJava.asInstanceOf[JWebSocket].writeBinaryMessage(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWebSocket].writeBinaryMessage(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -276,21 +276,21 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
 
   override 
   def writeTextMessage(text: String, handler: Handler[AsyncResult[Unit]]): WebSocket = {
-    asJava.asInstanceOf[JWebSocket].writeTextMessage(text.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWebSocket].writeTextMessage(text.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
 
   override 
   def closeHandler(handler: Handler[Unit]): WebSocket = {
-    asJava.asInstanceOf[JWebSocket].closeHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JWebSocket].closeHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def frameHandler(handler: Handler[WebSocketFrame]): WebSocket = {
-    asJava.asInstanceOf[JWebSocket].frameHandler({x: JWebSocketFrame => handler.handle(WebSocketFrame(x))})
+    asJava.asInstanceOf[JWebSocket].frameHandler((if (handler == null) null else new io.vertx.core.Handler[JWebSocketFrame]{def handle(x: JWebSocketFrame) {handler.handle(WebSocketFrame(x))}}))
     this
   }
 
@@ -306,7 +306,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
    * Same as  but with an `handler` called when the operation completes
    */
   override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JWebSocket].end(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWebSocket].end(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -334,7 +334,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
    * called with the result.   * @param dst the destination write stream
    */
   override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JWebSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWebSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -390,7 +390,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
    * Calls [[io.vertx.scala.core.http.WebSocketBase#close]]
    */
   override def end (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JWebSocket].end({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWebSocket].end((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -406,7 +406,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
    * Same as [[io.vertx.scala.core.http.WebSocketBase#close]] but with an `handler` called when the operation completes
    */
   override def close (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JWebSocket].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWebSocket].close((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -423,7 +423,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
    * Same as [[io.vertx.scala.core.http.WebSocketBase#close]] but with an `handler` called when the operation completes
    */
   override def close (statusCode: Short, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JWebSocket].close(statusCode.asInstanceOf[java.lang.Short], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWebSocket].close(statusCode.asInstanceOf[java.lang.Short], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -441,7 +441,7 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
    * Same as  but with an `handler` called when the operation completes
    */
   override def close (statusCode: Short, reason: scala.Option[String], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JWebSocket].close(statusCode.asInstanceOf[java.lang.Short], reason.map(x => x.asInstanceOf[java.lang.String]).orNull, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWebSocket].close(statusCode.asInstanceOf[java.lang.Short], reason.map(x => x.asInstanceOf[java.lang.String]).orNull, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

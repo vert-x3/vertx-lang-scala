@@ -47,7 +47,7 @@ class MailClient(private val _asJava: Object) {
    */
   
   def sendMail(email: MailMessage, resultHandler: Handler[AsyncResult[MailResult]]): MailClient = {
-    asJava.asInstanceOf[JMailClient].sendMail(email.asJava, {x: AsyncResult[JMailResult] => resultHandler.handle(AsyncResultWrapper[JMailResult, MailResult](x, a => MailResult(a)))})
+    asJava.asInstanceOf[JMailClient].sendMail(email.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMailResult]]{def handle(x: AsyncResult[JMailResult]) {resultHandler.handle(AsyncResultWrapper[JMailResult, MailResult](x, a => MailResult(a)))}}))
     this
   }
 

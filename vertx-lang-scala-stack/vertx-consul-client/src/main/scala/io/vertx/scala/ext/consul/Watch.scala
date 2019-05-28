@@ -49,7 +49,7 @@ class Watch[T: TypeTag](private val _asJava: Object) {
    */
   
   def setHandler(handler: Handler[WatchResult[T]]): Watch[T] = {
-    asJava.asInstanceOf[JWatch[Object]].setHandler({x: JWatchResult[Object] => handler.handle(WatchResult[T](x))})
+    asJava.asInstanceOf[JWatch[Object]].setHandler((if (handler == null) null else new io.vertx.core.Handler[JWatchResult[Object]]{def handle(x: JWatchResult[Object]) {handler.handle(WatchResult[T](x))}}))
     this
   }
 

@@ -123,152 +123,152 @@ class GenericsTCK(private val _asJava: Object) {
 
 
   def methodWithHandlerByteParameterized (handler: Handler[GenericRefedInterface[Byte]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerByteParameterized({x: JGenericRefedInterface[java.lang.Byte] => handler.handle(GenericRefedInterface[Byte](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerByteParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[java.lang.Byte]]{def handle(x: JGenericRefedInterface[java.lang.Byte]) {handler.handle(GenericRefedInterface[Byte](x))}}))
   }
 
 
   def methodWithHandlerShortParameterized (handler: Handler[GenericRefedInterface[Short]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerShortParameterized({x: JGenericRefedInterface[java.lang.Short] => handler.handle(GenericRefedInterface[Short](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerShortParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[java.lang.Short]]{def handle(x: JGenericRefedInterface[java.lang.Short]) {handler.handle(GenericRefedInterface[Short](x))}}))
   }
 
 
   def methodWithHandlerIntegerParameterized (handler: Handler[GenericRefedInterface[Int]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerIntegerParameterized({x: JGenericRefedInterface[java.lang.Integer] => handler.handle(GenericRefedInterface[Int](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerIntegerParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[java.lang.Integer]]{def handle(x: JGenericRefedInterface[java.lang.Integer]) {handler.handle(GenericRefedInterface[Int](x))}}))
   }
 
 
   def methodWithHandlerLongParameterized (handler: Handler[GenericRefedInterface[Long]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerLongParameterized({x: JGenericRefedInterface[java.lang.Long] => handler.handle(GenericRefedInterface[Long](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerLongParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[java.lang.Long]]{def handle(x: JGenericRefedInterface[java.lang.Long]) {handler.handle(GenericRefedInterface[Long](x))}}))
   }
 
 
   def methodWithHandlerFloatParameterized (handler: Handler[GenericRefedInterface[Float]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerFloatParameterized({x: JGenericRefedInterface[java.lang.Float] => handler.handle(GenericRefedInterface[Float](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerFloatParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[java.lang.Float]]{def handle(x: JGenericRefedInterface[java.lang.Float]) {handler.handle(GenericRefedInterface[Float](x))}}))
   }
 
 
   def methodWithHandlerDoubleParameterized (handler: Handler[GenericRefedInterface[Double]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerDoubleParameterized({x: JGenericRefedInterface[java.lang.Double] => handler.handle(GenericRefedInterface[Double](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerDoubleParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[java.lang.Double]]{def handle(x: JGenericRefedInterface[java.lang.Double]) {handler.handle(GenericRefedInterface[Double](x))}}))
   }
 
 
   def methodWithHandlerBooleanParameterized (handler: Handler[GenericRefedInterface[Boolean]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerBooleanParameterized({x: JGenericRefedInterface[java.lang.Boolean] => handler.handle(GenericRefedInterface[Boolean](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerBooleanParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[java.lang.Boolean]]{def handle(x: JGenericRefedInterface[java.lang.Boolean]) {handler.handle(GenericRefedInterface[Boolean](x))}}))
   }
 
 
   def methodWithHandlerCharacterParameterized (handler: Handler[GenericRefedInterface[Char]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerCharacterParameterized({x: JGenericRefedInterface[java.lang.Character] => handler.handle(GenericRefedInterface[Char](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerCharacterParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[java.lang.Character]]{def handle(x: JGenericRefedInterface[java.lang.Character]) {handler.handle(GenericRefedInterface[Char](x))}}))
   }
 
 
   def methodWithHandlerStringParameterized (handler: Handler[GenericRefedInterface[String]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerStringParameterized({x: JGenericRefedInterface[java.lang.String] => handler.handle(GenericRefedInterface[String](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerStringParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[java.lang.String]]{def handle(x: JGenericRefedInterface[java.lang.String]) {handler.handle(GenericRefedInterface[String](x))}}))
   }
 
 
   def methodWithHandlerJsonObjectParameterized (handler: Handler[GenericRefedInterface[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerJsonObjectParameterized({x: JGenericRefedInterface[JsonObject] => handler.handle(GenericRefedInterface[io.vertx.core.json.JsonObject](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerJsonObjectParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[JsonObject]]{def handle(x: JGenericRefedInterface[JsonObject]) {handler.handle(GenericRefedInterface[io.vertx.core.json.JsonObject](x))}}))
   }
 
 
   def methodWithHandlerJsonArrayParameterized (handler: Handler[GenericRefedInterface[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerJsonArrayParameterized({x: JGenericRefedInterface[JsonArray] => handler.handle(GenericRefedInterface[io.vertx.core.json.JsonArray](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerJsonArrayParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[JsonArray]]{def handle(x: JGenericRefedInterface[JsonArray]) {handler.handle(GenericRefedInterface[io.vertx.core.json.JsonArray](x))}}))
   }
 
 
   def methodWithHandlerDataObjectParameterized (handler: Handler[GenericRefedInterface[TestDataObject]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerDataObjectParameterized({x: JGenericRefedInterface[JTestDataObject] => handler.handle(GenericRefedInterface[TestDataObject](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerDataObjectParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[JTestDataObject]]{def handle(x: JGenericRefedInterface[JTestDataObject]) {handler.handle(GenericRefedInterface[TestDataObject](x))}}))
   }
 
 
   def methodWithHandlerEnumParameterized (handler: Handler[GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerEnumParameterized({x: JGenericRefedInterface[TestEnum] => handler.handle(GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerEnumParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[TestEnum]]{def handle(x: JGenericRefedInterface[TestEnum]) {handler.handle(GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum](x))}}))
   }
 
 
   def methodWithHandlerGenEnumParameterized (handler: Handler[GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerGenEnumParameterized({x: JGenericRefedInterface[TestGenEnum] => handler.handle(GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerGenEnumParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[TestGenEnum]]{def handle(x: JGenericRefedInterface[TestGenEnum]) {handler.handle(GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum](x))}}))
   }
 
 
   def methodWithHandlerUserTypeParameterized (handler: Handler[GenericRefedInterface[RefedInterface1]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerUserTypeParameterized({x: JGenericRefedInterface[JRefedInterface1] => handler.handle(GenericRefedInterface[RefedInterface1](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerUserTypeParameterized((if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[JRefedInterface1]]{def handle(x: JGenericRefedInterface[JRefedInterface1]) {handler.handle(GenericRefedInterface[RefedInterface1](x))}}))
   }
 
 
   def methodWithHandlerAsyncResultByteParameterized (handler: Handler[AsyncResult[GenericRefedInterface[Byte]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultByteParameterized({x: AsyncResult[JGenericRefedInterface[java.lang.Byte]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Byte], GenericRefedInterface[Byte]](x, a => GenericRefedInterface[Byte](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultByteParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[java.lang.Byte]]]{def handle(x: AsyncResult[JGenericRefedInterface[java.lang.Byte]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Byte], GenericRefedInterface[Byte]](x, a => GenericRefedInterface[Byte](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultShortParameterized (handler: Handler[AsyncResult[GenericRefedInterface[Short]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultShortParameterized({x: AsyncResult[JGenericRefedInterface[java.lang.Short]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Short], GenericRefedInterface[Short]](x, a => GenericRefedInterface[Short](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultShortParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[java.lang.Short]]]{def handle(x: AsyncResult[JGenericRefedInterface[java.lang.Short]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Short], GenericRefedInterface[Short]](x, a => GenericRefedInterface[Short](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultIntegerParameterized (handler: Handler[AsyncResult[GenericRefedInterface[Int]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultIntegerParameterized({x: AsyncResult[JGenericRefedInterface[java.lang.Integer]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Integer], GenericRefedInterface[Int]](x, a => GenericRefedInterface[Int](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultIntegerParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[java.lang.Integer]]]{def handle(x: AsyncResult[JGenericRefedInterface[java.lang.Integer]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Integer], GenericRefedInterface[Int]](x, a => GenericRefedInterface[Int](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultLongParameterized (handler: Handler[AsyncResult[GenericRefedInterface[Long]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultLongParameterized({x: AsyncResult[JGenericRefedInterface[java.lang.Long]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Long], GenericRefedInterface[Long]](x, a => GenericRefedInterface[Long](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultLongParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[java.lang.Long]]]{def handle(x: AsyncResult[JGenericRefedInterface[java.lang.Long]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Long], GenericRefedInterface[Long]](x, a => GenericRefedInterface[Long](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultFloatParameterized (handler: Handler[AsyncResult[GenericRefedInterface[Float]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultFloatParameterized({x: AsyncResult[JGenericRefedInterface[java.lang.Float]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Float], GenericRefedInterface[Float]](x, a => GenericRefedInterface[Float](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultFloatParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[java.lang.Float]]]{def handle(x: AsyncResult[JGenericRefedInterface[java.lang.Float]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Float], GenericRefedInterface[Float]](x, a => GenericRefedInterface[Float](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultDoubleParameterized (handler: Handler[AsyncResult[GenericRefedInterface[Double]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultDoubleParameterized({x: AsyncResult[JGenericRefedInterface[java.lang.Double]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Double], GenericRefedInterface[Double]](x, a => GenericRefedInterface[Double](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultDoubleParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[java.lang.Double]]]{def handle(x: AsyncResult[JGenericRefedInterface[java.lang.Double]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Double], GenericRefedInterface[Double]](x, a => GenericRefedInterface[Double](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultBooleanParameterized (handler: Handler[AsyncResult[GenericRefedInterface[Boolean]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultBooleanParameterized({x: AsyncResult[JGenericRefedInterface[java.lang.Boolean]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Boolean], GenericRefedInterface[Boolean]](x, a => GenericRefedInterface[Boolean](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultBooleanParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[java.lang.Boolean]]]{def handle(x: AsyncResult[JGenericRefedInterface[java.lang.Boolean]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Boolean], GenericRefedInterface[Boolean]](x, a => GenericRefedInterface[Boolean](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultCharacterParameterized (handler: Handler[AsyncResult[GenericRefedInterface[Char]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultCharacterParameterized({x: AsyncResult[JGenericRefedInterface[java.lang.Character]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Character], GenericRefedInterface[Char]](x, a => GenericRefedInterface[Char](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultCharacterParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[java.lang.Character]]]{def handle(x: AsyncResult[JGenericRefedInterface[java.lang.Character]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.Character], GenericRefedInterface[Char]](x, a => GenericRefedInterface[Char](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultStringParameterized (handler: Handler[AsyncResult[GenericRefedInterface[String]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultStringParameterized({x: AsyncResult[JGenericRefedInterface[java.lang.String]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.String], GenericRefedInterface[String]](x, a => GenericRefedInterface[String](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultStringParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[java.lang.String]]]{def handle(x: AsyncResult[JGenericRefedInterface[java.lang.String]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[java.lang.String], GenericRefedInterface[String]](x, a => GenericRefedInterface[String](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultJsonObjectParameterized (handler: Handler[AsyncResult[GenericRefedInterface[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultJsonObjectParameterized({x: AsyncResult[JGenericRefedInterface[JsonObject]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[JsonObject], GenericRefedInterface[io.vertx.core.json.JsonObject]](x, a => GenericRefedInterface[io.vertx.core.json.JsonObject](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultJsonObjectParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[JsonObject]]]{def handle(x: AsyncResult[JGenericRefedInterface[JsonObject]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[JsonObject], GenericRefedInterface[io.vertx.core.json.JsonObject]](x, a => GenericRefedInterface[io.vertx.core.json.JsonObject](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultJsonArrayParameterized (handler: Handler[AsyncResult[GenericRefedInterface[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultJsonArrayParameterized({x: AsyncResult[JGenericRefedInterface[JsonArray]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[JsonArray], GenericRefedInterface[io.vertx.core.json.JsonArray]](x, a => GenericRefedInterface[io.vertx.core.json.JsonArray](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultJsonArrayParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[JsonArray]]]{def handle(x: AsyncResult[JGenericRefedInterface[JsonArray]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[JsonArray], GenericRefedInterface[io.vertx.core.json.JsonArray]](x, a => GenericRefedInterface[io.vertx.core.json.JsonArray](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultDataObjectParameterized (handler: Handler[AsyncResult[GenericRefedInterface[TestDataObject]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultDataObjectParameterized({x: AsyncResult[JGenericRefedInterface[JTestDataObject]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[JTestDataObject], GenericRefedInterface[TestDataObject]](x, a => GenericRefedInterface[TestDataObject](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultDataObjectParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[JTestDataObject]]]{def handle(x: AsyncResult[JGenericRefedInterface[JTestDataObject]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[JTestDataObject], GenericRefedInterface[TestDataObject]](x, a => GenericRefedInterface[TestDataObject](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultEnumParameterized (handler: Handler[AsyncResult[GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultEnumParameterized({x: AsyncResult[JGenericRefedInterface[TestEnum]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[TestEnum], GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum]](x, a => GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultEnumParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[TestEnum]]]{def handle(x: AsyncResult[JGenericRefedInterface[TestEnum]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[TestEnum], GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum]](x, a => GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultGenEnumParameterized (handler: Handler[AsyncResult[GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultGenEnumParameterized({x: AsyncResult[JGenericRefedInterface[TestGenEnum]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[TestGenEnum], GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum]](x, a => GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultGenEnumParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[TestGenEnum]]]{def handle(x: AsyncResult[JGenericRefedInterface[TestGenEnum]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[TestGenEnum], GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum]](x, a => GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum](a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultUserTypeParameterized (handler: Handler[AsyncResult[GenericRefedInterface[RefedInterface1]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultUserTypeParameterized({x: AsyncResult[JGenericRefedInterface[JRefedInterface1]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[JRefedInterface1], GenericRefedInterface[RefedInterface1]](x, a => GenericRefedInterface[RefedInterface1](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultUserTypeParameterized((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[JRefedInterface1]]]{def handle(x: AsyncResult[JGenericRefedInterface[JRefedInterface1]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[JRefedInterface1], GenericRefedInterface[RefedInterface1]](x, a => GenericRefedInterface[RefedInterface1](a)))}}))
   }
 
 
@@ -353,12 +353,12 @@ class GenericsTCK(private val _asJava: Object) {
 
 
   def methodWithHandlerClassTypeParameterized [U: TypeTag](`type`: Class[U], handler: Handler[GenericRefedInterface[U]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerClassTypeParameterized[Object](toJavaClass(`type`), {x: JGenericRefedInterface[Object] => handler.handle(GenericRefedInterface[U](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerClassTypeParameterized[Object](toJavaClass(`type`), (if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[Object]]{def handle(x: JGenericRefedInterface[Object]) {handler.handle(GenericRefedInterface[U](x))}}))
   }
 
 
   def methodWithHandlerAsyncResultClassTypeParameterized [U: TypeTag](`type`: Class[U], handler: Handler[AsyncResult[GenericRefedInterface[U]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultClassTypeParameterized[Object](toJavaClass(`type`), {x: AsyncResult[JGenericRefedInterface[Object]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[Object], GenericRefedInterface[U]](x, a => GenericRefedInterface[U](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultClassTypeParameterized[Object](toJavaClass(`type`), (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[Object]]]{def handle(x: AsyncResult[JGenericRefedInterface[Object]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[Object], GenericRefedInterface[U]](x, a => GenericRefedInterface[U](a)))}}))
   }
 
 
@@ -378,12 +378,12 @@ class GenericsTCK(private val _asJava: Object) {
 
 
   def methodWithClassTypeHandler [U: TypeTag](`type`: Class[U], f: Handler[U]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithClassTypeHandler[Object](toJavaClass(`type`), {x: Object => f.handle(toScala[U](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithClassTypeHandler[Object](toJavaClass(`type`), (if (f == null) null else new io.vertx.core.Handler[Object]{def handle(x: Object) {f.handle(toScala[U](x))}}))
   }
 
 
   def methodWithClassTypeHandlerAsyncResult [U: TypeTag](`type`: Class[U], f: Handler[AsyncResult[U]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithClassTypeHandlerAsyncResult[Object](toJavaClass(`type`), {x: AsyncResult[Object] => f.handle(AsyncResultWrapper[Object, U](x, a => toScala[U](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithClassTypeHandlerAsyncResult[Object](toJavaClass(`type`), (if (f == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {f.handle(AsyncResultWrapper[Object, U](x, a => toScala[U](a)))}}))
   }
 
 
@@ -413,12 +413,12 @@ class GenericsTCK(private val _asJava: Object) {
 
 
   def methodWithHandlerGenericNullableApi (notNull: Boolean, handler: Handler[GenericNullableRefedInterface[RefedInterface1]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerGenericNullableApi(notNull.asInstanceOf[java.lang.Boolean], {x: JGenericNullableRefedInterface[JRefedInterface1] => handler.handle(GenericNullableRefedInterface[RefedInterface1](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerGenericNullableApi(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[JGenericNullableRefedInterface[JRefedInterface1]]{def handle(x: JGenericNullableRefedInterface[JRefedInterface1]) {handler.handle(GenericNullableRefedInterface[RefedInterface1](x))}}))
   }
 
 
   def methodWithHandlerAsyncResultGenericNullableApi (notNull: Boolean, handler: Handler[AsyncResult[GenericNullableRefedInterface[RefedInterface1]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultGenericNullableApi(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JGenericNullableRefedInterface[JRefedInterface1]] => handler.handle(AsyncResultWrapper[JGenericNullableRefedInterface[JRefedInterface1], GenericNullableRefedInterface[RefedInterface1]](x, a => GenericNullableRefedInterface[RefedInterface1](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultGenericNullableApi(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericNullableRefedInterface[JRefedInterface1]]]{def handle(x: AsyncResult[JGenericNullableRefedInterface[JRefedInterface1]]) {handler.handle(AsyncResultWrapper[JGenericNullableRefedInterface[JRefedInterface1], GenericNullableRefedInterface[RefedInterface1]](x, a => GenericNullableRefedInterface[RefedInterface1](a)))}}))
   }
 
 
@@ -433,12 +433,12 @@ class GenericsTCK(private val _asJava: Object) {
 
 
   def methodWithHandlerParamInfered [T: TypeTag](param: GenericRefedInterface[T], handler: Handler[GenericRefedInterface[T]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerParamInfered[Object](param.asJava.asInstanceOf[JGenericRefedInterface[Object]], {x: JGenericRefedInterface[Object] => handler.handle(GenericRefedInterface[T](x))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerParamInfered[Object](param.asJava.asInstanceOf[JGenericRefedInterface[Object]], (if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[Object]]{def handle(x: JGenericRefedInterface[Object]) {handler.handle(GenericRefedInterface[T](x))}}))
   }
 
 
   def methodWithHandlerAsyncResultParamInfered [T: TypeTag](param: GenericRefedInterface[T], handler: Handler[AsyncResult[GenericRefedInterface[T]]]): Unit = {
-    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultParamInfered[Object](param.asJava.asInstanceOf[JGenericRefedInterface[Object]], {x: AsyncResult[JGenericRefedInterface[Object]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[Object], GenericRefedInterface[T]](x, a => GenericRefedInterface[T](a)))})
+    asJava.asInstanceOf[JGenericsTCK].methodWithHandlerAsyncResultParamInfered[Object](param.asJava.asInstanceOf[JGenericRefedInterface[Object]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[Object]]]{def handle(x: AsyncResult[JGenericRefedInterface[Object]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[Object], GenericRefedInterface[T]](x, a => GenericRefedInterface[T](a)))}}))
   }
 
 

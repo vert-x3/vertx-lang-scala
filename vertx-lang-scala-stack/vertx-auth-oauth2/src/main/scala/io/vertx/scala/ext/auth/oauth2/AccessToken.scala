@@ -87,7 +87,7 @@ class AccessToken(private val _asJava: Object) extends User (_asJava) {
    */
   
   def refresh(callback: Handler[AsyncResult[Unit]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].refresh({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAccessToken].refresh((if (callback == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -97,7 +97,7 @@ class AccessToken(private val _asJava: Object) extends User (_asJava) {
    */
   
   def revoke(token_type: String, callback: Handler[AsyncResult[Unit]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAccessToken].revoke(token_type.asInstanceOf[java.lang.String], (if (callback == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -107,7 +107,7 @@ class AccessToken(private val _asJava: Object) extends User (_asJava) {
    */
   
   def logout(callback: Handler[AsyncResult[Unit]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].logout({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAccessToken].logout((if (callback == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -116,7 +116,7 @@ class AccessToken(private val _asJava: Object) extends User (_asJava) {
    */
   
   def introspect(callback: Handler[AsyncResult[Unit]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].introspect({x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAccessToken].introspect((if (callback == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -126,7 +126,7 @@ class AccessToken(private val _asJava: Object) extends User (_asJava) {
    */
   
   def introspect(tokenType: String, callback: Handler[AsyncResult[Unit]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].introspect(tokenType.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAccessToken].introspect(tokenType.asInstanceOf[java.lang.String], (if (callback == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {callback.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -135,7 +135,7 @@ class AccessToken(private val _asJava: Object) extends User (_asJava) {
    */
   
   def userInfo(callback: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].userInfo({x: AsyncResult[JsonObject] => callback.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JAccessToken].userInfo((if (callback == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {callback.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
     this
   }
 
@@ -145,7 +145,7 @@ class AccessToken(private val _asJava: Object) extends User (_asJava) {
    */
   
   def fetch(resource: String, callback: Handler[AsyncResult[OAuth2Response]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].fetch(resource.asInstanceOf[java.lang.String], {x: AsyncResult[JOAuth2Response] => callback.handle(AsyncResultWrapper[JOAuth2Response, OAuth2Response](x, a => OAuth2Response(a)))})
+    asJava.asInstanceOf[JAccessToken].fetch(resource.asInstanceOf[java.lang.String], (if (callback == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Response]]{def handle(x: AsyncResult[JOAuth2Response]) {callback.handle(AsyncResultWrapper[JOAuth2Response, OAuth2Response](x, a => OAuth2Response(a)))}}))
     this
   }
 
@@ -158,7 +158,7 @@ class AccessToken(private val _asJava: Object) extends User (_asJava) {
    */
   
   def fetch(method: io.vertx.core.http.HttpMethod, resource: String, headers: io.vertx.core.json.JsonObject, payload: io.vertx.core.buffer.Buffer, callback: Handler[AsyncResult[OAuth2Response]]): AccessToken = {
-    asJava.asInstanceOf[JAccessToken].fetch(method, resource.asInstanceOf[java.lang.String], headers, payload, {x: AsyncResult[JOAuth2Response] => callback.handle(AsyncResultWrapper[JOAuth2Response, OAuth2Response](x, a => OAuth2Response(a)))})
+    asJava.asInstanceOf[JAccessToken].fetch(method, resource.asInstanceOf[java.lang.String], headers, payload, (if (callback == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Response]]{def handle(x: AsyncResult[JOAuth2Response]) {callback.handle(AsyncResultWrapper[JOAuth2Response, OAuth2Response](x, a => OAuth2Response(a)))}}))
     this
   }
 

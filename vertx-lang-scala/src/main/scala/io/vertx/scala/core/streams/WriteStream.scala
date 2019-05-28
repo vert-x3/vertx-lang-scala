@@ -111,7 +111,7 @@ object WriteStream {
    */
   override 
   def exceptionHandler(handler: Handler[Throwable]): WriteStream[T] = {
-    asJava.asInstanceOf[JWriteStream[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JWriteStream[Object]].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -132,7 +132,7 @@ object WriteStream {
    */
   
   def write(data: T, handler: Handler[AsyncResult[Unit]]): WriteStream[T] = {
-    asJava.asInstanceOf[JWriteStream[Object]].write(toJava[T](data), {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWriteStream[Object]].write(toJava[T](data), (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -162,7 +162,7 @@ object WriteStream {
    */
   
   def drainHandler(handler: Handler[Unit]): WriteStream[T] = {
-    asJava.asInstanceOf[JWriteStream[Object]].drainHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JWriteStream[Object]].drainHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -178,7 +178,7 @@ object WriteStream {
    * Same as  but with an `handler` called when the operation completes
    */
   def end(data: T, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JWriteStream[Object]].end(toJava[T](data), {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWriteStream[Object]].end(toJava[T](data), (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -195,7 +195,7 @@ object WriteStream {
    * Same as [[io.vertx.scala.core.streams.WriteStream#end]] but with an `handler` called when the operation completes
    */
   def end (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JWriteStream[Object]].end({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JWriteStream[Object]].end((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

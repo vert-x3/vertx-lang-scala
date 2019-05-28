@@ -113,7 +113,7 @@ object ReadStream {
    */
   override 
   def exceptionHandler(handler: Handler[Throwable]): ReadStream[T] = {
-    asJava.asInstanceOf[JReadStream[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JReadStream[Object]].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -122,7 +122,7 @@ object ReadStream {
    */
   
   def handler(handler: Handler[T]): ReadStream[T] = {
-    asJava.asInstanceOf[JReadStream[Object]].handler({x: Object => handler.handle(toScala[T](x))})
+    asJava.asInstanceOf[JReadStream[Object]].handler((if (handler == null) null else new io.vertx.core.Handler[Object]{def handle(x: Object) {handler.handle(toScala[T](x))}}))
     this
   }
 
@@ -164,7 +164,7 @@ object ReadStream {
    */
   
   def endHandler(endHandler: Handler[Unit]): ReadStream[T] = {
-    asJava.asInstanceOf[JReadStream[Object]].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JReadStream[Object]].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -194,7 +194,7 @@ object ReadStream {
    * called with the result.   * @param dst the destination write stream
    */
   def pipeTo(dst: WriteStream[T], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JReadStream[Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Object]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JReadStream[Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Object]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

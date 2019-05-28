@@ -115,7 +115,7 @@ class Route(private val _asJava: Object) {
    */
   
   def handler(requestHandler: Handler[RoutingContext]): Route = {
-    asJava.asInstanceOf[JRoute].handler({x: JRoutingContext => requestHandler.handle(RoutingContext(x))})
+    asJava.asInstanceOf[JRoute].handler((if (requestHandler == null) null else new io.vertx.core.Handler[JRoutingContext]{def handle(x: JRoutingContext) {requestHandler.handle(RoutingContext(x))}}))
     this
   }
 
@@ -124,7 +124,7 @@ class Route(private val _asJava: Object) {
    */
   
   def blockingHandler(requestHandler: Handler[RoutingContext]): Route = {
-    asJava.asInstanceOf[JRoute].blockingHandler({x: JRoutingContext => requestHandler.handle(RoutingContext(x))})
+    asJava.asInstanceOf[JRoute].blockingHandler((if (requestHandler == null) null else new io.vertx.core.Handler[JRoutingContext]{def handle(x: JRoutingContext) {requestHandler.handle(RoutingContext(x))}}))
     this
   }
 
@@ -142,7 +142,7 @@ class Route(private val _asJava: Object) {
    */
   
   def blockingHandler(requestHandler: Handler[RoutingContext], ordered: Boolean): Route = {
-    asJava.asInstanceOf[JRoute].blockingHandler({x: JRoutingContext => requestHandler.handle(RoutingContext(x))}, ordered.asInstanceOf[java.lang.Boolean])
+    asJava.asInstanceOf[JRoute].blockingHandler((if (requestHandler == null) null else new io.vertx.core.Handler[JRoutingContext]{def handle(x: JRoutingContext) {requestHandler.handle(RoutingContext(x))}}), ordered.asInstanceOf[java.lang.Boolean])
     this
   }
 
@@ -154,7 +154,7 @@ class Route(private val _asJava: Object) {
    */
   
   def failureHandler(failureHandler: Handler[RoutingContext]): Route = {
-    asJava.asInstanceOf[JRoute].failureHandler({x: JRoutingContext => failureHandler.handle(RoutingContext(x))})
+    asJava.asInstanceOf[JRoute].failureHandler((if (failureHandler == null) null else new io.vertx.core.Handler[JRoutingContext]{def handle(x: JRoutingContext) {failureHandler.handle(RoutingContext(x))}}))
     this
   }
 

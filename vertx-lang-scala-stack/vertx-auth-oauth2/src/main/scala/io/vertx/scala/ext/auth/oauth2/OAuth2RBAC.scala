@@ -54,7 +54,7 @@ class OAuth2RBAC(private val _asJava: Object) {
    * @param handler the result handler.
    */
   def isAuthorized (user: AccessToken, authority: String, handler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JOAuth2RBAC].isAuthorized(user.asJava.asInstanceOf[JAccessToken], authority.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JOAuth2RBAC].isAuthorized(user.asJava.asInstanceOf[JAccessToken], authority.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {handler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))}}))
   }
 
 

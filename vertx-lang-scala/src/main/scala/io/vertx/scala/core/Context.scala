@@ -74,7 +74,7 @@ class Context(private val _asJava: Object) {
    */
   
   def exceptionHandler(handler: Handler[Throwable]): Context = {
-    asJava.asInstanceOf[JContext].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JContext].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -84,7 +84,7 @@ class Context(private val _asJava: Object) {
    * Run the specified action asynchronously on the same context, some time after the current execution has completed.   * @param action the action to run
    */
   def runOnContext (action: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JContext].runOnContext({x: Void => action.handle(x)})
+    asJava.asInstanceOf[JContext].runOnContext((if (action == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {action.handle(x)}}))
   }
 
   /**

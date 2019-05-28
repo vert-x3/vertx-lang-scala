@@ -54,7 +54,7 @@ class RabbitMQConsumer(private val _asJava: Object) extends ReadStream[RabbitMQM
    */
   override 
   def exceptionHandler(exceptionHandler: Handler[Throwable]): RabbitMQConsumer = {
-    asJava.asInstanceOf[JRabbitMQConsumer].exceptionHandler({x: Throwable => exceptionHandler.handle(x)})
+    asJava.asInstanceOf[JRabbitMQConsumer].exceptionHandler((if (exceptionHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {exceptionHandler.handle(x)}}))
     this
   }
 
@@ -63,7 +63,7 @@ class RabbitMQConsumer(private val _asJava: Object) extends ReadStream[RabbitMQM
    */
   override 
   def handler(messageArrived: Handler[RabbitMQMessage]): RabbitMQConsumer = {
-    asJava.asInstanceOf[JRabbitMQConsumer].handler({x: JRabbitMQMessage => messageArrived.handle(RabbitMQMessage(x))})
+    asJava.asInstanceOf[JRabbitMQConsumer].handler((if (messageArrived == null) null else new io.vertx.core.Handler[JRabbitMQMessage]{def handle(x: JRabbitMQMessage) {messageArrived.handle(RabbitMQMessage(x))}}))
     this
   }
 
@@ -93,7 +93,7 @@ class RabbitMQConsumer(private val _asJava: Object) extends ReadStream[RabbitMQM
    */
   override 
   def endHandler(endHandler: Handler[Unit]): RabbitMQConsumer = {
-    asJava.asInstanceOf[JRabbitMQConsumer].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JRabbitMQConsumer].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -110,7 +110,7 @@ class RabbitMQConsumer(private val _asJava: Object) extends ReadStream[RabbitMQM
 
 
   override def pipeTo(dst: WriteStream[RabbitMQMessage], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQConsumer].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JRabbitMQMessage]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQConsumer].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JRabbitMQMessage]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -136,7 +136,7 @@ class RabbitMQConsumer(private val _asJava: Object) extends ReadStream[RabbitMQM
    * The operation is asynchronous. When consumption will be stopped, you can by notified via [[io.vertx.scala.rabbitmq.RabbitMQConsumer#endHandler]]   * @param cancelResult contains information about operation status: success/fail.
    */
   def cancel (cancelResult: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRabbitMQConsumer].cancel({x: AsyncResult[Void] => cancelResult.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRabbitMQConsumer].cancel((if (cancelResult == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {cancelResult.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

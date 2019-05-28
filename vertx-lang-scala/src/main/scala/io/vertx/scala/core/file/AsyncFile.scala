@@ -48,7 +48,7 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
 
   override 
   def handler(handler: Handler[io.vertx.core.buffer.Buffer]): AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].handler({x: Buffer => handler.handle(x)})
+    asJava.asInstanceOf[JAsyncFile].handler((if (handler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {handler.handle(x)}}))
     this
   }
 
@@ -69,7 +69,7 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
 
   override 
   def endHandler(endHandler: Handler[Unit]): AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JAsyncFile].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -85,7 +85,7 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   override 
   def write(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].write(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].write(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -99,14 +99,14 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
 
   override 
   def drainHandler(handler: Handler[Unit]): AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].drainHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JAsyncFile].drainHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JAsyncFile].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -133,7 +133,7 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   
   def write(buffer: io.vertx.core.buffer.Buffer, position: Long, handler: Handler[AsyncResult[Unit]]): AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].write(buffer, position.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].write(buffer, position.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -154,7 +154,7 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   
   def read(buffer: io.vertx.core.buffer.Buffer, offset: Int, position: Long, length: Int, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].read(buffer, offset.asInstanceOf[java.lang.Integer], position.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Integer], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].read(buffer, offset.asInstanceOf[java.lang.Integer], position.asInstanceOf[java.lang.Long], length.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Buffer]]{def handle(x: AsyncResult[Buffer]) {handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))}}))
     this
   }
 
@@ -176,7 +176,7 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   
   def flush(handler: Handler[AsyncResult[Unit]]): AsyncFile = {
-    asJava.asInstanceOf[JAsyncFile].flush({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].flush((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -223,7 +223,7 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    * Same as  but with an `handler` called when the operation completes
    */
   override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncFile].end(data, {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].end(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -251,7 +251,7 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    * called with the result.   * @param dst the destination write stream
    */
   override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncFile].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -273,7 +273,7 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    * Close the file, see [[io.vertx.scala.core.file.AsyncFile#close]].
    */
   override def end (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncFile].end({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].end((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -288,7 +288,7 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    * The handler will be called when the close is complete, or an error occurs.   * @param handler the handler
    */
   def close (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncFile].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JAsyncFile].close((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

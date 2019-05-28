@@ -100,7 +100,7 @@ class Pipe[T: TypeTag](private val _asJava: Object) {
    * @param completionHandler the handler called when the pipe operation completes
    */
   def to (dst: WriteStream[T], completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JPipe[Object]].to(dst.asJava.asInstanceOf[JWriteStream[Object]], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JPipe[Object]].to(dst.asJava.asInstanceOf[JWriteStream[Object]], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

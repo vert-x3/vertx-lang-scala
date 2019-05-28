@@ -77,7 +77,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def agentInfo(resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].agentInfo({x: AsyncResult[JsonObject] => resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].agentInfo((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
     this
   }
 
@@ -87,7 +87,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def coordinateNodes(resultHandler: Handler[AsyncResult[CoordinateList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].coordinateNodes({x: AsyncResult[JCoordinateList] => resultHandler.handle(AsyncResultWrapper[JCoordinateList, CoordinateList](x, a => CoordinateList(a)))})
+    asJava.asInstanceOf[JConsulClient].coordinateNodes((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JCoordinateList]]{def handle(x: AsyncResult[JCoordinateList]) {resultHandler.handle(AsyncResultWrapper[JCoordinateList, CoordinateList](x, a => CoordinateList(a)))}}))
     this
   }
 
@@ -99,7 +99,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def coordinateNodesWithOptions(options: BlockingQueryOptions, resultHandler: Handler[AsyncResult[CoordinateList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].coordinateNodesWithOptions(options.asJava, {x: AsyncResult[JCoordinateList] => resultHandler.handle(AsyncResultWrapper[JCoordinateList, CoordinateList](x, a => CoordinateList(a)))})
+    asJava.asInstanceOf[JConsulClient].coordinateNodesWithOptions(options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JCoordinateList]]{def handle(x: AsyncResult[JCoordinateList]) {resultHandler.handle(AsyncResultWrapper[JCoordinateList, CoordinateList](x, a => CoordinateList(a)))}}))
     this
   }
 
@@ -109,7 +109,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def coordinateDatacenters(resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[DcCoordinates]]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].coordinateDatacenters({x: AsyncResult[java.util.List[JDcCoordinates]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JDcCoordinates], scala.collection.mutable.Buffer[DcCoordinates]](x, a => a.asScala.map(x => DcCoordinates(x))))})
+    asJava.asInstanceOf[JConsulClient].coordinateDatacenters((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JDcCoordinates]]]{def handle(x: AsyncResult[java.util.List[JDcCoordinates]]) {resultHandler.handle(AsyncResultWrapper[java.util.List[JDcCoordinates], scala.collection.mutable.Buffer[DcCoordinates]](x, a => a.asScala.map(x => DcCoordinates(x))))}}))
     this
   }
 
@@ -120,7 +120,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def getKeys(keyPrefix: String, resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].getKeys(keyPrefix.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[java.lang.String]] => resultHandler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JConsulClient].getKeys(keyPrefix.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.String]]]{def handle(x: AsyncResult[java.util.List[java.lang.String]]) {resultHandler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))}}))
     this
   }
 
@@ -132,7 +132,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def getKeysWithOptions(keyPrefix: String, options: BlockingQueryOptions, resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].getKeysWithOptions(keyPrefix.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[java.util.List[java.lang.String]] => resultHandler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JConsulClient].getKeysWithOptions(keyPrefix.asInstanceOf[java.lang.String], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.String]]]{def handle(x: AsyncResult[java.util.List[java.lang.String]]) {resultHandler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))}}))
     this
   }
 
@@ -144,7 +144,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def getValue(key: String, resultHandler: Handler[AsyncResult[KeyValue]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].getValue(key.asInstanceOf[java.lang.String], {x: AsyncResult[JKeyValue] => resultHandler.handle(AsyncResultWrapper[JKeyValue, KeyValue](x, a => KeyValue(a)))})
+    asJava.asInstanceOf[JConsulClient].getValue(key.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JKeyValue]]{def handle(x: AsyncResult[JKeyValue]) {resultHandler.handle(AsyncResultWrapper[JKeyValue, KeyValue](x, a => KeyValue(a)))}}))
     this
   }
 
@@ -158,7 +158,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def getValueWithOptions(key: String, options: BlockingQueryOptions, resultHandler: Handler[AsyncResult[KeyValue]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].getValueWithOptions(key.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JKeyValue] => resultHandler.handle(AsyncResultWrapper[JKeyValue, KeyValue](x, a => KeyValue(a)))})
+    asJava.asInstanceOf[JConsulClient].getValueWithOptions(key.asInstanceOf[java.lang.String], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JKeyValue]]{def handle(x: AsyncResult[JKeyValue]) {resultHandler.handle(AsyncResultWrapper[JKeyValue, KeyValue](x, a => KeyValue(a)))}}))
     this
   }
 
@@ -169,7 +169,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def deleteValue(key: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].deleteValue(key.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].deleteValue(key.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -181,7 +181,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def getValues(keyPrefix: String, resultHandler: Handler[AsyncResult[KeyValueList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].getValues(keyPrefix.asInstanceOf[java.lang.String], {x: AsyncResult[JKeyValueList] => resultHandler.handle(AsyncResultWrapper[JKeyValueList, KeyValueList](x, a => KeyValueList(a)))})
+    asJava.asInstanceOf[JConsulClient].getValues(keyPrefix.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JKeyValueList]]{def handle(x: AsyncResult[JKeyValueList]) {resultHandler.handle(AsyncResultWrapper[JKeyValueList, KeyValueList](x, a => KeyValueList(a)))}}))
     this
   }
 
@@ -195,7 +195,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def getValuesWithOptions(keyPrefix: String, options: BlockingQueryOptions, resultHandler: Handler[AsyncResult[KeyValueList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].getValuesWithOptions(keyPrefix.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JKeyValueList] => resultHandler.handle(AsyncResultWrapper[JKeyValueList, KeyValueList](x, a => KeyValueList(a)))})
+    asJava.asInstanceOf[JConsulClient].getValuesWithOptions(keyPrefix.asInstanceOf[java.lang.String], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JKeyValueList]]{def handle(x: AsyncResult[JKeyValueList]) {resultHandler.handle(AsyncResultWrapper[JKeyValueList, KeyValueList](x, a => KeyValueList(a)))}}))
     this
   }
 
@@ -206,7 +206,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def deleteValues(keyPrefix: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].deleteValues(keyPrefix.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].deleteValues(keyPrefix.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -218,7 +218,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def putValue(key: String, value: String, resultHandler: Handler[AsyncResult[Boolean]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].putValue(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JConsulClient].putValue(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))}}))
     this
   }
 
@@ -231,7 +231,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def putValueWithOptions(key: String, value: String, options: KeyValueOptions, resultHandler: Handler[AsyncResult[Boolean]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].putValueWithOptions(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[java.lang.Boolean] => resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JConsulClient].putValueWithOptions(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {resultHandler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))}}))
     this
   }
 
@@ -242,7 +242,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def transaction(request: TxnRequest, resultHandler: Handler[AsyncResult[TxnResponse]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].transaction(request.asJava, {x: AsyncResult[JTxnResponse] => resultHandler.handle(AsyncResultWrapper[JTxnResponse, TxnResponse](x, a => TxnResponse(a)))})
+    asJava.asInstanceOf[JConsulClient].transaction(request.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JTxnResponse]]{def handle(x: AsyncResult[JTxnResponse]) {resultHandler.handle(AsyncResultWrapper[JTxnResponse, TxnResponse](x, a => TxnResponse(a)))}}))
     this
   }
 
@@ -253,7 +253,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def createAclToken(token: AclToken, idHandler: Handler[AsyncResult[String]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].createAclToken(token.asJava, {x: AsyncResult[java.lang.String] => idHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JConsulClient].createAclToken(token.asJava, (if (idHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {idHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -264,7 +264,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def updateAclToken(token: AclToken, idHandler: Handler[AsyncResult[String]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].updateAclToken(token.asJava, {x: AsyncResult[java.lang.String] => idHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JConsulClient].updateAclToken(token.asJava, (if (idHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {idHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -275,7 +275,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def cloneAclToken(id: String, idHandler: Handler[AsyncResult[String]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].cloneAclToken(id.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => idHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JConsulClient].cloneAclToken(id.asInstanceOf[java.lang.String], (if (idHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {idHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -285,7 +285,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def listAclTokens(resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[AclToken]]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].listAclTokens({x: AsyncResult[java.util.List[JAclToken]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JAclToken], scala.collection.mutable.Buffer[AclToken]](x, a => a.asScala.map(x => AclToken(x))))})
+    asJava.asInstanceOf[JConsulClient].listAclTokens((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JAclToken]]]{def handle(x: AsyncResult[java.util.List[JAclToken]]) {resultHandler.handle(AsyncResultWrapper[java.util.List[JAclToken], scala.collection.mutable.Buffer[AclToken]](x, a => a.asScala.map(x => AclToken(x))))}}))
     this
   }
 
@@ -296,7 +296,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def infoAclToken(id: String, tokenHandler: Handler[AsyncResult[AclToken]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].infoAclToken(id.asInstanceOf[java.lang.String], {x: AsyncResult[JAclToken] => tokenHandler.handle(AsyncResultWrapper[JAclToken, AclToken](x, a => AclToken(a)))})
+    asJava.asInstanceOf[JConsulClient].infoAclToken(id.asInstanceOf[java.lang.String], (if (tokenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JAclToken]]{def handle(x: AsyncResult[JAclToken]) {tokenHandler.handle(AsyncResultWrapper[JAclToken, AclToken](x, a => AclToken(a)))}}))
     this
   }
 
@@ -307,7 +307,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def destroyAclToken(id: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].destroyAclToken(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].destroyAclToken(id.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -318,7 +318,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def fireEvent(name: String, resultHandler: Handler[AsyncResult[Event]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].fireEvent(name.asInstanceOf[java.lang.String], {x: AsyncResult[JEvent] => resultHandler.handle(AsyncResultWrapper[JEvent, Event](x, a => Event(a)))})
+    asJava.asInstanceOf[JConsulClient].fireEvent(name.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JEvent]]{def handle(x: AsyncResult[JEvent]) {resultHandler.handle(AsyncResultWrapper[JEvent, Event](x, a => Event(a)))}}))
     this
   }
 
@@ -330,7 +330,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def fireEventWithOptions(name: String, options: EventOptions, resultHandler: Handler[AsyncResult[Event]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].fireEventWithOptions(name.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JEvent] => resultHandler.handle(AsyncResultWrapper[JEvent, Event](x, a => Event(a)))})
+    asJava.asInstanceOf[JConsulClient].fireEventWithOptions(name.asInstanceOf[java.lang.String], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JEvent]]{def handle(x: AsyncResult[JEvent]) {resultHandler.handle(AsyncResultWrapper[JEvent, Event](x, a => Event(a)))}}))
     this
   }
 
@@ -340,7 +340,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def listEvents(resultHandler: Handler[AsyncResult[EventList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].listEvents({x: AsyncResult[JEventList] => resultHandler.handle(AsyncResultWrapper[JEventList, EventList](x, a => EventList(a)))})
+    asJava.asInstanceOf[JConsulClient].listEvents((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JEventList]]{def handle(x: AsyncResult[JEventList]) {resultHandler.handle(AsyncResultWrapper[JEventList, EventList](x, a => EventList(a)))}}))
     this
   }
 
@@ -358,7 +358,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def listEventsWithOptions(options: EventListOptions, resultHandler: Handler[AsyncResult[EventList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].listEventsWithOptions(options.asJava, {x: AsyncResult[JEventList] => resultHandler.handle(AsyncResultWrapper[JEventList, EventList](x, a => EventList(a)))})
+    asJava.asInstanceOf[JConsulClient].listEventsWithOptions(options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JEventList]]{def handle(x: AsyncResult[JEventList]) {resultHandler.handle(AsyncResultWrapper[JEventList, EventList](x, a => EventList(a)))}}))
     this
   }
 
@@ -369,7 +369,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def registerService(serviceOptions: ServiceOptions, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].registerService(serviceOptions.asJava, {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].registerService(serviceOptions.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -380,7 +380,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def maintenanceService(maintenanceOptions: MaintenanceOptions, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].maintenanceService(maintenanceOptions.asJava, {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].maintenanceService(maintenanceOptions.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -392,7 +392,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def deregisterService(id: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].deregisterService(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].deregisterService(id.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -403,7 +403,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def catalogServiceNodes(service: String, resultHandler: Handler[AsyncResult[ServiceList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].catalogServiceNodes(service.asInstanceOf[java.lang.String], {x: AsyncResult[JServiceList] => resultHandler.handle(AsyncResultWrapper[JServiceList, ServiceList](x, a => ServiceList(a)))})
+    asJava.asInstanceOf[JConsulClient].catalogServiceNodes(service.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JServiceList]]{def handle(x: AsyncResult[JServiceList]) {resultHandler.handle(AsyncResultWrapper[JServiceList, ServiceList](x, a => ServiceList(a)))}}))
     this
   }
 
@@ -415,7 +415,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def catalogServiceNodesWithOptions(service: String, options: ServiceQueryOptions, resultHandler: Handler[AsyncResult[ServiceList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].catalogServiceNodesWithOptions(service.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JServiceList] => resultHandler.handle(AsyncResultWrapper[JServiceList, ServiceList](x, a => ServiceList(a)))})
+    asJava.asInstanceOf[JConsulClient].catalogServiceNodesWithOptions(service.asInstanceOf[java.lang.String], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JServiceList]]{def handle(x: AsyncResult[JServiceList]) {resultHandler.handle(AsyncResultWrapper[JServiceList, ServiceList](x, a => ServiceList(a)))}}))
     this
   }
 
@@ -425,7 +425,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def catalogDatacenters(resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].catalogDatacenters({x: AsyncResult[java.util.List[java.lang.String]] => resultHandler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JConsulClient].catalogDatacenters((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.String]]]{def handle(x: AsyncResult[java.util.List[java.lang.String]]) {resultHandler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))}}))
     this
   }
 
@@ -435,7 +435,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def catalogNodes(resultHandler: Handler[AsyncResult[NodeList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].catalogNodes({x: AsyncResult[JNodeList] => resultHandler.handle(AsyncResultWrapper[JNodeList, NodeList](x, a => NodeList(a)))})
+    asJava.asInstanceOf[JConsulClient].catalogNodes((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JNodeList]]{def handle(x: AsyncResult[JNodeList]) {resultHandler.handle(AsyncResultWrapper[JNodeList, NodeList](x, a => NodeList(a)))}}))
     this
   }
 
@@ -446,7 +446,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def catalogNodesWithOptions(options: NodeQueryOptions, resultHandler: Handler[AsyncResult[NodeList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].catalogNodesWithOptions(options.asJava, {x: AsyncResult[JNodeList] => resultHandler.handle(AsyncResultWrapper[JNodeList, NodeList](x, a => NodeList(a)))})
+    asJava.asInstanceOf[JConsulClient].catalogNodesWithOptions(options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JNodeList]]{def handle(x: AsyncResult[JNodeList]) {resultHandler.handle(AsyncResultWrapper[JNodeList, NodeList](x, a => NodeList(a)))}}))
     this
   }
 
@@ -457,7 +457,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def healthChecks(service: String, resultHandler: Handler[AsyncResult[CheckList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].healthChecks(service.asInstanceOf[java.lang.String], {x: AsyncResult[JCheckList] => resultHandler.handle(AsyncResultWrapper[JCheckList, CheckList](x, a => CheckList(a)))})
+    asJava.asInstanceOf[JConsulClient].healthChecks(service.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JCheckList]]{def handle(x: AsyncResult[JCheckList]) {resultHandler.handle(AsyncResultWrapper[JCheckList, CheckList](x, a => CheckList(a)))}}))
     this
   }
 
@@ -469,7 +469,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def healthChecksWithOptions(service: String, options: CheckQueryOptions, resultHandler: Handler[AsyncResult[CheckList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].healthChecksWithOptions(service.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JCheckList] => resultHandler.handle(AsyncResultWrapper[JCheckList, CheckList](x, a => CheckList(a)))})
+    asJava.asInstanceOf[JConsulClient].healthChecksWithOptions(service.asInstanceOf[java.lang.String], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JCheckList]]{def handle(x: AsyncResult[JCheckList]) {resultHandler.handle(AsyncResultWrapper[JCheckList, CheckList](x, a => CheckList(a)))}}))
     this
   }
 
@@ -480,7 +480,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def healthState(healthState: io.vertx.ext.consul.HealthState, resultHandler: Handler[AsyncResult[CheckList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].healthState(healthState, {x: AsyncResult[JCheckList] => resultHandler.handle(AsyncResultWrapper[JCheckList, CheckList](x, a => CheckList(a)))})
+    asJava.asInstanceOf[JConsulClient].healthState(healthState, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JCheckList]]{def handle(x: AsyncResult[JCheckList]) {resultHandler.handle(AsyncResultWrapper[JCheckList, CheckList](x, a => CheckList(a)))}}))
     this
   }
 
@@ -492,7 +492,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def healthStateWithOptions(healthState: io.vertx.ext.consul.HealthState, options: CheckQueryOptions, resultHandler: Handler[AsyncResult[CheckList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].healthStateWithOptions(healthState, options.asJava, {x: AsyncResult[JCheckList] => resultHandler.handle(AsyncResultWrapper[JCheckList, CheckList](x, a => CheckList(a)))})
+    asJava.asInstanceOf[JConsulClient].healthStateWithOptions(healthState, options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JCheckList]]{def handle(x: AsyncResult[JCheckList]) {resultHandler.handle(AsyncResultWrapper[JCheckList, CheckList](x, a => CheckList(a)))}}))
     this
   }
 
@@ -505,7 +505,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def healthServiceNodes(service: String, passing: Boolean, resultHandler: Handler[AsyncResult[ServiceEntryList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].healthServiceNodes(service.asInstanceOf[java.lang.String], passing.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JServiceEntryList] => resultHandler.handle(AsyncResultWrapper[JServiceEntryList, ServiceEntryList](x, a => ServiceEntryList(a)))})
+    asJava.asInstanceOf[JConsulClient].healthServiceNodes(service.asInstanceOf[java.lang.String], passing.asInstanceOf[java.lang.Boolean], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JServiceEntryList]]{def handle(x: AsyncResult[JServiceEntryList]) {resultHandler.handle(AsyncResultWrapper[JServiceEntryList, ServiceEntryList](x, a => ServiceEntryList(a)))}}))
     this
   }
 
@@ -519,7 +519,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def healthServiceNodesWithOptions(service: String, passing: Boolean, options: ServiceQueryOptions, resultHandler: Handler[AsyncResult[ServiceEntryList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].healthServiceNodesWithOptions(service.asInstanceOf[java.lang.String], passing.asInstanceOf[java.lang.Boolean], options.asJava, {x: AsyncResult[JServiceEntryList] => resultHandler.handle(AsyncResultWrapper[JServiceEntryList, ServiceEntryList](x, a => ServiceEntryList(a)))})
+    asJava.asInstanceOf[JConsulClient].healthServiceNodesWithOptions(service.asInstanceOf[java.lang.String], passing.asInstanceOf[java.lang.Boolean], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JServiceEntryList]]{def handle(x: AsyncResult[JServiceEntryList]) {resultHandler.handle(AsyncResultWrapper[JServiceEntryList, ServiceEntryList](x, a => ServiceEntryList(a)))}}))
     this
   }
 
@@ -529,7 +529,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def catalogServices(resultHandler: Handler[AsyncResult[ServiceList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].catalogServices({x: AsyncResult[JServiceList] => resultHandler.handle(AsyncResultWrapper[JServiceList, ServiceList](x, a => ServiceList(a)))})
+    asJava.asInstanceOf[JConsulClient].catalogServices((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JServiceList]]{def handle(x: AsyncResult[JServiceList]) {resultHandler.handle(AsyncResultWrapper[JServiceList, ServiceList](x, a => ServiceList(a)))}}))
     this
   }
 
@@ -541,7 +541,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def catalogServicesWithOptions(options: BlockingQueryOptions, resultHandler: Handler[AsyncResult[ServiceList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].catalogServicesWithOptions(options.asJava, {x: AsyncResult[JServiceList] => resultHandler.handle(AsyncResultWrapper[JServiceList, ServiceList](x, a => ServiceList(a)))})
+    asJava.asInstanceOf[JConsulClient].catalogServicesWithOptions(options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JServiceList]]{def handle(x: AsyncResult[JServiceList]) {resultHandler.handle(AsyncResultWrapper[JServiceList, ServiceList](x, a => ServiceList(a)))}}))
     this
   }
 
@@ -552,7 +552,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def catalogNodeServices(node: String, resultHandler: Handler[AsyncResult[ServiceList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].catalogNodeServices(node.asInstanceOf[java.lang.String], {x: AsyncResult[JServiceList] => resultHandler.handle(AsyncResultWrapper[JServiceList, ServiceList](x, a => ServiceList(a)))})
+    asJava.asInstanceOf[JConsulClient].catalogNodeServices(node.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JServiceList]]{def handle(x: AsyncResult[JServiceList]) {resultHandler.handle(AsyncResultWrapper[JServiceList, ServiceList](x, a => ServiceList(a)))}}))
     this
   }
 
@@ -565,7 +565,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def catalogNodeServicesWithOptions(node: String, options: BlockingQueryOptions, resultHandler: Handler[AsyncResult[ServiceList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].catalogNodeServicesWithOptions(node.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JServiceList] => resultHandler.handle(AsyncResultWrapper[JServiceList, ServiceList](x, a => ServiceList(a)))})
+    asJava.asInstanceOf[JConsulClient].catalogNodeServicesWithOptions(node.asInstanceOf[java.lang.String], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JServiceList]]{def handle(x: AsyncResult[JServiceList]) {resultHandler.handle(AsyncResultWrapper[JServiceList, ServiceList](x, a => ServiceList(a)))}}))
     this
   }
 
@@ -575,7 +575,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def localServices(resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Service]]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].localServices({x: AsyncResult[java.util.List[JService]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JService], scala.collection.mutable.Buffer[Service]](x, a => a.asScala.map(x => Service(x))))})
+    asJava.asInstanceOf[JConsulClient].localServices((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JService]]]{def handle(x: AsyncResult[java.util.List[JService]]) {resultHandler.handle(AsyncResultWrapper[java.util.List[JService], scala.collection.mutable.Buffer[Service]](x, a => a.asScala.map(x => Service(x))))}}))
     this
   }
 
@@ -585,7 +585,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def localChecks(resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[Check]]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].localChecks({x: AsyncResult[java.util.List[JCheck]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JCheck], scala.collection.mutable.Buffer[Check]](x, a => a.asScala.map(x => Check(x))))})
+    asJava.asInstanceOf[JConsulClient].localChecks((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JCheck]]]{def handle(x: AsyncResult[java.util.List[JCheck]]) {resultHandler.handle(AsyncResultWrapper[java.util.List[JCheck], scala.collection.mutable.Buffer[Check]](x, a => a.asScala.map(x => Check(x))))}}))
     this
   }
 
@@ -597,7 +597,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def registerCheck(checkOptions: CheckOptions, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].registerCheck(checkOptions.asJava, {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].registerCheck(checkOptions.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -608,7 +608,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def deregisterCheck(checkId: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].deregisterCheck(checkId.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].deregisterCheck(checkId.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -619,7 +619,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def passCheck(checkId: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].passCheck(checkId.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].passCheck(checkId.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -631,7 +631,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def passCheckWithNote(checkId: String, note: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].passCheckWithNote(checkId.asInstanceOf[java.lang.String], note.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].passCheckWithNote(checkId.asInstanceOf[java.lang.String], note.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -642,7 +642,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def warnCheck(checkId: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].warnCheck(checkId.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].warnCheck(checkId.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -654,7 +654,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def warnCheckWithNote(checkId: String, note: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].warnCheckWithNote(checkId.asInstanceOf[java.lang.String], note.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].warnCheckWithNote(checkId.asInstanceOf[java.lang.String], note.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -665,7 +665,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def failCheck(checkId: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].failCheck(checkId.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].failCheck(checkId.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -677,7 +677,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def failCheckWithNote(checkId: String, note: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].failCheckWithNote(checkId.asInstanceOf[java.lang.String], note.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].failCheckWithNote(checkId.asInstanceOf[java.lang.String], note.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -689,7 +689,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def updateCheck(checkId: String, status: io.vertx.ext.consul.CheckStatus, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].updateCheck(checkId.asInstanceOf[java.lang.String], status, {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].updateCheck(checkId.asInstanceOf[java.lang.String], status, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -702,7 +702,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def updateCheckWithNote(checkId: String, status: io.vertx.ext.consul.CheckStatus, note: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].updateCheckWithNote(checkId.asInstanceOf[java.lang.String], status, note.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].updateCheckWithNote(checkId.asInstanceOf[java.lang.String], status, note.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -713,7 +713,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def leaderStatus(resultHandler: Handler[AsyncResult[String]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].leaderStatus({x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JConsulClient].leaderStatus((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -724,7 +724,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def peersStatus(resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].peersStatus({x: AsyncResult[java.util.List[java.lang.String]] => resultHandler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JConsulClient].peersStatus((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.String]]]{def handle(x: AsyncResult[java.util.List[java.lang.String]]) {resultHandler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))}}))
     this
   }
 
@@ -734,7 +734,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def createSession(idHandler: Handler[AsyncResult[String]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].createSession({x: AsyncResult[java.lang.String] => idHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JConsulClient].createSession((if (idHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {idHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -745,7 +745,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def createSessionWithOptions(options: SessionOptions, idHandler: Handler[AsyncResult[String]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].createSessionWithOptions(options.asJava, {x: AsyncResult[java.lang.String] => idHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JConsulClient].createSessionWithOptions(options.asJava, (if (idHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {idHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -756,7 +756,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def infoSession(id: String, resultHandler: Handler[AsyncResult[Session]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].infoSession(id.asInstanceOf[java.lang.String], {x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession, Session](x, a => Session(a)))})
+    asJava.asInstanceOf[JConsulClient].infoSession(id.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JSession]]{def handle(x: AsyncResult[JSession]) {resultHandler.handle(AsyncResultWrapper[JSession, Session](x, a => Session(a)))}}))
     this
   }
 
@@ -769,7 +769,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def infoSessionWithOptions(id: String, options: BlockingQueryOptions, resultHandler: Handler[AsyncResult[Session]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].infoSessionWithOptions(id.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession, Session](x, a => Session(a)))})
+    asJava.asInstanceOf[JConsulClient].infoSessionWithOptions(id.asInstanceOf[java.lang.String], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JSession]]{def handle(x: AsyncResult[JSession]) {resultHandler.handle(AsyncResultWrapper[JSession, Session](x, a => Session(a)))}}))
     this
   }
 
@@ -780,7 +780,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def renewSession(id: String, resultHandler: Handler[AsyncResult[Session]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].renewSession(id.asInstanceOf[java.lang.String], {x: AsyncResult[JSession] => resultHandler.handle(AsyncResultWrapper[JSession, Session](x, a => Session(a)))})
+    asJava.asInstanceOf[JConsulClient].renewSession(id.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JSession]]{def handle(x: AsyncResult[JSession]) {resultHandler.handle(AsyncResultWrapper[JSession, Session](x, a => Session(a)))}}))
     this
   }
 
@@ -790,7 +790,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def listSessions(resultHandler: Handler[AsyncResult[SessionList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].listSessions({x: AsyncResult[JSessionList] => resultHandler.handle(AsyncResultWrapper[JSessionList, SessionList](x, a => SessionList(a)))})
+    asJava.asInstanceOf[JConsulClient].listSessions((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JSessionList]]{def handle(x: AsyncResult[JSessionList]) {resultHandler.handle(AsyncResultWrapper[JSessionList, SessionList](x, a => SessionList(a)))}}))
     this
   }
 
@@ -802,7 +802,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def listSessionsWithOptions(options: BlockingQueryOptions, resultHandler: Handler[AsyncResult[SessionList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].listSessionsWithOptions(options.asJava, {x: AsyncResult[JSessionList] => resultHandler.handle(AsyncResultWrapper[JSessionList, SessionList](x, a => SessionList(a)))})
+    asJava.asInstanceOf[JConsulClient].listSessionsWithOptions(options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JSessionList]]{def handle(x: AsyncResult[JSessionList]) {resultHandler.handle(AsyncResultWrapper[JSessionList, SessionList](x, a => SessionList(a)))}}))
     this
   }
 
@@ -813,7 +813,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def listNodeSessions(nodeId: String, resultHandler: Handler[AsyncResult[SessionList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].listNodeSessions(nodeId.asInstanceOf[java.lang.String], {x: AsyncResult[JSessionList] => resultHandler.handle(AsyncResultWrapper[JSessionList, SessionList](x, a => SessionList(a)))})
+    asJava.asInstanceOf[JConsulClient].listNodeSessions(nodeId.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JSessionList]]{def handle(x: AsyncResult[JSessionList]) {resultHandler.handle(AsyncResultWrapper[JSessionList, SessionList](x, a => SessionList(a)))}}))
     this
   }
 
@@ -826,7 +826,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def listNodeSessionsWithOptions(nodeId: String, options: BlockingQueryOptions, resultHandler: Handler[AsyncResult[SessionList]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].listNodeSessionsWithOptions(nodeId.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JSessionList] => resultHandler.handle(AsyncResultWrapper[JSessionList, SessionList](x, a => SessionList(a)))})
+    asJava.asInstanceOf[JConsulClient].listNodeSessionsWithOptions(nodeId.asInstanceOf[java.lang.String], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JSessionList]]{def handle(x: AsyncResult[JSessionList]) {resultHandler.handle(AsyncResultWrapper[JSessionList, SessionList](x, a => SessionList(a)))}}))
     this
   }
 
@@ -837,7 +837,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def destroySession(id: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].destroySession(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].destroySession(id.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -848,7 +848,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def createPreparedQuery(definition: PreparedQueryDefinition, resultHandler: Handler[AsyncResult[String]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].createPreparedQuery(definition.asJava, {x: AsyncResult[java.lang.String] => resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JConsulClient].createPreparedQuery(definition.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {resultHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
     this
   }
 
@@ -859,7 +859,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def getPreparedQuery(id: String, resultHandler: Handler[AsyncResult[PreparedQueryDefinition]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].getPreparedQuery(id.asInstanceOf[java.lang.String], {x: AsyncResult[JPreparedQueryDefinition] => resultHandler.handle(AsyncResultWrapper[JPreparedQueryDefinition, PreparedQueryDefinition](x, a => PreparedQueryDefinition(a)))})
+    asJava.asInstanceOf[JConsulClient].getPreparedQuery(id.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JPreparedQueryDefinition]]{def handle(x: AsyncResult[JPreparedQueryDefinition]) {resultHandler.handle(AsyncResultWrapper[JPreparedQueryDefinition, PreparedQueryDefinition](x, a => PreparedQueryDefinition(a)))}}))
     this
   }
 
@@ -869,7 +869,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def getAllPreparedQueries(resultHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[PreparedQueryDefinition]]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].getAllPreparedQueries({x: AsyncResult[java.util.List[JPreparedQueryDefinition]] => resultHandler.handle(AsyncResultWrapper[java.util.List[JPreparedQueryDefinition], scala.collection.mutable.Buffer[PreparedQueryDefinition]](x, a => a.asScala.map(x => PreparedQueryDefinition(x))))})
+    asJava.asInstanceOf[JConsulClient].getAllPreparedQueries((if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JPreparedQueryDefinition]]]{def handle(x: AsyncResult[java.util.List[JPreparedQueryDefinition]]) {resultHandler.handle(AsyncResultWrapper[java.util.List[JPreparedQueryDefinition], scala.collection.mutable.Buffer[PreparedQueryDefinition]](x, a => a.asScala.map(x => PreparedQueryDefinition(x))))}}))
     this
   }
 
@@ -880,7 +880,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def updatePreparedQuery(definition: PreparedQueryDefinition, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].updatePreparedQuery(definition.asJava, {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].updatePreparedQuery(definition.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -891,7 +891,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def deletePreparedQuery(id: String, resultHandler: Handler[AsyncResult[Unit]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].deletePreparedQuery(id.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JConsulClient].deletePreparedQuery(id.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -902,7 +902,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def executePreparedQuery(query: String, resultHandler: Handler[AsyncResult[PreparedQueryExecuteResponse]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].executePreparedQuery(query.asInstanceOf[java.lang.String], {x: AsyncResult[JPreparedQueryExecuteResponse] => resultHandler.handle(AsyncResultWrapper[JPreparedQueryExecuteResponse, PreparedQueryExecuteResponse](x, a => PreparedQueryExecuteResponse(a)))})
+    asJava.asInstanceOf[JConsulClient].executePreparedQuery(query.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JPreparedQueryExecuteResponse]]{def handle(x: AsyncResult[JPreparedQueryExecuteResponse]) {resultHandler.handle(AsyncResultWrapper[JPreparedQueryExecuteResponse, PreparedQueryExecuteResponse](x, a => PreparedQueryExecuteResponse(a)))}}))
     this
   }
 
@@ -914,7 +914,7 @@ class ConsulClient(private val _asJava: Object) {
    */
   
   def executePreparedQueryWithOptions(query: String, options: PreparedQueryExecuteOptions, resultHandler: Handler[AsyncResult[PreparedQueryExecuteResponse]]): ConsulClient = {
-    asJava.asInstanceOf[JConsulClient].executePreparedQueryWithOptions(query.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[JPreparedQueryExecuteResponse] => resultHandler.handle(AsyncResultWrapper[JPreparedQueryExecuteResponse, PreparedQueryExecuteResponse](x, a => PreparedQueryExecuteResponse(a)))})
+    asJava.asInstanceOf[JConsulClient].executePreparedQueryWithOptions(query.asInstanceOf[java.lang.String], options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JPreparedQueryExecuteResponse]]{def handle(x: AsyncResult[JPreparedQueryExecuteResponse]) {resultHandler.handle(AsyncResultWrapper[JPreparedQueryExecuteResponse, PreparedQueryExecuteResponse](x, a => PreparedQueryExecuteResponse(a)))}}))
     this
   }
 

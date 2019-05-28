@@ -78,7 +78,7 @@ class Job(private val _asJava: Object) {
    */
   
   def statusUpdateHandler(handler: Handler[io.vertx.ext.shell.system.ExecStatus]): Job = {
-    asJava.asInstanceOf[JJob].statusUpdateHandler({x: ExecStatus => handler.handle(x)})
+    asJava.asInstanceOf[JJob].statusUpdateHandler((if (handler == null) null else new io.vertx.core.Handler[ExecStatus]{def handle(x: ExecStatus) {handler.handle(x)}}))
     this
   }
 

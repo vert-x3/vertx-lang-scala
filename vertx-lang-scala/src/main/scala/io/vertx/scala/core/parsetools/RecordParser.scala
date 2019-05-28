@@ -84,14 +84,14 @@ class RecordParser(private val _asJava: Object) extends ReadStream[io.vertx.core
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): RecordParser = {
-    asJava.asInstanceOf[JRecordParser].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JRecordParser].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[io.vertx.core.buffer.Buffer]): RecordParser = {
-    asJava.asInstanceOf[JRecordParser].handler({x: Buffer => handler.handle(x)})
+    asJava.asInstanceOf[JRecordParser].handler((if (handler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {handler.handle(x)}}))
     this
   }
 
@@ -119,7 +119,7 @@ class RecordParser(private val _asJava: Object) extends ReadStream[io.vertx.core
 
   override 
   def endHandler(endHandler: Handler[Unit]): RecordParser = {
-    asJava.asInstanceOf[JRecordParser].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JRecordParser].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -149,13 +149,13 @@ class RecordParser(private val _asJava: Object) extends ReadStream[io.vertx.core
    * called with the result.   * @param dst the destination write stream
    */
   override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRecordParser].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JRecordParser].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
 
   def setOutput (output: Handler[io.vertx.core.buffer.Buffer]): Unit = {
-    asJava.asInstanceOf[JRecordParser].setOutput({x: Buffer => output.handle(x)})
+    asJava.asInstanceOf[JRecordParser].setOutput((if (output == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {output.handle(x)}}))
   }
 
   /**
@@ -216,7 +216,7 @@ object RecordParser {
    * @param output handler that will receive the output
    */
   def newDelimited(delim: String,output: Handler[io.vertx.core.buffer.Buffer]): RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String], {x: Buffer => output.handle(x)}))
+    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String], (if (output == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {output.handle(x)}})))
   }
 
   /**
@@ -255,7 +255,7 @@ object RecordParser {
    * @param output handler that will receive the output
    */
   def newDelimited(delim: io.vertx.core.buffer.Buffer,output: Handler[io.vertx.core.buffer.Buffer]): RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim, {x: Buffer => output.handle(x)}))
+    RecordParser(JRecordParser.newDelimited(delim, (if (output == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {output.handle(x)}})))
   }
 
   /**
@@ -285,7 +285,7 @@ object RecordParser {
    * @param output handler that will receive the output
    */
   def newFixed(size: Int,output: Handler[io.vertx.core.buffer.Buffer]): RecordParser = {
-    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer], {x: Buffer => output.handle(x)}))
+    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer], (if (output == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {output.handle(x)}})))
   }
 
   /**

@@ -189,7 +189,7 @@ class Vertx(private val _asJava: Object) extends Measured {
    */
   
   def exceptionHandler(handler: Handler[Throwable]): Vertx = {
-    asJava.asInstanceOf[JVertx].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JVertx].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -318,7 +318,7 @@ class Vertx(private val _asJava: Object) extends Measured {
    * @return the unique ID of the timer
    */
   def setTimer (delay: Long, handler: Handler[Long]): Long = {
-    asJava.asInstanceOf[JVertx].setTimer(delay.asInstanceOf[java.lang.Long], {x: java.lang.Long => handler.handle(x.asInstanceOf[Long])}).asInstanceOf[Long]
+    asJava.asInstanceOf[JVertx].setTimer(delay.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[java.lang.Long]{def handle(x: java.lang.Long) {handler.handle(x.asInstanceOf[Long])}})).asInstanceOf[Long]
   }
 
   /**
@@ -337,7 +337,7 @@ class Vertx(private val _asJava: Object) extends Measured {
    * @return the unique ID of the timer
    */
   def setPeriodic (delay: Long, handler: Handler[Long]): Long = {
-    asJava.asInstanceOf[JVertx].setPeriodic(delay.asInstanceOf[java.lang.Long], {x: java.lang.Long => handler.handle(x.asInstanceOf[Long])}).asInstanceOf[Long]
+    asJava.asInstanceOf[JVertx].setPeriodic(delay.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[java.lang.Long]{def handle(x: java.lang.Long) {handler.handle(x.asInstanceOf[Long])}})).asInstanceOf[Long]
   }
 
   /**
@@ -362,7 +362,7 @@ class Vertx(private val _asJava: Object) extends Measured {
    * preceeding events have been handled.   * @param action - a handler representing the action to execute
    */
   def runOnContext (action: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JVertx].runOnContext({x: Void => action.handle(x)})
+    asJava.asInstanceOf[JVertx].runOnContext((if (action == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {action.handle(x)}}))
   }
 
   /**
@@ -380,7 +380,7 @@ class Vertx(private val _asJava: Object) extends Measured {
    * Like [[io.vertx.scala.core.Vertx#close]] but the completionHandler will be called when the close is complete   * @param completionHandler The handler will be notified when the close is complete.
    */
   def close (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JVertx].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JVertx].close((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -404,7 +404,7 @@ class Vertx(private val _asJava: Object) extends Measured {
    * @param completionHandler a handler which will be notified when the deployment is complete
    */
   def deployVerticle (name: String, completionHandler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {completionHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
   }
 
   /**
@@ -423,7 +423,7 @@ class Vertx(private val _asJava: Object) extends Measured {
    * @param completionHandler a handler which will be notified when the deployment is complete
    */
   def deployVerticle (name: String, options: DeploymentOptions, completionHandler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], options.asJava, {x: AsyncResult[java.lang.String] => completionHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JVertx].deployVerticle(name.asInstanceOf[java.lang.String], options.asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {completionHandler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
   }
 
   /**
@@ -440,7 +440,7 @@ class Vertx(private val _asJava: Object) extends Measured {
    * @param completionHandler a handler which will be notified when the undeployment is complete
    */
   def undeploy (deploymentID: String, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JVertx].undeploy(deploymentID.asInstanceOf[java.lang.String], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -585,7 +585,7 @@ object Vertx {
    * @param resultHandler the result handler that will receive the result
    */
   def clusteredVertx(options: VertxOptions,resultHandler: Handler[AsyncResult[Vertx]]): Unit = {
-    JVertx.clusteredVertx(options.asJava, {x: AsyncResult[JVertx] => resultHandler.handle(AsyncResultWrapper[JVertx, Vertx](x, a => Vertx(a)))})
+    JVertx.clusteredVertx(options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JVertx]]{def handle(x: AsyncResult[JVertx]) {resultHandler.handle(AsyncResultWrapper[JVertx, Vertx](x, a => Vertx(a)))}}))
   }
 
   /**

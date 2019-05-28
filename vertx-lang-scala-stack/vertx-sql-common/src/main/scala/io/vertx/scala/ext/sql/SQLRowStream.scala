@@ -57,14 +57,14 @@ class SQLRowStream(private val _asJava: Object) extends ReadStream[io.vertx.core
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): SQLRowStream = {
-    asJava.asInstanceOf[JSQLRowStream].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JSQLRowStream].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[io.vertx.core.json.JsonArray]): SQLRowStream = {
-    asJava.asInstanceOf[JSQLRowStream].handler({x: JsonArray => handler.handle(x)})
+    asJava.asInstanceOf[JSQLRowStream].handler((if (handler == null) null else new io.vertx.core.Handler[JsonArray]{def handle(x: JsonArray) {handler.handle(x)}}))
     this
   }
 
@@ -85,7 +85,7 @@ class SQLRowStream(private val _asJava: Object) extends ReadStream[io.vertx.core
 
   override 
   def endHandler(endHandler: Handler[Unit]): SQLRowStream = {
-    asJava.asInstanceOf[JSQLRowStream].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JSQLRowStream].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -94,7 +94,7 @@ class SQLRowStream(private val _asJava: Object) extends ReadStream[io.vertx.core
    */
   
   def resultSetClosedHandler(handler: Handler[Unit]): SQLRowStream = {
-    asJava.asInstanceOf[JSQLRowStream].resultSetClosedHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JSQLRowStream].resultSetClosedHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -111,7 +111,7 @@ class SQLRowStream(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
   override def pipeTo(dst: WriteStream[io.vertx.core.json.JsonArray], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JSQLRowStream].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JsonArray]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JSQLRowStream].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JsonArray]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -150,7 +150,7 @@ class SQLRowStream(private val _asJava: Object) extends ReadStream[io.vertx.core
    * Closes the stream/underlying cursor(s). The actual close happens asynchronously.   * @param handler called when the stream/underlying cursor(s) is(are) closed
    */
   def close (handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JSQLRowStream].close({x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JSQLRowStream].close((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

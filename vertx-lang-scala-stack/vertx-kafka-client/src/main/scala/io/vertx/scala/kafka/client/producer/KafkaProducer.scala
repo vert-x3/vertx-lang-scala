@@ -48,7 +48,7 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): KafkaProducer[K, V] = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -69,14 +69,14 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
 
   override 
   def drainHandler(handler: Handler[Unit]): KafkaProducer[K, V] = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].drainHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].drainHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def write(data: KafkaProducerRecord[K, V], handler: Handler[AsyncResult[Unit]]): KafkaProducer[K, V] = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].write(data.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].write(data.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -97,7 +97,7 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def send(record: KafkaProducerRecord[K, V], handler: Handler[AsyncResult[RecordMetadata]]): KafkaProducer[K, V] = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].send(record.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], {x: AsyncResult[JRecordMetadata] => handler.handle(AsyncResultWrapper[JRecordMetadata, RecordMetadata](x, a => RecordMetadata(a)))})
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].send(record.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRecordMetadata]]{def handle(x: AsyncResult[JRecordMetadata]) {handler.handle(AsyncResultWrapper[JRecordMetadata, RecordMetadata](x, a => RecordMetadata(a)))}}))
     this
   }
 
@@ -108,7 +108,7 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def partitionsFor(topic: String, handler: Handler[AsyncResult[scala.collection.mutable.Buffer[PartitionInfo]]]): KafkaProducer[K, V] = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].partitionsFor(topic.asInstanceOf[java.lang.String], {x: AsyncResult[java.util.List[JPartitionInfo]] => handler.handle(AsyncResultWrapper[java.util.List[JPartitionInfo], scala.collection.mutable.Buffer[PartitionInfo]](x, a => a.asScala.map(x => PartitionInfo(x))))})
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].partitionsFor(topic.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JPartitionInfo]]]{def handle(x: AsyncResult[java.util.List[JPartitionInfo]]) {handler.handle(AsyncResultWrapper[java.util.List[JPartitionInfo], scala.collection.mutable.Buffer[PartitionInfo]](x, a => a.asScala.map(x => PartitionInfo(x))))}}))
     this
   }
 
@@ -118,7 +118,7 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   
   def flush(completionHandler: Handler[Unit]): KafkaProducer[K, V] = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].flush({x: Void => completionHandler.handle(x)})
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].flush((if (completionHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {completionHandler.handle(x)}}))
     this
   }
 
@@ -130,7 +130,7 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
 
 
   override def end(data: KafkaProducerRecord[K, V], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].end(data.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].end(data.asJava.asInstanceOf[JKafkaProducerRecord[Object, Object]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -141,7 +141,7 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
 
 
   override def end (arg0: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].end({x: AsyncResult[Void] => arg0.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].end((if (arg0 == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {arg0.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -160,7 +160,7 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    * Close the producer   * @param completionHandler handler called on operation completed
    */
   def close (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].close((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -168,7 +168,7 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    * @param completionHandler handler called on operation completed
    */
   def close (timeout: Long, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JKafkaProducer[Object, Object]].close(timeout.asInstanceOf[java.lang.Long], {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaProducer[Object, Object]].close(timeout.asInstanceOf[java.lang.Long], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

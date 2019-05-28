@@ -104,7 +104,7 @@ public class TypeHelper {
       return getNonGenericType(type.getSimpleName()) + args + "(" + name + ")";
     } else if (kind == ClassKind.HANDLER) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-      return "{x: " + toScalaType(parameterizedType.getArg(0), false) + " => " + name + ".handle(" + toJavaWithConversion("x", parameterizedType.getArg(0), typeParams, methodTypeParams) + ")}";
+      return "if (" + name + " == null) null else {x: " + toScalaType(parameterizedType.getArg(0), false) + " => " + name + ".handle(" + toJavaWithConversion("x", parameterizedType.getArg(0), typeParams, methodTypeParams) + ")}";
     } else if (kind == ClassKind.ASYNC_RESULT) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       return "AsyncResultWrapper[" + toJavaType(parameterizedType.getArg(0), true) + ", " + toScalaType(parameterizedType.getArg(0), false) + "](x, a => " + toScalaWithConversion("a", parameterizedType.getArg(0), typeParams, methodTypeParams) + ")";
@@ -324,7 +324,7 @@ public class TypeHelper {
       return ret;
     } else if (type.getKind() == ClassKind.HANDLER) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-      return "{x: " + toJavaType(parameterizedType.getArg(0), true) + " => " + name + ".handle(" + toScalaWithConversion("x", parameterizedType.getArg(0), typeParams, methodTypeParams) + ")}";
+      return "(if (" + name + " == null) null else new io.vertx.core.Handler[" + toJavaType(parameterizedType.getArg(0), true) + "]{def handle(x: " + toJavaType(parameterizedType.getArg(0), true) + ") {" + name + ".handle(" + toScalaWithConversion("x", parameterizedType.getArg(0), typeParams, methodTypeParams) + ")}})";
     } else if (type.getKind() == ClassKind.ASYNC_RESULT) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String ret = "AsyncResultWrapper[" + toScalaType(parameterizedType.getArg(0), false) + ", " + toJavaType(parameterizedType.getArg(0), true) + "](x, a => " + toJavaWithConversion("a", parameterizedType.getArg(0), typeParams, methodTypeParams) + ")";

@@ -80,7 +80,7 @@ object AzureADAuth {
    * @param handler the instantiated Oauth2 provider instance handler
    */
   def discover(vertx: Vertx,config: OAuth2ClientOptions,handler: Handler[AsyncResult[OAuth2Auth]]): Unit = {
-    JAzureADAuth.discover(vertx.asJava.asInstanceOf[JVertx], config.asJava, {x: AsyncResult[JOAuth2Auth] => handler.handle(AsyncResultWrapper[JOAuth2Auth, OAuth2Auth](x, a => OAuth2Auth(a)))})
+    JAzureADAuth.discover(vertx.asJava.asInstanceOf[JVertx], config.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Auth]]{def handle(x: AsyncResult[JOAuth2Auth]) {handler.handle(AsyncResultWrapper[JOAuth2Auth, OAuth2Auth](x, a => OAuth2Auth(a)))}}))
   }
 
 }

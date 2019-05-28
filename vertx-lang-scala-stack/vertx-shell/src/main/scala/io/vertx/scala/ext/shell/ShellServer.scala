@@ -85,7 +85,7 @@ class ShellServer(private val _asJava: Object) {
    */
   
   def listen(listenHandler: Handler[AsyncResult[Unit]]): ShellServer = {
-    asJava.asInstanceOf[JShellServer].listen({x: AsyncResult[Void] => listenHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JShellServer].listen((if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {listenHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -117,7 +117,7 @@ class ShellServer(private val _asJava: Object) {
    * Close the shell server, this is an asynchronous close.   * @param completionHandler handler for getting notified when service is stopped
    */
   def close (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JShellServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JShellServer].close((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -125,7 +125,7 @@ class ShellServer(private val _asJava: Object) {
    * or set the prompt.   * @param shellHandler handler for getting notified when the server creates a new shell.
    */
   def shellHandler (shellHandler: Handler[Shell]): Unit = {
-    asJava.asInstanceOf[JShellServer].shellHandler({x: JShell => shellHandler.handle(Shell(x))})
+    asJava.asInstanceOf[JShellServer].shellHandler((if (shellHandler == null) null else new io.vertx.core.Handler[JShell]{def handle(x: JShell) {shellHandler.handle(Shell(x))}}))
   }
 
 

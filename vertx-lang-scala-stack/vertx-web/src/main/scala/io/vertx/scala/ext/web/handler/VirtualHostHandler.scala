@@ -50,7 +50,7 @@ object VirtualHostHandler {
    * Create a handler   * @return the handler
    */
   def create(hostname: String,handler: Handler[RoutingContext]): VirtualHostHandler = {
-    VirtualHostHandler(JVirtualHostHandler.create(hostname.asInstanceOf[java.lang.String], {x: JRoutingContext => handler.handle(RoutingContext(x))}))
+    VirtualHostHandler(JVirtualHostHandler.create(hostname.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[JRoutingContext]{def handle(x: JRoutingContext) {handler.handle(RoutingContext(x))}})))
   }
 
 }

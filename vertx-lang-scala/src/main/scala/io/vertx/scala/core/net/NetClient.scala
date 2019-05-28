@@ -52,7 +52,7 @@ class NetClient(private val _asJava: Object) extends Measured {
    */
   
   def connect(port: Int, host: String, connectHandler: Handler[AsyncResult[NetSocket]]): NetClient = {
-    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))})
+    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], (if (connectHandler == null) null else new io.vertx.core.Handler[AsyncResult[JNetSocket]]{def handle(x: AsyncResult[JNetSocket]) {connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))}}))
     this
   }
 
@@ -67,7 +67,7 @@ class NetClient(private val _asJava: Object) extends Measured {
    */
   
   def connect(port: Int, host: String, serverName: String, connectHandler: Handler[AsyncResult[NetSocket]]): NetClient = {
-    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], serverName.asInstanceOf[java.lang.String], {x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))})
+    asJava.asInstanceOf[JNetClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], serverName.asInstanceOf[java.lang.String], (if (connectHandler == null) null else new io.vertx.core.Handler[AsyncResult[JNetSocket]]{def handle(x: AsyncResult[JNetSocket]) {connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))}}))
     this
   }
 
@@ -79,7 +79,7 @@ class NetClient(private val _asJava: Object) extends Measured {
    */
   
   def connect(remoteAddress: SocketAddress, connectHandler: Handler[AsyncResult[NetSocket]]): NetClient = {
-    asJava.asInstanceOf[JNetClient].connect(remoteAddress.asJava.asInstanceOf[JSocketAddress], {x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))})
+    asJava.asInstanceOf[JNetClient].connect(remoteAddress.asJava.asInstanceOf[JSocketAddress], (if (connectHandler == null) null else new io.vertx.core.Handler[AsyncResult[JNetSocket]]{def handle(x: AsyncResult[JNetSocket]) {connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))}}))
     this
   }
 
@@ -92,7 +92,7 @@ class NetClient(private val _asJava: Object) extends Measured {
    */
   
   def connect(remoteAddress: SocketAddress, serverName: String, connectHandler: Handler[AsyncResult[NetSocket]]): NetClient = {
-    asJava.asInstanceOf[JNetClient].connect(remoteAddress.asJava.asInstanceOf[JSocketAddress], serverName.asInstanceOf[java.lang.String], {x: AsyncResult[JNetSocket] => connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))})
+    asJava.asInstanceOf[JNetClient].connect(remoteAddress.asJava.asInstanceOf[JSocketAddress], serverName.asInstanceOf[java.lang.String], (if (connectHandler == null) null else new io.vertx.core.Handler[AsyncResult[JNetSocket]]{def handle(x: AsyncResult[JNetSocket]) {connectHandler.handle(AsyncResultWrapper[JNetSocket, NetSocket](x, a => NetSocket(a)))}}))
     this
   }
 

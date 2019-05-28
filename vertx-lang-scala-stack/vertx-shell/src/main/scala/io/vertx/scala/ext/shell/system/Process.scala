@@ -86,7 +86,7 @@ class Process(private val _asJava: Object) {
    */
   
   def terminatedHandler(handler: Handler[Int]): Process = {
-    asJava.asInstanceOf[JProcess].terminatedHandler({x: java.lang.Integer => handler.handle(x.asInstanceOf[Int])})
+    asJava.asInstanceOf[JProcess].terminatedHandler((if (handler == null) null else new io.vertx.core.Handler[java.lang.Integer]{def handle(x: java.lang.Integer) {handler.handle(x.asInstanceOf[Int])}}))
     this
   }
 
@@ -124,7 +124,7 @@ class Process(private val _asJava: Object) {
    * Suspend the process.   * @param completionHandler handler called after resume callback
    */
   def resume(completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JProcess].resume({x: Void => completionHandler.handle(x)})
+    asJava.asInstanceOf[JProcess].resume((if (completionHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {completionHandler.handle(x)}}))
   }
 
   /**
@@ -183,42 +183,42 @@ class Process(private val _asJava: Object) {
    * @return true if the process caught the signal
    */
   def interrupt (completionHandler: Handler[Unit]): Boolean = {
-    asJava.asInstanceOf[JProcess].interrupt({x: Void => completionHandler.handle(x)}).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JProcess].interrupt((if (completionHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {completionHandler.handle(x)}})).asInstanceOf[Boolean]
   }
 
   /**
    * Suspend the process.   * @param completionHandler handler called after resume callback
    */
   def resume (foreground: Boolean, completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JProcess].resume(foreground.asInstanceOf[java.lang.Boolean], {x: Void => completionHandler.handle(x)})
+    asJava.asInstanceOf[JProcess].resume(foreground.asInstanceOf[java.lang.Boolean], (if (completionHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {completionHandler.handle(x)}}))
   }
 
   /**
    * Resume the process.   * @param completionHandler handler called after suspend callback
    */
   def suspend (completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JProcess].suspend({x: Void => completionHandler.handle(x)})
+    asJava.asInstanceOf[JProcess].suspend((if (completionHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {completionHandler.handle(x)}}))
   }
 
   /**
    * Terminate the process.   * @param completionHandler handler called after end callback
    */
   def terminate (completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JProcess].terminate({x: Void => completionHandler.handle(x)})
+    asJava.asInstanceOf[JProcess].terminate((if (completionHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {completionHandler.handle(x)}}))
   }
 
   /**
    * Set the process in background.   * @param completionHandler handler called after background callback
    */
   def toBackground (completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JProcess].toBackground({x: Void => completionHandler.handle(x)})
+    asJava.asInstanceOf[JProcess].toBackground((if (completionHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {completionHandler.handle(x)}}))
   }
 
   /**
    * Set the process in foreground.   * @param completionHandler handler called after foreground callback
    */
   def toForeground (completionHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JProcess].toForeground({x: Void => completionHandler.handle(x)})
+    asJava.asInstanceOf[JProcess].toForeground((if (completionHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {completionHandler.handle(x)}}))
   }
 
 

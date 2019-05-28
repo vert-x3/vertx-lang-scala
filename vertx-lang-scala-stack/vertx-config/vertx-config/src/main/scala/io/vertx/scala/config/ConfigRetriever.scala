@@ -62,7 +62,7 @@ class ConfigRetriever(private val _asJava: Object) {
    */
   
   def setBeforeScanHandler(function: Handler[Unit]): ConfigRetriever = {
-    asJava.asInstanceOf[JConfigRetriever].setBeforeScanHandler({x: Void => function.handle(x)})
+    asJava.asInstanceOf[JConfigRetriever].setBeforeScanHandler((if (function == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {function.handle(x)}}))
     this
   }
 
@@ -84,7 +84,7 @@ class ConfigRetriever(private val _asJava: Object) {
    * and computes the final configuration.   * @param completionHandler handler receiving the computed configuration, or a failure if the configuration cannot be retrieved
    */
   def getConfig (completionHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JConfigRetriever].getConfig({x: AsyncResult[JsonObject] => completionHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JConfigRetriever].getConfig((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {completionHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
   }
 
   /**
@@ -106,7 +106,7 @@ class ConfigRetriever(private val _asJava: Object) {
    * the configuration is broadcasted.   * @param listener the listener
    */
   def listen (listener: Handler[ConfigChange]): Unit = {
-    asJava.asInstanceOf[JConfigRetriever].listen({x: JConfigChange => listener.handle(ConfigChange(x))})
+    asJava.asInstanceOf[JConfigRetriever].listen((if (listener == null) null else new io.vertx.core.Handler[JConfigChange]{def handle(x: JConfigChange) {listener.handle(ConfigChange(x))}}))
   }
 
 

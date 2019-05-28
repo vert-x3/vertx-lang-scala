@@ -101,7 +101,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
    * @param replyHandler the reply handler for the reply.
    */
   def reply [R: TypeTag](message: AnyRef, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
-    asJava.asInstanceOf[JMessage[Object]].reply[Object](message, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))})
+    asJava.asInstanceOf[JMessage[Object]].reply[Object](message, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}}))
   }
 
   /**
@@ -119,7 +119,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
    * @param replyHandler the reply handler for the reply.
    */
   def reply [R: TypeTag](message: AnyRef, options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
-    asJava.asInstanceOf[JMessage[Object]].reply[Object](message, options.asJava, {x: AsyncResult[JMessage[Object]] => replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))})
+    asJava.asInstanceOf[JMessage[Object]].reply[Object](message, options.asJava, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}}))
   }
 
   /**

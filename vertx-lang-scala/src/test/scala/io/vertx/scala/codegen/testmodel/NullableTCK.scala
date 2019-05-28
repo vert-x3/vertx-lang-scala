@@ -54,12 +54,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableByteHandler (notNull: Boolean, handler: Handler[scala.Option[Byte]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableByteHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.lang.Byte => handler.handle(scala.Option(x.asInstanceOf[Byte]))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableByteHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.lang.Byte]{def handle(x: java.lang.Byte) {handler.handle(scala.Option(x.asInstanceOf[Byte]))}}))
   }
 
 
   def methodWithNullableByteHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[Byte]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableByteHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Byte] => handler.handle(AsyncResultWrapper[java.lang.Byte, scala.Option[Byte]](x, a => scala.Option(a.asInstanceOf[Byte])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableByteHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Byte]]{def handle(x: AsyncResult[java.lang.Byte]) {handler.handle(AsyncResultWrapper[java.lang.Byte, scala.Option[Byte]](x, a => scala.Option(a.asInstanceOf[Byte])))}}))
   }
 
 
@@ -79,12 +79,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableShortHandler (notNull: Boolean, handler: Handler[scala.Option[Short]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableShortHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.lang.Short => handler.handle(scala.Option(x.asInstanceOf[Short]))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableShortHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.lang.Short]{def handle(x: java.lang.Short) {handler.handle(scala.Option(x.asInstanceOf[Short]))}}))
   }
 
 
   def methodWithNullableShortHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[Short]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableShortHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Short] => handler.handle(AsyncResultWrapper[java.lang.Short, scala.Option[Short]](x, a => scala.Option(a.asInstanceOf[Short])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableShortHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Short]]{def handle(x: AsyncResult[java.lang.Short]) {handler.handle(AsyncResultWrapper[java.lang.Short, scala.Option[Short]](x, a => scala.Option(a.asInstanceOf[Short])))}}))
   }
 
 
@@ -104,12 +104,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableIntegerHandler (notNull: Boolean, handler: Handler[scala.Option[Int]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableIntegerHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.lang.Integer => handler.handle(scala.Option(x.asInstanceOf[Int]))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableIntegerHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.lang.Integer]{def handle(x: java.lang.Integer) {handler.handle(scala.Option(x.asInstanceOf[Int]))}}))
   }
 
 
   def methodWithNullableIntegerHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[Int]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableIntegerHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Integer] => handler.handle(AsyncResultWrapper[java.lang.Integer, scala.Option[Int]](x, a => scala.Option(a.asInstanceOf[Int])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableIntegerHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Integer]]{def handle(x: AsyncResult[java.lang.Integer]) {handler.handle(AsyncResultWrapper[java.lang.Integer, scala.Option[Int]](x, a => scala.Option(a.asInstanceOf[Int])))}}))
   }
 
 
@@ -129,12 +129,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableLongHandler (notNull: Boolean, handler: Handler[scala.Option[Long]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableLongHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.lang.Long => handler.handle(scala.Option(x.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableLongHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.lang.Long]{def handle(x: java.lang.Long) {handler.handle(scala.Option(x.asInstanceOf[Long]))}}))
   }
 
 
   def methodWithNullableLongHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[Long]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableLongHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, scala.Option[Long]](x, a => scala.Option(a.asInstanceOf[Long])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableLongHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, scala.Option[Long]](x, a => scala.Option(a.asInstanceOf[Long])))}}))
   }
 
 
@@ -154,12 +154,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableFloatHandler (notNull: Boolean, handler: Handler[scala.Option[Float]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableFloatHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.lang.Float => handler.handle(scala.Option(x.asInstanceOf[Float]))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableFloatHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.lang.Float]{def handle(x: java.lang.Float) {handler.handle(scala.Option(x.asInstanceOf[Float]))}}))
   }
 
 
   def methodWithNullableFloatHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[Float]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableFloatHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Float] => handler.handle(AsyncResultWrapper[java.lang.Float, scala.Option[Float]](x, a => scala.Option(a.asInstanceOf[Float])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableFloatHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Float]]{def handle(x: AsyncResult[java.lang.Float]) {handler.handle(AsyncResultWrapper[java.lang.Float, scala.Option[Float]](x, a => scala.Option(a.asInstanceOf[Float])))}}))
   }
 
 
@@ -179,12 +179,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableDoubleHandler (notNull: Boolean, handler: Handler[scala.Option[Double]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableDoubleHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.lang.Double => handler.handle(scala.Option(x.asInstanceOf[Double]))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableDoubleHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.lang.Double]{def handle(x: java.lang.Double) {handler.handle(scala.Option(x.asInstanceOf[Double]))}}))
   }
 
 
   def methodWithNullableDoubleHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[Double]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableDoubleHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Double] => handler.handle(AsyncResultWrapper[java.lang.Double, scala.Option[Double]](x, a => scala.Option(a.asInstanceOf[Double])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableDoubleHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Double]]{def handle(x: AsyncResult[java.lang.Double]) {handler.handle(AsyncResultWrapper[java.lang.Double, scala.Option[Double]](x, a => scala.Option(a.asInstanceOf[Double])))}}))
   }
 
 
@@ -204,12 +204,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableBooleanHandler (notNull: Boolean, handler: Handler[scala.Option[Boolean]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableBooleanHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.lang.Boolean => handler.handle(scala.Option(x.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableBooleanHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.lang.Boolean]{def handle(x: java.lang.Boolean) {handler.handle(scala.Option(x.asInstanceOf[Boolean]))}}))
   }
 
 
   def methodWithNullableBooleanHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[Boolean]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableBooleanHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean, scala.Option[Boolean]](x, a => scala.Option(a.asInstanceOf[Boolean])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableBooleanHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {handler.handle(AsyncResultWrapper[java.lang.Boolean, scala.Option[Boolean]](x, a => scala.Option(a.asInstanceOf[Boolean])))}}))
   }
 
 
@@ -229,12 +229,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableStringHandler (notNull: Boolean, handler: Handler[scala.Option[String]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableStringHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.lang.String => handler.handle(scala.Option(x.asInstanceOf[String]))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableStringHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(scala.Option(x.asInstanceOf[String]))}}))
   }
 
 
   def methodWithNullableStringHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[String]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableStringHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableStringHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, scala.Option[String]](x, a => scala.Option(a.asInstanceOf[String])))}}))
   }
 
 
@@ -254,12 +254,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableCharHandler (notNull: Boolean, handler: Handler[scala.Option[Char]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableCharHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.lang.Character => handler.handle(scala.Option(x.asInstanceOf[Char]))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableCharHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.lang.Character]{def handle(x: java.lang.Character) {handler.handle(scala.Option(x.asInstanceOf[Char]))}}))
   }
 
 
   def methodWithNullableCharHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[Char]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableCharHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Character] => handler.handle(AsyncResultWrapper[java.lang.Character, scala.Option[Char]](x, a => scala.Option(a.asInstanceOf[Char])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableCharHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Character]]{def handle(x: AsyncResult[java.lang.Character]) {handler.handle(AsyncResultWrapper[java.lang.Character, scala.Option[Char]](x, a => scala.Option(a.asInstanceOf[Char])))}}))
   }
 
 
@@ -279,12 +279,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableJsonObjectHandler (notNull: Boolean, handler: Handler[scala.Option[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableJsonObjectHandler(notNull.asInstanceOf[java.lang.Boolean], {x: JsonObject => handler.handle(scala.Option(x))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableJsonObjectHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[JsonObject]{def handle(x: JsonObject) {handler.handle(scala.Option(x))}}))
   }
 
 
   def methodWithNullableJsonObjectHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableJsonObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableJsonObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {handler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))}}))
   }
 
 
@@ -304,12 +304,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableJsonArrayHandler (notNull: Boolean, handler: Handler[scala.Option[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableJsonArrayHandler(notNull.asInstanceOf[java.lang.Boolean], {x: JsonArray => handler.handle(scala.Option(x))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableJsonArrayHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[JsonArray]{def handle(x: JsonArray) {handler.handle(scala.Option(x))}}))
   }
 
 
   def methodWithNullableJsonArrayHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableJsonArrayHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, scala.Option[io.vertx.core.json.JsonArray]](x, a => scala.Option(a)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableJsonArrayHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, scala.Option[io.vertx.core.json.JsonArray]](x, a => scala.Option(a)))}}))
   }
 
 
@@ -329,12 +329,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableApiHandler (notNull: Boolean, handler: Handler[scala.Option[RefedInterface1]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableApiHandler(notNull.asInstanceOf[java.lang.Boolean], {x: JRefedInterface1 => handler.handle(scala.Option(x).map(RefedInterface1(_)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableApiHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[JRefedInterface1]{def handle(x: JRefedInterface1) {handler.handle(scala.Option(x).map(RefedInterface1(_)))}}))
   }
 
 
   def methodWithNullableApiHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[RefedInterface1]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableApiHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JRefedInterface1] => handler.handle(AsyncResultWrapper[JRefedInterface1, scala.Option[RefedInterface1]](x, a => scala.Option(a).map(RefedInterface1(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableApiHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRefedInterface1]]{def handle(x: AsyncResult[JRefedInterface1]) {handler.handle(AsyncResultWrapper[JRefedInterface1, scala.Option[RefedInterface1]](x, a => scala.Option(a).map(RefedInterface1(_))))}}))
   }
 
 
@@ -354,12 +354,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableDataObjectHandler (notNull: Boolean, handler: Handler[scala.Option[TestDataObject]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableDataObjectHandler(notNull.asInstanceOf[java.lang.Boolean], {x: JTestDataObject => handler.handle(scala.Option(x).map(TestDataObject(_)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableDataObjectHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[JTestDataObject]{def handle(x: JTestDataObject) {handler.handle(scala.Option(x).map(TestDataObject(_)))}}))
   }
 
 
   def methodWithNullableDataObjectHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[TestDataObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableDataObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JTestDataObject] => handler.handle(AsyncResultWrapper[JTestDataObject, scala.Option[TestDataObject]](x, a => scala.Option(a).map(TestDataObject(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableDataObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JTestDataObject]]{def handle(x: AsyncResult[JTestDataObject]) {handler.handle(AsyncResultWrapper[JTestDataObject, scala.Option[TestDataObject]](x, a => scala.Option(a).map(TestDataObject(_))))}}))
   }
 
 
@@ -379,12 +379,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableEnumHandler (notNull: Boolean, handler: Handler[scala.Option[io.vertx.codegen.testmodel.TestEnum]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableEnumHandler(notNull.asInstanceOf[java.lang.Boolean], {x: TestEnum => handler.handle(scala.Option(x))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableEnumHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[TestEnum]{def handle(x: TestEnum) {handler.handle(scala.Option(x))}}))
   }
 
 
   def methodWithNullableEnumHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableEnumHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[TestEnum] => handler.handle(AsyncResultWrapper[TestEnum, scala.Option[io.vertx.codegen.testmodel.TestEnum]](x, a => scala.Option(a)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableEnumHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[TestEnum]]{def handle(x: AsyncResult[TestEnum]) {handler.handle(AsyncResultWrapper[TestEnum, scala.Option[io.vertx.codegen.testmodel.TestEnum]](x, a => scala.Option(a)))}}))
   }
 
 
@@ -404,12 +404,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableGenEnumHandler (notNull: Boolean, handler: Handler[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableGenEnumHandler(notNull.asInstanceOf[java.lang.Boolean], {x: TestGenEnum => handler.handle(scala.Option(x))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableGenEnumHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[TestGenEnum]{def handle(x: TestGenEnum) {handler.handle(scala.Option(x))}}))
   }
 
 
   def methodWithNullableGenEnumHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableGenEnumHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[TestGenEnum] => handler.handle(AsyncResultWrapper[TestGenEnum, scala.Option[io.vertx.codegen.testmodel.TestGenEnum]](x, a => scala.Option(a)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableGenEnumHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[TestGenEnum]]{def handle(x: AsyncResult[TestGenEnum]) {handler.handle(AsyncResultWrapper[TestGenEnum, scala.Option[io.vertx.codegen.testmodel.TestGenEnum]](x, a => scala.Option(a)))}}))
   }
 
 
@@ -424,12 +424,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableTypeVariableHandler [T: TypeTag](notNull: Boolean, value: T, handler: Handler[T]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandler[Object](notNull.asInstanceOf[java.lang.Boolean], toJava[T](value), {x: Object => handler.handle(toScala[T](x))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandler[Object](notNull.asInstanceOf[java.lang.Boolean], toJava[T](value), (if (handler == null) null else new io.vertx.core.Handler[Object]{def handle(x: Object) {handler.handle(toScala[T](x))}}))
   }
 
 
   def methodWithNullableTypeVariableHandlerAsyncResult [T: TypeTag](notNull: Boolean, value: T, handler: Handler[AsyncResult[T]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandlerAsyncResult[Object](notNull.asInstanceOf[java.lang.Boolean], toJava[T](value), {x: AsyncResult[Object] => handler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableTypeVariableHandlerAsyncResult[Object](notNull.asInstanceOf[java.lang.Boolean], toJava[T](value), (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {handler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))}}))
   }
 
 
@@ -454,12 +454,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListByteHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Byte]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListByteHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[java.lang.Byte] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Byte])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListByteHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Byte]]{def handle(x: java.util.List[java.lang.Byte]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Byte])))}}))
   }
 
 
   def methodWithNullableListByteHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[Byte]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListByteHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[java.lang.Byte]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Byte], scala.Option[scala.collection.mutable.Buffer[Byte]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Byte]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListByteHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Byte]]]{def handle(x: AsyncResult[java.util.List[java.lang.Byte]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Byte], scala.Option[scala.collection.mutable.Buffer[Byte]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Byte]))))}}))
   }
 
 
@@ -479,12 +479,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListShortHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Short]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListShortHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[java.lang.Short] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Short])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListShortHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Short]]{def handle(x: java.util.List[java.lang.Short]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Short])))}}))
   }
 
 
   def methodWithNullableListShortHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[Short]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListShortHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[java.lang.Short]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Short], scala.Option[scala.collection.mutable.Buffer[Short]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Short]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListShortHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Short]]]{def handle(x: AsyncResult[java.util.List[java.lang.Short]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Short], scala.Option[scala.collection.mutable.Buffer[Short]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Short]))))}}))
   }
 
 
@@ -504,12 +504,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListIntegerHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Int]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListIntegerHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[java.lang.Integer] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Int])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListIntegerHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Integer]]{def handle(x: java.util.List[java.lang.Integer]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Int])))}}))
   }
 
 
   def methodWithNullableListIntegerHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[Int]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListIntegerHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Integer], scala.Option[scala.collection.mutable.Buffer[Int]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Int]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListIntegerHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Integer]]]{def handle(x: AsyncResult[java.util.List[java.lang.Integer]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Integer], scala.Option[scala.collection.mutable.Buffer[Int]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Int]))))}}))
   }
 
 
@@ -529,12 +529,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListLongHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Long]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListLongHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[java.lang.Long] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Long])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListLongHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Long]]{def handle(x: java.util.List[java.lang.Long]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Long])))}}))
   }
 
 
   def methodWithNullableListLongHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[Long]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListLongHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[java.lang.Long]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Long], scala.Option[scala.collection.mutable.Buffer[Long]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Long]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListLongHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Long]]]{def handle(x: AsyncResult[java.util.List[java.lang.Long]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Long], scala.Option[scala.collection.mutable.Buffer[Long]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Long]))))}}))
   }
 
 
@@ -554,12 +554,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListFloatHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Float]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListFloatHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[java.lang.Float] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Float])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListFloatHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Float]]{def handle(x: java.util.List[java.lang.Float]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Float])))}}))
   }
 
 
   def methodWithNullableListFloatHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[Float]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListFloatHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[java.lang.Float]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Float], scala.Option[scala.collection.mutable.Buffer[Float]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Float]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListFloatHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Float]]]{def handle(x: AsyncResult[java.util.List[java.lang.Float]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Float], scala.Option[scala.collection.mutable.Buffer[Float]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Float]))))}}))
   }
 
 
@@ -579,12 +579,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListDoubleHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Double]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDoubleHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[java.lang.Double] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Double])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDoubleHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Double]]{def handle(x: java.util.List[java.lang.Double]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Double])))}}))
   }
 
 
   def methodWithNullableListDoubleHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[Double]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDoubleHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[java.lang.Double]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Double], scala.Option[scala.collection.mutable.Buffer[Double]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Double]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDoubleHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Double]]]{def handle(x: AsyncResult[java.util.List[java.lang.Double]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Double], scala.Option[scala.collection.mutable.Buffer[Double]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Double]))))}}))
   }
 
 
@@ -604,12 +604,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListBooleanHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Boolean]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListBooleanHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[java.lang.Boolean] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Boolean])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListBooleanHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Boolean]]{def handle(x: java.util.List[java.lang.Boolean]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Boolean])))}}))
   }
 
 
   def methodWithNullableListBooleanHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[Boolean]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListBooleanHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[java.lang.Boolean]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Boolean], scala.Option[scala.collection.mutable.Buffer[Boolean]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Boolean]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListBooleanHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Boolean]]]{def handle(x: AsyncResult[java.util.List[java.lang.Boolean]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Boolean], scala.Option[scala.collection.mutable.Buffer[Boolean]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Boolean]))))}}))
   }
 
 
@@ -629,12 +629,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListStringHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[String]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListStringHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[java.lang.String] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListStringHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.String]]{def handle(x: java.util.List[java.lang.String]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[String])))}}))
   }
 
 
   def methodWithNullableListStringHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[String]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListStringHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.Option[scala.collection.mutable.Buffer[String]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[String]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListStringHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.String]]]{def handle(x: AsyncResult[java.util.List[java.lang.String]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.Option[scala.collection.mutable.Buffer[String]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[String]))))}}))
   }
 
 
@@ -654,12 +654,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListCharHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[Char]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListCharHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[java.lang.Character] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Char])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListCharHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Character]]{def handle(x: java.util.List[java.lang.Character]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Char])))}}))
   }
 
 
   def methodWithNullableListCharHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[Char]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListCharHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[java.lang.Character]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Character], scala.Option[scala.collection.mutable.Buffer[Char]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Char]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListCharHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Character]]]{def handle(x: AsyncResult[java.util.List[java.lang.Character]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Character], scala.Option[scala.collection.mutable.Buffer[Char]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Char]))))}}))
   }
 
 
@@ -679,12 +679,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListJsonObjectHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonObjectHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[JsonObject] => handler.handle(scala.Option(x).map(_.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonObjectHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[JsonObject]]{def handle(x: java.util.List[JsonObject]) {handler.handle(scala.Option(x).map(_.asScala))}}))
   }
 
 
   def methodWithNullableListJsonObjectHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[JsonObject]] => handler.handle(AsyncResultWrapper[java.util.List[JsonObject], scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]](x, a => scala.Option(a).map(_.asScala)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JsonObject]]]{def handle(x: AsyncResult[java.util.List[JsonObject]]) {handler.handle(AsyncResultWrapper[java.util.List[JsonObject], scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]](x, a => scala.Option(a).map(_.asScala)))}}))
   }
 
 
@@ -704,12 +704,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListJsonArrayHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonArrayHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[JsonArray] => handler.handle(scala.Option(x).map(_.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonArrayHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[JsonArray]]{def handle(x: java.util.List[JsonArray]) {handler.handle(scala.Option(x).map(_.asScala))}}))
   }
 
 
   def methodWithNullableListJsonArrayHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonArrayHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[JsonArray]] => handler.handle(AsyncResultWrapper[java.util.List[JsonArray], scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]](x, a => scala.Option(a).map(_.asScala)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListJsonArrayHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JsonArray]]]{def handle(x: AsyncResult[java.util.List[JsonArray]]) {handler.handle(AsyncResultWrapper[java.util.List[JsonArray], scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]](x, a => scala.Option(a).map(_.asScala)))}}))
   }
 
 
@@ -729,12 +729,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListApiHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[RefedInterface1]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListApiHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[JRefedInterface1] => handler.handle(scala.Option(x).map(_.asScala.map(x => RefedInterface1(x))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListApiHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[JRefedInterface1]]{def handle(x: java.util.List[JRefedInterface1]) {handler.handle(scala.Option(x).map(_.asScala.map(x => RefedInterface1(x))))}}))
   }
 
 
   def methodWithNullableListApiHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[RefedInterface1]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListApiHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[JRefedInterface1]] => handler.handle(AsyncResultWrapper[java.util.List[JRefedInterface1], scala.Option[scala.collection.mutable.Buffer[RefedInterface1]]](x, a => scala.Option(a).map(_.asScala.map(x => RefedInterface1(x)))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListApiHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JRefedInterface1]]]{def handle(x: AsyncResult[java.util.List[JRefedInterface1]]) {handler.handle(AsyncResultWrapper[java.util.List[JRefedInterface1], scala.Option[scala.collection.mutable.Buffer[RefedInterface1]]](x, a => scala.Option(a).map(_.asScala.map(x => RefedInterface1(x)))))}}))
   }
 
 
@@ -754,12 +754,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListDataObjectHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[TestDataObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDataObjectHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[JTestDataObject] => handler.handle(scala.Option(x).map(_.asScala.map(x => TestDataObject(x))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDataObjectHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[JTestDataObject]]{def handle(x: java.util.List[JTestDataObject]) {handler.handle(scala.Option(x).map(_.asScala.map(x => TestDataObject(x))))}}))
   }
 
 
   def methodWithNullableListDataObjectHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[TestDataObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDataObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[JTestDataObject]] => handler.handle(AsyncResultWrapper[java.util.List[JTestDataObject], scala.Option[scala.collection.mutable.Buffer[TestDataObject]]](x, a => scala.Option(a).map(_.asScala.map(x => TestDataObject(x)))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListDataObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JTestDataObject]]]{def handle(x: AsyncResult[java.util.List[JTestDataObject]]) {handler.handle(AsyncResultWrapper[java.util.List[JTestDataObject], scala.Option[scala.collection.mutable.Buffer[TestDataObject]]](x, a => scala.Option(a).map(_.asScala.map(x => TestDataObject(x)))))}}))
   }
 
 
@@ -779,12 +779,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListEnumHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListEnumHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[TestEnum] => handler.handle(scala.Option(x).map(_.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListEnumHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[TestEnum]]{def handle(x: java.util.List[TestEnum]) {handler.handle(scala.Option(x).map(_.asScala))}}))
   }
 
 
   def methodWithNullableListEnumHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListEnumHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[TestEnum]] => handler.handle(AsyncResultWrapper[java.util.List[TestEnum], scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]](x, a => scala.Option(a).map(_.asScala)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListEnumHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[TestEnum]]]{def handle(x: AsyncResult[java.util.List[TestEnum]]) {handler.handle(AsyncResultWrapper[java.util.List[TestEnum], scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]](x, a => scala.Option(a).map(_.asScala)))}}))
   }
 
 
@@ -804,12 +804,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableListGenEnumHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListGenEnumHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.List[TestGenEnum] => handler.handle(scala.Option(x).map(_.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListGenEnumHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.List[TestGenEnum]]{def handle(x: java.util.List[TestGenEnum]) {handler.handle(scala.Option(x).map(_.asScala))}}))
   }
 
 
   def methodWithNullableListGenEnumHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableListGenEnumHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.List[TestGenEnum]] => handler.handle(AsyncResultWrapper[java.util.List[TestGenEnum], scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]]](x, a => scala.Option(a).map(_.asScala)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableListGenEnumHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[TestGenEnum]]]{def handle(x: AsyncResult[java.util.List[TestGenEnum]]) {handler.handle(AsyncResultWrapper[java.util.List[TestGenEnum], scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]]](x, a => scala.Option(a).map(_.asScala)))}}))
   }
 
 
@@ -829,12 +829,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetByteHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Byte]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetByteHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[java.lang.Byte] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Byte])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetByteHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Byte]]{def handle(x: java.util.Set[java.lang.Byte]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Byte])))}}))
   }
 
 
   def methodWithNullableSetByteHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[Byte]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetByteHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[java.lang.Byte]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Byte], scala.Option[scala.collection.mutable.Set[Byte]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Byte]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetByteHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Byte]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Byte]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Byte], scala.Option[scala.collection.mutable.Set[Byte]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Byte]))))}}))
   }
 
 
@@ -854,12 +854,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetShortHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Short]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetShortHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[java.lang.Short] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Short])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetShortHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Short]]{def handle(x: java.util.Set[java.lang.Short]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Short])))}}))
   }
 
 
   def methodWithNullableSetShortHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[Short]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetShortHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[java.lang.Short]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Short], scala.Option[scala.collection.mutable.Set[Short]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Short]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetShortHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Short]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Short]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Short], scala.Option[scala.collection.mutable.Set[Short]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Short]))))}}))
   }
 
 
@@ -879,12 +879,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetIntegerHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Int]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetIntegerHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[java.lang.Integer] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Int])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetIntegerHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Integer]]{def handle(x: java.util.Set[java.lang.Integer]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Int])))}}))
   }
 
 
   def methodWithNullableSetIntegerHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[Int]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetIntegerHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Integer], scala.Option[scala.collection.mutable.Set[Int]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Int]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetIntegerHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Integer]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Integer]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Integer], scala.Option[scala.collection.mutable.Set[Int]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Int]))))}}))
   }
 
 
@@ -904,12 +904,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetLongHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Long]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetLongHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[java.lang.Long] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Long])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetLongHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Long]]{def handle(x: java.util.Set[java.lang.Long]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Long])))}}))
   }
 
 
   def methodWithNullableSetLongHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[Long]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetLongHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[java.lang.Long]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Long], scala.Option[scala.collection.mutable.Set[Long]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Long]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetLongHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Long]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Long]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Long], scala.Option[scala.collection.mutable.Set[Long]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Long]))))}}))
   }
 
 
@@ -929,12 +929,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetFloatHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Float]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetFloatHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[java.lang.Float] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Float])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetFloatHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Float]]{def handle(x: java.util.Set[java.lang.Float]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Float])))}}))
   }
 
 
   def methodWithNullableSetFloatHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[Float]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetFloatHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[java.lang.Float]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Float], scala.Option[scala.collection.mutable.Set[Float]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Float]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetFloatHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Float]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Float]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Float], scala.Option[scala.collection.mutable.Set[Float]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Float]))))}}))
   }
 
 
@@ -954,12 +954,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetDoubleHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Double]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDoubleHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[java.lang.Double] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Double])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDoubleHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Double]]{def handle(x: java.util.Set[java.lang.Double]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Double])))}}))
   }
 
 
   def methodWithNullableSetDoubleHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[Double]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDoubleHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[java.lang.Double]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Double], scala.Option[scala.collection.mutable.Set[Double]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Double]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDoubleHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Double]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Double]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Double], scala.Option[scala.collection.mutable.Set[Double]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Double]))))}}))
   }
 
 
@@ -979,12 +979,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetBooleanHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Boolean]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetBooleanHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[java.lang.Boolean] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Boolean])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetBooleanHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Boolean]]{def handle(x: java.util.Set[java.lang.Boolean]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Boolean])))}}))
   }
 
 
   def methodWithNullableSetBooleanHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[Boolean]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetBooleanHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[java.lang.Boolean]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Boolean], scala.Option[scala.collection.mutable.Set[Boolean]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Boolean]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetBooleanHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Boolean]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Boolean]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Boolean], scala.Option[scala.collection.mutable.Set[Boolean]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Boolean]))))}}))
   }
 
 
@@ -1004,12 +1004,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetStringHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[String]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetStringHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[java.lang.String] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetStringHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.String]]{def handle(x: java.util.Set[java.lang.String]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[String])))}}))
   }
 
 
   def methodWithNullableSetStringHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[String]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetStringHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.String], scala.Option[scala.collection.mutable.Set[String]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[String]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetStringHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.String]]]{def handle(x: AsyncResult[java.util.Set[java.lang.String]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.String], scala.Option[scala.collection.mutable.Set[String]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[String]))))}}))
   }
 
 
@@ -1029,12 +1029,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetCharHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[Char]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetCharHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[java.lang.Character] => handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Char])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetCharHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Character]]{def handle(x: java.util.Set[java.lang.Character]) {handler.handle(scala.Option(x).map(_.asScala.map(x => x.asInstanceOf[Char])))}}))
   }
 
 
   def methodWithNullableSetCharHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[Char]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetCharHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[java.lang.Character]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Character], scala.Option[scala.collection.mutable.Set[Char]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Char]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetCharHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Character]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Character]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Character], scala.Option[scala.collection.mutable.Set[Char]]](x, a => scala.Option(a).map(_.asScala.map(x => x.asInstanceOf[Char]))))}}))
   }
 
 
@@ -1054,12 +1054,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetJsonObjectHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonObjectHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[JsonObject] => handler.handle(scala.Option(x).map(_.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonObjectHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[JsonObject]]{def handle(x: java.util.Set[JsonObject]) {handler.handle(scala.Option(x).map(_.asScala))}}))
   }
 
 
   def methodWithNullableSetJsonObjectHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[JsonObject]] => handler.handle(AsyncResultWrapper[java.util.Set[JsonObject], scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]](x, a => scala.Option(a).map(_.asScala)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JsonObject]]]{def handle(x: AsyncResult[java.util.Set[JsonObject]]) {handler.handle(AsyncResultWrapper[java.util.Set[JsonObject], scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]](x, a => scala.Option(a).map(_.asScala)))}}))
   }
 
 
@@ -1079,12 +1079,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetJsonArrayHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonArrayHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[JsonArray] => handler.handle(scala.Option(x).map(_.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonArrayHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[JsonArray]]{def handle(x: java.util.Set[JsonArray]) {handler.handle(scala.Option(x).map(_.asScala))}}))
   }
 
 
   def methodWithNullableSetJsonArrayHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonArrayHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[JsonArray]] => handler.handle(AsyncResultWrapper[java.util.Set[JsonArray], scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]](x, a => scala.Option(a).map(_.asScala)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetJsonArrayHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JsonArray]]]{def handle(x: AsyncResult[java.util.Set[JsonArray]]) {handler.handle(AsyncResultWrapper[java.util.Set[JsonArray], scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]](x, a => scala.Option(a).map(_.asScala)))}}))
   }
 
 
@@ -1104,12 +1104,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetApiHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[RefedInterface1]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetApiHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[JRefedInterface1] => handler.handle(scala.Option(x).map(_.asScala.map(x => RefedInterface1(x))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetApiHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[JRefedInterface1]]{def handle(x: java.util.Set[JRefedInterface1]) {handler.handle(scala.Option(x).map(_.asScala.map(x => RefedInterface1(x))))}}))
   }
 
 
   def methodWithNullableSetApiHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[RefedInterface1]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetApiHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[JRefedInterface1]] => handler.handle(AsyncResultWrapper[java.util.Set[JRefedInterface1], scala.Option[scala.collection.mutable.Set[RefedInterface1]]](x, a => scala.Option(a).map(_.asScala.map(x => RefedInterface1(x)))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetApiHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JRefedInterface1]]]{def handle(x: AsyncResult[java.util.Set[JRefedInterface1]]) {handler.handle(AsyncResultWrapper[java.util.Set[JRefedInterface1], scala.Option[scala.collection.mutable.Set[RefedInterface1]]](x, a => scala.Option(a).map(_.asScala.map(x => RefedInterface1(x)))))}}))
   }
 
 
@@ -1129,12 +1129,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetDataObjectHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[TestDataObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDataObjectHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[JTestDataObject] => handler.handle(scala.Option(x).map(_.asScala.map(x => TestDataObject(x))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDataObjectHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[JTestDataObject]]{def handle(x: java.util.Set[JTestDataObject]) {handler.handle(scala.Option(x).map(_.asScala.map(x => TestDataObject(x))))}}))
   }
 
 
   def methodWithNullableSetDataObjectHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[TestDataObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDataObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[JTestDataObject]] => handler.handle(AsyncResultWrapper[java.util.Set[JTestDataObject], scala.Option[scala.collection.mutable.Set[TestDataObject]]](x, a => scala.Option(a).map(_.asScala.map(x => TestDataObject(x)))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetDataObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JTestDataObject]]]{def handle(x: AsyncResult[java.util.Set[JTestDataObject]]) {handler.handle(AsyncResultWrapper[java.util.Set[JTestDataObject], scala.Option[scala.collection.mutable.Set[TestDataObject]]](x, a => scala.Option(a).map(_.asScala.map(x => TestDataObject(x)))))}}))
   }
 
 
@@ -1154,12 +1154,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetEnumHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetEnumHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[TestEnum] => handler.handle(scala.Option(x).map(_.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetEnumHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[TestEnum]]{def handle(x: java.util.Set[TestEnum]) {handler.handle(scala.Option(x).map(_.asScala))}}))
   }
 
 
   def methodWithNullableSetEnumHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetEnumHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[TestEnum]] => handler.handle(AsyncResultWrapper[java.util.Set[TestEnum], scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]](x, a => scala.Option(a).map(_.asScala)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetEnumHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[TestEnum]]]{def handle(x: AsyncResult[java.util.Set[TestEnum]]) {handler.handle(AsyncResultWrapper[java.util.Set[TestEnum], scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]](x, a => scala.Option(a).map(_.asScala)))}}))
   }
 
 
@@ -1179,12 +1179,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableSetGenEnumHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetGenEnumHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Set[TestGenEnum] => handler.handle(scala.Option(x).map(_.asScala))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetGenEnumHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Set[TestGenEnum]]{def handle(x: java.util.Set[TestGenEnum]) {handler.handle(scala.Option(x).map(_.asScala))}}))
   }
 
 
   def methodWithNullableSetGenEnumHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetGenEnumHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Set[TestGenEnum]] => handler.handle(AsyncResultWrapper[java.util.Set[TestGenEnum], scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]]](x, a => scala.Option(a).map(_.asScala)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableSetGenEnumHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[TestGenEnum]]]{def handle(x: AsyncResult[java.util.Set[TestGenEnum]]) {handler.handle(AsyncResultWrapper[java.util.Set[TestGenEnum], scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]]](x, a => scala.Option(a).map(_.asScala)))}}))
   }
 
 
@@ -1204,12 +1204,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableMapByteHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Byte]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Map[String, java.lang.Byte] => handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Byte]]{def handle(x: java.util.Map[String, java.lang.Byte]) {handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*)))}}))
   }
 
 
   def methodWithNullableMapByteHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Map[String, Byte]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Map[String, java.lang.Byte]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Byte], scala.Option[scala.collection.mutable.Map[String, Byte]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapByteHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Byte]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Byte]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Byte], scala.Option[scala.collection.mutable.Map[String, Byte]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*))))}}))
   }
 
 
@@ -1229,12 +1229,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableMapShortHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Short]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Map[String, java.lang.Short] => handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Short]]{def handle(x: java.util.Map[String, java.lang.Short]) {handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*)))}}))
   }
 
 
   def methodWithNullableMapShortHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Map[String, Short]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Map[String, java.lang.Short]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Short], scala.Option[scala.collection.mutable.Map[String, Short]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapShortHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Short]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Short]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Short], scala.Option[scala.collection.mutable.Map[String, Short]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*))))}}))
   }
 
 
@@ -1254,12 +1254,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableMapIntegerHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Int]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Map[String, java.lang.Integer] => handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Integer]]{def handle(x: java.util.Map[String, java.lang.Integer]) {handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*)))}}))
   }
 
 
   def methodWithNullableMapIntegerHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Map[String, Int]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Map[String, java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Integer], scala.Option[scala.collection.mutable.Map[String, Int]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapIntegerHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Integer]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Integer]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Integer], scala.Option[scala.collection.mutable.Map[String, Int]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*))))}}))
   }
 
 
@@ -1279,12 +1279,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableMapLongHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Long]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Map[String, java.lang.Long] => handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Long]]{def handle(x: java.util.Map[String, java.lang.Long]) {handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*)))}}))
   }
 
 
   def methodWithNullableMapLongHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Map[String, Long]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Map[String, java.lang.Long]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Long], scala.Option[scala.collection.mutable.Map[String, Long]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapLongHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Long]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Long]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Long], scala.Option[scala.collection.mutable.Map[String, Long]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*))))}}))
   }
 
 
@@ -1304,12 +1304,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableMapFloatHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Float]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Map[String, java.lang.Float] => handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Float]]{def handle(x: java.util.Map[String, java.lang.Float]) {handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*)))}}))
   }
 
 
   def methodWithNullableMapFloatHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Map[String, Float]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Map[String, java.lang.Float]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Float], scala.Option[scala.collection.mutable.Map[String, Float]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapFloatHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Float]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Float]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Float], scala.Option[scala.collection.mutable.Map[String, Float]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*))))}}))
   }
 
 
@@ -1329,12 +1329,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableMapDoubleHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Double]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Map[String, java.lang.Double] => handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Double]]{def handle(x: java.util.Map[String, java.lang.Double]) {handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*)))}}))
   }
 
 
   def methodWithNullableMapDoubleHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Map[String, Double]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Map[String, java.lang.Double]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Double], scala.Option[scala.collection.mutable.Map[String, Double]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapDoubleHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Double]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Double]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Double], scala.Option[scala.collection.mutable.Map[String, Double]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*))))}}))
   }
 
 
@@ -1354,12 +1354,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableMapBooleanHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Boolean]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Map[String, java.lang.Boolean] => handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Boolean]]{def handle(x: java.util.Map[String, java.lang.Boolean]) {handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*)))}}))
   }
 
 
   def methodWithNullableMapBooleanHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Map[String, Boolean]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Map[String, java.lang.Boolean]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Boolean], scala.Option[scala.collection.mutable.Map[String, Boolean]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapBooleanHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Boolean]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Boolean]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Boolean], scala.Option[scala.collection.mutable.Map[String, Boolean]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*))))}}))
   }
 
 
@@ -1379,12 +1379,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableMapStringHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, String]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapStringHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Map[String, java.lang.String] => handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapStringHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.String]]{def handle(x: java.util.Map[String, java.lang.String]) {handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)))}}))
   }
 
 
   def methodWithNullableMapStringHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Map[String, String]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapStringHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String], scala.Option[scala.collection.mutable.Map[String, String]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapStringHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.String]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.String]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String], scala.Option[scala.collection.mutable.Map[String, String]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*))))}}))
   }
 
 
@@ -1404,12 +1404,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableMapCharHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, Char]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Map[String, java.lang.Character] => handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Character]]{def handle(x: java.util.Map[String, java.lang.Character]) {handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*)))}}))
   }
 
 
   def methodWithNullableMapCharHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Map[String, Char]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Map[String, java.lang.Character]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Character], scala.Option[scala.collection.mutable.Map[String, Char]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapCharHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Character]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Character]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Character], scala.Option[scala.collection.mutable.Map[String, Char]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*))))}}))
   }
 
 
@@ -1429,12 +1429,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableMapJsonObjectHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Map[String, JsonObject] => handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, JsonObject]]{def handle(x: java.util.Map[String, JsonObject]) {handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.toSeq: _*)))}}))
   }
 
 
   def methodWithNullableMapJsonObjectHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Map[String, JsonObject]] => handler.handle(AsyncResultWrapper[java.util.Map[String, JsonObject], scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.toSeq: _*))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonObjectHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, JsonObject]]]{def handle(x: AsyncResult[java.util.Map[String, JsonObject]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, JsonObject], scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.toSeq: _*))))}}))
   }
 
 
@@ -1454,12 +1454,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableMapJsonArrayHandler (notNull: Boolean, handler: Handler[scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayHandler(notNull.asInstanceOf[java.lang.Boolean], {x: java.util.Map[String, JsonArray] => handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayHandler(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, JsonArray]]{def handle(x: java.util.Map[String, JsonArray]) {handler.handle(scala.Option(x).map(x => collection.mutable.Map(x.asScala.toSeq: _*)))}}))
   }
 
 
   def methodWithNullableMapJsonArrayHandlerAsyncResult (notNull: Boolean, handler: Handler[AsyncResult[scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.util.Map[String, JsonArray]] => handler.handle(AsyncResultWrapper[java.util.Map[String, JsonArray], scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.toSeq: _*))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableMapJsonArrayHandlerAsyncResult(notNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, JsonArray]]]{def handle(x: AsyncResult[java.util.Map[String, JsonArray]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, JsonArray], scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]](x, a => scala.Option(a).map(x => collection.mutable.Map(x.asScala.toSeq: _*))))}}))
   }
 
 
@@ -1484,12 +1484,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableByteHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[Byte]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableByteHandler({x: java.util.List[java.lang.Byte] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Byte])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableByteHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Byte]]{def handle(x: java.util.List[java.lang.Byte]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Byte])))}}))
   }
 
 
   def methodWithListNullableByteHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[Byte]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableByteHandlerAsyncResult({x: AsyncResult[java.util.List[java.lang.Byte]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Byte], scala.collection.mutable.Buffer[scala.Option[Byte]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Byte]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableByteHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Byte]]]{def handle(x: AsyncResult[java.util.List[java.lang.Byte]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Byte], scala.collection.mutable.Buffer[scala.Option[Byte]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Byte]))))}}))
   }
 
 
@@ -1504,12 +1504,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableShortHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[Short]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableShortHandler({x: java.util.List[java.lang.Short] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Short])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableShortHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Short]]{def handle(x: java.util.List[java.lang.Short]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Short])))}}))
   }
 
 
   def methodWithListNullableShortHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[Short]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableShortHandlerAsyncResult({x: AsyncResult[java.util.List[java.lang.Short]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Short], scala.collection.mutable.Buffer[scala.Option[Short]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Short]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableShortHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Short]]]{def handle(x: AsyncResult[java.util.List[java.lang.Short]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Short], scala.collection.mutable.Buffer[scala.Option[Short]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Short]))))}}))
   }
 
 
@@ -1524,12 +1524,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableIntegerHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[Int]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableIntegerHandler({x: java.util.List[java.lang.Integer] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Int])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableIntegerHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Integer]]{def handle(x: java.util.List[java.lang.Integer]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Int])))}}))
   }
 
 
   def methodWithListNullableIntegerHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[Int]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableIntegerHandlerAsyncResult({x: AsyncResult[java.util.List[java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Integer], scala.collection.mutable.Buffer[scala.Option[Int]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Int]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableIntegerHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Integer]]]{def handle(x: AsyncResult[java.util.List[java.lang.Integer]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Integer], scala.collection.mutable.Buffer[scala.Option[Int]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Int]))))}}))
   }
 
 
@@ -1544,12 +1544,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableLongHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[Long]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableLongHandler({x: java.util.List[java.lang.Long] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Long])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableLongHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Long]]{def handle(x: java.util.List[java.lang.Long]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Long])))}}))
   }
 
 
   def methodWithListNullableLongHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[Long]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableLongHandlerAsyncResult({x: AsyncResult[java.util.List[java.lang.Long]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Long], scala.collection.mutable.Buffer[scala.Option[Long]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Long]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableLongHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Long]]]{def handle(x: AsyncResult[java.util.List[java.lang.Long]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Long], scala.collection.mutable.Buffer[scala.Option[Long]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Long]))))}}))
   }
 
 
@@ -1564,12 +1564,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableBooleanHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[Boolean]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableBooleanHandler({x: java.util.List[java.lang.Boolean] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Boolean])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableBooleanHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Boolean]]{def handle(x: java.util.List[java.lang.Boolean]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Boolean])))}}))
   }
 
 
   def methodWithListNullableBooleanHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[Boolean]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableBooleanHandlerAsyncResult({x: AsyncResult[java.util.List[java.lang.Boolean]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Boolean], scala.collection.mutable.Buffer[scala.Option[Boolean]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Boolean]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableBooleanHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Boolean]]]{def handle(x: AsyncResult[java.util.List[java.lang.Boolean]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Boolean], scala.collection.mutable.Buffer[scala.Option[Boolean]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Boolean]))))}}))
   }
 
 
@@ -1584,12 +1584,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableFloatHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[Float]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableFloatHandler({x: java.util.List[java.lang.Float] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Float])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableFloatHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Float]]{def handle(x: java.util.List[java.lang.Float]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Float])))}}))
   }
 
 
   def methodWithListNullableFloatHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[Float]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableFloatHandlerAsyncResult({x: AsyncResult[java.util.List[java.lang.Float]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Float], scala.collection.mutable.Buffer[scala.Option[Float]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Float]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableFloatHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Float]]]{def handle(x: AsyncResult[java.util.List[java.lang.Float]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Float], scala.collection.mutable.Buffer[scala.Option[Float]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Float]))))}}))
   }
 
 
@@ -1604,12 +1604,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableDoubleHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[Double]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableDoubleHandler({x: java.util.List[java.lang.Double] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Double])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableDoubleHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Double]]{def handle(x: java.util.List[java.lang.Double]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Double])))}}))
   }
 
 
   def methodWithListNullableDoubleHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[Double]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableDoubleHandlerAsyncResult({x: AsyncResult[java.util.List[java.lang.Double]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Double], scala.collection.mutable.Buffer[scala.Option[Double]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Double]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableDoubleHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Double]]]{def handle(x: AsyncResult[java.util.List[java.lang.Double]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Double], scala.collection.mutable.Buffer[scala.Option[Double]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Double]))))}}))
   }
 
 
@@ -1624,12 +1624,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableStringHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[String]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableStringHandler({x: java.util.List[java.lang.String] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableStringHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.String]]{def handle(x: java.util.List[java.lang.String]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[String])))}}))
   }
 
 
   def methodWithListNullableStringHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[String]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableStringHandlerAsyncResult({x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[scala.Option[String]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[String]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableStringHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.String]]]{def handle(x: AsyncResult[java.util.List[java.lang.String]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[scala.Option[String]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[String]))))}}))
   }
 
 
@@ -1644,12 +1644,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableCharHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[Char]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableCharHandler({x: java.util.List[java.lang.Character] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Char])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableCharHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Character]]{def handle(x: java.util.List[java.lang.Character]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Char])))}}))
   }
 
 
   def methodWithListNullableCharHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[Char]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableCharHandlerAsyncResult({x: AsyncResult[java.util.List[java.lang.Character]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Character], scala.collection.mutable.Buffer[scala.Option[Char]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Char]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableCharHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Character]]]{def handle(x: AsyncResult[java.util.List[java.lang.Character]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Character], scala.collection.mutable.Buffer[scala.Option[Char]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Char]))))}}))
   }
 
 
@@ -1664,12 +1664,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableJsonObjectHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectHandler({x: java.util.List[JsonObject] => handler.handle(x.asScala.map(Option(_)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[JsonObject]]{def handle(x: java.util.List[JsonObject]) {handler.handle(x.asScala.map(Option(_)))}}))
   }
 
 
   def methodWithListNullableJsonObjectHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectHandlerAsyncResult({x: AsyncResult[java.util.List[JsonObject]] => handler.handle(AsyncResultWrapper[java.util.List[JsonObject], scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]](x, a => a.asScala.map(Option(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonObjectHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JsonObject]]]{def handle(x: AsyncResult[java.util.List[JsonObject]]) {handler.handle(AsyncResultWrapper[java.util.List[JsonObject], scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonObject]]](x, a => a.asScala.map(Option(_))))}}))
   }
 
 
@@ -1684,12 +1684,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableJsonArrayHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayHandler({x: java.util.List[JsonArray] => handler.handle(x.asScala.map(Option(_)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[JsonArray]]{def handle(x: java.util.List[JsonArray]) {handler.handle(x.asScala.map(Option(_)))}}))
   }
 
 
   def methodWithListNullableJsonArrayHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayHandlerAsyncResult({x: AsyncResult[java.util.List[JsonArray]] => handler.handle(AsyncResultWrapper[java.util.List[JsonArray], scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]](x, a => a.asScala.map(Option(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableJsonArrayHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JsonArray]]]{def handle(x: AsyncResult[java.util.List[JsonArray]]) {handler.handle(AsyncResultWrapper[java.util.List[JsonArray], scala.collection.mutable.Buffer[scala.Option[io.vertx.core.json.JsonArray]]](x, a => a.asScala.map(Option(_))))}}))
   }
 
 
@@ -1704,12 +1704,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableApiHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[RefedInterface1]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableApiHandler({x: java.util.List[JRefedInterface1] => handler.handle(x.asScala.map(x => scala.Option(x).map(RefedInterface1(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableApiHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[JRefedInterface1]]{def handle(x: java.util.List[JRefedInterface1]) {handler.handle(x.asScala.map(x => scala.Option(x).map(RefedInterface1(_))))}}))
   }
 
 
   def methodWithListNullableApiHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[RefedInterface1]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableApiHandlerAsyncResult({x: AsyncResult[java.util.List[JRefedInterface1]] => handler.handle(AsyncResultWrapper[java.util.List[JRefedInterface1], scala.collection.mutable.Buffer[scala.Option[RefedInterface1]]](x, a => a.asScala.map(x => scala.Option(x).map(RefedInterface1(_)))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableApiHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JRefedInterface1]]]{def handle(x: AsyncResult[java.util.List[JRefedInterface1]]) {handler.handle(AsyncResultWrapper[java.util.List[JRefedInterface1], scala.collection.mutable.Buffer[scala.Option[RefedInterface1]]](x, a => a.asScala.map(x => scala.Option(x).map(RefedInterface1(_)))))}}))
   }
 
 
@@ -1724,12 +1724,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableDataObjectHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[TestDataObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableDataObjectHandler({x: java.util.List[JTestDataObject] => handler.handle(x.asScala.map(x => scala.Option(x).map(TestDataObject(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableDataObjectHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[JTestDataObject]]{def handle(x: java.util.List[JTestDataObject]) {handler.handle(x.asScala.map(x => scala.Option(x).map(TestDataObject(_))))}}))
   }
 
 
   def methodWithListNullableDataObjectHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[TestDataObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableDataObjectHandlerAsyncResult({x: AsyncResult[java.util.List[JTestDataObject]] => handler.handle(AsyncResultWrapper[java.util.List[JTestDataObject], scala.collection.mutable.Buffer[scala.Option[TestDataObject]]](x, a => a.asScala.map(x => scala.Option(x).map(TestDataObject(_)))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableDataObjectHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JTestDataObject]]]{def handle(x: AsyncResult[java.util.List[JTestDataObject]]) {handler.handle(AsyncResultWrapper[java.util.List[JTestDataObject], scala.collection.mutable.Buffer[scala.Option[TestDataObject]]](x, a => a.asScala.map(x => scala.Option(x).map(TestDataObject(_)))))}}))
   }
 
 
@@ -1744,12 +1744,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableEnumHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumHandler({x: java.util.List[TestEnum] => handler.handle(x.asScala.map(Option(_)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[TestEnum]]{def handle(x: java.util.List[TestEnum]) {handler.handle(x.asScala.map(Option(_)))}}))
   }
 
 
   def methodWithListNullableEnumHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumHandlerAsyncResult({x: AsyncResult[java.util.List[TestEnum]] => handler.handle(AsyncResultWrapper[java.util.List[TestEnum], scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]](x, a => a.asScala.map(Option(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableEnumHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[TestEnum]]]{def handle(x: AsyncResult[java.util.List[TestEnum]]) {handler.handle(AsyncResultWrapper[java.util.List[TestEnum], scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestEnum]]](x, a => a.asScala.map(Option(_))))}}))
   }
 
 
@@ -1764,12 +1764,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithListNullableGenEnumHandler (handler: Handler[scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumHandler({x: java.util.List[TestGenEnum] => handler.handle(x.asScala.map(Option(_)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.List[TestGenEnum]]{def handle(x: java.util.List[TestGenEnum]) {handler.handle(x.asScala.map(Option(_)))}}))
   }
 
 
   def methodWithListNullableGenEnumHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumHandlerAsyncResult({x: AsyncResult[java.util.List[TestGenEnum]] => handler.handle(AsyncResultWrapper[java.util.List[TestGenEnum], scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]](x, a => a.asScala.map(Option(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithListNullableGenEnumHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[TestGenEnum]]]{def handle(x: AsyncResult[java.util.List[TestGenEnum]]) {handler.handle(AsyncResultWrapper[java.util.List[TestGenEnum], scala.collection.mutable.Buffer[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]](x, a => a.asScala.map(Option(_))))}}))
   }
 
 
@@ -1784,12 +1784,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableByteHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[Byte]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableByteHandler({x: java.util.Set[java.lang.Byte] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Byte])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableByteHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Byte]]{def handle(x: java.util.Set[java.lang.Byte]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Byte])))}}))
   }
 
 
   def methodWithSetNullableByteHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[Byte]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableByteHandlerAsyncResult({x: AsyncResult[java.util.Set[java.lang.Byte]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Byte], scala.collection.mutable.Set[scala.Option[Byte]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Byte]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableByteHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Byte]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Byte]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Byte], scala.collection.mutable.Set[scala.Option[Byte]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Byte]))))}}))
   }
 
 
@@ -1804,12 +1804,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableShortHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[Short]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableShortHandler({x: java.util.Set[java.lang.Short] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Short])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableShortHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Short]]{def handle(x: java.util.Set[java.lang.Short]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Short])))}}))
   }
 
 
   def methodWithSetNullableShortHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[Short]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableShortHandlerAsyncResult({x: AsyncResult[java.util.Set[java.lang.Short]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Short], scala.collection.mutable.Set[scala.Option[Short]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Short]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableShortHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Short]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Short]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Short], scala.collection.mutable.Set[scala.Option[Short]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Short]))))}}))
   }
 
 
@@ -1824,12 +1824,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableIntegerHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[Int]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableIntegerHandler({x: java.util.Set[java.lang.Integer] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Int])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableIntegerHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Integer]]{def handle(x: java.util.Set[java.lang.Integer]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Int])))}}))
   }
 
 
   def methodWithSetNullableIntegerHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[Int]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableIntegerHandlerAsyncResult({x: AsyncResult[java.util.Set[java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Integer], scala.collection.mutable.Set[scala.Option[Int]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Int]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableIntegerHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Integer]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Integer]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Integer], scala.collection.mutable.Set[scala.Option[Int]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Int]))))}}))
   }
 
 
@@ -1844,12 +1844,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableLongHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[Long]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableLongHandler({x: java.util.Set[java.lang.Long] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Long])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableLongHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Long]]{def handle(x: java.util.Set[java.lang.Long]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Long])))}}))
   }
 
 
   def methodWithSetNullableLongHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[Long]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableLongHandlerAsyncResult({x: AsyncResult[java.util.Set[java.lang.Long]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Long], scala.collection.mutable.Set[scala.Option[Long]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Long]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableLongHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Long]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Long]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Long], scala.collection.mutable.Set[scala.Option[Long]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Long]))))}}))
   }
 
 
@@ -1864,12 +1864,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableBooleanHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[Boolean]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableBooleanHandler({x: java.util.Set[java.lang.Boolean] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Boolean])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableBooleanHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Boolean]]{def handle(x: java.util.Set[java.lang.Boolean]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Boolean])))}}))
   }
 
 
   def methodWithSetNullableBooleanHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[Boolean]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableBooleanHandlerAsyncResult({x: AsyncResult[java.util.Set[java.lang.Boolean]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Boolean], scala.collection.mutable.Set[scala.Option[Boolean]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Boolean]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableBooleanHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Boolean]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Boolean]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Boolean], scala.collection.mutable.Set[scala.Option[Boolean]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Boolean]))))}}))
   }
 
 
@@ -1884,12 +1884,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableFloatHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[Float]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableFloatHandler({x: java.util.Set[java.lang.Float] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Float])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableFloatHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Float]]{def handle(x: java.util.Set[java.lang.Float]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Float])))}}))
   }
 
 
   def methodWithSetNullableFloatHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[Float]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableFloatHandlerAsyncResult({x: AsyncResult[java.util.Set[java.lang.Float]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Float], scala.collection.mutable.Set[scala.Option[Float]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Float]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableFloatHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Float]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Float]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Float], scala.collection.mutable.Set[scala.Option[Float]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Float]))))}}))
   }
 
 
@@ -1904,12 +1904,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableDoubleHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[Double]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableDoubleHandler({x: java.util.Set[java.lang.Double] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Double])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableDoubleHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Double]]{def handle(x: java.util.Set[java.lang.Double]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Double])))}}))
   }
 
 
   def methodWithSetNullableDoubleHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[Double]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableDoubleHandlerAsyncResult({x: AsyncResult[java.util.Set[java.lang.Double]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Double], scala.collection.mutable.Set[scala.Option[Double]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Double]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableDoubleHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Double]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Double]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Double], scala.collection.mutable.Set[scala.Option[Double]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Double]))))}}))
   }
 
 
@@ -1924,12 +1924,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableStringHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[String]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableStringHandler({x: java.util.Set[java.lang.String] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableStringHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.String]]{def handle(x: java.util.Set[java.lang.String]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[String])))}}))
   }
 
 
   def methodWithSetNullableStringHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[String]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableStringHandlerAsyncResult({x: AsyncResult[java.util.Set[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.String], scala.collection.mutable.Set[scala.Option[String]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[String]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableStringHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.String]]]{def handle(x: AsyncResult[java.util.Set[java.lang.String]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.String], scala.collection.mutable.Set[scala.Option[String]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[String]))))}}))
   }
 
 
@@ -1944,12 +1944,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableCharHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[Char]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableCharHandler({x: java.util.Set[java.lang.Character] => handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Char])))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableCharHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Character]]{def handle(x: java.util.Set[java.lang.Character]) {handler.handle(x.asScala.map(x => scala.Option(x.asInstanceOf[Char])))}}))
   }
 
 
   def methodWithSetNullableCharHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[Char]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableCharHandlerAsyncResult({x: AsyncResult[java.util.Set[java.lang.Character]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Character], scala.collection.mutable.Set[scala.Option[Char]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Char]))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableCharHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Character]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Character]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Character], scala.collection.mutable.Set[scala.Option[Char]]](x, a => a.asScala.map(x => scala.Option(x.asInstanceOf[Char]))))}}))
   }
 
 
@@ -1964,12 +1964,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableJsonObjectHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectHandler({x: java.util.Set[JsonObject] => handler.handle(x.asScala.map(Option(_)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[JsonObject]]{def handle(x: java.util.Set[JsonObject]) {handler.handle(x.asScala.map(Option(_)))}}))
   }
 
 
   def methodWithSetNullableJsonObjectHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectHandlerAsyncResult({x: AsyncResult[java.util.Set[JsonObject]] => handler.handle(AsyncResultWrapper[java.util.Set[JsonObject], scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]](x, a => a.asScala.map(Option(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonObjectHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JsonObject]]]{def handle(x: AsyncResult[java.util.Set[JsonObject]]) {handler.handle(AsyncResultWrapper[java.util.Set[JsonObject], scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonObject]]](x, a => a.asScala.map(Option(_))))}}))
   }
 
 
@@ -1984,12 +1984,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableJsonArrayHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayHandler({x: java.util.Set[JsonArray] => handler.handle(x.asScala.map(Option(_)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[JsonArray]]{def handle(x: java.util.Set[JsonArray]) {handler.handle(x.asScala.map(Option(_)))}}))
   }
 
 
   def methodWithSetNullableJsonArrayHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayHandlerAsyncResult({x: AsyncResult[java.util.Set[JsonArray]] => handler.handle(AsyncResultWrapper[java.util.Set[JsonArray], scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]](x, a => a.asScala.map(Option(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableJsonArrayHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JsonArray]]]{def handle(x: AsyncResult[java.util.Set[JsonArray]]) {handler.handle(AsyncResultWrapper[java.util.Set[JsonArray], scala.collection.mutable.Set[scala.Option[io.vertx.core.json.JsonArray]]](x, a => a.asScala.map(Option(_))))}}))
   }
 
 
@@ -2004,12 +2004,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableApiHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[RefedInterface1]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableApiHandler({x: java.util.Set[JRefedInterface1] => handler.handle(x.asScala.map(x => scala.Option(x).map(RefedInterface1(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableApiHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[JRefedInterface1]]{def handle(x: java.util.Set[JRefedInterface1]) {handler.handle(x.asScala.map(x => scala.Option(x).map(RefedInterface1(_))))}}))
   }
 
 
   def methodWithSetNullableApiHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[RefedInterface1]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableApiHandlerAsyncResult({x: AsyncResult[java.util.Set[JRefedInterface1]] => handler.handle(AsyncResultWrapper[java.util.Set[JRefedInterface1], scala.collection.mutable.Set[scala.Option[RefedInterface1]]](x, a => a.asScala.map(x => scala.Option(x).map(RefedInterface1(_)))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableApiHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JRefedInterface1]]]{def handle(x: AsyncResult[java.util.Set[JRefedInterface1]]) {handler.handle(AsyncResultWrapper[java.util.Set[JRefedInterface1], scala.collection.mutable.Set[scala.Option[RefedInterface1]]](x, a => a.asScala.map(x => scala.Option(x).map(RefedInterface1(_)))))}}))
   }
 
 
@@ -2024,12 +2024,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableDataObjectHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[TestDataObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableDataObjectHandler({x: java.util.Set[JTestDataObject] => handler.handle(x.asScala.map(x => scala.Option(x).map(TestDataObject(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableDataObjectHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[JTestDataObject]]{def handle(x: java.util.Set[JTestDataObject]) {handler.handle(x.asScala.map(x => scala.Option(x).map(TestDataObject(_))))}}))
   }
 
 
   def methodWithSetNullableDataObjectHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[TestDataObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableDataObjectHandlerAsyncResult({x: AsyncResult[java.util.Set[JTestDataObject]] => handler.handle(AsyncResultWrapper[java.util.Set[JTestDataObject], scala.collection.mutable.Set[scala.Option[TestDataObject]]](x, a => a.asScala.map(x => scala.Option(x).map(TestDataObject(_)))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableDataObjectHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JTestDataObject]]]{def handle(x: AsyncResult[java.util.Set[JTestDataObject]]) {handler.handle(AsyncResultWrapper[java.util.Set[JTestDataObject], scala.collection.mutable.Set[scala.Option[TestDataObject]]](x, a => a.asScala.map(x => scala.Option(x).map(TestDataObject(_)))))}}))
   }
 
 
@@ -2044,12 +2044,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableEnumHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumHandler({x: java.util.Set[TestEnum] => handler.handle(x.asScala.map(Option(_)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[TestEnum]]{def handle(x: java.util.Set[TestEnum]) {handler.handle(x.asScala.map(Option(_)))}}))
   }
 
 
   def methodWithSetNullableEnumHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumHandlerAsyncResult({x: AsyncResult[java.util.Set[TestEnum]] => handler.handle(AsyncResultWrapper[java.util.Set[TestEnum], scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]](x, a => a.asScala.map(Option(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableEnumHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[TestEnum]]]{def handle(x: AsyncResult[java.util.Set[TestEnum]]) {handler.handle(AsyncResultWrapper[java.util.Set[TestEnum], scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestEnum]]](x, a => a.asScala.map(Option(_))))}}))
   }
 
 
@@ -2064,12 +2064,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithSetNullableGenEnumHandler (handler: Handler[scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumHandler({x: java.util.Set[TestGenEnum] => handler.handle(x.asScala.map(Option(_)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Set[TestGenEnum]]{def handle(x: java.util.Set[TestGenEnum]) {handler.handle(x.asScala.map(Option(_)))}}))
   }
 
 
   def methodWithSetNullableGenEnumHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumHandlerAsyncResult({x: AsyncResult[java.util.Set[TestGenEnum]] => handler.handle(AsyncResultWrapper[java.util.Set[TestGenEnum], scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]](x, a => a.asScala.map(Option(_))))})
+    asJava.asInstanceOf[JNullableTCK].methodWithSetNullableGenEnumHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[TestGenEnum]]]{def handle(x: AsyncResult[java.util.Set[TestGenEnum]]) {handler.handle(AsyncResultWrapper[java.util.Set[TestGenEnum], scala.collection.mutable.Set[scala.Option[io.vertx.codegen.testmodel.TestGenEnum]]](x, a => a.asScala.map(Option(_))))}}))
   }
 
 
@@ -2084,12 +2084,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithMapNullableByteHandler (handler: Handler[scala.collection.mutable.Map[String, scala.Option[Byte]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableByteHandler({x: java.util.Map[String, java.lang.Byte] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Byte])).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableByteHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Byte]]{def handle(x: java.util.Map[String, java.lang.Byte]) {handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Byte])).toSeq: _*))}}))
   }
 
 
   def methodWithMapNullableByteHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[Byte]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableByteHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Byte]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Byte], scala.collection.mutable.Map[String, scala.Option[Byte]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Byte])).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableByteHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Byte]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Byte]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Byte], scala.collection.mutable.Map[String, scala.Option[Byte]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Byte])).toSeq: _*)))}}))
   }
 
 
@@ -2104,12 +2104,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithMapNullableShortHandler (handler: Handler[scala.collection.mutable.Map[String, scala.Option[Short]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableShortHandler({x: java.util.Map[String, java.lang.Short] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Short])).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableShortHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Short]]{def handle(x: java.util.Map[String, java.lang.Short]) {handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Short])).toSeq: _*))}}))
   }
 
 
   def methodWithMapNullableShortHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[Short]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableShortHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Short]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Short], scala.collection.mutable.Map[String, scala.Option[Short]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Short])).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableShortHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Short]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Short]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Short], scala.collection.mutable.Map[String, scala.Option[Short]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Short])).toSeq: _*)))}}))
   }
 
 
@@ -2124,12 +2124,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithMapNullableIntegerHandler (handler: Handler[scala.collection.mutable.Map[String, scala.Option[Int]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableIntegerHandler({x: java.util.Map[String, java.lang.Integer] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Int])).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableIntegerHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Integer]]{def handle(x: java.util.Map[String, java.lang.Integer]) {handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Int])).toSeq: _*))}}))
   }
 
 
   def methodWithMapNullableIntegerHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[Int]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableIntegerHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Integer], scala.collection.mutable.Map[String, scala.Option[Int]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Int])).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableIntegerHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Integer]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Integer]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Integer], scala.collection.mutable.Map[String, scala.Option[Int]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Int])).toSeq: _*)))}}))
   }
 
 
@@ -2144,12 +2144,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithMapNullableLongHandler (handler: Handler[scala.collection.mutable.Map[String, scala.Option[Long]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableLongHandler({x: java.util.Map[String, java.lang.Long] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Long])).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableLongHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Long]]{def handle(x: java.util.Map[String, java.lang.Long]) {handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Long])).toSeq: _*))}}))
   }
 
 
   def methodWithMapNullableLongHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[Long]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableLongHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Long]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Long], scala.collection.mutable.Map[String, scala.Option[Long]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Long])).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableLongHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Long]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Long]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Long], scala.collection.mutable.Map[String, scala.Option[Long]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Long])).toSeq: _*)))}}))
   }
 
 
@@ -2164,12 +2164,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithMapNullableBooleanHandler (handler: Handler[scala.collection.mutable.Map[String, scala.Option[Boolean]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableBooleanHandler({x: java.util.Map[String, java.lang.Boolean] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Boolean])).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableBooleanHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Boolean]]{def handle(x: java.util.Map[String, java.lang.Boolean]) {handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Boolean])).toSeq: _*))}}))
   }
 
 
   def methodWithMapNullableBooleanHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[Boolean]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableBooleanHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Boolean]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Boolean], scala.collection.mutable.Map[String, scala.Option[Boolean]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Boolean])).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableBooleanHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Boolean]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Boolean]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Boolean], scala.collection.mutable.Map[String, scala.Option[Boolean]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Boolean])).toSeq: _*)))}}))
   }
 
 
@@ -2184,12 +2184,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithMapNullableFloatHandler (handler: Handler[scala.collection.mutable.Map[String, scala.Option[Float]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableFloatHandler({x: java.util.Map[String, java.lang.Float] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Float])).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableFloatHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Float]]{def handle(x: java.util.Map[String, java.lang.Float]) {handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Float])).toSeq: _*))}}))
   }
 
 
   def methodWithMapNullableFloatHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[Float]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableFloatHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Float]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Float], scala.collection.mutable.Map[String, scala.Option[Float]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Float])).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableFloatHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Float]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Float]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Float], scala.collection.mutable.Map[String, scala.Option[Float]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Float])).toSeq: _*)))}}))
   }
 
 
@@ -2204,12 +2204,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithMapNullableDoubleHandler (handler: Handler[scala.collection.mutable.Map[String, scala.Option[Double]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableDoubleHandler({x: java.util.Map[String, java.lang.Double] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Double])).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableDoubleHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Double]]{def handle(x: java.util.Map[String, java.lang.Double]) {handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Double])).toSeq: _*))}}))
   }
 
 
   def methodWithMapNullableDoubleHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[Double]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableDoubleHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Double]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Double], scala.collection.mutable.Map[String, scala.Option[Double]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Double])).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableDoubleHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Double]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Double]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Double], scala.collection.mutable.Map[String, scala.Option[Double]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Double])).toSeq: _*)))}}))
   }
 
 
@@ -2224,12 +2224,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithMapNullableStringHandler (handler: Handler[scala.collection.mutable.Map[String, scala.Option[String]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableStringHandler({x: java.util.Map[String, java.lang.String] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[String])).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableStringHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.String]]{def handle(x: java.util.Map[String, java.lang.String]) {handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[String])).toSeq: _*))}}))
   }
 
 
   def methodWithMapNullableStringHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[String]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableStringHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, scala.Option[String]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[String])).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableStringHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.String]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.String]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.String], scala.collection.mutable.Map[String, scala.Option[String]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[String])).toSeq: _*)))}}))
   }
 
 
@@ -2244,12 +2244,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithMapNullableCharHandler (handler: Handler[scala.collection.mutable.Map[String, scala.Option[Char]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableCharHandler({x: java.util.Map[String, java.lang.Character] => handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Char])).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableCharHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, java.lang.Character]]{def handle(x: java.util.Map[String, java.lang.Character]) {handler.handle(collection.mutable.Map(x.asScala.mapValues(x => scala.Option(x.asInstanceOf[Char])).toSeq: _*))}}))
   }
 
 
   def methodWithMapNullableCharHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[Char]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableCharHandlerAsyncResult({x: AsyncResult[java.util.Map[String, java.lang.Character]] => handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Character], scala.collection.mutable.Map[String, scala.Option[Char]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Char])).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableCharHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, java.lang.Character]]]{def handle(x: AsyncResult[java.util.Map[String, java.lang.Character]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, java.lang.Character], scala.collection.mutable.Map[String, scala.Option[Char]]](x, a => collection.mutable.Map(a.asScala.mapValues(x => scala.Option(x.asInstanceOf[Char])).toSeq: _*)))}}))
   }
 
 
@@ -2264,12 +2264,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithMapNullableJsonObjectHandler (handler: Handler[scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandler({x: java.util.Map[String, JsonObject] => handler.handle(collection.mutable.Map(x.asScala.mapValues(Option(_)).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, JsonObject]]{def handle(x: java.util.Map[String, JsonObject]) {handler.handle(collection.mutable.Map(x.asScala.mapValues(Option(_)).toSeq: _*))}}))
   }
 
 
   def methodWithMapNullableJsonObjectHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandlerAsyncResult({x: AsyncResult[java.util.Map[String, JsonObject]] => handler.handle(AsyncResultWrapper[java.util.Map[String, JsonObject], scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]](x, a => collection.mutable.Map(a.asScala.mapValues(Option(_)).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonObjectHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, JsonObject]]]{def handle(x: AsyncResult[java.util.Map[String, JsonObject]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, JsonObject], scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonObject]]](x, a => collection.mutable.Map(a.asScala.mapValues(Option(_)).toSeq: _*)))}}))
   }
 
 
@@ -2284,12 +2284,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithMapNullableJsonArrayHandler (handler: Handler[scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandler({x: java.util.Map[String, JsonArray] => handler.handle(collection.mutable.Map(x.asScala.mapValues(Option(_)).toSeq: _*))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandler((if (handler == null) null else new io.vertx.core.Handler[java.util.Map[String, JsonArray]]{def handle(x: java.util.Map[String, JsonArray]) {handler.handle(collection.mutable.Map(x.asScala.mapValues(Option(_)).toSeq: _*))}}))
   }
 
 
   def methodWithMapNullableJsonArrayHandlerAsyncResult (handler: Handler[AsyncResult[scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandlerAsyncResult({x: AsyncResult[java.util.Map[String, JsonArray]] => handler.handle(AsyncResultWrapper[java.util.Map[String, JsonArray], scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]](x, a => collection.mutable.Map(a.asScala.mapValues(Option(_)).toSeq: _*)))})
+    asJava.asInstanceOf[JNullableTCK].methodWithMapNullableJsonArrayHandlerAsyncResult((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Map[String, JsonArray]]]{def handle(x: AsyncResult[java.util.Map[String, JsonArray]]) {handler.handle(AsyncResultWrapper[java.util.Map[String, JsonArray], scala.collection.mutable.Map[String, scala.Option[io.vertx.core.json.JsonArray]]](x, a => collection.mutable.Map(a.asScala.mapValues(Option(_)).toSeq: _*)))}}))
   }
 
 
@@ -2304,12 +2304,12 @@ class NullableTCK(private val _asJava: Object) {
 
 
   def methodWithNullableHandler (expectNull: Boolean, handler: Handler[String]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableHandler(expectNull.asInstanceOf[java.lang.Boolean], {x: java.lang.String => handler.handle(x.asInstanceOf[String])})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableHandler(expectNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}}))
   }
 
 
   def methodWithNullableHandlerAsyncResult (expectNull: Boolean, handler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JNullableTCK].methodWithNullableHandlerAsyncResult(expectNull.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JNullableTCK].methodWithNullableHandlerAsyncResult(expectNull.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
   }
 
 

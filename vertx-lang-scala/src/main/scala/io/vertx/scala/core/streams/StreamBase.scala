@@ -51,7 +51,7 @@ object StreamBase {
    */
   
   def exceptionHandler(handler: Handler[Throwable]): StreamBase = {
-    asJava.asInstanceOf[JStreamBase].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JStreamBase].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 

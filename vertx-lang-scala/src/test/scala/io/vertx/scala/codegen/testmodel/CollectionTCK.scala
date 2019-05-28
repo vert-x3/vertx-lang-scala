@@ -59,257 +59,257 @@ class CollectionTCK(private val _asJava: Object) {
 
 
   def methodWithHandlerListAndSet (listStringHandler: Handler[scala.collection.mutable.Buffer[String]], listIntHandler: Handler[scala.collection.mutable.Buffer[Int]], setStringHandler: Handler[scala.collection.mutable.Set[String]], setIntHandler: Handler[scala.collection.mutable.Set[Int]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListAndSet({x: java.util.List[java.lang.String] => listStringHandler.handle(x.asScala.map(x => x.asInstanceOf[String]))}, {x: java.util.List[java.lang.Integer] => listIntHandler.handle(x.asScala.map(x => x.asInstanceOf[Int]))}, {x: java.util.Set[java.lang.String] => setStringHandler.handle(x.asScala.map(x => x.asInstanceOf[String]))}, {x: java.util.Set[java.lang.Integer] => setIntHandler.handle(x.asScala.map(x => x.asInstanceOf[Int]))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListAndSet((if (listStringHandler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.String]]{def handle(x: java.util.List[java.lang.String]) {listStringHandler.handle(x.asScala.map(x => x.asInstanceOf[String]))}}), (if (listIntHandler == null) null else new io.vertx.core.Handler[java.util.List[java.lang.Integer]]{def handle(x: java.util.List[java.lang.Integer]) {listIntHandler.handle(x.asScala.map(x => x.asInstanceOf[Int]))}}), (if (setStringHandler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.String]]{def handle(x: java.util.Set[java.lang.String]) {setStringHandler.handle(x.asScala.map(x => x.asInstanceOf[String]))}}), (if (setIntHandler == null) null else new io.vertx.core.Handler[java.util.Set[java.lang.Integer]]{def handle(x: java.util.Set[java.lang.Integer]) {setIntHandler.handle(x.asScala.map(x => x.asInstanceOf[Int]))}}))
   }
 
 
   def methodWithHandlerAsyncResultListString (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[String]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListString({x: AsyncResult[java.util.List[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListString((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.String]]]{def handle(x: AsyncResult[java.util.List[java.lang.String]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.String], scala.collection.mutable.Buffer[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))}}))
   }
 
 
   def methodWithHandlerAsyncResultListInteger (handler: Handler[AsyncResult[scala.collection.mutable.Buffer[Int]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListInteger({x: AsyncResult[java.util.List[java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.List[java.lang.Integer], scala.collection.mutable.Buffer[Int]](x, a => a.asScala.map(x => x.asInstanceOf[Int])))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListInteger((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[java.lang.Integer]]]{def handle(x: AsyncResult[java.util.List[java.lang.Integer]]) {handler.handle(AsyncResultWrapper[java.util.List[java.lang.Integer], scala.collection.mutable.Buffer[Int]](x, a => a.asScala.map(x => x.asInstanceOf[Int])))}}))
   }
 
 
   def methodWithHandlerListVertxGen (listHandler: Handler[scala.collection.mutable.Buffer[RefedInterface1]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListVertxGen({x: java.util.List[JRefedInterface1] => listHandler.handle(x.asScala.map(x => RefedInterface1(x)))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListVertxGen((if (listHandler == null) null else new io.vertx.core.Handler[java.util.List[JRefedInterface1]]{def handle(x: java.util.List[JRefedInterface1]) {listHandler.handle(x.asScala.map(x => RefedInterface1(x)))}}))
   }
 
 
   def methodWithHandlerListAbstractVertxGen (listHandler: Handler[scala.collection.mutable.Buffer[RefedInterface2]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListAbstractVertxGen({x: java.util.List[JRefedInterface2] => listHandler.handle(x.asScala.map(x => RefedInterface2(x)))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListAbstractVertxGen((if (listHandler == null) null else new io.vertx.core.Handler[java.util.List[JRefedInterface2]]{def handle(x: java.util.List[JRefedInterface2]) {listHandler.handle(x.asScala.map(x => RefedInterface2(x)))}}))
   }
 
 
   def methodWithHandlerListJsonObject (listHandler: Handler[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListJsonObject({x: java.util.List[JsonObject] => listHandler.handle(x.asScala)})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListJsonObject((if (listHandler == null) null else new io.vertx.core.Handler[java.util.List[JsonObject]]{def handle(x: java.util.List[JsonObject]) {listHandler.handle(x.asScala)}}))
   }
 
 
   def methodWithHandlerListComplexJsonObject (listHandler: Handler[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListComplexJsonObject({x: java.util.List[JsonObject] => listHandler.handle(x.asScala)})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListComplexJsonObject((if (listHandler == null) null else new io.vertx.core.Handler[java.util.List[JsonObject]]{def handle(x: java.util.List[JsonObject]) {listHandler.handle(x.asScala)}}))
   }
 
 
   def methodWithHandlerListJsonArray (listHandler: Handler[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListJsonArray({x: java.util.List[JsonArray] => listHandler.handle(x.asScala)})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListJsonArray((if (listHandler == null) null else new io.vertx.core.Handler[java.util.List[JsonArray]]{def handle(x: java.util.List[JsonArray]) {listHandler.handle(x.asScala)}}))
   }
 
 
   def methodWithHandlerListComplexJsonArray (listHandler: Handler[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListComplexJsonArray({x: java.util.List[JsonArray] => listHandler.handle(x.asScala)})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListComplexJsonArray((if (listHandler == null) null else new io.vertx.core.Handler[java.util.List[JsonArray]]{def handle(x: java.util.List[JsonArray]) {listHandler.handle(x.asScala)}}))
   }
 
 
   def methodWithHandlerListDataObject (listHandler: Handler[scala.collection.mutable.Buffer[TestDataObject]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListDataObject({x: java.util.List[JTestDataObject] => listHandler.handle(x.asScala.map(x => TestDataObject(x)))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListDataObject((if (listHandler == null) null else new io.vertx.core.Handler[java.util.List[JTestDataObject]]{def handle(x: java.util.List[JTestDataObject]) {listHandler.handle(x.asScala.map(x => TestDataObject(x)))}}))
   }
 
 
   def methodWithHandlerListEnum (listHandler: Handler[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListEnum({x: java.util.List[TestEnum] => listHandler.handle(x.asScala)})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerListEnum((if (listHandler == null) null else new io.vertx.core.Handler[java.util.List[TestEnum]]{def handle(x: java.util.List[TestEnum]) {listHandler.handle(x.asScala)}}))
   }
 
 
   def methodWithHandlerAsyncResultSetString (handler: Handler[AsyncResult[scala.collection.mutable.Set[String]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetString({x: AsyncResult[java.util.Set[java.lang.String]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.String], scala.collection.mutable.Set[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetString((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.String]]]{def handle(x: AsyncResult[java.util.Set[java.lang.String]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.String], scala.collection.mutable.Set[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))}}))
   }
 
 
   def methodWithHandlerAsyncResultSetInteger (handler: Handler[AsyncResult[scala.collection.mutable.Set[Int]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetInteger({x: AsyncResult[java.util.Set[java.lang.Integer]] => handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Integer], scala.collection.mutable.Set[Int]](x, a => a.asScala.map(x => x.asInstanceOf[Int])))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetInteger((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.Integer]]]{def handle(x: AsyncResult[java.util.Set[java.lang.Integer]]) {handler.handle(AsyncResultWrapper[java.util.Set[java.lang.Integer], scala.collection.mutable.Set[Int]](x, a => a.asScala.map(x => x.asInstanceOf[Int])))}}))
   }
 
 
   def methodWithHandlerSetVertxGen (listHandler: Handler[scala.collection.mutable.Set[RefedInterface1]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetVertxGen({x: java.util.Set[JRefedInterface1] => listHandler.handle(x.asScala.map(x => RefedInterface1(x)))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetVertxGen((if (listHandler == null) null else new io.vertx.core.Handler[java.util.Set[JRefedInterface1]]{def handle(x: java.util.Set[JRefedInterface1]) {listHandler.handle(x.asScala.map(x => RefedInterface1(x)))}}))
   }
 
 
   def methodWithHandlerSetAbstractVertxGen (listHandler: Handler[scala.collection.mutable.Set[RefedInterface2]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetAbstractVertxGen({x: java.util.Set[JRefedInterface2] => listHandler.handle(x.asScala.map(x => RefedInterface2(x)))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetAbstractVertxGen((if (listHandler == null) null else new io.vertx.core.Handler[java.util.Set[JRefedInterface2]]{def handle(x: java.util.Set[JRefedInterface2]) {listHandler.handle(x.asScala.map(x => RefedInterface2(x)))}}))
   }
 
 
   def methodWithHandlerSetJsonObject (listHandler: Handler[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetJsonObject({x: java.util.Set[JsonObject] => listHandler.handle(x.asScala)})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetJsonObject((if (listHandler == null) null else new io.vertx.core.Handler[java.util.Set[JsonObject]]{def handle(x: java.util.Set[JsonObject]) {listHandler.handle(x.asScala)}}))
   }
 
 
   def methodWithHandlerSetComplexJsonObject (listHandler: Handler[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetComplexJsonObject({x: java.util.Set[JsonObject] => listHandler.handle(x.asScala)})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetComplexJsonObject((if (listHandler == null) null else new io.vertx.core.Handler[java.util.Set[JsonObject]]{def handle(x: java.util.Set[JsonObject]) {listHandler.handle(x.asScala)}}))
   }
 
 
   def methodWithHandlerSetJsonArray (listHandler: Handler[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetJsonArray({x: java.util.Set[JsonArray] => listHandler.handle(x.asScala)})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetJsonArray((if (listHandler == null) null else new io.vertx.core.Handler[java.util.Set[JsonArray]]{def handle(x: java.util.Set[JsonArray]) {listHandler.handle(x.asScala)}}))
   }
 
 
   def methodWithHandlerSetComplexJsonArray (setHandler: Handler[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetComplexJsonArray({x: java.util.Set[JsonArray] => setHandler.handle(x.asScala)})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetComplexJsonArray((if (setHandler == null) null else new io.vertx.core.Handler[java.util.Set[JsonArray]]{def handle(x: java.util.Set[JsonArray]) {setHandler.handle(x.asScala)}}))
   }
 
 
   def methodWithHandlerSetDataObject (setHandler: Handler[scala.collection.mutable.Set[TestDataObject]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetDataObject({x: java.util.Set[JTestDataObject] => setHandler.handle(x.asScala.map(x => TestDataObject(x)))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetDataObject((if (setHandler == null) null else new io.vertx.core.Handler[java.util.Set[JTestDataObject]]{def handle(x: java.util.Set[JTestDataObject]) {setHandler.handle(x.asScala.map(x => TestDataObject(x)))}}))
   }
 
 
   def methodWithHandlerSetEnum (setHandler: Handler[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetEnum({x: java.util.Set[TestEnum] => setHandler.handle(x.asScala)})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerSetEnum((if (setHandler == null) null else new io.vertx.core.Handler[java.util.Set[TestEnum]]{def handle(x: java.util.Set[TestEnum]) {setHandler.handle(x.asScala)}}))
   }
 
 
   def methodWithHandlerAsyncResultListVertxGen (listHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[RefedInterface1]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListVertxGen({x: AsyncResult[java.util.List[JRefedInterface1]] => listHandler.handle(AsyncResultWrapper[java.util.List[JRefedInterface1], scala.collection.mutable.Buffer[RefedInterface1]](x, a => a.asScala.map(x => RefedInterface1(x))))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListVertxGen((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JRefedInterface1]]]{def handle(x: AsyncResult[java.util.List[JRefedInterface1]]) {listHandler.handle(AsyncResultWrapper[java.util.List[JRefedInterface1], scala.collection.mutable.Buffer[RefedInterface1]](x, a => a.asScala.map(x => RefedInterface1(x))))}}))
   }
 
 
   def methodWithHandlerAsyncResultListAbstractVertxGen (listHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[RefedInterface2]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListAbstractVertxGen({x: AsyncResult[java.util.List[JRefedInterface2]] => listHandler.handle(AsyncResultWrapper[java.util.List[JRefedInterface2], scala.collection.mutable.Buffer[RefedInterface2]](x, a => a.asScala.map(x => RefedInterface2(x))))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListAbstractVertxGen((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JRefedInterface2]]]{def handle(x: AsyncResult[java.util.List[JRefedInterface2]]) {listHandler.handle(AsyncResultWrapper[java.util.List[JRefedInterface2], scala.collection.mutable.Buffer[RefedInterface2]](x, a => a.asScala.map(x => RefedInterface2(x))))}}))
   }
 
 
   def methodWithHandlerAsyncResultListJsonObject (listHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListJsonObject({x: AsyncResult[java.util.List[JsonObject]] => listHandler.handle(AsyncResultWrapper[java.util.List[JsonObject], scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]](x, a => a.asScala))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListJsonObject((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JsonObject]]]{def handle(x: AsyncResult[java.util.List[JsonObject]]) {listHandler.handle(AsyncResultWrapper[java.util.List[JsonObject], scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]](x, a => a.asScala))}}))
   }
 
 
   def methodWithHandlerAsyncResultListComplexJsonObject (listHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListComplexJsonObject({x: AsyncResult[java.util.List[JsonObject]] => listHandler.handle(AsyncResultWrapper[java.util.List[JsonObject], scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]](x, a => a.asScala))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListComplexJsonObject((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JsonObject]]]{def handle(x: AsyncResult[java.util.List[JsonObject]]) {listHandler.handle(AsyncResultWrapper[java.util.List[JsonObject], scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]](x, a => a.asScala))}}))
   }
 
 
   def methodWithHandlerAsyncResultListJsonArray (listHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListJsonArray({x: AsyncResult[java.util.List[JsonArray]] => listHandler.handle(AsyncResultWrapper[java.util.List[JsonArray], scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]](x, a => a.asScala))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListJsonArray((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JsonArray]]]{def handle(x: AsyncResult[java.util.List[JsonArray]]) {listHandler.handle(AsyncResultWrapper[java.util.List[JsonArray], scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]](x, a => a.asScala))}}))
   }
 
 
   def methodWithHandlerAsyncResultListComplexJsonArray (listHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListComplexJsonArray({x: AsyncResult[java.util.List[JsonArray]] => listHandler.handle(AsyncResultWrapper[java.util.List[JsonArray], scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]](x, a => a.asScala))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListComplexJsonArray((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JsonArray]]]{def handle(x: AsyncResult[java.util.List[JsonArray]]) {listHandler.handle(AsyncResultWrapper[java.util.List[JsonArray], scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]](x, a => a.asScala))}}))
   }
 
 
   def methodWithHandlerAsyncResultListDataObject (listHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[TestDataObject]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListDataObject({x: AsyncResult[java.util.List[JTestDataObject]] => listHandler.handle(AsyncResultWrapper[java.util.List[JTestDataObject], scala.collection.mutable.Buffer[TestDataObject]](x, a => a.asScala.map(x => TestDataObject(x))))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListDataObject((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JTestDataObject]]]{def handle(x: AsyncResult[java.util.List[JTestDataObject]]) {listHandler.handle(AsyncResultWrapper[java.util.List[JTestDataObject], scala.collection.mutable.Buffer[TestDataObject]](x, a => a.asScala.map(x => TestDataObject(x))))}}))
   }
 
 
   def methodWithHandlerAsyncResultListEnum (listHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListEnum({x: AsyncResult[java.util.List[TestEnum]] => listHandler.handle(AsyncResultWrapper[java.util.List[TestEnum], scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]](x, a => a.asScala))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultListEnum((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[TestEnum]]]{def handle(x: AsyncResult[java.util.List[TestEnum]]) {listHandler.handle(AsyncResultWrapper[java.util.List[TestEnum], scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]](x, a => a.asScala))}}))
   }
 
 
   def methodWithHandlerAsyncResultSetVertxGen (listHandler: Handler[AsyncResult[scala.collection.mutable.Set[RefedInterface1]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetVertxGen({x: AsyncResult[java.util.Set[JRefedInterface1]] => listHandler.handle(AsyncResultWrapper[java.util.Set[JRefedInterface1], scala.collection.mutable.Set[RefedInterface1]](x, a => a.asScala.map(x => RefedInterface1(x))))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetVertxGen((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JRefedInterface1]]]{def handle(x: AsyncResult[java.util.Set[JRefedInterface1]]) {listHandler.handle(AsyncResultWrapper[java.util.Set[JRefedInterface1], scala.collection.mutable.Set[RefedInterface1]](x, a => a.asScala.map(x => RefedInterface1(x))))}}))
   }
 
 
   def methodWithHandlerAsyncResultSetAbstractVertxGen (listHandler: Handler[AsyncResult[scala.collection.mutable.Set[RefedInterface2]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetAbstractVertxGen({x: AsyncResult[java.util.Set[JRefedInterface2]] => listHandler.handle(AsyncResultWrapper[java.util.Set[JRefedInterface2], scala.collection.mutable.Set[RefedInterface2]](x, a => a.asScala.map(x => RefedInterface2(x))))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetAbstractVertxGen((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JRefedInterface2]]]{def handle(x: AsyncResult[java.util.Set[JRefedInterface2]]) {listHandler.handle(AsyncResultWrapper[java.util.Set[JRefedInterface2], scala.collection.mutable.Set[RefedInterface2]](x, a => a.asScala.map(x => RefedInterface2(x))))}}))
   }
 
 
   def methodWithHandlerAsyncResultSetJsonObject (listHandler: Handler[AsyncResult[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetJsonObject({x: AsyncResult[java.util.Set[JsonObject]] => listHandler.handle(AsyncResultWrapper[java.util.Set[JsonObject], scala.collection.mutable.Set[io.vertx.core.json.JsonObject]](x, a => a.asScala))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetJsonObject((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JsonObject]]]{def handle(x: AsyncResult[java.util.Set[JsonObject]]) {listHandler.handle(AsyncResultWrapper[java.util.Set[JsonObject], scala.collection.mutable.Set[io.vertx.core.json.JsonObject]](x, a => a.asScala))}}))
   }
 
 
   def methodWithHandlerAsyncResultSetComplexJsonObject (listHandler: Handler[AsyncResult[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetComplexJsonObject({x: AsyncResult[java.util.Set[JsonObject]] => listHandler.handle(AsyncResultWrapper[java.util.Set[JsonObject], scala.collection.mutable.Set[io.vertx.core.json.JsonObject]](x, a => a.asScala))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetComplexJsonObject((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JsonObject]]]{def handle(x: AsyncResult[java.util.Set[JsonObject]]) {listHandler.handle(AsyncResultWrapper[java.util.Set[JsonObject], scala.collection.mutable.Set[io.vertx.core.json.JsonObject]](x, a => a.asScala))}}))
   }
 
 
   def methodWithHandlerAsyncResultSetJsonArray (listHandler: Handler[AsyncResult[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetJsonArray({x: AsyncResult[java.util.Set[JsonArray]] => listHandler.handle(AsyncResultWrapper[java.util.Set[JsonArray], scala.collection.mutable.Set[io.vertx.core.json.JsonArray]](x, a => a.asScala))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetJsonArray((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JsonArray]]]{def handle(x: AsyncResult[java.util.Set[JsonArray]]) {listHandler.handle(AsyncResultWrapper[java.util.Set[JsonArray], scala.collection.mutable.Set[io.vertx.core.json.JsonArray]](x, a => a.asScala))}}))
   }
 
 
   def methodWithHandlerAsyncResultSetComplexJsonArray (listHandler: Handler[AsyncResult[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetComplexJsonArray({x: AsyncResult[java.util.Set[JsonArray]] => listHandler.handle(AsyncResultWrapper[java.util.Set[JsonArray], scala.collection.mutable.Set[io.vertx.core.json.JsonArray]](x, a => a.asScala))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetComplexJsonArray((if (listHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JsonArray]]]{def handle(x: AsyncResult[java.util.Set[JsonArray]]) {listHandler.handle(AsyncResultWrapper[java.util.Set[JsonArray], scala.collection.mutable.Set[io.vertx.core.json.JsonArray]](x, a => a.asScala))}}))
   }
 
 
   def methodWithHandlerAsyncResultSetDataObject (setHandler: Handler[AsyncResult[scala.collection.mutable.Set[TestDataObject]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetDataObject({x: AsyncResult[java.util.Set[JTestDataObject]] => setHandler.handle(AsyncResultWrapper[java.util.Set[JTestDataObject], scala.collection.mutable.Set[TestDataObject]](x, a => a.asScala.map(x => TestDataObject(x))))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetDataObject((if (setHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[JTestDataObject]]]{def handle(x: AsyncResult[java.util.Set[JTestDataObject]]) {setHandler.handle(AsyncResultWrapper[java.util.Set[JTestDataObject], scala.collection.mutable.Set[TestDataObject]](x, a => a.asScala.map(x => TestDataObject(x))))}}))
   }
 
 
   def methodWithHandlerAsyncResultSetEnum (setHandler: Handler[AsyncResult[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]]): Unit = {
-    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetEnum({x: AsyncResult[java.util.Set[TestEnum]] => setHandler.handle(AsyncResultWrapper[java.util.Set[TestEnum], scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]](x, a => a.asScala))})
+    asJava.asInstanceOf[JCollectionTCK].methodWithHandlerAsyncResultSetEnum((if (setHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[TestEnum]]]{def handle(x: AsyncResult[java.util.Set[TestEnum]]) {setHandler.handle(AsyncResultWrapper[java.util.Set[TestEnum], scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]](x, a => a.asScala))}}))
   }
 
 
   def methodWithMapStringReturn (handler: Handler[String]): scala.collection.mutable.Map[String, String] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapStringReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapStringReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
   }
 
 
   def methodWithMapLongReturn (handler: Handler[String]): scala.collection.mutable.Map[String, Long] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapLongReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapLongReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.mapValues(x => x.asInstanceOf[Long]).toSeq: _*)
   }
 
 
   def methodWithMapIntegerReturn (handler: Handler[String]): scala.collection.mutable.Map[String, Int] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapIntegerReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapIntegerReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.mapValues(x => x.asInstanceOf[Int]).toSeq: _*)
   }
 
 
   def methodWithMapShortReturn (handler: Handler[String]): scala.collection.mutable.Map[String, Short] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapShortReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapShortReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.mapValues(x => x.asInstanceOf[Short]).toSeq: _*)
   }
 
 
   def methodWithMapByteReturn (handler: Handler[String]): scala.collection.mutable.Map[String, Byte] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapByteReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapByteReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.mapValues(x => x.asInstanceOf[Byte]).toSeq: _*)
   }
 
 
   def methodWithMapCharacterReturn (handler: Handler[String]): scala.collection.mutable.Map[String, Char] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapCharacterReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapCharacterReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.mapValues(x => x.asInstanceOf[Char]).toSeq: _*)
   }
 
 
   def methodWithMapBooleanReturn (handler: Handler[String]): scala.collection.mutable.Map[String, Boolean] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapBooleanReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapBooleanReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.mapValues(x => x.asInstanceOf[Boolean]).toSeq: _*)
   }
 
 
   def methodWithMapFloatReturn (handler: Handler[String]): scala.collection.mutable.Map[String, Float] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapFloatReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapFloatReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.mapValues(x => x.asInstanceOf[Float]).toSeq: _*)
   }
 
 
   def methodWithMapDoubleReturn (handler: Handler[String]): scala.collection.mutable.Map[String, Double] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapDoubleReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapDoubleReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.mapValues(x => x.asInstanceOf[Double]).toSeq: _*)
   }
 
 
   def methodWithMapJsonObjectReturn (handler: Handler[String]): scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapJsonObjectReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapJsonObjectReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.toSeq: _*)
   }
 
 
   def methodWithMapComplexJsonObjectReturn (handler: Handler[String]): scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapComplexJsonObjectReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapComplexJsonObjectReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.toSeq: _*)
   }
 
 
   def methodWithMapJsonArrayReturn (handler: Handler[String]): scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapJsonArrayReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapJsonArrayReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.toSeq: _*)
   }
 
 
   def methodWithMapComplexJsonArrayReturn (handler: Handler[String]): scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapComplexJsonArrayReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapComplexJsonArrayReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.toSeq: _*)
   }
 
 
   def methodWithMapObjectReturn (handler: Handler[String]): scala.collection.mutable.Map[String, AnyRef] = {
-    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapObjectReturn({x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asScala.mapValues(x => x).toSeq: _*)
+    collection.mutable.Map(asJava.asInstanceOf[JCollectionTCK].methodWithMapObjectReturn((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asScala.mapValues(x => x).toSeq: _*)
   }
 
 

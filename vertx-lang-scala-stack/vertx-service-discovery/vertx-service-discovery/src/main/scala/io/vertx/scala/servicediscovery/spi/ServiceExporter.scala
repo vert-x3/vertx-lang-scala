@@ -80,7 +80,7 @@ class ServiceExporter(private val _asJava: Object) {
    * Close the exporter   * @param closeHandler the handle to be notified when exporter is closed, may be `null`
    */
   def close (closeHandler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JServiceExporter].close({x: Void => closeHandler.handle(x)})
+    asJava.asInstanceOf[JServiceExporter].close((if (closeHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {closeHandler.handle(x)}}))
   }
 
 

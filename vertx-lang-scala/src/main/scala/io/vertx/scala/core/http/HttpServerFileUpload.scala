@@ -45,21 +45,21 @@ class HttpServerFileUpload(private val _asJava: Object) extends ReadStream[io.ve
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): HttpServerFileUpload = {
-    asJava.asInstanceOf[JHttpServerFileUpload].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JHttpServerFileUpload].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[io.vertx.core.buffer.Buffer]): HttpServerFileUpload = {
-    asJava.asInstanceOf[JHttpServerFileUpload].handler({x: Buffer => handler.handle(x)})
+    asJava.asInstanceOf[JHttpServerFileUpload].handler((if (handler == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def endHandler(endHandler: Handler[Unit]): HttpServerFileUpload = {
-    asJava.asInstanceOf[JHttpServerFileUpload].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JHttpServerFileUpload].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -119,7 +119,7 @@ class HttpServerFileUpload(private val _asJava: Object) extends ReadStream[io.ve
    * called with the result.   * @param dst the destination write stream
    */
   override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JHttpServerFileUpload].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpServerFileUpload].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

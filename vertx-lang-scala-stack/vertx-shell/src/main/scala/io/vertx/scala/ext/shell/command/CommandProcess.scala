@@ -45,7 +45,7 @@ class CommandProcess(private val _asJava: Object) extends Tty (_asJava) {
 
   override 
   def stdinHandler(handler: Handler[String]): CommandProcess = {
-    asJava.asInstanceOf[JCommandProcess].stdinHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
+    asJava.asInstanceOf[JCommandProcess].stdinHandler((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}}))
     this
   }
 
@@ -56,7 +56,7 @@ class CommandProcess(private val _asJava: Object) extends Tty (_asJava) {
    */
   
   def interruptHandler(handler: Handler[Unit]): CommandProcess = {
-    asJava.asInstanceOf[JCommandProcess].interruptHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JCommandProcess].interruptHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -67,7 +67,7 @@ class CommandProcess(private val _asJava: Object) extends Tty (_asJava) {
    */
   
   def suspendHandler(handler: Handler[Unit]): CommandProcess = {
-    asJava.asInstanceOf[JCommandProcess].suspendHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JCommandProcess].suspendHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -78,7 +78,7 @@ class CommandProcess(private val _asJava: Object) extends Tty (_asJava) {
    */
   
   def resumeHandler(handler: Handler[Unit]): CommandProcess = {
-    asJava.asInstanceOf[JCommandProcess].resumeHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JCommandProcess].resumeHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -89,7 +89,7 @@ class CommandProcess(private val _asJava: Object) extends Tty (_asJava) {
    */
   
   def endHandler(handler: Handler[Unit]): CommandProcess = {
-    asJava.asInstanceOf[JCommandProcess].endHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JCommandProcess].endHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -109,7 +109,7 @@ class CommandProcess(private val _asJava: Object) extends Tty (_asJava) {
    */
   
   def backgroundHandler(handler: Handler[Unit]): CommandProcess = {
-    asJava.asInstanceOf[JCommandProcess].backgroundHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JCommandProcess].backgroundHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -119,14 +119,14 @@ class CommandProcess(private val _asJava: Object) extends Tty (_asJava) {
    */
   
   def foregroundHandler(handler: Handler[Unit]): CommandProcess = {
-    asJava.asInstanceOf[JCommandProcess].foregroundHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JCommandProcess].foregroundHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def resizehandler(handler: Handler[Unit]): CommandProcess = {
-    asJava.asInstanceOf[JCommandProcess].resizehandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JCommandProcess].resizehandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 

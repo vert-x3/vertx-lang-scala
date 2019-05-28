@@ -57,7 +57,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def receivedFrameHandler(handler: Handler[ServerFrame]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].receivedFrameHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServerHandler].receivedFrameHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -67,7 +67,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def connectHandler(handler: Handler[ServerFrame]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].connectHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServerHandler].connectHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -77,7 +77,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def stompHandler(handler: Handler[ServerFrame]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].stompHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServerHandler].stompHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -87,7 +87,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def subscribeHandler(handler: Handler[ServerFrame]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].subscribeHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServerHandler].subscribeHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -97,7 +97,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def unsubscribeHandler(handler: Handler[ServerFrame]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].unsubscribeHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServerHandler].unsubscribeHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -107,7 +107,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def sendHandler(handler: Handler[ServerFrame]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].sendHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServerHandler].sendHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -117,7 +117,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def closeHandler(handler: Handler[StompServerConnection]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].closeHandler({x: JStompServerConnection => handler.handle(StompServerConnection(x))})
+    asJava.asInstanceOf[JStompServerHandler].closeHandler((if (handler == null) null else new io.vertx.core.Handler[JStompServerConnection]{def handle(x: JStompServerConnection) {handler.handle(StompServerConnection(x))}}))
     this
   }
 
@@ -127,7 +127,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def commitHandler(handler: Handler[ServerFrame]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].commitHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServerHandler].commitHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -137,7 +137,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def abortHandler(handler: Handler[ServerFrame]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].abortHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServerHandler].abortHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -147,7 +147,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def beginHandler(handler: Handler[ServerFrame]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].beginHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServerHandler].beginHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -157,7 +157,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def disconnectHandler(handler: Handler[ServerFrame]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].disconnectHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServerHandler].disconnectHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -167,7 +167,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def ackHandler(handler: Handler[ServerFrame]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].ackHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServerHandler].ackHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -177,7 +177,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def nackHandler(handler: Handler[ServerFrame]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].nackHandler({x: JServerFrame => handler.handle(ServerFrame(x))})
+    asJava.asInstanceOf[JStompServerHandler].nackHandler((if (handler == null) null else new io.vertx.core.Handler[JServerFrame]{def handle(x: JServerFrame) {handler.handle(ServerFrame(x))}}))
     this
   }
 
@@ -191,7 +191,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def onAuthenticationRequest(connection: StompServerConnection, login: String, passcode: String, handler: Handler[AsyncResult[Boolean]]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].onAuthenticationRequest(connection.asJava.asInstanceOf[JStompServerConnection], login.asInstanceOf[java.lang.String], passcode.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JStompServerHandler].onAuthenticationRequest(connection.asJava.asInstanceOf[JStompServerConnection], login.asInstanceOf[java.lang.String], passcode.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {handler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))}}))
     this
   }
 
@@ -239,7 +239,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def onAckHandler(handler: Handler[Acknowledgement]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].onAckHandler({x: JAcknowledgement => handler.handle(Acknowledgement(x))})
+    asJava.asInstanceOf[JStompServerHandler].onAckHandler((if (handler == null) null else new io.vertx.core.Handler[JAcknowledgement]{def handle(x: JAcknowledgement) {handler.handle(Acknowledgement(x))}}))
     this
   }
 
@@ -249,7 +249,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def onNackHandler(handler: Handler[Acknowledgement]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].onNackHandler({x: JAcknowledgement => handler.handle(Acknowledgement(x))})
+    asJava.asInstanceOf[JStompServerHandler].onNackHandler((if (handler == null) null else new io.vertx.core.Handler[JAcknowledgement]{def handle(x: JAcknowledgement) {handler.handle(Acknowledgement(x))}}))
     this
   }
 
@@ -263,7 +263,7 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
    */
   
   def pingHandler(handler: Handler[StompServerConnection]): StompServerHandler = {
-    asJava.asInstanceOf[JStompServerHandler].pingHandler({x: JStompServerConnection => handler.handle(StompServerConnection(x))})
+    asJava.asInstanceOf[JStompServerHandler].pingHandler((if (handler == null) null else new io.vertx.core.Handler[JStompServerConnection]{def handle(x: JStompServerConnection) {handler.handle(StompServerConnection(x))}}))
     this
   }
 

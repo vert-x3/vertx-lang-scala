@@ -54,7 +54,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def connect(port: Int, host: String, connectHandler: Handler[AsyncResult[MqttConnAckMessage]]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JMqttConnAckMessage] => connectHandler.handle(AsyncResultWrapper[JMqttConnAckMessage, MqttConnAckMessage](x, a => MqttConnAckMessage(a)))})
+    asJava.asInstanceOf[JMqttClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], (if (connectHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMqttConnAckMessage]]{def handle(x: AsyncResult[JMqttConnAckMessage]) {connectHandler.handle(AsyncResultWrapper[JMqttConnAckMessage, MqttConnAckMessage](x, a => MqttConnAckMessage(a)))}}))
     this
   }
 
@@ -67,7 +67,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def connect(port: Int, host: String, serverName: String, connectHandler: Handler[AsyncResult[MqttConnAckMessage]]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], serverName.asInstanceOf[java.lang.String], {x: AsyncResult[JMqttConnAckMessage] => connectHandler.handle(AsyncResultWrapper[JMqttConnAckMessage, MqttConnAckMessage](x, a => MqttConnAckMessage(a)))})
+    asJava.asInstanceOf[JMqttClient].connect(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], serverName.asInstanceOf[java.lang.String], (if (connectHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMqttConnAckMessage]]{def handle(x: AsyncResult[JMqttConnAckMessage]) {connectHandler.handle(AsyncResultWrapper[JMqttConnAckMessage, MqttConnAckMessage](x, a => MqttConnAckMessage(a)))}}))
     this
   }
 
@@ -86,7 +86,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def disconnect(disconnectHandler: Handler[AsyncResult[Unit]]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].disconnect({x: AsyncResult[Void] => disconnectHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JMqttClient].disconnect((if (disconnectHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {disconnectHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -115,7 +115,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def publish(topic: String, payload: io.vertx.core.buffer.Buffer, qosLevel: io.netty.handler.codec.mqtt.MqttQoS, isDup: Boolean, isRetain: Boolean, publishSentHandler: Handler[AsyncResult[Int]]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].publish(topic.asInstanceOf[java.lang.String], payload, qosLevel, isDup.asInstanceOf[java.lang.Boolean], isRetain.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Integer] => publishSentHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
+    asJava.asInstanceOf[JMqttClient].publish(topic.asInstanceOf[java.lang.String], payload, qosLevel, isDup.asInstanceOf[java.lang.Boolean], isRetain.asInstanceOf[java.lang.Boolean], (if (publishSentHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Integer]]{def handle(x: AsyncResult[java.lang.Integer]) {publishSentHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))}}))
     this
   }
 
@@ -125,7 +125,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def publishCompletionHandler(publishCompletionHandler: Handler[Int]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].publishCompletionHandler({x: java.lang.Integer => publishCompletionHandler.handle(x.asInstanceOf[Int])})
+    asJava.asInstanceOf[JMqttClient].publishCompletionHandler((if (publishCompletionHandler == null) null else new io.vertx.core.Handler[java.lang.Integer]{def handle(x: java.lang.Integer) {publishCompletionHandler.handle(x.asInstanceOf[Int])}}))
     this
   }
 
@@ -135,7 +135,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def publishHandler(publishHandler: Handler[MqttPublishMessage]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].publishHandler({x: JMqttPublishMessage => publishHandler.handle(MqttPublishMessage(x))})
+    asJava.asInstanceOf[JMqttClient].publishHandler((if (publishHandler == null) null else new io.vertx.core.Handler[JMqttPublishMessage]{def handle(x: JMqttPublishMessage) {publishHandler.handle(MqttPublishMessage(x))}}))
     this
   }
 
@@ -145,7 +145,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def subscribeCompletionHandler(subscribeCompletionHandler: Handler[MqttSubAckMessage]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].subscribeCompletionHandler({x: JMqttSubAckMessage => subscribeCompletionHandler.handle(MqttSubAckMessage(x))})
+    asJava.asInstanceOf[JMqttClient].subscribeCompletionHandler((if (subscribeCompletionHandler == null) null else new io.vertx.core.Handler[JMqttSubAckMessage]{def handle(x: JMqttSubAckMessage) {subscribeCompletionHandler.handle(MqttSubAckMessage(x))}}))
     this
   }
 
@@ -168,7 +168,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def subscribe(topic: String, qos: Int, subscribeSentHandler: Handler[AsyncResult[Int]]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].subscribe(topic.asInstanceOf[java.lang.String], qos.asInstanceOf[java.lang.Integer], {x: AsyncResult[java.lang.Integer] => subscribeSentHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
+    asJava.asInstanceOf[JMqttClient].subscribe(topic.asInstanceOf[java.lang.String], qos.asInstanceOf[java.lang.Integer], (if (subscribeSentHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Integer]]{def handle(x: AsyncResult[java.lang.Integer]) {subscribeSentHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))}}))
     this
   }
 
@@ -189,7 +189,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def subscribe(topics: scala.collection.mutable.Map[String, Int], subscribeSentHandler: Handler[AsyncResult[Int]]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].subscribe(topics.mapValues(x => x.asInstanceOf[java.lang.Integer]).asJava, {x: AsyncResult[java.lang.Integer] => subscribeSentHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
+    asJava.asInstanceOf[JMqttClient].subscribe(topics.mapValues(x => x.asInstanceOf[java.lang.Integer]).asJava, (if (subscribeSentHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Integer]]{def handle(x: AsyncResult[java.lang.Integer]) {subscribeSentHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))}}))
     this
   }
 
@@ -199,7 +199,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def unsubscribeCompletionHandler(unsubscribeCompletionHandler: Handler[Int]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].unsubscribeCompletionHandler({x: java.lang.Integer => unsubscribeCompletionHandler.handle(x.asInstanceOf[Int])})
+    asJava.asInstanceOf[JMqttClient].unsubscribeCompletionHandler((if (unsubscribeCompletionHandler == null) null else new io.vertx.core.Handler[java.lang.Integer]{def handle(x: java.lang.Integer) {unsubscribeCompletionHandler.handle(x.asInstanceOf[Int])}}))
     this
   }
 
@@ -220,7 +220,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def unsubscribe(topic: String, unsubscribeSentHandler: Handler[AsyncResult[Int]]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].unsubscribe(topic.asInstanceOf[java.lang.String], {x: AsyncResult[java.lang.Integer] => unsubscribeSentHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
+    asJava.asInstanceOf[JMqttClient].unsubscribe(topic.asInstanceOf[java.lang.String], (if (unsubscribeSentHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Integer]]{def handle(x: AsyncResult[java.lang.Integer]) {unsubscribeSentHandler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))}}))
     this
   }
 
@@ -230,7 +230,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def pingResponseHandler(pingResponseHandler: Handler[Unit]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].pingResponseHandler({x: Void => pingResponseHandler.handle(x)})
+    asJava.asInstanceOf[JMqttClient].pingResponseHandler((if (pingResponseHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {pingResponseHandler.handle(x)}}))
     this
   }
 
@@ -243,7 +243,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def exceptionHandler(handler: Handler[Throwable]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JMqttClient].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -253,7 +253,7 @@ class MqttClient(private val _asJava: Object) {
    */
   
   def closeHandler(closeHandler: Handler[Unit]): MqttClient = {
-    asJava.asInstanceOf[JMqttClient].closeHandler({x: Void => closeHandler.handle(x)})
+    asJava.asInstanceOf[JMqttClient].closeHandler((if (closeHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {closeHandler.handle(x)}}))
     this
   }
 

@@ -80,7 +80,7 @@ class HttpServer(private val _asJava: Object) extends Measured {
    */
   
   def requestHandler(handler: Handler[HttpServerRequest]): HttpServer = {
-    asJava.asInstanceOf[JHttpServer].requestHandler({x: JHttpServerRequest => handler.handle(HttpServerRequest(x))})
+    asJava.asInstanceOf[JHttpServer].requestHandler((if (handler == null) null else new io.vertx.core.Handler[JHttpServerRequest]{def handle(x: JHttpServerRequest) {handler.handle(HttpServerRequest(x))}}))
     this
   }
 
@@ -89,7 +89,7 @@ class HttpServer(private val _asJava: Object) extends Measured {
    */
   
   def connectionHandler(handler: Handler[HttpConnection]): HttpServer = {
-    asJava.asInstanceOf[JHttpServer].connectionHandler({x: JHttpConnection => handler.handle(HttpConnection(x))})
+    asJava.asInstanceOf[JHttpServer].connectionHandler((if (handler == null) null else new io.vertx.core.Handler[JHttpConnection]{def handle(x: JHttpConnection) {handler.handle(HttpConnection(x))}}))
     this
   }
 
@@ -100,7 +100,7 @@ class HttpServer(private val _asJava: Object) extends Measured {
    */
   
   def exceptionHandler(handler: Handler[Throwable]): HttpServer = {
-    asJava.asInstanceOf[JHttpServer].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JHttpServer].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -110,7 +110,7 @@ class HttpServer(private val _asJava: Object) extends Measured {
    */
   
   def websocketHandler(handler: Handler[ServerWebSocket]): HttpServer = {
-    asJava.asInstanceOf[JHttpServer].websocketHandler({x: JServerWebSocket => handler.handle(ServerWebSocket(x))})
+    asJava.asInstanceOf[JHttpServer].websocketHandler((if (handler == null) null else new io.vertx.core.Handler[JServerWebSocket]{def handle(x: JServerWebSocket) {handler.handle(ServerWebSocket(x))}}))
     this
   }
 
@@ -148,7 +148,7 @@ class HttpServer(private val _asJava: Object) extends Measured {
    */
   
   def listen(port: Int, host: String, listenHandler: Handler[AsyncResult[HttpServer]]): HttpServer = {
-    asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer, HttpServer](x, a => HttpServer(a)))})
+    asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], (if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpServer]]{def handle(x: AsyncResult[JHttpServer]) {listenHandler.handle(AsyncResultWrapper[JHttpServer, HttpServer](x, a => HttpServer(a)))}}))
     this
   }
 
@@ -160,7 +160,7 @@ class HttpServer(private val _asJava: Object) extends Measured {
    */
   
   def listen(address: SocketAddress, listenHandler: Handler[AsyncResult[HttpServer]]): HttpServer = {
-    asJava.asInstanceOf[JHttpServer].listen(address.asJava.asInstanceOf[JSocketAddress], {x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer, HttpServer](x, a => HttpServer(a)))})
+    asJava.asInstanceOf[JHttpServer].listen(address.asJava.asInstanceOf[JSocketAddress], (if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpServer]]{def handle(x: AsyncResult[JHttpServer]) {listenHandler.handle(AsyncResultWrapper[JHttpServer, HttpServer](x, a => HttpServer(a)))}}))
     this
   }
 
@@ -181,7 +181,7 @@ class HttpServer(private val _asJava: Object) extends Measured {
    */
   
   def listen(port: Int, listenHandler: Handler[AsyncResult[HttpServer]]): HttpServer = {
-    asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer, HttpServer](x, a => HttpServer(a)))})
+    asJava.asInstanceOf[JHttpServer].listen(port.asInstanceOf[java.lang.Integer], (if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpServer]]{def handle(x: AsyncResult[JHttpServer]) {listenHandler.handle(AsyncResultWrapper[JHttpServer, HttpServer](x, a => HttpServer(a)))}}))
     this
   }
 
@@ -190,7 +190,7 @@ class HttpServer(private val _asJava: Object) extends Measured {
    */
   
   def listen(listenHandler: Handler[AsyncResult[HttpServer]]): HttpServer = {
-    asJava.asInstanceOf[JHttpServer].listen({x: AsyncResult[JHttpServer] => listenHandler.handle(AsyncResultWrapper[JHttpServer, HttpServer](x, a => HttpServer(a)))})
+    asJava.asInstanceOf[JHttpServer].listen((if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpServer]]{def handle(x: AsyncResult[JHttpServer]) {listenHandler.handle(AsyncResultWrapper[JHttpServer, HttpServer](x, a => HttpServer(a)))}}))
     this
   }
 
@@ -216,7 +216,7 @@ class HttpServer(private val _asJava: Object) extends Measured {
    * Like [[io.vertx.scala.core.http.HttpServer#close]] but supplying a handler that will be called when the server is actually closed (or has failed).   * @param completionHandler the handler
    */
   def close (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JHttpServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JHttpServer].close((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**

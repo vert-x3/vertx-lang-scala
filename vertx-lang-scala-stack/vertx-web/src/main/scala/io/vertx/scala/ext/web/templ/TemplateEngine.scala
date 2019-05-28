@@ -46,7 +46,7 @@ class TemplateEngine(private val _asJava: Object) extends STemplateEngine (_asJa
    * @param handler the handler that will be called with a result containing the buffer or a failure.
    */
   def render(context: RoutingContext, templateFileName: String, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): Unit = {
-    asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext], templateFileName.asInstanceOf[java.lang.String], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))})
+    asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext], templateFileName.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Buffer]]{def handle(x: AsyncResult[Buffer]) {handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))}}))
   }
 
   /**
@@ -59,7 +59,7 @@ class TemplateEngine(private val _asJava: Object) extends STemplateEngine (_asJa
    * @param handler the handler that will be called with a result containing the buffer or a failure.
    */
   def render(context: RoutingContext, templateDirectory: String, templateFileName: String, handler: Handler[AsyncResult[io.vertx.core.buffer.Buffer]]): Unit = {
-    asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext], templateDirectory.asInstanceOf[java.lang.String], templateFileName.asInstanceOf[java.lang.String], {x: AsyncResult[Buffer] => handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))})
+    asJava.asInstanceOf[JTemplateEngine].render(context.asJava.asInstanceOf[JRoutingContext], templateDirectory.asInstanceOf[java.lang.String], templateFileName.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Buffer]]{def handle(x: AsyncResult[Buffer]) {handler.handle(AsyncResultWrapper[Buffer, io.vertx.core.buffer.Buffer](x, a => a))}}))
   }
 
   /**

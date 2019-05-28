@@ -51,7 +51,7 @@ class TermServer(private val _asJava: Object) {
    */
   
   def termHandler(handler: Handler[Term]): TermServer = {
-    asJava.asInstanceOf[JTermServer].termHandler({x: JTerm => handler.handle(Term(x))})
+    asJava.asInstanceOf[JTermServer].termHandler((if (handler == null) null else new io.vertx.core.Handler[JTerm]{def handle(x: JTerm) {handler.handle(Term(x))}}))
     this
   }
 
@@ -81,7 +81,7 @@ class TermServer(private val _asJava: Object) {
    */
   
   def listen(listenHandler: Handler[AsyncResult[TermServer]]): TermServer = {
-    asJava.asInstanceOf[JTermServer].listen({x: AsyncResult[JTermServer] => listenHandler.handle(AsyncResultWrapper[JTermServer, TermServer](x, a => TermServer(a)))})
+    asJava.asInstanceOf[JTermServer].listen((if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JTermServer]]{def handle(x: AsyncResult[JTermServer]) {listenHandler.handle(AsyncResultWrapper[JTermServer, TermServer](x, a => TermServer(a)))}}))
     this
   }
 
@@ -107,7 +107,7 @@ class TermServer(private val _asJava: Object) {
    * Like [[io.vertx.scala.ext.shell.term.TermServer#close]] but supplying a handler that will be notified when close is complete.   * @param completionHandler the handler to be notified when the term server is closed
    */
   def close (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JTermServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JTermServer].close((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

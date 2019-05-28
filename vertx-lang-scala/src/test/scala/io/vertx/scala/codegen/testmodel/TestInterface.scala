@@ -103,87 +103,87 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
 
 
   def methodWithHandlerBasicTypes (byteHandler: Handler[Byte], shortHandler: Handler[Short], intHandler: Handler[Int], longHandler: Handler[Long], floatHandler: Handler[Float], doubleHandler: Handler[Double], booleanHandler: Handler[Boolean], charHandler: Handler[Char], stringHandler: Handler[String]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerBasicTypes({x: java.lang.Byte => byteHandler.handle(x.asInstanceOf[Byte])}, {x: java.lang.Short => shortHandler.handle(x.asInstanceOf[Short])}, {x: java.lang.Integer => intHandler.handle(x.asInstanceOf[Int])}, {x: java.lang.Long => longHandler.handle(x.asInstanceOf[Long])}, {x: java.lang.Float => floatHandler.handle(x.asInstanceOf[Float])}, {x: java.lang.Double => doubleHandler.handle(x.asInstanceOf[Double])}, {x: java.lang.Boolean => booleanHandler.handle(x.asInstanceOf[Boolean])}, {x: java.lang.Character => charHandler.handle(x.asInstanceOf[Char])}, {x: java.lang.String => stringHandler.handle(x.asInstanceOf[String])})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerBasicTypes((if (byteHandler == null) null else new io.vertx.core.Handler[java.lang.Byte]{def handle(x: java.lang.Byte) {byteHandler.handle(x.asInstanceOf[Byte])}}), (if (shortHandler == null) null else new io.vertx.core.Handler[java.lang.Short]{def handle(x: java.lang.Short) {shortHandler.handle(x.asInstanceOf[Short])}}), (if (intHandler == null) null else new io.vertx.core.Handler[java.lang.Integer]{def handle(x: java.lang.Integer) {intHandler.handle(x.asInstanceOf[Int])}}), (if (longHandler == null) null else new io.vertx.core.Handler[java.lang.Long]{def handle(x: java.lang.Long) {longHandler.handle(x.asInstanceOf[Long])}}), (if (floatHandler == null) null else new io.vertx.core.Handler[java.lang.Float]{def handle(x: java.lang.Float) {floatHandler.handle(x.asInstanceOf[Float])}}), (if (doubleHandler == null) null else new io.vertx.core.Handler[java.lang.Double]{def handle(x: java.lang.Double) {doubleHandler.handle(x.asInstanceOf[Double])}}), (if (booleanHandler == null) null else new io.vertx.core.Handler[java.lang.Boolean]{def handle(x: java.lang.Boolean) {booleanHandler.handle(x.asInstanceOf[Boolean])}}), (if (charHandler == null) null else new io.vertx.core.Handler[java.lang.Character]{def handle(x: java.lang.Character) {charHandler.handle(x.asInstanceOf[Char])}}), (if (stringHandler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {stringHandler.handle(x.asInstanceOf[String])}}))
   }
 
 
   def methodWithHandlerStringReturn (expected: String): Handler[String] = {
-    {x: String => asJava.asInstanceOf[JTestInterface].methodWithHandlerStringReturn(expected.asInstanceOf[java.lang.String]).handle(x.asInstanceOf[java.lang.String])}
+    if (asJava.asInstanceOf[JTestInterface].methodWithHandlerStringReturn(expected.asInstanceOf[java.lang.String]) == null) null else {x: String => asJava.asInstanceOf[JTestInterface].methodWithHandlerStringReturn(expected.asInstanceOf[java.lang.String]).handle(x.asInstanceOf[java.lang.String])}
   }
 
 
   def methodWithHandlerGenericReturn [T: TypeTag](handler: Handler[T]): Handler[T] = {
-    {x: T => asJava.asInstanceOf[JTestInterface].methodWithHandlerGenericReturn[Object]({x: Object => handler.handle(toScala[T](x))}).handle(toJava[T](x))}
+    if (asJava.asInstanceOf[JTestInterface].methodWithHandlerGenericReturn[Object]((if (handler == null) null else new io.vertx.core.Handler[Object]{def handle(x: Object) {handler.handle(toScala[T](x))}})) == null) null else {x: T => asJava.asInstanceOf[JTestInterface].methodWithHandlerGenericReturn[Object]((if (handler == null) null else new io.vertx.core.Handler[Object]{def handle(x: Object) {handler.handle(toScala[T](x))}})).handle(toJava[T](x))}
   }
 
 
   def methodWithHandlerVertxGenReturn (expected: String): Handler[RefedInterface1] = {
-    {x: RefedInterface1 => asJava.asInstanceOf[JTestInterface].methodWithHandlerVertxGenReturn(expected.asInstanceOf[java.lang.String]).handle(x.asJava.asInstanceOf[JRefedInterface1])}
+    if (asJava.asInstanceOf[JTestInterface].methodWithHandlerVertxGenReturn(expected.asInstanceOf[java.lang.String]) == null) null else {x: RefedInterface1 => asJava.asInstanceOf[JTestInterface].methodWithHandlerVertxGenReturn(expected.asInstanceOf[java.lang.String]).handle(x.asJava.asInstanceOf[JRefedInterface1])}
   }
 
 
   def methodWithHandlerAsyncResultByte (sendFailure: Boolean, handler: Handler[AsyncResult[Byte]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultByte(sendFailure.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Byte] => handler.handle(AsyncResultWrapper[java.lang.Byte, Byte](x, a => a.asInstanceOf[Byte]))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultByte(sendFailure.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Byte]]{def handle(x: AsyncResult[java.lang.Byte]) {handler.handle(AsyncResultWrapper[java.lang.Byte, Byte](x, a => a.asInstanceOf[Byte]))}}))
   }
 
 
   def methodWithHandlerAsyncResultShort (sendFailure: Boolean, handler: Handler[AsyncResult[Short]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultShort(sendFailure.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Short] => handler.handle(AsyncResultWrapper[java.lang.Short, Short](x, a => a.asInstanceOf[Short]))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultShort(sendFailure.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Short]]{def handle(x: AsyncResult[java.lang.Short]) {handler.handle(AsyncResultWrapper[java.lang.Short, Short](x, a => a.asInstanceOf[Short]))}}))
   }
 
 
   def methodWithHandlerAsyncResultInteger (sendFailure: Boolean, handler: Handler[AsyncResult[Int]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultInteger(sendFailure.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Integer] => handler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultInteger(sendFailure.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Integer]]{def handle(x: AsyncResult[java.lang.Integer]) {handler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))}}))
   }
 
 
   def methodWithHandlerAsyncResultLong (sendFailure: Boolean, handler: Handler[AsyncResult[Long]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultLong(sendFailure.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Long] => handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultLong(sendFailure.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
   }
 
 
   def methodWithHandlerAsyncResultFloat (sendFailure: Boolean, handler: Handler[AsyncResult[Float]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultFloat(sendFailure.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Float] => handler.handle(AsyncResultWrapper[java.lang.Float, Float](x, a => a.asInstanceOf[Float]))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultFloat(sendFailure.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Float]]{def handle(x: AsyncResult[java.lang.Float]) {handler.handle(AsyncResultWrapper[java.lang.Float, Float](x, a => a.asInstanceOf[Float]))}}))
   }
 
 
   def methodWithHandlerAsyncResultDouble (sendFailure: Boolean, handler: Handler[AsyncResult[Double]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultDouble(sendFailure.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Double] => handler.handle(AsyncResultWrapper[java.lang.Double, Double](x, a => a.asInstanceOf[Double]))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultDouble(sendFailure.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Double]]{def handle(x: AsyncResult[java.lang.Double]) {handler.handle(AsyncResultWrapper[java.lang.Double, Double](x, a => a.asInstanceOf[Double]))}}))
   }
 
 
   def methodWithHandlerAsyncResultBoolean (sendFailure: Boolean, handler: Handler[AsyncResult[Boolean]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultBoolean(sendFailure.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Boolean] => handler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultBoolean(sendFailure.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Boolean]]{def handle(x: AsyncResult[java.lang.Boolean]) {handler.handle(AsyncResultWrapper[java.lang.Boolean, Boolean](x, a => a.asInstanceOf[Boolean]))}}))
   }
 
 
   def methodWithHandlerAsyncResultCharacter (sendFailure: Boolean, handler: Handler[AsyncResult[Char]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultCharacter(sendFailure.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.Character] => handler.handle(AsyncResultWrapper[java.lang.Character, Char](x, a => a.asInstanceOf[Char]))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultCharacter(sendFailure.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Character]]{def handle(x: AsyncResult[java.lang.Character]) {handler.handle(AsyncResultWrapper[java.lang.Character, Char](x, a => a.asInstanceOf[Char]))}}))
   }
 
 
   def methodWithHandlerAsyncResultString (sendFailure: Boolean, handler: Handler[AsyncResult[String]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultString(sendFailure.asInstanceOf[java.lang.Boolean], {x: AsyncResult[java.lang.String] => handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultString(sendFailure.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.String]]{def handle(x: AsyncResult[java.lang.String]) {handler.handle(AsyncResultWrapper[java.lang.String, String](x, a => a.asInstanceOf[String]))}}))
   }
 
 
   def methodWithHandlerAsyncResultDataObject (sendFailure: Boolean, handler: Handler[AsyncResult[TestDataObject]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultDataObject(sendFailure.asInstanceOf[java.lang.Boolean], {x: AsyncResult[JTestDataObject] => handler.handle(AsyncResultWrapper[JTestDataObject, TestDataObject](x, a => TestDataObject(a)))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultDataObject(sendFailure.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JTestDataObject]]{def handle(x: AsyncResult[JTestDataObject]) {handler.handle(AsyncResultWrapper[JTestDataObject, TestDataObject](x, a => TestDataObject(a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultStringReturn (expected: String, fail: Boolean): Handler[AsyncResult[String]] = {
-    {x: AsyncResult[String] => asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultStringReturn(expected.asInstanceOf[java.lang.String], fail.asInstanceOf[java.lang.Boolean]).handle(AsyncResultWrapper[String, java.lang.String](x, a => a.asInstanceOf[java.lang.String]))}
+    if (asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultStringReturn(expected.asInstanceOf[java.lang.String], fail.asInstanceOf[java.lang.Boolean]) == null) null else {x: AsyncResult[String] => asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultStringReturn(expected.asInstanceOf[java.lang.String], fail.asInstanceOf[java.lang.Boolean]).handle(AsyncResultWrapper[String, java.lang.String](x, a => a.asInstanceOf[java.lang.String]))}
   }
 
 
   def methodWithHandlerAsyncResultGenericReturn [T: TypeTag](handler: Handler[AsyncResult[T]]): Handler[AsyncResult[T]] = {
-    {x: AsyncResult[T] => asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericReturn[Object]({x: AsyncResult[Object] => handler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))}).handle(AsyncResultWrapper[T, Object](x, a => toJava[T](a)))}
+    if (asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericReturn[Object]((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {handler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))}})) == null) null else {x: AsyncResult[T] => asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericReturn[Object]((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {handler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))}})).handle(AsyncResultWrapper[T, Object](x, a => toJava[T](a)))}
   }
 
 
   def methodWithHandlerAsyncResultVertxGenReturn (expected: String, fail: Boolean): Handler[AsyncResult[RefedInterface1]] = {
-    {x: AsyncResult[RefedInterface1] => asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultVertxGenReturn(expected.asInstanceOf[java.lang.String], fail.asInstanceOf[java.lang.Boolean]).handle(AsyncResultWrapper[RefedInterface1, JRefedInterface1](x, a => a.asJava.asInstanceOf[JRefedInterface1]))}
+    if (asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultVertxGenReturn(expected.asInstanceOf[java.lang.String], fail.asInstanceOf[java.lang.Boolean]) == null) null else {x: AsyncResult[RefedInterface1] => asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultVertxGenReturn(expected.asInstanceOf[java.lang.String], fail.asInstanceOf[java.lang.Boolean]).handle(AsyncResultWrapper[RefedInterface1, JRefedInterface1](x, a => a.asJava.asInstanceOf[JRefedInterface1]))}
   }
 
 
@@ -203,12 +203,12 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
 
 
   def methodWithHandlerUserTypes (handler: Handler[RefedInterface1]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerUserTypes({x: JRefedInterface1 => handler.handle(RefedInterface1(x))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerUserTypes((if (handler == null) null else new io.vertx.core.Handler[JRefedInterface1]{def handle(x: JRefedInterface1) {handler.handle(RefedInterface1(x))}}))
   }
 
 
   def methodWithHandlerAsyncResultUserTypes (handler: Handler[AsyncResult[RefedInterface1]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultUserTypes({x: AsyncResult[JRefedInterface1] => handler.handle(AsyncResultWrapper[JRefedInterface1, RefedInterface1](x, a => RefedInterface1(a)))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultUserTypes((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRefedInterface1]]{def handle(x: AsyncResult[JRefedInterface1]) {handler.handle(AsyncResultWrapper[JRefedInterface1, RefedInterface1](x, a => RefedInterface1(a)))}}))
   }
 
 
@@ -228,32 +228,32 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
 
 
   def methodWithHandlerVoid (handler: Handler[Unit]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerVoid({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerVoid((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
   }
 
 
   def methodWithHandlerAsyncResultVoid (sendFailure: Boolean, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultVoid(sendFailure.asInstanceOf[java.lang.Boolean], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultVoid(sendFailure.asInstanceOf[java.lang.Boolean], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
   def methodWithHandlerThrowable (handler: Handler[Throwable]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerThrowable({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerThrowable((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
   }
 
 
   def methodWithHandlerDataObject (handler: Handler[TestDataObject]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerDataObject({x: JTestDataObject => handler.handle(TestDataObject(x))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerDataObject((if (handler == null) null else new io.vertx.core.Handler[JTestDataObject]{def handle(x: JTestDataObject) {handler.handle(TestDataObject(x))}}))
   }
 
 
   def methodWithHandlerGenericUserType [U: TypeTag](value: U, handler: Handler[GenericRefedInterface[U]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerGenericUserType[Object](toJava[U](value), {x: JGenericRefedInterface[Object] => handler.handle(GenericRefedInterface[U](x))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerGenericUserType[Object](toJava[U](value), (if (handler == null) null else new io.vertx.core.Handler[JGenericRefedInterface[Object]]{def handle(x: JGenericRefedInterface[Object]) {handler.handle(GenericRefedInterface[U](x))}}))
   }
 
 
   def methodWithHandlerAsyncResultGenericUserType [U: TypeTag](value: U, handler: Handler[AsyncResult[GenericRefedInterface[U]]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericUserType[Object](toJava[U](value), {x: AsyncResult[JGenericRefedInterface[Object]] => handler.handle(AsyncResultWrapper[JGenericRefedInterface[Object], GenericRefedInterface[U]](x, a => GenericRefedInterface[U](a)))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultGenericUserType[Object](toJava[U](value), (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JGenericRefedInterface[Object]]]{def handle(x: AsyncResult[JGenericRefedInterface[Object]]) {handler.handle(AsyncResultWrapper[JGenericRefedInterface[Object], GenericRefedInterface[U]](x, a => GenericRefedInterface[U](a)))}}))
   }
 
 
@@ -333,7 +333,7 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
 
 
   def overloadedMethod (str: String, handler: Handler[String]): String = {
-    asJava.asInstanceOf[JTestInterface].overloadedMethod(str.asInstanceOf[java.lang.String], {x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asInstanceOf[String]
+    asJava.asInstanceOf[JTestInterface].overloadedMethod(str.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asInstanceOf[String]
   }
 
 
@@ -343,12 +343,12 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
 
 
   def overloadedMethod (str: String, refed: RefedInterface1, handler: Handler[String]): String = {
-    asJava.asInstanceOf[JTestInterface].overloadedMethod(str.asInstanceOf[java.lang.String], refed.asJava.asInstanceOf[JRefedInterface1], {x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asInstanceOf[String]
+    asJava.asInstanceOf[JTestInterface].overloadedMethod(str.asInstanceOf[java.lang.String], refed.asJava.asInstanceOf[JRefedInterface1], (if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asInstanceOf[String]
   }
 
 
   def overloadedMethod (str: String, refed: RefedInterface1, period: Long, handler: Handler[String]): String = {
-    asJava.asInstanceOf[JTestInterface].overloadedMethod(str.asInstanceOf[java.lang.String], refed.asJava.asInstanceOf[JRefedInterface1], period.asInstanceOf[java.lang.Long], {x: java.lang.String => handler.handle(x.asInstanceOf[String])}).asInstanceOf[String]
+    asJava.asInstanceOf[JTestInterface].overloadedMethod(str.asInstanceOf[java.lang.String], refed.asJava.asInstanceOf[JRefedInterface1], period.asInstanceOf[java.lang.Long], (if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}})).asInstanceOf[String]
   }
 
 
@@ -363,12 +363,12 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
 
 
   def methodWithGenericHandler [U: TypeTag](`type`: String, handler: Handler[U]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithGenericHandler[Object](`type`.asInstanceOf[java.lang.String], {x: Object => handler.handle(toScala[U](x))})
+    asJava.asInstanceOf[JTestInterface].methodWithGenericHandler[Object](`type`.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[Object]{def handle(x: Object) {handler.handle(toScala[U](x))}}))
   }
 
 
   def methodWithGenericHandlerAsyncResult [U: TypeTag](`type`: String, asyncResultHandler: Handler[AsyncResult[U]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithGenericHandlerAsyncResult[Object](`type`.asInstanceOf[java.lang.String], {x: AsyncResult[Object] => asyncResultHandler.handle(AsyncResultWrapper[Object, U](x, a => toScala[U](a)))})
+    asJava.asInstanceOf[JTestInterface].methodWithGenericHandlerAsyncResult[Object](`type`.asInstanceOf[java.lang.String], (if (asyncResultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {asyncResultHandler.handle(AsyncResultWrapper[Object, U](x, a => toScala[U](a)))}}))
   }
 
 
@@ -413,42 +413,42 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
 
 
   def methodWithHandlerJson (jsonObjectHandler: Handler[io.vertx.core.json.JsonObject], jsonArrayHandler: Handler[io.vertx.core.json.JsonArray]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerJson({x: JsonObject => jsonObjectHandler.handle(x)}, {x: JsonArray => jsonArrayHandler.handle(x)})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerJson((if (jsonObjectHandler == null) null else new io.vertx.core.Handler[JsonObject]{def handle(x: JsonObject) {jsonObjectHandler.handle(x)}}), (if (jsonArrayHandler == null) null else new io.vertx.core.Handler[JsonArray]{def handle(x: JsonArray) {jsonArrayHandler.handle(x)}}))
   }
 
 
   def methodWithHandlerComplexJson (jsonObjectHandler: Handler[io.vertx.core.json.JsonObject], jsonArrayHandler: Handler[io.vertx.core.json.JsonArray]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerComplexJson({x: JsonObject => jsonObjectHandler.handle(x)}, {x: JsonArray => jsonArrayHandler.handle(x)})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerComplexJson((if (jsonObjectHandler == null) null else new io.vertx.core.Handler[JsonObject]{def handle(x: JsonObject) {jsonObjectHandler.handle(x)}}), (if (jsonArrayHandler == null) null else new io.vertx.core.Handler[JsonArray]{def handle(x: JsonArray) {jsonArrayHandler.handle(x)}}))
   }
 
 
   def methodWithHandlerAsyncResultJsonObject (handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultJsonObject({x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultJsonObject((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
   }
 
 
   def methodWithHandlerAsyncResultNullJsonObject (handler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonObject]]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonObject({x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonObject((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {handler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultComplexJsonObject (handler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultComplexJsonObject({x: AsyncResult[JsonObject] => handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultComplexJsonObject((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {handler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
   }
 
 
   def methodWithHandlerAsyncResultJsonArray (handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultJsonArray({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultJsonArray((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
   }
 
 
   def methodWithHandlerAsyncResultNullJsonArray (handler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonArray]]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonArray({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, scala.Option[io.vertx.core.json.JsonArray]](x, a => scala.Option(a)))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultNullJsonArray((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, scala.Option[io.vertx.core.json.JsonArray]](x, a => scala.Option(a)))}}))
   }
 
 
   def methodWithHandlerAsyncResultComplexJsonArray (handler: Handler[AsyncResult[io.vertx.core.json.JsonArray]]): Unit = {
-    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultComplexJsonArray({x: AsyncResult[JsonArray] => handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))})
+    asJava.asInstanceOf[JTestInterface].methodWithHandlerAsyncResultComplexJsonArray((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JsonArray]]{def handle(x: AsyncResult[JsonArray]) {handler.handle(AsyncResultWrapper[JsonArray, io.vertx.core.json.JsonArray](x, a => a))}}))
   }
 
 

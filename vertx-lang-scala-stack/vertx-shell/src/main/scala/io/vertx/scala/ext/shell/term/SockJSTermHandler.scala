@@ -39,7 +39,7 @@ class SockJSTermHandler(private val _asJava: Object) extends io.vertx.core.Handl
 
   
   def termHandler(handler: Handler[Term]): SockJSTermHandler = {
-    asJava.asInstanceOf[JSockJSTermHandler].termHandler({x: JTerm => handler.handle(Term(x))})
+    asJava.asInstanceOf[JSockJSTermHandler].termHandler((if (handler == null) null else new io.vertx.core.Handler[JTerm]{def handle(x: JTerm) {handler.handle(Term(x))}}))
     this
   }
 

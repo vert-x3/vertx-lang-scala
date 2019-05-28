@@ -73,7 +73,7 @@ class MqttServer(private val _asJava: Object) {
    */
   
   def listen(port: Int, host: String, listenHandler: Handler[AsyncResult[MqttServer]]): MqttServer = {
-    asJava.asInstanceOf[JMqttServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], {x: AsyncResult[JMqttServer] => listenHandler.handle(AsyncResultWrapper[JMqttServer, MqttServer](x, a => MqttServer(a)))})
+    asJava.asInstanceOf[JMqttServer].listen(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], (if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMqttServer]]{def handle(x: AsyncResult[JMqttServer]) {listenHandler.handle(AsyncResultWrapper[JMqttServer, MqttServer](x, a => MqttServer(a)))}}))
     this
   }
 
@@ -96,7 +96,7 @@ class MqttServer(private val _asJava: Object) {
    */
   
   def listen(port: Int, listenHandler: Handler[AsyncResult[MqttServer]]): MqttServer = {
-    asJava.asInstanceOf[JMqttServer].listen(port.asInstanceOf[java.lang.Integer], {x: AsyncResult[JMqttServer] => listenHandler.handle(AsyncResultWrapper[JMqttServer, MqttServer](x, a => MqttServer(a)))})
+    asJava.asInstanceOf[JMqttServer].listen(port.asInstanceOf[java.lang.Integer], (if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMqttServer]]{def handle(x: AsyncResult[JMqttServer]) {listenHandler.handle(AsyncResultWrapper[JMqttServer, MqttServer](x, a => MqttServer(a)))}}))
     this
   }
 
@@ -107,7 +107,7 @@ class MqttServer(private val _asJava: Object) {
    */
   
   def listen(listenHandler: Handler[AsyncResult[MqttServer]]): MqttServer = {
-    asJava.asInstanceOf[JMqttServer].listen({x: AsyncResult[JMqttServer] => listenHandler.handle(AsyncResultWrapper[JMqttServer, MqttServer](x, a => MqttServer(a)))})
+    asJava.asInstanceOf[JMqttServer].listen((if (listenHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMqttServer]]{def handle(x: AsyncResult[JMqttServer]) {listenHandler.handle(AsyncResultWrapper[JMqttServer, MqttServer](x, a => MqttServer(a)))}}))
     this
   }
 
@@ -118,7 +118,7 @@ class MqttServer(private val _asJava: Object) {
    */
   
   def endpointHandler(handler: Handler[MqttEndpoint]): MqttServer = {
-    asJava.asInstanceOf[JMqttServer].endpointHandler({x: JMqttEndpoint => handler.handle(MqttEndpoint(x))})
+    asJava.asInstanceOf[JMqttServer].endpointHandler((if (handler == null) null else new io.vertx.core.Handler[JMqttEndpoint]{def handle(x: JMqttEndpoint) {handler.handle(MqttEndpoint(x))}}))
     this
   }
 
@@ -129,7 +129,7 @@ class MqttServer(private val _asJava: Object) {
    */
   
   def exceptionHandler(handler: Handler[Throwable]): MqttServer = {
-    asJava.asInstanceOf[JMqttServer].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JMqttServer].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
@@ -156,7 +156,7 @@ class MqttServer(private val _asJava: Object) {
    * Close the server supplying an handler that will be called when the server is actually closed (or has failed).   * @param completionHandler the handler called on completion
    */
   def close (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JMqttServer].close({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JMqttServer].close((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

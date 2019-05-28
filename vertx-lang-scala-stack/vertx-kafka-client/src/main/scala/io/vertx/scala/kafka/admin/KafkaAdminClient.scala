@@ -45,7 +45,7 @@ class KafkaAdminClient(private val _asJava: Object) {
    * List the topics available in the cluster with the default options.   * @param completionHandler handler called on operation completed with the topics set
    */
   def listTopics (completionHandler: Handler[AsyncResult[scala.collection.mutable.Set[String]]]): Unit = {
-    asJava.asInstanceOf[JKafkaAdminClient].listTopics({x: AsyncResult[java.util.Set[java.lang.String]] => completionHandler.handle(AsyncResultWrapper[java.util.Set[java.lang.String], scala.collection.mutable.Set[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))})
+    asJava.asInstanceOf[JKafkaAdminClient].listTopics((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.Set[java.lang.String]]]{def handle(x: AsyncResult[java.util.Set[java.lang.String]]) {completionHandler.handle(AsyncResultWrapper[java.util.Set[java.lang.String], scala.collection.mutable.Set[String]](x, a => a.asScala.map(x => x.asInstanceOf[String])))}}))
   }
 
   /**
@@ -53,7 +53,7 @@ class KafkaAdminClient(private val _asJava: Object) {
    * @param completionHandler handler called on operation completed
    */
   def createTopics (topics: scala.collection.mutable.Buffer[NewTopic], completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JKafkaAdminClient].createTopics(topics.map(x => x.asJava).asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaAdminClient].createTopics(topics.map(x => x.asJava).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -61,14 +61,14 @@ class KafkaAdminClient(private val _asJava: Object) {
    * @param completionHandler handler called on operation completed
    */
   def deleteTopics (topicNames: scala.collection.mutable.Buffer[String], completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JKafkaAdminClient].deleteTopics(topicNames.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JKafkaAdminClient].deleteTopics(topicNames.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
    * Get the the consumer groups available in the cluster with the default options   * @param completionHandler handler called on operation completed with the consumer groups ids
    */
   def listConsumerGroups (completionHandler: Handler[AsyncResult[scala.collection.mutable.Buffer[ConsumerGroupListing]]]): Unit = {
-    asJava.asInstanceOf[JKafkaAdminClient].listConsumerGroups({x: AsyncResult[java.util.List[JConsumerGroupListing]] => completionHandler.handle(AsyncResultWrapper[java.util.List[JConsumerGroupListing], scala.collection.mutable.Buffer[ConsumerGroupListing]](x, a => a.asScala.map(x => ConsumerGroupListing(x))))})
+    asJava.asInstanceOf[JKafkaAdminClient].listConsumerGroups((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JConsumerGroupListing]]]{def handle(x: AsyncResult[java.util.List[JConsumerGroupListing]]) {completionHandler.handle(AsyncResultWrapper[java.util.List[JConsumerGroupListing], scala.collection.mutable.Buffer[ConsumerGroupListing]](x, a => a.asScala.map(x => ConsumerGroupListing(x))))}}))
   }
 
 

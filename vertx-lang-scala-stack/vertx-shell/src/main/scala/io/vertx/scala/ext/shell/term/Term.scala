@@ -40,14 +40,14 @@ class Term(private val _asJava: Object) extends Tty (_asJava) {
 
   override 
   def resizehandler(handler: Handler[Unit]): Term = {
-    asJava.asInstanceOf[JTerm].resizehandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JTerm].resizehandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def stdinHandler(handler: Handler[String]): Term = {
-    asJava.asInstanceOf[JTerm].stdinHandler({x: java.lang.String => handler.handle(x.asInstanceOf[String])})
+    asJava.asInstanceOf[JTerm].stdinHandler((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}}))
     this
   }
 
@@ -94,7 +94,7 @@ class Term(private val _asJava: Object) extends Tty (_asJava) {
    */
   
   def closeHandler(handler: Handler[Unit]): Term = {
-    asJava.asInstanceOf[JTerm].closeHandler({x: Void => handler.handle(x)})
+    asJava.asInstanceOf[JTerm].closeHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
     this
   }
 
@@ -120,7 +120,7 @@ class Term(private val _asJava: Object) extends Tty (_asJava) {
    * @param lineHandler the line handler called with the line
    */
   def readline (prompt: String, lineHandler: Handler[String]): Unit = {
-    asJava.asInstanceOf[JTerm].readline(prompt.asInstanceOf[java.lang.String], {x: java.lang.String => lineHandler.handle(x.asInstanceOf[String])})
+    asJava.asInstanceOf[JTerm].readline(prompt.asInstanceOf[java.lang.String], (if (lineHandler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {lineHandler.handle(x.asInstanceOf[String])}}))
   }
 
   /**
@@ -129,7 +129,7 @@ class Term(private val _asJava: Object) extends Tty (_asJava) {
    * @param completionHandler the completion handler
    */
   def readline (prompt: String, lineHandler: Handler[String], completionHandler: Handler[Completion]): Unit = {
-    asJava.asInstanceOf[JTerm].readline(prompt.asInstanceOf[java.lang.String], {x: java.lang.String => lineHandler.handle(x.asInstanceOf[String])}, {x: JCompletion => completionHandler.handle(Completion(x))})
+    asJava.asInstanceOf[JTerm].readline(prompt.asInstanceOf[java.lang.String], (if (lineHandler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {lineHandler.handle(x.asInstanceOf[String])}}), (if (completionHandler == null) null else new io.vertx.core.Handler[JCompletion]{def handle(x: JCompletion) {completionHandler.handle(Completion(x))}}))
   }
 
   /**

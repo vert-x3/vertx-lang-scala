@@ -83,7 +83,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def getNow(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].getNow(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClient].getNow(options.asJava, (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -97,7 +97,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def getNow(port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].getNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClient].getNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -110,7 +110,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def getNow(host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].getNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClient].getNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -122,7 +122,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def getNow(requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].getNow(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClient].getNow(requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -134,7 +134,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def headNow(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].headNow(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClient].headNow(options.asJava, (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -148,7 +148,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def headNow(port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].headNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClient].headNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -161,7 +161,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def headNow(host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].headNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClient].headNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -173,7 +173,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def headNow(requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].headNow(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClient].headNow(requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -185,7 +185,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def optionsNow(options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].optionsNow(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClient].optionsNow(options.asJava, (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -199,7 +199,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def optionsNow(port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].optionsNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClient].optionsNow(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -212,7 +212,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def optionsNow(host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].optionsNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClient].optionsNow(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -224,7 +224,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def optionsNow(requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].optionsNow(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))})
+    asJava.asInstanceOf[JHttpClient].optionsNow(requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}}))
     this
   }
 
@@ -235,7 +235,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(options: RequestOptions, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -248,7 +248,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(port: Int, host: String, requestURI: String, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -260,7 +260,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(options: RequestOptions, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -274,7 +274,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(port: Int, host: String, requestURI: String, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -286,7 +286,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(host: String, requestURI: String, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -299,7 +299,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(host: String, requestURI: String, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -311,7 +311,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(options: RequestOptions, headers: MultiMap, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -325,7 +325,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -338,7 +338,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(options: RequestOptions, headers: MultiMap, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -353,7 +353,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -366,7 +366,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(host: String, requestURI: String, headers: MultiMap, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -380,7 +380,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(host: String, requestURI: String, headers: MultiMap, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -394,7 +394,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -410,7 +410,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -425,7 +425,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -442,7 +442,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -457,7 +457,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -473,7 +473,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -488,7 +488,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -505,7 +505,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -521,7 +521,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocketAbs(url: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocketAbs(url.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocketAbs(url.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -537,7 +537,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -555,7 +555,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -571,7 +571,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -588,7 +588,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -599,7 +599,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(requestURI: String, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -611,7 +611,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(requestURI: String, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -623,7 +623,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(requestURI: String, headers: MultiMap, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -636,7 +636,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(requestURI: String, headers: MultiMap, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -650,7 +650,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -665,7 +665,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -680,7 +680,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))})
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}))
     this
   }
 
@@ -696,7 +696,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def websocket(requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String, wsConnect: Handler[WebSocket], failureHandler: Handler[Throwable]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], {x: JWebSocket => wsConnect.handle(WebSocket(x))}, {x: Throwable => failureHandler.handle(x)})
+    asJava.asInstanceOf[JHttpClient].websocket(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String], (if (wsConnect == null) null else new io.vertx.core.Handler[JWebSocket]{def handle(x: JWebSocket) {wsConnect.handle(WebSocket(x))}}), (if (failureHandler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {failureHandler.handle(x)}}))
     this
   }
 
@@ -705,7 +705,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    */
   
   def connectionHandler(handler: Handler[HttpConnection]): HttpClient = {
-    asJava.asInstanceOf[JHttpClient].connectionHandler({x: JHttpConnection => handler.handle(HttpConnection(x))})
+    asJava.asInstanceOf[JHttpClient].connectionHandler((if (handler == null) null else new io.vertx.core.Handler[JHttpConnection]{def handle(x: JHttpConnection) {handler.handle(HttpConnection(x))}}))
     this
   }
 
@@ -801,7 +801,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def request (method: io.vertx.core.http.HttpMethod, options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, options.asJava, (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -813,7 +813,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Use  to connect to a unix domain socket server.
    */
   def request (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, serverAddress.asJava.asInstanceOf[JSocketAddress], options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, serverAddress.asJava.asInstanceOf[JSocketAddress], options.asJava, (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -826,7 +826,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def request (method: io.vertx.core.http.HttpMethod, port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -838,7 +838,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Use  to connect to a unix domain socket server.
    */
   def request (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, serverAddress.asJava.asInstanceOf[JSocketAddress], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, serverAddress.asJava.asInstanceOf[JSocketAddress], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -850,7 +850,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def request (method: io.vertx.core.http.HttpMethod, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -870,7 +870,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def request (method: io.vertx.core.http.HttpMethod, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].request(method, requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -902,7 +902,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def requestAbs (method: io.vertx.core.http.HttpMethod, absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method, absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method, absoluteURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -914,7 +914,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Use  to connect to a unix domain socket server.
    */
   def requestAbs (method: io.vertx.core.http.HttpMethod, serverAddress: SocketAddress, absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method, serverAddress.asJava.asInstanceOf[JSocketAddress], absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].requestAbs(method, serverAddress.asJava.asInstanceOf[JSocketAddress], absoluteURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -951,7 +951,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def get (options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(options.asJava, (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -963,7 +963,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def get (port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -974,7 +974,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def get (host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -992,7 +992,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def get (requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].get(requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1010,7 +1010,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def getAbs (absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].getAbs(absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].getAbs(absoluteURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1047,7 +1047,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def post (options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(options.asJava, (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1059,7 +1059,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def post (port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1070,7 +1070,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def post (host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1088,7 +1088,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def post (requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].post(requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1106,7 +1106,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def postAbs (absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].postAbs(absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].postAbs(absoluteURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1143,7 +1143,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def head (options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(options.asJava, (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1155,7 +1155,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def head (port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1166,7 +1166,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def head (host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1184,7 +1184,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def head (requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].head(requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1202,7 +1202,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def headAbs (absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].headAbs(absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].headAbs(absoluteURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1239,7 +1239,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def options (options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(options.asJava, (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1251,7 +1251,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def options (port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1262,7 +1262,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def options (host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1280,7 +1280,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def options (requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].options(requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1298,7 +1298,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def optionsAbs (absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].optionsAbs(absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].optionsAbs(absoluteURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1335,7 +1335,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def put (options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(options.asJava, (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1347,7 +1347,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def put (port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1358,7 +1358,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def put (host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1376,7 +1376,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def put (requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].put(requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1394,7 +1394,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def putAbs (absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].putAbs(absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].putAbs(absoluteURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1431,7 +1431,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def delete (options: RequestOptions, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(options.asJava, {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(options.asJava, (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1443,7 +1443,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def delete (port: Int, host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1454,7 +1454,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def delete (host: String, requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1472,7 +1472,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def delete (requestURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(requestURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].delete(requestURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1490,7 +1490,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @return an HTTP client request object
    */
   def deleteAbs (absoluteURI: String, responseHandler: Handler[HttpClientResponse]): HttpClientRequest = {
-    HttpClientRequest(asJava.asInstanceOf[JHttpClient].deleteAbs(absoluteURI.asInstanceOf[java.lang.String], {x: JHttpClientResponse => responseHandler.handle(HttpClientResponse(x))}))
+    HttpClientRequest(asJava.asInstanceOf[JHttpClient].deleteAbs(absoluteURI.asInstanceOf[java.lang.String], (if (responseHandler == null) null else new io.vertx.core.Handler[JHttpClientResponse]{def handle(x: JHttpClientResponse) {responseHandler.handle(HttpClientResponse(x))}})))
   }
 
   /**
@@ -1500,7 +1500,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param handler handler that will be called with the websocket when connected
    */
   def webSocket (port: Int, host: String, requestURI: String, handler: Handler[AsyncResult[WebSocket]]): Unit = {
-    asJava.asInstanceOf[JHttpClient].webSocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JWebSocket] => handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))})
+    asJava.asInstanceOf[JHttpClient].webSocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JWebSocket]]{def handle(x: AsyncResult[JWebSocket]) {handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))}}))
   }
 
   /**
@@ -1509,7 +1509,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param handler handler that will be called with the websocket when connected
    */
   def webSocket (host: String, requestURI: String, handler: Handler[AsyncResult[WebSocket]]): Unit = {
-    asJava.asInstanceOf[JHttpClient].webSocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JWebSocket] => handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))})
+    asJava.asInstanceOf[JHttpClient].webSocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JWebSocket]]{def handle(x: AsyncResult[JWebSocket]) {handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))}}))
   }
 
   /**
@@ -1517,14 +1517,14 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param handler handler that will be called with the websocket when connected
    */
   def webSocket (requestURI: String, handler: Handler[AsyncResult[WebSocket]]): Unit = {
-    asJava.asInstanceOf[JHttpClient].webSocket(requestURI.asInstanceOf[java.lang.String], {x: AsyncResult[JWebSocket] => handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))})
+    asJava.asInstanceOf[JHttpClient].webSocket(requestURI.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JWebSocket]]{def handle(x: AsyncResult[JWebSocket]) {handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))}}))
   }
 
   /**
    * Connect a WebSocket with the specified options.   * @param options the request options see <a href="../../../../../../../cheatsheet/WebSocketConnectOptions.html">WebSocketConnectOptions</a>
    */
   def webSocket (options: WebSocketConnectOptions, handler: Handler[AsyncResult[WebSocket]]): Unit = {
-    asJava.asInstanceOf[JHttpClient].webSocket(options.asJava, {x: AsyncResult[JWebSocket] => handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))})
+    asJava.asInstanceOf[JHttpClient].webSocket(options.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JWebSocket]]{def handle(x: AsyncResult[JWebSocket]) {handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))}}))
   }
 
   /**
@@ -1536,7 +1536,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param handler handler that will be called if websocket connection fails
    */
   def webSocketAbs (url: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[WebSocket]]): Unit = {
-    asJava.asInstanceOf[JHttpClient].webSocketAbs(url.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.map(x => x.asInstanceOf[java.lang.String]).asJava, {x: AsyncResult[JWebSocket] => handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))})
+    asJava.asInstanceOf[JHttpClient].webSocketAbs(url.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JWebSocket]]{def handle(x: AsyncResult[JWebSocket]) {handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))}}))
   }
 
   /**

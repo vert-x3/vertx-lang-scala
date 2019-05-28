@@ -60,7 +60,7 @@ object JDBCDataSource {
    * @param resultHandler The result handler
    */
   def getJDBCClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[JDBCClient]]): Unit = {
-    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, {x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))})
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JJDBCClient]]{def handle(x: AsyncResult[JJDBCClient]) {resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))}}))
   }
 
   /**
@@ -70,7 +70,7 @@ object JDBCDataSource {
    * @param resultHandler The result handler
    */
   def getJDBCClient(discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[JDBCClient]]): Unit = {
-    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, {x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))})
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JJDBCClient]]{def handle(x: AsyncResult[JJDBCClient]) {resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))}}))
   }
 
   /**
@@ -81,7 +81,7 @@ object JDBCDataSource {
    * @param resultHandler the result handler
    */
   def getJDBCClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[JDBCClient]]): Unit = {
-    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, consumerConfiguration, {x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))})
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, consumerConfiguration, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JJDBCClient]]{def handle(x: AsyncResult[JJDBCClient]) {resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))}}))
   }
 
   /**
@@ -92,7 +92,7 @@ object JDBCDataSource {
    * @param resultHandler the result handler
    */
   def getJDBCClient(discovery: ServiceDiscovery,filter: Record => Boolean,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[JDBCClient]]): Unit = {
-    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, consumerConfiguration, {x: AsyncResult[JJDBCClient] => resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))})
+    JJDBCDataSource.getJDBCClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, consumerConfiguration, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JJDBCClient]]{def handle(x: AsyncResult[JJDBCClient]) {resultHandler.handle(AsyncResultWrapper[JJDBCClient, JDBCClient](x, a => JDBCClient(a)))}}))
   }
 
 }

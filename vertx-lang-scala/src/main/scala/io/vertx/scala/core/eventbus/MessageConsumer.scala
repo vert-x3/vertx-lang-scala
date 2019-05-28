@@ -51,14 +51,14 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object) extends ReadStrea
 
   override 
   def exceptionHandler(handler: Handler[Throwable]): MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer[Object]].exceptionHandler({x: Throwable => handler.handle(x)})
+    asJava.asInstanceOf[JMessageConsumer[Object]].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
   }
 
 
   override 
   def handler(handler: Handler[Message[T]]): MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer[Object]].handler({x: JMessage[Object] => handler.handle(Message[T](x))})
+    asJava.asInstanceOf[JMessageConsumer[Object]].handler((if (handler == null) null else new io.vertx.core.Handler[JMessage[Object]]{def handle(x: JMessage[Object]) {handler.handle(Message[T](x))}}))
     this
   }
 
@@ -86,7 +86,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object) extends ReadStrea
 
   override 
   def endHandler(endHandler: Handler[Unit]): MessageConsumer[T] = {
-    asJava.asInstanceOf[JMessageConsumer[Object]].endHandler({x: Void => endHandler.handle(x)})
+    asJava.asInstanceOf[JMessageConsumer[Object]].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
     this
   }
 
@@ -116,7 +116,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object) extends ReadStrea
    * called with the result.   * @param dst the destination write stream
    */
   override def pipeTo(dst: WriteStream[Message[T]], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JMessageConsumer[Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JMessage[Object]]], {x: AsyncResult[Void] => handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JMessageConsumer[Object]].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JMessage[Object]]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -164,7 +164,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object) extends ReadStrea
    * Optional method which can be called to indicate when the registration has been propagated across the cluster.   * @param completionHandler the completion handler
    */
   def completionHandler (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JMessageConsumer[Object]].completionHandler((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -178,7 +178,7 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object) extends ReadStrea
    * Unregisters the handler which created this registration   * @param completionHandler the handler called when the unregister is done. For example in a cluster when all nodes of the event bus have been unregistered.
    */
   def unregister (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JMessageConsumer[Object]].unregister({x: AsyncResult[Void] => completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))})
+    asJava.asInstanceOf[JMessageConsumer[Object]].unregister((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 

@@ -455,7 +455,7 @@ class RoutingContext(private val _asJava: Object) {
    * @return the id of the handler. This can be used if you later want to remove the handler.
    */
   def addHeadersEndHandler (handler: Handler[Unit]): Int = {
-    asJava.asInstanceOf[JRoutingContext].addHeadersEndHandler({x: Void => handler.handle(x)}).asInstanceOf[Int]
+    asJava.asInstanceOf[JRoutingContext].addHeadersEndHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}})).asInstanceOf[Int]
   }
 
   /**
@@ -474,7 +474,7 @@ class RoutingContext(private val _asJava: Object) {
    * @return the id of the handler. This can be used if you later want to remove the handler.
    */
   def addBodyEndHandler (handler: Handler[Unit]): Int = {
-    asJava.asInstanceOf[JRoutingContext].addBodyEndHandler({x: Void => handler.handle(x)}).asInstanceOf[Int]
+    asJava.asInstanceOf[JRoutingContext].addBodyEndHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}})).asInstanceOf[Int]
   }
 
   /**
