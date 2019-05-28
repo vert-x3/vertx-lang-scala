@@ -68,8 +68,8 @@
               <arg>-feature</arg>
               <arg>-deprecation</arg>
               <arg>-explaintypes</arg>
-              <arg>-unchecked</arg>
-              <arg>-Xlint</arg>
+              <arg>-Ywarn-unused-import:false</arg>
+              <arg>-Xlint:_</arg>
             </args>
           </configuration>
           <executions>
