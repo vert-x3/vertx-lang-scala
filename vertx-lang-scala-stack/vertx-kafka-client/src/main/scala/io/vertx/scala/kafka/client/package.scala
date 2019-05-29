@@ -335,12 +335,30 @@ package object client{
       asJava.drainHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
     }
 
+    def endFuture(): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.end({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def endFuture(data: io.vertx.kafka.client.producer.KafkaProducerRecord[K, V]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.end(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def writeFuture(data: io.vertx.kafka.client.producer.KafkaProducerRecord[K, V]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.write(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def writeFuture(record: io.vertx.kafka.client.producer.KafkaProducerRecord[K, V]): scala.concurrent.Future[io.vertx.kafka.client.producer.RecordMetadata] = {
+    def sendFuture(record: io.vertx.kafka.client.producer.KafkaProducerRecord[K, V]): scala.concurrent.Future[io.vertx.kafka.client.producer.RecordMetadata] = {
       val promise = Promise[io.vertx.kafka.client.producer.RecordMetadata]()
-      asJava.write(record, {a:AsyncResult[io.vertx.kafka.client.producer.RecordMetadata] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.send(record, {a:AsyncResult[io.vertx.kafka.client.producer.RecordMetadata] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 

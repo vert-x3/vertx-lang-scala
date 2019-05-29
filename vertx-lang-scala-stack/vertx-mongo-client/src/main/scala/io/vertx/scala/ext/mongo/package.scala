@@ -34,6 +34,7 @@ import scala.collection.JavaConverters._
 import io.vertx.ext.mongo.{IndexOptions => JIndexOptions}
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.core.json.JsonArray
+import io.vertx.ext.mongo.{IndexModel => JIndexModel}
 import io.vertx.ext.mongo.{BulkOperation => JBulkOperation}
 import io.vertx.core.streams
 import io.vertx.ext.mongo.{BulkWriteOptions => JBulkWriteOptions}
@@ -79,6 +80,15 @@ package object mongo{
   object FindOptions {
     def apply() = new FindOptions()
     def apply(json: JsonObject) = new FindOptions(json)
+  }
+
+
+
+  type IndexModel = io.vertx.ext.mongo.IndexModel
+
+  object IndexModel {
+    
+    def apply(json: JsonObject) = new IndexModel(json)
   }
 
 
@@ -470,6 +480,15 @@ package object mongo{
     def createIndexWithOptionsFuture(collection: java.lang.String,key: io.vertx.core.json.JsonObject,options: io.vertx.ext.mongo.IndexOptions): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
       asJava.createIndexWithOptions(collection, key, options, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[createIndexes]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createIndexesFuture(collection: java.lang.String,indexes: java.util.List[io.vertx.ext.mongo.IndexModel]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.createIndexes(collection, indexes, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
