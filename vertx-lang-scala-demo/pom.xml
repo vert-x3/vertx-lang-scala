@@ -11,29 +11,19 @@
     <relativePath>..</relativePath>
   </parent>
 
-  <artifactId>vertx-lang-scala-on-the-fly_2.13</artifactId>
-  <name>Scala on the fly compilation</name>
+  <artifactId>vertx-lang-scala-demo</artifactId>
+
+  <name>Vert.x Scala Language Demo</name>
 
   <dependencies>
 
     <!-- What we need at runtime -->
     <dependency>
-      <groupId>org.scala-lang</groupId>
-      <artifactId>scala-library</artifactId>
-      <version>${scala.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.scala-lang</groupId>
-      <artifactId>scala-compiler</artifactId>
-      <version>${scala.version}</version>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-scala_2.13</artifactId>
+      <version>${project.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_2.13</artifactId>
@@ -45,12 +35,6 @@
       <artifactId>scalactic_2.13</artifactId>
       <version>3.1.0-SNAP13</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.scalatestplus</groupId>
-      <artifactId>scalatestplus-junit_2.13.0-RC3</artifactId>
-      <version>1.0.0-SNAP8</version>
-      <type>bundle</type>
     </dependency>
   </dependencies>
 
@@ -64,7 +48,6 @@
             <goals>
               <goal>compile</goal>
               <goal>testCompile</goal>
-              <goal>doc-jar</goal>
             </goals>
           </execution>
         </executions>

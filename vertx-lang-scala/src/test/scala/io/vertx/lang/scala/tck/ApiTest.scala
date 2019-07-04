@@ -29,7 +29,7 @@ import io.vertx.scala.codegen.testmodel._
 import org.junit.ComparisonFailure
 import org.junit.runner.RunWith
 import org.scalatest.concurrent.Waiters.Waiter
-import org.scalatest.junit.JUnitRunner
+import org.scalatestplus.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
 
 import scala.concurrent.ExecutionContext

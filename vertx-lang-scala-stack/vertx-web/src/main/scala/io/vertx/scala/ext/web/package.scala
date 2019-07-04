@@ -36,22 +36,6 @@ package object web{
 
 
 
-  /**
-    * Represents an event that occurs on the event bus bridge.
-    * 
-    * Please consult the documentation for a full explanation.
-    */
-
-  implicit class BridgeEventScala(val asJava: io.vertx.ext.web.handler.sockjs.BridgeEvent) extends AnyVal {
-
-    def setFuture(): scala.concurrent.Future[java.lang.Boolean] = {
-      val promise = Promise[java.lang.Boolean]()
-      asJava.setHandler({a:AsyncResult[java.lang.Boolean] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-  }
-
 
   type BridgeOptions = io.vertx.ext.web.handler.sockjs.BridgeOptions
 
@@ -79,6 +63,7 @@ package object web{
     def apply() = new Http2PushMapping()
     def apply(json: JsonObject) = new Http2PushMapping(json)
   }
+
 
 
 
@@ -252,35 +237,6 @@ package object web{
 
   }
 
-
-
-  /**
-    * A template engine uses a specific template and the data in a routing context to render a resource into a buffer.
-    * 
-    * Concrete implementations exist for several well-known template engines.
-    */
-
-  implicit class TemplateEngineScala(val asJava: io.vertx.ext.web.templ.TemplateEngine) extends AnyVal {
-
-    /**
-     * Like [[render]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def renderFuture(context: io.vertx.ext.web.RoutingContext,templateFileName: java.lang.String): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
-      val promise = Promise[io.vertx.core.buffer.Buffer]()
-      asJava.render(context, templateFileName, {a:AsyncResult[io.vertx.core.buffer.Buffer] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[render]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def renderFuture(context: io.vertx.ext.web.RoutingContext,templateDirectory: java.lang.String,templateFileName: java.lang.String): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
-      val promise = Promise[io.vertx.core.buffer.Buffer]()
-      asJava.render(context, templateDirectory, templateFileName, {a:AsyncResult[io.vertx.core.buffer.Buffer] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-  }
 
 
 

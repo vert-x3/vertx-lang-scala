@@ -24,10 +24,6 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import com.acme.pkg.sub.{SubInterface => JSubInterface}
-import com.acme.pkg.sub
-import io.vertx.codegen.testmodel
-import com.acme.pkg.{MyInterface => JMyInterface}
-import io.vertx.codegen.testmodel.{TestInterface => JTestInterface}
 
 package object pkg{
 

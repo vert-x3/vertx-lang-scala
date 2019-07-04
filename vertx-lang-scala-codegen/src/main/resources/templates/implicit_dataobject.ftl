@@ -1,5 +1,5 @@
 
-<#if !type.abstract>
+<#if concrete>
   type ${className} = ${helper.getNonGenericType(type)}
 
   object ${helper.getSimpleName(type.name)} {

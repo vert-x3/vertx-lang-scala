@@ -8,7 +8,7 @@ import io.vertx.lang.scala.json.Json.arr
 import io.vertx.scala.codegen.testmodel.TestDataObject
 import org.junit.runner.RunWith
 import org.scalatest.{FlatSpec, Matchers}
-import org.scalatest.junit.JUnitRunner
+import org.scalatestplus.junit.JUnitRunner
 import scala.collection.JavaConverters._
 
 import scala.collection.mutable

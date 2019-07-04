@@ -42,18 +42,18 @@ package object circuitbreaker{
     /**
      * Like [[executeCommandWithFallback]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def executeCommandWithFallbackFuture[T](command: io.vertx.core.Future[T] => Unit,fallback: Throwable => T): scala.concurrent.Future[T] = {
+    def executeCommandWithFallbackFuture[T](command: io.vertx.core.Promise[T] => Unit,fallback: Throwable => T): scala.concurrent.Future[T] = {
       val promise = Promise[T]()
-      asJava.executeCommandWithFallback[T]({x: io.vertx.core.Future[T] => command(x)}, {x: Throwable => fallback(x)}, {a:AsyncResult[T] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.executeCommandWithFallback[T]({x: io.vertx.core.Promise[T] => command(x)}, {x: Throwable => fallback(x)}, {a:AsyncResult[T] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
     /**
      * Like [[executeCommand]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def executeCommandFuture[T](command: io.vertx.core.Future[T] => Unit): scala.concurrent.Future[T] = {
+    def executeCommandFuture[T](command: io.vertx.core.Promise[T] => Unit): scala.concurrent.Future[T] = {
       val promise = Promise[T]()
-      asJava.executeCommand[T]({x: io.vertx.core.Future[T] => command(x)}, {a:AsyncResult[T] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.executeCommand[T]({x: io.vertx.core.Promise[T] => command(x)}, {a:AsyncResult[T] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 

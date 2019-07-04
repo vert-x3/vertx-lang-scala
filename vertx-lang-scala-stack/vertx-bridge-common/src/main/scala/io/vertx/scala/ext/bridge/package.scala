@@ -24,31 +24,14 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import io.vertx.ext.bridge.{BaseBridgeEvent => JBaseBridgeEvent}
+import io.vertx.core.{Promise => JPromise}
 import io.vertx.core
 import io.vertx.core.{Future => JFuture}
 import io.vertx.ext.bridge.BridgeEventType
 import io.vertx.core.json.JsonObject
-import io.vertx.core.AsyncResult
-import io.vertx.core.Handler
 
 package object bridge{
 
-
-  /**
-    * Represents an event that occurs on the event bus bridge.
-    * 
-    * Please consult the documentation for a full explanation.
-    */
-
-  implicit class BaseBridgeEventScala(val asJava: io.vertx.ext.bridge.BaseBridgeEvent) extends AnyVal {
-
-    def setFuture(): scala.concurrent.Future[java.lang.Boolean] = {
-      val promise = Promise[java.lang.Boolean]()
-      asJava.setHandler({a:AsyncResult[java.lang.Boolean] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-  }
 
 
   type BridgeOptions = io.vertx.ext.bridge.BridgeOptions

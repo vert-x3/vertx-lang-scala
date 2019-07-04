@@ -4,7 +4,7 @@ import io.vertx.codegen.testmodel.{GenericsTCKImpl, TestEnum, TestGenEnum}
 import io.vertx.lang.scala.json.Json
 import io.vertx.scala.codegen.testmodel._
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
+import org.scalatestplus.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers, OptionValues}
 
 import scala.concurrent.ExecutionContext

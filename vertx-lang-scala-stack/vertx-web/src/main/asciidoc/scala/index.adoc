@@ -20,7 +20,7 @@ You can use Vert.x-Web to create classic server-side web applications, RESTful w
 web applications, or any other kind of web application you can think of. Vert.x-Web doesn't care. It's up to you to chose
 the type of app you prefer, not Vert.x-Web.
 
-Vert.x-Web is a great fit for writingRESTful HTTP micro-services*, but we don'tforce* you to write apps like that.
+Vert.x-Web is a great fit for writing RESTful HTTP micro-services**, but we don't force** you to write apps like that.
 
 Some of the key features of Vert.x-Web include:
 
@@ -657,7 +657,7 @@ Let's change the ordering of route2 so it runs before route1:
 [source,scala]
 ----
 
-var route1 = router.route("/some/path/").handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
+var route1 = router.route("/some/path/").order(1).handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 
   var response = routingContext.response()
   response.write("route1\n")
@@ -666,7 +666,7 @@ var route1 = router.route("/some/path/").handler((routingContext: io.vertx.scala
   routingContext.next()
 })
 
-var route2 = router.route("/some/path/").handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
+var route2 = router.route("/some/path/").order(0).handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 
   var response = routingContext.response()
   // enable chunked responses because we will be adding data as
@@ -680,7 +680,7 @@ var route2 = router.route("/some/path/").handler((routingContext: io.vertx.scala
   routingContext.next()
 })
 
-var route3 = router.route("/some/path/").handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
+var route3 = router.route("/some/path/").order(2).handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 
   var response = routingContext.response()
   response.write("route3")
@@ -688,9 +688,6 @@ var route3 = router.route("/some/path/").handler((routingContext: io.vertx.scala
   // Now end the response
   routingContext.response().end()
 })
-
-// Change the order of route2 so it runs before route1
-route2.order(-1)
 
 ----
 
@@ -705,6 +702,8 @@ route3
 If two matching routes have the same value of order, then they will be called in the order they were added.
 
 You can also specify that a route is handled last, with `link:../../scaladocs/io/vertx/scala/ext/web/Route.html#last()[last]`
+
+Note: Route order can be specified only before you configure an handler!
 
 == Routing based on MIME type of request
 
@@ -812,7 +811,7 @@ router.route().produces("application/json").handler((routingContext: io.vertx.sc
 
   var response = routingContext.response()
   response.putHeader("content-type", "application/json")
-  response.write(someJSON).end()
+  response.end(someJSON)
 
 })
 
@@ -843,7 +842,7 @@ router.route().produces("application/json").produces("text/html").handler((routi
   var acceptableContentType = routingContext.getAcceptableContentType()
 
   response.putHeader("content-type", acceptableContentType)
-  response.write(whatever).end()
+  response.end(whatever)
 })
 
 ----
@@ -1095,13 +1094,17 @@ user understands, if you're only interested in the user prefered locale then the
 `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#preferredLocale()[preferredLocale]` will return the 1st element of the list or `null` if no
 locale was provided by the user.
 
-== Default 404 Handling
+== Route match failures
 
-If no routes match for any particular request, Vert.x-Web will signal a 404 error.
+If no routes match for any particular request, Vert.x-Web will signal an error depending on match failure:
 
+* 404 If no route matches the path
+* 405 If a route matches the path but don't match the HTTP Method
+* 406 If a route matches the path and the method but It can't provide a response with a content type matching `Accept` header
+* 415 If a route matches the path and the method but It can't accept the `Content-type`
+* 400 If a route matches the path and the method but It can't accept an empty body
 
-A default 404 error handler is provided by Router. Anyway you can provide your own 404 error handler with
-`link:../../scaladocs/io/vertx/scala/ext/web/Router.html#errorHandler(int)[errorHandler]`
+You can manually manage those failures using `link:../../scaladocs/io/vertx/scala/ext/web/Router.html#errorHandler(int)[errorHandler]`
 
 == Error handling
 
@@ -1975,7 +1978,7 @@ TODO more CORS docs
 Vert.x-Web includes dynamic page generation capabilities by including out of the box support for several popular template
 engines. You can also easily add your own.
 
-Template engines are described by `link:../../scaladocs/io/vertx/scala/ext/web/templ/TemplateEngine.html[TemplateEngine]`. In order to render a template
+Template engines are described by `link:../../scaladocs/io/vertx/scala/ext/web/common/template/TemplateEngine.html[TemplateEngine]`. In order to render a template
 `link:../../scaladocs/io/vertx/scala/ext/web/common/template/TemplateEngine.html#render(io.vertx.core.json.JsonObject,%20java.lang.String)[render]` is used.
 
 The simplest way to use templates is not to call the template engine directly but to use the
@@ -2008,7 +2011,7 @@ These examples are not using the traditional "transcoding" as they use an API pr
 
 To use MVEL, you need to add the following _dependency_ to your project:
 `${maven.groupId}:vertx-web-templ-mvel:${maven.version}`. Create an instance of the MVEL template engine using:
-`io.vertx.ext.web.templ.MVELTemplateEngine#create()`
+`io.vertx.ext.web.templ.mvel.MVELTemplateEngine#create(io.vertx.core.Vertx)`
 
 When using the MVEL template engine, it will by default look for
 templates with the `.templ` extension if no extension is specified in the file name.
@@ -2034,7 +2037,7 @@ MVEL templates.
 
 To use the Jade template engine, you need to add the following _dependency_ to your project:
 `${maven.groupId}:vertx-web-templ-jade:${maven.version}`. Create an instance of the Jade template engine using:
-`io.vertx.ext.web.templ.JadeTemplateEngine#create()`.
+`io.vertx.ext.web.templ.jade.JadeTemplateEngine#create(io.vertx.core.Vertx)`.
 
 When using the Jade template engine, it will by default look for
 templates with the `.jade` extension if no extension is specified in the file name.
@@ -2060,7 +2063,7 @@ Jade templates.
 
 To use Handlebars, you need to add the following _dependency_ to your project:
 `${maven.groupId}:vertx-web-templ-handlebars:${maven.version}`. Create an instance of the Handlebars template engine
-using: `io.vertx.ext.web.templ.HandlebarsTemplateEngine#create()`.
+using: `io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine#create(io.vertx.core.Vertx)`.
 
 When using the Handlebars template engine, it will by default look for
 templates with the `.hbs` extension if no extension is specified in the file name.
@@ -2098,7 +2101,7 @@ handlebars templates.
 
 To use Thymeleaf, you need to add the following _dependency_ to your project:
 `${maven.groupId}:vertx-web-templ-thymeleaf:${maven.version}`. Create an instance of the Thymeleaf template engine
-using: `io.vertx.ext.web.templ.ThymeleafTemplateEngine#create()`.
+using: `io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine#create(io.vertx.core.Vertx)`.
 
 When using the Thymeleaf template engine, it will by default look for
 templates with the `.html` extension if no extension is specified in the file name.
@@ -2154,7 +2157,7 @@ Apache FreeMarker templates.
 
 To use Pebble, you need to add the following _dependency_ to your project:
 `io.vertx:vertx-web-templ-pebble:${maven.version}`. Create an instance of the Pebble template engine
-using: `io.vertx.ext.web.templ.PebbleTemplateEngine#create(vertx)`.
+using: `io.vertx.ext.web.templ.pebble.PebbleTemplateEngine#create(vertx)`.
 
 When using the Pebble template engine, it will by default look for
 templates with the `.peb` extension if no extension is specified in the file name.
@@ -2208,12 +2211,16 @@ Hello @foo and @bar
 Request path is @context.getString("path")
 ----
 
-=== Disabling caching
+=== Caching
+
+Many of the engines support caching of the compiled templates. The cache is stored inside a vert.x shared data local map
+which allows the engines to share the same cache across several verticles in a efficient and safe way.
+
+==== Disabling caching
 
 During development you might want to disable template caching so that the template gets reevaluated on each request.
-In order to do this you need to set the system property: `io.vertx.ext.web.TemplateEngine.disableCache` to `true`.
-
-By default it will be false. So caching is always enabled.
+In order to do this you need to set the system property: `vertxweb.environment` or environment variable
+`VERTXWEB_ENVIRONMENT` to `dev` or `development`. By default caching is always enabled.
 
 == Error handler
 
@@ -2226,7 +2233,7 @@ failure handler for any paths that you want covered.
 == Request logger
 
 Vert.x-Web includes a handler `link:../../scaladocs/io/vertx/scala/ext/web/handler/LoggerHandler.html[LoggerHandler]` that you can use to log HTTP requests.
-
+You should mount this handler before any handler that could fail the `RoutingContext`
 
 By default requests are logged to the Vert.x logger which can be configured to use JUL logging, log4j or SLF4J.
 
@@ -2961,7 +2968,7 @@ or the header name they have chosen during the instantiation of the `CSRFHandler
 ----
 
 router.route().handler(CookieHandler.create())
-router.route().handler(CSRFHandler.create("abracadabra"))
+router.route().handler(CSRFHandler.create(vertx, "abracadabra"))
 router.route().handler((rc: io.vertx.scala.ext.web.RoutingContext) => {
 
 })
@@ -3200,3 +3207,51 @@ This is handled automatically by the handler as long as the provider is configur
 
 In real life this means that your API's can access your protected resources using the header `Authorization` with the
 value `Bearer BASE64_ACCESS_TOKEN`.
+
+=== Handling HTTP Method overriding
+
+Many companies and other services impose limitations to the REST HTTP methods they allow to the outside world. Some are lax by allowing any method, most are restricted by allowing only a small-but-decent set and some only allow GET and POST. The reasons for such restritions varies: browser or client limitations or a really strict corporate firewalls. Web services with only GET and POST does not express well the REST ideology. PUT, DELETE, OPTIONS, among others are quite useful to specify what do to to a resource. To deal with it, it was created the X-HTTP-METHOD-OVERRIDE HTTP header as a workaround.
+
+By sending a request with GET/POST and which method the request should truly process inside the X-HTTP-METHOD-OVERRIDE HTTP header, the server should recognize the header and redirect to the appropriate method.
+
+Vert.x allows one to do so, simply by:
+
+[source,scala]
+----
+router.route().handler(MethodOverrideHandler.create())
+
+router.route(HttpMethod.GET, "/").handler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
+  // do GET stuff...
+})
+
+router.route(HttpMethod.POST, "/").handler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
+  // do POST stuff...
+})
+
+----
+
+Since it will redirect the request, it is wise to avoid firing request handlers unnecessarily, so it is better to add the MethodOverrideHandler as the first handler.
+
+Also, a word of caution: THIS MIGHT BECOME AN ATTACK VECTOR FOR ILL-INTENTIONED PEOPLE!
+
+To mitigate such a problem, the MethodOverrideHandler comes with a Safe-Downgrade Policy by default. This policy says that the method contained in X-HTTP-METHOD-OVERRIDE can override the original one if:
+
+* the overriding method is idempotent; or
+* the overriding method is safe and the method to be overrided is NOT idempotent; or
+* the method to be overrided is not safe.
+
+Although we do NOT recommend, Vert.x will not force you to anything. If it is your desire to allow any overriding, then:
+
+[source,scala]
+----
+router.route().handler(MethodOverrideHandler.create(false))
+
+router.route(HttpMethod.GET, "/").handler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
+  // do GET stuff...
+})
+
+router.route(HttpMethod.POST, "/").handler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
+  // do POST stuff...
+})
+
+----

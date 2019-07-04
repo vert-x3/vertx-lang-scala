@@ -37,22 +37,6 @@ import io.vertx.core.{Vertx => JVertx}
 package object tcp{
 
 
-  /**
-    * Represents an event that occurs on the event bus bridge.
-    * 
-    * Please consult the documentation for a full explanation.
-    */
-
-  implicit class BridgeEventScala(val asJava: io.vertx.ext.eventbus.bridge.tcp.BridgeEvent) extends AnyVal {
-
-    def setFuture(): scala.concurrent.Future[java.lang.Boolean] = {
-      val promise = Promise[java.lang.Boolean]()
-      asJava.setHandler({a:AsyncResult[java.lang.Boolean] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-  }
-
 
   /**
     * TCP EventBus bridge for Vert.x

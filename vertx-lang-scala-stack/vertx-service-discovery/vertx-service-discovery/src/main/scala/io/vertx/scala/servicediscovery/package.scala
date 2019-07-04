@@ -24,9 +24,9 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import io.vertx.servicediscovery.{Record => JRecord}
+import io.vertx.core.{Promise => JPromise}
 import io.vertx.core
 import io.vertx.servicediscovery
-import io.vertx.core.{Future => JFuture}
 import io.vertx.servicediscovery.spi.{ServicePublisher => JServicePublisher}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.Handler

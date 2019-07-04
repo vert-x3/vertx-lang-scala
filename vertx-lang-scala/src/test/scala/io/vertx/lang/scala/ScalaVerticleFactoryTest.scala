@@ -9,7 +9,7 @@ import org.junit.runner.RunWith
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.time.SpanSugar._
 import org.scalatest.concurrent.ScalaFutures.whenReady
-import org.scalatest.junit.JUnitRunner
+import org.scalatestplus.junit.JUnitRunner
 import org.scalatest.{AsyncFlatSpec, Matchers}
 
 import scala.concurrent.Promise

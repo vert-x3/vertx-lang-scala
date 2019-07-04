@@ -17,8 +17,7 @@
 package io.vertx.lang.scala
 
 import io.vertx.core.json.JsonObject
-import io.vertx.core.{AbstractVerticle, Future, Verticle}
-import io.vertx.core.{Context, Vertx}
+import io.vertx.core.{AbstractVerticle, Context, Future, Promise, Verticle, Vertx}
 
 import scala.util.{Failure, Success}
 import scala.collection.JavaConverters._
@@ -113,14 +112,14 @@ abstract class ScalaVerticle {
       ScalaVerticle.this.init(vertx, context, this)
     }
 
-    override final def start(startFuture: Future[Void]): Unit = {
+    override final def start(startFuture: Promise[Void]): Unit = {
       that.startFuture().onComplete{
         case Success(_) => startFuture.complete()
         case Failure(throwable) => startFuture.fail(throwable)
       }
     }
 
-    override final def stop(stopFuture: Future[Void]): Unit = {
+    override final def stop(stopFuture: Promise[Void]): Unit = {
       that.stopFuture().onComplete{
         case Success(_) => stopFuture.complete()
         case Failure(throwable) => stopFuture.fail(throwable)

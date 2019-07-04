@@ -22,7 +22,7 @@ public class ScalaDocGenerator implements DocGenerator {
 
   @Override
   public void init(ProcessingEnvironment processingEnvironment) {
-    factory = new TypeMirrorFactory(processingEnvironment.getElementUtils(), processingEnvironment.getTypeUtils());
+    factory = new TypeMirrorFactory(processingEnvironment.getElementUtils(), processingEnvironment.getTypeUtils(), null);
     translator = new CodeTranslator(processingEnvironment);
     env = processingEnvironment;
   }

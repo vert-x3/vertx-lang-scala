@@ -26,7 +26,9 @@ import scala.concurrent.Promise
 import io.vertx.rabbitmq.{RabbitMQConsumer => JRabbitMQConsumer}
 import io.vertx.core.streams
 import io.vertx.core.streams.{ReadStream => JReadStream}
+import io.vertx.core
 import io.vertx.rabbitmq.{RabbitMQMessage => JRabbitMQMessage}
+import io.vertx.core.{Future => JFuture}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.streams.{Pipe => JPipe}

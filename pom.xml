@@ -5,11 +5,11 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-parent</artifactId>
-    <version>14</version>
+    <version>15-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>vertx-lang-scala-parent_2.12</artifactId>
+  <artifactId>vertx-lang-scala-parent_2.13</artifactId>
   <version>4.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <inceptionYear>2016</inceptionYear>
@@ -30,7 +30,7 @@
     </license>
   </licenses>
   <properties>
-    <scala.version>2.12.7</scala.version>
+    <scala.version>2.13.0</scala.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <stack.version>${project.version}</stack.version>
@@ -73,6 +73,7 @@
     <module>vertx-lang-scala</module>
     <module>vertx-lang-scala-stack</module>
     <module>vertx-lang-scala-on-the-fly</module>
+    <module>vertx-lang-scala-demo</module>
     <!--<module>vertx-lang-scala-docs</module>-->
   </modules>
 </project>

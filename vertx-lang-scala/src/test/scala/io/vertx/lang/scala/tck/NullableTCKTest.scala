@@ -9,7 +9,7 @@ import io.vertx.scala.codegen.testmodel.TestDataObject
 import io.vertx.scala.codegen.testmodel._
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
+import org.scalatestplus.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers, OptionValues}
 
 import scala.collection.mutable

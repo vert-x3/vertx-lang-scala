@@ -39,13 +39,7 @@ to configure various options such as for using SSL connections.
 
 [source,scala]
 ----
-var bridge = AmqpBridge.create(vertx)
-// Start the bridge, then use the event loop thread to process things thereafter.
-bridge.startFuture("localhost", 5672).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
-
+Code not translatable
 ----
 
 === Receiving a Message
@@ -119,14 +113,7 @@ message could look something like:
 
 [source,scala]
 ----
-var applicationProperties = new io.vertx.core.json.JsonObject()
-applicationProperties.put("name", "value")
-
-var amqpMsgPayload = new io.vertx.core.json.JsonObject()
-amqpMsgPayload.put("application_properties", applicationProperties)
-
-producer.send(amqpMsgPayload)
-
+Code not translatable
 ----
 
 When receiving a message with application properties, the "application_properties" element is added to the JsonObject
@@ -299,14 +286,7 @@ The following is a basic example of sending a message and providing a reply-hand
 
 [source,scala]
 ----
-var amqpMsgPayload = new io.vertx.core.json.JsonObject()
-amqpMsgPayload.put("body", "myRequest")
-
-producer.sendFuture(amqpMsgPayload).onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
-}
-
+Code not translatable
 ----
 
 === Received messages seeking a reply.

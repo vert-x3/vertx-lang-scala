@@ -262,6 +262,21 @@ package object testmodel{
 
 
 
+  /**
+
+    */
+
+  implicit class FutureTCKScala(val asJava: io.vertx.codegen.testmodel.FutureTCK) extends AnyVal {
+
+    def asyncMethodFuture(): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.asyncMethod({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
+
 
 
   /**
@@ -398,6 +413,108 @@ package object testmodel{
 
 
 
+
+
+
+  implicit class JsonCodecTCKScala(val asJava: io.vertx.codegen.testmodel.JsonCodecTCK) extends AnyVal {
+
+    def methodWithHandlerAsyncResultTypeToIntegerParamFuture(): scala.concurrent.Future[io.vertx.codegen.testmodel.MyPojoToInteger] = {
+      val promise = Promise[io.vertx.codegen.testmodel.MyPojoToInteger]()
+      asJava.methodWithHandlerAsyncResultTypeToIntegerParam({a:AsyncResult[io.vertx.codegen.testmodel.MyPojoToInteger] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultListOfTypeToIntegerParamFuture(): scala.concurrent.Future[java.util.List[io.vertx.codegen.testmodel.MyPojoToInteger]] = {
+      val promise = Promise[java.util.List[io.vertx.codegen.testmodel.MyPojoToInteger]]()
+      asJava.methodWithHandlerAsyncResultListOfTypeToIntegerParam({a:AsyncResult[java.util.List[io.vertx.codegen.testmodel.MyPojoToInteger]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultSetOfTypeToIntegerParamFuture(): scala.concurrent.Future[java.util.Set[io.vertx.codegen.testmodel.MyPojoToInteger]] = {
+      val promise = Promise[java.util.Set[io.vertx.codegen.testmodel.MyPojoToInteger]]()
+      asJava.methodWithHandlerAsyncResultSetOfTypeToIntegerParam({a:AsyncResult[java.util.Set[io.vertx.codegen.testmodel.MyPojoToInteger]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultMapOfTypeToIntegerParamFuture(): scala.concurrent.Future[java.util.Map[String, io.vertx.codegen.testmodel.MyPojoToInteger]] = {
+      val promise = Promise[java.util.Map[String, io.vertx.codegen.testmodel.MyPojoToInteger]]()
+      asJava.methodWithHandlerAsyncResultMapOfTypeToIntegerParam({a:AsyncResult[java.util.Map[java.lang.String,io.vertx.codegen.testmodel.MyPojoToInteger]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultTypeToStringParamFuture(): scala.concurrent.Future[java.time.ZonedDateTime] = {
+      val promise = Promise[java.time.ZonedDateTime]()
+      asJava.methodWithHandlerAsyncResultTypeToStringParam({a:AsyncResult[java.time.ZonedDateTime] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultListOfTypeToStringParamFuture(): scala.concurrent.Future[java.util.List[java.time.ZonedDateTime]] = {
+      val promise = Promise[java.util.List[java.time.ZonedDateTime]]()
+      asJava.methodWithHandlerAsyncResultListOfTypeToStringParam({a:AsyncResult[java.util.List[java.time.ZonedDateTime]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultSetOfTypeToStringParamFuture(): scala.concurrent.Future[java.util.Set[java.time.ZonedDateTime]] = {
+      val promise = Promise[java.util.Set[java.time.ZonedDateTime]]()
+      asJava.methodWithHandlerAsyncResultSetOfTypeToStringParam({a:AsyncResult[java.util.Set[java.time.ZonedDateTime]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultMapOfTypeToStringParamFuture(): scala.concurrent.Future[java.util.Map[String, java.time.ZonedDateTime]] = {
+      val promise = Promise[java.util.Map[String, java.time.ZonedDateTime]]()
+      asJava.methodWithHandlerAsyncResultMapOfTypeToStringParam({a:AsyncResult[java.util.Map[java.lang.String,java.time.ZonedDateTime]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultTypeToJsonArrayParamFuture(): scala.concurrent.Future[io.vertx.codegen.testmodel.MyPojoToJsonArray] = {
+      val promise = Promise[io.vertx.codegen.testmodel.MyPojoToJsonArray]()
+      asJava.methodWithHandlerAsyncResultTypeToJsonArrayParam({a:AsyncResult[io.vertx.codegen.testmodel.MyPojoToJsonArray] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultListOfTypeToJsonArrayParamFuture(): scala.concurrent.Future[java.util.List[io.vertx.codegen.testmodel.MyPojoToJsonArray]] = {
+      val promise = Promise[java.util.List[io.vertx.codegen.testmodel.MyPojoToJsonArray]]()
+      asJava.methodWithHandlerAsyncResultListOfTypeToJsonArrayParam({a:AsyncResult[java.util.List[io.vertx.codegen.testmodel.MyPojoToJsonArray]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultSetOfTypeToJsonArrayParamFuture(): scala.concurrent.Future[java.util.Set[io.vertx.codegen.testmodel.MyPojoToJsonArray]] = {
+      val promise = Promise[java.util.Set[io.vertx.codegen.testmodel.MyPojoToJsonArray]]()
+      asJava.methodWithHandlerAsyncResultSetOfTypeToJsonArrayParam({a:AsyncResult[java.util.Set[io.vertx.codegen.testmodel.MyPojoToJsonArray]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultMapOfTypeToJsonArrayParamFuture(): scala.concurrent.Future[java.util.Map[String, io.vertx.codegen.testmodel.MyPojoToJsonArray]] = {
+      val promise = Promise[java.util.Map[String, io.vertx.codegen.testmodel.MyPojoToJsonArray]]()
+      asJava.methodWithHandlerAsyncResultMapOfTypeToJsonArrayParam({a:AsyncResult[java.util.Map[java.lang.String,io.vertx.codegen.testmodel.MyPojoToJsonArray]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultTypeToJsonObjectParamFuture(): scala.concurrent.Future[io.vertx.codegen.testmodel.MyPojoToJsonObject] = {
+      val promise = Promise[io.vertx.codegen.testmodel.MyPojoToJsonObject]()
+      asJava.methodWithHandlerAsyncResultTypeToJsonObjectParam({a:AsyncResult[io.vertx.codegen.testmodel.MyPojoToJsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultListOfTypeToJsonObjectParamFuture(): scala.concurrent.Future[java.util.List[io.vertx.codegen.testmodel.MyPojoToJsonObject]] = {
+      val promise = Promise[java.util.List[io.vertx.codegen.testmodel.MyPojoToJsonObject]]()
+      asJava.methodWithHandlerAsyncResultListOfTypeToJsonObjectParam({a:AsyncResult[java.util.List[io.vertx.codegen.testmodel.MyPojoToJsonObject]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultSetOfTypeToJsonObjectParamFuture(): scala.concurrent.Future[java.util.Set[io.vertx.codegen.testmodel.MyPojoToJsonObject]] = {
+      val promise = Promise[java.util.Set[io.vertx.codegen.testmodel.MyPojoToJsonObject]]()
+      asJava.methodWithHandlerAsyncResultSetOfTypeToJsonObjectParam({a:AsyncResult[java.util.Set[io.vertx.codegen.testmodel.MyPojoToJsonObject]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultMapOfTypeToJsonObjectParamFuture(): scala.concurrent.Future[java.util.Map[String, io.vertx.codegen.testmodel.MyPojoToJsonObject]] = {
+      val promise = Promise[java.util.Map[String, io.vertx.codegen.testmodel.MyPojoToJsonObject]]()
+      asJava.methodWithHandlerAsyncResultMapOfTypeToJsonObjectParam({a:AsyncResult[java.util.Map[java.lang.String,io.vertx.codegen.testmodel.MyPojoToJsonObject]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
 
 
   /**

@@ -2,7 +2,7 @@ package io.vertx.lang.scala.pump
 
 import java.util.ArrayList
 
-import io.vertx.core.{AsyncResult, Handler}
+import io.vertx.core.{AsyncResult, Handler, Promise}
 import io.vertx.core.streams.WriteStream
 
 /**
@@ -38,17 +38,23 @@ class JavaFakeWriteStream[T] extends WriteStream[T] {
 
   override def write(data: T) = {
     received.add(data)
-    this
+    val promise = Promise.promise[Void]
+    promise.complete()
+    promise.future
   }
 
   override def exceptionHandler(handler: Handler[Throwable] ) = {
     this
   }
 
-  override def write(data: T, handler: Handler[AsyncResult[Void]]): WriteStream[T] = throw new RuntimeException("Not implemented")
+  override def write(data: T, handler: Handler[AsyncResult[Void]]): Unit = throw new RuntimeException("Not implemented")
 
   override def end(handler: Handler[AsyncResult[Void]]): Unit = throw new RuntimeException("Not implemented")
 
 
-  override def end() {}
+  override def end() = {
+    val promise = Promise.promise[Void]
+    promise.complete()
+    promise.future
+  }
 }
