@@ -398,14 +398,14 @@ class RoutingContext(private val _asJava: Object) {
   }
 
   /**
-   * @return Get the entire HTTP request body as a JsonObject. The context must have first been routed to a io.vertx.scala.ext.web.handler.BodyHandler for this to be populated.
+   * @return Get the entire HTTP request body as a JsonObject. The context must have first been routed to a io.vertx.scala.ext.web.handler.BodyHandler for this to be populated. <br/> When the body is `null` or the `"null"` JSON literal then `null` is returned.
    */
   def getBodyAsJson (): scala.Option[io.vertx.core.json.JsonObject] = {
     scala.Option(asJava.asInstanceOf[JRoutingContext].getBodyAsJson())
   }
 
   /**
-   * @return Get the entire HTTP request body as a JsonArray. The context must have first been routed to a io.vertx.scala.ext.web.handler.BodyHandler for this to be populated.
+   * @return Get the entire HTTP request body as a JsonArray. The context must have first been routed to a io.vertx.scala.ext.web.handler.BodyHandler for this to be populated. <br/> When the body is `null` or the `"null"` JSON literal then `null` is returned.
    */
   def getBodyAsJsonArray (): scala.Option[io.vertx.core.json.JsonArray] = {
     scala.Option(asJava.asInstanceOf[JRoutingContext].getBodyAsJsonArray())
@@ -553,18 +553,20 @@ class RoutingContext(private val _asJava: Object) {
   }
 
   /**
-   * Returns a map of all query parameters inside the <a href="https://en.wikipedia.org/wiki/Query_string">query string</a>   * @return the multimap of query parameters
+   * Returns a map of all query parameters inside the <a href="https://en.wikipedia.org/wiki/Query_string">query string</a><br/>
+   * The query parameters are lazily decoded: the decoding happens on the first time this method is called. If the query string is invalid
+   * it fails the context   * @return the multimap of query parameters
    */
   def queryParams (): MultiMap = {
     MultiMap(asJava.asInstanceOf[JRoutingContext].queryParams())
   }
 
   /**
-   * Gets the value of a single query parameter   * @param query The name of query parameter
-   * @return The list of all elements inside query parameter
+   * Gets the value of a single query parameter. For more info [[io.vertx.scala.ext.web.RoutingContext#queryParams]]   * @param name The name of query parameter
+   * @return The list of all parameters matching the parameter name. It returns an empty list if no query parameter with `name` was found
    */
-  def queryParam (query: String): scala.Option[scala.collection.mutable.Buffer[String]] = {
-    scala.Option(asJava.asInstanceOf[JRoutingContext].queryParam(query.asInstanceOf[java.lang.String])).map(_.asScala.map(x => x.asInstanceOf[String]))
+  def queryParam (name: String): scala.collection.mutable.Buffer[String] = {
+    asJava.asInstanceOf[JRoutingContext].queryParam(name.asInstanceOf[java.lang.String]).asScala.map(x => x.asInstanceOf[String])
   }
 
 

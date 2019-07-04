@@ -27,6 +27,7 @@ import io.vertx.lang.scala.Converter._
 
 /**
   * A handler which logs request information to the Vert.x logger.
+  * You should mount this handler before any handler that could fail the routing context
   */
 
 class LoggerHandler(private val _asJava: Object) extends io.vertx.core.Handler[RoutingContext] {

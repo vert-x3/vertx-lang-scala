@@ -60,7 +60,7 @@ var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerO
 // Store the circuit breaker in a field and access it as follows
 // ---
 
-breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
+breaker.execute((future: io.vertx.scala.core.Promise<java.lang.Object>) => {
   // some code executing with the breaker
   // the code reports failures or success on the given future.
   // if this future is marked as failed, the breaker increased the
@@ -87,7 +87,7 @@ var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerO
 // Store the circuit breaker in a field and access it as follows
 // ---
 
-breaker.execute((future: io.vertx.scala.core.Future<java.lang.String>) => {
+breaker.execute((future: io.vertx.scala.core.Promise<java.lang.String>) => {
   vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
     if (response.statusCode() != 200) {
       future.fail("HTTP error")
@@ -122,7 +122,7 @@ var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerO
 // Store the circuit breaker in a field and access it as follows
 // ---
 
-breaker.executeWithFallback((future: io.vertx.scala.core.Future<java.lang.String>) => {
+breaker.executeWithFallback((future: io.vertx.scala.core.Promise<java.lang.String>) => {
   vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
     if (response.statusCode() != 200) {
       future.fail("HTTP error")
@@ -159,7 +159,7 @@ var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerO
   "hello"
 })
 
-breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
+breaker.execute((future: io.vertx.scala.core.Promise<java.lang.Object>) => {
   vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
     if (response.statusCode() != 200) {
       future.fail("HTTP error")
@@ -205,7 +205,7 @@ var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerO
   retryCount * 100
 })
 
-breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
+breaker.execute((future: io.vertx.scala.core.Promise<java.lang.Object>) => {
   vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
     if (response.statusCode() != 200) {
       future.fail("HTTP error")
@@ -233,7 +233,7 @@ var breaker = CircuitBreaker.create("my-circuit-breaker", vertx, CircuitBreakerO
   println("Circuit closed")
 })
 
-breaker.execute((future: io.vertx.scala.core.Future<java.lang.Object>) => {
+breaker.execute((future: io.vertx.scala.core.Promise<java.lang.Object>) => {
   vertx.createHttpClient().getNow(8080, "localhost", "/", (response: io.vertx.scala.core.http.HttpClientResponse) => {
     if (response.statusCode() != 200) {
       future.fail("HTTP error")

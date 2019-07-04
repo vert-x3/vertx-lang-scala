@@ -56,9 +56,10 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
   private var cached_5: Option[scala.collection.mutable.Buffer[String]] = None
   private var cached_6: Option[scala.Option[T]] = None
   private var cached_7: Option[scala.Option[io.vertx.core.buffer.Buffer]] = None
-  private var cached_8: Option[scala.Option[String]] = None
-  private var cached_9: Option[scala.Option[io.vertx.core.json.JsonObject]] = None
-  private var cached_10: Option[scala.Option[io.vertx.core.json.JsonArray]] = None
+  private var cached_8: Option[scala.collection.mutable.Buffer[String]] = None
+  private var cached_9: Option[scala.Option[String]] = None
+  private var cached_10: Option[scala.Option[io.vertx.core.json.JsonObject]] = None
+  private var cached_11: Option[scala.Option[io.vertx.core.json.JsonArray]] = None
 
 
   /**
@@ -150,36 +151,47 @@ class HttpResponse[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
+   * @return the list of all followed redirects, including the final location.
+   */
+  def followedRedirects(): scala.collection.mutable.Buffer[String] = {
+    if (cached_8 == None) {
+      val tmp = asJava.asInstanceOf[JHttpResponse[Object]].followedRedirects()
+      cached_8 = Some(tmp.asScala.map(x => x.asInstanceOf[String]))
+    }
+    cached_8.get
+  }
+
+  /**
    * @return the response body decoded as a `String`, or `null` if a codec other than BodyCodec#buffer() was used
    */
   def bodyAsString(): scala.Option[String] = {
-    if (cached_8 == None) {
+    if (cached_9 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsString()
-      cached_8 = Some(scala.Option(tmp.asInstanceOf[String]))
+      cached_9 = Some(scala.Option(tmp.asInstanceOf[String]))
     }
-    cached_8.get
+    cached_9.get
   }
 
   /**
    * @return the response body decoded as JsonObject, or `null` if a codec other than BodyCodec#buffer() was used
    */
   def bodyAsJsonObject(): scala.Option[io.vertx.core.json.JsonObject] = {
-    if (cached_9 == None) {
+    if (cached_10 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJsonObject()
-      cached_9 = Some(scala.Option(tmp))
+      cached_10 = Some(scala.Option(tmp))
     }
-    cached_9.get
+    cached_10.get
   }
 
   /**
    * @return the response body decoded as a JsonArray, or `null` if a codec other than BodyCodec#buffer() was used
    */
   def bodyAsJsonArray(): scala.Option[io.vertx.core.json.JsonArray] = {
-    if (cached_10 == None) {
+    if (cached_11 == None) {
       val tmp = asJava.asInstanceOf[JHttpResponse[Object]].bodyAsJsonArray()
-      cached_10 = Some(scala.Option(tmp))
+      cached_11 = Some(scala.Option(tmp))
     }
-    cached_10.get
+    cached_11.get
   }
 
 

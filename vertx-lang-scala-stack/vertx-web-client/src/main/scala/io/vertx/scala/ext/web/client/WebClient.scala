@@ -381,6 +381,46 @@ class WebClient(private val _asJava: Object) {
   }
 
   /**
+   * Create a request with a custom HTTP method to send to the server at the default host and port.   * @param customHttpMethod custom HTTP Method
+   * @param requestURI the relative URI
+   * @return an HTTP client request object
+   */
+  def raw (customHttpMethod: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].raw(customHttpMethod.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+   * Create a request with a custom HTTP method to send to the server at the specified host and port.   * @param customHttpMethod custom HTTP Method
+   * @param port the port
+   * @param host the host
+   * @param requestURI the relative URI
+   * @return an HTTP client request object
+   */
+  def raw (customHttpMethod: String, port: Int, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].raw(customHttpMethod.asInstanceOf[java.lang.String], port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+   * Create a request with a custom HTTP method  to send to the server at the specified host and default port.   * @param customHttpMethod custom HTTP Method
+   * @param host the host
+   * @param requestURI the relative URI
+   * @return an HTTP client request object
+   */
+  def raw (customHttpMethod: String, host: String, requestURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].raw(customHttpMethod.asInstanceOf[java.lang.String], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+   * Create a request with a custom HTTP method  to send to the server using an absolute URI, specifying a response handler to receive
+   * the response   * @param customHttpMethod custom HTTP Method
+   * @param absoluteURI the absolute URI
+   * @return an HTTP client request object
+   */
+  def rawAbs (customHttpMethod: String, absoluteURI: String): HttpRequest[io.vertx.core.buffer.Buffer] = {
+    HttpRequest[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JWebClient].rawAbs(customHttpMethod.asInstanceOf[java.lang.String], absoluteURI.asInstanceOf[java.lang.String]))
+  }
+
+  /**
    * Close the client. Closing will close down any pooled connections.
    * Clients should always be closed after use.
    */

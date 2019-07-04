@@ -147,6 +147,34 @@ class EventBus(private val _asJava: Object) extends Measured {
   }
 
   /**
+   * Sends a message and and specify a `replyHandler` that will be called if the recipient
+   * subsequently replies to the message.
+   * 
+   * The message will be delivered to at most one of the handlers registered to the address.   * @param address the address to send it to
+   * @param message the message body, may be `null`
+   * @param replyHandler reply handler will be called when any reply from the recipient is received
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def request[T: TypeTag](address: String, message: AnyRef, replyHandler: Handler[AsyncResult[Message[T]]]): EventBus = {
+    asJava.asInstanceOf[JEventBus].request[Object](address.asInstanceOf[java.lang.String], message, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[T]](x, a => Message[T](a)))}}))
+    this
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.eventbus.EventBus#request]] but specifying `options` that can be used to configure the delivery.   * @param address the address to send it to
+   * @param message the message body, may be `null`
+   * @param options delivery options see <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
+   * @param replyHandler reply handler will be called when any reply from the recipient is received
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def request[T: TypeTag](address: String, message: AnyRef, options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[T]]]): EventBus = {
+    asJava.asInstanceOf[JEventBus].request[Object](address.asInstanceOf[java.lang.String], message, options.asJava, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[T]](x, a => Message[T](a)))}}))
+    this
+  }
+
+  /**
    * Publish a message.
    * The message will be delivered to all handlers registered to the address.   * @param address the address to publish it to
    * @param message the message, may be `null`
@@ -319,6 +347,26 @@ class EventBus(private val _asJava: Object) extends Measured {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => Message[T](x))
     asJava.asInstanceOf[JEventBus].send[Object](address.asInstanceOf[java.lang.String], message, options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def requestFuture [T: TypeTag](address: String, message: AnyRef): scala.concurrent.Future[Message[T]] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => Message[T](x))
+    asJava.asInstanceOf[JEventBus].request[Object](address.asInstanceOf[java.lang.String], message, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def requestFuture [T: TypeTag](address: String, message: AnyRef, options: DeliveryOptions): scala.concurrent.Future[Message[T]] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[T]](x => Message[T](x))
+    asJava.asInstanceOf[JEventBus].request[Object](address.asInstanceOf[java.lang.String], message, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

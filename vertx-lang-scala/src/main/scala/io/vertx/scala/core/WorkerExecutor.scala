@@ -18,8 +18,8 @@ package io.vertx.scala.core
 
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.metrics.{Measured => JMeasured}
+import io.vertx.core.{Promise => JPromise}
 import scala.reflect.runtime.universe._
-import io.vertx.core.{Future => JFuture}
 import io.vertx.core.{WorkerExecutor => JWorkerExecutor}
 import io.vertx.scala.core.metrics.Measured
 import io.vertx.core.AsyncResult
@@ -60,7 +60,7 @@ class WorkerExecutor(private val _asJava: Object) extends Measured {
    */
   def executeBlocking[T](blockingFunction: () => T, ordered: Boolean = true): concurrent.Future[T] = {
     val promise = concurrent.Promise[T]
-    val h: Handler[io.vertx.core.Future[T]] = {f => util.Try(blockingFunction()) match {
+    val h: Handler[io.vertx.core.Promise[T]] = {f => util.Try(blockingFunction()) match {
       case util.Success(s) => f.complete(s)
       case util.Failure(t) => f.fail(t)
     }}

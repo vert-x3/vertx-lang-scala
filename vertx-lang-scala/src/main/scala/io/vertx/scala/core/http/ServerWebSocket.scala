@@ -18,22 +18,22 @@ package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.Pipe
+import io.vertx.core.{Promise => JPromise}
 import scala.reflect.runtime.universe._
 import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
 import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
-import io.vertx.scala.core.Future
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
-import io.vertx.core.{Future => JFuture}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.streams.{Pipe => JPipe}
+import io.vertx.scala.core.Promise
 import io.vertx.scala.core.net.SocketAddress
 import io.vertx.lang.scala.HandlerOps._
 
@@ -461,6 +461,13 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
     asJava.asInstanceOf[JServerWebSocket].isSsl().asInstanceOf[Boolean]
   }
 
+  /**
+   * @return `true` if the WebSocket is closed
+   */
+  override def isClosed (): Boolean = {
+    asJava.asInstanceOf[JServerWebSocket].isClosed().asInstanceOf[Boolean]
+  }
+
 
   def uri (): String = {
     asJava.asInstanceOf[JServerWebSocket].uri().asInstanceOf[String]
@@ -526,8 +533,8 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
    * 
    * Calling this method will override the `future` completion handler.   * @param future the future to complete with
    */
-  def setHandshake (future: Future[Int]): Unit = {
-    asJava.asInstanceOf[JServerWebSocket].setHandshake(future.asJava.asInstanceOf[JFuture[java.lang.Integer]])
+  def setHandshake (future: Promise[Int]): Unit = {
+    asJava.asInstanceOf[JServerWebSocket].setHandshake(future.asJava.asInstanceOf[JPromise[java.lang.Integer]])
   }
 
   /**

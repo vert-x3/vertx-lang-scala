@@ -55,6 +55,29 @@ class Message[T: TypeTag](private val _asJava: Object) {
 
 
 
+  /**
+   * Reply to this message, specifying a `replyHandler` for the reply - i.e.
+   * to receive the reply to the reply.
+   * 
+   * If the message was sent specifying a reply handler, that handler will be
+   * called when it has received a reply. If the message wasn't sent specifying a receipt handler
+   * this method does nothing.   * @param message the message to reply with.
+   * @param replyHandler the reply handler for the reply.
+   */
+  def replyAndRequest[R: TypeTag](message: AnyRef, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
+    asJava.asInstanceOf[JMessage[Object]].replyAndRequest[Object](message, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}}))
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.eventbus.Message#replyAndRequest]] but specifying `options` that can be used
+   * to configure the delivery.   * @param message the message body, may be `null`
+   * @param options delivery options see <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
+   * @param replyHandler reply handler will be called when any reply from the recipient is received
+   */
+  def replyAndRequest[R: TypeTag](message: AnyRef, options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
+    asJava.asInstanceOf[JMessage[Object]].replyAndRequest[Object](message, options.asJava, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}}))
+  }
+
 
   /**
    * The address the message was sent to
@@ -151,6 +174,26 @@ class Message[T: TypeTag](private val _asJava: Object) {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
     asJava.asInstanceOf[JMessage[Object]].reply[Object](message, options.asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[replyAndRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def replyAndRequestFuture [R: TypeTag](message: AnyRef): scala.concurrent.Future[Message[R]] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
+    asJava.asInstanceOf[JMessage[Object]].replyAndRequest[Object](message, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[replyAndRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def replyAndRequestFuture [R: TypeTag](message: AnyRef, options: DeliveryOptions): scala.concurrent.Future[Message[R]] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
+    asJava.asInstanceOf[JMessage[Object]].replyAndRequest[Object](message, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

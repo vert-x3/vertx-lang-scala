@@ -17,6 +17,7 @@
 package io.vertx.scala.core
 
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.core.{Promise => JPromise}
 import scala.reflect.runtime.universe._
 import io.vertx.core.{Future => JFuture}
 import io.vertx.core.AsyncResult
@@ -59,23 +60,6 @@ class Future[T: TypeTag](private val _asJava: Object) {
     this
   }
 
-
-  /**
-   * Compose this future with a provided `next` future.
-   *
-   * When this (the one on which `compose` is called) future succeeds, the `handler` will be called with
-   * the completed value, this handler should complete the next future.
-   *
-   * If the `handler` throws an exception, the returned future will be failed with this exception.
-   *
-   * When this future fails, the failure will be propagated to the `next` future and the `handler`
-   * will not be called.   * @param handler the handler
-   * @param next the next future
-   * @return the next future, used for chaining
-   */
-  def compose[U: TypeTag](handler: Handler[T], next: Future[U]): Future[U] = {
-    Future[U](asJava.asInstanceOf[JFuture[Object]].compose[Object]((if (handler == null) null else new io.vertx.core.Handler[Object]{def handle(x: Object) {handler.handle(toScala[T](x))}}), next.asJava.asInstanceOf[JFuture[Object]]))
-  }
 
   /**
    * Compose this future with a `mapper` function.
@@ -203,8 +187,7 @@ class Future[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
-   *  Set a null result. Any handler will be called, if there is one, and the future will be marked as completed.
-   */
+   *  Set a null result. Any handler will be called, if there is one, and the future will be marked as completed.   */
   def complete (): Unit = {
     asJava.asInstanceOf[JFuture[Object]].complete()
   }
@@ -292,8 +275,8 @@ object Future {
    * Create a future that hasn't completed yet and that is passed to the `handler` before it is returned.   * @param handler the handler
    * @return the future.
    */
-  def future[T: TypeTag](handler: Handler[Future[T]]): Future[T] = {
-    Future[T](JFuture.future[Object]((if (handler == null) null else new io.vertx.core.Handler[JFuture[Object]]{def handle(x: JFuture[Object]) {handler.handle(Future[T](x))}})))
+  def future[T: TypeTag](handler: Handler[Promise[T]]): Future[T] = {
+    Future[T](JFuture.future[Object]((if (handler == null) null else new io.vertx.core.Handler[JPromise[Object]]{def handle(x: JPromise[Object]) {handler.handle(Promise[T](x))}})))
   }
 
   /**

@@ -42,6 +42,7 @@ import io.vertx.core.eventbus.{EventBus => JEventBus}
 import io.vertx.core.http.{HttpServer => JHttpServer}
 import io.vertx.core.metrics.{Measured => JMeasured}
 import io.vertx.core.file.{FileSystem => JFileSystem}
+import io.vertx.core.{Promise => JPromise}
 import io.vertx.core.net.{NetClient => JNetClient}
 import io.vertx.core.http.{HttpClientOptions => JHttpClientOptions}
 import io.vertx.scala.core.datagram.DatagramSocketOptions
@@ -56,7 +57,6 @@ import io.vertx.core.datagram.{DatagramSocketOptions => JDatagramSocketOptions}
 import java.util.concurrent.TimeUnit
 import io.vertx.core.http.{HttpClient => JHttpClient}
 import io.vertx.core.{Context => JContext}
-import io.vertx.core.{Future => JFuture}
 import io.vertx.scala.core.file.FileSystem
 import io.vertx.scala.core.http.HttpClientOptions
 import io.vertx.scala.core.net.NetServerOptions
@@ -470,7 +470,7 @@ class Vertx(private val _asJava: Object) extends Measured {
    */
   def executeBlocking[T](blockingFunction: () => T, ordered: Boolean = true): concurrent.Future[T] = {
     val promise = concurrent.Promise[T]
-    val h: Handler[io.vertx.core.Future[T]] = {f => util.Try(blockingFunction()) match {
+    val h: Handler[io.vertx.core.Promise[T]] = {f => util.Try(blockingFunction()) match {
       case util.Success(s) => f.complete(s)
       case util.Failure(t) => f.fail(t)
     }}

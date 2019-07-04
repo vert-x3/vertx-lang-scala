@@ -234,7 +234,10 @@ def remoteAddress ( ): SocketAddress    /**
 def localAddress ( ): SocketAddress    /**
    * @return true if this io.vertx.scala.core.http.HttpConnection is encrypted via SSL/TLS.
    */
-def isSsl ( ): Boolean
+def isSsl ( ): Boolean    /**
+   * @return `true` if the WebSocket is closed
+   */
+def isClosed ( ): Boolean
 
    /**
   * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
@@ -722,6 +725,13 @@ object WebSocketBase {
    */
   def isSsl (): Boolean = {
     asJava.asInstanceOf[JWebSocketBase].isSsl().asInstanceOf[Boolean]
+  }
+
+  /**
+   * @return `true` if the WebSocket is closed
+   */
+  def isClosed (): Boolean = {
+    asJava.asInstanceOf[JWebSocketBase].isClosed().asInstanceOf[Boolean]
   }
 
 

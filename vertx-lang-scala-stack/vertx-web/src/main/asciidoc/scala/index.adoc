@@ -657,7 +657,7 @@ Let's change the ordering of route2 so it runs before route1:
 [source,scala]
 ----
 
-var route1 = router.route("/some/path/").handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
+var route1 = router.route("/some/path/").order(1).handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 
   var response = routingContext.response()
   response.write("route1\n")
@@ -666,7 +666,7 @@ var route1 = router.route("/some/path/").handler((routingContext: io.vertx.scala
   routingContext.next()
 })
 
-var route2 = router.route("/some/path/").handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
+var route2 = router.route("/some/path/").order(0).handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 
   var response = routingContext.response()
   // enable chunked responses because we will be adding data as
@@ -680,7 +680,7 @@ var route2 = router.route("/some/path/").handler((routingContext: io.vertx.scala
   routingContext.next()
 })
 
-var route3 = router.route("/some/path/").handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
+var route3 = router.route("/some/path/").order(2).handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 
   var response = routingContext.response()
   response.write("route3")
@@ -688,9 +688,6 @@ var route3 = router.route("/some/path/").handler((routingContext: io.vertx.scala
   // Now end the response
   routingContext.response().end()
 })
-
-// Change the order of route2 so it runs before route1
-route2.order(-1)
 
 ----
 
@@ -705,6 +702,8 @@ route3
 If two matching routes have the same value of order, then they will be called in the order they were added.
 
 You can also specify that a route is handled last, with `link:../../scaladocs/io/vertx/scala/ext/web/Route.html#last()[last]`
+
+Note: Route order can be specified only before you configure an handler!
 
 == Routing based on MIME type of request
 
@@ -1095,13 +1094,17 @@ user understands, if you're only interested in the user prefered locale then the
 `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#preferredLocale()[preferredLocale]` will return the 1st element of the list or `null` if no
 locale was provided by the user.
 
-== Default 404 Handling
+== Route match failures
 
-If no routes match for any particular request, Vert.x-Web will signal a 404 error.
+If no routes match for any particular request, Vert.x-Web will signal an error depending on match failure:
 
+* 404 If no route matches the path
+* 405 If a route matches the path but don't match the HTTP Method
+* 406 If a route matches the path and the method but It can't provide a response with a content type matching `Accept` header
+* 415 If a route matches the path and the method but It can't accept the `Content-type`
+* 400 If a route matches the path and the method but It can't accept an empty body
 
-A default 404 error handler is provided by Router. Anyway you can provide your own 404 error handler with
-`link:../../scaladocs/io/vertx/scala/ext/web/Router.html#errorHandler(int)[errorHandler]`
+You can manually manage those failures using `link:../../scaladocs/io/vertx/scala/ext/web/Router.html#errorHandler(int)[errorHandler]`
 
 == Error handling
 
@@ -2226,7 +2229,7 @@ failure handler for any paths that you want covered.
 == Request logger
 
 Vert.x-Web includes a handler `link:../../scaladocs/io/vertx/scala/ext/web/handler/LoggerHandler.html[LoggerHandler]` that you can use to log HTTP requests.
-
+You should mount this handler before any handler that could fail the `RoutingContext`
 
 By default requests are logged to the Vert.x logger which can be configured to use JUL logging, log4j or SLF4J.
 

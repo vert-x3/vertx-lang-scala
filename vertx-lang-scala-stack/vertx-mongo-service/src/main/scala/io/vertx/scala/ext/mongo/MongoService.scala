@@ -85,8 +85,8 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
 
 
   override 
-  def updateCollection(collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[MongoClientUpdateResult]]): MongoService = {
-    asJava.asInstanceOf[JMongoService].updateCollection(collection.asInstanceOf[java.lang.String], query, update, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientUpdateResult]]{def handle(x: AsyncResult[JMongoClientUpdateResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult, MongoClientUpdateResult](x, a => MongoClientUpdateResult(a)))}}))
+  def updateCollection(collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.Option[MongoClientUpdateResult]]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].updateCollection(collection.asInstanceOf[java.lang.String], query, update, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientUpdateResult]]{def handle(x: AsyncResult[JMongoClientUpdateResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult, scala.Option[MongoClientUpdateResult]](x, a => scala.Option(a).map(MongoClientUpdateResult(_))))}}))
     this
   }
 
@@ -99,8 +99,8 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
 
 
   override 
-  def updateCollectionWithOptions(collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, options: UpdateOptions, resultHandler: Handler[AsyncResult[MongoClientUpdateResult]]): MongoService = {
-    asJava.asInstanceOf[JMongoService].updateCollectionWithOptions(collection.asInstanceOf[java.lang.String], query, update, options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientUpdateResult]]{def handle(x: AsyncResult[JMongoClientUpdateResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult, MongoClientUpdateResult](x, a => MongoClientUpdateResult(a)))}}))
+  def updateCollectionWithOptions(collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, options: UpdateOptions, resultHandler: Handler[AsyncResult[scala.Option[MongoClientUpdateResult]]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].updateCollectionWithOptions(collection.asInstanceOf[java.lang.String], query, update, options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientUpdateResult]]{def handle(x: AsyncResult[JMongoClientUpdateResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult, scala.Option[MongoClientUpdateResult]](x, a => scala.Option(a).map(MongoClientUpdateResult(_))))}}))
     this
   }
 
@@ -113,8 +113,8 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
 
 
   override 
-  def replaceDocuments(collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[MongoClientUpdateResult]]): MongoService = {
-    asJava.asInstanceOf[JMongoService].replaceDocuments(collection.asInstanceOf[java.lang.String], query, replace, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientUpdateResult]]{def handle(x: AsyncResult[JMongoClientUpdateResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult, MongoClientUpdateResult](x, a => MongoClientUpdateResult(a)))}}))
+  def replaceDocuments(collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.Option[MongoClientUpdateResult]]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].replaceDocuments(collection.asInstanceOf[java.lang.String], query, replace, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientUpdateResult]]{def handle(x: AsyncResult[JMongoClientUpdateResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult, scala.Option[MongoClientUpdateResult]](x, a => scala.Option(a).map(MongoClientUpdateResult(_))))}}))
     this
   }
 
@@ -127,22 +127,22 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
 
 
   override 
-  def replaceDocumentsWithOptions(collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, options: UpdateOptions, resultHandler: Handler[AsyncResult[MongoClientUpdateResult]]): MongoService = {
-    asJava.asInstanceOf[JMongoService].replaceDocumentsWithOptions(collection.asInstanceOf[java.lang.String], query, replace, options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientUpdateResult]]{def handle(x: AsyncResult[JMongoClientUpdateResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult, MongoClientUpdateResult](x, a => MongoClientUpdateResult(a)))}}))
+  def replaceDocumentsWithOptions(collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, options: UpdateOptions, resultHandler: Handler[AsyncResult[scala.Option[MongoClientUpdateResult]]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].replaceDocumentsWithOptions(collection.asInstanceOf[java.lang.String], query, replace, options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientUpdateResult]]{def handle(x: AsyncResult[JMongoClientUpdateResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientUpdateResult, scala.Option[MongoClientUpdateResult]](x, a => scala.Option(a).map(MongoClientUpdateResult(_))))}}))
     this
   }
 
 
   override 
-  def bulkWrite(collection: String, operations: scala.collection.mutable.Buffer[BulkOperation], resultHandler: Handler[AsyncResult[MongoClientBulkWriteResult]]): MongoService = {
-    asJava.asInstanceOf[JMongoService].bulkWrite(collection.asInstanceOf[java.lang.String], operations.map(x => x.asJava).asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientBulkWriteResult]]{def handle(x: AsyncResult[JMongoClientBulkWriteResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientBulkWriteResult, MongoClientBulkWriteResult](x, a => MongoClientBulkWriteResult(a)))}}))
+  def bulkWrite(collection: String, operations: scala.collection.mutable.Buffer[BulkOperation], resultHandler: Handler[AsyncResult[scala.Option[MongoClientBulkWriteResult]]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].bulkWrite(collection.asInstanceOf[java.lang.String], operations.map(x => x.asJava).asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientBulkWriteResult]]{def handle(x: AsyncResult[JMongoClientBulkWriteResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientBulkWriteResult, scala.Option[MongoClientBulkWriteResult]](x, a => scala.Option(a).map(MongoClientBulkWriteResult(_))))}}))
     this
   }
 
 
   override 
-  def bulkWriteWithOptions(collection: String, operations: scala.collection.mutable.Buffer[BulkOperation], bulkWriteOptions: BulkWriteOptions, resultHandler: Handler[AsyncResult[MongoClientBulkWriteResult]]): MongoService = {
-    asJava.asInstanceOf[JMongoService].bulkWriteWithOptions(collection.asInstanceOf[java.lang.String], operations.map(x => x.asJava).asJava, bulkWriteOptions.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientBulkWriteResult]]{def handle(x: AsyncResult[JMongoClientBulkWriteResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientBulkWriteResult, MongoClientBulkWriteResult](x, a => MongoClientBulkWriteResult(a)))}}))
+  def bulkWriteWithOptions(collection: String, operations: scala.collection.mutable.Buffer[BulkOperation], bulkWriteOptions: BulkWriteOptions, resultHandler: Handler[AsyncResult[scala.Option[MongoClientBulkWriteResult]]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].bulkWriteWithOptions(collection.asInstanceOf[java.lang.String], operations.map(x => x.asJava).asJava, bulkWriteOptions.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientBulkWriteResult]]{def handle(x: AsyncResult[JMongoClientBulkWriteResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientBulkWriteResult, scala.Option[MongoClientBulkWriteResult]](x, a => scala.Option(a).map(MongoClientBulkWriteResult(_))))}}))
     this
   }
 
@@ -225,8 +225,8 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
 
 
   override 
-  def removeDocuments(collection: String, query: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[MongoClientDeleteResult]]): MongoService = {
-    asJava.asInstanceOf[JMongoService].removeDocuments(collection.asInstanceOf[java.lang.String], query, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientDeleteResult]]{def handle(x: AsyncResult[JMongoClientDeleteResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientDeleteResult, MongoClientDeleteResult](x, a => MongoClientDeleteResult(a)))}}))
+  def removeDocuments(collection: String, query: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.Option[MongoClientDeleteResult]]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].removeDocuments(collection.asInstanceOf[java.lang.String], query, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientDeleteResult]]{def handle(x: AsyncResult[JMongoClientDeleteResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientDeleteResult, scala.Option[MongoClientDeleteResult]](x, a => scala.Option(a).map(MongoClientDeleteResult(_))))}}))
     this
   }
 
@@ -239,8 +239,8 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
 
 
   override 
-  def removeDocumentsWithOptions(collection: String, query: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption], resultHandler: Handler[AsyncResult[MongoClientDeleteResult]]): MongoService = {
-    asJava.asInstanceOf[JMongoService].removeDocumentsWithOptions(collection.asInstanceOf[java.lang.String], query, writeOption.map(x => x).orNull, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientDeleteResult]]{def handle(x: AsyncResult[JMongoClientDeleteResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientDeleteResult, MongoClientDeleteResult](x, a => MongoClientDeleteResult(a)))}}))
+  def removeDocumentsWithOptions(collection: String, query: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption], resultHandler: Handler[AsyncResult[scala.Option[MongoClientDeleteResult]]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].removeDocumentsWithOptions(collection.asInstanceOf[java.lang.String], query, writeOption.map(x => x).orNull, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientDeleteResult]]{def handle(x: AsyncResult[JMongoClientDeleteResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientDeleteResult, scala.Option[MongoClientDeleteResult]](x, a => scala.Option(a).map(MongoClientDeleteResult(_))))}}))
     this
   }
 
@@ -253,8 +253,8 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
 
 
   override 
-  def removeDocument(collection: String, query: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[MongoClientDeleteResult]]): MongoService = {
-    asJava.asInstanceOf[JMongoService].removeDocument(collection.asInstanceOf[java.lang.String], query, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientDeleteResult]]{def handle(x: AsyncResult[JMongoClientDeleteResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientDeleteResult, MongoClientDeleteResult](x, a => MongoClientDeleteResult(a)))}}))
+  def removeDocument(collection: String, query: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.Option[MongoClientDeleteResult]]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].removeDocument(collection.asInstanceOf[java.lang.String], query, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientDeleteResult]]{def handle(x: AsyncResult[JMongoClientDeleteResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientDeleteResult, scala.Option[MongoClientDeleteResult]](x, a => scala.Option(a).map(MongoClientDeleteResult(_))))}}))
     this
   }
 
@@ -267,8 +267,8 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
 
 
   override 
-  def removeDocumentWithOptions(collection: String, query: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption], resultHandler: Handler[AsyncResult[MongoClientDeleteResult]]): MongoService = {
-    asJava.asInstanceOf[JMongoService].removeDocumentWithOptions(collection.asInstanceOf[java.lang.String], query, writeOption.map(x => x).orNull, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientDeleteResult]]{def handle(x: AsyncResult[JMongoClientDeleteResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientDeleteResult, MongoClientDeleteResult](x, a => MongoClientDeleteResult(a)))}}))
+  def removeDocumentWithOptions(collection: String, query: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption], resultHandler: Handler[AsyncResult[scala.Option[MongoClientDeleteResult]]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].removeDocumentWithOptions(collection.asInstanceOf[java.lang.String], query, writeOption.map(x => x).orNull, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClientDeleteResult]]{def handle(x: AsyncResult[JMongoClientDeleteResult]) {resultHandler.handle(AsyncResultWrapper[JMongoClientDeleteResult, scala.Option[MongoClientDeleteResult]](x, a => scala.Option(a).map(MongoClientDeleteResult(_))))}}))
     this
   }
 
@@ -323,8 +323,8 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
 
 
   override 
-  def runCommand(commandName: String, command: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[io.vertx.core.json.JsonObject]]): MongoService = {
-    asJava.asInstanceOf[JMongoService].runCommand(commandName.asInstanceOf[java.lang.String], command, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {resultHandler.handle(AsyncResultWrapper[JsonObject, io.vertx.core.json.JsonObject](x, a => a))}}))
+  def runCommand(commandName: String, command: io.vertx.core.json.JsonObject, resultHandler: Handler[AsyncResult[scala.Option[io.vertx.core.json.JsonObject]]]): MongoService = {
+    asJava.asInstanceOf[JMongoService].runCommand(commandName.asInstanceOf[java.lang.String], command, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JsonObject]]{def handle(x: AsyncResult[JsonObject]) {resultHandler.handle(AsyncResultWrapper[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x, a => scala.Option(a)))}}))
     this
   }
 
@@ -391,9 +391,9 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
   }
 
 
-  override def updateCollectionFuture (collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject): scala.concurrent.Future[MongoClientUpdateResult] = {
+  override def updateCollectionFuture (collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject): scala.concurrent.Future[scala.Option[MongoClientUpdateResult]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientUpdateResult, MongoClientUpdateResult](x => MongoClientUpdateResult(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientUpdateResult, scala.Option[MongoClientUpdateResult]](x => scala.Option(x).map(MongoClientUpdateResult(_)))
     asJava.asInstanceOf[JMongoService].updateCollection(collection.asInstanceOf[java.lang.String], query, update, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -407,9 +407,9 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
   }
 
 
-  override def updateCollectionWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, options: UpdateOptions): scala.concurrent.Future[MongoClientUpdateResult] = {
+  override def updateCollectionWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, options: UpdateOptions): scala.concurrent.Future[scala.Option[MongoClientUpdateResult]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientUpdateResult, MongoClientUpdateResult](x => MongoClientUpdateResult(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientUpdateResult, scala.Option[MongoClientUpdateResult]](x => scala.Option(x).map(MongoClientUpdateResult(_)))
     asJava.asInstanceOf[JMongoService].updateCollectionWithOptions(collection.asInstanceOf[java.lang.String], query, update, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -423,9 +423,9 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
   }
 
 
-  override def replaceDocumentsFuture (collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject): scala.concurrent.Future[MongoClientUpdateResult] = {
+  override def replaceDocumentsFuture (collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject): scala.concurrent.Future[scala.Option[MongoClientUpdateResult]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientUpdateResult, MongoClientUpdateResult](x => MongoClientUpdateResult(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientUpdateResult, scala.Option[MongoClientUpdateResult]](x => scala.Option(x).map(MongoClientUpdateResult(_)))
     asJava.asInstanceOf[JMongoService].replaceDocuments(collection.asInstanceOf[java.lang.String], query, replace, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -439,25 +439,25 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
   }
 
 
-  override def replaceDocumentsWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, options: UpdateOptions): scala.concurrent.Future[MongoClientUpdateResult] = {
+  override def replaceDocumentsWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, options: UpdateOptions): scala.concurrent.Future[scala.Option[MongoClientUpdateResult]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientUpdateResult, MongoClientUpdateResult](x => MongoClientUpdateResult(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientUpdateResult, scala.Option[MongoClientUpdateResult]](x => scala.Option(x).map(MongoClientUpdateResult(_)))
     asJava.asInstanceOf[JMongoService].replaceDocumentsWithOptions(collection.asInstanceOf[java.lang.String], query, replace, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 
-  override def bulkWriteFuture (collection: String, operations: scala.collection.mutable.Buffer[BulkOperation]): scala.concurrent.Future[MongoClientBulkWriteResult] = {
+  override def bulkWriteFuture (collection: String, operations: scala.collection.mutable.Buffer[BulkOperation]): scala.concurrent.Future[scala.Option[MongoClientBulkWriteResult]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientBulkWriteResult, MongoClientBulkWriteResult](x => MongoClientBulkWriteResult(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientBulkWriteResult, scala.Option[MongoClientBulkWriteResult]](x => scala.Option(x).map(MongoClientBulkWriteResult(_)))
     asJava.asInstanceOf[JMongoService].bulkWrite(collection.asInstanceOf[java.lang.String], operations.map(x => x.asJava).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 
-  override def bulkWriteWithOptionsFuture (collection: String, operations: scala.collection.mutable.Buffer[BulkOperation], bulkWriteOptions: BulkWriteOptions): scala.concurrent.Future[MongoClientBulkWriteResult] = {
+  override def bulkWriteWithOptionsFuture (collection: String, operations: scala.collection.mutable.Buffer[BulkOperation], bulkWriteOptions: BulkWriteOptions): scala.concurrent.Future[scala.Option[MongoClientBulkWriteResult]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientBulkWriteResult, MongoClientBulkWriteResult](x => MongoClientBulkWriteResult(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientBulkWriteResult, scala.Option[MongoClientBulkWriteResult]](x => scala.Option(x).map(MongoClientBulkWriteResult(_)))
     asJava.asInstanceOf[JMongoService].bulkWriteWithOptions(collection.asInstanceOf[java.lang.String], operations.map(x => x.asJava).asJava, bulkWriteOptions.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -551,9 +551,9 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
   }
 
 
-  override def removeDocumentsFuture (collection: String, query: io.vertx.core.json.JsonObject): scala.concurrent.Future[MongoClientDeleteResult] = {
+  override def removeDocumentsFuture (collection: String, query: io.vertx.core.json.JsonObject): scala.concurrent.Future[scala.Option[MongoClientDeleteResult]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientDeleteResult, MongoClientDeleteResult](x => MongoClientDeleteResult(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientDeleteResult, scala.Option[MongoClientDeleteResult]](x => scala.Option(x).map(MongoClientDeleteResult(_)))
     asJava.asInstanceOf[JMongoService].removeDocuments(collection.asInstanceOf[java.lang.String], query, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -567,9 +567,9 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
   }
 
 
-  override def removeDocumentsWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption]): scala.concurrent.Future[MongoClientDeleteResult] = {
+  override def removeDocumentsWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption]): scala.concurrent.Future[scala.Option[MongoClientDeleteResult]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientDeleteResult, MongoClientDeleteResult](x => MongoClientDeleteResult(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientDeleteResult, scala.Option[MongoClientDeleteResult]](x => scala.Option(x).map(MongoClientDeleteResult(_)))
     asJava.asInstanceOf[JMongoService].removeDocumentsWithOptions(collection.asInstanceOf[java.lang.String], query, writeOption.map(x => x).orNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -583,9 +583,9 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
   }
 
 
-  override def removeDocumentFuture (collection: String, query: io.vertx.core.json.JsonObject): scala.concurrent.Future[MongoClientDeleteResult] = {
+  override def removeDocumentFuture (collection: String, query: io.vertx.core.json.JsonObject): scala.concurrent.Future[scala.Option[MongoClientDeleteResult]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientDeleteResult, MongoClientDeleteResult](x => MongoClientDeleteResult(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientDeleteResult, scala.Option[MongoClientDeleteResult]](x => scala.Option(x).map(MongoClientDeleteResult(_)))
     asJava.asInstanceOf[JMongoService].removeDocument(collection.asInstanceOf[java.lang.String], query, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -599,9 +599,9 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
   }
 
 
-  override def removeDocumentWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption]): scala.concurrent.Future[MongoClientDeleteResult] = {
+  override def removeDocumentWithOptionsFuture (collection: String, query: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption]): scala.concurrent.Future[scala.Option[MongoClientDeleteResult]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientDeleteResult, MongoClientDeleteResult](x => MongoClientDeleteResult(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JMongoClientDeleteResult, scala.Option[MongoClientDeleteResult]](x => scala.Option(x).map(MongoClientDeleteResult(_)))
     asJava.asInstanceOf[JMongoService].removeDocumentWithOptions(collection.asInstanceOf[java.lang.String], query, writeOption.map(x => x).orNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -663,9 +663,9 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
   }
 
 
-  override def runCommandFuture (commandName: String, command: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  override def runCommandFuture (commandName: String, command: io.vertx.core.json.JsonObject): scala.concurrent.Future[scala.Option[io.vertx.core.json.JsonObject]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, io.vertx.core.json.JsonObject](x => x)
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JsonObject, scala.Option[io.vertx.core.json.JsonObject]](x => scala.Option(x))
     asJava.asInstanceOf[JMongoService].runCommand(commandName.asInstanceOf[java.lang.String], command, promiseAndHandler._1)
     promiseAndHandler._2.future
   }

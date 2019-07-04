@@ -98,6 +98,15 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
+   * Configure the request to use a custom HTTP method   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def rawMethod(method: String): HttpRequest[T] = {
+    asJava.asInstanceOf[JHttpRequest[Object]].rawMethod(method.asInstanceOf[java.lang.String])
+    this
+  }
+
+  /**
    * Configure the request to use a new port `value`.   * @return a reference to this, so the API can be used fluently
    */
   
@@ -308,6 +317,19 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
    */
   def copy (): HttpRequest[T] = {
     HttpRequest[T](asJava.asInstanceOf[JHttpRequest[Object]].copy())
+  }
+
+  /**
+   * Allow or disallow multipart mixed encoding when sending  having files sharing the same
+   * file name.
+   * <br/>
+   * The default value is `true`.
+   * <br/>
+   * Set to `false` if you want to achieve the behavior for <a href="http://www.w3.org/TR/html5/forms.html#multipart-form-data">HTML5</a>.   * @param allow `true` allows use of multipart mixed encoding
+   * @return a reference to this, so the API can be used fluently
+   */
+  def multipartMixed (allow: Boolean): HttpRequest[T] = {
+    HttpRequest[T](asJava.asInstanceOf[JHttpRequest[Object]].multipartMixed(allow.asInstanceOf[java.lang.Boolean]))
   }
 
   /**

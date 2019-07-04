@@ -451,6 +451,13 @@ class WebSocket(private val _asJava: Object) extends WebSocketBase {
     asJava.asInstanceOf[JWebSocket].isSsl().asInstanceOf[Boolean]
   }
 
+  /**
+   * @return `true` if the WebSocket is closed
+   */
+  override def isClosed (): Boolean = {
+    asJava.asInstanceOf[JWebSocket].isClosed().asInstanceOf[Boolean]
+  }
+
 
  /**
   * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.

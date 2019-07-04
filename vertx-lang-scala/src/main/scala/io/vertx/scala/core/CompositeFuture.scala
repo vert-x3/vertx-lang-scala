@@ -58,23 +58,6 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
 
 
   /**
-   * Compose this future with a provided `next` future.
-   *
-   * When this (the one on which `compose` is called) future succeeds, the `handler` will be called with
-   * the completed value, this handler should complete the next future.
-   *
-   * If the `handler` throws an exception, the returned future will be failed with this exception.
-   *
-   * When this future fails, the failure will be propagated to the `next` future and the `handler`
-   * will not be called.   * @param handler the handler
-   * @param next the next future
-   * @return the next future, used for chaining
-   */
-  override def compose[U: TypeTag](handler: Handler[CompositeFuture], next: Future[U]): Future[U] = {
-    Future[U](asJava.asInstanceOf[JCompositeFuture].compose[Object]((if (handler == null) null else new io.vertx.core.Handler[JCompositeFuture]{def handle(x: JCompositeFuture) {handler.handle(CompositeFuture(x))}}), next.asJava.asInstanceOf[JFuture[Object]]))
-  }
-
-  /**
    * Compose this future with a `mapper` function.
    *
    * When this future (the one on which `compose` is called) succeeds, the `mapper` will be called with
