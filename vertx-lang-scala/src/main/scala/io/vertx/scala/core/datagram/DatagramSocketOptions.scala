@@ -26,7 +26,7 @@ import io.vertx.scala.core.net.{NetworkOptions => ExtNetworkOptions}
  * Options used to configure a datagram socket.
  */
 
-class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions) extends ExtNetworkOptions {
+class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions) extends ExtNetworkOptions(_asJava) {
   def asJava = _asJava
   /**
    * Set if the socket can send or receive broadcast packets

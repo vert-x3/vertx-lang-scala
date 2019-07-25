@@ -28,7 +28,7 @@ import io.vertx.scala.core.net.{NetworkOptions => ExtNetworkOptions}
  * Base class. TCP and SSL related options
  */
 
-trait TCPSSLOptions extends ExtNetworkOptions {
+abstract class TCPSSLOptions(private val _asJava: JTCPSSLOptions) extends ExtNetworkOptions(_asJava) {
 
   /**
    * Add a CRL path

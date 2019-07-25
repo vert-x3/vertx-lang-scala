@@ -28,7 +28,7 @@ import io.vertx.scala.core.net.{TCPSSLOptions => ExtTCPSSLOptions}
  * Base class for Client options
  */
 
-trait ClientOptionsBase extends ExtTCPSSLOptions {
+abstract class ClientOptionsBase(private val _asJava: JClientOptionsBase) extends ExtTCPSSLOptions(_asJava) {
 
   /**
    * Set the connect timeout

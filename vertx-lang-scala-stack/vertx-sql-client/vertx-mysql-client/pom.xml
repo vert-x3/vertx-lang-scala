@@ -11,14 +11,19 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>vertx-sql-client-scala_2.12</artifactId>
+  <artifactId>vertx-mysql-client-scala_2.12</artifactId>
 
   <properties>
-    <vertx-module>vertx-sql-client</vertx-module>
+    <vertx-module>vertx-mysql-client</vertx-module>
   </properties>
 
   <dependencies>
     <!-- RUNTIME DEPS -->
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sql-client-scala_2.12</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>${vertx-module}</artifactId>

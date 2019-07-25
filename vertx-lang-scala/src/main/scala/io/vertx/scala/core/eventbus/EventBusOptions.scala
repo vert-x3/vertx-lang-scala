@@ -41,7 +41,7 @@ import io.vertx.core.net.{JksOptions => JJksOptions}
  * Options to configure the event bus.
  */
 
-class EventBusOptions(private val _asJava: JEventBusOptions) extends ExtTCPSSLOptions {
+class EventBusOptions(private val _asJava: JEventBusOptions) extends ExtTCPSSLOptions(_asJava) {
   def asJava = _asJava
   /**
    * Set the accept back log.

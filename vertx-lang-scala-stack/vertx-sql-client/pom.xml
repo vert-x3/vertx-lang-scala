@@ -11,7 +11,7 @@
 
   <modelVersion>4.0.0</modelVersion>
 
-  <artifactId>vertx-config-parent-scala_2.12</artifactId>
+  <artifactId>vertx-sql-client-parent-scala_2.12</artifactId>
   <packaging>pom</packaging>
 
   <properties>
@@ -29,13 +29,8 @@
   </properties>
 
   <modules>
-    <module>vertx-config</module>
-    <module>vertx-config-git</module>
-    <module>vertx-config-hocon</module>
-    <module>vertx-config-kubernetes-configmap</module>
-    <module>vertx-config-redis</module>
-    <module>vertx-config-spring-config-server</module>
-    <module>vertx-config-yaml</module>
-    <module>vertx-config-zookeeper</module>
+    <module>vertx-sql-client</module>
+    <module>vertx-mysql-client</module>
+    <module>vertx-pg-client</module>
   </modules>
 </project>

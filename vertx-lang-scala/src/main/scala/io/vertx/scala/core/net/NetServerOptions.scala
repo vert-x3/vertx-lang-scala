@@ -29,7 +29,7 @@ import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
  * Options for configuring a [[io.vertx.scala.core.net.NetServer]].
  */
 
-class NetServerOptions(private val _asJava: JNetServerOptions) extends ExtTCPSSLOptions {
+class NetServerOptions(private val _asJava: JNetServerOptions) extends ExtTCPSSLOptions(_asJava) {
   def asJava = _asJava
   /**
    * Set the accept back log

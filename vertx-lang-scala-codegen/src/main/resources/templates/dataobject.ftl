@@ -13,13 +13,13 @@ ${typeHelper.renderDoc(type, " *", doc)}
 </#if>
 
 <@compress single_line=true>
-<#if concrete>
-class ${className}(private val _asJava: J${className})
+<#if isClass>
+<#if !concrete>abstract</#if> class ${className}(private val _asJava: J${className})
 <#else>
 trait ${className}
 </#if>
 <#if superTypes?has_content>
- extends <#list superTypes as superType>Ext${typeHelper.toScalaType(superType, false)}<#if !superType.isAbstract()>(_asJava)</#if><#sep>with </#list>
+ extends <#list superTypes as superType>Ext${typeHelper.toScalaType(superType, false)}<#if !superType.isAbstract() || (superType.isAbstract() && superType.isClass())>(_asJava)</#if><#sep>with </#list>
 </#if>
  {
 </@compress>

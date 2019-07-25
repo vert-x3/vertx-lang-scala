@@ -25,7 +25,7 @@ import scala.collection.JavaConverters._
 
  */
 
-trait NetworkOptions {
+abstract class NetworkOptions(private val _asJava: JNetworkOptions) {
 
   /**
    * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.

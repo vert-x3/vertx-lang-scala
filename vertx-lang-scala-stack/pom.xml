@@ -299,5 +299,6 @@
     <module>vertx-circuit-breaker</module>
     <module>vertx-config</module>
     <module>vertx-service-discovery</module>
+    <module>vertx-sql-client</module>
   </modules>
 </project>

@@ -28,7 +28,7 @@ import scala.collection.JavaConverters._
  * Options for configuring a [[io.vertx.scala.core.net.NetClient]].
  */
 
-class NetClientOptions(private val _asJava: JNetClientOptions) extends ExtClientOptionsBase {
+class NetClientOptions(private val _asJava: JNetClientOptions) extends ExtClientOptionsBase(_asJava) {
   def asJava = _asJava
   /**
    * Set the connect timeout

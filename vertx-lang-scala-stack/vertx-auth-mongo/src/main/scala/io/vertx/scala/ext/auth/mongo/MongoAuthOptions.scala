@@ -26,7 +26,7 @@ import io.vertx.scala.ext.auth.{AuthOptions => ExtAuthOptions}
  * Options configuring Mongo authentication.
  */
 
-class MongoAuthOptions(private val _asJava: JMongoAuthOptions) extends ExtAuthOptions {
+class MongoAuthOptions(private val _asJava: JMongoAuthOptions) extends ExtAuthOptions(_asJava) {
   def asJava = _asJava
   /**
    * The property name to be used to set the name of the collection inside the config.
