@@ -21,5 +21,4 @@ object Main {
         case Failure(exception) => println("Failure")
       }
   }
-
 }
