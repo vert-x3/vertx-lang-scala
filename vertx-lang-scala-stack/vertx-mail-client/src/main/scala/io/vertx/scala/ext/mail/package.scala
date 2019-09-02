@@ -35,14 +35,6 @@ import io.vertx.ext.mail.{MailMessage => JMailMessage}
 package object mail{
 
 
-  type MailAttachment = io.vertx.ext.mail.MailAttachment
-
-  object MailAttachment {
-    def apply() = new MailAttachment()
-    def apply(json: JsonObject) = new MailAttachment(json)
-  }
-
-
 
   /**
     * SMTP mail client for Vert.x

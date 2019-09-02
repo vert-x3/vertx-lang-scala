@@ -37,6 +37,7 @@ import io.vertx.ext.web.client.predicate.{ResponsePredicateResult => JResponsePr
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.streams
 import io.vertx.core.http.HttpMethod
+import io.vertx.core.{Future => JFuture}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult

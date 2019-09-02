@@ -26,6 +26,7 @@ import scala.concurrent.Promise
 import io.vertx.mqtt.{MqttEndpoint => JMqttEndpoint}
 import io.vertx.core
 import io.vertx.mqtt.{MqttServerOptions => JMqttServerOptions}
+import io.vertx.core.{Future => JFuture}
 import io.vertx.mqtt.{MqttServer => JMqttServer}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler

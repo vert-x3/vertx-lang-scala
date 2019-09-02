@@ -319,7 +319,7 @@ package object client{
   /**
     * Vert.x Kafka producer.
     * 
-    * The  provides global control over writing a record.
+    * The [[io.vertx.core.streams.WriteStream#write]] provides global control over writing a record.
 
     */
 
@@ -335,6 +335,12 @@ package object client{
       asJava.drainHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
     }
 
+    def writeFuture(arg0: io.vertx.kafka.client.producer.KafkaProducerRecord[K, V]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.write(arg0, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
     def endFuture(): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
       asJava.end({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
@@ -344,12 +350,6 @@ package object client{
     def endFuture(data: io.vertx.kafka.client.producer.KafkaProducerRecord[K, V]): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
       asJava.end(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    def writeFuture(data: io.vertx.kafka.client.producer.KafkaProducerRecord[K, V]): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.write(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -368,6 +368,15 @@ package object client{
     def partitionsForFuture(topic: java.lang.String): scala.concurrent.Future[java.util.List[io.vertx.kafka.client.common.PartitionInfo]] = {
       val promise = Promise[java.util.List[io.vertx.kafka.client.common.PartitionInfo]]()
       asJava.partitionsFor(topic, {a:AsyncResult[java.util.List[io.vertx.kafka.client.common.PartitionInfo]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[flush]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def flushFuture(): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.flush({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 

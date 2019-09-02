@@ -51,7 +51,7 @@ var retriever = ConfigRetriever.create(vertx, ConfigRetrieverOptions()
 ----
 
 The store configuration is used to create an instance of
-`link:../../scaladocs/io/vertx/scala/redis/RedisClient.html[RedisClient]`. check the documentation of the Vert.x Redis Client
+`link:../../scaladocs/io/vertx/scala/redis/client/Redis.html[Redis]`. check the documentation of the Vert.x Redis Client
 for further details.
 
 In addition, you can set the `key` instructing the store in which _field_ the configuration

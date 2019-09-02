@@ -55,8 +55,6 @@ package object web{
 
 
 
-
-
   type Http2PushMapping = io.vertx.ext.web.Http2PushMapping
 
   object Http2PushMapping {

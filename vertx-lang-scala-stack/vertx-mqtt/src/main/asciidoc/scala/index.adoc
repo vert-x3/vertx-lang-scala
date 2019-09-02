@@ -61,7 +61,7 @@ mqttServer.endpointHandler((endpoint: io.vertx.scala.mqtt.MqttEndpoint) => {
     println(s"[username = ${todo-renderDataObjectMemberSelect}, password = ${todo-renderDataObjectMemberSelect}]")
   }
   if (endpoint.will() != null) {
-    println(s"[will topic = ${todo-renderDataObjectMemberSelect} msg = ${todo-renderDataObjectMemberSelect} QoS = ${todo-renderDataObjectMemberSelect} isRetain = ${todo-renderDataObjectMemberSelect}]")
+    println(s"[will topic = ${todo-renderDataObjectMemberSelect} msg = ${new java.lang.String(todo-renderDataObjectMemberSelect)} QoS = ${todo-renderDataObjectMemberSelect} isRetain = ${todo-renderDataObjectMemberSelect}]")
   }
 
   println(s"[keep alive timeout = ${endpoint.keepAliveTimeSeconds()}]")
@@ -132,7 +132,7 @@ mqttServer.endpointHandler((endpoint: io.vertx.scala.mqtt.MqttEndpoint) => {
     println(s"[username = ${todo-renderDataObjectMemberSelect}, password = ${todo-renderDataObjectMemberSelect}]")
   }
   if (endpoint.will() != null) {
-    println(s"[will topic = ${todo-renderDataObjectMemberSelect} msg = ${todo-renderDataObjectMemberSelect} QoS = ${todo-renderDataObjectMemberSelect} isRetain = ${todo-renderDataObjectMemberSelect}]")
+    println(s"[will topic = ${todo-renderDataObjectMemberSelect} msg = ${new java.lang.String(todo-renderDataObjectMemberSelect)} QoS = ${todo-renderDataObjectMemberSelect} isRetain = ${todo-renderDataObjectMemberSelect}]")
   }
 
   println(s"[keep alive timeout = ${endpoint.keepAliveTimeSeconds()}]")
@@ -391,7 +391,7 @@ and calling `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#connect(in
 ----
 var client = MqttClient.create(vertx)
 
-client.connectFuture(1883, "iot.eclipse.org").onComplete{
+client.connectFuture(1883, "mqtt.eclipse.org").onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -451,7 +451,13 @@ This one is pretty useful because you could see the packetId of just received PU
 ----
 client.publishCompletionHandler((id: java.lang.Integer) => {
   println(s"Id of just received PUBACK or PUBCOMP packet is ${id}")
-}).publish("hello", Buffer.buffer("hello"), MqttQoS.EXACTLY_ONCE, false, false).publish("hello", Buffer.buffer("hello"), MqttQoS.AT_LEAST_ONCE, false, false).publish("hello", Buffer.buffer("hello"), MqttQoS.AT_LEAST_ONCE, false, false)
+})
+// The line of code below will trigger publishCompletionHandler (QoS 2)
+client.publish("hello", Buffer.buffer("hello"), MqttQoS.EXACTLY_ONCE, false, false)
+// The line of code below will trigger publishCompletionHandler (QoS is 1)
+client.publish("hello", Buffer.buffer("hello"), MqttQoS.AT_LEAST_ONCE, false, false)
+// The line of code below does not trigger because QoS value is 0
+client.publish("hello", Buffer.buffer("hello"), MqttQoS.AT_LEAST_ONCE, false, false)
 
 
 ----
@@ -471,7 +477,9 @@ client.subscribeCompletionHandler((mqttSubAckMessage: io.vertx.scala.mqtt.messag
     }
   })
 
-}).subscribe("temp", 1).subscribe("temp2", 2)
+})
+client.subscribe("temp", 1)
+client.subscribe("temp2", 2)
 
 ----
 
@@ -481,14 +489,17 @@ client.subscribeCompletionHandler((mqttSubAckMessage: io.vertx.scala.mqtt.messag
 ----
 client.unsubscribeCompletionHandler((id: java.lang.Integer) => {
   println(s"Id of just received UNSUBACK packet is ${id}")
-}).subscribe("temp", 1).unsubscribe("temp")
+})
+client.subscribe("temp", 1)
+client.unsubscribe("temp")
 
 ----
 * unsubscribe sent
 +
 [source,scala]
 ----
-client.subscribe("temp", 1).unsubscribeFuture("temp").onComplete{
+client.subscribe("temp", 1)
+client.unsubscribeFuture("temp").onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }

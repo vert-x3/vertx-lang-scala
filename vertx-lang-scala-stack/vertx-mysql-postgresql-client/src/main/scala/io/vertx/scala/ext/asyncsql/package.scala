@@ -28,7 +28,6 @@ import io.vertx.ext.sql.{SQLOperations => JSQLOperations}
 import io.vertx.core
 import io.vertx.ext.asyncsql.{MySQLClient => JMySQLClient}
 import io.vertx.ext.asyncsql.{AsyncSQLClient => JAsyncSQLClient}
-import io.vertx.ext.sql.{SQLClient => JSQLClient}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
 import io.vertx.ext.sql

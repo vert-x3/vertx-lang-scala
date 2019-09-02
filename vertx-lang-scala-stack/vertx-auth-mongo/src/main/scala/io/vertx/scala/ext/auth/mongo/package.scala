@@ -25,13 +25,15 @@ import scala.concurrent.Promise
 
 import io.vertx.ext.auth
 import io.vertx.ext.auth.mongo.HashAlgorithm
-import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.ext.mongo.{MongoClient => JMongoClient}
+import io.vertx.core
+import scala.collection.JavaConverters._
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.ext.auth.mongo.{MongoAuth => JMongoAuth}
+import io.vertx.core.{Future => JFuture}
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.auth.mongo.{HashStrategy => JHashStrategy}
 import io.vertx.core.AsyncResult
-import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 import io.vertx.ext.mongo
 

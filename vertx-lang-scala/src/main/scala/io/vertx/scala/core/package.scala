@@ -478,6 +478,7 @@ package object core{
   }
 
 
+
   type CopyOptions = io.vertx.core.file.CopyOptions
 
   object CopyOptions {
@@ -2354,6 +2355,14 @@ package object core{
       scala.Option(asJava.getFormAttribute(attributeName))
     }
 
+
+    /**
+     * Like [[getCookie]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getCookieOption(name: java.lang.String): scala.Option[io.vertx.core.http.Cookie] = {
+      scala.Option(asJava.getCookie(name))
+    }
+
     /**
      * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
@@ -2438,6 +2447,22 @@ package object core{
      */
     def bodyEndHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.HttpServerResponse = {
       asJava.bodyEndHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
+    }
+
+
+    /**
+     * Like [[removeCookie]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def removeCookieOption(name: java.lang.String): scala.Option[io.vertx.core.http.Cookie] = {
+      scala.Option(asJava.removeCookie(name))
+    }
+
+
+    /**
+     * Like [[removeCookie]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def removeCookieOption(name: java.lang.String,invalidate: java.lang.Boolean): scala.Option[io.vertx.core.http.Cookie] = {
+      scala.Option(asJava.removeCookie(name, invalidate))
     }
 
     /**
@@ -3748,6 +3773,25 @@ package object core{
     * 
     * Please see the user manual for more detailed usage information.
     */
+
+  type Vertx = io.vertx.core.Vertx
+
+  object Vertx {
+    def vertx(options: VertxOptions = null): io.vertx.core.Vertx =
+      if(options == null)
+        io.vertx.core.Vertx.vertx()
+      else
+        io.vertx.core.Vertx.vertx(options)
+
+    def clusteredVertx(options: VertxOptions): scala.concurrent.Future[io.vertx.core.Vertx] = {
+      val promise = Promise[io.vertx.core.Vertx]()
+      io.vertx.core.Vertx.clusteredVertx(options).setHandler({a:AsyncResult[io.vertx.core.Vertx] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def currentContext(): scala.Option[io.vertx.core.Context] =
+      scala.Option(io.vertx.core.Vertx.currentContext())
+  }
 
   implicit class VertxScala(val asJava: io.vertx.core.Vertx) extends AnyVal {
 

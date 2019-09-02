@@ -24,6 +24,7 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import io.vertx.core
+import io.vertx.core.{Future => JFuture}
 import io.vertx.kafka.admin.{ConsumerGroupListing => JConsumerGroupListing}
 import io.vertx.kafka.admin.{NewTopic => JNewTopic}
 import io.vertx.kafka.admin.{ConsumerGroupDescription => JConsumerGroupDescription}

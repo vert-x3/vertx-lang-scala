@@ -24,6 +24,8 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import io.vertx.core
+import io.vertx.core.{Future => JFuture}
 import io.vertx.ext.auth.{User => JUser}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
@@ -98,15 +100,6 @@ package object auth{
     def isAuthorizedFuture(authority: java.lang.String): scala.concurrent.Future[java.lang.Boolean] = {
       val promise = Promise[java.lang.Boolean]()
       asJava.isAuthorized(authority, {a:AsyncResult[java.lang.Boolean] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[isAuthorised]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def isAuthorisedFuture(authority: java.lang.String): scala.concurrent.Future[java.lang.Boolean] = {
-      val promise = Promise[java.lang.Boolean]()
-      asJava.isAuthorised(authority, {a:AsyncResult[java.lang.Boolean] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 

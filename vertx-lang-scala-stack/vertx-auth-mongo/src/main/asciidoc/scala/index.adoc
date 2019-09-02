@@ -167,7 +167,7 @@ implementation assumes a familiar user/role/permission model, where a user can h
 can have zero or more permissions.
 
 If validating if a user has a particular permission simply pass the permission into.
-`link:../../scaladocs/io/vertx/scala/ext/auth/User.html#isAuthorised(java.lang.String)[isAuthorised]` as follows:
+`link:../../scaladocs/io/vertx/scala/ext/auth/User.html#isAuthorized(java.lang.String)[isAuthorized]` as follows:
 
 [source,scala]
 ----

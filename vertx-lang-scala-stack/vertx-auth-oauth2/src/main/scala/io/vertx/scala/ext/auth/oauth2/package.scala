@@ -26,7 +26,9 @@ import scala.concurrent.Promise
 import io.vertx.ext.auth
 import io.vertx.core.buffer.Buffer
 import io.vertx.ext.auth.oauth2.{AccessToken => JAccessToken}
+import io.vertx.core
 import io.vertx.core.http.HttpMethod
+import io.vertx.core.{Future => JFuture}
 import io.vertx.ext.auth.{User => JUser}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
@@ -139,15 +141,6 @@ package object oauth2{
     */
 
   implicit class OAuth2AuthScala(val asJava: io.vertx.ext.auth.oauth2.OAuth2Auth) extends AnyVal {
-
-    /**
-     * Like [[getToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def getTokenFuture(params: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
-      val promise = Promise[io.vertx.ext.auth.oauth2.AccessToken]()
-      asJava.getToken(params, {a:AsyncResult[io.vertx.ext.auth.oauth2.AccessToken] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
 
     /**
      * Like [[decodeToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
