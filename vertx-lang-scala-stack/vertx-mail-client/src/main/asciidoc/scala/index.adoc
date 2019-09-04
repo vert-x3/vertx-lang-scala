@@ -108,7 +108,7 @@ this supports base64 attachments.
 
 [source,scala]
 ----
-var attachment = MailAttachment()
+var attachment = MailAttachment.create()
 attachment.setContentType("text/plain")
 attachment.setData(Buffer.buffer("attachment file"))
 
@@ -126,7 +126,7 @@ A valid example for a Content-ID value is "<filename%201.jpg@example.org>"
 
 [source,scala]
 ----
-var attachment = MailAttachment()
+var attachment = MailAttachment.create()
 attachment.setContentType("image/jpeg")
 attachment.setData(Buffer.buffer("image data"))
 attachment.setDisposition("inline")

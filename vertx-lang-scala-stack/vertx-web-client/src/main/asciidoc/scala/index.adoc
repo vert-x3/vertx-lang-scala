@@ -801,6 +801,8 @@ var client = WebClient.create(vertx, WebClientOptions()
 
 ----
 
+NOTE: For security reason, client won't follow redirects for request with methods different from GET or HEAD
+
 == Using HTTPS
 
 Vert.x Web Client can be configured to use HTTPS in exactly the same way as the Vert.x `link:../../scaladocs/io/vertx/scala/core/http/HttpClient.html[HttpClient]`.

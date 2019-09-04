@@ -425,7 +425,7 @@ type is the proxies interface (the location is the address).
 `link:../../apidocs/io/vertx/ext/jdbc/JDBCClient.html[JDBCClient]` (the configuration of the client is computed from the location, metadata and
 consumer configuration).
 * `link:../../apidocs/io/vertx/servicediscovery/types/RedisDataSource.html[RedisDataSource]` - for Redis data sources, the service object is a
-`link:../../apidocs/io/vertx/redis/RedisClient.html[RedisClient]` (the configuration of the client is computed from the location, metadata and
+`link:../../apidocs/io/vertx/redis/client/Redis.html[Redis]` (the configuration of the client is computed from the location, metadata and
 consumer configuration).
 * `link:../../apidocs/io/vertx/servicediscovery/types/MongoDataSource.html[MongoDataSource]` - for Mongo data sources, the service object is a
 `link:../../apidocs/io/vertx/ext/mongo/MongoClient.html[MongoClient]` (the configuration of the client is computed from the location, metadata and
@@ -811,7 +811,7 @@ JDBCDataSource.getJDBCClient(discovery, [
 === Redis Data source
 
 Redis data sources are a specialization for Redis persistence databases.
-The client of a Redis data source service is a `link:../../apidocs/io/vertx/redis/RedisClient.html[RedisClient]`.
+The client of a Redis data source service is a `link:../../apidocs/io/vertx/redis/client/Redis.html[Redis]`.
 
 ==== Publishing a Redis service
 
@@ -840,7 +840,7 @@ source (url, port...).
 ==== Consuming a Redis service
 
 As stated in the previous section, how to access a data source depends on the data source itself. To build the
-`link:../../apidocs/io/vertx/redis/RedisClient.html[RedisClient]`, you can merge configuration: the record location, the metadata and a json object provided by
+`link:../../apidocs/io/vertx/redis/client/Redis.html[Redis]`, you can merge configuration: the record location, the metadata and a json object provided by
 the consumer:
 
 [source, groovy]
@@ -1010,7 +1010,7 @@ register it using
 
 The second parameter can provide an optional configuration for the bridge.
 
-When the bridge is registered the `link:../../apidocs/io/vertx/servicediscovery/spi/ServiceImporter.html#start-io.vertx.core.Vertx-io.vertx.servicediscovery.spi.ServicePublisher-io.vertx.core.json.JsonObject-io.vertx.core.Future-[start]` method is called.
+When the bridge is registered the `link:../../apidocs/io/vertx/servicediscovery/spi/ServiceImporter.html#start-io.vertx.core.Vertx-io.vertx.servicediscovery.spi.ServicePublisher-io.vertx.core.json.JsonObject-io.vertx.core.Promise-[start]` method is called.
 It lets you configure the bridge. When the bridge is configured, ready and has imported / exported the initial services, it must complete the given `link:../../apidocs/io/vertx/core/Future.html[Future]`.
 If the bridge starts method is blocking, it must use an `link:../../apidocs/io/vertx/core/Vertx.html#executeBlocking-io.vertx.core.Handler-boolean-io.vertx.core.Handler-[executeBlocking]` construct, and complete the given future object.
 

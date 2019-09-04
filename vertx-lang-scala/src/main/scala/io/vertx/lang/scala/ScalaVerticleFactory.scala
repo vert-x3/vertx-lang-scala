@@ -16,12 +16,9 @@
 
 package io.vertx.lang.scala
 
-import io.vertx.core.{DeploymentOptions, Verticle, Vertx}
-import io.vertx.core.Future
+import io.vertx.core.{Verticle, Vertx}
 import io.vertx.core.spi.VerticleFactory
 import io.vertx.lang.scala.onthefly.OnTheFlyCompiler
-
-import scala.util.Success
 
 /**
  * Factory for creating Verticle-Instances from a compiled class or scala source code.

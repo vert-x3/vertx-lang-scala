@@ -16,20 +16,20 @@
 
 package io.vertx.lang.scala.tck
 
-import com.acme.scala.pkg.MyInterface
-import io.vertx.codegen.testmodel._
+import com.acme.pkg.MyInterface
+import io.vertx.codegen.testmodel.{TestInterfaceImpl, RefedInterface1Impl, TestEnum}
 import io.vertx.core.http.HttpServerOptions
 import io.vertx.core.json.{JsonArray, JsonObject}
 import io.vertx.core.{Future, VertxException}
-import io.vertx.lang.scala.ScalaAsyncResult
 import io.vertx.lang.scala.json.Json
 import io.vertx.lang.scala.json.Json.arr
-import io.vertx.scala.codegen.testmodel
-import io.vertx.scala.codegen.testmodel.{ConcreteHandlerUserTypeExtension, Factory, RefedInterface1, TestDataObject, TestInterface}
+import io.vertx.codegen.testmodel.{ConcreteHandlerUserTypeExtension, Factory, TestInterface}
+import io.vertx.lang.scala.ScalaAsyncResult
+import io.vertx.scala.codegen.testmodel._
 import org.junit.ComparisonFailure
 import org.junit.runner.RunWith
 import org.scalatest.concurrent.Waiters.Waiter
-import org.scalatest.junit.JUnitRunner
+import org.scalatestplus.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
 
 import scala.concurrent.ExecutionContext
@@ -42,7 +42,7 @@ import scala.util.{Failure, Success}
 @RunWith(classOf[JUnitRunner])
 class ApiTest extends FlatSpec with Matchers {
 
-  val obj = TestInterface(new TestInterfaceImpl())
+  val obj:TestInterface = new TestInterfaceImpl()
 
   implicit val execCtx = new ExecutionContext {
     override def reportFailure(cause: Throwable): Unit = ???
@@ -55,7 +55,15 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithBasicBoxedParams" should "work" in {
-    obj.methodWithBasicBoxedParams(123, 12345, 1234567, 1265615234l, 12.345f, 12.34566d, true, 'X')
+    obj.methodWithBasicBoxedParams(
+      Byte.box(123),
+      Short.box(12345),
+      Int.box(1234567),
+      1265615234l,
+      12.345f,
+      12.34566d,
+      true,
+      'X')
   }
 
   "testMethodWithHandlerBasicTypes" should "work" in {
@@ -252,7 +260,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithUserTypes" should "work" in {
-    val refed = RefedInterface1(new RefedInterface1Impl())
+    val refed = new RefedInterface1Impl()
     refed.setString("aardvarks")
     obj.methodWithUserTypes(refed)
   }
@@ -273,11 +281,11 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testDataObjectParam" should "work" in {
-    obj.methodWithDataObjectParam(testmodel.TestDataObject.fromJson(Json.obj().put("bar", 123).put("foo", "hello").put("wibble", 1.23)))
+    obj.methodWithDataObjectParam(TestDataObject(Json.obj().put("bar", 123).put("foo", "hello").put("wibble", 1.23)))
   }
 
   "testMethodWithHandlerDataObject" should "work" in {
-    val dataObject = TestDataObject.fromJson(Json.obj().put("foo", "foo").put("bar", 123))
+    val dataObject = TestDataObject(Json.obj().put("foo", "foo").put("bar", 123))
 
     exec1(w =>
       obj.methodWithHandlerDataObject(it => {
@@ -291,7 +299,7 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithHandlerAsyncResultDataObject" should "work" in {
-    val dataObject = TestDataObject.fromJson(Json.obj().put("foo", "foo").put("bar", 123))
+    val dataObject = TestDataObject(Json.obj().put("foo", "foo").put("bar", 123))
 
     exec1(w => obj.methodWithHandlerAsyncResultDataObjectFuture(false).foreach(result => {
       w {
@@ -334,7 +342,7 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testMethodWithHandlerVertxGenReturn" should "work" in {
     val handler = obj.methodWithHandlerVertxGenReturn("wibble")
-    handler.handle(RefedInterface1(new RefedInterface1Impl().setString("wibble")))
+    handler.handle(new RefedInterface1Impl().setString("wibble"))
   }
 
   "testMethodWithHandlerAsyncResultStringReturn" should "work" in {
@@ -375,7 +383,7 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testMethodWithHandlerAsyncResultVertxGenReturn" should "work" in {
     var handler = obj.methodWithHandlerAsyncResultVertxGenReturn("wibble", false)
-    handler.handle(Future.succeededFuture(RefedInterface1(new RefedInterface1Impl().setString("wibble"))))
+    handler.handle(Future.succeededFuture(new RefedInterface1Impl().setString("wibble")))
     handler = obj.methodWithHandlerAsyncResultVertxGenReturn("oh-no", true)
     handler.handle(Future.failedFuture("oh-no"))
   }
@@ -403,15 +411,15 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testMethodWithConcreteHandlerUserTypesSubtypeExtension" should "work" in {
     obj.methodWithConcreteHandlerUserTypeSubtypeExtension(
-      new ConcreteHandlerUserTypeExtension(new io.vertx.codegen.testmodel.ConcreteHandlerUserTypeExtension() {
+      new ConcreteHandlerUserTypeExtension() {
         override def handle(event: io.vertx.codegen.testmodel.RefedInterface1): Unit = {
           assert("echidnas" == event.getString)
         }
-      }))
+      })
   }
 
   "testMethodWithHandlerVoid" should "work" in {
-    obj.methodWithHandlerVoid((event:Unit) => assert(true))
+    obj.methodWithHandlerVoid((event:Void) => assert(true))
   }
 
   "testMethodWithHandlerAsyncResultVoid" should "work" in {
@@ -530,7 +538,7 @@ class ApiTest extends FlatSpec with Matchers {
 
   "testVertxGenNullReturn" should "work" in {
     val r = obj.methodWithVertxGenNullReturn()
-    assert(null == r.asJava)
+    assert(null == r)
   }
 
   "testVertxAbstractGenReturn" should "work" in {
@@ -545,15 +553,14 @@ class ApiTest extends FlatSpec with Matchers {
   }
 
   "testDataObjectNullReturn" should "work" in {
-    //DataObjects created with apply(null) will be filled with an empty dataobject instead of null
     val r = obj.methodWithDataObjectNullReturn()
-    assert(null != r.asJava)
+    assert(null == r)
   }
 
 
 
   "testOverloadedMethods" should "work" in {
-    val refed = new RefedInterface1(new RefedInterface1Impl())
+    val refed = new RefedInterface1Impl()
     refed.setString("dog")
     assert("meth1" == obj.overloadedMethod("cat", refed))
     var counter = 0
@@ -594,15 +601,6 @@ class ApiTest extends FlatSpec with Matchers {
     assert("bar" == TestInterface.staticFactoryMethod("bar").getString())
   }
 
-  "testMethodWithCachedReturn" should "work" in {
-    val ret1 = obj.methodWithCachedReturn("bar")
-    assert("bar" == ret1.getString())
-    val ret2 = obj.methodWithCachedReturn("bar")
-    assert(ret1.eq(ret2))
-    val ret3 = obj.methodWithCachedReturn("bar")
-    assert(ret1.eq(ret3))
-  }
-
   "methodWithCachedReturnPrimitive" should "work" in {
     val ret1 = obj.methodWithCachedReturnPrimitive(2)
     assert(2 == ret1)
@@ -610,17 +608,6 @@ class ApiTest extends FlatSpec with Matchers {
     assert(ret1 == ret2)
     val ret3 = obj.methodWithCachedReturnPrimitive(2)
     assert(ret1 == ret3)
-  }
-
-  "testMethodWithCachedListReturn" should "work" in {
-    val ret1 = obj.methodWithCachedListReturn()
-    assert(2 == ret1.size)
-    assert("foo" == ret1.head.getString)
-    assert("bar" == ret1(1).getString)
-    val ret2 = obj.methodWithCachedListReturn()
-    assert(ret1.eq(ret2))
-    val ret3 = obj.methodWithCachedListReturn()
-    assert(ret1.eq(ret3))
   }
 
   "testJsonReturns" should "work" in {

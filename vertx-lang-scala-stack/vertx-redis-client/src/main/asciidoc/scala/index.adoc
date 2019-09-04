@@ -59,7 +59,7 @@ configured using a `link:../dataobjects.html#RedisOptions[RedisOptions]` data ob
 initialized with the following values:
 
 * `netClientOptions`: default is `TcpKeepAlive: true`, `TcpNoDelay: true`
-* `endpoint`: default is `localhost:6379`
+* `endpoint`: default is `redis://localhost:6379`
 * `masterName`: default is `mymaster`
 * `role` default is `MASTER`
 * `slaves` default is `NEVER`
@@ -82,12 +82,7 @@ once a successful connection is established to the server.
 
 [source,scala]
 ----
-var options = RedisOptions()
-  .setPassword("abracadabra")
-  .setSelect(1)
-
-
-Redis.createClient(vertx, options).connectFuture().onComplete{
+Redis.createClient(vertx, "redis://:abracadabra@localhost:6379/1").connectFuture().onComplete{
   case Success(result) => {
     var client = result
   }
@@ -95,6 +90,23 @@ Redis.createClient(vertx, options).connectFuture().onComplete{
 }
 
 ----
+
+== Connection String
+
+The client will recognize addresses that follow the expression:
+
+----
+redis://[:password@]host[:port][/db-number]
+----
+
+Or
+
+----
+unix://[:password@]/domain/docker.sock[?select=db-number]
+----
+
+When specifying a password or a database those commands are always executed on connection start.
+
 
 == Running commands
 
@@ -141,7 +153,7 @@ To work with high availability mode the connection creation is quite similar:
 ----
 Redis.createClient(vertx, RedisOptions()
   .setType(RedisClientType.SENTINEL)
-  .setEndpoints(Set(SocketAddress.inetSocketAddress(5000, "127.0.0.1"), SocketAddress.inetSocketAddress(5001, "127.0.0.1"), SocketAddress.inetSocketAddress(5002, "127.0.0.1")))
+  .setEndpoints(Set("redis://127.0.0.1:5000", "redis://127.0.0.1:5001", "redis://127.0.0.1:5002"))
   .setMasterName("sentinel7000")
   .setRole(RedisRole.MASTER)
 ).connectFuture().onComplete{
@@ -162,7 +174,7 @@ To work with cluster the connection creation is quite similar:
 [source,scala]
 ----
 var options = RedisOptions()
-  .setEndpoints(Set(SocketAddress.inetSocketAddress(7000, "127.0.0.1"), SocketAddress.inetSocketAddress(7001, "127.0.0.1"), SocketAddress.inetSocketAddress(7002, "127.0.0.1"), SocketAddress.inetSocketAddress(7003, "127.0.0.1"), SocketAddress.inetSocketAddress(7004, "127.0.0.1"), SocketAddress.inetSocketAddress(7005, "127.0.0.1")))
+  .setEndpoints(Set("redis://127.0.0.1:7000", "redis://127.0.0.1:7001", "redis://127.0.0.1:7002", "redis://127.0.0.1:7003", "redis://127.0.0.1:7004", "redis://127.0.0.1:7005"))
 
 
 ----
@@ -221,7 +233,7 @@ domain docket:
 [source,scala]
 ----
 
-Redis.createClient(vertx, SocketAddress.domainSocketAddress("/tmp/redis.sock")).connectFuture().onComplete{
+Redis.createClient(vertx, "unix:///tmp/redis.sock").connectFuture().onComplete{
   case Success(result) => {
     var client = result
   }

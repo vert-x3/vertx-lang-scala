@@ -24,6 +24,18 @@ public class ClassCodeGenerator extends Generator<Model> {
   public String filename;
   public String templateFilename;
   public Template template;
+  public Map<String, Set<String>> fileToImports = new HashMap<>();
+
+  public static final List<String> ignoredPackages;
+  static {
+    List<String> temp = new ArrayList<>();
+    temp.add("io.vertx.redis");
+    ignoredPackages = Collections.unmodifiableList(temp);
+  }
+
+  public ClassCodeGenerator() {
+    this.incremental = true;
+  }
 
   @Override
   public void load(ProcessingEnvironment processingEnv) {
@@ -35,7 +47,7 @@ public class ClassCodeGenerator extends Generator<Model> {
     cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
     try {
-      template = cfg.getTemplate("class.ftl");
+      template = cfg.getTemplate("package_object.ftl");
     } catch (IOException e) {
       e.printStackTrace();
       throw new RuntimeException(e);
@@ -45,56 +57,72 @@ public class ClassCodeGenerator extends Generator<Model> {
   @Override
   public String filename(Model model) {
     if(!((TypeInfo)model.getVars().get("type")).getName().equals("io.vertx.core.buffer.Buffer")) {
-      return "scala/" + model.getModule().translateQualifiedName(model.getFqn(), "scala").replace('.', '/') + ".scala";
+      String fileName = filenameForModel(model);
+      fileToImports.put(fileName, new HashSet<>());
+
+      ClassTypeInfo type = ((ClassTypeInfo)model.getVars().get("type"));
+      Set<TypeInfo> importedTypes = (Set<TypeInfo>)model.getVars().get("importedTypes");
+
+      fileToImports.get(fileName).addAll(adjustedImports(type, importedTypes));
+
+      return fileName;
     }
     return null;
   }
 
+  String filenameForModel(Model model) {
+    return "scala/" + model.getModule().translatePackageName("scala").replace('.', '/') + "/package.scala";
+  }
+
   @Override
   public String render(Model model, int index, int size, Map<String, Object> session) {
-    Map<String, Object> vars = new HashMap<>();
-
     ClassTypeInfo type = ((ClassTypeInfo)model.getVars().get("type"));
-    Set<TypeInfo> importedTypes = (Set<TypeInfo>)model.getVars().get("importedTypes");
-    List<TypeInfo> superTypes = (List<TypeInfo>)model.getVars().get("superTypes");
+    if(!ignoredPackages.contains(type.getPackageName())) {
+      Map<String, Object> vars = new HashMap<>();
+      String translatedPackage = type.getModule().translatePackageName("scala");
 
-    vars.putAll(TypeNameTranslator.vars(name));
-    vars.putAll(model.getVars());
-    vars.put("typeHelper", new TypeHelper());
-    vars.put("className", Helper.getSimpleName(type.getName()));
-    vars.put("packageName", type.getRaw().translatePackageName("scala"));
-    vars.put("imps", adjustedImports(type, importedTypes));
-    vars.putAll(ClassKind.vars());
-    vars.putAll(MethodKind.vars());
-    vars.putAll(Case.vars());
-    vars.put("classes", classes(superTypes));
-    vars.put("abstractClasses", abstractClasses(superTypes));
+      vars.putAll(TypeNameTranslator.vars(name));
+      vars.putAll(model.getVars());
+      vars.put("nonGenericType", Helper.getNonGenericType(type.toString()));
+      vars.put("modulePackage", translatedPackage.substring(0, translatedPackage.lastIndexOf('.')));
+      vars.put("moduleName", translatedPackage.substring(translatedPackage.lastIndexOf('.') + 1));
 
-    vars.put("basicMethods", TypeHelper.findBasicMethods((List<MethodInfo>)vars.get("instanceMethods")));
-    vars.put("cacheReturnMethods", TypeHelper.findCacheReturnMethods((List<MethodInfo>)vars.get("instanceMethods")));
-    vars.put("defaultMethods", TypeHelper.findDefaultMethods((List<MethodInfo>)vars.get("instanceMethods")));
-    vars.put("fluentMethods", TypeHelper.findFluentMethods((List<MethodInfo>)vars.get("instanceMethods")));
-    vars.put("futureMethods", TypeHelper.findFutureMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("basicMethods", TypeHelper.findBasicMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("cacheReturnMethods", TypeHelper.findCacheReturnMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("defaultMethods", TypeHelper.findDefaultMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("fluentMethods", TypeHelper.findFluentMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("futureMethods", TypeHelper.findFutureMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("nullableMethods", TypeHelper.findNullableMethods((List<MethodInfo>)vars.get("instanceMethods")));
 
-    Writer writer = new StringWriter();
-    try {
-      template.process(vars, writer);
-      return writer.toString();
-    } catch (TemplateException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
-    } catch (IOException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
+
+      vars.put("typeHelper", new TypeHelper());
+      vars.put("helper", new Helper());
+      vars.put("className", type.getSimpleName());
+      vars.put("packageName", translatedPackage);
+      vars.put("imps", fileToImports.get(filenameForModel(model)));
+      vars.putAll(ClassKind.vars());
+      vars.putAll(MethodKind.vars());
+      vars.putAll(Case.vars());
+      vars.put("incrementalIndex", index);
+      vars.put("incrementalSize", size);
+
+      Writer writer = new StringWriter();
+      try {
+        template.process(vars, writer);
+        return writer.toString();
+      } catch (TemplateException e) {
+        e.printStackTrace();
+        throw new RuntimeException(e);
+      } catch (IOException e) {
+        e.printStackTrace();
+        throw new RuntimeException(e);
+      }
     }
+    return "";
   }
 
   public Set<String> adjustedImports(ClassTypeInfo type, Set<TypeInfo> importedTypes) {
     Set<String> imps = TypeHelper.generateImports(type, importedTypes, Collections.emptyList());
-
-    imps.add("io.vertx.lang.scala.HandlerOps._");
-    imps.add("scala.reflect.runtime.universe._");
-    imps.add("io.vertx.lang.scala.Converter._");
 
     //Change
     //import io.vertx.scala.ext.web.common.template.TemplateEngine
@@ -111,19 +139,5 @@ public class ClassCodeGenerator extends Generator<Model> {
     }
 
     return imps;
-  }
-
-  public List<TypeInfo> classes(Collection<TypeInfo> classTypeInfos) {
-    return classTypeInfos
-      .stream()
-      .filter(clazz -> ((ApiTypeInfo)clazz.getRaw()).isConcrete())
-      .collect(Collectors.toList());
-  }
-
-  public List<TypeInfo> abstractClasses(Collection<TypeInfo> classTypeInfos) {
-    return classTypeInfos
-      .stream()
-      .filter(clazz -> !((ApiTypeInfo)clazz.getRaw()).isConcrete())
-      .collect(Collectors.toList());
   }
 }

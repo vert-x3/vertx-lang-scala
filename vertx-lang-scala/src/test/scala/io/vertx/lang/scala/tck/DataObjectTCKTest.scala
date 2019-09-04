@@ -4,19 +4,19 @@ import io.vertx.codegen.testmodel.DataObjectTCKImpl
 import io.vertx.lang.scala.json.Json
 import io.vertx.scala.codegen.testmodel._
 import org.junit.runner.RunWith
-import org.scalatest.junit.JUnitRunner
+import org.scalatestplus.junit.JUnitRunner
 import org.scalatest.{FlatSpec, Matchers}
-import java.time.Instant;
+import java.time.Instant
 
 /**
   * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
 @RunWith(classOf[JUnitRunner])
 class DataObjectTCKTest extends FlatSpec with Matchers {
-  val dataObjectTCK = DataObjectTCK(new DataObjectTCKImpl())
+  val dataObjectTCK = new DataObjectTCKImpl()
 
   "testReadDataObjectWithValues" should "work" in {
-    val dataObject = dataObjectTCK.getDataObjectWithValues().asJava.toJson
+    val dataObject = dataObjectTCK.getDataObjectWithValues().toJson
     assert(true == dataObject.getBoolean("booleanValue"))
     assert(520 == dataObject.getInteger("shortValue"))
     assert(123456 == dataObject.getInteger("intValue"))
@@ -42,7 +42,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
 
 
   "testWriteDataObjectWithValues" should "work" in {
-    val dataObject = DataObjectWithValues.fromJson(Json.obj()
+    val dataObject = DataObjectWithValues(Json.obj()
       .put("booleanValue", true)
       .put("shortValue", 520)
       .put("intValue", 123456)
@@ -66,7 +66,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
   }
 
   "testReadDataObjectWithLists" should "work" in {
-    val dataObject = dataObjectTCK.getDataObjectWithLists().asJava.toJson
+    val dataObject = dataObjectTCK.getDataObjectWithLists().toJson
     assert(dataObject.getJsonArray("booleanValues") != null)
     assert(Json.arr(true, false, true) === dataObject.getJsonArray("booleanValues"))
     assert(dataObject.getJsonArray("shortValues") != null)
@@ -103,7 +103,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
 
     println(Json.arr(Map("foo" -> "eek").asJava, Map("foo" -> "wibble").asJava).getValue(0).getClass)
 
-    val dataObject = DataObjectWithLists.fromJson(Json.obj()
+    val dataObject = DataObjectWithLists(Json.obj()
       .put("booleanValues", Json.arr(true, false, true))
       .put("shortValues", Json.arr(0, 520, 1040))
       .put("integerValues", Json.arr(0, 123456, 654321))
@@ -121,7 +121,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
   }
 
   "testReadDataObjectWithMaps" should "work" in {
-    val dataObject = dataObjectTCK.getDataObjectWithMaps().asJava.toJson
+    val dataObject = dataObjectTCK.getDataObjectWithMaps().toJson
     assert(Json.obj().put("1", true).put("2", false) == dataObject.getJsonObject("booleanValues"))
     assert(Json.obj().put("1", 520).put("2", 1040) == dataObject.getJsonObject("shortValues"))
     assert(Json.obj().put("1", 123456).put("2", 654321) == dataObject.getJsonObject("integerValues"))
@@ -142,7 +142,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
   }
 
   "testWriteDataObjectWithMaps" should "work" in {
-    val dataObject = DataObjectWithMaps.fromJson(Json.obj()
+    val dataObject = DataObjectWithMaps(Json.obj()
       .put("booleanValues", Json.obj().put("1", true).put("2", false))
       .put("shortValues", Json.obj().put("1", 520).put("2", 1040))
       .put("integerValues", Json.obj().put("1", 123456).put("2", 654321))
@@ -161,7 +161,7 @@ class DataObjectTCKTest extends FlatSpec with Matchers {
   }
 
   "testMethodWithOnlyJsonObjectConstructorDataObject" should "work" in {
-    val dataObject = DataObjectWithOnlyJsonObjectConstructor.fromJson(Json.obj().put("foo", "bar"))
+    val dataObject = DataObjectWithOnlyJsonObjectConstructor(Json.obj().put("foo", "bar"))
     dataObjectTCK.methodWithOnlyJsonObjectConstructorDataObject(dataObject)
   }
 }

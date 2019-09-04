@@ -78,7 +78,8 @@ An example on how to use this provider and authenticate with GitHub can be imple
 [source,scala]
 ----
 
-var oauth2 = OAuth2Auth.create(vertx, OAuth2FlowType.AUTH_CODE, OAuth2ClientOptions()
+var oauth2 = OAuth2Auth.create(vertx, OAuth2ClientOptions()
+  .setFlow(OAuth2FlowType.AUTH_CODE)
   .setClientID("YOUR_CLIENT_ID")
   .setClientSecret("YOUR_CLIENT_SECRET")
   .setSite("https://github.com/login")
@@ -121,6 +122,7 @@ access token.
 
 // Set the client credentials and the OAuth2 server
 var credentials = OAuth2ClientOptions()
+  .setFlow(OAuth2FlowType.AUTH_CODE)
   .setClientID("<client-id>")
   .setClientSecret("<client-secret>")
   .setSite("https://api.oauth.com")
@@ -128,7 +130,7 @@ var credentials = OAuth2ClientOptions()
 
 
 // Initialize the OAuth2 Library
-var oauth2 = OAuth2Auth.create(vertx, OAuth2FlowType.AUTH_CODE, credentials)
+var oauth2 = OAuth2Auth.create(vertx, credentials)
 
 // Authorization oauth2 URI
 var authorization_uri = oauth2.authorizeURL(new io.vertx.core.json.JsonObject().put("redirect_uri", "http://localhost:8080/callback").put("scope", "<scope>").put("state", "<state>"))
@@ -161,7 +163,9 @@ need a fast way to test your application.
 ----
 
 // Initialize the OAuth2 Library
-var oauth2 = OAuth2Auth.create(vertx, OAuth2FlowType.PASSWORD)
+var oauth2 = OAuth2Auth.create(vertx, OAuth2ClientOptions()
+  .setFlow(OAuth2FlowType.PASSWORD)
+)
 
 var tokenConfig = new io.vertx.core.json.JsonObject().put("username", "username").put("password", "password")
 
@@ -187,6 +191,7 @@ This flow is suitable when client is requesting access to the protected resource
 
 // Set the client credentials and the OAuth2 server
 var credentials = OAuth2ClientOptions()
+  .setFlow(OAuth2FlowType.CLIENT)
   .setClientID("<client-id>")
   .setClientSecret("<client-secret>")
   .setSite("https://api.oauth.com")
@@ -194,7 +199,7 @@ var credentials = OAuth2ClientOptions()
 
 
 // Initialize the OAuth2 Library
-var oauth2 = OAuth2Auth.create(vertx, OAuth2FlowType.CLIENT, credentials)
+var oauth2 = OAuth2Auth.create(vertx, credentials)
 
 var tokenConfig = new io.vertx.core.json.JsonObject()
 

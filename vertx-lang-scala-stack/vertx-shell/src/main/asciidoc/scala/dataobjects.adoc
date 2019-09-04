@@ -71,6 +71,8 @@ The SockJS handler options.
 Configure the SockJS path, the default value is <code>/term/*</code>.
 +++
 |[[ssl]]`@ssl`|`Boolean`|-
+|[[sslHandshakeTimeout]]`@sslHandshakeTimeout`|`Number (long)`|-
+|[[sslHandshakeTimeoutUnit]]`@sslHandshakeTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|-
 |[[tcpCork]]`@tcpCork`|`Boolean`|-
 |[[tcpFastOpen]]`@tcpFastOpen`|`Boolean`|-
 |[[tcpKeepAlive]]`@tcpKeepAlive`|`Boolean`|-
@@ -234,6 +236,8 @@ allows to send data in 8 bit format and thus charset like UTF-8.
 |[[sni]]`@sni`|`Boolean`|-
 |[[soLinger]]`@soLinger`|`Number (int)`|-
 |[[ssl]]`@ssl`|`Boolean`|-
+|[[sslHandshakeTimeout]]`@sslHandshakeTimeout`|`Number (long)`|-
+|[[sslHandshakeTimeoutUnit]]`@sslHandshakeTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|-
 |[[tcpCork]]`@tcpCork`|`Boolean`|-
 |[[tcpFastOpen]]`@tcpFastOpen`|`Boolean`|-
 |[[tcpKeepAlive]]`@tcpKeepAlive`|`Boolean`|-
