@@ -17,8 +17,6 @@ package io.vertx.lang.scala.json
 
 import org.junit.Test
 import org.junit.Assert.assertEquals
-import org.junit.Ignore
-import io.vertx.lang.scala.json._
 
 /**
  * @author Edgar Chan

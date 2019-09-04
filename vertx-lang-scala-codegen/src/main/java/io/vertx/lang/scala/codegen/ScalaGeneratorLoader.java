@@ -12,35 +12,16 @@ public class ScalaGeneratorLoader implements GeneratorLoader {
   public Stream<Generator<?>> loadGenerators(ProcessingEnvironment processingEnv) {
     HashSet<Generator<?>> generators = new HashSet<>();
 
-//    MvelCodeGenerator datatObjectGen = new MvelCodeGenerator();
-//    HashSet dataObjectKinds = new HashSet();
-//    dataObjectKinds.add("dataObject");
-//    datatObjectGen.name = "Scala";
-//    datatObjectGen.kinds = dataObjectKinds;
-//    datatObjectGen.incremental = false;
-//    datatObjectGen.filename = "if(type.name != 'io.vertx.ext.web.handler.sockjs.PermittedOptions'){'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'}";
-//    datatObjectGen.templateFilename = "vertx-scala/template/dataobject.templ";
-//    generators.add(datatObjectGen);
-
-
-    DataObjectCodeGenerator datatObjectGen = new DataObjectCodeGenerator();
-    HashSet dataObjectKinds = new HashSet();
-    dataObjectKinds.add("dataObject");
-    datatObjectGen.name = "Scala";
-    datatObjectGen.kinds = dataObjectKinds;
-    datatObjectGen.incremental = false;
-    datatObjectGen.filename = "if(type.name != 'io.vertx.ext.web.handler.sockjs.PermittedOptions'){'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'}";
-    datatObjectGen.templateFilename = "vertx-scala/template/dataobject.templ";
-    generators.add(datatObjectGen);
-
     ClassCodeGenerator classGen = new ClassCodeGenerator();
     HashSet classKinds = new HashSet();
     classKinds.add("class");
+    classKinds.add("dataObject");
     classGen.name = "Scala";
     classGen.kinds = classKinds;
-    classGen.incremental = false;
-    classGen.filename = "if(type.name != 'io.vertx.core.buffer.Buffer'){'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'}";
-    classGen.templateFilename = "vertx-scala/template/class.templ";
+    classGen.incremental = true;
+    classGen.filename = "if(type.name != 'io.vertx.core.buffer.Buffer'){var pkg = 'scala/' + type.module.translatePackageName('scala').replace('.', '/'); var splitted = pkg.split('/'); return pkg + '/package.scala';}";
+    //TODO: this is wrong
+    classGen.templateFilename = "vertx-scala/template/package_object.ftl";
     generators.add(classGen);
 
 

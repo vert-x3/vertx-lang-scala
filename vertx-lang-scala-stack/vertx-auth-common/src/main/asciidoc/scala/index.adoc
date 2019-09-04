@@ -87,7 +87,7 @@ authProvider.authenticateFuture(authInfo).onComplete{
 
 Once you have an `link:../../scaladocs/io/vertx/scala/ext/auth/User.html[User]` instance you can call methods on it to authorise it.
 
-to check if a user has a specific authority you use `link:../../scaladocs/io/vertx/scala/ext/auth/User.html#isAuthorised(java.lang.String)[isAuthorised]`.
+to check if a user has a specific authority you use `link:../../scaladocs/io/vertx/scala/ext/auth/User.html#isAuthorized(java.lang.String)[isAuthorized]`.
 
 The results of all the above are provided asynchronously in the handler.
 

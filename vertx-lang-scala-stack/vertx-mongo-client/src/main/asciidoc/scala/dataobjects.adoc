@@ -271,6 +271,9 @@ Options for configuring updates.
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[arrayFilters]]`@arrayFilters`|`Json array`|+++
+Set the arrayFilters option
++++
 |[[multi]]`@multi`|`Boolean`|+++
 Set whether multi is enabled
 +++

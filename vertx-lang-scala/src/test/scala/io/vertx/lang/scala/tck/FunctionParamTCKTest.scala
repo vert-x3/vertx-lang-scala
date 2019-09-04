@@ -3,13 +3,13 @@ package io.vertx.lang.scala.tck
 import java.lang.Boolean
 
 import io.vertx.codegen.testmodel.{FunctionParamTCKImpl, RefedInterface1Impl, TestEnum}
-import io.vertx.codegen.testmodel.{TestDataObject => JTestDataObject}
 import io.vertx.lang.scala.json.Json
 import io.vertx.lang.scala.json.Json.arr
-import io.vertx.scala.codegen.testmodel.{FunctionParamTCK, RefedInterface1, TestDataObject}
+import io.vertx.scala.codegen.testmodel.TestDataObject
 import org.junit.runner.RunWith
 import org.scalatest.{FlatSpec, Matchers}
-import org.scalatest.junit.JUnitRunner
+import org.scalatestplus.junit.JUnitRunner
+import scala.collection.JavaConverters._
 
 import scala.collection.mutable
 
@@ -18,7 +18,7 @@ import scala.collection.mutable
   */
 @RunWith(classOf[JUnitRunner])
 class FunctionParamTCKTest extends FlatSpec with Matchers {
-  val obj = FunctionParamTCK(new FunctionParamTCKImpl())
+  val obj = new FunctionParamTCKImpl()
   "testBasicParam" should "work" in {
     val ret = obj.methodWithBasicParam(
       it => { assert(100.toByte == it); "ok0" },
@@ -30,25 +30,25 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
       it => { assert(true == it); "ok6" },
       it => { assert('F' == it); "ok7" },
       it => { assert("wibble" == it); "ok8" })
-    assert(List("ok0","ok1","ok2","ok3","ok4","ok5","ok6","ok7","ok8") == ret)
+    assert(List("ok0","ok1","ok2","ok3","ok4","ok5","ok6","ok7","ok8").diff(ret.asScala) == List())
   }
 
   "testJsonParam" should "work" in {
     val ret = obj.methodWithJsonParam(
       it => { assert(Json.obj(("one",1),("two",2),("three",3)) == it); "ok0" },
       it => { assert(arr("one","two","three") == it); "ok1" })
-    assert(List("ok0","ok1") == ret)
+    assert(List("ok0","ok1").diff(ret.asScala) == List())
   }
 
   "testVoidParam" should "work" in {
-    assert("ok" == obj.methodWithVoidParam(() => { assert(true); "ok" }))
+    assert("ok" == obj.methodWithVoidParam(_ => { assert(true); "ok" }))
   }
 
   "testUserTypeParam" should "work" in {
-    val refed = new RefedInterface1(new RefedInterface1Impl())
+    val refed = new RefedInterface1Impl()
     assert("ok" == obj.methodWithUserTypeParam(refed, it => {
       it.setString("foobarjuu")
-      assert("foobarjuu" == it.getString())
+      assert("foobarjuu" == it.getString)
       "ok"
     }))
   }
@@ -82,21 +82,24 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
 
   "testListParam" should "work" in {
     assert("ok" == obj.methodWithListParam(it => {
-      assert(List("one", "two", "three") == it)
+      assert(List("one", "two", "three").diff(it.asScala) == List())
       "ok"
     }))
   }
 
   "testSetParam" should "work" in {
     assert("ok" == obj.methodWithSetParam(it => {
-      assert(Set("one", "two", "three") == it)
+      assert(Set("one", "two", "three").diff(it.asScala) == Set())
       "ok"
     }))
   }
 
   "testMapParam" should "work" in {
     assert("ok" == obj.methodWithMapParam(it => {
-      assert(Map("one" ->"one", "two" -> "two", "three" -> "three") == it)
+      assert(it.size() == 3)
+      assert(it.get("one") == "one")
+      assert(it.get("two") == "two")
+      assert(it.get("three") == "three")
       "ok"
     }))
   }
@@ -114,11 +117,11 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
 
   "testGenericUserTypeParam" should "work" in {
     assert("ok" == obj.methodWithGenericUserTypeParam[Int](123, it => {
-      assert(123 == it.getValue())
+      assert(123 == it.getValue)
       "ok"
     }))
     assert("ok" == obj.methodWithGenericUserTypeParam[String]("the-string-arg", it => {
-      assert("the-string-arg" == it.getValue())
+      assert("the-string-arg" == it.getValue)
       "ok"
     }))
   }
@@ -153,7 +156,7 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
 
   "testObjectReturn" should "work" in {
     assert("ok" == obj.methodWithObjectReturn(
-      it => it match {
+      it => it.intValue() match {
           case 0 => "the-string".asInstanceOf[Object]
           case 1 => 123.asInstanceOf[Object]
           case 2 => true.asInstanceOf[Object]
@@ -165,7 +168,7 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
   }
 
   "testDataObjectReturn" should "work" in {
-    assert("ok" == obj.methodWithDataObjectReturn(it => {TestDataObject(new JTestDataObject().setFoo("wasabi").setBar(6).setWibble(0.01))}))
+    assert("ok" == obj.methodWithDataObjectReturn(it => {TestDataObject().setFoo("wasabi").setBar(6).setWibble(0.01)}))
   }
 
   "testEnumReturn" should "work" in {
@@ -173,15 +176,15 @@ class FunctionParamTCKTest extends FlatSpec with Matchers {
   }
 
   "testListReturn" should "work" in {
-    assert("ok" == obj.methodWithListReturn(it => {mutable.Buffer("one", "two", "three")}))
+    assert("ok" == obj.methodWithListReturn(it => {mutable.Buffer("one", "two", "three").asJava}))
   }
 
   "testSetReturn" should "work" in {
-    assert("ok" == obj.methodWithSetReturn(it => {mutable.Set("one", "two", "three")}))
+    assert("ok" == obj.methodWithSetReturn(it => {mutable.Set("one", "two", "three").asJava}))
   }
 
   "testMapReturn" should "work" in {
-    assert("ok" == obj.methodWithMapReturn(it => {mutable.Map("one" -> "one", "two" -> "two", "three" -> "three")}))
+    assert("ok" == obj.methodWithMapReturn(it => {mutable.Map("one" -> "one", "two" -> "two", "three" -> "three").asJava}))
   }
 
   "testGenericReturn" should "work" in {

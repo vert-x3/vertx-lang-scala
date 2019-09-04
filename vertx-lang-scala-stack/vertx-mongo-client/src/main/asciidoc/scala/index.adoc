@@ -809,6 +809,10 @@ For more information on the format of the connection string please consult the d
 `heartbeat.socket`:: Configures the socket settings for the cluster monitor of the MongoDB java driver.
 `heartbeatFrequencyMS`:: The frequency that the cluster monitor attempts to reach each server. Default is `5000` (5 seconds)
 `minHeartbeatFrequencyMS`:: The minimum heartbeat frequency. The default value is `1000` (1 second)
+`ssl`:: Enable ssl between the vertx-mongo-client and mongo
+`trustAll`:: When using ssl, trust _ALL_ certificates. *WARNING* - Trusting _ALL_ certificates will open you up to potential security issues such as MITM attacks.
+`caPath`:: Set a path to a file that contains a certificate that will be used as a source of trust when making SSL connections to mongo.
+
 
 NOTE: Most of the default values listed above use the default values of the MongoDB Java Driver.
 Please consult the driver documentation for up to date information.

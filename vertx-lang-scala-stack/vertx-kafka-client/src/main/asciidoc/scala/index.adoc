@@ -682,7 +682,7 @@ consumer.closeFuture().onComplete{
 
 == Sending messages to a topic
 
-You can use  `link:../../scaladocs/io/vertx/scala/kafka/client/producer/KafkaProducer.html#write()[write]` to send messages (records) to a topic.
+You can use  `link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html#write()[write]` to send messages (records) to a topic.
 
 The simplest way to send a message is to specify only the destination topic and the related value, omitting its key
 or partition, in this case the messages are sent in a round robin fashion across all the partitions of the topic.
