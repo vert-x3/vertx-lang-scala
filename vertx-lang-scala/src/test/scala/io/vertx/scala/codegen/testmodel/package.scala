@@ -416,7 +416,7 @@ package object testmodel{
 
 
 
-  implicit class JsonCodecTCKScala(val asJava: io.vertx.codegen.testmodel.JsonCodecTCK) extends AnyVal {
+  implicit class JsonMapperTCKScala(val asJava: io.vertx.codegen.testmodel.JsonMapperTCK) extends AnyVal {
 
     def methodWithHandlerAsyncResultTypeToIntegerParamFuture(): scala.concurrent.Future[io.vertx.codegen.testmodel.MyPojoToInteger] = {
       val promise = Promise[io.vertx.codegen.testmodel.MyPojoToInteger]()
