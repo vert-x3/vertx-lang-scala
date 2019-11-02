@@ -27,9 +27,7 @@ import io.vertx.ext.auth.shiro.{ShiroAuthOptions => JShiroAuthOptions}
 import io.vertx.ext.auth
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.core
-import io.vertx.core.json.JsonObject
 import io.vertx.ext.auth.shiro.{ShiroAuth => JShiroAuth}
-import io.vertx.ext.auth.shiro.ShiroAuthRealmType
 import io.vertx.core.{Vertx => JVertx}
 
 package object shiro{

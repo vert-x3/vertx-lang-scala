@@ -37,6 +37,9 @@ set if ESMTP should be tried as first command (EHLO)
  in that way, the property has to be set to false.
  <p>
 +++
+|[[enabledSecureTransportProtocols]]`@enabledSecureTransportProtocols`|`Array of String`|+++
+Sets the list of enabled SSL/TLS protocols.
++++
 |[[hostname]]`@hostname`|`String`|+++
 Set the hostname of the smtp server.
 +++
@@ -85,6 +88,15 @@ Set the tls security mode for the connection.
 |[[trustAll]]`@trustAll`|`Boolean`|+++
 set whether to trust all certificates on ssl connect the option is also
  applied to STARTTLS operation
++++
+|[[userAgent]]`@userAgent`|`String`|+++
+Sets the Mail User Agent(MUA) name.
+
+<p>
+ It is used to generate the boundary in case of MultiPart email and the Message-ID.
+
+ If <code>null</code> is set, DEFAULT_USER_AGENT is used.
+</p>
 +++
 |[[username]]`@username`|`String`|+++
 Set the username for the login.

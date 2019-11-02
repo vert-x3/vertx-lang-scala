@@ -225,8 +225,8 @@ auth module into a single line of code, for example, consider setting up your au
 ----
 
 OpenIDConnectAuth.discover(vertx, OAuth2ClientOptions()
-  .setSite("https://accounts.google.com")
   .setClientID("clientId")
+  .setSite("https://accounts.google.com")
 , {
   case Success(result) => {
     // the setup call succeeded.
@@ -356,8 +356,9 @@ Please remember that Keycloak **does** implement OpenID Connect, so you can conf
 ----
 
 OpenIDConnectAuth.discover(vertx, OAuth2ClientOptions()
-  .setSite("http://server:port/auth/realms/your_realm")
   .setClientID("clientId")
+  .setTenant("your_realm")
+  .setSite("http://server:port/auth/realms/{tenant}")
 , {
   case Success(result) => {
     // the setup call succeeded.

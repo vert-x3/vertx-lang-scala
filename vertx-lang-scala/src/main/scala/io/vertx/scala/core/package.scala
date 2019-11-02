@@ -3516,6 +3516,24 @@ package object core{
     }
 
     /**
+     * Like [[writePing]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def writePingFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.writePing(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[writePong]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def writePongFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.writePong(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
      * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def endFuture(): scala.concurrent.Future[Unit] = {
@@ -3578,6 +3596,15 @@ package object core{
     def writeTextMessageFuture(text: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
       asJava.writeTextMessage(text, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[setHandshake]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def setHandshakeFuture(future: io.vertx.core.Future[java.lang.Integer]): scala.concurrent.Future[java.lang.Integer] = {
+      val promise = Promise[java.lang.Integer]()
+      asJava.setHandshake(future, {a:AsyncResult[java.lang.Integer] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -4012,6 +4039,24 @@ package object core{
     }
 
     /**
+     * Like [[writePing]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def writePingFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.writePing(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[writePong]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def writePongFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.writePong(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
      * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def endFuture(): scala.concurrent.Future[Unit] = {
@@ -4226,6 +4271,24 @@ package object core{
     def writeTextMessageFuture(text: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
       asJava.writeTextMessage(text, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[writePing]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def writePingFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.writePing(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[writePong]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def writePongFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.writePong(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 

@@ -153,7 +153,7 @@ To work with high availability mode the connection creation is quite similar:
 ----
 Redis.createClient(vertx, RedisOptions()
   .setType(RedisClientType.SENTINEL)
-  .setEndpoints(Set("redis://127.0.0.1:5000", "redis://127.0.0.1:5001", "redis://127.0.0.1:5002"))
+  .setConnectionStrings(Set("redis://127.0.0.1:5000", "redis://127.0.0.1:5001", "redis://127.0.0.1:5002"))
   .setMasterName("sentinel7000")
   .setRole(RedisRole.MASTER)
 ).connectFuture().onComplete{
@@ -174,7 +174,7 @@ To work with cluster the connection creation is quite similar:
 [source,scala]
 ----
 var options = RedisOptions()
-  .setEndpoints(Set("redis://127.0.0.1:7000", "redis://127.0.0.1:7001", "redis://127.0.0.1:7002", "redis://127.0.0.1:7003", "redis://127.0.0.1:7004", "redis://127.0.0.1:7005"))
+  .setConnectionStrings(Set("redis://127.0.0.1:7000", "redis://127.0.0.1:7001", "redis://127.0.0.1:7002", "redis://127.0.0.1:7003", "redis://127.0.0.1:7004", "redis://127.0.0.1:7005"))
 
 
 ----

@@ -47,6 +47,24 @@ package object redis{
       promise.future
     }
 
+    /**
+     * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def sendFuture(command: io.vertx.redis.client.Request): scala.concurrent.Future[io.vertx.redis.client.Response] = {
+      val promise = Promise[io.vertx.redis.client.Response]()
+      asJava.send(command, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[batch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def batchFuture(commands: java.util.List[io.vertx.redis.client.Request]): scala.concurrent.Future[java.util.List[io.vertx.redis.client.Response]] = {
+      val promise = Promise[java.util.List[io.vertx.redis.client.Response]]()
+      asJava.batch(commands, {a:AsyncResult[java.util.List[io.vertx.redis.client.Response]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
   }
 
 

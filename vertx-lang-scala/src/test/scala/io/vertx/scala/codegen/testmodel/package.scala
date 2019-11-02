@@ -514,6 +514,30 @@ package object testmodel{
       promise.future
     }
 
+    def methodWithHandlerAsyncResultFunctionMappedFuture(): scala.concurrent.Future[java.util.Locale] = {
+      val promise = Promise[java.util.Locale]()
+      asJava.methodWithHandlerAsyncResultFunctionMapped({a:AsyncResult[java.util.Locale] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultListOfFunctionMappedFuture(): scala.concurrent.Future[java.util.List[java.util.Locale]] = {
+      val promise = Promise[java.util.List[java.util.Locale]]()
+      asJava.methodWithHandlerAsyncResultListOfFunctionMapped({a:AsyncResult[java.util.List[java.util.Locale]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultSetOfFunctionMappedFuture(): scala.concurrent.Future[java.util.Set[java.util.Locale]] = {
+      val promise = Promise[java.util.Set[java.util.Locale]]()
+      asJava.methodWithHandlerAsyncResultSetOfFunctionMapped({a:AsyncResult[java.util.Set[java.util.Locale]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def methodWithHandlerAsyncResultMapOfFunctionMappedFuture(): scala.concurrent.Future[java.util.Map[String, java.util.Locale]] = {
+      val promise = Promise[java.util.Map[String, java.util.Locale]]()
+      asJava.methodWithHandlerAsyncResultMapOfFunctionMapped({a:AsyncResult[java.util.Map[java.lang.String,java.util.Locale]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
   }
 
 

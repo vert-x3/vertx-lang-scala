@@ -45,22 +45,4 @@ package object jwt{
   }
 
 
-
-  type JWTKeyStoreOptions = io.vertx.ext.auth.jwt.JWTKeyStoreOptions
-
-  object JWTKeyStoreOptions {
-    def apply() = new JWTKeyStoreOptions()
-    def apply(json: JsonObject) = new JWTKeyStoreOptions(json)
-  }
-
-
-
-  type JWTOptions = io.vertx.ext.auth.jwt.JWTOptions
-
-  object JWTOptions {
-    def apply() = new JWTOptions()
-    def apply(json: JsonObject) = new JWTOptions(json)
-  }
-
-
 }

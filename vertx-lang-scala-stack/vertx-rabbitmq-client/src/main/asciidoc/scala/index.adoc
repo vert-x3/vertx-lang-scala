@@ -135,7 +135,7 @@ Publish a message to a queue
 
 [source,scala]
 ----
-var message = new io.vertx.core.json.JsonObject().put("body", "Hello RabbitMQ, from Vert.x !")
+var message = Buffer.buffer("body", "Hello RabbitMQ, from Vert.x !")
 client.basicPublishFuture("", "my.queue", message).onComplete{
   case Success(result) => {
     println("Message published !")
@@ -153,7 +153,7 @@ Publish a message to a queue and confirm the broker acknowledged it.
 
 [source,scala]
 ----
-var message = new io.vertx.core.json.JsonObject().put("body", "Hello RabbitMQ, from Vert.x !")
+var message = Buffer.buffer("body", "Hello RabbitMQ, from Vert.x !")
 
 // Put the channel in confirm mode. This can be done once at init.
 client.confirmSelectFuture().onComplete{
@@ -292,7 +292,7 @@ Will get a message from a queue
 client.basicGetFuture("my.queue", true).onComplete{
   case Success(result) => {
     var msg = result
-    println(s"Got message: ${msg.getValue("body")}")
+    println(s"Got message: ${msg.body()}")
   }
   case Failure(cause) => {
     println(s"$cause")
@@ -305,21 +305,24 @@ client.basicGetFuture("my.queue", true).onComplete{
 
 [source,scala]
 ----
-// Create the event bus handler which messages will be sent to
-vertx.eventBus().consumer("my.address", (msg: io.vertx.scala.core.eventbus.Message<java.lang.Object>) => {
-  var json = msg.body()
-  println(s"Got message: ${json.getValue("body")}")
-  // ack
-  client.basicAckFuture(json.getValue("deliveryTag"), false).onComplete{
-    case Success(result) => println("Success")
-    case Failure(cause) => println("Failure")
-  }
-})
-
-// Setup the link between rabbitmq consumer and event bus address
-client.basicConsumeFuture("my.queue", "my.address", false).onComplete{
+// Setup the rabbitmq consumer
+client.basicConsumerFuture("my.queue", QueueOptions()
+  .setAutoAck(false)
+).onComplete{
   case Success(result) => {
     println("RabbitMQ consumer created !")
+    var consumer = result
+
+    // Set the handler which messages will be sent to
+    consumer.handler((msg: io.vertx.scala.rabbitmq.RabbitMQMessage) => {
+      var json = msg.body()
+      println(s"Got message: ${json.getValue("body")}")
+      // ack
+      client.basicAckFuture(json.getValue("deliveryTag"), false).onComplete{
+        case Success(result) => println("Success")
+        case Failure(cause) => println("Failure")
+      }
+    })
   }
   case Failure(cause) => {
     println(s"$cause")

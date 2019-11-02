@@ -26,6 +26,7 @@ import scala.concurrent.Promise
 import io.vertx.ext.mail.{MailConfig => JMailConfig}
 import io.vertx.core
 import io.vertx.ext.mail.{MailResult => JMailResult}
+import io.vertx.core.{Future => JFuture}
 import io.vertx.ext.mail.{MailClient => JMailClient}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
