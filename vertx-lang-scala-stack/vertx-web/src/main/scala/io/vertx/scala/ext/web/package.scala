@@ -74,15 +74,6 @@ package object web{
 
 
 
-  type PermittedOptions = io.vertx.ext.web.handler.sockjs.PermittedOptions
-
-  object PermittedOptions {
-    def apply() = new PermittedOptions()
-    def apply(json: JsonObject) = new PermittedOptions(json)
-  }
-
-
-
 
 
 

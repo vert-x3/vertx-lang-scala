@@ -186,6 +186,8 @@ what you are doing, this may generate invalid messages.
 The MailAttachment object has the following properties
 
 * `data` Buffer containing the binary data of the attachment
+* `stream` ReadStream that represents the source of the binary data of the attachment
+* `size` int describing the attachment size when using `stream` as the source of the binary data
 * `contentType` String of the Content-Type of the attachment (e.g. text/plain or text/plain; charset="UTF8", default is application/octet-stream)
 * `description` String describing the attachment (this is put in the description header of the attachment), optional
 * `disposition` String describing the disposition of the attachment (this is either "inline" or "attachment", default is attachment)
@@ -213,6 +215,7 @@ The configuration has the following properties
 * `keyStorePassword` String password used to decrypt the key store (optional)
 * `allowRcptErrors` boolean if true, sending continues if a recipient address is not accepted and the mail will be sent if at least one address is accepted (default false)
 * `disableEsmtp` boolean if true, ESMTP-related commands will not be used (set if your smtp server doesn't even give a proper error response code for the EHLO command) (default false)
+* `userAgent` String represents the Mail User Agent(MUA) name used to generate email boundaries for multipart emails and message-id, default is `vertxmail`.
 
 === MailResult object
 The MailResult object has the following members

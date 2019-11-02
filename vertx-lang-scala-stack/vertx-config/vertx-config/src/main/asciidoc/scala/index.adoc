@@ -565,7 +565,7 @@ The `link:../../scaladocs/io/vertx/scala/config/ConfigRetriever.html[ConfigRetri
 
 [source, scala]
 ----
-var future = ConfigRetriever.getConfigAsFuture(retriever)
+var future = retriever.getConfig()
 future.setHandlerFuture().onComplete{
   case Success(result) => {
     // Failed to retrieve the configuration

@@ -23,27 +23,19 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import scala.concurrent.Promise
 
-import io.vertx.ext.mongo.WriteOption
-import io.vertx.ext.mongo.{MongoClientBulkWriteResult => JMongoClientBulkWriteResult}
-import io.vertx.ext.mongo.{MongoClient => JMongoClient}
 import io.vertx.core
 import io.vertx.core.streams.{ReadStream => JReadStream}
-import io.vertx.ext.mongo.{MongoClientDeleteResult => JMongoClientDeleteResult}
-import io.vertx.ext.mongo.{FindOptions => JFindOptions}
 import scala.collection.JavaConverters._
-import io.vertx.ext.mongo.{IndexOptions => JIndexOptions}
-import io.vertx.core.{Vertx => JVertx}
-import io.vertx.core.json.JsonArray
-import io.vertx.ext.mongo.{IndexModel => JIndexModel}
-import io.vertx.ext.mongo.{BulkOperation => JBulkOperation}
+import io.vertx.core.streams.{WriteStream => JWriteStream}
+import io.vertx.ext.mongo.{MongoGridFsClient => JMongoGridFsClient}
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.streams
-import io.vertx.ext.mongo.{BulkWriteOptions => JBulkWriteOptions}
-import io.vertx.ext.mongo.{UpdateOptions => JUpdateOptions}
-import io.vertx.ext.mongo.{AggregateOptions => JAggregateOptions}
+import io.vertx.core.{Future => JFuture}
+import io.vertx.ext.mongo.{GridFsUploadOptions => JGridFsUploadOptions}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
-import io.vertx.ext.mongo.{MongoClientUpdateResult => JMongoClientUpdateResult}
+import io.vertx.ext.mongo.{GridFsDownloadOptions => JGridFsDownloadOptions}
 
 package object mongo{
 
@@ -80,6 +72,24 @@ package object mongo{
   object FindOptions {
     def apply() = new FindOptions()
     def apply(json: JsonObject) = new FindOptions(json)
+  }
+
+
+
+  type GridFsDownloadOptions = io.vertx.ext.mongo.GridFsDownloadOptions
+
+  object GridFsDownloadOptions {
+    def apply() = new GridFsDownloadOptions()
+    def apply(json: JsonObject) = new GridFsDownloadOptions(json)
+  }
+
+
+
+  type GridFsUploadOptions = io.vertx.ext.mongo.GridFsUploadOptions
+
+  object GridFsUploadOptions {
+    def apply() = new GridFsUploadOptions()
+    def apply(json: JsonObject) = new GridFsUploadOptions(json)
   }
 
 
@@ -187,29 +197,11 @@ package object mongo{
     }
 
     /**
-     * Like [[update]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def updateFuture(collection: java.lang.String,query: io.vertx.core.json.JsonObject,update: io.vertx.core.json.JsonObject): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.update(collection, query, update, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
      * Like [[updateCollection]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def updateCollectionFuture(collection: java.lang.String,query: io.vertx.core.json.JsonObject,update: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.ext.mongo.MongoClientUpdateResult] = {
       val promise = Promise[io.vertx.ext.mongo.MongoClientUpdateResult]()
       asJava.updateCollection(collection, query, update, {a:AsyncResult[io.vertx.ext.mongo.MongoClientUpdateResult] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[updateWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def updateWithOptionsFuture(collection: java.lang.String,query: io.vertx.core.json.JsonObject,update: io.vertx.core.json.JsonObject,options: io.vertx.ext.mongo.UpdateOptions): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.updateWithOptions(collection, query, update, options, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -223,29 +215,11 @@ package object mongo{
     }
 
     /**
-     * Like [[replace]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def replaceFuture(collection: java.lang.String,query: io.vertx.core.json.JsonObject,replace: io.vertx.core.json.JsonObject): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.replace(collection, query, replace, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
      * Like [[replaceDocuments]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def replaceDocumentsFuture(collection: java.lang.String,query: io.vertx.core.json.JsonObject,replace: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.ext.mongo.MongoClientUpdateResult] = {
       val promise = Promise[io.vertx.ext.mongo.MongoClientUpdateResult]()
       asJava.replaceDocuments(collection, query, replace, {a:AsyncResult[io.vertx.ext.mongo.MongoClientUpdateResult] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[replaceWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def replaceWithOptionsFuture(collection: java.lang.String,query: io.vertx.core.json.JsonObject,replace: io.vertx.core.json.JsonObject,options: io.vertx.ext.mongo.UpdateOptions): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.replaceWithOptions(collection, query, replace, options, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -367,29 +341,11 @@ package object mongo{
     }
 
     /**
-     * Like [[remove]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def removeFuture(collection: java.lang.String,query: io.vertx.core.json.JsonObject): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.remove(collection, query, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
      * Like [[removeDocuments]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def removeDocumentsFuture(collection: java.lang.String,query: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.ext.mongo.MongoClientDeleteResult] = {
       val promise = Promise[io.vertx.ext.mongo.MongoClientDeleteResult]()
       asJava.removeDocuments(collection, query, {a:AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[removeWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def removeWithOptionsFuture(collection: java.lang.String,query: io.vertx.core.json.JsonObject,writeOption: io.vertx.ext.mongo.WriteOption): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.removeWithOptions(collection, query, writeOption, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -403,29 +359,11 @@ package object mongo{
     }
 
     /**
-     * Like [[removeOne]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def removeOneFuture(collection: java.lang.String,query: io.vertx.core.json.JsonObject): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.removeOne(collection, query, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
      * Like [[removeDocument]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def removeDocumentFuture(collection: java.lang.String,query: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.ext.mongo.MongoClientDeleteResult] = {
       val promise = Promise[io.vertx.ext.mongo.MongoClientDeleteResult]()
       asJava.removeDocument(collection, query, {a:AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[removeOneWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def removeOneWithOptionsFuture(collection: java.lang.String,query: io.vertx.core.json.JsonObject,writeOption: io.vertx.ext.mongo.WriteOption): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.removeOneWithOptions(collection, query, writeOption, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -537,6 +475,24 @@ package object mongo{
       promise.future
     }
 
+    /**
+     * Like [[createDefaultGridFsBucketService]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createDefaultGridFsBucketServiceFuture(): scala.concurrent.Future[io.vertx.ext.mongo.MongoGridFsClient] = {
+      val promise = Promise[io.vertx.ext.mongo.MongoGridFsClient]()
+      asJava.createDefaultGridFsBucketService({a:AsyncResult[io.vertx.ext.mongo.MongoGridFsClient] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[createGridFsBucketService]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createGridFsBucketServiceFuture(bucketName: java.lang.String): scala.concurrent.Future[io.vertx.ext.mongo.MongoGridFsClient] = {
+      val promise = Promise[io.vertx.ext.mongo.MongoGridFsClient]()
+      asJava.createGridFsBucketService(bucketName, {a:AsyncResult[io.vertx.ext.mongo.MongoGridFsClient] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
   }
 
 
@@ -565,6 +521,123 @@ package object mongo{
     def apply(json: JsonObject) = new MongoClientUpdateResult(json)
   }
 
+
+
+
+  implicit class MongoGridFsClientScala(val asJava: io.vertx.ext.mongo.MongoGridFsClient) extends AnyVal {
+
+    /**
+     * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def deleteFuture(id: java.lang.String): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.delete(id, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def downloadByFileNameFuture(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer],fileName: java.lang.String): scala.concurrent.Future[java.lang.Long] = {
+      val promise = Promise[java.lang.Long]()
+      asJava.downloadByFileName(stream, fileName, {a:AsyncResult[java.lang.Long] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def downloadByFileNameWithOptionsFuture(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer],fileName: java.lang.String,options: io.vertx.ext.mongo.GridFsDownloadOptions): scala.concurrent.Future[java.lang.Long] = {
+      val promise = Promise[java.lang.Long]()
+      asJava.downloadByFileNameWithOptions(stream, fileName, options, {a:AsyncResult[java.lang.Long] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def downloadByIdFuture(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer],id: java.lang.String): scala.concurrent.Future[java.lang.Long] = {
+      val promise = Promise[java.lang.Long]()
+      asJava.downloadById(stream, id, {a:AsyncResult[java.lang.Long] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[downloadFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def downloadFileFuture(fileName: java.lang.String): scala.concurrent.Future[java.lang.Long] = {
+      val promise = Promise[java.lang.Long]()
+      asJava.downloadFile(fileName, {a:AsyncResult[java.lang.Long] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[downloadFileAs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def downloadFileAsFuture(fileName: java.lang.String,newFileName: java.lang.String): scala.concurrent.Future[java.lang.Long] = {
+      val promise = Promise[java.lang.Long]()
+      asJava.downloadFileAs(fileName, newFileName, {a:AsyncResult[java.lang.Long] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[downloadFileByID]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def downloadFileByIDFuture(id: java.lang.String,fileName: java.lang.String): scala.concurrent.Future[java.lang.Long] = {
+      val promise = Promise[java.lang.Long]()
+      asJava.downloadFileByID(id, fileName, {a:AsyncResult[java.lang.Long] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[drop]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def dropFuture(): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.drop({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[findAllIds]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def findAllIdsFuture(): scala.concurrent.Future[java.util.List[java.lang.String]] = {
+      val promise = Promise[java.util.List[java.lang.String]]()
+      asJava.findAllIds({a:AsyncResult[java.util.List[java.lang.String]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[findIds]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def findIdsFuture(query: io.vertx.core.json.JsonObject): scala.concurrent.Future[java.util.List[java.lang.String]] = {
+      val promise = Promise[java.util.List[java.lang.String]]()
+      asJava.findIds(query, {a:AsyncResult[java.util.List[java.lang.String]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def uploadByFileNameFuture(stream: io.vertx.core.streams.ReadStream[io.vertx.core.buffer.Buffer],fileName: java.lang.String): scala.concurrent.Future[java.lang.String] = {
+      val promise = Promise[java.lang.String]()
+      asJava.uploadByFileName(stream, fileName, {a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def uploadByFileNameWithOptionsFuture(stream: io.vertx.core.streams.ReadStream[io.vertx.core.buffer.Buffer],fileName: java.lang.String,options: io.vertx.ext.mongo.GridFsUploadOptions): scala.concurrent.Future[java.lang.String] = {
+      val promise = Promise[java.lang.String]()
+      asJava.uploadByFileNameWithOptions(stream, fileName, options, {a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[uploadFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def uploadFileFuture(fileName: java.lang.String): scala.concurrent.Future[java.lang.String] = {
+      val promise = Promise[java.lang.String]()
+      asJava.uploadFile(fileName, {a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[uploadFileWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def uploadFileWithOptionsFuture(fileName: java.lang.String,options: io.vertx.ext.mongo.GridFsUploadOptions): scala.concurrent.Future[java.lang.String] = {
+      val promise = Promise[java.lang.String]()
+      asJava.uploadFileWithOptions(fileName, options, {a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
 
 
   type UpdateOptions = io.vertx.ext.mongo.UpdateOptions

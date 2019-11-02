@@ -488,7 +488,6 @@ mongoClient.dropCollectionFuture("mynewcollectionr").onComplete{
 
 ----
 
-
 === Running other MongoDB commands
 
 You can run arbitrary MongoDB commands with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#runCommand(java.lang.String,%20io.vertx.core.json.JsonObject)[runCommand]`.
@@ -688,6 +687,412 @@ mongoClient.saveFuture("books", document).onComplete{
       println(s"Title is : ${book.getValue("title")}")
     })
   }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+== Storing/Retrieving files and binary data
+
+The client can store and retrieve files and binary data using MongoDB GridFS. The
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html[MongoGridFsClient]` can be used to upload or download files
+and streams to GridFS.
+
+=== Get the MongoGridFsClient to interact with GridFS.
+
+The `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html[MongoGridFsClient]` is created by calling
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createGridFsBucketService(java.lang.String)[createGridFsBucketService]` and providing a bucket name. In GridFS, the bucket name
+ends up being a collection that contains references to all of the objects that are stored.
+You can segregate objects into distinct buckets by providing a unique name.
+
+This has the following fields:
+
+`bucketName` : The name of the bucket to create
+
+Here's an example of getting a `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html[MongoGridFsClient]` with the a custom bucket
+name
+
+[source,scala]
+----
+mongoClient.createGridFsBucketServiceFuture("bakeke").onComplete{
+  case Success(result) => {
+    //Interact with the GridFS client...
+    var client = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+GridFS uses a default bucket named "fs". If you prefer to get the default bucket instead of naming your own,
+call `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createDefaultGridFsBucketService()[createDefaultGridFsBucketService]`
+
+Here's an example of getting a `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html[MongoGridFsClient]` with the default bucket name.
+
+[source,scala]
+----
+mongoClient.createDefaultGridFsBucketServiceFuture().onComplete{
+  case Success(result) => {
+    //Interact with the GridFS client...
+    var client = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+
+----
+
+=== Drop an entire file bucket from GridFS.
+
+An entire file bucket along with all of its contents can be dropped with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#drop()[drop]`. It will
+drop the bucket that was specified when the MongoGridFsClient was created.
+
+Here is an example of dropping a file bucket.
+
+[source,scala]
+----
+gridFsClient.dropFuture().onComplete{
+  case Success(result) => {
+    //The file bucket is dropped and all files in it, erased
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Find all file IDs in a GridFS bucket.
+
+A list of all of the file IDs in a bucket can be found with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#findAllIds()[findAllIds]`.
+The files can be downloaded by ID using `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadFileByID(java.lang.String,%20java.lang.String)[downloadFileByID]`.
+
+Here is an example of retrieving the list of file IDs.
+
+[source,scala]
+----
+gridFsClient.findAllIdsFuture().onComplete{
+  case Success(result) => {
+    var ids = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Find file IDs in a GridFS bucket matching a query.
+
+A query can be specified to match files in the GridFS bucket. `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#findIds(io.vertx.core.json.JsonObject)[findIds]`
+will return a list of file IDs that match the query.
+
+This has the following fields:
+
+`query` : The is a json object that can match any of the file's metadata using standard MongoDB query operators. An empty
+json object will match all documents. You can query on attributes of the GridFS files collection as described
+in the GridFS manual. https://docs.mongodb.com/manual/core/gridfs/#the-files-collection
+
+The files can be downloaded by ID using `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadFileByID(java.lang.String,%20java.lang.String)[downloadFileByID]`.
+
+Here is an example of retrieving the list of file IDs based on a metadata query.
+
+[source,scala]
+----
+var query = new io.vertx.core.json.JsonObject().put("metadata.nick_name", "Puhi the eel")
+gridFsClient.findIdsFuture(query).onComplete{
+  case Success(result) => {
+    var ids = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Delete a file in GridFS based on its ID.
+
+A file previously stored in GridFS can be deleted with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#delete(java.lang.String)[delete]` by providing
+the ID of the file. The file IDs can be retrieved with a query using `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#findIds(io.vertx.core.json.JsonObject)[findIds]`.
+
+This has the following fields:
+`id` : The ID generated by GridFS when the file was stored
+
+Here is an example of deleting a file by ID.
+
+[source,scala]
+----
+var id = "56660b074cedfd000570839c"
+gridFsClient.deleteFuture(id).onComplete(res: io.vertx.scala.core.AsyncResult<java.lang.Void>) => {
+  if (res.succeeded()) {
+    //File deleted
+  } else {
+    //Something went wrong
+    res.cause().printStackTrace()
+  }
+}
+
+----
+
+=== Upload a file in GridFS
+
+A file can be stored by name with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#uploadFile(java.lang.String)[uploadFile]`. When it
+succeeds, the ID generated by GridFS will be returned. This ID can be used to retrieve the file later.
+
+This has the following fields:
+
+`fileName` : this is name used to save the file in GridFS
+
+[source,scala]
+----
+gridFsClient.uploadFileFuture("file.name").onComplete{
+  case Success(result) => {
+    var id = result
+    //The ID of the stored object in Grid FS
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Upload a file in GridFS with options.
+
+A file can be stored with additional options with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#uploadFileWithOptions(java.lang.String,%20io.vertx.ext.mongo.GridFsUploadOptions)[uploadFileWithOptions]`
+passing in an instance of `link:../dataobjects.html#GridFsUploadOptions[GridFsUploadOptions]`. When it
+succeeds, the ID generated by GridFS will be returned.
+
+This has the following fields:
+
+`metadata` : this is a json object that includes any metadata that may be useful in a later search
+`chunkSizeBytes` : GridFS will break up the file into chunks of this size
+
+Here is an example of a file uploadByFileName that specifies the chunk size and metadata.
+
+[source,scala]
+----
+var metadata = new io.vertx.core.json.JsonObject()
+metadata.put("nick_name", "Puhi the Eel")
+
+var options = GridFsUploadOptions()
+options.setChunkSizeBytes(1024)
+options.setMetadata(metadata)
+
+gridFsClient.uploadFileWithOptionsFuture("file.name", options).onComplete{
+  case Success(result) => {
+    var id = result
+    //The ID of the stored object in Grid FS
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Download a file previously stored in GridFS
+
+A file can be downloaded by its original name with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadFile(java.lang.String)[downloadFile]`.
+When the download is complete, the result handler will return the length of the download as a Long.
+
+This has the following fields:
+
+`fileName`:: the name of the file that was previously stored
+
+Here is an example of downloading a file using the name that it was stored with in GridFS.
+
+[source,scala]
+----
+gridFsClient.downloadFileFuture("file.name").onComplete{
+  case Success(result) => {
+    var fileLength = result
+    //The length of the file stored in fileName
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Download a file previously stored in GridFS given its ID
+
+A file can be downloaded to a given file name by its ID with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadFileByID(java.lang.String,%20java.lang.String)[downloadFileByID]`.
+When the download succeeds, the result handler will return the length of the download as a Long.
+
+This has the following fields:
+
+`id` : The ID generated by GridFS when the file was stored
+
+Here is an example of downloading a file using the ID that it was given when stored in GridFS.
+
+[source,scala]
+----
+var id = "56660b074cedfd000570839c"
+var filename = "puhi.fil"
+gridFsClient.downloadFileByIDFuture(id, filename).onComplete{
+  case Success(result) => {
+    var fileLength = result
+    //The length of the file stored in fileName
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Download a file from GridFS to a new name
+
+A file can be resolved using its original name and then downloaded to a new name
+with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadFileAs(java.lang.String,%20java.lang.String)[downloadFileAs]`.
+When the download succeeds, the result handler will return the length of the download as a Long.
+
+This has the following fields:
+
+`fileName` : the name of the file that was previously stored
+`newFileName` : the new name for which the file will be stored
+
+[source,scala]
+----
+gridFsClient.downloadFileAsFuture("file.name", "new_file.name").onComplete{
+  case Success(result) => {
+    var fileLength = result
+    //The length of the file stored in fileName
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Upload a Stream to GridFS
+
+Streams can be uploaded to GridFS using `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#uploadByFileName(io.vertx.core.streams.ReadStream,%20java.lang.String)[uploadByFileName]`.
+Once the stream is uploaded, the result handler will be called with the ID generated by GridFS.
+
+This has the following fields:
+
+`stream` : the `link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` to upload
+`fileName` : the name for which the stream will be stored
+
+Here is an example of uploading a file stream to GridFS:
+
+[source,scala]
+----
+gridFsStreamClient.uploadByFileNameFuture(asyncFile, "kanaloa").onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+=== Upload a Stream to GridFS with Options
+
+Streams can be uploaded to GridFS using `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#uploadByFileNameWithOptions(io.vertx.core.streams.ReadStream,%20java.lang.String,%20io.vertx.ext.mongo.GridFsUploadOptions)[uploadByFileNameWithOptions]`
+passing in an instance of `link:../dataobjects.html#GridFsUploadOptions[GridFsUploadOptions]`.
+Once the stream is uploaded, the result handler will be called with the ID generated by GridFS.
+
+This has the following fields:
+
+`stream` : the `link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` to upload
+`fileName` : the name for which the stream will be stored
+`options' : the UploadOptions
+
+`link:../dataobjects.html#GridFsUploadOptions[GridFsUploadOptions]` has the following fields:
+
+`metadata` : this is a json object that includes any metadata that may be useful in a later search
+`chunkSizeBytes` : GridFS will break up the file into chunks of this size
+
+Here is an example of uploading a file stream with options to GridFS:
+
+[source,scala]
+----
+var options = GridFsUploadOptions()
+options.setChunkSizeBytes(2048)
+options.setMetadata(new io.vertx.core.json.JsonObject().put("catagory", "Polynesian gods"))
+gridFsStreamClient.uploadByFileNameWithOptionsFuture(asyncFile, "kanaloa", options).onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+
+----
+
+=== Download a Stream from GridFS using File Name
+
+Streams can be downloaded from GridFS using a file name with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadByFileName(io.vertx.core.streams.WriteStream,%20java.lang.String)[downloadByFileName]`.
+Once the stream is downloaded a result handler will be called with the length of the stream as a Long.
+
+This has the following fields:
+
+`stream` : the `link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]` to download to
+`fileName` : the name of the file that will be downloaded to the stream.
+
+Here is an example of downloading a file to a stream:
+
+[source,scala]
+----
+gridFsStreamClient.downloadByFileNameFuture(asyncFile, "kamapuaa.fil").onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+=== Download a Stream with Options from GridFS using File Name
+
+Streams can be downloaded from GridFS using a file name and download options with
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadByFileNameWithOptions(io.vertx.core.streams.WriteStream,%20java.lang.String,%20io.vertx.ext.mongo.GridFsDownloadOptions)[downloadByFileNameWithOptions]` passing in an instance of `link:../dataobjects.html#GridFsDownloadOptions[GridFsDownloadOptions]`.
+Once the stream is downloaded a result handler will be called with the length of the stream as a Long.
+
+This has the following fields:
+
+`stream` : the `link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]` to download to
+`fileName` : the name of the file that will be downloaded to the stream
+`options` : an instance of `link:../dataobjects.html#GridFsDownloadOptions[GridFsDownloadOptions]`
+
+DownloadOptions has the following field:
+
+`revision` : the revision of the file to download
+
+Here is an example of downloading a file to a stream with options:
+
+[source,scala]
+----
+var options = GridFsDownloadOptions()
+options.setRevision(0)
+gridFsStreamClient.downloadByFileNameWithOptionsFuture(asyncFile, "kamapuaa.fil", options).onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+=== Download a Stream from GridFS using ID
+
+Streams can be downloaded using the ID generated by GridFS with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadById(io.vertx.core.streams.WriteStream,%20java.lang.String)[downloadById]`.
+Once the stream is downloaded a result handler will be called with the length of the stream as a Long.
+
+This has the following fields:
+
+`stream` : the `link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]` to download to
+`id` : the string represendation of the ID generated by GridFS
+
+Here is an example of downloading a file to a stream using the object's ID:
+
+[source,scala]
+----
+var id = "58f61bf84cedfd000661af06"
+gridFsStreamClient.downloadByIdFuture(asyncFile, id).onComplete{
+  case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
 

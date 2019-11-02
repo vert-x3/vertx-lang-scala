@@ -37,8 +37,6 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 package object rabbitmq{
 
 
-
-
   type QueueOptions = io.vertx.rabbitmq.QueueOptions
 
   object QueueOptions {
@@ -57,54 +55,27 @@ package object rabbitmq{
     /**
      * Like [[basicAck]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def basicAckFuture(deliveryTag: java.lang.Long,multiple: java.lang.Boolean): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = Promise[io.vertx.core.json.JsonObject]()
-      asJava.basicAck(deliveryTag, multiple, {a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+    def basicAckFuture(deliveryTag: java.lang.Long,multiple: java.lang.Boolean): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.basicAck(deliveryTag, multiple, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
     /**
      * Like [[basicNack]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def basicNackFuture(deliveryTag: java.lang.Long,multiple: java.lang.Boolean,requeue: java.lang.Boolean): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = Promise[io.vertx.core.json.JsonObject]()
-      asJava.basicNack(deliveryTag, multiple, requeue, {a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+    def basicNackFuture(deliveryTag: java.lang.Long,multiple: java.lang.Boolean,requeue: java.lang.Boolean): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.basicNack(deliveryTag, multiple, requeue, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
     /**
      * Like [[basicGet]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def basicGetFuture(queue: java.lang.String,autoAck: java.lang.Boolean): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = Promise[io.vertx.core.json.JsonObject]()
-      asJava.basicGet(queue, autoAck, {a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[basicConsume]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def basicConsumeFuture(queue: java.lang.String,address: java.lang.String): scala.concurrent.Future[java.lang.String] = {
-      val promise = Promise[java.lang.String]()
-      asJava.basicConsume(queue, address, {a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[basicConsume]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def basicConsumeFuture(queue: java.lang.String,address: java.lang.String,autoAck: java.lang.Boolean): scala.concurrent.Future[java.lang.String] = {
-      val promise = Promise[java.lang.String]()
-      asJava.basicConsume(queue, address, autoAck, {a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[basicCancel]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def basicCancelFuture(consumerTag: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.basicCancel(consumerTag, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+    def basicGetFuture(queue: java.lang.String,autoAck: java.lang.Boolean): scala.concurrent.Future[io.vertx.rabbitmq.RabbitMQMessage] = {
+      val promise = Promise[io.vertx.rabbitmq.RabbitMQMessage]()
+      asJava.basicGet(queue, autoAck, {a:AsyncResult[io.vertx.rabbitmq.RabbitMQMessage] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -129,9 +100,9 @@ package object rabbitmq{
     /**
      * Like [[basicPublish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def basicPublishFuture(exchange: java.lang.String,routingKey: java.lang.String,message: io.vertx.core.json.JsonObject): scala.concurrent.Future[Unit] = {
+    def basicPublishFuture(exchange: java.lang.String,routingKey: java.lang.String,body: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
-      asJava.basicPublish(exchange, routingKey, message, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.basicPublish(exchange, routingKey, body, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -240,42 +211,6 @@ package object rabbitmq{
     def queueDeclareAutoFuture(): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = Promise[io.vertx.core.json.JsonObject]()
       asJava.queueDeclareAuto({a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[queueDeclare]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def queueDeclareFuture(queue: java.lang.String,durable: java.lang.Boolean,exclusive: java.lang.Boolean,autoDelete: java.lang.Boolean): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = Promise[io.vertx.core.json.JsonObject]()
-      asJava.queueDeclare(queue, durable, exclusive, autoDelete, {a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[queueDeclare]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def queueDeclareFuture(queue: java.lang.String,durable: java.lang.Boolean,exclusive: java.lang.Boolean,autoDelete: java.lang.Boolean,config: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = Promise[io.vertx.core.json.JsonObject]()
-      asJava.queueDeclare(queue, durable, exclusive, autoDelete, config, {a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[queueDelete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def queueDeleteFuture(queue: java.lang.String): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = Promise[io.vertx.core.json.JsonObject]()
-      asJava.queueDelete(queue, {a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[queueDeleteIf]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def queueDeleteIfFuture(queue: java.lang.String,ifUnused: java.lang.Boolean,ifEmpty: java.lang.Boolean): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = Promise[io.vertx.core.json.JsonObject]()
-      asJava.queueDeleteIf(queue, ifUnused, ifEmpty, {a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 

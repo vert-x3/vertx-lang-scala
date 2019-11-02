@@ -77,15 +77,6 @@ package object auth{
 
 
 
-  type SecretOptions = io.vertx.ext.auth.SecretOptions
-
-  object SecretOptions {
-    def apply() = new SecretOptions()
-    def apply(json: JsonObject) = new SecretOptions(json)
-  }
-
-
-
   /**
     * Represents an authenticates User and contains operations to authorise the user.
     * 

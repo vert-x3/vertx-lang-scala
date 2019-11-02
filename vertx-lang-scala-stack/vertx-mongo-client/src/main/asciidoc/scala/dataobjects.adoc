@@ -18,9 +18,6 @@ Set the flag if writing to temporary files is enabled.
 |[[batchSize]]`@batchSize`|`Number (int)`|+++
 Set the batch size for methods loading found data in batches.
 +++
-|[[maxAwaitTime]]`@maxAwaitTime`|`Number (long)`|+++
-The maximum amount of time for the server to wait on new documents to satisfy a $changeStream aggregation.
-+++
 |[[maxTime]]`@maxTime`|`Number (long)`|+++
 Set the time limit in milliseconds for processing operations on a cursor.
 +++
@@ -102,6 +99,33 @@ Set the skip
 |[[sort]]`@sort`|`Json object`|+++
 Set the sort document
 +++
+|===
+
+[[GridFsDownloadOptions]]
+== GridFsDownloadOptions
+
+++++
+Options used to configure downloads from GridFS.
+++++
+'''
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[revision]]`@revision`|`Number (Integer)`|-
+|===
+
+[[GridFsUploadOptions]]
+== GridFsUploadOptions
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[chunkSizeBytes]]`@chunkSizeBytes`|`Number (Integer)`|-
+|[[metadata]]`@metadata`|`Json object`|-
 |===
 
 [[IndexModel]]
