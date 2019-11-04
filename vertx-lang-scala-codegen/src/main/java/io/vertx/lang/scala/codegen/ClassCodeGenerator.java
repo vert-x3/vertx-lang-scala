@@ -110,10 +110,7 @@ public class ClassCodeGenerator extends Generator<Model> {
       try {
         template.process(vars, writer);
         return writer.toString();
-      } catch (TemplateException e) {
-        e.printStackTrace();
-        throw new RuntimeException(e);
-      } catch (IOException e) {
+      } catch (TemplateException | IOException e) {
         e.printStackTrace();
         throw new RuntimeException(e);
       }

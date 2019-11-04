@@ -31,5 +31,7 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object pebble{
 
+  type PebbleTemplateEngine = io.vertx.ext.web.templ.pebble.PebbleTemplateEngine
+
 
 }

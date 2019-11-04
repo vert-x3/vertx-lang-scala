@@ -742,8 +742,8 @@ public class TypeHelper {
   public static boolean isKeyword(String possibleKeyword) {
     return (possibleKeyword.equals("type") || possibleKeyword.equals("object"));
   }
-  
-  
+
+
   //IMPORTS
 
 
@@ -804,7 +804,7 @@ public class TypeHelper {
 
   //IMPORTS
 
-  
+
   //METHODS
 
 
@@ -963,8 +963,8 @@ public class TypeHelper {
     methodName += "Future";
     return escapeIfKeyword(methodName);
   }
-  
-  
+
+
   //METHODS
 
   //DOCS
@@ -1088,6 +1088,20 @@ public class TypeHelper {
     }
   }
 
+  public static String getFullNameWithScalaNotation(TypeInfo type) {
+    List<String> paramNames = ((ClassTypeInfo) type).getParams().stream().map(TypeParamInfo.Class::getName).collect(Collectors.toList());
+    String scalaNotation = type.getName();
+    if(paramNames.size() > 0 ){
+      scalaNotation += "[" + String.join(",", paramNames) + "]";
+    }
+    return scalaNotation;
+  }
+
+  public static String getSimpleNameWithScalaNotation(TypeInfo type) {
+    String scalaNotation = getFullNameWithScalaNotation(type);
+    return scalaNotation.substring(scalaNotation.lastIndexOf(".") + 1);
+  }
+
   public static String convertToScalaNotation(String type) {
     return  type
       .replace("<", "[").replace(">", "]")
@@ -1174,5 +1188,5 @@ public class TypeHelper {
     }
     return output.toString().replace("<p>", "");
   }
-  
+
 }

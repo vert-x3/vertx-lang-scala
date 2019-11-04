@@ -39,6 +39,8 @@ import io.vertx.ext.mongo
 
 package object mongo{
 
+  type HashStrategy = io.vertx.ext.auth.mongo.HashStrategy
+
 
 
   /**
@@ -59,12 +61,13 @@ package object mongo{
   }
 
 
-  type MongoAuthOptions = io.vertx.ext.auth.mongo.MongoAuthOptions
 
+  type MongoAuthOptions = io.vertx.ext.auth.mongo.MongoAuthOptions
   object MongoAuthOptions {
     def apply() = new MongoAuthOptions()
     def apply(json: JsonObject) = new MongoAuthOptions(json)
   }
+
 
 
 }

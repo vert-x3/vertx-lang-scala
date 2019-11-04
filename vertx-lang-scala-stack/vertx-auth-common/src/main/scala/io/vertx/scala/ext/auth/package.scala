@@ -37,6 +37,7 @@ package object auth{
 
 
 
+
   /**
     *
     * User-facing interface for authenticating users.
@@ -56,11 +57,17 @@ package object auth{
   }
 
 
+  type ChainAuth = io.vertx.ext.auth.ChainAuth
+
+
+  type HashingAlgorithm = io.vertx.ext.auth.HashingAlgorithm
+
+
+  type HashingStrategy = io.vertx.ext.auth.HashingStrategy
 
 
 
   type KeyStoreOptions = io.vertx.ext.auth.KeyStoreOptions
-
   object KeyStoreOptions {
     def apply() = new KeyStoreOptions()
     def apply(json: JsonObject) = new KeyStoreOptions(json)
@@ -68,12 +75,13 @@ package object auth{
 
 
 
-  type PubSecKeyOptions = io.vertx.ext.auth.PubSecKeyOptions
 
+  type PubSecKeyOptions = io.vertx.ext.auth.PubSecKeyOptions
   object PubSecKeyOptions {
     def apply() = new PubSecKeyOptions()
     def apply(json: JsonObject) = new PubSecKeyOptions(json)
   }
+
 
 
 
@@ -95,6 +103,9 @@ package object auth{
     }
 
   }
+
+
+  type VertxContextPRNG = io.vertx.ext.auth.VertxContextPRNG
 
 
 }

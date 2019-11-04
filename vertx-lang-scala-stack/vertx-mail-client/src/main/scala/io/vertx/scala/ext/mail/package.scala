@@ -35,6 +35,8 @@ import io.vertx.ext.mail.{MailMessage => JMailMessage}
 
 package object mail{
 
+  type MailAttachment = io.vertx.ext.mail.MailAttachment
+
 
 
   /**
@@ -57,8 +59,8 @@ package object mail{
   }
 
 
-  type MailConfig = io.vertx.ext.mail.MailConfig
 
+  type MailConfig = io.vertx.ext.mail.MailConfig
   object MailConfig {
     def apply() = new MailConfig()
     def apply(json: JsonObject) = new MailConfig(json)
@@ -66,8 +68,8 @@ package object mail{
 
 
 
-  type MailMessage = io.vertx.ext.mail.MailMessage
 
+  type MailMessage = io.vertx.ext.mail.MailMessage
   object MailMessage {
     def apply() = new MailMessage()
     def apply(json: JsonObject) = new MailMessage(json)
@@ -75,12 +77,13 @@ package object mail{
 
 
 
-  type MailResult = io.vertx.ext.mail.MailResult
 
+  type MailResult = io.vertx.ext.mail.MailResult
   object MailResult {
     def apply() = new MailResult()
     def apply(json: JsonObject) = new MailResult(json)
   }
+
 
 
 }

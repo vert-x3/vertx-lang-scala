@@ -31,5 +31,7 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object mvel{
 
+  type MVELTemplateEngine = io.vertx.ext.web.templ.mvel.MVELTemplateEngine
+
 
 }

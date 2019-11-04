@@ -27,6 +27,10 @@ import com.acme.pkg.sub.{SubInterface => JSubInterface}
 
 package object pkg{
 
+  type MyInterface = com.acme.pkg.MyInterface
+
+
+  type SubInterface = com.acme.pkg.sub.SubInterface
 
 
 }

@@ -69,7 +69,6 @@ package object consul{
 
 
   type AclToken = io.vertx.ext.consul.AclToken
-
   object AclToken {
     def apply() = new AclToken()
     def apply(json: JsonObject) = new AclToken(json)
@@ -77,8 +76,8 @@ package object consul{
 
 
 
-  type BlockingQueryOptions = io.vertx.ext.consul.BlockingQueryOptions
 
+  type BlockingQueryOptions = io.vertx.ext.consul.BlockingQueryOptions
   object BlockingQueryOptions {
     def apply() = new BlockingQueryOptions()
     def apply(json: JsonObject) = new BlockingQueryOptions(json)
@@ -86,8 +85,8 @@ package object consul{
 
 
 
-  type Check = io.vertx.ext.consul.Check
 
+  type Check = io.vertx.ext.consul.Check
   object Check {
     def apply() = new Check()
     def apply(json: JsonObject) = new Check(json)
@@ -95,8 +94,8 @@ package object consul{
 
 
 
-  type CheckList = io.vertx.ext.consul.CheckList
 
+  type CheckList = io.vertx.ext.consul.CheckList
   object CheckList {
     def apply() = new CheckList()
     def apply(json: JsonObject) = new CheckList(json)
@@ -104,8 +103,8 @@ package object consul{
 
 
 
-  type CheckOptions = io.vertx.ext.consul.CheckOptions
 
+  type CheckOptions = io.vertx.ext.consul.CheckOptions
   object CheckOptions {
     def apply() = new CheckOptions()
     def apply(json: JsonObject) = new CheckOptions(json)
@@ -113,12 +112,13 @@ package object consul{
 
 
 
-  type CheckQueryOptions = io.vertx.ext.consul.CheckQueryOptions
 
+  type CheckQueryOptions = io.vertx.ext.consul.CheckQueryOptions
   object CheckQueryOptions {
     def apply() = new CheckQueryOptions()
     def apply(json: JsonObject) = new CheckQueryOptions(json)
   }
+
 
 
 
@@ -797,8 +797,8 @@ package object consul{
   }
 
 
-  type ConsulClientOptions = io.vertx.ext.consul.ConsulClientOptions
 
+  type ConsulClientOptions = io.vertx.ext.consul.ConsulClientOptions
   object ConsulClientOptions {
     def apply() = new ConsulClientOptions()
     def apply(json: JsonObject) = new ConsulClientOptions(json)
@@ -806,8 +806,8 @@ package object consul{
 
 
 
-  type Coordinate = io.vertx.ext.consul.Coordinate
 
+  type Coordinate = io.vertx.ext.consul.Coordinate
   object Coordinate {
     def apply() = new Coordinate()
     def apply(json: JsonObject) = new Coordinate(json)
@@ -815,8 +815,8 @@ package object consul{
 
 
 
-  type CoordinateList = io.vertx.ext.consul.CoordinateList
 
+  type CoordinateList = io.vertx.ext.consul.CoordinateList
   object CoordinateList {
     def apply() = new CoordinateList()
     def apply(json: JsonObject) = new CoordinateList(json)
@@ -824,8 +824,8 @@ package object consul{
 
 
 
-  type DcCoordinates = io.vertx.ext.consul.DcCoordinates
 
+  type DcCoordinates = io.vertx.ext.consul.DcCoordinates
   object DcCoordinates {
     def apply() = new DcCoordinates()
     def apply(json: JsonObject) = new DcCoordinates(json)
@@ -833,8 +833,8 @@ package object consul{
 
 
 
-  type Event = io.vertx.ext.consul.Event
 
+  type Event = io.vertx.ext.consul.Event
   object Event {
     def apply() = new Event()
     def apply(json: JsonObject) = new Event(json)
@@ -842,8 +842,8 @@ package object consul{
 
 
 
-  type EventList = io.vertx.ext.consul.EventList
 
+  type EventList = io.vertx.ext.consul.EventList
   object EventList {
     def apply() = new EventList()
     def apply(json: JsonObject) = new EventList(json)
@@ -851,8 +851,8 @@ package object consul{
 
 
 
-  type EventListOptions = io.vertx.ext.consul.EventListOptions
 
+  type EventListOptions = io.vertx.ext.consul.EventListOptions
   object EventListOptions {
     def apply() = new EventListOptions()
     def apply(json: JsonObject) = new EventListOptions(json)
@@ -860,8 +860,8 @@ package object consul{
 
 
 
-  type EventOptions = io.vertx.ext.consul.EventOptions
 
+  type EventOptions = io.vertx.ext.consul.EventOptions
   object EventOptions {
     def apply() = new EventOptions()
     def apply(json: JsonObject) = new EventOptions(json)
@@ -869,8 +869,8 @@ package object consul{
 
 
 
-  type KeyValue = io.vertx.ext.consul.KeyValue
 
+  type KeyValue = io.vertx.ext.consul.KeyValue
   object KeyValue {
     def apply() = new KeyValue()
     def apply(json: JsonObject) = new KeyValue(json)
@@ -878,8 +878,8 @@ package object consul{
 
 
 
-  type KeyValueList = io.vertx.ext.consul.KeyValueList
 
+  type KeyValueList = io.vertx.ext.consul.KeyValueList
   object KeyValueList {
     def apply() = new KeyValueList()
     def apply(json: JsonObject) = new KeyValueList(json)
@@ -887,8 +887,8 @@ package object consul{
 
 
 
-  type KeyValueOptions = io.vertx.ext.consul.KeyValueOptions
 
+  type KeyValueOptions = io.vertx.ext.consul.KeyValueOptions
   object KeyValueOptions {
     def apply() = new KeyValueOptions()
     def apply(json: JsonObject) = new KeyValueOptions(json)
@@ -896,8 +896,8 @@ package object consul{
 
 
 
-  type MaintenanceOptions = io.vertx.ext.consul.MaintenanceOptions
 
+  type MaintenanceOptions = io.vertx.ext.consul.MaintenanceOptions
   object MaintenanceOptions {
     def apply() = new MaintenanceOptions()
     def apply(json: JsonObject) = new MaintenanceOptions(json)
@@ -905,8 +905,8 @@ package object consul{
 
 
 
-  type Node = io.vertx.ext.consul.Node
 
+  type Node = io.vertx.ext.consul.Node
   object Node {
     def apply() = new Node()
     def apply(json: JsonObject) = new Node(json)
@@ -914,8 +914,8 @@ package object consul{
 
 
 
-  type NodeList = io.vertx.ext.consul.NodeList
 
+  type NodeList = io.vertx.ext.consul.NodeList
   object NodeList {
     def apply() = new NodeList()
     def apply(json: JsonObject) = new NodeList(json)
@@ -923,8 +923,8 @@ package object consul{
 
 
 
-  type NodeQueryOptions = io.vertx.ext.consul.NodeQueryOptions
 
+  type NodeQueryOptions = io.vertx.ext.consul.NodeQueryOptions
   object NodeQueryOptions {
     def apply() = new NodeQueryOptions()
     def apply(json: JsonObject) = new NodeQueryOptions(json)
@@ -932,8 +932,8 @@ package object consul{
 
 
 
-  type PreparedQueryDefinition = io.vertx.ext.consul.PreparedQueryDefinition
 
+  type PreparedQueryDefinition = io.vertx.ext.consul.PreparedQueryDefinition
   object PreparedQueryDefinition {
     def apply() = new PreparedQueryDefinition()
     def apply(json: JsonObject) = new PreparedQueryDefinition(json)
@@ -941,8 +941,8 @@ package object consul{
 
 
 
-  type PreparedQueryExecuteOptions = io.vertx.ext.consul.PreparedQueryExecuteOptions
 
+  type PreparedQueryExecuteOptions = io.vertx.ext.consul.PreparedQueryExecuteOptions
   object PreparedQueryExecuteOptions {
     def apply() = new PreparedQueryExecuteOptions()
     def apply(json: JsonObject) = new PreparedQueryExecuteOptions(json)
@@ -950,8 +950,8 @@ package object consul{
 
 
 
-  type PreparedQueryExecuteResponse = io.vertx.ext.consul.PreparedQueryExecuteResponse
 
+  type PreparedQueryExecuteResponse = io.vertx.ext.consul.PreparedQueryExecuteResponse
   object PreparedQueryExecuteResponse {
     def apply() = new PreparedQueryExecuteResponse()
     def apply(json: JsonObject) = new PreparedQueryExecuteResponse(json)
@@ -959,8 +959,8 @@ package object consul{
 
 
 
-  type Service = io.vertx.ext.consul.Service
 
+  type Service = io.vertx.ext.consul.Service
   object Service {
     def apply() = new Service()
     def apply(json: JsonObject) = new Service(json)
@@ -968,8 +968,8 @@ package object consul{
 
 
 
-  type ServiceEntry = io.vertx.ext.consul.ServiceEntry
 
+  type ServiceEntry = io.vertx.ext.consul.ServiceEntry
   object ServiceEntry {
     def apply() = new ServiceEntry()
     def apply(json: JsonObject) = new ServiceEntry(json)
@@ -977,8 +977,8 @@ package object consul{
 
 
 
-  type ServiceEntryList = io.vertx.ext.consul.ServiceEntryList
 
+  type ServiceEntryList = io.vertx.ext.consul.ServiceEntryList
   object ServiceEntryList {
     def apply() = new ServiceEntryList()
     def apply(json: JsonObject) = new ServiceEntryList(json)
@@ -986,8 +986,8 @@ package object consul{
 
 
 
-  type ServiceList = io.vertx.ext.consul.ServiceList
 
+  type ServiceList = io.vertx.ext.consul.ServiceList
   object ServiceList {
     def apply() = new ServiceList()
     def apply(json: JsonObject) = new ServiceList(json)
@@ -995,8 +995,8 @@ package object consul{
 
 
 
-  type ServiceOptions = io.vertx.ext.consul.ServiceOptions
 
+  type ServiceOptions = io.vertx.ext.consul.ServiceOptions
   object ServiceOptions {
     def apply() = new ServiceOptions()
     def apply(json: JsonObject) = new ServiceOptions(json)
@@ -1004,8 +1004,8 @@ package object consul{
 
 
 
-  type ServiceQueryOptions = io.vertx.ext.consul.ServiceQueryOptions
 
+  type ServiceQueryOptions = io.vertx.ext.consul.ServiceQueryOptions
   object ServiceQueryOptions {
     def apply() = new ServiceQueryOptions()
     def apply(json: JsonObject) = new ServiceQueryOptions(json)
@@ -1013,8 +1013,8 @@ package object consul{
 
 
 
-  type Session = io.vertx.ext.consul.Session
 
+  type Session = io.vertx.ext.consul.Session
   object Session {
     def apply() = new Session()
     def apply(json: JsonObject) = new Session(json)
@@ -1022,8 +1022,8 @@ package object consul{
 
 
 
-  type SessionList = io.vertx.ext.consul.SessionList
 
+  type SessionList = io.vertx.ext.consul.SessionList
   object SessionList {
     def apply() = new SessionList()
     def apply(json: JsonObject) = new SessionList(json)
@@ -1031,8 +1031,8 @@ package object consul{
 
 
 
-  type SessionOptions = io.vertx.ext.consul.SessionOptions
 
+  type SessionOptions = io.vertx.ext.consul.SessionOptions
   object SessionOptions {
     def apply() = new SessionOptions()
     def apply(json: JsonObject) = new SessionOptions(json)
@@ -1040,8 +1040,8 @@ package object consul{
 
 
 
-  type TxnError = io.vertx.ext.consul.TxnError
 
+  type TxnError = io.vertx.ext.consul.TxnError
   object TxnError {
     def apply() = new TxnError()
     def apply(json: JsonObject) = new TxnError(json)
@@ -1049,8 +1049,8 @@ package object consul{
 
 
 
-  type TxnKVOperation = io.vertx.ext.consul.TxnKVOperation
 
+  type TxnKVOperation = io.vertx.ext.consul.TxnKVOperation
   object TxnKVOperation {
     def apply() = new TxnKVOperation()
     def apply(json: JsonObject) = new TxnKVOperation(json)
@@ -1058,8 +1058,8 @@ package object consul{
 
 
 
-  type TxnRequest = io.vertx.ext.consul.TxnRequest
 
+  type TxnRequest = io.vertx.ext.consul.TxnRequest
   object TxnRequest {
     def apply() = new TxnRequest()
     def apply(json: JsonObject) = new TxnRequest(json)
@@ -1067,14 +1067,19 @@ package object consul{
 
 
 
-  type TxnResponse = io.vertx.ext.consul.TxnResponse
 
+  type TxnResponse = io.vertx.ext.consul.TxnResponse
   object TxnResponse {
     def apply() = new TxnResponse()
     def apply(json: JsonObject) = new TxnResponse(json)
   }
 
 
+
+  type Watch[T] = io.vertx.ext.consul.Watch[T]
+
+
+  type WatchResult[T] = io.vertx.ext.consul.WatchResult[T]
 
 
 }

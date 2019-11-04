@@ -35,7 +35,6 @@ package object dropwizard{
 
 
   type DropwizardMetricsOptions = io.vertx.ext.dropwizard.DropwizardMetricsOptions
-
   object DropwizardMetricsOptions {
     def apply() = new DropwizardMetricsOptions()
     def apply(json: JsonObject) = new DropwizardMetricsOptions(json)
@@ -43,13 +42,16 @@ package object dropwizard{
 
 
 
-  type Match = io.vertx.ext.dropwizard.Match
 
+  type Match = io.vertx.ext.dropwizard.Match
   object Match {
     def apply() = new Match()
     def apply(json: JsonObject) = new Match(json)
   }
 
+
+
+  type MetricsService = io.vertx.ext.dropwizard.MetricsService
 
 
 }

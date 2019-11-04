@@ -66,7 +66,6 @@ package object core{
   private def listToJsArr(a: Seq[_]) = JsonArray(a: _*)
 
   type AddressResolverOptions = io.vertx.core.dns.AddressResolverOptions
-
   object AddressResolverOptions {
     def apply() = new AddressResolverOptions()
     def apply(json: JsonObject) = new AddressResolverOptions(json)
@@ -74,12 +73,13 @@ package object core{
 
 
 
-  type Argument = io.vertx.core.cli.Argument
 
+  type Argument = io.vertx.core.cli.Argument
   object Argument {
     def apply() = new Argument()
     def apply(json: JsonObject) = new Argument(json)
   }
+
 
 
 
@@ -115,6 +115,15 @@ package object core{
     }
 
     /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
      * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def writeFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
@@ -138,15 +147,6 @@ package object core{
     def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
       asJava.end(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -187,6 +187,7 @@ package object core{
     }
 
   }
+
 
 
   /**
@@ -371,8 +372,14 @@ package object core{
   }
 
 
+  type CLI = io.vertx.core.cli.CLI
 
 
+
+
+
+
+  type CommandLine = io.vertx.core.cli.CommandLine
 
 
 
@@ -385,6 +392,7 @@ package object core{
   implicit class CompositeFutureScala(val asJava: io.vertx.core.CompositeFuture) extends AnyVal {
 
   }
+
 
 
   /**
@@ -478,13 +486,16 @@ package object core{
   }
 
 
+  type Cookie = io.vertx.core.http.Cookie
+
+
 
   type CopyOptions = io.vertx.core.file.CopyOptions
-
   object CopyOptions {
     def apply() = new CopyOptions()
     def apply(json: JsonObject) = new CopyOptions(json)
   }
+
 
 
 
@@ -559,6 +570,9 @@ package object core{
     }
 
   }
+
+
+  type DatagramPacket = io.vertx.core.datagram.DatagramPacket
 
 
 
@@ -719,8 +733,8 @@ package object core{
   }
 
 
-  type DatagramSocketOptions = io.vertx.core.datagram.DatagramSocketOptions
 
+  type DatagramSocketOptions = io.vertx.core.datagram.DatagramSocketOptions
   object DatagramSocketOptions {
     def apply() = new DatagramSocketOptions()
     def apply(json: JsonObject) = new DatagramSocketOptions(json)
@@ -728,9 +742,11 @@ package object core{
 
 
 
+  type DeliveryContext[T] = io.vertx.core.eventbus.DeliveryContext[T]
+
+
 
   type DeliveryOptions = io.vertx.core.eventbus.DeliveryOptions
-
   object DeliveryOptions {
     def apply() = new DeliveryOptions()
     def apply(json: JsonObject) = new DeliveryOptions(json)
@@ -738,12 +754,13 @@ package object core{
 
 
 
-  type DeploymentOptions = io.vertx.core.DeploymentOptions
 
+  type DeploymentOptions = io.vertx.core.DeploymentOptions
   object DeploymentOptions {
     def apply() = new DeploymentOptions()
     def apply(json: JsonObject) = new DeploymentOptions(json)
   }
+
 
 
 
@@ -866,12 +883,13 @@ package object core{
   }
 
 
-  type DnsClientOptions = io.vertx.core.dns.DnsClientOptions
 
+  type DnsClientOptions = io.vertx.core.dns.DnsClientOptions
   object DnsClientOptions {
     def apply() = new DnsClientOptions()
     def apply(json: JsonObject) = new DnsClientOptions(json)
   }
+
 
 
 
@@ -957,13 +975,16 @@ package object core{
   }
 
 
-  type EventBusOptions = io.vertx.core.eventbus.EventBusOptions
 
+  type EventBusOptions = io.vertx.core.eventbus.EventBusOptions
   object EventBusOptions {
     def apply() = new EventBusOptions()
     def apply(json: JsonObject) = new EventBusOptions(json)
   }
 
+
+
+  type FileProps = io.vertx.core.file.FileProps
 
 
 
@@ -1327,13 +1348,16 @@ package object core{
   }
 
 
-  type FileSystemOptions = io.vertx.core.file.FileSystemOptions
 
+  type FileSystemOptions = io.vertx.core.file.FileSystemOptions
   object FileSystemOptions {
     def apply() = new FileSystemOptions()
     def apply(json: JsonObject) = new FileSystemOptions(json)
   }
 
+
+
+  type FileSystemProps = io.vertx.core.file.FileSystemProps
 
 
 
@@ -1347,8 +1371,8 @@ package object core{
   }
 
 
-  type GoAway = io.vertx.core.http.GoAway
 
+  type GoAway = io.vertx.core.http.GoAway
   object GoAway {
     def apply() = new GoAway()
     def apply(json: JsonObject) = new GoAway(json)
@@ -1356,12 +1380,13 @@ package object core{
 
 
 
-  type Http2Settings = io.vertx.core.http.Http2Settings
 
+  type Http2Settings = io.vertx.core.http.Http2Settings
   object Http2Settings {
     def apply() = new Http2Settings()
     def apply(json: JsonObject) = new Http2Settings(json)
   }
+
 
 
 
@@ -1892,12 +1917,13 @@ package object core{
   }
 
 
-  type HttpClientOptions = io.vertx.core.http.HttpClientOptions
 
+  type HttpClientOptions = io.vertx.core.http.HttpClientOptions
   object HttpClientOptions {
     def apply() = new HttpClientOptions()
     def apply(json: JsonObject) = new HttpClientOptions(json)
   }
+
 
 
 
@@ -2029,6 +2055,7 @@ package object core{
   }
 
 
+
   /**
     * Represents a client-side HTTP response.
     * 
@@ -2093,6 +2120,7 @@ package object core{
   }
 
 
+
   /**
     * Represents an HTTP connection.
     * <p/>
@@ -2149,6 +2177,9 @@ package object core{
     }
 
   }
+
+
+  type HttpFrame = io.vertx.core.http.HttpFrame
 
 
 
@@ -2212,6 +2243,7 @@ package object core{
   }
 
 
+
   /**
     * Represents an file upload from an HTML FORM.
     */
@@ -2245,12 +2277,13 @@ package object core{
   }
 
 
-  type HttpServerOptions = io.vertx.core.http.HttpServerOptions
 
+  type HttpServerOptions = io.vertx.core.http.HttpServerOptions
   object HttpServerOptions {
     def apply() = new HttpServerOptions()
     def apply(json: JsonObject) = new HttpServerOptions(json)
   }
+
 
 
 
@@ -2382,6 +2415,7 @@ package object core{
     }
 
   }
+
 
 
   /**
@@ -2594,8 +2628,8 @@ package object core{
   }
 
 
-  type JdkSSLEngineOptions = io.vertx.core.net.JdkSSLEngineOptions
 
+  type JdkSSLEngineOptions = io.vertx.core.net.JdkSSLEngineOptions
   object JdkSSLEngineOptions {
     def apply() = new JdkSSLEngineOptions()
     def apply(json: JsonObject) = new JdkSSLEngineOptions(json)
@@ -2603,13 +2637,16 @@ package object core{
 
 
 
-  type JksOptions = io.vertx.core.net.JksOptions
 
+  type JksOptions = io.vertx.core.net.JksOptions
   object JksOptions {
     def apply() = new JksOptions()
     def apply(json: JsonObject) = new JksOptions(json)
   }
 
+
+
+  type JsonEvent = io.vertx.core.parsetools.JsonEvent
 
 
 
@@ -2657,8 +2694,19 @@ package object core{
   }
 
 
+  type JsonPointer = io.vertx.core.json.pointer.JsonPointer
 
 
+  type JsonPointerIterator = io.vertx.core.json.pointer.JsonPointerIterator
+
+
+  type LocalMap[K,V] = io.vertx.core.shareddata.LocalMap[K,V]
+
+
+  type Lock = io.vertx.core.shareddata.Lock
+
+
+  type Measured = io.vertx.core.metrics.Measured
 
 
 
@@ -2734,6 +2782,7 @@ package object core{
 
   }
 
+
   import io.vertx.core.MultiMap
   import io.vertx.core.eventbus.Message
 
@@ -2804,6 +2853,7 @@ package object core{
     }
 
   }
+
 
 
   /**
@@ -2878,14 +2928,19 @@ package object core{
   }
 
 
-  type MetricsOptions = io.vertx.core.metrics.MetricsOptions
 
+  type MetricsOptions = io.vertx.core.metrics.MetricsOptions
   object MetricsOptions {
     def apply() = new MetricsOptions()
     def apply(json: JsonObject) = new MetricsOptions(json)
   }
 
 
+
+  type MultiMap = io.vertx.core.MultiMap
+
+
+  type MxRecord = io.vertx.core.dns.MxRecord
 
 
 
@@ -2939,12 +2994,13 @@ package object core{
   }
 
 
-  type NetClientOptions = io.vertx.core.net.NetClientOptions
 
+  type NetClientOptions = io.vertx.core.net.NetClientOptions
   object NetClientOptions {
     def apply() = new NetClientOptions()
     def apply(json: JsonObject) = new NetClientOptions(json)
   }
+
 
 
 
@@ -3010,12 +3066,13 @@ package object core{
   }
 
 
-  type NetServerOptions = io.vertx.core.net.NetServerOptions
 
+  type NetServerOptions = io.vertx.core.net.NetServerOptions
   object NetServerOptions {
     def apply() = new NetServerOptions()
     def apply(json: JsonObject) = new NetServerOptions(json)
   }
+
 
 
 
@@ -3065,20 +3122,20 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.end(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
      * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
       asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.end(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -3178,8 +3235,9 @@ package object core{
 
 
 
-  type OpenOptions = io.vertx.core.file.OpenOptions
 
+
+  type OpenOptions = io.vertx.core.file.OpenOptions
   object OpenOptions {
     def apply() = new OpenOptions()
     def apply(json: JsonObject) = new OpenOptions(json)
@@ -3187,8 +3245,8 @@ package object core{
 
 
 
-  type OpenSSLEngineOptions = io.vertx.core.net.OpenSSLEngineOptions
 
+  type OpenSSLEngineOptions = io.vertx.core.net.OpenSSLEngineOptions
   object OpenSSLEngineOptions {
     def apply() = new OpenSSLEngineOptions()
     def apply(json: JsonObject) = new OpenSSLEngineOptions(json)
@@ -3196,8 +3254,8 @@ package object core{
 
 
 
-  type Option = io.vertx.core.cli.Option
 
+  type Option = io.vertx.core.cli.Option
   object Option {
     def apply() = new Option()
     def apply(json: JsonObject) = new Option(json)
@@ -3205,8 +3263,8 @@ package object core{
 
 
 
-  type PemKeyCertOptions = io.vertx.core.net.PemKeyCertOptions
 
+  type PemKeyCertOptions = io.vertx.core.net.PemKeyCertOptions
   object PemKeyCertOptions {
     def apply() = new PemKeyCertOptions()
     def apply(json: JsonObject) = new PemKeyCertOptions(json)
@@ -3214,8 +3272,8 @@ package object core{
 
 
 
-  type PemTrustOptions = io.vertx.core.net.PemTrustOptions
 
+  type PemTrustOptions = io.vertx.core.net.PemTrustOptions
   object PemTrustOptions {
     def apply() = new PemTrustOptions()
     def apply(json: JsonObject) = new PemTrustOptions(json)
@@ -3223,12 +3281,13 @@ package object core{
 
 
 
-  type PfxOptions = io.vertx.core.net.PfxOptions
 
+  type PfxOptions = io.vertx.core.net.PfxOptions
   object PfxOptions {
     def apply() = new PfxOptions()
     def apply(json: JsonObject) = new PfxOptions(json)
   }
+
 
 
 
@@ -3268,14 +3327,19 @@ package object core{
   }
 
 
+  type Promise[T] = io.vertx.core.Promise[T]
+
+
 
   type ProxyOptions = io.vertx.core.net.ProxyOptions
-
   object ProxyOptions {
     def apply() = new ProxyOptions()
     def apply(json: JsonObject) = new ProxyOptions(json)
   }
 
+
+
+  type Pump = io.vertx.core.streams.Pump
 
 
 
@@ -3336,6 +3400,7 @@ package object core{
     }
 
   }
+
 
 
   /**
@@ -3399,13 +3464,16 @@ package object core{
   }
 
 
-  type RequestOptions = io.vertx.core.http.RequestOptions
 
+  type RequestOptions = io.vertx.core.http.RequestOptions
   object RequestOptions {
     def apply() = new RequestOptions()
     def apply(json: JsonObject) = new RequestOptions(json)
   }
 
+
+
+  type SelfSignedCertificate = io.vertx.core.net.SelfSignedCertificate
 
 
 
@@ -3489,6 +3557,15 @@ package object core{
     }
 
     /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
      * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def writeFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
@@ -3503,15 +3580,6 @@ package object core{
     def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
       asJava.end(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -3609,6 +3677,7 @@ package object core{
     }
 
   }
+
 
 
   /**
@@ -3715,15 +3784,23 @@ package object core{
   }
 
 
+  type SocketAddress = io.vertx.core.net.SocketAddress
+
+
+  type SrvRecord = io.vertx.core.dns.SrvRecord
+
+
+  type StreamBase = io.vertx.core.streams.StreamBase
 
 
 
   type StreamPriority = io.vertx.core.http.StreamPriority
-
   object StreamPriority {
     def apply() = new StreamPriority()
     def apply(json: JsonObject) = new StreamPriority(json)
   }
+
+
 
 
 
@@ -3768,12 +3845,13 @@ package object core{
   }
 
 
-  type TracingOptions = io.vertx.core.tracing.TracingOptions
 
+  type TracingOptions = io.vertx.core.tracing.TracingOptions
   object TracingOptions {
     def apply() = new TracingOptions()
     def apply(json: JsonObject) = new TracingOptions(json)
   }
+
 
 
 
@@ -3934,12 +4012,13 @@ package object core{
   }
 
 
-  type VertxOptions = io.vertx.core.VertxOptions
 
+  type VertxOptions = io.vertx.core.VertxOptions
   object VertxOptions {
     def apply() = new VertxOptions()
     def apply(json: JsonObject) = new VertxOptions(json)
   }
+
 
 
 
@@ -4012,6 +4091,15 @@ package object core{
     }
 
     /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
      * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def writeFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
@@ -4026,15 +4114,6 @@ package object core{
     def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
       asJava.end(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -4125,6 +4204,7 @@ package object core{
   }
 
 
+
   /**
     * Base WebSocket implementation.
     * 
@@ -4203,6 +4283,15 @@ package object core{
     }
 
     /**
+     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
      * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def writeFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
@@ -4217,15 +4306,6 @@ package object core{
     def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
       asJava.end(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -4331,13 +4411,16 @@ package object core{
   }
 
 
-  type WebSocketConnectOptions = io.vertx.core.http.WebSocketConnectOptions
 
+  type WebSocketConnectOptions = io.vertx.core.http.WebSocketConnectOptions
   object WebSocketConnectOptions {
     def apply() = new WebSocketConnectOptions()
     def apply(json: JsonObject) = new WebSocketConnectOptions(json)
   }
 
+
+
+  type WebSocketFrame = io.vertx.core.http.WebSocketFrame
 
 
 
@@ -4372,6 +4455,7 @@ package object core{
 
 
   }
+
 
 
   /**
@@ -4444,5 +4528,6 @@ package object core{
     }
 
   }
+
 
 }

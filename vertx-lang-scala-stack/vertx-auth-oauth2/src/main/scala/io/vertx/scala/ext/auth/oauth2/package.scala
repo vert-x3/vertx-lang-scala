@@ -119,20 +119,55 @@ package object oauth2{
   }
 
 
+  type AzureADAuth = io.vertx.ext.auth.oauth2.providers.AzureADAuth
 
 
+  type BoxAuth = io.vertx.ext.auth.oauth2.providers.BoxAuth
 
 
+  type CloudFoundryAuth = io.vertx.ext.auth.oauth2.providers.CloudFoundryAuth
 
 
+  type DropboxAuth = io.vertx.ext.auth.oauth2.providers.DropboxAuth
 
 
+  type FacebookAuth = io.vertx.ext.auth.oauth2.providers.FacebookAuth
 
 
+  type FoursquareAuth = io.vertx.ext.auth.oauth2.providers.FoursquareAuth
 
 
+  type GithubAuth = io.vertx.ext.auth.oauth2.providers.GithubAuth
 
 
+  type GoogleAuth = io.vertx.ext.auth.oauth2.providers.GoogleAuth
+
+
+  type HerokuAuth = io.vertx.ext.auth.oauth2.providers.HerokuAuth
+
+
+  type InstagramAuth = io.vertx.ext.auth.oauth2.providers.InstagramAuth
+
+
+  type KeycloakAuth = io.vertx.ext.auth.oauth2.providers.KeycloakAuth
+
+
+  type KeycloakHelper = io.vertx.ext.auth.oauth2.KeycloakHelper
+
+
+  type KeycloakRBAC = io.vertx.ext.auth.oauth2.rbac.KeycloakRBAC
+
+
+  type LinkedInAuth = io.vertx.ext.auth.oauth2.providers.LinkedInAuth
+
+
+  type LiveAuth = io.vertx.ext.auth.oauth2.providers.LiveAuth
+
+
+  type MailchimpAuth = io.vertx.ext.auth.oauth2.providers.MailchimpAuth
+
+
+  type MicroProfileRBAC = io.vertx.ext.auth.oauth2.rbac.MicroProfileRBAC
 
 
 
@@ -181,12 +216,13 @@ package object oauth2{
   }
 
 
-  type OAuth2ClientOptions = io.vertx.ext.auth.oauth2.OAuth2ClientOptions
 
+  type OAuth2ClientOptions = io.vertx.ext.auth.oauth2.OAuth2ClientOptions
   object OAuth2ClientOptions {
     def apply() = new OAuth2ClientOptions()
     def apply(json: JsonObject) = new OAuth2ClientOptions(json)
   }
+
 
 
 
@@ -217,10 +253,25 @@ package object oauth2{
   }
 
 
+  type OAuth2Response = io.vertx.ext.auth.oauth2.OAuth2Response
 
 
+  type OpenIDConnectAuth = io.vertx.ext.auth.oauth2.providers.OpenIDConnectAuth
 
 
+  type SalesforceAuth = io.vertx.ext.auth.oauth2.providers.SalesforceAuth
+
+
+  type ShopifyAuth = io.vertx.ext.auth.oauth2.providers.ShopifyAuth
+
+
+  type SoundcloudAuth = io.vertx.ext.auth.oauth2.providers.SoundcloudAuth
+
+
+  type StripeAuth = io.vertx.ext.auth.oauth2.providers.StripeAuth
+
+
+  type TwitterAuth = io.vertx.ext.auth.oauth2.providers.TwitterAuth
 
 
 }

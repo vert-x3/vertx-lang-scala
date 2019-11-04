@@ -35,11 +35,14 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object servicediscovery{
 
+  type EventBusService = io.vertx.servicediscovery.types.EventBusService
+
+
+  type HttpEndpoint = io.vertx.servicediscovery.types.HttpEndpoint
 
 
 
   type HttpLocation = io.vertx.servicediscovery.types.HttpLocation
-
   object HttpLocation {
     def apply() = new HttpLocation()
     def apply(json: JsonObject) = new HttpLocation(json)
@@ -47,16 +50,25 @@ package object servicediscovery{
 
 
 
+  type JDBCDataSource = io.vertx.servicediscovery.types.JDBCDataSource
+
+
+  type MessageSource = io.vertx.servicediscovery.types.MessageSource
+
+
+  type MongoDataSource = io.vertx.servicediscovery.types.MongoDataSource
 
 
 
   type Record = io.vertx.servicediscovery.Record
-
   object Record {
     def apply() = new Record()
     def apply(json: JsonObject) = new Record(json)
   }
 
+
+
+  type RedisDataSource = io.vertx.servicediscovery.types.RedisDataSource
 
 
 
@@ -198,14 +210,19 @@ package object servicediscovery{
   }
 
 
-  type ServiceDiscoveryOptions = io.vertx.servicediscovery.ServiceDiscoveryOptions
 
+  type ServiceDiscoveryOptions = io.vertx.servicediscovery.ServiceDiscoveryOptions
   object ServiceDiscoveryOptions {
     def apply() = new ServiceDiscoveryOptions()
     def apply(json: JsonObject) = new ServiceDiscoveryOptions(json)
   }
 
 
+
+  type ServiceExporter = io.vertx.servicediscovery.spi.ServiceExporter
+
+
+  type ServiceImporter = io.vertx.servicediscovery.spi.ServiceImporter
 
 
 
@@ -243,6 +260,9 @@ package object servicediscovery{
     }
 
   }
+
+
+  type ServiceReference = io.vertx.servicediscovery.ServiceReference
 
 
 }

@@ -35,14 +35,16 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object jwt{
 
+  type JWTAuth = io.vertx.ext.auth.jwt.JWTAuth
+
 
 
   type JWTAuthOptions = io.vertx.ext.auth.jwt.JWTAuthOptions
-
   object JWTAuthOptions {
     def apply() = new JWTAuthOptions()
     def apply(json: JsonObject) = new JWTAuthOptions(json)
   }
+
 
 
 }

@@ -32,10 +32,11 @@ import io.vertx.ext.stomp.{StompServerHandler => JStompServerHandler}
 
 package object stomp{
 
+  type Acknowledgement = io.vertx.ext.stomp.Acknowledgement
+
 
 
   type BridgeOptions = io.vertx.ext.stomp.BridgeOptions
-
   object BridgeOptions {
     def apply() = new BridgeOptions()
     def apply(json: JsonObject) = new BridgeOptions(json)
@@ -43,16 +44,25 @@ package object stomp{
 
 
 
+  type Destination = io.vertx.ext.stomp.Destination
+
+
+  type DestinationFactory = io.vertx.ext.stomp.DestinationFactory
+
 
 
   type Frame = io.vertx.ext.stomp.Frame
-
   object Frame {
     def apply() = new Frame()
     def apply(json: JsonObject) = new Frame(json)
   }
 
 
+
+  type Frames = io.vertx.ext.stomp.Frames
+
+
+  type ServerFrame = io.vertx.ext.stomp.ServerFrame
 
 
 
@@ -101,13 +111,16 @@ package object stomp{
   }
 
 
+  type StompClientConnection = io.vertx.ext.stomp.StompClientConnection
+
+
 
   type StompClientOptions = io.vertx.ext.stomp.StompClientOptions
-
   object StompClientOptions {
     def apply() = new StompClientOptions()
     def apply(json: JsonObject) = new StompClientOptions(json)
   }
+
 
 
 
@@ -157,14 +170,18 @@ package object stomp{
   }
 
 
+  type StompServerConnection = io.vertx.ext.stomp.StompServerConnection
+
+
+
 
 
   type StompServerOptions = io.vertx.ext.stomp.StompServerOptions
-
   object StompServerOptions {
     def apply() = new StompServerOptions()
     def apply(json: JsonObject) = new StompServerOptions(json)
   }
+
 
 
 }

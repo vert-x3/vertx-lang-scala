@@ -34,15 +34,19 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object jdbc{
 
+  type JDBCAuth = io.vertx.ext.auth.jdbc.JDBCAuth
+
 
 
   type JDBCAuthOptions = io.vertx.ext.auth.jdbc.JDBCAuthOptions
-
   object JDBCAuthOptions {
     def apply() = new JDBCAuthOptions()
     def apply(json: JsonObject) = new JDBCAuthOptions(json)
   }
 
+
+
+  type JDBCHashStrategy = io.vertx.ext.auth.jdbc.JDBCHashStrategy
 
 
 }

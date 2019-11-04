@@ -36,11 +36,11 @@ package object mqtt{
 
 
   type MqttAuth = io.vertx.mqtt.MqttAuth
-
   object MqttAuth {
     
     def apply(json: JsonObject) = new MqttAuth(json)
   }
+
 
 
 
@@ -117,13 +117,16 @@ package object mqtt{
   }
 
 
-  type MqttClientOptions = io.vertx.mqtt.MqttClientOptions
 
+  type MqttClientOptions = io.vertx.mqtt.MqttClientOptions
   object MqttClientOptions {
     def apply() = new MqttClientOptions()
     def apply(json: JsonObject) = new MqttClientOptions(json)
   }
 
+
+
+  type MqttConnAckMessage = io.vertx.mqtt.messages.MqttConnAckMessage
 
 
 
@@ -154,6 +157,11 @@ package object mqtt{
 
   }
 
+
+  type MqttMessage = io.vertx.mqtt.messages.MqttMessage
+
+
+  type MqttPublishMessage = io.vertx.mqtt.messages.MqttPublishMessage
 
 
 
@@ -208,8 +216,8 @@ package object mqtt{
   }
 
 
-  type MqttServerOptions = io.vertx.mqtt.MqttServerOptions
 
+  type MqttServerOptions = io.vertx.mqtt.MqttServerOptions
   object MqttServerOptions {
     def apply() = new MqttServerOptions()
     def apply(json: JsonObject) = new MqttServerOptions(json)
@@ -217,16 +225,25 @@ package object mqtt{
 
 
 
+  type MqttSubAckMessage = io.vertx.mqtt.messages.MqttSubAckMessage
 
+
+  type MqttSubscribeMessage = io.vertx.mqtt.messages.MqttSubscribeMessage
+
+
+  type MqttTopicSubscription = io.vertx.mqtt.MqttTopicSubscription
+
+
+  type MqttUnsubscribeMessage = io.vertx.mqtt.messages.MqttUnsubscribeMessage
 
 
 
   type MqttWill = io.vertx.mqtt.MqttWill
-
   object MqttWill {
     
     def apply(json: JsonObject) = new MqttWill(json)
   }
+
 
 
 }

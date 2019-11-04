@@ -60,12 +60,14 @@ package object circuitbreaker{
   }
 
 
-  type CircuitBreakerOptions = io.vertx.circuitbreaker.CircuitBreakerOptions
 
+  type CircuitBreakerOptions = io.vertx.circuitbreaker.CircuitBreakerOptions
   object CircuitBreakerOptions {
     def apply() = new CircuitBreakerOptions()
     def apply(json: JsonObject) = new CircuitBreakerOptions(json)
   }
+
+
 
 
 

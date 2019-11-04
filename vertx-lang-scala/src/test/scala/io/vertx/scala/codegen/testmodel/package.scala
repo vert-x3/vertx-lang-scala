@@ -45,6 +45,9 @@ package object testmodel{
 
 
 
+  type AnyJavaTypeTCK = io.vertx.codegen.testmodel.AnyJavaTypeTCK
+
+
 
   /**
 
@@ -179,8 +182,14 @@ package object testmodel{
 
 
 
-  type DataObjectWithBuffer = io.vertx.codegen.testmodel.DataObjectWithBuffer
+  type ConstantTCK = io.vertx.codegen.testmodel.ConstantTCK
 
+
+  type DataObjectTCK = io.vertx.codegen.testmodel.DataObjectTCK
+
+
+
+  type DataObjectWithBuffer = io.vertx.codegen.testmodel.DataObjectWithBuffer
   object DataObjectWithBuffer {
     def apply() = new DataObjectWithBuffer()
     def apply(json: JsonObject) = new DataObjectWithBuffer(json)
@@ -188,8 +197,8 @@ package object testmodel{
 
 
 
-  type DataObjectWithListAdders = io.vertx.codegen.testmodel.DataObjectWithListAdders
 
+  type DataObjectWithListAdders = io.vertx.codegen.testmodel.DataObjectWithListAdders
   object DataObjectWithListAdders {
     def apply() = new DataObjectWithListAdders()
     def apply(json: JsonObject) = new DataObjectWithListAdders(json)
@@ -197,8 +206,8 @@ package object testmodel{
 
 
 
-  type DataObjectWithLists = io.vertx.codegen.testmodel.DataObjectWithLists
 
+  type DataObjectWithLists = io.vertx.codegen.testmodel.DataObjectWithLists
   object DataObjectWithLists {
     def apply() = new DataObjectWithLists()
     def apply(json: JsonObject) = new DataObjectWithLists(json)
@@ -206,8 +215,8 @@ package object testmodel{
 
 
 
-  type DataObjectWithMapAdders = io.vertx.codegen.testmodel.DataObjectWithMapAdders
 
+  type DataObjectWithMapAdders = io.vertx.codegen.testmodel.DataObjectWithMapAdders
   object DataObjectWithMapAdders {
     def apply() = new DataObjectWithMapAdders()
     def apply(json: JsonObject) = new DataObjectWithMapAdders(json)
@@ -215,8 +224,8 @@ package object testmodel{
 
 
 
-  type DataObjectWithMaps = io.vertx.codegen.testmodel.DataObjectWithMaps
 
+  type DataObjectWithMaps = io.vertx.codegen.testmodel.DataObjectWithMaps
   object DataObjectWithMaps {
     def apply() = new DataObjectWithMaps()
     def apply(json: JsonObject) = new DataObjectWithMaps(json)
@@ -224,8 +233,8 @@ package object testmodel{
 
 
 
-  type DataObjectWithNestedBuffer = io.vertx.codegen.testmodel.DataObjectWithNestedBuffer
 
+  type DataObjectWithNestedBuffer = io.vertx.codegen.testmodel.DataObjectWithNestedBuffer
   object DataObjectWithNestedBuffer {
     def apply() = new DataObjectWithNestedBuffer()
     def apply(json: JsonObject) = new DataObjectWithNestedBuffer(json)
@@ -233,8 +242,8 @@ package object testmodel{
 
 
 
-  type DataObjectWithOnlyJsonObjectConstructor = io.vertx.codegen.testmodel.DataObjectWithOnlyJsonObjectConstructor
 
+  type DataObjectWithOnlyJsonObjectConstructor = io.vertx.codegen.testmodel.DataObjectWithOnlyJsonObjectConstructor
   object DataObjectWithOnlyJsonObjectConstructor {
     
     def apply(json: JsonObject) = new DataObjectWithOnlyJsonObjectConstructor(json)
@@ -242,8 +251,8 @@ package object testmodel{
 
 
 
-  type DataObjectWithRecursion = io.vertx.codegen.testmodel.DataObjectWithRecursion
 
+  type DataObjectWithRecursion = io.vertx.codegen.testmodel.DataObjectWithRecursion
   object DataObjectWithRecursion {
     
     def apply(json: JsonObject) = new DataObjectWithRecursion(json)
@@ -251,14 +260,19 @@ package object testmodel{
 
 
 
-  type DataObjectWithValues = io.vertx.codegen.testmodel.DataObjectWithValues
 
+  type DataObjectWithValues = io.vertx.codegen.testmodel.DataObjectWithValues
   object DataObjectWithValues {
     def apply() = new DataObjectWithValues()
     def apply(json: JsonObject) = new DataObjectWithValues(json)
   }
 
 
+
+  type Factory = io.vertx.codegen.testmodel.Factory
+
+
+  type FunctionParamTCK = io.vertx.codegen.testmodel.FunctionParamTCK
 
 
 
@@ -276,6 +290,11 @@ package object testmodel{
 
   }
 
+
+  type GenericNullableRefedInterface[T] = io.vertx.codegen.testmodel.GenericNullableRefedInterface[T]
+
+
+  type GenericRefedInterface[T] = io.vertx.codegen.testmodel.GenericRefedInterface[T]
 
 
 
@@ -412,6 +431,13 @@ package object testmodel{
   }
 
 
+  type InterfaceWithApiArg = io.vertx.codegen.testmodel.InterfaceWithApiArg
+
+
+  type InterfaceWithStringArg = io.vertx.codegen.testmodel.InterfaceWithStringArg
+
+
+  type InterfaceWithVariableArg[T,U] = io.vertx.codegen.testmodel.InterfaceWithVariableArg[T,U]
 
 
 
@@ -539,6 +565,7 @@ package object testmodel{
     }
 
   }
+
 
 
   /**
@@ -1744,16 +1771,25 @@ package object testmodel{
   }
 
 
+  type RefedInterface1 = io.vertx.codegen.testmodel.RefedInterface1
 
+
+  type RefedInterface2 = io.vertx.codegen.testmodel.RefedInterface2
+
+
+  type SuperInterface1 = io.vertx.codegen.testmodel.SuperInterface1
+
+
+  type SuperInterface2 = io.vertx.codegen.testmodel.SuperInterface2
 
 
 
   type TestDataObject = io.vertx.codegen.testmodel.TestDataObject
-
   object TestDataObject {
     def apply() = new TestDataObject()
     def apply(json: JsonObject) = new TestDataObject(json)
   }
+
 
 
 
@@ -1914,5 +1950,6 @@ package object testmodel{
     }
 
   }
+
 
 }

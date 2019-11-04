@@ -48,4 +48,7 @@ package object common{
   }
 
 
+  type WebEnvironment = io.vertx.ext.web.common.WebEnvironment
+
+
 }

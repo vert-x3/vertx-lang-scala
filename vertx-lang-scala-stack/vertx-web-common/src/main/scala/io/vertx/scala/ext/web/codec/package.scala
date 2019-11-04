@@ -34,5 +34,7 @@ import io.vertx.core.parsetools
 
 package object codec{
 
+  type BodyCodec[T] = io.vertx.ext.web.codec.BodyCodec[T]
+
 
 }

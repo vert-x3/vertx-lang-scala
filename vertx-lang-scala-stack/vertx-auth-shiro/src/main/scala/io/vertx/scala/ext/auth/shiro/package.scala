@@ -32,14 +32,16 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object shiro{
 
+  type ShiroAuth = io.vertx.ext.auth.shiro.ShiroAuth
+
 
 
   type ShiroAuthOptions = io.vertx.ext.auth.shiro.ShiroAuthOptions
-
   object ShiroAuthOptions {
     def apply() = new ShiroAuthOptions()
     def apply(json: JsonObject) = new ShiroAuthOptions(json)
   }
+
 
 
 }

@@ -32,5 +32,7 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object thymeleaf{
 
+  type ThymeleafTemplateEngine = io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine
+
 
 }

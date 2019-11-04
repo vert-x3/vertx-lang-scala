@@ -27,6 +27,10 @@ import io.vertx.ext.web.multipart.{FormDataPart => JFormDataPart}
 
 package object multipart{
 
+  type FormDataPart = io.vertx.ext.web.multipart.FormDataPart
+
+
+  type MultipartForm = io.vertx.ext.web.multipart.MultipartForm
 
 
 }
