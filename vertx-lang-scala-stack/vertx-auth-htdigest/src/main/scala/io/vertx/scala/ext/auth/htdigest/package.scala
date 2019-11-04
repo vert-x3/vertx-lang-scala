@@ -31,5 +31,7 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object htdigest{
 
+  type HtdigestAuth = io.vertx.ext.auth.htdigest.HtdigestAuth
+
 
 }

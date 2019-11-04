@@ -30,11 +30,11 @@ package object jwt{
 
 
   type JWTOptions = io.vertx.ext.jwt.JWTOptions
-
   object JWTOptions {
     def apply() = new JWTOptions()
     def apply(json: JsonObject) = new JWTOptions(json)
   }
+
 
 
 }

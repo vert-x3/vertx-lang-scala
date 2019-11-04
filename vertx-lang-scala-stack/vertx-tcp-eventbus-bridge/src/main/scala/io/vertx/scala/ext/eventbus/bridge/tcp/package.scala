@@ -36,6 +36,8 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object tcp{
 
+  type BridgeEvent = io.vertx.ext.eventbus.bridge.tcp.BridgeEvent
+
 
 
   /**
@@ -81,5 +83,6 @@ package object tcp{
     }
 
   }
+
 
 }

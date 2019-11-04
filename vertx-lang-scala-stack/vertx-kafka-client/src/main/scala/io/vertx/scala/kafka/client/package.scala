@@ -32,11 +32,11 @@ package object client{
 
 
   type ConfigResource = io.vertx.kafka.client.common.ConfigResource
-
   object ConfigResource {
     def apply() = new ConfigResource()
     def apply(json: JsonObject) = new ConfigResource(json)
   }
+
 
 
 
@@ -313,6 +313,13 @@ package object client{
   }
 
 
+  type KafkaConsumerRecord[K,V] = io.vertx.kafka.client.consumer.KafkaConsumerRecord[K,V]
+
+
+  type KafkaConsumerRecords[K,V] = io.vertx.kafka.client.consumer.KafkaConsumerRecords[K,V]
+
+
+  type KafkaHeader = io.vertx.kafka.client.producer.KafkaHeader
 
 
 
@@ -401,9 +408,11 @@ package object client{
   }
 
 
+  type KafkaProducerRecord[K,V] = io.vertx.kafka.client.producer.KafkaProducerRecord[K,V]
+
+
 
   type Node = io.vertx.kafka.client.common.Node
-
   object Node {
     def apply() = new Node()
     def apply(json: JsonObject) = new Node(json)
@@ -411,8 +420,8 @@ package object client{
 
 
 
-  type OffsetAndMetadata = io.vertx.kafka.client.consumer.OffsetAndMetadata
 
+  type OffsetAndMetadata = io.vertx.kafka.client.consumer.OffsetAndMetadata
   object OffsetAndMetadata {
     def apply() = new OffsetAndMetadata()
     def apply(json: JsonObject) = new OffsetAndMetadata(json)
@@ -420,8 +429,8 @@ package object client{
 
 
 
-  type OffsetAndTimestamp = io.vertx.kafka.client.consumer.OffsetAndTimestamp
 
+  type OffsetAndTimestamp = io.vertx.kafka.client.consumer.OffsetAndTimestamp
   object OffsetAndTimestamp {
     def apply() = new OffsetAndTimestamp()
     def apply(json: JsonObject) = new OffsetAndTimestamp(json)
@@ -429,8 +438,8 @@ package object client{
 
 
 
-  type PartitionInfo = io.vertx.kafka.client.common.PartitionInfo
 
+  type PartitionInfo = io.vertx.kafka.client.common.PartitionInfo
   object PartitionInfo {
     def apply() = new PartitionInfo()
     def apply(json: JsonObject) = new PartitionInfo(json)
@@ -438,8 +447,8 @@ package object client{
 
 
 
-  type RecordMetadata = io.vertx.kafka.client.producer.RecordMetadata
 
+  type RecordMetadata = io.vertx.kafka.client.producer.RecordMetadata
   object RecordMetadata {
     def apply() = new RecordMetadata()
     def apply(json: JsonObject) = new RecordMetadata(json)
@@ -447,8 +456,8 @@ package object client{
 
 
 
-  type TopicPartition = io.vertx.kafka.client.common.TopicPartition
 
+  type TopicPartition = io.vertx.kafka.client.common.TopicPartition
   object TopicPartition {
     def apply() = new TopicPartition()
     def apply(json: JsonObject) = new TopicPartition(json)
@@ -456,12 +465,13 @@ package object client{
 
 
 
-  type TopicPartitionInfo = io.vertx.kafka.client.common.TopicPartitionInfo
 
+  type TopicPartitionInfo = io.vertx.kafka.client.common.TopicPartitionInfo
   object TopicPartitionInfo {
     def apply() = new TopicPartitionInfo()
     def apply(json: JsonObject) = new TopicPartitionInfo(json)
   }
+
 
 
 }

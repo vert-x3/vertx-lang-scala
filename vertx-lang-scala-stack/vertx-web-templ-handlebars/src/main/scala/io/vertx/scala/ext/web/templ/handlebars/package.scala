@@ -31,5 +31,7 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object handlebars{
 
+  type HandlebarsTemplateEngine = io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine
+
 
 }

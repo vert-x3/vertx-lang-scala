@@ -45,6 +45,8 @@ import io.vertx.core.Handler
 
 package object client{
 
+  type ErrorConverter = io.vertx.ext.web.client.predicate.ErrorConverter
+
 
 
   /**
@@ -154,16 +156,25 @@ package object client{
   }
 
 
+  type HttpResponse[T] = io.vertx.ext.web.client.HttpResponse[T]
 
+
+  type ResponsePredicate = io.vertx.ext.web.client.predicate.ResponsePredicate
+
+
+  type ResponsePredicateResult = io.vertx.ext.web.client.predicate.ResponsePredicateResult
+
+
+  type WebClient = io.vertx.ext.web.client.WebClient
 
 
 
   type WebClientOptions = io.vertx.ext.web.client.WebClientOptions
-
   object WebClientOptions {
     def apply() = new WebClientOptions()
     def apply(json: JsonObject) = new WebClientOptions(json)
   }
+
 
 
 }

@@ -31,5 +31,7 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object freemarker{
 
+  type FreeMarkerTemplateEngine = io.vertx.ext.web.templ.freemarker.FreeMarkerTemplateEngine
+
 
 }

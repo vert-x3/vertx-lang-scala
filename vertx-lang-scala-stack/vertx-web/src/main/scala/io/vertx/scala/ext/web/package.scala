@@ -37,8 +37,12 @@ package object web{
 
 
 
-  type BridgeOptions = io.vertx.ext.web.handler.sockjs.BridgeOptions
 
+  type BridgeEvent = io.vertx.ext.web.handler.sockjs.BridgeEvent
+
+
+
+  type BridgeOptions = io.vertx.ext.web.handler.sockjs.BridgeOptions
   object BridgeOptions {
     def apply() = new BridgeOptions()
     def apply(json: JsonObject) = new BridgeOptions(json)
@@ -50,13 +54,24 @@ package object web{
 
 
 
+  type ClusteredSessionStore = io.vertx.ext.web.sstore.ClusteredSessionStore
+
+
+
+
+
+
+
+
+
+
+  type FileUpload = io.vertx.ext.web.FileUpload
 
 
 
 
 
   type Http2PushMapping = io.vertx.ext.web.Http2PushMapping
-
   object Http2PushMapping {
     def apply() = new Http2PushMapping()
     def apply(json: JsonObject) = new Http2PushMapping(json)
@@ -66,6 +81,15 @@ package object web{
 
 
 
+  type LanguageHeader = io.vertx.ext.web.LanguageHeader
+
+
+  type LocalSessionStore = io.vertx.ext.web.sstore.LocalSessionStore
+
+
+
+
+  type MIMEHeader = io.vertx.ext.web.MIMEHeader
 
 
 
@@ -74,9 +98,28 @@ package object web{
 
 
 
+  type ParsedHeaderValue = io.vertx.ext.web.ParsedHeaderValue
+
+
+  type ParsedHeaderValues = io.vertx.ext.web.ParsedHeaderValues
 
 
 
+
+
+
+
+
+  type Route = io.vertx.ext.web.Route
+
+
+  type Router = io.vertx.ext.web.Router
+
+
+  type RoutingContext = io.vertx.ext.web.RoutingContext
+
+
+  type Session = io.vertx.ext.web.Session
 
 
 
@@ -137,12 +180,14 @@ package object web{
 
 
 
-  type SockJSHandlerOptions = io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions
 
+
+  type SockJSHandlerOptions = io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions
   object SockJSHandlerOptions {
     def apply() = new SockJSHandlerOptions()
     def apply(json: JsonObject) = new SockJSHandlerOptions(json)
   }
+
 
 
 
@@ -194,6 +239,12 @@ package object web{
       scala.Option(asJava.webUser())
     }
 
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
     def endFuture(): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
       asJava.end({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
@@ -203,12 +254,6 @@ package object web{
     def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = Promise[Unit]()
       asJava.end(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
-      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -225,6 +270,12 @@ package object web{
     }
 
   }
+
+
+
+
+
+
 
 
 

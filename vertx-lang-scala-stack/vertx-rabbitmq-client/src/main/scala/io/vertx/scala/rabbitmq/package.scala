@@ -38,11 +38,11 @@ package object rabbitmq{
 
 
   type QueueOptions = io.vertx.rabbitmq.QueueOptions
-
   object QueueOptions {
     def apply() = new QueueOptions()
     def apply(json: JsonObject) = new QueueOptions(json)
   }
+
 
 
 
@@ -253,6 +253,7 @@ package object rabbitmq{
   }
 
 
+
   /**
     * A stream of messages from a rabbitmq queue.
 
@@ -302,13 +303,16 @@ package object rabbitmq{
   }
 
 
+  type RabbitMQMessage = io.vertx.rabbitmq.RabbitMQMessage
+
+
 
   type RabbitMQOptions = io.vertx.rabbitmq.RabbitMQOptions
-
   object RabbitMQOptions {
     def apply() = new RabbitMQOptions()
     def apply(json: JsonObject) = new RabbitMQOptions(json)
   }
+
 
 
 }

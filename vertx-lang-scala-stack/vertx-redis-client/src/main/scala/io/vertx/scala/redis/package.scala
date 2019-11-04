@@ -29,6 +29,8 @@ import io.vertx.redis.client.{Request => JRequest}
 
 package object redis{
 
+  type Command = io.vertx.redis.client.Command
+
 
 
   /**
@@ -66,6 +68,7 @@ package object redis{
     }
 
   }
+
 
 
   /**
@@ -1878,6 +1881,7 @@ package object redis{
   }
 
 
+
   /**
     * A simple Redis client.
 
@@ -1936,14 +1940,19 @@ package object redis{
   }
 
 
-  type RedisOptions = io.vertx.redis.client.RedisOptions
 
+  type RedisOptions = io.vertx.redis.client.RedisOptions
   object RedisOptions {
     def apply() = new RedisOptions()
     def apply(json: JsonObject) = new RedisOptions(json)
   }
 
 
+
+  type Request = io.vertx.redis.client.Request
+
+
+  type Response = io.vertx.redis.client.Response
 
 
 }

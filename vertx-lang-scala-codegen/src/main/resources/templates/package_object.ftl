@@ -27,7 +27,10 @@ package object ${moduleName}{
   <#include "implicit_dataobject.ftl">
 <#elseif !type.name?contains("Handler") && futureMethods?has_content>
   <#include "class.ftl">
+<#elseif !type.name?contains("Handler") && helper.getSimpleName(type.name) != 'Message'>
+  type ${typeHelper.getSimpleNameWithScalaNotation(type)} = ${typeHelper.getFullNameWithScalaNotation(type)}
 </#if>
+
 <#if helper.getSimpleName(type.name) == 'Message'>
   <#include "extensions/Message.ftl">
 </#if>

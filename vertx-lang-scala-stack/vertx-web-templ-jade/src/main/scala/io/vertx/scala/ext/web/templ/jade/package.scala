@@ -31,5 +31,7 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object jade{
 
+  type JadeTemplateEngine = io.vertx.ext.web.templ.jade.JadeTemplateEngine
+
 
 }
