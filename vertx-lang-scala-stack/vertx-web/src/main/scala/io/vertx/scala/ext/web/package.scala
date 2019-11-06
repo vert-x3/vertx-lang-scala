@@ -38,7 +38,6 @@ package object web{
 
 
 
-  type BridgeEvent = io.vertx.ext.web.handler.sockjs.BridgeEvent
 
 
 
@@ -54,7 +53,32 @@ package object web{
 
 
 
-  type ClusteredSessionStore = io.vertx.ext.web.sstore.ClusteredSessionStore
+  object ClusteredSessionStore {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String) = {
+      io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, sessionMapName)
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String,retryTimeout: java.lang.Long) = {
+      io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, sessionMapName, retryTimeout)
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx)
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx,retryTimeout: java.lang.Long) = {
+      io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, retryTimeout)
+    }
+  }
 
 
 
@@ -65,7 +89,6 @@ package object web{
 
 
 
-  type FileUpload = io.vertx.ext.web.FileUpload
 
 
 
@@ -81,45 +104,64 @@ package object web{
 
 
 
-  type LanguageHeader = io.vertx.ext.web.LanguageHeader
 
 
-  type LocalSessionStore = io.vertx.ext.web.sstore.LocalSessionStore
-
-
-
-
-  type MIMEHeader = io.vertx.ext.web.MIMEHeader
-
-
-
-
-
-
-
-
-  type ParsedHeaderValue = io.vertx.ext.web.ParsedHeaderValue
-
-
-  type ParsedHeaderValues = io.vertx.ext.web.ParsedHeaderValues
-
-
-
-
+  object LocalSessionStore {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.web.sstore.LocalSessionStore.create(vertx)
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String) = {
+      io.vertx.ext.web.sstore.LocalSessionStore.create(vertx, sessionMapName)
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String,reaperInterval: java.lang.Long) = {
+      io.vertx.ext.web.sstore.LocalSessionStore.create(vertx, sessionMapName, reaperInterval)
+    }
+  }
 
 
 
 
-  type Route = io.vertx.ext.web.Route
 
 
-  type Router = io.vertx.ext.web.Router
 
 
-  type RoutingContext = io.vertx.ext.web.RoutingContext
 
 
-  type Session = io.vertx.ext.web.Session
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  object Router {
+    /**
+     * Like [[router]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def router(vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.web.Router.router(vertx)
+    }
+  }
+
+
+
+
 
 
 
@@ -135,7 +177,7 @@ package object web{
      * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getFuture(cookieValue: java.lang.String): scala.concurrent.Future[io.vertx.ext.web.Session] = {
-      val promise = Promise[io.vertx.ext.web.Session]()
+      val promise = concurrent.Promise[io.vertx.ext.web.Session]()
       asJava.get(cookieValue, {a:AsyncResult[io.vertx.ext.web.Session] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -144,7 +186,7 @@ package object web{
      * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def deleteFuture(id: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.delete(id, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -153,7 +195,7 @@ package object web{
      * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def putFuture(session: io.vertx.ext.web.Session): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.put(session, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -162,7 +204,7 @@ package object web{
      * Like [[clear]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def clearFuture(): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.clear({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -171,7 +213,7 @@ package object web{
      * Like [[size]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sizeFuture(): scala.concurrent.Future[java.lang.Integer] = {
-      val promise = Promise[java.lang.Integer]()
+      val promise = concurrent.Promise[java.lang.Integer]()
       asJava.size({a:AsyncResult[java.lang.Integer] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -240,31 +282,31 @@ package object web{
     }
 
     def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
     def endFuture(): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.end({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
     def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.end(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
     def writeFuture(data: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.write(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
     def writeFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.write(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }

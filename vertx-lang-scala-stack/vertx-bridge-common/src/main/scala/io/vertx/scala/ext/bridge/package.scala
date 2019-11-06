@@ -32,7 +32,6 @@ import io.vertx.core.json.JsonObject
 
 package object bridge{
 
-  type BaseBridgeEvent = io.vertx.ext.bridge.BaseBridgeEvent
 
 
 

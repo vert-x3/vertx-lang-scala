@@ -49,7 +49,7 @@ package object auth{
      * Like [[authenticate]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def authenticateFuture(authInfo: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.ext.auth.User] = {
-      val promise = Promise[io.vertx.ext.auth.User]()
+      val promise = concurrent.Promise[io.vertx.ext.auth.User]()
       asJava.authenticate(authInfo, {a:AsyncResult[io.vertx.ext.auth.User] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -57,13 +57,26 @@ package object auth{
   }
 
 
-  type ChainAuth = io.vertx.ext.auth.ChainAuth
+  object ChainAuth {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create() = {
+      io.vertx.ext.auth.ChainAuth.create()
+    }
+  }
 
 
-  type HashingAlgorithm = io.vertx.ext.auth.HashingAlgorithm
 
 
-  type HashingStrategy = io.vertx.ext.auth.HashingStrategy
+  object HashingStrategy {
+    /**
+     * Like [[load]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def load() = {
+      io.vertx.ext.auth.HashingStrategy.load()
+    }
+  }
 
 
 
@@ -97,7 +110,7 @@ package object auth{
      * Like [[isAuthorized]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def isAuthorizedFuture(authority: java.lang.String): scala.concurrent.Future[java.lang.Boolean] = {
-      val promise = Promise[java.lang.Boolean]()
+      val promise = concurrent.Promise[java.lang.Boolean]()
       asJava.isAuthorized(authority, {a:AsyncResult[java.lang.Boolean] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -105,7 +118,20 @@ package object auth{
   }
 
 
-  type VertxContextPRNG = io.vertx.ext.auth.VertxContextPRNG
+  object VertxContextPRNG {
+    /**
+     * Like [[current]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def current() = {
+      io.vertx.ext.auth.VertxContextPRNG.current()
+    }
+    /**
+     * Like [[current]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def current(vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.auth.VertxContextPRNG.current(vertx)
+    }
+  }
 
 
 }

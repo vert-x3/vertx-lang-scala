@@ -34,7 +34,14 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object jdbc{
 
-  type JDBCAuth = io.vertx.ext.auth.jdbc.JDBCAuth
+  object JDBCAuth {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx,client: io.vertx.ext.jdbc.JDBCClient) = {
+      io.vertx.ext.auth.jdbc.JDBCAuth.create(vertx, client)
+    }
+  }
 
 
 
@@ -46,7 +53,26 @@ package object jdbc{
 
 
 
-  type JDBCHashStrategy = io.vertx.ext.auth.jdbc.JDBCHashStrategy
+  object JDBCHashStrategy {
+    /**
+     * Like [[createSHA512]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createSHA512(vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.auth.jdbc.JDBCHashStrategy.createSHA512(vertx)
+    }
+    /**
+     * Like [[createPBKDF2]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createPBKDF2(vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.auth.jdbc.JDBCHashStrategy.createPBKDF2(vertx)
+    }
+    /**
+     * Like [[isEqual]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def isEqual(hasha: java.lang.String,hashb: java.lang.String) = {
+      io.vertx.ext.auth.jdbc.JDBCHashStrategy.isEqual(hasha, hashb)
+    }
+  }
 
 
 }

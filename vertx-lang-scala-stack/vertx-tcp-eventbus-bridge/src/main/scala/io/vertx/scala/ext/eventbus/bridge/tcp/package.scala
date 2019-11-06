@@ -36,7 +36,6 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object tcp{
 
-  type BridgeEvent = io.vertx.ext.eventbus.bridge.tcp.BridgeEvent
 
 
 
@@ -50,7 +49,7 @@ package object tcp{
      * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def listenFuture(): scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] = {
-      val promise = Promise[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]()
+      val promise = concurrent.Promise[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]()
       asJava.listen({a:AsyncResult[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -59,7 +58,7 @@ package object tcp{
      * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer,address: java.lang.String): scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] = {
-      val promise = Promise[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]()
+      val promise = concurrent.Promise[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]()
       asJava.listen(port, address, {a:AsyncResult[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -68,7 +67,7 @@ package object tcp{
      * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer): scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] = {
-      val promise = Promise[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]()
+      val promise = concurrent.Promise[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]()
       asJava.listen(port, {a:AsyncResult[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -77,7 +76,7 @@ package object tcp{
      * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.close({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }

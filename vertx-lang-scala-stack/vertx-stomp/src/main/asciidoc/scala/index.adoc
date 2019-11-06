@@ -422,9 +422,10 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
       // You can reconnect or switch to another server.
     })
 
-    connection.send("/queue", Buffer.buffer("Hello"), (frame: io.vertx.scala.ext.stomp.Frame) => {
-      println("Message processed by the server")
-    })
+    connection.sendFuture("/queue", Buffer.buffer("Hello")).onComplete{
+      case Success(result) => println("Success")
+      case Failure(cause) => println("Failure")
+    }
   }
   case Failure(cause) => {
     println(s"$cause")
@@ -592,9 +593,10 @@ var client = StompClient.create(vertx).connectFuture().onComplete{
   case Success(result) => {
     var connection = result
 
-    connection.send("/queue", Buffer.buffer("Hello"), (frame: io.vertx.scala.ext.stomp.Frame) => {
-      println("Message processed by the server")
-    })
+    connection.sendFuture("/queue", Buffer.buffer("Hello")).onComplete{
+      case Success(result) => println("Success")
+      case Failure(cause) => println("Failure")
+    }
   }
   case Failure(cause) => {
     println(s"$cause")

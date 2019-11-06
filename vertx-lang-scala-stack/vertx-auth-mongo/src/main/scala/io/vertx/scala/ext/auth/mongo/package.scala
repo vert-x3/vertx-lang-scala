@@ -39,7 +39,6 @@ import io.vertx.ext.mongo
 
 package object mongo{
 
-  type HashStrategy = io.vertx.ext.auth.mongo.HashStrategy
 
 
 
@@ -53,7 +52,7 @@ package object mongo{
      * Like [[insertUser]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def insertUserFuture(username: java.lang.String,password: java.lang.String,roles: java.util.List[java.lang.String],permissions: java.util.List[java.lang.String]): scala.concurrent.Future[java.lang.String] = {
-      val promise = Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]()
       asJava.insertUser(username, password, roles, permissions, {a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }

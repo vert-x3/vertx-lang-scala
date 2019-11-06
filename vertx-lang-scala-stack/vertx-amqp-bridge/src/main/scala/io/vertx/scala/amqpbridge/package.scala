@@ -47,7 +47,7 @@ package object amqpbridge{
      * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def startFuture(hostname: java.lang.String,port: java.lang.Integer,username: java.lang.String,password: java.lang.String): scala.concurrent.Future[io.vertx.amqpbridge.AmqpBridge] = {
-      val promise = Promise[io.vertx.amqpbridge.AmqpBridge]()
+      val promise = concurrent.Promise[io.vertx.amqpbridge.AmqpBridge]()
       asJava.start(hostname, port, username, password, {a:AsyncResult[io.vertx.amqpbridge.AmqpBridge] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -56,7 +56,7 @@ package object amqpbridge{
      * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def startFuture(hostname: java.lang.String,port: java.lang.Integer): scala.concurrent.Future[io.vertx.amqpbridge.AmqpBridge] = {
-      val promise = Promise[io.vertx.amqpbridge.AmqpBridge]()
+      val promise = concurrent.Promise[io.vertx.amqpbridge.AmqpBridge]()
       asJava.start(hostname, port, {a:AsyncResult[io.vertx.amqpbridge.AmqpBridge] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -65,7 +65,7 @@ package object amqpbridge{
      * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.close({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }

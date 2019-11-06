@@ -88,6 +88,7 @@ public class ClassCodeGenerator extends Generator<Model> {
       vars.put("moduleName", translatedPackage.substring(translatedPackage.lastIndexOf('.') + 1));
 
       vars.put("basicMethods", TypeHelper.findBasicMethods((List<MethodInfo>)vars.get("instanceMethods")));
+      vars.put("staticMethods", vars.get("staticMethods"));
       vars.put("cacheReturnMethods", TypeHelper.findCacheReturnMethods((List<MethodInfo>)vars.get("instanceMethods")));
       vars.put("defaultMethods", TypeHelper.findDefaultMethods((List<MethodInfo>)vars.get("instanceMethods")));
       vars.put("fluentMethods", TypeHelper.findFluentMethods((List<MethodInfo>)vars.get("instanceMethods")));

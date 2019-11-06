@@ -39,7 +39,7 @@ ${typeHelper.methodDoc(type, method, "    ", true)}
 ${typeHelper.methodDoc(type, method, "    ", true)}
       </#if>
     def ${typeHelper.createNameForMethodReturningAFuture(method)}${typeHelper.assembleTypeParams(method.typeParams, true)}(<#list typeHelper.removeLastParam(method.params) as param>${typeHelper.escapeIfKeyword(param.name)}: ${typeHelper.wrapInOptionIfNullable(param.type.nullable, typeHelper.toScalaMethodParam(param.type))}<#sep>,</#list>): scala.concurrent.Future[${typeHelper.toReturnType(typeHelper.typeOfReturnedFuture(method))}] = {
-      val promise = Promise[${typeHelper.toReturnType(typeHelper.typeOfReturnedFuture(method))}]()
+      val promise = concurrent.Promise[${typeHelper.toReturnType(typeHelper.typeOfReturnedFuture(method))}]()
       ${typeHelper.invokeMethodAndUseProvidedHandler('asJava', type, method, typeParams, '{a:AsyncResult[' + typeHelper.typeOfReturnedFuture(method).getName()?replace('<', '[')?replace('>', ']') + '] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()}')?replace('<', '[')?replace('>]', ']]')}
       promise.future
     }

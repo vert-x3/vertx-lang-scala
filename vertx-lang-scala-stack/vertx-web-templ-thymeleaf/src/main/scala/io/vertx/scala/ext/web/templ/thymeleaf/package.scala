@@ -32,7 +32,14 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object thymeleaf{
 
-  type ThymeleafTemplateEngine = io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine
+  object ThymeleafTemplateEngine {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine.create(vertx)
+    }
+  }
 
 
 }

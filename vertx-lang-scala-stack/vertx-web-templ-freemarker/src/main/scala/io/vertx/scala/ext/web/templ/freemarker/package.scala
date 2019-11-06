@@ -31,7 +31,20 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object freemarker{
 
-  type FreeMarkerTemplateEngine = io.vertx.ext.web.templ.freemarker.FreeMarkerTemplateEngine
+  object FreeMarkerTemplateEngine {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.web.templ.freemarker.FreeMarkerTemplateEngine.create(vertx)
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx,extension: java.lang.String) = {
+      io.vertx.ext.web.templ.freemarker.FreeMarkerTemplateEngine.create(vertx, extension)
+    }
+  }
 
 
 }

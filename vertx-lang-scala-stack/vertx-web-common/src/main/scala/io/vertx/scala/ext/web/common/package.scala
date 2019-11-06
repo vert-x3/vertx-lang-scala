@@ -40,7 +40,7 @@ package object common{
      * Like [[render]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def renderFuture(context: io.vertx.core.json.JsonObject,templateFileName: java.lang.String): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
-      val promise = Promise[io.vertx.core.buffer.Buffer]()
+      val promise = concurrent.Promise[io.vertx.core.buffer.Buffer]()
       asJava.render(context, templateFileName, {a:AsyncResult[io.vertx.core.buffer.Buffer] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -48,7 +48,20 @@ package object common{
   }
 
 
-  type WebEnvironment = io.vertx.ext.web.common.WebEnvironment
+  object WebEnvironment {
+    /**
+     * Like [[development]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def development() = {
+      io.vertx.ext.web.common.WebEnvironment.development()
+    }
+    /**
+     * Like [[mode]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def modeOption() = {
+      scala.Option(io.vertx.ext.web.common.WebEnvironment.mode())
+    }
+  }
 
 
 }

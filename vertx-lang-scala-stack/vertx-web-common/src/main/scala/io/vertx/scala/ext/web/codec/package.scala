@@ -34,7 +34,74 @@ import io.vertx.core.parsetools
 
 package object codec{
 
-  type BodyCodec[T] = io.vertx.ext.web.codec.BodyCodec[T]
+  object BodyCodec {
+    /**
+     * Like [[string]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def string() = {
+      io.vertx.ext.web.codec.BodyCodec.string()
+    }
+    /**
+     * Like [[string]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def string(encoding: java.lang.String) = {
+      io.vertx.ext.web.codec.BodyCodec.string(encoding)
+    }
+    /**
+     * Like [[buffer]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def buffer() = {
+      io.vertx.ext.web.codec.BodyCodec.buffer()
+    }
+    /**
+     * Like [[jsonObject]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def jsonObject() = {
+      io.vertx.ext.web.codec.BodyCodec.jsonObject()
+    }
+    /**
+     * Like [[jsonArray]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def jsonArray() = {
+      io.vertx.ext.web.codec.BodyCodec.jsonArray()
+    }
+    /**
+     * Like [[json]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def json[U](`type`: Class[U]) = {
+      io.vertx.ext.web.codec.BodyCodec.json[U](`type`)
+    }
+    /**
+     * Like [[none]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def none() = {
+      io.vertx.ext.web.codec.BodyCodec.none()
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create[T](decode: io.vertx.core.buffer.Buffer => T) = {
+      io.vertx.ext.web.codec.BodyCodec.create[T](a => decode(a))
+    }
+    /**
+     * Like [[pipe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipe(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]) = {
+      io.vertx.ext.web.codec.BodyCodec.pipe(stream)
+    }
+    /**
+     * Like [[pipe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def pipe(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer],close: java.lang.Boolean) = {
+      io.vertx.ext.web.codec.BodyCodec.pipe(stream, close)
+    }
+    /**
+     * Like [[jsonStream]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def jsonStream(parser: io.vertx.core.parsetools.JsonParser) = {
+      io.vertx.ext.web.codec.BodyCodec.jsonStream(parser)
+    }
+  }
 
 
 }

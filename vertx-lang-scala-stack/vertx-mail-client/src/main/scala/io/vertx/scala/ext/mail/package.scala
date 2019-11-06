@@ -35,7 +35,26 @@ import io.vertx.ext.mail.{MailMessage => JMailMessage}
 
 package object mail{
 
-  type MailAttachment = io.vertx.ext.mail.MailAttachment
+  object MailAttachment {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create() = {
+      io.vertx.ext.mail.MailAttachment.create()
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(json: io.vertx.core.json.JsonObject) = {
+      io.vertx.ext.mail.MailAttachment.create(json)
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(other: io.vertx.ext.mail.MailAttachment) = {
+      io.vertx.ext.mail.MailAttachment.create(other)
+    }
+  }
 
 
 
@@ -51,7 +70,7 @@ package object mail{
      * Like [[sendMail]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sendMailFuture(email: io.vertx.ext.mail.MailMessage): scala.concurrent.Future[io.vertx.ext.mail.MailResult] = {
-      val promise = Promise[io.vertx.ext.mail.MailResult]()
+      val promise = concurrent.Promise[io.vertx.ext.mail.MailResult]()
       asJava.sendMail(email, {a:AsyncResult[io.vertx.ext.mail.MailResult] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }

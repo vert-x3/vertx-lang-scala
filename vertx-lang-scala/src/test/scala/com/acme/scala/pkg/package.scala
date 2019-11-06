@@ -27,10 +27,13 @@ import com.acme.pkg.sub.{SubInterface => JSubInterface}
 
 package object pkg{
 
-  type MyInterface = com.acme.pkg.MyInterface
+  object MyInterface {
+    def create() = {
+      com.acme.pkg.MyInterface.create()
+    }
+  }
 
 
-  type SubInterface = com.acme.pkg.sub.SubInterface
 
 
 }

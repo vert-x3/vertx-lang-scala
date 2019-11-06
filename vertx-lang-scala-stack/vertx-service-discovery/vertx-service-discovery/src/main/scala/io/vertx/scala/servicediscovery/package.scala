@@ -35,10 +35,108 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object servicediscovery{
 
-  type EventBusService = io.vertx.servicediscovery.types.EventBusService
+  object EventBusService {
+    /**
+     * Like [[createRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createRecord(name: java.lang.String,address: java.lang.String,itf: java.lang.String,metadata: io.vertx.core.json.JsonObject) = {
+      io.vertx.servicediscovery.types.EventBusService.createRecord(name, address, itf, metadata)
+    }
+    /**
+     * Like [[getServiceProxy]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getServiceProxy[T](discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,clientClass: Class[T],resultHandler: AsyncResult[T] => Unit) = {
+      io.vertx.servicediscovery.types.EventBusService.getServiceProxy[T](discovery, a => filter(a), clientClass, {p:AsyncResult[T] => resultHandler(p)})
+    }
+    /**
+     * Like [[getServiceProxyWithJsonFilter]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getServiceProxyWithJsonFilter[T](discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,clientClass: Class[T],resultHandler: AsyncResult[T] => Unit) = {
+      io.vertx.servicediscovery.types.EventBusService.getServiceProxyWithJsonFilter[T](discovery, filter, clientClass, {p:AsyncResult[T] => resultHandler(p)})
+    }
+    /**
+     * Like [[createRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createRecord(name: java.lang.String,address: java.lang.String,classname: java.lang.String) = {
+      io.vertx.servicediscovery.types.EventBusService.createRecord(name, address, classname)
+    }
+  }
 
 
-  type HttpEndpoint = io.vertx.servicediscovery.types.HttpEndpoint
+  object HttpEndpoint {
+    /**
+     * Like [[createRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createRecord(name: java.lang.String,host: java.lang.String,port: java.lang.Integer,root: java.lang.String,metadata: io.vertx.core.json.JsonObject) = {
+      io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, host, port, root, metadata)
+    }
+    /**
+     * Like [[createRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createRecord(name: java.lang.String,ssl: java.lang.Boolean,host: java.lang.String,port: java.lang.Integer,root: java.lang.String,metadata: io.vertx.core.json.JsonObject) = {
+      io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, ssl, host, port, root, metadata)
+    }
+    /**
+     * Like [[createRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createRecord(name: java.lang.String,host: java.lang.String,port: java.lang.Integer,root: java.lang.String) = {
+      io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, host, port, root)
+    }
+    /**
+     * Like [[createRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createRecord(name: java.lang.String,host: java.lang.String) = {
+      io.vertx.servicediscovery.types.HttpEndpoint.createRecord(name, host)
+    }
+    /**
+     * Like [[getClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.core.http.HttpClient] => Unit) = {
+      io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery, filter, {p:AsyncResult[io.vertx.core.http.HttpClient] => resultHandler(p)})
+    }
+    /**
+     * Like [[getWebClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getWebClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.ext.web.client.WebClient] => Unit) = {
+      io.vertx.servicediscovery.types.HttpEndpoint.getWebClient(discovery, filter, {p:AsyncResult[io.vertx.ext.web.client.WebClient] => resultHandler(p)})
+    }
+    /**
+     * Like [[getClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,conf: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.core.http.HttpClient] => Unit) = {
+      io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery, filter, conf, {p:AsyncResult[io.vertx.core.http.HttpClient] => resultHandler(p)})
+    }
+    /**
+     * Like [[getWebClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getWebClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,conf: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.ext.web.client.WebClient] => Unit) = {
+      io.vertx.servicediscovery.types.HttpEndpoint.getWebClient(discovery, filter, conf, {p:AsyncResult[io.vertx.ext.web.client.WebClient] => resultHandler(p)})
+    }
+    /**
+     * Like [[getClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,resultHandler: AsyncResult[io.vertx.core.http.HttpClient] => Unit) = {
+      io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery, a => filter(a), {p:AsyncResult[io.vertx.core.http.HttpClient] => resultHandler(p)})
+    }
+    /**
+     * Like [[getWebClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getWebClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,resultHandler: AsyncResult[io.vertx.ext.web.client.WebClient] => Unit) = {
+      io.vertx.servicediscovery.types.HttpEndpoint.getWebClient(discovery, a => filter(a), {p:AsyncResult[io.vertx.ext.web.client.WebClient] => resultHandler(p)})
+    }
+    /**
+     * Like [[getClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,conf: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.core.http.HttpClient] => Unit) = {
+      io.vertx.servicediscovery.types.HttpEndpoint.getClient(discovery, a => filter(a), conf, {p:AsyncResult[io.vertx.core.http.HttpClient] => resultHandler(p)})
+    }
+    /**
+     * Like [[getWebClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getWebClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,conf: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.ext.web.client.WebClient] => Unit) = {
+      io.vertx.servicediscovery.types.HttpEndpoint.getWebClient(discovery, a => filter(a), conf, {p:AsyncResult[io.vertx.ext.web.client.WebClient] => resultHandler(p)})
+    }
+  }
 
 
 
@@ -50,13 +148,97 @@ package object servicediscovery{
 
 
 
-  type JDBCDataSource = io.vertx.servicediscovery.types.JDBCDataSource
+  object JDBCDataSource {
+    def createRecord(name: java.lang.String,location: io.vertx.core.json.JsonObject,metadata: io.vertx.core.json.JsonObject) = {
+      io.vertx.servicediscovery.types.JDBCDataSource.createRecord(name, location, metadata)
+    }
+    /**
+     * Like [[getJDBCClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getJDBCClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.ext.jdbc.JDBCClient] => Unit) = {
+      io.vertx.servicediscovery.types.JDBCDataSource.getJDBCClient(discovery, filter, {p:AsyncResult[io.vertx.ext.jdbc.JDBCClient] => resultHandler(p)})
+    }
+    /**
+     * Like [[getJDBCClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getJDBCClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,resultHandler: AsyncResult[io.vertx.ext.jdbc.JDBCClient] => Unit) = {
+      io.vertx.servicediscovery.types.JDBCDataSource.getJDBCClient(discovery, a => filter(a), {p:AsyncResult[io.vertx.ext.jdbc.JDBCClient] => resultHandler(p)})
+    }
+    /**
+     * Like [[getJDBCClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getJDBCClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.ext.jdbc.JDBCClient] => Unit) = {
+      io.vertx.servicediscovery.types.JDBCDataSource.getJDBCClient(discovery, filter, consumerConfiguration, {p:AsyncResult[io.vertx.ext.jdbc.JDBCClient] => resultHandler(p)})
+    }
+    /**
+     * Like [[getJDBCClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getJDBCClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.ext.jdbc.JDBCClient] => Unit) = {
+      io.vertx.servicediscovery.types.JDBCDataSource.getJDBCClient(discovery, a => filter(a), consumerConfiguration, {p:AsyncResult[io.vertx.ext.jdbc.JDBCClient] => resultHandler(p)})
+    }
+  }
 
 
-  type MessageSource = io.vertx.servicediscovery.types.MessageSource
+  object MessageSource {
+    /**
+     * Like [[createRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createRecord(name: java.lang.String,address: java.lang.String,`type`: java.lang.String,metadata: io.vertx.core.json.JsonObject) = {
+      io.vertx.servicediscovery.types.MessageSource.createRecord(name, address, `type`, metadata)
+    }
+    /**
+     * Like [[createRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createRecord(name: java.lang.String,address: java.lang.String,`type`: java.lang.String) = {
+      io.vertx.servicediscovery.types.MessageSource.createRecord(name, address, `type`)
+    }
+    /**
+     * Like [[createRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createRecord(name: java.lang.String,address: java.lang.String) = {
+      io.vertx.servicediscovery.types.MessageSource.createRecord(name, address)
+    }
+    /**
+     * Like [[getConsumer]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getConsumer[T](discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.core.eventbus.MessageConsumer[T]] => Unit) = {
+      io.vertx.servicediscovery.types.MessageSource.getConsumer[T](discovery, filter, {p:AsyncResult[io.vertx.core.eventbus.MessageConsumer[T]] => resultHandler(p)})
+    }
+    /**
+     * Like [[getConsumer]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getConsumer[T](discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,resultHandler: AsyncResult[io.vertx.core.eventbus.MessageConsumer[T]] => Unit) = {
+      io.vertx.servicediscovery.types.MessageSource.getConsumer[T](discovery, a => filter(a), {p:AsyncResult[io.vertx.core.eventbus.MessageConsumer[T]] => resultHandler(p)})
+    }
+  }
 
 
-  type MongoDataSource = io.vertx.servicediscovery.types.MongoDataSource
+  object MongoDataSource {
+    /**
+     * Like [[createRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createRecord(name: java.lang.String,location: io.vertx.core.json.JsonObject,metadata: io.vertx.core.json.JsonObject) = {
+      io.vertx.servicediscovery.types.MongoDataSource.createRecord(name, location, metadata)
+    }
+    /**
+     * Like [[getMongoClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getMongoClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.ext.mongo.MongoClient] => Unit) = {
+      io.vertx.servicediscovery.types.MongoDataSource.getMongoClient(discovery, filter, {p:AsyncResult[io.vertx.ext.mongo.MongoClient] => resultHandler(p)})
+    }
+    /**
+     * Like [[getMongoClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getMongoClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,resultHandler: AsyncResult[io.vertx.ext.mongo.MongoClient] => Unit) = {
+      io.vertx.servicediscovery.types.MongoDataSource.getMongoClient(discovery, a => filter(a), {p:AsyncResult[io.vertx.ext.mongo.MongoClient] => resultHandler(p)})
+    }
+    /**
+     * Like [[getMongoClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getMongoClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.ext.mongo.MongoClient] => Unit) = {
+      io.vertx.servicediscovery.types.MongoDataSource.getMongoClient(discovery, filter, consumerConfiguration, {p:AsyncResult[io.vertx.ext.mongo.MongoClient] => resultHandler(p)})
+    }
+  }
 
 
 
@@ -68,7 +250,38 @@ package object servicediscovery{
 
 
 
-  type RedisDataSource = io.vertx.servicediscovery.types.RedisDataSource
+  object RedisDataSource {
+    /**
+     * Like [[createRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createRecord(name: java.lang.String,location: io.vertx.core.json.JsonObject,metadata: io.vertx.core.json.JsonObject) = {
+      io.vertx.servicediscovery.types.RedisDataSource.createRecord(name, location, metadata)
+    }
+    /**
+     * Like [[getRedisClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getRedisClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.redis.client.Redis] => Unit) = {
+      io.vertx.servicediscovery.types.RedisDataSource.getRedisClient(discovery, filter, {p:AsyncResult[io.vertx.redis.client.Redis] => resultHandler(p)})
+    }
+    /**
+     * Like [[getRedisClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getRedisClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,resultHandler: AsyncResult[io.vertx.redis.client.Redis] => Unit) = {
+      io.vertx.servicediscovery.types.RedisDataSource.getRedisClient(discovery, a => filter(a), {p:AsyncResult[io.vertx.redis.client.Redis] => resultHandler(p)})
+    }
+    /**
+     * Like [[getRedisClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getRedisClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.redis.client.Redis] => Unit) = {
+      io.vertx.servicediscovery.types.RedisDataSource.getRedisClient(discovery, filter, consumerConfiguration, {p:AsyncResult[io.vertx.redis.client.Redis] => resultHandler(p)})
+    }
+    /**
+     * Like [[getRedisClient]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getRedisClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.redis.client.Redis] => Unit) = {
+      io.vertx.servicediscovery.types.RedisDataSource.getRedisClient(discovery, a => filter(a), consumerConfiguration, {p:AsyncResult[io.vertx.redis.client.Redis] => resultHandler(p)})
+    }
+  }
 
 
 
@@ -112,7 +325,7 @@ package object servicediscovery{
      * Like [[registerServiceImporter]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def registerServiceImporterFuture(importer: io.vertx.servicediscovery.spi.ServiceImporter,configuration: io.vertx.core.json.JsonObject): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.registerServiceImporter(importer, configuration, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -121,7 +334,7 @@ package object servicediscovery{
      * Like [[registerServiceExporter]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def registerServiceExporterFuture(exporter: io.vertx.servicediscovery.spi.ServiceExporter,configuration: io.vertx.core.json.JsonObject): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.registerServiceExporter(exporter, configuration, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -130,7 +343,7 @@ package object servicediscovery{
      * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def publishFuture(record: io.vertx.servicediscovery.Record): scala.concurrent.Future[io.vertx.servicediscovery.Record] = {
-      val promise = Promise[io.vertx.servicediscovery.Record]()
+      val promise = concurrent.Promise[io.vertx.servicediscovery.Record]()
       asJava.publish(record, {a:AsyncResult[io.vertx.servicediscovery.Record] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -139,7 +352,7 @@ package object servicediscovery{
      * Like [[unpublish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def unpublishFuture(id: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.unpublish(id, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -148,7 +361,7 @@ package object servicediscovery{
      * Like [[getRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getRecordFuture(filter: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.servicediscovery.Record] = {
-      val promise = Promise[io.vertx.servicediscovery.Record]()
+      val promise = concurrent.Promise[io.vertx.servicediscovery.Record]()
       asJava.getRecord(filter, {a:AsyncResult[io.vertx.servicediscovery.Record] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -157,7 +370,7 @@ package object servicediscovery{
      * Like [[getRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getRecordFuture(filter: io.vertx.servicediscovery.Record => java.lang.Boolean): scala.concurrent.Future[io.vertx.servicediscovery.Record] = {
-      val promise = Promise[io.vertx.servicediscovery.Record]()
+      val promise = concurrent.Promise[io.vertx.servicediscovery.Record]()
       asJava.getRecord({x: io.vertx.servicediscovery.Record => filter(x)}, {a:AsyncResult[io.vertx.servicediscovery.Record] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -166,7 +379,7 @@ package object servicediscovery{
      * Like [[getRecord]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getRecordFuture(filter: io.vertx.servicediscovery.Record => java.lang.Boolean,includeOutOfService: java.lang.Boolean): scala.concurrent.Future[io.vertx.servicediscovery.Record] = {
-      val promise = Promise[io.vertx.servicediscovery.Record]()
+      val promise = concurrent.Promise[io.vertx.servicediscovery.Record]()
       asJava.getRecord({x: io.vertx.servicediscovery.Record => filter(x)}, includeOutOfService, {a:AsyncResult[io.vertx.servicediscovery.Record] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -175,7 +388,7 @@ package object servicediscovery{
      * Like [[getRecords]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getRecordsFuture(filter: io.vertx.core.json.JsonObject): scala.concurrent.Future[java.util.List[io.vertx.servicediscovery.Record]] = {
-      val promise = Promise[java.util.List[io.vertx.servicediscovery.Record]]()
+      val promise = concurrent.Promise[java.util.List[io.vertx.servicediscovery.Record]]()
       asJava.getRecords(filter, {a:AsyncResult[java.util.List[io.vertx.servicediscovery.Record]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -184,7 +397,7 @@ package object servicediscovery{
      * Like [[getRecords]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getRecordsFuture(filter: io.vertx.servicediscovery.Record => java.lang.Boolean): scala.concurrent.Future[java.util.List[io.vertx.servicediscovery.Record]] = {
-      val promise = Promise[java.util.List[io.vertx.servicediscovery.Record]]()
+      val promise = concurrent.Promise[java.util.List[io.vertx.servicediscovery.Record]]()
       asJava.getRecords({x: io.vertx.servicediscovery.Record => filter(x)}, {a:AsyncResult[java.util.List[io.vertx.servicediscovery.Record]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -193,7 +406,7 @@ package object servicediscovery{
      * Like [[getRecords]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getRecordsFuture(filter: io.vertx.servicediscovery.Record => java.lang.Boolean,includeOutOfService: java.lang.Boolean): scala.concurrent.Future[java.util.List[io.vertx.servicediscovery.Record]] = {
-      val promise = Promise[java.util.List[io.vertx.servicediscovery.Record]]()
+      val promise = concurrent.Promise[java.util.List[io.vertx.servicediscovery.Record]]()
       asJava.getRecords({x: io.vertx.servicediscovery.Record => filter(x)}, includeOutOfService, {a:AsyncResult[java.util.List[io.vertx.servicediscovery.Record]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -202,7 +415,7 @@ package object servicediscovery{
      * Like [[update]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def updateFuture(record: io.vertx.servicediscovery.Record): scala.concurrent.Future[io.vertx.servicediscovery.Record] = {
-      val promise = Promise[io.vertx.servicediscovery.Record]()
+      val promise = concurrent.Promise[io.vertx.servicediscovery.Record]()
       asJava.update(record, {a:AsyncResult[io.vertx.servicediscovery.Record] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -219,10 +432,8 @@ package object servicediscovery{
 
 
 
-  type ServiceExporter = io.vertx.servicediscovery.spi.ServiceExporter
 
 
-  type ServiceImporter = io.vertx.servicediscovery.spi.ServiceImporter
 
 
 
@@ -236,7 +447,7 @@ package object servicediscovery{
      * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def publishFuture(record: io.vertx.servicediscovery.Record): scala.concurrent.Future[io.vertx.servicediscovery.Record] = {
-      val promise = Promise[io.vertx.servicediscovery.Record]()
+      val promise = concurrent.Promise[io.vertx.servicediscovery.Record]()
       asJava.publish(record, {a:AsyncResult[io.vertx.servicediscovery.Record] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -245,7 +456,7 @@ package object servicediscovery{
      * Like [[unpublish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def unpublishFuture(id: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.unpublish(id, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -254,7 +465,7 @@ package object servicediscovery{
      * Like [[update]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def updateFuture(record: io.vertx.servicediscovery.Record): scala.concurrent.Future[io.vertx.servicediscovery.Record] = {
-      val promise = Promise[io.vertx.servicediscovery.Record]()
+      val promise = concurrent.Promise[io.vertx.servicediscovery.Record]()
       asJava.update(record, {a:AsyncResult[io.vertx.servicediscovery.Record] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -262,7 +473,6 @@ package object servicediscovery{
   }
 
 
-  type ServiceReference = io.vertx.servicediscovery.ServiceReference
 
 
 }

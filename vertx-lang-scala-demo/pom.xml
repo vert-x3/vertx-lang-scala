@@ -23,6 +23,11 @@
       <artifactId>vertx-lang-scala_2.13</artifactId>
       <version>${project.version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-scala_2.13</artifactId>
+      <version>${project.version}</version>
+    </dependency>
 
     <dependency>
       <groupId>org.scalatest</groupId>

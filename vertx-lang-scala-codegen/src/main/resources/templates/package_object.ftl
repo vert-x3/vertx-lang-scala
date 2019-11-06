@@ -27,8 +27,17 @@ package object ${moduleName}{
   <#include "implicit_dataobject.ftl">
 <#elseif !type.name?contains("Handler") && futureMethods?has_content>
   <#include "class.ftl">
-<#elseif !type.name?contains("Handler") && helper.getSimpleName(type.name) != 'Message'>
-  type ${typeHelper.getSimpleNameWithScalaNotation(type)} = ${typeHelper.getFullNameWithScalaNotation(type)}
+<#elseif !type.name?contains("Handler") && helper.getSimpleName(type.name) != 'Message' && staticMethods?has_content>
+  object ${helper.getSimpleName(type.name)} {
+  <#list staticMethods as method>
+      <#if method.doc??>
+${typeHelper.methodDoc(type, method, "    ", true)}
+      </#if>
+    def ${typeHelper.escapeIfKeyword(method.name)}<#if method.returnType.nullable>Option</#if>${typeHelper.assembleTypeParams(method.typeParams, true)}(<#list method.params as param>${typeHelper.escapeIfKeyword(param.name)}: ${typeHelper.wrapInOptionIfNullable(param.type.nullable, typeHelper.toScalaMethodParam(param.type))}<#sep>,</#list>) = {
+      <#if method.returnType.nullable>scala.Option(</#if>${typeHelper.invokeMethodWithoutConvertingReturn(type.name, type, method)}<#if method.returnType.nullable>)</#if>
+    }
+  </#list>
+  }
 </#if>
 
 <#if helper.getSimpleName(type.name) == 'Message'>
