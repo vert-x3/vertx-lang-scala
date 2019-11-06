@@ -815,6 +815,15 @@ public class TypeHelper {
     return method.getName().equals("addInterceptor") || method.getName().equals("removeInterceptor");
   }
 
+  public static List<MethodInfo> findStaticMethods(List<MethodInfo> methods) {
+    if(methods == null)
+      return Collections.emptyList();
+    return methods.stream()
+      .filter(method -> !skipMethod(method))
+      .filter(method -> method.isStaticMethod())
+      .collect(Collectors.toList());
+  }
+
   public static List<MethodInfo> findBasicMethods(List<MethodInfo> methods) {
     if(methods == null)
       return Collections.emptyList();

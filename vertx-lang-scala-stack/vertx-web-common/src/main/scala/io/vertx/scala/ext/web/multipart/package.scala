@@ -27,10 +27,16 @@ import io.vertx.ext.web.multipart.{FormDataPart => JFormDataPart}
 
 package object multipart{
 
-  type FormDataPart = io.vertx.ext.web.multipart.FormDataPart
 
 
-  type MultipartForm = io.vertx.ext.web.multipart.MultipartForm
+  object MultipartForm {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create() = {
+      io.vertx.ext.web.multipart.MultipartForm.create()
+    }
+  }
 
 
 }

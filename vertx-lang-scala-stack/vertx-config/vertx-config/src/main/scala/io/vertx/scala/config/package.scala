@@ -59,7 +59,7 @@ package object config{
      * Like [[getConfig]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getConfigFuture(): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = Promise[io.vertx.core.json.JsonObject]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
       asJava.getConfig({a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }

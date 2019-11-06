@@ -32,7 +32,14 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object shiro{
 
-  type ShiroAuth = io.vertx.ext.auth.shiro.ShiroAuth
+  object ShiroAuth {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.shiro.ShiroAuthOptions) = {
+      io.vertx.ext.auth.shiro.ShiroAuth.create(vertx, options)
+    }
+  }
 
 
 

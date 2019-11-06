@@ -18,7 +18,7 @@
       * Like [[deployVerticle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
       */
     def deployVerticleFuture(verticle: ScalaVerticle): scala.concurrent.Future[String] = {
-      val promise = Promise[String]()
+      val promise = concurrent.Promise[String]()
       asJava.deployVerticle(verticle.asJava(), {a:AsyncResult[String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -38,7 +38,7 @@
       * Like [[deployVerticle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
       */
     def deployVerticleFuture(verticle: ScalaVerticle, options: DeploymentOptions): scala.concurrent.Future[String] = {
-      val promise = Promise[String]()
+      val promise = concurrent.Promise[String]()
       asJava.deployVerticle(verticle.asJava(),options , {a:AsyncResult[String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }

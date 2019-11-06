@@ -35,7 +35,14 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object jwt{
 
-  type JWTAuth = io.vertx.ext.auth.jwt.JWTAuth
+  object JWTAuth {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.jwt.JWTAuthOptions) = {
+      io.vertx.ext.auth.jwt.JWTAuth.create(vertx, config)
+    }
+  }
 
 
 

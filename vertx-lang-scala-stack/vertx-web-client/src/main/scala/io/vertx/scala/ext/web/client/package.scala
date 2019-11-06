@@ -45,7 +45,20 @@ import io.vertx.core.Handler
 
 package object client{
 
-  type ErrorConverter = io.vertx.ext.web.client.predicate.ErrorConverter
+  object ErrorConverter {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(converter: io.vertx.ext.web.client.predicate.ResponsePredicateResult => Throwable) = {
+      io.vertx.ext.web.client.predicate.ErrorConverter.create(a => converter(a))
+    }
+    /**
+     * Like [[createFullBody]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def createFullBody(converter: io.vertx.ext.web.client.predicate.ResponsePredicateResult => Throwable) = {
+      io.vertx.ext.web.client.predicate.ErrorConverter.createFullBody(a => converter(a))
+    }
+  }
 
 
 
@@ -94,7 +107,7 @@ package object client{
      * Like [[sendStream]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sendStreamFuture(body: io.vertx.core.streams.ReadStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendStream(body, {a:AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -103,7 +116,7 @@ package object client{
      * Like [[sendBuffer]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sendBufferFuture(body: io.vertx.core.buffer.Buffer): scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendBuffer(body, {a:AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -112,7 +125,7 @@ package object client{
      * Like [[sendJsonObject]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sendJsonObjectFuture(body: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendJsonObject(body, {a:AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -121,7 +134,7 @@ package object client{
      * Like [[sendJson]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sendJsonFuture(body: AnyRef): scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendJson(body, {a:AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -130,7 +143,7 @@ package object client{
      * Like [[sendForm]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sendFormFuture(body: io.vertx.core.MultiMap): scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendForm(body, {a:AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -139,7 +152,7 @@ package object client{
      * Like [[sendMultipartForm]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sendMultipartFormFuture(body: io.vertx.ext.web.multipart.MultipartForm): scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendMultipartForm(body, {a:AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -148,7 +161,7 @@ package object client{
      * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sendFuture(): scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.send({a:AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -156,16 +169,90 @@ package object client{
   }
 
 
-  type HttpResponse[T] = io.vertx.ext.web.client.HttpResponse[T]
 
 
-  type ResponsePredicate = io.vertx.ext.web.client.predicate.ResponsePredicate
+  object ResponsePredicate {
+    /**
+     * Like [[status]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def status(statusCode: java.lang.Integer) = {
+      io.vertx.ext.web.client.predicate.ResponsePredicate.status(statusCode)
+    }
+    /**
+     * Like [[status]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def status(min: java.lang.Integer,max: java.lang.Integer) = {
+      io.vertx.ext.web.client.predicate.ResponsePredicate.status(min, max)
+    }
+    /**
+     * Like [[contentType]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def contentType(mimeType: java.lang.String) = {
+      io.vertx.ext.web.client.predicate.ResponsePredicate.contentType(mimeType)
+    }
+    /**
+     * Like [[contentType]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def contentType(mimeTypes: java.util.List[java.lang.String]) = {
+      io.vertx.ext.web.client.predicate.ResponsePredicate.contentType(mimeTypes)
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(test: io.vertx.ext.web.client.HttpResponse[Void] => io.vertx.ext.web.client.predicate.ResponsePredicateResult) = {
+      io.vertx.ext.web.client.predicate.ResponsePredicate.create(a => test(a))
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(test: io.vertx.ext.web.client.HttpResponse[Void] => io.vertx.ext.web.client.predicate.ResponsePredicateResult,errorConverter: io.vertx.ext.web.client.predicate.ErrorConverter) = {
+      io.vertx.ext.web.client.predicate.ResponsePredicate.create(a => test(a), errorConverter)
+    }
+  }
 
 
-  type ResponsePredicateResult = io.vertx.ext.web.client.predicate.ResponsePredicateResult
+  object ResponsePredicateResult {
+    /**
+     * Like [[success]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def success() = {
+      io.vertx.ext.web.client.predicate.ResponsePredicateResult.success()
+    }
+    /**
+     * Like [[failure]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def failure(message: java.lang.String) = {
+      io.vertx.ext.web.client.predicate.ResponsePredicateResult.failure(message)
+    }
+  }
 
 
-  type WebClient = io.vertx.ext.web.client.WebClient
+  object WebClient {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.web.client.WebClient.create(vertx)
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.web.client.WebClientOptions) = {
+      io.vertx.ext.web.client.WebClient.create(vertx, options)
+    }
+    /**
+     * Like [[wrap]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def wrap(httpClient: io.vertx.core.http.HttpClient) = {
+      io.vertx.ext.web.client.WebClient.wrap(httpClient)
+    }
+    /**
+     * Like [[wrap]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def wrap(httpClient: io.vertx.core.http.HttpClient,options: io.vertx.ext.web.client.WebClientOptions) = {
+      io.vertx.ext.web.client.WebClient.wrap(httpClient, options)
+    }
+  }
 
 
 

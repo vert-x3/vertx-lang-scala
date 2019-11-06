@@ -132,7 +132,7 @@ package object consul{
      * Like [[agentInfo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def agentInfoFuture(): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = Promise[io.vertx.core.json.JsonObject]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
       asJava.agentInfo({a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -141,7 +141,7 @@ package object consul{
      * Like [[coordinateNodes]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def coordinateNodesFuture(): scala.concurrent.Future[io.vertx.ext.consul.CoordinateList] = {
-      val promise = Promise[io.vertx.ext.consul.CoordinateList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.CoordinateList]()
       asJava.coordinateNodes({a:AsyncResult[io.vertx.ext.consul.CoordinateList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -150,7 +150,7 @@ package object consul{
      * Like [[coordinateNodesWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def coordinateNodesWithOptionsFuture(options: io.vertx.ext.consul.BlockingQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.CoordinateList] = {
-      val promise = Promise[io.vertx.ext.consul.CoordinateList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.CoordinateList]()
       asJava.coordinateNodesWithOptions(options, {a:AsyncResult[io.vertx.ext.consul.CoordinateList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -159,7 +159,7 @@ package object consul{
      * Like [[coordinateDatacenters]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def coordinateDatacentersFuture(): scala.concurrent.Future[java.util.List[io.vertx.ext.consul.DcCoordinates]] = {
-      val promise = Promise[java.util.List[io.vertx.ext.consul.DcCoordinates]]()
+      val promise = concurrent.Promise[java.util.List[io.vertx.ext.consul.DcCoordinates]]()
       asJava.coordinateDatacenters({a:AsyncResult[java.util.List[io.vertx.ext.consul.DcCoordinates]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -168,7 +168,7 @@ package object consul{
      * Like [[getKeys]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getKeysFuture(keyPrefix: java.lang.String): scala.concurrent.Future[java.util.List[java.lang.String]] = {
-      val promise = Promise[java.util.List[java.lang.String]]()
+      val promise = concurrent.Promise[java.util.List[java.lang.String]]()
       asJava.getKeys(keyPrefix, {a:AsyncResult[java.util.List[java.lang.String]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -177,7 +177,7 @@ package object consul{
      * Like [[getKeysWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getKeysWithOptionsFuture(keyPrefix: java.lang.String,options: io.vertx.ext.consul.BlockingQueryOptions): scala.concurrent.Future[java.util.List[java.lang.String]] = {
-      val promise = Promise[java.util.List[java.lang.String]]()
+      val promise = concurrent.Promise[java.util.List[java.lang.String]]()
       asJava.getKeysWithOptions(keyPrefix, options, {a:AsyncResult[java.util.List[java.lang.String]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -186,7 +186,7 @@ package object consul{
      * Like [[getValue]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getValueFuture(key: java.lang.String): scala.concurrent.Future[io.vertx.ext.consul.KeyValue] = {
-      val promise = Promise[io.vertx.ext.consul.KeyValue]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.KeyValue]()
       asJava.getValue(key, {a:AsyncResult[io.vertx.ext.consul.KeyValue] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -195,7 +195,7 @@ package object consul{
      * Like [[getValueWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getValueWithOptionsFuture(key: java.lang.String,options: io.vertx.ext.consul.BlockingQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.KeyValue] = {
-      val promise = Promise[io.vertx.ext.consul.KeyValue]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.KeyValue]()
       asJava.getValueWithOptions(key, options, {a:AsyncResult[io.vertx.ext.consul.KeyValue] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -204,7 +204,7 @@ package object consul{
      * Like [[deleteValue]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def deleteValueFuture(key: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.deleteValue(key, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -213,7 +213,7 @@ package object consul{
      * Like [[getValues]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getValuesFuture(keyPrefix: java.lang.String): scala.concurrent.Future[io.vertx.ext.consul.KeyValueList] = {
-      val promise = Promise[io.vertx.ext.consul.KeyValueList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.KeyValueList]()
       asJava.getValues(keyPrefix, {a:AsyncResult[io.vertx.ext.consul.KeyValueList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -222,7 +222,7 @@ package object consul{
      * Like [[getValuesWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getValuesWithOptionsFuture(keyPrefix: java.lang.String,options: io.vertx.ext.consul.BlockingQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.KeyValueList] = {
-      val promise = Promise[io.vertx.ext.consul.KeyValueList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.KeyValueList]()
       asJava.getValuesWithOptions(keyPrefix, options, {a:AsyncResult[io.vertx.ext.consul.KeyValueList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -231,7 +231,7 @@ package object consul{
      * Like [[deleteValues]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def deleteValuesFuture(keyPrefix: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.deleteValues(keyPrefix, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -240,7 +240,7 @@ package object consul{
      * Like [[putValue]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def putValueFuture(key: java.lang.String,value: java.lang.String): scala.concurrent.Future[java.lang.Boolean] = {
-      val promise = Promise[java.lang.Boolean]()
+      val promise = concurrent.Promise[java.lang.Boolean]()
       asJava.putValue(key, value, {a:AsyncResult[java.lang.Boolean] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -249,7 +249,7 @@ package object consul{
      * Like [[putValueWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def putValueWithOptionsFuture(key: java.lang.String,value: java.lang.String,options: io.vertx.ext.consul.KeyValueOptions): scala.concurrent.Future[java.lang.Boolean] = {
-      val promise = Promise[java.lang.Boolean]()
+      val promise = concurrent.Promise[java.lang.Boolean]()
       asJava.putValueWithOptions(key, value, options, {a:AsyncResult[java.lang.Boolean] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -258,7 +258,7 @@ package object consul{
      * Like [[transaction]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def transactionFuture(request: io.vertx.ext.consul.TxnRequest): scala.concurrent.Future[io.vertx.ext.consul.TxnResponse] = {
-      val promise = Promise[io.vertx.ext.consul.TxnResponse]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.TxnResponse]()
       asJava.transaction(request, {a:AsyncResult[io.vertx.ext.consul.TxnResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -267,7 +267,7 @@ package object consul{
      * Like [[createAclToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def createAclTokenFuture(token: io.vertx.ext.consul.AclToken): scala.concurrent.Future[java.lang.String] = {
-      val promise = Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]()
       asJava.createAclToken(token, {a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -276,7 +276,7 @@ package object consul{
      * Like [[updateAclToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def updateAclTokenFuture(token: io.vertx.ext.consul.AclToken): scala.concurrent.Future[java.lang.String] = {
-      val promise = Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]()
       asJava.updateAclToken(token, {a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -285,7 +285,7 @@ package object consul{
      * Like [[cloneAclToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def cloneAclTokenFuture(id: java.lang.String): scala.concurrent.Future[java.lang.String] = {
-      val promise = Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]()
       asJava.cloneAclToken(id, {a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -294,7 +294,7 @@ package object consul{
      * Like [[listAclTokens]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def listAclTokensFuture(): scala.concurrent.Future[java.util.List[io.vertx.ext.consul.AclToken]] = {
-      val promise = Promise[java.util.List[io.vertx.ext.consul.AclToken]]()
+      val promise = concurrent.Promise[java.util.List[io.vertx.ext.consul.AclToken]]()
       asJava.listAclTokens({a:AsyncResult[java.util.List[io.vertx.ext.consul.AclToken]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -303,7 +303,7 @@ package object consul{
      * Like [[infoAclToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def infoAclTokenFuture(id: java.lang.String): scala.concurrent.Future[io.vertx.ext.consul.AclToken] = {
-      val promise = Promise[io.vertx.ext.consul.AclToken]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.AclToken]()
       asJava.infoAclToken(id, {a:AsyncResult[io.vertx.ext.consul.AclToken] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -312,7 +312,7 @@ package object consul{
      * Like [[destroyAclToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def destroyAclTokenFuture(id: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.destroyAclToken(id, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -321,7 +321,7 @@ package object consul{
      * Like [[fireEvent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def fireEventFuture(name: java.lang.String): scala.concurrent.Future[io.vertx.ext.consul.Event] = {
-      val promise = Promise[io.vertx.ext.consul.Event]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.Event]()
       asJava.fireEvent(name, {a:AsyncResult[io.vertx.ext.consul.Event] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -330,7 +330,7 @@ package object consul{
      * Like [[fireEventWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def fireEventWithOptionsFuture(name: java.lang.String,options: io.vertx.ext.consul.EventOptions): scala.concurrent.Future[io.vertx.ext.consul.Event] = {
-      val promise = Promise[io.vertx.ext.consul.Event]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.Event]()
       asJava.fireEventWithOptions(name, options, {a:AsyncResult[io.vertx.ext.consul.Event] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -339,7 +339,7 @@ package object consul{
      * Like [[listEvents]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def listEventsFuture(): scala.concurrent.Future[io.vertx.ext.consul.EventList] = {
-      val promise = Promise[io.vertx.ext.consul.EventList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.EventList]()
       asJava.listEvents({a:AsyncResult[io.vertx.ext.consul.EventList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -348,7 +348,7 @@ package object consul{
      * Like [[listEventsWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def listEventsWithOptionsFuture(options: io.vertx.ext.consul.EventListOptions): scala.concurrent.Future[io.vertx.ext.consul.EventList] = {
-      val promise = Promise[io.vertx.ext.consul.EventList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.EventList]()
       asJava.listEventsWithOptions(options, {a:AsyncResult[io.vertx.ext.consul.EventList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -357,7 +357,7 @@ package object consul{
      * Like [[registerService]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def registerServiceFuture(serviceOptions: io.vertx.ext.consul.ServiceOptions): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.registerService(serviceOptions, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -366,7 +366,7 @@ package object consul{
      * Like [[maintenanceService]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def maintenanceServiceFuture(maintenanceOptions: io.vertx.ext.consul.MaintenanceOptions): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.maintenanceService(maintenanceOptions, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -375,7 +375,7 @@ package object consul{
      * Like [[deregisterService]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def deregisterServiceFuture(id: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.deregisterService(id, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -384,7 +384,7 @@ package object consul{
      * Like [[catalogServiceNodes]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def catalogServiceNodesFuture(service: java.lang.String): scala.concurrent.Future[io.vertx.ext.consul.ServiceList] = {
-      val promise = Promise[io.vertx.ext.consul.ServiceList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.ServiceList]()
       asJava.catalogServiceNodes(service, {a:AsyncResult[io.vertx.ext.consul.ServiceList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -393,7 +393,7 @@ package object consul{
      * Like [[catalogServiceNodesWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def catalogServiceNodesWithOptionsFuture(service: java.lang.String,options: io.vertx.ext.consul.ServiceQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.ServiceList] = {
-      val promise = Promise[io.vertx.ext.consul.ServiceList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.ServiceList]()
       asJava.catalogServiceNodesWithOptions(service, options, {a:AsyncResult[io.vertx.ext.consul.ServiceList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -402,7 +402,7 @@ package object consul{
      * Like [[catalogDatacenters]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def catalogDatacentersFuture(): scala.concurrent.Future[java.util.List[java.lang.String]] = {
-      val promise = Promise[java.util.List[java.lang.String]]()
+      val promise = concurrent.Promise[java.util.List[java.lang.String]]()
       asJava.catalogDatacenters({a:AsyncResult[java.util.List[java.lang.String]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -411,7 +411,7 @@ package object consul{
      * Like [[catalogNodes]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def catalogNodesFuture(): scala.concurrent.Future[io.vertx.ext.consul.NodeList] = {
-      val promise = Promise[io.vertx.ext.consul.NodeList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.NodeList]()
       asJava.catalogNodes({a:AsyncResult[io.vertx.ext.consul.NodeList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -420,7 +420,7 @@ package object consul{
      * Like [[catalogNodesWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def catalogNodesWithOptionsFuture(options: io.vertx.ext.consul.NodeQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.NodeList] = {
-      val promise = Promise[io.vertx.ext.consul.NodeList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.NodeList]()
       asJava.catalogNodesWithOptions(options, {a:AsyncResult[io.vertx.ext.consul.NodeList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -429,7 +429,7 @@ package object consul{
      * Like [[healthChecks]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def healthChecksFuture(service: java.lang.String): scala.concurrent.Future[io.vertx.ext.consul.CheckList] = {
-      val promise = Promise[io.vertx.ext.consul.CheckList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.CheckList]()
       asJava.healthChecks(service, {a:AsyncResult[io.vertx.ext.consul.CheckList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -438,7 +438,7 @@ package object consul{
      * Like [[healthChecksWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def healthChecksWithOptionsFuture(service: java.lang.String,options: io.vertx.ext.consul.CheckQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.CheckList] = {
-      val promise = Promise[io.vertx.ext.consul.CheckList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.CheckList]()
       asJava.healthChecksWithOptions(service, options, {a:AsyncResult[io.vertx.ext.consul.CheckList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -447,7 +447,7 @@ package object consul{
      * Like [[healthState]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def healthStateFuture(healthState: io.vertx.ext.consul.HealthState): scala.concurrent.Future[io.vertx.ext.consul.CheckList] = {
-      val promise = Promise[io.vertx.ext.consul.CheckList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.CheckList]()
       asJava.healthState(healthState, {a:AsyncResult[io.vertx.ext.consul.CheckList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -456,7 +456,7 @@ package object consul{
      * Like [[healthStateWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def healthStateWithOptionsFuture(healthState: io.vertx.ext.consul.HealthState,options: io.vertx.ext.consul.CheckQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.CheckList] = {
-      val promise = Promise[io.vertx.ext.consul.CheckList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.CheckList]()
       asJava.healthStateWithOptions(healthState, options, {a:AsyncResult[io.vertx.ext.consul.CheckList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -465,7 +465,7 @@ package object consul{
      * Like [[healthServiceNodes]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def healthServiceNodesFuture(service: java.lang.String,passing: java.lang.Boolean): scala.concurrent.Future[io.vertx.ext.consul.ServiceEntryList] = {
-      val promise = Promise[io.vertx.ext.consul.ServiceEntryList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.ServiceEntryList]()
       asJava.healthServiceNodes(service, passing, {a:AsyncResult[io.vertx.ext.consul.ServiceEntryList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -474,7 +474,7 @@ package object consul{
      * Like [[healthServiceNodesWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def healthServiceNodesWithOptionsFuture(service: java.lang.String,passing: java.lang.Boolean,options: io.vertx.ext.consul.ServiceQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.ServiceEntryList] = {
-      val promise = Promise[io.vertx.ext.consul.ServiceEntryList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.ServiceEntryList]()
       asJava.healthServiceNodesWithOptions(service, passing, options, {a:AsyncResult[io.vertx.ext.consul.ServiceEntryList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -483,7 +483,7 @@ package object consul{
      * Like [[catalogServices]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def catalogServicesFuture(): scala.concurrent.Future[io.vertx.ext.consul.ServiceList] = {
-      val promise = Promise[io.vertx.ext.consul.ServiceList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.ServiceList]()
       asJava.catalogServices({a:AsyncResult[io.vertx.ext.consul.ServiceList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -492,7 +492,7 @@ package object consul{
      * Like [[catalogServicesWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def catalogServicesWithOptionsFuture(options: io.vertx.ext.consul.BlockingQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.ServiceList] = {
-      val promise = Promise[io.vertx.ext.consul.ServiceList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.ServiceList]()
       asJava.catalogServicesWithOptions(options, {a:AsyncResult[io.vertx.ext.consul.ServiceList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -501,7 +501,7 @@ package object consul{
      * Like [[catalogNodeServices]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def catalogNodeServicesFuture(node: java.lang.String): scala.concurrent.Future[io.vertx.ext.consul.ServiceList] = {
-      val promise = Promise[io.vertx.ext.consul.ServiceList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.ServiceList]()
       asJava.catalogNodeServices(node, {a:AsyncResult[io.vertx.ext.consul.ServiceList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -510,7 +510,7 @@ package object consul{
      * Like [[catalogNodeServicesWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def catalogNodeServicesWithOptionsFuture(node: java.lang.String,options: io.vertx.ext.consul.BlockingQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.ServiceList] = {
-      val promise = Promise[io.vertx.ext.consul.ServiceList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.ServiceList]()
       asJava.catalogNodeServicesWithOptions(node, options, {a:AsyncResult[io.vertx.ext.consul.ServiceList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -519,7 +519,7 @@ package object consul{
      * Like [[localServices]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def localServicesFuture(): scala.concurrent.Future[java.util.List[io.vertx.ext.consul.Service]] = {
-      val promise = Promise[java.util.List[io.vertx.ext.consul.Service]]()
+      val promise = concurrent.Promise[java.util.List[io.vertx.ext.consul.Service]]()
       asJava.localServices({a:AsyncResult[java.util.List[io.vertx.ext.consul.Service]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -528,7 +528,7 @@ package object consul{
      * Like [[localChecks]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def localChecksFuture(): scala.concurrent.Future[java.util.List[io.vertx.ext.consul.Check]] = {
-      val promise = Promise[java.util.List[io.vertx.ext.consul.Check]]()
+      val promise = concurrent.Promise[java.util.List[io.vertx.ext.consul.Check]]()
       asJava.localChecks({a:AsyncResult[java.util.List[io.vertx.ext.consul.Check]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -537,7 +537,7 @@ package object consul{
      * Like [[registerCheck]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def registerCheckFuture(checkOptions: io.vertx.ext.consul.CheckOptions): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.registerCheck(checkOptions, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -546,7 +546,7 @@ package object consul{
      * Like [[deregisterCheck]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def deregisterCheckFuture(checkId: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.deregisterCheck(checkId, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -555,7 +555,7 @@ package object consul{
      * Like [[passCheck]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def passCheckFuture(checkId: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.passCheck(checkId, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -564,7 +564,7 @@ package object consul{
      * Like [[passCheckWithNote]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def passCheckWithNoteFuture(checkId: java.lang.String,note: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.passCheckWithNote(checkId, note, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -573,7 +573,7 @@ package object consul{
      * Like [[warnCheck]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def warnCheckFuture(checkId: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.warnCheck(checkId, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -582,7 +582,7 @@ package object consul{
      * Like [[warnCheckWithNote]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def warnCheckWithNoteFuture(checkId: java.lang.String,note: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.warnCheckWithNote(checkId, note, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -591,7 +591,7 @@ package object consul{
      * Like [[failCheck]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def failCheckFuture(checkId: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.failCheck(checkId, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -600,7 +600,7 @@ package object consul{
      * Like [[failCheckWithNote]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def failCheckWithNoteFuture(checkId: java.lang.String,note: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.failCheckWithNote(checkId, note, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -609,7 +609,7 @@ package object consul{
      * Like [[updateCheck]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def updateCheckFuture(checkId: java.lang.String,status: io.vertx.ext.consul.CheckStatus): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.updateCheck(checkId, status, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -618,7 +618,7 @@ package object consul{
      * Like [[updateCheckWithNote]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def updateCheckWithNoteFuture(checkId: java.lang.String,status: io.vertx.ext.consul.CheckStatus,note: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.updateCheckWithNote(checkId, status, note, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -627,7 +627,7 @@ package object consul{
      * Like [[leaderStatus]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def leaderStatusFuture(): scala.concurrent.Future[java.lang.String] = {
-      val promise = Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]()
       asJava.leaderStatus({a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -636,7 +636,7 @@ package object consul{
      * Like [[peersStatus]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def peersStatusFuture(): scala.concurrent.Future[java.util.List[java.lang.String]] = {
-      val promise = Promise[java.util.List[java.lang.String]]()
+      val promise = concurrent.Promise[java.util.List[java.lang.String]]()
       asJava.peersStatus({a:AsyncResult[java.util.List[java.lang.String]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -645,7 +645,7 @@ package object consul{
      * Like [[createSession]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def createSessionFuture(): scala.concurrent.Future[java.lang.String] = {
-      val promise = Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]()
       asJava.createSession({a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -654,7 +654,7 @@ package object consul{
      * Like [[createSessionWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def createSessionWithOptionsFuture(options: io.vertx.ext.consul.SessionOptions): scala.concurrent.Future[java.lang.String] = {
-      val promise = Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]()
       asJava.createSessionWithOptions(options, {a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -663,7 +663,7 @@ package object consul{
      * Like [[infoSession]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def infoSessionFuture(id: java.lang.String): scala.concurrent.Future[io.vertx.ext.consul.Session] = {
-      val promise = Promise[io.vertx.ext.consul.Session]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.Session]()
       asJava.infoSession(id, {a:AsyncResult[io.vertx.ext.consul.Session] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -672,7 +672,7 @@ package object consul{
      * Like [[infoSessionWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def infoSessionWithOptionsFuture(id: java.lang.String,options: io.vertx.ext.consul.BlockingQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.Session] = {
-      val promise = Promise[io.vertx.ext.consul.Session]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.Session]()
       asJava.infoSessionWithOptions(id, options, {a:AsyncResult[io.vertx.ext.consul.Session] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -681,7 +681,7 @@ package object consul{
      * Like [[renewSession]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def renewSessionFuture(id: java.lang.String): scala.concurrent.Future[io.vertx.ext.consul.Session] = {
-      val promise = Promise[io.vertx.ext.consul.Session]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.Session]()
       asJava.renewSession(id, {a:AsyncResult[io.vertx.ext.consul.Session] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -690,7 +690,7 @@ package object consul{
      * Like [[listSessions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def listSessionsFuture(): scala.concurrent.Future[io.vertx.ext.consul.SessionList] = {
-      val promise = Promise[io.vertx.ext.consul.SessionList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.SessionList]()
       asJava.listSessions({a:AsyncResult[io.vertx.ext.consul.SessionList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -699,7 +699,7 @@ package object consul{
      * Like [[listSessionsWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def listSessionsWithOptionsFuture(options: io.vertx.ext.consul.BlockingQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.SessionList] = {
-      val promise = Promise[io.vertx.ext.consul.SessionList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.SessionList]()
       asJava.listSessionsWithOptions(options, {a:AsyncResult[io.vertx.ext.consul.SessionList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -708,7 +708,7 @@ package object consul{
      * Like [[listNodeSessions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def listNodeSessionsFuture(nodeId: java.lang.String): scala.concurrent.Future[io.vertx.ext.consul.SessionList] = {
-      val promise = Promise[io.vertx.ext.consul.SessionList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.SessionList]()
       asJava.listNodeSessions(nodeId, {a:AsyncResult[io.vertx.ext.consul.SessionList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -717,7 +717,7 @@ package object consul{
      * Like [[listNodeSessionsWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def listNodeSessionsWithOptionsFuture(nodeId: java.lang.String,options: io.vertx.ext.consul.BlockingQueryOptions): scala.concurrent.Future[io.vertx.ext.consul.SessionList] = {
-      val promise = Promise[io.vertx.ext.consul.SessionList]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.SessionList]()
       asJava.listNodeSessionsWithOptions(nodeId, options, {a:AsyncResult[io.vertx.ext.consul.SessionList] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -726,7 +726,7 @@ package object consul{
      * Like [[destroySession]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def destroySessionFuture(id: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.destroySession(id, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -735,7 +735,7 @@ package object consul{
      * Like [[createPreparedQuery]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def createPreparedQueryFuture(definition: io.vertx.ext.consul.PreparedQueryDefinition): scala.concurrent.Future[java.lang.String] = {
-      val promise = Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]()
       asJava.createPreparedQuery(definition, {a:AsyncResult[java.lang.String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -744,7 +744,7 @@ package object consul{
      * Like [[getPreparedQuery]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getPreparedQueryFuture(id: java.lang.String): scala.concurrent.Future[io.vertx.ext.consul.PreparedQueryDefinition] = {
-      val promise = Promise[io.vertx.ext.consul.PreparedQueryDefinition]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.PreparedQueryDefinition]()
       asJava.getPreparedQuery(id, {a:AsyncResult[io.vertx.ext.consul.PreparedQueryDefinition] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -753,7 +753,7 @@ package object consul{
      * Like [[getAllPreparedQueries]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getAllPreparedQueriesFuture(): scala.concurrent.Future[java.util.List[io.vertx.ext.consul.PreparedQueryDefinition]] = {
-      val promise = Promise[java.util.List[io.vertx.ext.consul.PreparedQueryDefinition]]()
+      val promise = concurrent.Promise[java.util.List[io.vertx.ext.consul.PreparedQueryDefinition]]()
       asJava.getAllPreparedQueries({a:AsyncResult[java.util.List[io.vertx.ext.consul.PreparedQueryDefinition]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -762,7 +762,7 @@ package object consul{
      * Like [[updatePreparedQuery]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def updatePreparedQueryFuture(definition: io.vertx.ext.consul.PreparedQueryDefinition): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.updatePreparedQuery(definition, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -771,7 +771,7 @@ package object consul{
      * Like [[deletePreparedQuery]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def deletePreparedQueryFuture(id: java.lang.String): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.deletePreparedQuery(id, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -780,7 +780,7 @@ package object consul{
      * Like [[executePreparedQuery]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def executePreparedQueryFuture(query: java.lang.String): scala.concurrent.Future[io.vertx.ext.consul.PreparedQueryExecuteResponse] = {
-      val promise = Promise[io.vertx.ext.consul.PreparedQueryExecuteResponse]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.PreparedQueryExecuteResponse]()
       asJava.executePreparedQuery(query, {a:AsyncResult[io.vertx.ext.consul.PreparedQueryExecuteResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -789,7 +789,7 @@ package object consul{
      * Like [[executePreparedQueryWithOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.vertx.ext.consul.PreparedQueryExecuteOptions): scala.concurrent.Future[io.vertx.ext.consul.PreparedQueryExecuteResponse] = {
-      val promise = Promise[io.vertx.ext.consul.PreparedQueryExecuteResponse]()
+      val promise = concurrent.Promise[io.vertx.ext.consul.PreparedQueryExecuteResponse]()
       asJava.executePreparedQueryWithOptions(query, options, {a:AsyncResult[io.vertx.ext.consul.PreparedQueryExecuteResponse] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1076,10 +1076,82 @@ package object consul{
 
 
 
-  type Watch[T] = io.vertx.ext.consul.Watch[T]
+  object Watch {
+    /**
+     * Like [[key]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def key(key: java.lang.String,vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.consul.Watch.key(key, vertx)
+    }
+    /**
+     * Like [[key]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def key(key: java.lang.String,vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOptions) = {
+      io.vertx.ext.consul.Watch.key(key, vertx, options)
+    }
+    /**
+     * Like [[keyPrefix]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def keyPrefix(keyPrefix: java.lang.String,vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.consul.Watch.keyPrefix(keyPrefix, vertx)
+    }
+    /**
+     * Like [[keyPrefix]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def keyPrefix(keyPrefix: java.lang.String,vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOptions) = {
+      io.vertx.ext.consul.Watch.keyPrefix(keyPrefix, vertx, options)
+    }
+    /**
+     * Like [[services]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def services(vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.consul.Watch.services(vertx)
+    }
+    /**
+     * Like [[services]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def services(vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOptions) = {
+      io.vertx.ext.consul.Watch.services(vertx, options)
+    }
+    /**
+     * Like [[service]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def service(service: java.lang.String,vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.consul.Watch.service(service, vertx)
+    }
+    /**
+     * Like [[service]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def service(service: java.lang.String,vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOptions) = {
+      io.vertx.ext.consul.Watch.service(service, vertx, options)
+    }
+    /**
+     * Like [[events]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def events(event: java.lang.String,vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.consul.Watch.events(event, vertx)
+    }
+    /**
+     * Like [[events]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def events(event: java.lang.String,vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOptions) = {
+      io.vertx.ext.consul.Watch.events(event, vertx, options)
+    }
+    /**
+     * Like [[nodes]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def nodes(vertx: io.vertx.core.Vertx) = {
+      io.vertx.ext.consul.Watch.nodes(vertx)
+    }
+    /**
+     * Like [[nodes]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def nodes(vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOptions) = {
+      io.vertx.ext.consul.Watch.nodes(vertx, options)
+    }
+  }
 
 
-  type WatchResult[T] = io.vertx.ext.consul.WatchResult[T]
 
 
 }

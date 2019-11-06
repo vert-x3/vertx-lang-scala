@@ -44,13 +44,13 @@ package object jdbc{
   implicit class JDBCClientScala(val asJava: io.vertx.ext.jdbc.JDBCClient) extends AnyVal {
 
     def querySingleFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
-      val promise = Promise[io.vertx.core.json.JsonArray]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
       asJava.querySingle(sql, {a:AsyncResult[io.vertx.core.json.JsonArray] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
     def querySingleWithParamsFuture(sql: java.lang.String,arguments: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
-      val promise = Promise[io.vertx.core.json.JsonArray]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
       asJava.querySingleWithParams(sql, arguments, {a:AsyncResult[io.vertx.core.json.JsonArray] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }

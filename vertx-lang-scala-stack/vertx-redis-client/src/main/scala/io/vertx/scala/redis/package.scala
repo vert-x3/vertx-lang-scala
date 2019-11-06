@@ -29,7 +29,14 @@ import io.vertx.redis.client.{Request => JRequest}
 
 package object redis{
 
-  type Command = io.vertx.redis.client.Command
+  object Command {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(command: java.lang.String,arity: java.lang.Integer,firstKey: java.lang.Integer,lastKey: java.lang.Integer,interval: java.lang.Integer,readOnly: java.lang.Boolean,movable: java.lang.Boolean) = {
+      io.vertx.redis.client.Command.create(command, arity, firstKey, lastKey, interval, readOnly, movable)
+    }
+  }
 
 
 
@@ -44,7 +51,7 @@ package object redis{
      * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def connectFuture(): scala.concurrent.Future[io.vertx.redis.client.RedisConnection] = {
-      val promise = Promise[io.vertx.redis.client.RedisConnection]()
+      val promise = concurrent.Promise[io.vertx.redis.client.RedisConnection]()
       asJava.connect({a:AsyncResult[io.vertx.redis.client.RedisConnection] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -53,7 +60,7 @@ package object redis{
      * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sendFuture(command: io.vertx.redis.client.Request): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.send(command, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -62,7 +69,7 @@ package object redis{
      * Like [[batch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def batchFuture(commands: java.util.List[io.vertx.redis.client.Request]): scala.concurrent.Future[java.util.List[io.vertx.redis.client.Response]] = {
-      val promise = Promise[java.util.List[io.vertx.redis.client.Response]]()
+      val promise = concurrent.Promise[java.util.List[io.vertx.redis.client.Response]]()
       asJava.batch(commands, {a:AsyncResult[java.util.List[io.vertx.redis.client.Response]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -82,7 +89,7 @@ package object redis{
      * Like [[append]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def appendFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.append(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -91,7 +98,7 @@ package object redis{
      * Like [[asking]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def askingFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.asking({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -100,7 +107,7 @@ package object redis{
      * Like [[auth]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def authFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.auth(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -109,7 +116,7 @@ package object redis{
      * Like [[bgrewriteaof]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def bgrewriteaofFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.bgrewriteaof({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -118,7 +125,7 @@ package object redis{
      * Like [[bgsave]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def bgsaveFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.bgsave(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -127,7 +134,7 @@ package object redis{
      * Like [[bitcount]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def bitcountFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.bitcount(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -136,7 +143,7 @@ package object redis{
      * Like [[bitfield]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def bitfieldFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.bitfield(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -145,7 +152,7 @@ package object redis{
      * Like [[bitop]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def bitopFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.bitop(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -154,7 +161,7 @@ package object redis{
      * Like [[bitpos]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def bitposFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.bitpos(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -163,7 +170,7 @@ package object redis{
      * Like [[blpop]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def blpopFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.blpop(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -172,7 +179,7 @@ package object redis{
      * Like [[brpop]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def brpopFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.brpop(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -181,7 +188,7 @@ package object redis{
      * Like [[brpoplpush]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def brpoplpushFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.brpoplpush(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -190,7 +197,7 @@ package object redis{
      * Like [[bzpopmax]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def bzpopmaxFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.bzpopmax(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -199,7 +206,7 @@ package object redis{
      * Like [[bzpopmin]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def bzpopminFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.bzpopmin(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -208,7 +215,7 @@ package object redis{
      * Like [[client]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def clientFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.client(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -217,7 +224,7 @@ package object redis{
      * Like [[cluster]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def clusterFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.cluster(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -226,7 +233,7 @@ package object redis{
      * Like [[command]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def commandFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.command({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -235,7 +242,7 @@ package object redis{
      * Like [[config]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def configFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.config(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -244,7 +251,7 @@ package object redis{
      * Like [[dbsize]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def dbsizeFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.dbsize({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -253,7 +260,7 @@ package object redis{
      * Like [[debug]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def debugFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.debug(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -262,7 +269,7 @@ package object redis{
      * Like [[decr]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def decrFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.decr(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -271,7 +278,7 @@ package object redis{
      * Like [[decrby]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def decrbyFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.decrby(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -280,7 +287,7 @@ package object redis{
      * Like [[del]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def delFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.del(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -289,7 +296,7 @@ package object redis{
      * Like [[discard]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def discardFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.discard({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -298,7 +305,7 @@ package object redis{
      * Like [[dump]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def dumpFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.dump(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -307,7 +314,7 @@ package object redis{
      * Like [[echo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def echoFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.echo(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -316,7 +323,7 @@ package object redis{
      * Like [[eval]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def evalFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.eval(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -325,7 +332,7 @@ package object redis{
      * Like [[evalsha]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def evalshaFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.evalsha(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -334,7 +341,7 @@ package object redis{
      * Like [[exec]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def execFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.exec({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -343,7 +350,7 @@ package object redis{
      * Like [[exists]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def existsFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.exists(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -352,7 +359,7 @@ package object redis{
      * Like [[expire]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def expireFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.expire(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -361,7 +368,7 @@ package object redis{
      * Like [[expireat]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def expireatFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.expireat(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -370,7 +377,7 @@ package object redis{
      * Like [[flushall]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def flushallFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.flushall(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -379,7 +386,7 @@ package object redis{
      * Like [[flushdb]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def flushdbFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.flushdb(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -388,7 +395,7 @@ package object redis{
      * Like [[geoadd]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def geoaddFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.geoadd(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -397,7 +404,7 @@ package object redis{
      * Like [[geodist]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def geodistFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.geodist(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -406,7 +413,7 @@ package object redis{
      * Like [[geohash]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def geohashFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.geohash(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -415,7 +422,7 @@ package object redis{
      * Like [[geopos]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def geoposFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.geopos(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -424,7 +431,7 @@ package object redis{
      * Like [[georadius]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def georadiusFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.georadius(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -433,7 +440,7 @@ package object redis{
      * Like [[georadiusRo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def georadiusRoFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.georadiusRo(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -442,7 +449,7 @@ package object redis{
      * Like [[georadiusbymember]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def georadiusbymemberFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.georadiusbymember(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -451,7 +458,7 @@ package object redis{
      * Like [[georadiusbymemberRo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def georadiusbymemberRoFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.georadiusbymemberRo(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -460,7 +467,7 @@ package object redis{
      * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.get(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -469,7 +476,7 @@ package object redis{
      * Like [[getbit]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getbitFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.getbit(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -478,7 +485,7 @@ package object redis{
      * Like [[getrange]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getrangeFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.getrange(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -487,7 +494,7 @@ package object redis{
      * Like [[getset]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def getsetFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.getset(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -496,7 +503,7 @@ package object redis{
      * Like [[hdel]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hdelFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hdel(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -505,7 +512,7 @@ package object redis{
      * Like [[hexists]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hexistsFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hexists(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -514,7 +521,7 @@ package object redis{
      * Like [[hget]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hgetFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hget(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -523,7 +530,7 @@ package object redis{
      * Like [[hgetall]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hgetallFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hgetall(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -532,7 +539,7 @@ package object redis{
      * Like [[hincrby]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hincrbyFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hincrby(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -541,7 +548,7 @@ package object redis{
      * Like [[hincrbyfloat]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hincrbyfloatFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hincrbyfloat(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -550,7 +557,7 @@ package object redis{
      * Like [[hkeys]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hkeysFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hkeys(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -559,7 +566,7 @@ package object redis{
      * Like [[hlen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hlenFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hlen(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -568,7 +575,7 @@ package object redis{
      * Like [[hmget]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hmgetFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hmget(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -577,7 +584,7 @@ package object redis{
      * Like [[hmset]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hmsetFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hmset(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -586,7 +593,7 @@ package object redis{
      * Like [[host]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hostFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.host(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -595,7 +602,7 @@ package object redis{
      * Like [[hscan]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hscanFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hscan(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -604,7 +611,7 @@ package object redis{
      * Like [[hset]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hsetFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hset(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -613,7 +620,7 @@ package object redis{
      * Like [[hsetnx]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hsetnxFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hsetnx(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -622,7 +629,7 @@ package object redis{
      * Like [[hstrlen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hstrlenFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hstrlen(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -631,7 +638,7 @@ package object redis{
      * Like [[hvals]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def hvalsFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.hvals(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -640,7 +647,7 @@ package object redis{
      * Like [[incr]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def incrFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.incr(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -649,7 +656,7 @@ package object redis{
      * Like [[incrby]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def incrbyFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.incrby(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -658,7 +665,7 @@ package object redis{
      * Like [[incrbyfloat]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def incrbyfloatFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.incrbyfloat(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -667,7 +674,7 @@ package object redis{
      * Like [[info]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def infoFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.info(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -676,7 +683,7 @@ package object redis{
      * Like [[keys]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def keysFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.keys(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -685,7 +692,7 @@ package object redis{
      * Like [[lastsave]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def lastsaveFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.lastsave({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -694,7 +701,7 @@ package object redis{
      * Like [[latency]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def latencyFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.latency(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -703,7 +710,7 @@ package object redis{
      * Like [[lindex]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def lindexFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.lindex(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -712,7 +719,7 @@ package object redis{
      * Like [[linsert]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def linsertFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String,arg3: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.linsert(arg0, arg1, arg2, arg3, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -721,7 +728,7 @@ package object redis{
      * Like [[llen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def llenFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.llen(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -730,7 +737,7 @@ package object redis{
      * Like [[lolwut]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def lolwutFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.lolwut(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -739,7 +746,7 @@ package object redis{
      * Like [[lpop]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def lpopFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.lpop(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -748,7 +755,7 @@ package object redis{
      * Like [[lpush]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def lpushFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.lpush(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -757,7 +764,7 @@ package object redis{
      * Like [[lpushx]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def lpushxFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.lpushx(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -766,7 +773,7 @@ package object redis{
      * Like [[lrange]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def lrangeFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.lrange(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -775,7 +782,7 @@ package object redis{
      * Like [[lrem]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def lremFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.lrem(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -784,7 +791,7 @@ package object redis{
      * Like [[lset]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def lsetFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.lset(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -793,7 +800,7 @@ package object redis{
      * Like [[ltrim]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def ltrimFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.ltrim(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -802,7 +809,7 @@ package object redis{
      * Like [[memory]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def memoryFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.memory(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -811,7 +818,7 @@ package object redis{
      * Like [[mget]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def mgetFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.mget(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -820,7 +827,7 @@ package object redis{
      * Like [[migrate]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def migrateFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.migrate(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -829,7 +836,7 @@ package object redis{
      * Like [[module]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def moduleFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.module(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -838,7 +845,7 @@ package object redis{
      * Like [[monitor]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def monitorFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.monitor({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -847,7 +854,7 @@ package object redis{
      * Like [[move]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def moveFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.move(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -856,7 +863,7 @@ package object redis{
      * Like [[mset]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def msetFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.mset(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -865,7 +872,7 @@ package object redis{
      * Like [[msetnx]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def msetnxFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.msetnx(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -874,7 +881,7 @@ package object redis{
      * Like [[multi]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def multiFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.multi({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -883,7 +890,7 @@ package object redis{
      * Like [[object]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def objectFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.`object`(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -892,7 +899,7 @@ package object redis{
      * Like [[persist]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def persistFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.persist(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -901,7 +908,7 @@ package object redis{
      * Like [[pexpire]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def pexpireFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.pexpire(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -910,7 +917,7 @@ package object redis{
      * Like [[pexpireat]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def pexpireatFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.pexpireat(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -919,7 +926,7 @@ package object redis{
      * Like [[pfadd]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def pfaddFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.pfadd(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -928,7 +935,7 @@ package object redis{
      * Like [[pfcount]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def pfcountFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.pfcount(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -937,7 +944,7 @@ package object redis{
      * Like [[pfdebug]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def pfdebugFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.pfdebug(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -946,7 +953,7 @@ package object redis{
      * Like [[pfmerge]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def pfmergeFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.pfmerge(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -955,7 +962,7 @@ package object redis{
      * Like [[pfselftest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def pfselftestFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.pfselftest({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -964,7 +971,7 @@ package object redis{
      * Like [[ping]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def pingFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.ping(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -973,7 +980,7 @@ package object redis{
      * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def postFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.post(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -982,7 +989,7 @@ package object redis{
      * Like [[psetex]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def psetexFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.psetex(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -991,7 +998,7 @@ package object redis{
      * Like [[psubscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def psubscribeFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.psubscribe(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1000,7 +1007,7 @@ package object redis{
      * Like [[psync]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def psyncFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.psync(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1009,7 +1016,7 @@ package object redis{
      * Like [[pttl]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def pttlFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.pttl(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1018,7 +1025,7 @@ package object redis{
      * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def publishFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.publish(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1027,7 +1034,7 @@ package object redis{
      * Like [[pubsub]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def pubsubFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.pubsub(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1036,7 +1043,7 @@ package object redis{
      * Like [[punsubscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def punsubscribeFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.punsubscribe(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1045,7 +1052,7 @@ package object redis{
      * Like [[randomkey]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def randomkeyFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.randomkey({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1054,7 +1061,7 @@ package object redis{
      * Like [[readonly]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def readonlyFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.readonly({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1063,7 +1070,7 @@ package object redis{
      * Like [[readwrite]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def readwriteFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.readwrite({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1072,7 +1079,7 @@ package object redis{
      * Like [[rename]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def renameFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.rename(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1081,7 +1088,7 @@ package object redis{
      * Like [[renamenx]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def renamenxFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.renamenx(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1090,7 +1097,7 @@ package object redis{
      * Like [[replconf]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def replconfFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.replconf(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1099,7 +1106,7 @@ package object redis{
      * Like [[replicaof]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def replicaofFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.replicaof(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1108,7 +1115,7 @@ package object redis{
      * Like [[restore]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def restoreFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.restore(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1117,7 +1124,7 @@ package object redis{
      * Like [[restoreAsking]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def restoreAskingFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.restoreAsking(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1126,7 +1133,7 @@ package object redis{
      * Like [[role]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def roleFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.role({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1135,7 +1142,7 @@ package object redis{
      * Like [[rpop]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def rpopFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.rpop(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1144,7 +1151,7 @@ package object redis{
      * Like [[rpoplpush]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def rpoplpushFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.rpoplpush(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1153,7 +1160,7 @@ package object redis{
      * Like [[rpush]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def rpushFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.rpush(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1162,7 +1169,7 @@ package object redis{
      * Like [[rpushx]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def rpushxFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.rpushx(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1171,7 +1178,7 @@ package object redis{
      * Like [[sadd]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def saddFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.sadd(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1180,7 +1187,7 @@ package object redis{
      * Like [[save]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def saveFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.save({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1189,7 +1196,7 @@ package object redis{
      * Like [[scan]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def scanFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.scan(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1198,7 +1205,7 @@ package object redis{
      * Like [[scard]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def scardFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.scard(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1207,7 +1214,7 @@ package object redis{
      * Like [[script]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def scriptFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.script(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1216,7 +1223,7 @@ package object redis{
      * Like [[sdiff]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sdiffFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.sdiff(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1225,7 +1232,7 @@ package object redis{
      * Like [[sdiffstore]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sdiffstoreFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.sdiffstore(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1234,7 +1241,7 @@ package object redis{
      * Like [[select]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def selectFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.select(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1243,7 +1250,7 @@ package object redis{
      * Like [[set]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def setFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.set(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1252,7 +1259,7 @@ package object redis{
      * Like [[setbit]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def setbitFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.setbit(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1261,7 +1268,7 @@ package object redis{
      * Like [[setex]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def setexFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.setex(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1270,7 +1277,7 @@ package object redis{
      * Like [[setnx]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def setnxFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.setnx(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1279,7 +1286,7 @@ package object redis{
      * Like [[setrange]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def setrangeFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.setrange(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1288,7 +1295,7 @@ package object redis{
      * Like [[shutdown]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def shutdownFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.shutdown(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1297,7 +1304,7 @@ package object redis{
      * Like [[sinter]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sinterFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.sinter(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1306,7 +1313,7 @@ package object redis{
      * Like [[sinterstore]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sinterstoreFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.sinterstore(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1315,7 +1322,7 @@ package object redis{
      * Like [[sismember]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sismemberFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.sismember(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1324,7 +1331,7 @@ package object redis{
      * Like [[slaveof]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def slaveofFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.slaveof(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1333,7 +1340,7 @@ package object redis{
      * Like [[slowlog]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def slowlogFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.slowlog(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1342,7 +1349,7 @@ package object redis{
      * Like [[smembers]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def smembersFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.smembers(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1351,7 +1358,7 @@ package object redis{
      * Like [[smove]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def smoveFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.smove(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1360,7 +1367,7 @@ package object redis{
      * Like [[sort]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sortFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.sort(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1369,7 +1376,7 @@ package object redis{
      * Like [[spop]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def spopFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.spop(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1378,7 +1385,7 @@ package object redis{
      * Like [[srandmember]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def srandmemberFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.srandmember(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1387,7 +1394,7 @@ package object redis{
      * Like [[srem]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sremFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.srem(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1396,7 +1403,7 @@ package object redis{
      * Like [[sscan]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sscanFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.sscan(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1405,7 +1412,7 @@ package object redis{
      * Like [[strlen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def strlenFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.strlen(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1414,7 +1421,7 @@ package object redis{
      * Like [[subscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def subscribeFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.subscribe(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1423,7 +1430,7 @@ package object redis{
      * Like [[substr]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def substrFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.substr(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1432,7 +1439,7 @@ package object redis{
      * Like [[sunion]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sunionFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.sunion(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1441,7 +1448,7 @@ package object redis{
      * Like [[sunionstore]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sunionstoreFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.sunionstore(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1450,7 +1457,7 @@ package object redis{
      * Like [[swapdb]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def swapdbFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.swapdb(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1459,7 +1466,7 @@ package object redis{
      * Like [[sync]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def syncFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.sync({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1468,7 +1475,7 @@ package object redis{
      * Like [[time]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def timeFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.time({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1477,7 +1484,7 @@ package object redis{
      * Like [[touch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def touchFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.touch(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1486,7 +1493,7 @@ package object redis{
      * Like [[ttl]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def ttlFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.ttl(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1495,7 +1502,7 @@ package object redis{
      * Like [[type]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def typeFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.`type`(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1504,7 +1511,7 @@ package object redis{
      * Like [[unlink]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def unlinkFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.unlink(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1513,7 +1520,7 @@ package object redis{
      * Like [[unsubscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def unsubscribeFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.unsubscribe(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1522,7 +1529,7 @@ package object redis{
      * Like [[unwatch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def unwatchFuture(): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.unwatch({a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1531,7 +1538,7 @@ package object redis{
      * Like [[wait]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def waitFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.wait(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1540,7 +1547,7 @@ package object redis{
      * Like [[watch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def watchFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.watch(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1549,7 +1556,7 @@ package object redis{
      * Like [[xack]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xackFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xack(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1558,7 +1565,7 @@ package object redis{
      * Like [[xadd]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xaddFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xadd(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1567,7 +1574,7 @@ package object redis{
      * Like [[xclaim]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xclaimFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xclaim(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1576,7 +1583,7 @@ package object redis{
      * Like [[xdel]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xdelFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xdel(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1585,7 +1592,7 @@ package object redis{
      * Like [[xgroup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xgroupFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xgroup(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1594,7 +1601,7 @@ package object redis{
      * Like [[xinfo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xinfoFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xinfo(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1603,7 +1610,7 @@ package object redis{
      * Like [[xlen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xlenFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xlen(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1612,7 +1619,7 @@ package object redis{
      * Like [[xpending]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xpendingFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xpending(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1621,7 +1628,7 @@ package object redis{
      * Like [[xrange]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xrangeFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xrange(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1630,7 +1637,7 @@ package object redis{
      * Like [[xread]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xreadFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xread(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1639,7 +1646,7 @@ package object redis{
      * Like [[xreadgroup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xreadgroupFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xreadgroup(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1648,7 +1655,7 @@ package object redis{
      * Like [[xrevrange]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xrevrangeFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xrevrange(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1657,7 +1664,7 @@ package object redis{
      * Like [[xsetid]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xsetidFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xsetid(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1666,7 +1673,7 @@ package object redis{
      * Like [[xtrim]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def xtrimFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.xtrim(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1675,7 +1682,7 @@ package object redis{
      * Like [[zadd]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zaddFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zadd(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1684,7 +1691,7 @@ package object redis{
      * Like [[zcard]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zcardFuture(arg0: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zcard(arg0, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1693,7 +1700,7 @@ package object redis{
      * Like [[zcount]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zcountFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zcount(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1702,7 +1709,7 @@ package object redis{
      * Like [[zincrby]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zincrbyFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zincrby(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1711,7 +1718,7 @@ package object redis{
      * Like [[zinterstore]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zinterstoreFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zinterstore(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1720,7 +1727,7 @@ package object redis{
      * Like [[zlexcount]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zlexcountFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zlexcount(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1729,7 +1736,7 @@ package object redis{
      * Like [[zpopmax]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zpopmaxFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zpopmax(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1738,7 +1745,7 @@ package object redis{
      * Like [[zpopmin]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zpopminFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zpopmin(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1747,7 +1754,7 @@ package object redis{
      * Like [[zrange]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zrangeFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zrange(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1756,7 +1763,7 @@ package object redis{
      * Like [[zrangebylex]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zrangebylexFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zrangebylex(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1765,7 +1772,7 @@ package object redis{
      * Like [[zrangebyscore]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zrangebyscoreFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zrangebyscore(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1774,7 +1781,7 @@ package object redis{
      * Like [[zrank]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zrankFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zrank(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1783,7 +1790,7 @@ package object redis{
      * Like [[zrem]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zremFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zrem(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1792,7 +1799,7 @@ package object redis{
      * Like [[zremrangebylex]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zremrangebylexFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zremrangebylex(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1801,7 +1808,7 @@ package object redis{
      * Like [[zremrangebyrank]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zremrangebyrankFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zremrangebyrank(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1810,7 +1817,7 @@ package object redis{
      * Like [[zremrangebyscore]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zremrangebyscoreFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zremrangebyscore(arg0, arg1, arg2, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1819,7 +1826,7 @@ package object redis{
      * Like [[zrevrange]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zrevrangeFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zrevrange(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1828,7 +1835,7 @@ package object redis{
      * Like [[zrevrangebylex]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zrevrangebylexFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zrevrangebylex(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1837,7 +1844,7 @@ package object redis{
      * Like [[zrevrangebyscore]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zrevrangebyscoreFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zrevrangebyscore(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1846,7 +1853,7 @@ package object redis{
      * Like [[zrevrank]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zrevrankFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zrevrank(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1855,7 +1862,7 @@ package object redis{
      * Like [[zscan]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zscanFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zscan(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1864,7 +1871,7 @@ package object redis{
      * Like [[zscore]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zscoreFuture(arg0: java.lang.String,arg1: java.lang.String): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zscore(arg0, arg1, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1873,7 +1880,7 @@ package object redis{
      * Like [[zunionstore]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def zunionstoreFuture(args: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.zunionstore(args, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1914,7 +1921,7 @@ package object redis{
     }
 
     def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.redis.client.Response]): scala.concurrent.Future[Unit] = {
-      val promise = Promise[Unit]()
+      val promise = concurrent.Promise[Unit]()
       asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1923,7 +1930,7 @@ package object redis{
      * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def sendFuture(command: io.vertx.redis.client.Request): scala.concurrent.Future[io.vertx.redis.client.Response] = {
-      val promise = Promise[io.vertx.redis.client.Response]()
+      val promise = concurrent.Promise[io.vertx.redis.client.Response]()
       asJava.send(command, {a:AsyncResult[io.vertx.redis.client.Response] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1932,7 +1939,7 @@ package object redis{
      * Like [[batch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def batchFuture(commands: java.util.List[io.vertx.redis.client.Request]): scala.concurrent.Future[java.util.List[io.vertx.redis.client.Response]] = {
-      val promise = Promise[java.util.List[io.vertx.redis.client.Response]]()
+      val promise = concurrent.Promise[java.util.List[io.vertx.redis.client.Response]]()
       asJava.batch(commands, {a:AsyncResult[java.util.List[io.vertx.redis.client.Response]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
@@ -1949,10 +1956,13 @@ package object redis{
 
 
 
-  type Request = io.vertx.redis.client.Request
+  object Request {
+    def cmd(command: io.vertx.redis.client.Command) = {
+      io.vertx.redis.client.Request.cmd(command)
+    }
+  }
 
 
-  type Response = io.vertx.redis.client.Response
 
 
 }
