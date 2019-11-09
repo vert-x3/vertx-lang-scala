@@ -48,11 +48,6 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-consul-service-scala_2.13</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-mqtt-scala_2.13</artifactId>
       <version>${stack.version}</version>
     </dependency>
@@ -74,11 +69,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-mongo-client-scala_2.13</artifactId>
-      <version>${stack.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-mongo-service-scala_2.13</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>
