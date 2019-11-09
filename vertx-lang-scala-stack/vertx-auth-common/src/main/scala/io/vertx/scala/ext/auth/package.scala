@@ -23,15 +23,18 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import scala.concurrent.Promise
 
-import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.core
-import io.vertx.core.{Future => JFuture}
-import io.vertx.ext.auth.{User => JUser}
-import io.vertx.core.json.JsonObject
-import io.vertx.core.AsyncResult
-import io.vertx.core.Handler
+import io.vertx.ext.auth.{AndAuthorization => JAndAuthorization}
+import io.vertx.ext.auth.{Authorization => JAuthorization}
+import scala.collection.JavaConverters._
 
 package object auth{
+
+  object AndAuthorization {
+    def create() = {
+      io.vertx.ext.auth.AndAuthorization.create()
+    }
+  }
+
 
 
 
@@ -51,6 +54,87 @@ package object auth{
     def authenticateFuture(authInfo: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.ext.auth.User] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.User]()
       asJava.authenticate(authInfo, {a:AsyncResult[io.vertx.ext.auth.User] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
+
+
+  /**
+    * Generic interface to fetch user related information from a server backend.
+    *
+    * All methods of this interface are optional.
+    */
+
+  implicit class AuthStoreScala(val asJava: io.vertx.ext.auth.AuthStore) extends AnyVal {
+
+    /**
+     * Like [[getUserCredentialsByName]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getUserCredentialsByNameFuture(username: java.lang.String): scala.concurrent.Future[java.util.List[io.vertx.core.json.JsonObject]] = {
+      val promise = concurrent.Promise[java.util.List[io.vertx.core.json.JsonObject]]()
+      asJava.getUserCredentialsByName(username, {a:AsyncResult[java.util.List[io.vertx.core.json.JsonObject]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[getUserCredentialsById]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getUserCredentialsByIdFuture(rawId: java.lang.String): scala.concurrent.Future[java.util.List[io.vertx.core.json.JsonObject]] = {
+      val promise = concurrent.Promise[java.util.List[io.vertx.core.json.JsonObject]]()
+      asJava.getUserCredentialsById(rawId, {a:AsyncResult[java.util.List[io.vertx.core.json.JsonObject]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[updateUserCredential]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def updateUserCredentialFuture(id: java.lang.String,data: io.vertx.core.json.JsonObject,upsert: java.lang.Boolean): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.updateUserCredential(id, data, upsert, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[getUserRoles]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getUserRolesFuture(id: java.lang.String): scala.concurrent.Future[java.util.List[java.lang.String]] = {
+      val promise = concurrent.Promise[java.util.List[java.lang.String]]()
+      asJava.getUserRoles(id, {a:AsyncResult[java.util.List[java.lang.String]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[getUserPermissions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getUserPermissionsFuture(id: java.lang.String): scala.concurrent.Future[java.util.List[java.lang.String]] = {
+      val promise = concurrent.Promise[java.util.List[java.lang.String]]()
+      asJava.getUserPermissions(id, {a:AsyncResult[java.util.List[java.lang.String]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
+
+
+
+
+
+
+  /**
+    * The role of an AuthorizationProvider is to return a set of Authorization.
+    * Note that each AuthorizationProvider must provide its own unique Id
+    */
+
+  implicit class AuthorizationProviderScala(val asJava: io.vertx.ext.auth.AuthorizationProvider) extends AnyVal {
+
+    /**
+     * Like [[getAuthorizations]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def getAuthorizationsFuture(user: io.vertx.ext.auth.User): scala.concurrent.Future[java.util.Set[io.vertx.ext.auth.Authorization]] = {
+      val promise = concurrent.Promise[java.util.Set[io.vertx.ext.auth.Authorization]]()
+      asJava.getAuthorizations(user, {a:AsyncResult[java.util.Set[io.vertx.ext.auth.Authorization]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -88,6 +172,27 @@ package object auth{
 
 
 
+  object NotAuthorization {
+    def create(authorization: io.vertx.ext.auth.Authorization) = {
+      io.vertx.ext.auth.NotAuthorization.create(authorization)
+    }
+  }
+
+
+  object OrAuthorization {
+    def create() = {
+      io.vertx.ext.auth.OrAuthorization.create()
+    }
+  }
+
+
+  object PermissionBasedAuthorization {
+    def create(permission: java.lang.String) = {
+      io.vertx.ext.auth.PermissionBasedAuthorization.create(permission)
+    }
+  }
+
+
 
   type PubSecKeyOptions = io.vertx.ext.auth.PubSecKeyOptions
   object PubSecKeyOptions {
@@ -95,6 +200,13 @@ package object auth{
     def apply(json: JsonObject) = new PubSecKeyOptions(json)
   }
 
+
+
+  object RoleBasedAuthorization {
+    def create(role: java.lang.String) = {
+      io.vertx.ext.auth.RoleBasedAuthorization.create(role)
+    }
+  }
 
 
 
@@ -130,6 +242,13 @@ package object auth{
      */
     def current(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.auth.VertxContextPRNG.current(vertx)
+    }
+  }
+
+
+  object WildcardPermissionBasedAuthorization {
+    def create(permission: java.lang.String) = {
+      io.vertx.ext.auth.WildcardPermissionBasedAuthorization.create(permission)
     }
   }
 
