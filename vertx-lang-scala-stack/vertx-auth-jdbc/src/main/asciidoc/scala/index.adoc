@@ -1,7 +1,8 @@
 == JDBC Auth Provider implementation
 
-We provide an implementation of `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` which uses the Vert.x `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html[JDBCClient]`
-to perform authentication and authorisation against any JDBC compliant database. To use this project,
+We provide an implementation of `link:../../scaladocs/io/vertx/scala/ext/auth/authentication/AuthenticationProvider.html[AuthenticationProvider]` as well as
+`link:../../scaladocs/io/vertx/scala/ext/auth/authorization/AuthorizationProvider.html[AuthorizationProvider]` which uses the Vert.x `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html[JDBCClient]`
+to perform authentication and authorization against any JDBC compliant database. To use this project,
 add the following dependency to the _dependencies_ section of your build descriptor:
 
 * Maven (in your `pom.xml`):
@@ -25,26 +26,26 @@ compile 'io.vertx:vertx-auth-jdbc:${maven.version}'
 To create an instance you first need an instance of `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html[JDBCClient]`. To learn how to create one
 of those please consult the documentation for the JDBC client.
 
-Once you've got one of those you can create a `link:../../scaladocs/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html[JDBCAuth]` instance as follows:
+Once you've got one of those you can create a `link:../../scaladocs/io/vertx/scala/ext/auth/jdbc/JDBCAuthentication.html[JDBCAuthentication]` instance as follows:
 
 [source,scala]
 ----
 
 var jdbcClient = JDBCClient.createShared(vertx, jdbcClientConfig)
-
-var authProvider = JDBCAuth.create(vertx, jdbcClient)
+var options = JDBCAuthenticationOptions()
+var authenticationProvider = JDBCAuthentication.create(jdbcClient, options)
 
 ----
 
-Once you've got your instance you can authenticate and authorise with it just like any `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]`.
+Once you've got your instance you can authenticate and authorize with it just like any `link:../../scaladocs/io/vertx/scala/ext/auth/authentication/AuthenticationProvider.html[AuthenticationProvider]`.
 
-The out of the box config assumes certain queries for authentication and authorisation, these can easily be changed
-with the operations `link:../../scaladocs/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html#setAuthenticationQuery()[setAuthenticationQuery]`,
-`link:../../scaladocs/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html#setPermissionsQuery()[setPermissionsQuery]` and
-`link:../../scaladocs/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html#setRolesQuery()[setRolesQuery]`, if you want to use them with a different
-database schema.
+The out of the box config assumes certain queries for authentication and authorization, these can easily be changed with the operations
+`link:../dataobjects.html#JDBCAuthenticationOptions#setAuthenticationQuery()[authenticationQuery]`,
+`link:../dataobjects.html#JDBCAuthorizationOptions#setPermissionsQuery()[permissionsQuery]` and
+`link:../dataobjects.html#JDBCAuthorizationOptions#setRolesQuery()[rolesQuery]`, if you want to use them with a different database schema.
 
-The default implementation assumes that the password is stored in the database as a SHA-512 hash after being
+The `link:../../scaladocs/io/vertx/scala/ext/auth/jdbc/JDBCHashStrategy.html[JDBCHashStrategy]` is a required parameter to build an instance of `link:../../scaladocs/io/vertx/scala/ext/auth/jdbc/JDBCAuthorization.html[JDBCAuthorization]`
+The Sha-512 hash strategy assumes that the password is stored in the database as a SHA-512 hash after being
 concatenated with a salt. It also assumes the salt is stored in the table too.
 
 The basic data definition for the storage should look like this:
@@ -56,8 +57,7 @@ The basic data definition for the storage should look like this:
 --
 CREATE TABLE `user` (
  `username` VARCHAR(255) NOT NULL,
- `password` VARCHAR(255) NOT NULL,
- `password_salt` VARCHAR(255) NOT NULL
+ `password` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `user_roles` (
@@ -72,20 +72,24 @@ CREATE TABLE `roles_perms` (
 
 ALTER TABLE user ADD CONSTRAINT `pk_username` PRIMARY KEY (username);
 ALTER TABLE user_roles ADD CONSTRAINT `pk_user_roles` PRIMARY KEY (username, role);
-ALTER TABLE roles_perms ADD CONSTRAINT `pk_roles_perms` PRIMARY KEY (role);
+ALTER TABLE roles_perms ADD CONSTRAINT `pk_roles_perms` PRIMARY KEY (role, perm);
 
 ALTER TABLE user_roles ADD CONSTRAINT fk_username FOREIGN KEY (username) REFERENCES user(username);
-ALTER TABLE user_roles ADD CONSTRAINT fk_roles FOREIGN KEY (role) REFERENCES roles_perms(role);
 ----
 
-The current password hashing strategy is based on the SHA-512 algorithm. OWASP as of 2018-01-08 recommends
-the usage of stronger algorithms, for this case you can use the PBKDF2 strategy (OWASP recommendation).
+== Hashing Strategy
 
-WARNING: If you already have a running application switching the strategies will make break your existing
-passwords, so you will need to migrate the passwords from one algorithm to the second.
+The provider uses the <a href="https://github.com/P-H-C/phc-string-format/blob/master/phc-sf-spec.md">phc sf spec</a> to
+hash password. In the past releases this wasn't the rule. In order to keep backward compatibility a authentication
+provider can be created with a legacy hashing strategy. It is highly recommended to avoid this, and upgrade the user
+hashes to the new format (by requesting the user to renew the password for example).
 
-If you want to override this behaviour you can do so by providing an alternative hash strategy and setting it with
-`link:../../scaladocs/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html#setHashStrategy()[setHashStrategy]`.
+THe legacy hashing strategy can be used on the *deprecated* factory method of JDBCAuthentication `link:../../scaladocs/io/vertx/scala/ext/auth/jdbc/JDBCAuthentication.html#create(io.vertx.ext.jdbc.JDBCClient,%20io.vertx.ext.auth.jdbc.JDBCHashStrategy)[JDBCAuthentication.create]`
+You have the choice between SHA-512 or PBKDF2. Note that as of 2018-01-08 OWASP recommends the usage of stronger
+algorithms, for this case you can use the PBKDF2 strategy (OWASP recommendation).
+
+WARNING: If you already have a running legacy application switching the strategies will break your existing
+passwords. The new format will *not* for suffer from this.
 
 WARNING: It is advised to always store your passwords as hashes in your database tables which have been created
 with a salt which should be stored in the row too. A strong hashing algorithm should be used. It is strongly advised
@@ -147,50 +151,9 @@ to hash new password before storing it to the database. Doing it is a 3 step tas
 [source,scala]
 ----
 
-var salt = auth.generateSalt()
-var hash = auth.computeHash("sausages", salt)
+var hash = jdbcAuth.hash("pbkdf2", VertxContextPRNG.current().nextString(32), "sausages")
 // save to the database
-conn.updateWithParamsFuture("INSERT INTO user VALUES (?, ?, ?)", new io.vertx.core.json.JsonArray().add("tim").add(hash).add(salt)).onComplete{
-  case Success(result) => {
-    // success!
-  }
-  case Failure(cause) => println("Failure")
-}
-
-----
-
-WARNING: Hashing user password with salt can be not enough, this approach his good enough for avoiding rainbow tables
-attacks or precomputed table attacks but if the attacker gets the database it will be easier to setup a brute force
-attack. This kind of attack is slower but all required information is given: the hash and the salt.
-
-To make the hash attack more complex the default strategy allows you to provide an application level list of nonces
-to be used in the computation. This list should not be stored in the database since it add an extra variable to the
-computation that is unknown, making the brute force attack as potentially the only way to crack the hash. You might
-want to refresh the nonces now and then so you should add and never remove entries to the list, for example:
-
-[source,scala]
-----
-auth.setNonces(new io.vertx.core.json.JsonArray().add("random_hash_1").add("random_hash_1"))
-
-----
-
-In order to decode there is no change required to the code, however to generate a new user you must specify which
-nonce (by it's index) you want to use. If you look at the previous example, the usage is quite similar:
-
-1. Generate a salt string
-2. Hash the password given the salt string and choosen nonce
-3. Store it to the database
-
-[source,scala]
-----
-
-auth.setNonces(new io.vertx.core.json.JsonArray().add("random_hash_1").add("random_hash_1"))
-
-var salt = auth.generateSalt()
-// we will pick the second nonce
-var hash = auth.computeHash("sausages", salt, 1)
-// save to the database
-conn.updateWithParamsFuture("INSERT INTO user VALUES (?, ?, ?)", new io.vertx.core.json.JsonArray().add("tim").add(hash).add(salt)).onComplete{
+conn.updateWithParamsFuture("INSERT INTO user (username, password) VALUES (?, ?)", new io.vertx.core.json.JsonArray().add("tim").add(hash)).onComplete{
   case Success(result) => {
     // success!
   }
@@ -226,42 +189,17 @@ Although Vert.x auth itself does not mandate any specific model of permissions (
 implementation assumes a familiar user/role/permission model, where a user can have zero or more roles and a role
 can have zero or more permissions.
 
-If validating if a user has a particular permission simply pass the permission into.
-`link:../../scaladocs/io/vertx/scala/ext/auth/User.html#isAuthorized(java.lang.String)[isAuthorized]` as follows:
+If validating if a user has a particular permission simply match the user against a given permission as follows:
 
 [source,scala]
 ----
-
-user.isAuthorizedFuture("commit_code").onComplete{
+jdbcAuthZ.getAuthorizationsFuture(user).onComplete{
   case Success(result) => {
-    var hasPermission = result
+    if (PermissionBasedAuthorization.create("commit_code").match(user)) {
+      // Has permission!
+    }
   }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
+  case Failure(cause) => println("Failure")
 }
 
-
 ----
-
-If validating that a user has a particular _role_ then you should prefix the argument with the role prefix.
-
-[source,scala]
-----
-
-user.isAuthorizedFuture("role:manager").onComplete{
-  case Success(result) => {
-    var hasRole = result
-  }
-  case Failure(cause) => {
-    println(s"$cause")
-  }
-}
-
-
-----
-
-The default role prefix is `role:`. You can change this with `link:../../scaladocs/io/vertx/scala/ext/auth/jdbc/JDBCAuth.html#setRolePrefix()[setRolePrefix]`.
-
-@author <a href="mailto:julien@julienviet.com">Julien Viet</a>
-@author <a href="http://tfox.org">Tim Fox</a>

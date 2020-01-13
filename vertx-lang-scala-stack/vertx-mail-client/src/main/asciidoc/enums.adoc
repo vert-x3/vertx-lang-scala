@@ -1,0 +1,91 @@
+= Enums
+
+[[DKIMSignAlgorithm]]
+== DKIMSignAlgorithm
+
+++++
+
+ Signing Algorithm specified by DKIM spec.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[RSA_SHA1]]`RSA_SHA1`|-
+|[[RSA_SHA256]]`RSA_SHA256`|-
+|===
+
+[[LoginOption]]
+== LoginOption
+
+++++
+ possible options for a login into a SMTP server
+ <br>
+ either DISABLED, OPTIONAL, REQUIRED or XOAUTH2
+ <p>
+ DISABLED means no login will be attempted
+ <p>
+ NONE means a login will be attempted if the server supports in and login credentials are set
+ <p>
+ REQUIRED means that a login will be attempted if the server supports it and the send operation will fail otherwise
+ <p>
+ XOAUTH2 means that a login will be attempted using Google Gmail Oauth2 tokens
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[DISABLED]]`DISABLED`|-
+|[[NONE]]`NONE`|-
+|[[REQUIRED]]`REQUIRED`|-
+|[[XOAUTH2]]`XOAUTH2`|-
+|===
+
+[[MessageCanonic]]
+== MessageCanonic
+
+++++
+
+ Message canonicalization for DKIM.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[SIMPLE]]`SIMPLE`|-
+|[[RELAXED]]`RELAXED`|-
+|===
+
+[[StartTLSOptions]]
+== StartTLSOptions
+
+++++
+ possible options for a secure connection using TLS
+ <br>
+ either DISABLED, OPTIONAL or REQUIRED
+ <p>
+ DISABLED means STARTTLS will not be used in any case
+ <p>
+ OPTIONS means STARTTLS will be used if the server supports it and a plain connection will be used otherwise
+ please note that this option is not a secure as it seems since a MITM attacker can remove the STARTTLS line
+ from the capabilities reply.
+ <p>
+ REQUIRED means that STARTTLS will be used if the server supports it and the send operation will fail otherwise
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[DISABLED]]`DISABLED`|-
+|[[OPTIONAL]]`OPTIONAL`|-
+|[[REQUIRED]]`REQUIRED`|-
+|===
+

@@ -35,6 +35,15 @@ import io.vertx.ext.mail.{MailMessage => JMailMessage}
 
 package object mail{
 
+
+  type DKIMSignOptions = io.vertx.ext.mail.DKIMSignOptions
+  object DKIMSignOptions {
+    def apply() = new DKIMSignOptions()
+    def apply(json: JsonObject) = new DKIMSignOptions(json)
+  }
+
+
+
   object MailAttachment {
     /**
      * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.

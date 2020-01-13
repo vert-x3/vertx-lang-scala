@@ -60,6 +60,7 @@ import io.vertx.ext.consul.{PreparedQueryExecuteResponse => JPreparedQueryExecut
 import io.vertx.ext.consul.{ServiceEntryList => JServiceEntryList}
 import io.vertx.ext.consul.{KeyValueList => JKeyValueList}
 import io.vertx.ext.consul.{Event => JEvent}
+import io.vertx.core.{Future => JFuture}
 import io.vertx.ext.consul.{Session => JSession}
 import io.vertx.core.Handler
 import io.vertx.ext.consul.{KeyValue => JKeyValue}

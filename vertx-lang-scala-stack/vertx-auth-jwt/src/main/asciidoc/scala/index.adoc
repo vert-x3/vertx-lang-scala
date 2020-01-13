@@ -93,9 +93,6 @@ Loading keys can be performed in 3 different ways:
 * Using OpenSSL `pem` formatted files (pub/sec keys)
 * Using Java Keystore files (both symmetric and pub/sec keys)
 
-It is recommended to avoid java keystores, as java keystores are complex to generate and make many assumptions in order
-to choose the right key for the authenticator.
-
 ==== Using Symmetric Keys
 
 The default signature method for JWT's is known as `HS256`. `HS` stands in this case for `HMAC Signature using SHA256`.
@@ -108,8 +105,7 @@ assume that the secret is: `keyboard cat` then you can configure your Auth as:
 var provider = JWTAuth.create(vertx, JWTAuthOptions()
   .setPubSecKeys(Set(PubSecKeyOptions()
     .setAlgorithm("HS256")
-    .setPublicKey("keyboard cat")
-    .setSymmetric(true)
+    .setBuffer("keyboard cat")
   ))
 )
 
@@ -199,8 +195,10 @@ Now you can use this to issue or validate tokens:
 var provider = JWTAuth.create(vertx, JWTAuthOptions()
   .setPubSecKeys(Set(PubSecKeyOptions()
     .setAlgorithm("RS256")
-    .setPublicKey("MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxPSbCQY5mBKFDIn1kggv\nWb4ChjrctqD4nFnJOJk4mpuZ/u3h2ZgeKJJkJv8+5oFO6vsEwF7/TqKXp0XDp6IH\nbyaOSWdkl535rCYR5AxDSjwnuSXsSp54pvB+fEEFDPFF81GHixepIbqXCB+BnCTg\nN65BqwNn/1Vgqv6+H3nweNlbTv8e/scEgbg6ZYcsnBBB9kYLp69FSwNWpvPmd60e\n3DWyIo3WCUmKlQgjHL4PHLKYwwKgOHG/aNl4hN4/wqTixCAHe6KdLnehLn71x+Z0\nSyXbWooftefpJP1wMbwlCpH3ikBzVIfHKLWT9QIOVoRgchPU3WAsZv/ePgl5i8Co\nqwIDAQAB")
-    .setSecretKey("MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDE9JsJBjmYEoUM\nifWSCC9ZvgKGOty2oPicWck4mTiam5n+7eHZmB4okmQm/z7mgU7q+wTAXv9Oopen\nRcOnogdvJo5JZ2SXnfmsJhHkDENKPCe5JexKnnim8H58QQUM8UXzUYeLF6khupcI\nH4GcJOA3rkGrA2f/VWCq/r4fefB42VtO/x7+xwSBuDplhyycEEH2Rgunr0VLA1am\n8+Z3rR7cNbIijdYJSYqVCCMcvg8cspjDAqA4cb9o2XiE3j/CpOLEIAd7op0ud6Eu\nfvXH5nRLJdtaih+15+kk/XAxvCUKkfeKQHNUh8cotZP1Ag5WhGByE9TdYCxm/94+\nCXmLwKirAgMBAAECggEAeQ+M+BgOcK35gAKQoklLqZLEhHNL1SnOhnQd3h84DrhU\nCMF5UEFTUEbjLqE3rYGP25mdiw0ZSuFf7B5SrAhJH4YIcZAO4a7ll23zE0SCW+/r\nzr9DpX4Q1TP/2yowC4uGHpBfixxpBmVljkWnai20cCU5Ef/O/cAh4hkhDcHrEKwb\nm9nymKQt06YnvpCMKoHDdqzfB3eByoAKuGxo/sbi5LDpWalCabcg7w+WKIEU1PHb\nQi+RiDf3TzbQ6TYhAEH2rKM9JHbp02TO/r3QOoqHMITW6FKYvfiVFN+voS5zzAO3\nc5X4I+ICNzm+mnt8wElV1B6nO2hFg2PE9uVnlgB2GQKBgQD8xkjNhERaT7f78gBl\nch15DRDH0m1rz84PKRznoPrSEY/HlWddlGkn0sTnbVYKXVTvNytKSmznRZ7fSTJB\n2IhQV7+I0jeb7pyLllF5PdSQqKTk6oCeL8h8eDPN7awZ731zff1AGgJ3DJXlRTh/\nO6zj9nI8llvGzP30274I2/+cdwKBgQDHd/twbiHZZTDexYewP0ufQDtZP1Nk54fj\nEpkEuoTdEPymRoq7xo+Lqj5ewhAtVKQuz6aH4BeEtSCHhxy8OFLDBdoGCEd/WBpD\nf+82sfmGk+FxLyYkLxHCxsZdOb93zkUXPCoCrvNRaUFO1qq5Dk8eftGCdC3iETHE\n6h5avxHGbQKBgQCLHQVMNhL4MQ9slU8qhZc627n0fxbBUuhw54uE3s+rdQbQLKVq\nlxcYV6MOStojciIgVRh6FmPBFEvPTxVdr7G1pdU/k5IPO07kc6H7O9AUnPvDEFwg\nsuN/vRelqbwhufAs85XBBY99vWtxdpsVSt5nx2YvegCgdIj/jUAU2B7hGQKBgEgV\nsCRdaJYr35FiSTsEZMvUZp5GKFka4xzIp8vxq/pIHUXp0FEz3MRYbdnIwBfhssPH\n/yKzdUxcOLlBtry+jgo0nyn26/+1Uyh5n3VgtBBSePJyW5JQAFcnhqBCMlOVk5pl\n/7igiQYux486PNBLv4QByK0gV0SPejDzeqzIyB+xAoGAe5if7DAAKhH0r2M8vTkm\nJvbCFjwuvhjuI+A8AuS8zw634BHne2a1Fkvc8c3d9VDbqsHCtv2tVkxkKXPjVvtB\nDtzuwUbp6ebF+jOfPK0LDuJoTdTdiNjIcXJ7iTTI3cXUnUNWWphYnFogzPFq9CyL\n0fPinYmDJpkwMYHqQaLGQyg=")
+    .setBuffer("-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxPSbCQY5mBKFDIn1kggv\nWb4ChjrctqD4nFnJOJk4mpuZ/u3h2ZgeKJJkJv8+5oFO6vsEwF7/TqKXp0XDp6IH\nbyaOSWdkl535rCYR5AxDSjwnuSXsSp54pvB+fEEFDPFF81GHixepIbqXCB+BnCTg\nN65BqwNn/1Vgqv6+H3nweNlbTv8e/scEgbg6ZYcsnBBB9kYLp69FSwNWpvPmd60e\n3DWyIo3WCUmKlQgjHL4PHLKYwwKgOHG/aNl4hN4/wqTixCAHe6KdLnehLn71x+Z0\nSyXbWooftefpJP1wMbwlCpH3ikBzVIfHKLWT9QIOVoRgchPU3WAsZv/ePgl5i8Co\nqwIDAQAB\n-----END PUBLIC KEY-----")
+  , PubSecKeyOptions()
+    .setAlgorithm("RS256")
+    .setBuffer("-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDE9JsJBjmYEoUM\nifWSCC9ZvgKGOty2oPicWck4mTiam5n+7eHZmB4okmQm/z7mgU7q+wTAXv9Oopen\nRcOnogdvJo5JZ2SXnfmsJhHkDENKPCe5JexKnnim8H58QQUM8UXzUYeLF6khupcI\nH4GcJOA3rkGrA2f/VWCq/r4fefB42VtO/x7+xwSBuDplhyycEEH2Rgunr0VLA1am\n8+Z3rR7cNbIijdYJSYqVCCMcvg8cspjDAqA4cb9o2XiE3j/CpOLEIAd7op0ud6Eu\nfvXH5nRLJdtaih+15+kk/XAxvCUKkfeKQHNUh8cotZP1Ag5WhGByE9TdYCxm/94+\nCXmLwKirAgMBAAECggEAeQ+M+BgOcK35gAKQoklLqZLEhHNL1SnOhnQd3h84DrhU\nCMF5UEFTUEbjLqE3rYGP25mdiw0ZSuFf7B5SrAhJH4YIcZAO4a7ll23zE0SCW+/r\nzr9DpX4Q1TP/2yowC4uGHpBfixxpBmVljkWnai20cCU5Ef/O/cAh4hkhDcHrEKwb\nm9nymKQt06YnvpCMKoHDdqzfB3eByoAKuGxo/sbi5LDpWalCabcg7w+WKIEU1PHb\nQi+RiDf3TzbQ6TYhAEH2rKM9JHbp02TO/r3QOoqHMITW6FKYvfiVFN+voS5zzAO3\nc5X4I+ICNzm+mnt8wElV1B6nO2hFg2PE9uVnlgB2GQKBgQD8xkjNhERaT7f78gBl\nch15DRDH0m1rz84PKRznoPrSEY/HlWddlGkn0sTnbVYKXVTvNytKSmznRZ7fSTJB\n2IhQV7+I0jeb7pyLllF5PdSQqKTk6oCeL8h8eDPN7awZ731zff1AGgJ3DJXlRTh/\nO6zj9nI8llvGzP30274I2/+cdwKBgQDHd/twbiHZZTDexYewP0ufQDtZP1Nk54fj\nEpkEuoTdEPymRoq7xo+Lqj5ewhAtVKQuz6aH4BeEtSCHhxy8OFLDBdoGCEd/WBpD\nf+82sfmGk+FxLyYkLxHCxsZdOb93zkUXPCoCrvNRaUFO1qq5Dk8eftGCdC3iETHE\n6h5avxHGbQKBgQCLHQVMNhL4MQ9slU8qhZc627n0fxbBUuhw54uE3s+rdQbQLKVq\nlxcYV6MOStojciIgVRh6FmPBFEvPTxVdr7G1pdU/k5IPO07kc6H7O9AUnPvDEFwg\nsuN/vRelqbwhufAs85XBBY99vWtxdpsVSt5nx2YvegCgdIj/jUAU2B7hGQKBgEgV\nsCRdaJYr35FiSTsEZMvUZp5GKFka4xzIp8vxq/pIHUXp0FEz3MRYbdnIwBfhssPH\n/yKzdUxcOLlBtry+jgo0nyn26/+1Uyh5n3VgtBBSePJyW5JQAFcnhqBCMlOVk5pl\n/7igiQYux486PNBLv4QByK0gV0SPejDzeqzIyB+xAoGAe5if7DAAKhH0r2M8vTkm\nJvbCFjwuvhjuI+A8AuS8zw634BHne2a1Fkvc8c3d9VDbqsHCtv2tVkxkKXPjVvtB\nDtzuwUbp6ebF+jOfPK0LDuJoTdTdiNjIcXJ7iTTI3cXUnUNWWphYnFogzPFq9CyL\n0fPinYmDJpkwMYHqQaLGQyg=\n-----END PRIVATE KEY-----")
   ))
 )
 
@@ -209,9 +207,6 @@ var token = provider.generateToken(new io.vertx.core.json.JsonObject(), JWTOptio
 )
 
 ----
-
-Do note that all the lines `-----BEGIN ...` and `-----END...` should be stripped from the string to be passed to the
-configuration.
 
 ==== Using EC keys
 
@@ -259,7 +254,7 @@ Using the private key you can already generate tokens:
 var provider = JWTAuth.create(vertx, JWTAuthOptions()
   .setPubSecKeys(Set(PubSecKeyOptions()
     .setAlgorithm("ES256")
-    .setSecretKey("MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgeRyEfU1NSHPTCuC9\nrwLZMukaWCH2Fk6q5w+XBYrKtLihRANCAAStpUnwKmSvBM9EI+W5QN3ALpvz6bh0\nSPCXyz5KfQZQuSj4f3l+xNERDUDaygIUdLjBXf/bc15ur2iZjcq4r0Mr")
+    .setBuffer("-----BEGIN PRIVATE KEY-----\nMIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgeRyEfU1NSHPTCuC9\nrwLZMukaWCH2Fk6q5w+XBYrKtLihRANCAAStpUnwKmSvBM9EI+W5QN3ALpvz6bh0\nSPCXyz5KfQZQuSj4f3l+xNERDUDaygIUdLjBXf/bc15ur2iZjcq4r0Mr\n-----END PRIVATE KEY-----\n")
   ))
 )
 
@@ -282,8 +277,10 @@ So you can do all operations with it:
 var provider = JWTAuth.create(vertx, JWTAuthOptions()
   .setPubSecKeys(Set(PubSecKeyOptions()
     .setAlgorithm("ES256")
-    .setPublicKey("MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEraVJ8CpkrwTPRCPluUDdwC6b8+m4\ndEjwl8s+Sn0GULko+H95fsTREQ1A2soCFHS4wV3/23Nebq9omY3KuK9DKw==\n")
-    .setSecretKey("MIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgeRyEfU1NSHPTCuC9\nrwLZMukaWCH2Fk6q5w+XBYrKtLihRANCAAStpUnwKmSvBM9EI+W5QN3ALpvz6bh0\nSPCXyz5KfQZQuSj4f3l+xNERDUDaygIUdLjBXf/bc15ur2iZjcq4r0Mr")
+    .setBuffer("-----BEGIN PUBLIC KEY-----\nMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEraVJ8CpkrwTPRCPluUDdwC6b8+m4\ndEjwl8s+Sn0GULko+H95fsTREQ1A2soCFHS4wV3/23Nebq9omY3KuK9DKw==\n-----END PUBLIC KEY-----")
+  , PubSecKeyOptions()
+    .setAlgorithm("RS256")
+    .setBuffer("-----BEGIN PRIVATE KEY-----\nMIGHAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBG0wawIBAQQgeRyEfU1NSHPTCuC9\nrwLZMukaWCH2Fk6q5w+XBYrKtLihRANCAAStpUnwKmSvBM9EI+W5QN3ALpvz6bh0\nSPCXyz5KfQZQuSj4f3l+xNERDUDaygIUdLjBXf/bc15ur2iZjcq4r0Mr")
   ))
 )
 
@@ -319,6 +316,12 @@ a good practice `HS256` should be present:
 When no keystore is provided the implementation falls back in unsecure mode and signatures will not be verified, this
 is useful for the cases where the payload if signed and or encrypted by external means.
 
+Key pairs stored on a keystore always include a certificate. The validity of the certificate is tested on load and keys
+will not be loaded if either expired or not yet valid to be use.
+
+All keys algorithms will be checked if can be matched to the given alias. For example an `RS256` key will not be loaded
+if issued with a `EC` algorithm, or if issued with `RSA` but signature `SHA1WithRSA` instead of `SHA256WithRSA`.
+
 ===== Generate a new Keystore file
 
 The only required tool to generate a keystore file is `keytool`, you can now specify which algorithms you need by
@@ -336,6 +339,9 @@ keytool -genkeypair -keystore keystore.jceks -storetype jceks -storepass secret 
 keytool -genkeypair -keystore keystore.jceks -storetype jceks -storepass secret -keyalg EC -keysize 521 -alias ES512 -keypass secret -sigalg SHA512withECDSA -dname "CN=,OU=,O=,L=,ST=,C=" -validity 360
 ----
 
+For more information on keystores and how to use the `PKCS12` format (Default from Java >=9) please see the documentation
+of the common module.
+
 === Read only tokens
 
 If you need to consume JWT tokens issues by third parties you probably won't have the private key with you, in that
@@ -347,7 +353,7 @@ case all you need to have is a public key im PEM format.
 var config = JWTAuthOptions()
   .setPubSecKeys(Set(PubSecKeyOptions()
     .setAlgorithm("RS256")
-    .setPublicKey("BASE64-ENCODED-PUBLIC_KEY")
+    .setBuffer("BASE64-ENCODED-PUBLIC_KEY")
   ))
 
 
@@ -456,12 +462,27 @@ jwtAuth.authenticateFuture(new io.vertx.core.json.JsonObject().put("jwt", "BASE6
 === Authorizing (AuthZ)
 
 Once a token is parsed and is valid we can use it to perform authorization tasks. The most simple is to verify if a
-user has a specific authority. In this case one needs to to:
+user has a specific authority. Authorization will follow the common `link:../../scaladocs/io/vertx/scala/ext/auth/authorization/AuthorizationProvider.html[AuthorizationProvider]`
+API. Choose the provider that generated your token and evaluate.
+
+Currently there are 2 factories:
+
+* `link:../../scaladocs/io/vertx/scala/ext/auth/jwt/authorization/JWTAuthorization.html[JWTAuthorization]` inspects tokens based on the "permissions" claim key.
+* `link:../../scaladocs/io/vertx/scala/ext/auth/jwt/authorization/MicroProfileAuthorization.html[MicroProfileAuthorization]` inspects tokens based on the <a href="https://www.eclipse.org/community/eclipse_newsletter/2017/september/article2.php">MP JWT spec</a>.
+
+The typical usage is to extract the permissions form the user object using the provider and perform the attestation:
 
 [source,scala]
 ----
-user.isAuthorizedFuture("create-report").onComplete{
-  case Success(result) => println("Success")
+var authz = MicroProfileAuthorization.create()
+
+authz.getAuthorizationsFuture(user).onComplete{
+  case Success(result) => {
+    // and now we can perform checks as needed
+    if (PermissionBasedAuthorization.create("create-report").match(user)) {
+      // Yes the user can create reports
+    }
+  }
   case Failure(cause) => println("Failure")
 }
 
@@ -519,7 +540,3 @@ Token expiration is controlled by the property `expiresInSeconds`, by default th
 fields `audience`, `issuer` and `subject` are then picked from the config is available and added to the token metadata.
 
 Finally the token is signed and encoded in the correct format.
-
-@author <a href="mailto:julien@julienviet.com">Julien Viet</a>
-@author <a href="http://tfox.org">Tim Fox</a>
-@author <a href="mailto:pmlopes@gmail.com">Paulo Lopes</a>

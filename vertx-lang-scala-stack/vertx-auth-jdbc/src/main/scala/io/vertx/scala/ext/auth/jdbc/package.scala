@@ -23,14 +23,14 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import scala.concurrent.Promise
 
-import io.vertx.core.json.JsonArray
-import io.vertx.ext.auth
-import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
-import io.vertx.core
-import io.vertx.ext.auth.jdbc.{JDBCAuth => JJDBCAuth}
+import io.vertx.ext.auth.jdbc.{JDBCAuthentication => JJDBCAuthentication}
+import io.vertx.ext.auth.authentication.{AuthenticationProvider => JAuthenticationProvider}
+import io.vertx.ext.auth.authentication
+import scala.collection.JavaConverters._
 import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
 import io.vertx.ext.jdbc
-import io.vertx.core.{Vertx => JVertx}
+import io.vertx.ext.auth.jdbc.{JDBCHashStrategy => JJDBCHashStrategy}
+import io.vertx.ext.auth.jdbc.{JDBCAuthenticationOptions => JJDBCAuthenticationOptions}
 
 package object jdbc{
 
@@ -49,6 +49,50 @@ package object jdbc{
   object JDBCAuthOptions {
     def apply() = new JDBCAuthOptions()
     def apply(json: JsonObject) = new JDBCAuthOptions(json)
+  }
+
+
+
+  object JDBCAuthentication {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(client: io.vertx.ext.jdbc.JDBCClient,hashStrategy: io.vertx.ext.auth.jdbc.JDBCHashStrategy,options: io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions) = {
+      io.vertx.ext.auth.jdbc.JDBCAuthentication.create(client, hashStrategy, options)
+    }
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(client: io.vertx.ext.jdbc.JDBCClient,options: io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions) = {
+      io.vertx.ext.auth.jdbc.JDBCAuthentication.create(client, options)
+    }
+  }
+
+
+
+  type JDBCAuthenticationOptions = io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions
+  object JDBCAuthenticationOptions {
+    def apply() = new JDBCAuthenticationOptions()
+    def apply(json: JsonObject) = new JDBCAuthenticationOptions(json)
+  }
+
+
+
+  object JDBCAuthorization {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(providerId: java.lang.String,client: io.vertx.ext.jdbc.JDBCClient,options: io.vertx.ext.auth.jdbc.JDBCAuthorizationOptions) = {
+      io.vertx.ext.auth.jdbc.JDBCAuthorization.create(providerId, client, options)
+    }
+  }
+
+
+
+  type JDBCAuthorizationOptions = io.vertx.ext.auth.jdbc.JDBCAuthorizationOptions
+  object JDBCAuthorizationOptions {
+    def apply() = new JDBCAuthorizationOptions()
+    def apply(json: JsonObject) = new JDBCAuthorizationOptions(json)
   }
 
 

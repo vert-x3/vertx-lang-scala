@@ -2,9 +2,10 @@ package io.vertx.lang.scala
 
 import java.io.File
 import java.nio.file.Files
+import java.util.concurrent.Callable
 
-import io.vertx.core.{AsyncResult, Handler, Vertx}
-import io.vertx.scala.core._
+import io.vertx.core
+import io.vertx.core.{AsyncResult, Handler, Verticle, Vertx}
 import org.junit.runner.RunWith
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.time.SpanSugar._
@@ -28,9 +29,13 @@ class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
     Files.copy(rs, file.toPath)
 
     val scalaVerticleFactory = new ScalaVerticleFactory
-    vertx.deployVerticle(scalaVerticleFactory.createVerticle(file.toPath.toString, getClass.getClassLoader), new Handler[AsyncResult[java.lang.String]] {
-        override def handle(event: AsyncResult[String]): Unit = promise.success(event.result())
-      })
+    val verticlePromise:core.Promise[Callable[Verticle]] = core.Promise.promise()
+    scalaVerticleFactory.createVerticle(file.toPath.toString, getClass.getClassLoader, verticlePromise)
+    verticlePromise.future().onComplete(v => {
+      vertx.deployVerticle(v.result().call(), new Handler[AsyncResult[java.lang.String]] {
+          override def handle(event: AsyncResult[String]): Unit = promise.success(event.result())
+        })
+    })
 
     whenReady(promise.future, defaultPatience) {_ shouldNot be(null)}
   }
@@ -39,9 +44,14 @@ class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
     val promise = Promise[String]
     val vertx = Vertx.vertx()
     val scalaVerticleFactory = new ScalaVerticleFactory
-    vertx.deployVerticle(scalaVerticleFactory.createVerticle("ScalaTestVerticle2.scala", getClass.getClassLoader), new Handler[AsyncResult[java.lang.String]] {
+
+    val verticlePromise:core.Promise[Callable[Verticle]] = core.Promise.promise()
+    scalaVerticleFactory.createVerticle("ScalaTestVerticle2.scala", getClass.getClassLoader, verticlePromise)
+    verticlePromise.future().onComplete(v => {
+      vertx.deployVerticle(v.result().call(), new Handler[AsyncResult[java.lang.String]] {
         override def handle(event: AsyncResult[String]): Unit = promise.success(event.result())
       })
+    })
 
     whenReady(promise.future, defaultPatience) {_ shouldNot be(null)}
   }

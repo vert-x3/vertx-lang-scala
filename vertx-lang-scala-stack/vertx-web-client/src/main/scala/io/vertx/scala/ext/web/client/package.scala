@@ -31,13 +31,14 @@ import io.vertx.core
 import io.vertx.core.streams.{ReadStream => JReadStream}
 import io.vertx.ext.web.client.{HttpRequest => JHttpRequest}
 import io.vertx.ext.web.client.predicate.{ResponsePredicate => JResponsePredicate}
+import io.vertx.core.http
 import io.vertx.ext.web.multipart
 import io.vertx.ext.web.client.{HttpResponse => JHttpResponse}
 import io.vertx.ext.web.client.predicate.{ResponsePredicateResult => JResponsePredicateResult}
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.streams
-import io.vertx.core.http.HttpMethod
 import io.vertx.core.{Future => JFuture}
+import io.vertx.core.http.{HttpMethod => JHttpMethod}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
@@ -99,8 +100,8 @@ package object client{
     /**
      * Like [[sendJson]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def sendJson(body: AnyRef,handler: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => Unit): Unit = {
-      asJava.sendJson(body, {p:AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => handler(p)})
+    def sendJson(body: scala.Option[AnyRef],handler: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => Unit): Unit = {
+      asJava.sendJson(body.orNull, {p:AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => handler(p)})
     }
 
     /**
@@ -133,7 +134,7 @@ package object client{
     /**
      * Like [[sendJson]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def sendJsonFuture(body: AnyRef): scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
+    def sendJsonFuture(body: scala.Option[AnyRef]): scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
       val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendJson(body, {a:AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future

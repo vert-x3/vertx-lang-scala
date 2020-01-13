@@ -96,10 +96,7 @@ var service = ShellService.create(vertx, ShellServiceOptions()
       .setPath("server-keystore.jks")
       .setPassword("wibble")
     )
-    .setAuthOptions(ShiroAuthOptions()
-      .setType(ShiroAuthRealmType.PROPERTIES)
-      .setConfig(new io.vertx.core.json.JsonObject().put("properties_path", "file:/path/to/my/auth.properties"))
-    )
+    .setAuthOptions(new io.vertx.core.json.JsonObject().put("provider", "shiro").put("type", "PROPERTIES").put("config", new io.vertx.core.json.JsonObject().put("properties_path", "file:/path/to/my/auth.properties")))
   )
 )
 service.start()
@@ -148,7 +145,7 @@ providers:
 - _jdbc_ : JDBC backend
 - _mongo_ : MongoDB backend
 
-These options can be created directly using directly `link:../../vertx-auth-common/dataobjects.html#AuthOptions[AuthOptions]`:
+These options can be created directly using directly corresponding class:
 
 - `link:../../vertx-auth-shiro/dataobjects.html#ShiroAuthOptions[ShiroAuthOptions]` for Shiro
 - `link:../../vertx-auth-jdbc/dataobjects.html#JDBCAuthOptions[JDBCAuthOptions]` for JDBC
@@ -214,9 +211,7 @@ var service = ShellService.create(vertx, ShellServiceOptions()
       .setPath("server-keystore.jks")
       .setPassword("wibble")
     )
-    .setAuthOptions(MongoAuthOptions()
-      .setConfig(new io.vertx.core.json.JsonObject().put("connection_string", "mongodb://localhost:27018"))
-    )
+    .setAuthOptions(new io.vertx.core.json.JsonObject().put("provider", "mongo").put("config", new io.vertx.core.json.JsonObject().put("connection_string", "mongodb://localhost:27018")))
   )
 )
 service.start()
@@ -243,9 +238,7 @@ var service = ShellService.create(vertx, ShellServiceOptions()
       .setPath("server-keystore.jks")
       .setPassword("wibble")
     )
-    .setAuthOptions(JDBCAuthOptions()
-      .setConfig(new io.vertx.core.json.JsonObject().put("url", "jdbc:hsqldb:mem:test?shutdown=true").put("driver_class", "org.hsqldb.jdbcDriver"))
-    )
+    .setAuthOptions(new io.vertx.core.json.JsonObject().put("provider", "jdbc").put("config", new io.vertx.core.json.JsonObject().put("url", "jdbc:hsqldb:mem:test?shutdown=true").put("driver_class", "org.hsqldb.jdbcDriver")))
   )
 )
 service.start()
@@ -279,9 +272,7 @@ var service = ShellService.create(vertx, ShellServiceOptions()
   .setHttpOptions(HttpTermOptions()
     .setHost("localhost")
     .setPort(8080)
-    .setAuthOptions(MongoAuthOptions()
-      .setConfig(new io.vertx.core.json.JsonObject().put("connection_string", "mongodb://localhost:27018"))
-    )
+    .setAuthOptions(new io.vertx.core.json.JsonObject().put("provider", "mongo").put("config", new io.vertx.core.json.JsonObject().put("connection_string", "mongodb://localhost:27018")))
   )
 )
 service.start()
@@ -304,9 +295,7 @@ var service = ShellService.create(vertx, ShellServiceOptions()
   .setHttpOptions(HttpTermOptions()
     .setHost("localhost")
     .setPort(8080)
-    .setAuthOptions(JDBCAuthOptions()
-      .setConfig(new io.vertx.core.json.JsonObject().put("url", "jdbc:hsqldb:mem:test?shutdown=true").put("driver_class", "org.hsqldb.jdbcDriver"))
-    )
+    .setAuthOptions(new io.vertx.core.json.JsonObject().put("provider", "jdbc").put("config", new io.vertx.core.json.JsonObject().put("url", "jdbc:hsqldb:mem:test?shutdown=true").put("driver_class", "org.hsqldb.jdbcDriver")))
   )
 )
 service.start()
@@ -786,7 +775,7 @@ Vert.x Shell also provides bare terminal servers for those who need to write pur
 A `link:../../scaladocs/io/vertx/scala/ext/shell/term/Term.html[Term]` handler must be set on a term server before starting it. This handler will
 handle each term when the user connects.
 
-An `link:../../vertx-auth-common/dataobjects.html#AuthOptions[AuthOptions]` can be set on `link:../dataobjects.html#SSHTermOptions[SSHTermOptions]` and `link:../dataobjects.html#HttpTermOptions[HttpTermOptions]`.
+An {@code Auth*Options} can be set on `link:../dataobjects.html#SSHTermOptions[SSHTermOptions]` and `link:../dataobjects.html#HttpTermOptions[HttpTermOptions]`.
 Alternatively, an `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]` can be `link:../../scaladocs/io/vertx/scala/ext/shell/term/TermServer.html#authProvider()[set]`
 directly on the term server before starting it.
 

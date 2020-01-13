@@ -27,13 +27,14 @@ import io.vertx.ext.auth
 import io.vertx.core.buffer.Buffer
 import io.vertx.ext.auth.oauth2.{AccessToken => JAccessToken}
 import io.vertx.core
-import io.vertx.core.http.HttpMethod
+import io.vertx.core.http.{HttpMethod => JHttpMethod}
 import io.vertx.core.{Future => JFuture}
 import io.vertx.ext.auth.{User => JUser}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.ext.auth.oauth2.{OAuth2Response => JOAuth2Response}
+import io.vertx.core.http
 
 package object oauth2{
 
@@ -337,6 +338,16 @@ package object oauth2{
   }
 
 
+  object KeycloakAuthorization {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create() = {
+      io.vertx.ext.auth.oauth2.authorization.KeycloakAuthorization.create()
+    }
+  }
+
+
   object KeycloakHelper {
     /**
      * Like [[rawIdToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
@@ -465,10 +476,55 @@ package object oauth2{
 
 
   /**
-    * Factory interface for creating OAuth2 based [[io.vertx.ext.auth.AuthProvider]] instances.
+    * Factory interface for creating OAuth2 based [[io.vertx.ext.auth.authentication.AuthenticationProvider]] instances.
     */
 
   implicit class OAuth2AuthScala(val asJava: io.vertx.ext.auth.oauth2.OAuth2Auth) extends AnyVal {
+
+    /**
+     * Like [[jWKSet]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def jWKSetFuture(): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.jWKSet({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[refresh]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def refreshFuture(user: io.vertx.ext.auth.User): scala.concurrent.Future[io.vertx.ext.auth.User] = {
+      val promise = concurrent.Promise[io.vertx.ext.auth.User]()
+      asJava.refresh(user, {a:AsyncResult[io.vertx.ext.auth.User] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[revoke]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def revokeFuture(user: io.vertx.ext.auth.User,tokenType: java.lang.String): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.revoke(user, tokenType, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[revoke]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def revokeFuture(user: io.vertx.ext.auth.User): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.revoke(user, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[userInfo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def userInfoFuture(user: io.vertx.ext.auth.User): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
+      asJava.userInfo(user, {a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
 
     /**
      * Like [[decodeToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
@@ -529,7 +585,6 @@ package object oauth2{
     * The contract is that once an authority is checked for a given user, it's value is cached during the execution
     * of the request. If a user is stored to a persistent storage, or the token is introspected, the cache is cleared
     * and a new call will be handled to the implementation.
-
     */
 
   implicit class OAuth2RBACScala(val asJava: io.vertx.ext.auth.oauth2.OAuth2RBAC) extends AnyVal {
@@ -576,6 +631,16 @@ package object oauth2{
      */
     def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2ClientOptions,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.SalesforceAuth.discover(vertx, config, {p:AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => handler(p)})
+    }
+  }
+
+
+  object ScopeAuthorization {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(scopeSeparator: java.lang.String) = {
+      io.vertx.ext.auth.oauth2.authorization.ScopeAuthorization.create(scopeSeparator)
     }
   }
 

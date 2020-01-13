@@ -32,6 +32,12 @@ public class ClassCodeGenerator extends Generator<Model> {
     temp.add("io.vertx.redis");
     ignoredPackages = Collections.unmodifiableList(temp);
   }
+  public static final List<String> ignoreClassname;
+  static {
+    List<String> temp = new ArrayList<>();
+    temp.add("RelayParty");
+    ignoreClassname = Collections.unmodifiableList(temp);
+  }
 
   public ClassCodeGenerator() {
     this.incremental = true;
@@ -77,7 +83,7 @@ public class ClassCodeGenerator extends Generator<Model> {
   @Override
   public String render(Model model, int index, int size, Map<String, Object> session) {
     ClassTypeInfo type = ((ClassTypeInfo)model.getVars().get("type"));
-    if(!ignoredPackages.contains(type.getPackageName())) {
+    if(!ignoredPackages.contains(type.getPackageName()) && !ignoreClassname.contains(type.getSimpleName())) {
       Map<String, Object> vars = new HashMap<>();
       String translatedPackage = type.getModule().translatePackageName("scala");
 

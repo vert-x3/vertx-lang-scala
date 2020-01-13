@@ -15,8 +15,8 @@ The web term configuration options.
 |[[acceptBacklog]]`@acceptBacklog`|`Number (int)`|-
 |[[acceptUnmaskedFrames]]`@acceptUnmaskedFrames`|`Boolean`|-
 |[[alpnVersions]]`@alpnVersions`|`Array of link:enums.html#HttpVersion[HttpVersion]`|-
-|[[authOptions]]`@authOptions`|`link:dataobjects.html#AuthOptions[AuthOptions]`|+++
-
+|[[authOptions]]`@authOptions`|`Json object`|+++
+Set the auth options.
 +++
 |[[charset]]`@charset`|`String`|+++
 Set the charset used for encoding / decoding text data from/to SockJS
@@ -105,8 +105,8 @@ The SSH term configuration options.
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[authOptions]]`@authOptions`|`link:dataobjects.html#AuthOptions[AuthOptions]`|+++
-
+|[[authOptions]]`@authOptions`|`Json object`|+++
+Set the auth options.
 +++
 |[[defaultCharset]]`@defaultCharset`|`String`|+++
 Set the default charset to use when the client does not specifies one.

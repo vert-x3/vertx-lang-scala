@@ -40,7 +40,7 @@ Here is an example:
 [source,scala]
 ----
 ServiceDiscovery.create(vertx, ServiceDiscoveryOptions()
-  .setBackendConfiguration(new io.vertx.core.json.JsonObject().put("host", "127.0.0.1").put("key", "records"))
+  .setBackendConfiguration(new io.vertx.core.json.JsonObject().put("connectionString", "redis://localhost:6379").put("key", "records"))
 )
 
 ----
@@ -51,7 +51,7 @@ It's important to note that the backend configuration is passed in the `setBacke
 [source,scala]
 ----
 ServiceDiscovery.create(vertx, ServiceDiscoveryOptions()
-  .setBackendConfiguration(new io.vertx.core.json.JsonObject().put("host", "localhost").put("port", 1234).put("key", "my-records"))
+  .setBackendConfiguration(new io.vertx.core.json.JsonObject().put("connectionString", "redis://localhost:6379").put("key", "my-records"))
 )
 
 ----

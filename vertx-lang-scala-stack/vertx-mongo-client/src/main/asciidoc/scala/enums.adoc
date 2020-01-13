@@ -1,0 +1,33 @@
+= Enums
+
+[[WriteOption]]
+== WriteOption
+
+++++
+Enum representing the mongoDB Java Driver's link
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[ACKNOWLEDGED]]`ACKNOWLEDGED`|+++
+
++++
+|[[UNACKNOWLEDGED]]`UNACKNOWLEDGED`|+++
+
++++
+|[[FSYNCED]]`FSYNCED`|+++
+
++++
+|[[JOURNALED]]`JOURNALED`|+++
+
++++
+|[[REPLICA_ACKNOWLEDGED]]`REPLICA_ACKNOWLEDGED`|+++
+
++++
+|[[MAJORITY]]`MAJORITY`|+++
+
++++
+|===

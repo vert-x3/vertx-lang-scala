@@ -67,6 +67,10 @@ The client credentials grant type MUST only be used by confidential clients.
 
 For more details see http://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-4.4[Oauth2 specification, section 4.4].
 
+=== JWT (on behalf of) Flow
+
+The client can request an access token using JWTs also known as "on-behalf-of".
+
 === Extensions
 
 The provider supports RFC7523 an extension to allow server to server authorization based on JWT.
@@ -256,7 +260,7 @@ A couple of well known OpenID Connect Discovery providers are:
 
 This and the given `client id` is enough to configure your auth provider object.
 
-=== AccessToken object
+=== User object
 
 When a token expires we need to refresh it. OAuth2 offers the AccessToken class that add a couple of useful methods
 to refresh the access token when it is expired.
@@ -264,9 +268,9 @@ to refresh the access token when it is expired.
 [source,scala]
 ----
 // Check if the token is expired. If expired it is refreshed.
-if (token.expired()) {
+if (user.expired()) {
   // Callbacks
-  token.refreshFuture().onComplete{
+  oauth2.refreshFuture(user).onComplete{
     case Success(result) => {
       // success
     }
@@ -283,7 +287,7 @@ When you've done with the token or you want to log out, you can revoke the acces
 [source,scala]
 ----
 // Revoke only the access token
-token.revokeFuture("access_token").onComplete{
+oauth2.revokeFuture(user, "access_token").onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -342,11 +346,11 @@ data (e.g. `preferred_username`) from the Keycloak principal. For example:
 [source,scala]
 ----
 // you can get the decoded `id_token` from the Keycloak principal
-var idToken = KeycloakHelper.idToken(principal)
+var idToken = user.principal().getValue("idToken")
 
 // you can also retrieve some properties directly from the Keycloak principal
 // e.g. `preferred_username`
-var username = KeycloakHelper.preferredUsername(principal)
+var username = user.principal().getValue("preferred_username")
 
 ----
 
@@ -393,7 +397,7 @@ the User level:
 [source,scala]
 ----
 // OAuth2Auth level
-oauth2.introspectTokenFuture("opaque string").onComplete{
+oauth2.authenticateFuture(new io.vertx.core.json.JsonObject().put("access_token", "opaque string")).onComplete{
   case Success(result) => {
     // token is valid!
     var accessToken = result
@@ -402,7 +406,7 @@ oauth2.introspectTokenFuture("opaque string").onComplete{
 }
 
 // User level
-token.introspectFuture().onComplete{
+oauth2.authenticateFuture(user.principal()).onComplete{
   case Success(result) => {
     // Token is valid!
   }
@@ -446,11 +450,11 @@ OAuth2 is an AuthN protocol, however OpenId Connect adds JWTs to the token forma
 at the token level. Currently there are 2 known JWT AuthZ known formats:
 
 * Keycloak
-* MicroProfile JWT 1.1 spec
+* MicroProfile JWT 1.1 spec (from the auth-jwt module)
 
 === Keycloak JWT
 
-Given that Keycloak does provide `JWT` `access_token`s one can authorize at two distinct levels:
+Given that Keycloak does provide `JWT` access_tokens one can authorize at two distinct levels:
 
 * role
 * authority
@@ -472,9 +476,9 @@ example you want to see if the user can `print` in the current application:
 
 [source,scala]
 ----
-user.isAuthorizedFuture("print").onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
+// in this case it is assumed that the role is the current application
+if (PermissionBasedAuthorization.create("print").match(user)) {
+  // Yes the user can print
 }
 
 ----
@@ -483,9 +487,10 @@ However this is quite specific, you might want to verify if the user can `add-us
 
 [source,scala]
 ----
-user.isAuthorizedFuture("realm:add-user").onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
+// the resource is "realm"
+// the authority is "add-user"
+if (PermissionBasedAuthorization.create("add-user").setResource("realm").match(user)) {
+  // Yes the user can add users to the application
 }
 
 ----
@@ -494,9 +499,10 @@ Or if the user can access the `year-report` in the `finance` department:
 
 [source,scala]
 ----
-user.isAuthorizedFuture("finance:year-report").onComplete{
-  case Success(result) => println("Success")
-  case Failure(cause) => println("Failure")
+// the role is "finance"
+// the authority is "year-report"
+if (PermissionBasedAuthorization.create("year-report").setResource("finance").match(user)) {
+  // Yes the user can access the year report from the finance department
 }
 
 ----
@@ -506,15 +512,8 @@ user.isAuthorizedFuture("finance:year-report").onComplete{
 Another format in the form of a spec is the MP-JWT 1.1. This spec defines a JSON array of strings under the property
 name `groups` that define the "groups" the token has an authority over.
 
-In order to use this spec to assert AuthZ the right handler must be set:
-
-[source,scala]
-----
-// use the MP-JWT 1.1 spec handler to
-// handle Role-Based Access Control (AuthZ)
-oauth2Auth.rbacHandler(MicroProfileRBAC.create())
-
-----
+In order to use this spec to assert AuthZ use the `link:../../scaladocs/io/vertx/scala/ext/auth/authorization/AuthorizationProvider.html[AuthorizationProvider]` factory
+provided on the `auth-jwt` module.
 
 
 == Token Management
@@ -542,7 +541,7 @@ screen. In this case you can refresh the token. To refresh a token you need to h
 
 [source,scala]
 ----
-user.refreshFuture().onComplete{
+oauth2.refreshFuture(user).onComplete{
   case Success(result) => {
     // the refresh call succeeded
   }
@@ -560,7 +559,7 @@ any application. In order to do this one needs to revoke the token against the O
 
 [source,scala]
 ----
-user.revokeFuture("access_token").onComplete{
+oauth2.revokeFuture(user, "access_token").onComplete{
   case Success(result) => {
     // the refresh call succeeded
   }
@@ -589,7 +588,7 @@ means that the check happens on the OAuth2 server.
 
 [source,scala]
 ----
-user.introspectFuture().onComplete{
+oauth2.authenticateFuture(user.principal()).onComplete{
   case Success(result) => {
     // the introspection call succeeded
   }

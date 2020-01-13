@@ -1,0 +1,53 @@
+= Enums
+
+[[AclTokenType]]
+== AclTokenType
+
+++++
+Acl token type is either "client" (meaning the token cannot modify ACL rules) or "management"
+(meaning the token is allowed to perform all actions).
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[CLIENT]]`CLIENT`|-
+|[[MANAGEMENT]]`MANAGEMENT`|-
+|===
+
+[[CheckStatus]]
+== CheckStatus
+
+++++
+Represents an check status.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[PASSING]]`PASSING`|-
+|[[WARNING]]`WARNING`|-
+|[[CRITICAL]]`CRITICAL`|-
+|===
+
+[[HealthState]]
+== HealthState
+
+++++
+Represents an health states.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[PASSING]]`PASSING`|-
+|[[WARNING]]`WARNING`|-
+|[[CRITICAL]]`CRITICAL`|-
+|[[ANY]]`ANY`|-
+|===

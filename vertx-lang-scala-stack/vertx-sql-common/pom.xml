@@ -23,21 +23,18 @@
       <groupId>io.vertx</groupId>
       <artifactId>${vertx-module}</artifactId>
       <version>${stack.version}</version>
+      <scope>provided</scope>
+      <classifier>sources</classifier>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>${vertx-module}</artifactId>
       <version>${stack.version}</version>
-      <scope>provided</scope>
-      <classifier>sources</classifier>
     </dependency>
   </dependencies>
 
   <build>
     <plugins>
-      <plugin>
-        <artifactId>maven-assembly-plugin</artifactId>
-      </plugin>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
       </plugin>
@@ -51,6 +48,9 @@
         <configuration>
           <reportOutputDirectory>/${project.build.directory}/docs/vertx-core/scala</reportOutputDirectory>
         </configuration>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
@@ -70,7 +70,7 @@
         <configuration>
           <instructions>
             <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-            <Export-Package>io.vertx.scala.ext.sql;version=${project.version}
+            <Export-Package>io.vertx.scala.ext.auth;version=${project.version}
             </Export-Package>
             <Import-Package>*</Import-Package>
             <Include-Resource>{maven-resources}</Include-Resource>
