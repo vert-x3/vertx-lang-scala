@@ -15,8 +15,8 @@
 |[[acceptBacklog]]`@acceptBacklog`|`Number (int)`|-
 |[[acceptUnmaskedFrames]]`@acceptUnmaskedFrames`|`Boolean`|-
 |[[alpnVersions]]`@alpnVersions`|`Array of link:enums.html#HttpVersion[HttpVersion]`|-
-|[[authOptions]]`@authOptions`|`link:dataobjects.html#AuthOptions[AuthOptions]`|+++
-
+|[[authOptions]]`@authOptions`|`Json object`|+++
+Set the auth options.
 +++
 |[[charset]]`@charset`|`String`|+++
 Set the charset used for encoding / decoding text data from/to SockJS
@@ -45,13 +45,13 @@ The path of the <i>inputrc</i> config.
 |[[maxChunkSize]]`@maxChunkSize`|`Number (int)`|-
 |[[maxHeaderSize]]`@maxHeaderSize`|`Number (int)`|-
 |[[maxInitialLineLength]]`@maxInitialLineLength`|`Number (int)`|-
-|[[maxWebsocketFrameSize]]`@maxWebsocketFrameSize`|`Number (int)`|-
-|[[maxWebsocketMessageSize]]`@maxWebsocketMessageSize`|`Number (int)`|-
+|[[maxWebSocketFrameSize]]`@maxWebSocketFrameSize`|`Number (int)`|-
+|[[maxWebSocketMessageSize]]`@maxWebSocketMessageSize`|`Number (int)`|-
 |[[openSslEngineOptions]]`@openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
 |[[pemKeyCertOptions]]`@pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|-
 |[[pemTrustOptions]]`@pemTrustOptions`|`link:dataobjects.html#PemTrustOptions[PemTrustOptions]`|-
-|[[perFrameWebsocketCompressionSupported]]`@perFrameWebsocketCompressionSupported`|`Boolean`|-
-|[[perMessageWebsocketCompressionSupported]]`@perMessageWebsocketCompressionSupported`|`Boolean`|-
+|[[perFrameWebSocketCompressionSupported]]`@perFrameWebSocketCompressionSupported`|`Boolean`|-
+|[[perMessageWebSocketCompressionSupported]]`@perMessageWebSocketCompressionSupported`|`Boolean`|-
 |[[pfxKeyCertOptions]]`@pfxKeyCertOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
 |[[pfxTrustOptions]]`@pfxTrustOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
 |[[port]]`@port`|`Number (int)`|-
@@ -87,10 +87,10 @@ Set <code>term.js</code> resource to use.
 |[[vertsShellJsResource]]`@vertsShellJsResource`|`Buffer`|+++
 Set <code>vertxshell.js</code> resource to use.
 +++
-|[[websocketAllowServerNoContext]]`@websocketAllowServerNoContext`|`Boolean`|-
-|[[websocketCompressionLevel]]`@websocketCompressionLevel`|`Number (int)`|-
-|[[websocketPreferredClientNoContext]]`@websocketPreferredClientNoContext`|`Boolean`|-
-|[[websocketSubProtocols]]`@websocketSubProtocols`|`String`|-
+|[[webSocketAllowServerNoContext]]`@webSocketAllowServerNoContext`|`Boolean`|-
+|[[webSocketCompressionLevel]]`@webSocketCompressionLevel`|`Number (int)`|-
+|[[webSocketPreferredClientNoContext]]`@webSocketPreferredClientNoContext`|`Boolean`|-
+|[[webSocketSubProtocols]]`@webSocketSubProtocols`|`Array of String`|-
 |===
 
 [[SSHTermOptions]]
@@ -105,8 +105,8 @@ Set <code>vertxshell.js</code> resource to use.
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[authOptions]]`@authOptions`|`link:dataobjects.html#AuthOptions[AuthOptions]`|+++
-
+|[[authOptions]]`@authOptions`|`Json object`|+++
+Set the auth options.
 +++
 |[[defaultCharset]]`@defaultCharset`|`String`|+++
 Set the default charset to use when the client does not specifies one.

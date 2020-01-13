@@ -261,6 +261,10 @@
 
   <modules>
     <module>vertx-mqtt</module>
+    <module>vertx-sql-client</module>
+    <module>vertx-pg-client</module>
+    <module>vertx-mysql-client</module>
+    <module>vertx-mssql-client</module>
     <module>vertx-sql-common</module>
     <module>vertx-bridge-common</module>
     <module>vertx-jdbc-client</module>
@@ -270,6 +274,11 @@
     <module>vertx-auth-common</module>
     <module>vertx-auth-shiro</module>
     <module>vertx-auth-htdigest</module>
+    <module>vertx-auth-htpasswd</module>
+    <module>vertx-auth-ldap</module>
+    <module>vertx-auth-properties</module>
+    <module>vertx-auth-sql</module>
+    <module>vertx-auth-webauthn</module>
     <module>vertx-auth-oauth2</module>
     <module>vertx-auth-mongo</module>
     <module>vertx-auth-jwt</module>
@@ -287,7 +296,7 @@
     <module>vertx-mail-client</module>
     <module>vertx-rabbitmq-client</module>
     <module>vertx-redis-client</module>
-    <module>vertx-stomp</module>
+<!--    <module>vertx-stomp</module>-->
     <module>vertx-tcp-eventbus-bridge</module>
     <module>vertx-amqp-bridge</module>
     <module>vertx-dropwizard-metrics</module>

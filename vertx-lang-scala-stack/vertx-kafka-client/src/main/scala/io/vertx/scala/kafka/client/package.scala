@@ -365,6 +365,30 @@ package object client{
       promise.future
     }
 
+    def initTransactionsFuture(): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.initTransactions({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def beginTransactionFuture(): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.beginTransaction({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def commitTransactionFuture(): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.commitTransaction({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def abortTransactionFuture(): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.abortTransaction({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
     /**
      * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */

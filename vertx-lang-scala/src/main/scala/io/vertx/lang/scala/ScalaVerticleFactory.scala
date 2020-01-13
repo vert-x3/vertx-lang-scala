@@ -16,7 +16,9 @@
 
 package io.vertx.lang.scala
 
-import io.vertx.core.{Verticle, Vertx}
+import java.util.concurrent.Callable
+
+import io.vertx.core.{Promise, Verticle, Vertx}
 import io.vertx.core.spi.VerticleFactory
 import io.vertx.lang.scala.onthefly.OnTheFlyCompiler
 
@@ -36,11 +38,16 @@ class ScalaVerticleFactory extends VerticleFactory {
 
   override def close(): Unit = this.vertx = null
 
-  override def createVerticle(verticleName: String, classLoader: ClassLoader): Verticle =
+
+  override def createVerticle(verticleName: String, classLoader: ClassLoader, promise: Promise[Callable[Verticle]]): Unit =
     if (verticleName.endsWith(".scala")) {
-      verticleFromSource(verticleName, classLoader)
+      promise.complete(() => {
+        verticleFromSource(verticleName, classLoader)
+      })
     } else {
-      verticleFromClass(verticleName, classLoader)
+      promise.complete(() => {
+        verticleFromClass(verticleName, classLoader)
+      })
     }
 
   private def verticleFromSource(verticleName: String, classLoader: ClassLoader): Verticle = {

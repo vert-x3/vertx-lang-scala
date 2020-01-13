@@ -69,4 +69,45 @@ package object mongo{
 
 
 
+  object MongoAuthentication {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(mongoClient: io.vertx.ext.mongo.MongoClient,options: io.vertx.ext.auth.mongo.MongoAuthenticationOptions) = {
+      io.vertx.ext.auth.mongo.MongoAuthentication.create(mongoClient, options)
+    }
+    def create(mongoClient: io.vertx.ext.mongo.MongoClient,hashStrategy: io.vertx.ext.auth.mongo.HashStrategy,options: io.vertx.ext.auth.mongo.MongoAuthenticationOptions) = {
+      io.vertx.ext.auth.mongo.MongoAuthentication.create(mongoClient, hashStrategy, options)
+    }
+  }
+
+
+
+  type MongoAuthenticationOptions = io.vertx.ext.auth.mongo.MongoAuthenticationOptions
+  object MongoAuthenticationOptions {
+    def apply() = new MongoAuthenticationOptions()
+    def apply(json: JsonObject) = new MongoAuthenticationOptions(json)
+  }
+
+
+
+  object MongoAuthorization {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(providerId: java.lang.String,mongoClient: io.vertx.ext.mongo.MongoClient,options: io.vertx.ext.auth.mongo.MongoAuthorizationOptions) = {
+      io.vertx.ext.auth.mongo.MongoAuthorization.create(providerId, mongoClient, options)
+    }
+  }
+
+
+
+  type MongoAuthorizationOptions = io.vertx.ext.auth.mongo.MongoAuthorizationOptions
+  object MongoAuthorizationOptions {
+    def apply() = new MongoAuthorizationOptions()
+    def apply(json: JsonObject) = new MongoAuthorizationOptions(json)
+  }
+
+
+
 }

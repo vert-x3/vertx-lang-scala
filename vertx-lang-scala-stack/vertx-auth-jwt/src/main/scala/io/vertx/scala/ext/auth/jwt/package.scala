@@ -24,13 +24,13 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import io.vertx.ext.auth.jwt.{JWTAuthOptions => JJWTAuthOptions}
-import io.vertx.ext.auth
 import io.vertx.ext.jwt
-import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.core
 import io.vertx.ext.jwt.{JWTOptions => JJWTOptions}
 import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
+import io.vertx.ext.auth.authentication.{AuthenticationProvider => JAuthenticationProvider}
 import io.vertx.core.json.JsonObject
+import io.vertx.ext.auth.authentication
 import io.vertx.core.{Vertx => JVertx}
 
 package object jwt{
@@ -52,6 +52,26 @@ package object jwt{
     def apply(json: JsonObject) = new JWTAuthOptions(json)
   }
 
+
+
+  object JWTAuthorization {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create(rootClaim: java.lang.String) = {
+      io.vertx.ext.auth.jwt.authorization.JWTAuthorization.create(rootClaim)
+    }
+  }
+
+
+  object MicroProfileAuthorization {
+    /**
+     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def create() = {
+      io.vertx.ext.auth.jwt.authorization.MicroProfileAuthorization.create()
+    }
+  }
 
 
 }

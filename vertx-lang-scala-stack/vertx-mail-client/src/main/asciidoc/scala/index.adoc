@@ -153,6 +153,48 @@ mailClient.sendMailFuture(message).onComplete{
 
 ----
 
+== DKIM Signature Signing emails
+
+It supports http://dkim.org[DomainKeys Identified Mail (DKIM)] Signature signing to secure your emails. All you need to
+do is to specify required configurations to sign your email.
+
+A mail client with DKIM feature enabled can be created as follows:
+
+[source,scala]
+----
+var dkimSignOptions = DKIMSignOptions()
+dkimSignOptions.setPrivateKey("PKCS8 Private Key Base64 String")
+dkimSignOptions.setAuid("identifier@example.com")
+dkimSignOptions.setSelector("selector")
+dkimSignOptions.setSdid("example.com")
+var config = MailConfig()
+  .setDKIMSignOption(dkimSignOptions)
+  .setEnableDKIM(true)
+
+var mailClient = MailClient.createShared(vertx, config)
+
+----
+
+After the mail client is created, each `mailClient.sendMail` call will have the email signed by adding additional
+`DKIM-Signature` header.
+
+=== Caching the Attachment Streams used in DKIM
+
+To be able to perform DKIM sign, it needs to hash the email's body, including attachments.
+If an attachment comes from a ReadStream, it won't be able to go through again. So we need
+to cache the attachment data. This client provides 2 strategies to cache it.
+
+* In memory caching
+
+By default, the stream content is cached in memory so it can be sent later.
+
+* Caching in a temporary file
+
+You can cache data from attachment's Stream to a temporary file by specifying a system property:
+`vertx.mail.attachment.cache.file` to `true` for large attachments. It will try to delete the temporary file
+after each send.
+
+
 == Mail-client data objects
 
 === MailMessage properties
@@ -216,9 +258,28 @@ The configuration has the following properties
 * `allowRcptErrors` boolean if true, sending continues if a recipient address is not accepted and the mail will be sent if at least one address is accepted (default false)
 * `disableEsmtp` boolean if true, ESMTP-related commands will not be used (set if your smtp server doesn't even give a proper error response code for the EHLO command) (default false)
 * `userAgent` String represents the Mail User Agent(MUA) name used to generate email boundaries for multipart emails and message-id, default is `vertxmail`.
+* `enableDKIM` boolean if true, the DKIM signing will be enabled if DKIM configurations are set as well, default is `false`.
+* `dkimSignOptions` List of `DKIMSignOptions` which are used to perform the DKIM sign.
 
 === MailResult object
 The MailResult object has the following members
 
 * `messageID` the Message-ID of the generated mail
 * `recipients` the list of recipients the mail was sent to (if allowRcptErrors is true, this may be fewer than the intended recipients)
+
+=== DKIMSignOptions object
+The DKIMSignOptions object has the following properties
+
+* `privateKey` The RSA https://www.ietf.org/rfc/rfc5208.txt[PKCS#8] format private key used to sign the emails.
+* `privateKeyPath` The file path where the RSA https://www.ietf.org/rfc/rfc5208.txt[PKCS#8] format private key is specified. Either `privateKey` or `privateKeyPath` is *required*.
+* `signAlgo` either `DKIMSignAlgorithm.RSA_SHA256`(default) or `DKIMSignAlgorithm.RSA_SHA1`. The algorithm used to do the body hashing and signature sign.
+* `signedHeaders` List of String that specify which email headers will be used to perform the sign. Defaults: `From`, `Reply-to`, `Subject`, `Date`, `To`, `Cc`. Note: the order matters.
+* `sdid` *required*, String, Singing Domain Identifier(SDID), normally it is the domain of the SMTP server.
+* `auid` optional, String, the Agent or User Identifier(AUID), default is `@` plus `sdid`
+* `selector` *required*, String, the selector used to query public key.
+* `headerCanonic` MessageCanonic algorithm used for headers, one of `simple`(default) and `relaxed`.
+* `bodyCanonic` MessageCanonic algorithm used for body hashing, one of `simple`(default) and `relaxed`.
+* `bodyLimit` optional, int, how long of the body used to calculate the body hash.
+* `signatureTimestamp` optional, boolean, if includes timestamp in the `DKIM-SIgnature` tags list. default is false
+* `expireTime` optional, long, expire time in seconds when the signature sign will be expired from now.
+* `copiedHeaders` optional, List of strings, the copied headers used in DKIM. Usually they are used for debug purpose according to the DKIM spec.

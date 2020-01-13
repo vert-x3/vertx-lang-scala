@@ -929,54 +929,54 @@ package object core{
     /**
      * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def send(address: java.lang.String,message: AnyRef): io.vertx.core.eventbus.EventBus = {
-      asJava.send(address, message)
+    def send(address: java.lang.String,message: scala.Option[AnyRef]): io.vertx.core.eventbus.EventBus = {
+      asJava.send(address, message.orNull)
     }
 
 
     /**
      * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def send(address: java.lang.String,message: AnyRef,options: io.vertx.core.eventbus.DeliveryOptions): io.vertx.core.eventbus.EventBus = {
-      asJava.send(address, message, options)
+    def send(address: java.lang.String,message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions): io.vertx.core.eventbus.EventBus = {
+      asJava.send(address, message.orNull, options)
     }
 
 
     /**
      * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def request[T](address: java.lang.String,message: AnyRef,replyHandler: AsyncResult[io.vertx.core.eventbus.Message[T]] => Unit): io.vertx.core.eventbus.EventBus = {
-      asJava.request[T](address, message, {p:AsyncResult[io.vertx.core.eventbus.Message[T]] => replyHandler(p)})
+    def request[T](address: java.lang.String,message: scala.Option[AnyRef],replyHandler: AsyncResult[io.vertx.core.eventbus.Message[T]] => Unit): io.vertx.core.eventbus.EventBus = {
+      asJava.request[T](address, message.orNull, {p:AsyncResult[io.vertx.core.eventbus.Message[T]] => replyHandler(p)})
     }
 
 
     /**
      * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def request[T](address: java.lang.String,message: AnyRef,options: io.vertx.core.eventbus.DeliveryOptions,replyHandler: AsyncResult[io.vertx.core.eventbus.Message[T]] => Unit): io.vertx.core.eventbus.EventBus = {
-      asJava.request[T](address, message, options, {p:AsyncResult[io.vertx.core.eventbus.Message[T]] => replyHandler(p)})
+    def request[T](address: java.lang.String,message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions,replyHandler: AsyncResult[io.vertx.core.eventbus.Message[T]] => Unit): io.vertx.core.eventbus.EventBus = {
+      asJava.request[T](address, message.orNull, options, {p:AsyncResult[io.vertx.core.eventbus.Message[T]] => replyHandler(p)})
     }
 
 
     /**
      * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def publish(address: java.lang.String,message: AnyRef): io.vertx.core.eventbus.EventBus = {
-      asJava.publish(address, message)
+    def publish(address: java.lang.String,message: scala.Option[AnyRef]): io.vertx.core.eventbus.EventBus = {
+      asJava.publish(address, message.orNull)
     }
 
 
     /**
      * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def publish(address: java.lang.String,message: AnyRef,options: io.vertx.core.eventbus.DeliveryOptions): io.vertx.core.eventbus.EventBus = {
-      asJava.publish(address, message, options)
+    def publish(address: java.lang.String,message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions): io.vertx.core.eventbus.EventBus = {
+      asJava.publish(address, message.orNull, options)
     }
 
     /**
      * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def requestFuture[T](address: java.lang.String,message: AnyRef): scala.concurrent.Future[io.vertx.core.eventbus.Message[T]] = {
+    def requestFuture[T](address: java.lang.String,message: scala.Option[AnyRef]): scala.concurrent.Future[io.vertx.core.eventbus.Message[T]] = {
       val promise = concurrent.Promise[io.vertx.core.eventbus.Message[T]]()
       asJava.request[T](address, message, {a:AsyncResult[io.vertx.core.eventbus.Message[T]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
@@ -985,7 +985,7 @@ package object core{
     /**
      * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def requestFuture[T](address: java.lang.String,message: AnyRef,options: io.vertx.core.eventbus.DeliveryOptions): scala.concurrent.Future[io.vertx.core.eventbus.Message[T]] = {
+    def requestFuture[T](address: java.lang.String,message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions): scala.concurrent.Future[io.vertx.core.eventbus.Message[T]] = {
       val promise = concurrent.Promise[io.vertx.core.eventbus.Message[T]]()
       asJava.request[T](address, message, options, {a:AsyncResult[io.vertx.core.eventbus.Message[T]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
@@ -1992,14 +1992,6 @@ package object core{
       asJava.continueHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
     }
 
-
-    /**
-     * Like [[connectionHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def connectionHandler(handler: scala.Option[io.vertx.core.http.HttpConnection => Unit]): io.vertx.core.http.HttpClientRequest = {
-      asJava.connectionHandler(handler match {case Some(t) => p:io.vertx.core.http.HttpConnection => t(p); case None => null})
-    }
-
     /**
      * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
@@ -2037,6 +2029,15 @@ package object core{
     }
 
     /**
+     * Like [[sendHead]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def sendHeadFuture(): scala.concurrent.Future[io.vertx.core.http.HttpVersion] = {
+      val promise = concurrent.Promise[io.vertx.core.http.HttpVersion]()
+      asJava.sendHead({a:AsyncResult[io.vertx.core.http.HttpVersion] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
      * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
     def endFuture(chunk: java.lang.String): scala.concurrent.Future[Unit] = {
@@ -2069,6 +2070,15 @@ package object core{
     def endFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.end({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like [[netSocket]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def netSocketFuture(): scala.concurrent.Future[io.vertx.core.net.NetSocket] = {
+      val promise = concurrent.Promise[io.vertx.core.net.NetSocket]()
+      asJava.netSocket({a:AsyncResult[io.vertx.core.net.NetSocket] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -2207,6 +2217,16 @@ package object core{
 
 
 
+  object HttpMethod {
+    /**
+     * Like [[valueOf]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     */
+    def valueOf(value: java.lang.String) = {
+      io.vertx.core.http.HttpMethod.valueOf(value)
+    }
+  }
+
+
 
   /**
     * An HTTP and WebSockets server.
@@ -2214,7 +2234,7 @@ package object core{
     * You receive HTTP requests by providing a [[io.vertx.core.http.HttpServer#requestHandler]]. As requests arrive on the server the handler
     * will be called with the requests.
     * 
-    * You receive WebSockets by providing a [[io.vertx.core.http.HttpServer#websocketHandler]]. As WebSocket connections arrive on the server, the
+    * You receive WebSockets by providing a [[io.vertx.core.http.HttpServer#webSocketHandler]]. As WebSocket connections arrive on the server, the
     * WebSocket is passed to the handler.
     */
 
@@ -2767,38 +2787,38 @@ package object core{
     /**
      * Like [[reply]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def reply(message: AnyRef): Unit = {
-      asJava.reply(message)
+    def reply(message: scala.Option[AnyRef]): Unit = {
+      asJava.reply(message.orNull)
     }
 
 
     /**
      * Like [[reply]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def reply(message: AnyRef,options: io.vertx.core.eventbus.DeliveryOptions): Unit = {
-      asJava.reply(message, options)
+    def reply(message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions): Unit = {
+      asJava.reply(message.orNull, options)
     }
 
 
     /**
      * Like [[replyAndRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def replyAndRequest[R](message: AnyRef,replyHandler: AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
-      asJava.replyAndRequest[R](message, {p:AsyncResult[io.vertx.core.eventbus.Message[R]] => replyHandler(p)})
+    def replyAndRequest[R](message: scala.Option[AnyRef],replyHandler: AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
+      asJava.replyAndRequest[R](message.orNull, {p:AsyncResult[io.vertx.core.eventbus.Message[R]] => replyHandler(p)})
     }
 
 
     /**
      * Like [[replyAndRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def replyAndRequest[R](message: AnyRef,options: io.vertx.core.eventbus.DeliveryOptions,replyHandler: AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
-      asJava.replyAndRequest[R](message, options, {p:AsyncResult[io.vertx.core.eventbus.Message[R]] => replyHandler(p)})
+    def replyAndRequest[R](message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions,replyHandler: AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
+      asJava.replyAndRequest[R](message.orNull, options, {p:AsyncResult[io.vertx.core.eventbus.Message[R]] => replyHandler(p)})
     }
 
     /**
      * Like [[replyAndRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def replyAndRequestFuture[R](message: AnyRef): scala.concurrent.Future[io.vertx.core.eventbus.Message[R]] = {
+    def replyAndRequestFuture[R](message: scala.Option[AnyRef]): scala.concurrent.Future[io.vertx.core.eventbus.Message[R]] = {
       val promise = concurrent.Promise[io.vertx.core.eventbus.Message[R]]()
       asJava.replyAndRequest[R](message, {a:AsyncResult[io.vertx.core.eventbus.Message[R]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
@@ -2807,7 +2827,7 @@ package object core{
     /**
      * Like [[replyAndRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
      */
-    def replyAndRequestFuture[R](message: AnyRef,options: io.vertx.core.eventbus.DeliveryOptions): scala.concurrent.Future[io.vertx.core.eventbus.Message[R]] = {
+    def replyAndRequestFuture[R](message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions): scala.concurrent.Future[io.vertx.core.eventbus.Message[R]] = {
       val promise = concurrent.Promise[io.vertx.core.eventbus.Message[R]]()
       asJava.replyAndRequest[R](message, options, {a:AsyncResult[io.vertx.core.eventbus.Message[R]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
@@ -3552,7 +3572,7 @@ package object core{
   /**
     * Represents a server side WebSocket.
     * 
-    * Instances of this class are passed into a [[io.vertx.core.http.HttpServer#websocketHandler]] or provided
+    * Instances of this class are passed into a [[io.vertx.core.http.HttpServer#webSocketHandler]] or provided
     * when a WebSocket handshake is manually [[io.vertx.core.http.HttpServerRequest#upgrade]]ed.
     */
 

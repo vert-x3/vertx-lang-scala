@@ -23,10 +23,10 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import scala.concurrent.Promise
 
-import io.vertx.ext.auth
-import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.ext.auth.htdigest.{HtdigestAuth => JHtdigestAuth}
 import io.vertx.core
+import io.vertx.ext.auth.authentication.{AuthenticationProvider => JAuthenticationProvider}
+import io.vertx.ext.auth.authentication
 import io.vertx.core.{Vertx => JVertx}
 
 package object htdigest{

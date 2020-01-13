@@ -1,8 +1,8 @@
 = Vert.x-Web
 :toc: left
 
-Vert.x-Web is a set of building blocks for building web applications with Vert.x. Think of it as a Swiss Army Knife for building
-modern, scalable, web apps.
+Vert.x-Web is a set of building blocks for building web applications with Vert.x. Think of it as a Swiss Army Knife for
+building modern, scalable, web apps.
 
 Vert.x core provides a fairly low level set of functionality for handling HTTP, and for some applications
 that will be sufficient.
@@ -30,18 +30,17 @@ Some of the key features of Vert.x-Web include:
 * Content negotiation
 * Request body handling
 * Body size limits
-* Cookie parsing and handling
 * Multipart forms
 * Multipart file uploads
 * Sub routers
 * Session support - both local (for sticky sessions) and clustered (for non sticky)
 * CORS (Cross Origin Resource Sharing) support
 * Error page handler
-* Basic Authentication
+* HTTP Basic/Digest Authentication
 * Redirect based authentication
-* Authorisation handlers
-* JWT based authorization
-* User/role/permission authorisation
+* Authorization handlers
+* JWT/OAuth2 based authorization
+* User/role/permission authorization
 * Favicon handling
 * Template support for server side rendering, including support for the following template engines out of the box:
 ** Handlebars
@@ -59,8 +58,8 @@ Some of the key features of Vert.x-Web include:
 * CSRF Cross Site Request Forgery
 * VirtualHost
 
-Most features in Vert.x-Web are implemented as handlers so you can always write your own. We envisage many more being written
-over time.
+Most features in Vert.x-Web are implemented as handlers so you can always write your own. We envisage many more being
+written over time.
 
 We'll discuss all these features in this manual.
 
@@ -145,7 +144,7 @@ You can run this, and point your browser at `http://localhost:8080` to verify th
 Here's the 10000 foot view:
 
 A `link:../../scaladocs/io/vertx/scala/ext/web/Router.html[Router]` is one of the core concepts of Vert.x-Web. It's an object which maintains zero or more
-`link:../../scaladocs/io/vertx/scala/ext/web/Route.html[Routes]` .
+`link:../../scaladocs/io/vertx/scala/ext/web/Route.html[Routes]`.
 
 A router takes an HTTP request and finds the first matching route for that request, and passes the request to that route.
 
@@ -376,20 +375,20 @@ route.handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 
 == Capturing path parameters
 
-It's possible to match paths using placeholders for parameters which are then available in the request
-`link:../../scaladocs/io/vertx/scala/core/http/HttpServerRequest.html#params()[params]`.
+It's possible to match paths using placeholders for parameters which are then available in the context
+`link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#pathParam()[pathParam]`.
 
 Here's an example
 
 [source,scala]
 ----
 
-var route = router.route(HttpMethod.POST, "/catalogue/products/:producttype/:productid/")
+var route = router.route(HttpMethod.POST, "/catalogue/products/:productType/:productID/")
 
 route.handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 
-  var productType = routingContext.request().getParam("producttype")
-  var productID = routingContext.request().getParam("productid")
+  var productType = routingContext.pathParam("productType")
+  var productID = routingContext.pathParam("productID")
 
   // Do something with them...
 })
@@ -401,7 +400,7 @@ The placeholders consist of `:` followed by the parameter name. Parameter names 
 numeric character or underscore.
 
 In the above example, if a POST request is made to path: `/catalogue/products/tools/drill123/` then the route will match
-and `productType` will receive the value `tools` and productID will receive the value `drill123`.
+and `productType` will receive the value `tools` and `productID` will receive the value `drill123`.
 
 == Routing with regular expressions
 
@@ -459,8 +458,8 @@ var route = router.routeWithRegex(".*foo")
 // param1
 route.pathRegex("\\/([^\\/]+)\\/([^\\/]+)").handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 
-  var productType = routingContext.request().getParam("param0")
-  var productID = routingContext.request().getParam("param1")
+  var productType = routingContext.pathParam("param0")
+  var productID = routingContext.pathParam("param1")
 
   // Do something with them...
 })
@@ -469,7 +468,7 @@ route.pathRegex("\\/([^\\/]+)\\/([^\\/]+)").handler((routingContext: io.vertx.sc
 ----
 
 In the above example, if a request is made to path: `/tools/drill123/` then the route will match
-and `productType` will receive the value `tools` and productID will receive the value `drill123`.
+and `productType` will receive the value `tools` and `productID` will receive the value `drill123`.
 
 Captures are denoted in regular expressions with capture groups (i.e. surrounding the capture with round brackets)
 
@@ -483,10 +482,10 @@ It's possible to use named capture groups in the regex path.
 
 // This regular expression matches paths that start with something like: "/foo/bar"
 // It uses named regex groups to capture path params
-var route = router.routeWithRegex("\\/(?<productType>[^\\/]+)\\/(?<productId>[^\\/]+)").handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
+var route = router.routeWithRegex("\\/(?<productType>[^\\/]+)\\/(?<productID>[^\\/]+)").handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 
-  var productType = routingContext.request().getParam("productType")
-  var productID = routingContext.request().getParam("productId")
+  var productType = routingContext.pathParam("productType")
+  var productID = routingContext.pathParam("productID")
 
   // Do something with them...
 })
@@ -582,6 +581,22 @@ route.handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
 
 
 ----
+
+If you are creating an application that require custom HTTP verbs, for example, an `WebDav` server, then you can specify
+custom verbs like:
+
+[source,scala]
+----
+
+var route = router.route().method(HttpMethod.valueOf("MKCOL")).handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
+  // This handler will be called for any MKCOL request
+})
+
+
+----
+
+NOTE: It is important to notice that features such as rerouting will not accept custom http methods and inspecting the
+route verbs will yield the enumeration value `OTHER` instead of the custom name.
 
 == Route order
 
@@ -1175,7 +1190,17 @@ mainRouter.mountSubRouter("/productsAPI", restAPI)
 
 ----
 
-This means the REST API is now accessible via paths like: `/productsAPI/products/product1234`
+This means the REST API is now accessible via paths like: `/productsAPI/products/product1234`.
+
+There are a couple of rules that must be fulfilled before sub routers can be used:
+
+* The route path must end with a wild card
+* Parameters are allowed but full regex patterns not
+* Only 1 handler can be registered before or after this call (but they can on a new route object for the same path)
+* Only 1 router per path object
+
+Validation happens at the time the router is added to the http server. This means that you cannot get any validation
+error during the build time because of the dynamic nature of sub routers. They depend on the context to be validated.
 
 == Localization
 
@@ -1640,15 +1665,29 @@ You can also use `link:../../scaladocs/io/vertx/scala/ext/web/Session.html#setAc
 
 The session timeout can be configured when creating the session handler. Default timeout is 30 minutes.
 
-== Authentication / authorisation
+== Authentication / authorization
 
-Vert.x comes with some out-of-the-box handlers for handling both authentication and authorisation.
+Vert.x comes with some out-of-the-box handlers for handling both authentication and authorization. In vert.x web
+the meanings for the 2 words are:
 
-=== Creating an auth handler
+* *Authentication* - Tells who the user is
+* *Authorization* - Tells what the user is allowed to do
 
-To create an auth handler you need an instance of `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]`. Auth provider is
-used for authentication and authorisation of users. Vert.x provides several auth provider instances out of the box
-in the vertx-auth project. For full information on auth providers and how to use and configure them
+While *Authentication* is tightened to a well known protocol, e.g.:
+
+* HTTP Basic Authentication
+* HTTP Digest Authentication
+* OAuth2 Authentication
+* ...
+
+*Authorization* in vert.x is quite generic and can be used regardless of the prior. Yet it is also possible and a valid
+use case to use the same provider module for both cases.
+
+=== Creating an Authentication handler
+
+To create an auth handler you need an instance of `link:../../scaladocs/io/vertx/scala/ext/auth/authentication/AuthenticationProvider.html[AuthenticationProvider]`.
+Authentication provider is used for authentication of users. Vert.x provides several authentication provider instances
+out of the box in the vertx-auth project. For full information on auth providers and how to use and configure them
 please consult the auth documentation.
 
 Here's a simple example of creating a basic auth handler given an auth provider.
@@ -1662,15 +1701,15 @@ var basicAuthHandler = BasicAuthHandler.create(authProvider)
 
 ----
 
-=== Handling auth in your application
+=== Handling authentication in your application
 
-Let's say you want all requests to paths that start with `/private/` to be subject to auth. To do that you make sure
-your auth handler is before your application handlers on those paths:
+Let's say you want all requests to paths that start with `/private/` to be subject to authentication. To do that you
+make sure your authentication handler is before your application handlers on those paths:
 
 [source,scala]
 ----
 
-router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setAuthProvider(authProvider))
+router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
 
 var basicAuthHandler = BasicAuthHandler.create(authProvider)
 
@@ -1694,15 +1733,14 @@ router.route("/private/somepath").handler((routingContext: io.vertx.scala.ext.we
 
 ----
 
-If the auth handler has successfully authenticated and authorised the user it will inject a `link:../../scaladocs/io/vertx/scala/ext/auth/User.html[User]`
+If the authentication handler has successfully authenticated the user it will inject a `link:../../scaladocs/io/vertx/scala/ext/auth/User.html[User]`
 object into the `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html[RoutingContext]` so it's available in your handlers with:
 `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#user()[user]`.
 
 If you want your User object to be stored in the session so it's available between requests so you don't have to
-authenticate on each request, then you should make sure you have a session handler and a user session handler on matching
-routes before the auth handler.
+authenticate on each request, then you should make sure you have a session handler before the authentication handler.
 
-Once you have your user object you can also programmatically use the methods on it to authorise the user.
+Once you have your user object you can also programmatically use the methods on it to authorize the user.
 
 If you want to cause the user to be logged out you can call `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#clearUser()[clearUser]`
 on the routing context.
@@ -1712,34 +1750,31 @@ on the routing context.
 http://en.wikipedia.org/wiki/Basic_access_authentication[HTTP Basic Authentication] is a simple means of authentication
 that can be appropriate for simple applications.
 
-With basic auth, credentials are sent unencrypted across the wire in HTTP headers so it's essential that you serve
-your application using HTTPS not HTTP.
+With basic authentication, credentials are sent unencrypted across the wire in HTTP headers so it's essential that you
+serve your application using HTTPS not HTTP.
 
-With basic auth, if a user requests a resource that requires authorisation, the basic auth handler will send back
-a `401` response with the header `WWW-Authenticate` set. This prompts the browser to show a log-in dialogue and
+With basic authentication, if a user requests a resource that requires authentication, the basic auth handler will send
+back a `401` response with the header `WWW-Authenticate` set. This prompts the browser to show a log-in dialogue and
 prompt the user to enter their username and password.
 
 The request is made to the resource again, this time with the `Authorization` header set, containing the username
 and password encoded in Base64.
 
-When the basic auth handler receives this information, it calls the configured `link:../../scaladocs/io/vertx/scala/ext/auth/AuthProvider.html[AuthProvider]`
-with the username and password to authenticate the user. If the authentication is successful the handler attempts
-to authorise the user. If that is successful then the routing of the request is allowed to continue to the application
-handlers, otherwise a `403` response is returned to signify that access is denied.
+When the basic auth handler receives this information, it calls the configured `link:../../scaladocs/io/vertx/scala/ext/auth/authentication/AuthenticationProvider.html[AuthenticationProvider]`
+with the username and password to authenticate the user. If the authentication is successful then the routing of the
+request is allowed to continue to the application handlers, otherwise a `403` response is returned to signify that
+access is denied.
 
-The auth handler can be set-up with a set of authorities that are required for access to the resources to
-be granted.
+=== Redirect authentication handler
 
-=== Redirect auth handler
-
-With redirect auth handling the user is redirected to towards a login page in the case they are trying to access
-a protected resource and they are not logged in.
+With redirect authentication handling the user is redirected to towards a login page in the case they are trying to
+access a protected resource and they are not logged in.
 
 The user then fills in the login form and submits it. This is handled by the server which authenticates
 the user and, if authenticated redirects the user back to the original resource.
 
 To use redirect auth you configure an instance of `link:../../scaladocs/io/vertx/scala/ext/web/handler/RedirectAuthHandler.html[RedirectAuthHandler]` instead of a
-basic auth handler.
+basic authentication handler.
 
 You will also need to setup handlers to serve your actual login page, and a handler to handle the actual login itself.
 To handle the login we provide a prebuilt handler `link:../../scaladocs/io/vertx/scala/ext/web/handler/FormLoginHandler.html[FormLoginHandler]` for the purpose.
@@ -1749,7 +1784,7 @@ Here's an example of a simple app, using a redirect auth handler on the default 
 [source,scala]
 ----
 
-router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setAuthProvider(authProvider))
+router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
 
 var redirectAuthHandler = RedirectAuthHandler.create(authProvider)
 
@@ -1779,9 +1814,9 @@ router.route("/private/somepath").handler((routingContext: io.vertx.scala.ext.we
 
 ----
 
-=== JWT authorisation
+=== JWT authentication
 
-With JWT authorisation resources can be protected by means of permissions and users without enough rights are denied
+With JWT authentication resources can be protected by means of permissions and users without enough rights are denied
 access. You need to add the `io.vertx:vertx-auth-jwt:${maven.version}` dependency to use `JWTAuthProvider`
 
 To use this handler there are 2 steps involved:
@@ -1820,7 +1855,7 @@ router.route("/login").handler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
 
 ----
 
-Now that your client has a token all it is required is that forall* consequent request the HTTP header
+Now that your client has a token all it is required is that *for all* consequent request the HTTP header
 `Authorization` is filled with: `Bearer <token>` e.g.:
 
 [source,scala]
@@ -1879,12 +1914,24 @@ var handler = (rc: io.vertx.scala.ext.web.RoutingContext) => {
 
 ----
 
-=== Configuring required authorities
+=== Configuring authorization
 
-With any auth handler you can also configure required authorities to access the resource.
+Until now all examples were covering authentication. Authorization is the next logical step when dealing with user.
+While authentication was really specific to the protocol, *authorization* is independent, all information is extracted
+from the `User` object.
 
-By default, if no authorities are configured then it is sufficient to be logged in to access the resource, otherwise
-the user must be both logged in (authenticated) and have the required authorities.
+Before this is possible there is a need to load the authorizations to this same object. In order to do this the
+`link:../../scaladocs/io/vertx/scala/ext/web/handler/AuthorizationHandler.html[AuthorizationHandler]` should be used. An authorization handler will load all known
+authorizations from a given `link:../../scaladocs/io/vertx/scala/ext/auth/authorization/AuthorizationProvider.html[AuthorizationProvider]`.
+
+[source,scala]
+----
+// attest that all requests on the route match the required authorization
+router.route().handler(AuthorizationHandler.create(PermissionBasedAuthorization.create("can-do-work")).addAuthorizationProvider(authProvider))
+
+----
+
+The lookup can be performed on more than 1 source, just keep adding `addAuthorizationProvider(provider)` to the handler.
 
 Here's an example of configuring an app so that different authorities are required for different parts of the
 app. Note that the meaning of the authorities is determined by the underlying auth provider that you use. E.g. some
@@ -1892,34 +1939,26 @@ may support a role/permission based model but others might use another model.
 
 [source,scala]
 ----
-
-var listProductsAuthHandler = RedirectAuthHandler.create(authProvider)
-listProductsAuthHandler.addAuthority("list_products")
-
-// Need "list_products" authority to list products
-router.route("/listproducts/*").handler(listProductsAuthHandler)
-
-var settingsAuthHandler = RedirectAuthHandler.create(authProvider)
-settingsAuthHandler.addAuthority("role:admin")
+// Need "list_products" authorization to list products
+router.route("/listproducts/*").handler(AuthorizationHandler.create(PermissionBasedAuthorization.create("list_products")).addAuthorizationProvider(authProvider))
 
 // Only "admin" has access to /private/settings
-router.route("/private/settings/*").handler(settingsAuthHandler)
-
+router.route("/private/settings/*").handler(AuthorizationHandler.create(RoleBasedAuthorization.create("admin")).addAuthorizationProvider(authProvider))
 
 ----
 
-=== Chaining multiple auth handlers
+=== Chaining multiple authentication handlers
 
-There are times when you want to support multiple authN/authZ mechanisms in a single application. For this you can
+There are times when you want to support multiple authentication mechanisms in a single application. For this you can
 use the `link:../../scaladocs/io/vertx/scala/ext/web/handler/ChainAuthHandler.html[ChainAuthHandler]`. The chain auth handler will attempt to perform
-authentication on a chain of handlers. The chain works both for AuthN and AuthZ, so if the authentication is valid
-at a given handler of the chain, then that same handler will be used to perform authorization (if requested).
+authentication on a chain of handlers.
 
 It is important to know that some handlers require specific providers, for example:
 
 * The `link:../../scaladocs/io/vertx/scala/ext/web/handler/JWTAuthHandler.html[JWTAuthHandler]` requires `link:../../scaladocs/io/vertx/scala/ext/auth/jwt/JWTAuth.html[JWTAuth]`.
 * The `link:../../scaladocs/io/vertx/scala/ext/web/handler/DigestAuthHandler.html[DigestAuthHandler]` requires `link:../../scaladocs/io/vertx/scala/ext/auth/htdigest/HtdigestAuth.html[HtdigestAuth]`.
 * The `link:../../scaladocs/io/vertx/scala/ext/web/handler/OAuth2AuthHandler.html[OAuth2AuthHandler]` requires `link:../../scaladocs/io/vertx/scala/ext/auth/oauth2/OAuth2Auth.html[OAuth2Auth]`.
+* The `link:../../scaladocs/io/vertx/scala/ext/web/handler/WebAuthnHandler.html[WebAuthnHandler]` requires `link:../../scaladocs/io/vertx/scala/ext/auth/webauthn/WebAuthn.html[WebAuthn]`.
 
 So it is not expected that the providers will be shared across all handlers. There are cases where one can share the
 provider across handlers, for example:
@@ -1936,9 +1975,9 @@ would start configuring your chain as:
 var chain = ChainAuthHandler.create()
 
 // add http basic auth handler to the chain
-chain.append(BasicAuthHandler.create(provider))
+chain.add(BasicAuthHandler.create(provider))
 // add form redirect auth handler to the chain
-chain.append(RedirectAuthHandler.create(provider))
+chain.add(RedirectAuthHandler.create(provider))
 
 // secure your route
 router.route("/secure/resource").handler(chain)
@@ -2132,7 +2171,7 @@ This is useful for security situations:
 var gitHubAuthProvider = GithubAuth.create(vertx, "CLIENT_ID", "CLIENT_SECRET")
 // create a oauth2 handler on our running server
 // the second argument is the full url to the callback as you entered in your provider management console.
-var githubOAuth2 = OAuth2AuthHandler.create(gitHubAuthProvider, "https://myserver.com/github-callback")
+var githubOAuth2 = OAuth2AuthHandler.create(vertx, gitHubAuthProvider, "https://myserver.com/github-callback")
 // setup the callback handler for receiving the GitHub callback
 githubOAuth2.setupCallback(router.route())
 
@@ -2147,7 +2186,7 @@ var googleAuthProvider = OAuth2Auth.create(vertx, OAuth2ClientOptions()
 )
 
 // create a oauth2 handler on our domain: "http://localhost:8080"
-var googleOAuth2 = OAuth2AuthHandler.create(googleAuthProvider, "http://localhost:8080")
+var googleOAuth2 = OAuth2AuthHandler.create(vertx, googleAuthProvider, "http://localhost:8080")
 
 
 MultiTenantHandler.create("X-Tenant").addTenantHandler("tenant-github", githubOAuth2).addTenantHandler("tenant-google", googleOAuth2).addDefaultHandler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
@@ -2300,7 +2339,7 @@ Here are some examples:
 [snip]
 <p th:text="${context.get('foo')}"></p>
 <p th:text="${context.get('bar')}"></p>
-<p th:text="${context.normalisedPath()}"></p>
+<p th:text="${context.normalizedPath()}"></p>
 <p th:text="${context.request().params().get('param1')}"></p>
 <p th:text="${context.request().params().get('param2')}"></p>
 [snip]
@@ -2328,7 +2367,7 @@ Here are some examples:
 [snip]
 <p th:text="${context.foo}"></p>
 <p th:text="${context.bar}"></p>
-<p th:text="${context.normalisedPath()}"></p>
+<p th:text="${context.normalizedPath()}"></p>
 <p th:text="${context.request().params().param1}"></p>
 <p th:text="${context.request().params().param2}"></p>
 [snip]
@@ -2356,7 +2395,7 @@ Here are some examples:
 [snip]
 <p th:text="{{context.foo}}"></p>
 <p th:text="{{context.bar}}"></p>
-<p th:text="{{context.normalisedPath()}}"></p>
+<p th:text="{{context.normalizedPath()}}"></p>
 <p th:text="{{context.request().params().param1}}"></p>
 <p th:text="{{context.request().params().param2}}"></p>
 [snip]
@@ -2729,7 +2768,7 @@ and receive messages:
 
 [source,html]
 ----
-<script src="http://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script src='vertx-eventbus.js'></script>
 
 <script>
@@ -2918,10 +2957,10 @@ router.mountSubRouter("/eventbus", sockJSHandler.bridge(options))
 
 ----
 
-=== Requiring authorisation for messages
+=== Requiring authorization for messages
 
-The event bus bridge can also be configured to use the Vert.x-Web authorisation functionality to require
-authorisation for messages, either in-bound or out-bound on the bridge.
+The event bus bridge can also be configured to use the Vert.x-Web authorization functionality to require
+authorization for messages, either in-bound or out-bound on the bridge.
 
 To do this, you can add extra fields to the match described in the previous section that determine what authority is
 required for the match.
@@ -3020,7 +3059,7 @@ complete the future with `true` to enable further processing.
 
 If you don't want the event to be processed you can complete the future with `false`. This is a useful feature that
 enables you to do your own filtering on messages passing through the bridge, or perhaps apply some fine grained
-authorisation or metrics.
+authorization or metrics.
 
 Here's an example where we reject all messages flowing through the bridge if they contain the word "Armadillos".
 
@@ -3083,7 +3122,7 @@ In client side JavaScript you use the 'vertx-eventbus.js` library to create conn
 
 [source,html]
 ----
-<script src="http://cdn.jsdelivr.net/sockjs/0.3.4/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 <script src='vertx-eventbus.js'></script>
 
 <script>
@@ -3182,6 +3221,10 @@ router.route().handler((rc: io.vertx.scala.ext.web.RoutingContext) => {
 
 ----
 
+Note that this handler is session aware. If there is a session available the form parameter or header might be omited
+during the `POST` action as it will be read from the session. This also implies that tokens will only be regenerated
+on session upgrades.
+
 === Using AJAX
 
 When accessing protected routes via ajax both the csrf token will need to be passed in the request. Typically this is
@@ -3234,7 +3277,7 @@ var authProvider = GithubAuth.create(vertx, "CLIENT_ID", "CLIENT_SECRET")
 
 // create a oauth2 handler on our running server
 // the second argument is the full url to the callback as you entered in your provider management console.
-var oauth2 = OAuth2AuthHandler.create(authProvider, "https://myserver.com/callback")
+var oauth2 = OAuth2AuthHandler.create(vertx, authProvider, "https://myserver.com/callback")
 
 // setup the callback handler for receiving the GitHub callback
 oauth2.setupCallback(router.route())
@@ -3299,10 +3342,10 @@ var authProvider = OAuth2Auth.create(vertx, OAuth2ClientOptions()
 )
 
 // create a oauth2 handler on our domain: "http://localhost:8080"
-var oauth2 = OAuth2AuthHandler.create(authProvider, "http://localhost:8080")
+var oauth2 = OAuth2AuthHandler.create(vertx, authProvider, "http://localhost:8080")
 
 // these are the scopes
-oauth2.addAuthority("profile")
+oauth2.extraParams(new io.vertx.core.json.JsonObject().put("scope", "profile"))
 
 // setup the callback handler for receiving the Google callback
 oauth2.setupCallback(router.get("/callback"))
@@ -3335,7 +3378,7 @@ mandatory for the default values, 80 for http, 443 for https.
 [source,scala]
 ----
 // create a oauth2 handler pinned to myserver.com: "https://myserver.com:8447/callback"
-var oauth2 = OAuth2AuthHandler.create(provider, "https://myserver.com:8447/callback")
+var oauth2 = OAuth2AuthHandler.create(vertx, provider, "https://myserver.com:8447/callback")
 // now allow the handler to setup the callback url for you
 oauth2.setupCallback(router.route())
 
@@ -3365,9 +3408,9 @@ need an application like the following snippet:
 var authProvider = GithubAuth.create(vertx, "YOUR PROVIDER CLIENTID", "YOUR PROVIDER CLIENT SECRET")
 // We need a user session handler too to make sure
 // the user is stored in the session between requests
-router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setAuthProvider(authProvider))
+router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
 // we now protect the resource under the path "/protected"
-router.route("/protected").handler(OAuth2AuthHandler.create(authProvider).setupCallback(router.route("/callback")).addAuthority("user:email"))
+router.route("/protected").handler(OAuth2AuthHandler.create(vertx, authProvider).setupCallback(router.route("/callback")).extraParams(new io.vertx.core.json.JsonObject().put("scope", "user:email")))
 // Entry point to the application, this will render
 // a custom template.
 router.get("/").handler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
@@ -3397,6 +3440,241 @@ This is handled automatically by the handler as long as the provider is configur
 
 In real life this means that your API's can access your protected resources using the header `Authorization` with the
 value `Bearer BASE64_ACCESS_TOKEN`.
+
+=== WebAuthn
+
+Our online existence relies on an outdated and fragile idea of passwords. The password is what lies between a malicious
+user and your bank account or social media accounts. Passwords are hard to maintain; it's hard to store them on the
+server (passwords get stolen). They're hard to memorize, or not tell to others (phishing attacks).
+
+But there's a better way! A passwordless world, and it is a standard by W3C and FIDO Alliance running on your browser.
+
+WebAuthn is an API that allows servers to register and authenticate users using public-key cryptography instead of a
+password, an API that uses cryptography in a user-accessible way with the help of an authentication device, for example
+a yubikey token, or your mobile phone.
+
+The protocol requires at least the first callback to be mounted on the router:
+
+1. `/webauthn/response` the callback used to perform all the validations
+2. `/webauthn/login` the endpoint to allow users to start the login flow (optional, but without it it won't be able to login)
+3. `/webauthn/register` the endpoint to allow users to register a new identificator (optional, if the data is already stored this endpoint is not needed)
+
+An example of a protected application is:
+
+[source,scala]
+----
+// create the webauthn security object
+var webAuthn = WebAuthn.create(vertx, WebAuthnOptions()
+  .setOrigin("https://192.168.178.74.xip.io:8443")
+  .setRpName("Vert.x WebAuthN Demo")
+  .setAuthenticatorAttachment(AuthenticatorAttachment.PLATFORM)
+  .setRequireResidentKey(false)
+  .setUserVerification(UserVerification.REQUIRED)
+, authStore)
+
+// parse the BODY
+router.post().handler(BodyHandler.create())
+// add a session handler
+router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
+
+// security handler
+var webAuthNHandler = WebAuthnHandler.create(webAuthn).setupCallback(router.post("/webauthn/response")).setupCredentialsCreateCallback(router.post("/webauthn/register")).setupCredentialsGetCallback(router.post("/webauthn/login"))
+
+// secure the remaining routes
+router.route().handler(webAuthNHandler)
+
+----
+
+The application is not secure on the backend side but there is some code needed to be performed on the client side. A bit
+of boilerplate is required, take these 2 functions:
+
+[source,javascript]
+----
+/**
+* Converts PublicKeyCredential into serialised JSON
+* @param  {Object} pubKeyCred
+* @return {Object}            - JSON encoded publicKeyCredential
+*/
+var publicKeyCredentialToJSON = (pubKeyCred) => {
+ if (pubKeyCred instanceof Array) {
+   let arr = [];
+   for (let i of pubKeyCred) { arr.push(publicKeyCredentialToJSON(i)) }
+
+   return arr
+ }
+
+ if (pubKeyCred instanceof ArrayBuffer) {
+   return base64url.encode(pubKeyCred)
+ }
+
+ if (pubKeyCred instanceof Object) {
+   let obj = {};
+
+   for (let key in pubKeyCred) {
+     obj[key] = publicKeyCredentialToJSON(pubKeyCred[key])
+   }
+
+   return obj
+ }
+
+ return pubKeyCred
+};
+
+/**
+* Generate secure random buffer
+* @param  {Number} len - Length of the buffer (default 32 bytes)
+* @return {Uint8Array} - random string
+*/
+var generateRandomBuffer = (len) => {
+ len = len || 32;
+
+ let randomBuffer = new Uint8Array(len);
+ window.crypto.getRandomValues(randomBuffer);
+
+ return randomBuffer
+};
+
+/**
+* Decodes arrayBuffer required fields.
+*/
+var preformatMakeCredReq = (makeCredReq) => {
+ makeCredReq.challenge = base64url.decode(makeCredReq.challenge);
+ makeCredReq.user.id = base64url.decode(makeCredReq.user.id);
+
+ return makeCredReq
+};
+
+/**
+* Decodes arrayBuffer required fields.
+*/
+var preformatGetAssertReq = (getAssert) => {
+ getAssert.challenge = base64url.decode(getAssert.challenge);
+
+ for (let allowCred of getAssert.allowCredentials) {
+   allowCred.id = base64url.decode(allowCred.id)
+ }
+
+ return getAssert
+};
+----
+
+These functions will help you with the interaction with the server. Nothing more. Let's start by login in a user:
+
+[source,javascript]
+----
+// using the functions defined before...
+getGetAssertionChallenge({name: 'your-user-name'})
+.then((response) => {
+ // base64 must be decoded to a JavaScript Buffer
+ let publicKey = preformatGetAssertReq(response);
+ // the response is then passed to the browser
+ // to generate an assertion by interacting with your token/phone/etc...
+ return navigator.credentials.get({publicKey})
+})
+.then((response) => {
+ // convert response buffers to base64 and json
+ let getAssertionResponse = publicKeyCredentialToJSON(response);
+ // send information to server
+ return sendWebAuthnResponse(getAssertionResponse)
+})
+.then((response) => {
+ // success!
+ alert('Login success')
+})
+.catch((error) => alert(error));
+
+// utility functions
+
+let sendWebAuthnResponse = (body) => {
+ return fetch('/webauthn/response', {
+   method: 'POST',
+   credentials: 'include',
+   headers: {
+     'Content-Type': 'application/json'
+   },
+   body: JSON.stringify(body)
+ })
+   .then(response => {
+     if (!response.ok) {
+       throw new Error(`Server responded with error: ${response.statusText}`);
+     }
+     return response;
+   })
+};
+
+let getGetAssertionChallenge = (formBody) => {
+ return fetch('/webauthn/login', {
+   method: 'POST',
+   credentials: 'include',
+   headers: {
+     'Content-Type': 'application/json'
+   },
+   body: JSON.stringify(formBody)
+ })
+   .then(response => {
+     if (!response.ok) {
+       throw new Error(`Server responded with error: ${response.statusText}`);
+     }
+     return response;
+   })
+   .then((response) => response.json())
+};
+----
+
+The example above already covered 66% of the API, 2 out fo 3 endpoints where covered. The final endpoint is the user
+registration. User registration is the process of enrolling a new key into the server credential store and map to a user,
+and of course on the client side a private key was created and associated with the server but this key never left the
+hardware token or your phone security chip.
+
+To register a user and reusing most of the functions already defined above:
+
+[source,javascript]
+----
+/* Handle for register form submission */
+getMakeCredentialsChallenge({name: 'myalias', displayName: 'Paulo Lopes'})
+.then((response) => {
+ // convert challenge & id to buffer and perform register
+ let publicKey = preformatMakeCredReq(response);
+ // create a new secure key pair
+ return navigator.credentials.create({publicKey})
+})
+.then((response) => {
+ // convert response from buffer to json
+ let makeCredResponse = window.publicKeyCredentialToJSON(response);
+ // send to server to confirm the user
+ return sendWebAuthnResponse(makeCredResponse)
+})
+.then((response) => {
+ alert('Registration completed')
+})
+.catch((error) => alert(error));
+
+// utility functions
+
+let getMakeCredentialsChallenge = (formBody) => {
+ return fetch('/webauthn/register', {
+   method: 'POST',
+   credentials: 'include',
+   headers: {
+     'Content-Type': 'application/json'
+   },
+   body: JSON.stringify(formBody)
+ })
+   .then(response => {
+     if (!response.ok) {
+       throw new Error(`Server responded with error: ${response.statusText}`);
+     }
+     return response;
+   })
+   .then((response) => response.json())
+};
+----
+
+WARNING: Due to the secure nature of the API browsers will not allow you to use this API on plain text HTTP. All requests
+must go over HTTPS.
+
+WARNING: WebAuthN requires HTTPS with a working TLS certificate, you can use self signed certiticates too during
+development.
 
 === Handling HTTP Method overriding
 

@@ -23,14 +23,19 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import scala.concurrent.Promise
 
-import io.vertx.ext.web.handler.{CorsHandler => JCorsHandler}
 import io.vertx.ext.web
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.core.http.HttpMethod
-import scala.collection.JavaConverters._
+import io.vertx.ext.auth.authorization.{Authorization => JAuthorization}
+import io.vertx.ext.auth.authorization
+import io.vertx.ext.web.handler.{AuthorizationHandler => JAuthorizationHandler}
 import io.vertx.core.Handler
+import io.vertx.ext.auth.authorization.{AuthorizationProvider => JAuthorizationProvider}
 
 package object web{
+
+
+
+
 
 
 
@@ -312,6 +317,8 @@ package object web{
     }
 
   }
+
+
 
 
 
