@@ -37,7 +37,7 @@ package object common{
   implicit class TemplateEngineScala(val asJava: io.vertx.ext.web.common.template.TemplateEngine) extends AnyVal {
 
     /**
-     * Like [[render]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like render from [[io.vertx.ext.web.common.template.TemplateEngine]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def renderFuture(context: io.vertx.core.json.JsonObject,templateFileName: java.lang.String): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
       val promise = concurrent.Promise[io.vertx.core.buffer.Buffer]()
@@ -50,13 +50,13 @@ package object common{
 
   object WebEnvironment {
     /**
-     * Like [[development]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Will return true if the mode is not null and equals ignoring case the string "dev"     * @return always boolean
      */
     def development() = {
       io.vertx.ext.web.common.WebEnvironment.development()
     }
     /**
-     * Like [[mode]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * The current mode from the system properties with fallback to environment variables     * @return String with mode value or null
      */
     def modeOption() = {
       scala.Option(io.vertx.ext.web.common.WebEnvironment.mode())

@@ -93,7 +93,7 @@ package object stomp{
   implicit class StompClientScala(val asJava: io.vertx.ext.stomp.StompClient) extends AnyVal {
 
     /**
-     * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like connect from [[io.vertx.ext.stomp.StompClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def connectFuture(port: java.lang.Integer,host: java.lang.String): scala.concurrent.Future[io.vertx.ext.stomp.StompClientConnection] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompClientConnection]()
@@ -102,7 +102,7 @@ package object stomp{
     }
 
     /**
-     * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like connect from [[io.vertx.ext.stomp.StompClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def connectFuture(net: io.vertx.core.net.NetClient): scala.concurrent.Future[io.vertx.ext.stomp.StompClientConnection] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompClientConnection]()
@@ -111,7 +111,7 @@ package object stomp{
     }
 
     /**
-     * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like connect from [[io.vertx.ext.stomp.StompClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def connectFuture(port: java.lang.Integer,host: java.lang.String,net: io.vertx.core.net.NetClient): scala.concurrent.Future[io.vertx.ext.stomp.StompClientConnection] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompClientConnection]()
@@ -120,7 +120,7 @@ package object stomp{
     }
 
     /**
-     * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like connect from [[io.vertx.ext.stomp.StompClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def connectFuture(): scala.concurrent.Future[io.vertx.ext.stomp.StompClientConnection] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompClientConnection]()
@@ -140,7 +140,7 @@ package object stomp{
   implicit class StompClientConnectionScala(val asJava: io.vertx.ext.stomp.StompClientConnection) extends AnyVal {
 
     /**
-     * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like send from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFuture(headers: java.util.Map[String, java.lang.String],body: io.vertx.core.buffer.Buffer): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -149,7 +149,7 @@ package object stomp{
     }
 
     /**
-     * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like send from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFuture(destination: java.lang.String,body: io.vertx.core.buffer.Buffer): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -158,7 +158,7 @@ package object stomp{
     }
 
     /**
-     * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like send from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFuture(frame: io.vertx.ext.stomp.Frame): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -167,7 +167,7 @@ package object stomp{
     }
 
     /**
-     * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like send from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFuture(destination: java.lang.String,headers: java.util.Map[String, java.lang.String],body: io.vertx.core.buffer.Buffer): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -176,7 +176,7 @@ package object stomp{
     }
 
     /**
-     * Like [[subscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like subscribe from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def subscribeFuture(destination: java.lang.String,handler: io.vertx.ext.stomp.Frame => Unit): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -185,7 +185,7 @@ package object stomp{
     }
 
     /**
-     * Like [[subscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like subscribe from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def subscribeFuture(destination: java.lang.String,headers: java.util.Map[String, java.lang.String],handler: io.vertx.ext.stomp.Frame => Unit): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -194,7 +194,7 @@ package object stomp{
     }
 
     /**
-     * Like [[unsubscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like unsubscribe from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def unsubscribeFuture(destination: java.lang.String): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -203,7 +203,7 @@ package object stomp{
     }
 
     /**
-     * Like [[unsubscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like unsubscribe from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def unsubscribeFuture(destination: java.lang.String,headers: java.util.Map[String, java.lang.String]): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -212,7 +212,7 @@ package object stomp{
     }
 
     /**
-     * Like [[beginTX]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like beginTX from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def beginTXFuture(id: java.lang.String): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -221,7 +221,7 @@ package object stomp{
     }
 
     /**
-     * Like [[beginTX]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like beginTX from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def beginTXFuture(id: java.lang.String,headers: java.util.Map[String, java.lang.String]): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -230,7 +230,7 @@ package object stomp{
     }
 
     /**
-     * Like [[commit]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like commit from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def commitFuture(id: java.lang.String): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -239,7 +239,7 @@ package object stomp{
     }
 
     /**
-     * Like [[commit]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like commit from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def commitFuture(id: java.lang.String,headers: java.util.Map[String, java.lang.String]): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -248,7 +248,7 @@ package object stomp{
     }
 
     /**
-     * Like [[abort]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like abort from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def abortFuture(id: java.lang.String): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -257,7 +257,7 @@ package object stomp{
     }
 
     /**
-     * Like [[abort]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like abort from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def abortFuture(id: java.lang.String,headers: java.util.Map[String, java.lang.String]): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -266,7 +266,7 @@ package object stomp{
     }
 
     /**
-     * Like [[disconnect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like disconnect from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def disconnectFuture(): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -275,7 +275,7 @@ package object stomp{
     }
 
     /**
-     * Like [[disconnect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like disconnect from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def disconnectFuture(frame: io.vertx.ext.stomp.Frame): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -284,7 +284,7 @@ package object stomp{
     }
 
     /**
-     * Like [[ack]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like ack from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def ackFuture(id: java.lang.String): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -293,7 +293,7 @@ package object stomp{
     }
 
     /**
-     * Like [[nack]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like nack from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def nackFuture(id: java.lang.String): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -302,7 +302,7 @@ package object stomp{
     }
 
     /**
-     * Like [[ack]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like ack from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def ackFuture(id: java.lang.String,txId: java.lang.String): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -311,7 +311,7 @@ package object stomp{
     }
 
     /**
-     * Like [[nack]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like nack from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def nackFuture(id: java.lang.String,txId: java.lang.String): scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
@@ -340,7 +340,7 @@ package object stomp{
   implicit class StompServerScala(val asJava: io.vertx.ext.stomp.StompServer) extends AnyVal {
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.ext.stomp.StompServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(): scala.concurrent.Future[io.vertx.ext.stomp.StompServer] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompServer]()
@@ -349,7 +349,7 @@ package object stomp{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.ext.stomp.StompServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer): scala.concurrent.Future[io.vertx.ext.stomp.StompServer] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompServer]()
@@ -358,7 +358,7 @@ package object stomp{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.ext.stomp.StompServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer,host: java.lang.String): scala.concurrent.Future[io.vertx.ext.stomp.StompServer] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompServer]()
@@ -367,7 +367,7 @@ package object stomp{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.ext.stomp.StompServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()

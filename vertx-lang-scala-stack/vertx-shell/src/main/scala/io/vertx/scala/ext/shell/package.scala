@@ -30,19 +30,22 @@ package object shell{
 
   object CliToken {
     /**
-     * Like [[createText]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a text token.     * @param text the text
+     * @return the token
      */
     def createText(text: java.lang.String) = {
       io.vertx.ext.shell.cli.CliToken.createText(text)
     }
     /**
-     * Like [[createBlank]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a new blank token.     * @param blank the blank value
+     * @return the token
      */
     def createBlank(blank: java.lang.String) = {
       io.vertx.ext.shell.cli.CliToken.createBlank(blank)
     }
     /**
-     * Like [[tokenize]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Tokenize the string argument and return a list of tokens.     * @param s the tokenized string
+     * @return the tokens
      */
     def tokenize(s: java.lang.String) = {
       io.vertx.ext.shell.cli.CliToken.tokenize(s)
@@ -54,13 +57,17 @@ package object shell{
 
   object CommandBuilder {
     /**
-     * Like [[command]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a new commmand builder, the command is responsible for managing the options and arguments via the
+     * [[io.vertx.ext.shell.command.CommandProcess]].     * @param name the command name
+     * @return the command
      */
     def command(name: java.lang.String) = {
       io.vertx.ext.shell.command.CommandBuilder.command(name)
     }
     /**
-     * Like [[command]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a new commmand with its [[io.vertx.core.cli.CLI]] descriptor. This command can then retrieve the parsed
+     * [[io.vertx.ext.shell.command.CommandProcess#commandLine]] when it executes to know get the command arguments and options.     * @param cli the cli to use
+     * @return the command
      */
     def command(cli: io.vertx.core.cli.CLI) = {
       io.vertx.ext.shell.command.CommandBuilder.command(cli)
@@ -80,7 +87,7 @@ package object shell{
   implicit class CommandRegistryScala(val asJava: io.vertx.ext.shell.command.CommandRegistry) extends AnyVal {
 
     /**
-     * Like [[registerCommand]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like registerCommand from [[io.vertx.ext.shell.command.CommandRegistry]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def registerCommandFuture(command: io.vertx.ext.shell.command.Command): scala.concurrent.Future[io.vertx.ext.shell.command.Command] = {
       val promise = concurrent.Promise[io.vertx.ext.shell.command.Command]()
@@ -89,7 +96,7 @@ package object shell{
     }
 
     /**
-     * Like [[registerCommands]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like registerCommands from [[io.vertx.ext.shell.command.CommandRegistry]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def registerCommandsFuture(commands: java.util.List[io.vertx.ext.shell.command.Command]): scala.concurrent.Future[java.util.List[io.vertx.ext.shell.command.Command]] = {
       val promise = concurrent.Promise[java.util.List[io.vertx.ext.shell.command.Command]]()
@@ -98,7 +105,7 @@ package object shell{
     }
 
     /**
-     * Like [[unregisterCommand]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like unregisterCommand from [[io.vertx.ext.shell.command.CommandRegistry]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def unregisterCommandFuture(commandName: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -111,7 +118,7 @@ package object shell{
 
   object CommandResolver {
     /**
-     * Like [[baseCommands]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * @return the base commands of Vert.x Shell.
      */
     def baseCommands(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.shell.command.CommandResolver.baseCommands(vertx)
@@ -138,13 +145,13 @@ package object shell{
 
   object Pty {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
+     * Create a new pseudo terminal with no terminal type.     */
     def create() = {
       io.vertx.ext.shell.term.Pty.create()
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a new pseudo terminal.     * @param terminalType the terminal type, for instance ` vt100`
+     * @return the created pseudo terminal
      */
     def create(terminalType: java.lang.String) = {
       io.vertx.ext.shell.term.Pty.create(terminalType)
@@ -163,7 +170,7 @@ package object shell{
 
   object Session {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a new empty session.     * @return the created session
      */
     def create() = {
       io.vertx.ext.shell.session.Session.create()
@@ -189,7 +196,7 @@ package object shell{
   implicit class ShellServerScala(val asJava: io.vertx.ext.shell.ShellServer) extends AnyVal {
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.ext.shell.ShellServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -198,7 +205,7 @@ package object shell{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.ext.shell.ShellServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -230,7 +237,7 @@ package object shell{
   implicit class ShellServiceScala(val asJava: io.vertx.ext.shell.ShellService) extends AnyVal {
 
     /**
-     * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like start from [[io.vertx.ext.shell.ShellService]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def startFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -239,7 +246,7 @@ package object shell{
     }
 
     /**
-     * Like [[stop]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like stop from [[io.vertx.ext.shell.ShellService]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def stopFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -282,7 +289,7 @@ package object shell{
   implicit class TermServerScala(val asJava: io.vertx.ext.shell.term.TermServer) extends AnyVal {
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.ext.shell.term.TermServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -291,7 +298,7 @@ package object shell{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.ext.shell.term.TermServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()

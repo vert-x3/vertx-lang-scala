@@ -31,7 +31,7 @@ package object ${moduleName}{
   object ${helper.getSimpleName(type.name)} {
   <#list staticMethods as method>
       <#if method.doc??>
-${typeHelper.methodDoc(type, method, "    ", true)}
+${typeHelper.methodDoc(type, method, "    ", false)}
       </#if>
     def ${typeHelper.escapeIfKeyword(method.name)}<#if method.returnType.nullable>Option</#if>${typeHelper.assembleTypeParams(method.typeParams, true)}(<#list method.params as param>${typeHelper.escapeIfKeyword(param.name)}: ${typeHelper.wrapInOptionIfNullable(param.type.nullable, typeHelper.toScalaMethodParam(param.type))}<#sep>,</#list>) = {
       <#if method.returnType.nullable>scala.Option(</#if>${typeHelper.invokeMethodWithoutConvertingReturn(type.name, type, method)}<#if method.returnType.nullable>)</#if>

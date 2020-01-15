@@ -52,7 +52,7 @@ package object mqtt{
   implicit class MqttClientScala(val asJava: io.vertx.mqtt.MqttClient) extends AnyVal {
 
     /**
-     * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like connect from [[io.vertx.mqtt.MqttClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def connectFuture(port: java.lang.Integer,host: java.lang.String): scala.concurrent.Future[io.vertx.mqtt.messages.MqttConnAckMessage] = {
       val promise = concurrent.Promise[io.vertx.mqtt.messages.MqttConnAckMessage]()
@@ -61,7 +61,7 @@ package object mqtt{
     }
 
     /**
-     * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like connect from [[io.vertx.mqtt.MqttClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def connectFuture(port: java.lang.Integer,host: java.lang.String,serverName: java.lang.String): scala.concurrent.Future[io.vertx.mqtt.messages.MqttConnAckMessage] = {
       val promise = concurrent.Promise[io.vertx.mqtt.messages.MqttConnAckMessage]()
@@ -70,7 +70,7 @@ package object mqtt{
     }
 
     /**
-     * Like [[disconnect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like disconnect from [[io.vertx.mqtt.MqttClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def disconnectFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -79,7 +79,7 @@ package object mqtt{
     }
 
     /**
-     * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like publish from [[io.vertx.mqtt.MqttClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def publishFuture(topic: java.lang.String,payload: io.vertx.core.buffer.Buffer,qosLevel: io.netty.handler.codec.mqtt.MqttQoS,isDup: java.lang.Boolean,isRetain: java.lang.Boolean): scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
@@ -88,7 +88,7 @@ package object mqtt{
     }
 
     /**
-     * Like [[subscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like subscribe from [[io.vertx.mqtt.MqttClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def subscribeFuture(topic: java.lang.String,qos: java.lang.Integer): scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
@@ -97,7 +97,7 @@ package object mqtt{
     }
 
     /**
-     * Like [[subscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like subscribe from [[io.vertx.mqtt.MqttClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def subscribeFuture(topics: java.util.Map[String, java.lang.Integer]): scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
@@ -106,7 +106,7 @@ package object mqtt{
     }
 
     /**
-     * Like [[unsubscribe]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like unsubscribe from [[io.vertx.mqtt.MqttClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def unsubscribeFuture(topic: java.lang.String): scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
@@ -128,7 +128,9 @@ package object mqtt{
 
   object MqttConnAckMessage {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a concrete instance of a Vert.x connack message     * @param code return code from the connection request
+     * @param isSessionPresent is an old session is present
+     * @return 
      */
     def create(code: io.netty.handler.codec.mqtt.MqttConnectReturnCode,isSessionPresent: java.lang.Boolean) = {
       io.vertx.mqtt.messages.MqttConnAckMessage.create(code, isSessionPresent)
@@ -145,7 +147,7 @@ package object mqtt{
   implicit class MqttEndpointScala(val asJava: io.vertx.mqtt.MqttEndpoint) extends AnyVal {
 
     /**
-     * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like publish from [[io.vertx.mqtt.MqttEndpoint]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def publishFuture(topic: java.lang.String,payload: io.vertx.core.buffer.Buffer,qosLevel: io.netty.handler.codec.mqtt.MqttQoS,isDup: java.lang.Boolean,isRetain: java.lang.Boolean): scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
@@ -154,7 +156,7 @@ package object mqtt{
     }
 
     /**
-     * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like publish from [[io.vertx.mqtt.MqttEndpoint]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def publishFuture(topic: java.lang.String,payload: io.vertx.core.buffer.Buffer,qosLevel: io.netty.handler.codec.mqtt.MqttQoS,isDup: java.lang.Boolean,isRetain: java.lang.Boolean,messageId: java.lang.Integer): scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
@@ -183,7 +185,7 @@ package object mqtt{
   implicit class MqttServerScala(val asJava: io.vertx.mqtt.MqttServer) extends AnyVal {
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.mqtt.MqttServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer,host: java.lang.String): scala.concurrent.Future[io.vertx.mqtt.MqttServer] = {
       val promise = concurrent.Promise[io.vertx.mqtt.MqttServer]()
@@ -192,7 +194,7 @@ package object mqtt{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.mqtt.MqttServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer): scala.concurrent.Future[io.vertx.mqtt.MqttServer] = {
       val promise = concurrent.Promise[io.vertx.mqtt.MqttServer]()
@@ -201,7 +203,7 @@ package object mqtt{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.mqtt.MqttServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(): scala.concurrent.Future[io.vertx.mqtt.MqttServer] = {
       val promise = concurrent.Promise[io.vertx.mqtt.MqttServer]()
@@ -210,7 +212,7 @@ package object mqtt{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.mqtt.MqttServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()

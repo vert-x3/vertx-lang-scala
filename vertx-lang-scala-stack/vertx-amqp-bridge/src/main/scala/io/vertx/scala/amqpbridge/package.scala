@@ -44,7 +44,7 @@ package object amqpbridge{
   implicit class AmqpBridgeScala(val asJava: io.vertx.amqpbridge.AmqpBridge) extends AnyVal {
 
     /**
-     * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like start from [[io.vertx.amqpbridge.AmqpBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def startFuture(hostname: java.lang.String,port: java.lang.Integer,username: java.lang.String,password: java.lang.String): scala.concurrent.Future[io.vertx.amqpbridge.AmqpBridge] = {
       val promise = concurrent.Promise[io.vertx.amqpbridge.AmqpBridge]()
@@ -53,7 +53,7 @@ package object amqpbridge{
     }
 
     /**
-     * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like start from [[io.vertx.amqpbridge.AmqpBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def startFuture(hostname: java.lang.String,port: java.lang.Integer): scala.concurrent.Future[io.vertx.amqpbridge.AmqpBridge] = {
       val promise = concurrent.Promise[io.vertx.amqpbridge.AmqpBridge]()
@@ -62,7 +62,7 @@ package object amqpbridge{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.amqpbridge.AmqpBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()

@@ -46,19 +46,20 @@ package object mail{
 
   object MailAttachment {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * construct an empty MailAttachment object that can be filled with the
+     * setters
      */
     def create() = {
       io.vertx.ext.mail.MailAttachment.create()
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * create a MailAttachment object from a JsonObject representation     * @param json object to be copied
      */
     def create(json: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.mail.MailAttachment.create(json)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * create a copy of a MailAttachment object     * @param other object to be copied
      */
     def create(other: io.vertx.ext.mail.MailAttachment) = {
       io.vertx.ext.mail.MailAttachment.create(other)
@@ -76,7 +77,7 @@ package object mail{
   implicit class MailClientScala(val asJava: io.vertx.ext.mail.MailClient) extends AnyVal {
 
     /**
-     * Like [[sendMail]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like sendMail from [[io.vertx.ext.mail.MailClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendMailFuture(email: io.vertx.ext.mail.MailMessage): scala.concurrent.Future[io.vertx.ext.mail.MailResult] = {
       val promise = concurrent.Promise[io.vertx.ext.mail.MailResult]()

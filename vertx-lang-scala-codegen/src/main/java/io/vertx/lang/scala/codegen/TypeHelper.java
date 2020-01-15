@@ -992,7 +992,11 @@ public class TypeHelper {
 
       if (future) {
         doc += commentedIndentation;
-        doc += " Like [[" + method.getName() + "]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.\n";
+        String params = method.getParams().stream().map(param -> convertToScalaNotation(param.getType().getSimpleName())).collect(Collectors.joining(","));
+        if (params != "") {
+          params = "(" + params +")";
+        }
+        doc += " Like " +  method.getName() + " from [[" + type.getName() + "]] but returns a Scala Future instead of taking an AsyncResultHandler.\n";
       } else {
         doc += renderDoc(type, commentedIndentation, method.getDoc());
         for (ParamInfo param : method.getParams()) {

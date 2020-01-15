@@ -60,25 +60,39 @@ package object web{
 
   object ClusteredSessionStore {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a session store     * @param vertx the Vert.x instance
+     * @param sessionMapName the session map name
+     * @return the session store
      */
     def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, sessionMapName)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a session store.<p/>
+     *
+     * The retry timeout value, configures how long the session handler will retry to get a session from the store
+     * when it is not found.     * @param vertx the Vert.x instance
+     * @param sessionMapName the session map name
+     * @param retryTimeout the store retry timeout, in ms
+     * @return the session store
      */
     def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String,retryTimeout: java.lang.Long) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, sessionMapName, retryTimeout)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a session store     * @param vertx the Vert.x instance
+     * @return the session store
      */
     def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a session store.<p/>
+     *
+     * The retry timeout value, configures how long the session handler will retry to get a session from the store
+     * when it is not found.     * @param vertx the Vert.x instance
+     * @param retryTimeout the store retry timeout, in ms
+     * @return the session store
      */
     def create(vertx: io.vertx.core.Vertx,retryTimeout: java.lang.Long) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, retryTimeout)
@@ -113,19 +127,25 @@ package object web{
 
   object LocalSessionStore {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a session store     * @param vertx the Vert.x instance
+     * @return the session store
      */
     def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.sstore.LocalSessionStore.create(vertx)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a session store     * @param vertx the Vert.x instance
+     * @param sessionMapName name for map used to store sessions
+     * @return the session store
      */
     def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String) = {
       io.vertx.ext.web.sstore.LocalSessionStore.create(vertx, sessionMapName)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a session store     * @param vertx the Vert.x instance
+     * @param sessionMapName name for map used to store sessions
+     * @param reaperInterval how often, in ms, to check for expired sessions
+     * @return the session store
      */
     def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String,reaperInterval: java.lang.Long) = {
       io.vertx.ext.web.sstore.LocalSessionStore.create(vertx, sessionMapName, reaperInterval)
@@ -157,7 +177,8 @@ package object web{
 
   object Router {
     /**
-     * Like [[router]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a router     * @param vertx the Vert.x instance
+     * @return the router
      */
     def router(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.Router.router(vertx)
@@ -179,7 +200,7 @@ package object web{
   implicit class SessionStoreScala(val asJava: io.vertx.ext.web.sstore.SessionStore) extends AnyVal {
 
     /**
-     * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like get from [[io.vertx.ext.web.sstore.SessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getFuture(cookieValue: java.lang.String): scala.concurrent.Future[io.vertx.ext.web.Session] = {
       val promise = concurrent.Promise[io.vertx.ext.web.Session]()
@@ -188,7 +209,7 @@ package object web{
     }
 
     /**
-     * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like delete from [[io.vertx.ext.web.sstore.SessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def deleteFuture(id: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -197,7 +218,7 @@ package object web{
     }
 
     /**
-     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like put from [[io.vertx.ext.web.sstore.SessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putFuture(session: io.vertx.ext.web.Session): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -206,7 +227,7 @@ package object web{
     }
 
     /**
-     * Like [[clear]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like clear from [[io.vertx.ext.web.sstore.SessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def clearFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -215,7 +236,7 @@ package object web{
     }
 
     /**
-     * Like [[size]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like size from [[io.vertx.ext.web.sstore.SessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sizeFuture(): scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
@@ -272,7 +293,7 @@ package object web{
 
 
     /**
-     * Like [[webSession]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like webSession from [[io.vertx.ext.web.handler.sockjs.SockJSSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def webSessionOption(): scala.Option[io.vertx.ext.web.Session] = {
       scala.Option(asJava.webSession())
@@ -280,16 +301,10 @@ package object web{
 
 
     /**
-     * Like [[webUser]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like webUser from [[io.vertx.ext.web.handler.sockjs.SockJSSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def webUserOption(): scala.Option[io.vertx.ext.auth.User] = {
       scala.Option(asJava.webUser())
-    }
-
-    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
-      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
     }
 
     def endFuture(): scala.concurrent.Future[Unit] = {
@@ -301,6 +316,12 @@ package object web{
     def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.end(data, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 

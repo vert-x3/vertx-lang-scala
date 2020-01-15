@@ -82,7 +82,7 @@ package object mysqlclient{
     }
 
     /**
-     * Like [[ping]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like ping from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pingFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -91,7 +91,7 @@ package object mysqlclient{
     }
 
     /**
-     * Like [[specifySchema]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like specifySchema from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def specifySchemaFuture(schemaName: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -100,7 +100,7 @@ package object mysqlclient{
     }
 
     /**
-     * Like [[getInternalStatistics]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getInternalStatistics from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getInternalStatisticsFuture(): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -109,7 +109,7 @@ package object mysqlclient{
     }
 
     /**
-     * Like [[setOption]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like setOption from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def setOptionFuture(option: io.vertx.mysqlclient.MySQLSetOption): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -118,7 +118,7 @@ package object mysqlclient{
     }
 
     /**
-     * Like [[resetConnection]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like resetConnection from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def resetConnectionFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -127,7 +127,7 @@ package object mysqlclient{
     }
 
     /**
-     * Like [[debug]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like debug from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def debugFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -136,7 +136,7 @@ package object mysqlclient{
     }
 
     /**
-     * Like [[changeUser]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like changeUser from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def changeUserFuture(options: io.vertx.mysqlclient.MySQLAuthOptions): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()

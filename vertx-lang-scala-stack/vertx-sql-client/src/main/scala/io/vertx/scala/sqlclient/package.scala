@@ -46,7 +46,7 @@ package object sqlclient{
   implicit class CursorScala(val asJava: io.vertx.sqlclient.Cursor) extends AnyVal {
 
     /**
-     * Like [[read]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like read from [[io.vertx.sqlclient.Cursor]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def readFuture(count: java.lang.Integer): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
@@ -55,7 +55,7 @@ package object sqlclient{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.sqlclient.Cursor]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -98,7 +98,7 @@ package object sqlclient{
     }
 
     /**
-     * Like [[getConnection]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getConnection from [[io.vertx.sqlclient.Pool]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getConnectionFuture(): scala.concurrent.Future[io.vertx.sqlclient.SqlConnection] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.SqlConnection]()
@@ -107,7 +107,7 @@ package object sqlclient{
     }
 
     /**
-     * Like [[begin]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like begin from [[io.vertx.sqlclient.Pool]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def beginFuture(): scala.concurrent.Future[io.vertx.sqlclient.Transaction] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.Transaction]()
@@ -135,7 +135,7 @@ package object sqlclient{
   implicit class PreparedQueryScala(val asJava: io.vertx.sqlclient.PreparedQuery) extends AnyVal {
 
     /**
-     * Like [[execute]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like execute from [[io.vertx.sqlclient.PreparedQuery]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def executeFuture(): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
@@ -144,7 +144,7 @@ package object sqlclient{
     }
 
     /**
-     * Like [[execute]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like execute from [[io.vertx.sqlclient.PreparedQuery]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def executeFuture(args: io.vertx.sqlclient.Tuple): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
@@ -153,7 +153,7 @@ package object sqlclient{
     }
 
     /**
-     * Like [[batch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like batch from [[io.vertx.sqlclient.PreparedQuery]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def batchFuture(argsList: java.util.List[io.vertx.sqlclient.Tuple]): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
@@ -162,7 +162,7 @@ package object sqlclient{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.sqlclient.PreparedQuery]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -211,7 +211,7 @@ package object sqlclient{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.sqlclient.RowStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -230,7 +230,7 @@ package object sqlclient{
   implicit class SqlClientScala(val asJava: io.vertx.sqlclient.SqlClient) extends AnyVal {
 
     /**
-     * Like [[query]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like query from [[io.vertx.sqlclient.SqlClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
@@ -239,7 +239,7 @@ package object sqlclient{
     }
 
     /**
-     * Like [[preparedQuery]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like preparedQuery from [[io.vertx.sqlclient.SqlClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def preparedQueryFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
@@ -248,7 +248,7 @@ package object sqlclient{
     }
 
     /**
-     * Like [[preparedQuery]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like preparedQuery from [[io.vertx.sqlclient.SqlClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def preparedQueryFuture(sql: java.lang.String,arguments: io.vertx.sqlclient.Tuple): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
@@ -257,7 +257,7 @@ package object sqlclient{
     }
 
     /**
-     * Like [[preparedBatch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like preparedBatch from [[io.vertx.sqlclient.SqlClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def preparedBatchFuture(sql: java.lang.String,batch: java.util.List[io.vertx.sqlclient.Tuple]): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
@@ -280,7 +280,7 @@ package object sqlclient{
   implicit class SqlConnectionScala(val asJava: io.vertx.sqlclient.SqlConnection) extends AnyVal {
 
     /**
-     * Like [[prepare]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like prepare from [[io.vertx.sqlclient.SqlConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def prepareFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.PreparedQuery] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.PreparedQuery]()
@@ -326,7 +326,7 @@ package object sqlclient{
   implicit class TransactionScala(val asJava: io.vertx.sqlclient.Transaction) extends AnyVal {
 
     /**
-     * Like [[prepare]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like prepare from [[io.vertx.sqlclient.Transaction]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def prepareFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.PreparedQuery] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.PreparedQuery]()
@@ -335,7 +335,7 @@ package object sqlclient{
     }
 
     /**
-     * Like [[commit]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like commit from [[io.vertx.sqlclient.Transaction]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def commitFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -344,7 +344,7 @@ package object sqlclient{
     }
 
     /**
-     * Like [[rollback]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like rollback from [[io.vertx.sqlclient.Transaction]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def rollbackFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -381,55 +381,81 @@ package object sqlclient{
 
   object Tuple {
     /**
-     * Like [[tuple]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * @return a new empty tuple
      */
     def tuple() = {
       io.vertx.sqlclient.Tuple.tuple()
     }
     /**
-     * Like [[wrap]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Wrap the provided `list` with a tuple.
+     * <br/>
+     * The list is not copied and is used as store for tuple elements.     * @return the list wrapped as a tuple
      */
     def wrap(list: java.util.List[AnyRef]) = {
       io.vertx.sqlclient.Tuple.wrap(list)
     }
     /**
-     * Like [[of]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a tuple of one element.     * @param elt1 the first value
+     * @return the tuple
      */
     def of(elt1: AnyRef) = {
       io.vertx.sqlclient.Tuple.of(elt1)
     }
     /**
-     * Like [[of]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a tuple of two elements.     * @param elt1 the first value
+     * @param elt2 the second value
+     * @return the tuple
      */
     def of(elt1: AnyRef,elt2: AnyRef) = {
       io.vertx.sqlclient.Tuple.of(elt1, elt2)
     }
     /**
-     * Like [[of]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a tuple of three elements.     * @param elt1 the first value
+     * @param elt2 the second value
+     * @param elt3 the third value
+     * @return the tuple
      */
     def of(elt1: AnyRef,elt2: AnyRef,elt3: AnyRef) = {
       io.vertx.sqlclient.Tuple.of(elt1, elt2, elt3)
     }
     /**
-     * Like [[of]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a tuple of four elements.     * @param elt1 the first value
+     * @param elt2 the second value
+     * @param elt3 the third value
+     * @param elt4 the fourth value
+     * @return the tuple
      */
     def of(elt1: AnyRef,elt2: AnyRef,elt3: AnyRef,elt4: AnyRef) = {
       io.vertx.sqlclient.Tuple.of(elt1, elt2, elt3, elt4)
     }
     /**
-     * Like [[of]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a tuple of five elements.     * @param elt1 the first value
+     * @param elt2 the second value
+     * @param elt3 the third value
+     * @param elt4 the fourth value
+     * @param elt5 the fifth value
+     * @return the tuple
      */
     def of(elt1: AnyRef,elt2: AnyRef,elt3: AnyRef,elt4: AnyRef,elt5: AnyRef) = {
       io.vertx.sqlclient.Tuple.of(elt1, elt2, elt3, elt4, elt5)
     }
     /**
-     * Like [[of]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a tuple of six elements.     * @param elt1 the first value
+     * @param elt2 the second valueg
+     * @param elt3 the third value
+     * @param elt4 the fourth value
+     * @param elt5 the fifth value
+     * @param elt6 the sixth value
+     * @return the tuple
      */
     def of(elt1: AnyRef,elt2: AnyRef,elt3: AnyRef,elt4: AnyRef,elt5: AnyRef,elt6: AnyRef) = {
       io.vertx.sqlclient.Tuple.of(elt1, elt2, elt3, elt4, elt5, elt6)
     }
     /**
-     * Like [[tuple]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a tuple with the provided `elements` list.
+     * <p/>
+     * The `elements` list is not modified.     * @param elements the list of elements
+     * @return the tuple
      */
     def tuple(elements: java.util.List[AnyRef]) = {
       io.vertx.sqlclient.Tuple.tuple(elements)

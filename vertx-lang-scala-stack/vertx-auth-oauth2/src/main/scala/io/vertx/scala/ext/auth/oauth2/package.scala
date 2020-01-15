@@ -46,7 +46,7 @@ package object oauth2{
   implicit class AccessTokenScala(val asJava: io.vertx.ext.auth.oauth2.AccessToken) extends AnyVal {
 
     /**
-     * Like [[refresh]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like refresh from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def refreshFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -55,7 +55,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[revoke]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like revoke from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def revokeFuture(token_type: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -64,7 +64,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[logout]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like logout from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def logoutFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -73,7 +73,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[introspect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like introspect from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def introspectFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -82,7 +82,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[introspect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like introspect from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def introspectFuture(tokenType: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -91,7 +91,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[userInfo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like userInfo from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def userInfoFuture(): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
@@ -100,7 +100,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[fetch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like fetch from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def fetchFuture(resource: java.lang.String): scala.concurrent.Future[io.vertx.ext.auth.oauth2.OAuth2Response] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.OAuth2Response]()
@@ -109,7 +109,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[fetch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like fetch from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def fetchFuture(method: io.vertx.core.http.HttpMethod,resource: java.lang.String,headers: io.vertx.core.json.JsonObject,payload: io.vertx.core.buffer.Buffer): scala.concurrent.Future[io.vertx.ext.auth.oauth2.OAuth2Response] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.OAuth2Response]()
@@ -122,19 +122,35 @@ package object oauth2{
 
   object AzureADAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Microsoft Azure Active Directory     * @param clientId the client id given to you by Azure
+     * @param clientSecret the client secret given to you by Azure
+     * @param guid the guid of your application given to you by Azure
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,guid: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.AzureADAuth.create(vertx, clientId, clientSecret, guid)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Microsoft Azure Active Directory     * @param clientId the client id given to you by Azure
+     * @param clientSecret the client secret given to you by Azure
+     * @param guid the guid of your application given to you by Azure
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,guid: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.AzureADAuth.create(vertx, clientId, clientSecret, guid, httpClientOptions)
     }
     /**
-     * Like [[discover]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for OpenID Connect Discovery. The discovery will use the default site in the
+     * configuration options and attempt to load the well known descriptor. If a site is provided (for example when
+     * running on a custom instance) that site will be used to do the lookup.
+     * 
+     * If the discovered config includes a json web key url, it will be also fetched and the JWKs will be loaded
+     * into the OAuth provider so tokens can be decoded.
+     * 
+     * With this provider, if the given configuration is using the flow type  then
+     * the extra parameters object will include `requested_token_use = on_behalf_of` as required by
+     * <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow">https://docs.microsoft.com/en-us/azure/active-directory</a>.     * @param vertx the vertx instance
+     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2ClientOptions.html">OAuth2ClientOptions</a>
+     * @param handler the instantiated Oauth2 provider instance handler
      */
     def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2ClientOptions,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.AzureADAuth.discover(vertx, config, {p:AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => handler(p)})
@@ -144,13 +160,16 @@ package object oauth2{
 
   object BoxAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for App.net     * @param clientId the client id given to you by box.com
+     * @param clientSecret the client secret given to you by box.com
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.BoxAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for App.net     * @param clientId the client id given to you by box.com
+     * @param clientSecret the client secret given to you by box.com
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.BoxAuth.create(vertx, clientId, clientSecret, httpClientOptions)
@@ -160,13 +179,18 @@ package object oauth2{
 
   object CloudFoundryAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for CloudFoundry UAA     * @param clientId the client id given to you by CloudFoundry UAA
+     * @param clientSecret the client secret given to you by CloudFoundry UAA
+     * @param uuaURL the url to your UUA server instance
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,uuaURL: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.CloudFoundryAuth.create(vertx, clientId, clientSecret, uuaURL)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for CloudFoundry UAA     * @param clientId the client id given to you by CloudFoundry UAA
+     * @param clientSecret the client secret given to you by CloudFoundry UAA
+     * @param uuaURL the url to your UUA server instance
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,uuaURL: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.CloudFoundryAuth.create(vertx, clientId, clientSecret, uuaURL, httpClientOptions)
@@ -176,13 +200,16 @@ package object oauth2{
 
   object DropboxAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Dropbox     * @param clientId the client id given to you by Dropbox
+     * @param clientSecret the client secret given to you by Dropbox
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.DropboxAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Dropbox     * @param clientId the client id given to you by Dropbox
+     * @param clientSecret the client secret given to you by Dropbox
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.DropboxAuth.create(vertx, clientId, clientSecret, httpClientOptions)
@@ -192,13 +219,16 @@ package object oauth2{
 
   object FacebookAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Facebook     * @param clientId the client id given to you by Facebook
+     * @param clientSecret the client secret given to you by Facebook
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.FacebookAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Facebook     * @param clientId the client id given to you by Facebook
+     * @param clientSecret the client secret given to you by Facebook
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.FacebookAuth.create(vertx, clientId, clientSecret, httpClientOptions)
@@ -208,13 +238,16 @@ package object oauth2{
 
   object FoursquareAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Foursquare     * @param clientId the client id given to you by Foursquare
+     * @param clientSecret the client secret given to you by Foursquare
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.FoursquareAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Foursquare     * @param clientId the client id given to you by Foursquare
+     * @param clientSecret the client secret given to you by Foursquare
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.FoursquareAuth.create(vertx, clientId, clientSecret, httpClientOptions)
@@ -224,13 +257,16 @@ package object oauth2{
 
   object GithubAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Github     * @param clientId the client id given to you by Github
+     * @param clientSecret the client secret given to you by Github
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.GithubAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Github     * @param clientId the client id given to you by Github
+     * @param clientSecret the client secret given to you by Github
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.GithubAuth.create(vertx, clientId, clientSecret, httpClientOptions)
@@ -240,31 +276,42 @@ package object oauth2{
 
   object GoogleAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Google     * @param clientId the client id given to you by Google
+     * @param clientSecret the client secret given to you by Google
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.GoogleAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Google     * @param clientId the client id given to you by Google
+     * @param clientSecret the client secret given to you by Google
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.GoogleAuth.create(vertx, clientId, clientSecret, httpClientOptions)
     }
     /**
-     * Like [[discover]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for OpenID Connect Discovery. The discovery will use the default site in the
+     * configuration options and attempt to load the well known descriptor. If a site is provided (for example when
+     * running on a custom instance) that site will be used to do the lookup.
+     * 
+     * If the discovered config includes a json web key url, it will be also fetched and the JWKs will be loaded
+     * into the OAuth provider so tokens can be decoded.     * @param vertx the vertx instance
+     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2ClientOptions.html">OAuth2ClientOptions</a>
+     * @param handler the instantiated Oauth2 provider instance handler
      */
     def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2ClientOptions,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.GoogleAuth.discover(vertx, config, {p:AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => handler(p)})
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Google Service Account (Server to Server)     * @param serviceAccountJson the configuration json file from your Google API page
      */
     def create(vertx: io.vertx.core.Vertx,serviceAccountJson: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.providers.GoogleAuth.create(vertx, serviceAccountJson)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Google Service Account (Server to Server)     * @param serviceAccountJson the configuration json file from your Google API page
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,serviceAccountJson: io.vertx.core.json.JsonObject,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.GoogleAuth.create(vertx, serviceAccountJson, httpClientOptions)
@@ -274,13 +321,16 @@ package object oauth2{
 
   object HerokuAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Heroku     * @param clientId the client id given to you by Heroku
+     * @param clientSecret the client secret given to you by Heroku
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.HerokuAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Heroku     * @param clientId the client id given to you by Heroku
+     * @param clientSecret the client secret given to you by Heroku
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.HerokuAuth.create(vertx, clientId, clientSecret, httpClientOptions)
@@ -290,13 +340,16 @@ package object oauth2{
 
   object InstagramAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Instagram     * @param clientId the client id given to you by Instagram
+     * @param clientSecret the client secret given to you by Instagram
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.InstagramAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Instagram     * @param clientId the client id given to you by Instagram
+     * @param clientSecret the client secret given to you by Instagram
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.InstagramAuth.create(vertx, clientId, clientSecret, httpClientOptions)
@@ -306,31 +359,42 @@ package object oauth2{
 
   object KeycloakAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Keycloak     * @param config the json config file exported from Keycloak admin console
      */
     def create(vertx: io.vertx.core.Vertx,config: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.providers.KeycloakAuth.create(vertx, config)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Keycloak     * @param flow the oauth2 flow to use
+     * @param config the json config file exported from Keycloak admin console
      */
     def create(vertx: io.vertx.core.Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.providers.KeycloakAuth.create(vertx, flow, config)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Keycloak     * @param config the json config file exported from Keycloak admin console
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,config: io.vertx.core.json.JsonObject,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.KeycloakAuth.create(vertx, config, httpClientOptions)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Keycloak     * @param flow the oauth2 flow to use
+     * @param config the json config file exported from Keycloak admin console
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.KeycloakAuth.create(vertx, flow, config, httpClientOptions)
     }
     /**
-     * Like [[discover]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for OpenID Connect Discovery. The discovery will use the default site in the
+     * configuration options and attempt to load the well known descriptor. If a site is provided (for example when
+     * running on a custom instance) that site will be used to do the lookup.
+     * 
+     * If the discovered config includes a json web key url, it will be also fetched and the JWKs will be loaded
+     * into the OAuth provider so tokens can be decoded.     * @param vertx the vertx instance
+     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2ClientOptions.html">OAuth2ClientOptions</a>
+     * @param handler the instantiated Oauth2 provider instance handler
      */
     def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2ClientOptions,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.KeycloakAuth.discover(vertx, config, {p:AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => handler(p)})
@@ -340,7 +404,9 @@ package object oauth2{
 
   object KeycloakAuthorization {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Factory method to create an Authorization Provider for tokens adhering to the Keycloak token format.
+     * When the user is known to not be a JWT, (e.g.: a OAuth2 response token) then the root claim
+     * is expected to be the extracted from the user  under the key: `accessToken`.     * @return a AuthorizationProvider
      */
     def create() = {
       io.vertx.ext.auth.oauth2.authorization.KeycloakAuthorization.create()
@@ -350,25 +416,29 @@ package object oauth2{
 
   object KeycloakHelper {
     /**
-     * Like [[rawIdToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Get raw `id_token` string from the principal.     * @param principal user principal
+     * @return the raw id token string
      */
     def rawIdToken(principal: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.KeycloakHelper.rawIdToken(principal)
     }
     /**
-     * Like [[idToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Get decoded `id_token` from the principal.     * @param principal user principal
+     * @return the id token
      */
     def idToken(principal: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.KeycloakHelper.idToken(principal)
     }
     /**
-     * Like [[rawAccessToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Get raw `access_token` string from the principal.     * @param principal user principal
+     * @return the raw access token string
      */
     def rawAccessToken(principal: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.KeycloakHelper.rawAccessToken(principal)
     }
     /**
-     * Like [[accessToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Get decoded `access_token` from the principal.     * @param principal user principal
+     * @return the access token
      */
     def accessToken(principal: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.KeycloakHelper.accessToken(principal)
@@ -398,7 +468,9 @@ package object oauth2{
       io.vertx.ext.auth.oauth2.KeycloakHelper.allowedOrigins(principal)
     }
     /**
-     * Like [[parseToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Parse the token string with base64 decoder.
+     * This will only obtain the "payload" part of the token.     * @param token token string
+     * @return token payload json object
      */
     def parseToken(token: java.lang.String) = {
       io.vertx.ext.auth.oauth2.KeycloakHelper.parseToken(token)
@@ -408,7 +480,7 @@ package object oauth2{
 
   object KeycloakRBAC {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Factory method to create a RBAC handler for tokens adhering to the Keycloak token format.     * @return a RBAC validator
      */
     def create(options: io.vertx.ext.auth.oauth2.OAuth2ClientOptions) = {
       io.vertx.ext.auth.oauth2.rbac.KeycloakRBAC.create(options)
@@ -418,13 +490,16 @@ package object oauth2{
 
   object LinkedInAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for LinkedIn     * @param clientId the client id given to you by LinkedIn
+     * @param clientSecret the client secret given to you by LinkedIn
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.LinkedInAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for LinkedIn     * @param clientId the client id given to you by LinkedIn
+     * @param clientSecret the client secret given to you by LinkedIn
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.LinkedInAuth.create(vertx, clientId, clientSecret, httpClientOptions)
@@ -434,13 +509,16 @@ package object oauth2{
 
   object LiveAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for live.com     * @param clientId the client id given to you by live.com
+     * @param clientSecret the client secret given to you by live.com
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.LiveAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for live.com     * @param clientId the client id given to you by live.com
+     * @param clientSecret the client secret given to you by live.com
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.LiveAuth.create(vertx, clientId, clientSecret, httpClientOptions)
@@ -450,13 +528,16 @@ package object oauth2{
 
   object MailchimpAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Mailchimp     * @param clientId the client id given to you by Mailchimp
+     * @param clientSecret the client secret given to you by Mailchimp
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.MailchimpAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Mailchimp     * @param clientId the client id given to you by Mailchimp
+     * @param clientSecret the client secret given to you by Mailchimp
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.MailchimpAuth.create(vertx, clientId, clientSecret, httpClientOptions)
@@ -466,7 +547,7 @@ package object oauth2{
 
   object MicroProfileRBAC {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Factory method to create a RBAC handler for tokens adhering to the MP-JWT 1.1 spec.     * @return a RBAC validator
      */
     def create() = {
       io.vertx.ext.auth.oauth2.rbac.MicroProfileRBAC.create()
@@ -482,7 +563,7 @@ package object oauth2{
   implicit class OAuth2AuthScala(val asJava: io.vertx.ext.auth.oauth2.OAuth2Auth) extends AnyVal {
 
     /**
-     * Like [[jWKSet]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like jWKSet from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def jWKSetFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -491,7 +572,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[refresh]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like refresh from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def refreshFuture(user: io.vertx.ext.auth.User): scala.concurrent.Future[io.vertx.ext.auth.User] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.User]()
@@ -500,7 +581,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[revoke]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like revoke from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def revokeFuture(user: io.vertx.ext.auth.User,tokenType: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -509,7 +590,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[revoke]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like revoke from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def revokeFuture(user: io.vertx.ext.auth.User): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -518,7 +599,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[userInfo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like userInfo from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def userInfoFuture(user: io.vertx.ext.auth.User): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
@@ -527,7 +608,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[decodeToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like decodeToken from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def decodeTokenFuture(token: java.lang.String): scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.AccessToken]()
@@ -536,7 +617,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[introspectToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like introspectToken from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def introspectTokenFuture(token: java.lang.String): scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.AccessToken]()
@@ -545,7 +626,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[introspectToken]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like introspectToken from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def introspectTokenFuture(token: java.lang.String,tokenType: java.lang.String): scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.AccessToken]()
@@ -554,7 +635,7 @@ package object oauth2{
     }
 
     /**
-     * Like [[loadJWK]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like loadJWK from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def loadJWKFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -590,7 +671,7 @@ package object oauth2{
   implicit class OAuth2RBACScala(val asJava: io.vertx.ext.auth.oauth2.OAuth2RBAC) extends AnyVal {
 
     /**
-     * Like [[isAuthorized]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like isAuthorized from [[io.vertx.ext.auth.oauth2.OAuth2RBAC]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def isAuthorizedFuture(user: io.vertx.ext.auth.oauth2.AccessToken,authority: java.lang.String): scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
@@ -605,7 +686,13 @@ package object oauth2{
 
   object OpenIDConnectAuth {
     /**
-     * Like [[discover]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for OpenID Connect Discovery. The discovery will use the given site in the
+     * configuration options and attempt to load the well known descriptor.
+     * 
+     * If the discovered config includes a json web key url, it will be also fetched and the JWKs will be loaded
+     * into the OAuth provider so tokens can be decoded.     * @param vertx the vertx instance
+     * @param config the initial config, it should contain a site url see <a href="../../../../../../../../../cheatsheet/OAuth2ClientOptions.html">OAuth2ClientOptions</a>
+     * @param handler the instantiated Oauth2 provider instance handler
      */
     def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2ClientOptions,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.OpenIDConnectAuth.discover(vertx, config, {p:AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => handler(p)})
@@ -615,19 +702,29 @@ package object oauth2{
 
   object SalesforceAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Salesforce     * @param clientId the client id given to you by Salesforce
+     * @param clientSecret the client secret given to you by Salesforce
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.SalesforceAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Salesforce     * @param clientId the client id given to you by Salesforce
+     * @param clientSecret the client secret given to you by Salesforce
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.SalesforceAuth.create(vertx, clientId, clientSecret, httpClientOptions)
     }
     /**
-     * Like [[discover]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for OpenID Connect Discovery. The discovery will use the default site in the
+     * configuration options and attempt to load the well known descriptor. If a site is provided (for example when
+     * running on a custom instance) that site will be used to do the lookup.
+     * 
+     * If the discovered config includes a json web key url, it will be also fetched and the JWKs will be loaded
+     * into the OAuth provider so tokens can be decoded.     * @param vertx the vertx instance
+     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2ClientOptions.html">OAuth2ClientOptions</a>
+     * @param handler the instantiated Oauth2 provider instance handler
      */
     def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2ClientOptions,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.SalesforceAuth.discover(vertx, config, {p:AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => handler(p)})
@@ -637,7 +734,8 @@ package object oauth2{
 
   object ScopeAuthorization {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Factory method to create a Authorization provider for Oauth 2.0 scopes.     * @param scopeSeparator the scope separator e.g.: `" "`, `","`, `"+"`
+     * @return a AuthorizationProvider
      */
     def create(scopeSeparator: java.lang.String) = {
       io.vertx.ext.auth.oauth2.authorization.ScopeAuthorization.create(scopeSeparator)
@@ -647,13 +745,18 @@ package object oauth2{
 
   object ShopifyAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Shopify     * @param clientId the client id given to you by Shopify
+     * @param clientSecret the client secret given to you by Shopify
+     * @param shop your shop name
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,shop: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.ShopifyAuth.create(vertx, clientId, clientSecret, shop)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Shopify     * @param clientId the client id given to you by Shopify
+     * @param clientSecret the client secret given to you by Shopify
+     * @param shop your shop name
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,shop: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.ShopifyAuth.create(vertx, clientId, clientSecret, shop, httpClientOptions)
@@ -663,13 +766,16 @@ package object oauth2{
 
   object SoundcloudAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for SoundCloud     * @param clientId the client id given to you by SoundCloud
+     * @param clientSecret the client secret given to you by SoundCloud
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.SoundcloudAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for SoundCloud     * @param clientId the client id given to you by SoundCloud
+     * @param clientSecret the client secret given to you by SoundCloud
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.SoundcloudAuth.create(vertx, clientId, clientSecret, httpClientOptions)
@@ -679,13 +785,16 @@ package object oauth2{
 
   object StripeAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Stripe     * @param clientId the client id given to you by Stripe
+     * @param clientSecret the client secret given to you by Stripe
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.StripeAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Stripe     * @param clientId the client id given to you by Stripe
+     * @param clientSecret the client secret given to you by Stripe
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.StripeAuth.create(vertx, clientId, clientSecret, httpClientOptions)
@@ -695,13 +804,16 @@ package object oauth2{
 
   object TwitterAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Twitter     * @param clientId the client id given to you by Twitter
+     * @param clientSecret the client secret given to you by Twitter
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.TwitterAuth.create(vertx, clientId, clientSecret)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a OAuth2Auth provider for Twitter     * @param clientId the client id given to you by Twitter
+     * @param clientSecret the client secret given to you by Twitter
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
      */
     def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.TwitterAuth.create(vertx, clientId, clientSecret, httpClientOptions)

@@ -15,7 +15,7 @@
     }
 
     /**
-      * Like [[deployVerticle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+      * Like [[deployVerticle]] but returns a Scala Future instead of taking an AsyncResultHandler.
       */
     def deployVerticleFuture(verticle: ScalaVerticle): scala.concurrent.Future[String] = {
       val promise = concurrent.Promise[String]()
@@ -35,7 +35,7 @@
     }
 
     /**
-      * Like [[deployVerticle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+      * Like [[deployVerticle]] but returns a Scala Future instead of taking an AsyncResultHandler.
       */
     def deployVerticleFuture(verticle: ScalaVerticle, options: DeploymentOptions): scala.concurrent.Future[String] = {
       val promise = concurrent.Promise[String]()

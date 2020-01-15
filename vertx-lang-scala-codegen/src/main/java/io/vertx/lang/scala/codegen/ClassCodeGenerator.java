@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.*;
+import java.util.logging.LogManager;
 import java.util.stream.Collectors;
 
 /**
@@ -35,11 +36,11 @@ public class ClassCodeGenerator extends Generator<Model> {
   public static final List<String> ignoreClassname;
   static {
     List<String> temp = new ArrayList<>();
-    temp.add("RelayParty");
     ignoreClassname = Collections.unmodifiableList(temp);
   }
 
   public ClassCodeGenerator() {
+    LogManager.getLogManager().reset();
     this.incremental = true;
   }
 
@@ -62,7 +63,7 @@ public class ClassCodeGenerator extends Generator<Model> {
 
   @Override
   public String filename(Model model) {
-    if(!((TypeInfo)model.getVars().get("type")).getName().equals("io.vertx.core.buffer.Buffer")) {
+    if(!((TypeInfo)model.getVars().get("type")).getName().equals("io.vertx.core.buffer.Buffer") && !(model.getFqn().contains(".impl.") || model.getFqn().endsWith(".impl"))) {
       String fileName = filenameForModel(model);
       fileToImports.put(fileName, new HashSet<>());
 

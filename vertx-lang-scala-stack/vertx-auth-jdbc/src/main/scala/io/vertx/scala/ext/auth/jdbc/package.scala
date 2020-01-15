@@ -36,7 +36,8 @@ package object jdbc{
 
   object JDBCAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a JDBC auth provider implementation     * @param client the JDBC client instance
+     * @return the auth provider
      */
     def create(vertx: io.vertx.core.Vertx,client: io.vertx.ext.jdbc.JDBCClient) = {
       io.vertx.ext.auth.jdbc.JDBCAuth.create(vertx, client)
@@ -55,13 +56,18 @@ package object jdbc{
 
   object JDBCAuthentication {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a JDBC auth provider implementation     * @param client the JDBC client instance
+     * @param hashStrategy legacy hashing strategy
+     * @param options authentication options see <a href="../../../../../../../../cheatsheet/JDBCAuthenticationOptions.html">JDBCAuthenticationOptions</a>
+     * @return the auth provider
      */
     def create(client: io.vertx.ext.jdbc.JDBCClient,hashStrategy: io.vertx.ext.auth.jdbc.JDBCHashStrategy,options: io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions) = {
       io.vertx.ext.auth.jdbc.JDBCAuthentication.create(client, hashStrategy, options)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a JDBC auth provider implementation     * @param client the JDBC client instance
+     * @param options authentication options see <a href="../../../../../../../../cheatsheet/JDBCAuthenticationOptions.html">JDBCAuthenticationOptions</a>
+     * @return the auth provider
      */
     def create(client: io.vertx.ext.jdbc.JDBCClient,options: io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions) = {
       io.vertx.ext.auth.jdbc.JDBCAuthentication.create(client, options)
@@ -80,7 +86,10 @@ package object jdbc{
 
   object JDBCAuthorization {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a JDBC authorization provider implementation     * @param providerId the provider id
+     * @param client the JDBC client instance
+     * @param options the JDBCAuthorizationOptions see <a href="../../../../../../../../cheatsheet/JDBCAuthorizationOptions.html">JDBCAuthorizationOptions</a>
+     * @return the auth provider
      */
     def create(providerId: java.lang.String,client: io.vertx.ext.jdbc.JDBCClient,options: io.vertx.ext.auth.jdbc.JDBCAuthorizationOptions) = {
       io.vertx.ext.auth.jdbc.JDBCAuthorization.create(providerId, client, options)
@@ -99,19 +108,28 @@ package object jdbc{
 
   object JDBCHashStrategy {
     /**
-     * Like [[createSHA512]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * This is the current backwards compatible hashing implementation, new applications should prefer the
+     * PBKDF2 implementation, unless the tradeoff between security and CPU usage is an option.     * @param vertx the vert.x instance
+     * @return the implementation.
      */
     def createSHA512(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.auth.jdbc.JDBCHashStrategy.createSHA512(vertx)
     }
     /**
-     * Like [[createPBKDF2]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Implements a Hashing Strategy as per https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet (2018-01-17).
+     *
+     * New deployments should use this strategy instead of the default one (which was the previous OWASP recommendation).
+     *
+     * The work factor can be updated by using the nonces json array.     * @param vertx the vert.x instance
+     * @return the implementation.
      */
     def createPBKDF2(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.auth.jdbc.JDBCHashStrategy.createPBKDF2(vertx)
     }
     /**
-     * Like [[isEqual]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Time constant string comparision to avoid timming attacks.     * @param hasha hash a to compare
+     * @param hashb hash b to compare
+     * @return true if equal
      */
     def isEqual(hasha: java.lang.String,hashb: java.lang.String) = {
       io.vertx.ext.auth.jdbc.JDBCHashStrategy.isEqual(hasha, hashb)

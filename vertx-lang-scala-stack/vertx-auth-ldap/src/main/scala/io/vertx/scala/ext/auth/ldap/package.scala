@@ -34,7 +34,9 @@ package object ldap{
 
   object LdapAuthentication {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a LDAP authentication provider     * @param vertx the Vert.x instance
+     * @param options the ldap options see <a href="../../../../../../../../cheatsheet/LdapAuthenticationOptions.html">LdapAuthenticationOptions</a>
+     * @return the authentication provider
      */
     def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.ldap.LdapAuthenticationOptions) = {
       io.vertx.ext.auth.ldap.LdapAuthentication.create(vertx, options)

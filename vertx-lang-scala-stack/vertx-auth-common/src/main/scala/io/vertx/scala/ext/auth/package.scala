@@ -51,7 +51,7 @@ package object auth{
   implicit class AuthenticationProviderScala(val asJava: io.vertx.ext.auth.authentication.AuthenticationProvider) extends AnyVal {
 
     /**
-     * Like [[authenticate]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like authenticate from [[io.vertx.ext.auth.authentication.AuthenticationProvider]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def authenticateFuture(authInfo: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.ext.auth.User] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.User]()
@@ -66,7 +66,8 @@ package object auth{
 
   object AuthorizationContext {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Factory for Authorization Context     * @param user a user
+     * @return a AuthorizationContext instance
      */
     def create(user: io.vertx.ext.auth.User) = {
       io.vertx.ext.auth.authorization.AuthorizationContext.create(user)
@@ -83,7 +84,7 @@ package object auth{
   implicit class AuthorizationProviderScala(val asJava: io.vertx.ext.auth.authorization.AuthorizationProvider) extends AnyVal {
 
     /**
-     * Like [[getAuthorizations]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getAuthorizations from [[io.vertx.ext.auth.authorization.AuthorizationProvider]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getAuthorizationsFuture(user: io.vertx.ext.auth.User): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -98,19 +99,19 @@ package object auth{
 
   object ChainAuth {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a Chainable Auth Provider auth provider     * @return the auth provider
      */
     def create() = {
       io.vertx.ext.auth.ChainAuth.create()
     }
     /**
-     * Like [[all]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a Chainable Auth Provider auth provider that will resolve if all auth providers are successful.     * @return the auth provider
      */
     def all() = {
       io.vertx.ext.auth.ChainAuth.all()
     }
     /**
-     * Like [[any]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a Chainable Auth Provider auth provider that will resolve on the first success.     * @return the auth provider
      */
     def any() = {
       io.vertx.ext.auth.ChainAuth.any()
@@ -122,7 +123,7 @@ package object auth{
 
   object HashingStrategy {
     /**
-     * Like [[load]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Factory method to load the algorithms from the system     * @return a Hashing Strategy capable of hashing using the available algorithms
      */
     def load() = {
       io.vertx.ext.auth.HashingStrategy.load()
@@ -186,7 +187,7 @@ package object auth{
   implicit class UserScala(val asJava: io.vertx.ext.auth.User) extends AnyVal {
 
     /**
-     * Like [[isAuthorized]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like isAuthorized from [[io.vertx.ext.auth.User]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def isAuthorizedFuture(authority: io.vertx.ext.auth.authorization.Authorization): scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
@@ -195,7 +196,7 @@ package object auth{
     }
 
     /**
-     * Like [[isAuthorized]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like isAuthorized from [[io.vertx.ext.auth.User]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def isAuthorizedFuture(authority: java.lang.String): scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
@@ -208,13 +209,17 @@ package object auth{
 
   object VertxContextPRNG {
     /**
-     * Like [[current]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Get or create a secure non blocking random number generator using the current vert.x context. If there is no
+     * current context (i.e.: not running on the eventloop) then a IllegalStateException is thrown.     * @return A secure non blocking random number generator.
      */
     def current() = {
       io.vertx.ext.auth.VertxContextPRNG.current()
     }
     /**
-     * Like [[current]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Get or create a secure non blocking random number generator using the current vert.x instance. Since the context
+     * might be different this method will attempt to use the current context first if available and then fall back to
+     * create a new instance of the PRNG.     * @param vertx a Vert.x instance.
+     * @return A secure non blocking random number generator.
      */
     def current(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.auth.VertxContextPRNG.current(vertx)
