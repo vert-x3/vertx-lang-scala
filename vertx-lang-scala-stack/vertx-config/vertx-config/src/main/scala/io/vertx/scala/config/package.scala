@@ -56,7 +56,7 @@ package object config{
   implicit class ConfigRetrieverScala(val asJava: io.vertx.config.ConfigRetriever) extends AnyVal {
 
     /**
-     * Like [[getConfig]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getConfig from [[io.vertx.config.ConfigRetriever]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getConfigFuture(): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()

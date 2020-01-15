@@ -49,7 +49,7 @@ package object mongo{
   implicit class MongoAuthScala(val asJava: io.vertx.ext.auth.mongo.MongoAuth) extends AnyVal {
 
     /**
-     * Like [[insertUser]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like insertUser from [[io.vertx.ext.auth.mongo.MongoAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def insertUserFuture(username: java.lang.String,password: java.lang.String,roles: java.util.List[java.lang.String],permissions: java.util.List[java.lang.String]): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -71,7 +71,9 @@ package object mongo{
 
   object MongoAuthentication {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Creates an instance of MongoAuth by using the given  and configuration object.     * @param mongoClient an instance of MongoClient to be used for data storage and retrival
+     * @param options the configuration object for the current instance. see <a href="../../../../../../../../cheatsheet/MongoAuthenticationOptions.html">MongoAuthenticationOptions</a>
+     * @return the created instance of MongoAuthentication
      */
     def create(mongoClient: io.vertx.ext.mongo.MongoClient,options: io.vertx.ext.auth.mongo.MongoAuthenticationOptions) = {
       io.vertx.ext.auth.mongo.MongoAuthentication.create(mongoClient, options)
@@ -93,7 +95,10 @@ package object mongo{
 
   object MongoAuthorization {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Creates an instance of MongoAuthorization by using the given  and configuration object.     * @param providerId the provider ID to differentiate from others
+     * @param mongoClient an instance of MongoClient to be used for data storage and retrival
+     * @param options the configuration object for the current instance. see <a href="../../../../../../../../cheatsheet/MongoAuthorizationOptions.html">MongoAuthorizationOptions</a>
+     * @return the created instance of MongoAuthorization
      */
     def create(providerId: java.lang.String,mongoClient: io.vertx.ext.mongo.MongoClient,options: io.vertx.ext.auth.mongo.MongoAuthorizationOptions) = {
       io.vertx.ext.auth.mongo.MongoAuthorization.create(providerId, mongoClient, options)

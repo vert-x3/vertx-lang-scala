@@ -53,7 +53,8 @@ package object dropwizard{
 
   object MetricsService {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Creates a metric service for a given [[io.vertx.core.Vertx]] instance.     * @param vertx the vertx instance
+     * @return the metrics service
      */
     def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.dropwizard.MetricsService.create(vertx)

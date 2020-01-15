@@ -35,13 +35,16 @@ package object sql{
 
   object SqlAuthentication {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a JDBC auth provider implementation     * @param client the JDBC client instance
+     * @return the auth provider
      */
     def create(client: io.vertx.sqlclient.SqlClient) = {
       io.vertx.ext.auth.sql.SqlAuthentication.create(client)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a JDBC auth provider implementation     * @param client the JDBC client instance
+     * @param options authentication options see <a href="../../../../../../../../cheatsheet/SqlAuthenticationOptions.html">SqlAuthenticationOptions</a>
+     * @return the auth provider
      */
     def create(client: io.vertx.sqlclient.SqlClient,options: io.vertx.ext.auth.sql.SqlAuthenticationOptions) = {
       io.vertx.ext.auth.sql.SqlAuthentication.create(client, options)
@@ -60,13 +63,16 @@ package object sql{
 
   object SqlAuthorization {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a JDBC authorization provider implementation     * @param client the SQL client instance
+     * @return the auth provider
      */
     def create(client: io.vertx.sqlclient.SqlClient) = {
       io.vertx.ext.auth.sql.SqlAuthorization.create(client)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a JDBC authorization provider implementation     * @param client the SQL client instance
+     * @param options the SqlAuthorizationOptions see <a href="../../../../../../../../cheatsheet/SqlAuthorizationOptions.html">SqlAuthorizationOptions</a>
+     * @return the auth provider
      */
     def create(client: io.vertx.sqlclient.SqlClient,options: io.vertx.ext.auth.sql.SqlAuthorizationOptions) = {
       io.vertx.ext.auth.sql.SqlAuthorization.create(client, options)

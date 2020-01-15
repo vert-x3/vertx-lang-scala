@@ -53,15 +53,10 @@
         <plugin>
           <groupId>net.alchim31.maven</groupId>
           <artifactId>scala-maven-plugin</artifactId>
-          <version>3.2.2</version>
+          <version>4.3.0</version>
           <configuration>
             <args>
               <arg>-target:jvm-1.8</arg>
-              <arg>-feature</arg>
-              <arg>-deprecation</arg>
-              <arg>-explaintypes</arg>
-              <arg>-unchecked</arg>
-              <arg>-Xlint</arg>
             </args>
           </configuration>
         </plugin>

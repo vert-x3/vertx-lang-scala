@@ -33,13 +33,13 @@ package object jade{
 
   object JadeTemplateEngine {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a template engine using defaults     * @return the engine
      */
     def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.templ.jade.JadeTemplateEngine.create(vertx)
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a template engine using defaults     * @return the engine
      */
     def create(vertx: io.vertx.core.Vertx,extension: java.lang.String) = {
       io.vertx.ext.web.templ.jade.JadeTemplateEngine.create(vertx, extension)

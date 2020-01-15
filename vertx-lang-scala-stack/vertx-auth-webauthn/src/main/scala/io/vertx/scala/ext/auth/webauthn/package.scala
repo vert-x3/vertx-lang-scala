@@ -43,7 +43,7 @@ package object webauthn{
   implicit class CredentialStoreScala(val asJava: io.vertx.ext.auth.webauthn.CredentialStore) extends AnyVal {
 
     /**
-     * Like [[getUserCredentialsByName]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getUserCredentialsByName from [[io.vertx.ext.auth.webauthn.CredentialStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getUserCredentialsByNameFuture(username: java.lang.String): scala.concurrent.Future[java.util.List[io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[java.util.List[io.vertx.core.json.JsonObject]]()
@@ -52,7 +52,7 @@ package object webauthn{
     }
 
     /**
-     * Like [[getUserCredentialsById]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getUserCredentialsById from [[io.vertx.ext.auth.webauthn.CredentialStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getUserCredentialsByIdFuture(rawId: java.lang.String): scala.concurrent.Future[java.util.List[io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[java.util.List[io.vertx.core.json.JsonObject]]()
@@ -61,7 +61,7 @@ package object webauthn{
     }
 
     /**
-     * Like [[updateUserCredential]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like updateUserCredential from [[io.vertx.ext.auth.webauthn.CredentialStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def updateUserCredentialFuture(id: java.lang.String,data: io.vertx.core.json.JsonObject,upsert: java.lang.Boolean): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -73,6 +73,15 @@ package object webauthn{
 
 
 
+  type RelayParty = io.vertx.ext.auth.webauthn.RelayParty
+  object RelayParty {
+    def apply() = new RelayParty()
+    def apply(json: JsonObject) = new RelayParty(json)
+  }
+
+
+
+
   /**
     * Factory interface for creating WebAuthN based [[io.vertx.ext.auth.authentication.AuthenticationProvider]] instances.
     */
@@ -81,14 +90,14 @@ package object webauthn{
 
 
     /**
-     * Like [[getCredentialsOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getCredentialsOptions from [[io.vertx.ext.auth.webauthn.WebAuthn]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getCredentialsOptions(username: scala.Option[java.lang.String],handler: AsyncResult[io.vertx.core.json.JsonObject] => Unit): io.vertx.ext.auth.webauthn.WebAuthn = {
       asJava.getCredentialsOptions(username.orNull, {p:AsyncResult[io.vertx.core.json.JsonObject] => handler(p)})
     }
 
     /**
-     * Like [[createCredentialsOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like createCredentialsOptions from [[io.vertx.ext.auth.webauthn.WebAuthn]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def createCredentialsOptionsFuture(user: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
@@ -97,7 +106,7 @@ package object webauthn{
     }
 
     /**
-     * Like [[getCredentialsOptions]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getCredentialsOptions from [[io.vertx.ext.auth.webauthn.WebAuthn]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getCredentialsOptionsFuture(username: scala.Option[java.lang.String]): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()

@@ -115,16 +115,7 @@ package object core{
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
-      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.file.AsyncFile]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -133,7 +124,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.file.AsyncFile]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -142,7 +133,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.file.AsyncFile]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -151,7 +142,16 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.file.AsyncFile]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like close from [[io.vertx.core.file.AsyncFile]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -160,7 +160,7 @@ package object core{
     }
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.file.AsyncFile]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(buffer: io.vertx.core.buffer.Buffer,position: java.lang.Long): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -169,7 +169,7 @@ package object core{
     }
 
     /**
-     * Like [[read]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like read from [[io.vertx.core.file.AsyncFile]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def readFuture(buffer: io.vertx.core.buffer.Buffer,offset: java.lang.Integer,position: java.lang.Long,length: java.lang.Integer): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
       val promise = concurrent.Promise[io.vertx.core.buffer.Buffer]()
@@ -178,7 +178,7 @@ package object core{
     }
 
     /**
-     * Like [[flush]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like flush from [[io.vertx.core.file.AsyncFile]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def flushFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -200,7 +200,7 @@ package object core{
 
 
     /**
-     * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like get from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def get(k: K,resultHandler: AsyncResult[V] => Unit): Unit = {
       asJava.get(k, {p:AsyncResult[V] => resultHandler(p)})
@@ -208,7 +208,7 @@ package object core{
 
 
     /**
-     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like put from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def put(k: K,v: V,completionHandler: AsyncResult[Void] => Unit): Unit = {
       asJava.put(k, v, {p:AsyncResult[Void] => completionHandler(p)})
@@ -216,7 +216,7 @@ package object core{
 
 
     /**
-     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like put from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def put(k: K,v: V,ttl: java.lang.Long,completionHandler: AsyncResult[Void] => Unit): Unit = {
       asJava.put(k, v, ttl, {p:AsyncResult[Void] => completionHandler(p)})
@@ -224,7 +224,7 @@ package object core{
 
 
     /**
-     * Like [[putIfAbsent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like putIfAbsent from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putIfAbsent(k: K,v: V,completionHandler: AsyncResult[V] => Unit): Unit = {
       asJava.putIfAbsent(k, v, {p:AsyncResult[V] => completionHandler(p)})
@@ -232,7 +232,7 @@ package object core{
 
 
     /**
-     * Like [[putIfAbsent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like putIfAbsent from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putIfAbsent(k: K,v: V,ttl: java.lang.Long,completionHandler: AsyncResult[V] => Unit): Unit = {
       asJava.putIfAbsent(k, v, ttl, {p:AsyncResult[V] => completionHandler(p)})
@@ -240,7 +240,7 @@ package object core{
 
 
     /**
-     * Like [[remove]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like remove from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def remove(k: K,resultHandler: AsyncResult[V] => Unit): Unit = {
       asJava.remove(k, {p:AsyncResult[V] => resultHandler(p)})
@@ -248,7 +248,7 @@ package object core{
 
 
     /**
-     * Like [[removeIfPresent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like removeIfPresent from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def removeIfPresent(k: K,v: V,resultHandler: AsyncResult[java.lang.Boolean] => Unit): Unit = {
       asJava.removeIfPresent(k, v, {p:AsyncResult[java.lang.Boolean] => resultHandler(p)})
@@ -256,7 +256,7 @@ package object core{
 
 
     /**
-     * Like [[replace]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like replace from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def replace(k: K,v: V,resultHandler: AsyncResult[V] => Unit): Unit = {
       asJava.replace(k, v, {p:AsyncResult[V] => resultHandler(p)})
@@ -264,14 +264,14 @@ package object core{
 
 
     /**
-     * Like [[replaceIfPresent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like replaceIfPresent from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def replaceIfPresent(k: K,oldValue: V,newValue: V,resultHandler: AsyncResult[java.lang.Boolean] => Unit): Unit = {
       asJava.replaceIfPresent(k, oldValue, newValue, {p:AsyncResult[java.lang.Boolean] => resultHandler(p)})
     }
 
     /**
-     * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like get from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getFuture(k: K): scala.concurrent.Future[V] = {
       val promise = concurrent.Promise[V]()
@@ -280,7 +280,7 @@ package object core{
     }
 
     /**
-     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like put from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putFuture(k: K,v: V): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -289,7 +289,7 @@ package object core{
     }
 
     /**
-     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like put from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putFuture(k: K,v: V,ttl: java.lang.Long): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -298,7 +298,7 @@ package object core{
     }
 
     /**
-     * Like [[putIfAbsent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like putIfAbsent from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putIfAbsentFuture(k: K,v: V): scala.concurrent.Future[V] = {
       val promise = concurrent.Promise[V]()
@@ -307,7 +307,7 @@ package object core{
     }
 
     /**
-     * Like [[putIfAbsent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like putIfAbsent from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putIfAbsentFuture(k: K,v: V,ttl: java.lang.Long): scala.concurrent.Future[V] = {
       val promise = concurrent.Promise[V]()
@@ -316,7 +316,7 @@ package object core{
     }
 
     /**
-     * Like [[remove]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like remove from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def removeFuture(k: K): scala.concurrent.Future[V] = {
       val promise = concurrent.Promise[V]()
@@ -325,7 +325,7 @@ package object core{
     }
 
     /**
-     * Like [[removeIfPresent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like removeIfPresent from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def removeIfPresentFuture(k: K,v: V): scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
@@ -334,7 +334,7 @@ package object core{
     }
 
     /**
-     * Like [[replace]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like replace from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def replaceFuture(k: K,v: V): scala.concurrent.Future[V] = {
       val promise = concurrent.Promise[V]()
@@ -343,7 +343,7 @@ package object core{
     }
 
     /**
-     * Like [[replaceIfPresent]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like replaceIfPresent from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def replaceIfPresentFuture(k: K,oldValue: V,newValue: V): scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
@@ -352,7 +352,7 @@ package object core{
     }
 
     /**
-     * Like [[clear]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like clear from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def clearFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -361,7 +361,7 @@ package object core{
     }
 
     /**
-     * Like [[size]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like size from [[io.vertx.core.shareddata.AsyncMap]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sizeFuture(): scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
@@ -374,7 +374,8 @@ package object core{
 
   object CLI {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Creates an instance of [[io.vertx.core.cli.CLI]] using the default implementation.     * @param name the name of the CLI (must not be `null`)
+     * @return the created instance of CLI
      */
     def create(name: java.lang.String) = {
       io.vertx.core.cli.CLI.create(name)
@@ -388,7 +389,9 @@ package object core{
 
   object CommandLine {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Creates a command line object from the [[io.vertx.core.cli.CLI]]. This object is intended to be used by
+     * the parser to set the argument and option values.     * @param cli the CLI definition
+     * @return the command line object
      */
     def create(cli: io.vertx.core.cli.CLI) = {
       io.vertx.core.cli.CommandLine.create(cli)
@@ -467,7 +470,7 @@ package object core{
 
 
     /**
-     * Like [[config]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like config from [[io.vertx.core.Context]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def configOption(): scala.Option[io.vertx.core.json.JsonObject] = {
       scala.Option(asJava.config())
@@ -475,7 +478,7 @@ package object core{
 
 
     /**
-     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like put from [[io.vertx.core.Context]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def put(key: java.lang.String,value: AnyRef): Unit = {
       asJava.put(key, value)
@@ -483,7 +486,7 @@ package object core{
 
 
     /**
-     * Like [[putLocal]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like putLocal from [[io.vertx.core.Context]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putLocal(key: java.lang.String,value: AnyRef): Unit = {
       asJava.putLocal(key, value)
@@ -491,7 +494,7 @@ package object core{
 
 
     /**
-     * Like [[exceptionHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like exceptionHandler from [[io.vertx.core.Context]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.Context = {
       asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
@@ -502,7 +505,9 @@ package object core{
 
   object Cookie {
     /**
-     * Like [[cookie]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a new cookie     * @param name the name of the cookie
+     * @param value the cookie value
+     * @return the cookie
      */
     def cookie(name: java.lang.String,value: java.lang.String) = {
       io.vertx.core.http.Cookie.cookie(name, value)
@@ -528,7 +533,7 @@ package object core{
   implicit class CounterScala(val asJava: io.vertx.core.shareddata.Counter) extends AnyVal {
 
     /**
-     * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like get from [[io.vertx.core.shareddata.Counter]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getFuture(): scala.concurrent.Future[java.lang.Long] = {
       val promise = concurrent.Promise[java.lang.Long]()
@@ -537,7 +542,7 @@ package object core{
     }
 
     /**
-     * Like [[incrementAndGet]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like incrementAndGet from [[io.vertx.core.shareddata.Counter]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def incrementAndGetFuture(): scala.concurrent.Future[java.lang.Long] = {
       val promise = concurrent.Promise[java.lang.Long]()
@@ -546,7 +551,7 @@ package object core{
     }
 
     /**
-     * Like [[getAndIncrement]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getAndIncrement from [[io.vertx.core.shareddata.Counter]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getAndIncrementFuture(): scala.concurrent.Future[java.lang.Long] = {
       val promise = concurrent.Promise[java.lang.Long]()
@@ -555,7 +560,7 @@ package object core{
     }
 
     /**
-     * Like [[decrementAndGet]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like decrementAndGet from [[io.vertx.core.shareddata.Counter]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def decrementAndGetFuture(): scala.concurrent.Future[java.lang.Long] = {
       val promise = concurrent.Promise[java.lang.Long]()
@@ -564,7 +569,7 @@ package object core{
     }
 
     /**
-     * Like [[addAndGet]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like addAndGet from [[io.vertx.core.shareddata.Counter]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def addAndGetFuture(value: java.lang.Long): scala.concurrent.Future[java.lang.Long] = {
       val promise = concurrent.Promise[java.lang.Long]()
@@ -573,7 +578,7 @@ package object core{
     }
 
     /**
-     * Like [[getAndAdd]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getAndAdd from [[io.vertx.core.shareddata.Counter]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getAndAddFuture(value: java.lang.Long): scala.concurrent.Future[java.lang.Long] = {
       val promise = concurrent.Promise[java.lang.Long]()
@@ -582,7 +587,7 @@ package object core{
     }
 
     /**
-     * Like [[compareAndSet]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like compareAndSet from [[io.vertx.core.shareddata.Counter]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def compareAndSetFuture(expected: java.lang.Long,value: java.lang.Long): scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
@@ -613,7 +618,7 @@ package object core{
 
 
     /**
-     * Like [[listenMulticastGroup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listenMulticastGroup from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenMulticastGroup(multicastAddress: java.lang.String,networkInterface: java.lang.String,source: scala.Option[java.lang.String],handler: AsyncResult[Void] => Unit): io.vertx.core.datagram.DatagramSocket = {
       asJava.listenMulticastGroup(multicastAddress, networkInterface, source.orNull, {p:AsyncResult[Void] => handler(p)})
@@ -621,7 +626,7 @@ package object core{
 
 
     /**
-     * Like [[unlistenMulticastGroup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like unlistenMulticastGroup from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def unlistenMulticastGroup(multicastAddress: java.lang.String,networkInterface: java.lang.String,source: scala.Option[java.lang.String],handler: AsyncResult[Void] => Unit): io.vertx.core.datagram.DatagramSocket = {
       asJava.unlistenMulticastGroup(multicastAddress, networkInterface, source.orNull, {p:AsyncResult[Void] => handler(p)})
@@ -643,7 +648,7 @@ package object core{
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.datagram.DatagramPacket]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -652,7 +657,7 @@ package object core{
     }
 
     /**
-     * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like send from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFuture(packet: io.vertx.core.buffer.Buffer,port: java.lang.Integer,host: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -661,7 +666,7 @@ package object core{
     }
 
     /**
-     * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like send from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFuture(str: java.lang.String,port: java.lang.Integer,host: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -670,7 +675,7 @@ package object core{
     }
 
     /**
-     * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like send from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFuture(str: java.lang.String,enc: java.lang.String,port: java.lang.Integer,host: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -679,7 +684,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -688,7 +693,7 @@ package object core{
     }
 
     /**
-     * Like [[listenMulticastGroup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listenMulticastGroup from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenMulticastGroupFuture(multicastAddress: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -697,7 +702,7 @@ package object core{
     }
 
     /**
-     * Like [[listenMulticastGroup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listenMulticastGroup from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenMulticastGroupFuture(multicastAddress: java.lang.String,networkInterface: java.lang.String,source: scala.Option[java.lang.String]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -706,7 +711,7 @@ package object core{
     }
 
     /**
-     * Like [[unlistenMulticastGroup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like unlistenMulticastGroup from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def unlistenMulticastGroupFuture(multicastAddress: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -715,7 +720,7 @@ package object core{
     }
 
     /**
-     * Like [[unlistenMulticastGroup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like unlistenMulticastGroup from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def unlistenMulticastGroupFuture(multicastAddress: java.lang.String,networkInterface: java.lang.String,source: scala.Option[java.lang.String]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -724,7 +729,7 @@ package object core{
     }
 
     /**
-     * Like [[blockMulticastGroup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like blockMulticastGroup from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def blockMulticastGroupFuture(multicastAddress: java.lang.String,sourceToBlock: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -733,7 +738,7 @@ package object core{
     }
 
     /**
-     * Like [[blockMulticastGroup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like blockMulticastGroup from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def blockMulticastGroupFuture(multicastAddress: java.lang.String,networkInterface: java.lang.String,sourceToBlock: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -742,7 +747,7 @@ package object core{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.core.datagram.DatagramSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer,host: java.lang.String): scala.concurrent.Future[io.vertx.core.datagram.DatagramSocket] = {
       val promise = concurrent.Promise[io.vertx.core.datagram.DatagramSocket]()
@@ -792,7 +797,7 @@ package object core{
   implicit class DnsClientScala(val asJava: io.vertx.core.dns.DnsClient) extends AnyVal {
 
     /**
-     * Like [[lookup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like lookup from [[io.vertx.core.dns.DnsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def lookupFuture(name: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -801,7 +806,7 @@ package object core{
     }
 
     /**
-     * Like [[lookup4]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like lookup4 from [[io.vertx.core.dns.DnsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def lookup4Future(name: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -810,7 +815,7 @@ package object core{
     }
 
     /**
-     * Like [[lookup6]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like lookup6 from [[io.vertx.core.dns.DnsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def lookup6Future(name: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -819,7 +824,7 @@ package object core{
     }
 
     /**
-     * Like [[resolveA]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like resolveA from [[io.vertx.core.dns.DnsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def resolveAFuture(name: java.lang.String): scala.concurrent.Future[java.util.List[java.lang.String]] = {
       val promise = concurrent.Promise[java.util.List[java.lang.String]]()
@@ -828,7 +833,7 @@ package object core{
     }
 
     /**
-     * Like [[resolveAAAA]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like resolveAAAA from [[io.vertx.core.dns.DnsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def resolveAAAAFuture(name: java.lang.String): scala.concurrent.Future[java.util.List[java.lang.String]] = {
       val promise = concurrent.Promise[java.util.List[java.lang.String]]()
@@ -837,7 +842,7 @@ package object core{
     }
 
     /**
-     * Like [[resolveCNAME]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like resolveCNAME from [[io.vertx.core.dns.DnsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def resolveCNAMEFuture(name: java.lang.String): scala.concurrent.Future[java.util.List[java.lang.String]] = {
       val promise = concurrent.Promise[java.util.List[java.lang.String]]()
@@ -846,7 +851,7 @@ package object core{
     }
 
     /**
-     * Like [[resolveMX]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like resolveMX from [[io.vertx.core.dns.DnsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def resolveMXFuture(name: java.lang.String): scala.concurrent.Future[java.util.List[io.vertx.core.dns.MxRecord]] = {
       val promise = concurrent.Promise[java.util.List[io.vertx.core.dns.MxRecord]]()
@@ -855,7 +860,7 @@ package object core{
     }
 
     /**
-     * Like [[resolveTXT]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like resolveTXT from [[io.vertx.core.dns.DnsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def resolveTXTFuture(name: java.lang.String): scala.concurrent.Future[java.util.List[java.lang.String]] = {
       val promise = concurrent.Promise[java.util.List[java.lang.String]]()
@@ -864,7 +869,7 @@ package object core{
     }
 
     /**
-     * Like [[resolvePTR]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like resolvePTR from [[io.vertx.core.dns.DnsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def resolvePTRFuture(name: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -873,7 +878,7 @@ package object core{
     }
 
     /**
-     * Like [[resolveNS]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like resolveNS from [[io.vertx.core.dns.DnsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def resolveNSFuture(name: java.lang.String): scala.concurrent.Future[java.util.List[java.lang.String]] = {
       val promise = concurrent.Promise[java.util.List[java.lang.String]]()
@@ -882,7 +887,7 @@ package object core{
     }
 
     /**
-     * Like [[resolveSRV]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like resolveSRV from [[io.vertx.core.dns.DnsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def resolveSRVFuture(name: java.lang.String): scala.concurrent.Future[java.util.List[io.vertx.core.dns.SrvRecord]] = {
       val promise = concurrent.Promise[java.util.List[io.vertx.core.dns.SrvRecord]]()
@@ -891,7 +896,7 @@ package object core{
     }
 
     /**
-     * Like [[reverseLookup]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like reverseLookup from [[io.vertx.core.dns.DnsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def reverseLookupFuture(ipaddress: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -927,7 +932,7 @@ package object core{
 
 
     /**
-     * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like send from [[io.vertx.core.eventbus.EventBus]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def send(address: java.lang.String,message: scala.Option[AnyRef]): io.vertx.core.eventbus.EventBus = {
       asJava.send(address, message.orNull)
@@ -935,7 +940,7 @@ package object core{
 
 
     /**
-     * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like send from [[io.vertx.core.eventbus.EventBus]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def send(address: java.lang.String,message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions): io.vertx.core.eventbus.EventBus = {
       asJava.send(address, message.orNull, options)
@@ -943,7 +948,7 @@ package object core{
 
 
     /**
-     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like request from [[io.vertx.core.eventbus.EventBus]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def request[T](address: java.lang.String,message: scala.Option[AnyRef],replyHandler: AsyncResult[io.vertx.core.eventbus.Message[T]] => Unit): io.vertx.core.eventbus.EventBus = {
       asJava.request[T](address, message.orNull, {p:AsyncResult[io.vertx.core.eventbus.Message[T]] => replyHandler(p)})
@@ -951,7 +956,7 @@ package object core{
 
 
     /**
-     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like request from [[io.vertx.core.eventbus.EventBus]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def request[T](address: java.lang.String,message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions,replyHandler: AsyncResult[io.vertx.core.eventbus.Message[T]] => Unit): io.vertx.core.eventbus.EventBus = {
       asJava.request[T](address, message.orNull, options, {p:AsyncResult[io.vertx.core.eventbus.Message[T]] => replyHandler(p)})
@@ -959,7 +964,7 @@ package object core{
 
 
     /**
-     * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like publish from [[io.vertx.core.eventbus.EventBus]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def publish(address: java.lang.String,message: scala.Option[AnyRef]): io.vertx.core.eventbus.EventBus = {
       asJava.publish(address, message.orNull)
@@ -967,14 +972,14 @@ package object core{
 
 
     /**
-     * Like [[publish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like publish from [[io.vertx.core.eventbus.EventBus]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def publish(address: java.lang.String,message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions): io.vertx.core.eventbus.EventBus = {
       asJava.publish(address, message.orNull, options)
     }
 
     /**
-     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like request from [[io.vertx.core.eventbus.EventBus]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def requestFuture[T](address: java.lang.String,message: scala.Option[AnyRef]): scala.concurrent.Future[io.vertx.core.eventbus.Message[T]] = {
       val promise = concurrent.Promise[io.vertx.core.eventbus.Message[T]]()
@@ -983,7 +988,7 @@ package object core{
     }
 
     /**
-     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like request from [[io.vertx.core.eventbus.EventBus]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def requestFuture[T](address: java.lang.String,message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions): scala.concurrent.Future[io.vertx.core.eventbus.Message[T]] = {
       val promise = concurrent.Promise[io.vertx.core.eventbus.Message[T]]()
@@ -1025,7 +1030,7 @@ package object core{
 
 
     /**
-     * Like [[chown]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like chown from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def chown(path: java.lang.String,user: scala.Option[java.lang.String],group: scala.Option[java.lang.String],handler: AsyncResult[Void] => Unit): io.vertx.core.file.FileSystem = {
       asJava.chown(path, user.orNull, group.orNull, {p:AsyncResult[Void] => handler(p)})
@@ -1033,14 +1038,14 @@ package object core{
 
 
     /**
-     * Like [[chownBlocking]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like chownBlocking from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def chownBlocking(path: java.lang.String,user: scala.Option[java.lang.String],group: scala.Option[java.lang.String]): io.vertx.core.file.FileSystem = {
       asJava.chownBlocking(path, user.orNull, group.orNull)
     }
 
     /**
-     * Like [[copy]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like copy from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def copyFuture(from: java.lang.String,to: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1049,7 +1054,7 @@ package object core{
     }
 
     /**
-     * Like [[copy]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like copy from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def copyFuture(from: java.lang.String,to: java.lang.String,options: io.vertx.core.file.CopyOptions): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1058,7 +1063,7 @@ package object core{
     }
 
     /**
-     * Like [[copyRecursive]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like copyRecursive from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def copyRecursiveFuture(from: java.lang.String,to: java.lang.String,recursive: java.lang.Boolean): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1067,7 +1072,7 @@ package object core{
     }
 
     /**
-     * Like [[move]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like move from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def moveFuture(from: java.lang.String,to: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1076,7 +1081,7 @@ package object core{
     }
 
     /**
-     * Like [[move]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like move from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def moveFuture(from: java.lang.String,to: java.lang.String,options: io.vertx.core.file.CopyOptions): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1085,7 +1090,7 @@ package object core{
     }
 
     /**
-     * Like [[truncate]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like truncate from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def truncateFuture(path: java.lang.String,len: java.lang.Long): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1094,7 +1099,7 @@ package object core{
     }
 
     /**
-     * Like [[chmod]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like chmod from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def chmodFuture(path: java.lang.String,perms: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1103,7 +1108,7 @@ package object core{
     }
 
     /**
-     * Like [[chmodRecursive]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like chmodRecursive from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def chmodRecursiveFuture(path: java.lang.String,perms: java.lang.String,dirPerms: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1112,7 +1117,7 @@ package object core{
     }
 
     /**
-     * Like [[chown]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like chown from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def chownFuture(path: java.lang.String,user: scala.Option[java.lang.String],group: scala.Option[java.lang.String]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1121,7 +1126,7 @@ package object core{
     }
 
     /**
-     * Like [[props]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like props from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def propsFuture(path: java.lang.String): scala.concurrent.Future[io.vertx.core.file.FileProps] = {
       val promise = concurrent.Promise[io.vertx.core.file.FileProps]()
@@ -1130,7 +1135,7 @@ package object core{
     }
 
     /**
-     * Like [[lprops]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like lprops from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def lpropsFuture(path: java.lang.String): scala.concurrent.Future[io.vertx.core.file.FileProps] = {
       val promise = concurrent.Promise[io.vertx.core.file.FileProps]()
@@ -1139,7 +1144,7 @@ package object core{
     }
 
     /**
-     * Like [[link]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like link from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def linkFuture(link: java.lang.String,existing: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1148,7 +1153,7 @@ package object core{
     }
 
     /**
-     * Like [[symlink]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like symlink from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def symlinkFuture(link: java.lang.String,existing: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1157,7 +1162,7 @@ package object core{
     }
 
     /**
-     * Like [[unlink]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like unlink from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def unlinkFuture(link: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1166,7 +1171,7 @@ package object core{
     }
 
     /**
-     * Like [[readSymlink]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like readSymlink from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def readSymlinkFuture(link: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -1175,7 +1180,7 @@ package object core{
     }
 
     /**
-     * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like delete from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def deleteFuture(path: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1184,7 +1189,7 @@ package object core{
     }
 
     /**
-     * Like [[deleteRecursive]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like deleteRecursive from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def deleteRecursiveFuture(path: java.lang.String,recursive: java.lang.Boolean): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1193,7 +1198,7 @@ package object core{
     }
 
     /**
-     * Like [[mkdir]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like mkdir from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def mkdirFuture(path: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1202,7 +1207,7 @@ package object core{
     }
 
     /**
-     * Like [[mkdir]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like mkdir from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def mkdirFuture(path: java.lang.String,perms: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1211,7 +1216,7 @@ package object core{
     }
 
     /**
-     * Like [[mkdirs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like mkdirs from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def mkdirsFuture(path: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1220,7 +1225,7 @@ package object core{
     }
 
     /**
-     * Like [[mkdirs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like mkdirs from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def mkdirsFuture(path: java.lang.String,perms: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1229,7 +1234,7 @@ package object core{
     }
 
     /**
-     * Like [[readDir]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like readDir from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def readDirFuture(path: java.lang.String): scala.concurrent.Future[java.util.List[java.lang.String]] = {
       val promise = concurrent.Promise[java.util.List[java.lang.String]]()
@@ -1238,7 +1243,7 @@ package object core{
     }
 
     /**
-     * Like [[readDir]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like readDir from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def readDirFuture(path: java.lang.String,filter: java.lang.String): scala.concurrent.Future[java.util.List[java.lang.String]] = {
       val promise = concurrent.Promise[java.util.List[java.lang.String]]()
@@ -1247,7 +1252,7 @@ package object core{
     }
 
     /**
-     * Like [[readFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like readFile from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def readFileFuture(path: java.lang.String): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
       val promise = concurrent.Promise[io.vertx.core.buffer.Buffer]()
@@ -1256,7 +1261,7 @@ package object core{
     }
 
     /**
-     * Like [[writeFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like writeFile from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFileFuture(path: java.lang.String,data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1265,7 +1270,7 @@ package object core{
     }
 
     /**
-     * Like [[open]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like open from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def openFuture(path: java.lang.String,options: io.vertx.core.file.OpenOptions): scala.concurrent.Future[io.vertx.core.file.AsyncFile] = {
       val promise = concurrent.Promise[io.vertx.core.file.AsyncFile]()
@@ -1274,7 +1279,7 @@ package object core{
     }
 
     /**
-     * Like [[createFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like createFile from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def createFileFuture(path: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1283,7 +1288,7 @@ package object core{
     }
 
     /**
-     * Like [[createFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like createFile from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def createFileFuture(path: java.lang.String,perms: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1292,7 +1297,7 @@ package object core{
     }
 
     /**
-     * Like [[exists]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like exists from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def existsFuture(path: java.lang.String): scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
@@ -1301,7 +1306,7 @@ package object core{
     }
 
     /**
-     * Like [[fsProps]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like fsProps from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def fsPropsFuture(path: java.lang.String): scala.concurrent.Future[io.vertx.core.file.FileSystemProps] = {
       val promise = concurrent.Promise[io.vertx.core.file.FileSystemProps]()
@@ -1310,7 +1315,7 @@ package object core{
     }
 
     /**
-     * Like [[createTempDirectory]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like createTempDirectory from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def createTempDirectoryFuture(prefix: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -1319,7 +1324,7 @@ package object core{
     }
 
     /**
-     * Like [[createTempDirectory]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like createTempDirectory from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def createTempDirectoryFuture(prefix: java.lang.String,perms: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -1328,7 +1333,7 @@ package object core{
     }
 
     /**
-     * Like [[createTempDirectory]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like createTempDirectory from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def createTempDirectoryFuture(dir: java.lang.String,prefix: java.lang.String,perms: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -1337,7 +1342,7 @@ package object core{
     }
 
     /**
-     * Like [[createTempFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like createTempFile from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def createTempFileFuture(prefix: java.lang.String,suffix: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -1346,7 +1351,7 @@ package object core{
     }
 
     /**
-     * Like [[createTempFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like createTempFile from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def createTempFileFuture(prefix: java.lang.String,suffix: java.lang.String,perms: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -1355,7 +1360,7 @@ package object core{
     }
 
     /**
-     * Like [[createTempFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like createTempFile from [[io.vertx.core.file.FileSystem]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def createTempFileFuture(dir: java.lang.String,prefix: java.lang.String,suffix: java.lang.String,perms: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -1437,7 +1442,7 @@ package object core{
   implicit class HttpClientScala(val asJava: io.vertx.core.http.HttpClient) extends AnyVal {
 
     /**
-     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like request from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def requestFuture(method: io.vertx.core.http.HttpMethod,options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1446,7 +1451,7 @@ package object core{
     }
 
     /**
-     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like request from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def requestFuture(method: io.vertx.core.http.HttpMethod,serverAddress: io.vertx.core.net.SocketAddress,options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1455,7 +1460,7 @@ package object core{
     }
 
     /**
-     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like request from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def requestFuture(method: io.vertx.core.http.HttpMethod,port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1464,7 +1469,7 @@ package object core{
     }
 
     /**
-     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like request from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def requestFuture(method: io.vertx.core.http.HttpMethod,serverAddress: io.vertx.core.net.SocketAddress,port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1473,7 +1478,7 @@ package object core{
     }
 
     /**
-     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like request from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def requestFuture(method: io.vertx.core.http.HttpMethod,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1482,7 +1487,7 @@ package object core{
     }
 
     /**
-     * Like [[request]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like request from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def requestFuture(method: io.vertx.core.http.HttpMethod,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1491,7 +1496,7 @@ package object core{
     }
 
     /**
-     * Like [[requestAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like requestAbs from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def requestAbsFuture(method: io.vertx.core.http.HttpMethod,absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1500,7 +1505,7 @@ package object core{
     }
 
     /**
-     * Like [[requestAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like requestAbs from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def requestAbsFuture(method: io.vertx.core.http.HttpMethod,serverAddress: io.vertx.core.net.SocketAddress,absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1509,7 +1514,7 @@ package object core{
     }
 
     /**
-     * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like get from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1518,7 +1523,7 @@ package object core{
     }
 
     /**
-     * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like get from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1527,7 +1532,7 @@ package object core{
     }
 
     /**
-     * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like get from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1536,7 +1541,7 @@ package object core{
     }
 
     /**
-     * Like [[get]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like get from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1545,7 +1550,7 @@ package object core{
     }
 
     /**
-     * Like [[getAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getAbs from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getAbsFuture(absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1554,7 +1559,7 @@ package object core{
     }
 
     /**
-     * Like [[getNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getNow from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getNowFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1563,7 +1568,7 @@ package object core{
     }
 
     /**
-     * Like [[getNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getNow from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getNowFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1572,7 +1577,7 @@ package object core{
     }
 
     /**
-     * Like [[getNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getNow from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getNowFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1581,7 +1586,7 @@ package object core{
     }
 
     /**
-     * Like [[getNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getNow from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getNowFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1590,7 +1595,7 @@ package object core{
     }
 
     /**
-     * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like post from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def postFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1599,7 +1604,7 @@ package object core{
     }
 
     /**
-     * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like post from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def postFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1608,7 +1613,7 @@ package object core{
     }
 
     /**
-     * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like post from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def postFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1617,7 +1622,7 @@ package object core{
     }
 
     /**
-     * Like [[post]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like post from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def postFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1626,7 +1631,7 @@ package object core{
     }
 
     /**
-     * Like [[postAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like postAbs from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def postAbsFuture(absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1635,7 +1640,7 @@ package object core{
     }
 
     /**
-     * Like [[head]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like head from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def headFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1644,7 +1649,7 @@ package object core{
     }
 
     /**
-     * Like [[head]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like head from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def headFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1653,7 +1658,7 @@ package object core{
     }
 
     /**
-     * Like [[head]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like head from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def headFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1662,7 +1667,7 @@ package object core{
     }
 
     /**
-     * Like [[head]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like head from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def headFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1671,7 +1676,7 @@ package object core{
     }
 
     /**
-     * Like [[headAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like headAbs from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def headAbsFuture(absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1680,7 +1685,7 @@ package object core{
     }
 
     /**
-     * Like [[headNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like headNow from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def headNowFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1689,7 +1694,7 @@ package object core{
     }
 
     /**
-     * Like [[headNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like headNow from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def headNowFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1698,7 +1703,7 @@ package object core{
     }
 
     /**
-     * Like [[headNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like headNow from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def headNowFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1707,7 +1712,7 @@ package object core{
     }
 
     /**
-     * Like [[headNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like headNow from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def headNowFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1716,7 +1721,7 @@ package object core{
     }
 
     /**
-     * Like [[options]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like options from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def optionsFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1725,7 +1730,7 @@ package object core{
     }
 
     /**
-     * Like [[options]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like options from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def optionsFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1734,7 +1739,7 @@ package object core{
     }
 
     /**
-     * Like [[options]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like options from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def optionsFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1743,7 +1748,7 @@ package object core{
     }
 
     /**
-     * Like [[options]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like options from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def optionsFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1752,7 +1757,7 @@ package object core{
     }
 
     /**
-     * Like [[optionsAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like optionsAbs from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def optionsAbsFuture(absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1761,7 +1766,7 @@ package object core{
     }
 
     /**
-     * Like [[optionsNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like optionsNow from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def optionsNowFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1770,7 +1775,7 @@ package object core{
     }
 
     /**
-     * Like [[optionsNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like optionsNow from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def optionsNowFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1779,7 +1784,7 @@ package object core{
     }
 
     /**
-     * Like [[optionsNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like optionsNow from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def optionsNowFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1788,7 +1793,7 @@ package object core{
     }
 
     /**
-     * Like [[optionsNow]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like optionsNow from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def optionsNowFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1797,7 +1802,7 @@ package object core{
     }
 
     /**
-     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like put from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1806,7 +1811,7 @@ package object core{
     }
 
     /**
-     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like put from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1815,7 +1820,7 @@ package object core{
     }
 
     /**
-     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like put from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1824,7 +1829,7 @@ package object core{
     }
 
     /**
-     * Like [[put]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like put from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1833,7 +1838,7 @@ package object core{
     }
 
     /**
-     * Like [[putAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like putAbs from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def putAbsFuture(absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1842,7 +1847,7 @@ package object core{
     }
 
     /**
-     * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like delete from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def deleteFuture(options: io.vertx.core.http.RequestOptions): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1851,7 +1856,7 @@ package object core{
     }
 
     /**
-     * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like delete from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def deleteFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1860,7 +1865,7 @@ package object core{
     }
 
     /**
-     * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like delete from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def deleteFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1869,7 +1874,7 @@ package object core{
     }
 
     /**
-     * Like [[delete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like delete from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def deleteFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1878,7 +1883,7 @@ package object core{
     }
 
     /**
-     * Like [[deleteAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like deleteAbs from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def deleteAbsFuture(absoluteURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -1887,7 +1892,7 @@ package object core{
     }
 
     /**
-     * Like [[webSocket]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like webSocket from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def webSocketFuture(port: java.lang.Integer,host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.WebSocket] = {
       val promise = concurrent.Promise[io.vertx.core.http.WebSocket]()
@@ -1896,7 +1901,7 @@ package object core{
     }
 
     /**
-     * Like [[webSocket]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like webSocket from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def webSocketFuture(host: java.lang.String,requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.WebSocket] = {
       val promise = concurrent.Promise[io.vertx.core.http.WebSocket]()
@@ -1905,7 +1910,7 @@ package object core{
     }
 
     /**
-     * Like [[webSocket]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like webSocket from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def webSocketFuture(requestURI: java.lang.String): scala.concurrent.Future[io.vertx.core.http.WebSocket] = {
       val promise = concurrent.Promise[io.vertx.core.http.WebSocket]()
@@ -1914,7 +1919,7 @@ package object core{
     }
 
     /**
-     * Like [[webSocket]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like webSocket from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def webSocketFuture(options: io.vertx.core.http.WebSocketConnectOptions): scala.concurrent.Future[io.vertx.core.http.WebSocket] = {
       val promise = concurrent.Promise[io.vertx.core.http.WebSocket]()
@@ -1923,7 +1928,7 @@ package object core{
     }
 
     /**
-     * Like [[webSocketAbs]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like webSocketAbs from [[io.vertx.core.http.HttpClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def webSocketAbsFuture(url: java.lang.String,headers: io.vertx.core.MultiMap,version: io.vertx.core.http.WebsocketVersion,subProtocols: java.util.List[java.lang.String]): scala.concurrent.Future[io.vertx.core.http.WebSocket] = {
       val promise = concurrent.Promise[io.vertx.core.http.WebSocket]()
@@ -1986,14 +1991,14 @@ package object core{
 
 
     /**
-     * Like [[continueHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like continueHandler from [[io.vertx.core.http.HttpClientRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def continueHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.HttpClientRequest = {
       asJava.continueHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
     }
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.http.HttpClientRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2002,7 +2007,7 @@ package object core{
     }
 
     /**
-     * Like [[onComplete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like onComplete from [[io.vertx.core.http.HttpClientRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def onCompleteFuture(): scala.concurrent.Future[io.vertx.core.http.HttpClientResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpClientResponse]()
@@ -2011,7 +2016,7 @@ package object core{
     }
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.http.HttpClientRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(chunk: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2020,7 +2025,7 @@ package object core{
     }
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.http.HttpClientRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(chunk: java.lang.String,enc: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2029,7 +2034,7 @@ package object core{
     }
 
     /**
-     * Like [[sendHead]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like sendHead from [[io.vertx.core.http.HttpClientRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendHeadFuture(): scala.concurrent.Future[io.vertx.core.http.HttpVersion] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpVersion]()
@@ -2038,7 +2043,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.HttpClientRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(chunk: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2047,7 +2052,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.HttpClientRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(chunk: java.lang.String,enc: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2056,7 +2061,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.HttpClientRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(chunk: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2065,7 +2070,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.HttpClientRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2074,7 +2079,7 @@ package object core{
     }
 
     /**
-     * Like [[netSocket]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like netSocket from [[io.vertx.core.http.HttpClientRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def netSocketFuture(): scala.concurrent.Future[io.vertx.core.net.NetSocket] = {
       val promise = concurrent.Promise[io.vertx.core.net.NetSocket]()
@@ -2121,7 +2126,7 @@ package object core{
 
 
     /**
-     * Like [[getHeader]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getHeader from [[io.vertx.core.http.HttpClientResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getHeaderOption(headerName: java.lang.String): scala.Option[java.lang.String] = {
       scala.Option(asJava.getHeader(headerName))
@@ -2129,14 +2134,14 @@ package object core{
 
 
     /**
-     * Like [[getTrailer]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getTrailer from [[io.vertx.core.http.HttpClientResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getTrailerOption(trailerName: java.lang.String): scala.Option[java.lang.String] = {
       scala.Option(asJava.getTrailer(trailerName))
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.http.HttpClientResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2145,7 +2150,7 @@ package object core{
     }
 
     /**
-     * Like [[body]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like body from [[io.vertx.core.http.HttpClientResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def bodyFuture(): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
       val promise = concurrent.Promise[io.vertx.core.buffer.Buffer]()
@@ -2172,7 +2177,7 @@ package object core{
 
 
     /**
-     * Like [[goAwayHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like goAwayHandler from [[io.vertx.core.http.HttpConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def goAwayHandler(handler: scala.Option[io.vertx.core.http.GoAway => Unit]): io.vertx.core.http.HttpConnection = {
       asJava.goAwayHandler(handler match {case Some(t) => p:io.vertx.core.http.GoAway => t(p); case None => null})
@@ -2180,7 +2185,7 @@ package object core{
 
 
     /**
-     * Like [[shutdownHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like shutdownHandler from [[io.vertx.core.http.HttpConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def shutdownHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.HttpConnection = {
       asJava.shutdownHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
@@ -2188,14 +2193,14 @@ package object core{
 
 
     /**
-     * Like [[pingHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pingHandler from [[io.vertx.core.http.HttpConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pingHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.HttpConnection = {
       asJava.pingHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
     }
 
     /**
-     * Like [[updateSettings]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like updateSettings from [[io.vertx.core.http.HttpConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def updateSettingsFuture(settings: io.vertx.core.http.Http2Settings): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2204,7 +2209,7 @@ package object core{
     }
 
     /**
-     * Like [[ping]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like ping from [[io.vertx.core.http.HttpConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pingFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
       val promise = concurrent.Promise[io.vertx.core.buffer.Buffer]()
@@ -2219,7 +2224,14 @@ package object core{
 
   object HttpMethod {
     /**
-     * Like [[valueOf]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Lookup the `HttpMethod` value for the specified `value`.
+     * <br/>
+     * The predefined method constants [[io.vertx.core.http.HttpMethod]], [[io.vertx.core.http.HttpMethod]], [[io.vertx.core.http.HttpMethod]], [[io.vertx.core.http.HttpMethod]], [[io.vertx.core.http.HttpMethod]],
+     * [[io.vertx.core.http.HttpMethod]], [[io.vertx.core.http.HttpMethod]], [[io.vertx.core.http.HttpMethod]] and [[io.vertx.core.http.HttpMethod]] are interned and will be returned
+     * when case sensitively matching their string value (i.e `"GET"`, etc...)
+     * <br/>
+     * Otherwise a new instance is returned.     * @param value the value
+     * @return the `HttpMethod` instance for the specified string `value`
      */
     def valueOf(value: java.lang.String) = {
       io.vertx.core.http.HttpMethod.valueOf(value)
@@ -2241,7 +2253,7 @@ package object core{
   implicit class HttpServerScala(val asJava: io.vertx.core.http.HttpServer) extends AnyVal {
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.core.http.HttpServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer,host: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpServer] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpServer]()
@@ -2250,7 +2262,7 @@ package object core{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.core.http.HttpServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(address: io.vertx.core.net.SocketAddress): scala.concurrent.Future[io.vertx.core.http.HttpServer] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpServer]()
@@ -2259,7 +2271,7 @@ package object core{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.core.http.HttpServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer): scala.concurrent.Future[io.vertx.core.http.HttpServer] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpServer]()
@@ -2268,7 +2280,7 @@ package object core{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.core.http.HttpServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(): scala.concurrent.Future[io.vertx.core.http.HttpServer] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpServer]()
@@ -2277,7 +2289,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.HttpServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2311,7 +2323,7 @@ package object core{
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.http.HttpServerFileUpload]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2363,7 +2375,7 @@ package object core{
 
 
     /**
-     * Like [[scheme]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like scheme from [[io.vertx.core.http.HttpServerRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def schemeOption(): scala.Option[java.lang.String] = {
       scala.Option(asJava.scheme())
@@ -2371,7 +2383,7 @@ package object core{
 
 
     /**
-     * Like [[path]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like path from [[io.vertx.core.http.HttpServerRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pathOption(): scala.Option[java.lang.String] = {
       scala.Option(asJava.path())
@@ -2379,7 +2391,7 @@ package object core{
 
 
     /**
-     * Like [[query]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like query from [[io.vertx.core.http.HttpServerRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryOption(): scala.Option[java.lang.String] = {
       scala.Option(asJava.query())
@@ -2387,7 +2399,7 @@ package object core{
 
 
     /**
-     * Like [[host]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like host from [[io.vertx.core.http.HttpServerRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def hostOption(): scala.Option[java.lang.String] = {
       scala.Option(asJava.host())
@@ -2395,7 +2407,7 @@ package object core{
 
 
     /**
-     * Like [[getHeader]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getHeader from [[io.vertx.core.http.HttpServerRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getHeaderOption(headerName: java.lang.String): scala.Option[java.lang.String] = {
       scala.Option(asJava.getHeader(headerName))
@@ -2403,7 +2415,7 @@ package object core{
 
 
     /**
-     * Like [[getParam]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getParam from [[io.vertx.core.http.HttpServerRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getParamOption(paramName: java.lang.String): scala.Option[java.lang.String] = {
       scala.Option(asJava.getParam(paramName))
@@ -2411,7 +2423,7 @@ package object core{
 
 
     /**
-     * Like [[bodyHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like bodyHandler from [[io.vertx.core.http.HttpServerRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def bodyHandler(bodyHandler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.HttpServerRequest = {
       asJava.bodyHandler(bodyHandler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
@@ -2419,7 +2431,7 @@ package object core{
 
 
     /**
-     * Like [[uploadHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like uploadHandler from [[io.vertx.core.http.HttpServerRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def uploadHandler(uploadHandler: scala.Option[io.vertx.core.http.HttpServerFileUpload => Unit]): io.vertx.core.http.HttpServerRequest = {
       asJava.uploadHandler(uploadHandler match {case Some(t) => p:io.vertx.core.http.HttpServerFileUpload => t(p); case None => null})
@@ -2427,7 +2439,7 @@ package object core{
 
 
     /**
-     * Like [[getFormAttribute]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getFormAttribute from [[io.vertx.core.http.HttpServerRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getFormAttributeOption(attributeName: java.lang.String): scala.Option[java.lang.String] = {
       scala.Option(asJava.getFormAttribute(attributeName))
@@ -2435,14 +2447,14 @@ package object core{
 
 
     /**
-     * Like [[getCookie]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getCookie from [[io.vertx.core.http.HttpServerRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getCookieOption(name: java.lang.String): scala.Option[io.vertx.core.http.Cookie] = {
       scala.Option(asJava.getCookie(name))
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.http.HttpServerRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2451,7 +2463,7 @@ package object core{
     }
 
     /**
-     * Like [[body]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like body from [[io.vertx.core.http.HttpServerRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def bodyFuture(): scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
       val promise = concurrent.Promise[io.vertx.core.buffer.Buffer]()
@@ -2498,7 +2510,7 @@ package object core{
 
 
     /**
-     * Like [[closeHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like closeHandler from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.HttpServerResponse = {
       asJava.closeHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
@@ -2506,7 +2518,7 @@ package object core{
 
 
     /**
-     * Like [[endHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like endHandler from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.HttpServerResponse = {
       asJava.endHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
@@ -2514,7 +2526,7 @@ package object core{
 
 
     /**
-     * Like [[headersEndHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like headersEndHandler from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def headersEndHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.HttpServerResponse = {
       asJava.headersEndHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
@@ -2522,7 +2534,7 @@ package object core{
 
 
     /**
-     * Like [[bodyEndHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like bodyEndHandler from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def bodyEndHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.HttpServerResponse = {
       asJava.bodyEndHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
@@ -2530,7 +2542,7 @@ package object core{
 
 
     /**
-     * Like [[removeCookie]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like removeCookie from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def removeCookieOption(name: java.lang.String): scala.Option[io.vertx.core.http.Cookie] = {
       scala.Option(asJava.removeCookie(name))
@@ -2538,14 +2550,14 @@ package object core{
 
 
     /**
-     * Like [[removeCookie]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like removeCookie from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def removeCookieOption(name: java.lang.String,invalidate: java.lang.Boolean): scala.Option[io.vertx.core.http.Cookie] = {
       scala.Option(asJava.removeCookie(name, invalidate))
     }
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2554,7 +2566,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2563,7 +2575,7 @@ package object core{
     }
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(chunk: java.lang.String,enc: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2572,7 +2584,7 @@ package object core{
     }
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(chunk: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2581,7 +2593,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(chunk: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2590,7 +2602,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(chunk: java.lang.String,enc: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2599,7 +2611,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(chunk: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2608,7 +2620,7 @@ package object core{
     }
 
     /**
-     * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like sendFile from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFileFuture(filename: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2617,7 +2629,7 @@ package object core{
     }
 
     /**
-     * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like sendFile from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFileFuture(filename: java.lang.String,offset: java.lang.Long): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2626,7 +2638,7 @@ package object core{
     }
 
     /**
-     * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like sendFile from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFileFuture(filename: java.lang.String,offset: java.lang.Long,length: java.lang.Long): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2635,7 +2647,7 @@ package object core{
     }
 
     /**
-     * Like [[push]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like push from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pushFuture(method: io.vertx.core.http.HttpMethod,host: java.lang.String,path: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpServerResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpServerResponse]()
@@ -2644,7 +2656,7 @@ package object core{
     }
 
     /**
-     * Like [[push]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like push from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pushFuture(method: io.vertx.core.http.HttpMethod,path: java.lang.String,headers: io.vertx.core.MultiMap): scala.concurrent.Future[io.vertx.core.http.HttpServerResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpServerResponse]()
@@ -2653,7 +2665,7 @@ package object core{
     }
 
     /**
-     * Like [[push]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like push from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pushFuture(method: io.vertx.core.http.HttpMethod,path: java.lang.String): scala.concurrent.Future[io.vertx.core.http.HttpServerResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpServerResponse]()
@@ -2662,7 +2674,7 @@ package object core{
     }
 
     /**
-     * Like [[push]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like push from [[io.vertx.core.http.HttpServerResponse]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pushFuture(method: io.vertx.core.http.HttpMethod,host: java.lang.String,path: java.lang.String,headers: io.vertx.core.MultiMap): scala.concurrent.Future[io.vertx.core.http.HttpServerResponse] = {
       val promise = concurrent.Promise[io.vertx.core.http.HttpServerResponse]()
@@ -2727,7 +2739,7 @@ package object core{
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.parsetools.JsonParser]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.parsetools.JsonEvent]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2740,13 +2752,14 @@ package object core{
 
   object JsonPointer {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Build an empty JsonPointer     * @return a new empty JsonPointer
      */
     def create() = {
       io.vertx.core.json.pointer.JsonPointer.create()
     }
     /**
-     * Like [[from]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Build a JsonPointer from a json pointer string     * @param pointer the string representing a pointer
+     * @return new instance of JsonPointer
      */
     def from(pointer: java.lang.String) = {
       io.vertx.core.json.pointer.JsonPointer.from(pointer)
@@ -2777,7 +2790,7 @@ package object core{
 
 
     /**
-     * Like [[replyAddress]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like replyAddress from [[io.vertx.core.eventbus.Message]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def replyAddressOption(): scala.Option[java.lang.String] = {
       scala.Option(asJava.replyAddress())
@@ -2785,7 +2798,7 @@ package object core{
 
 
     /**
-     * Like [[reply]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like reply from [[io.vertx.core.eventbus.Message]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def reply(message: scala.Option[AnyRef]): Unit = {
       asJava.reply(message.orNull)
@@ -2793,7 +2806,7 @@ package object core{
 
 
     /**
-     * Like [[reply]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like reply from [[io.vertx.core.eventbus.Message]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def reply(message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions): Unit = {
       asJava.reply(message.orNull, options)
@@ -2801,7 +2814,7 @@ package object core{
 
 
     /**
-     * Like [[replyAndRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like replyAndRequest from [[io.vertx.core.eventbus.Message]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def replyAndRequest[R](message: scala.Option[AnyRef],replyHandler: AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
       asJava.replyAndRequest[R](message.orNull, {p:AsyncResult[io.vertx.core.eventbus.Message[R]] => replyHandler(p)})
@@ -2809,14 +2822,14 @@ package object core{
 
 
     /**
-     * Like [[replyAndRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like replyAndRequest from [[io.vertx.core.eventbus.Message]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def replyAndRequest[R](message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions,replyHandler: AsyncResult[io.vertx.core.eventbus.Message[R]] => Unit): Unit = {
       asJava.replyAndRequest[R](message.orNull, options, {p:AsyncResult[io.vertx.core.eventbus.Message[R]] => replyHandler(p)})
     }
 
     /**
-     * Like [[replyAndRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like replyAndRequest from [[io.vertx.core.eventbus.Message]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def replyAndRequestFuture[R](message: scala.Option[AnyRef]): scala.concurrent.Future[io.vertx.core.eventbus.Message[R]] = {
       val promise = concurrent.Promise[io.vertx.core.eventbus.Message[R]]()
@@ -2825,7 +2838,7 @@ package object core{
     }
 
     /**
-     * Like [[replyAndRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like replyAndRequest from [[io.vertx.core.eventbus.Message]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def replyAndRequestFuture[R](message: scala.Option[AnyRef],options: io.vertx.core.eventbus.DeliveryOptions): scala.concurrent.Future[io.vertx.core.eventbus.Message[R]] = {
       val promise = concurrent.Promise[io.vertx.core.eventbus.Message[R]]()
@@ -2879,7 +2892,7 @@ package object core{
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.eventbus.MessageConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.eventbus.Message[T]]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2888,7 +2901,7 @@ package object core{
     }
 
     /**
-     * Like [[completionHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like completionHandler from [[io.vertx.core.eventbus.MessageConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def completionFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2897,7 +2910,7 @@ package object core{
     }
 
     /**
-     * Like [[unregister]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like unregister from [[io.vertx.core.eventbus.MessageConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def unregisterFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2918,7 +2931,7 @@ package object core{
 
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.eventbus.MessageProducer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def write(data: T,handler: AsyncResult[Void] => Unit): Unit = {
       asJava.write(data, {p:AsyncResult[Void] => handler(p)})
@@ -2926,7 +2939,7 @@ package object core{
 
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.eventbus.MessageProducer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def end(data: T,handler: AsyncResult[Void] => Unit): Unit = {
       asJava.end(data, {p:AsyncResult[Void] => handler(p)})
@@ -2943,7 +2956,7 @@ package object core{
     }
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.eventbus.MessageProducer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(data: T): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2952,7 +2965,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.eventbus.MessageProducer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(data: T): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2961,7 +2974,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.eventbus.MessageProducer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2970,7 +2983,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.eventbus.MessageProducer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -2992,7 +3005,7 @@ package object core{
 
   object MultiMap {
     /**
-     * Like [[caseInsensitiveMultiMap]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a multi-map implementation with case insensitive keys, for instance it can be used to hold some HTTP headers.     * @return the multi-map
      */
     def caseInsensitiveMultiMap() = {
       io.vertx.core.MultiMap.caseInsensitiveMultiMap()
@@ -3015,7 +3028,7 @@ package object core{
   implicit class NetClientScala(val asJava: io.vertx.core.net.NetClient) extends AnyVal {
 
     /**
-     * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like connect from [[io.vertx.core.net.NetClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def connectFuture(port: java.lang.Integer,host: java.lang.String): scala.concurrent.Future[io.vertx.core.net.NetSocket] = {
       val promise = concurrent.Promise[io.vertx.core.net.NetSocket]()
@@ -3024,7 +3037,7 @@ package object core{
     }
 
     /**
-     * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like connect from [[io.vertx.core.net.NetClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def connectFuture(port: java.lang.Integer,host: java.lang.String,serverName: java.lang.String): scala.concurrent.Future[io.vertx.core.net.NetSocket] = {
       val promise = concurrent.Promise[io.vertx.core.net.NetSocket]()
@@ -3033,7 +3046,7 @@ package object core{
     }
 
     /**
-     * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like connect from [[io.vertx.core.net.NetClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def connectFuture(remoteAddress: io.vertx.core.net.SocketAddress): scala.concurrent.Future[io.vertx.core.net.NetSocket] = {
       val promise = concurrent.Promise[io.vertx.core.net.NetSocket]()
@@ -3042,7 +3055,7 @@ package object core{
     }
 
     /**
-     * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like connect from [[io.vertx.core.net.NetClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def connectFuture(remoteAddress: io.vertx.core.net.SocketAddress,serverName: java.lang.String): scala.concurrent.Future[io.vertx.core.net.NetSocket] = {
       val promise = concurrent.Promise[io.vertx.core.net.NetSocket]()
@@ -3071,14 +3084,14 @@ package object core{
 
 
     /**
-     * Like [[connectHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like connectHandler from [[io.vertx.core.net.NetServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def connectHandler(handler: scala.Option[io.vertx.core.net.NetSocket => Unit]): io.vertx.core.net.NetServer = {
       asJava.connectHandler(handler match {case Some(t) => p:io.vertx.core.net.NetSocket => t(p); case None => null})
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.core.net.NetServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(): scala.concurrent.Future[io.vertx.core.net.NetServer] = {
       val promise = concurrent.Promise[io.vertx.core.net.NetServer]()
@@ -3087,7 +3100,7 @@ package object core{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.core.net.NetServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer,host: java.lang.String): scala.concurrent.Future[io.vertx.core.net.NetServer] = {
       val promise = concurrent.Promise[io.vertx.core.net.NetServer]()
@@ -3096,7 +3109,7 @@ package object core{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.core.net.NetServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer): scala.concurrent.Future[io.vertx.core.net.NetServer] = {
       val promise = concurrent.Promise[io.vertx.core.net.NetServer]()
@@ -3105,7 +3118,7 @@ package object core{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.core.net.NetServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(localAddress: io.vertx.core.net.SocketAddress): scala.concurrent.Future[io.vertx.core.net.NetServer] = {
       val promise = concurrent.Promise[io.vertx.core.net.NetServer]()
@@ -3114,7 +3127,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.net.NetServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3161,7 +3174,7 @@ package object core{
 
 
     /**
-     * Like [[endHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like endHandler from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.net.NetSocket = {
       asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
@@ -3174,23 +3187,14 @@ package object core{
 
 
     /**
-     * Like [[closeHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like closeHandler from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeHandler(handler: scala.Option[Void => Unit]): io.vertx.core.net.NetSocket = {
       asJava.closeHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
-      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3199,7 +3203,16 @@ package object core{
     }
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like write from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(str: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3208,7 +3221,7 @@ package object core{
     }
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(str: java.lang.String,enc: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3217,7 +3230,7 @@ package object core{
     }
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(message: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3226,7 +3239,7 @@ package object core{
     }
 
     /**
-     * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like sendFile from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFileFuture(filename: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3235,7 +3248,7 @@ package object core{
     }
 
     /**
-     * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like sendFile from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFileFuture(filename: java.lang.String,offset: java.lang.Long): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3244,7 +3257,7 @@ package object core{
     }
 
     /**
-     * Like [[sendFile]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like sendFile from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def sendFileFuture(filename: java.lang.String,offset: java.lang.Long,length: java.lang.Long): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3253,7 +3266,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3262,7 +3275,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3271,7 +3284,7 @@ package object core{
     }
 
     /**
-     * Like [[upgradeToSsl]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like upgradeToSsl from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def upgradeToSslFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3280,7 +3293,7 @@ package object core{
     }
 
     /**
-     * Like [[upgradeToSsl]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like upgradeToSsl from [[io.vertx.core.net.NetSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def upgradeToSslFuture(serverName: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3375,7 +3388,7 @@ package object core{
   implicit class PipeScala[T](val asJava: io.vertx.core.streams.Pipe[T]) extends AnyVal {
 
     /**
-     * Like [[to]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like to from [[io.vertx.core.streams.Pipe]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def toFuture(dst: io.vertx.core.streams.WriteStream[T]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3388,7 +3401,7 @@ package object core{
 
   object Promise {
     /**
-     * Like [[promise]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a promise that hasn't completed yet     * @return the promise
      */
     def promise[T]() = {
       io.vertx.core.Promise.promise[T]()
@@ -3407,13 +3420,19 @@ package object core{
 
   object Pump {
     /**
-     * Like [[pump]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a new `Pump` with the given `ReadStream` and `WriteStream`     * @param rs the read stream
+     * @param ws the write stream
+     * @return the pump
      */
     def pump[T](rs: io.vertx.core.streams.ReadStream[T],ws: io.vertx.core.streams.WriteStream[T]) = {
       io.vertx.core.streams.Pump.pump[T](rs, ws)
     }
     /**
-     * Like [[pump]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a new `Pump` with the given `ReadStream` and `WriteStream` and
+     * `writeQueueMaxSize`     * @param rs the read stream
+     * @param ws the write stream
+     * @param writeQueueMaxSize the max size of the write queue
+     * @return the pump
      */
     def pump[T](rs: io.vertx.core.streams.ReadStream[T],ws: io.vertx.core.streams.WriteStream[T],writeQueueMaxSize: java.lang.Integer) = {
       io.vertx.core.streams.Pump.pump[T](rs, ws, writeQueueMaxSize)
@@ -3447,7 +3466,7 @@ package object core{
 
 
     /**
-     * Like [[exceptionHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like exceptionHandler from [[io.vertx.core.streams.ReadStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.streams.ReadStream[T] = {
       asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
@@ -3455,7 +3474,7 @@ package object core{
 
 
     /**
-     * Like [[handler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like handler from [[io.vertx.core.streams.ReadStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def handler(handler: scala.Option[T => Unit]): io.vertx.core.streams.ReadStream[T] = {
       asJava.handler(handler match {case Some(t) => p:T => t(p); case None => null})
@@ -3463,14 +3482,14 @@ package object core{
 
 
     /**
-     * Like [[endHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like endHandler from [[io.vertx.core.streams.ReadStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.core.streams.ReadStream[T] = {
       asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.streams.ReadStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pipeToFuture(dst: io.vertx.core.streams.WriteStream[T]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3532,7 +3551,7 @@ package object core{
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.parsetools.RecordParser]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3554,13 +3573,14 @@ package object core{
 
   object SelfSignedCertificate {
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a new `SelfSignedCertificate` instance.     * @return a new instance.
      */
     def create() = {
       io.vertx.core.net.SelfSignedCertificate.create()
     }
     /**
-     * Like [[create]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a new `SelfSignedCertificate` instance with a fully-qualified domain name,     * @param fqdn a fully qualified domain name.
+     * @return a new instance.
      */
     def create(fqdn: java.lang.String) = {
       io.vertx.core.net.SelfSignedCertificate.create(fqdn)
@@ -3580,7 +3600,7 @@ package object core{
 
 
     /**
-     * Like [[textMessageHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like textMessageHandler from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def textMessageHandler(handler: scala.Option[java.lang.String => Unit]): io.vertx.core.http.WebSocketBase = {
       asJava.textMessageHandler(handler match {case Some(t) => p:java.lang.String => t(p); case None => null})
@@ -3588,7 +3608,7 @@ package object core{
 
 
     /**
-     * Like [[binaryMessageHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like binaryMessageHandler from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def binaryMessageHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
       asJava.binaryMessageHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
@@ -3596,7 +3616,7 @@ package object core{
 
 
     /**
-     * Like [[pongHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pongHandler from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pongHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
       asJava.pongHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
@@ -3604,7 +3624,7 @@ package object core{
 
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def close(statusCode: java.lang.Short,reason: scala.Option[java.lang.String],handler: AsyncResult[Void] => Unit): Unit = {
       asJava.close(statusCode, reason.orNull, {p:AsyncResult[Void] => handler(p)})
@@ -3642,23 +3662,14 @@ package object core{
 
 
     /**
-     * Like [[query]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like query from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryOption(): scala.Option[java.lang.String] = {
       scala.Option(asJava.query())
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
-      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3667,7 +3678,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3676,7 +3687,16 @@ package object core{
     }
 
     /**
-     * Like [[writePing]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like writePing from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writePingFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3685,7 +3705,7 @@ package object core{
     }
 
     /**
-     * Like [[writePong]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like writePong from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writePongFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3694,7 +3714,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3703,7 +3723,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3712,7 +3732,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(statusCode: java.lang.Short): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3721,7 +3741,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(statusCode: java.lang.Short,reason: scala.Option[java.lang.String]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -3760,7 +3780,7 @@ package object core{
     }
 
     /**
-     * Like [[setHandshake]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like setHandshake from [[io.vertx.core.http.ServerWebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def setHandshakeFuture(future: io.vertx.core.Future[java.lang.Integer]): scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
@@ -3793,7 +3813,7 @@ package object core{
   implicit class SharedDataScala(val asJava: io.vertx.core.shareddata.SharedData) extends AnyVal {
 
     /**
-     * Like [[getClusterWideMap]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getClusterWideMap from [[io.vertx.core.shareddata.SharedData]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getClusterWideMapFuture[K, V](name: java.lang.String): scala.concurrent.Future[io.vertx.core.shareddata.AsyncMap[K, V]] = {
       val promise = concurrent.Promise[io.vertx.core.shareddata.AsyncMap[K, V]]()
@@ -3802,7 +3822,7 @@ package object core{
     }
 
     /**
-     * Like [[getAsyncMap]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getAsyncMap from [[io.vertx.core.shareddata.SharedData]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getAsyncMapFuture[K, V](name: java.lang.String): scala.concurrent.Future[io.vertx.core.shareddata.AsyncMap[K, V]] = {
       val promise = concurrent.Promise[io.vertx.core.shareddata.AsyncMap[K, V]]()
@@ -3811,7 +3831,7 @@ package object core{
     }
 
     /**
-     * Like [[getLocalAsyncMap]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getLocalAsyncMap from [[io.vertx.core.shareddata.SharedData]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getLocalAsyncMapFuture[K, V](name: java.lang.String): scala.concurrent.Future[io.vertx.core.shareddata.AsyncMap[K, V]] = {
       val promise = concurrent.Promise[io.vertx.core.shareddata.AsyncMap[K, V]]()
@@ -3820,7 +3840,7 @@ package object core{
     }
 
     /**
-     * Like [[getLock]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getLock from [[io.vertx.core.shareddata.SharedData]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getLockFuture(name: java.lang.String): scala.concurrent.Future[io.vertx.core.shareddata.Lock] = {
       val promise = concurrent.Promise[io.vertx.core.shareddata.Lock]()
@@ -3829,7 +3849,7 @@ package object core{
     }
 
     /**
-     * Like [[getLockWithTimeout]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getLockWithTimeout from [[io.vertx.core.shareddata.SharedData]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getLockWithTimeoutFuture(name: java.lang.String,timeout: java.lang.Long): scala.concurrent.Future[io.vertx.core.shareddata.Lock] = {
       val promise = concurrent.Promise[io.vertx.core.shareddata.Lock]()
@@ -3838,7 +3858,7 @@ package object core{
     }
 
     /**
-     * Like [[getLocalLock]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getLocalLock from [[io.vertx.core.shareddata.SharedData]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getLocalLockFuture(name: java.lang.String): scala.concurrent.Future[io.vertx.core.shareddata.Lock] = {
       val promise = concurrent.Promise[io.vertx.core.shareddata.Lock]()
@@ -3847,7 +3867,7 @@ package object core{
     }
 
     /**
-     * Like [[getLocalLockWithTimeout]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getLocalLockWithTimeout from [[io.vertx.core.shareddata.SharedData]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getLocalLockWithTimeoutFuture(name: java.lang.String,timeout: java.lang.Long): scala.concurrent.Future[io.vertx.core.shareddata.Lock] = {
       val promise = concurrent.Promise[io.vertx.core.shareddata.Lock]()
@@ -3856,7 +3876,7 @@ package object core{
     }
 
     /**
-     * Like [[getCounter]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getCounter from [[io.vertx.core.shareddata.SharedData]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getCounterFuture(name: java.lang.String): scala.concurrent.Future[io.vertx.core.shareddata.Counter] = {
       val promise = concurrent.Promise[io.vertx.core.shareddata.Counter]()
@@ -3865,7 +3885,7 @@ package object core{
     }
 
     /**
-     * Like [[getLocalCounter]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getLocalCounter from [[io.vertx.core.shareddata.SharedData]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getLocalCounterFuture(name: java.lang.String): scala.concurrent.Future[io.vertx.core.shareddata.Counter] = {
       val promise = concurrent.Promise[io.vertx.core.shareddata.Counter]()
@@ -3878,13 +3898,17 @@ package object core{
 
   object SocketAddress {
     /**
-     * Like [[inetSocketAddress]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a inet socket address, `host` must be non `null` and `port` must be between `0`
+     * and `65536`.     * @param port the address port
+     * @param host the address host
+     * @return the created socket address
      */
     def inetSocketAddress(port: java.lang.Integer,host: java.lang.String) = {
       io.vertx.core.net.SocketAddress.inetSocketAddress(port, host)
     }
     /**
-     * Like [[domainSocketAddress]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a domain socket address.     * @param path the address path
+     * @return the created socket address
      */
     def domainSocketAddress(path: java.lang.String) = {
       io.vertx.core.net.SocketAddress.domainSocketAddress(path)
@@ -3937,7 +3961,7 @@ package object core{
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.TimeoutStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pipeToFuture(dst: io.vertx.core.streams.WriteStream[java.lang.Long]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4019,7 +4043,7 @@ package object core{
     }
 
     /**
-      * Like [[deployVerticle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+      * Like [[deployVerticle]] but returns a Scala Future instead of taking an AsyncResultHandler.
       */
     def deployVerticleFuture(verticle: ScalaVerticle): scala.concurrent.Future[String] = {
       val promise = concurrent.Promise[String]()
@@ -4039,7 +4063,7 @@ package object core{
     }
 
     /**
-      * Like [[deployVerticle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+      * Like [[deployVerticle]] but returns a Scala Future instead of taking an AsyncResultHandler.
       */
     def deployVerticleFuture(verticle: ScalaVerticle, options: DeploymentOptions): scala.concurrent.Future[String] = {
       val promise = concurrent.Promise[String]()
@@ -4070,14 +4094,14 @@ package object core{
 
 
     /**
-     * Like [[exceptionHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like exceptionHandler from [[io.vertx.core.Vertx]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.Vertx = {
       asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.Vertx]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4086,7 +4110,7 @@ package object core{
     }
 
     /**
-     * Like [[deployVerticle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like deployVerticle from [[io.vertx.core.Vertx]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def deployVerticleFuture(name: java.lang.String): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -4095,7 +4119,7 @@ package object core{
     }
 
     /**
-     * Like [[deployVerticle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like deployVerticle from [[io.vertx.core.Vertx]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def deployVerticleFuture(name: java.lang.String,options: io.vertx.core.DeploymentOptions): scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
@@ -4104,7 +4128,7 @@ package object core{
     }
 
     /**
-     * Like [[undeploy]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like undeploy from [[io.vertx.core.Vertx]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def undeployFuture(deploymentID: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4133,7 +4157,7 @@ package object core{
 
 
     /**
-     * Like [[textMessageHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like textMessageHandler from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def textMessageHandler(handler: scala.Option[java.lang.String => Unit]): io.vertx.core.http.WebSocketBase = {
       asJava.textMessageHandler(handler match {case Some(t) => p:java.lang.String => t(p); case None => null})
@@ -4141,7 +4165,7 @@ package object core{
 
 
     /**
-     * Like [[binaryMessageHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like binaryMessageHandler from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def binaryMessageHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
       asJava.binaryMessageHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
@@ -4149,7 +4173,7 @@ package object core{
 
 
     /**
-     * Like [[pongHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pongHandler from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pongHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
       asJava.pongHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
@@ -4157,7 +4181,7 @@ package object core{
 
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def close(statusCode: java.lang.Short,reason: scala.Option[java.lang.String],handler: AsyncResult[Void] => Unit): Unit = {
       asJava.close(statusCode, reason.orNull, {p:AsyncResult[Void] => handler(p)})
@@ -4194,16 +4218,7 @@ package object core{
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
-      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4212,7 +4227,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4221,7 +4236,16 @@ package object core{
     }
 
     /**
-     * Like [[writePing]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like writePing from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writePingFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4230,7 +4254,7 @@ package object core{
     }
 
     /**
-     * Like [[writePong]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like writePong from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writePongFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4239,7 +4263,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4248,7 +4272,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4257,7 +4281,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(statusCode: java.lang.Short): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4266,7 +4290,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.WebSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(statusCode: java.lang.Short,reason: scala.Option[java.lang.String]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4339,7 +4363,7 @@ package object core{
 
 
     /**
-     * Like [[closeHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like closeHandler from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeHandler(handler: scala.Option[Void => Unit]): io.vertx.core.http.WebSocketBase = {
       asJava.closeHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
@@ -4347,7 +4371,7 @@ package object core{
 
 
     /**
-     * Like [[frameHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like frameHandler from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def frameHandler(handler: scala.Option[io.vertx.core.http.WebSocketFrame => Unit]): io.vertx.core.http.WebSocketBase = {
       asJava.frameHandler(handler match {case Some(t) => p:io.vertx.core.http.WebSocketFrame => t(p); case None => null})
@@ -4355,7 +4379,7 @@ package object core{
 
 
     /**
-     * Like [[textMessageHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like textMessageHandler from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def textMessageHandler(handler: scala.Option[java.lang.String => Unit]): io.vertx.core.http.WebSocketBase = {
       asJava.textMessageHandler(handler match {case Some(t) => p:java.lang.String => t(p); case None => null})
@@ -4363,7 +4387,7 @@ package object core{
 
 
     /**
-     * Like [[binaryMessageHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like binaryMessageHandler from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def binaryMessageHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
       asJava.binaryMessageHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
@@ -4371,7 +4395,7 @@ package object core{
 
 
     /**
-     * Like [[pongHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pongHandler from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def pongHandler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]): io.vertx.core.http.WebSocketBase = {
       asJava.pongHandler(handler match {case Some(t) => p:io.vertx.core.buffer.Buffer => t(p); case None => null})
@@ -4379,23 +4403,14 @@ package object core{
 
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def close(statusCode: java.lang.Short,reason: scala.Option[java.lang.String],handler: AsyncResult[Void] => Unit): Unit = {
       asJava.close(statusCode, reason.orNull, {p:AsyncResult[Void] => handler(p)})
     }
 
     /**
-     * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-     */
-    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
-      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
-
-    /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4404,7 +4419,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4413,7 +4428,16 @@ package object core{
     }
 
     /**
-     * Like [[writeFrame]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like pipeTo from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.pipeTo(dst, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like writeFrame from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFrameFuture(frame: io.vertx.core.http.WebSocketFrame): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4422,7 +4446,7 @@ package object core{
     }
 
     /**
-     * Like [[writeFinalTextFrame]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like writeFinalTextFrame from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFinalTextFrameFuture(text: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4431,7 +4455,7 @@ package object core{
     }
 
     /**
-     * Like [[writeFinalBinaryFrame]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like writeFinalBinaryFrame from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFinalBinaryFrameFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4440,7 +4464,7 @@ package object core{
     }
 
     /**
-     * Like [[writeBinaryMessage]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like writeBinaryMessage from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeBinaryMessageFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4449,7 +4473,7 @@ package object core{
     }
 
     /**
-     * Like [[writeTextMessage]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like writeTextMessage from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeTextMessageFuture(text: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4458,7 +4482,7 @@ package object core{
     }
 
     /**
-     * Like [[writePing]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like writePing from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writePingFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4467,7 +4491,7 @@ package object core{
     }
 
     /**
-     * Like [[writePong]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like writePong from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writePongFuture(data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4476,7 +4500,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4485,7 +4509,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4494,7 +4518,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(statusCode: java.lang.Short): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4503,7 +4527,7 @@ package object core{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.core.http.WebSocketBase]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(statusCode: java.lang.Short,reason: scala.Option[java.lang.String]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4525,31 +4549,39 @@ package object core{
 
   object WebSocketFrame {
     /**
-     * Like [[binaryFrame]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a binary WebSocket frame.     * @param data the data for the frame
+     * @param isFinal true if it's the final frame in the WebSocket message
+     * @return the frame
      */
     def binaryFrame(data: io.vertx.core.buffer.Buffer,isFinal: java.lang.Boolean) = {
       io.vertx.core.http.WebSocketFrame.binaryFrame(data, isFinal)
     }
     /**
-     * Like [[textFrame]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a text WebSocket frame.     * @param str the string for the frame
+     * @param isFinal true if it's the final frame in the WebSocket message
+     * @return the frame
      */
     def textFrame(str: java.lang.String,isFinal: java.lang.Boolean) = {
       io.vertx.core.http.WebSocketFrame.textFrame(str, isFinal)
     }
     /**
-     * Like [[pingFrame]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a ping WebSocket frame.  Will be a final frame. There is no option for non final ping frames.     * @param data the bytes for the frame, may be at most 125 bytes
+     * @return the frame
      */
     def pingFrame(data: io.vertx.core.buffer.Buffer) = {
       io.vertx.core.http.WebSocketFrame.pingFrame(data)
     }
     /**
-     * Like [[pongFrame]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a pong WebSocket frame.  Will be a final frame. There is no option for non final pong frames.     * @param data the bytes for the frame, may be at most 125 bytes
+     * @return the frame
      */
     def pongFrame(data: io.vertx.core.buffer.Buffer) = {
       io.vertx.core.http.WebSocketFrame.pongFrame(data)
     }
     /**
-     * Like [[continuationFrame]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Create a continuation frame     * @param data the data for the frame
+     * @param isFinal true if it's the final frame in the WebSocket message
+     * @return the frame
      */
     def continuationFrame(data: io.vertx.core.buffer.Buffer,isFinal: java.lang.Boolean) = {
       io.vertx.core.http.WebSocketFrame.continuationFrame(data, isFinal)
@@ -4604,7 +4636,7 @@ package object core{
 
 
     /**
-     * Like [[exceptionHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like exceptionHandler from [[io.vertx.core.streams.WriteStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def exceptionHandler(handler: scala.Option[Throwable => Unit]): io.vertx.core.streams.WriteStream[T] = {
       asJava.exceptionHandler(handler match {case Some(t) => p:Throwable => t(p); case None => null})
@@ -4612,7 +4644,7 @@ package object core{
 
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.streams.WriteStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def write(data: T,handler: AsyncResult[Void] => Unit): Unit = {
       asJava.write(data, {p:AsyncResult[Void] => handler(p)})
@@ -4620,7 +4652,7 @@ package object core{
 
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.streams.WriteStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def end(data: T,handler: AsyncResult[Void] => Unit): Unit = {
       asJava.end(data, {p:AsyncResult[Void] => handler(p)})
@@ -4628,14 +4660,14 @@ package object core{
 
 
     /**
-     * Like [[drainHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like drainHandler from [[io.vertx.core.streams.WriteStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def drainHandler(handler: scala.Option[Void => Unit]): io.vertx.core.streams.WriteStream[T] = {
       asJava.drainHandler(handler match {case Some(t) => p:Void => t(p); case None => null})
     }
 
     /**
-     * Like [[write]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like write from [[io.vertx.core.streams.WriteStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def writeFuture(data: T): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4644,7 +4676,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.streams.WriteStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -4653,7 +4685,7 @@ package object core{
     }
 
     /**
-     * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like end from [[io.vertx.core.streams.WriteStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endFuture(data: T): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()

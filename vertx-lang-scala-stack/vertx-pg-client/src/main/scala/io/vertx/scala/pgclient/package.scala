@@ -101,7 +101,7 @@ package object pgclient{
 
 
     /**
-     * Like [[handler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like handler from [[io.vertx.pgclient.pubsub.PgChannel]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def handler(handler: scala.Option[java.lang.String => Unit]): io.vertx.pgclient.pubsub.PgChannel = {
       asJava.handler(handler match {case Some(t) => p:java.lang.String => t(p); case None => null})
@@ -109,7 +109,7 @@ package object pgclient{
 
 
     /**
-     * Like [[endHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like endHandler from [[io.vertx.pgclient.pubsub.PgChannel]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.pgclient.pubsub.PgChannel = {
       asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
@@ -146,7 +146,7 @@ package object pgclient{
   implicit class PgConnectionScala(val asJava: io.vertx.pgclient.PgConnection) extends AnyVal {
 
     /**
-     * Like [[cancelRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like cancelRequest from [[io.vertx.pgclient.PgConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def cancelRequestFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -241,7 +241,7 @@ package object pgclient{
   implicit class PgSubscriberScala(val asJava: io.vertx.pgclient.pubsub.PgSubscriber) extends AnyVal {
 
     /**
-     * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like connect from [[io.vertx.pgclient.pubsub.PgSubscriber]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def connectFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()

@@ -53,7 +53,7 @@ package object rabbitmq{
   implicit class RabbitMQClientScala(val asJava: io.vertx.rabbitmq.RabbitMQClient) extends AnyVal {
 
     /**
-     * Like [[basicAck]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like basicAck from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def basicAckFuture(deliveryTag: java.lang.Long,multiple: java.lang.Boolean): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -62,7 +62,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[basicNack]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like basicNack from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def basicNackFuture(deliveryTag: java.lang.Long,multiple: java.lang.Boolean,requeue: java.lang.Boolean): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -71,7 +71,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[basicGet]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like basicGet from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def basicGetFuture(queue: java.lang.String,autoAck: java.lang.Boolean): scala.concurrent.Future[io.vertx.rabbitmq.RabbitMQMessage] = {
       val promise = concurrent.Promise[io.vertx.rabbitmq.RabbitMQMessage]()
@@ -80,7 +80,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[basicConsumer]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like basicConsumer from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def basicConsumerFuture(queue: java.lang.String): scala.concurrent.Future[io.vertx.rabbitmq.RabbitMQConsumer] = {
       val promise = concurrent.Promise[io.vertx.rabbitmq.RabbitMQConsumer]()
@@ -89,7 +89,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[basicConsumer]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like basicConsumer from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def basicConsumerFuture(queue: java.lang.String,options: io.vertx.rabbitmq.QueueOptions): scala.concurrent.Future[io.vertx.rabbitmq.RabbitMQConsumer] = {
       val promise = concurrent.Promise[io.vertx.rabbitmq.RabbitMQConsumer]()
@@ -98,7 +98,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[basicPublish]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like basicPublish from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def basicPublishFuture(exchange: java.lang.String,routingKey: java.lang.String,body: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -107,7 +107,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[confirmSelect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like confirmSelect from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def confirmSelectFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -116,7 +116,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[waitForConfirms]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like waitForConfirms from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def waitForConfirmsFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -125,7 +125,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[waitForConfirms]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like waitForConfirms from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def waitForConfirmsFuture(timeout: java.lang.Long): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -134,7 +134,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[basicQos]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like basicQos from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def basicQosFuture(prefetchCount: java.lang.Integer): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -143,7 +143,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[basicQos]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like basicQos from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def basicQosFuture(prefetchCount: java.lang.Integer,global: java.lang.Boolean): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -152,7 +152,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[basicQos]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like basicQos from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def basicQosFuture(prefetchSize: java.lang.Integer,prefetchCount: java.lang.Integer,global: java.lang.Boolean): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -161,7 +161,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[exchangeDeclare]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like exchangeDeclare from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def exchangeDeclareFuture(exchange: java.lang.String,`type`: java.lang.String,durable: java.lang.Boolean,autoDelete: java.lang.Boolean): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -170,7 +170,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[exchangeDeclare]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like exchangeDeclare from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def exchangeDeclareFuture(exchange: java.lang.String,`type`: java.lang.String,durable: java.lang.Boolean,autoDelete: java.lang.Boolean,config: io.vertx.core.json.JsonObject): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -179,7 +179,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[exchangeDelete]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like exchangeDelete from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def exchangeDeleteFuture(exchange: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -188,7 +188,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[exchangeBind]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like exchangeBind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def exchangeBindFuture(destination: java.lang.String,source: java.lang.String,routingKey: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -197,7 +197,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[exchangeUnbind]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like exchangeUnbind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def exchangeUnbindFuture(destination: java.lang.String,source: java.lang.String,routingKey: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -206,7 +206,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[queueDeclareAuto]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like queueDeclareAuto from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queueDeclareAutoFuture(): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
@@ -215,7 +215,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[queueBind]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like queueBind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queueBindFuture(queue: java.lang.String,exchange: java.lang.String,routingKey: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -224,7 +224,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[messageCount]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like messageCount from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def messageCountFuture(queue: java.lang.String): scala.concurrent.Future[java.lang.Long] = {
       val promise = concurrent.Promise[java.lang.Long]()
@@ -233,7 +233,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[start]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like start from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def startFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -242,7 +242,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[stop]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like stop from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def stopFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -263,7 +263,7 @@ package object rabbitmq{
 
 
     /**
-     * Like [[exceptionHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like exceptionHandler from [[io.vertx.rabbitmq.RabbitMQConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def exceptionHandler(exceptionHandler: scala.Option[Throwable => Unit]): io.vertx.rabbitmq.RabbitMQConsumer = {
       asJava.exceptionHandler(exceptionHandler match {case Some(t) => p:Throwable => t(p); case None => null})
@@ -271,7 +271,7 @@ package object rabbitmq{
 
 
     /**
-     * Like [[handler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like handler from [[io.vertx.rabbitmq.RabbitMQConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def handler(messageArrived: scala.Option[io.vertx.rabbitmq.RabbitMQMessage => Unit]): io.vertx.rabbitmq.RabbitMQConsumer = {
       asJava.handler(messageArrived match {case Some(t) => p:io.vertx.rabbitmq.RabbitMQMessage => t(p); case None => null})
@@ -279,7 +279,7 @@ package object rabbitmq{
 
 
     /**
-     * Like [[endHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like endHandler from [[io.vertx.rabbitmq.RabbitMQConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def endHandler(endHandler: scala.Option[Void => Unit]): io.vertx.rabbitmq.RabbitMQConsumer = {
       asJava.endHandler(endHandler match {case Some(t) => p:Void => t(p); case None => null})
@@ -292,7 +292,7 @@ package object rabbitmq{
     }
 
     /**
-     * Like [[cancel]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like cancel from [[io.vertx.rabbitmq.RabbitMQConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def cancelFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()

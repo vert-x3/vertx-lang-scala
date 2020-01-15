@@ -46,7 +46,7 @@ package object tcp{
   implicit class TcpEventBusBridgeScala(val asJava: io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge) extends AnyVal {
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(): scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] = {
       val promise = concurrent.Promise[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]()
@@ -55,7 +55,7 @@ package object tcp{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer,address: java.lang.String): scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] = {
       val promise = concurrent.Promise[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]()
@@ -64,7 +64,7 @@ package object tcp{
     }
 
     /**
-     * Like [[listen]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listen from [[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listenFuture(port: java.lang.Integer): scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] = {
       val promise = concurrent.Promise[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]()
@@ -73,7 +73,7 @@ package object tcp{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()

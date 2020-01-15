@@ -91,7 +91,7 @@ package object admin{
   implicit class KafkaAdminClientScala(val asJava: io.vertx.kafka.admin.KafkaAdminClient) extends AnyVal {
 
     /**
-     * Like [[listTopics]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listTopics from [[io.vertx.kafka.admin.KafkaAdminClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listTopicsFuture(): scala.concurrent.Future[java.util.Set[java.lang.String]] = {
       val promise = concurrent.Promise[java.util.Set[java.lang.String]]()
@@ -100,7 +100,7 @@ package object admin{
     }
 
     /**
-     * Like [[describeTopics]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like describeTopics from [[io.vertx.kafka.admin.KafkaAdminClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def describeTopicsFuture(topicNames: java.util.List[java.lang.String]): scala.concurrent.Future[java.util.Map[String, io.vertx.kafka.admin.TopicDescription]] = {
       val promise = concurrent.Promise[java.util.Map[String, io.vertx.kafka.admin.TopicDescription]]()
@@ -109,7 +109,7 @@ package object admin{
     }
 
     /**
-     * Like [[createTopics]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like createTopics from [[io.vertx.kafka.admin.KafkaAdminClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def createTopicsFuture(topics: java.util.List[io.vertx.kafka.admin.NewTopic]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -118,7 +118,7 @@ package object admin{
     }
 
     /**
-     * Like [[deleteTopics]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like deleteTopics from [[io.vertx.kafka.admin.KafkaAdminClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def deleteTopicsFuture(topicNames: java.util.List[java.lang.String]): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -127,7 +127,7 @@ package object admin{
     }
 
     /**
-     * Like [[listConsumerGroups]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like listConsumerGroups from [[io.vertx.kafka.admin.KafkaAdminClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def listConsumerGroupsFuture(): scala.concurrent.Future[java.util.List[io.vertx.kafka.admin.ConsumerGroupListing]] = {
       val promise = concurrent.Promise[java.util.List[io.vertx.kafka.admin.ConsumerGroupListing]]()
@@ -136,7 +136,7 @@ package object admin{
     }
 
     /**
-     * Like [[describeConsumerGroups]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like describeConsumerGroups from [[io.vertx.kafka.admin.KafkaAdminClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def describeConsumerGroupsFuture(groupIds: java.util.List[java.lang.String]): scala.concurrent.Future[java.util.Map[String, io.vertx.kafka.admin.ConsumerGroupDescription]] = {
       val promise = concurrent.Promise[java.util.Map[String, io.vertx.kafka.admin.ConsumerGroupDescription]]()

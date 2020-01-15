@@ -50,7 +50,7 @@ package object sql{
   implicit class SQLClientScala(val asJava: io.vertx.ext.sql.SQLClient) extends AnyVal {
 
     /**
-     * Like [[querySingle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like querySingle from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def querySingleFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
@@ -59,7 +59,7 @@ package object sql{
     }
 
     /**
-     * Like [[querySingleWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like querySingleWithParams from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def querySingleWithParamsFuture(sql: java.lang.String,arguments: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
@@ -68,7 +68,7 @@ package object sql{
     }
 
     /**
-     * Like [[getConnection]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getConnection from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getConnectionFuture(): scala.concurrent.Future[io.vertx.ext.sql.SQLConnection] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.SQLConnection]()
@@ -77,7 +77,7 @@ package object sql{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -86,7 +86,7 @@ package object sql{
     }
 
     /**
-     * Like [[query]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like query from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.ext.sql.ResultSet] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
@@ -95,7 +95,7 @@ package object sql{
     }
 
     /**
-     * Like [[queryStream]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like queryStream from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryStreamFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.ext.sql.SQLRowStream] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.SQLRowStream]()
@@ -104,7 +104,7 @@ package object sql{
     }
 
     /**
-     * Like [[queryStreamWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like queryStreamWithParams from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryStreamWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.ext.sql.SQLRowStream] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.SQLRowStream]()
@@ -113,7 +113,7 @@ package object sql{
     }
 
     /**
-     * Like [[queryWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like queryWithParams from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryWithParamsFuture(sql: java.lang.String,arguments: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.ext.sql.ResultSet] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
@@ -122,7 +122,7 @@ package object sql{
     }
 
     /**
-     * Like [[update]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like update from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def updateFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.ext.sql.UpdateResult] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.UpdateResult]()
@@ -131,7 +131,7 @@ package object sql{
     }
 
     /**
-     * Like [[updateWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like updateWithParams from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def updateWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.ext.sql.UpdateResult] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.UpdateResult]()
@@ -140,7 +140,7 @@ package object sql{
     }
 
     /**
-     * Like [[call]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like call from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def callFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.ext.sql.ResultSet] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
@@ -149,7 +149,7 @@ package object sql{
     }
 
     /**
-     * Like [[callWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like callWithParams from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def callWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonArray,outputs: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.ext.sql.ResultSet] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
@@ -168,7 +168,7 @@ package object sql{
   implicit class SQLConnectionScala(val asJava: io.vertx.ext.sql.SQLConnection) extends AnyVal {
 
     /**
-     * Like [[querySingle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like querySingle from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def querySingleFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
@@ -177,7 +177,7 @@ package object sql{
     }
 
     /**
-     * Like [[querySingleWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like querySingleWithParams from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def querySingleWithParamsFuture(sql: java.lang.String,arguments: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
@@ -186,7 +186,7 @@ package object sql{
     }
 
     /**
-     * Like [[setAutoCommit]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like setAutoCommit from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def setAutoCommitFuture(autoCommit: java.lang.Boolean): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -195,7 +195,7 @@ package object sql{
     }
 
     /**
-     * Like [[execute]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like execute from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def executeFuture(sql: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -204,7 +204,7 @@ package object sql{
     }
 
     /**
-     * Like [[query]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like query from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.ext.sql.ResultSet] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
@@ -213,7 +213,7 @@ package object sql{
     }
 
     /**
-     * Like [[queryStream]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like queryStream from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryStreamFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.ext.sql.SQLRowStream] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.SQLRowStream]()
@@ -222,7 +222,7 @@ package object sql{
     }
 
     /**
-     * Like [[queryWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like queryWithParams from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.ext.sql.ResultSet] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
@@ -231,7 +231,7 @@ package object sql{
     }
 
     /**
-     * Like [[queryStreamWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like queryStreamWithParams from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryStreamWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.ext.sql.SQLRowStream] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.SQLRowStream]()
@@ -240,7 +240,7 @@ package object sql{
     }
 
     /**
-     * Like [[update]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like update from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def updateFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.ext.sql.UpdateResult] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.UpdateResult]()
@@ -249,7 +249,7 @@ package object sql{
     }
 
     /**
-     * Like [[updateWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like updateWithParams from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def updateWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.ext.sql.UpdateResult] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.UpdateResult]()
@@ -258,7 +258,7 @@ package object sql{
     }
 
     /**
-     * Like [[call]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like call from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def callFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.ext.sql.ResultSet] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
@@ -267,7 +267,7 @@ package object sql{
     }
 
     /**
-     * Like [[callWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like callWithParams from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def callWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonArray,outputs: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.ext.sql.ResultSet] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
@@ -276,7 +276,7 @@ package object sql{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -285,7 +285,7 @@ package object sql{
     }
 
     /**
-     * Like [[commit]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like commit from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def commitFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -294,7 +294,7 @@ package object sql{
     }
 
     /**
-     * Like [[rollback]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like rollback from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def rollbackFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -303,7 +303,7 @@ package object sql{
     }
 
     /**
-     * Like [[batch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like batch from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def batchFuture(sqlStatements: java.util.List[java.lang.String]): scala.concurrent.Future[java.util.List[java.lang.Integer]] = {
       val promise = concurrent.Promise[java.util.List[java.lang.Integer]]()
@@ -312,7 +312,7 @@ package object sql{
     }
 
     /**
-     * Like [[batchWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like batchWithParams from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def batchWithParamsFuture(sqlStatement: java.lang.String,args: java.util.List[io.vertx.core.json.JsonArray]): scala.concurrent.Future[java.util.List[java.lang.Integer]] = {
       val promise = concurrent.Promise[java.util.List[java.lang.Integer]]()
@@ -321,7 +321,7 @@ package object sql{
     }
 
     /**
-     * Like [[batchCallableWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like batchCallableWithParams from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def batchCallableWithParamsFuture(sqlStatement: java.lang.String,inArgs: java.util.List[io.vertx.core.json.JsonArray],outArgs: java.util.List[io.vertx.core.json.JsonArray]): scala.concurrent.Future[java.util.List[java.lang.Integer]] = {
       val promise = concurrent.Promise[java.util.List[java.lang.Integer]]()
@@ -330,7 +330,7 @@ package object sql{
     }
 
     /**
-     * Like [[setTransactionIsolation]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like setTransactionIsolation from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def setTransactionIsolationFuture(isolation: io.vertx.ext.sql.TransactionIsolation): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -339,7 +339,7 @@ package object sql{
     }
 
     /**
-     * Like [[getTransactionIsolation]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like getTransactionIsolation from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def getTransactionIsolationFuture(): scala.concurrent.Future[io.vertx.ext.sql.TransactionIsolation] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.TransactionIsolation]()
@@ -358,7 +358,7 @@ package object sql{
   implicit class SQLOperationsScala(val asJava: io.vertx.ext.sql.SQLOperations) extends AnyVal {
 
     /**
-     * Like [[query]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like query from [[io.vertx.ext.sql.SQLOperations]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.ext.sql.ResultSet] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
@@ -367,7 +367,7 @@ package object sql{
     }
 
     /**
-     * Like [[queryWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like queryWithParams from [[io.vertx.ext.sql.SQLOperations]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.ext.sql.ResultSet] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
@@ -376,7 +376,7 @@ package object sql{
     }
 
     /**
-     * Like [[queryStream]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like queryStream from [[io.vertx.ext.sql.SQLOperations]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryStreamFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.ext.sql.SQLRowStream] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.SQLRowStream]()
@@ -385,7 +385,7 @@ package object sql{
     }
 
     /**
-     * Like [[queryStreamWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like queryStreamWithParams from [[io.vertx.ext.sql.SQLOperations]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def queryStreamWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.ext.sql.SQLRowStream] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.SQLRowStream]()
@@ -394,7 +394,7 @@ package object sql{
     }
 
     /**
-     * Like [[querySingle]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like querySingle from [[io.vertx.ext.sql.SQLOperations]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def querySingleFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
@@ -403,7 +403,7 @@ package object sql{
     }
 
     /**
-     * Like [[querySingleWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like querySingleWithParams from [[io.vertx.ext.sql.SQLOperations]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def querySingleWithParamsFuture(sql: java.lang.String,arguments: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
@@ -412,7 +412,7 @@ package object sql{
     }
 
     /**
-     * Like [[update]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like update from [[io.vertx.ext.sql.SQLOperations]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def updateFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.ext.sql.UpdateResult] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.UpdateResult]()
@@ -421,7 +421,7 @@ package object sql{
     }
 
     /**
-     * Like [[updateWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like updateWithParams from [[io.vertx.ext.sql.SQLOperations]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def updateWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.ext.sql.UpdateResult] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.UpdateResult]()
@@ -430,7 +430,7 @@ package object sql{
     }
 
     /**
-     * Like [[call]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like call from [[io.vertx.ext.sql.SQLOperations]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def callFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.ext.sql.ResultSet] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
@@ -439,7 +439,7 @@ package object sql{
     }
 
     /**
-     * Like [[callWithParams]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like callWithParams from [[io.vertx.ext.sql.SQLOperations]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def callWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonArray,outputs: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.ext.sql.ResultSet] = {
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
@@ -494,7 +494,7 @@ package object sql{
     }
 
     /**
-     * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like close from [[io.vertx.ext.sql.SQLRowStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def closeFuture(): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()

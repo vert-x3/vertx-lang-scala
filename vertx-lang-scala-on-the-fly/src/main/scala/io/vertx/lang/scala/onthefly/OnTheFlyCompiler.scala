@@ -18,7 +18,7 @@ package io.vertx.lang.scala.onthefly
 
 import java.io.File
 import java.math.BigInteger
-import java.nio.file.{Path, Paths}
+import java.nio.file.Paths
 import java.security.MessageDigest
 
 import scala.collection.mutable

@@ -40,7 +40,7 @@ package object circuitbreaker{
   implicit class CircuitBreakerScala(val asJava: io.vertx.circuitbreaker.CircuitBreaker) extends AnyVal {
 
     /**
-     * Like [[executeWithFallback]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like executeWithFallback from [[io.vertx.circuitbreaker.CircuitBreaker]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def executeWithFallbackFuture[T](command: io.vertx.core.Promise[T] => Unit,fallback: Throwable => T): scala.concurrent.Future[T] = {
       val promise = concurrent.Promise[T]()
@@ -49,7 +49,7 @@ package object circuitbreaker{
     }
 
     /**
-     * Like [[execute]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+     * Like execute from [[io.vertx.circuitbreaker.CircuitBreaker]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def executeFuture[T](command: io.vertx.core.Promise[T] => Unit): scala.concurrent.Future[T] = {
       val promise = concurrent.Promise[T]()
