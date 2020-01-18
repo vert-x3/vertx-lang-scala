@@ -208,11 +208,11 @@ class RabbitMQOptions(private val _asJava: JRabbitMQOptions) {
 
 
 object RabbitMQOptions {
-  
+
   def apply() = {
     new RabbitMQOptions(new JRabbitMQOptions(emptyObj()))
   }
-  
+
   def apply(t: JRabbitMQOptions) = {
     if (t != null) {
       new RabbitMQOptions(t)
@@ -220,7 +220,7 @@ object RabbitMQOptions {
       new RabbitMQOptions(new JRabbitMQOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): RabbitMQOptions = {
     if (json != null) {
       new RabbitMQOptions(new JRabbitMQOptions(json))

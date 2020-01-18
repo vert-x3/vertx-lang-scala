@@ -42,12 +42,12 @@ class BodyCodec[T: TypeTag](private val _asJava: Object) {
 
 object BodyCodec {
   def apply[T: TypeTag](asJava: JBodyCodec[_]) = new BodyCodec[T](asJava)
-  
+
   /**
    * @return the UTF-8 string codec
    */
   def string(): BodyCodec[String] = {
-    BodyCodec[String](JBodyCodec.string())
+    BodyCodec[String](JBodyCodec.string())//2 string
   }
 
   /**
@@ -55,42 +55,42 @@ object BodyCodec {
    * @return the codec
    */
   def string(encoding: String): BodyCodec[String] = {
-    BodyCodec[String](JBodyCodec.string(encoding.asInstanceOf[java.lang.String]))
+    BodyCodec[String](JBodyCodec.string(encoding.asInstanceOf[java.lang.String]))//2 string
   }
 
   /**
    * @return the Buffer codec
    */
   def buffer(): BodyCodec[io.vertx.core.buffer.Buffer] = {
-    BodyCodec[io.vertx.core.buffer.Buffer](JBodyCodec.buffer())
+    BodyCodec[io.vertx.core.buffer.Buffer](JBodyCodec.buffer())//2 buffer
   }
 
   /**
    * @return the JsonObject codec
    */
   def jsonObject(): BodyCodec[io.vertx.core.json.JsonObject] = {
-    BodyCodec[io.vertx.core.json.JsonObject](JBodyCodec.jsonObject())
+    BodyCodec[io.vertx.core.json.JsonObject](JBodyCodec.jsonObject())//2 jsonObject
   }
 
   /**
    * @return the JsonArray codec
    */
   def jsonArray(): BodyCodec[io.vertx.core.json.JsonArray] = {
-    BodyCodec[io.vertx.core.json.JsonArray](JBodyCodec.jsonArray())
+    BodyCodec[io.vertx.core.json.JsonArray](JBodyCodec.jsonArray())//2 jsonArray
   }
 
   /**
    * Create and return a codec for Java objects encoded using Jackson mapper.   * @return a codec for mapping POJO to Json
    */
   def json[U: TypeTag](`type`: Class[U]): BodyCodec[U] = {
-    BodyCodec[U](JBodyCodec.json[Object](toJavaClass(`type`)))
+    BodyCodec[U](JBodyCodec.json[Object](toJavaClass(`type`)))//2 json
   }
 
   /**
    * @return a codec that simply discards the response
    */
   def none(): BodyCodec[Unit] = {
-    BodyCodec[Unit](JBodyCodec.none())
+    BodyCodec[Unit](JBodyCodec.none())//2 none
   }
 
   /**
@@ -98,7 +98,7 @@ object BodyCodec {
    * @return the created codec
    */
   def create[T: TypeTag](decode: io.vertx.core.buffer.Buffer => T): BodyCodec[T] = {
-    BodyCodec[T](JBodyCodec.create[Object]({x: Buffer => toJava[T](decode(x))}))
+    BodyCodec[T](JBodyCodec.create[Object]({x: Buffer => toJava[T](decode(x))}))//2 create
   }
 
   /**
@@ -108,7 +108,7 @@ object BodyCodec {
    * @return the body codec for a write stream
    */
   def pipe(stream: WriteStream[io.vertx.core.buffer.Buffer]): BodyCodec[Unit] = {
-    BodyCodec[Unit](JBodyCodec.pipe(stream.asJava.asInstanceOf[JWriteStream[Buffer]]))
+    BodyCodec[Unit](JBodyCodec.pipe(stream.asJava.asInstanceOf[JWriteStream[Buffer]]))//2 pipe
   }
 
   /**
@@ -117,7 +117,7 @@ object BodyCodec {
    * @return the body codec for a write stream
    */
   def pipe(stream: WriteStream[io.vertx.core.buffer.Buffer],close: Boolean): BodyCodec[Unit] = {
-    BodyCodec[Unit](JBodyCodec.pipe(stream.asJava.asInstanceOf[JWriteStream[Buffer]], close.asInstanceOf[java.lang.Boolean]))
+    BodyCodec[Unit](JBodyCodec.pipe(stream.asJava.asInstanceOf[JWriteStream[Buffer]], close.asInstanceOf[java.lang.Boolean]))//2 pipe
   }
 
 }

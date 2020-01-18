@@ -240,7 +240,7 @@ class KafkaProducer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
 
 object KafkaProducer {
   def apply[K: TypeTag, V: TypeTag](asJava: JKafkaProducer[_, _]) = new KafkaProducer[K, V](asJava)
-  
+
   /**
    * Get or create a KafkaProducer instance which shares its stream with any other KafkaProducer created with the same `name`   * @param vertx Vert.x instance to use
    * @param name the producer name to identify it
@@ -248,7 +248,7 @@ object KafkaProducer {
    * @return an instance of the KafkaProducer
    */
   def createShared[K: TypeTag, V: TypeTag](vertx: Vertx,name: String,config: scala.collection.mutable.Map[String, String]): KafkaProducer[K, V] = {
-    KafkaProducer[K, V](JKafkaProducer.createShared[Object, Object](vertx.asJava.asInstanceOf[JVertx], name.asInstanceOf[java.lang.String], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava))
+    KafkaProducer[K, V](JKafkaProducer.createShared[Object, Object](vertx.asJava.asInstanceOf[JVertx], name.asInstanceOf[java.lang.String], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava))//2 createShared
   }
 
   /**
@@ -260,7 +260,7 @@ object KafkaProducer {
    * @return an instance of the KafkaProducer
    */
   def createShared[K: TypeTag, V: TypeTag](vertx: Vertx,name: String,config: scala.collection.mutable.Map[String, String],keyType: Class[K],valueType: Class[V]): KafkaProducer[K, V] = {
-    KafkaProducer[K, V](JKafkaProducer.createShared[Object, Object](vertx.asJava.asInstanceOf[JVertx], name.asInstanceOf[java.lang.String], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, toJavaClass(keyType), toJavaClass(valueType)))
+    KafkaProducer[K, V](JKafkaProducer.createShared[Object, Object](vertx.asJava.asInstanceOf[JVertx], name.asInstanceOf[java.lang.String], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, toJavaClass(keyType), toJavaClass(valueType)))//2 createShared
   }
 
   /**
@@ -269,7 +269,7 @@ object KafkaProducer {
    * @return an instance of the KafkaProducer
    */
   def create[K: TypeTag, V: TypeTag](vertx: Vertx,config: scala.collection.mutable.Map[String, String]): KafkaProducer[K, V] = {
-    KafkaProducer[K, V](JKafkaProducer.create[Object, Object](vertx.asJava.asInstanceOf[JVertx], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava))
+    KafkaProducer[K, V](JKafkaProducer.create[Object, Object](vertx.asJava.asInstanceOf[JVertx], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava))//2 create
   }
 
   /**
@@ -280,7 +280,7 @@ object KafkaProducer {
    * @return an instance of the KafkaProducer
    */
   def create[K: TypeTag, V: TypeTag](vertx: Vertx,config: scala.collection.mutable.Map[String, String],keyType: Class[K],valueType: Class[V]): KafkaProducer[K, V] = {
-    KafkaProducer[K, V](JKafkaProducer.create[Object, Object](vertx.asJava.asInstanceOf[JVertx], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, toJavaClass(keyType), toJavaClass(valueType)))
+    KafkaProducer[K, V](JKafkaProducer.create[Object, Object](vertx.asJava.asInstanceOf[JVertx], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, toJavaClass(keyType), toJavaClass(valueType)))//2 create
   }
 
 }

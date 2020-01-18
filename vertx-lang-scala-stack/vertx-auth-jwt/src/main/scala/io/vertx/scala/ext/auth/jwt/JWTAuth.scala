@@ -62,14 +62,14 @@ class JWTAuth(private val _asJava: Object) extends AuthProvider (_asJava) {
 
 object JWTAuth {
   def apply(asJava: JJWTAuth) = new JWTAuth(asJava)
-  
+
   /**
    * Create a JWT auth provider   * @param vertx the Vertx instance
    * @param config the config see <a href="../../../../../../../../cheatsheet/JWTAuthOptions.html">JWTAuthOptions</a>
    * @return the auth provider
    */
   def create(vertx: Vertx,config: JWTAuthOptions): JWTAuth = {
-    JWTAuth(JJWTAuth.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))
+    JWTAuth(JJWTAuth.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))//2 create
   }
 
 }

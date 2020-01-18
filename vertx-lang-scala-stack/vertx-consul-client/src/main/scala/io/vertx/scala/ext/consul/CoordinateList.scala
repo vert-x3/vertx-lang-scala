@@ -55,11 +55,11 @@ class CoordinateList(private val _asJava: JCoordinateList) {
 
 
 object CoordinateList {
-  
+
   def apply() = {
     new CoordinateList(new JCoordinateList(emptyObj()))
   }
-  
+
   def apply(t: JCoordinateList) = {
     if (t != null) {
       new CoordinateList(t)
@@ -67,7 +67,7 @@ object CoordinateList {
       new CoordinateList(new JCoordinateList(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): CoordinateList = {
     if (json != null) {
       new CoordinateList(new JCoordinateList(json))

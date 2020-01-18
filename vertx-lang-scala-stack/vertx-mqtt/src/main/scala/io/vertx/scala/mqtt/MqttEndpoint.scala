@@ -540,5 +540,5 @@ class MqttEndpoint(private val _asJava: Object) {
 
 object MqttEndpoint {
   def apply(asJava: JMqttEndpoint) = new MqttEndpoint(asJava)
-  
+
 }

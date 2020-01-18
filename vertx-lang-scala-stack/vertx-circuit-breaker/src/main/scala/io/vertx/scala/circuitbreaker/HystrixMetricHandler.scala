@@ -48,13 +48,13 @@ class HystrixMetricHandler(private val _asJava: Object) extends io.vertx.core.Ha
 
 object HystrixMetricHandler {
   def apply(asJava: JHystrixMetricHandler) = new HystrixMetricHandler(asJava)
-  
+
   /**
    * Creates the handler, using the default notification address.   * @param vertx the Vert.x instance
    * @return the handler
    */
   def create(vertx: Vertx): HystrixMetricHandler = {
-    HystrixMetricHandler(JHystrixMetricHandler.create(vertx.asJava.asInstanceOf[JVertx]))
+    HystrixMetricHandler(JHystrixMetricHandler.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -63,7 +63,7 @@ object HystrixMetricHandler {
    * @return the handler
    */
   def create(vertx: Vertx,address: String): HystrixMetricHandler = {
-    HystrixMetricHandler(JHystrixMetricHandler.create(vertx.asJava.asInstanceOf[JVertx], address.asInstanceOf[java.lang.String]))
+    HystrixMetricHandler(JHystrixMetricHandler.create(vertx.asJava.asInstanceOf[JVertx], address.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

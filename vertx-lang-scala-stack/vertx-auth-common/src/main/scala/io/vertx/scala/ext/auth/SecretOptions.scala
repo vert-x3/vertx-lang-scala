@@ -49,11 +49,11 @@ class SecretOptions(private val _asJava: JSecretOptions) {
 
 
 object SecretOptions {
-  
+
   def apply() = {
     new SecretOptions(new JSecretOptions(emptyObj()))
   }
-  
+
   def apply(t: JSecretOptions) = {
     if (t != null) {
       new SecretOptions(t)
@@ -61,7 +61,7 @@ object SecretOptions {
       new SecretOptions(new JSecretOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): SecretOptions = {
     if (json != null) {
       new SecretOptions(new JSecretOptions(json))

@@ -75,5 +75,5 @@ class AuthProvider(private val _asJava: Object) {
 
 object AuthProvider {
   def apply(asJava: JAuthProvider) = new AuthProvider(asJava)
-  
+
 }

@@ -226,5 +226,5 @@ class Process(private val _asJava: Object) {
 
 object Process {
   def apply(asJava: JProcess) = new Process(asJava)
-  
+
 }

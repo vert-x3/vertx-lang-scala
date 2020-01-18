@@ -84,11 +84,11 @@ class PemTrustOptions(private val _asJava: JPemTrustOptions) {
 
 
 object PemTrustOptions {
-  
+
   def apply() = {
     new PemTrustOptions(new JPemTrustOptions(emptyObj()))
   }
-  
+
   def apply(t: JPemTrustOptions) = {
     if (t != null) {
       new PemTrustOptions(t)
@@ -96,7 +96,7 @@ object PemTrustOptions {
       new PemTrustOptions(new JPemTrustOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): PemTrustOptions = {
     if (json != null) {
       new PemTrustOptions(new JPemTrustOptions(json))

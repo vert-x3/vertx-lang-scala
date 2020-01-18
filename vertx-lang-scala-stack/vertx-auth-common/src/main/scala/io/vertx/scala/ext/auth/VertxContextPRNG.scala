@@ -69,13 +69,13 @@ class VertxContextPRNG(private val _asJava: Object) {
 
 object VertxContextPRNG {
   def apply(asJava: JVertxContextPRNG) = new VertxContextPRNG(asJava)
-  
+
   /**
    * Get or create a secure non blocking random number generator using the current vert.x context. If there is no
    * current context (i.e.: not running on the eventloop) then a IllegalStateException is thrown.   * @return A secure non blocking random number generator.
    */
   def current(): VertxContextPRNG = {
-    VertxContextPRNG(JVertxContextPRNG.current())
+    VertxContextPRNG(JVertxContextPRNG.current())//2 current
   }
 
   /**
@@ -85,7 +85,7 @@ object VertxContextPRNG {
    * @return A secure non blocking random number generator.
    */
   def current(vertx: Vertx): VertxContextPRNG = {
-    VertxContextPRNG(JVertxContextPRNG.current(vertx.asJava.asInstanceOf[JVertx]))
+    VertxContextPRNG(JVertxContextPRNG.current(vertx.asJava.asInstanceOf[JVertx]))//2 current
   }
 
 }

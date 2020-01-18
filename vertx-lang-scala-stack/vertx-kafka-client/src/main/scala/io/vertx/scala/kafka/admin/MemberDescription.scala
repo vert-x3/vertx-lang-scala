@@ -80,11 +80,11 @@ class MemberDescription(private val _asJava: JMemberDescription) {
 
 
 object MemberDescription {
-  
+
   def apply() = {
     new MemberDescription(new JMemberDescription(emptyObj()))
   }
-  
+
   def apply(t: JMemberDescription) = {
     if (t != null) {
       new MemberDescription(t)
@@ -92,7 +92,7 @@ object MemberDescription {
       new MemberDescription(new JMemberDescription(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MemberDescription = {
     if (json != null) {
       new MemberDescription(new JMemberDescription(json))

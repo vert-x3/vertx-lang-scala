@@ -86,5 +86,5 @@ class JobController(private val _asJava: Object) {
 
 object JobController {
   def apply(asJava: JJobController) = new JobController(asJava)
-  
+
 }

@@ -142,13 +142,13 @@ class JWTAuthHandler(private val _asJava: Object) extends AuthHandler with io.ve
 
 object JWTAuthHandler {
   def apply(asJava: JJWTAuthHandler) = new JWTAuthHandler(asJava)
-  
+
   /**
    * Create a JWT auth handler   * @param authProvider the auth provider to use
    * @return the auth handler
    */
   def create(authProvider: JWTAuth): JWTAuthHandler = {
-    JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth]))
+    JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth]))//2 create
   }
 
   /**
@@ -156,7 +156,7 @@ object JWTAuthHandler {
    * @return the auth handler
    */
   def create(authProvider: JWTAuth,skip: String): JWTAuthHandler = {
-    JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth], skip.asInstanceOf[java.lang.String]))
+    JWTAuthHandler(JJWTAuthHandler.create(authProvider.asJava.asInstanceOf[JJWTAuth], skip.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

@@ -257,5 +257,5 @@ class SharedData(private val _asJava: Object) {
 
 object SharedData {
   def apply(asJava: JSharedData) = new SharedData(asJava)
-  
+
 }

@@ -55,11 +55,11 @@ class DcCoordinates(private val _asJava: JDcCoordinates) {
 
 
 object DcCoordinates {
-  
+
   def apply() = {
     new DcCoordinates(new JDcCoordinates(emptyObj()))
   }
-  
+
   def apply(t: JDcCoordinates) = {
     if (t != null) {
       new DcCoordinates(t)
@@ -67,7 +67,7 @@ object DcCoordinates {
       new DcCoordinates(new JDcCoordinates(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DcCoordinates = {
     if (json != null) {
       new DcCoordinates(new JDcCoordinates(json))

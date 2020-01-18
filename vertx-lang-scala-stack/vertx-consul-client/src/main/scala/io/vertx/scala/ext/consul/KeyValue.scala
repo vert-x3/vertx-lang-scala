@@ -115,11 +115,11 @@ class KeyValue(private val _asJava: JKeyValue) {
 
 
 object KeyValue {
-  
+
   def apply() = {
     new KeyValue(new JKeyValue(emptyObj()))
   }
-  
+
   def apply(t: JKeyValue) = {
     if (t != null) {
       new KeyValue(t)
@@ -127,7 +127,7 @@ object KeyValue {
       new KeyValue(new JKeyValue(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): KeyValue = {
     if (json != null) {
       new KeyValue(new JKeyValue(json))

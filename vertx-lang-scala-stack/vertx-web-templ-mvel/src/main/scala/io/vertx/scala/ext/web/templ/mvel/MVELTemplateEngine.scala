@@ -61,12 +61,12 @@ class MVELTemplateEngine(private val _asJava: Object) extends TemplateEngine (_a
 
 object MVELTemplateEngine {
   def apply(asJava: JMVELTemplateEngine) = new MVELTemplateEngine(asJava)
-  
+
   /**
    * Create a template engine using defaults   * @return the engine
    */
   def create(vertx: Vertx): MVELTemplateEngine = {
-    MVELTemplateEngine(JMVELTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))
+    MVELTemplateEngine(JMVELTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

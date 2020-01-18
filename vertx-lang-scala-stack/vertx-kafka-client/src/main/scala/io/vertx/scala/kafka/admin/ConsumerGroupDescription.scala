@@ -107,11 +107,11 @@ class ConsumerGroupDescription(private val _asJava: JConsumerGroupDescription) {
 
 
 object ConsumerGroupDescription {
-  
+
   def apply() = {
     new ConsumerGroupDescription(new JConsumerGroupDescription(emptyObj()))
   }
-  
+
   def apply(t: JConsumerGroupDescription) = {
     if (t != null) {
       new ConsumerGroupDescription(t)
@@ -119,7 +119,7 @@ object ConsumerGroupDescription {
       new ConsumerGroupDescription(new JConsumerGroupDescription(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ConsumerGroupDescription = {
     if (json != null) {
       new ConsumerGroupDescription(new JConsumerGroupDescription(json))

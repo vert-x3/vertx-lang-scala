@@ -55,11 +55,11 @@ class BitFieldSetCommand(private val _asJava: JBitFieldSetCommand) {
 
 
 object BitFieldSetCommand {
-  
+
   def apply() = {
     new BitFieldSetCommand(new JBitFieldSetCommand(emptyObj()))
   }
-  
+
   def apply(t: JBitFieldSetCommand) = {
     if (t != null) {
       new BitFieldSetCommand(t)
@@ -67,7 +67,7 @@ object BitFieldSetCommand {
       new BitFieldSetCommand(new JBitFieldSetCommand(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): BitFieldSetCommand = {
     if (json != null) {
       new BitFieldSetCommand(new JBitFieldSetCommand(json))

@@ -253,15 +253,15 @@ class RedisSentinel(private val _asJava: Object) {
 
 object RedisSentinel {
   def apply(asJava: JRedisSentinel) = new RedisSentinel(asJava)
-  
+
 
   def create(vertx: Vertx): RedisSentinel = {
-    RedisSentinel(JRedisSentinel.create(vertx.asJava.asInstanceOf[JVertx]))
+    RedisSentinel(JRedisSentinel.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 
   def create(vertx: Vertx,config: io.vertx.core.json.JsonObject): RedisSentinel = {
-    RedisSentinel(JRedisSentinel.create(vertx.asJava.asInstanceOf[JVertx], config))
+    RedisSentinel(JRedisSentinel.create(vertx.asJava.asInstanceOf[JVertx], config))//2 create
   }
 
 }

@@ -282,5 +282,5 @@ class AccessToken(private val _asJava: Object) extends User (_asJava) {
 
 object AccessToken {
   def apply(asJava: JAccessToken) = new AccessToken(asJava)
-  
+
 }

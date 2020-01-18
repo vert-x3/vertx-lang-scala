@@ -174,10 +174,24 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
     this
   }
 
-
+  /**
+   * Set the request to follow HTTP redirects up to <a href="../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>.   * @param followRedirects `true` to follow HTTP redirects
+   * @return a reference to this, so the API can be used fluently
+   */
   
   def setFollowRedirects(followRedirects: Boolean): HttpClientRequest = {
     asJava.asInstanceOf[JHttpClientRequest].setFollowRedirects(followRedirects.asInstanceOf[java.lang.Boolean])
+    this
+  }
+
+  /**
+   * Set the max number of HTTP redirects this request will follow. The default is `0` which means
+   * no redirects.   * @param maxRedirects the number of HTTP redirect to follow
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def setMaxRedirects(maxRedirects: Int): HttpClientRequest = {
+    asJava.asInstanceOf[JHttpClientRequest].setMaxRedirects(maxRedirects.asInstanceOf[java.lang.Integer])
     this
   }
 
@@ -277,7 +291,7 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
    * Forces the head of the request to be written before [[io.vertx.scala.core.http.HttpClientRequest#end]] is called on the request or any data is
    * written to it.
    * 
-   * This is normally used to implement HTTP 100-continue handling, see  for
+   * This is normally used to implement HTTP 100-continue handling, see [[io.vertx.scala.core.http.HttpClientRequest#continueHandler]] for
    * more information.   * @return a reference to this, so the API can be used fluently
    */
   
@@ -653,5 +667,5 @@ class HttpClientRequest(private val _asJava: Object) extends WriteStream[io.vert
 
 object HttpClientRequest {
   def apply(asJava: JHttpClientRequest) = new HttpClientRequest(asJava)
-  
+
 }

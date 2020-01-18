@@ -545,11 +545,11 @@ class StompClientOptions(private val _asJava: JStompClientOptions) extends ExtNe
 
 
 object StompClientOptions {
-  
+
   def apply() = {
     new StompClientOptions(new JStompClientOptions(emptyObj()))
   }
-  
+
   def apply(t: JStompClientOptions) = {
     if (t != null) {
       new StompClientOptions(t)
@@ -557,7 +557,7 @@ object StompClientOptions {
       new StompClientOptions(new JStompClientOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): StompClientOptions = {
     if (json != null) {
       new StompClientOptions(new JStompClientOptions(json))

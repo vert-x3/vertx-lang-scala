@@ -237,7 +237,7 @@ class FileSystem(private val _asJava: Object) {
   }
 
   /**
-   * Blocking version of 
+   * Blocking version of [[io.vertx.scala.core.file.FileSystem#chown]]
    *
    */
   
@@ -442,7 +442,7 @@ class FileSystem(private val _asJava: Object) {
   /**
    * Create the directory represented by `path` and any non existent parents, asynchronously.
    * 
-   * The operation will fail if the directory already exists.   * @param path path to the file
+   * The operation will fail if the `path` already exists but is not a directory.   * @param path path to the file
    * @param handler the handler that will be called on completion
    * @return a reference to this, so the API can be used fluently
    */
@@ -469,7 +469,7 @@ class FileSystem(private val _asJava: Object) {
    * The permission String takes the form rwxr-x--- as specified
    * in <a href="http://download.oracle.com/javase/7/docs/api/java/nio/file/attribute/PosixFilePermissions.html">here</a>.
    * 
-   * The operation will fail if the directory already exists.   * @param path path to the file
+   * The operation will fail if the `path` already exists but is not a directory.   * @param path path to the file
    * @param perms the permissions string
    * @param handler the handler that will be called on completion
    * @return a reference to this, so the API can be used fluently
@@ -1232,5 +1232,5 @@ class FileSystem(private val _asJava: Object) {
 
 object FileSystem {
   def apply(asJava: JFileSystem) = new FileSystem(asJava)
-  
+
 }

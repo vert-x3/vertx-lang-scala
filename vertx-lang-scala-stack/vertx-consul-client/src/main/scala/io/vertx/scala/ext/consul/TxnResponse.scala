@@ -49,11 +49,11 @@ class TxnResponse(private val _asJava: JTxnResponse) {
 
 
 object TxnResponse {
-  
+
   def apply() = {
     new TxnResponse(new JTxnResponse(emptyObj()))
   }
-  
+
   def apply(t: JTxnResponse) = {
     if (t != null) {
       new TxnResponse(t)
@@ -61,7 +61,7 @@ object TxnResponse {
       new TxnResponse(new JTxnResponse(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): TxnResponse = {
     if (json != null) {
       new TxnResponse(new JTxnResponse(json))

@@ -194,5 +194,5 @@ class BasicProperties(private val _asJava: Object) {
 
 object BasicProperties {
   def apply(asJava: JBasicProperties) = new BasicProperties(asJava)
-  
+
 }

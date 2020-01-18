@@ -55,11 +55,11 @@ class GeoMember(private val _asJava: JGeoMember) {
 
 
 object GeoMember {
-  
+
   def apply() = {
     new GeoMember(new JGeoMember(emptyObj()))
   }
-  
+
   def apply(t: JGeoMember) = {
     if (t != null) {
       new GeoMember(t)
@@ -67,7 +67,7 @@ object GeoMember {
       new GeoMember(new JGeoMember(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): GeoMember = {
     if (json != null) {
       new GeoMember(new JGeoMember(json))

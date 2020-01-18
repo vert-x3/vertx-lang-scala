@@ -23,6 +23,10 @@ import io.vertx.sqlclient.{Tuple => JTuple}
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 
+/**
+  * Represents single row of the result set.
+
+  */
 
 class Row(private val _asJava: Object) extends Tuple (_asJava) {
 
@@ -124,5 +128,5 @@ class Row(private val _asJava: Object) extends Tuple (_asJava) {
 
 object Row {
   def apply(asJava: JRow) = new Row(asJava)
-  
+
 }

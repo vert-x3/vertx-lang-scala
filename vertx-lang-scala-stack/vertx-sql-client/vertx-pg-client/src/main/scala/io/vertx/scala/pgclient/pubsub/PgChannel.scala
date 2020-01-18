@@ -139,5 +139,5 @@ class PgChannel(private val _asJava: Object) extends ReadStream[String] {
 
 object PgChannel {
   def apply(asJava: JPgChannel) = new PgChannel(asJava)
-  
+
 }

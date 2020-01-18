@@ -96,7 +96,7 @@ public class DataObjectCodeGenerator extends Generator<Model> {
     imps.add("io.vertx.lang.scala.json.Json._");
     imps.add("io.vertx.core.json.JsonObject");
     imps.add("scala.collection.JavaConverters._");
-
+    imps.remove("io.vertx.ext.web.{Cookie => JCookie}");
 
     return imps;
   }

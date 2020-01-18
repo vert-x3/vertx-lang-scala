@@ -51,12 +51,12 @@ class KeycloakAuth(private val _asJava: Object) extends OpenIDConnectAuth (_asJa
 
 object KeycloakAuth {
   def apply(asJava: JKeycloakAuth) = new KeycloakAuth(asJava)
-  
+
   /**
    * Create a OAuth2Auth provider for Keycloak   * @param config the json config file exported from Keycloak admin console
    */
   def create(vertx: Vertx,config: io.vertx.core.json.JsonObject): OAuth2Auth = {
-    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx], config))
+    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx], config))//2 create
   }
 
   /**
@@ -64,7 +64,7 @@ object KeycloakAuth {
    * @param config the json config file exported from Keycloak admin console
    */
   def create(vertx: Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject): OAuth2Auth = {
-    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx], flow, config))
+    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx], flow, config))//2 create
   }
 
   /**
@@ -72,7 +72,7 @@ object KeycloakAuth {
    * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
    */
   def create(vertx: Vertx,config: io.vertx.core.json.JsonObject,httpClientOptions: HttpClientOptions): OAuth2Auth = {
-    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx], config, httpClientOptions.asJava))
+    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx], config, httpClientOptions.asJava))//2 create
   }
 
   /**
@@ -81,7 +81,7 @@ object KeycloakAuth {
    * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
    */
   def create(vertx: Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject,httpClientOptions: HttpClientOptions): OAuth2Auth = {
-    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx], flow, config, httpClientOptions.asJava))
+    OAuth2Auth(JKeycloakAuth.create(vertx.asJava.asInstanceOf[JVertx], flow, config, httpClientOptions.asJava))//2 create
   }
 
   /**
@@ -95,7 +95,7 @@ object KeycloakAuth {
    * @param handler the instantiated Oauth2 provider instance handler
    */
   def discover(vertx: Vertx,config: OAuth2ClientOptions,handler: Handler[AsyncResult[OAuth2Auth]]): Unit = {
-    JKeycloakAuth.discover(vertx.asJava.asInstanceOf[JVertx], config.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Auth]]{def handle(x: AsyncResult[JOAuth2Auth]) {handler.handle(AsyncResultWrapper[JOAuth2Auth, OAuth2Auth](x, a => OAuth2Auth(a)))}}))
+    JKeycloakAuth.discover(vertx.asJava.asInstanceOf[JVertx], config.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Auth]]{def handle(x: AsyncResult[JOAuth2Auth]) {handler.handle(AsyncResultWrapper[JOAuth2Auth, OAuth2Auth](x, a => OAuth2Auth(a)))}}))//2 discover
   }
 
 }

@@ -55,11 +55,11 @@ class SessionList(private val _asJava: JSessionList) {
 
 
 object SessionList {
-  
+
   def apply() = {
     new SessionList(new JSessionList(emptyObj()))
   }
-  
+
   def apply(t: JSessionList) = {
     if (t != null) {
       new SessionList(t)
@@ -67,7 +67,7 @@ object SessionList {
       new SessionList(new JSessionList(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): SessionList = {
     if (json != null) {
       new SessionList(new JSessionList(json))

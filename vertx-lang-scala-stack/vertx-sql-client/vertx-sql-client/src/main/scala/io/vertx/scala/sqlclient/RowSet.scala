@@ -17,7 +17,6 @@
 package io.vertx.scala.sqlclient
 
 import io.vertx.sqlclient.{RowIterator => JRowIterator}
-import io.vertx.sqlclient.{Row => JRow}
 import io.vertx.sqlclient.{RowSet => JRowSet}
 import scala.reflect.runtime.universe._
 import io.vertx.sqlclient.{SqlResult => JSqlResult}
@@ -30,7 +29,7 @@ import io.vertx.lang.scala.Converter._
 
   */
 
-class RowSet(private val _asJava: Object) extends SqlResult[RowSet] (_asJava) {
+class RowSet[R: TypeTag](private val _asJava: Object) extends SqlResult[RowSet[R]] (_asJava) {
 
 
 
@@ -40,24 +39,24 @@ class RowSet(private val _asJava: Object) extends SqlResult[RowSet] (_asJava) {
   /**
    * Get the result value.   * @return the result
    */
-  override def value (): RowSet = {
-    RowSet(asJava.asInstanceOf[JRowSet].value())
+  override def value (): RowSet[R] = {
+    RowSet[R](asJava.asInstanceOf[JRowSet[Object]].value())
   }
 
 
-  def iterator (): RowIterator = {
-    RowIterator(asJava.asInstanceOf[JRowSet].iterator())
+  def iterator (): RowIterator[R] = {
+    RowIterator[R](asJava.asInstanceOf[JRowSet[Object]].iterator())
   }
 
 
-  override def next (): RowSet = {
-    RowSet(asJava.asInstanceOf[JRowSet].next())
+  override def next (): RowSet[R] = {
+    RowSet[R](asJava.asInstanceOf[JRowSet[Object]].next())
   }
 
 
 }
 
 object RowSet {
-  def apply(asJava: JRowSet) = new RowSet(asJava)
-  
+  def apply[R: TypeTag](asJava: JRowSet[_]) = new RowSet[R](asJava)
+
 }

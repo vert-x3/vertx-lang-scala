@@ -63,14 +63,14 @@ class MqttConnAckMessage(private val _asJava: Object) {
 
 object MqttConnAckMessage {
   def apply(asJava: JMqttConnAckMessage) = new MqttConnAckMessage(asJava)
-  
+
   /**
    * Create a concrete instance of a Vert.x connack message   * @param code return code from the connection request
    * @param isSessionPresent is an old session is present
    * @return 
    */
   def create(code: io.netty.handler.codec.mqtt.MqttConnectReturnCode,isSessionPresent: Boolean): MqttConnAckMessage = {
-    MqttConnAckMessage(JMqttConnAckMessage.create(code, isSessionPresent.asInstanceOf[java.lang.Boolean]))
+    MqttConnAckMessage(JMqttConnAckMessage.create(code, isSessionPresent.asInstanceOf[java.lang.Boolean]))//2 create
   }
 
 }

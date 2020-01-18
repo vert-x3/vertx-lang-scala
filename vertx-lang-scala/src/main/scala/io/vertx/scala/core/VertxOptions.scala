@@ -375,11 +375,11 @@ class VertxOptions(private val _asJava: JVertxOptions) {
 
 
 object VertxOptions {
-  
+
   def apply() = {
     new VertxOptions(new JVertxOptions(emptyObj()))
   }
-  
+
   def apply(t: JVertxOptions) = {
     if (t != null) {
       new VertxOptions(t)
@@ -387,7 +387,7 @@ object VertxOptions {
       new VertxOptions(new JVertxOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): VertxOptions = {
     if (json != null) {
       new VertxOptions(new JVertxOptions(json))

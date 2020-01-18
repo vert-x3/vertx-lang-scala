@@ -96,5 +96,5 @@ class HashStrategy(private val _asJava: Object) {
 
 object HashStrategy {
   def apply(asJava: JHashStrategy) = new HashStrategy(asJava)
-  
+
 }

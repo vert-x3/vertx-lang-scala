@@ -139,13 +139,13 @@ class JDBCAuth(private val _asJava: Object) extends AuthProvider (_asJava) {
 
 object JDBCAuth {
   def apply(asJava: JJDBCAuth) = new JDBCAuth(asJava)
-  
+
   /**
    * Create a JDBC auth provider implementation   * @param client the JDBC client instance
    * @return the auth provider
    */
   def create(vertx: Vertx,client: JDBCClient): JDBCAuth = {
-    JDBCAuth(JJDBCAuth.create(vertx.asJava.asInstanceOf[JVertx], client.asJava.asInstanceOf[JJDBCClient]))
+    JDBCAuth(JJDBCAuth.create(vertx.asJava.asInstanceOf[JVertx], client.asJava.asInstanceOf[JJDBCClient]))//2 create
   }
 
 }

@@ -193,5 +193,5 @@ class CommandProcess(private val _asJava: Object) extends Tty (_asJava) {
 
 object CommandProcess {
   def apply(asJava: JCommandProcess) = new CommandProcess(asJava)
-  
+
 }

@@ -69,11 +69,11 @@ class ConfigResource(private val _asJava: JConfigResource) {
 
 
 object ConfigResource {
-  
+
   def apply() = {
     new ConfigResource(new JConfigResource(emptyObj()))
   }
-  
+
   def apply(t: JConfigResource) = {
     if (t != null) {
       new ConfigResource(t)
@@ -81,7 +81,7 @@ object ConfigResource {
       new ConfigResource(new JConfigResource(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ConfigResource = {
     if (json != null) {
       new ConfigResource(new JConfigResource(json))

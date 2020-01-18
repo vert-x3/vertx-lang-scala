@@ -136,20 +136,20 @@ class Destination(private val _asJava: Object) {
 
 object Destination {
   def apply(asJava: JDestination) = new Destination(asJava)
-  
+
 
   def topic(vertx: Vertx,destination: String): Destination = {
-    Destination(JDestination.topic(vertx.asJava.asInstanceOf[JVertx], destination.asInstanceOf[java.lang.String]))
+    Destination(JDestination.topic(vertx.asJava.asInstanceOf[JVertx], destination.asInstanceOf[java.lang.String]))//2 topic
   }
 
 
   def queue(vertx: Vertx,destination: String): Destination = {
-    Destination(JDestination.queue(vertx.asJava.asInstanceOf[JVertx], destination.asInstanceOf[java.lang.String]))
+    Destination(JDestination.queue(vertx.asJava.asInstanceOf[JVertx], destination.asInstanceOf[java.lang.String]))//2 queue
   }
 
 
   def bridge(vertx: Vertx,options: BridgeOptions): Destination = {
-    Destination(JDestination.bridge(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    Destination(JDestination.bridge(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 bridge
   }
 
 }

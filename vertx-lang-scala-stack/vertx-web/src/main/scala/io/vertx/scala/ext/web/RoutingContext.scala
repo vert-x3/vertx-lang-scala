@@ -18,11 +18,12 @@ package io.vertx.scala.ext.web
 
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
 import io.vertx.scala.core.http.HttpServerResponse
+import io.vertx.scala.core.http.Cookie
 import scala.reflect.runtime.universe._
 import io.vertx.ext.web.{Route => JRoute}
 import io.vertx.scala.core.Vertx
 import io.vertx.scala.ext.auth.User
-import io.vertx.ext.web.{Cookie => JCookie}
+import io.vertx.core.http.{Cookie => JCookie}
 import io.vertx.ext.web.{Locale => JLocale}
 import io.vertx.ext.auth.{User => JUser}
 import io.vertx.ext.web.{ParsedHeaderValues => JParsedHeaderValues}
@@ -48,7 +49,7 @@ import io.vertx.lang.scala.HandlerOps._
   * Represents the context for the handling of a request in Vert.x-Web.
   * 
   * A new instance is created for each HTTP request that is received in the
-  *  of the router.
+  * [[io.vertx.scala.core.Handler#handle]] of the router.
   * 
   * The same instance is passed to any matching request or failure handlers during the routing of the request or
   * failure.
@@ -226,8 +227,7 @@ class RoutingContext(private val _asJava: Object) {
   }
 
   /**
-   * Add a cookie. This will be sent back to the client in the response. The context must have first been routed
-   * to a [[io.vertx.scala.ext.web.handler.CookieHandler]] for this to work.   * @param cookie the cookie
+   * Add a cookie. This will be sent back to the client in the response.   * @param cookie the cookie
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -238,8 +238,7 @@ class RoutingContext(private val _asJava: Object) {
 
 
   /**
-   * Expire a cookie, notifying a User Agent to remove it from its cookie jar. The context must have first been routed
-   * to a [[io.vertx.scala.ext.web.handler.CookieHandler]] for this to work.   * @param name the name of the cookie
+   * Expire a cookie, notifying a User Agent to remove it from its cookie jar.   * @param name the name of the cookie
    * @return the cookie, if it existed, or null
    */
   def removeCookie(name: String): scala.Option[Cookie] = {
@@ -248,7 +247,7 @@ class RoutingContext(private val _asJava: Object) {
 
   /**
    * Restarts the current router with a new path and reusing the original method. All path parameters are then parsed
-   * and available on the params list.   * @param path the new http path.
+   * and available on the params list. Query params will also be allowed and available.   * @param path the new http path.
    */
   def reroute(path: String): Unit = {
     asJava.asInstanceOf[JRoutingContext].reroute(path.asInstanceOf[java.lang.String])
@@ -349,8 +348,7 @@ class RoutingContext(private val _asJava: Object) {
   }
 
   /**
-   * Get the cookie with the specified name. The context must have first been routed to a [[io.vertx.scala.ext.web.handler.CookieHandler]]
-   * for this to work.   * @param name the cookie name
+   * Get the cookie with the specified name.   * @param name the cookie name
    * @return the cookie
    */
   def getCookie (name: String): scala.Option[Cookie] = {
@@ -359,8 +357,7 @@ class RoutingContext(private val _asJava: Object) {
 
   /**
    * Remove a cookie from the cookie set. If invalidate is true then it will expire a cookie, notifying a User Agent to
-   * remove it from its cookie jar. The context must have first been routed to a
-   * [[io.vertx.scala.ext.web.handler.CookieHandler]] for this to work.   * @param name the name of the cookie
+   * remove it from its cookie jar.   * @param name the name of the cookie
    * @return the cookie, if it existed, or null
    */
   def removeCookie (name: String, invalidate: Boolean): scala.Option[Cookie] = {
@@ -368,14 +365,14 @@ class RoutingContext(private val _asJava: Object) {
   }
 
   /**
-   * @return the number of cookies. The context must have first been routed to a io.vertx.scala.ext.web.handler.CookieHandler for this to work.
+   * @return the number of cookies.
    */
   def cookieCount (): Int = {
     asJava.asInstanceOf[JRoutingContext].cookieCount().asInstanceOf[Int]
   }
 
   /**
-   * @return a set of all the cookies. The context must have first been routed to a io.vertx.scala.ext.web.handler.CookieHandler for this to be populated.
+   * @return a set of all the cookies.
    */
   def cookies (): scala.collection.mutable.Set[Cookie] = {
     asJava.asInstanceOf[JRoutingContext].cookies().asScala.map(x => Cookie(x))
@@ -530,7 +527,7 @@ class RoutingContext(private val _asJava: Object) {
 
   /**
    * Restarts the current router with a new method and path. All path parameters are then parsed and available on the
-   * params list.   * @param method the new http request
+   * params list. Query params will also be allowed and available.   * @param method the new http request
    * @param path the new http path.
    */
   def reroute (method: io.vertx.core.http.HttpMethod, path: String): Unit = {
@@ -574,5 +571,5 @@ class RoutingContext(private val _asJava: Object) {
 
 object RoutingContext {
   def apply(asJava: JRoutingContext) = new RoutingContext(asJava)
-  
+
 }

@@ -99,5 +99,5 @@ class Shell(private val _asJava: Object) {
 
 object Shell {
   def apply(asJava: JShell) = new Shell(asJava)
-  
+
 }

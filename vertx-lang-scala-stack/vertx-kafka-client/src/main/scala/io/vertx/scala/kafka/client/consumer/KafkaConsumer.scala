@@ -61,13 +61,6 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
 
 
   override 
-  def fetch(arg0: Long): ReadStream[KafkaConsumerRecord[K, V]] = {
-    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].fetch(arg0.asInstanceOf[java.lang.Long])
-    this
-  }
-
-
-  override 
   def exceptionHandler(handler: Handler[Throwable]): KafkaConsumer[K, V] = {
     asJava.asInstanceOf[JKafkaConsumer[Object, Object]].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
     this
@@ -98,6 +91,13 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
   override 
   def endHandler(endHandler: Handler[Unit]): KafkaConsumer[K, V] = {
     asJava.asInstanceOf[JKafkaConsumer[Object, Object]].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
+    this
+  }
+
+
+  override 
+  def fetch(amount: Long): KafkaConsumer[K, V] = {
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].fetch(amount.asInstanceOf[java.lang.Long])
     this
   }
 
@@ -547,6 +547,18 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
     this
   }
 
+  /**
+   * Sets the poll timeout (in ms) for the underlying native Kafka Consumer. Defaults to 1000.
+   * Setting timeout to a lower value results in a more 'responsive' client, because it will block for a shorter period
+   * if no data is available in the assigned partition and therefore allows subsequent actions to be executed with a shorter
+   * delay. At the same time, the client will poll more frequently and thus will potentially create a higher load on the Kafka Broker.   * @param timeout The time, in milliseconds, spent waiting in poll if data is not available in the buffer. If 0, returns immediately with any records that are available currently in the native Kafka consumer's buffer, else returns empty. Must not be negative.
+   */
+  
+  def pollTimeout(timeout: Long): KafkaConsumer[K, V] = {
+    asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pollTimeout(timeout.asInstanceOf[java.lang.Long])
+    this
+  }
+
 
 
   override def pipe(): Pipe[KafkaConsumerRecord[K, V]] = {
@@ -640,16 +652,6 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
    */
   def endOffsets (topicPartition: TopicPartition, handler: Handler[AsyncResult[Long]]): Unit = {
     asJava.asInstanceOf[JKafkaConsumer[Object, Object]].endOffsets(topicPartition.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Long]]{def handle(x: AsyncResult[java.lang.Long]) {handler.handle(AsyncResultWrapper[java.lang.Long, Long](x, a => a.asInstanceOf[Long]))}}))
-  }
-
-  /**
-   * Sets the poll timeout (in ms) for the underlying native Kafka Consumer. Defaults to 1000.
-   * Setting timeout to a lower value results in a more 'responsive' client, because it will block for a shorter period
-   * if no data is available in the assigned partition and therefore allows subsequent actions to be executed with a shorter
-   * delay. At the same time, the client will poll more frequently and thus will potentially create a higher load on the Kafka Broker.   * @param timeout The time, in milliseconds, spent waiting in poll if data is not available in the buffer. If 0, returns immediately with any records that are available currently in the native Kafka consumer's buffer, else returns empty. Must not be negative.
-   */
-  def pollTimeout (timeout: Long): KafkaConsumer[K, V] = {
-    KafkaConsumer[K, V](asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pollTimeout(timeout.asInstanceOf[java.lang.Long]))
   }
 
   /**
@@ -933,14 +935,14 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
 
 object KafkaConsumer {
   def apply[K: TypeTag, V: TypeTag](asJava: JKafkaConsumer[_, _]) = new KafkaConsumer[K, V](asJava)
-  
+
   /**
    * Create a new KafkaConsumer instance   * @param vertx Vert.x instance to use
    * @param config Kafka consumer configuration
    * @return an instance of the KafkaConsumer
    */
   def create[K: TypeTag, V: TypeTag](vertx: Vertx,config: scala.collection.mutable.Map[String, String]): KafkaConsumer[K, V] = {
-    KafkaConsumer[K, V](JKafkaConsumer.create[Object, Object](vertx.asJava.asInstanceOf[JVertx], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava))
+    KafkaConsumer[K, V](JKafkaConsumer.create[Object, Object](vertx.asJava.asInstanceOf[JVertx], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava))//2 create
   }
 
   /**
@@ -951,7 +953,7 @@ object KafkaConsumer {
    * @return an instance of the KafkaConsumer
    */
   def create[K: TypeTag, V: TypeTag](vertx: Vertx,config: scala.collection.mutable.Map[String, String],keyType: Class[K],valueType: Class[V]): KafkaConsumer[K, V] = {
-    KafkaConsumer[K, V](JKafkaConsumer.create[Object, Object](vertx.asJava.asInstanceOf[JVertx], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, toJavaClass(keyType), toJavaClass(valueType)))
+    KafkaConsumer[K, V](JKafkaConsumer.create[Object, Object](vertx.asJava.asInstanceOf[JVertx], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava, toJavaClass(keyType), toJavaClass(valueType)))//2 create
   }
 
 }

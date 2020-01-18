@@ -57,6 +57,34 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
   }
 
 
+  override 
+  def onComplete(handler: Handler[AsyncResult[CompositeFuture]]): CompositeFuture = {
+    asJava.asInstanceOf[JCompositeFuture].onComplete((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JCompositeFuture]]{def handle(x: AsyncResult[JCompositeFuture]) {handler.handle(AsyncResultWrapper[JCompositeFuture, CompositeFuture](x, a => CompositeFuture(a)))}}))
+    this
+  }
+
+
+  override 
+  def onSuccess(handler: Handler[CompositeFuture]): CompositeFuture = {
+    asJava.asInstanceOf[JCompositeFuture].onSuccess((if (handler == null) null else new io.vertx.core.Handler[JCompositeFuture]{def handle(x: JCompositeFuture) {handler.handle(CompositeFuture(x))}}))
+    this
+  }
+
+
+  override 
+  def onFailure(handler: Handler[Throwable]): CompositeFuture = {
+    asJava.asInstanceOf[JCompositeFuture].onFailure((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
+    this
+  }
+
+
+  /**
+   * Alias for [[io.vertx.scala.core.Future#compose]].
+   */
+  override def flatMap[U: TypeTag](mapper: CompositeFuture => Future[U]): Future[U] = {
+    Future[U](asJava.asInstanceOf[JCompositeFuture].flatMap[Object]({x: JCompositeFuture => mapper(CompositeFuture(x)).asJava.asInstanceOf[JFuture[Object]]}))
+  }
+
   /**
    * Compose this future with a `mapper` function.
    *
@@ -72,6 +100,25 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
    */
   override def compose[U: TypeTag](mapper: CompositeFuture => Future[U]): Future[U] = {
     Future[U](asJava.asInstanceOf[JCompositeFuture].compose[Object]({x: JCompositeFuture => mapper(CompositeFuture(x)).asJava.asInstanceOf[JFuture[Object]]}))
+  }
+
+  /**
+   * Compose this future with a `successMapper` and `failureMapper` functions.
+   *
+   * When this future (the one on which `compose` is called) succeeds, the `successMapper` will be called with
+   * the completed value and this mapper returns another future object. This returned future completion will complete
+   * the future returned by this method call.
+   *
+   * When this future (the one on which `compose` is called) fails, the `failureMapper` will be called with
+   * the failure and this mapper returns another future object. This returned future completion will complete
+   * the future returned by this method call.
+   *
+   * If any mapper function throws an exception, the returned future will be failed with this exception.   * @param successMapper the function mapping the success
+   * @param failureMapper the function mapping the failure
+   * @return the composed future
+   */
+  override def compose[U: TypeTag](successMapper: CompositeFuture => Future[U], failureMapper: Throwable => Future[U]): Future[U] = {
+    Future[U](asJava.asInstanceOf[JCompositeFuture].compose[Object]({x: JCompositeFuture => successMapper(CompositeFuture(x)).asJava.asInstanceOf[JFuture[Object]]}, {x: Throwable => failureMapper(x).asJava.asInstanceOf[JFuture[Object]]}))
   }
 
   /**
@@ -224,7 +271,7 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
 
 object CompositeFuture {
   def apply(asJava: JCompositeFuture) = new CompositeFuture(asJava)
-  
+
   /**
    * Return a composite future, succeeded when all futures are succeeded, failed when any future is failed.
    * <p/>
@@ -233,35 +280,35 @@ object CompositeFuture {
    * @return the composite future
    */
   def all[T1, T2](f1: Future[T1],f2: Future[T2]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.all[Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.all[Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]]))//2 all
   }
 
   /**
    * Like [[io.vertx.scala.core.CompositeFuture#all]] but with 3 futures.
    */
   def all[T1, T2, T3](f1: Future[T1],f2: Future[T2],f3: Future[T3]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.all[Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.all[Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]]))//2 all
   }
 
   /**
    * Like [[io.vertx.scala.core.CompositeFuture#all]] but with 4 futures.
    */
   def all[T1, T2, T3, T4](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.all[Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.all[Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]]))//2 all
   }
 
   /**
    * Like [[io.vertx.scala.core.CompositeFuture#all]] but with 5 futures.
    */
   def all[T1, T2, T3, T4, T5](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.all[Object, Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]], f5.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.all[Object, Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]], f5.asJava.asInstanceOf[JFuture[Object]]))//2 all
   }
 
   /**
    * Like [[io.vertx.scala.core.CompositeFuture#all]] but with 6 futures.
    */
   def all[T1, T2, T3, T4, T5, T6](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5],f6: Future[T6]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.all[Object, Object, Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]], f5.asJava.asInstanceOf[JFuture[Object]], f6.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.all[Object, Object, Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]], f5.asJava.asInstanceOf[JFuture[Object]], f6.asJava.asInstanceOf[JFuture[Object]]))//2 all
   }
 
   /**
@@ -270,7 +317,7 @@ object CompositeFuture {
    * When the list is empty, the returned future will be already completed.
    */
   def all(futures: scala.collection.mutable.Buffer[Future[_]]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.all(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
+    CompositeFuture(JCompositeFuture.all(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))//2 all
   }
 
   /**
@@ -281,35 +328,35 @@ object CompositeFuture {
    * @return the composite future
    */
   def any[T1, T2](f1: Future[T1],f2: Future[T2]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.any[Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.any[Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]]))//2 any
   }
 
   /**
    * Like [[io.vertx.scala.core.CompositeFuture#any]] but with 3 futures.
    */
   def any[T1, T2, T3](f1: Future[T1],f2: Future[T2],f3: Future[T3]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.any[Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.any[Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]]))//2 any
   }
 
   /**
    * Like [[io.vertx.scala.core.CompositeFuture#any]] but with 4 futures.
    */
   def any[T1, T2, T3, T4](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.any[Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.any[Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]]))//2 any
   }
 
   /**
    * Like [[io.vertx.scala.core.CompositeFuture#any]] but with 5 futures.
    */
   def any[T1, T2, T3, T4, T5](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.any[Object, Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]], f5.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.any[Object, Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]], f5.asJava.asInstanceOf[JFuture[Object]]))//2 any
   }
 
   /**
    * Like [[io.vertx.scala.core.CompositeFuture#any]] but with 6 futures.
    */
   def any[T1, T2, T3, T4, T5, T6](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5],f6: Future[T6]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.any[Object, Object, Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]], f5.asJava.asInstanceOf[JFuture[Object]], f6.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.any[Object, Object, Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]], f5.asJava.asInstanceOf[JFuture[Object]], f6.asJava.asInstanceOf[JFuture[Object]]))//2 any
   }
 
   /**
@@ -318,7 +365,7 @@ object CompositeFuture {
    * When the list is empty, the returned future will be already completed.
    */
   def any(futures: scala.collection.mutable.Buffer[Future[_]]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.any(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
+    CompositeFuture(JCompositeFuture.any(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))//2 any
   }
 
   /**
@@ -329,35 +376,35 @@ object CompositeFuture {
    * @return the composite future
    */
   def join[T1, T2](f1: Future[T1],f2: Future[T2]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.join[Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.join[Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]]))//2 join
   }
 
   /**
    * Like [[io.vertx.scala.core.CompositeFuture#join]] but with 3 futures.
    */
   def join[T1, T2, T3](f1: Future[T1],f2: Future[T2],f3: Future[T3]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.join[Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.join[Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]]))//2 join
   }
 
   /**
    * Like [[io.vertx.scala.core.CompositeFuture#join]] but with 4 futures.
    */
   def join[T1, T2, T3, T4](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.join[Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.join[Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]]))//2 join
   }
 
   /**
    * Like [[io.vertx.scala.core.CompositeFuture#join]] but with 5 futures.
    */
   def join[T1, T2, T3, T4, T5](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.join[Object, Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]], f5.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.join[Object, Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]], f5.asJava.asInstanceOf[JFuture[Object]]))//2 join
   }
 
   /**
    * Like [[io.vertx.scala.core.CompositeFuture#join]] but with 6 futures.
    */
   def join[T1, T2, T3, T4, T5, T6](f1: Future[T1],f2: Future[T2],f3: Future[T3],f4: Future[T4],f5: Future[T5],f6: Future[T6]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.join[Object, Object, Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]], f5.asJava.asInstanceOf[JFuture[Object]], f6.asJava.asInstanceOf[JFuture[Object]]))
+    CompositeFuture(JCompositeFuture.join[Object, Object, Object, Object, Object, Object](f1.asJava.asInstanceOf[JFuture[Object]], f2.asJava.asInstanceOf[JFuture[Object]], f3.asJava.asInstanceOf[JFuture[Object]], f4.asJava.asInstanceOf[JFuture[Object]], f5.asJava.asInstanceOf[JFuture[Object]], f6.asJava.asInstanceOf[JFuture[Object]]))//2 join
   }
 
   /**
@@ -366,7 +413,7 @@ object CompositeFuture {
    * When the list is empty, the returned future will be already completed.
    */
   def join(futures: scala.collection.mutable.Buffer[Future[_]]): CompositeFuture = {
-    CompositeFuture(JCompositeFuture.join(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))
+    CompositeFuture(JCompositeFuture.join(futures.map(x => x.asJava.asInstanceOf[JFuture[_]]).asJava))//2 join
   }
 
 }

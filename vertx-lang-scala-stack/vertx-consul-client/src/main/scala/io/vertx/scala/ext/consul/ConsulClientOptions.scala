@@ -462,6 +462,24 @@ class ConsulClientOptions(private val _asJava: JConsulClientOptions) extends Ext
     asJava.getMaxWaitQueueSize().asInstanceOf[Int]
   }
 
+  override def setMaxWebSocketFrameSize(value: Int) = {
+    asJava.setMaxWebSocketFrameSize(value)
+    this
+  }
+
+  override def getMaxWebSocketFrameSize: Int = {
+    asJava.getMaxWebSocketFrameSize().asInstanceOf[Int]
+  }
+
+  override def setMaxWebSocketMessageSize(value: Int) = {
+    asJava.setMaxWebSocketMessageSize(value)
+    this
+  }
+
+  override def getMaxWebSocketMessageSize: Int = {
+    asJava.getMaxWebSocketMessageSize().asInstanceOf[Int]
+  }
+
   /**
    * Set the max websocket frame size
    */
@@ -840,9 +858,23 @@ class ConsulClientOptions(private val _asJava: JConsulClientOptions) extends Ext
     asJava.isTryUseCompression().asInstanceOf[Boolean]
   }
 
+  override def setTryUsePerFrameWebSocketCompression(value: Boolean) = {
+    asJava.setTryUsePerFrameWebSocketCompression(value)
+    this
+  }
+
   override def setTryUsePerFrameWebsocketCompression(value: Boolean) = {
     asJava.setTryUsePerFrameWebsocketCompression(value)
     this
+  }
+
+  override def setTryUsePerMessageWebSocketCompression(value: Boolean) = {
+    asJava.setTryUsePerMessageWebSocketCompression(value)
+    this
+  }
+
+  override def getTryUsePerMessageWebSocketCompression: Boolean = {
+    asJava.getTryUsePerMessageWebSocketCompression().asInstanceOf[Boolean]
   }
 
   override def setTryUsePerMessageWebsocketCompression(value: Boolean) = {
@@ -914,6 +946,33 @@ class ConsulClientOptions(private val _asJava: JConsulClientOptions) extends Ext
     asJava.isVerifyHost().asInstanceOf[Boolean]
   }
 
+  override def setWebSocketCompressionAllowClientNoContext(value: Boolean) = {
+    asJava.setWebSocketCompressionAllowClientNoContext(value)
+    this
+  }
+
+  override def getWebSocketCompressionAllowClientNoContext: Boolean = {
+    asJava.getWebSocketCompressionAllowClientNoContext().asInstanceOf[Boolean]
+  }
+
+  override def setWebSocketCompressionLevel(value: Int) = {
+    asJava.setWebSocketCompressionLevel(value)
+    this
+  }
+
+  override def getWebSocketCompressionLevel: Int = {
+    asJava.getWebSocketCompressionLevel().asInstanceOf[Int]
+  }
+
+  override def setWebSocketCompressionRequestServerNoContext(value: Boolean) = {
+    asJava.setWebSocketCompressionRequestServerNoContext(value)
+    this
+  }
+
+  override def getWebSocketCompressionRequestServerNoContext: Boolean = {
+    asJava.getWebSocketCompressionRequestServerNoContext().asInstanceOf[Boolean]
+  }
+
   override def setWebsocketCompressionAllowClientNoContext(value: Boolean) = {
     asJava.setWebsocketCompressionAllowClientNoContext(value)
     this
@@ -945,11 +1004,11 @@ class ConsulClientOptions(private val _asJava: JConsulClientOptions) extends Ext
 
 
 object ConsulClientOptions {
-  
+
   def apply() = {
     new ConsulClientOptions(new JConsulClientOptions(emptyObj()))
   }
-  
+
   def apply(t: JConsulClientOptions) = {
     if (t != null) {
       new ConsulClientOptions(t)
@@ -957,7 +1016,7 @@ object ConsulClientOptions {
       new ConsulClientOptions(new JConsulClientOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ConsulClientOptions = {
     if (json != null) {
       new ConsulClientOptions(new JConsulClientOptions(json))

@@ -51,11 +51,11 @@ class SetOptions(private val _asJava: JSetOptions) {
 
 
 object SetOptions {
-  
+
   def apply() = {
     new SetOptions(new JSetOptions(emptyObj()))
   }
-  
+
   def apply(t: JSetOptions) = {
     if (t != null) {
       new SetOptions(t)
@@ -63,7 +63,7 @@ object SetOptions {
       new SetOptions(new JSetOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): SetOptions = {
     if (json != null) {
       new SetOptions(new JSetOptions(json))

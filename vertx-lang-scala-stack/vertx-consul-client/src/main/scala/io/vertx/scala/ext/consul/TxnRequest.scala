@@ -34,11 +34,11 @@ class TxnRequest(private val _asJava: JTxnRequest) {
 
 
 object TxnRequest {
-  
+
   def apply() = {
     new TxnRequest(new JTxnRequest(emptyObj()))
   }
-  
+
   def apply(t: JTxnRequest) = {
     if (t != null) {
       new TxnRequest(t)
@@ -46,7 +46,7 @@ object TxnRequest {
       new TxnRequest(new JTxnRequest(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): TxnRequest = {
     if (json != null) {
       new TxnRequest(new JTxnRequest(json))

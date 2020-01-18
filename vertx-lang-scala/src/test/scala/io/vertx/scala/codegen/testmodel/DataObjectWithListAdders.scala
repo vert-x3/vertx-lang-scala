@@ -97,11 +97,11 @@ class DataObjectWithListAdders(private val _asJava: JDataObjectWithListAdders) {
 
 
 object DataObjectWithListAdders {
-  
+
   def apply() = {
     new DataObjectWithListAdders(new JDataObjectWithListAdders(emptyObj()))
   }
-  
+
   def apply(t: JDataObjectWithListAdders) = {
     if (t != null) {
       new DataObjectWithListAdders(t)
@@ -109,7 +109,7 @@ object DataObjectWithListAdders {
       new DataObjectWithListAdders(new JDataObjectWithListAdders(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DataObjectWithListAdders = {
     if (json != null) {
       new DataObjectWithListAdders(new JDataObjectWithListAdders(json))

@@ -79,11 +79,11 @@ class Node(private val _asJava: JNode) {
 
 
 object Node {
-  
+
   def apply() = {
     new Node(new JNode(emptyObj()))
   }
-  
+
   def apply(t: JNode) = {
     if (t != null) {
       new Node(t)
@@ -91,7 +91,7 @@ object Node {
       new Node(new JNode(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Node = {
     if (json != null) {
       new Node(new JNode(json))

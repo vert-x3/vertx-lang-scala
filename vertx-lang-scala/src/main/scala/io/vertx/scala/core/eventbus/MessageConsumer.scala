@@ -216,5 +216,5 @@ class MessageConsumer[T: TypeTag](private val _asJava: Object) extends ReadStrea
 
 object MessageConsumer {
   def apply[T: TypeTag](asJava: JMessageConsumer[_]) = new MessageConsumer[T](asJava)
-  
+
 }

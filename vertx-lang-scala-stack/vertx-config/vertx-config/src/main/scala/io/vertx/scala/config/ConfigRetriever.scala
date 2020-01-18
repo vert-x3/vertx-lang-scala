@@ -124,14 +124,14 @@ class ConfigRetriever(private val _asJava: Object) {
 
 object ConfigRetriever {
   def apply(asJava: JConfigRetriever) = new ConfigRetriever(asJava)
-  
+
   /**
    * Creates an instance of the default implementation of the [[io.vertx.scala.config.ConfigRetriever]].   * @param vertx the vert.x instance
    * @param options the options, must not be `null`, must contain the list of configured store. see <a href="../../../../../../cheatsheet/ConfigRetrieverOptions.html">ConfigRetrieverOptions</a>
    * @return the created instance.
    */
   def create(vertx: Vertx,options: ConfigRetrieverOptions): ConfigRetriever = {
-    ConfigRetriever(JConfigRetriever.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    ConfigRetriever(JConfigRetriever.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
   /**
@@ -140,7 +140,7 @@ object ConfigRetriever {
    * @return the created instance.
    */
   def create(vertx: Vertx): ConfigRetriever = {
-    ConfigRetriever(JConfigRetriever.create(vertx.asJava.asInstanceOf[JVertx]))
+    ConfigRetriever(JConfigRetriever.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -149,7 +149,7 @@ object ConfigRetriever {
    * @return the future completed when the configuration is retrieved
    */
   def getConfigAsFuture(retriever: ConfigRetriever): Future[io.vertx.core.json.JsonObject] = {
-    Future[io.vertx.core.json.JsonObject](JConfigRetriever.getConfigAsFuture(retriever.asJava.asInstanceOf[JConfigRetriever]))
+    Future[io.vertx.core.json.JsonObject](JConfigRetriever.getConfigAsFuture(retriever.asJava.asInstanceOf[JConfigRetriever]))//2 getConfigAsFuture
   }
 
 }

@@ -71,11 +71,11 @@ class TopicDescription(private val _asJava: JTopicDescription) {
 
 
 object TopicDescription {
-  
+
   def apply() = {
     new TopicDescription(new JTopicDescription(emptyObj()))
   }
-  
+
   def apply(t: JTopicDescription) = {
     if (t != null) {
       new TopicDescription(t)
@@ -83,7 +83,7 @@ object TopicDescription {
       new TopicDescription(new JTopicDescription(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): TopicDescription = {
     if (json != null) {
       new TopicDescription(new JTopicDescription(json))

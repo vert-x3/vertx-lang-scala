@@ -150,5 +150,5 @@ class Session(private val _asJava: Object) {
 
 object Session {
   def apply(asJava: JSession) = new Session(asJava)
-  
+
 }

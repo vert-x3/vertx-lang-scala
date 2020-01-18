@@ -112,13 +112,13 @@ class DigestAuthHandler(private val _asJava: Object) extends AuthHandler with io
 
 object DigestAuthHandler {
   def apply(asJava: JDigestAuthHandler) = new DigestAuthHandler(asJava)
-  
+
   /**
    * Create a digest auth handler   * @param authProvider the auth provider to use
    * @return the auth handler
    */
   def create(authProvider: HtdigestAuth): DigestAuthHandler = {
-    DigestAuthHandler(JDigestAuthHandler.create(authProvider.asJava.asInstanceOf[JHtdigestAuth]))
+    DigestAuthHandler(JDigestAuthHandler.create(authProvider.asJava.asInstanceOf[JHtdigestAuth]))//2 create
   }
 
   /**
@@ -127,7 +127,7 @@ object DigestAuthHandler {
    * @return the auth handler
    */
   def create(authProvider: HtdigestAuth,nonceExpireTimeout: Long): DigestAuthHandler = {
-    DigestAuthHandler(JDigestAuthHandler.create(authProvider.asJava.asInstanceOf[JHtdigestAuth], nonceExpireTimeout.asInstanceOf[java.lang.Long]))
+    DigestAuthHandler(JDigestAuthHandler.create(authProvider.asJava.asInstanceOf[JHtdigestAuth], nonceExpireTimeout.asInstanceOf[java.lang.Long]))//2 create
   }
 
 }

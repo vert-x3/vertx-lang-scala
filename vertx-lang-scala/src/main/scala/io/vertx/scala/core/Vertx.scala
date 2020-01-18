@@ -184,7 +184,7 @@ class Vertx(private val _asJava: Object) extends Measured {
 
 
   /**
-   * Set a default exception handler for [[io.vertx.scala.core.Context]], set on  at creation.   * @param handler the exception handler
+   * Set a default exception handler for [[io.vertx.scala.core.Context]], set on [[io.vertx.scala.core.Context#exceptionHandler]] at creation.   * @param handler the exception handler
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -562,12 +562,12 @@ class Vertx(private val _asJava: Object) extends Measured {
 
 object Vertx {
   def apply(asJava: JVertx) = new Vertx(asJava)
-  
+
   /**
    * Creates a non clustered instance using default options.   * @return the instance
    */
   def vertx(): Vertx = {
-    Vertx(JVertx.vertx())
+    Vertx(JVertx.vertx())//2 vertx
   }
 
   /**
@@ -575,7 +575,7 @@ object Vertx {
    * @return the instance
    */
   def vertx(options: VertxOptions): Vertx = {
-    Vertx(JVertx.vertx(options.asJava))
+    Vertx(JVertx.vertx(options.asJava))//2 vertx
   }
 
   /**
@@ -585,14 +585,14 @@ object Vertx {
    * @param resultHandler the result handler that will receive the result
    */
   def clusteredVertx(options: VertxOptions,resultHandler: Handler[AsyncResult[Vertx]]): Unit = {
-    JVertx.clusteredVertx(options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JVertx]]{def handle(x: AsyncResult[JVertx]) {resultHandler.handle(AsyncResultWrapper[JVertx, Vertx](x, a => Vertx(a)))}}))
+    JVertx.clusteredVertx(options.asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JVertx]]{def handle(x: AsyncResult[JVertx]) {resultHandler.handle(AsyncResultWrapper[JVertx, Vertx](x, a => Vertx(a)))}}))//2 clusteredVertx
   }
 
   /**
    * Gets the current context   * @return The current context or null if no current context
    */
   def currentContext(): scala.Option[Context] = {
-    scala.Option(JVertx.currentContext()).map(Context(_))
+    scala.Option(JVertx.currentContext()).map(Context(_))//2 currentContext
   }
 
 }

@@ -63,11 +63,11 @@ class GeoRadiusOptions(private val _asJava: JGeoRadiusOptions) {
 
 
 object GeoRadiusOptions {
-  
+
   def apply() = {
     new GeoRadiusOptions(new JGeoRadiusOptions(emptyObj()))
   }
-  
+
   def apply(t: JGeoRadiusOptions) = {
     if (t != null) {
       new GeoRadiusOptions(t)
@@ -75,7 +75,7 @@ object GeoRadiusOptions {
       new GeoRadiusOptions(new JGeoRadiusOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): GeoRadiusOptions = {
     if (json != null) {
       new GeoRadiusOptions(new JGeoRadiusOptions(json))

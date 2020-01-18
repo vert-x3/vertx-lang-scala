@@ -86,11 +86,11 @@ class PfxOptions(private val _asJava: JPfxOptions) {
 
 
 object PfxOptions {
-  
+
   def apply() = {
     new PfxOptions(new JPfxOptions(emptyObj()))
   }
-  
+
   def apply(t: JPfxOptions) = {
     if (t != null) {
       new PfxOptions(t)
@@ -98,7 +98,7 @@ object PfxOptions {
       new PfxOptions(new JPfxOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): PfxOptions = {
     if (json != null) {
       new PfxOptions(new JPfxOptions(json))

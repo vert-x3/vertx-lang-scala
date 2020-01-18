@@ -79,11 +79,11 @@ class CopyOptions(private val _asJava: JCopyOptions) {
 
 
 object CopyOptions {
-  
+
   def apply() = {
     new CopyOptions(new JCopyOptions(emptyObj()))
   }
-  
+
   def apply(t: JCopyOptions) = {
     if (t != null) {
       new CopyOptions(t)
@@ -91,7 +91,7 @@ object CopyOptions {
       new CopyOptions(new JCopyOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): CopyOptions = {
     if (json != null) {
       new CopyOptions(new JCopyOptions(json))

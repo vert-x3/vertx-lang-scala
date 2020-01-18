@@ -59,7 +59,7 @@ The unshared client can be created the same way leaving out the identifier.
 [source,scala]
 ----
 var config = MailConfig()
-var mailClient = MailClient.createNonShared(vertx, config)
+var mailClient = MailClient.create(vertx, config)
 
 ----
 
@@ -72,7 +72,7 @@ config.setPort(587)
 config.setStarttls(StartTLSOptions.REQUIRED)
 config.setUsername("user")
 config.setPassword("password")
-var mailClient = MailClient.createNonShared(vertx, config)
+var mailClient = MailClient.create(vertx, config)
 
 ----
 
@@ -213,6 +213,7 @@ The configuration has the following properties
 * `keyStorePassword` String password used to decrypt the key store (optional)
 * `allowRcptErrors` boolean if true, sending continues if a recipient address is not accepted and the mail will be sent if at least one address is accepted (default false)
 * `disableEsmtp` boolean if true, ESMTP-related commands will not be used (set if your smtp server doesn't even give a proper error response code for the EHLO command) (default false)
+* `userAgent` String represents the Mail User Agent(MUA) name used to generate email boundaries for multipart emails and message-id, default is `vertxmail`.
 
 === MailResult object
 The MailResult object has the following members

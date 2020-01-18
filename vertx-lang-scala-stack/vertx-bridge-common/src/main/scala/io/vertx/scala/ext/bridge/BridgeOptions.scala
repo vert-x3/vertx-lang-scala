@@ -65,11 +65,11 @@ class BridgeOptions(private val _asJava: JBridgeOptions) {
 
 
 object BridgeOptions {
-  
+
   def apply() = {
     new BridgeOptions(new JBridgeOptions(emptyObj()))
   }
-  
+
   def apply(t: JBridgeOptions) = {
     if (t != null) {
       new BridgeOptions(t)
@@ -77,7 +77,7 @@ object BridgeOptions {
       new BridgeOptions(new JBridgeOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): BridgeOptions = {
     if (json != null) {
       new BridgeOptions(new JBridgeOptions(json))

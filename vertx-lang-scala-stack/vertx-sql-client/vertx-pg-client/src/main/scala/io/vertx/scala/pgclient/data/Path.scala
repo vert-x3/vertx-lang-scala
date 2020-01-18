@@ -52,11 +52,11 @@ class Path(private val _asJava: JPath) {
 
 
 object Path {
-  
+
   def apply() = {
     new Path(new JPath(emptyObj()))
   }
-  
+
   def apply(t: JPath) = {
     if (t != null) {
       new Path(t)
@@ -64,7 +64,7 @@ object Path {
       new Path(new JPath(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Path = {
     if (json != null) {
       new Path(new JPath(json))

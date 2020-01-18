@@ -86,11 +86,11 @@ class IndexOptions(private val _asJava: JIndexOptions) {
 
 
 object IndexOptions {
-  
+
   def apply() = {
     new IndexOptions(new JIndexOptions(emptyObj()))
   }
-  
+
   def apply(t: JIndexOptions) = {
     if (t != null) {
       new IndexOptions(t)
@@ -98,7 +98,7 @@ object IndexOptions {
       new IndexOptions(new JIndexOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): IndexOptions = {
     if (json != null) {
       new IndexOptions(new JIndexOptions(json))

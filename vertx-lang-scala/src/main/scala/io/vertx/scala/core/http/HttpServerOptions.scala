@@ -377,6 +377,30 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions) extends ExtNetS
   /**
    * Set the maximum WebSocket frames size
    */
+  def setMaxWebSocketFrameSize(value: Int) = {
+    asJava.setMaxWebSocketFrameSize(value)
+    this
+  }
+
+  def getMaxWebSocketFrameSize: Int = {
+    asJava.getMaxWebSocketFrameSize().asInstanceOf[Int]
+  }
+
+  /**
+   * Set the maximum WebSocket message size
+   */
+  def setMaxWebSocketMessageSize(value: Int) = {
+    asJava.setMaxWebSocketMessageSize(value)
+    this
+  }
+
+  def getMaxWebSocketMessageSize: Int = {
+    asJava.getMaxWebSocketMessageSize().asInstanceOf[Int]
+  }
+
+  /**
+   * Set the maximum WebSocket frames size
+   */
   def setMaxWebsocketFrameSize(value: Int) = {
     asJava.setMaxWebsocketFrameSize(value)
     this
@@ -434,6 +458,18 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions) extends ExtNetS
   /**
    * Enable or disable support for the WebSocket per-frame deflate compression extension.
    */
+  def setPerFrameWebSocketCompressionSupported(value: Boolean) = {
+    asJava.setPerFrameWebSocketCompressionSupported(value)
+    this
+  }
+
+  def getPerFrameWebSocketCompressionSupported: Boolean = {
+    asJava.getPerFrameWebSocketCompressionSupported().asInstanceOf[Boolean]
+  }
+
+  /**
+   * Enable or disable support for the WebSocket per-frame deflate compression extension.
+   */
   def setPerFrameWebsocketCompressionSupported(value: Boolean) = {
     asJava.setPerFrameWebsocketCompressionSupported(value)
     this
@@ -441,6 +477,18 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions) extends ExtNetS
 
   def getPerFrameWebsocketCompressionSupported: Boolean = {
     asJava.getPerFrameWebsocketCompressionSupported().asInstanceOf[Boolean]
+  }
+
+  /**
+   * Enable or disable support for WebSocket per-message deflate compression extension.
+   */
+  def setPerMessageWebSocketCompressionSupported(value: Boolean) = {
+    asJava.setPerMessageWebSocketCompressionSupported(value)
+    this
+  }
+
+  def getPerMessageWebSocketCompressionSupported: Boolean = {
+    asJava.getPerMessageWebSocketCompressionSupported().asInstanceOf[Boolean]
   }
 
   /**
@@ -713,6 +761,61 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions) extends ExtNetS
    * Set whether the WebSocket server will accept the `server_no_context_takeover` parameter of the per-message
    * deflate compression extension offered by the client.
    */
+  def setWebSocketAllowServerNoContext(value: Boolean) = {
+    asJava.setWebSocketAllowServerNoContext(value)
+    this
+  }
+
+  def getWebSocketAllowServerNoContext: Boolean = {
+    asJava.getWebSocketAllowServerNoContext().asInstanceOf[Boolean]
+  }
+
+  /**
+   * Set the WebSocket compression level.
+   */
+  def setWebSocketCompressionLevel(value: Int) = {
+    asJava.setWebSocketCompressionLevel(value)
+    this
+  }
+
+  def getWebSocketCompressionLevel: Int = {
+    asJava.getWebSocketCompressionLevel().asInstanceOf[Int]
+  }
+
+  /**
+   * Set whether the WebSocket server will accept the `client_no_context_takeover` parameter of the per-message
+   * deflate compression extension offered by the client.
+   */
+  def setWebSocketPreferredClientNoContext(value: Boolean) = {
+    asJava.setWebSocketPreferredClientNoContext(value)
+    this
+  }
+
+  def getWebSocketPreferredClientNoContext: Boolean = {
+    asJava.getWebSocketPreferredClientNoContext().asInstanceOf[Boolean]
+  }
+
+  /**
+   * Set the WebSocket list of sub-protocol supported by the server.
+   */
+  def addWebSocketSubProtocol(value: String) = {
+    asJava.addWebSocketSubProtocol(value)
+    this
+  }
+
+  def setWebSocketSubProtocols(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setWebSocketSubProtocols(value.asJava)
+    this
+  }
+
+  def getWebSocketSubProtocols: scala.collection.mutable.Buffer[String] = {
+    asJava.getWebSocketSubProtocols().asScala.map(x => x.asInstanceOf[String])
+  }
+
+  /**
+   * Set whether the WebSocket server will accept the `server_no_context_takeover` parameter of the per-message
+   * deflate compression extension offered by the client.
+   */
   def setWebsocketAllowServerNoContext(value: Boolean) = {
     asJava.setWebsocketAllowServerNoContext(value)
     this
@@ -763,11 +866,11 @@ class HttpServerOptions(private val _asJava: JHttpServerOptions) extends ExtNetS
 
 
 object HttpServerOptions {
-  
+
   def apply() = {
     new HttpServerOptions(new JHttpServerOptions(emptyObj()))
   }
-  
+
   def apply(t: JHttpServerOptions) = {
     if (t != null) {
       new HttpServerOptions(t)
@@ -775,7 +878,7 @@ object HttpServerOptions {
       new HttpServerOptions(new JHttpServerOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): HttpServerOptions = {
     if (json != null) {
       new HttpServerOptions(new JHttpServerOptions(json))

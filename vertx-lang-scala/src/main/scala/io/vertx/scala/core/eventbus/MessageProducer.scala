@@ -213,5 +213,5 @@ class MessageProducer[T: TypeTag](private val _asJava: Object) extends WriteStre
 
 object MessageProducer {
   def apply[T: TypeTag](asJava: JMessageProducer[_]) = new MessageProducer[T](asJava)
-  
+
 }

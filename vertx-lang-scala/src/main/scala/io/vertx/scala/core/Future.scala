@@ -48,11 +48,7 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
 
   /**
-   * Set a handler for the result.
-   * 
-   * If the future has already been completed it will be called immediately. Otherwise it will be called when the
-   * future is completed.   * @param handler the Handler that will be called with the result
-   * @return a reference to this, so it can be used fluently
+   * Like [[io.vertx.scala.core.Future#onComplete]].
    */
   
   def setHandler(handler: Handler[AsyncResult[T]]): Future[T] = {
@@ -60,6 +56,46 @@ class Future[T: TypeTag](private val _asJava: Object) {
     this
   }
 
+  /**
+   * Add a handler to be notified of the result.
+   * <br/>   * @param handler the handler that will be called with the result
+   * @return a reference to this, so it can be used fluently
+   */
+  
+  def onComplete(handler: Handler[AsyncResult[T]]): Future[T] = {
+    asJava.asInstanceOf[JFuture[Object]].onComplete((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {handler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))}}))
+    this
+  }
+
+  /**
+   * Add a handler to be notified of the succeeded result.
+   * <br/>   * @param handler the handler that will be called with the succeeded result
+   * @return a reference to this, so it can be used fluently
+   */
+  
+  def onSuccess(handler: Handler[T]): Future[T] = {
+    asJava.asInstanceOf[JFuture[Object]].onSuccess((if (handler == null) null else new io.vertx.core.Handler[Object]{def handle(x: Object) {handler.handle(toScala[T](x))}}))
+    this
+  }
+
+  /**
+   * Add a handler to be notified of the failed result.
+   * <br/>   * @param handler the handler that will be called with the failed result
+   * @return a reference to this, so it can be used fluently
+   */
+  
+  def onFailure(handler: Handler[Throwable]): Future[T] = {
+    asJava.asInstanceOf[JFuture[Object]].onFailure((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
+    this
+  }
+
+
+  /**
+   * Alias for [[io.vertx.scala.core.Future#compose]].
+   */
+  def flatMap[U: TypeTag](mapper: T => Future[U]): Future[U] = {
+    Future[U](asJava.asInstanceOf[JFuture[Object]].flatMap[Object]({x: Object => mapper(toScala[T](x)).asJava.asInstanceOf[JFuture[Object]]}))
+  }
 
   /**
    * Compose this future with a `mapper` function.
@@ -76,6 +112,25 @@ class Future[T: TypeTag](private val _asJava: Object) {
    */
   def compose[U: TypeTag](mapper: T => Future[U]): Future[U] = {
     Future[U](asJava.asInstanceOf[JFuture[Object]].compose[Object]({x: Object => mapper(toScala[T](x)).asJava.asInstanceOf[JFuture[Object]]}))
+  }
+
+  /**
+   * Compose this future with a `successMapper` and `failureMapper` functions.
+   *
+   * When this future (the one on which `compose` is called) succeeds, the `successMapper` will be called with
+   * the completed value and this mapper returns another future object. This returned future completion will complete
+   * the future returned by this method call.
+   *
+   * When this future (the one on which `compose` is called) fails, the `failureMapper` will be called with
+   * the failure and this mapper returns another future object. This returned future completion will complete
+   * the future returned by this method call.
+   *
+   * If any mapper function throws an exception, the returned future will be failed with this exception.   * @param successMapper the function mapping the success
+   * @param failureMapper the function mapping the failure
+   * @return the composed future
+   */
+  def compose[U: TypeTag](successMapper: T => Future[U], failureMapper: Throwable => Future[U]): Future[U] = {
+    Future[U](asJava.asInstanceOf[JFuture[Object]].compose[Object]({x: Object => successMapper(toScala[T](x)).asJava.asInstanceOf[JFuture[Object]]}, {x: Throwable => failureMapper(x).asJava.asInstanceOf[JFuture[Object]]}))
   }
 
   /**
@@ -270,27 +325,27 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
 object Future {
   def apply[T: TypeTag](asJava: JFuture[_]) = new Future[T](asJava)
-  
+
   /**
    * Create a future that hasn't completed yet and that is passed to the `handler` before it is returned.   * @param handler the handler
    * @return the future.
    */
   def future[T: TypeTag](handler: Handler[Promise[T]]): Future[T] = {
-    Future[T](JFuture.future[Object]((if (handler == null) null else new io.vertx.core.Handler[JPromise[Object]]{def handle(x: JPromise[Object]) {handler.handle(Promise[T](x))}})))
+    Future[T](JFuture.future[Object]((if (handler == null) null else new io.vertx.core.Handler[JPromise[Object]]{def handle(x: JPromise[Object]) {handler.handle(Promise[T](x))}})))//2 future
   }
 
   /**
    * Create a future that hasn't completed yet   * @return the future
    */
   def future[T: TypeTag](): Future[T] = {
-    Future[T](JFuture.future[Object]())
+    Future[T](JFuture.future[Object]())//2 future
   }
 
   /**
    * Create a succeeded future with a null result   * @return the future
    */
   def succeededFuture[T: TypeTag](): Future[T] = {
-    Future[T](JFuture.succeededFuture[Object]())
+    Future[T](JFuture.succeededFuture[Object]())//2 succeededFuture
   }
 
   /**
@@ -298,7 +353,7 @@ object Future {
    * @return the future
    */
   def succeededFuture[T: TypeTag](result: T): Future[T] = {
-    Future[T](JFuture.succeededFuture[Object](toJava[T](result)))
+    Future[T](JFuture.succeededFuture[Object](toJava[T](result)))//2 succeededFuture
   }
 
   /**
@@ -306,7 +361,7 @@ object Future {
    * @return the future
    */
   def failedFuture[T: TypeTag](t: Throwable): Future[T] = {
-    Future[T](JFuture.failedFuture[Object](t))
+    Future[T](JFuture.failedFuture[Object](t))//2 failedFuture
   }
 
   /**
@@ -314,7 +369,7 @@ object Future {
    * @return the future
    */
   def failedFuture[T: TypeTag](failureMessage: String): Future[T] = {
-    Future[T](JFuture.failedFuture[Object](failureMessage.asInstanceOf[java.lang.String]))
+    Future[T](JFuture.failedFuture[Object](failureMessage.asInstanceOf[java.lang.String]))//2 failedFuture
   }
 
 }

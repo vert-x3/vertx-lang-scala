@@ -334,6 +334,24 @@ class WebClientOptions(private val _asJava: JWebClientOptions) extends ExtHttpCl
     asJava.getMaxWaitQueueSize().asInstanceOf[Int]
   }
 
+  override def setMaxWebSocketFrameSize(value: Int) = {
+    asJava.setMaxWebSocketFrameSize(value)
+    this
+  }
+
+  override def getMaxWebSocketFrameSize: Int = {
+    asJava.getMaxWebSocketFrameSize().asInstanceOf[Int]
+  }
+
+  override def setMaxWebSocketMessageSize(value: Int) = {
+    asJava.setMaxWebSocketMessageSize(value)
+    this
+  }
+
+  override def getMaxWebSocketMessageSize: Int = {
+    asJava.getMaxWebSocketMessageSize().asInstanceOf[Int]
+  }
+
   override def setMaxWebsocketFrameSize(value: Int) = {
     asJava.setMaxWebsocketFrameSize(value)
     this
@@ -613,9 +631,23 @@ class WebClientOptions(private val _asJava: JWebClientOptions) extends ExtHttpCl
     asJava.isTryUseCompression().asInstanceOf[Boolean]
   }
 
+  override def setTryUsePerFrameWebSocketCompression(value: Boolean) = {
+    asJava.setTryUsePerFrameWebSocketCompression(value)
+    this
+  }
+
   override def setTryUsePerFrameWebsocketCompression(value: Boolean) = {
     asJava.setTryUsePerFrameWebsocketCompression(value)
     this
+  }
+
+  override def setTryUsePerMessageWebSocketCompression(value: Boolean) = {
+    asJava.setTryUsePerMessageWebSocketCompression(value)
+    this
+  }
+
+  override def getTryUsePerMessageWebSocketCompression: Boolean = {
+    asJava.getTryUsePerMessageWebSocketCompression().asInstanceOf[Boolean]
   }
 
   override def setTryUsePerMessageWebsocketCompression(value: Boolean) = {
@@ -678,6 +710,33 @@ class WebClientOptions(private val _asJava: JWebClientOptions) extends ExtHttpCl
     asJava.isVerifyHost().asInstanceOf[Boolean]
   }
 
+  override def setWebSocketCompressionAllowClientNoContext(value: Boolean) = {
+    asJava.setWebSocketCompressionAllowClientNoContext(value)
+    this
+  }
+
+  override def getWebSocketCompressionAllowClientNoContext: Boolean = {
+    asJava.getWebSocketCompressionAllowClientNoContext().asInstanceOf[Boolean]
+  }
+
+  override def setWebSocketCompressionLevel(value: Int) = {
+    asJava.setWebSocketCompressionLevel(value)
+    this
+  }
+
+  override def getWebSocketCompressionLevel: Int = {
+    asJava.getWebSocketCompressionLevel().asInstanceOf[Int]
+  }
+
+  override def setWebSocketCompressionRequestServerNoContext(value: Boolean) = {
+    asJava.setWebSocketCompressionRequestServerNoContext(value)
+    this
+  }
+
+  override def getWebSocketCompressionRequestServerNoContext: Boolean = {
+    asJava.getWebSocketCompressionRequestServerNoContext().asInstanceOf[Boolean]
+  }
+
   override def setWebsocketCompressionAllowClientNoContext(value: Boolean) = {
     asJava.setWebsocketCompressionAllowClientNoContext(value)
     this
@@ -709,11 +768,11 @@ class WebClientOptions(private val _asJava: JWebClientOptions) extends ExtHttpCl
 
 
 object WebClientOptions {
-  
+
   def apply() = {
     new WebClientOptions(new JWebClientOptions(emptyObj()))
   }
-  
+
   def apply(t: JWebClientOptions) = {
     if (t != null) {
       new WebClientOptions(t)
@@ -721,7 +780,7 @@ object WebClientOptions {
       new WebClientOptions(new JWebClientOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): WebClientOptions = {
     if (json != null) {
       new WebClientOptions(new JWebClientOptions(json))

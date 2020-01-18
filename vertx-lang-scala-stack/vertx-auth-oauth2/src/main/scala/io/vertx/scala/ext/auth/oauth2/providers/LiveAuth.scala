@@ -43,13 +43,13 @@ class LiveAuth(private val _asJava: Object) {
 
 object LiveAuth {
   def apply(asJava: JLiveAuth) = new LiveAuth(asJava)
-  
+
   /**
    * Create a OAuth2Auth provider for live.com   * @param clientId the client id given to you by live.com
    * @param clientSecret the client secret given to you by live.com
    */
   def create(vertx: Vertx,clientId: String,clientSecret: String): OAuth2Auth = {
-    OAuth2Auth(JLiveAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String]))
+    OAuth2Auth(JLiveAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String]))//2 create
   }
 
   /**
@@ -58,7 +58,7 @@ object LiveAuth {
    * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
    */
   def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
-    OAuth2Auth(JLiveAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], httpClientOptions.asJava))
+    OAuth2Auth(JLiveAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], httpClientOptions.asJava))//2 create
   }
 
 }

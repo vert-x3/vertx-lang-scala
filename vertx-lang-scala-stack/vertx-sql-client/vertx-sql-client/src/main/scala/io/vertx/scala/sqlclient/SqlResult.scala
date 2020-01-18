@@ -17,6 +17,7 @@
 package io.vertx.scala.sqlclient
 
 import scala.reflect.runtime.universe._
+import io.vertx.sqlclient.{PropertyKind => JPropertyKind}
 import io.vertx.sqlclient.{SqlResult => JSqlResult}
 import scala.collection.JavaConverters._
 import io.vertx.lang.scala.HandlerOps._
@@ -34,32 +35,32 @@ class SqlResult[T: TypeTag](private val _asJava: Object) {
 
 
   /**
-   * Get the number of the affected rows in the operation to this PgResult.
-   * <p/>
-   * The meaning depends on the executed statement:
-   * <ul>
-   *   <li>INSERT: the number of rows inserted</li>
-   *   <li>DELETE: the number of rows deleted</li>
-   *   <li>UPDATE: the number of rows updated</li>
-   *   <li>SELECT: the number of rows retrieved</li>
-   * </ul>   * @return the count of affected rows.
+   * Get the number of the affected rows in the operation to this SqlResult.   * @return the count of affected rows.
    */
   def rowCount (): Int = {
     asJava.asInstanceOf[JSqlResult[Object]].rowCount().asInstanceOf[Int]
   }
 
   /**
-   * Get the names of columns in the PgResult.   * @return the list of names of columns.
+   * Get the names of columns in the SqlResult.   * @return the list of names of columns.
    */
   def columnsNames (): scala.collection.mutable.Buffer[String] = {
     asJava.asInstanceOf[JSqlResult[Object]].columnsNames().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
-   * Get the number of rows in the PgResult.   * @return the count of rows.
+   * Get the number of rows retrieved in the SqlResult.   * @return the count of rows.
    */
   def size (): Int = {
     asJava.asInstanceOf[JSqlResult[Object]].size().asInstanceOf[Int]
+  }
+
+  /**
+   * Get the property with the specified [[io.vertx.scala.sqlclient.PropertyKind]].   * @param propertyKind the kind of the property
+   * @return the value of the property
+   */
+  def property [V: TypeTag](propertyKind: PropertyKind[V]): V = {
+    toScala[V](asJava.asInstanceOf[JSqlResult[Object]].property[Object](propertyKind.asJava.asInstanceOf[JPropertyKind[Object]]))
   }
 
   /**
@@ -82,5 +83,5 @@ class SqlResult[T: TypeTag](private val _asJava: Object) {
 
 object SqlResult {
   def apply[T: TypeTag](asJava: JSqlResult[_]) = new SqlResult[T](asJava)
-  
+
 }

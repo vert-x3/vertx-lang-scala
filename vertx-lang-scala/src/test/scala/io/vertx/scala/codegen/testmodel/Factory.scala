@@ -42,20 +42,20 @@ class Factory(private val _asJava: Object) {
 
 object Factory {
   def apply(asJava: JFactory) = new Factory(asJava)
-  
+
 
   def createConcreteHandlerUserType(handler: Handler[RefedInterface1]): ConcreteHandlerUserType = {
-    ConcreteHandlerUserType(JFactory.createConcreteHandlerUserType((if (handler == null) null else new io.vertx.core.Handler[JRefedInterface1]{def handle(x: JRefedInterface1) {handler.handle(RefedInterface1(x))}})))
+    ConcreteHandlerUserType(JFactory.createConcreteHandlerUserType((if (handler == null) null else new io.vertx.core.Handler[JRefedInterface1]{def handle(x: JRefedInterface1) {handler.handle(RefedInterface1(x))}})))//2 createConcreteHandlerUserType
   }
 
 
   def createAbstractHandlerUserType(handler: Handler[RefedInterface1]): AbstractHandlerUserType = {
-    AbstractHandlerUserType(JFactory.createAbstractHandlerUserType((if (handler == null) null else new io.vertx.core.Handler[JRefedInterface1]{def handle(x: JRefedInterface1) {handler.handle(RefedInterface1(x))}})))
+    AbstractHandlerUserType(JFactory.createAbstractHandlerUserType((if (handler == null) null else new io.vertx.core.Handler[JRefedInterface1]{def handle(x: JRefedInterface1) {handler.handle(RefedInterface1(x))}})))//2 createAbstractHandlerUserType
   }
 
 
   def createConcreteHandlerUserTypeExtension(handler: Handler[RefedInterface1]): ConcreteHandlerUserTypeExtension = {
-    ConcreteHandlerUserTypeExtension(JFactory.createConcreteHandlerUserTypeExtension((if (handler == null) null else new io.vertx.core.Handler[JRefedInterface1]{def handle(x: JRefedInterface1) {handler.handle(RefedInterface1(x))}})))
+    ConcreteHandlerUserTypeExtension(JFactory.createConcreteHandlerUserTypeExtension((if (handler == null) null else new io.vertx.core.Handler[JRefedInterface1]{def handle(x: JRefedInterface1) {handler.handle(RefedInterface1(x))}})))//2 createConcreteHandlerUserTypeExtension
   }
 
 }

@@ -55,11 +55,11 @@ class NodeList(private val _asJava: JNodeList) {
 
 
 object NodeList {
-  
+
   def apply() = {
     new NodeList(new JNodeList(emptyObj()))
   }
-  
+
   def apply(t: JNodeList) = {
     if (t != null) {
       new NodeList(t)
@@ -67,7 +67,7 @@ object NodeList {
       new NodeList(new JNodeList(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): NodeList = {
     if (json != null) {
       new NodeList(new JNodeList(json))

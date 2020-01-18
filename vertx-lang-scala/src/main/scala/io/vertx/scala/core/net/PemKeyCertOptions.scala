@@ -173,11 +173,11 @@ class PemKeyCertOptions(private val _asJava: JPemKeyCertOptions) {
 
 
 object PemKeyCertOptions {
-  
+
   def apply() = {
     new PemKeyCertOptions(new JPemKeyCertOptions(emptyObj()))
   }
-  
+
   def apply(t: JPemKeyCertOptions) = {
     if (t != null) {
       new PemKeyCertOptions(t)
@@ -185,7 +185,7 @@ object PemKeyCertOptions {
       new PemKeyCertOptions(new JPemKeyCertOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): PemKeyCertOptions = {
     if (json != null) {
       new PemKeyCertOptions(new JPemKeyCertOptions(json))

@@ -142,6 +142,7 @@ or closed, where the first and last points are considered connected.
 |[[port]]`@port`|`Number (int)`|-
 |[[preparedStatementCacheMaxSize]]`@preparedStatementCacheMaxSize`|`Number (int)`|-
 |[[preparedStatementCacheSqlLimit]]`@preparedStatementCacheSqlLimit`|`Number (int)`|-
+|[[properties]]`@properties`|`String`|-
 |[[proxyOptions]]`@proxyOptions`|`link:dataobjects.html#ProxyOptions[ProxyOptions]`|-
 |[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|-
 |[[reconnectAttempts]]`@reconnectAttempts`|`Number (int)`|-

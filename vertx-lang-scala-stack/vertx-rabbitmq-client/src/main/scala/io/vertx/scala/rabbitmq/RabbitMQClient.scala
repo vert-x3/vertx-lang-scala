@@ -573,13 +573,13 @@ class RabbitMQClient(private val _asJava: Object) {
 
 object RabbitMQClient {
   def apply(asJava: JRabbitMQClient) = new RabbitMQClient(asJava)
-  
+
   /**
    * Create and return a client configured with the default options.   * @param vertx the vertx instance
    * @return the client
    */
   def create(vertx: Vertx): RabbitMQClient = {
-    RabbitMQClient(JRabbitMQClient.create(vertx.asJava.asInstanceOf[JVertx]))
+    RabbitMQClient(JRabbitMQClient.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -588,7 +588,7 @@ object RabbitMQClient {
    * @return the client
    */
   def create(vertx: Vertx,config: RabbitMQOptions): RabbitMQClient = {
-    RabbitMQClient(JRabbitMQClient.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))
+    RabbitMQClient(JRabbitMQClient.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))//2 create
   }
 
 }

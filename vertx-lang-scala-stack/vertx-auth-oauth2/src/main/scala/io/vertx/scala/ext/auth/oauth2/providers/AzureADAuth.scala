@@ -49,14 +49,14 @@ class AzureADAuth(private val _asJava: Object) extends OpenIDConnectAuth (_asJav
 
 object AzureADAuth {
   def apply(asJava: JAzureADAuth) = new AzureADAuth(asJava)
-  
+
   /**
    * Create a OAuth2Auth provider for Microsoft Azure Active Directory   * @param clientId the client id given to you by Azure
    * @param clientSecret the client secret given to you by Azure
    * @param guid the guid of your application given to you by Azure
    */
   def create(vertx: Vertx,clientId: String,clientSecret: String,guid: String): OAuth2Auth = {
-    OAuth2Auth(JAzureADAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], guid.asInstanceOf[java.lang.String]))
+    OAuth2Auth(JAzureADAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], guid.asInstanceOf[java.lang.String]))//2 create
   }
 
   /**
@@ -66,7 +66,7 @@ object AzureADAuth {
    * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
    */
   def create(vertx: Vertx,clientId: String,clientSecret: String,guid: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
-    OAuth2Auth(JAzureADAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], guid.asInstanceOf[java.lang.String], httpClientOptions.asJava))
+    OAuth2Auth(JAzureADAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], guid.asInstanceOf[java.lang.String], httpClientOptions.asJava))//2 create
   }
 
   /**
@@ -80,7 +80,7 @@ object AzureADAuth {
    * @param handler the instantiated Oauth2 provider instance handler
    */
   def discover(vertx: Vertx,config: OAuth2ClientOptions,handler: Handler[AsyncResult[OAuth2Auth]]): Unit = {
-    JAzureADAuth.discover(vertx.asJava.asInstanceOf[JVertx], config.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Auth]]{def handle(x: AsyncResult[JOAuth2Auth]) {handler.handle(AsyncResultWrapper[JOAuth2Auth, OAuth2Auth](x, a => OAuth2Auth(a)))}}))
+    JAzureADAuth.discover(vertx.asJava.asInstanceOf[JVertx], config.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Auth]]{def handle(x: AsyncResult[JOAuth2Auth]) {handler.handle(AsyncResultWrapper[JOAuth2Auth, OAuth2Auth](x, a => OAuth2Auth(a)))}}))//2 discover
   }
 
 }

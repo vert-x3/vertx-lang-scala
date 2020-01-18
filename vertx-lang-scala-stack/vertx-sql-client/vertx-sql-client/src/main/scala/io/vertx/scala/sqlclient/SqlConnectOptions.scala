@@ -52,34 +52,12 @@ abstract class SqlConnectOptions(private val _asJava: JSqlConnectOptions) extend
 
   def getCachePreparedStatements: Boolean
 
-  def setConnectTimeout(value: Int): SqlConnectOptions
-
-  def getConnectTimeout: Int
-
-  def addCrlPath(value: String): SqlConnectOptions
-
-  def getCrlPaths: scala.collection.mutable.Buffer[String]
-
-  def addCrlValue(value: io.vertx.core.buffer.Buffer): SqlConnectOptions
-
-  def getCrlValues: scala.collection.mutable.Buffer[io.vertx.core.buffer.Buffer]
-
   /**
    * Specify the default database for the connection.
    */
   def setDatabase(value: String): SqlConnectOptions
 
   def getDatabase: String
-
-  def addEnabledCipherSuite(value: String): SqlConnectOptions
-
-  def getEnabledCipherSuites: scala.collection.mutable.Set[String]
-
-  def addEnabledSecureTransportProtocol(value: String): SqlConnectOptions
-
-  def setEnabledSecureTransportProtocols(value: Set[String]): SqlConnectOptions
-
-  def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String]
 
   /**
    * Specify the host for connecting to the server.
@@ -88,64 +66,12 @@ abstract class SqlConnectOptions(private val _asJava: JSqlConnectOptions) extend
 
   def getHost: String
 
-  def setHostnameVerificationAlgorithm(value: String): SqlConnectOptions
-
-  def getHostnameVerificationAlgorithm: String
-
-  def setIdleTimeout(value: Int): SqlConnectOptions
-
-  def getIdleTimeout: Int
-
-  def setIdleTimeoutUnit(value: java.util.concurrent.TimeUnit): SqlConnectOptions
-
-  def getIdleTimeoutUnit: java.util.concurrent.TimeUnit
-
-  def setJdkSslEngineOptions(value: JdkSSLEngineOptions): SqlConnectOptions
-
-  def getJdkSslEngineOptions: JdkSSLEngineOptions
-
-  def setKeyStoreOptions(value: JksOptions): SqlConnectOptions
-
-  def getKeyStoreOptions: JksOptions
-
-  def setLocalAddress(value: String): SqlConnectOptions
-
-  def getLocalAddress: String
-
-  def setLogActivity(value: Boolean): SqlConnectOptions
-
-  def getLogActivity: Boolean
-
-  def setMetricsName(value: String): SqlConnectOptions
-
-  def getMetricsName: String
-
-  def setOpenSslEngineOptions(value: OpenSSLEngineOptions): SqlConnectOptions
-
-  def getOpenSslEngineOptions: OpenSSLEngineOptions
-
   /**
    * Specify the user password to be used for the authentication.
    */
   def setPassword(value: String): SqlConnectOptions
 
   def getPassword: String
-
-  def setPemKeyCertOptions(value: PemKeyCertOptions): SqlConnectOptions
-
-  def getPemKeyCertOptions: PemKeyCertOptions
-
-  def setPemTrustOptions(value: PemTrustOptions): SqlConnectOptions
-
-  def getPemTrustOptions: PemTrustOptions
-
-  def setPfxKeyCertOptions(value: PfxOptions): SqlConnectOptions
-
-  def getPfxKeyCertOptions: PfxOptions
-
-  def setPfxTrustOptions(value: PfxOptions): SqlConnectOptions
-
-  def getPfxTrustOptions: PfxOptions
 
   /**
    * Specify the port for connecting to the server.
@@ -168,89 +94,12 @@ abstract class SqlConnectOptions(private val _asJava: JSqlConnectOptions) extend
 
   def getPreparedStatementCacheSqlLimit: Int
 
-  def setProxyOptions(value: ProxyOptions): SqlConnectOptions
+  /**
+   * Set properties for this client, which will be sent to server at the connection start.
+   */
+  def setProperties(value: Map[String, String]): SqlConnectOptions
 
-  def getProxyOptions: ProxyOptions
-
-  def setReceiveBufferSize(value: Int): SqlConnectOptions
-
-  def getReceiveBufferSize: Int
-
-  def setReconnectAttempts(value: Int): SqlConnectOptions
-
-  def getReconnectAttempts: Int
-
-  def setReconnectInterval(value: Long): SqlConnectOptions
-
-  def getReconnectInterval: Long
-
-  def setReuseAddress(value: Boolean): SqlConnectOptions
-
-  def isReuseAddress: Boolean
-
-  def setReusePort(value: Boolean): SqlConnectOptions
-
-  def isReusePort: Boolean
-
-  def setSendBufferSize(value: Int): SqlConnectOptions
-
-  def getSendBufferSize: Int
-
-  def setSoLinger(value: Int): SqlConnectOptions
-
-  def getSoLinger: Int
-
-  def setSsl(value: Boolean): SqlConnectOptions
-
-  def isSsl: Boolean
-
-  def setSslHandshakeTimeout(value: Long): SqlConnectOptions
-
-  def getSslHandshakeTimeout: Long
-
-  def setSslHandshakeTimeoutUnit(value: java.util.concurrent.TimeUnit): SqlConnectOptions
-
-  def getSslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit
-
-  def setTcpCork(value: Boolean): SqlConnectOptions
-
-  def isTcpCork: Boolean
-
-  def setTcpFastOpen(value: Boolean): SqlConnectOptions
-
-  def isTcpFastOpen: Boolean
-
-  def setTcpKeepAlive(value: Boolean): SqlConnectOptions
-
-  def isTcpKeepAlive: Boolean
-
-  def setTcpNoDelay(value: Boolean): SqlConnectOptions
-
-  def isTcpNoDelay: Boolean
-
-  def setTcpQuickAck(value: Boolean): SqlConnectOptions
-
-  def isTcpQuickAck: Boolean
-
-  def setTrafficClass(value: Int): SqlConnectOptions
-
-  def getTrafficClass: Int
-
-  def setTrustAll(value: Boolean): SqlConnectOptions
-
-  def isTrustAll: Boolean
-
-  def setTrustStoreOptions(value: JksOptions): SqlConnectOptions
-
-  def getTrustStoreOptions: JksOptions
-
-  def setUseAlpn(value: Boolean): SqlConnectOptions
-
-  def isUseAlpn: Boolean
-
-  def setUsePooledBuffers(value: Boolean): SqlConnectOptions
-
-  def isUsePooledBuffers: Boolean
+  def getProperties: scala.collection.mutable.Map[String, String]
 
   /**
    * Specify the user account to be used for the authentication.

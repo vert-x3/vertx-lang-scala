@@ -57,11 +57,11 @@ class PreparedQueryExecuteOptions(private val _asJava: JPreparedQueryExecuteOpti
 
 
 object PreparedQueryExecuteOptions {
-  
+
   def apply() = {
     new PreparedQueryExecuteOptions(new JPreparedQueryExecuteOptions(emptyObj()))
   }
-  
+
   def apply(t: JPreparedQueryExecuteOptions) = {
     if (t != null) {
       new PreparedQueryExecuteOptions(t)
@@ -69,7 +69,7 @@ object PreparedQueryExecuteOptions {
       new PreparedQueryExecuteOptions(new JPreparedQueryExecuteOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): PreparedQueryExecuteOptions = {
     if (json != null) {
       new PreparedQueryExecuteOptions(new JPreparedQueryExecuteOptions(json))

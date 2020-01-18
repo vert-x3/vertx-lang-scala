@@ -61,12 +61,12 @@ class PebbleTemplateEngine(private val _asJava: Object) extends TemplateEngine (
 
 object PebbleTemplateEngine {
   def apply(asJava: JPebbleTemplateEngine) = new PebbleTemplateEngine(asJava)
-  
+
   /**
    * Create a template engine using defaults   * @return the engine
    */
   def create(vertx: Vertx): PebbleTemplateEngine = {
-    PebbleTemplateEngine(JPebbleTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))
+    PebbleTemplateEngine(JPebbleTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

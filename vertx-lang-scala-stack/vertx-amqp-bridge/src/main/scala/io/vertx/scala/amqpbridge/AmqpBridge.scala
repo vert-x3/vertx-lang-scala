@@ -134,13 +134,13 @@ class AmqpBridge(private val _asJava: Object) {
 
 object AmqpBridge {
   def apply(asJava: JAmqpBridge) = new AmqpBridge(asJava)
-  
+
   /**
    * Creates a Bridge.   * @param vertx the vertx instance to use
    * @return the (not-yet-started) bridge.
    */
   def create(vertx: Vertx): AmqpBridge = {
-    AmqpBridge(JAmqpBridge.create(vertx.asJava.asInstanceOf[JVertx]))
+    AmqpBridge(JAmqpBridge.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -149,7 +149,7 @@ object AmqpBridge {
    * @return the (not-yet-started) bridge.
    */
   def create(vertx: Vertx,options: AmqpBridgeOptions): AmqpBridge = {
-    AmqpBridge(JAmqpBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    AmqpBridge(JAmqpBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
 }

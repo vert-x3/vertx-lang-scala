@@ -85,11 +85,11 @@ class SockJSHandlerOptions(private val _asJava: JSockJSHandlerOptions) {
 
 
 object SockJSHandlerOptions {
-  
+
   def apply() = {
     new SockJSHandlerOptions(new JSockJSHandlerOptions(emptyObj()))
   }
-  
+
   def apply(t: JSockJSHandlerOptions) = {
     if (t != null) {
       new SockJSHandlerOptions(t)
@@ -97,7 +97,7 @@ object SockJSHandlerOptions {
       new SockJSHandlerOptions(new JSockJSHandlerOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): SockJSHandlerOptions = {
     if (json != null) {
       new SockJSHandlerOptions(new JSockJSHandlerOptions(json))

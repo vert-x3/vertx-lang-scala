@@ -55,11 +55,11 @@ class EventList(private val _asJava: JEventList) {
 
 
 object EventList {
-  
+
   def apply() = {
     new EventList(new JEventList(emptyObj()))
   }
-  
+
   def apply(t: JEventList) = {
     if (t != null) {
       new EventList(t)
@@ -67,7 +67,7 @@ object EventList {
       new EventList(new JEventList(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): EventList = {
     if (json != null) {
       new EventList(new JEventList(json))

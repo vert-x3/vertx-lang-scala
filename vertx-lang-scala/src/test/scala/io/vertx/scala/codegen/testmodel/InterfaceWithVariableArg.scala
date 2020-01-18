@@ -60,5 +60,5 @@ class InterfaceWithVariableArg[T: TypeTag, U: TypeTag](private val _asJava: Obje
 
 object InterfaceWithVariableArg {
   def apply[T: TypeTag, U: TypeTag](asJava: JInterfaceWithVariableArg[_, _]) = new InterfaceWithVariableArg[T, U](asJava)
-  
+
 }

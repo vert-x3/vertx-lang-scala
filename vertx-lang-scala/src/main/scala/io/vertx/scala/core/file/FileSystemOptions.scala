@@ -73,11 +73,11 @@ class FileSystemOptions(private val _asJava: JFileSystemOptions) {
 
 
 object FileSystemOptions {
-  
+
   def apply() = {
     new FileSystemOptions(new JFileSystemOptions(emptyObj()))
   }
-  
+
   def apply(t: JFileSystemOptions) = {
     if (t != null) {
       new FileSystemOptions(t)
@@ -85,7 +85,7 @@ object FileSystemOptions {
       new FileSystemOptions(new JFileSystemOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): FileSystemOptions = {
     if (json != null) {
       new FileSystemOptions(new JFileSystemOptions(json))

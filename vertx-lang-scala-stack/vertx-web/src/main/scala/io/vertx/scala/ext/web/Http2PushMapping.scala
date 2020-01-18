@@ -55,11 +55,11 @@ class Http2PushMapping(private val _asJava: JHttp2PushMapping) {
 
 
 object Http2PushMapping {
-  
+
   def apply() = {
     new Http2PushMapping(new JHttp2PushMapping(emptyObj()))
   }
-  
+
   def apply(t: JHttp2PushMapping) = {
     if (t != null) {
       new Http2PushMapping(t)
@@ -67,7 +67,7 @@ object Http2PushMapping {
       new Http2PushMapping(new JHttp2PushMapping(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Http2PushMapping = {
     if (json != null) {
       new Http2PushMapping(new JHttp2PushMapping(json))

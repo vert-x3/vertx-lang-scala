@@ -75,12 +75,12 @@ class MultipartForm(private val _asJava: Object) {
 
 object MultipartForm {
   def apply(asJava: JMultipartForm) = new MultipartForm(asJava)
-  
+
   /**
    * @return a multipart form instance
    */
   def create(): MultipartForm = {
-    MultipartForm(JMultipartForm.create())
+    MultipartForm(JMultipartForm.create())//2 create
   }
 
 }

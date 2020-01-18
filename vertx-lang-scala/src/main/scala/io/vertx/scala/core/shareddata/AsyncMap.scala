@@ -251,5 +251,5 @@ class AsyncMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 
 object AsyncMap {
   def apply[K: TypeTag, V: TypeTag](asJava: JAsyncMap[_, _]) = new AsyncMap[K, V](asJava)
-  
+
 }

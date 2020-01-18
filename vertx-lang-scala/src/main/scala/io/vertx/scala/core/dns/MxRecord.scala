@@ -51,5 +51,5 @@ class MxRecord(private val _asJava: Object) {
 
 object MxRecord {
   def apply(asJava: JMxRecord) = new MxRecord(asJava)
-  
+
 }

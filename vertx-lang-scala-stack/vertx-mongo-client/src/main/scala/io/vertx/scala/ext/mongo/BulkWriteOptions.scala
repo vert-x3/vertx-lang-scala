@@ -55,11 +55,11 @@ class BulkWriteOptions(private val _asJava: JBulkWriteOptions) {
 
 
 object BulkWriteOptions {
-  
+
   def apply() = {
     new BulkWriteOptions(new JBulkWriteOptions(emptyObj()))
   }
-  
+
   def apply(t: JBulkWriteOptions) = {
     if (t != null) {
       new BulkWriteOptions(t)
@@ -67,7 +67,7 @@ object BulkWriteOptions {
       new BulkWriteOptions(new JBulkWriteOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): BulkWriteOptions = {
     if (json != null) {
       new BulkWriteOptions(new JBulkWriteOptions(json))

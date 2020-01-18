@@ -42,5 +42,5 @@ class SignalHandler(private val _asJava: Object) {
 
 object SignalHandler {
   def apply(asJava: JSignalHandler) = new SignalHandler(asJava)
-  
+
 }

@@ -505,5 +505,5 @@ class SQLConnection(private val _asJava: Object) extends SQLOperations {
 
 object SQLConnection {
   def apply(asJava: JSQLConnection) = new SQLConnection(asJava)
-  
+
 }

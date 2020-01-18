@@ -59,11 +59,11 @@ class UpdateResult(private val _asJava: JUpdateResult) {
 
 
 object UpdateResult {
-  
+
   def apply() = {
     new UpdateResult(new JUpdateResult(emptyObj()))
   }
-  
+
   def apply(t: JUpdateResult) = {
     if (t != null) {
       new UpdateResult(t)
@@ -71,7 +71,7 @@ object UpdateResult {
       new UpdateResult(new JUpdateResult(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): UpdateResult = {
     if (json != null) {
       new UpdateResult(new JUpdateResult(json))

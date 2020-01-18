@@ -651,10 +651,10 @@ class TestInterface(private val _asJava: Object) extends SuperInterface1 (_asJav
 
 object TestInterface {
   def apply(asJava: JTestInterface) = new TestInterface(asJava)
-  
+
 
   def staticFactoryMethod(foo: String): RefedInterface1 = {
-    RefedInterface1(JTestInterface.staticFactoryMethod(foo.asInstanceOf[java.lang.String]))
+    RefedInterface1(JTestInterface.staticFactoryMethod(foo.asInstanceOf[java.lang.String]))//2 staticFactoryMethod
   }
 
 }

@@ -76,7 +76,7 @@ class Watch[T: TypeTag](private val _asJava: Object) {
 
 object Watch {
   def apply[T: TypeTag](asJava: JWatch[_]) = new Watch[T](asJava)
-  
+
   /**
    * Creates `Watch` to monitoring a specific key in the KV store.
    * The underlying Consul client will be created with default options.
@@ -85,7 +85,7 @@ object Watch {
    * @return the `Watch` instance
    */
   def key(key: String,vertx: Vertx): Watch[KeyValue] = {
-    Watch[KeyValue](JWatch.key(key.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx]))
+    Watch[KeyValue](JWatch.key(key.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx]))//2 key
   }
 
   /**
@@ -96,7 +96,7 @@ object Watch {
    * @return the `Watch` instance
    */
   def key(key: String,vertx: Vertx,options: ConsulClientOptions): Watch[KeyValue] = {
-    Watch[KeyValue](JWatch.key(key.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    Watch[KeyValue](JWatch.key(key.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 key
   }
 
   /**
@@ -107,7 +107,7 @@ object Watch {
    * @return the `Watch` instance
    */
   def keyPrefix(keyPrefix: String,vertx: Vertx): Watch[KeyValueList] = {
-    Watch[KeyValueList](JWatch.keyPrefix(keyPrefix.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx]))
+    Watch[KeyValueList](JWatch.keyPrefix(keyPrefix.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx]))//2 keyPrefix
   }
 
   /**
@@ -118,7 +118,7 @@ object Watch {
    * @return the `Watch` instance
    */
   def keyPrefix(keyPrefix: String,vertx: Vertx,options: ConsulClientOptions): Watch[KeyValueList] = {
-    Watch[KeyValueList](JWatch.keyPrefix(keyPrefix.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    Watch[KeyValueList](JWatch.keyPrefix(keyPrefix.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 keyPrefix
   }
 
   /**
@@ -128,7 +128,7 @@ object Watch {
    * @return the `Watch` instance
    */
   def services(vertx: Vertx): Watch[ServiceList] = {
-    Watch[ServiceList](JWatch.services(vertx.asJava.asInstanceOf[JVertx]))
+    Watch[ServiceList](JWatch.services(vertx.asJava.asInstanceOf[JVertx]))//2 services
   }
 
   /**
@@ -138,7 +138,7 @@ object Watch {
    * @return the `Watch` instance
    */
   def services(vertx: Vertx,options: ConsulClientOptions): Watch[ServiceList] = {
-    Watch[ServiceList](JWatch.services(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    Watch[ServiceList](JWatch.services(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 services
   }
 
   /**
@@ -149,7 +149,7 @@ object Watch {
    * @return the `Watch` instance
    */
   def service(service: String,vertx: Vertx): Watch[ServiceEntryList] = {
-    Watch[ServiceEntryList](JWatch.service(service.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx]))
+    Watch[ServiceEntryList](JWatch.service(service.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx]))//2 service
   }
 
   /**
@@ -160,7 +160,7 @@ object Watch {
    * @return the `Watch` instance
    */
   def service(service: String,vertx: Vertx,options: ConsulClientOptions): Watch[ServiceEntryList] = {
-    Watch[ServiceEntryList](JWatch.service(service.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    Watch[ServiceEntryList](JWatch.service(service.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 service
   }
 
   /**
@@ -171,7 +171,7 @@ object Watch {
    * @return the `Watch` instance
    */
   def events(event: String,vertx: Vertx): Watch[EventList] = {
-    Watch[EventList](JWatch.events(event.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx]))
+    Watch[EventList](JWatch.events(event.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx]))//2 events
   }
 
   /**
@@ -182,7 +182,7 @@ object Watch {
    * @return the `Watch` instance
    */
   def events(event: String,vertx: Vertx,options: ConsulClientOptions): Watch[EventList] = {
-    Watch[EventList](JWatch.events(event.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    Watch[EventList](JWatch.events(event.asInstanceOf[java.lang.String], vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 events
   }
 
   /**
@@ -192,7 +192,7 @@ object Watch {
    * @return the `Watch` instance
    */
   def nodes(vertx: Vertx): Watch[NodeList] = {
-    Watch[NodeList](JWatch.nodes(vertx.asJava.asInstanceOf[JVertx]))
+    Watch[NodeList](JWatch.nodes(vertx.asJava.asInstanceOf[JVertx]))//2 nodes
   }
 
   /**
@@ -202,7 +202,7 @@ object Watch {
    * @return the `Watch` instance
    */
   def nodes(vertx: Vertx,options: ConsulClientOptions): Watch[NodeList] = {
-    Watch[NodeList](JWatch.nodes(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    Watch[NodeList](JWatch.nodes(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 nodes
   }
 
 }

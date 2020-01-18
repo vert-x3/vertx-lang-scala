@@ -38,11 +38,11 @@ class MqttAuth(private val _asJava: JMqttAuth) {
 
 
 object MqttAuth {
-  
+
   def apply() = {
     new MqttAuth(new JMqttAuth(emptyObj()))
   }
-  
+
   def apply(t: JMqttAuth) = {
     if (t != null) {
       new MqttAuth(t)
@@ -50,7 +50,7 @@ object MqttAuth {
       new MqttAuth(new JMqttAuth(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MqttAuth = {
     if (json != null) {
       new MqttAuth(new JMqttAuth(json))

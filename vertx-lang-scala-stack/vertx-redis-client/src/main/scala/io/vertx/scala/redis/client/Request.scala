@@ -109,10 +109,10 @@ class Request(private val _asJava: Object) {
 
 object Request {
   def apply(asJava: JRequest) = new Request(asJava)
-  
+
 
   def cmd(command: Command): Request = {
-    Request(JRequest.cmd(command.asJava.asInstanceOf[JCommand]))
+    Request(JRequest.cmd(command.asJava.asInstanceOf[JCommand]))//2 cmd
   }
 
 }

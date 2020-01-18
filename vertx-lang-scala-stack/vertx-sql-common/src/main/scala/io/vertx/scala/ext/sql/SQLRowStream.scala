@@ -176,5 +176,5 @@ class SQLRowStream(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 object SQLRowStream {
   def apply(asJava: JSQLRowStream) = new SQLRowStream(asJava)
-  
+
 }

@@ -21,12 +21,14 @@ import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.ext.web.handler.sockjs.{SockJSSocket => JSockJSSocket}
 import scala.reflect.runtime.universe._
 import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.ext.web.{Router => JRouter}
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.handler.sockjs.{SockJSHandlerOptions => JSockJSHandlerOptions}
 import io.vertx.ext.web.handler.sockjs.{BridgeOptions => JBridgeOptions}
 import io.vertx.ext.web.handler.sockjs.{BridgeEvent => JBridgeEvent}
+import io.vertx.scala.ext.web.Router
 import io.vertx.core.Handler
 import io.vertx.lang.scala.HandlerOps._
 
@@ -43,46 +45,42 @@ class SockJSHandler(private val _asJava: Object) extends io.vertx.core.Handler[R
 
 
 
+
+
   /**
    * Set a SockJS socket handler. This handler will be called with a SockJS socket whenever a SockJS connection
    * is made from a client   * @param handler the handler
-   * @return a reference to this, so the API can be used fluently
+   * @return a router to be mounted on an existing router
    */
-  
-  def socketHandler(handler: Handler[SockJSSocket]): SockJSHandler = {
-    asJava.asInstanceOf[JSockJSHandler].socketHandler((if (handler == null) null else new io.vertx.core.Handler[JSockJSSocket]{def handle(x: JSockJSSocket) {handler.handle(SockJSSocket(x))}}))
-    this
+  def socketHandler (handler: Handler[SockJSSocket]): Router = {
+    Router(asJava.asInstanceOf[JSockJSHandler].socketHandler((if (handler == null) null else new io.vertx.core.Handler[JSockJSSocket]{def handle(x: JSockJSSocket) {handler.handle(SockJSSocket(x))}})))
   }
 
   /**
    * Bridge the SockJS handler to the Vert.x event bus. This basically installs a built-in SockJS socket handler
    * which takes SockJS traffic and bridges it to the event bus, thus allowing you to extend the server-side
    * Vert.x event bus to browsers   * @param bridgeOptions options to configure the bridge with see <a href="../../../../../../../../../cheatsheet/BridgeOptions.html">BridgeOptions</a>
-   * @return a reference to this, so the API can be used fluently
+   * @return a router to be mounted on an existing router
    */
-  
-  def bridge(bridgeOptions: BridgeOptions): SockJSHandler = {
-    asJava.asInstanceOf[JSockJSHandler].bridge(bridgeOptions.asJava)
-    this
+  def bridge (bridgeOptions: BridgeOptions): Router = {
+    Router(asJava.asInstanceOf[JSockJSHandler].bridge(bridgeOptions.asJava))
   }
 
   /**
    * Like [[io.vertx.scala.ext.web.handler.sockjs.SockJSHandler#bridge]] but specifying a handler
    * that will receive bridge events.   * @param bridgeOptions options to configure the bridge with see <a href="../../../../../../../../../cheatsheet/BridgeOptions.html">BridgeOptions</a>
    * @param bridgeEventHandler handler to receive bridge events
-   * @return a reference to this, so the API can be used fluently
+   * @return a router to be mounted on an existing router
    */
-  
-  def bridge(bridgeOptions: BridgeOptions, bridgeEventHandler: Handler[BridgeEvent]): SockJSHandler = {
-    asJava.asInstanceOf[JSockJSHandler].bridge(bridgeOptions.asJava, (if (bridgeEventHandler == null) null else new io.vertx.core.Handler[JBridgeEvent]{def handle(x: JBridgeEvent) {bridgeEventHandler.handle(BridgeEvent(x))}}))
-    this
+  def bridge (bridgeOptions: BridgeOptions, bridgeEventHandler: Handler[BridgeEvent]): Router = {
+    Router(asJava.asInstanceOf[JSockJSHandler].bridge(bridgeOptions.asJava, (if (bridgeEventHandler == null) null else new io.vertx.core.Handler[JBridgeEvent]{def handle(x: JBridgeEvent) {bridgeEventHandler.handle(BridgeEvent(x))}})))
   }
 
-
-
-
-  override def handle (arg0: RoutingContext): Unit = {
-    asJava.asInstanceOf[JSockJSHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
+  /**
+   * @param routingContext the rounting context
+   */
+  def handle (routingContext: RoutingContext): Unit = {
+    asJava.asInstanceOf[JSockJSHandler].handle(routingContext.asJava.asInstanceOf[JRoutingContext])
   }
 
 
@@ -90,13 +88,13 @@ class SockJSHandler(private val _asJava: Object) extends io.vertx.core.Handler[R
 
 object SockJSHandler {
   def apply(asJava: JSockJSHandler) = new SockJSHandler(asJava)
-  
+
   /**
    * Create a SockJS handler   * @param vertx the Vert.x instance
    * @return the handler
    */
   def create(vertx: Vertx): SockJSHandler = {
-    SockJSHandler(JSockJSHandler.create(vertx.asJava.asInstanceOf[JVertx]))
+    SockJSHandler(JSockJSHandler.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -105,7 +103,7 @@ object SockJSHandler {
    * @return the handler
    */
   def create(vertx: Vertx,options: SockJSHandlerOptions): SockJSHandler = {
-    SockJSHandler(JSockJSHandler.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    SockJSHandler(JSockJSHandler.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
 }

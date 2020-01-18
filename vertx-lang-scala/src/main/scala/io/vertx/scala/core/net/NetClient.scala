@@ -160,5 +160,5 @@ class NetClient(private val _asJava: Object) extends Measured {
 
 object NetClient {
   def apply(asJava: JNetClient) = new NetClient(asJava)
-  
+
 }

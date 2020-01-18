@@ -18,29 +18,29 @@ package io.vertx.scala.core.http
 
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.scala.core.streams.Pipe
-import io.vertx.core.{Promise => JPromise}
 import scala.reflect.runtime.universe._
 import io.vertx.core.http.{WebSocketBase => JWebSocketBase}
 import io.vertx.core.http.{WebSocketFrame => JWebSocketFrame}
+import io.vertx.scala.core.Future
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.http.{ServerWebSocket => JServerWebSocket}
+import io.vertx.core.{Future => JFuture}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.scala.core.MultiMap
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.streams.{Pipe => JPipe}
-import io.vertx.scala.core.Promise
 import io.vertx.scala.core.net.SocketAddress
 import io.vertx.lang.scala.HandlerOps._
 
 /**
   * Represents a server side WebSocket.
   * 
-  * Instances of this class are passed into a [[io.vertx.scala.core.http.HttpServer#websocketHandler]] or provided
+  * Instances of this class are passed into a [[io.vertx.scala.core.http.HttpServer#webSocketHandler]] or provided
   * when a WebSocket handshake is manually [[io.vertx.scala.core.http.HttpServerRequest#upgrade]]ed.
   */
 
@@ -48,7 +48,6 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
   def asJava = _asJava
   private var cached_0: Option[SocketAddress] = None
   private var cached_1: Option[SocketAddress] = None
-  private var cached_2: Option[MultiMap] = None
 
 
   /**
@@ -71,17 +70,6 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
       cached_1 = Some(SocketAddress(tmp))
     }
     cached_1.get
-  }
-
-  /**
-   * @return the headers in the WebSocket handshake
-   */
-  def headers(): MultiMap = {
-    if (cached_2 == None) {
-      val tmp = asJava.asInstanceOf[JServerWebSocket].headers()
-      cached_2 = Some(MultiMap(tmp))
-    }
-    cached_2.get
   }
 
 
@@ -120,7 +108,7 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
 
   /**
    * Set a text message handler on the connection. This handler will be called similar to the
-   * , but the buffer will be converted to a String first   * @param handler the handler
+   * [[io.vertx.scala.core.http.WebSocketBase#binaryMessageHandler]], but the buffer will be converted to a String first   * @param handler the handler
    * @return a reference to this, so the API can be used fluently
    */
   override 
@@ -315,20 +303,6 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
 
 
   /**
-   * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.   * @param data the data to write
-   */
-  override def end(data: io.vertx.core.buffer.Buffer): Unit = {
-    asJava.asInstanceOf[JServerWebSocket].end(data)
-  }
-
-  /**
-   * Same as  but with an `handler` called when the operation completes
-   */
-  override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JServerWebSocket].end(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
-  }
-
-  /**
    * Pause this stream and return a  to transfer the elements of this stream to a destination .
    * <p/>
    * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
@@ -354,6 +328,20 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
    */
   override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JServerWebSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+  }
+
+  /**
+   * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.   * @param data the data to write
+   */
+  override def end(data: io.vertx.core.buffer.Buffer): Unit = {
+    asJava.asInstanceOf[JServerWebSocket].end(data)
+  }
+
+  /**
+   * Same as  but with an `handler` called when the operation completes
+   */
+  override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JServerWebSocket].end(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -396,6 +384,29 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
    */
   override def subProtocol (): String = {
     asJava.asInstanceOf[JServerWebSocket].subProtocol().asInstanceOf[String]
+  }
+
+  /**
+   * Returns the status code received when the WebSocket was closed by the other side, otherwise `null`.
+   */
+  override def closeStatusCode (): Short = {
+    asJava.asInstanceOf[JServerWebSocket].closeStatusCode().asInstanceOf[Short]
+  }
+
+  /**
+   * Returns the reason message received when the WebSocket was closed by the other side, otherwise `null`.
+   */
+  override def closeReason (): String = {
+    asJava.asInstanceOf[JServerWebSocket].closeReason().asInstanceOf[String]
+  }
+
+  /**
+   *  Returns the HTTP headers when the WebSocket is first obtained in the handler.
+   *  <p/>
+   *  The headers will be `null` on subsequent interactions.   * @return the headers
+   */
+  override def headers (): MultiMap = {
+    MultiMap(asJava.asInstanceOf[JServerWebSocket].headers())
   }
 
   /**
@@ -448,7 +459,7 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
   }
 
   /**
-   * Same as  but with an `handler` called when the operation completes
+   * Same as [[io.vertx.scala.core.http.WebSocketBase#close]] but with an `handler` called when the operation completes
    */
   override def close (statusCode: Short, reason: scala.Option[String], handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JServerWebSocket].close(statusCode.asInstanceOf[java.lang.Short], reason.map(x => x.asInstanceOf[java.lang.String]).orNull, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
@@ -532,9 +543,17 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
    * This method should be called from the WebSocket handler to explicitly set an asynchronous handshake.
    * 
    * Calling this method will override the `future` completion handler.   * @param future the future to complete with
+   * @param handler the completion handler
    */
-  def setHandshake (future: Promise[Int]): Unit = {
-    asJava.asInstanceOf[JServerWebSocket].setHandshake(future.asJava.asInstanceOf[JPromise[java.lang.Integer]])
+  def setHandshake (future: Future[Int], handler: Handler[AsyncResult[Int]]): Unit = {
+    asJava.asInstanceOf[JServerWebSocket].setHandshake(future.asJava.asInstanceOf[JFuture[java.lang.Integer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.lang.Integer]]{def handle(x: AsyncResult[java.lang.Integer]) {handler.handle(AsyncResultWrapper[java.lang.Integer, Int](x, a => a.asInstanceOf[Int]))}}))
+  }
+
+  /**
+   * Like [[io.vertx.scala.core.http.ServerWebSocket#setHandshake]] but without a completion handler.
+   */
+  def setHandshake (future: Future[Int]): Unit = {
+    asJava.asInstanceOf[JServerWebSocket].setHandshake(future.asJava.asInstanceOf[JFuture[java.lang.Integer]])
   }
 
   /**
@@ -550,22 +569,22 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
 
 
  /**
-  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-  */
-  override def endFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
-    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JServerWebSocket].end(data, promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
- /**
   * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
   override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JServerWebSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def endFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JServerWebSocket].end(data, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -657,9 +676,19 @@ class ServerWebSocket(private val _asJava: Object) extends WebSocketBase {
     promiseAndHandler._2.future
   }
 
+ /**
+  * Like [[setHandshake]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def setHandshakeFuture (future: Future[Int]): scala.concurrent.Future[Int] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[java.lang.Integer, Int](x => x.asInstanceOf[Int])
+    asJava.asInstanceOf[JServerWebSocket].setHandshake(future.asJava.asInstanceOf[JFuture[java.lang.Integer]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
 }
 
 object ServerWebSocket {
   def apply(asJava: JServerWebSocket) = new ServerWebSocket(asJava)
-  
+
 }

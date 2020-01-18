@@ -183,5 +183,5 @@ class Job(private val _asJava: Object) {
 
 object Job {
   def apply(asJava: JJob) = new Job(asJava)
-  
+
 }

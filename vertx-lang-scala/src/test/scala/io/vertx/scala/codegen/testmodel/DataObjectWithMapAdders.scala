@@ -97,11 +97,11 @@ class DataObjectWithMapAdders(private val _asJava: JDataObjectWithMapAdders) {
 
 
 object DataObjectWithMapAdders {
-  
+
   def apply() = {
     new DataObjectWithMapAdders(new JDataObjectWithMapAdders(emptyObj()))
   }
-  
+
   def apply(t: JDataObjectWithMapAdders) = {
     if (t != null) {
       new DataObjectWithMapAdders(t)
@@ -109,7 +109,7 @@ object DataObjectWithMapAdders {
       new DataObjectWithMapAdders(new JDataObjectWithMapAdders(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DataObjectWithMapAdders = {
     if (json != null) {
       new DataObjectWithMapAdders(new JDataObjectWithMapAdders(json))

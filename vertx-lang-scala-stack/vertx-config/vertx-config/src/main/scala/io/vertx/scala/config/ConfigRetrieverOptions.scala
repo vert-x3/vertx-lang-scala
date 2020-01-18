@@ -72,11 +72,11 @@ class ConfigRetrieverOptions(private val _asJava: JConfigRetrieverOptions) {
 
 
 object ConfigRetrieverOptions {
-  
+
   def apply() = {
     new ConfigRetrieverOptions(new JConfigRetrieverOptions(emptyObj()))
   }
-  
+
   def apply(t: JConfigRetrieverOptions) = {
     if (t != null) {
       new ConfigRetrieverOptions(t)
@@ -84,7 +84,7 @@ object ConfigRetrieverOptions {
       new ConfigRetrieverOptions(new JConfigRetrieverOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ConfigRetrieverOptions = {
     if (json != null) {
       new ConfigRetrieverOptions(new JConfigRetrieverOptions(json))

@@ -77,7 +77,7 @@ class Command(private val _asJava: Object) {
 
 object Command {
   def apply(asJava: JCommand) = new Command(asJava)
-  
+
   /**
    * Creates a Redis Command from METADATA. The metadata comes from the REDIS command "COMMAND"
    * https://redis.io/commands/command
@@ -99,7 +99,7 @@ object Command {
    * @return a command instance
    */
   def create(command: String,arity: Int,firstKey: Int,lastKey: Int,interval: Int,readOnly: Boolean,movable: Boolean): Command = {
-    Command(JCommand.create(command.asInstanceOf[java.lang.String], arity.asInstanceOf[java.lang.Integer], firstKey.asInstanceOf[java.lang.Integer], lastKey.asInstanceOf[java.lang.Integer], interval.asInstanceOf[java.lang.Integer], readOnly.asInstanceOf[java.lang.Boolean], movable.asInstanceOf[java.lang.Boolean]))
+    Command(JCommand.create(command.asInstanceOf[java.lang.String], arity.asInstanceOf[java.lang.Integer], firstKey.asInstanceOf[java.lang.Integer], lastKey.asInstanceOf[java.lang.Integer], interval.asInstanceOf[java.lang.Integer], readOnly.asInstanceOf[java.lang.Boolean], movable.asInstanceOf[java.lang.Boolean]))//2 create
   }
 
 }

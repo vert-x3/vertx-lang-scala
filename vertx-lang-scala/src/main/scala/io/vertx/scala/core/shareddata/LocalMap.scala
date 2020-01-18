@@ -169,5 +169,5 @@ class LocalMap[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 
 object LocalMap {
   def apply[K: TypeTag, V: TypeTag](asJava: JLocalMap[_, _]) = new LocalMap[K, V](asJava)
-  
+
 }

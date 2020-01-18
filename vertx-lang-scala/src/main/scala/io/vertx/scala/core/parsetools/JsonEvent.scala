@@ -178,5 +178,5 @@ class JsonEvent(private val _asJava: Object) {
 
 object JsonEvent {
   def apply(asJava: JJsonEvent) = new JsonEvent(asJava)
-  
+
 }

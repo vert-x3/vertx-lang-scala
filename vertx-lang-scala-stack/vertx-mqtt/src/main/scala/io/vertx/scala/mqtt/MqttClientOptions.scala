@@ -579,11 +579,11 @@ class MqttClientOptions(private val _asJava: JMqttClientOptions) extends ExtNetC
 
 
 object MqttClientOptions {
-  
+
   def apply() = {
     new MqttClientOptions(new JMqttClientOptions(emptyObj()))
   }
-  
+
   def apply(t: JMqttClientOptions) = {
     if (t != null) {
       new MqttClientOptions(t)
@@ -591,7 +591,7 @@ object MqttClientOptions {
       new MqttClientOptions(new JMqttClientOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MqttClientOptions = {
     if (json != null) {
       new MqttClientOptions(new JMqttClientOptions(json))

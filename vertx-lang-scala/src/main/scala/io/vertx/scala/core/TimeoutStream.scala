@@ -139,5 +139,5 @@ class TimeoutStream(private val _asJava: Object) extends ReadStream[Long] {
 
 object TimeoutStream {
   def apply(asJava: JTimeoutStream) = new TimeoutStream(asJava)
-  
+
 }

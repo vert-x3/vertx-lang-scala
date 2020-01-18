@@ -307,6 +307,24 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions) extends ExtHttpServ
     asJava.getMaxInitialLineLength().asInstanceOf[Int]
   }
 
+  override def setMaxWebSocketFrameSize(value: Int) = {
+    asJava.setMaxWebSocketFrameSize(value)
+    this
+  }
+
+  override def getMaxWebSocketFrameSize: Int = {
+    asJava.getMaxWebSocketFrameSize().asInstanceOf[Int]
+  }
+
+  override def setMaxWebSocketMessageSize(value: Int) = {
+    asJava.setMaxWebSocketMessageSize(value)
+    this
+  }
+
+  override def getMaxWebSocketMessageSize: Int = {
+    asJava.getMaxWebSocketMessageSize().asInstanceOf[Int]
+  }
+
   override def setMaxWebsocketFrameSize(value: Int) = {
     asJava.setMaxWebsocketFrameSize(value)
     this
@@ -352,6 +370,15 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions) extends ExtHttpServ
     PemTrustOptions(asJava.getPemTrustOptions())
   }
 
+  override def setPerFrameWebSocketCompressionSupported(value: Boolean) = {
+    asJava.setPerFrameWebSocketCompressionSupported(value)
+    this
+  }
+
+  override def getPerFrameWebSocketCompressionSupported: Boolean = {
+    asJava.getPerFrameWebSocketCompressionSupported().asInstanceOf[Boolean]
+  }
+
   override def setPerFrameWebsocketCompressionSupported(value: Boolean) = {
     asJava.setPerFrameWebsocketCompressionSupported(value)
     this
@@ -359,6 +386,15 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions) extends ExtHttpServ
 
   override def getPerFrameWebsocketCompressionSupported: Boolean = {
     asJava.getPerFrameWebsocketCompressionSupported().asInstanceOf[Boolean]
+  }
+
+  override def setPerMessageWebSocketCompressionSupported(value: Boolean) = {
+    asJava.setPerMessageWebSocketCompressionSupported(value)
+    this
+  }
+
+  override def getPerMessageWebSocketCompressionSupported: Boolean = {
+    asJava.getPerMessageWebSocketCompressionSupported().asInstanceOf[Boolean]
   }
 
   override def setPerMessageWebsocketCompressionSupported(value: Boolean) = {
@@ -619,6 +655,47 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions) extends ExtHttpServ
     asJava.getVertsShellJsResource()
   }
 
+  override def setWebSocketAllowServerNoContext(value: Boolean) = {
+    asJava.setWebSocketAllowServerNoContext(value)
+    this
+  }
+
+  override def getWebSocketAllowServerNoContext: Boolean = {
+    asJava.getWebSocketAllowServerNoContext().asInstanceOf[Boolean]
+  }
+
+  override def setWebSocketCompressionLevel(value: Int) = {
+    asJava.setWebSocketCompressionLevel(value)
+    this
+  }
+
+  override def getWebSocketCompressionLevel: Int = {
+    asJava.getWebSocketCompressionLevel().asInstanceOf[Int]
+  }
+
+  override def setWebSocketPreferredClientNoContext(value: Boolean) = {
+    asJava.setWebSocketPreferredClientNoContext(value)
+    this
+  }
+
+  override def getWebSocketPreferredClientNoContext: Boolean = {
+    asJava.getWebSocketPreferredClientNoContext().asInstanceOf[Boolean]
+  }
+
+  override def addWebSocketSubProtocol(value: String) = {
+    asJava.addWebSocketSubProtocol(value)
+    this
+  }
+
+  override def setWebSocketSubProtocols(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setWebSocketSubProtocols(value.asJava)
+    this
+  }
+
+  override def getWebSocketSubProtocols: scala.collection.mutable.Buffer[String] = {
+    asJava.getWebSocketSubProtocols().asScala.map(x => x.asInstanceOf[String])
+  }
+
   override def setWebsocketAllowServerNoContext(value: Boolean) = {
     asJava.setWebsocketAllowServerNoContext(value)
     this
@@ -659,11 +736,11 @@ class HttpTermOptions(private val _asJava: JHttpTermOptions) extends ExtHttpServ
 
 
 object HttpTermOptions {
-  
+
   def apply() = {
     new HttpTermOptions(new JHttpTermOptions(emptyObj()))
   }
-  
+
   def apply(t: JHttpTermOptions) = {
     if (t != null) {
       new HttpTermOptions(t)
@@ -671,7 +748,7 @@ object HttpTermOptions {
       new HttpTermOptions(new JHttpTermOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): HttpTermOptions = {
     if (json != null) {
       new HttpTermOptions(new JHttpTermOptions(json))

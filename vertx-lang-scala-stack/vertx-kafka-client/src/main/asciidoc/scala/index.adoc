@@ -8,8 +8,6 @@ messages asynchronously or reading them as a stream (even with the possibility t
 
 As producer, the API provides methods for sending message to a topic partition like writing on a stream.
 
-WARNING: this module has the tech preview status, this means the API can change between versions.
-
 == Using the Vert.x Kafka client
 
 To use this component, add the following dependency to the dependencies section of your build descriptor:

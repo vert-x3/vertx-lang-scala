@@ -218,11 +218,11 @@ class AddressResolverOptions(private val _asJava: JAddressResolverOptions) {
 
 
 object AddressResolverOptions {
-  
+
   def apply() = {
     new AddressResolverOptions(new JAddressResolverOptions(emptyObj()))
   }
-  
+
   def apply(t: JAddressResolverOptions) = {
     if (t != null) {
       new AddressResolverOptions(t)
@@ -230,7 +230,7 @@ object AddressResolverOptions {
       new AddressResolverOptions(new JAddressResolverOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): AddressResolverOptions = {
     if (json != null) {
       new AddressResolverOptions(new JAddressResolverOptions(json))

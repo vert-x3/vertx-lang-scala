@@ -116,11 +116,11 @@ class Argument(private val _asJava: JArgument) {
 
 
 object Argument {
-  
+
   def apply() = {
     new Argument(new JArgument(emptyObj()))
   }
-  
+
   def apply(t: JArgument) = {
     if (t != null) {
       new Argument(t)
@@ -128,7 +128,7 @@ object Argument {
       new Argument(new JArgument(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Argument = {
     if (json != null) {
       new Argument(new JArgument(json))

@@ -50,11 +50,11 @@ class Circle(private val _asJava: JCircle) {
 
 
 object Circle {
-  
+
   def apply() = {
     new Circle(new JCircle(emptyObj()))
   }
-  
+
   def apply(t: JCircle) = {
     if (t != null) {
       new Circle(t)
@@ -62,7 +62,7 @@ object Circle {
       new Circle(new JCircle(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Circle = {
     if (json != null) {
       new Circle(new JCircle(json))

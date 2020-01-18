@@ -79,11 +79,11 @@ class AggregateOptions(private val _asJava: JAggregateOptions) {
 
 
 object AggregateOptions {
-  
+
   def apply() = {
     new AggregateOptions(new JAggregateOptions(emptyObj()))
   }
-  
+
   def apply(t: JAggregateOptions) = {
     if (t != null) {
       new AggregateOptions(t)
@@ -91,7 +91,7 @@ object AggregateOptions {
       new AggregateOptions(new JAggregateOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): AggregateOptions = {
     if (json != null) {
       new AggregateOptions(new JAggregateOptions(json))

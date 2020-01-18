@@ -117,11 +117,11 @@ class WebSocketConnectOptions(private val _asJava: JWebSocketConnectOptions) ext
 
 
 object WebSocketConnectOptions {
-  
+
   def apply() = {
     new WebSocketConnectOptions(new JWebSocketConnectOptions(emptyObj()))
   }
-  
+
   def apply(t: JWebSocketConnectOptions) = {
     if (t != null) {
       new WebSocketConnectOptions(t)
@@ -129,7 +129,7 @@ object WebSocketConnectOptions {
       new WebSocketConnectOptions(new JWebSocketConnectOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): WebSocketConnectOptions = {
     if (json != null) {
       new WebSocketConnectOptions(new JWebSocketConnectOptions(json))

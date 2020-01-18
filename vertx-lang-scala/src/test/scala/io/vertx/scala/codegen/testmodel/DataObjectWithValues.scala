@@ -127,11 +127,11 @@ class DataObjectWithValues(private val _asJava: JDataObjectWithValues) {
 
 
 object DataObjectWithValues {
-  
+
   def apply() = {
     new DataObjectWithValues(new JDataObjectWithValues(emptyObj()))
   }
-  
+
   def apply(t: JDataObjectWithValues) = {
     if (t != null) {
       new DataObjectWithValues(t)
@@ -139,7 +139,7 @@ object DataObjectWithValues {
       new DataObjectWithValues(new JDataObjectWithValues(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DataObjectWithValues = {
     if (json != null) {
       new DataObjectWithValues(new JDataObjectWithValues(json))

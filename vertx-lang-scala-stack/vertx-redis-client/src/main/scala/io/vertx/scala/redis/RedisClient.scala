@@ -5043,15 +5043,15 @@ class RedisClient(private val _asJava: Object) {
 
 object RedisClient {
   def apply(asJava: JRedisClient) = new RedisClient(asJava)
-  
+
 
   def create(vertx: Vertx): RedisClient = {
-    RedisClient(JRedisClient.create(vertx.asJava.asInstanceOf[JVertx]))
+    RedisClient(JRedisClient.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 
   def create(vertx: Vertx,config: io.vertx.core.json.JsonObject): RedisClient = {
-    RedisClient(JRedisClient.create(vertx.asJava.asInstanceOf[JVertx], config))
+    RedisClient(JRedisClient.create(vertx.asJava.asInstanceOf[JVertx], config))//2 create
   }
 
 }

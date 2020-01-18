@@ -56,11 +56,11 @@ class PoolOptions(private val _asJava: JPoolOptions) {
 
 
 object PoolOptions {
-  
+
   def apply() = {
     new PoolOptions(new JPoolOptions(emptyObj()))
   }
-  
+
   def apply(t: JPoolOptions) = {
     if (t != null) {
       new PoolOptions(t)
@@ -68,7 +68,7 @@ object PoolOptions {
       new PoolOptions(new JPoolOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): PoolOptions = {
     if (json != null) {
       new PoolOptions(new JPoolOptions(json))

@@ -64,5 +64,5 @@ class MqttSubAckMessage(private val _asJava: Object) extends MqttMessage {
 
 object MqttSubAckMessage {
   def apply(asJava: JMqttSubAckMessage) = new MqttSubAckMessage(asJava)
-  
+
 }

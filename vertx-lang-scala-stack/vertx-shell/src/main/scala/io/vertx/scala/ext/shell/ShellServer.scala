@@ -153,14 +153,14 @@ class ShellServer(private val _asJava: Object) {
 
 object ShellServer {
   def apply(asJava: JShellServer) = new ShellServer(asJava)
-  
+
   /**
    * Create a new shell server with default options.   * @param vertx the vertx
    * @param options the options see <a href="../../../../../../../cheatsheet/ShellServerOptions.html">ShellServerOptions</a>
    * @return the created shell server
    */
   def create(vertx: Vertx,options: ShellServerOptions): ShellServer = {
-    ShellServer(JShellServer.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    ShellServer(JShellServer.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
   /**
@@ -168,7 +168,7 @@ object ShellServer {
    * @return the created shell server
    */
   def create(vertx: Vertx): ShellServer = {
-    ShellServer(JShellServer.create(vertx.asJava.asInstanceOf[JVertx]))
+    ShellServer(JShellServer.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

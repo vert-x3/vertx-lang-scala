@@ -164,5 +164,5 @@ class FunctionParamTCK(private val _asJava: Object) {
 
 object FunctionParamTCK {
   def apply(asJava: JFunctionParamTCK) = new FunctionParamTCK(asJava)
-  
+
 }

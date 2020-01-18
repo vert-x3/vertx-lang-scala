@@ -65,12 +65,12 @@ class ChainAuth(private val _asJava: Object) extends AuthProvider (_asJava) {
 
 object ChainAuth {
   def apply(asJava: JChainAuth) = new ChainAuth(asJava)
-  
+
   /**
    * Create a Chainable Auth Provider auth provider   * @return the auth provider
    */
   def create(): ChainAuth = {
-    ChainAuth(JChainAuth.create())
+    ChainAuth(JChainAuth.create())//2 create
   }
 
 }

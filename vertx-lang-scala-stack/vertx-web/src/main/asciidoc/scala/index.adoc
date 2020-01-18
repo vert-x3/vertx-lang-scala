@@ -1205,6 +1205,34 @@ router.route().handler(BodyHandler.create())
 
 ----
 
+If an async call is required before, the `HttpServerRequest` should be paused and then resumed so that the request
+events are not delivered until the body handler is ready to process them.
+
+[source,scala]
+----
+
+router.route().handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
+
+  var request = routingContext.request()
+
+  // Pause the request
+  request.pause()
+
+  someAsyncCall((result: java.lang.Void) => {
+
+    // Resume the request
+    request.resume()
+
+    // And continue processing
+    routingContext.next()
+  })
+})
+
+// This body handler will be called for all routes
+router.route().handler(BodyHandler.create())
+
+----
+
 === Getting the request body
 
 If you know the request body is JSON, then you can use `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#getBodyAsJson()[getBodyAsJson]`,
@@ -1257,23 +1285,16 @@ such as the name, file-name and size to be accessed.
 
 == Handling cookies
 
-Vert.x-Web has cookies support using the `link:../../scaladocs/io/vertx/scala/ext/web/handler/CookieHandler.html[CookieHandler]`.
+Vert.x-Web has out of the box cookies support.
 
-You should make sure a cookie handler is on a matching route for any requests that require this functionality.
+Before 3.8.1, cookie required to use the `link:../../scaladocs/io/vertx/scala/ext/web/handler/CookieHandler.html[CookieHandler]` to active this functionality.
 
-[source,scala]
-----
-
-// This cookie handler will be called for all routes
-router.route().handler(CookieHandler.create())
-
-
-----
+Since 3.8.1, the `CookieHandler` has been deprecated and should not be used anymore.
 
 === Manipulating cookies
 
 You use `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#getCookie()[getCookie]` to retrieve
-a cookie by name, or use `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#cookies()[cookies]` to retrieve the entire set.
+a cookie by name, or use `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#cookieMap()[cookieMap]` to retrieve the entire set.
 
 To remove a cookie, use `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.html#removeCookie()[removeCookie]`.
 
@@ -1282,7 +1303,7 @@ To add a cookie use `link:../../scaladocs/io/vertx/scala/ext/web/RoutingContext.
 The set of cookies will be written back in the response automatically when the response headers are written so the
 browser can store them.
 
-Cookies are described by instances of `link:../../scaladocs/io/vertx/scala/ext/web/Cookie.html[Cookie]`. This allows you to retrieve the name,
+Cookies are described by instances of `link:../../scaladocs/io/vertx/scala/core/http/Cookie.html[Cookie]`. This allows you to retrieve the name,
 value, domain, path and other normal cookie properties.
 
 Here's an example of querying and adding cookies:
@@ -1290,19 +1311,13 @@ Here's an example of querying and adding cookies:
 [source,scala]
 ----
 
-// This cookie handler will be called for all routes
-router.route().handler(CookieHandler.create())
+var someCookie = routingContext.getCookie("mycookie")
+var cookieValue = someCookie.getValue()
 
-router.route("some/path/").handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
+// Do something with cookie...
 
-  var someCookie = routingContext.getCookie("mycookie")
-  var cookieValue = someCookie.getValue()
-
-  // Do something with cookie...
-
-  // Add a cookie - this will get written back in the response automatically
-  routingContext.addCookie(Cookie.cookie("othercookie", "somevalue"))
-})
+// Add a cookie - this will get written back in the response automatically
+routingContext.addCookie(Cookie.cookie("othercookie", "somevalue"))
 
 ----
 
@@ -1422,18 +1437,12 @@ Vertx.clusteredVertx(VertxOptions()
 Once you've created a session store you can create a session handler, and add it to a route. You should make sure
 your session handler is routed to before your application handlers.
 
-You'll also need to include a `link:../../scaladocs/io/vertx/scala/ext/web/handler/CookieHandler.html[CookieHandler]` as the session handler uses cookies to
-lookup the session. The cookie handler should be before the session handler when routing.
-
 Here's an example:
 
 [source,scala]
 ----
 
 var router = Router.router(vertx)
-
-// We need a cookie handler first
-router.route().handler(CookieHandler.create())
 
 // Create a clustered session store using defaults
 var store = ClusteredSessionStore.create(vertx)
@@ -1475,7 +1484,6 @@ Here's an example of manipulating session data:
 [source,scala]
 ----
 
-router.route().handler(CookieHandler.create())
 router.route().handler(sessionHandler)
 
 // Now your application handlers
@@ -1531,7 +1539,6 @@ Here's a simple example of creating a basic auth handler given an auth provider.
 [source,scala]
 ----
 
-router.route().handler(CookieHandler.create())
 router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
 
 var basicAuthHandler = BasicAuthHandler.create(authProvider)
@@ -1546,7 +1553,6 @@ your auth handler is before your application handlers on those paths:
 [source,scala]
 ----
 
-router.route().handler(CookieHandler.create())
 router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setAuthProvider(authProvider))
 
 var basicAuthHandler = BasicAuthHandler.create(authProvider)
@@ -1626,7 +1632,6 @@ Here's an example of a simple app, using a redirect auth handler on the default 
 [source,scala]
 ----
 
-router.route().handler(CookieHandler.create())
 router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)).setAuthProvider(authProvider))
 
 var redirectAuthHandler = RedirectAuthHandler.create(authProvider)
@@ -1972,6 +1977,68 @@ router.route().handler((routingContext: io.vertx.scala.ext.web.RoutingContext) =
 ////
 TODO more CORS docs
 ////
+
+== Multi Tenant
+
+There are cases where your application needs to handle more than just 1 tenant. In this case a helper handler is
+provided that simplifies setting up the application.
+
+In the case the tenant is identified by a HTTP header, say for example `X-Tenant`, then creating the handler is as
+simple as:
+
+[source,scala]
+----
+router.route().handler(MultiTenantHandler.create("X-Tenant"))
+
+----
+
+You now should register what handler should be executed for the given tenant:
+
+[source,scala]
+----
+MultiTenantHandler.create("X-Tenant").addTenantHandler("tenant-A", (ctx: io.vertx.scala.ext.web.RoutingContext) => {
+  // do something for tenant A...
+}).addTenantHandler("tenant-B", (ctx: io.vertx.scala.ext.web.RoutingContext) => {
+  // do something for tenant B...
+}).addDefaultHandler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
+  // do something when no tenant matches...
+})
+
+
+----
+
+This is useful for security situations:
+
+[source,scala]
+----
+// create an OAuth2 provider, clientID and clientSecret should be requested to github
+var gitHubAuthProvider = GithubAuth.create(vertx, "CLIENT_ID", "CLIENT_SECRET")
+// create a oauth2 handler on our running server
+// the second argument is the full url to the callback as you entered in your provider management console.
+var githubOAuth2 = OAuth2AuthHandler.create(gitHubAuthProvider, "https://myserver.com/github-callback")
+// setup the callback handler for receiving the GitHub callback
+githubOAuth2.setupCallback(router.route())
+
+// create an OAuth2 provider, clientID and clientSecret should be requested to Google
+var googleAuthProvider = OAuth2Auth.create(vertx, OAuth2ClientOptions()
+  .setClientID("CLIENT_ID")
+  .setClientSecret("CLIENT_SECRET")
+  .setFlow(OAuth2FlowType.AUTH_CODE)
+  .setSite("https://accounts.google.com")
+  .setTokenPath("https://www.googleapis.com/oauth2/v3/token")
+  .setAuthorizationPath("/o/oauth2/auth")
+)
+
+// create a oauth2 handler on our domain: "http://localhost:8080"
+var googleOAuth2 = OAuth2AuthHandler.create(googleAuthProvider, "http://localhost:8080")
+
+
+MultiTenantHandler.create("X-Tenant").addTenantHandler("tenant-github", githubOAuth2).addTenantHandler("tenant-google", googleOAuth2).addDefaultHandler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
+  ctx.fail(401)
+})
+
+----
+
 
 == Templates
 
@@ -2486,9 +2553,8 @@ var router = Router.router(vertx)
 
 var sockJSHandler = SockJSHandler.create(vertx)
 var options = BridgeOptions()
-sockJSHandler.bridge(options)
-
-router.route("/eventbus/*").handler(sockJSHandler)
+// mount the bridge on the router
+router.mountSubRouter("/eventbus", sockJSHandler.bridge(options))
 
 ----
 
@@ -2681,9 +2747,8 @@ var options = BridgeOptions()
   .setOutboundPermitteds(Set(outboundPermitted1, outboundPermitted2))
 
 
-sockJSHandler.bridge(options)
-
-router.route("/eventbus/*").handler(sockJSHandler)
+// mount the bridge on the router
+router.mountSubRouter("/eventbus", sockJSHandler.bridge(options))
 
 ----
 
@@ -2735,22 +2800,19 @@ var inboundPermitted = PermittedOptions()
 inboundPermitted.setRequiredAuthority("place_orders")
 
 var sockJSHandler = SockJSHandler.create(vertx)
-sockJSHandler.bridge(BridgeOptions()
-  .setInboundPermitteds(Set(inboundPermitted))
-)
 
 // Now set up some basic auth handling:
 
-router.route().handler(CookieHandler.create())
 router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)))
 
 var basicAuthHandler = BasicAuthHandler.create(authProvider)
 
 router.route("/eventbus/*").handler(basicAuthHandler)
 
-
-router.route("/eventbus/*").handler(sockJSHandler)
-
+// mount the bridge on the router
+router.mountSubRouter("/eventbus", sockJSHandler.bridge(BridgeOptions()
+  .setInboundPermitteds(Set(inboundPermitted))
+))
 
 ----
 
@@ -2811,7 +2873,8 @@ var options = BridgeOptions()
   .setInboundPermitteds(Set(inboundPermitted))
 
 
-sockJSHandler.bridge(options, (be: io.vertx.scala.ext.web.handler.sockjs.BridgeEvent) => {
+// mount the bridge on the router
+router.mountSubRouter("/eventbus", sockJSHandler.bridge(options, (be: io.vertx.scala.ext.web.handler.sockjs.BridgeEvent) => {
   if (be.type() == BridgeEventType.PUBLISH || be.type() == BridgeEventType.RECEIVE) {
     if (be.getRawMessage().getValue("body") == "armadillos") {
       // Reject it
@@ -2820,11 +2883,7 @@ sockJSHandler.bridge(options, (be: io.vertx.scala.ext.web.handler.sockjs.BridgeE
     }
   }
   be.complete(true)
-})
-
-router.route("/eventbus/*").handler(sockJSHandler)
-
-
+}))
 
 ----
 
@@ -2843,15 +2902,14 @@ var options = BridgeOptions()
   .setPingTimeout(5000)
 
 
-sockJSHandler.bridge(options, (be: io.vertx.scala.ext.web.handler.sockjs.BridgeEvent) => {
+// mount the bridge on the router
+router.mountSubRouter("/eventbus", sockJSHandler.bridge(options, (be: io.vertx.scala.ext.web.handler.sockjs.BridgeEvent) => {
   if (be.type() == BridgeEventType.SOCKET_IDLE) {
     // Do some custom handling...
   }
 
   be.complete(true)
-})
-
-router.route("/eventbus/*").handler(sockJSHandler)
+}))
 
 ----
 
@@ -2909,7 +2967,8 @@ var options = BridgeOptions()
   .setInboundPermitteds(Set(inboundPermitted))
 
 
-sockJSHandler.bridge(options, (be: io.vertx.scala.ext.web.handler.sockjs.BridgeEvent) => {
+// mount the bridge on the router
+router.mountSubRouter("/eventbus", sockJSHandler.bridge(options, (be: io.vertx.scala.ext.web.handler.sockjs.BridgeEvent) => {
   if (be.type() == BridgeEventType.PUBLISH || be.type() == BridgeEventType.SEND) {
     // Add some headers
     var headers = new io.vertx.core.json.JsonObject().put("header1", "val").put("header2", "val2")
@@ -2918,11 +2977,7 @@ sockJSHandler.bridge(options, (be: io.vertx.scala.ext.web.handler.sockjs.BridgeE
     be.setRawMessage(rawMessage)
   }
   be.complete(true)
-})
-
-router.route("/eventbus/*").handler(sockJSHandler)
-
-
+}))
 
 ----
 
@@ -2954,7 +3009,6 @@ or the header name they have chosen during the instantiation of the `CSRFHandler
 [source,scala]
 ----
 
-router.route().handler(CookieHandler.create())
 router.route().handler(CSRFHandler.create("abracadabra"))
 router.route().handler((rc: io.vertx.scala.ext.web.RoutingContext) => {
 
@@ -3155,8 +3209,6 @@ need an application like the following snippet:
 // we use a Router to route all HTTP requests
 // to organize our code in a reusable way.
 
-// We need cookies and sessions
-router.route().handler(CookieHandler.create())
 // Simple auth service which uses a GitHub to
 // authenticate the user
 var authProvider = GithubAuth.create(vertx, "YOUR PROVIDER CLIENTID", "YOUR PROVIDER CLIENT SECRET")

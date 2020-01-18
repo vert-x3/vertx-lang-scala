@@ -142,5 +142,5 @@ class LanguageHeader(private val _asJava: Object) extends Locale (_asJava) with 
 
 object LanguageHeader {
   def apply(asJava: JLanguageHeader) = new LanguageHeader(asJava)
-  
+
 }

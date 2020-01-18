@@ -55,11 +55,11 @@ class TxnError(private val _asJava: JTxnError) {
 
 
 object TxnError {
-  
+
   def apply() = {
     new TxnError(new JTxnError(emptyObj()))
   }
-  
+
   def apply(t: JTxnError) = {
     if (t != null) {
       new TxnError(t)
@@ -67,7 +67,7 @@ object TxnError {
       new TxnError(new JTxnError(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): TxnError = {
     if (json != null) {
       new TxnError(new JTxnError(json))

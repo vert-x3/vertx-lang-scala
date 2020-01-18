@@ -202,19 +202,19 @@ class JsonParser(private val _asJava: Object) extends ReadStream[JsonEvent] with
 
 object JsonParser {
   def apply(asJava: JJsonParser) = new JsonParser(asJava)
-  
+
   /**
    * Create a new `JsonParser` instance.
    */
   def newParser(): JsonParser = {
-    JsonParser(JJsonParser.newParser())
+    JsonParser(JJsonParser.newParser())//2 newParser
   }
 
   /**
    * Create a new `JsonParser` instance.
    */
   def newParser(stream: ReadStream[io.vertx.core.buffer.Buffer]): JsonParser = {
-    JsonParser(JJsonParser.newParser(stream.asJava.asInstanceOf[JReadStream[Buffer]]))
+    JsonParser(JJsonParser.newParser(stream.asJava.asInstanceOf[JReadStream[Buffer]]))//2 newParser
   }
 
 }

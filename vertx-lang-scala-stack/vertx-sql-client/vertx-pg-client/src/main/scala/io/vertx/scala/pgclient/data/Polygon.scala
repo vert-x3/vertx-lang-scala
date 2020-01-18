@@ -42,11 +42,11 @@ class Polygon(private val _asJava: JPolygon) {
 
 
 object Polygon {
-  
+
   def apply() = {
     new Polygon(new JPolygon(emptyObj()))
   }
-  
+
   def apply(t: JPolygon) = {
     if (t != null) {
       new Polygon(t)
@@ -54,7 +54,7 @@ object Polygon {
       new Polygon(new JPolygon(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Polygon = {
     if (json != null) {
       new Polygon(new JPolygon(json))

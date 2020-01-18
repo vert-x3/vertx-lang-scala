@@ -50,13 +50,13 @@ class GoogleAuth(private val _asJava: Object) extends OpenIDConnectAuth (_asJava
 
 object GoogleAuth {
   def apply(asJava: JGoogleAuth) = new GoogleAuth(asJava)
-  
+
   /**
    * Create a OAuth2Auth provider for Google   * @param clientId the client id given to you by Google
    * @param clientSecret the client secret given to you by Google
    */
   def create(vertx: Vertx,clientId: String,clientSecret: String): OAuth2Auth = {
-    OAuth2Auth(JGoogleAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String]))
+    OAuth2Auth(JGoogleAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String]))//2 create
   }
 
   /**
@@ -65,7 +65,7 @@ object GoogleAuth {
    * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
    */
   def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
-    OAuth2Auth(JGoogleAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], httpClientOptions.asJava))
+    OAuth2Auth(JGoogleAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], httpClientOptions.asJava))//2 create
   }
 
   /**
@@ -79,14 +79,14 @@ object GoogleAuth {
    * @param handler the instantiated Oauth2 provider instance handler
    */
   def discover(vertx: Vertx,config: OAuth2ClientOptions,handler: Handler[AsyncResult[OAuth2Auth]]): Unit = {
-    JGoogleAuth.discover(vertx.asJava.asInstanceOf[JVertx], config.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Auth]]{def handle(x: AsyncResult[JOAuth2Auth]) {handler.handle(AsyncResultWrapper[JOAuth2Auth, OAuth2Auth](x, a => OAuth2Auth(a)))}}))
+    JGoogleAuth.discover(vertx.asJava.asInstanceOf[JVertx], config.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Auth]]{def handle(x: AsyncResult[JOAuth2Auth]) {handler.handle(AsyncResultWrapper[JOAuth2Auth, OAuth2Auth](x, a => OAuth2Auth(a)))}}))//2 discover
   }
 
   /**
    * Create a OAuth2Auth provider for Google Service Account (Server to Server)   * @param serviceAccountJson the configuration json file from your Google API page
    */
   def create(vertx: Vertx,serviceAccountJson: io.vertx.core.json.JsonObject): OAuth2Auth = {
-    OAuth2Auth(JGoogleAuth.create(vertx.asJava.asInstanceOf[JVertx], serviceAccountJson))
+    OAuth2Auth(JGoogleAuth.create(vertx.asJava.asInstanceOf[JVertx], serviceAccountJson))//2 create
   }
 
   /**
@@ -94,7 +94,7 @@ object GoogleAuth {
    * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
    */
   def create(vertx: Vertx,serviceAccountJson: io.vertx.core.json.JsonObject,httpClientOptions: HttpClientOptions): OAuth2Auth = {
-    OAuth2Auth(JGoogleAuth.create(vertx.asJava.asInstanceOf[JVertx], serviceAccountJson, httpClientOptions.asJava))
+    OAuth2Auth(JGoogleAuth.create(vertx.asJava.asInstanceOf[JVertx], serviceAccountJson, httpClientOptions.asJava))//2 create
   }
 
 }

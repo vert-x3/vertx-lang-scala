@@ -47,5 +47,5 @@ class SuperInterface1(private val _asJava: Object) {
 
 object SuperInterface1 {
   def apply(asJava: JSuperInterface1) = new SuperInterface1(asJava)
-  
+
 }

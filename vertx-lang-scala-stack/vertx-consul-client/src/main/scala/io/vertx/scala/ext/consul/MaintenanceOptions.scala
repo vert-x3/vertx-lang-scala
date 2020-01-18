@@ -72,11 +72,11 @@ class MaintenanceOptions(private val _asJava: JMaintenanceOptions) {
 
 
 object MaintenanceOptions {
-  
+
   def apply() = {
     new MaintenanceOptions(new JMaintenanceOptions(emptyObj()))
   }
-  
+
   def apply(t: JMaintenanceOptions) = {
     if (t != null) {
       new MaintenanceOptions(t)
@@ -84,7 +84,7 @@ object MaintenanceOptions {
       new MaintenanceOptions(new JMaintenanceOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MaintenanceOptions = {
     if (json != null) {
       new MaintenanceOptions(new JMaintenanceOptions(json))

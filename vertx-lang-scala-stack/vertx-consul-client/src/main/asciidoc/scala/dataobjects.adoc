@@ -321,6 +321,8 @@ Set to <code>maxRedirects</code> the maximum number of redirection a request can
 Set the maximum requests allowed in the wait queue, any requests beyond the max size will result in
 a ConnectionPoolTooBusyException.  If the value is set to a negative number then the queue will be unbounded.
 +++
+|[[maxWebSocketFrameSize]]`@maxWebSocketFrameSize`|`Number (int)`|-
+|[[maxWebSocketMessageSize]]`@maxWebSocketMessageSize`|`Number (int)`|-
 |[[maxWebsocketFrameSize]]`@maxWebsocketFrameSize`|`Number (int)`|+++
 Set the max websocket frame size
 +++
@@ -415,8 +417,11 @@ Set the trust options in jks format, aka Java truststore
 |[[tryUseCompression]]`@tryUseCompression`|`Boolean`|+++
 Set whether compression is enabled
 +++
+|[[tryUsePerFrameWebSocketCompression]]`@tryUsePerFrameWebSocketCompression`|`Boolean`|-
 |[[tryUsePerFrameWebsocketCompression]]`@tryUsePerFrameWebsocketCompression`|`Boolean`|-
+|[[tryUsePerMessageWebSocketCompression]]`@tryUsePerMessageWebSocketCompression`|`Boolean`|-
 |[[tryUsePerMessageWebsocketCompression]]`@tryUsePerMessageWebsocketCompression`|`Boolean`|-
+|[[tryWebSocketDeflateFrameCompression]]`@tryWebSocketDeflateFrameCompression`|`Boolean`|-
 |[[tryWebsocketDeflateFrameCompression]]`@tryWebsocketDeflateFrameCompression`|`Boolean`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|+++
 Set the ALPN usage.
@@ -433,6 +438,9 @@ Sets whether the Web Client should send a user agent header. Defaults to true.
 |[[verifyHost]]`@verifyHost`|`Boolean`|+++
 Set whether hostname verification is enabled
 +++
+|[[webSocketCompressionAllowClientNoContext]]`@webSocketCompressionAllowClientNoContext`|`Boolean`|-
+|[[webSocketCompressionLevel]]`@webSocketCompressionLevel`|`Number (int)`|-
+|[[webSocketCompressionRequestServerNoContext]]`@webSocketCompressionRequestServerNoContext`|`Boolean`|-
 |[[websocketCompressionAllowClientNoContext]]`@websocketCompressionAllowClientNoContext`|`Boolean`|-
 |[[websocketCompressionLevel]]`@websocketCompressionLevel`|`Number (int)`|-
 |[[websocketCompressionRequestServerNoContext]]`@websocketCompressionRequestServerNoContext`|`Boolean`|-

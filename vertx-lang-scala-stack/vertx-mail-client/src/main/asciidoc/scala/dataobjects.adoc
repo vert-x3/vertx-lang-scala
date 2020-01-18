@@ -72,6 +72,9 @@ smtp hosts on the internet. Since the client knows that is connects to a host th
 in that way, the property has to be set to false.
 <p>
 +++
+|[[enabledSecureTransportProtocols]]`@enabledSecureTransportProtocols`|`Array of String`|+++
+Sets the list of enabled SSL/TLS protocols.
++++
 |[[hostname]]`@hostname`|`String`|+++
 Set the hostname of the smtp server.
 +++

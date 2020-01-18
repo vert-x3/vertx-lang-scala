@@ -46,12 +46,16 @@ The path of the <i>inputrc</i> config.
 |[[maxChunkSize]]`@maxChunkSize`|`Number (int)`|-
 |[[maxHeaderSize]]`@maxHeaderSize`|`Number (int)`|-
 |[[maxInitialLineLength]]`@maxInitialLineLength`|`Number (int)`|-
+|[[maxWebSocketFrameSize]]`@maxWebSocketFrameSize`|`Number (int)`|-
+|[[maxWebSocketMessageSize]]`@maxWebSocketMessageSize`|`Number (int)`|-
 |[[maxWebsocketFrameSize]]`@maxWebsocketFrameSize`|`Number (int)`|-
 |[[maxWebsocketMessageSize]]`@maxWebsocketMessageSize`|`Number (int)`|-
 |[[openSslEngineOptions]]`@openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
 |[[pemKeyCertOptions]]`@pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|-
 |[[pemTrustOptions]]`@pemTrustOptions`|`link:dataobjects.html#PemTrustOptions[PemTrustOptions]`|-
+|[[perFrameWebSocketCompressionSupported]]`@perFrameWebSocketCompressionSupported`|`Boolean`|-
 |[[perFrameWebsocketCompressionSupported]]`@perFrameWebsocketCompressionSupported`|`Boolean`|-
+|[[perMessageWebSocketCompressionSupported]]`@perMessageWebSocketCompressionSupported`|`Boolean`|-
 |[[perMessageWebsocketCompressionSupported]]`@perMessageWebsocketCompressionSupported`|`Boolean`|-
 |[[pfxKeyCertOptions]]`@pfxKeyCertOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
 |[[pfxTrustOptions]]`@pfxTrustOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
@@ -89,6 +93,10 @@ Set <code>term.js</code> resource to use.
 |[[vertsShellJsResource]]`@vertsShellJsResource`|`Buffer`|+++
 Set <code>vertxshell.js</code> resource to use.
 +++
+|[[webSocketAllowServerNoContext]]`@webSocketAllowServerNoContext`|`Boolean`|-
+|[[webSocketCompressionLevel]]`@webSocketCompressionLevel`|`Number (int)`|-
+|[[webSocketPreferredClientNoContext]]`@webSocketPreferredClientNoContext`|`Boolean`|-
+|[[webSocketSubProtocols]]`@webSocketSubProtocols`|`Array of String`|-
 |[[websocketAllowServerNoContext]]`@websocketAllowServerNoContext`|`Boolean`|-
 |[[websocketCompressionLevel]]`@websocketCompressionLevel`|`Number (int)`|-
 |[[websocketPreferredClientNoContext]]`@websocketPreferredClientNoContext`|`Boolean`|-

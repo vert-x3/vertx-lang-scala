@@ -17,7 +17,6 @@
 package io.vertx.scala.sqlclient
 
 import io.vertx.sqlclient.{RowIterator => JRowIterator}
-import io.vertx.sqlclient.{Row => JRow}
 import scala.reflect.runtime.universe._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
@@ -27,7 +26,7 @@ import io.vertx.lang.scala.Converter._
 
   */
 
-class RowIterator(private val _asJava: Object) {
+class RowIterator[R: TypeTag](private val _asJava: Object) {
   def asJava = _asJava
 
 
@@ -36,18 +35,18 @@ class RowIterator(private val _asJava: Object) {
 
 
   def hasNext (): Boolean = {
-    asJava.asInstanceOf[JRowIterator].hasNext().asInstanceOf[Boolean]
+    asJava.asInstanceOf[JRowIterator[Object]].hasNext().asInstanceOf[Boolean]
   }
 
 
-  def next (): Row = {
-    Row(asJava.asInstanceOf[JRowIterator].next())
+  def next (): R = {
+    toScala[R](asJava.asInstanceOf[JRowIterator[Object]].next())
   }
 
 
 }
 
 object RowIterator {
-  def apply(asJava: JRowIterator) = new RowIterator(asJava)
-  
+  def apply[R: TypeTag](asJava: JRowIterator[_]) = new RowIterator[R](asJava)
+
 }

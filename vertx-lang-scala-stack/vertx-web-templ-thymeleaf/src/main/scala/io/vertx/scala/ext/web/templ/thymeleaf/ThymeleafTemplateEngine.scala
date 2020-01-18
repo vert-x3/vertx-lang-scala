@@ -52,12 +52,12 @@ class ThymeleafTemplateEngine(private val _asJava: Object) extends TemplateEngin
 
 object ThymeleafTemplateEngine {
   def apply(asJava: JThymeleafTemplateEngine) = new ThymeleafTemplateEngine(asJava)
-  
+
   /**
    * Create a template engine using defaults   * @return the engine
    */
   def create(vertx: Vertx): ThymeleafTemplateEngine = {
-    ThymeleafTemplateEngine(JThymeleafTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))
+    ThymeleafTemplateEngine(JThymeleafTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

@@ -105,5 +105,5 @@ class KafkaConsumerRecord[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 
 object KafkaConsumerRecord {
   def apply[K: TypeTag, V: TypeTag](asJava: JKafkaConsumerRecord[_, _]) = new KafkaConsumerRecord[K, V](asJava)
-  
+
 }

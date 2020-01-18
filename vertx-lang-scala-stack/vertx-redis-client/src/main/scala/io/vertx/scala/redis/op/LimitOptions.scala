@@ -41,11 +41,11 @@ class LimitOptions(private val _asJava: JLimitOptions) {
 
 
 object LimitOptions {
-  
+
   def apply() = {
     new LimitOptions(new JLimitOptions(emptyObj()))
   }
-  
+
   def apply(t: JLimitOptions) = {
     if (t != null) {
       new LimitOptions(t)
@@ -53,7 +53,7 @@ object LimitOptions {
       new LimitOptions(new JLimitOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): LimitOptions = {
     if (json != null) {
       new LimitOptions(new JLimitOptions(json))

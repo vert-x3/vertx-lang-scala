@@ -79,11 +79,11 @@ class UpdateOptions(private val _asJava: JUpdateOptions) {
 
 
 object UpdateOptions {
-  
+
   def apply() = {
     new UpdateOptions(new JUpdateOptions(emptyObj()))
   }
-  
+
   def apply(t: JUpdateOptions) = {
     if (t != null) {
       new UpdateOptions(t)
@@ -91,7 +91,7 @@ object UpdateOptions {
       new UpdateOptions(new JUpdateOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): UpdateOptions = {
     if (json != null) {
       new UpdateOptions(new JUpdateOptions(json))

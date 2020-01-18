@@ -290,6 +290,11 @@ public class TypeHelper {
           ret = "toJava["+type.getSimpleName()+"](" + name + ")";
         }
       }
+      else {
+        if (nullable) {
+          ret += ".orNull";
+        }
+      }
       return ret;
     } else if (type.getKind() == ClassKind.CLASS_TYPE) {
       String ret = "toJavaClass("+name+")";
@@ -583,8 +588,8 @@ public class TypeHelper {
     }
     return false;
   }
-  
-  
+
+
   //IMPORTS
 
 
@@ -646,7 +651,7 @@ public class TypeHelper {
 
   //IMPORTS
 
-  
+
   //METHODS
 
 
@@ -783,7 +788,15 @@ public class TypeHelper {
         .collect(Collectors.toList()));
       typeParamString = "[" + typeParamString + "]";
     }
-    return toScalaWithConversion(target + "." + escapeIfKeyword(method.getName()) + typeParamString + "(" + paramString + ")", method.getReturnType(), typeParams, method.getTypeParams());
+
+    if(type.getName().equals("io.vertx.sqlclient.Tuple") && method.getName().equals("of")) {
+      String pars = "(new io.vertx.sqlclient.impl.ArrayTuple(0))";
+      for (String par : paramString.split(", ")) {
+        pars += ".addValue(" + par + ")";
+      }
+      return "Tuple("+pars+")";
+    }
+    return toScalaWithConversion(target + "." + escapeIfKeyword(method.getName()) + typeParamString + "(" + paramString + ")", method.getReturnType(), typeParams, method.getTypeParams()) + "//2 "+method.getName();
   }
 
   public static List<TypeParamInfo> removeLastParam(List<TypeParamInfo> params) {
@@ -804,8 +817,8 @@ public class TypeHelper {
     methodName += "Future";
     return escapeIfKeyword(methodName);
   }
-  
-  
+
+
   //METHODS
 
   //DOCS
@@ -1016,5 +1029,5 @@ public class TypeHelper {
     return output.toString().replace("<p>", "");
   }
   //DOCS
-  
+
 }

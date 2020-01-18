@@ -108,11 +108,11 @@ class JWTAuthOptions(private val _asJava: JJWTAuthOptions) {
 
 
 object JWTAuthOptions {
-  
+
   def apply() = {
     new JWTAuthOptions(new JJWTAuthOptions(emptyObj()))
   }
-  
+
   def apply(t: JJWTAuthOptions) = {
     if (t != null) {
       new JWTAuthOptions(t)
@@ -120,7 +120,7 @@ object JWTAuthOptions {
       new JWTAuthOptions(new JJWTAuthOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): JWTAuthOptions = {
     if (json != null) {
       new JWTAuthOptions(new JJWTAuthOptions(json))

@@ -204,14 +204,14 @@ class MqttServer(private val _asJava: Object) {
 
 object MqttServer {
   def apply(asJava: JMqttServer) = new MqttServer(asJava)
-  
+
   /**
    * Return an MQTT server instance   * @param vertx Vert.x instance
    * @param options MQTT server options see <a href="../../../../../../cheatsheet/MqttServerOptions.html">MqttServerOptions</a>
    * @return MQTT server instance
    */
   def create(vertx: Vertx,options: MqttServerOptions): MqttServer = {
-    MqttServer(JMqttServer.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    MqttServer(JMqttServer.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
   /**
@@ -219,7 +219,7 @@ object MqttServer {
    * @return MQTT server instance
    */
   def create(vertx: Vertx): MqttServer = {
-    MqttServer(JMqttServer.create(vertx.asJava.asInstanceOf[JVertx]))
+    MqttServer(JMqttServer.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

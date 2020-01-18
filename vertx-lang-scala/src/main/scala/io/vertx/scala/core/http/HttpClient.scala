@@ -230,7 +230,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket with the specified options   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -243,7 +243,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Connect a WebSocket to the specified port, host and relative request URI   * @param port the port
    * @param host the host
    * @param requestURI the relative URI
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -254,8 +254,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket with the specified options   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -268,8 +268,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Connect a WebSocket to the specified port, host and relative request URI   * @param port the port
    * @param host the host
    * @param requestURI the relative URI
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -281,7 +281,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
   /**
    * Connect a WebSocket to the host and relative request URI and default port   * @param host the host
    * @param requestURI the relative URI
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -293,8 +293,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
   /**
    * Connect a WebSocket to the host and relative request URI and default port   * @param host the host
    * @param requestURI the relative URI
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -306,7 +306,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
   /**
    * Connect a WebSocket with the specified options, and with the specified headers   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @param headers the headers
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -320,7 +320,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -332,8 +332,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
   /**
    * Connect a WebSocket with the specified options, and with the specified headers   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @param headers the headers
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -347,8 +347,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -361,7 +361,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Connect a WebSocket to the specified host,relative request UR, and default port and with the specified headers   * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -374,8 +374,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Connect a WebSocket to the specified host,relative request UR, and default port and with the specified headers   * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -388,8 +388,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Connect a WebSocket with the specified optionsI, with the specified headers and using
    * the specified version of WebSockets   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @param headers the headers
-   * @param version the websocket version
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param version the WebSocket version
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -404,8 +404,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param version the WebSocket version
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -418,9 +418,9 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Connect a WebSocket with the specified options, with the specified headers and using
    * the specified version of WebSockets   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @param headers the headers
-   * @param version the websocket version
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param version the WebSocket version
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -435,9 +435,9 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param version the WebSocket version
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -451,8 +451,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * the specified version of WebSockets   * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param version the WebSocket version
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -466,9 +466,9 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * the specified version of WebSockets   * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param version the WebSocket version
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -479,11 +479,11 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket with the specified options, with the specified headers, using
-   * the specified version of WebSockets, and the specified websocket sub protocols   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+   * the specified version of WebSockets, and the specified WebSocket sub protocols   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols to use
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -494,13 +494,13 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket to the specified port, host and relative request URI, with the specified headers, using
-   * the specified version of WebSockets, and the specified websocket sub protocols   * @param port the port
+   * the specified version of WebSockets, and the specified WebSocket sub protocols   * @param port the port
    * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols to use
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -511,12 +511,12 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket with the specified absolute url, with the specified headers, using
-   * the specified version of WebSockets, and the specified websocket sub protocols.   * @param url the absolute url
+   * the specified version of WebSockets, and the specified WebSocket sub protocols.   * @param url the absolute url
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols to use
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -527,12 +527,12 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket with the specified options, with the specified headers, using
-   * the specified version of WebSockets, and the specified websocket sub protocols   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+   * the specified version of WebSockets, and the specified WebSocket sub protocols   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols to use
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -543,14 +543,14 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket to the specified port, host and relative request URI, with the specified headers, using
-   * the specified version of WebSockets, and the specified websocket sub protocols   * @param port the port
+   * the specified version of WebSockets, and the specified WebSocket sub protocols   * @param port the port
    * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols to use
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -561,12 +561,12 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket to the specified host, relative request URI and default port, with the specified headers, using
-   * the specified version of WebSockets, and the specified websocket sub protocols   * @param host the host
+   * the specified version of WebSockets, and the specified WebSocket sub protocols   * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols to use
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -577,13 +577,13 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket to the specified host, relative request URI and default port, with the specified headers, using
-   * the specified version of WebSockets, and the specified websocket sub protocols   * @param host the host
+   * the specified version of WebSockets, and the specified WebSocket sub protocols   * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols to use
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -594,7 +594,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket at the relative request URI using the default host and port   * @param requestURI the relative URI
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -605,8 +605,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket at the relative request URI using the default host and port   * @param requestURI the relative URI
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -618,7 +618,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
   /**
    * Connect a WebSocket at the relative request URI using the default host and port and the specified headers   * @param requestURI the relative URI
    * @param headers the headers
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -630,8 +630,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
   /**
    * Connect a WebSocket at the relative request URI using the default host and port and the specified headers   * @param requestURI the relative URI
    * @param headers the headers
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -644,8 +644,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Connect a WebSocket at the relative request URI using the default host and port, the specified headers and the
    * specified version of WebSockets   * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param version the WebSocket version
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -658,9 +658,9 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Connect a WebSocket at the relative request URI using the default host and port, the specified headers and the
    * specified version of WebSockets   * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param version the WebSocket version
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -673,9 +673,9 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Connect a WebSocket at the relative request URI using the default host and port, the specified headers, the
    * specified version of WebSockets and the specified sub protocols   * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols
-   * @param wsConnect handler that will be called with the websocket when connected
+   * @param wsConnect handler that will be called with the WebSocket when connected
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -688,10 +688,10 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Connect a WebSocket at the relative request URI using the default host and port, the specified headers, the
    * specified version of WebSockets and the specified sub protocols   * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols
-   * @param wsConnect handler that will be called with the websocket when connected
-   * @param failureHandler handler that will be called if websocket connection fails
+   * @param wsConnect handler that will be called with the WebSocket when connected
+   * @param failureHandler handler that will be called if WebSocket connection fails
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -1497,7 +1497,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Connect a WebSocket to the specified port, host and relative request URI   * @param port the port
    * @param host the host
    * @param requestURI the relative URI
-   * @param handler handler that will be called with the websocket when connected
+   * @param handler handler that will be called with the WebSocket when connected
    */
   def webSocket (port: Int, host: String, requestURI: String, handler: Handler[AsyncResult[WebSocket]]): Unit = {
     asJava.asInstanceOf[JHttpClient].webSocket(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JWebSocket]]{def handle(x: AsyncResult[JWebSocket]) {handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))}}))
@@ -1506,7 +1506,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
   /**
    * Connect a WebSocket to the host and relative request URI and default port   * @param host the host
    * @param requestURI the relative URI
-   * @param handler handler that will be called with the websocket when connected
+   * @param handler handler that will be called with the WebSocket when connected
    */
   def webSocket (host: String, requestURI: String, handler: Handler[AsyncResult[WebSocket]]): Unit = {
     asJava.asInstanceOf[JHttpClient].webSocket(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JWebSocket]]{def handle(x: AsyncResult[JWebSocket]) {handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))}}))
@@ -1514,7 +1514,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket at the relative request URI using the default host and port   * @param requestURI the relative URI
-   * @param handler handler that will be called with the websocket when connected
+   * @param handler handler that will be called with the WebSocket when connected
    */
   def webSocket (requestURI: String, handler: Handler[AsyncResult[WebSocket]]): Unit = {
     asJava.asInstanceOf[JHttpClient].webSocket(requestURI.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JWebSocket]]{def handle(x: AsyncResult[JWebSocket]) {handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))}}))
@@ -1529,11 +1529,11 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Connect a WebSocket with the specified absolute url, with the specified headers, using
-   * the specified version of WebSockets, and the specified websocket sub protocols.   * @param url the absolute url
+   * the specified version of WebSockets, and the specified WebSocket sub protocols.   * @param url the absolute url
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols to use
-   * @param handler handler that will be called if websocket connection fails
+   * @param handler handler that will be called if WebSocket connection fails
    */
   def webSocketAbs (url: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: scala.collection.mutable.Buffer[String], handler: Handler[AsyncResult[WebSocket]]): Unit = {
     asJava.asInstanceOf[JHttpClient].webSocketAbs(url.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JWebSocket]]{def handle(x: AsyncResult[JWebSocket]) {handler.handle(AsyncResultWrapper[JWebSocket, WebSocket](x, a => WebSocket(a)))}}))
@@ -1541,7 +1541,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Create a WebSocket stream with the specified options   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (options: RequestOptions): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(options.asJava))
@@ -1551,7 +1551,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Create a WebSocket stream to the specified port, host and relative request URI   * @param port the port
    * @param host the host
    * @param requestURI the relative URI
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (port: Int, host: String, requestURI: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
@@ -1560,7 +1560,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
   /**
    * Create a WebSocket stream to the specified host, relative request URI and default port   * @param host the host
    * @param requestURI the relative URI
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (host: String, requestURI: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String]))
@@ -1569,7 +1569,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
   /**
    * Create a WebSocket stream with the specified options, and with the specified headers   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @param headers the headers
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (options: RequestOptions, headers: MultiMap): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(options.asJava, headers.asJava.asInstanceOf[JMultiMap]))
@@ -1580,7 +1580,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (port: Int, host: String, requestURI: String, headers: MultiMap): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap]))
@@ -1590,7 +1590,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Create a WebSocket stream to the specified host, relative request URI and default port and with the specified headers   * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (host: String, requestURI: String, headers: MultiMap): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap]))
@@ -1600,8 +1600,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Create a WebSocket stream with the specified options, with the specified headers and using
    * the specified version of WebSockets   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @param headers the headers
-   * @param version the websocket version
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @param version the WebSocket version
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version))
@@ -1613,8 +1613,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @param version the WebSocket version
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version))
@@ -1625,8 +1625,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * the specified version of WebSockets   * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @param version the WebSocket version
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version))
@@ -1634,11 +1634,11 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Create a WebSocket stream with the specified absolute url, the specified headers, using the specified version of WebSockets,
-   * and the specified websocket sub protocols.   * @param url the absolute url
+   * and the specified WebSocket sub protocols.   * @param url the absolute url
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols to use
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStreamAbs (url: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStreamAbs(url.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String]))
@@ -1646,11 +1646,11 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Create a WebSocket stream to the specified port, host and relative request URI, with the specified headers, using
-   * the specified version of WebSockets, and the specified websocket sub protocols   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
+   * the specified version of WebSockets, and the specified WebSocket sub protocols   * @param options the request options see <a href="../../../../../../../cheatsheet/RequestOptions.html">RequestOptions</a>
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols to use
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (options: RequestOptions, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(options.asJava, headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String]))
@@ -1658,13 +1658,13 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Create a WebSocket stream to the specified port, host and relative request URI, with the specified headers, using
-   * the specified version of WebSockets, and the specified websocket sub protocols   * @param port the port
+   * the specified version of WebSockets, and the specified WebSocket sub protocols   * @param port the port
    * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols to use
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (port: Int, host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String]))
@@ -1672,12 +1672,12 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Create a WebSocket stream to the specified host, relative request URI and default port, with the specified headers, using
-   * the specified version of WebSockets, and the specified websocket sub protocols   * @param host the host
+   * the specified version of WebSockets, and the specified WebSocket sub protocols   * @param host the host
    * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols to use
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (host: String, requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(host.asInstanceOf[java.lang.String], requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String]))
@@ -1685,7 +1685,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
   /**
    * Create a WebSocket stream at the relative request URI using the default host and port and the specified headers   * @param requestURI the relative URI
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (requestURI: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(requestURI.asInstanceOf[java.lang.String]))
@@ -1694,7 +1694,7 @@ class HttpClient(private val _asJava: Object) extends Measured {
   /**
    * Create a WebSocket stream at the relative request URI using the default host and port and the specified headers   * @param requestURI the relative URI
    * @param headers the headers
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (requestURI: String, headers: MultiMap): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap]))
@@ -1704,8 +1704,8 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Create a WebSocket stream at the relative request URI using the default host and port, the specified headers and the
    * specified version of WebSockets   * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @param version the WebSocket version
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version))
@@ -1715,9 +1715,9 @@ class HttpClient(private val _asJava: Object) extends Measured {
    * Create a WebSocket stream at the relative request URI using the default host and port, the specified headers, the
    * specified version of WebSockets and the specified sub protocols   * @param requestURI the relative URI
    * @param headers the headers
-   * @param version the websocket version
+   * @param version the WebSocket version
    * @param subProtocols the subprotocols
-   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a websocket
+   * @return a stream emitting a WebSocket event when the client connection has been upgraded to a WebSocket
    */
   def websocketStream (requestURI: String, headers: MultiMap, version: io.vertx.core.http.WebsocketVersion, subProtocols: String): ReadStream[WebSocket] = {
     ReadStream[WebSocket](asJava.asInstanceOf[JHttpClient].websocketStream(requestURI.asInstanceOf[java.lang.String], headers.asJava.asInstanceOf[JMultiMap], version, subProtocols.asInstanceOf[java.lang.String]))
@@ -1786,5 +1786,5 @@ class HttpClient(private val _asJava: Object) extends Measured {
 
 object HttpClient {
   def apply(asJava: JHttpClient) = new HttpClient(asJava)
-  
+
 }

@@ -449,6 +449,24 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions) extends Ext
     asJava.getMaxWaitQueueSize().asInstanceOf[Int]
   }
 
+  override def setMaxWebSocketFrameSize(value: Int) = {
+    asJava.setMaxWebSocketFrameSize(value)
+    this
+  }
+
+  override def getMaxWebSocketFrameSize: Int = {
+    asJava.getMaxWebSocketFrameSize().asInstanceOf[Int]
+  }
+
+  override def setMaxWebSocketMessageSize(value: Int) = {
+    asJava.setMaxWebSocketMessageSize(value)
+    this
+  }
+
+  override def getMaxWebSocketMessageSize: Int = {
+    asJava.getMaxWebSocketMessageSize().asInstanceOf[Int]
+  }
+
   override def setMaxWebsocketFrameSize(value: Int) = {
     asJava.setMaxWebsocketFrameSize(value)
     this
@@ -793,9 +811,23 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions) extends Ext
     asJava.isTryUseCompression().asInstanceOf[Boolean]
   }
 
+  override def setTryUsePerFrameWebSocketCompression(value: Boolean) = {
+    asJava.setTryUsePerFrameWebSocketCompression(value)
+    this
+  }
+
   override def setTryUsePerFrameWebsocketCompression(value: Boolean) = {
     asJava.setTryUsePerFrameWebsocketCompression(value)
     this
+  }
+
+  override def setTryUsePerMessageWebSocketCompression(value: Boolean) = {
+    asJava.setTryUsePerMessageWebSocketCompression(value)
+    this
+  }
+
+  override def getTryUsePerMessageWebSocketCompression: Boolean = {
+    asJava.getTryUsePerMessageWebSocketCompression().asInstanceOf[Boolean]
   }
 
   override def setTryUsePerMessageWebsocketCompression(value: Boolean) = {
@@ -891,6 +923,33 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions) extends Ext
     asJava.isVerifyHost().asInstanceOf[Boolean]
   }
 
+  override def setWebSocketCompressionAllowClientNoContext(value: Boolean) = {
+    asJava.setWebSocketCompressionAllowClientNoContext(value)
+    this
+  }
+
+  override def getWebSocketCompressionAllowClientNoContext: Boolean = {
+    asJava.getWebSocketCompressionAllowClientNoContext().asInstanceOf[Boolean]
+  }
+
+  override def setWebSocketCompressionLevel(value: Int) = {
+    asJava.setWebSocketCompressionLevel(value)
+    this
+  }
+
+  override def getWebSocketCompressionLevel: Int = {
+    asJava.getWebSocketCompressionLevel().asInstanceOf[Int]
+  }
+
+  override def setWebSocketCompressionRequestServerNoContext(value: Boolean) = {
+    asJava.setWebSocketCompressionRequestServerNoContext(value)
+    this
+  }
+
+  override def getWebSocketCompressionRequestServerNoContext: Boolean = {
+    asJava.getWebSocketCompressionRequestServerNoContext().asInstanceOf[Boolean]
+  }
+
   override def setWebsocketCompressionAllowClientNoContext(value: Boolean) = {
     asJava.setWebsocketCompressionAllowClientNoContext(value)
     this
@@ -922,11 +981,11 @@ class OAuth2ClientOptions(private val _asJava: JOAuth2ClientOptions) extends Ext
 
 
 object OAuth2ClientOptions {
-  
+
   def apply() = {
     new OAuth2ClientOptions(new JOAuth2ClientOptions(emptyObj()))
   }
-  
+
   def apply(t: JOAuth2ClientOptions) = {
     if (t != null) {
       new OAuth2ClientOptions(t)
@@ -934,7 +993,7 @@ object OAuth2ClientOptions {
       new OAuth2ClientOptions(new JOAuth2ClientOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): OAuth2ClientOptions = {
     if (json != null) {
       new OAuth2ClientOptions(new JOAuth2ClientOptions(json))

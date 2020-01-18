@@ -1672,13 +1672,13 @@ class ConsulClient(private val _asJava: Object) {
 
 object ConsulClient {
   def apply(asJava: JConsulClient) = new ConsulClient(asJava)
-  
+
   /**
    * Create a Consul client with default options.   * @param vertx the Vert.x instance
    * @return the client
    */
   def create(vertx: Vertx): ConsulClient = {
-    ConsulClient(JConsulClient.create(vertx.asJava.asInstanceOf[JVertx]))
+    ConsulClient(JConsulClient.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -1687,7 +1687,7 @@ object ConsulClient {
    * @return the client
    */
   def create(vertx: Vertx,options: ConsulClientOptions): ConsulClient = {
-    ConsulClient(JConsulClient.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    ConsulClient(JConsulClient.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
 }

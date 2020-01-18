@@ -48,12 +48,12 @@ class HtdigestAuth(private val _asJava: Object) extends AuthProvider (_asJava) {
 
 object HtdigestAuth {
   def apply(asJava: JHtdigestAuth) = new HtdigestAuth(asJava)
-  
+
   /**
    * Creates an instance of HtdigestAuth.   * @return the created instance of HtdigestAuths
    */
   def create(vertx: Vertx): HtdigestAuth = {
-    HtdigestAuth(JHtdigestAuth.create(vertx.asJava.asInstanceOf[JVertx]))
+    HtdigestAuth(JHtdigestAuth.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -61,7 +61,7 @@ object HtdigestAuth {
    * @return the created instance of HtdigestAuths
    */
   def create(vertx: Vertx,htfile: String): HtdigestAuth = {
-    HtdigestAuth(JHtdigestAuth.create(vertx.asJava.asInstanceOf[JVertx], htfile.asInstanceOf[java.lang.String]))
+    HtdigestAuth(JHtdigestAuth.create(vertx.asJava.asInstanceOf[JVertx], htfile.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

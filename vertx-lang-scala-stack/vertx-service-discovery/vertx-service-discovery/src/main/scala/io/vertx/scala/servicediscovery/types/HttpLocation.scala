@@ -93,11 +93,11 @@ class HttpLocation(private val _asJava: JHttpLocation) {
 
 
 object HttpLocation {
-  
+
   def apply() = {
     new HttpLocation(new JHttpLocation(emptyObj()))
   }
-  
+
   def apply(t: JHttpLocation) = {
     if (t != null) {
       new HttpLocation(t)
@@ -105,7 +105,7 @@ object HttpLocation {
       new HttpLocation(new JHttpLocation(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): HttpLocation = {
     if (json != null) {
       new HttpLocation(new JHttpLocation(json))

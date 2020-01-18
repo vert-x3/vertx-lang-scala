@@ -81,12 +81,12 @@ class HashingStrategy(private val _asJava: Object) {
 
 object HashingStrategy {
   def apply(asJava: JHashingStrategy) = new HashingStrategy(asJava)
-  
+
   /**
    * Factory method to load the algorithms from the system   * @return a Hashing Strategy capable of hashing using the available algorithms
    */
   def load(): HashingStrategy = {
-    HashingStrategy(JHashingStrategy.load())
+    HashingStrategy(JHashingStrategy.load())//2 load
   }
 
 }

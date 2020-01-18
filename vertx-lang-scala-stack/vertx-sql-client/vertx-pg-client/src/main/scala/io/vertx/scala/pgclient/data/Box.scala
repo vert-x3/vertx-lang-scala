@@ -50,11 +50,11 @@ class Box(private val _asJava: JBox) {
 
 
 object Box {
-  
+
   def apply() = {
     new Box(new JBox(emptyObj()))
   }
-  
+
   def apply(t: JBox) = {
     if (t != null) {
       new Box(t)
@@ -62,7 +62,7 @@ object Box {
       new Box(new JBox(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Box = {
     if (json != null) {
       new Box(new JBox(json))

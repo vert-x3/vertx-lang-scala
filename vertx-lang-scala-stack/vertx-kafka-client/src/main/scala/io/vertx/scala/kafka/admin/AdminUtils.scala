@@ -160,14 +160,14 @@ class AdminUtils(private val _asJava: Object) {
 
 object AdminUtils {
   def apply(asJava: JAdminUtils) = new AdminUtils(asJava)
-  
+
   /**
    * Create a new AdminUtils instance   * @param vertx Vert.x instance to use
    * @param zookeeperHosts comma-separated list of Zookeeper server, e.g. localhost:2181,localhost:2182
    * @return an instance of the AdminUtilWrapper
    */
   def create(vertx: Vertx,zookeeperHosts: String): AdminUtils = {
-    AdminUtils(JAdminUtils.create(vertx.asJava.asInstanceOf[JVertx], zookeeperHosts.asInstanceOf[java.lang.String]))
+    AdminUtils(JAdminUtils.create(vertx.asJava.asInstanceOf[JVertx], zookeeperHosts.asInstanceOf[java.lang.String]))//2 create
   }
 
   /**
@@ -177,7 +177,7 @@ object AdminUtils {
    * @return an instance of the AdminUtilWrapper
    */
   def create(vertx: Vertx,zookeeperHosts: String,autoClose: Boolean): AdminUtils = {
-    AdminUtils(JAdminUtils.create(vertx.asJava.asInstanceOf[JVertx], zookeeperHosts.asInstanceOf[java.lang.String], autoClose.asInstanceOf[java.lang.Boolean]))
+    AdminUtils(JAdminUtils.create(vertx.asJava.asInstanceOf[JVertx], zookeeperHosts.asInstanceOf[java.lang.String], autoClose.asInstanceOf[java.lang.Boolean]))//2 create
   }
 
   /**
@@ -189,7 +189,7 @@ object AdminUtils {
    * @return an instance of the AdminUtilWrapper
    */
   def create(vertx: Vertx,zookeeperHosts: String,connectionTimeoutMs: Int,isSecure: Boolean,autoClose: Boolean): AdminUtils = {
-    AdminUtils(JAdminUtils.create(vertx.asJava.asInstanceOf[JVertx], zookeeperHosts.asInstanceOf[java.lang.String], connectionTimeoutMs.asInstanceOf[java.lang.Integer], isSecure.asInstanceOf[java.lang.Boolean], autoClose.asInstanceOf[java.lang.Boolean]))
+    AdminUtils(JAdminUtils.create(vertx.asJava.asInstanceOf[JVertx], zookeeperHosts.asInstanceOf[java.lang.String], connectionTimeoutMs.asInstanceOf[java.lang.Integer], isSecure.asInstanceOf[java.lang.Boolean], autoClose.asInstanceOf[java.lang.Boolean]))//2 create
   }
 
 }

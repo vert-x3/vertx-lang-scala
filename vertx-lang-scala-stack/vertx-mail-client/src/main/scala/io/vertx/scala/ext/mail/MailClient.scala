@@ -75,14 +75,20 @@ class MailClient(private val _asJava: Object) {
 
 object MailClient {
   def apply(asJava: JMailClient) = new MailClient(asJava)
-  
+
   /**
-   * create a non shared instance of the mail client   * @param vertx the Vertx instance the operation will be run in
+   */
+  def createNonShared(vertx: Vertx,config: MailConfig): MailClient = {
+    MailClient(JMailClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config.asJava))//2 createNonShared
+  }
+
+  /**
+   * Create a non shared instance of the mail client.   * @param vertx the Vertx instance the operation will be run in
    * @param config MailConfig configuration to be used for sending mails see <a href="../../../../../../../cheatsheet/MailConfig.html">MailConfig</a>
    * @return MailClient instance that can then be used to send multiple mails
    */
-  def createNonShared(vertx: Vertx,config: MailConfig): MailClient = {
-    MailClient(JMailClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config.asJava))
+  def create(vertx: Vertx,config: MailConfig): MailClient = {
+    MailClient(JMailClient.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))//2 create
   }
 
   /**
@@ -93,7 +99,7 @@ object MailClient {
    * @return the client
    */
   def createShared(vertx: Vertx,config: MailConfig,poolName: String): MailClient = {
-    MailClient(JMailClient.createShared(vertx.asJava.asInstanceOf[JVertx], config.asJava, poolName.asInstanceOf[java.lang.String]))
+    MailClient(JMailClient.createShared(vertx.asJava.asInstanceOf[JVertx], config.asJava, poolName.asInstanceOf[java.lang.String]))//2 createShared
   }
 
   /**
@@ -102,7 +108,7 @@ object MailClient {
    * @return the client
    */
   def createShared(vertx: Vertx,config: MailConfig): MailClient = {
-    MailClient(JMailClient.createShared(vertx.asJava.asInstanceOf[JVertx], config.asJava))
+    MailClient(JMailClient.createShared(vertx.asJava.asInstanceOf[JVertx], config.asJava))//2 createShared
   }
 
 }

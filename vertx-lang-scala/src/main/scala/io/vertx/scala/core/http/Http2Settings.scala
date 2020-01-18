@@ -106,11 +106,11 @@ class Http2Settings(private val _asJava: JHttp2Settings) {
 
 
 object Http2Settings {
-  
+
   def apply() = {
     new Http2Settings(new JHttp2Settings(emptyObj()))
   }
-  
+
   def apply(t: JHttp2Settings) = {
     if (t != null) {
       new Http2Settings(t)
@@ -118,7 +118,7 @@ object Http2Settings {
       new Http2Settings(new JHttp2Settings(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Http2Settings = {
     if (json != null) {
       new Http2Settings(new JHttp2Settings(json))

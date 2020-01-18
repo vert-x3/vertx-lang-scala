@@ -102,11 +102,11 @@ class ResultSet(private val _asJava: JResultSet) {
 
 
 object ResultSet {
-  
+
   def apply() = {
     new ResultSet(new JResultSet(emptyObj()))
   }
-  
+
   def apply(t: JResultSet) = {
     if (t != null) {
       new ResultSet(t)
@@ -114,7 +114,7 @@ object ResultSet {
       new ResultSet(new JResultSet(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ResultSet = {
     if (json != null) {
       new ResultSet(new JResultSet(json))

@@ -204,7 +204,7 @@ class Context(private val _asJava: Object) {
 
 object Context {
   def apply(asJava: JContext) = new Context(asJava)
-  
+
   /**
    * Is the current thread a worker thread?
    * 
@@ -212,24 +212,24 @@ object Context {
    * from an event loop context, then this will return true but [[io.vertx.scala.core.Context#isWorkerContext]] will return false.   * @return true if current thread is a worker thread, false otherwise
    */
   def isOnWorkerThread(): Boolean = {
-    JContext.isOnWorkerThread().asInstanceOf[Boolean]
+    JContext.isOnWorkerThread().asInstanceOf[Boolean]//2 isOnWorkerThread
   }
 
   /**
    * Is the current thread an event thread?
    * 
    * NOTE! This is not always the same as calling [[io.vertx.scala.core.Context#isEventLoopContext]]. If you are running blocking code
-   * from an event loop context, then this will return false but [[io.vertx.scala.core.Context#isEventLoopContext]] will return true.   * @return true if current thread is a worker thread, false otherwise
+   * from an event loop context, then this will return false but [[io.vertx.scala.core.Context#isEventLoopContext]] will return true.   * @return true if current thread is an event thread, false otherwise
    */
   def isOnEventLoopThread(): Boolean = {
-    JContext.isOnEventLoopThread().asInstanceOf[Boolean]
+    JContext.isOnEventLoopThread().asInstanceOf[Boolean]//2 isOnEventLoopThread
   }
 
   /**
    * Is the current thread a Vert.x thread? That's either a worker thread or an event loop thread   * @return true if current thread is a Vert.x thread, false otherwise
    */
   def isOnVertxThread(): Boolean = {
-    JContext.isOnVertxThread().asInstanceOf[Boolean]
+    JContext.isOnVertxThread().asInstanceOf[Boolean]//2 isOnVertxThread
   }
 
 }

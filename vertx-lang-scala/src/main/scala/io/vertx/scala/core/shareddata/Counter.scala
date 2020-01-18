@@ -165,5 +165,5 @@ class Counter(private val _asJava: Object) {
 
 object Counter {
   def apply(asJava: JCounter) = new Counter(asJava)
-  
+
 }

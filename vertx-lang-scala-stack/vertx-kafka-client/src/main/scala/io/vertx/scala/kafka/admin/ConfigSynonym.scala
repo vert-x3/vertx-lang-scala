@@ -69,11 +69,11 @@ class ConfigSynonym(private val _asJava: JConfigSynonym) {
 
 
 object ConfigSynonym {
-  
+
   def apply() = {
     new ConfigSynonym(new JConfigSynonym(emptyObj()))
   }
-  
+
   def apply(t: JConfigSynonym) = {
     if (t != null) {
       new ConfigSynonym(t)
@@ -81,7 +81,7 @@ object ConfigSynonym {
       new ConfigSynonym(new JConfigSynonym(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ConfigSynonym = {
     if (json != null) {
       new ConfigSynonym(new JConfigSynonym(json))

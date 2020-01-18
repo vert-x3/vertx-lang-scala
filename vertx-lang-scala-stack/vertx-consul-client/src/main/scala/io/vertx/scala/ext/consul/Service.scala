@@ -127,11 +127,11 @@ class Service(private val _asJava: JService) {
 
 
 object Service {
-  
+
   def apply() = {
     new Service(new JService(emptyObj()))
   }
-  
+
   def apply(t: JService) = {
     if (t != null) {
       new Service(t)
@@ -139,7 +139,7 @@ object Service {
       new Service(new JService(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Service = {
     if (json != null) {
       new Service(new JService(json))

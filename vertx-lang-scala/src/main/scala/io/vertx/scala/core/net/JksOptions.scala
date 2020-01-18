@@ -86,11 +86,11 @@ class JksOptions(private val _asJava: JJksOptions) {
 
 
 object JksOptions {
-  
+
   def apply() = {
     new JksOptions(new JJksOptions(emptyObj()))
   }
-  
+
   def apply(t: JJksOptions) = {
     if (t != null) {
       new JksOptions(t)
@@ -98,7 +98,7 @@ object JksOptions {
       new JksOptions(new JJksOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): JksOptions = {
     if (json != null) {
       new JksOptions(new JJksOptions(json))

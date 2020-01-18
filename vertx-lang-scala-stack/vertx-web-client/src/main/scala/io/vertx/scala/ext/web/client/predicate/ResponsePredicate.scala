@@ -68,12 +68,12 @@ class ResponsePredicate(private val _asJava: Object) {
 
 object ResponsePredicate {
   def apply(asJava: JResponsePredicate) = new ResponsePredicate(asJava)
-  
+
   /**
    * Creates a predicate asserting that the status response code is equal to `statusCode`.   * @param statusCode the expected status code
    */
   def status(statusCode: Int): ResponsePredicate = {
-    ResponsePredicate(JResponsePredicate.status(statusCode.asInstanceOf[java.lang.Integer]))
+    ResponsePredicate(JResponsePredicate.status(statusCode.asInstanceOf[java.lang.Integer]))//2 status
   }
 
   /**
@@ -81,28 +81,28 @@ object ResponsePredicate {
    * @param max the highest (exclusive) accepted status code
    */
   def status(min: Int,max: Int): ResponsePredicate = {
-    ResponsePredicate(JResponsePredicate.status(min.asInstanceOf[java.lang.Integer], max.asInstanceOf[java.lang.Integer]))
+    ResponsePredicate(JResponsePredicate.status(min.asInstanceOf[java.lang.Integer], max.asInstanceOf[java.lang.Integer]))//2 status
   }
 
   /**
    * Creates a predicate validating the response has a `content-type` header matching the `mimeType`.   * @param mimeType the mime type
    */
   def contentType(mimeType: String): ResponsePredicate = {
-    ResponsePredicate(JResponsePredicate.contentType(mimeType.asInstanceOf[java.lang.String]))
+    ResponsePredicate(JResponsePredicate.contentType(mimeType.asInstanceOf[java.lang.String]))//2 contentType
   }
 
   /**
    * Creates a predicate validating the response has a `content-type` header matching one of the `mimeTypes`.   * @param mimeTypes the list of mime types
    */
   def contentType(mimeTypes: scala.collection.mutable.Buffer[String]): ResponsePredicate = {
-    ResponsePredicate(JResponsePredicate.contentType(mimeTypes.map(x => x.asInstanceOf[java.lang.String]).asJava))
+    ResponsePredicate(JResponsePredicate.contentType(mimeTypes.map(x => x.asInstanceOf[java.lang.String]).asJava))//2 contentType
   }
 
   /**
    * Creates a new [[io.vertx.scala.ext.web.client.predicate.ResponsePredicate]]. The default error converter will be used (discarding the body).   * @param test the function to invoke when the response is received
    */
   def create(test: HttpResponse[Unit] => ResponsePredicateResult): ResponsePredicate = {
-    ResponsePredicate(JResponsePredicate.create({x: JHttpResponse[Void] => test(HttpResponse[Unit](x)).asJava.asInstanceOf[JResponsePredicateResult]}))
+    ResponsePredicate(JResponsePredicate.create({x: JHttpResponse[Void] => test(HttpResponse[Unit](x)).asJava.asInstanceOf[JResponsePredicateResult]}))//2 create
   }
 
   /**
@@ -110,7 +110,7 @@ object ResponsePredicate {
    * @param errorConverter converts the result of the `test` function to a Throwable
    */
   def create(test: HttpResponse[Unit] => ResponsePredicateResult,errorConverter: ErrorConverter): ResponsePredicate = {
-    ResponsePredicate(JResponsePredicate.create({x: JHttpResponse[Void] => test(HttpResponse[Unit](x)).asJava.asInstanceOf[JResponsePredicateResult]}, errorConverter.asJava.asInstanceOf[JErrorConverter]))
+    ResponsePredicate(JResponsePredicate.create({x: JHttpResponse[Void] => test(HttpResponse[Unit](x)).asJava.asInstanceOf[JResponsePredicateResult]}, errorConverter.asJava.asInstanceOf[JErrorConverter]))//2 create
   }
 
 }

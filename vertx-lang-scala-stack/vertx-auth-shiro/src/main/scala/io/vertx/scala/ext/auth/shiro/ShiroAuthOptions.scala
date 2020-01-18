@@ -26,7 +26,7 @@ import io.vertx.scala.ext.auth.{AuthOptions => ExtAuthOptions}
  * Shiro auth configuration options, see Vert.x Auth Shiro component and/or Apache Shiro project.
  */
 
-class ShiroAuthOptions(private val _asJava: JShiroAuthOptions) extends ExtAuthOptions(_asJava) {
+class ShiroAuthOptions(private val _asJava: JShiroAuthOptions) extends ExtAuthOptions {
   def asJava = _asJava
   /**
    * Set the Shiro auth config.
@@ -56,11 +56,11 @@ class ShiroAuthOptions(private val _asJava: JShiroAuthOptions) extends ExtAuthOp
 
 
 object ShiroAuthOptions {
-  
+
   def apply() = {
     new ShiroAuthOptions(new JShiroAuthOptions(emptyObj()))
   }
-  
+
   def apply(t: JShiroAuthOptions) = {
     if (t != null) {
       new ShiroAuthOptions(t)
@@ -68,7 +68,7 @@ object ShiroAuthOptions {
       new ShiroAuthOptions(new JShiroAuthOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ShiroAuthOptions = {
     if (json != null) {
       new ShiroAuthOptions(new JShiroAuthOptions(json))

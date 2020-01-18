@@ -68,11 +68,11 @@ class Match(private val _asJava: JMatch) {
 
 
 object Match {
-  
+
   def apply() = {
     new Match(new JMatch(emptyObj()))
   }
-  
+
   def apply(t: JMatch) = {
     if (t != null) {
       new Match(t)
@@ -80,7 +80,7 @@ object Match {
       new Match(new JMatch(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Match = {
     if (json != null) {
       new Match(new JMatch(json))

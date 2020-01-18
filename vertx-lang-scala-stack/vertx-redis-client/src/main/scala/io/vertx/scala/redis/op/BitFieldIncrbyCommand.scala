@@ -55,11 +55,11 @@ class BitFieldIncrbyCommand(private val _asJava: JBitFieldIncrbyCommand) {
 
 
 object BitFieldIncrbyCommand {
-  
+
   def apply() = {
     new BitFieldIncrbyCommand(new JBitFieldIncrbyCommand(emptyObj()))
   }
-  
+
   def apply(t: JBitFieldIncrbyCommand) = {
     if (t != null) {
       new BitFieldIncrbyCommand(t)
@@ -67,7 +67,7 @@ object BitFieldIncrbyCommand {
       new BitFieldIncrbyCommand(new JBitFieldIncrbyCommand(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): BitFieldIncrbyCommand = {
     if (json != null) {
       new BitFieldIncrbyCommand(new JBitFieldIncrbyCommand(json))

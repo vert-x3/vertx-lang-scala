@@ -40,11 +40,11 @@ class MongoClientUpdateResult(private val _asJava: JMongoClientUpdateResult) {
 
 
 object MongoClientUpdateResult {
-  
+
   def apply() = {
     new MongoClientUpdateResult(new JMongoClientUpdateResult(emptyObj()))
   }
-  
+
   def apply(t: JMongoClientUpdateResult) = {
     if (t != null) {
       new MongoClientUpdateResult(t)
@@ -52,7 +52,7 @@ object MongoClientUpdateResult {
       new MongoClientUpdateResult(new JMongoClientUpdateResult(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MongoClientUpdateResult = {
     if (json != null) {
       new MongoClientUpdateResult(new JMongoClientUpdateResult(json))

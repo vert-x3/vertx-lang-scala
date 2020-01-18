@@ -53,19 +53,19 @@ class ResponseContentTypeHandler(private val _asJava: Object) extends io.vertx.c
 
 object ResponseContentTypeHandler {
   def apply(asJava: JResponseContentTypeHandler) = new ResponseContentTypeHandler(asJava)
-  
+
   /**
    * Create a response content type handler.   * @return the response content type handler
    */
   def create(): ResponseContentTypeHandler = {
-    ResponseContentTypeHandler(JResponseContentTypeHandler.create())
+    ResponseContentTypeHandler(JResponseContentTypeHandler.create())//2 create
   }
 
   /**
    * Create a response content type handler with a custom disable flag.   * @return the response content type handler
    */
   def create(disableFlag: String): ResponseContentTypeHandler = {
-    ResponseContentTypeHandler(JResponseContentTypeHandler.create(disableFlag.asInstanceOf[java.lang.String]))
+    ResponseContentTypeHandler(JResponseContentTypeHandler.create(disableFlag.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

@@ -59,13 +59,13 @@ class TemplateHandler(private val _asJava: Object) extends io.vertx.core.Handler
 
 object TemplateHandler {
   def apply(asJava: JTemplateHandler) = new TemplateHandler(asJava)
-  
+
   /**
    * Create a handler   * @param engine the template engine
    * @return the handler
    */
   def create(engine: TemplateEngine): TemplateHandler = {
-    TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine]))
+    TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine]))//2 create
   }
 
   /**
@@ -75,7 +75,7 @@ object TemplateHandler {
    * @return the handler
    */
   def create(engine: TemplateEngine,templateDirectory: String,contentType: String): TemplateHandler = {
-    TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine], templateDirectory.asInstanceOf[java.lang.String], contentType.asInstanceOf[java.lang.String]))
+    TemplateHandler(JTemplateHandler.create(engine.asJava.asInstanceOf[JTemplateEngine], templateDirectory.asInstanceOf[java.lang.String], contentType.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

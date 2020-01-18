@@ -69,5 +69,5 @@ class DeliveryContext[T: TypeTag](private val _asJava: Object) {
 
 object DeliveryContext {
   def apply[T: TypeTag](asJava: JDeliveryContext[_]) = new DeliveryContext[T](asJava)
-  
+
 }

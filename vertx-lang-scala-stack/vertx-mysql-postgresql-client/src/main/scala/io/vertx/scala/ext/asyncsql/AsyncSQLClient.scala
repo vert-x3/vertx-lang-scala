@@ -75,5 +75,5 @@ class AsyncSQLClient(private val _asJava: Object) extends SQLClient (_asJava) {
 
 object AsyncSQLClient {
   def apply(asJava: JAsyncSQLClient) = new AsyncSQLClient(asJava)
-  
+
 }

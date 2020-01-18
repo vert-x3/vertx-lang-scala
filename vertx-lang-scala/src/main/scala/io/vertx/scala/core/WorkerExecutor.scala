@@ -81,5 +81,5 @@ class WorkerExecutor(private val _asJava: Object) extends Measured {
 
 object WorkerExecutor {
   def apply(asJava: JWorkerExecutor) = new WorkerExecutor(asJava)
-  
+
 }

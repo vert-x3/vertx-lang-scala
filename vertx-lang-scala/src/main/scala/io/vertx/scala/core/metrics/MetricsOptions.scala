@@ -44,11 +44,11 @@ class MetricsOptions(private val _asJava: JMetricsOptions) {
 
 
 object MetricsOptions {
-  
+
   def apply() = {
     new MetricsOptions(new JMetricsOptions(emptyObj()))
   }
-  
+
   def apply(t: JMetricsOptions) = {
     if (t != null) {
       new MetricsOptions(t)
@@ -56,7 +56,7 @@ object MetricsOptions {
       new MetricsOptions(new JMetricsOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MetricsOptions = {
     if (json != null) {
       new MetricsOptions(new JMetricsOptions(json))

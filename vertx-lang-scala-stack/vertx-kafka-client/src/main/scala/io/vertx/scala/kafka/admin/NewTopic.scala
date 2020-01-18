@@ -80,11 +80,11 @@ class NewTopic(private val _asJava: JNewTopic) {
 
 
 object NewTopic {
-  
+
   def apply() = {
     new NewTopic(new JNewTopic(emptyObj()))
   }
-  
+
   def apply(t: JNewTopic) = {
     if (t != null) {
       new NewTopic(t)
@@ -92,7 +92,7 @@ object NewTopic {
       new NewTopic(new JNewTopic(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): NewTopic = {
     if (json != null) {
       new NewTopic(new JNewTopic(json))

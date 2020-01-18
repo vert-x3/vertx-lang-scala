@@ -210,11 +210,11 @@ class CheckOptions(private val _asJava: JCheckOptions) {
 
 
 object CheckOptions {
-  
+
   def apply() = {
     new CheckOptions(new JCheckOptions(emptyObj()))
   }
-  
+
   def apply(t: JCheckOptions) = {
     if (t != null) {
       new CheckOptions(t)
@@ -222,7 +222,7 @@ object CheckOptions {
       new CheckOptions(new JCheckOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): CheckOptions = {
     if (json != null) {
       new CheckOptions(new JCheckOptions(json))

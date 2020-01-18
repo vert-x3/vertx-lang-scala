@@ -47,11 +47,11 @@ class MongoClientBulkWriteResult(private val _asJava: JMongoClientBulkWriteResul
 
 
 object MongoClientBulkWriteResult {
-  
+
   def apply() = {
     new MongoClientBulkWriteResult(new JMongoClientBulkWriteResult(emptyObj()))
   }
-  
+
   def apply(t: JMongoClientBulkWriteResult) = {
     if (t != null) {
       new MongoClientBulkWriteResult(t)
@@ -59,7 +59,7 @@ object MongoClientBulkWriteResult {
       new MongoClientBulkWriteResult(new JMongoClientBulkWriteResult(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MongoClientBulkWriteResult = {
     if (json != null) {
       new MongoClientBulkWriteResult(new JMongoClientBulkWriteResult(json))

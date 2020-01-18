@@ -126,7 +126,7 @@ class KafkaProducerRecord[K: TypeTag, V: TypeTag](private val _asJava: Object) {
 
 object KafkaProducerRecord {
   def apply[K: TypeTag, V: TypeTag](asJava: JKafkaProducerRecord[_, _]) = new KafkaProducerRecord[K, V](asJava)
-  
+
   /**
    * Create a concrete instance of a Vert.x producer record   * @param topic the topic this record is being sent to
    * @param key the key (or null if no key is specified)
@@ -136,7 +136,7 @@ object KafkaProducerRecord {
    * @return Vert.x producer record
    */
   def create[K: TypeTag, V: TypeTag](topic: String,key: K,value: V,timestamp: Long,partition: Int): KafkaProducerRecord[K, V] = {
-    KafkaProducerRecord[K, V](JKafkaProducerRecord.create[Object, Object](topic.asInstanceOf[java.lang.String], toJava[K](key), toJava[V](value), timestamp.asInstanceOf[java.lang.Long], partition.asInstanceOf[java.lang.Integer]))
+    KafkaProducerRecord[K, V](JKafkaProducerRecord.create[Object, Object](topic.asInstanceOf[java.lang.String], toJava[K](key), toJava[V](value), timestamp.asInstanceOf[java.lang.Long], partition.asInstanceOf[java.lang.Integer]))//2 create
   }
 
   /**
@@ -146,7 +146,7 @@ object KafkaProducerRecord {
    * @return Vert.x producer record
    */
   def create[K: TypeTag, V: TypeTag](topic: String,key: K,value: V): KafkaProducerRecord[K, V] = {
-    KafkaProducerRecord[K, V](JKafkaProducerRecord.create[Object, Object](topic.asInstanceOf[java.lang.String], toJava[K](key), toJava[V](value)))
+    KafkaProducerRecord[K, V](JKafkaProducerRecord.create[Object, Object](topic.asInstanceOf[java.lang.String], toJava[K](key), toJava[V](value)))//2 create
   }
 
   /**
@@ -155,7 +155,7 @@ object KafkaProducerRecord {
    * @return Vert.x producer record
    */
   def create[K: TypeTag, V: TypeTag](topic: String,value: V): KafkaProducerRecord[K, V] = {
-    KafkaProducerRecord[K, V](JKafkaProducerRecord.create[Object, Object](topic.asInstanceOf[java.lang.String], toJava[V](value)))
+    KafkaProducerRecord[K, V](JKafkaProducerRecord.create[Object, Object](topic.asInstanceOf[java.lang.String], toJava[V](value)))//2 create
   }
 
 }

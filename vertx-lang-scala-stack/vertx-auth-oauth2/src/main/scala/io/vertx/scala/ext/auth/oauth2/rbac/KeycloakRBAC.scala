@@ -41,12 +41,12 @@ class KeycloakRBAC(private val _asJava: Object) {
 
 object KeycloakRBAC {
   def apply(asJava: JKeycloakRBAC) = new KeycloakRBAC(asJava)
-  
+
   /**
    * Factory method to create a RBAC handler for tokens adhering to the Keycloak token format.   * @return a RBAC validator
    */
   def create(options: OAuth2ClientOptions): OAuth2RBAC = {
-    OAuth2RBAC(JKeycloakRBAC.create(options.asJava))
+    OAuth2RBAC(JKeycloakRBAC.create(options.asJava))//2 create
   }
 
 }

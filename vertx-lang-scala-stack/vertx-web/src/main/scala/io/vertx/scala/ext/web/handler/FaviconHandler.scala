@@ -47,12 +47,12 @@ class FaviconHandler(private val _asJava: Object) extends io.vertx.core.Handler[
 
 object FaviconHandler {
   def apply(asJava: JFaviconHandler) = new FaviconHandler(asJava)
-  
+
   /**
    * Create a handler with defaults   * @return the handler
    */
   def create(): FaviconHandler = {
-    FaviconHandler(JFaviconHandler.create())
+    FaviconHandler(JFaviconHandler.create())//2 create
   }
 
   /**
@@ -60,7 +60,7 @@ object FaviconHandler {
    * @return the handler
    */
   def create(path: String): FaviconHandler = {
-    FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String]))
+    FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String]))//2 create
   }
 
   /**
@@ -69,7 +69,7 @@ object FaviconHandler {
    * @return the handler
    */
   def create(path: String,maxAgeSeconds: Long): FaviconHandler = {
-    FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String], maxAgeSeconds.asInstanceOf[java.lang.Long]))
+    FaviconHandler(JFaviconHandler.create(path.asInstanceOf[java.lang.String], maxAgeSeconds.asInstanceOf[java.lang.Long]))//2 create
   }
 
   /**
@@ -77,7 +77,7 @@ object FaviconHandler {
    * @return the handler
    */
   def create(maxAgeSeconds: Long): FaviconHandler = {
-    FaviconHandler(JFaviconHandler.create(maxAgeSeconds.asInstanceOf[java.lang.Long]))
+    FaviconHandler(JFaviconHandler.create(maxAgeSeconds.asInstanceOf[java.lang.Long]))//2 create
   }
 
 }

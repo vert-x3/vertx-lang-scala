@@ -131,11 +131,11 @@ class SQLOptions(private val _asJava: JSQLOptions) {
 
 
 object SQLOptions {
-  
+
   def apply() = {
     new SQLOptions(new JSQLOptions(emptyObj()))
   }
-  
+
   def apply(t: JSQLOptions) = {
     if (t != null) {
       new SQLOptions(t)
@@ -143,7 +143,7 @@ object SQLOptions {
       new SQLOptions(new JSQLOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): SQLOptions = {
     if (json != null) {
       new SQLOptions(new JSQLOptions(json))

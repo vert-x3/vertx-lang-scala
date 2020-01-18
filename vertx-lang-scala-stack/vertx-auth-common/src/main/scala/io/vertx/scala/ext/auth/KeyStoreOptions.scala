@@ -58,11 +58,11 @@ class KeyStoreOptions(private val _asJava: JKeyStoreOptions) {
 
 
 object KeyStoreOptions {
-  
+
   def apply() = {
     new KeyStoreOptions(new JKeyStoreOptions(emptyObj()))
   }
-  
+
   def apply(t: JKeyStoreOptions) = {
     if (t != null) {
       new KeyStoreOptions(t)
@@ -70,7 +70,7 @@ object KeyStoreOptions {
       new KeyStoreOptions(new JKeyStoreOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): KeyStoreOptions = {
     if (json != null) {
       new KeyStoreOptions(new JKeyStoreOptions(json))

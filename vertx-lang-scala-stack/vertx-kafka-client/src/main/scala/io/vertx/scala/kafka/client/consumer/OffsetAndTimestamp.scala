@@ -56,11 +56,11 @@ class OffsetAndTimestamp(private val _asJava: JOffsetAndTimestamp) {
 
 
 object OffsetAndTimestamp {
-  
+
   def apply() = {
     new OffsetAndTimestamp(new JOffsetAndTimestamp(emptyObj()))
   }
-  
+
   def apply(t: JOffsetAndTimestamp) = {
     if (t != null) {
       new OffsetAndTimestamp(t)
@@ -68,7 +68,7 @@ object OffsetAndTimestamp {
       new OffsetAndTimestamp(new JOffsetAndTimestamp(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): OffsetAndTimestamp = {
     if (json != null) {
       new OffsetAndTimestamp(new JOffsetAndTimestamp(json))

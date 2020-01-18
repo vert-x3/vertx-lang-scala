@@ -4982,5 +4982,5 @@ class RedisTransaction(private val _asJava: Object) {
 
 object RedisTransaction {
   def apply(asJava: JRedisTransaction) = new RedisTransaction(asJava)
-  
+
 }

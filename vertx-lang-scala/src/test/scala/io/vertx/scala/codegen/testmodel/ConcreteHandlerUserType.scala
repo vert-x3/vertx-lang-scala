@@ -44,5 +44,5 @@ class ConcreteHandlerUserType(private val _asJava: Object) extends io.vertx.core
 
 object ConcreteHandlerUserType {
   def apply(asJava: JConcreteHandlerUserType) = new ConcreteHandlerUserType(asJava)
-  
+
 }

@@ -90,5 +90,5 @@ class BridgeEvent(private val _asJava: Object) extends BaseBridgeEvent (_asJava)
 
 object BridgeEvent {
   def apply(asJava: JBridgeEvent) = new BridgeEvent(asJava)
-  
+
 }

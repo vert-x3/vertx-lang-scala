@@ -112,13 +112,13 @@ class RedirectAuthHandler(private val _asJava: Object) extends AuthHandler with 
 
 object RedirectAuthHandler {
   def apply(asJava: JRedirectAuthHandler) = new RedirectAuthHandler(asJava)
-  
+
   /**
    * Create a handler   * @param authProvider the auth service to use
    * @return the handler
    */
   def create(authProvider: AuthProvider): AuthHandler = {
-    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))
+    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider]))//2 create
   }
 
   /**
@@ -127,7 +127,7 @@ object RedirectAuthHandler {
    * @return the handler
    */
   def create(authProvider: AuthProvider,loginRedirectURL: String): AuthHandler = {
-    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], loginRedirectURL.asInstanceOf[java.lang.String]))
+    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], loginRedirectURL.asInstanceOf[java.lang.String]))//2 create
   }
 
   /**
@@ -137,7 +137,7 @@ object RedirectAuthHandler {
    * @return the handler
    */
   def create(authProvider: AuthProvider,loginRedirectURL: String,returnURLParam: String): AuthHandler = {
-    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], loginRedirectURL.asInstanceOf[java.lang.String], returnURLParam.asInstanceOf[java.lang.String]))
+    AuthHandler(JRedirectAuthHandler.create(authProvider.asJava.asInstanceOf[JAuthProvider], loginRedirectURL.asInstanceOf[java.lang.String], returnURLParam.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

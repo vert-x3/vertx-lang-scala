@@ -80,6 +80,18 @@ class MailConfig(private val _asJava: JMailConfig) {
   }
 
   /**
+   * Sets the list of enabled SSL/TLS protocols.
+   */
+  def setEnabledSecureTransportProtocols(value: Set[String]) = {
+    asJava.setEnabledSecureTransportProtocols(value.asJava)
+    this
+  }
+
+  def getEnabledSecureTransportProtocols: scala.collection.mutable.Set[String] = {
+    asJava.getEnabledSecureTransportProtocols().asScala.map(x => x.asInstanceOf[String])
+  }
+
+  /**
    * Set the hostname of the smtp server.
    */
   def setHostname(value: String) = {
@@ -252,11 +264,11 @@ class MailConfig(private val _asJava: JMailConfig) {
 
 
 object MailConfig {
-  
+
   def apply() = {
     new MailConfig(new JMailConfig(emptyObj()))
   }
-  
+
   def apply(t: JMailConfig) = {
     if (t != null) {
       new MailConfig(t)
@@ -264,7 +276,7 @@ object MailConfig {
       new MailConfig(new JMailConfig(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MailConfig = {
     if (json != null) {
       new MailConfig(new JMailConfig(json))

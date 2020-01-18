@@ -185,14 +185,14 @@ class OAuth2Auth(private val _asJava: Object) extends AuthProvider (_asJava) {
 
 object OAuth2Auth {
   def apply(asJava: JOAuth2Auth) = new OAuth2Auth(asJava)
-  
+
   /**
    * @param vertx the Vertx instance
    * @param config the config as exported from the admin console
    * @return the auth provider
    */
   def createKeycloak(vertx: Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject): OAuth2Auth = {
-    OAuth2Auth(JOAuth2Auth.createKeycloak(vertx.asJava.asInstanceOf[JVertx], flow, config))
+    OAuth2Auth(JOAuth2Auth.createKeycloak(vertx.asJava.asInstanceOf[JVertx], flow, config))//2 createKeycloak
   }
 
   /**
@@ -201,7 +201,7 @@ object OAuth2Auth {
    * @return the auth provider
    */
   def create(vertx: Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: OAuth2ClientOptions): OAuth2Auth = {
-    OAuth2Auth(JOAuth2Auth.create(vertx.asJava.asInstanceOf[JVertx], flow, config.asJava))
+    OAuth2Auth(JOAuth2Auth.create(vertx.asJava.asInstanceOf[JVertx], flow, config.asJava))//2 create
   }
 
   /**
@@ -209,7 +209,7 @@ object OAuth2Auth {
    * @return the auth provider
    */
   def create(vertx: Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType): OAuth2Auth = {
-    OAuth2Auth(JOAuth2Auth.create(vertx.asJava.asInstanceOf[JVertx], flow))
+    OAuth2Auth(JOAuth2Auth.create(vertx.asJava.asInstanceOf[JVertx], flow))//2 create
   }
 
   /**
@@ -217,7 +217,7 @@ object OAuth2Auth {
    * @return the auth provider
    */
   def create(vertx: Vertx): OAuth2Auth = {
-    OAuth2Auth(JOAuth2Auth.create(vertx.asJava.asInstanceOf[JVertx]))
+    OAuth2Auth(JOAuth2Auth.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -226,7 +226,7 @@ object OAuth2Auth {
    * @return the auth provider
    */
   def create(vertx: Vertx,config: OAuth2ClientOptions): OAuth2Auth = {
-    OAuth2Auth(JOAuth2Auth.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))
+    OAuth2Auth(JOAuth2Auth.create(vertx.asJava.asInstanceOf[JVertx], config.asJava))//2 create
   }
 
 }

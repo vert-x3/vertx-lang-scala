@@ -242,7 +242,7 @@ class MongoAuth(private val _asJava: Object) extends AuthProvider (_asJava) {
 
 object MongoAuth {
   def apply(asJava: JMongoAuth) = new MongoAuth(asJava)
-  
+
   /**
    * Creates an instance of MongoAuth by using the given  and configuration object. An example for a
    * configuration object:
@@ -255,7 +255,7 @@ object MongoAuth {
    * @return the created instance of MongoAuths
    */
   def create(mongoClient: MongoClient,config: io.vertx.core.json.JsonObject): MongoAuth = {
-    MongoAuth(JMongoAuth.create(mongoClient.asJava.asInstanceOf[JMongoClient], config))
+    MongoAuth(JMongoAuth.create(mongoClient.asJava.asInstanceOf[JMongoClient], config))//2 create
   }
 
 }

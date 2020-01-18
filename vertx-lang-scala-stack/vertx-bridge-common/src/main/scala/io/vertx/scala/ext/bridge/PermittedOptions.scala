@@ -83,11 +83,11 @@ class PermittedOptions(private val _asJava: JPermittedOptions) {
 
 
 object PermittedOptions {
-  
+
   def apply() = {
     new PermittedOptions(new JPermittedOptions(emptyObj()))
   }
-  
+
   def apply(t: JPermittedOptions) = {
     if (t != null) {
       new PermittedOptions(t)
@@ -95,7 +95,7 @@ object PermittedOptions {
       new PermittedOptions(new JPermittedOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): PermittedOptions = {
     if (json != null) {
       new PermittedOptions(new JPermittedOptions(json))

@@ -115,11 +115,11 @@ class ServiceOptions(private val _asJava: JServiceOptions) {
 
 
 object ServiceOptions {
-  
+
   def apply() = {
     new ServiceOptions(new JServiceOptions(emptyObj()))
   }
-  
+
   def apply(t: JServiceOptions) = {
     if (t != null) {
       new ServiceOptions(t)
@@ -127,7 +127,7 @@ object ServiceOptions {
       new ServiceOptions(new JServiceOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ServiceOptions = {
     if (json != null) {
       new ServiceOptions(new JServiceOptions(json))

@@ -134,14 +134,14 @@ class OAuth2AuthHandler(private val _asJava: Object) extends AuthHandler with io
 
 object OAuth2AuthHandler {
   def apply(asJava: JOAuth2AuthHandler) = new OAuth2AuthHandler(asJava)
-  
+
   /**
    * Create a OAuth2 auth handler with host pinning   * @param authProvider the auth provider to use
    * @param callbackURL the callback URL you entered in your provider admin console, usually it should be something like: `https://myserver:8888/callback`
    * @return the auth handler
    */
   def create(authProvider: OAuth2Auth,callbackURL: String): OAuth2AuthHandler = {
-    OAuth2AuthHandler(JOAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[JOAuth2Auth], callbackURL.asInstanceOf[java.lang.String]))
+    OAuth2AuthHandler(JOAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[JOAuth2Auth], callbackURL.asInstanceOf[java.lang.String]))//2 create
   }
 
   /**
@@ -151,7 +151,7 @@ object OAuth2AuthHandler {
    * @return the auth handler
    */
   def create(authProvider: OAuth2Auth): OAuth2AuthHandler = {
-    OAuth2AuthHandler(JOAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[JOAuth2Auth]))
+    OAuth2AuthHandler(JOAuth2AuthHandler.create(authProvider.asJava.asInstanceOf[JOAuth2Auth]))//2 create
   }
 
 }

@@ -97,11 +97,11 @@ class DataObjectWithLists(private val _asJava: JDataObjectWithLists) {
 
 
 object DataObjectWithLists {
-  
+
   def apply() = {
     new DataObjectWithLists(new JDataObjectWithLists(emptyObj()))
   }
-  
+
   def apply(t: JDataObjectWithLists) = {
     if (t != null) {
       new DataObjectWithLists(t)
@@ -109,7 +109,7 @@ object DataObjectWithLists {
       new DataObjectWithLists(new JDataObjectWithLists(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DataObjectWithLists = {
     if (json != null) {
       new DataObjectWithLists(new JDataObjectWithLists(json))

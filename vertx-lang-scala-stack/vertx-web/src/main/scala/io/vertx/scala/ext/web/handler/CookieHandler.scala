@@ -27,6 +27,8 @@ import io.vertx.lang.scala.Converter._
 /**
   * A handler which decodes cookies from the request, makes them available in the 
   * and writes them back in the response.
+  *
+  * Since 3.8.1 this handler simply calls the next request handler. This handler will be removed in Vert.x 4.
   */
 
 class CookieHandler(private val _asJava: Object) extends io.vertx.core.Handler[RoutingContext] {
@@ -46,12 +48,12 @@ class CookieHandler(private val _asJava: Object) extends io.vertx.core.Handler[R
 
 object CookieHandler {
   def apply(asJava: JCookieHandler) = new CookieHandler(asJava)
-  
+
   /**
    * Create a cookie handler   * @return the cookie handler
    */
   def create(): CookieHandler = {
-    CookieHandler(JCookieHandler.create())
+    CookieHandler(JCookieHandler.create())//2 create
   }
 
 }

@@ -31,11 +31,11 @@ class JdkSSLEngineOptions(private val _asJava: JJdkSSLEngineOptions) {
 
 
 object JdkSSLEngineOptions {
-  
+
   def apply() = {
     new JdkSSLEngineOptions(new JJdkSSLEngineOptions(emptyObj()))
   }
-  
+
   def apply(t: JJdkSSLEngineOptions) = {
     if (t != null) {
       new JdkSSLEngineOptions(t)
@@ -43,7 +43,7 @@ object JdkSSLEngineOptions {
       new JdkSSLEngineOptions(new JJdkSSLEngineOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): JdkSSLEngineOptions = {
     if (json != null) {
       new JdkSSLEngineOptions(new JJdkSSLEngineOptions(json))

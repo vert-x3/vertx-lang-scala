@@ -92,11 +92,11 @@ class PartitionInfo(private val _asJava: JPartitionInfo) {
 
 
 object PartitionInfo {
-  
+
   def apply() = {
     new PartitionInfo(new JPartitionInfo(emptyObj()))
   }
-  
+
   def apply(t: JPartitionInfo) = {
     if (t != null) {
       new PartitionInfo(t)
@@ -104,7 +104,7 @@ object PartitionInfo {
       new PartitionInfo(new JPartitionInfo(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): PartitionInfo = {
     if (json != null) {
       new PartitionInfo(new JPartitionInfo(json))

@@ -300,7 +300,7 @@ var router = Router.router(vertx)
 router.get("/hystrix-metrics").handler(HystrixMetricHandler.create(vertx))
 
 // Create the HTTP server using the router to dispatch the requests
-vertx.createHttpServer().requestHandler(router.accept _).listen(8080)
+vertx.createHttpServer().requestHandler(router).listen(8080)
 
 
 ----

@@ -117,11 +117,11 @@ class ConfigEntry(private val _asJava: JConfigEntry) {
 
 
 object ConfigEntry {
-  
+
   def apply() = {
     new ConfigEntry(new JConfigEntry(emptyObj()))
   }
-  
+
   def apply(t: JConfigEntry) = {
     if (t != null) {
       new ConfigEntry(t)
@@ -129,7 +129,7 @@ object ConfigEntry {
       new ConfigEntry(new JConfigEntry(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ConfigEntry = {
     if (json != null) {
       new ConfigEntry(new JConfigEntry(json))

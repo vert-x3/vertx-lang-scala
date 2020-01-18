@@ -48,15 +48,15 @@ class Script(private val _asJava: Object) {
 
 object Script {
   def apply(asJava: JScript) = new Script(asJava)
-  
+
 
   def create(script: String): Script = {
-    Script(JScript.create(script.asInstanceOf[java.lang.String]))
+    Script(JScript.create(script.asInstanceOf[java.lang.String]))//2 create
   }
 
 
   def create(script: String,sha1: String): Script = {
-    Script(JScript.create(script.asInstanceOf[java.lang.String], sha1.asInstanceOf[java.lang.String]))
+    Script(JScript.create(script.asInstanceOf[java.lang.String], sha1.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

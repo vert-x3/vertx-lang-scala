@@ -43,11 +43,11 @@ class OpenSSLEngineOptions(private val _asJava: JOpenSSLEngineOptions) {
 
 
 object OpenSSLEngineOptions {
-  
+
   def apply() = {
     new OpenSSLEngineOptions(new JOpenSSLEngineOptions(emptyObj()))
   }
-  
+
   def apply(t: JOpenSSLEngineOptions) = {
     if (t != null) {
       new OpenSSLEngineOptions(t)
@@ -55,7 +55,7 @@ object OpenSSLEngineOptions {
       new OpenSSLEngineOptions(new JOpenSSLEngineOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): OpenSSLEngineOptions = {
     if (json != null) {
       new OpenSSLEngineOptions(new JOpenSSLEngineOptions(json))

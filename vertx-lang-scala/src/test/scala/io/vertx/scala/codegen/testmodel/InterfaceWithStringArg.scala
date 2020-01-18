@@ -55,5 +55,5 @@ class InterfaceWithStringArg(private val _asJava: Object) extends GenericRefedIn
 
 object InterfaceWithStringArg {
   def apply(asJava: JInterfaceWithStringArg) = new InterfaceWithStringArg(asJava)
-  
+
 }

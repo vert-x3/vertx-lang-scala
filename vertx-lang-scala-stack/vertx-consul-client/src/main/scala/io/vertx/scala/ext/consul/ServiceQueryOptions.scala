@@ -67,11 +67,11 @@ class ServiceQueryOptions(private val _asJava: JServiceQueryOptions) {
 
 
 object ServiceQueryOptions {
-  
+
   def apply() = {
     new ServiceQueryOptions(new JServiceQueryOptions(emptyObj()))
   }
-  
+
   def apply(t: JServiceQueryOptions) = {
     if (t != null) {
       new ServiceQueryOptions(t)
@@ -79,7 +79,7 @@ object ServiceQueryOptions {
       new ServiceQueryOptions(new JServiceQueryOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ServiceQueryOptions = {
     if (json != null) {
       new ServiceQueryOptions(new JServiceQueryOptions(json))

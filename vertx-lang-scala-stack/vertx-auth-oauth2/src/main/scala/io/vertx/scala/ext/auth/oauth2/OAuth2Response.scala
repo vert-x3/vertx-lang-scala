@@ -99,5 +99,5 @@ class OAuth2Response(private val _asJava: Object) {
 
 object OAuth2Response {
   def apply(asJava: JOAuth2Response) = new OAuth2Response(asJava)
-  
+
 }

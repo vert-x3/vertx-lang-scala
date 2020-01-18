@@ -112,7 +112,7 @@ class CSRFHandler(private val _asJava: Object) extends io.vertx.core.Handler[Rou
 
 object CSRFHandler {
   def apply(asJava: JCSRFHandler) = new CSRFHandler(asJava)
-  
+
   /**
    * Instantiate a new CSRFHandlerImpl with a secret
    * 
@@ -121,7 +121,7 @@ object CSRFHandler {
    * </pre>   * @param secret server secret to sign the token.
    */
   def create(secret: String): CSRFHandler = {
-    CSRFHandler(JCSRFHandler.create(secret.asInstanceOf[java.lang.String]))
+    CSRFHandler(JCSRFHandler.create(secret.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

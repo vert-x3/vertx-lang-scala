@@ -31,11 +31,11 @@ class DataObjectWithOnlyJsonObjectConstructor(private val _asJava: JDataObjectWi
 
 
 object DataObjectWithOnlyJsonObjectConstructor {
-  
+
   def apply() = {
     new DataObjectWithOnlyJsonObjectConstructor(new JDataObjectWithOnlyJsonObjectConstructor(emptyObj()))
   }
-  
+
   def apply(t: JDataObjectWithOnlyJsonObjectConstructor) = {
     if (t != null) {
       new DataObjectWithOnlyJsonObjectConstructor(t)
@@ -43,7 +43,7 @@ object DataObjectWithOnlyJsonObjectConstructor {
       new DataObjectWithOnlyJsonObjectConstructor(new JDataObjectWithOnlyJsonObjectConstructor(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DataObjectWithOnlyJsonObjectConstructor = {
     if (json != null) {
       new DataObjectWithOnlyJsonObjectConstructor(new JDataObjectWithOnlyJsonObjectConstructor(json))

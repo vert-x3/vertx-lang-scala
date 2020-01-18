@@ -38,5 +38,5 @@ class AnyJavaTypeTCK(private val _asJava: Object) {
 
 object AnyJavaTypeTCK {
   def apply(asJava: JAnyJavaTypeTCK) = new AnyJavaTypeTCK(asJava)
-  
+
 }

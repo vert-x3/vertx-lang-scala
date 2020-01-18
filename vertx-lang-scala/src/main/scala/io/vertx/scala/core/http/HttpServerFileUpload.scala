@@ -195,5 +195,5 @@ class HttpServerFileUpload(private val _asJava: Object) extends ReadStream[io.ve
 
 object HttpServerFileUpload {
   def apply(asJava: JHttpServerFileUpload) = new HttpServerFileUpload(asJava)
-  
+
 }

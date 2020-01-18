@@ -201,7 +201,7 @@ class Redis(private val _asJava: Object) extends ReadStream[Response] {
 
 object Redis {
   def apply(asJava: JRedis) = new Redis(asJava)
-  
+
   /**
    * Connect to redis, the `onConnect` will get the [[io.vertx.scala.redis.client.Redis]] instance.
    *
@@ -209,14 +209,14 @@ object Redis {
    * to a standalone server on the default port on "localhost".
    */
   def createClient(vertx: Vertx,address: SocketAddress): Redis = {
-    Redis(JRedis.createClient(vertx.asJava.asInstanceOf[JVertx], address.asJava.asInstanceOf[JSocketAddress]))
+    Redis(JRedis.createClient(vertx.asJava.asInstanceOf[JVertx], address.asJava.asInstanceOf[JSocketAddress]))//2 createClient
   }
 
   /**
    * Connect to redis, the `onConnect` will get the [[io.vertx.scala.redis.client.Redis]] instance.
    */
   def createClient(vertx: Vertx,options: RedisOptions): Redis = {
-    Redis(JRedis.createClient(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    Redis(JRedis.createClient(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 createClient
   }
 
 }

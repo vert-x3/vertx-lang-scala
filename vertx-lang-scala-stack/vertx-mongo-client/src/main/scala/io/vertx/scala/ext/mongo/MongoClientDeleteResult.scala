@@ -34,11 +34,11 @@ class MongoClientDeleteResult(private val _asJava: JMongoClientDeleteResult) {
 
 
 object MongoClientDeleteResult {
-  
+
   def apply() = {
     new MongoClientDeleteResult(new JMongoClientDeleteResult(emptyObj()))
   }
-  
+
   def apply(t: JMongoClientDeleteResult) = {
     if (t != null) {
       new MongoClientDeleteResult(t)
@@ -46,7 +46,7 @@ object MongoClientDeleteResult {
       new MongoClientDeleteResult(new JMongoClientDeleteResult(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MongoClientDeleteResult = {
     if (json != null) {
       new MongoClientDeleteResult(new JMongoClientDeleteResult(json))

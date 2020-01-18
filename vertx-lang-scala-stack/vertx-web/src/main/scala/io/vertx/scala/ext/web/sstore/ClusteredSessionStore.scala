@@ -42,14 +42,14 @@ class ClusteredSessionStore(private val _asJava: Object) extends SessionStore (_
 
 object ClusteredSessionStore {
   def apply(asJava: JClusteredSessionStore) = new ClusteredSessionStore(asJava)
-  
+
   /**
    * Create a session store   * @param vertx the Vert.x instance
    * @param sessionMapName the session map name
    * @return the session store
    */
   def create(vertx: Vertx,sessionMapName: String): ClusteredSessionStore = {
-    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName.asInstanceOf[java.lang.String]))
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName.asInstanceOf[java.lang.String]))//2 create
   }
 
   /**
@@ -62,7 +62,7 @@ object ClusteredSessionStore {
    * @return the session store
    */
   def create(vertx: Vertx,sessionMapName: String,retryTimeout: Long): ClusteredSessionStore = {
-    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName.asInstanceOf[java.lang.String], retryTimeout.asInstanceOf[java.lang.Long]))
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName.asInstanceOf[java.lang.String], retryTimeout.asInstanceOf[java.lang.Long]))//2 create
   }
 
   /**
@@ -70,7 +70,7 @@ object ClusteredSessionStore {
    * @return the session store
    */
   def create(vertx: Vertx): ClusteredSessionStore = {
-    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -82,7 +82,7 @@ object ClusteredSessionStore {
    * @return the session store
    */
   def create(vertx: Vertx,retryTimeout: Long): ClusteredSessionStore = {
-    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx], retryTimeout.asInstanceOf[java.lang.Long]))
+    ClusteredSessionStore(JClusteredSessionStore.create(vertx.asJava.asInstanceOf[JVertx], retryTimeout.asInstanceOf[java.lang.Long]))//2 create
   }
 
 }

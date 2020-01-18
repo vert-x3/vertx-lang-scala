@@ -134,5 +134,5 @@ class FormDataPart(private val _asJava: Object) {
 
 object FormDataPart {
   def apply(asJava: JFormDataPart) = new FormDataPart(asJava)
-  
+
 }

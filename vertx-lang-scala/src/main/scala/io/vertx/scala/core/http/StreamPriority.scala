@@ -68,11 +68,11 @@ class StreamPriority(private val _asJava: JStreamPriority) {
 
 
 object StreamPriority {
-  
+
   def apply() = {
     new StreamPriority(new JStreamPriority(emptyObj()))
   }
-  
+
   def apply(t: JStreamPriority) = {
     if (t != null) {
       new StreamPriority(t)
@@ -80,7 +80,7 @@ object StreamPriority {
       new StreamPriority(new JStreamPriority(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): StreamPriority = {
     if (json != null) {
       new StreamPriority(new JStreamPriority(json))

@@ -59,11 +59,11 @@ class Line(private val _asJava: JLine) {
 
 
 object Line {
-  
+
   def apply() = {
     new Line(new JLine(emptyObj()))
   }
-  
+
   def apply(t: JLine) = {
     if (t != null) {
       new Line(t)
@@ -71,7 +71,7 @@ object Line {
       new Line(new JLine(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Line = {
     if (json != null) {
       new Line(new JLine(json))

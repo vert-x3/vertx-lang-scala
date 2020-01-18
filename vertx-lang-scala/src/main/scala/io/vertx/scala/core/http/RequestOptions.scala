@@ -87,11 +87,11 @@ class RequestOptions(private val _asJava: JRequestOptions) {
 
 
 object RequestOptions {
-  
+
   def apply() = {
     new RequestOptions(new JRequestOptions(emptyObj()))
   }
-  
+
   def apply(t: JRequestOptions) = {
     if (t != null) {
       new RequestOptions(t)
@@ -99,7 +99,7 @@ object RequestOptions {
       new RequestOptions(new JRequestOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): RequestOptions = {
     if (json != null) {
       new RequestOptions(new JRequestOptions(json))

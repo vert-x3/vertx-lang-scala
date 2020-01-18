@@ -54,5 +54,5 @@ class ServerFrame(private val _asJava: Object) {
 
 object ServerFrame {
   def apply(asJava: JServerFrame) = new ServerFrame(asJava)
-  
+
 }

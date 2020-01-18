@@ -435,11 +435,11 @@ class TelnetTermOptions(private val _asJava: JTelnetTermOptions) extends ExtNetS
 
 
 object TelnetTermOptions {
-  
+
   def apply() = {
     new TelnetTermOptions(new JTelnetTermOptions(emptyObj()))
   }
-  
+
   def apply(t: JTelnetTermOptions) = {
     if (t != null) {
       new TelnetTermOptions(t)
@@ -447,7 +447,7 @@ object TelnetTermOptions {
       new TelnetTermOptions(new JTelnetTermOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): TelnetTermOptions = {
     if (json != null) {
       new TelnetTermOptions(new JTelnetTermOptions(json))

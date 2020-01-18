@@ -91,11 +91,11 @@ class Coordinate(private val _asJava: JCoordinate) {
 
 
 object Coordinate {
-  
+
   def apply() = {
     new Coordinate(new JCoordinate(emptyObj()))
   }
-  
+
   def apply(t: JCoordinate) = {
     if (t != null) {
       new Coordinate(t)
@@ -103,7 +103,7 @@ object Coordinate {
       new Coordinate(new JCoordinate(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Coordinate = {
     if (json != null) {
       new Coordinate(new JCoordinate(json))

@@ -92,11 +92,11 @@ class PreparedQueryExecuteResponse(private val _asJava: JPreparedQueryExecuteRes
 
 
 object PreparedQueryExecuteResponse {
-  
+
   def apply() = {
     new PreparedQueryExecuteResponse(new JPreparedQueryExecuteResponse(emptyObj()))
   }
-  
+
   def apply(t: JPreparedQueryExecuteResponse) = {
     if (t != null) {
       new PreparedQueryExecuteResponse(t)
@@ -104,7 +104,7 @@ object PreparedQueryExecuteResponse {
       new PreparedQueryExecuteResponse(new JPreparedQueryExecuteResponse(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): PreparedQueryExecuteResponse = {
     if (json != null) {
       new PreparedQueryExecuteResponse(new JPreparedQueryExecuteResponse(json))

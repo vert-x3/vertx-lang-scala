@@ -66,13 +66,13 @@ class CliToken(private val _asJava: Object) {
 
 object CliToken {
   def apply(asJava: JCliToken) = new CliToken(asJava)
-  
+
   /**
    * Create a text token.   * @param text the text
    * @return the token
    */
   def createText(text: String): CliToken = {
-    CliToken(JCliToken.createText(text.asInstanceOf[java.lang.String]))
+    CliToken(JCliToken.createText(text.asInstanceOf[java.lang.String]))//2 createText
   }
 
   /**
@@ -80,7 +80,7 @@ object CliToken {
    * @return the token
    */
   def createBlank(blank: String): CliToken = {
-    CliToken(JCliToken.createBlank(blank.asInstanceOf[java.lang.String]))
+    CliToken(JCliToken.createBlank(blank.asInstanceOf[java.lang.String]))//2 createBlank
   }
 
   /**
@@ -88,7 +88,7 @@ object CliToken {
    * @return the tokens
    */
   def tokenize(s: String): scala.collection.mutable.Buffer[CliToken] = {
-    JCliToken.tokenize(s.asInstanceOf[java.lang.String]).asScala.map(x => CliToken(x))
+    JCliToken.tokenize(s.asInstanceOf[java.lang.String]).asScala.map(x => CliToken(x))//2 tokenize
   }
 
 }

@@ -171,11 +171,11 @@ class MailMessage(private val _asJava: JMailMessage) {
 
 
 object MailMessage {
-  
+
   def apply() = {
     new MailMessage(new JMailMessage(emptyObj()))
   }
-  
+
   def apply(t: JMailMessage) = {
     if (t != null) {
       new MailMessage(t)
@@ -183,7 +183,7 @@ object MailMessage {
       new MailMessage(new JMailMessage(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MailMessage = {
     if (json != null) {
       new MailMessage(new JMailMessage(json))

@@ -430,5 +430,5 @@ class DatagramSocket(private val _asJava: Object) extends ReadStream[DatagramPac
 
 object DatagramSocket {
   def apply(asJava: JDatagramSocket) = new DatagramSocket(asJava)
-  
+
 }

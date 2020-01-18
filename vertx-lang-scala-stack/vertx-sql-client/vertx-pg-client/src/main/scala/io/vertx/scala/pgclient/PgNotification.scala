@@ -68,11 +68,11 @@ class PgNotification(private val _asJava: JPgNotification) {
 
 
 object PgNotification {
-  
+
   def apply() = {
     new PgNotification(new JPgNotification(emptyObj()))
   }
-  
+
   def apply(t: JPgNotification) = {
     if (t != null) {
       new PgNotification(t)
@@ -80,7 +80,7 @@ object PgNotification {
       new PgNotification(new JPgNotification(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): PgNotification = {
     if (json != null) {
       new PgNotification(new JPgNotification(json))

@@ -95,11 +95,11 @@ class Interval(private val _asJava: JInterval) {
 
 
 object Interval {
-  
+
   def apply() = {
     new Interval(new JInterval(emptyObj()))
   }
-  
+
   def apply(t: JInterval) = {
     if (t != null) {
       new Interval(t)
@@ -107,7 +107,7 @@ object Interval {
       new Interval(new JInterval(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Interval = {
     if (json != null) {
       new Interval(new JInterval(json))

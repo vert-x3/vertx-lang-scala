@@ -42,8 +42,8 @@ import io.vertx.core.net.{JksOptions => JJksOptions}
 
  */
 
-class PgConnectOptions(private val _asJava: JPgConnectOptions) extends ExtSqlConnectOptions {
-  def asJava = _asJava
+class PgConnectOptions(private val _asJava: JPgConnectOptions) extends ExtSqlConnectOptions(_asJava) {
+  override def asJava = _asJava
   override def setCachePreparedStatements(value: Boolean) = {
     asJava.setCachePreparedStatements(value)
     this
@@ -283,6 +283,15 @@ class PgConnectOptions(private val _asJava: JPgConnectOptions) extends ExtSqlCon
     asJava.getPreparedStatementCacheSqlLimit().asInstanceOf[Int]
   }
 
+  override def setProperties(value: Map[String, String]) = {
+    asJava.setProperties(value.asJava)
+    this
+  }
+
+  override def getProperties: scala.collection.mutable.Map[String, String] = {
+    collection.mutable.Map(asJava.getProperties().asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
+  }
+
   override def setProxyOptions(value: ProxyOptions) = {
     asJava.setProxyOptions(value.asJava)
     this
@@ -497,11 +506,11 @@ class PgConnectOptions(private val _asJava: JPgConnectOptions) extends ExtSqlCon
 
 
 object PgConnectOptions {
-  
+
   def apply() = {
     new PgConnectOptions(new JPgConnectOptions(emptyObj()))
   }
-  
+
   def apply(t: JPgConnectOptions) = {
     if (t != null) {
       new PgConnectOptions(t)
@@ -509,7 +518,7 @@ object PgConnectOptions {
       new PgConnectOptions(new JPgConnectOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): PgConnectOptions = {
     if (json != null) {
       new PgConnectOptions(new JPgConnectOptions(json))

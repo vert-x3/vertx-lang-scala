@@ -480,11 +480,11 @@ class ProtonClientOptions(private val _asJava: JProtonClientOptions) extends Ext
 
 
 object ProtonClientOptions {
-  
+
   def apply() = {
     new ProtonClientOptions(new JProtonClientOptions(emptyObj()))
   }
-  
+
   def apply(t: JProtonClientOptions) = {
     if (t != null) {
       new ProtonClientOptions(t)
@@ -492,7 +492,7 @@ object ProtonClientOptions {
       new ProtonClientOptions(new JProtonClientOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ProtonClientOptions = {
     if (json != null) {
       new ProtonClientOptions(new JProtonClientOptions(json))

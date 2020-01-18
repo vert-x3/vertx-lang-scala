@@ -1,5 +1,6 @@
 
 <#list properties as property>
+<#if property.declared>
 <#if property.doc??>
   /**
 ${typeHelper.renderDoc(type, "   *", property.doc)}
@@ -28,6 +29,7 @@ ${typeHelper.renderDoc(type, "   *", property.doc)}
 <#if (property.setter || property.adder) && property.getterMethod??>
   def ${property.getterMethod}: ${typeHelper.fromPropertyInfoToScala(property)}
 
+</#if>
 </#if>
 </#list>
 }

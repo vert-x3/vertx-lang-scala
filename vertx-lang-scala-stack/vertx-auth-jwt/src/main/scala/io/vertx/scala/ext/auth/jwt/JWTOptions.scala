@@ -142,11 +142,11 @@ class JWTOptions(private val _asJava: JJWTOptions) extends ExtJWTOptions(_asJava
 
 
 object JWTOptions {
-  
+
   def apply() = {
     new JWTOptions(new JJWTOptions(emptyObj()))
   }
-  
+
   def apply(t: JJWTOptions) = {
     if (t != null) {
       new JWTOptions(t)
@@ -154,7 +154,7 @@ object JWTOptions {
       new JWTOptions(new JJWTOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): JWTOptions = {
     if (json != null) {
       new JWTOptions(new JJWTOptions(json))

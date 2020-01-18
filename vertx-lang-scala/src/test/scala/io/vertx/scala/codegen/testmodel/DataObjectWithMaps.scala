@@ -97,11 +97,11 @@ class DataObjectWithMaps(private val _asJava: JDataObjectWithMaps) {
 
 
 object DataObjectWithMaps {
-  
+
   def apply() = {
     new DataObjectWithMaps(new JDataObjectWithMaps(emptyObj()))
   }
-  
+
   def apply(t: JDataObjectWithMaps) = {
     if (t != null) {
       new DataObjectWithMaps(t)
@@ -109,7 +109,7 @@ object DataObjectWithMaps {
       new DataObjectWithMaps(new JDataObjectWithMaps(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DataObjectWithMaps = {
     if (json != null) {
       new DataObjectWithMaps(new JDataObjectWithMaps(json))

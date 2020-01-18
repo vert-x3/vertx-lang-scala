@@ -279,5 +279,5 @@ class HttpClientResponse(private val _asJava: Object) extends ReadStream[io.vert
 
 object HttpClientResponse {
   def apply(asJava: JHttpClientResponse) = new HttpClientResponse(asJava)
-  
+
 }

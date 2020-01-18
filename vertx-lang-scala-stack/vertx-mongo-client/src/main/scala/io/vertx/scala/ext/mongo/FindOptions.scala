@@ -91,11 +91,11 @@ class FindOptions(private val _asJava: JFindOptions) {
 
 
 object FindOptions {
-  
+
   def apply() = {
     new FindOptions(new JFindOptions(emptyObj()))
   }
-  
+
   def apply(t: JFindOptions) = {
     if (t != null) {
       new FindOptions(t)
@@ -103,7 +103,7 @@ object FindOptions {
       new FindOptions(new JFindOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): FindOptions = {
     if (json != null) {
       new FindOptions(new JFindOptions(json))

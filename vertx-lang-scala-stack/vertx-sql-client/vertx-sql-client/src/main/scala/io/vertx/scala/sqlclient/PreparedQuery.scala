@@ -43,8 +43,8 @@ class PreparedQuery(private val _asJava: Object) {
    * Calls [[io.vertx.scala.sqlclient.PreparedQuery#execute]] with an empty tuple argument.
    */
   
-  def execute(handler: Handler[AsyncResult[RowSet]]): PreparedQuery = {
-    asJava.asInstanceOf[JPreparedQuery].execute((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet]]{def handle(x: AsyncResult[JRowSet]) {handler.handle(AsyncResultWrapper[JRowSet, RowSet](x, a => RowSet(a)))}}))
+  def execute(handler: Handler[AsyncResult[RowSet[Row]]]): PreparedQuery = {
+    asJava.asInstanceOf[JPreparedQuery].execute((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
     this
   }
 
@@ -53,8 +53,8 @@ class PreparedQuery(private val _asJava: Object) {
    * @return the query
    */
   
-  def execute(args: Tuple, handler: Handler[AsyncResult[RowSet]]): PreparedQuery = {
-    asJava.asInstanceOf[JPreparedQuery].execute(args.asJava.asInstanceOf[JTuple], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet]]{def handle(x: AsyncResult[JRowSet]) {handler.handle(AsyncResultWrapper[JRowSet, RowSet](x, a => RowSet(a)))}}))
+  def execute(args: Tuple, handler: Handler[AsyncResult[RowSet[Row]]]): PreparedQuery = {
+    asJava.asInstanceOf[JPreparedQuery].execute(args.asJava.asInstanceOf[JTuple], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
     this
   }
 
@@ -63,8 +63,8 @@ class PreparedQuery(private val _asJava: Object) {
    * @return the createBatch
    */
   
-  def batch(argsList: scala.collection.mutable.Buffer[Tuple], handler: Handler[AsyncResult[RowSet]]): PreparedQuery = {
-    asJava.asInstanceOf[JPreparedQuery].batch(argsList.map(x => x.asJava.asInstanceOf[JTuple]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet]]{def handle(x: AsyncResult[JRowSet]) {handler.handle(AsyncResultWrapper[JRowSet, RowSet](x, a => RowSet(a)))}}))
+  def batch(argsList: scala.collection.mutable.Buffer[Tuple], handler: Handler[AsyncResult[RowSet[Row]]]): PreparedQuery = {
+    asJava.asInstanceOf[JPreparedQuery].batch(argsList.map(x => x.asJava.asInstanceOf[JTuple]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
     this
   }
 
@@ -115,9 +115,9 @@ class PreparedQuery(private val _asJava: Object) {
  /**
   * Like [[execute]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def executeFuture (): scala.concurrent.Future[RowSet] = {
+  def executeFuture (): scala.concurrent.Future[RowSet[Row]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet, RowSet](x => RowSet(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
     asJava.asInstanceOf[JPreparedQuery].execute(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -125,9 +125,9 @@ class PreparedQuery(private val _asJava: Object) {
  /**
   * Like [[execute]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def executeFuture (args: Tuple): scala.concurrent.Future[RowSet] = {
+  def executeFuture (args: Tuple): scala.concurrent.Future[RowSet[Row]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet, RowSet](x => RowSet(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
     asJava.asInstanceOf[JPreparedQuery].execute(args.asJava.asInstanceOf[JTuple], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -135,9 +135,9 @@ class PreparedQuery(private val _asJava: Object) {
  /**
   * Like [[batch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def batchFuture (argsList: scala.collection.mutable.Buffer[Tuple]): scala.concurrent.Future[RowSet] = {
+  def batchFuture (argsList: scala.collection.mutable.Buffer[Tuple]): scala.concurrent.Future[RowSet[Row]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet, RowSet](x => RowSet(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
     asJava.asInstanceOf[JPreparedQuery].batch(argsList.map(x => x.asJava.asInstanceOf[JTuple]).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -156,5 +156,5 @@ class PreparedQuery(private val _asJava: Object) {
 
 object PreparedQuery {
   def apply(asJava: JPreparedQuery) = new PreparedQuery(asJava)
-  
+
 }

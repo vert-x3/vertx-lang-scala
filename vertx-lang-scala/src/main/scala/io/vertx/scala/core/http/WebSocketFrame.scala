@@ -118,14 +118,14 @@ class WebSocketFrame(private val _asJava: Object) {
 
 object WebSocketFrame {
   def apply(asJava: JWebSocketFrame) = new WebSocketFrame(asJava)
-  
+
   /**
    * Create a binary WebSocket frame.   * @param data the data for the frame
    * @param isFinal true if it's the final frame in the WebSocket message
    * @return the frame
    */
   def binaryFrame(data: io.vertx.core.buffer.Buffer,isFinal: Boolean): WebSocketFrame = {
-    WebSocketFrame(JWebSocketFrame.binaryFrame(data, isFinal.asInstanceOf[java.lang.Boolean]))
+    WebSocketFrame(JWebSocketFrame.binaryFrame(data, isFinal.asInstanceOf[java.lang.Boolean]))//2 binaryFrame
   }
 
   /**
@@ -134,7 +134,7 @@ object WebSocketFrame {
    * @return the frame
    */
   def textFrame(str: String,isFinal: Boolean): WebSocketFrame = {
-    WebSocketFrame(JWebSocketFrame.textFrame(str.asInstanceOf[java.lang.String], isFinal.asInstanceOf[java.lang.Boolean]))
+    WebSocketFrame(JWebSocketFrame.textFrame(str.asInstanceOf[java.lang.String], isFinal.asInstanceOf[java.lang.Boolean]))//2 textFrame
   }
 
   /**
@@ -142,7 +142,7 @@ object WebSocketFrame {
    * @return the frame
    */
   def pingFrame(data: io.vertx.core.buffer.Buffer): WebSocketFrame = {
-    WebSocketFrame(JWebSocketFrame.pingFrame(data))
+    WebSocketFrame(JWebSocketFrame.pingFrame(data))//2 pingFrame
   }
 
   /**
@@ -150,7 +150,7 @@ object WebSocketFrame {
    * @return the frame
    */
   def pongFrame(data: io.vertx.core.buffer.Buffer): WebSocketFrame = {
-    WebSocketFrame(JWebSocketFrame.pongFrame(data))
+    WebSocketFrame(JWebSocketFrame.pongFrame(data))//2 pongFrame
   }
 
   /**
@@ -159,7 +159,7 @@ object WebSocketFrame {
    * @return the frame
    */
   def continuationFrame(data: io.vertx.core.buffer.Buffer,isFinal: Boolean): WebSocketFrame = {
-    WebSocketFrame(JWebSocketFrame.continuationFrame(data, isFinal.asInstanceOf[java.lang.Boolean]))
+    WebSocketFrame(JWebSocketFrame.continuationFrame(data, isFinal.asInstanceOf[java.lang.Boolean]))//2 continuationFrame
   }
 
 }

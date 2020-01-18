@@ -191,6 +191,16 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
   }
 
   /**
+   * Sets the number of bytes that will be read when using the file as a [[io.vertx.scala.core.streams.ReadStream]].   * @param readLength the bytes that will be read from the file
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def setReadLength(readLength: Long): AsyncFile = {
+    asJava.asInstanceOf[JAsyncFile].setReadLength(readLength.asInstanceOf[java.lang.Long])
+    this
+  }
+
+  /**
    * Sets the position from which data will be written when using the file as a [[io.vertx.scala.core.streams.WriteStream]].   * @param writePos the position in the file
    * @return a reference to this, so the API can be used fluently
    */
@@ -211,20 +221,6 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
     this
   }
 
-
-  /**
-   * Same as [[io.vertx.scala.core.file.AsyncFile#end]] but writes some data to the stream before ending.   * @param data the data to write
-   */
-  override def end(data: io.vertx.core.buffer.Buffer): Unit = {
-    asJava.asInstanceOf[JAsyncFile].end(data)
-  }
-
-  /**
-   * Same as  but with an `handler` called when the operation completes
-   */
-  override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JAsyncFile].end(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
-  }
 
   /**
    * Pause this stream and return a  to transfer the elements of this stream to a destination .
@@ -252,6 +248,20 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
    */
   override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JAsyncFile].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+  }
+
+  /**
+   * Same as [[io.vertx.scala.core.file.AsyncFile#end]] but writes some data to the stream before ending.   * @param data the data to write
+   */
+  override def end(data: io.vertx.core.buffer.Buffer): Unit = {
+    asJava.asInstanceOf[JAsyncFile].end(data)
+  }
+
+  /**
+   * Same as  but with an `handler` called when the operation completes
+   */
+  override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JAsyncFile].end(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -300,22 +310,22 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
 
 
  /**
-  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-  */
-  override def endFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
-    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JAsyncFile].end(data, promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
- /**
   * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
   override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JAsyncFile].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def endFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JAsyncFile].end(data, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -383,5 +393,5 @@ class AsyncFile(private val _asJava: Object) extends ReadStream[io.vertx.core.bu
 
 object AsyncFile {
   def apply(asJava: JAsyncFile) = new AsyncFile(asJava)
-  
+
 }

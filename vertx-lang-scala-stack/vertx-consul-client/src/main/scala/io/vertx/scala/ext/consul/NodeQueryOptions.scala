@@ -55,11 +55,11 @@ class NodeQueryOptions(private val _asJava: JNodeQueryOptions) {
 
 
 object NodeQueryOptions {
-  
+
   def apply() = {
     new NodeQueryOptions(new JNodeQueryOptions(emptyObj()))
   }
-  
+
   def apply(t: JNodeQueryOptions) = {
     if (t != null) {
       new NodeQueryOptions(t)
@@ -67,7 +67,7 @@ object NodeQueryOptions {
       new NodeQueryOptions(new JNodeQueryOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): NodeQueryOptions = {
     if (json != null) {
       new NodeQueryOptions(new JNodeQueryOptions(json))

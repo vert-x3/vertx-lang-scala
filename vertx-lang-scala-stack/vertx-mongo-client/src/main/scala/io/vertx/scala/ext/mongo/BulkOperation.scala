@@ -92,11 +92,11 @@ class BulkOperation(private val _asJava: JBulkOperation) {
 
 
 object BulkOperation {
-  
+
   def apply() = {
     new BulkOperation(new JBulkOperation(emptyObj()))
   }
-  
+
   def apply(t: JBulkOperation) = {
     if (t != null) {
       new BulkOperation(t)
@@ -104,7 +104,7 @@ object BulkOperation {
       new BulkOperation(new JBulkOperation(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): BulkOperation = {
     if (json != null) {
       new BulkOperation(new JBulkOperation(json))

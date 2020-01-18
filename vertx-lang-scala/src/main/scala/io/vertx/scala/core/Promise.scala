@@ -120,43 +120,12 @@ class Promise[T: TypeTag](private val _asJava: Object) {
 
 object Promise {
   def apply[T: TypeTag](asJava: JPromise[_]) = new Promise[T](asJava)
-  
-  /**
-   * Create a succeeded promise with a `null` result   * @return the promise
-   */
-  def succeededPromise[T: TypeTag](): Promise[T] = {
-    Promise[T](JPromise.succeededPromise[Object]())
-  }
-
-  /**
-   * Created a succeeded promise with the specified `result`.   * @param result the result
-   * @return the promise
-   */
-  def succeededPromise[T: TypeTag](result: T): Promise[T] = {
-    Promise[T](JPromise.succeededPromise[Object](toJava[T](result)))
-  }
-
-  /**
-   * Create a failed promise with the specified failure `cause`.   * @param cause the failure cause as a Throwable
-   * @return the promise
-   */
-  def failedPromise[T: TypeTag](cause: Throwable): Promise[T] = {
-    Promise[T](JPromise.failedPromise[Object](cause))
-  }
-
-  /**
-   * Create a failed promise with the specified `failureMessage`.   * @param failureMessage the failure message
-   * @return the promise
-   */
-  def failedPromise[T: TypeTag](failureMessage: String): Promise[T] = {
-    Promise[T](JPromise.failedPromise[Object](failureMessage.asInstanceOf[java.lang.String]))
-  }
 
   /**
    * Create a promise that hasn't completed yet   * @return the promise
    */
   def promise[T: TypeTag](): Promise[T] = {
-    Promise[T](JPromise.promise[Object]())
+    Promise[T](JPromise.promise[Object]())//2 promise
   }
 
 }

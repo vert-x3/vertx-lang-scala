@@ -305,21 +305,24 @@ client.basicGetFuture("my.queue", true).onComplete{
 
 [source,scala]
 ----
-// Create the event bus handler which messages will be sent to
-vertx.eventBus().consumer("my.address", (msg: io.vertx.scala.core.eventbus.Message<java.lang.Object>) => {
-  var json = msg.body()
-  println(s"Got message: ${json.getValue("body")}")
-  // ack
-  client.basicAckFuture(json.getValue("deliveryTag"), false).onComplete{
-    case Success(result) => println("Success")
-    case Failure(cause) => println("Failure")
-  }
-})
-
-// Setup the link between rabbitmq consumer and event bus address
-client.basicConsumeFuture("my.queue", "my.address", false).onComplete{
+// Setup the rabbitmq consumer
+client.basicConsumerFuture("my.queue", QueueOptions()
+  .setAutoAck(false)
+).onComplete{
   case Success(result) => {
     println("RabbitMQ consumer created !")
+    var consumer = result
+
+    // Set the handler which messages will be sent to
+    consumer.handler((msg: io.vertx.scala.rabbitmq.RabbitMQMessage) => {
+      var json = msg.body()
+      println(s"Got message: ${json.getValue("body")}")
+      // ack
+      client.basicAckFuture(json.getValue("deliveryTag"), false).onComplete{
+        case Success(result) => println("Success")
+        case Failure(cause) => println("Failure")
+      }
+    })
   }
   case Failure(cause) => {
     println(s"$cause")

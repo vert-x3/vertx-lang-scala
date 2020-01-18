@@ -61,12 +61,12 @@ class JadeTemplateEngine(private val _asJava: Object) extends TemplateEngine (_a
 
 object JadeTemplateEngine {
   def apply(asJava: JJadeTemplateEngine) = new JadeTemplateEngine(asJava)
-  
+
   /**
    * Create a template engine using defaults   * @return the engine
    */
   def create(vertx: Vertx): JadeTemplateEngine = {
-    JadeTemplateEngine(JJadeTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))
+    JadeTemplateEngine(JJadeTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

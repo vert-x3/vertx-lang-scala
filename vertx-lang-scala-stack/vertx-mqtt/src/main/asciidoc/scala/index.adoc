@@ -61,7 +61,7 @@ mqttServer.endpointHandler((endpoint: io.vertx.scala.mqtt.MqttEndpoint) => {
     println(s"[username = ${todo-renderDataObjectMemberSelect}, password = ${todo-renderDataObjectMemberSelect}]")
   }
   if (endpoint.will() != null) {
-    println(s"[will topic = ${todo-renderDataObjectMemberSelect} msg = ${todo-renderDataObjectMemberSelect} QoS = ${todo-renderDataObjectMemberSelect} isRetain = ${todo-renderDataObjectMemberSelect}]")
+    println(s"[will topic = ${todo-renderDataObjectMemberSelect} msg = ${new java.lang.String(todo-renderDataObjectMemberSelect)} QoS = ${todo-renderDataObjectMemberSelect} isRetain = ${todo-renderDataObjectMemberSelect}]")
   }
 
   println(s"[keep alive timeout = ${endpoint.keepAliveTimeSeconds()}]")
@@ -132,7 +132,7 @@ mqttServer.endpointHandler((endpoint: io.vertx.scala.mqtt.MqttEndpoint) => {
     println(s"[username = ${todo-renderDataObjectMemberSelect}, password = ${todo-renderDataObjectMemberSelect}]")
   }
   if (endpoint.will() != null) {
-    println(s"[will topic = ${todo-renderDataObjectMemberSelect} msg = ${todo-renderDataObjectMemberSelect} QoS = ${todo-renderDataObjectMemberSelect} isRetain = ${todo-renderDataObjectMemberSelect}]")
+    println(s"[will topic = ${todo-renderDataObjectMemberSelect} msg = ${new java.lang.String(todo-renderDataObjectMemberSelect)} QoS = ${todo-renderDataObjectMemberSelect} isRetain = ${todo-renderDataObjectMemberSelect}]")
   }
 
   println(s"[keep alive timeout = ${endpoint.keepAliveTimeSeconds()}]")
@@ -391,7 +391,7 @@ and calling `link:../../scaladocs/io/vertx/scala/mqtt/MqttClient.html#connect(in
 ----
 var client = MqttClient.create(vertx)
 
-client.connectFuture(1883, "iot.eclipse.org").onComplete{
+client.connectFuture(1883, "mqtt.eclipse.org").onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }

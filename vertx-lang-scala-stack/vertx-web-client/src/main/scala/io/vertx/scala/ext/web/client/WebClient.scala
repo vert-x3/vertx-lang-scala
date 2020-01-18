@@ -433,13 +433,13 @@ class WebClient(private val _asJava: Object) {
 
 object WebClient {
   def apply(asJava: JWebClient) = new WebClient(asJava)
-  
+
   /**
    * Create a web client using the provided `vertx` instance and default options.   * @param vertx the vertx instance
    * @return the created web client
    */
   def create(vertx: Vertx): WebClient = {
-    WebClient(JWebClient.create(vertx.asJava.asInstanceOf[JVertx]))
+    WebClient(JWebClient.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -448,7 +448,7 @@ object WebClient {
    * @return the created web client
    */
   def create(vertx: Vertx,options: WebClientOptions): WebClient = {
-    WebClient(JWebClient.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    WebClient(JWebClient.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
   /**
@@ -456,7 +456,7 @@ object WebClient {
    * @return the web client
    */
   def wrap(httpClient: HttpClient): WebClient = {
-    WebClient(JWebClient.wrap(httpClient.asJava.asInstanceOf[JHttpClient]))
+    WebClient(JWebClient.wrap(httpClient.asJava.asInstanceOf[JHttpClient]))//2 wrap
   }
 
   /**
@@ -468,7 +468,7 @@ object WebClient {
    * @return the web client
    */
   def wrap(httpClient: HttpClient,options: WebClientOptions): WebClient = {
-    WebClient(JWebClient.wrap(httpClient.asJava.asInstanceOf[JHttpClient], options.asJava))
+    WebClient(JWebClient.wrap(httpClient.asJava.asInstanceOf[JHttpClient], options.asJava))//2 wrap
   }
 
 }

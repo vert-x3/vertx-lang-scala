@@ -86,5 +86,5 @@ class Completion(private val _asJava: Object) {
 
 object Completion {
   def apply(asJava: JCompletion) = new Completion(asJava)
-  
+
 }

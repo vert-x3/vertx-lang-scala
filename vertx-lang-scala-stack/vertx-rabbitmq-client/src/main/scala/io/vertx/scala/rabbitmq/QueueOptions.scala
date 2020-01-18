@@ -64,11 +64,11 @@ class QueueOptions(private val _asJava: JQueueOptions) {
 
 
 object QueueOptions {
-  
+
   def apply() = {
     new QueueOptions(new JQueueOptions(emptyObj()))
   }
-  
+
   def apply(t: JQueueOptions) = {
     if (t != null) {
       new QueueOptions(t)
@@ -76,7 +76,7 @@ object QueueOptions {
       new QueueOptions(new JQueueOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): QueueOptions = {
     if (json != null) {
       new QueueOptions(new JQueueOptions(json))

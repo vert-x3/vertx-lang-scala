@@ -585,11 +585,11 @@ class EventBusOptions(private val _asJava: JEventBusOptions) extends ExtTCPSSLOp
 
 
 object EventBusOptions {
-  
+
   def apply() = {
     new EventBusOptions(new JEventBusOptions(emptyObj()))
   }
-  
+
   def apply(t: JEventBusOptions) = {
     if (t != null) {
       new EventBusOptions(t)
@@ -597,7 +597,7 @@ object EventBusOptions {
       new EventBusOptions(new JEventBusOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): EventBusOptions = {
     if (json != null) {
       new EventBusOptions(new JEventBusOptions(json))

@@ -45,19 +45,19 @@ class WebEnvironment(private val _asJava: Object) {
 
 object WebEnvironment {
   def apply(asJava: JWebEnvironment) = new WebEnvironment(asJava)
-  
+
   /**
    * Will return true if the mode is not null and equals ignoring case the string "dev"   * @return always boolean
    */
   def development(): Boolean = {
-    JWebEnvironment.development().asInstanceOf[Boolean]
+    JWebEnvironment.development().asInstanceOf[Boolean]//2 development
   }
 
   /**
    * The current mode from the system properties with fallback to environment variables   * @return String with mode value or null
    */
   def mode(): scala.Option[String] = {
-    scala.Option(JWebEnvironment.mode().asInstanceOf[String])
+    scala.Option(JWebEnvironment.mode().asInstanceOf[String])//2 mode
   }
 
 }

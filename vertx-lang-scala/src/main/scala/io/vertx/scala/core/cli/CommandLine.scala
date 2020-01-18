@@ -178,14 +178,14 @@ class CommandLine(private val _asJava: Object) {
 
 object CommandLine {
   def apply(asJava: JCommandLine) = new CommandLine(asJava)
-  
+
   /**
    * Creates a command line object from the [[io.vertx.scala.core.cli.CLI]]. This object is intended to be used by
    * the parser to set the argument and option values.   * @param cli the CLI definition
    * @return the command line object
    */
   def create(cli: CLI): CommandLine = {
-    CommandLine(JCommandLine.create(cli.asJava.asInstanceOf[JCLI]))
+    CommandLine(JCommandLine.create(cli.asJava.asInstanceOf[JCLI]))//2 create
   }
 
 }

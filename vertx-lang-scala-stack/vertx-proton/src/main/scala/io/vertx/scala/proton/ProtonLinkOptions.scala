@@ -57,11 +57,11 @@ class ProtonLinkOptions(private val _asJava: JProtonLinkOptions) {
 
 
 object ProtonLinkOptions {
-  
+
   def apply() = {
     new ProtonLinkOptions(new JProtonLinkOptions(emptyObj()))
   }
-  
+
   def apply(t: JProtonLinkOptions) = {
     if (t != null) {
       new ProtonLinkOptions(t)
@@ -69,7 +69,7 @@ object ProtonLinkOptions {
       new ProtonLinkOptions(new JProtonLinkOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ProtonLinkOptions = {
     if (json != null) {
       new ProtonLinkOptions(new JProtonLinkOptions(json))

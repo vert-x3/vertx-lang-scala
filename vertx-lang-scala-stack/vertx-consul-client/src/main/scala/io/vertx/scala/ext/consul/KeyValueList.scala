@@ -55,11 +55,11 @@ class KeyValueList(private val _asJava: JKeyValueList) {
 
 
 object KeyValueList {
-  
+
   def apply() = {
     new KeyValueList(new JKeyValueList(emptyObj()))
   }
-  
+
   def apply(t: JKeyValueList) = {
     if (t != null) {
       new KeyValueList(t)
@@ -67,7 +67,7 @@ object KeyValueList {
       new KeyValueList(new JKeyValueList(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): KeyValueList = {
     if (json != null) {
       new KeyValueList(new JKeyValueList(json))

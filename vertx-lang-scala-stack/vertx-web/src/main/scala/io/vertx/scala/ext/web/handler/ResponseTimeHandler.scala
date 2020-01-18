@@ -46,12 +46,12 @@ class ResponseTimeHandler(private val _asJava: Object) extends io.vertx.core.Han
 
 object ResponseTimeHandler {
   def apply(asJava: JResponseTimeHandler) = new ResponseTimeHandler(asJava)
-  
+
   /**
    * Create a handler   * @return the handler
    */
   def create(): ResponseTimeHandler = {
-    ResponseTimeHandler(JResponseTimeHandler.create())
+    ResponseTimeHandler(JResponseTimeHandler.create())//2 create
   }
 
 }

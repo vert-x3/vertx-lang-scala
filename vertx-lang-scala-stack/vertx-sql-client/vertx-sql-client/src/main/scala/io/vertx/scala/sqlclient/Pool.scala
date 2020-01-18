@@ -23,6 +23,7 @@ import io.vertx.sqlclient.{Tuple => JTuple}
 import io.vertx.sqlclient.{Pool => JPool}
 import scala.collection.JavaConverters._
 import io.vertx.lang.scala.Converter._
+import io.vertx.sqlclient.{Row => JRow}
 import io.vertx.sqlclient.{SqlClient => JSqlClient}
 import io.vertx.sqlclient.{Transaction => JTransaction}
 import io.vertx.core.AsyncResult
@@ -41,29 +42,29 @@ class Pool(private val _asJava: Object) extends SqlClient (_asJava) {
 
 
   override 
-  def preparedQuery(sql: String, handler: Handler[AsyncResult[RowSet]]): Pool = {
-    asJava.asInstanceOf[JPool].preparedQuery(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet]]{def handle(x: AsyncResult[JRowSet]) {handler.handle(AsyncResultWrapper[JRowSet, RowSet](x, a => RowSet(a)))}}))
+  def preparedQuery(sql: String, handler: Handler[AsyncResult[RowSet[Row]]]): Pool = {
+    asJava.asInstanceOf[JPool].preparedQuery(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
     this
   }
 
 
   override 
-  def query(sql: String, handler: Handler[AsyncResult[RowSet]]): Pool = {
-    asJava.asInstanceOf[JPool].query(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet]]{def handle(x: AsyncResult[JRowSet]) {handler.handle(AsyncResultWrapper[JRowSet, RowSet](x, a => RowSet(a)))}}))
+  def query(sql: String, handler: Handler[AsyncResult[RowSet[Row]]]): Pool = {
+    asJava.asInstanceOf[JPool].query(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
     this
   }
 
 
   override 
-  def preparedQuery(sql: String, arguments: Tuple, handler: Handler[AsyncResult[RowSet]]): Pool = {
-    asJava.asInstanceOf[JPool].preparedQuery(sql.asInstanceOf[java.lang.String], arguments.asJava.asInstanceOf[JTuple], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet]]{def handle(x: AsyncResult[JRowSet]) {handler.handle(AsyncResultWrapper[JRowSet, RowSet](x, a => RowSet(a)))}}))
+  def preparedQuery(sql: String, arguments: Tuple, handler: Handler[AsyncResult[RowSet[Row]]]): Pool = {
+    asJava.asInstanceOf[JPool].preparedQuery(sql.asInstanceOf[java.lang.String], arguments.asJava.asInstanceOf[JTuple], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
     this
   }
 
 
   override 
-  def preparedBatch(sql: String, batch: scala.collection.mutable.Buffer[Tuple], handler: Handler[AsyncResult[RowSet]]): Pool = {
-    asJava.asInstanceOf[JPool].preparedBatch(sql.asInstanceOf[java.lang.String], batch.map(x => x.asJava.asInstanceOf[JTuple]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet]]{def handle(x: AsyncResult[JRowSet]) {handler.handle(AsyncResultWrapper[JRowSet, RowSet](x, a => RowSet(a)))}}))
+  def preparedBatch(sql: String, batch: scala.collection.mutable.Buffer[Tuple], handler: Handler[AsyncResult[RowSet[Row]]]): Pool = {
+    asJava.asInstanceOf[JPool].preparedBatch(sql.asInstanceOf[java.lang.String], batch.map(x => x.asJava.asInstanceOf[JTuple]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
     this
   }
 
@@ -92,33 +93,33 @@ class Pool(private val _asJava: Object) extends SqlClient (_asJava) {
 
 
 
-  override def preparedQueryFuture (sql: String): scala.concurrent.Future[RowSet] = {
+  override def preparedQueryFuture (sql: String): scala.concurrent.Future[RowSet[Row]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet, RowSet](x => RowSet(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
     asJava.asInstanceOf[JPool].preparedQuery(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 
-  override def queryFuture (sql: String): scala.concurrent.Future[RowSet] = {
+  override def queryFuture (sql: String): scala.concurrent.Future[RowSet[Row]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet, RowSet](x => RowSet(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
     asJava.asInstanceOf[JPool].query(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 
-  override def preparedQueryFuture (sql: String, arguments: Tuple): scala.concurrent.Future[RowSet] = {
+  override def preparedQueryFuture (sql: String, arguments: Tuple): scala.concurrent.Future[RowSet[Row]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet, RowSet](x => RowSet(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
     asJava.asInstanceOf[JPool].preparedQuery(sql.asInstanceOf[java.lang.String], arguments.asJava.asInstanceOf[JTuple], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 
-  override def preparedBatchFuture (sql: String, batch: scala.collection.mutable.Buffer[Tuple]): scala.concurrent.Future[RowSet] = {
+  override def preparedBatchFuture (sql: String, batch: scala.collection.mutable.Buffer[Tuple]): scala.concurrent.Future[RowSet[Row]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet, RowSet](x => RowSet(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
     asJava.asInstanceOf[JPool].preparedBatch(sql.asInstanceOf[java.lang.String], batch.map(x => x.asJava.asInstanceOf[JTuple]).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -147,5 +148,5 @@ class Pool(private val _asJava: Object) extends SqlClient (_asJava) {
 
 object Pool {
   def apply(asJava: JPool) = new Pool(asJava)
-  
+
 }

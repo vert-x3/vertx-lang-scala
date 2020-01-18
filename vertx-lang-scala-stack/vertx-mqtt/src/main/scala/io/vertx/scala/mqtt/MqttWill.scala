@@ -47,11 +47,11 @@ class MqttWill(private val _asJava: JMqttWill) {
 
 
 object MqttWill {
-  
+
   def apply() = {
     new MqttWill(new JMqttWill(emptyObj()))
   }
-  
+
   def apply(t: JMqttWill) = {
     if (t != null) {
       new MqttWill(t)
@@ -59,7 +59,7 @@ object MqttWill {
       new MqttWill(new JMqttWill(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MqttWill = {
     if (json != null) {
       new MqttWill(new JMqttWill(json))

@@ -114,11 +114,11 @@ class SSHTermOptions(private val _asJava: JSSHTermOptions) {
 
 
 object SSHTermOptions {
-  
+
   def apply() = {
     new SSHTermOptions(new JSSHTermOptions(emptyObj()))
   }
-  
+
   def apply(t: JSSHTermOptions) = {
     if (t != null) {
       new SSHTermOptions(t)
@@ -126,7 +126,7 @@ object SSHTermOptions {
       new SSHTermOptions(new JSSHTermOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): SSHTermOptions = {
     if (json != null) {
       new SSHTermOptions(new JSSHTermOptions(json))

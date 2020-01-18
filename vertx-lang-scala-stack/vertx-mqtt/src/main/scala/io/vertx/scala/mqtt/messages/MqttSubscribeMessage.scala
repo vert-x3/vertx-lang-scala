@@ -66,5 +66,5 @@ class MqttSubscribeMessage(private val _asJava: Object) extends MqttMessage {
 
 object MqttSubscribeMessage {
   def apply(asJava: JMqttSubscribeMessage) = new MqttSubscribeMessage(asJava)
-  
+
 }

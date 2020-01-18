@@ -58,11 +58,11 @@ class JWTKeyStoreOptions(private val _asJava: JJWTKeyStoreOptions) {
 
 
 object JWTKeyStoreOptions {
-  
+
   def apply() = {
     new JWTKeyStoreOptions(new JJWTKeyStoreOptions(emptyObj()))
   }
-  
+
   def apply(t: JJWTKeyStoreOptions) = {
     if (t != null) {
       new JWTKeyStoreOptions(t)
@@ -70,7 +70,7 @@ object JWTKeyStoreOptions {
       new JWTKeyStoreOptions(new JJWTKeyStoreOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): JWTKeyStoreOptions = {
     if (json != null) {
       new JWTKeyStoreOptions(new JJWTKeyStoreOptions(json))

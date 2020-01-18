@@ -97,5 +97,5 @@ class BaseBridgeEvent(private val _asJava: Object) extends Promise[Boolean] (_as
 
 object BaseBridgeEvent {
   def apply(asJava: JBaseBridgeEvent) = new BaseBridgeEvent(asJava)
-  
+
 }

@@ -46,11 +46,11 @@ class MemberAssignment(private val _asJava: JMemberAssignment) {
 
 
 object MemberAssignment {
-  
+
   def apply() = {
     new MemberAssignment(new JMemberAssignment(emptyObj()))
   }
-  
+
   def apply(t: JMemberAssignment) = {
     if (t != null) {
       new MemberAssignment(t)
@@ -58,7 +58,7 @@ object MemberAssignment {
       new MemberAssignment(new JMemberAssignment(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MemberAssignment = {
     if (json != null) {
       new MemberAssignment(new JMemberAssignment(json))

@@ -61,19 +61,19 @@ class ResponsePredicateResult(private val _asJava: Object) {
 
 object ResponsePredicateResult {
   def apply(asJava: JResponsePredicateResult) = new ResponsePredicateResult(asJava)
-  
+
   /**
    * @return a successful result
    */
   def success(): ResponsePredicateResult = {
-    ResponsePredicateResult(JResponsePredicateResult.success())
+    ResponsePredicateResult(JResponsePredicateResult.success())//2 success
   }
 
   /**
    * Creates a failed result.   * @param message the failure description
    */
   def failure(message: String): ResponsePredicateResult = {
-    ResponsePredicateResult(JResponsePredicateResult.failure(message.asInstanceOf[java.lang.String]))
+    ResponsePredicateResult(JResponsePredicateResult.failure(message.asInstanceOf[java.lang.String]))//2 failure
   }
 
 }

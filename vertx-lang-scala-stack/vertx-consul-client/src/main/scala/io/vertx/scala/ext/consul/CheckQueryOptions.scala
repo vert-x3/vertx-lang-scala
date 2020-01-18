@@ -55,11 +55,11 @@ class CheckQueryOptions(private val _asJava: JCheckQueryOptions) {
 
 
 object CheckQueryOptions {
-  
+
   def apply() = {
     new CheckQueryOptions(new JCheckQueryOptions(emptyObj()))
   }
-  
+
   def apply(t: JCheckQueryOptions) = {
     if (t != null) {
       new CheckQueryOptions(t)
@@ -67,7 +67,7 @@ object CheckQueryOptions {
       new CheckQueryOptions(new JCheckQueryOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): CheckQueryOptions = {
     if (json != null) {
       new CheckQueryOptions(new JCheckQueryOptions(json))

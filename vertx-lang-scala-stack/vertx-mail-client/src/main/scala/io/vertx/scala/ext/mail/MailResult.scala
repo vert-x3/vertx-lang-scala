@@ -55,11 +55,11 @@ class MailResult(private val _asJava: JMailResult) {
 
 
 object MailResult {
-  
+
   def apply() = {
     new MailResult(new JMailResult(emptyObj()))
   }
-  
+
   def apply(t: JMailResult) = {
     if (t != null) {
       new MailResult(t)
@@ -67,7 +67,7 @@ object MailResult {
       new MailResult(new JMailResult(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MailResult = {
     if (json != null) {
       new MailResult(new JMailResult(json))

@@ -39,7 +39,7 @@ public class ScalaGeneratorLoader implements GeneratorLoader {
     classGen.name = "Scala";
     classGen.kinds = classKinds;
     classGen.incremental = false;
-    classGen.filename = "if(type.name != 'io.vertx.core.buffer.Buffer'){'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'}";
+    classGen.filename = "if(type.name != 'io.vertx.core.buffer.Buffer' && type.name != 'io.vertx.ext.web.Cookie'){'scala/' + module.translateQualifiedName(fqn, 'scala').replace('.', '/') + '.scala'}";
     classGen.templateFilename = "vertx-scala/template/class.templ";
     generators.add(classGen);
 

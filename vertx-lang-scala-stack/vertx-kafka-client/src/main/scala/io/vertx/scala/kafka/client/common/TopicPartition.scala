@@ -56,11 +56,11 @@ class TopicPartition(private val _asJava: JTopicPartition) {
 
 
 object TopicPartition {
-  
+
   def apply() = {
     new TopicPartition(new JTopicPartition(emptyObj()))
   }
-  
+
   def apply(t: JTopicPartition) = {
     if (t != null) {
       new TopicPartition(t)
@@ -68,7 +68,7 @@ object TopicPartition {
       new TopicPartition(new JTopicPartition(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): TopicPartition = {
     if (json != null) {
       new TopicPartition(new JTopicPartition(json))

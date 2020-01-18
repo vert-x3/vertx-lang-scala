@@ -149,11 +149,11 @@ class DropwizardMetricsOptions(private val _asJava: JDropwizardMetricsOptions) e
 
 
 object DropwizardMetricsOptions {
-  
+
   def apply() = {
     new DropwizardMetricsOptions(new JDropwizardMetricsOptions(emptyObj()))
   }
-  
+
   def apply(t: JDropwizardMetricsOptions) = {
     if (t != null) {
       new DropwizardMetricsOptions(t)
@@ -161,7 +161,7 @@ object DropwizardMetricsOptions {
       new DropwizardMetricsOptions(new JDropwizardMetricsOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DropwizardMetricsOptions = {
     if (json != null) {
       new DropwizardMetricsOptions(new JDropwizardMetricsOptions(json))

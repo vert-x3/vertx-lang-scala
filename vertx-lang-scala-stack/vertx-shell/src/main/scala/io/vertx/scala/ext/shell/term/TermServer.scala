@@ -135,13 +135,13 @@ class TermServer(private val _asJava: Object) {
 
 object TermServer {
   def apply(asJava: JTermServer) = new TermServer(asJava)
-  
+
   /**
    * Create a term server for the SSH protocol.   * @param vertx the vertx instance
    * @return the term server
    */
   def createSSHTermServer(vertx: Vertx): TermServer = {
-    TermServer(JTermServer.createSSHTermServer(vertx.asJava.asInstanceOf[JVertx]))
+    TermServer(JTermServer.createSSHTermServer(vertx.asJava.asInstanceOf[JVertx]))//2 createSSHTermServer
   }
 
   /**
@@ -150,7 +150,7 @@ object TermServer {
    * @return the term server
    */
   def createSSHTermServer(vertx: Vertx,options: SSHTermOptions): TermServer = {
-    TermServer(JTermServer.createSSHTermServer(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    TermServer(JTermServer.createSSHTermServer(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 createSSHTermServer
   }
 
   /**
@@ -158,7 +158,7 @@ object TermServer {
    * @return the term server
    */
   def createTelnetTermServer(vertx: Vertx): TermServer = {
-    TermServer(JTermServer.createTelnetTermServer(vertx.asJava.asInstanceOf[JVertx]))
+    TermServer(JTermServer.createTelnetTermServer(vertx.asJava.asInstanceOf[JVertx]))//2 createTelnetTermServer
   }
 
   /**
@@ -167,7 +167,7 @@ object TermServer {
    * @return the term server
    */
   def createTelnetTermServer(vertx: Vertx,options: TelnetTermOptions): TermServer = {
-    TermServer(JTermServer.createTelnetTermServer(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    TermServer(JTermServer.createTelnetTermServer(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 createTelnetTermServer
   }
 
   /**
@@ -175,7 +175,7 @@ object TermServer {
    * @return the term server
    */
   def createHttpTermServer(vertx: Vertx): TermServer = {
-    TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx]))
+    TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx]))//2 createHttpTermServer
   }
 
   /**
@@ -184,7 +184,7 @@ object TermServer {
    * @return the term server
    */
   def createHttpTermServer(vertx: Vertx,options: HttpTermOptions): TermServer = {
-    TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 createHttpTermServer
   }
 
   /**
@@ -193,7 +193,7 @@ object TermServer {
    * @return the term server
    */
   def createHttpTermServer(vertx: Vertx,router: Router): TermServer = {
-    TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx], router.asJava.asInstanceOf[JRouter]))
+    TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx], router.asJava.asInstanceOf[JRouter]))//2 createHttpTermServer
   }
 
   /**
@@ -203,7 +203,7 @@ object TermServer {
    * @return the term server
    */
   def createHttpTermServer(vertx: Vertx,router: Router,options: HttpTermOptions): TermServer = {
-    TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx], router.asJava.asInstanceOf[JRouter], options.asJava))
+    TermServer(JTermServer.createHttpTermServer(vertx.asJava.asInstanceOf[JVertx], router.asJava.asInstanceOf[JRouter], options.asJava))//2 createHttpTermServer
   }
 
 }

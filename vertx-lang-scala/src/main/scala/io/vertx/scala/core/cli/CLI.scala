@@ -166,6 +166,16 @@ class CLI(private val _asJava: Object) {
     this
   }
 
+  /**
+   * Sets the priority of the CLI.   * @param priority the priority
+   * @return the current CLI instance
+   */
+  
+  def setPriority(priority: Int): CLI = {
+    asJava.asInstanceOf[JCLI].setPriority(priority.asInstanceOf[java.lang.Integer])
+    this
+  }
+
 
 
   /**
@@ -251,18 +261,25 @@ class CLI(private val _asJava: Object) {
     scala.Option(asJava.asInstanceOf[JCLI].getArgument(index.asInstanceOf[java.lang.Integer])).map(Argument(_))
   }
 
+  /**
+   * @return the CLI priority.
+   */
+  def getPriority (): Int = {
+    asJava.asInstanceOf[JCLI].getPriority().asInstanceOf[Int]
+  }
+
 
 }
 
 object CLI {
   def apply(asJava: JCLI) = new CLI(asJava)
-  
+
   /**
    * Creates an instance of [[io.vertx.scala.core.cli.CLI]] using the default implementation.   * @param name the name of the CLI (must not be `null`)
    * @return the created instance of CLI
    */
   def create(name: String): CLI = {
-    CLI(JCLI.create(name.asInstanceOf[java.lang.String]))
+    CLI(JCLI.create(name.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

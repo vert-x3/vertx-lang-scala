@@ -55,11 +55,11 @@ class ServiceList(private val _asJava: JServiceList) {
 
 
 object ServiceList {
-  
+
   def apply() = {
     new ServiceList(new JServiceList(emptyObj()))
   }
-  
+
   def apply(t: JServiceList) = {
     if (t != null) {
       new ServiceList(t)
@@ -67,7 +67,7 @@ object ServiceList {
       new ServiceList(new JServiceList(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ServiceList = {
     if (json != null) {
       new ServiceList(new JServiceList(json))

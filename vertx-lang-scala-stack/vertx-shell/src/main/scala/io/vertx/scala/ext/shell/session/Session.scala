@@ -64,12 +64,12 @@ class Session(private val _asJava: Object) {
 
 object Session {
   def apply(asJava: JSession) = new Session(asJava)
-  
+
   /**
    * Create a new empty session.   * @return the created session
    */
   def create(): Session = {
-    Session(JSession.create())
+    Session(JSession.create())//2 create
   }
 
 }

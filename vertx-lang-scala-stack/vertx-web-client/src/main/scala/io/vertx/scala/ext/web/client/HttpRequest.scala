@@ -165,7 +165,7 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
-   * Configure the request to add a new HTTP header.   * @param name the header name
+   * Configure the request to set a new HTTP header.   * @param name the header name
    * @param value the header value
    * @return a reference to this, so the API can be used fluently
    */
@@ -358,8 +358,8 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
    * Like [[io.vertx.scala.ext.web.client.HttpRequest#send]] but with an HTTP request `body` object encoded as json and the content type
    * set to `application/json`.   * @param body the body
    */
-  def sendJson (body: AnyRef, handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
-    asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpResponse[Object]]]{def handle(x: AsyncResult[JHttpResponse[Object]]) {handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))}}))
+  def sendJson (body: scala.Option[AnyRef], handler: Handler[AsyncResult[HttpResponse[T]]]): Unit = {
+    asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body.orNull, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JHttpResponse[Object]]]{def handle(x: AsyncResult[JHttpResponse[Object]]) {handler.handle(AsyncResultWrapper[JHttpResponse[Object], HttpResponse[T]](x, a => HttpResponse[T](a)))}}))
   }
 
   /**
@@ -421,10 +421,10 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
  /**
   * Like [[sendJson]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def sendJsonFuture (body: AnyRef): scala.concurrent.Future[HttpResponse[T]] = {
+  def sendJsonFuture (body: scala.Option[AnyRef]): scala.concurrent.Future[HttpResponse[T]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JHttpResponse[Object], HttpResponse[T]](x => HttpResponse[T](x))
-    asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body, promiseAndHandler._1)
+    asJava.asInstanceOf[JHttpRequest[Object]].sendJson(body.orNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -462,5 +462,5 @@ class HttpRequest[T: TypeTag](private val _asJava: Object) {
 
 object HttpRequest {
   def apply[T: TypeTag](asJava: JHttpRequest[_]) = new HttpRequest[T](asJava)
-  
+
 }

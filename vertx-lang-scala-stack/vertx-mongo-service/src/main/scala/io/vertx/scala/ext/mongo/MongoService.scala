@@ -690,14 +690,14 @@ class MongoService(private val _asJava: Object) extends MongoClient (_asJava) {
 
 object MongoService {
   def apply(asJava: JMongoService) = new MongoService(asJava)
-  
+
   /**
    * Create a proxy to a service that is deployed somewhere on the event bus   * @param vertx the Vert.x instance
    * @param address the address the service is listening on on the event bus
    * @return the service
    */
   def createEventBusProxy(vertx: Vertx,address: String): MongoService = {
-    MongoService(JMongoService.createEventBusProxy(vertx.asJava.asInstanceOf[JVertx], address.asInstanceOf[java.lang.String]))
+    MongoService(JMongoService.createEventBusProxy(vertx.asJava.asInstanceOf[JVertx], address.asInstanceOf[java.lang.String]))//2 createEventBusProxy
   }
 
 }

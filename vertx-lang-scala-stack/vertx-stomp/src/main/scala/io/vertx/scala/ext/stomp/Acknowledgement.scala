@@ -60,5 +60,5 @@ class Acknowledgement(private val _asJava: Object) {
 
 object Acknowledgement {
   def apply(asJava: JAcknowledgement) = new Acknowledgement(asJava)
-  
+
 }

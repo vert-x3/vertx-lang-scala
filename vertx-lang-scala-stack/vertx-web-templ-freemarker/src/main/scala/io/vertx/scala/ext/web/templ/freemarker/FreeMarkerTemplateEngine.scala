@@ -61,12 +61,12 @@ class FreeMarkerTemplateEngine(private val _asJava: Object) extends TemplateEngi
 
 object FreeMarkerTemplateEngine {
   def apply(asJava: JFreeMarkerTemplateEngine) = new FreeMarkerTemplateEngine(asJava)
-  
+
   /**
    * Create a template engine using defaults   * @return the engine
    */
   def create(vertx: Vertx): FreeMarkerTemplateEngine = {
-    FreeMarkerTemplateEngine(JFreeMarkerTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))
+    FreeMarkerTemplateEngine(JFreeMarkerTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

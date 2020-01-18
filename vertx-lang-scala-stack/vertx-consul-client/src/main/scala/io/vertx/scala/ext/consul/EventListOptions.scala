@@ -55,11 +55,11 @@ class EventListOptions(private val _asJava: JEventListOptions) {
 
 
 object EventListOptions {
-  
+
   def apply() = {
     new EventListOptions(new JEventListOptions(emptyObj()))
   }
-  
+
   def apply(t: JEventListOptions) = {
     if (t != null) {
       new EventListOptions(t)
@@ -67,7 +67,7 @@ object EventListOptions {
       new EventListOptions(new JEventListOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): EventListOptions = {
     if (json != null) {
       new EventListOptions(new JEventListOptions(json))

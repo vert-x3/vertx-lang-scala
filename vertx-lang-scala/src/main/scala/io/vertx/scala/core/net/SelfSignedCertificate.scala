@@ -76,12 +76,12 @@ class SelfSignedCertificate(private val _asJava: Object) {
 
 object SelfSignedCertificate {
   def apply(asJava: JSelfSignedCertificate) = new SelfSignedCertificate(asJava)
-  
+
   /**
    * Create a new `SelfSignedCertificate` instance.   * @return a new instance.
    */
   def create(): SelfSignedCertificate = {
-    SelfSignedCertificate(JSelfSignedCertificate.create())
+    SelfSignedCertificate(JSelfSignedCertificate.create())//2 create
   }
 
   /**
@@ -89,7 +89,7 @@ object SelfSignedCertificate {
    * @return a new instance.
    */
   def create(fqdn: String): SelfSignedCertificate = {
-    SelfSignedCertificate(JSelfSignedCertificate.create(fqdn.asInstanceOf[java.lang.String]))
+    SelfSignedCertificate(JSelfSignedCertificate.create(fqdn.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

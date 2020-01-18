@@ -68,11 +68,11 @@ class GoAway(private val _asJava: JGoAway) {
 
 
 object GoAway {
-  
+
   def apply() = {
     new GoAway(new JGoAway(emptyObj()))
   }
-  
+
   def apply(t: JGoAway) = {
     if (t != null) {
       new GoAway(t)
@@ -80,7 +80,7 @@ object GoAway {
       new GoAway(new JGoAway(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): GoAway = {
     if (json != null) {
       new GoAway(new JGoAway(json))

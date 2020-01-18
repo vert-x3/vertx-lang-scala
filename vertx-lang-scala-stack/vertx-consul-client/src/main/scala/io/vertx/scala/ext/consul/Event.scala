@@ -127,11 +127,11 @@ class Event(private val _asJava: JEvent) {
 
 
 object Event {
-  
+
   def apply() = {
     new Event(new JEvent(emptyObj()))
   }
-  
+
   def apply(t: JEvent) = {
     if (t != null) {
       new Event(t)
@@ -139,7 +139,7 @@ object Event {
       new Event(new JEvent(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Event = {
     if (json != null) {
       new Event(new JEvent(json))

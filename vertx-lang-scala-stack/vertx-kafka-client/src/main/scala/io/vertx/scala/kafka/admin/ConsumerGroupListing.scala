@@ -56,11 +56,11 @@ class ConsumerGroupListing(private val _asJava: JConsumerGroupListing) {
 
 
 object ConsumerGroupListing {
-  
+
   def apply() = {
     new ConsumerGroupListing(new JConsumerGroupListing(emptyObj()))
   }
-  
+
   def apply(t: JConsumerGroupListing) = {
     if (t != null) {
       new ConsumerGroupListing(t)
@@ -68,7 +68,7 @@ object ConsumerGroupListing {
       new ConsumerGroupListing(new JConsumerGroupListing(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ConsumerGroupListing = {
     if (json != null) {
       new ConsumerGroupListing(new JConsumerGroupListing(json))

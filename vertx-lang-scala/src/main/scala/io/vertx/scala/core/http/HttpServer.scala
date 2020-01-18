@@ -39,7 +39,7 @@ import io.vertx.lang.scala.HandlerOps._
   * You receive HTTP requests by providing a [[io.vertx.scala.core.http.HttpServer#requestHandler]]. As requests arrive on the server the handler
   * will be called with the requests.
   * 
-  * You receive WebSockets by providing a [[io.vertx.scala.core.http.HttpServer#websocketHandler]]. As WebSocket connections arrive on the server, the
+  * You receive WebSockets by providing a [[io.vertx.scala.core.http.HttpServer#webSocketHandler]]. As WebSocket connections arrive on the server, the
   * WebSocket is passed to the handler.
   */
 
@@ -47,11 +47,12 @@ class HttpServer(private val _asJava: Object) extends Measured {
   def asJava = _asJava
   private var cached_0: Option[ReadStream[HttpServerRequest]] = None
   private var cached_1: Option[ReadStream[ServerWebSocket]] = None
+  private var cached_2: Option[ReadStream[ServerWebSocket]] = None
 
 
   /**
    * Return the request stream for the server. As HTTP requests are received by the server,
-   * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to the stream .   * @return the request stream
+   * instances of [[io.vertx.scala.core.http.HttpServerRequest]] will be created and passed to the stream [[io.vertx.scala.core.streams.ReadStream#handler]].   * @return the request stream
    */
   def requestStream(): ReadStream[HttpServerRequest] = {
     if (cached_0 == None) {
@@ -62,8 +63,8 @@ class HttpServer(private val _asJava: Object) extends Measured {
   }
 
   /**
-   * Return the websocket stream for the server. If a websocket connect handshake is successful a
-   * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream .   * @return the websocket stream
+   * Return the WebSocket stream for the server. If a webSocket connect handshake is successful a
+   * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream [[io.vertx.scala.core.streams.ReadStream#handler]].   * @return the WebSocket stream
    */
   def websocketStream(): ReadStream[ServerWebSocket] = {
     if (cached_1 == None) {
@@ -71,6 +72,18 @@ class HttpServer(private val _asJava: Object) extends Measured {
       cached_1 = Some(ReadStream[ServerWebSocket](tmp))
     }
     cached_1.get
+  }
+
+  /**
+   * Return the WebSocket stream for the server. If a WebSocket connect handshake is successful a
+   * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the stream [[io.vertx.scala.core.streams.ReadStream#handler]].   * @return the WebSocket stream
+   */
+  def webSocketStream(): ReadStream[ServerWebSocket] = {
+    if (cached_2 == None) {
+      val tmp = asJava.asInstanceOf[JHttpServer].webSocketStream()
+      cached_2 = Some(ReadStream[ServerWebSocket](tmp))
+    }
+    cached_2.get
   }
 
 
@@ -105,12 +118,22 @@ class HttpServer(private val _asJava: Object) extends Measured {
   }
 
   /**
-   * Set the websocket handler for the server to `wsHandler`. If a websocket connect handshake is successful a
+   * Set the WebSocket handler for the server to `wsHandler`. If a WebSocket connect handshake is successful a
    * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the handler.   * @return a reference to this, so the API can be used fluently
    */
   
   def websocketHandler(handler: Handler[ServerWebSocket]): HttpServer = {
     asJava.asInstanceOf[JHttpServer].websocketHandler((if (handler == null) null else new io.vertx.core.Handler[JServerWebSocket]{def handle(x: JServerWebSocket) {handler.handle(ServerWebSocket(x))}}))
+    this
+  }
+
+  /**
+   * Set the WebSocket handler for the server to `wsHandler`. If a WebSocket connect handshake is successful a
+   * new [[io.vertx.scala.core.http.ServerWebSocket]] instance will be created and passed to the handler.   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def webSocketHandler(handler: Handler[ServerWebSocket]): HttpServer = {
+    asJava.asInstanceOf[JHttpServer].webSocketHandler((if (handler == null) null else new io.vertx.core.Handler[JServerWebSocket]{def handle(x: JServerWebSocket) {handler.handle(ServerWebSocket(x))}}))
     this
   }
 
@@ -282,5 +305,5 @@ class HttpServer(private val _asJava: Object) extends Measured {
 
 object HttpServer {
   def apply(asJava: JHttpServer) = new HttpServer(asJava)
-  
+
 }

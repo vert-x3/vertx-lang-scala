@@ -417,7 +417,7 @@ Http server includes all the metrics of a <<net-server-metrics,Net Server>> plus
 * `open-websockets` - A <<counter>> of the number of open web socket connections
 * `open-websockets.<remote-host>` - A <<counter>> of the number of open web socket connections for a particular remote host
 
-Http URI metrics must be explicitely configured in the options either by exact match or regex match:
+Http URI metrics must be explicitly configured in the options either by exact match or regex match:
 
 [source,scala]
 ----
@@ -437,7 +437,8 @@ var vertx = Vertx.vertx(VertxOptions()
 
 In case if the uri contains some path parameters like `/users/:userId` it might not make sense to have a separate entry in the registry for each user
 id (like `get-requests./users/1`, `get-requests./users/2` and so on) but a summarized one. To achieve that you can set an alias to the match instance
-in this case the alias will be used as a part of the registry name instead of uri like `<http-method>-requests.<alias>`
+in this case the alias will be used as a part of the registry name instead of uri like `<http-method>-requests.<alias>`.
+In addition there will be separate counters for each response group for each defined alias like `responses-<code>.<alias>`.
 
 [source,scala]
 ----

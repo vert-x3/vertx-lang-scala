@@ -55,10 +55,10 @@ class SockJSTermHandler(private val _asJava: Object) extends io.vertx.core.Handl
 
 object SockJSTermHandler {
   def apply(asJava: JSockJSTermHandler) = new SockJSTermHandler(asJava)
-  
+
 
   def create(vertx: Vertx,charset: String): SockJSTermHandler = {
-    SockJSTermHandler(JSockJSTermHandler.create(vertx.asJava.asInstanceOf[JVertx], charset.asInstanceOf[java.lang.String]))
+    SockJSTermHandler(JSockJSTermHandler.create(vertx.asJava.asInstanceOf[JVertx], charset.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

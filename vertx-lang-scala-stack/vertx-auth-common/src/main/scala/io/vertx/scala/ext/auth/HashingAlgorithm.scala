@@ -59,5 +59,5 @@ class HashingAlgorithm(private val _asJava: Object) {
 
 object HashingAlgorithm {
   def apply(asJava: JHashingAlgorithm) = new HashingAlgorithm(asJava)
-  
+
 }

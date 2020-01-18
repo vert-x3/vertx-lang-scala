@@ -103,7 +103,7 @@ class ScalaVerticleTest extends AsyncFlatSpec with Matchers with ScalaFutures{
 class StartFutureVerticle extends ScalaVerticle{
   override def startFuture(): Future[Unit] = {
     vertx.eventBus
-      .send("startMethod", "startFuture")
+      .send("startMethod", Some("startFuture"))
     Future.successful()
   }
 }
@@ -111,7 +111,7 @@ class StartFutureVerticle extends ScalaVerticle{
 class StartVerticle extends ScalaVerticle{
   override def start(): Unit = {
     vertx.eventBus
-      .send("startMethod", "start")
+      .send("startMethod", Some("start"))
   }
 }
 class StartFailVerticle extends ScalaVerticle{
@@ -123,7 +123,7 @@ class StartFailVerticle extends ScalaVerticle{
 class StopFutureVerticle extends ScalaVerticle{
   override def stopFuture(): Future[Unit] = {
     vertx.eventBus
-      .send("stopMethod", "stopFuture")
+      .send("stopMethod", Some("stopFuture"))
     Future.successful()
   }
 }
@@ -131,7 +131,7 @@ class StopFutureVerticle extends ScalaVerticle{
 class StopVerticle extends ScalaVerticle{
   override def stop(): Unit = {
     vertx.eventBus
-      .send("stopMethod", "stop")
+      .send("stopMethod", Some("stop"))
   }
 }
 

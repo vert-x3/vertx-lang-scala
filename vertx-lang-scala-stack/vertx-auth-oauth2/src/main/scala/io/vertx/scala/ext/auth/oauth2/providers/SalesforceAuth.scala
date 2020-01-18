@@ -49,13 +49,13 @@ class SalesforceAuth(private val _asJava: Object) extends OpenIDConnectAuth (_as
 
 object SalesforceAuth {
   def apply(asJava: JSalesforceAuth) = new SalesforceAuth(asJava)
-  
+
   /**
    * Create a OAuth2Auth provider for Salesforce   * @param clientId the client id given to you by Salesforce
    * @param clientSecret the client secret given to you by Salesforce
    */
   def create(vertx: Vertx,clientId: String,clientSecret: String): OAuth2Auth = {
-    OAuth2Auth(JSalesforceAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String]))
+    OAuth2Auth(JSalesforceAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String]))//2 create
   }
 
   /**
@@ -64,7 +64,7 @@ object SalesforceAuth {
    * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
    */
   def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
-    OAuth2Auth(JSalesforceAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], httpClientOptions.asJava))
+    OAuth2Auth(JSalesforceAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], httpClientOptions.asJava))//2 create
   }
 
   /**
@@ -78,7 +78,7 @@ object SalesforceAuth {
    * @param handler the instantiated Oauth2 provider instance handler
    */
   def discover(vertx: Vertx,config: OAuth2ClientOptions,handler: Handler[AsyncResult[OAuth2Auth]]): Unit = {
-    JSalesforceAuth.discover(vertx.asJava.asInstanceOf[JVertx], config.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Auth]]{def handle(x: AsyncResult[JOAuth2Auth]) {handler.handle(AsyncResultWrapper[JOAuth2Auth, OAuth2Auth](x, a => OAuth2Auth(a)))}}))
+    JSalesforceAuth.discover(vertx.asJava.asInstanceOf[JVertx], config.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Auth]]{def handle(x: AsyncResult[JOAuth2Auth]) {handler.handle(AsyncResultWrapper[JOAuth2Auth, OAuth2Auth](x, a => OAuth2Auth(a)))}}))//2 discover
   }
 
 }

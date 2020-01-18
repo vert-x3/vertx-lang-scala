@@ -209,12 +209,12 @@ class JsonPointer(private val _asJava: Object) {
 
 object JsonPointer {
   def apply(asJava: JJsonPointer) = new JsonPointer(asJava)
-  
+
   /**
    * Build an empty JsonPointer   * @return a new empty JsonPointer
    */
   def create(): JsonPointer = {
-    JsonPointer(JJsonPointer.create())
+    JsonPointer(JJsonPointer.create())//2 create
   }
 
   /**
@@ -222,7 +222,7 @@ object JsonPointer {
    * @return new instance of JsonPointer
    */
   def from(pointer: String): JsonPointer = {
-    JsonPointer(JJsonPointer.from(pointer.asInstanceOf[java.lang.String]))
+    JsonPointer(JJsonPointer.from(pointer.asInstanceOf[java.lang.String]))//2 from
   }
 
 }

@@ -89,5 +89,5 @@ class RabbitMQMessage(private val _asJava: Object) {
 
 object RabbitMQMessage {
   def apply(asJava: JRabbitMQMessage) = new RabbitMQMessage(asJava)
-  
+
 }

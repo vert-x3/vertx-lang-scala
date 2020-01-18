@@ -63,5 +63,5 @@ class MqttTopicSubscription(private val _asJava: Object) {
 
 object MqttTopicSubscription {
   def apply(asJava: JMqttTopicSubscription) = new MqttTopicSubscription(asJava)
-  
+
 }

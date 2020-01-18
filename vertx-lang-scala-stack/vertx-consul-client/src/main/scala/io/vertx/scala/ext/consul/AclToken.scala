@@ -79,11 +79,11 @@ class AclToken(private val _asJava: JAclToken) {
 
 
 object AclToken {
-  
+
   def apply() = {
     new AclToken(new JAclToken(emptyObj()))
   }
-  
+
   def apply(t: JAclToken) = {
     if (t != null) {
       new AclToken(t)
@@ -91,7 +91,7 @@ object AclToken {
       new AclToken(new JAclToken(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): AclToken = {
     if (json != null) {
       new AclToken(new JAclToken(json))

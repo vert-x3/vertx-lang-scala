@@ -76,11 +76,11 @@ class PubSecKeyOptions(private val _asJava: JPubSecKeyOptions) {
 
 
 object PubSecKeyOptions {
-  
+
   def apply() = {
     new PubSecKeyOptions(new JPubSecKeyOptions(emptyObj()))
   }
-  
+
   def apply(t: JPubSecKeyOptions) = {
     if (t != null) {
       new PubSecKeyOptions(t)
@@ -88,7 +88,7 @@ object PubSecKeyOptions {
       new PubSecKeyOptions(new JPubSecKeyOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): PubSecKeyOptions = {
     if (json != null) {
       new PubSecKeyOptions(new JPubSecKeyOptions(json))

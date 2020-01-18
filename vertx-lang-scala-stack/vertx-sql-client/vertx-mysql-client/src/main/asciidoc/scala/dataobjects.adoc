@@ -1,5 +1,43 @@
 = Cheatsheets
 
+[[MySQLAuthOptions]]
+== MySQLAuthOptions
+
+++++
+Authentication options for MySQL authentication which can be used for CHANGE_USER command.
+++++
+'''
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[charset]]`@charset`|`String`|+++
+Set the charset for the connection.
++++
+|[[collation]]`@collation`|`String`|+++
+Set the collation for the connection.
++++
+|[[database]]`@database`|`String`|+++
+Specify the default database for the re-authentication.
++++
+|[[password]]`@password`|`String`|+++
+Specify the user password to be used for the authentication.
++++
+|[[properties]]`@properties`|`String`|+++
+Set connection attributes which will be sent to server at the re-authentication.
++++
+|[[serverRsaPublicKeyPath]]`@serverRsaPublicKeyPath`|`String`|+++
+Set the path of server RSA public key which is mostly used for encrypting password under insecure connections when performing authentication.
++++
+|[[serverRsaPublicKeyValue]]`@serverRsaPublicKeyValue`|`Buffer`|+++
+Set the value of server RSA public key which is mostly used for encrypting password under insecure connections when performing authentication.
++++
+|[[user]]`@user`|`String`|+++
+Specify the user account to be used for the authentication.
++++
+|===
+
 [[MySQLConnectOptions]]
 == MySQLConnectOptions
 
@@ -13,6 +51,15 @@ Connect options for configuring link or link.
 |===
 ^|Name | Type ^| Description
 |[[cachePreparedStatements]]`@cachePreparedStatements`|`Boolean`|-
+|[[characterEncoding]]`@characterEncoding`|`String`|+++
+Set the Java charset for encoding string values, this value is UTF-8 by default.
++++
+|[[charset]]`@charset`|`String`|+++
+Set the charset for the connection.
++++
+|[[collation]]`@collation`|`String`|+++
+Set the collation for the connection.
++++
 |[[connectTimeout]]`@connectTimeout`|`Number (int)`|-
 |[[crlPaths]]`@crlPaths`|`Array of String`|-
 |[[crlValues]]`@crlValues`|`Array of Buffer`|-
@@ -37,6 +84,7 @@ Connect options for configuring link or link.
 |[[port]]`@port`|`Number (int)`|-
 |[[preparedStatementCacheMaxSize]]`@preparedStatementCacheMaxSize`|`Number (int)`|-
 |[[preparedStatementCacheSqlLimit]]`@preparedStatementCacheSqlLimit`|`Number (int)`|-
+|[[properties]]`@properties`|`String`|-
 |[[proxyOptions]]`@proxyOptions`|`link:dataobjects.html#ProxyOptions[ProxyOptions]`|-
 |[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|-
 |[[reconnectAttempts]]`@reconnectAttempts`|`Number (int)`|-
@@ -44,10 +92,19 @@ Connect options for configuring link or link.
 |[[reuseAddress]]`@reuseAddress`|`Boolean`|-
 |[[reusePort]]`@reusePort`|`Boolean`|-
 |[[sendBufferSize]]`@sendBufferSize`|`Number (int)`|-
+|[[serverRsaPublicKeyPath]]`@serverRsaPublicKeyPath`|`String`|+++
+Set the path of server RSA public key which is mostly used for encrypting password under insecure connections when performing authentication.
++++
+|[[serverRsaPublicKeyValue]]`@serverRsaPublicKeyValue`|`Buffer`|+++
+Set the value of server RSA public key which is mostly used for encrypting password under insecure connections when performing authentication.
++++
 |[[soLinger]]`@soLinger`|`Number (int)`|-
 |[[ssl]]`@ssl`|`Boolean`|-
 |[[sslHandshakeTimeout]]`@sslHandshakeTimeout`|`Number (long)`|-
 |[[sslHandshakeTimeoutUnit]]`@sslHandshakeTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|-
+|[[sslMode]]`@sslMode`|`link:enums.html#SslMode[SslMode]`|+++
+Set the link for the client, this option can be used to specify the desired security state of the connection to the server.
++++
 |[[tcpCork]]`@tcpCork`|`Boolean`|-
 |[[tcpFastOpen]]`@tcpFastOpen`|`Boolean`|-
 |[[tcpKeepAlive]]`@tcpKeepAlive`|`Boolean`|-
@@ -56,6 +113,12 @@ Connect options for configuring link or link.
 |[[trafficClass]]`@trafficClass`|`Number (int)`|-
 |[[trustAll]]`@trustAll`|`Boolean`|-
 |[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
+|[[useAffectedRows]]`@useAffectedRows`|`Boolean`|+++
+Sets how affected rows are calculated on update/delete/insert, if set to <code>true</code> an update that effectively
+does not change any data returns zero affected rows.
+
+See <a href="https://dev.mysql.com/doc/refman/8.0/en/mysql-affected-rows.html">mysql-affected-rows</a> for details.
++++
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
 |[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |[[user]]`@user`|`String`|-

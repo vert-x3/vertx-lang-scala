@@ -22,6 +22,7 @@ import io.vertx.core.http.HttpMethod
 import io.vertx.ext.web.{Route => JRoute}
 import scala.collection.JavaConverters._
 import io.vertx.core.Handler
+import io.vertx.ext.web.{Router => JRouter}
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 
@@ -129,6 +130,24 @@ class Route(private val _asJava: Object) {
   }
 
   /**
+   * Use a (sub) [[io.vertx.scala.ext.web.Router]] as a handler. There are several requirements to be fulfilled for this
+   * to be accepted.
+   *
+   * <ul>
+   *     <li>The route path must end with a wild card</li>
+   *     <li>Parameters are allowed but full regex patterns not</li>
+   *     <li>No other handler can be registered before or after this call (but they can on a new route object for the same path)</li>
+   *     <li>Only 1 router per path object</li>
+   * </ul>   * @param subRouter the router to add
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def subRouter(subRouter: Router): Route = {
+    asJava.asInstanceOf[JRoute].subRouter(subRouter.asJava.asInstanceOf[JRouter])
+    this
+  }
+
+  /**
    * Specify a blocking request handler for the route.
    * This method works just like [[io.vertx.scala.ext.web.Route#handler]] excepted that it will run the blocking handler on a worker thread
    * so that it won't block the event loop. Note that it's safe to call context.next() from the
@@ -221,6 +240,13 @@ class Route(private val _asJava: Object) {
   }
 
   /**
+   * Returns true of the path is a regular expression, this includes expression paths.   * @return true if backed by a pattern.
+   */
+  def isRegexPath (): Boolean = {
+    asJava.asInstanceOf[JRoute].isRegexPath().asInstanceOf[Boolean]
+  }
+
+  /**
    * @return the http methods accepted by this route
    */
   def methods (): scala.collection.mutable.Set[io.vertx.core.http.HttpMethod] = {
@@ -232,5 +258,5 @@ class Route(private val _asJava: Object) {
 
 object Route {
   def apply(asJava: JRoute) = new Route(asJava)
-  
+
 }

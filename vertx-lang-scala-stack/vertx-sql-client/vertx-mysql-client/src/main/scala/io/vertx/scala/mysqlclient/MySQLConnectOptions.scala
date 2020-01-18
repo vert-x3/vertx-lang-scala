@@ -43,8 +43,8 @@ import io.vertx.core.net.{JksOptions => JJksOptions}
 
  */
 
-class MySQLConnectOptions(private val _asJava: JMySQLConnectOptions) extends ExtSqlConnectOptions {
-  def asJava = _asJava
+class MySQLConnectOptions(private val _asJava: JMySQLConnectOptions) extends ExtSqlConnectOptions(_asJava) {
+  override def asJava = _asJava
   override def setCachePreparedStatements(value: Boolean) = {
     asJava.setCachePreparedStatements(value)
     this
@@ -52,6 +52,42 @@ class MySQLConnectOptions(private val _asJava: JMySQLConnectOptions) extends Ext
 
   override def getCachePreparedStatements: Boolean = {
     asJava.getCachePreparedStatements().asInstanceOf[Boolean]
+  }
+
+  /**
+   * Set the Java charset for encoding string values, this value is UTF-8 by default.
+   */
+  def setCharacterEncoding(value: String) = {
+    asJava.setCharacterEncoding(value)
+    this
+  }
+
+  def getCharacterEncoding: String = {
+    asJava.getCharacterEncoding().asInstanceOf[String]
+  }
+
+  /**
+   * Set the charset for the connection.
+   */
+  def setCharset(value: String) = {
+    asJava.setCharset(value)
+    this
+  }
+
+  def getCharset: String = {
+    asJava.getCharset().asInstanceOf[String]
+  }
+
+  /**
+   * Set the collation for the connection.
+   */
+  def setCollation(value: String) = {
+    asJava.setCollation(value)
+    this
+  }
+
+  def getCollation: String = {
+    asJava.getCollation().asInstanceOf[String]
   }
 
   override def setConnectTimeout(value: Int) = {
@@ -275,6 +311,15 @@ class MySQLConnectOptions(private val _asJava: JMySQLConnectOptions) extends Ext
     asJava.getPreparedStatementCacheSqlLimit().asInstanceOf[Int]
   }
 
+  override def setProperties(value: Map[String, String]) = {
+    asJava.setProperties(value.asJava)
+    this
+  }
+
+  override def getProperties: scala.collection.mutable.Map[String, String] = {
+    collection.mutable.Map(asJava.getProperties().asScala.mapValues(x => x.asInstanceOf[String]).toSeq: _*)
+  }
+
   override def setProxyOptions(value: ProxyOptions) = {
     asJava.setProxyOptions(value.asJava)
     this
@@ -338,6 +383,30 @@ class MySQLConnectOptions(private val _asJava: JMySQLConnectOptions) extends Ext
     asJava.getSendBufferSize().asInstanceOf[Int]
   }
 
+  /**
+   * Set the path of server RSA public key which is mostly used for encrypting password under insecure connections when performing authentication.
+   */
+  def setServerRsaPublicKeyPath(value: String) = {
+    asJava.setServerRsaPublicKeyPath(value)
+    this
+  }
+
+  def getServerRsaPublicKeyPath: String = {
+    asJava.getServerRsaPublicKeyPath().asInstanceOf[String]
+  }
+
+  /**
+   * Set the value of server RSA public key which is mostly used for encrypting password under insecure connections when performing authentication.
+   */
+  def setServerRsaPublicKeyValue(value: io.vertx.core.buffer.Buffer) = {
+    asJava.setServerRsaPublicKeyValue(value)
+    this
+  }
+
+  def getServerRsaPublicKeyValue: io.vertx.core.buffer.Buffer = {
+    asJava.getServerRsaPublicKeyValue()
+  }
+
   override def setSoLinger(value: Int) = {
     asJava.setSoLinger(value)
     this
@@ -372,6 +441,18 @@ class MySQLConnectOptions(private val _asJava: JMySQLConnectOptions) extends Ext
 
   override def getSslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = {
     asJava.getSslHandshakeTimeoutUnit()
+  }
+
+  /**
+   * Set the [[io.vertx.mysqlclient.SslMode]] for the client, this option can be used to specify the desired security state of the connection to the server.
+   */
+  def setSslMode(value: io.vertx.mysqlclient.SslMode) = {
+    asJava.setSslMode(value)
+    this
+  }
+
+  def getSslMode: io.vertx.mysqlclient.SslMode = {
+    asJava.getSslMode()
   }
 
   override def setTcpCork(value: Boolean) = {
@@ -446,6 +527,21 @@ class MySQLConnectOptions(private val _asJava: JMySQLConnectOptions) extends Ext
     JksOptions(asJava.getTrustStoreOptions())
   }
 
+  /**
+   * Sets how affected rows are calculated on update/delete/insert, if set to <code>true</code> an update that effectively
+   * does not change any data returns zero affected rows.
+   *
+   * See <a href="https://dev.mysql.com/doc/refman/8.0/en/mysql-affected-rows.html">mysql-affected-rows</a> for details.
+   */
+  def setUseAffectedRows(value: Boolean) = {
+    asJava.setUseAffectedRows(value)
+    this
+  }
+
+  def isUseAffectedRows: Boolean = {
+    asJava.isUseAffectedRows().asInstanceOf[Boolean]
+  }
+
   override def setUseAlpn(value: Boolean) = {
     asJava.setUseAlpn(value)
     this
@@ -477,11 +573,11 @@ class MySQLConnectOptions(private val _asJava: JMySQLConnectOptions) extends Ext
 
 
 object MySQLConnectOptions {
-  
+
   def apply() = {
     new MySQLConnectOptions(new JMySQLConnectOptions(emptyObj()))
   }
-  
+
   def apply(t: JMySQLConnectOptions) = {
     if (t != null) {
       new MySQLConnectOptions(t)
@@ -489,7 +585,7 @@ object MySQLConnectOptions {
       new MySQLConnectOptions(new JMySQLConnectOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MySQLConnectOptions = {
     if (json != null) {
       new MySQLConnectOptions(new JMySQLConnectOptions(json))

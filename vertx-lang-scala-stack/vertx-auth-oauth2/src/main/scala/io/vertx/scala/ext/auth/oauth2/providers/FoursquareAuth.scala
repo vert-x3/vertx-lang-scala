@@ -43,13 +43,13 @@ class FoursquareAuth(private val _asJava: Object) {
 
 object FoursquareAuth {
   def apply(asJava: JFoursquareAuth) = new FoursquareAuth(asJava)
-  
+
   /**
    * Create a OAuth2Auth provider for Foursquare   * @param clientId the client id given to you by Foursquare
    * @param clientSecret the client secret given to you by Foursquare
    */
   def create(vertx: Vertx,clientId: String,clientSecret: String): OAuth2Auth = {
-    OAuth2Auth(JFoursquareAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String]))
+    OAuth2Auth(JFoursquareAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String]))//2 create
   }
 
   /**
@@ -58,7 +58,7 @@ object FoursquareAuth {
    * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
    */
   def create(vertx: Vertx,clientId: String,clientSecret: String,httpClientOptions: HttpClientOptions): OAuth2Auth = {
-    OAuth2Auth(JFoursquareAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], httpClientOptions.asJava))
+    OAuth2Auth(JFoursquareAuth.create(vertx.asJava.asInstanceOf[JVertx], clientId.asInstanceOf[java.lang.String], clientSecret.asInstanceOf[java.lang.String], httpClientOptions.asJava))//2 create
   }
 
 }

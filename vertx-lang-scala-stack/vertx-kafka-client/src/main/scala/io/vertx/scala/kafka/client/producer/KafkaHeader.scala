@@ -63,15 +63,15 @@ class KafkaHeader(private val _asJava: Object) {
 
 object KafkaHeader {
   def apply(asJava: JKafkaHeader) = new KafkaHeader(asJava)
-  
+
 
   def header(key: String,value: io.vertx.core.buffer.Buffer): KafkaHeader = {
-    KafkaHeader(JKafkaHeader.header(key.asInstanceOf[java.lang.String], value))
+    KafkaHeader(JKafkaHeader.header(key.asInstanceOf[java.lang.String], value))//2 header
   }
 
 
   def header(key: String,value: String): KafkaHeader = {
-    KafkaHeader(JKafkaHeader.header(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String]))
+    KafkaHeader(JKafkaHeader.header(key.asInstanceOf[java.lang.String], value.asInstanceOf[java.lang.String]))//2 header
   }
 
 }

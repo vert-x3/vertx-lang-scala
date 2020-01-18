@@ -129,14 +129,14 @@ class PgSubscriber(private val _asJava: Object) {
 
 object PgSubscriber {
   def apply(asJava: JPgSubscriber) = new PgSubscriber(asJava)
-  
+
   /**
    * Create a subscriber.   * @param vertx the vertx instance
    * @param options the connect options see <a href="../../../../../../../cheatsheet/PgConnectOptions.html">PgConnectOptions</a>
    * @return the subscriber
    */
   def subscriber(vertx: Vertx,options: PgConnectOptions): PgSubscriber = {
-    PgSubscriber(JPgSubscriber.subscriber(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    PgSubscriber(JPgSubscriber.subscriber(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 subscriber
   }
 
 }

@@ -47,12 +47,12 @@ class LoggerHandler(private val _asJava: Object) extends io.vertx.core.Handler[R
 
 object LoggerHandler {
   def apply(asJava: JLoggerHandler) = new LoggerHandler(asJava)
-  
+
   /**
    * Create a handler with default format   * @return the handler
    */
   def create(): LoggerHandler = {
-    LoggerHandler(JLoggerHandler.create())
+    LoggerHandler(JLoggerHandler.create())//2 create
   }
 
   /**
@@ -60,7 +60,7 @@ object LoggerHandler {
    * @return the handler
    */
   def create(format: io.vertx.ext.web.handler.LoggerFormat): LoggerHandler = {
-    LoggerHandler(JLoggerHandler.create(format))
+    LoggerHandler(JLoggerHandler.create(format))//2 create
   }
 
   /**
@@ -69,7 +69,7 @@ object LoggerHandler {
    * @return the handler
    */
   def create(immediate: Boolean,format: io.vertx.ext.web.handler.LoggerFormat): LoggerHandler = {
-    LoggerHandler(JLoggerHandler.create(immediate.asInstanceOf[java.lang.Boolean], format))
+    LoggerHandler(JLoggerHandler.create(immediate.asInstanceOf[java.lang.Boolean], format))//2 create
   }
 
 }

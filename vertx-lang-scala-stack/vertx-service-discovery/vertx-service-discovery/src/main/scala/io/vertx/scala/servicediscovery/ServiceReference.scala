@@ -105,5 +105,5 @@ class ServiceReference(private val _asJava: Object) {
 
 object ServiceReference {
   def apply(asJava: JServiceReference) = new ServiceReference(asJava)
-  
+
 }

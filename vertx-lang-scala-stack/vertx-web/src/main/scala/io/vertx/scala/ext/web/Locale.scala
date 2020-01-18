@@ -58,25 +58,25 @@ class Locale(private val _asJava: Object) {
 
 object Locale {
   def apply(asJava: JLocale) = new Locale(asJava)
-  
+
 
   def create(): Locale = {
-    Locale(JLocale.create())
+    Locale(JLocale.create())//2 create
   }
 
 
   def create(language: String): Locale = {
-    Locale(JLocale.create(language.asInstanceOf[java.lang.String]))
+    Locale(JLocale.create(language.asInstanceOf[java.lang.String]))//2 create
   }
 
 
   def create(language: String,country: String): Locale = {
-    Locale(JLocale.create(language.asInstanceOf[java.lang.String], country.asInstanceOf[java.lang.String]))
+    Locale(JLocale.create(language.asInstanceOf[java.lang.String], country.asInstanceOf[java.lang.String]))//2 create
   }
 
 
   def create(language: String,country: String,variant: String): Locale = {
-    Locale(JLocale.create(language.asInstanceOf[java.lang.String], country.asInstanceOf[java.lang.String], variant.asInstanceOf[java.lang.String]))
+    Locale(JLocale.create(language.asInstanceOf[java.lang.String], country.asInstanceOf[java.lang.String], variant.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

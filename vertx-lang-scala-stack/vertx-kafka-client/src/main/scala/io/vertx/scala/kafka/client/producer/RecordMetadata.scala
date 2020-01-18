@@ -88,11 +88,11 @@ class RecordMetadata(private val _asJava: JRecordMetadata) {
 
 
 object RecordMetadata {
-  
+
   def apply() = {
     new RecordMetadata(new JRecordMetadata(emptyObj()))
   }
-  
+
   def apply(t: JRecordMetadata) = {
     if (t != null) {
       new RecordMetadata(t)
@@ -100,7 +100,7 @@ object RecordMetadata {
       new RecordMetadata(new JRecordMetadata(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): RecordMetadata = {
     if (json != null) {
       new RecordMetadata(new JRecordMetadata(json))

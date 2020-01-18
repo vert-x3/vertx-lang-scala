@@ -41,11 +41,11 @@ class DataObjectWithBuffer(private val _asJava: JDataObjectWithBuffer) {
 
 
 object DataObjectWithBuffer {
-  
+
   def apply() = {
     new DataObjectWithBuffer(new JDataObjectWithBuffer(emptyObj()))
   }
-  
+
   def apply(t: JDataObjectWithBuffer) = {
     if (t != null) {
       new DataObjectWithBuffer(t)
@@ -53,7 +53,7 @@ object DataObjectWithBuffer {
       new DataObjectWithBuffer(new JDataObjectWithBuffer(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DataObjectWithBuffer = {
     if (json != null) {
       new DataObjectWithBuffer(new JDataObjectWithBuffer(json))

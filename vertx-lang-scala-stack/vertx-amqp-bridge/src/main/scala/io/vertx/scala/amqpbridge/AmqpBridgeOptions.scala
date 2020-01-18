@@ -491,11 +491,11 @@ class AmqpBridgeOptions(private val _asJava: JAmqpBridgeOptions) extends ExtProt
 
 
 object AmqpBridgeOptions {
-  
+
   def apply() = {
     new AmqpBridgeOptions(new JAmqpBridgeOptions(emptyObj()))
   }
-  
+
   def apply(t: JAmqpBridgeOptions) = {
     if (t != null) {
       new AmqpBridgeOptions(t)
@@ -503,7 +503,7 @@ object AmqpBridgeOptions {
       new AmqpBridgeOptions(new JAmqpBridgeOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): AmqpBridgeOptions = {
     if (json != null) {
       new AmqpBridgeOptions(new JAmqpBridgeOptions(json))

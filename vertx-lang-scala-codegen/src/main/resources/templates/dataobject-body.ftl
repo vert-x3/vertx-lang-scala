@@ -1,5 +1,5 @@
 <#ftl  stripWhitespace=true>
-  <#if !isAllSuperTypesAbstract>override </#if>def asJava = _asJava
+  <#if !isAllSuperTypesAbstract || type.simpleName == "MySQLConnectOptions" || type.simpleName == "PgConnectOptions">override </#if>def asJava = _asJava
 <#list properties as property>
   <#if property.doc?? >
   /**
@@ -93,11 +93,11 @@ ${typeHelper.renderDoc(type, "   *", property.doc)}
 
 
 object ${className} {
-  
+
   def apply() = {
     new ${className}(new J${className}(emptyObj()))
   }
-  
+
   def apply(t: J${className}) = {
     if (t != null) {
       new ${className}(t)
@@ -105,7 +105,7 @@ object ${className} {
       new ${className}(new J${className}(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ${className} = {
     if (json != null) {
       new ${className}(new J${className}(json))

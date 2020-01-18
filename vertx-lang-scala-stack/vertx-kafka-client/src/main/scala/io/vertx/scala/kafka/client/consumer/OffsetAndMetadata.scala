@@ -56,11 +56,11 @@ class OffsetAndMetadata(private val _asJava: JOffsetAndMetadata) {
 
 
 object OffsetAndMetadata {
-  
+
   def apply() = {
     new OffsetAndMetadata(new JOffsetAndMetadata(emptyObj()))
   }
-  
+
   def apply(t: JOffsetAndMetadata) = {
     if (t != null) {
       new OffsetAndMetadata(t)
@@ -68,7 +68,7 @@ object OffsetAndMetadata {
       new OffsetAndMetadata(new JOffsetAndMetadata(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): OffsetAndMetadata = {
     if (json != null) {
       new OffsetAndMetadata(new JOffsetAndMetadata(json))

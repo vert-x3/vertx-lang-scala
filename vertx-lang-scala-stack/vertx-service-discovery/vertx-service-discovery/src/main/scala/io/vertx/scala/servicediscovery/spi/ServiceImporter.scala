@@ -63,5 +63,5 @@ class ServiceImporter(private val _asJava: Object) {
 
 object ServiceImporter {
   def apply(asJava: JServiceImporter) = new ServiceImporter(asJava)
-  
+
 }

@@ -577,5 +577,5 @@ class CollectionTCK(private val _asJava: Object) {
 
 object CollectionTCK {
   def apply(asJava: JCollectionTCK) = new CollectionTCK(asJava)
-  
+
 }

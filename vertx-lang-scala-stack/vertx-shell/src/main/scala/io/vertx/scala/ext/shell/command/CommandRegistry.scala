@@ -137,13 +137,13 @@ class CommandRegistry(private val _asJava: Object) extends CommandResolver (_asJ
 
 object CommandRegistry {
   def apply(asJava: JCommandRegistry) = new CommandRegistry(asJava)
-  
+
   /**
    * Get the shared registry for the Vert.x instance.   * @param vertx the vertx instance
    * @return the shared registry
    */
   def getShared(vertx: Vertx): CommandRegistry = {
-    CommandRegistry(JCommandRegistry.getShared(vertx.asJava.asInstanceOf[JVertx]))
+    CommandRegistry(JCommandRegistry.getShared(vertx.asJava.asInstanceOf[JVertx]))//2 getShared
   }
 
   /**
@@ -151,7 +151,7 @@ object CommandRegistry {
    * @return the created registry
    */
   def create(vertx: Vertx): CommandRegistry = {
-    CommandRegistry(JCommandRegistry.create(vertx.asJava.asInstanceOf[JVertx]))
+    CommandRegistry(JCommandRegistry.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

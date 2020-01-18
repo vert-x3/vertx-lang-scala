@@ -103,12 +103,12 @@ class ShellService(private val _asJava: Object) {
 
 object ShellService {
   def apply(asJava: JShellService) = new ShellService(asJava)
-  
+
   /**
    * Like [[io.vertx.scala.ext.shell.ShellService#create]], with default options.
    */
   def create(vertx: Vertx): ShellService = {
-    ShellService(JShellService.create(vertx.asJava.asInstanceOf[JVertx]))
+    ShellService(JShellService.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -117,7 +117,7 @@ object ShellService {
    * @return the shell service
    */
   def create(vertx: Vertx,options: ShellServiceOptions): ShellService = {
-    ShellService(JShellService.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    ShellService(JShellService.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
 }

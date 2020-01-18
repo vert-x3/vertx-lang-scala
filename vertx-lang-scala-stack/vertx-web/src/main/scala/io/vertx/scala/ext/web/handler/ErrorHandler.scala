@@ -51,12 +51,12 @@ class ErrorHandler(private val _asJava: Object) extends io.vertx.core.Handler[Ro
 
 object ErrorHandler {
   def apply(asJava: JErrorHandler) = new ErrorHandler(asJava)
-  
+
   /**
    * Create an error handler using defaults   * @return the handler
    */
   def create(): ErrorHandler = {
-    ErrorHandler(JErrorHandler.create())
+    ErrorHandler(JErrorHandler.create())//2 create
   }
 
   /**
@@ -65,7 +65,7 @@ object ErrorHandler {
    * @return the handler
    */
   def create(errorTemplateName: String,displayExceptionDetails: Boolean): ErrorHandler = {
-    ErrorHandler(JErrorHandler.create(errorTemplateName.asInstanceOf[java.lang.String], displayExceptionDetails.asInstanceOf[java.lang.Boolean]))
+    ErrorHandler(JErrorHandler.create(errorTemplateName.asInstanceOf[java.lang.String], displayExceptionDetails.asInstanceOf[java.lang.Boolean]))//2 create
   }
 
   /**
@@ -73,7 +73,7 @@ object ErrorHandler {
    * @return the handler
    */
   def create(displayExceptionDetails: Boolean): ErrorHandler = {
-    ErrorHandler(JErrorHandler.create(displayExceptionDetails.asInstanceOf[java.lang.Boolean]))
+    ErrorHandler(JErrorHandler.create(displayExceptionDetails.asInstanceOf[java.lang.Boolean]))//2 create
   }
 
   /**
@@ -81,7 +81,7 @@ object ErrorHandler {
    * @return the handler
    */
   def create(errorTemplateName: String): ErrorHandler = {
-    ErrorHandler(JErrorHandler.create(errorTemplateName.asInstanceOf[java.lang.String]))
+    ErrorHandler(JErrorHandler.create(errorTemplateName.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

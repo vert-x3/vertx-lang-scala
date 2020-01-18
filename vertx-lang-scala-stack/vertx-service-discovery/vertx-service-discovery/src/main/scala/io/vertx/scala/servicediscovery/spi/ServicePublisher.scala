@@ -96,5 +96,5 @@ class ServicePublisher(private val _asJava: Object) {
 
 object ServicePublisher {
   def apply(asJava: JServicePublisher) = new ServicePublisher(asJava)
-  
+
 }

@@ -56,12 +56,12 @@ class CommandResolver(private val _asJava: Object) {
 
 object CommandResolver {
   def apply(asJava: JCommandResolver) = new CommandResolver(asJava)
-  
+
   /**
    * @return the base commands of Vert.x Shell.
    */
   def baseCommands(vertx: Vertx): CommandResolver = {
-    CommandResolver(JCommandResolver.baseCommands(vertx.asJava.asInstanceOf[JVertx]))
+    CommandResolver(JCommandResolver.baseCommands(vertx.asJava.asInstanceOf[JVertx]))//2 baseCommands
   }
 
 }

@@ -435,6 +435,30 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   /**
    * Set the max WebSocket frame size
    */
+  def setMaxWebSocketFrameSize(value: Int) = {
+    asJava.setMaxWebSocketFrameSize(value)
+    this
+  }
+
+  def getMaxWebSocketFrameSize: Int = {
+    asJava.getMaxWebSocketFrameSize().asInstanceOf[Int]
+  }
+
+  /**
+   * Set the max WebSocket message size
+   */
+  def setMaxWebSocketMessageSize(value: Int) = {
+    asJava.setMaxWebSocketMessageSize(value)
+    this
+  }
+
+  def getMaxWebSocketMessageSize: Int = {
+    asJava.getMaxWebSocketMessageSize().asInstanceOf[Int]
+  }
+
+  /**
+   * Set the max WebSocket frame size
+   */
   def setMaxWebsocketFrameSize(value: Int) = {
     asJava.setMaxWebsocketFrameSize(value)
     this
@@ -813,9 +837,29 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   /**
    * Set whether the client will offer the WebSocket per-frame deflate compression extension.
    */
+  def setTryUsePerFrameWebSocketCompression(value: Boolean) = {
+    asJava.setTryUsePerFrameWebSocketCompression(value)
+    this
+  }
+
+  /**
+   * Set whether the client will offer the WebSocket per-frame deflate compression extension.
+   */
   def setTryUsePerFrameWebsocketCompression(value: Boolean) = {
     asJava.setTryUsePerFrameWebsocketCompression(value)
     this
+  }
+
+  /**
+   * Set whether the client will offer the WebSocket per-message deflate compression extension.
+   */
+  def setTryUsePerMessageWebSocketCompression(value: Boolean) = {
+    asJava.setTryUsePerMessageWebSocketCompression(value)
+    this
+  }
+
+  def getTryUsePerMessageWebSocketCompression: Boolean = {
+    asJava.getTryUsePerMessageWebSocketCompression().asInstanceOf[Boolean]
   }
 
   /**
@@ -830,6 +874,9 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
     asJava.getTryUsePerMessageWebsocketCompression().asInstanceOf[Boolean]
   }
 
+  /**
+
+   */
   /**
 
    */
@@ -873,6 +920,44 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
    * Set whether the `client_no_context_takeover` parameter of the WebSocket per-message
    * deflate compression extension will be offered.
    */
+  def setWebSocketCompressionAllowClientNoContext(value: Boolean) = {
+    asJava.setWebSocketCompressionAllowClientNoContext(value)
+    this
+  }
+
+  def getWebSocketCompressionAllowClientNoContext: Boolean = {
+    asJava.getWebSocketCompressionAllowClientNoContext().asInstanceOf[Boolean]
+  }
+
+  /**
+   * Set the WebSocket deflate compression level.
+   */
+  def setWebSocketCompressionLevel(value: Int) = {
+    asJava.setWebSocketCompressionLevel(value)
+    this
+  }
+
+  def getWebSocketCompressionLevel: Int = {
+    asJava.getWebSocketCompressionLevel().asInstanceOf[Int]
+  }
+
+  /**
+   * Set whether the `server_no_context_takeover` parameter of the WebSocket per-message
+   * deflate compression extension will be offered.
+   */
+  def setWebSocketCompressionRequestServerNoContext(value: Boolean) = {
+    asJava.setWebSocketCompressionRequestServerNoContext(value)
+    this
+  }
+
+  def getWebSocketCompressionRequestServerNoContext: Boolean = {
+    asJava.getWebSocketCompressionRequestServerNoContext().asInstanceOf[Boolean]
+  }
+
+  /**
+   * Set whether the `client_no_context_takeover` parameter of the WebSocket per-message
+   * deflate compression extension will be offered.
+   */
   def setWebsocketCompressionAllowClientNoContext(value: Boolean) = {
     asJava.setWebsocketCompressionAllowClientNoContext(value)
     this
@@ -883,7 +968,7 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
   }
 
   /**
-   * Set the Websocket deflate compression level.
+   * Set the WebSocket deflate compression level.
    */
   def setWebsocketCompressionLevel(value: Int) = {
     asJava.setWebsocketCompressionLevel(value)
@@ -911,11 +996,11 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
 
 
 object HttpClientOptions {
-  
+
   def apply() = {
     new HttpClientOptions(new JHttpClientOptions(emptyObj()))
   }
-  
+
   def apply(t: JHttpClientOptions) = {
     if (t != null) {
       new HttpClientOptions(t)
@@ -923,7 +1008,7 @@ object HttpClientOptions {
       new HttpClientOptions(new JHttpClientOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): HttpClientOptions = {
     if (json != null) {
       new HttpClientOptions(new JHttpClientOptions(json))

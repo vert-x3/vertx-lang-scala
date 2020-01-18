@@ -164,25 +164,25 @@ class TcpEventBusBridge(private val _asJava: Object) {
 
 object TcpEventBusBridge {
   def apply(asJava: JTcpEventBusBridge) = new TcpEventBusBridge(asJava)
-  
+
 
   def create(vertx: Vertx): TcpEventBusBridge = {
-    TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx]))
+    TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 
   def create(vertx: Vertx,options: BridgeOptions): TcpEventBusBridge = {
-    TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
 
   def create(vertx: Vertx,options: BridgeOptions,netServerOptions: NetServerOptions): TcpEventBusBridge = {
-    TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, netServerOptions.asJava))
+    TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, netServerOptions.asJava))//2 create
   }
 
 
   def create(vertx: Vertx,options: BridgeOptions,netServerOptions: NetServerOptions,eventHandler: Handler[BridgeEvent]): TcpEventBusBridge = {
-    TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, netServerOptions.asJava, (if (eventHandler == null) null else new io.vertx.core.Handler[JBridgeEvent]{def handle(x: JBridgeEvent) {eventHandler.handle(BridgeEvent(x))}})))
+    TcpEventBusBridge(JTcpEventBusBridge.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, netServerOptions.asJava, (if (eventHandler == null) null else new io.vertx.core.Handler[JBridgeEvent]{def handle(x: JBridgeEvent) {eventHandler.handle(BridgeEvent(x))}})))//2 create
   }
 
 }

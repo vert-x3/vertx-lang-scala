@@ -49,11 +49,11 @@ class DataObjectWithRecursion(private val _asJava: JDataObjectWithRecursion) {
 
 
 object DataObjectWithRecursion {
-  
+
   def apply() = {
     new DataObjectWithRecursion(new JDataObjectWithRecursion(emptyObj()))
   }
-  
+
   def apply(t: JDataObjectWithRecursion) = {
     if (t != null) {
       new DataObjectWithRecursion(t)
@@ -61,7 +61,7 @@ object DataObjectWithRecursion {
       new DataObjectWithRecursion(new JDataObjectWithRecursion(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DataObjectWithRecursion = {
     if (json != null) {
       new DataObjectWithRecursion(new JDataObjectWithRecursion(json))

@@ -358,14 +358,14 @@ class MqttClient(private val _asJava: Object) {
 
 object MqttClient {
   def apply(asJava: JMqttClient) = new MqttClient(asJava)
-  
+
   /**
    * Return an MQTT client instance   * @param vertx Vert.x instance
    * @param options MQTT client options see <a href="../../../../../../cheatsheet/MqttClientOptions.html">MqttClientOptions</a>
    * @return MQTT client instance
    */
   def create(vertx: Vertx,options: MqttClientOptions): MqttClient = {
-    MqttClient(JMqttClient.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    MqttClient(JMqttClient.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
   /**
@@ -373,7 +373,7 @@ object MqttClient {
    * @return MQTT client instance
    */
   def create(vertx: Vertx): MqttClient = {
-    MqttClient(JMqttClient.create(vertx.asJava.asInstanceOf[JVertx]))
+    MqttClient(JMqttClient.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

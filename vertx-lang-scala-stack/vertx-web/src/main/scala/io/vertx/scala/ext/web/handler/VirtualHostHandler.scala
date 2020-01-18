@@ -45,12 +45,12 @@ class VirtualHostHandler(private val _asJava: Object) extends io.vertx.core.Hand
 
 object VirtualHostHandler {
   def apply(asJava: JVirtualHostHandler) = new VirtualHostHandler(asJava)
-  
+
   /**
    * Create a handler   * @return the handler
    */
   def create(hostname: String,handler: Handler[RoutingContext]): VirtualHostHandler = {
-    VirtualHostHandler(JVirtualHostHandler.create(hostname.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[JRoutingContext]{def handle(x: JRoutingContext) {handler.handle(RoutingContext(x))}})))
+    VirtualHostHandler(JVirtualHostHandler.create(hostname.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[JRoutingContext]{def handle(x: JRoutingContext) {handler.handle(RoutingContext(x))}})))//2 create
   }
 
 }

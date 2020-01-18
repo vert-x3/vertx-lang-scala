@@ -3044,10 +3044,10 @@ class RedisAPI(private val _asJava: Object) {
 
 object RedisAPI {
   def apply(asJava: JRedisAPI) = new RedisAPI(asJava)
-  
+
 
   def api(client: Redis): RedisAPI = {
-    RedisAPI(JRedisAPI.api(client.asJava.asInstanceOf[JRedis]))
+    RedisAPI(JRedisAPI.api(client.asJava.asInstanceOf[JRedis]))//2 api
   }
 
 }

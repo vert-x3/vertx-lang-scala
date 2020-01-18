@@ -81,11 +81,11 @@ class KeyValueOptions(private val _asJava: JKeyValueOptions) {
 
 
 object KeyValueOptions {
-  
+
   def apply() = {
     new KeyValueOptions(new JKeyValueOptions(emptyObj()))
   }
-  
+
   def apply(t: JKeyValueOptions) = {
     if (t != null) {
       new KeyValueOptions(t)
@@ -93,7 +93,7 @@ object KeyValueOptions {
       new KeyValueOptions(new JKeyValueOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): KeyValueOptions = {
     if (json != null) {
       new KeyValueOptions(new JKeyValueOptions(json))

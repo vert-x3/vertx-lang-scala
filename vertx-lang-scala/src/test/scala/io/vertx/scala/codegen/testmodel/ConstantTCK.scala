@@ -40,5 +40,5 @@ class ConstantTCK(private val _asJava: Object) {
 
 object ConstantTCK {
   def apply(asJava: JConstantTCK) = new ConstantTCK(asJava)
-  
+
 }

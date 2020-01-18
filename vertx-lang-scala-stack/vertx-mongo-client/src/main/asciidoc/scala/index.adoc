@@ -86,11 +86,11 @@ interacting with different databases.
 In most cases you will want to share a pool between different client instances.
 However, it's possible you want to create a client instance that doesn't share its pool with any other client.
 
-In that case you can use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createNonShared(io.vertx.core.Vertx)[MongoClient.createNonShared]`.
+In that case you can use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#create(io.vertx.core.Vertx)[MongoClient.create]`.
 
 [source,scala]
 ----
-var client = MongoClient.createNonShared(vertx, config)
+var client = MongoClient.create(vertx, config)
 
 ----
 
@@ -385,7 +385,7 @@ By default, `batchSize` is set to 20.
 
 === Finding a single document
 
-To find a single document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findOne(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject))[findOne]`.
+To find a single document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findOne(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject)[findOne]`.
 
 This works just like `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject)[find]` but it returns just the first matching document.
 

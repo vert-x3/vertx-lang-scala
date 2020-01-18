@@ -72,5 +72,5 @@ class OAuth2RBAC(private val _asJava: Object) {
 
 object OAuth2RBAC {
   def apply(asJava: JOAuth2RBAC) = new OAuth2RBAC(asJava)
-  
+
 }

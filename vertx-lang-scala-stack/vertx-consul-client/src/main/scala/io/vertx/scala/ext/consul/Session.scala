@@ -103,11 +103,11 @@ class Session(private val _asJava: JSession) {
 
 
 object Session {
-  
+
   def apply() = {
     new Session(new JSession(emptyObj()))
   }
-  
+
   def apply(t: JSession) = {
     if (t != null) {
       new Session(t)
@@ -115,7 +115,7 @@ object Session {
       new Session(new JSession(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Session = {
     if (json != null) {
       new Session(new JSession(json))

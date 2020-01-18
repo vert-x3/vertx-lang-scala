@@ -89,5 +89,5 @@ class Envelope(private val _asJava: Object) {
 
 object Envelope {
   def apply(asJava: JEnvelope) = new Envelope(asJava)
-  
+
 }

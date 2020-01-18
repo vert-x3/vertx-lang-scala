@@ -127,11 +127,11 @@ class Check(private val _asJava: JCheck) {
 
 
 object Check {
-  
+
   def apply() = {
     new Check(new JCheck(emptyObj()))
   }
-  
+
   def apply(t: JCheck) = {
     if (t != null) {
       new Check(t)
@@ -139,7 +139,7 @@ object Check {
       new Check(new JCheck(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Check = {
     if (json != null) {
       new Check(new JCheck(json))

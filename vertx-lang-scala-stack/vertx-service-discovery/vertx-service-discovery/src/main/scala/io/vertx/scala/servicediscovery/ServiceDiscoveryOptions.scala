@@ -95,11 +95,11 @@ class ServiceDiscoveryOptions(private val _asJava: JServiceDiscoveryOptions) {
 
 
 object ServiceDiscoveryOptions {
-  
+
   def apply() = {
     new ServiceDiscoveryOptions(new JServiceDiscoveryOptions(emptyObj()))
   }
-  
+
   def apply(t: JServiceDiscoveryOptions) = {
     if (t != null) {
       new ServiceDiscoveryOptions(t)
@@ -107,7 +107,7 @@ object ServiceDiscoveryOptions {
       new ServiceDiscoveryOptions(new JServiceDiscoveryOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ServiceDiscoveryOptions = {
     if (json != null) {
       new ServiceDiscoveryOptions(new JServiceDiscoveryOptions(json))

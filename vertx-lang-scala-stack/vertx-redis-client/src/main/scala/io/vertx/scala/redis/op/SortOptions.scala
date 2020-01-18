@@ -56,11 +56,11 @@ class SortOptions(private val _asJava: JSortOptions) {
 
 
 object SortOptions {
-  
+
   def apply() = {
     new SortOptions(new JSortOptions(emptyObj()))
   }
-  
+
   def apply(t: JSortOptions) = {
     if (t != null) {
       new SortOptions(t)
@@ -68,7 +68,7 @@ object SortOptions {
       new SortOptions(new JSortOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): SortOptions = {
     if (json != null) {
       new SortOptions(new JSortOptions(json))

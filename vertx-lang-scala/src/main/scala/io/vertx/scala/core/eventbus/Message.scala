@@ -64,8 +64,8 @@ class Message[T: TypeTag](private val _asJava: Object) {
    * this method does nothing.   * @param message the message to reply with.
    * @param replyHandler the reply handler for the reply.
    */
-  def replyAndRequest[R: TypeTag](message: AnyRef, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
-    asJava.asInstanceOf[JMessage[Object]].replyAndRequest[Object](message, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}}))
+  def replyAndRequest[R: TypeTag](message: scala.Option[AnyRef], replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
+    asJava.asInstanceOf[JMessage[Object]].replyAndRequest[Object](message.orNull, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}}))
   }
 
   /**
@@ -74,8 +74,8 @@ class Message[T: TypeTag](private val _asJava: Object) {
    * @param options delivery options see <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
    * @param replyHandler reply handler will be called when any reply from the recipient is received
    */
-  def replyAndRequest[R: TypeTag](message: AnyRef, options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
-    asJava.asInstanceOf[JMessage[Object]].replyAndRequest[Object](message, options.asJava, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}}))
+  def replyAndRequest[R: TypeTag](message: scala.Option[AnyRef], options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
+    asJava.asInstanceOf[JMessage[Object]].replyAndRequest[Object](message.orNull, options.asJava, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}}))
   }
 
 
@@ -123,16 +123,16 @@ class Message[T: TypeTag](private val _asJava: Object) {
    * to receive the reply to the reply.   * @param message the message to reply with.
    * @param replyHandler the reply handler for the reply.
    */
-  def reply [R: TypeTag](message: AnyRef, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
-    asJava.asInstanceOf[JMessage[Object]].reply[Object](message, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}}))
+  def reply [R: TypeTag](message: scala.Option[AnyRef], replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
+    asJava.asInstanceOf[JMessage[Object]].reply[Object](message.orNull, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}}))
   }
 
   /**
    * Link [[io.vertx.scala.core.eventbus.Message#reply]] but allows you to specify delivery options for the reply.   * @param message the reply message
    * @param options the delivery options see <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
    */
-  def reply (message: AnyRef, options: DeliveryOptions): Unit = {
-    asJava.asInstanceOf[JMessage[Object]].reply(message, options.asJava)
+  def reply (message: scala.Option[AnyRef], options: DeliveryOptions): Unit = {
+    asJava.asInstanceOf[JMessage[Object]].reply(message.orNull, options.asJava)
   }
 
   /**
@@ -141,8 +141,8 @@ class Message[T: TypeTag](private val _asJava: Object) {
    * @param options the delivery options see <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
    * @param replyHandler the reply handler for the reply.
    */
-  def reply [R: TypeTag](message: AnyRef, options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
-    asJava.asInstanceOf[JMessage[Object]].reply[Object](message, options.asJava, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}}))
+  def reply [R: TypeTag](message: scala.Option[AnyRef], options: DeliveryOptions, replyHandler: Handler[AsyncResult[Message[R]]]): Unit = {
+    asJava.asInstanceOf[JMessage[Object]].reply[Object](message.orNull, options.asJava, (if (replyHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessage[Object]]]{def handle(x: AsyncResult[JMessage[Object]]) {replyHandler.handle(AsyncResultWrapper[JMessage[Object], Message[R]](x, a => Message[R](a)))}}))
   }
 
   /**
@@ -160,40 +160,40 @@ class Message[T: TypeTag](private val _asJava: Object) {
  /**
   * Like [[reply]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def replyFuture [R: TypeTag](message: AnyRef): scala.concurrent.Future[Message[R]] = {
+  def replyFuture [R: TypeTag](message: scala.Option[AnyRef]): scala.concurrent.Future[Message[R]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
-    asJava.asInstanceOf[JMessage[Object]].reply[Object](message, promiseAndHandler._1)
+    asJava.asInstanceOf[JMessage[Object]].reply[Object](message.orNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
   * Like [[reply]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def replyFuture [R: TypeTag](message: AnyRef, options: DeliveryOptions): scala.concurrent.Future[Message[R]] = {
+  def replyFuture [R: TypeTag](message: scala.Option[AnyRef], options: DeliveryOptions): scala.concurrent.Future[Message[R]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
-    asJava.asInstanceOf[JMessage[Object]].reply[Object](message, options.asJava, promiseAndHandler._1)
+    asJava.asInstanceOf[JMessage[Object]].reply[Object](message.orNull, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
   * Like [[replyAndRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def replyAndRequestFuture [R: TypeTag](message: AnyRef): scala.concurrent.Future[Message[R]] = {
+  def replyAndRequestFuture [R: TypeTag](message: scala.Option[AnyRef]): scala.concurrent.Future[Message[R]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
-    asJava.asInstanceOf[JMessage[Object]].replyAndRequest[Object](message, promiseAndHandler._1)
+    asJava.asInstanceOf[JMessage[Object]].replyAndRequest[Object](message.orNull, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
  /**
   * Like [[replyAndRequest]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def replyAndRequestFuture [R: TypeTag](message: AnyRef, options: DeliveryOptions): scala.concurrent.Future[Message[R]] = {
+  def replyAndRequestFuture [R: TypeTag](message: scala.Option[AnyRef], options: DeliveryOptions): scala.concurrent.Future[Message[R]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JMessage[Object], Message[R]](x => Message[R](x))
-    asJava.asInstanceOf[JMessage[Object]].replyAndRequest[Object](message, options.asJava, promiseAndHandler._1)
+    asJava.asInstanceOf[JMessage[Object]].replyAndRequest[Object](message.orNull, options.asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -201,5 +201,5 @@ class Message[T: TypeTag](private val _asJava: Object) {
 
 object Message {
   def apply[T: TypeTag](asJava: JMessage[_]) = new Message[T](asJava)
-  
+
 }

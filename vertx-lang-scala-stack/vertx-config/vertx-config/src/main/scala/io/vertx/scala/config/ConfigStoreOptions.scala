@@ -83,11 +83,11 @@ class ConfigStoreOptions(private val _asJava: JConfigStoreOptions) {
 
 
 object ConfigStoreOptions {
-  
+
   def apply() = {
     new ConfigStoreOptions(new JConfigStoreOptions(emptyObj()))
   }
-  
+
   def apply(t: JConfigStoreOptions) = {
     if (t != null) {
       new ConfigStoreOptions(t)
@@ -95,7 +95,7 @@ object ConfigStoreOptions {
       new ConfigStoreOptions(new JConfigStoreOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ConfigStoreOptions = {
     if (json != null) {
       new ConfigStoreOptions(new JConfigStoreOptions(json))

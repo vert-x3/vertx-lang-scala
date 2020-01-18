@@ -119,5 +119,5 @@ class MIMEHeader(private val _asJava: Object) extends ParsedHeaderValue {
 
 object MIMEHeader {
   def apply(asJava: JMIMEHeader) = new MIMEHeader(asJava)
-  
+
 }

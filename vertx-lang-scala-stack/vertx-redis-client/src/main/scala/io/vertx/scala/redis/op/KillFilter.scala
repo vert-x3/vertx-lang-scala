@@ -64,11 +64,11 @@ class KillFilter(private val _asJava: JKillFilter) {
 
 
 object KillFilter {
-  
+
   def apply() = {
     new KillFilter(new JKillFilter(emptyObj()))
   }
-  
+
   def apply(t: JKillFilter) = {
     if (t != null) {
       new KillFilter(t)
@@ -76,7 +76,7 @@ object KillFilter {
       new KillFilter(new JKillFilter(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): KillFilter = {
     if (json != null) {
       new KillFilter(new JKillFilter(json))

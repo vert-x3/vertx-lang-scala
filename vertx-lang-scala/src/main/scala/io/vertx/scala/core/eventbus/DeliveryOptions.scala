@@ -84,11 +84,11 @@ class DeliveryOptions(private val _asJava: JDeliveryOptions) {
 
 
 object DeliveryOptions {
-  
+
   def apply() = {
     new DeliveryOptions(new JDeliveryOptions(emptyObj()))
   }
-  
+
   def apply(t: JDeliveryOptions) = {
     if (t != null) {
       new DeliveryOptions(t)
@@ -96,7 +96,7 @@ object DeliveryOptions {
       new DeliveryOptions(new JDeliveryOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DeliveryOptions = {
     if (json != null) {
       new DeliveryOptions(new JDeliveryOptions(json))

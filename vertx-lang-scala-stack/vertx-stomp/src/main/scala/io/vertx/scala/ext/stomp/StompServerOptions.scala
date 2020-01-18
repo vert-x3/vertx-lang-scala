@@ -562,11 +562,11 @@ class StompServerOptions(private val _asJava: JStompServerOptions) extends ExtNe
 
 
 object StompServerOptions {
-  
+
   def apply() = {
     new StompServerOptions(new JStompServerOptions(emptyObj()))
   }
-  
+
   def apply(t: JStompServerOptions) = {
     if (t != null) {
       new StompServerOptions(t)
@@ -574,7 +574,7 @@ object StompServerOptions {
       new StompServerOptions(new JStompServerOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): StompServerOptions = {
     if (json != null) {
       new StompServerOptions(new JStompServerOptions(json))

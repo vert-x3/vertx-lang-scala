@@ -317,5 +317,5 @@ class SQLClient(private val _asJava: Object) extends SQLOperations {
 
 object SQLClient {
   def apply(asJava: JSQLClient) = new SQLClient(asJava)
-  
+
 }

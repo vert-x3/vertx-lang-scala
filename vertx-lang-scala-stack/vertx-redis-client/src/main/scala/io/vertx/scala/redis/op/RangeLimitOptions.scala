@@ -47,11 +47,11 @@ class RangeLimitOptions(private val _asJava: JRangeLimitOptions) extends ExtLimi
 
 
 object RangeLimitOptions {
-  
+
   def apply() = {
     new RangeLimitOptions(new JRangeLimitOptions(emptyObj()))
   }
-  
+
   def apply(t: JRangeLimitOptions) = {
     if (t != null) {
       new RangeLimitOptions(t)
@@ -59,7 +59,7 @@ object RangeLimitOptions {
       new RangeLimitOptions(new JRangeLimitOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): RangeLimitOptions = {
     if (json != null) {
       new RangeLimitOptions(new JRangeLimitOptions(json))

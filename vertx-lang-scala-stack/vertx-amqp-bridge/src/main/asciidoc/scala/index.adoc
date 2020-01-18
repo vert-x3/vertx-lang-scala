@@ -3,7 +3,7 @@
 This component provides AMQP 1.0 producer and consumer support via a bridging layer implementing the Vert.x event bus
 MessageProducer and MessageConsumer APIs over the top of link:https://github.com/vert-x3/vertx-proton/[vertx-proton].
 
-WARNING: this module has the tech preview status, this means the API can change between versions.
+WARNING: This component will be removed in Vert.x 4, instead you should use https://vertx.io/docs/vertx-amqp-client/java/[Vert.x AMQP Client]
 
 == Using Vert.x AMQP Bridge
 

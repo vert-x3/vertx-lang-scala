@@ -1078,14 +1078,20 @@ class MongoClient(private val _asJava: Object) {
 
 object MongoClient {
   def apply(asJava: JMongoClient) = new MongoClient(asJava)
-  
+
+  /**
+   */
+  def createNonShared(vertx: Vertx,config: io.vertx.core.json.JsonObject): MongoClient = {
+    MongoClient(JMongoClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))//2 createNonShared
+  }
+
   /**
    * Create a Mongo client which maintains its own data source.   * @param vertx the Vert.x instance
    * @param config the configuration
    * @return the client
    */
-  def createNonShared(vertx: Vertx,config: io.vertx.core.json.JsonObject): MongoClient = {
-    MongoClient(JMongoClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))
+  def create(vertx: Vertx,config: io.vertx.core.json.JsonObject): MongoClient = {
+    MongoClient(JMongoClient.create(vertx.asJava.asInstanceOf[JVertx], config))//2 create
   }
 
   /**
@@ -1096,7 +1102,7 @@ object MongoClient {
    * @return the client
    */
   def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject,dataSourceName: String): MongoClient = {
-    MongoClient(JMongoClient.createShared(vertx.asJava.asInstanceOf[JVertx], config, dataSourceName.asInstanceOf[java.lang.String]))
+    MongoClient(JMongoClient.createShared(vertx.asJava.asInstanceOf[JVertx], config, dataSourceName.asInstanceOf[java.lang.String]))//2 createShared
   }
 
   /**
@@ -1105,7 +1111,7 @@ object MongoClient {
    * @return the client
    */
   def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject): MongoClient = {
-    MongoClient(JMongoClient.createShared(vertx.asJava.asInstanceOf[JVertx], config))
+    MongoClient(JMongoClient.createShared(vertx.asJava.asInstanceOf[JVertx], config))//2 createShared
   }
 
 }

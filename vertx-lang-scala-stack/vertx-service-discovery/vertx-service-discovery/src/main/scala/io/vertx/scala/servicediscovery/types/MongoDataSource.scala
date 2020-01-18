@@ -47,7 +47,7 @@ class MongoDataSource(private val _asJava: Object) {
 
 object MongoDataSource {
   def apply(asJava: JMongoDataSource) = new MongoDataSource(asJava)
-  
+
   /**
    * Convenient method to create a record for a Mongo data source.   * @param name the service name
    * @param location the location of the service (e.g. url, port...)
@@ -55,7 +55,7 @@ object MongoDataSource {
    * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
    */
   def createRecord(name: String,location: io.vertx.core.json.JsonObject,metadata: io.vertx.core.json.JsonObject): Record = {
-    Record(JMongoDataSource.createRecord(name.asInstanceOf[java.lang.String], location, metadata))
+    Record(JMongoDataSource.createRecord(name.asInstanceOf[java.lang.String], location, metadata))//2 createRecord
   }
 
   /**
@@ -65,7 +65,7 @@ object MongoDataSource {
    * @param resultHandler The result handler
    */
   def getMongoClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
-    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClient]]{def handle(x: AsyncResult[JMongoClient]) {resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))}}))
+    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClient]]{def handle(x: AsyncResult[JMongoClient]) {resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))}}))//2 getMongoClient
   }
 
   /**
@@ -76,7 +76,7 @@ object MongoDataSource {
    * @param resultHandler The result handler
    */
   def getMongoClient(discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
-    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClient]]{def handle(x: AsyncResult[JMongoClient]) {resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))}}))
+    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClient]]{def handle(x: AsyncResult[JMongoClient]) {resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))}}))//2 getMongoClient
   }
 
   /**
@@ -87,7 +87,7 @@ object MongoDataSource {
    * @param resultHandler the result handler
    */
   def getMongoClient(discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MongoClient]]): Unit = {
-    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, consumerConfiguration, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClient]]{def handle(x: AsyncResult[JMongoClient]) {resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))}}))
+    JMongoDataSource.getMongoClient(discovery.asJava.asInstanceOf[JServiceDiscovery], filter, consumerConfiguration, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMongoClient]]{def handle(x: AsyncResult[JMongoClient]) {resultHandler.handle(AsyncResultWrapper[JMongoClient, MongoClient](x, a => MongoClient(a)))}}))//2 getMongoClient
   }
 
 }

@@ -19,6 +19,7 @@ package io.vertx.scala.sqlclient
 import io.vertx.core.buffer.Buffer
 import scala.reflect.runtime.universe._
 import io.vertx.sqlclient.{Tuple => JTuple}
+import scala.collection.JavaConverters._
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 
@@ -123,28 +124,19 @@ class Tuple(private val _asJava: Object) {
   }
 
 
-
   /**
    * Get a boolean value at `pos`.   * @param pos the position
    * @return the value or `null`
    */
-  def getBoolean (pos: Int): Boolean = {
+  def getBoolean(pos: Int): Boolean = {
     asJava.asInstanceOf[JTuple].getBoolean(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
-  }
-
-  /**
-   * Get an object value at `pos`.   * @param pos the position
-   * @return the value or `null`
-   */
-  def getValue (pos: Int): AnyRef = {
-    toScala[java.lang.Object](asJava.asInstanceOf[JTuple].getValue(pos.asInstanceOf[java.lang.Integer]))
   }
 
   /**
    * Get a short value at `pos`.   * @param pos the position
    * @return the value or `null`
    */
-  def getShort (pos: Int): Short = {
+  def getShort(pos: Int): Short = {
     asJava.asInstanceOf[JTuple].getShort(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Short]
   }
 
@@ -152,7 +144,7 @@ class Tuple(private val _asJava: Object) {
    * Get an integer value at `pos`.   * @param pos the position
    * @return the value or `null`
    */
-  def getInteger (pos: Int): Int = {
+  def getInteger(pos: Int): Int = {
     asJava.asInstanceOf[JTuple].getInteger(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Int]
   }
 
@@ -160,7 +152,7 @@ class Tuple(private val _asJava: Object) {
    * Get a long value at `pos`.   * @param pos the position
    * @return the value or `null`
    */
-  def getLong (pos: Int): Long = {
+  def getLong(pos: Int): Long = {
     asJava.asInstanceOf[JTuple].getLong(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Long]
   }
 
@@ -168,7 +160,7 @@ class Tuple(private val _asJava: Object) {
    * Get a float value at `pos`.   * @param pos the position
    * @return the value or `null`
    */
-  def getFloat (pos: Int): Float = {
+  def getFloat(pos: Int): Float = {
     asJava.asInstanceOf[JTuple].getFloat(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Float]
   }
 
@@ -176,7 +168,7 @@ class Tuple(private val _asJava: Object) {
    * Get a double value at `pos`.   * @param pos the position
    * @return the value or `null`
    */
-  def getDouble (pos: Int): Double = {
+  def getDouble(pos: Int): Double = {
     asJava.asInstanceOf[JTuple].getDouble(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[Double]
   }
 
@@ -184,7 +176,7 @@ class Tuple(private val _asJava: Object) {
    * Get a string value at `pos`.   * @param pos the position
    * @return the value or `null`
    */
-  def getString (pos: Int): String = {
+  def getString(pos: Int): String = {
     asJava.asInstanceOf[JTuple].getString(pos.asInstanceOf[java.lang.Integer]).asInstanceOf[String]
   }
 
@@ -192,13 +184,22 @@ class Tuple(private val _asJava: Object) {
    * Get a buffer value at `pos`.   * @param pos the position
    * @return the value or `null`
    */
-  def getBuffer (pos: Int): io.vertx.core.buffer.Buffer = {
+  def getBuffer(pos: Int): io.vertx.core.buffer.Buffer = {
     asJava.asInstanceOf[JTuple].getBuffer(pos.asInstanceOf[java.lang.Integer])
   }
 
 
-  def get [T: TypeTag](`type`: Class[T], pos: Int): T = {
+  def get[T: TypeTag](`type`: Class[T], pos: Int): T = {
     toScala[T](asJava.asInstanceOf[JTuple].get[Object](toJavaClass(`type`), pos.asInstanceOf[java.lang.Integer]))
+  }
+
+
+  /**
+   * Get an object value at `pos`.   * @param pos the position
+   * @return the value or `null`
+   */
+  def getValue (pos: Int): AnyRef = {
+    toScala[java.lang.Object](asJava.asInstanceOf[JTuple].getValue(pos.asInstanceOf[java.lang.Integer]))
   }
 
   /**
@@ -218,12 +219,21 @@ class Tuple(private val _asJava: Object) {
 
 object Tuple {
   def apply(asJava: JTuple) = new Tuple(asJava)
-  
+
   /**
    * @return a new empty tuple
    */
   def tuple(): Tuple = {
-    Tuple(JTuple.tuple())
+    Tuple(JTuple.tuple())//2 tuple
+  }
+
+  /**
+   * Wrap the provided `list` with a tuple.
+   * <br/>
+   * The list is not copied and is used as store for tuple elements.   * @return the list wrapped as a tuple
+   */
+  def wrap(list: scala.collection.mutable.Buffer[AnyRef]): Tuple = {
+    Tuple(JTuple.wrap(list.map(x => x).asJava))//2 wrap
   }
 
   /**
@@ -231,7 +241,7 @@ object Tuple {
    * @return the tuple
    */
   def of(elt1: AnyRef): Tuple = {
-    Tuple(JTuple.of(elt1))
+    Tuple((new io.vertx.sqlclient.impl.ArrayTuple(0)).addValue(elt1))
   }
 
   /**
@@ -240,7 +250,7 @@ object Tuple {
    * @return the tuple
    */
   def of(elt1: AnyRef,elt2: AnyRef): Tuple = {
-    Tuple(JTuple.of(elt1, elt2))
+    Tuple((new io.vertx.sqlclient.impl.ArrayTuple(0)).addValue(elt1).addValue(elt2))
   }
 
   /**
@@ -250,7 +260,7 @@ object Tuple {
    * @return the tuple
    */
   def of(elt1: AnyRef,elt2: AnyRef,elt3: AnyRef): Tuple = {
-    Tuple(JTuple.of(elt1, elt2, elt3))
+    Tuple((new io.vertx.sqlclient.impl.ArrayTuple(0)).addValue(elt1).addValue(elt2).addValue(elt3))
   }
 
   /**
@@ -261,7 +271,7 @@ object Tuple {
    * @return the tuple
    */
   def of(elt1: AnyRef,elt2: AnyRef,elt3: AnyRef,elt4: AnyRef): Tuple = {
-    Tuple(JTuple.of(elt1, elt2, elt3, elt4))
+    Tuple((new io.vertx.sqlclient.impl.ArrayTuple(0)).addValue(elt1).addValue(elt2).addValue(elt3).addValue(elt4))
   }
 
   /**
@@ -273,7 +283,7 @@ object Tuple {
    * @return the tuple
    */
   def of(elt1: AnyRef,elt2: AnyRef,elt3: AnyRef,elt4: AnyRef,elt5: AnyRef): Tuple = {
-    Tuple(JTuple.of(elt1, elt2, elt3, elt4, elt5))
+    Tuple((new io.vertx.sqlclient.impl.ArrayTuple(0)).addValue(elt1).addValue(elt2).addValue(elt3).addValue(elt4).addValue(elt5))
   }
 
   /**
@@ -286,7 +296,17 @@ object Tuple {
    * @return the tuple
    */
   def of(elt1: AnyRef,elt2: AnyRef,elt3: AnyRef,elt4: AnyRef,elt5: AnyRef,elt6: AnyRef): Tuple = {
-    Tuple(JTuple.of(elt1, elt2, elt3, elt4, elt5, elt6))
+    Tuple((new io.vertx.sqlclient.impl.ArrayTuple(0)).addValue(elt1).addValue(elt2).addValue(elt3).addValue(elt4).addValue(elt5).addValue(elt6))
+  }
+
+  /**
+   * Create a tuple with the provided `elements` list.
+   * <p/>
+   * The `elements` list is not modified.   * @param elements the list of elements
+   * @return the tuple
+   */
+  def tuple(elements: scala.collection.mutable.Buffer[AnyRef]): Tuple = {
+    Tuple(JTuple.tuple(elements.map(x => x).asJava))//2 tuple
   }
 
 }

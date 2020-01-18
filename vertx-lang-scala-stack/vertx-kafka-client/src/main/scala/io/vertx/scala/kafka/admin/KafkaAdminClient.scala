@@ -116,14 +116,14 @@ class KafkaAdminClient(private val _asJava: Object) {
 
 object KafkaAdminClient {
   def apply(asJava: JKafkaAdminClient) = new KafkaAdminClient(asJava)
-  
+
   /**
    * Create a new KafkaAdminClient instance   * @param vertx Vert.x instance to use
    * @param config Kafka admin client configuration
    * @return an instance of the KafkaAdminClient
    */
   def create(vertx: Vertx,config: scala.collection.mutable.Map[String, String]): KafkaAdminClient = {
-    KafkaAdminClient(JKafkaAdminClient.create(vertx.asJava.asInstanceOf[JVertx], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava))
+    KafkaAdminClient(JKafkaAdminClient.create(vertx.asJava.asInstanceOf[JVertx], config.mapValues(x => x.asInstanceOf[java.lang.String]).asJava))//2 create
   }
 
 }

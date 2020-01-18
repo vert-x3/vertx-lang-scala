@@ -41,11 +41,11 @@ class ScanOptions(private val _asJava: JScanOptions) {
 
 
 object ScanOptions {
-  
+
   def apply() = {
     new ScanOptions(new JScanOptions(emptyObj()))
   }
-  
+
   def apply(t: JScanOptions) = {
     if (t != null) {
       new ScanOptions(t)
@@ -53,7 +53,7 @@ object ScanOptions {
       new ScanOptions(new JScanOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ScanOptions = {
     if (json != null) {
       new ScanOptions(new JScanOptions(json))

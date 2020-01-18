@@ -75,14 +75,14 @@ class CommandBuilder(private val _asJava: Object) {
 
 object CommandBuilder {
   def apply(asJava: JCommandBuilder) = new CommandBuilder(asJava)
-  
+
   /**
    * Create a new commmand builder, the command is responsible for managing the options and arguments via the
    * [[io.vertx.scala.ext.shell.command.CommandProcess]].   * @param name the command name
    * @return the command
    */
   def command(name: String): CommandBuilder = {
-    CommandBuilder(JCommandBuilder.command(name.asInstanceOf[java.lang.String]))
+    CommandBuilder(JCommandBuilder.command(name.asInstanceOf[java.lang.String]))//2 command
   }
 
   /**
@@ -91,7 +91,7 @@ object CommandBuilder {
    * @return the command
    */
   def command(cli: CLI): CommandBuilder = {
-    CommandBuilder(JCommandBuilder.command(cli.asJava.asInstanceOf[JCLI]))
+    CommandBuilder(JCommandBuilder.command(cli.asJava.asInstanceOf[JCLI]))//2 command
   }
 
 }

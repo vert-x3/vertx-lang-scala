@@ -39,12 +39,12 @@ class MicroProfileRBAC(private val _asJava: Object) {
 
 object MicroProfileRBAC {
   def apply(asJava: JMicroProfileRBAC) = new MicroProfileRBAC(asJava)
-  
+
   /**
    * Factory method to create a RBAC handler for tokens adhering to the MP-JWT 1.1 spec.   * @return a RBAC validator
    */
   def create(): OAuth2RBAC = {
-    OAuth2RBAC(JMicroProfileRBAC.create())
+    OAuth2RBAC(JMicroProfileRBAC.create())//2 create
   }
 
 }

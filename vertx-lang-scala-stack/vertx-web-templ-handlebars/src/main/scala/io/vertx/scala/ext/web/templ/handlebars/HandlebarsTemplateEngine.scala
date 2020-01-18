@@ -61,12 +61,12 @@ class HandlebarsTemplateEngine(private val _asJava: Object) extends TemplateEngi
 
 object HandlebarsTemplateEngine {
   def apply(asJava: JHandlebarsTemplateEngine) = new HandlebarsTemplateEngine(asJava)
-  
+
   /**
    * Create a template engine using defaults   * @return the engine
    */
   def create(vertx: Vertx): HandlebarsTemplateEngine = {
-    HandlebarsTemplateEngine(JHandlebarsTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))
+    HandlebarsTemplateEngine(JHandlebarsTemplateEngine.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

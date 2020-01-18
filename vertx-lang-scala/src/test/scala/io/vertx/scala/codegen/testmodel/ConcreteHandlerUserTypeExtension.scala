@@ -44,5 +44,5 @@ class ConcreteHandlerUserTypeExtension(private val _asJava: Object) extends Conc
 
 object ConcreteHandlerUserTypeExtension {
   def apply(asJava: JConcreteHandlerUserTypeExtension) = new ConcreteHandlerUserTypeExtension(asJava)
-  
+
 }

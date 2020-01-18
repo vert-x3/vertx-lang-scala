@@ -44,11 +44,11 @@ class Config(private val _asJava: JConfig) {
 
 
 object Config {
-  
+
   def apply() = {
     new Config(new JConfig(emptyObj()))
   }
-  
+
   def apply(t: JConfig) = {
     if (t != null) {
       new Config(t)
@@ -56,7 +56,7 @@ object Config {
       new Config(new JConfig(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Config = {
     if (json != null) {
       new Config(new JConfig(json))

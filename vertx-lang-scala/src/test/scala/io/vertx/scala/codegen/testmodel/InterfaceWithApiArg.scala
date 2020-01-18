@@ -56,5 +56,5 @@ class InterfaceWithApiArg(private val _asJava: Object) extends GenericRefedInter
 
 object InterfaceWithApiArg {
   def apply(asJava: JInterfaceWithApiArg) = new InterfaceWithApiArg(asJava)
-  
+
 }

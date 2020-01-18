@@ -483,11 +483,11 @@ class NetServerOptions(private val _asJava: JNetServerOptions) extends ExtTCPSSL
 
 
 object NetServerOptions {
-  
+
   def apply() = {
     new NetServerOptions(new JNetServerOptions(emptyObj()))
   }
-  
+
   def apply(t: JNetServerOptions) = {
     if (t != null) {
       new NetServerOptions(t)
@@ -495,7 +495,7 @@ object NetServerOptions {
       new NetServerOptions(new JNetServerOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): NetServerOptions = {
     if (json != null) {
       new NetServerOptions(new JNetServerOptions(json))

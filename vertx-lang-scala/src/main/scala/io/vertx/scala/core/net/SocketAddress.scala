@@ -61,7 +61,7 @@ class SocketAddress(private val _asJava: Object) {
 
 object SocketAddress {
   def apply(asJava: JSocketAddress) = new SocketAddress(asJava)
-  
+
   /**
    * Create a inet socket address, `host` must be non `null` and `port` must be between `0`
    * and `65536`.   * @param port the address port
@@ -69,7 +69,7 @@ object SocketAddress {
    * @return the created socket address
    */
   def inetSocketAddress(port: Int,host: String): SocketAddress = {
-    SocketAddress(JSocketAddress.inetSocketAddress(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String]))
+    SocketAddress(JSocketAddress.inetSocketAddress(port.asInstanceOf[java.lang.Integer], host.asInstanceOf[java.lang.String]))//2 inetSocketAddress
   }
 
   /**
@@ -77,7 +77,7 @@ object SocketAddress {
    * @return the created socket address
    */
   def domainSocketAddress(path: String): SocketAddress = {
-    SocketAddress(JSocketAddress.domainSocketAddress(path.asInstanceOf[java.lang.String]))
+    SocketAddress(JSocketAddress.domainSocketAddress(path.asInstanceOf[java.lang.String]))//2 domainSocketAddress
   }
 
 }

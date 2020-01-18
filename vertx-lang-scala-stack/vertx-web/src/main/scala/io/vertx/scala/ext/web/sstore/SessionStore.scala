@@ -179,13 +179,13 @@ class SessionStore(private val _asJava: Object) {
 
 object SessionStore {
   def apply(asJava: JSessionStore) = new SessionStore(asJava)
-  
+
   /**
    * Create a Session store given a backend and configuration JSON.   * @param vertx vertx instance
    * @return the store or runtime exception
    */
   def create(vertx: Vertx): SessionStore = {
-    SessionStore(JSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))
+    SessionStore(JSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -194,7 +194,7 @@ object SessionStore {
    * @return the store or runtime exception
    */
   def create(vertx: Vertx,options: io.vertx.core.json.JsonObject): SessionStore = {
-    SessionStore(JSessionStore.create(vertx.asJava.asInstanceOf[JVertx], options))
+    SessionStore(JSessionStore.create(vertx.asJava.asInstanceOf[JVertx], options))//2 create
   }
 
 }

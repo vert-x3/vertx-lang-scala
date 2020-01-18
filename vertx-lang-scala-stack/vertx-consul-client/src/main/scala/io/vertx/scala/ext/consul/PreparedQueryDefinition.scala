@@ -201,11 +201,11 @@ class PreparedQueryDefinition(private val _asJava: JPreparedQueryDefinition) {
 
 
 object PreparedQueryDefinition {
-  
+
   def apply() = {
     new PreparedQueryDefinition(new JPreparedQueryDefinition(emptyObj()))
   }
-  
+
   def apply(t: JPreparedQueryDefinition) = {
     if (t != null) {
       new PreparedQueryDefinition(t)
@@ -213,7 +213,7 @@ object PreparedQueryDefinition {
       new PreparedQueryDefinition(new JPreparedQueryDefinition(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): PreparedQueryDefinition = {
     if (json != null) {
       new PreparedQueryDefinition(new JPreparedQueryDefinition(json))

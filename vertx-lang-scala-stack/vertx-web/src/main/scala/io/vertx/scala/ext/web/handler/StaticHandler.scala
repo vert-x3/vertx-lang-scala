@@ -250,12 +250,12 @@ class StaticHandler(private val _asJava: Object) extends io.vertx.core.Handler[R
 
 object StaticHandler {
   def apply(asJava: JStaticHandler) = new StaticHandler(asJava)
-  
+
   /**
    * Create a handler using defaults   * @return the handler
    */
   def create(): StaticHandler = {
-    StaticHandler(JStaticHandler.create())
+    StaticHandler(JStaticHandler.create())//2 create
   }
 
   /**
@@ -263,7 +263,7 @@ object StaticHandler {
    * @return the handler
    */
   def create(root: String): StaticHandler = {
-    StaticHandler(JStaticHandler.create(root.asInstanceOf[java.lang.String]))
+    StaticHandler(JStaticHandler.create(root.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

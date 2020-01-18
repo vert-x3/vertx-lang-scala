@@ -41,11 +41,11 @@ class MigrateOptions(private val _asJava: JMigrateOptions) {
 
 
 object MigrateOptions {
-  
+
   def apply() = {
     new MigrateOptions(new JMigrateOptions(emptyObj()))
   }
-  
+
   def apply(t: JMigrateOptions) = {
     if (t != null) {
       new MigrateOptions(t)
@@ -53,7 +53,7 @@ object MigrateOptions {
       new MigrateOptions(new JMigrateOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MigrateOptions = {
     if (json != null) {
       new MigrateOptions(new JMigrateOptions(json))

@@ -243,5 +243,5 @@ class NetServer(private val _asJava: Object) extends Measured {
 
 object NetServer {
   def apply(asJava: JNetServer) = new NetServer(asJava)
-  
+
 }

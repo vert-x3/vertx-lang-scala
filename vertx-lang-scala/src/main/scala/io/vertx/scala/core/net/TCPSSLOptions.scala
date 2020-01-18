@@ -88,13 +88,6 @@ abstract class TCPSSLOptions(private val _asJava: JTCPSSLOptions) extends ExtNet
 
   def getKeyStoreOptions: JksOptions
 
-  /**
-   * Set to true to enabled network activity logging: Netty's pipeline is configured for logging on Netty's logger.
-   */
-  def setLogActivity(value: Boolean): TCPSSLOptions
-
-  def getLogActivity: Boolean
-
   def setOpenSslEngineOptions(value: OpenSSLEngineOptions): TCPSSLOptions
 
   def getOpenSslEngineOptions: OpenSSLEngineOptions
@@ -126,36 +119,6 @@ abstract class TCPSSLOptions(private val _asJava: JTCPSSLOptions) extends ExtNet
   def setPfxTrustOptions(value: PfxOptions): TCPSSLOptions
 
   def getPfxTrustOptions: PfxOptions
-
-  /**
-   * Set the TCP receive buffer size
-   */
-  def setReceiveBufferSize(value: Int): TCPSSLOptions
-
-  def getReceiveBufferSize: Int
-
-  /**
-   * Set the value of reuse address
-   */
-  def setReuseAddress(value: Boolean): TCPSSLOptions
-
-  def isReuseAddress: Boolean
-
-  /**
-   * Set the value of reuse port.
-   * <p/>
-   * This is only supported by native transports.
-   */
-  def setReusePort(value: Boolean): TCPSSLOptions
-
-  def isReusePort: Boolean
-
-  /**
-   * Set the TCP send buffer size
-   */
-  def setSendBufferSize(value: Int): TCPSSLOptions
-
-  def getSendBufferSize: Int
 
   /**
    * Set whether SO_linger keep alive is enabled
@@ -219,13 +182,6 @@ abstract class TCPSSLOptions(private val _asJava: JTCPSSLOptions) extends ExtNet
   def setTcpQuickAck(value: Boolean): TCPSSLOptions
 
   def isTcpQuickAck: Boolean
-
-  /**
-   * Set the value of traffic class
-   */
-  def setTrafficClass(value: Int): TCPSSLOptions
-
-  def getTrafficClass: Int
 
   /**
    * Set the trust options in jks format, aka Java truststore

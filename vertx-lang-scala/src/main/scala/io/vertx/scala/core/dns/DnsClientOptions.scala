@@ -91,11 +91,11 @@ class DnsClientOptions(private val _asJava: JDnsClientOptions) {
 
 
 object DnsClientOptions {
-  
+
   def apply() = {
     new DnsClientOptions(new JDnsClientOptions(emptyObj()))
   }
-  
+
   def apply(t: JDnsClientOptions) = {
     if (t != null) {
       new DnsClientOptions(t)
@@ -103,7 +103,7 @@ object DnsClientOptions {
       new DnsClientOptions(new JDnsClientOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DnsClientOptions = {
     if (json != null) {
       new DnsClientOptions(new JDnsClientOptions(json))

@@ -96,5 +96,5 @@ class TemplateEngine(private val _asJava: Object) extends STemplateEngine (_asJa
 
 object TemplateEngine {
   def apply(asJava: JTemplateEngine) = new TemplateEngine(asJava)
-  
+
 }

@@ -67,11 +67,11 @@ class ServiceEntry(private val _asJava: JServiceEntry) {
 
 
 object ServiceEntry {
-  
+
   def apply() = {
     new ServiceEntry(new JServiceEntry(emptyObj()))
   }
-  
+
   def apply(t: JServiceEntry) = {
     if (t != null) {
       new ServiceEntry(t)
@@ -79,7 +79,7 @@ object ServiceEntry {
       new ServiceEntry(new JServiceEntry(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ServiceEntry = {
     if (json != null) {
       new ServiceEntry(new JServiceEntry(json))

@@ -44,13 +44,13 @@ class LocalSessionStore(private val _asJava: Object) extends SessionStore (_asJa
 
 object LocalSessionStore {
   def apply(asJava: JLocalSessionStore) = new LocalSessionStore(asJava)
-  
+
   /**
    * Create a session store   * @param vertx the Vert.x instance
    * @return the session store
    */
   def create(vertx: Vertx): LocalSessionStore = {
-    LocalSessionStore(JLocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))
+    LocalSessionStore(JLocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -59,7 +59,7 @@ object LocalSessionStore {
    * @return the session store
    */
   def create(vertx: Vertx,sessionMapName: String): LocalSessionStore = {
-    LocalSessionStore(JLocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName.asInstanceOf[java.lang.String]))
+    LocalSessionStore(JLocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName.asInstanceOf[java.lang.String]))//2 create
   }
 
   /**
@@ -69,7 +69,7 @@ object LocalSessionStore {
    * @return the session store
    */
   def create(vertx: Vertx,sessionMapName: String,reaperInterval: Long): LocalSessionStore = {
-    LocalSessionStore(JLocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName.asInstanceOf[java.lang.String], reaperInterval.asInstanceOf[java.lang.Long]))
+    LocalSessionStore(JLocalSessionStore.create(vertx.asJava.asInstanceOf[JVertx], sessionMapName.asInstanceOf[java.lang.String], reaperInterval.asInstanceOf[java.lang.Long]))//2 create
   }
 
 }

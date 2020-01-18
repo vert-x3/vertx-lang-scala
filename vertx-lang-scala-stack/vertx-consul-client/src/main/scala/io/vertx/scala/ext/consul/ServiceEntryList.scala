@@ -55,11 +55,11 @@ class ServiceEntryList(private val _asJava: JServiceEntryList) {
 
 
 object ServiceEntryList {
-  
+
   def apply() = {
     new ServiceEntryList(new JServiceEntryList(emptyObj()))
   }
-  
+
   def apply(t: JServiceEntryList) = {
     if (t != null) {
       new ServiceEntryList(t)
@@ -67,7 +67,7 @@ object ServiceEntryList {
       new ServiceEntryList(new JServiceEntryList(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ServiceEntryList = {
     if (json != null) {
       new ServiceEntryList(new JServiceEntryList(json))

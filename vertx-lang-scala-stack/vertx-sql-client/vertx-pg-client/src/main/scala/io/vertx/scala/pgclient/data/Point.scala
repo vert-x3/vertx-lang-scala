@@ -50,11 +50,11 @@ class Point(private val _asJava: JPoint) {
 
 
 object Point {
-  
+
   def apply() = {
     new Point(new JPoint(emptyObj()))
   }
-  
+
   def apply(t: JPoint) = {
     if (t != null) {
       new Point(t)
@@ -62,7 +62,7 @@ object Point {
       new Point(new JPoint(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Point = {
     if (json != null) {
       new Point(new JPoint(json))

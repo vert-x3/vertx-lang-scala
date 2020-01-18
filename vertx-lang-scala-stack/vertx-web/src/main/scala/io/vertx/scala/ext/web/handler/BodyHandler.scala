@@ -108,12 +108,12 @@ class BodyHandler(private val _asJava: Object) extends io.vertx.core.Handler[Rou
 
 object BodyHandler {
   def apply(asJava: JBodyHandler) = new BodyHandler(asJava)
-  
+
   /**
    * Create a body handler with defaults   * @return the body handler
    */
   def create(): BodyHandler = {
-    BodyHandler(JBodyHandler.create())
+    BodyHandler(JBodyHandler.create())//2 create
   }
 
   /**
@@ -121,7 +121,7 @@ object BodyHandler {
    * @return the body handler
    */
   def create(handleFileUploads: Boolean): BodyHandler = {
-    BodyHandler(JBodyHandler.create(handleFileUploads.asInstanceOf[java.lang.Boolean]))
+    BodyHandler(JBodyHandler.create(handleFileUploads.asInstanceOf[java.lang.Boolean]))//2 create
   }
 
   /**
@@ -129,7 +129,7 @@ object BodyHandler {
    * @return the body handler
    */
   def create(uploadDirectory: String): BodyHandler = {
-    BodyHandler(JBodyHandler.create(uploadDirectory.asInstanceOf[java.lang.String]))
+    BodyHandler(JBodyHandler.create(uploadDirectory.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

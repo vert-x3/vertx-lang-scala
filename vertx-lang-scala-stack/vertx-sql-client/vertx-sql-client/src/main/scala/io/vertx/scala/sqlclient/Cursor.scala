@@ -18,6 +18,7 @@ package io.vertx.scala.sqlclient
 
 import io.vertx.sqlclient.{Cursor => JCursor}
 import io.vertx.lang.scala.AsyncResultWrapper
+import io.vertx.sqlclient.{Row => JRow}
 import io.vertx.sqlclient.{RowSet => JRowSet}
 import scala.reflect.runtime.universe._
 import io.vertx.core.AsyncResult
@@ -50,8 +51,8 @@ class Cursor(private val _asJava: Object) {
    * Read rows from the cursor, the result is provided asynchronously to the `handler`.   * @param count the amount of rows to read
    * @param handler the handler for the result
    */
-  def read (count: Int, handler: Handler[AsyncResult[RowSet]]): Unit = {
-    asJava.asInstanceOf[JCursor].read(count.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet]]{def handle(x: AsyncResult[JRowSet]) {handler.handle(AsyncResultWrapper[JRowSet, RowSet](x, a => RowSet(a)))}}))
+  def read (count: Int, handler: Handler[AsyncResult[RowSet[Row]]]): Unit = {
+    asJava.asInstanceOf[JCursor].read(count.asInstanceOf[java.lang.Integer], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
   }
 
   /**
@@ -73,9 +74,9 @@ class Cursor(private val _asJava: Object) {
  /**
   * Like [[read]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def readFuture (count: Int): scala.concurrent.Future[RowSet] = {
+  def readFuture (count: Int): scala.concurrent.Future[RowSet[Row]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet, RowSet](x => RowSet(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
     asJava.asInstanceOf[JCursor].read(count.asInstanceOf[java.lang.Integer], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -94,5 +95,5 @@ class Cursor(private val _asJava: Object) {
 
 object Cursor {
   def apply(asJava: JCursor) = new Cursor(asJava)
-  
+
 }

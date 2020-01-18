@@ -112,11 +112,11 @@ class MailAttachment(private val _asJava: JMailAttachment) {
 
 
 object MailAttachment {
-  
+
   def apply() = {
     new MailAttachment(new JMailAttachment(emptyObj()))
   }
-  
+
   def apply(t: JMailAttachment) = {
     if (t != null) {
       new MailAttachment(t)
@@ -124,7 +124,7 @@ object MailAttachment {
       new MailAttachment(new JMailAttachment(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MailAttachment = {
     if (json != null) {
       new MailAttachment(new JMailAttachment(json))

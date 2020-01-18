@@ -88,5 +88,5 @@ class ServiceExporter(private val _asJava: Object) {
 
 object ServiceExporter {
   def apply(asJava: JServiceExporter) = new ServiceExporter(asJava)
-  
+
 }

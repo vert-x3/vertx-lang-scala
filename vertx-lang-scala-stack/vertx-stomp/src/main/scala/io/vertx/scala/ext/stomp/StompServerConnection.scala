@@ -115,5 +115,5 @@ class StompServerConnection(private val _asJava: Object) {
 
 object StompServerConnection {
   def apply(asJava: JStompServerConnection) = new StompServerConnection(asJava)
-  
+
 }

@@ -26,7 +26,7 @@ import io.vertx.scala.ext.auth.{AuthOptions => ExtAuthOptions}
  * Options configuring JDBC authentication.
  */
 
-class JDBCAuthOptions(private val _asJava: JJDBCAuthOptions) extends ExtAuthOptions(_asJava) {
+class JDBCAuthOptions(private val _asJava: JJDBCAuthOptions) extends ExtAuthOptions {
   def asJava = _asJava
   /**
    * Set the authentication query to use. Use this if you want to override the default authentication query.
@@ -116,11 +116,11 @@ class JDBCAuthOptions(private val _asJava: JJDBCAuthOptions) extends ExtAuthOpti
 
 
 object JDBCAuthOptions {
-  
+
   def apply() = {
     new JDBCAuthOptions(new JJDBCAuthOptions(emptyObj()))
   }
-  
+
   def apply(t: JJDBCAuthOptions) = {
     if (t != null) {
       new JDBCAuthOptions(t)
@@ -128,7 +128,7 @@ object JDBCAuthOptions {
       new JDBCAuthOptions(new JJDBCAuthOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): JDBCAuthOptions = {
     if (json != null) {
       new JDBCAuthOptions(new JJDBCAuthOptions(json))

@@ -209,14 +209,14 @@ class RecordParser(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 object RecordParser {
   def apply(asJava: JRecordParser) = new RecordParser(asJava)
-  
+
   /**
    * Like [[io.vertx.scala.core.parsetools.RecordParser#newDelimited]] but set the `output` that will receive whole records
    * which have been parsed.   * @param delim the initial delimiter string
    * @param output handler that will receive the output
    */
   def newDelimited(delim: String,output: Handler[io.vertx.core.buffer.Buffer]): RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String], (if (output == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {output.handle(x)}})))
+    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String], (if (output == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {output.handle(x)}})))//2 newDelimited
   }
 
   /**
@@ -227,7 +227,7 @@ object RecordParser {
    * @param stream the wrapped stream
    */
   def newDelimited(delim: String,stream: ReadStream[io.vertx.core.buffer.Buffer]): RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String], stream.asJava.asInstanceOf[JReadStream[Buffer]]))
+    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String], stream.asJava.asInstanceOf[JReadStream[Buffer]]))//2 newDelimited
   }
 
   /**
@@ -237,7 +237,7 @@ object RecordParser {
    * `output` Will receive whole records which have been parsed.   * @param delim the initial delimiter string
    */
   def newDelimited(delim: String): RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String]))
+    RecordParser(JRecordParser.newDelimited(delim.asInstanceOf[java.lang.String]))//2 newDelimited
   }
 
   /**
@@ -246,7 +246,7 @@ object RecordParser {
    *    * @param delim the initial delimiter buffer
    */
   def newDelimited(delim: io.vertx.core.buffer.Buffer): RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim))
+    RecordParser(JRecordParser.newDelimited(delim))//2 newDelimited
   }
 
   /**
@@ -255,7 +255,7 @@ object RecordParser {
    * @param output handler that will receive the output
    */
   def newDelimited(delim: io.vertx.core.buffer.Buffer,output: Handler[io.vertx.core.buffer.Buffer]): RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim, (if (output == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {output.handle(x)}})))
+    RecordParser(JRecordParser.newDelimited(delim, (if (output == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {output.handle(x)}})))//2 newDelimited
   }
 
   /**
@@ -266,7 +266,7 @@ object RecordParser {
    * @param stream the wrapped stream
    */
   def newDelimited(delim: io.vertx.core.buffer.Buffer,stream: ReadStream[io.vertx.core.buffer.Buffer]): RecordParser = {
-    RecordParser(JRecordParser.newDelimited(delim, stream.asJava.asInstanceOf[JReadStream[Buffer]]))
+    RecordParser(JRecordParser.newDelimited(delim, stream.asJava.asInstanceOf[JReadStream[Buffer]]))//2 newDelimited
   }
 
   /**
@@ -276,7 +276,7 @@ object RecordParser {
    * `output` Will receive whole records which have been parsed.   * @param size the initial record size
    */
   def newFixed(size: Int): RecordParser = {
-    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer]))
+    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer]))//2 newFixed
   }
 
   /**
@@ -285,7 +285,7 @@ object RecordParser {
    * @param output handler that will receive the output
    */
   def newFixed(size: Int,output: Handler[io.vertx.core.buffer.Buffer]): RecordParser = {
-    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer], (if (output == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {output.handle(x)}})))
+    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer], (if (output == null) null else new io.vertx.core.Handler[Buffer]{def handle(x: Buffer) {output.handle(x)}})))//2 newFixed
   }
 
   /**
@@ -296,7 +296,7 @@ object RecordParser {
    * @param stream the wrapped stream
    */
   def newFixed(size: Int,stream: ReadStream[io.vertx.core.buffer.Buffer]): RecordParser = {
-    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer], stream.asJava.asInstanceOf[JReadStream[Buffer]]))
+    RecordParser(JRecordParser.newFixed(size.asInstanceOf[java.lang.Integer], stream.asJava.asInstanceOf[JReadStream[Buffer]]))//2 newFixed
   }
 
 }

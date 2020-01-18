@@ -418,11 +418,11 @@ class MqttServerOptions(private val _asJava: JMqttServerOptions) extends ExtNetS
 
 
 object MqttServerOptions {
-  
+
   def apply() = {
     new MqttServerOptions(new JMqttServerOptions(emptyObj()))
   }
-  
+
   def apply(t: JMqttServerOptions) = {
     if (t != null) {
       new MqttServerOptions(t)
@@ -430,7 +430,7 @@ object MqttServerOptions {
       new MqttServerOptions(new JMqttServerOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MqttServerOptions = {
     if (json != null) {
       new MqttServerOptions(new JMqttServerOptions(json))

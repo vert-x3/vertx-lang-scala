@@ -92,14 +92,14 @@ class JDBCHashStrategy(private val _asJava: Object) {
 
 object JDBCHashStrategy {
   def apply(asJava: JJDBCHashStrategy) = new JDBCHashStrategy(asJava)
-  
+
   /**
    * This is the current backwards compatible hashing implementation, new applications should prefer the
    * PBKDF2 implementation, unless the tradeoff between security and CPU usage is an option.   * @param vertx the vert.x instance
    * @return the implementation.
    */
   def createSHA512(vertx: Vertx): JDBCHashStrategy = {
-    JDBCHashStrategy(JJDBCHashStrategy.createSHA512(vertx.asJava.asInstanceOf[JVertx]))
+    JDBCHashStrategy(JJDBCHashStrategy.createSHA512(vertx.asJava.asInstanceOf[JVertx]))//2 createSHA512
   }
 
   /**
@@ -111,7 +111,7 @@ object JDBCHashStrategy {
    * @return the implementation.
    */
   def createPBKDF2(vertx: Vertx): JDBCHashStrategy = {
-    JDBCHashStrategy(JJDBCHashStrategy.createPBKDF2(vertx.asJava.asInstanceOf[JVertx]))
+    JDBCHashStrategy(JJDBCHashStrategy.createPBKDF2(vertx.asJava.asInstanceOf[JVertx]))//2 createPBKDF2
   }
 
   /**
@@ -120,7 +120,7 @@ object JDBCHashStrategy {
    * @return true if equal
    */
   def isEqual(hasha: String,hashb: String): Boolean = {
-    JJDBCHashStrategy.isEqual(hasha.asInstanceOf[java.lang.String], hashb.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
+    JJDBCHashStrategy.isEqual(hasha.asInstanceOf[java.lang.String], hashb.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]//2 isEqual
   }
 
 }

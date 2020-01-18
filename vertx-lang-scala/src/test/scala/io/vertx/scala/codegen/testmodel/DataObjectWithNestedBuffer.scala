@@ -59,11 +59,11 @@ class DataObjectWithNestedBuffer(private val _asJava: JDataObjectWithNestedBuffe
 
 
 object DataObjectWithNestedBuffer {
-  
+
   def apply() = {
     new DataObjectWithNestedBuffer(new JDataObjectWithNestedBuffer(emptyObj()))
   }
-  
+
   def apply(t: JDataObjectWithNestedBuffer) = {
     if (t != null) {
       new DataObjectWithNestedBuffer(t)
@@ -71,7 +71,7 @@ object DataObjectWithNestedBuffer {
       new DataObjectWithNestedBuffer(new JDataObjectWithNestedBuffer(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DataObjectWithNestedBuffer = {
     if (json != null) {
       new DataObjectWithNestedBuffer(new JDataObjectWithNestedBuffer(json))

@@ -78,14 +78,14 @@ class JDBCClient(private val _asJava: Object) extends SQLClient (_asJava) {
 
 object JDBCClient {
   def apply(asJava: JJDBCClient) = new JDBCClient(asJava)
-  
+
   /**
    * Create a JDBC client which maintains its own data source.   * @param vertx the Vert.x instance
    * @param config the configuration
    * @return the client
    */
   def createNonShared(vertx: Vertx,config: io.vertx.core.json.JsonObject): JDBCClient = {
-    JDBCClient(JJDBCClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))
+    JDBCClient(JJDBCClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))//2 createNonShared
   }
 
   /**
@@ -96,7 +96,7 @@ object JDBCClient {
    * @return the client
    */
   def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject,dataSourceName: String): JDBCClient = {
-    JDBCClient(JJDBCClient.createShared(vertx.asJava.asInstanceOf[JVertx], config, dataSourceName.asInstanceOf[java.lang.String]))
+    JDBCClient(JJDBCClient.createShared(vertx.asJava.asInstanceOf[JVertx], config, dataSourceName.asInstanceOf[java.lang.String]))//2 createShared
   }
 
   /**
@@ -105,7 +105,7 @@ object JDBCClient {
    * @return the client
    */
   def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject): JDBCClient = {
-    JDBCClient(JJDBCClient.createShared(vertx.asJava.asInstanceOf[JVertx], config))
+    JDBCClient(JJDBCClient.createShared(vertx.asJava.asInstanceOf[JVertx], config))//2 createShared
   }
 
 }

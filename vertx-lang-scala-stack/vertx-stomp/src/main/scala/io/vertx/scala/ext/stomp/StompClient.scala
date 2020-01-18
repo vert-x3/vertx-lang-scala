@@ -211,13 +211,13 @@ class StompClient(private val _asJava: Object) {
 
 object StompClient {
   def apply(asJava: JStompClient) = new StompClient(asJava)
-  
+
   /**
    * Creates a [[io.vertx.scala.ext.stomp.StompClient]] using the default implementation.   * @param vertx the vert.x instance to use
    * @return the created StompClient
    */
   def create(vertx: Vertx): StompClient = {
-    StompClient(JStompClient.create(vertx.asJava.asInstanceOf[JVertx]))
+    StompClient(JStompClient.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -226,7 +226,7 @@ object StompClient {
    * @return the created StompClient
    */
   def create(vertx: Vertx,options: StompClientOptions): StompClient = {
-    StompClient(JStompClient.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    StompClient(JStompClient.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
 }

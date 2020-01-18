@@ -55,11 +55,11 @@ class BitFieldOptions(private val _asJava: JBitFieldOptions) {
 
 
 object BitFieldOptions {
-  
+
   def apply() = {
     new BitFieldOptions(new JBitFieldOptions(emptyObj()))
   }
-  
+
   def apply(t: JBitFieldOptions) = {
     if (t != null) {
       new BitFieldOptions(t)
@@ -67,7 +67,7 @@ object BitFieldOptions {
       new BitFieldOptions(new JBitFieldOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): BitFieldOptions = {
     if (json != null) {
       new BitFieldOptions(new JBitFieldOptions(json))

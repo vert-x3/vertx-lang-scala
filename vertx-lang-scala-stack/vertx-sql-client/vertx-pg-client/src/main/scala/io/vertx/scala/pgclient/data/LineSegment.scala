@@ -50,11 +50,11 @@ class LineSegment(private val _asJava: JLineSegment) {
 
 
 object LineSegment {
-  
+
   def apply() = {
     new LineSegment(new JLineSegment(emptyObj()))
   }
-  
+
   def apply(t: JLineSegment) = {
     if (t != null) {
       new LineSegment(t)
@@ -62,7 +62,7 @@ object LineSegment {
       new LineSegment(new JLineSegment(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): LineSegment = {
     if (json != null) {
       new LineSegment(new JLineSegment(json))

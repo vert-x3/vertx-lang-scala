@@ -67,11 +67,11 @@ class ShellServerOptions(private val _asJava: JShellServerOptions) {
 
 
 object ShellServerOptions {
-  
+
   def apply() = {
     new ShellServerOptions(new JShellServerOptions(emptyObj()))
   }
-  
+
   def apply(t: JShellServerOptions) = {
     if (t != null) {
       new ShellServerOptions(t)
@@ -79,7 +79,7 @@ object ShellServerOptions {
       new ShellServerOptions(new JShellServerOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ShellServerOptions = {
     if (json != null) {
       new ShellServerOptions(new JShellServerOptions(json))

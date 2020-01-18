@@ -349,13 +349,13 @@ class StompServerHandler(private val _asJava: Object) extends io.vertx.core.Hand
 
 object StompServerHandler {
   def apply(asJava: JStompServerHandler) = new StompServerHandler(asJava)
-  
+
   /**
    * Creates an instance of [[io.vertx.scala.ext.stomp.StompServerHandler]] using the default (compliant) implementation.   * @param vertx the vert.x instance to use
    * @return the created StompServerHandler
    */
   def create(vertx: Vertx): StompServerHandler = {
-    StompServerHandler(JStompServerHandler.create(vertx.asJava.asInstanceOf[JVertx]))
+    StompServerHandler(JStompServerHandler.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

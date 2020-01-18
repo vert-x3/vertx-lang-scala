@@ -55,8 +55,11 @@ public class ClassCodeGenerator extends Generator<Model> {
     Map<String, Object> vars = new HashMap<>();
 
     ClassTypeInfo type = ((ClassTypeInfo)model.getVars().get("type"));
+    if(type.getName().equals("io.vertx.ext.web.Cookie")) {
+      return null;
+    }
     Set<TypeInfo> importedTypes = (Set<TypeInfo>)model.getVars().get("importedTypes");
-    List<TypeInfo> superTypes = (List<TypeInfo>)model.getVars().get("superTypes");
+    List<TypeInfo> superTypes = ((List<TypeInfo>)model.getVars().get("superTypes")).stream().filter(ti -> !ti.getName().equals("io.vertx.ext.web.Cookie")).collect(Collectors.toList());
 
     vars.putAll(TypeNameTranslator.vars(name));
     vars.putAll(model.getVars());
@@ -109,6 +112,8 @@ public class ClassCodeGenerator extends Generator<Model> {
     if(type.getName().equals("io.vertx.core.Vertx")) {
       imps.add("io.vertx.lang.scala.ScalaVerticle");
     }
+
+    imps.remove("io.vertx.ext.web.{Cookie => JCookie}");
 
     return imps;
   }

@@ -47,7 +47,7 @@ class MessageSource(private val _asJava: Object) {
 
 object MessageSource {
   def apply(asJava: JMessageSource) = new MessageSource(asJava)
-  
+
   /**
    * Create a record representing a data producer.   * @param name the name of the service
    * @param address the address on which the data is sent
@@ -56,7 +56,7 @@ object MessageSource {
    * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
    */
   def createRecord(name: String,address: String,`type`: String,metadata: io.vertx.core.json.JsonObject): Record = {
-    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], `type`.asInstanceOf[java.lang.String], metadata))
+    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], `type`.asInstanceOf[java.lang.String], metadata))//2 createRecord
   }
 
   /**
@@ -66,7 +66,7 @@ object MessageSource {
    * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
    */
   def createRecord(name: String,address: String,`type`: String): Record = {
-    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], `type`.asInstanceOf[java.lang.String]))
+    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String], `type`.asInstanceOf[java.lang.String]))//2 createRecord
   }
 
   /**
@@ -76,7 +76,7 @@ object MessageSource {
    * @return the created recordsee <a href="../../../../../../../cheatsheet/Record.html">Record</a>
    */
   def createRecord(name: String,address: String): Record = {
-    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String]))
+    Record(JMessageSource.createRecord(name.asInstanceOf[java.lang.String], address.asInstanceOf[java.lang.String]))//2 createRecord
   }
 
   /**
@@ -86,7 +86,7 @@ object MessageSource {
    * @param resultHandler The result handler
    */
   def getConsumer[T: TypeTag](discovery: ServiceDiscovery,filter: io.vertx.core.json.JsonObject,resultHandler: Handler[AsyncResult[MessageConsumer[T]]]): Unit = {
-    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], filter, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessageConsumer[Object]]]{def handle(x: AsyncResult[JMessageConsumer[Object]]) {resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object], MessageConsumer[T]](x, a => MessageConsumer[T](a)))}}))
+    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], filter, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessageConsumer[Object]]]{def handle(x: AsyncResult[JMessageConsumer[Object]]) {resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object], MessageConsumer[T]](x, a => MessageConsumer[T](a)))}}))//2 getConsumer
   }
 
   /**
@@ -96,7 +96,7 @@ object MessageSource {
    * @param resultHandler The result handler
    */
   def getConsumer[T: TypeTag](discovery: ServiceDiscovery,filter: Record => Boolean,resultHandler: Handler[AsyncResult[MessageConsumer[T]]]): Unit = {
-    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessageConsumer[Object]]]{def handle(x: AsyncResult[JMessageConsumer[Object]]) {resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object], MessageConsumer[T]](x, a => MessageConsumer[T](a)))}}))
+    JMessageSource.getConsumer[Object](discovery.asJava.asInstanceOf[JServiceDiscovery], {x: JRecord => filter(Record(x)).asInstanceOf[java.lang.Boolean]}, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[JMessageConsumer[Object]]]{def handle(x: AsyncResult[JMessageConsumer[Object]]) {resultHandler.handle(AsyncResultWrapper[JMessageConsumer[Object], MessageConsumer[T]](x, a => MessageConsumer[T](a)))}}))//2 getConsumer
   }
 
 }

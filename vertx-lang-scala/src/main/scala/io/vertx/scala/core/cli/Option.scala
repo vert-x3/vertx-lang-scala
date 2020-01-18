@@ -191,11 +191,11 @@ class Option(private val _asJava: JOption) {
 
 
 object Option {
-  
+
   def apply() = {
     new Option(new JOption(emptyObj()))
   }
-  
+
   def apply(t: JOption) = {
     if (t != null) {
       new Option(t)
@@ -203,7 +203,7 @@ object Option {
       new Option(new JOption(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Option = {
     if (json != null) {
       new Option(new JOption(json))

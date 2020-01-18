@@ -135,10 +135,10 @@ class ChainAuthHandler(private val _asJava: Object) extends AuthHandler with io.
 
 object ChainAuthHandler {
   def apply(asJava: JChainAuthHandler) = new ChainAuthHandler(asJava)
-  
+
 
   def create(): ChainAuthHandler = {
-    ChainAuthHandler(JChainAuthHandler.create())
+    ChainAuthHandler(JChainAuthHandler.create())//2 create
   }
 
 }

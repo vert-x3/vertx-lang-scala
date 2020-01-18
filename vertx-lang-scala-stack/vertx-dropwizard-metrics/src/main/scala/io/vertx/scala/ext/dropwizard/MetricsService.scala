@@ -78,13 +78,13 @@ class MetricsService(private val _asJava: Object) {
 
 object MetricsService {
   def apply(asJava: JMetricsService) = new MetricsService(asJava)
-  
+
   /**
    * Creates a metric service for a given [[io.vertx.scala.core.Vertx]] instance.   * @param vertx the vertx instance
    * @return the metrics service
    */
   def create(vertx: Vertx): MetricsService = {
-    MetricsService(JMetricsService.create(vertx.asJava.asInstanceOf[JVertx]))
+    MetricsService(JMetricsService.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

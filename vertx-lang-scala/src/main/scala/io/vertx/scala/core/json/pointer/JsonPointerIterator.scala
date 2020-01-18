@@ -42,21 +42,21 @@ class JsonPointerIterator(private val _asJava: Object) {
    * @return `true` if the current value is a queryable object
    */
   def isObject (currentValue: scala.Option[AnyRef]): Boolean = {
-    asJava.asInstanceOf[JJsonPointerIterator].isObject(currentValue).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JJsonPointerIterator].isObject(currentValue.orNull).asInstanceOf[Boolean]
   }
 
   /**
    * @return `true` if the current value is a queryable array
    */
   def isArray (currentValue: scala.Option[AnyRef]): Boolean = {
-    asJava.asInstanceOf[JJsonPointerIterator].isArray(currentValue).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JJsonPointerIterator].isArray(currentValue.orNull).asInstanceOf[Boolean]
   }
 
   /**
    * @return `true` if the current value is null/empty
    */
   def isNull (currentValue: scala.Option[AnyRef]): Boolean = {
-    asJava.asInstanceOf[JJsonPointerIterator].isNull(currentValue).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JJsonPointerIterator].isNull(currentValue.orNull).asInstanceOf[Boolean]
   }
 
   /**
@@ -64,7 +64,7 @@ class JsonPointerIterator(private val _asJava: Object) {
    * @return `true` if current value is a queryable object that contains the specified key
    */
   def objectContainsKey (currentValue: scala.Option[AnyRef], key: String): Boolean = {
-    asJava.asInstanceOf[JJsonPointerIterator].objectContainsKey(currentValue, key.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JJsonPointerIterator].objectContainsKey(currentValue.orNull, key.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
   }
 
   /**
@@ -73,7 +73,7 @@ class JsonPointerIterator(private val _asJava: Object) {
    * @return the requested object parameter, or null if the method was not able to find it
    */
   def getObjectParameter (currentValue: scala.Option[AnyRef], key: String, createOnMissing: Boolean): AnyRef = {
-    toScala[java.lang.Object](asJava.asInstanceOf[JJsonPointerIterator].getObjectParameter(currentValue, key.asInstanceOf[java.lang.String], createOnMissing.asInstanceOf[java.lang.Boolean]))
+    toScala[java.lang.Object](asJava.asInstanceOf[JJsonPointerIterator].getObjectParameter(currentValue.orNull, key.asInstanceOf[java.lang.String], createOnMissing.asInstanceOf[java.lang.Boolean]))
   }
 
   /**
@@ -81,28 +81,28 @@ class JsonPointerIterator(private val _asJava: Object) {
    * @return the request array element, or null if the method was not able to find it
    */
   def getArrayElement (currentValue: scala.Option[AnyRef], i: Int): AnyRef = {
-    toScala[java.lang.Object](asJava.asInstanceOf[JJsonPointerIterator].getArrayElement(currentValue, i.asInstanceOf[java.lang.Integer]))
+    toScala[java.lang.Object](asJava.asInstanceOf[JJsonPointerIterator].getArrayElement(currentValue.orNull, i.asInstanceOf[java.lang.Integer]))
   }
 
   /**
    * Write object parameter at specified key   * @return true if the operation is successful
    */
   def writeObjectParameter (currentValue: scala.Option[AnyRef], key: String, value: scala.Option[AnyRef]): Boolean = {
-    asJava.asInstanceOf[JJsonPointerIterator].writeObjectParameter(currentValue, key.asInstanceOf[java.lang.String], value).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JJsonPointerIterator].writeObjectParameter(currentValue.orNull, key.asInstanceOf[java.lang.String], value.orNull).asInstanceOf[Boolean]
   }
 
   /**
    * Write array element at specified index   * @return true if the operation is successful
    */
   def writeArrayElement (currentValue: scala.Option[AnyRef], i: Int, value: scala.Option[AnyRef]): Boolean = {
-    asJava.asInstanceOf[JJsonPointerIterator].writeArrayElement(currentValue, i.asInstanceOf[java.lang.Integer], value).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JJsonPointerIterator].writeArrayElement(currentValue.orNull, i.asInstanceOf[java.lang.Integer], value.orNull).asInstanceOf[Boolean]
   }
 
   /**
    * Append array element   * @return true if the operation is successful
    */
   def appendArrayElement (currentValue: scala.Option[AnyRef], value: scala.Option[AnyRef]): Boolean = {
-    asJava.asInstanceOf[JJsonPointerIterator].appendArrayElement(currentValue, value).asInstanceOf[Boolean]
+    asJava.asInstanceOf[JJsonPointerIterator].appendArrayElement(currentValue.orNull, value.orNull).asInstanceOf[Boolean]
   }
 
 
@@ -110,5 +110,5 @@ class JsonPointerIterator(private val _asJava: Object) {
 
 object JsonPointerIterator {
   def apply(asJava: JJsonPointerIterator) = new JsonPointerIterator(asJava)
-  
+
 }

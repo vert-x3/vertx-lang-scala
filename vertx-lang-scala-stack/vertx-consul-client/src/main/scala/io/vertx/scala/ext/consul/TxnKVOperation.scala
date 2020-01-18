@@ -103,11 +103,11 @@ class TxnKVOperation(private val _asJava: JTxnKVOperation) {
 
 
 object TxnKVOperation {
-  
+
   def apply() = {
     new TxnKVOperation(new JTxnKVOperation(emptyObj()))
   }
-  
+
   def apply(t: JTxnKVOperation) = {
     if (t != null) {
       new TxnKVOperation(t)
@@ -115,7 +115,7 @@ object TxnKVOperation {
       new TxnKVOperation(new JTxnKVOperation(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): TxnKVOperation = {
     if (json != null) {
       new TxnKVOperation(new JTxnKVOperation(json))

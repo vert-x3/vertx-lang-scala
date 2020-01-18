@@ -136,5 +136,5 @@ class RowStream[T: TypeTag](private val _asJava: Object) extends ReadStream[T] {
 
 object RowStream {
   def apply[T: TypeTag](asJava: JRowStream[_]) = new RowStream[T](asJava)
-  
+
 }

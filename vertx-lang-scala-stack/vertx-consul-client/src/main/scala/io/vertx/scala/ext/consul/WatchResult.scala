@@ -69,5 +69,5 @@ class WatchResult[T: TypeTag](private val _asJava: Object) {
 
 object WatchResult {
   def apply[T: TypeTag](asJava: JWatchResult[_]) = new WatchResult[T](asJava)
-  
+
 }

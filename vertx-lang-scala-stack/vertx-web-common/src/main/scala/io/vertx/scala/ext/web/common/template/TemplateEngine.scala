@@ -76,5 +76,5 @@ class TemplateEngine(private val _asJava: Object) {
 
 object TemplateEngine {
   def apply(asJava: JTemplateEngine) = new TemplateEngine(asJava)
-  
+
 }

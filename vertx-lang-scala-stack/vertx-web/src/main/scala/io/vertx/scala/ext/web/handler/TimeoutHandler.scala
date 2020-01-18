@@ -46,12 +46,12 @@ class TimeoutHandler(private val _asJava: Object) extends io.vertx.core.Handler[
 
 object TimeoutHandler {
   def apply(asJava: JTimeoutHandler) = new TimeoutHandler(asJava)
-  
+
   /**
    * Create a handler   * @return the handler
    */
   def create(): TimeoutHandler = {
-    TimeoutHandler(JTimeoutHandler.create())
+    TimeoutHandler(JTimeoutHandler.create())//2 create
   }
 
   /**
@@ -59,7 +59,7 @@ object TimeoutHandler {
    * @return the handler
    */
   def create(timeout: Long): TimeoutHandler = {
-    TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long]))
+    TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long]))//2 create
   }
 
   /**
@@ -67,7 +67,7 @@ object TimeoutHandler {
    * @return the handler
    */
   def create(timeout: Long,errorCode: Int): TimeoutHandler = {
-    TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long], errorCode.asInstanceOf[java.lang.Integer]))
+    TimeoutHandler(JTimeoutHandler.create(timeout.asInstanceOf[java.lang.Long], errorCode.asInstanceOf[java.lang.Integer]))//2 create
   }
 
 }

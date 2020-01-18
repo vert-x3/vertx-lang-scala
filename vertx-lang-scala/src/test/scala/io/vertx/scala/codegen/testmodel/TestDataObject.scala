@@ -58,11 +58,11 @@ class TestDataObject(private val _asJava: JTestDataObject) {
 
 
 object TestDataObject {
-  
+
   def apply() = {
     new TestDataObject(new JTestDataObject(emptyObj()))
   }
-  
+
   def apply(t: JTestDataObject) = {
     if (t != null) {
       new TestDataObject(t)
@@ -70,7 +70,7 @@ object TestDataObject {
       new TestDataObject(new JTestDataObject(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): TestDataObject = {
     if (json != null) {
       new TestDataObject(new JTestDataObject(json))

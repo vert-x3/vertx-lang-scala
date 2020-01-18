@@ -108,11 +108,11 @@ class ShellServiceOptions(private val _asJava: JShellServiceOptions) extends Ext
 
 
 object ShellServiceOptions {
-  
+
   def apply() = {
     new ShellServiceOptions(new JShellServiceOptions(emptyObj()))
   }
-  
+
   def apply(t: JShellServiceOptions) = {
     if (t != null) {
       new ShellServiceOptions(t)
@@ -120,7 +120,7 @@ object ShellServiceOptions {
       new ShellServiceOptions(new JShellServiceOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ShellServiceOptions = {
     if (json != null) {
       new ShellServiceOptions(new JShellServiceOptions(json))

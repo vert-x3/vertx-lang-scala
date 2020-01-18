@@ -72,6 +72,9 @@ set if ESMTP should be tried as first command (EHLO)
  in that way, the property has to be set to false.
  <p>
 +++
+|[[enabledSecureTransportProtocols]]`@enabledSecureTransportProtocols`|`Array of String`|+++
+Sets the list of enabled SSL/TLS protocols.
++++
 |[[hostname]]`@hostname`|`String`|+++
 Set the hostname of the smtp server.
 +++

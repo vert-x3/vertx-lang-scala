@@ -114,5 +114,5 @@ class User(private val _asJava: Object) {
 
 object User {
   def apply(asJava: JUser) = new User(asJava)
-  
+
 }

@@ -113,11 +113,11 @@ class SessionOptions(private val _asJava: JSessionOptions) {
 
 
 object SessionOptions {
-  
+
   def apply() = {
     new SessionOptions(new JSessionOptions(emptyObj()))
   }
-  
+
   def apply(t: JSessionOptions) = {
     if (t != null) {
       new SessionOptions(t)
@@ -125,7 +125,7 @@ object SessionOptions {
       new SessionOptions(new JSessionOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): SessionOptions = {
     if (json != null) {
       new SessionOptions(new JSessionOptions(json))

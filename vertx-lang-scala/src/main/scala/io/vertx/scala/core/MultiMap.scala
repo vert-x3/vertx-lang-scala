@@ -159,12 +159,12 @@ class MultiMap(private val _asJava: Object) {
 
 object MultiMap {
   def apply(asJava: JMultiMap) = new MultiMap(asJava)
-  
+
   /**
    * Create a multi-map implementation with case insensitive keys, for instance it can be used to hold some HTTP headers.   * @return the multi-map
    */
   def caseInsensitiveMultiMap(): MultiMap = {
-    MultiMap(JMultiMap.caseInsensitiveMultiMap())
+    MultiMap(JMultiMap.caseInsensitiveMultiMap())//2 caseInsensitiveMultiMap
   }
 
 }

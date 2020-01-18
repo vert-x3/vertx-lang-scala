@@ -76,11 +76,11 @@ class Pty(private val _asJava: Object) {
 
 object Pty {
   def apply(asJava: JPty) = new Pty(asJava)
-  
+
   /**
    * Create a new pseudo terminal with no terminal type.   */
   def create(): Pty = {
-    Pty(JPty.create())
+    Pty(JPty.create())//2 create
   }
 
   /**
@@ -88,7 +88,7 @@ object Pty {
    * @return the created pseudo terminal
    */
   def create(terminalType: String): Pty = {
-    Pty(JPty.create(terminalType.asInstanceOf[java.lang.String]))
+    Pty(JPty.create(terminalType.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

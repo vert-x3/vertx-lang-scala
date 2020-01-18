@@ -509,11 +509,11 @@ class NetClientOptions(private val _asJava: JNetClientOptions) extends ExtClient
 
 
 object NetClientOptions {
-  
+
   def apply() = {
     new NetClientOptions(new JNetClientOptions(emptyObj()))
   }
-  
+
   def apply(t: JNetClientOptions) = {
     if (t != null) {
       new NetClientOptions(t)
@@ -521,7 +521,7 @@ object NetClientOptions {
       new NetClientOptions(new JNetClientOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): NetClientOptions = {
     if (json != null) {
       new NetClientOptions(new JNetClientOptions(json))

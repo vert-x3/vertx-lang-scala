@@ -74,6 +74,56 @@ class ServiceDiscovery(private val _asJava: Object) {
 
 
 
+  /**
+   * Registers a discovery service importer. Importers let you integrate other discovery technologies in this service
+   * discovery.   * @param importer the service importer
+   * @param configuration the optional configuration
+   * @return the current ServiceDiscovery
+   */
+  
+  def registerServiceImporter(importer: ServiceImporter, configuration: io.vertx.core.json.JsonObject): ServiceDiscovery = {
+    asJava.asInstanceOf[JServiceDiscovery].registerServiceImporter(importer.asJava.asInstanceOf[JServiceImporter], configuration)
+    this
+  }
+
+  /**
+   * Registers a discovery service importer. Importers let you integrate other discovery technologies in this service
+   * discovery.   * @param importer the service importer
+   * @param configuration the optional configuration
+   * @param completionHandler handler call when the importer has finished its initialization and initial imports
+   * @return the current ServiceDiscovery
+   */
+  
+  def registerServiceImporter(importer: ServiceImporter, configuration: io.vertx.core.json.JsonObject, completionHandler: Handler[AsyncResult[Unit]]): ServiceDiscovery = {
+    asJava.asInstanceOf[JServiceDiscovery].registerServiceImporter(importer.asJava.asInstanceOf[JServiceImporter], configuration, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+    this
+  }
+
+  /**
+   * Registers a discovery bridge. Exporters let you integrate other discovery technologies in this service
+   * discovery.   * @param exporter the service exporter
+   * @param configuration the optional configuration
+   * @return the current ServiceDiscovery
+   */
+  
+  def registerServiceExporter(exporter: ServiceExporter, configuration: io.vertx.core.json.JsonObject): ServiceDiscovery = {
+    asJava.asInstanceOf[JServiceDiscovery].registerServiceExporter(exporter.asJava.asInstanceOf[JServiceExporter], configuration)
+    this
+  }
+
+  /**
+   * Registers a discovery bridge. Exporters let you integrate other discovery technologies in this service
+   * discovery.   * @param exporter the service exporter
+   * @param configuration the optional configuration
+   * @param completionHandler handler notified when the exporter has been correctly initialized.
+   * @return the current ServiceDiscovery
+   */
+  
+  def registerServiceExporter(exporter: ServiceExporter, configuration: io.vertx.core.json.JsonObject, completionHandler: Handler[AsyncResult[Unit]]): ServiceDiscovery = {
+    asJava.asInstanceOf[JServiceDiscovery].registerServiceExporter(exporter.asJava.asInstanceOf[JServiceExporter], configuration, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+    this
+  }
+
 
 
   /**
@@ -99,48 +149,6 @@ class ServiceDiscovery(private val _asJava: Object) {
    */
   def release (reference: ServiceReference): Boolean = {
     asJava.asInstanceOf[JServiceDiscovery].release(reference.asJava.asInstanceOf[JServiceReference]).asInstanceOf[Boolean]
-  }
-
-  /**
-   * Registers a discovery service importer. Importers let you integrate other discovery technologies in this service
-   * discovery.   * @param importer the service importer
-   * @param configuration the optional configuration
-   * @return the current ServiceDiscovery
-   */
-  def registerServiceImporter (importer: ServiceImporter, configuration: io.vertx.core.json.JsonObject): ServiceDiscovery = {
-    ServiceDiscovery(asJava.asInstanceOf[JServiceDiscovery].registerServiceImporter(importer.asJava.asInstanceOf[JServiceImporter], configuration))
-  }
-
-  /**
-   * Registers a discovery service importer. Importers let you integrate other discovery technologies in this service
-   * discovery.   * @param importer the service importer
-   * @param configuration the optional configuration
-   * @param completionHandler handler call when the importer has finished its initialization and initial imports
-   * @return the current ServiceDiscovery
-   */
-  def registerServiceImporter (importer: ServiceImporter, configuration: io.vertx.core.json.JsonObject, completionHandler: Handler[AsyncResult[Unit]]): ServiceDiscovery = {
-    ServiceDiscovery(asJava.asInstanceOf[JServiceDiscovery].registerServiceImporter(importer.asJava.asInstanceOf[JServiceImporter], configuration, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}})))
-  }
-
-  /**
-   * Registers a discovery bridge. Exporters let you integrate other discovery technologies in this service
-   * discovery.   * @param exporter the service exporter
-   * @param configuration the optional configuration
-   * @return the current ServiceDiscovery
-   */
-  def registerServiceExporter (exporter: ServiceExporter, configuration: io.vertx.core.json.JsonObject): ServiceDiscovery = {
-    ServiceDiscovery(asJava.asInstanceOf[JServiceDiscovery].registerServiceExporter(exporter.asJava.asInstanceOf[JServiceExporter], configuration))
-  }
-
-  /**
-   * Registers a discovery bridge. Exporters let you integrate other discovery technologies in this service
-   * discovery.   * @param exporter the service exporter
-   * @param configuration the optional configuration
-   * @param completionHandler handler notified when the exporter has been correctly initialized.
-   * @return the current ServiceDiscovery
-   */
-  def registerServiceExporter (exporter: ServiceExporter, configuration: io.vertx.core.json.JsonObject, completionHandler: Handler[AsyncResult[Unit]]): ServiceDiscovery = {
-    ServiceDiscovery(asJava.asInstanceOf[JServiceDiscovery].registerServiceExporter(exporter.asJava.asInstanceOf[JServiceExporter], configuration, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}})))
   }
 
   /**
@@ -394,14 +402,14 @@ class ServiceDiscovery(private val _asJava: Object) {
 
 object ServiceDiscovery {
   def apply(asJava: JServiceDiscovery) = new ServiceDiscovery(asJava)
-  
+
   /**
    * Creates an instance of [[io.vertx.scala.servicediscovery.ServiceDiscovery]].   * @param vertx the vert.x instance
    * @param options the discovery options see <a href="../../../../../../cheatsheet/ServiceDiscoveryOptions.html">ServiceDiscoveryOptions</a>
    * @return the created service discovery instance.
    */
   def create(vertx: Vertx,options: ServiceDiscoveryOptions): ServiceDiscovery = {
-    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
   /**
@@ -409,7 +417,7 @@ object ServiceDiscovery {
    * @return the created instance
    */
   def create(vertx: Vertx): ServiceDiscovery = {
-    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx]))
+    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
   /**
@@ -419,7 +427,7 @@ object ServiceDiscovery {
    * @return the created instance, should not be used to retrieve services before the invocation of the completion handler.
    */
   def create(vertx: Vertx,options: ServiceDiscoveryOptions,completionHandler: Handler[ServiceDiscovery]): ServiceDiscovery = {
-    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[JServiceDiscovery]{def handle(x: JServiceDiscovery) {completionHandler.handle(ServiceDiscovery(x))}})))
+    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], options.asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[JServiceDiscovery]{def handle(x: JServiceDiscovery) {completionHandler.handle(ServiceDiscovery(x))}})))//2 create
   }
 
   /**
@@ -428,7 +436,7 @@ object ServiceDiscovery {
    * @return the created instance, should not be used to retrieve services before the invocation of the completion handler.
    */
   def create(vertx: Vertx,completionHandler: Handler[ServiceDiscovery]): ServiceDiscovery = {
-    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], (if (completionHandler == null) null else new io.vertx.core.Handler[JServiceDiscovery]{def handle(x: JServiceDiscovery) {completionHandler.handle(ServiceDiscovery(x))}})))
+    ServiceDiscovery(JServiceDiscovery.create(vertx.asJava.asInstanceOf[JVertx], (if (completionHandler == null) null else new io.vertx.core.Handler[JServiceDiscovery]{def handle(x: JServiceDiscovery) {completionHandler.handle(ServiceDiscovery(x))}})))//2 create
   }
 
   /**
@@ -437,7 +445,7 @@ object ServiceDiscovery {
    * @param svcObject the service object
    */
   def releaseServiceObject(discovery: ServiceDiscovery,svcObject: AnyRef): Unit = {
-    JServiceDiscovery.releaseServiceObject(discovery.asJava.asInstanceOf[JServiceDiscovery], svcObject)
+    JServiceDiscovery.releaseServiceObject(discovery.asJava.asInstanceOf[JServiceDiscovery], svcObject)//2 releaseServiceObject
   }
 
 }

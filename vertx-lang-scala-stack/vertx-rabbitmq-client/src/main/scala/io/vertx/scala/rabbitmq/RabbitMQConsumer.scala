@@ -169,5 +169,5 @@ class RabbitMQConsumer(private val _asJava: Object) extends ReadStream[RabbitMQM
 
 object RabbitMQConsumer {
   def apply(asJava: JRabbitMQConsumer) = new RabbitMQConsumer(asJava)
-  
+
 }

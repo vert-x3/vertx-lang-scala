@@ -57,11 +57,11 @@ class BlockingQueryOptions(private val _asJava: JBlockingQueryOptions) {
 
 
 object BlockingQueryOptions {
-  
+
   def apply() = {
     new BlockingQueryOptions(new JBlockingQueryOptions(emptyObj()))
   }
-  
+
   def apply(t: JBlockingQueryOptions) = {
     if (t != null) {
       new BlockingQueryOptions(t)
@@ -69,7 +69,7 @@ object BlockingQueryOptions {
       new BlockingQueryOptions(new JBlockingQueryOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): BlockingQueryOptions = {
     if (json != null) {
       new BlockingQueryOptions(new JBlockingQueryOptions(json))

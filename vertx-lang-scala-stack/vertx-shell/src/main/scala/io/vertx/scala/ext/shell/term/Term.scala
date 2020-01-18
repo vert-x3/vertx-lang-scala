@@ -144,5 +144,5 @@ class Term(private val _asJava: Object) extends Tty (_asJava) {
 
 object Term {
   def apply(asJava: JTerm) = new Term(asJava)
-  
+
 }

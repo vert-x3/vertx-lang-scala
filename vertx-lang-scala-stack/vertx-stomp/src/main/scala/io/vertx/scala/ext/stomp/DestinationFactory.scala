@@ -49,5 +49,5 @@ class DestinationFactory(private val _asJava: Object) {
 
 object DestinationFactory {
   def apply(asJava: JDestinationFactory) = new DestinationFactory(asJava)
-  
+
 }

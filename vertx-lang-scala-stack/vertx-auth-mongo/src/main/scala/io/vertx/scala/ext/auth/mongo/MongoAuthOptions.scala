@@ -26,7 +26,7 @@ import io.vertx.scala.ext.auth.{AuthOptions => ExtAuthOptions}
  * Options configuring Mongo authentication.
  */
 
-class MongoAuthOptions(private val _asJava: JMongoAuthOptions) extends ExtAuthOptions(_asJava) {
+class MongoAuthOptions(private val _asJava: JMongoAuthOptions) extends ExtAuthOptions {
   def asJava = _asJava
   /**
    * The property name to be used to set the name of the collection inside the config.
@@ -164,11 +164,11 @@ class MongoAuthOptions(private val _asJava: JMongoAuthOptions) extends ExtAuthOp
 
 
 object MongoAuthOptions {
-  
+
   def apply() = {
     new MongoAuthOptions(new JMongoAuthOptions(emptyObj()))
   }
-  
+
   def apply(t: JMongoAuthOptions) = {
     if (t != null) {
       new MongoAuthOptions(t)
@@ -176,7 +176,7 @@ object MongoAuthOptions {
       new MongoAuthOptions(new JMongoAuthOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): MongoAuthOptions = {
     if (json != null) {
       new MongoAuthOptions(new JMongoAuthOptions(json))

@@ -236,14 +236,14 @@ class StompServer(private val _asJava: Object) {
 
 object StompServer {
   def apply(asJava: JStompServer) = new StompServer(asJava)
-  
+
   /**
    * Creates a [[io.vertx.scala.ext.stomp.StompServer]] based on the default Stomp Server implementation.   * @param vertx the vert.x instance to use
    * @param options the server options see <a href="../../../../../../../cheatsheet/StompServerOptions.html">StompServerOptions</a>
    * @return the created StompServer
    */
   def create(vertx: Vertx,options: StompServerOptions): StompServer = {
-    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))
+    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 create
   }
 
   /**
@@ -252,7 +252,7 @@ object StompServer {
    * @return the created StompServer
    */
   def create(vertx: Vertx,netServer: NetServer): StompServer = {
-    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx], netServer.asJava.asInstanceOf[JNetServer]))
+    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx], netServer.asJava.asInstanceOf[JNetServer]))//2 create
   }
 
   /**
@@ -262,7 +262,7 @@ object StompServer {
    * @return the created StompServer
    */
   def create(vertx: Vertx,net: NetServer,options: StompServerOptions): StompServer = {
-    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx], net.asJava.asInstanceOf[JNetServer], options.asJava))
+    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx], net.asJava.asInstanceOf[JNetServer], options.asJava))//2 create
   }
 
   /**
@@ -270,7 +270,7 @@ object StompServer {
    * @return the created StompServer
    */
   def create(vertx: Vertx): StompServer = {
-    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx]))
+    StompServer(JStompServer.create(vertx.asJava.asInstanceOf[JVertx]))//2 create
   }
 
 }

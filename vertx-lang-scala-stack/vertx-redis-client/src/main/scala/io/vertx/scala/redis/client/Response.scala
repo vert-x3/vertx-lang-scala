@@ -139,5 +139,5 @@ class Response(private val _asJava: Object) {
 
 object Response {
   def apply(asJava: JResponse) = new Response(asJava)
-  
+
 }

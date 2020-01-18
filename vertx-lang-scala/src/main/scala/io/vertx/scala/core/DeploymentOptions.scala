@@ -191,11 +191,11 @@ class DeploymentOptions(private val _asJava: JDeploymentOptions) {
 
 
 object DeploymentOptions {
-  
+
   def apply() = {
     new DeploymentOptions(new JDeploymentOptions(emptyObj()))
   }
-  
+
   def apply(t: JDeploymentOptions) = {
     if (t != null) {
       new DeploymentOptions(t)
@@ -203,7 +203,7 @@ object DeploymentOptions {
       new DeploymentOptions(new JDeploymentOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DeploymentOptions = {
     if (json != null) {
       new DeploymentOptions(new JDeploymentOptions(json))

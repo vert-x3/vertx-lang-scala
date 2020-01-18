@@ -113,5 +113,5 @@ class MqttPublishMessage(private val _asJava: Object) extends MqttMessage {
 
 object MqttPublishMessage {
   def apply(asJava: JMqttPublishMessage) = new MqttPublishMessage(asJava)
-  
+
 }

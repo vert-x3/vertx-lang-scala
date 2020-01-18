@@ -135,13 +135,13 @@ class CorsHandler(private val _asJava: Object) extends io.vertx.core.Handler[Rou
 
 object CorsHandler {
   def apply(asJava: JCorsHandler) = new CorsHandler(asJava)
-  
+
   /**
    * Create a CORS handler   * @param allowedOriginPattern the allowed origin pattern
    * @return the handler
    */
   def create(allowedOriginPattern: String): CorsHandler = {
-    CorsHandler(JCorsHandler.create(allowedOriginPattern.asInstanceOf[java.lang.String]))
+    CorsHandler(JCorsHandler.create(allowedOriginPattern.asInstanceOf[java.lang.String]))//2 create
   }
 
 }

@@ -565,11 +565,11 @@ class RedisOptions(private val _asJava: JRedisOptions) extends ExtNetClientOptio
 
 
 object RedisOptions {
-  
+
   def apply() = {
     new RedisOptions(new JRedisOptions(emptyObj()))
   }
-  
+
   def apply(t: JRedisOptions) = {
     if (t != null) {
       new RedisOptions(t)
@@ -577,7 +577,7 @@ object RedisOptions {
       new RedisOptions(new JRedisOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): RedisOptions = {
     if (json != null) {
       new RedisOptions(new JRedisOptions(json))

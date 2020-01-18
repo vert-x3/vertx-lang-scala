@@ -166,11 +166,11 @@ class DatagramSocketOptions(private val _asJava: JDatagramSocketOptions) extends
 
 
 object DatagramSocketOptions {
-  
+
   def apply() = {
     new DatagramSocketOptions(new JDatagramSocketOptions(emptyObj()))
   }
-  
+
   def apply(t: JDatagramSocketOptions) = {
     if (t != null) {
       new DatagramSocketOptions(t)
@@ -178,7 +178,7 @@ object DatagramSocketOptions {
       new DatagramSocketOptions(new JDatagramSocketOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): DatagramSocketOptions = {
     if (json != null) {
       new DatagramSocketOptions(new JDatagramSocketOptions(json))

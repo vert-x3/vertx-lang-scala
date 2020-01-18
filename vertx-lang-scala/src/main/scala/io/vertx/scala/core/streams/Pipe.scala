@@ -127,5 +127,5 @@ class Pipe[T: TypeTag](private val _asJava: Object) {
 
 object Pipe {
   def apply[T: TypeTag](asJava: JPipe[_]) = new Pipe[T](asJava)
-  
+
 }

@@ -106,11 +106,11 @@ class Record(private val _asJava: JRecord) {
 
 
 object Record {
-  
+
   def apply() = {
     new Record(new JRecord(emptyObj()))
   }
-  
+
   def apply(t: JRecord) = {
     if (t != null) {
       new Record(t)
@@ -118,7 +118,7 @@ object Record {
       new Record(new JRecord(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Record = {
     if (json != null) {
       new Record(new JRecord(json))

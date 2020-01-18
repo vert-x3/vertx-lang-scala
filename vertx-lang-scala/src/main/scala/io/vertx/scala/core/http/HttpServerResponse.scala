@@ -25,6 +25,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.lang.scala.Converter._
 import io.vertx.scala.core.streams.WriteStream
 import io.vertx.core.buffer.Buffer
+import io.vertx.core.http.{Cookie => JCookie}
 import io.vertx.core.http.HttpMethod
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.scala.core.MultiMap
@@ -439,12 +440,30 @@ class HttpServerResponse(private val _asJava: Object) extends WriteStream[io.ver
     this
   }
 
+  /**
+   * Add a cookie. This will be sent back to the client in the response.   * @param cookie the cookie
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def addCookie(cookie: Cookie): HttpServerResponse = {
+    asJava.asInstanceOf[JHttpServerResponse].addCookie(cookie.asJava.asInstanceOf[JCookie])
+    this
+  }
+
 
   /**
    * Reset this HTTP/2 stream with the error code `0`.
    */
   def reset(): Unit = {
     asJava.asInstanceOf[JHttpServerResponse].reset()
+  }
+
+  /**
+   * Expire a cookie, notifying a User Agent to remove it from its cookie jar.   * @param name the name of the cookie
+   * @return the cookie, if it existed, or null
+   */
+  def removeCookie(name: String): scala.Option[Cookie] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerResponse].removeCookie(name.asInstanceOf[java.lang.String])).map(Cookie(_))
   }
 
 
@@ -584,6 +603,15 @@ class HttpServerResponse(private val _asJava: Object) extends WriteStream[io.ver
    */
   def reset (code: Long): Unit = {
     asJava.asInstanceOf[JHttpServerResponse].reset(code.asInstanceOf[java.lang.Long])
+  }
+
+  /**
+   * Remove a cookie from the cookie set. If invalidate is true then it will expire a cookie, notifying a User Agent to
+   * remove it from its cookie jar.   * @param name the name of the cookie
+   * @return the cookie, if it existed, or null
+   */
+  def removeCookie (name: String, invalidate: Boolean): scala.Option[Cookie] = {
+    scala.Option(asJava.asInstanceOf[JHttpServerResponse].removeCookie(name.asInstanceOf[java.lang.String], invalidate.asInstanceOf[java.lang.Boolean])).map(Cookie(_))
   }
 
 
@@ -731,5 +759,5 @@ class HttpServerResponse(private val _asJava: Object) extends WriteStream[io.ver
 
 object HttpServerResponse {
   def apply(asJava: JHttpServerResponse) = new HttpServerResponse(asJava)
-  
+
 }

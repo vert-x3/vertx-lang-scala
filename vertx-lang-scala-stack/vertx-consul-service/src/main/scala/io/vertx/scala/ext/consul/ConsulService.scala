@@ -1190,14 +1190,14 @@ class ConsulService(private val _asJava: Object) extends ConsulClient (_asJava) 
 
 object ConsulService {
   def apply(asJava: JConsulService) = new ConsulService(asJava)
-  
+
   /**
    * Create a proxy to a service that is deployed somewhere on the event bus   * @param vertx the Vert.x instance
    * @param address the address the service is listening on on the event bus
    * @return the service
    */
   def createEventBusProxy(vertx: Vertx,address: String): ConsulService = {
-    ConsulService(JConsulService.createEventBusProxy(vertx.asJava.asInstanceOf[JVertx], address.asInstanceOf[java.lang.String]))
+    ConsulService(JConsulService.createEventBusProxy(vertx.asJava.asInstanceOf[JVertx], address.asInstanceOf[java.lang.String]))//2 createEventBusProxy
   }
 
 }

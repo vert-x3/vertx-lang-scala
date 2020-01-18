@@ -18,16 +18,17 @@ package io.vertx.scala.sqlclient
 
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.sqlclient.{RowSet => JRowSet}
-import io.vertx.sqlclient.{SqlClient => JSqlClient}
 import scala.reflect.runtime.universe._
 import io.vertx.sqlclient.{Tuple => JTuple}
+import scala.collection.JavaConverters._
+import io.vertx.lang.scala.Converter._
+import io.vertx.sqlclient.{Row => JRow}
+import io.vertx.sqlclient.{SqlClient => JSqlClient}
 import io.vertx.sqlclient.{Transaction => JTransaction}
 import io.vertx.core.AsyncResult
-import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 import io.vertx.sqlclient.{PreparedQuery => JPreparedQuery}
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 
 /**
   * A transaction that allows to control the transaction and receive events.
@@ -60,29 +61,29 @@ class Transaction(private val _asJava: Object) extends SqlClient (_asJava) {
 
 
   override 
-  def query(sql: String, handler: Handler[AsyncResult[RowSet]]): Transaction = {
-    asJava.asInstanceOf[JTransaction].query(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet]]{def handle(x: AsyncResult[JRowSet]) {handler.handle(AsyncResultWrapper[JRowSet, RowSet](x, a => RowSet(a)))}}))
+  def query(sql: String, handler: Handler[AsyncResult[RowSet[Row]]]): Transaction = {
+    asJava.asInstanceOf[JTransaction].query(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
     this
   }
 
 
   override 
-  def preparedQuery(sql: String, handler: Handler[AsyncResult[RowSet]]): Transaction = {
-    asJava.asInstanceOf[JTransaction].preparedQuery(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet]]{def handle(x: AsyncResult[JRowSet]) {handler.handle(AsyncResultWrapper[JRowSet, RowSet](x, a => RowSet(a)))}}))
+  def preparedQuery(sql: String, handler: Handler[AsyncResult[RowSet[Row]]]): Transaction = {
+    asJava.asInstanceOf[JTransaction].preparedQuery(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
     this
   }
 
 
   override 
-  def preparedQuery(sql: String, arguments: Tuple, handler: Handler[AsyncResult[RowSet]]): Transaction = {
-    asJava.asInstanceOf[JTransaction].preparedQuery(sql.asInstanceOf[java.lang.String], arguments.asJava.asInstanceOf[JTuple], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet]]{def handle(x: AsyncResult[JRowSet]) {handler.handle(AsyncResultWrapper[JRowSet, RowSet](x, a => RowSet(a)))}}))
+  def preparedQuery(sql: String, arguments: Tuple, handler: Handler[AsyncResult[RowSet[Row]]]): Transaction = {
+    asJava.asInstanceOf[JTransaction].preparedQuery(sql.asInstanceOf[java.lang.String], arguments.asJava.asInstanceOf[JTuple], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
     this
   }
 
 
   override 
-  def preparedBatch(sql: String, batch: scala.collection.mutable.Buffer[Tuple], handler: Handler[AsyncResult[RowSet]]): Transaction = {
-    asJava.asInstanceOf[JTransaction].preparedBatch(sql.asInstanceOf[java.lang.String], batch.map(x => x.asJava.asInstanceOf[JTuple]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet]]{def handle(x: AsyncResult[JRowSet]) {handler.handle(AsyncResultWrapper[JRowSet, RowSet](x, a => RowSet(a)))}}))
+  def preparedBatch(sql: String, batch: scala.collection.mutable.Buffer[Tuple], handler: Handler[AsyncResult[RowSet[Row]]]): Transaction = {
+    asJava.asInstanceOf[JTransaction].preparedBatch(sql.asInstanceOf[java.lang.String], batch.map(x => x.asJava.asInstanceOf[JTuple]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
     this
   }
 
@@ -155,33 +156,33 @@ class Transaction(private val _asJava: Object) extends SqlClient (_asJava) {
   }
 
 
-  override def queryFuture (sql: String): scala.concurrent.Future[RowSet] = {
+  override def queryFuture (sql: String): scala.concurrent.Future[RowSet[Row]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet, RowSet](x => RowSet(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
     asJava.asInstanceOf[JTransaction].query(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 
-  override def preparedQueryFuture (sql: String): scala.concurrent.Future[RowSet] = {
+  override def preparedQueryFuture (sql: String): scala.concurrent.Future[RowSet[Row]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet, RowSet](x => RowSet(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
     asJava.asInstanceOf[JTransaction].preparedQuery(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 
-  override def preparedQueryFuture (sql: String, arguments: Tuple): scala.concurrent.Future[RowSet] = {
+  override def preparedQueryFuture (sql: String, arguments: Tuple): scala.concurrent.Future[RowSet[Row]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet, RowSet](x => RowSet(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
     asJava.asInstanceOf[JTransaction].preparedQuery(sql.asInstanceOf[java.lang.String], arguments.asJava.asInstanceOf[JTuple], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
 
-  override def preparedBatchFuture (sql: String, batch: scala.collection.mutable.Buffer[Tuple]): scala.concurrent.Future[RowSet] = {
+  override def preparedBatchFuture (sql: String, batch: scala.collection.mutable.Buffer[Tuple]): scala.concurrent.Future[RowSet[Row]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet, RowSet](x => RowSet(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
     asJava.asInstanceOf[JTransaction].preparedBatch(sql.asInstanceOf[java.lang.String], batch.map(x => x.asJava.asInstanceOf[JTuple]).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
@@ -190,5 +191,5 @@ class Transaction(private val _asJava: Object) extends SqlClient (_asJava) {
 
 object Transaction {
   def apply(asJava: JTransaction) = new Transaction(asJava)
-  
+
 }

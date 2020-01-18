@@ -50,14 +50,14 @@ class ErrorConverter(private val _asJava: Object) {
 
 object ErrorConverter {
   def apply(asJava: JErrorConverter) = new ErrorConverter(asJava)
-  
+
   /**
    * Creates a full [[io.vertx.scala.ext.web.client.predicate.ErrorConverter]], that will passed a predicate result with the response body.
    *
    * The `converter` function will be invoked <em>after</em> the HTTP response body is received.   * @param converter a function creating a Throwable from a ResponsePredicateResult
    */
   def create(converter: ResponsePredicateResult => Throwable): ErrorConverter = {
-    ErrorConverter(JErrorConverter.create({x: JResponsePredicateResult => converter(ResponsePredicateResult(x))}))
+    ErrorConverter(JErrorConverter.create({x: JResponsePredicateResult => converter(ResponsePredicateResult(x))}))//2 create
   }
 
   /**
@@ -66,7 +66,7 @@ object ErrorConverter {
    * The `converter` function will be invoked <em>after</em> the HTTP response body is received.   * @param converter a function creating a Throwable from a ResponsePredicateResult
    */
   def createFullBody(converter: ResponsePredicateResult => Throwable): ErrorConverter = {
-    ErrorConverter(JErrorConverter.createFullBody({x: JResponsePredicateResult => converter(ResponsePredicateResult(x))}))
+    ErrorConverter(JErrorConverter.createFullBody({x: JResponsePredicateResult => converter(ResponsePredicateResult(x))}))//2 createFullBody
   }
 
 }

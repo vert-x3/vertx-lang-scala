@@ -46,7 +46,7 @@ class OpenIDConnectAuth(private val _asJava: Object) {
 
 object OpenIDConnectAuth {
   def apply(asJava: JOpenIDConnectAuth) = new OpenIDConnectAuth(asJava)
-  
+
   /**
    * Create a OAuth2Auth provider for OpenID Connect Discovery. The discovery will use the given site in the
    * configuration options and attempt to load the well known descriptor.
@@ -57,7 +57,7 @@ object OpenIDConnectAuth {
    * @param handler the instantiated Oauth2 provider instance handler
    */
   def discover(vertx: Vertx,config: OAuth2ClientOptions,handler: Handler[AsyncResult[OAuth2Auth]]): Unit = {
-    JOpenIDConnectAuth.discover(vertx.asJava.asInstanceOf[JVertx], config.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Auth]]{def handle(x: AsyncResult[JOAuth2Auth]) {handler.handle(AsyncResultWrapper[JOAuth2Auth, OAuth2Auth](x, a => OAuth2Auth(a)))}}))
+    JOpenIDConnectAuth.discover(vertx.asJava.asInstanceOf[JVertx], config.asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JOAuth2Auth]]{def handle(x: AsyncResult[JOAuth2Auth]) {handler.handle(AsyncResultWrapper[JOAuth2Auth, OAuth2Auth](x, a => OAuth2Auth(a)))}}))//2 discover
   }
 
 }

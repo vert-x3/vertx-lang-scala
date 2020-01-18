@@ -93,11 +93,11 @@ class ProxyOptions(private val _asJava: JProxyOptions) {
 
 
 object ProxyOptions {
-  
+
   def apply() = {
     new ProxyOptions(new JProxyOptions(emptyObj()))
   }
-  
+
   def apply(t: JProxyOptions) = {
     if (t != null) {
       new ProxyOptions(t)
@@ -105,7 +105,7 @@ object ProxyOptions {
       new ProxyOptions(new JProxyOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ProxyOptions = {
     if (json != null) {
       new ProxyOptions(new JProxyOptions(json))

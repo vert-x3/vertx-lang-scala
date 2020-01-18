@@ -10,9 +10,11 @@ Here is how to run simple queries:
 `queries01`
 ----
 
+=== Prepared queries
+
 You can do the same with prepared queries.
 
-The SQL string can refer to parameters by position, using `$1`, `$2`, etc…​
+The SQL string can refer to parameters by position, using the database syntax {PREPARED_PARAMS}
 
 [source,scala]
 ----
@@ -47,18 +49,13 @@ or by name
 `queries06`
 ----
 
+The client will not do any magic here and the column name is identified with the name in the table regardless of how your SQL text is.
+
 You can access a wide variety of of types
 
 [source,scala]
 ----
 `queries07`
-----
-
-You can execute prepared batch
-
-[source,scala]
-----
-`queries08`
 ----
 
 You can cache prepared queries:
@@ -68,9 +65,11 @@ You can cache prepared queries:
 `queries09`
 ----
 
-You can fetch generated keys with a 'RETURNING' clause in your query:
+=== Batches
+
+You can execute prepared batch
 
 [source,scala]
 ----
-`queries10`
+`queries08`
 ----

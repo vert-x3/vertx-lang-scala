@@ -84,5 +84,5 @@ class Command(private val _asJava: Object) {
 
 object Command {
   def apply(asJava: JCommand) = new Command(asJava)
-  
+
 }

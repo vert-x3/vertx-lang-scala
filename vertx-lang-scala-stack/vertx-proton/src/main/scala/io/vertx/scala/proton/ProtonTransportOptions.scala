@@ -61,11 +61,11 @@ class ProtonTransportOptions(private val _asJava: JProtonTransportOptions) {
 
 
 object ProtonTransportOptions {
-  
+
   def apply() = {
     new ProtonTransportOptions(new JProtonTransportOptions(emptyObj()))
   }
-  
+
   def apply(t: JProtonTransportOptions) = {
     if (t != null) {
       new ProtonTransportOptions(t)
@@ -73,7 +73,7 @@ object ProtonTransportOptions {
       new ProtonTransportOptions(new JProtonTransportOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): ProtonTransportOptions = {
     if (json != null) {
       new ProtonTransportOptions(new JProtonTransportOptions(json))

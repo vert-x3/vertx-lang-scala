@@ -158,11 +158,11 @@ class CircuitBreakerOptions(private val _asJava: JCircuitBreakerOptions) {
 
 
 object CircuitBreakerOptions {
-  
+
   def apply() = {
     new CircuitBreakerOptions(new JCircuitBreakerOptions(emptyObj()))
   }
-  
+
   def apply(t: JCircuitBreakerOptions) = {
     if (t != null) {
       new CircuitBreakerOptions(t)
@@ -170,7 +170,7 @@ object CircuitBreakerOptions {
       new CircuitBreakerOptions(new JCircuitBreakerOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): CircuitBreakerOptions = {
     if (json != null) {
       new CircuitBreakerOptions(new JCircuitBreakerOptions(json))

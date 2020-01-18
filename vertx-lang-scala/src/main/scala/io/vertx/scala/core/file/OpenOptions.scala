@@ -163,11 +163,11 @@ class OpenOptions(private val _asJava: JOpenOptions) {
 
 
 object OpenOptions {
-  
+
   def apply() = {
     new OpenOptions(new JOpenOptions(emptyObj()))
   }
-  
+
   def apply(t: JOpenOptions) = {
     if (t != null) {
       new OpenOptions(t)
@@ -175,7 +175,7 @@ object OpenOptions {
       new OpenOptions(new JOpenOptions(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): OpenOptions = {
     if (json != null) {
       new OpenOptions(new JOpenOptions(json))

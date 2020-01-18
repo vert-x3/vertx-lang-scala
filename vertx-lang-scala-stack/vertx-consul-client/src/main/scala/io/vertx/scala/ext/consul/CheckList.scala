@@ -55,11 +55,11 @@ class CheckList(private val _asJava: JCheckList) {
 
 
 object CheckList {
-  
+
   def apply() = {
     new CheckList(new JCheckList(emptyObj()))
   }
-  
+
   def apply(t: JCheckList) = {
     if (t != null) {
       new CheckList(t)
@@ -67,7 +67,7 @@ object CheckList {
       new CheckList(new JCheckList(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): CheckList = {
     if (json != null) {
       new CheckList(new JCheckList(json))

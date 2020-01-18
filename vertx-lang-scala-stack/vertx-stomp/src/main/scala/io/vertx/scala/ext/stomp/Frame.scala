@@ -111,11 +111,11 @@ class Frame(private val _asJava: JFrame) {
 
 
 object Frame {
-  
+
   def apply() = {
     new Frame(new JFrame(emptyObj()))
   }
-  
+
   def apply(t: JFrame) = {
     if (t != null) {
       new Frame(t)
@@ -123,7 +123,7 @@ object Frame {
       new Frame(new JFrame(emptyObj()))
     }
   }
-  
+
   def fromJson(json: JsonObject): Frame = {
     if (json != null) {
       new Frame(new JFrame(json))

@@ -79,14 +79,14 @@ class MySQLClient(private val _asJava: Object) extends AsyncSQLClient (_asJava) 
 
 object MySQLClient {
   def apply(asJava: JMySQLClient) = new MySQLClient(asJava)
-  
+
   /**
    * Create a MySQL client which maintains its own pool.   * @param vertx the Vert.x instance
    * @param config the configuration
    * @return the client
    */
   def createNonShared(vertx: Vertx,config: io.vertx.core.json.JsonObject): AsyncSQLClient = {
-    AsyncSQLClient(JMySQLClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))
+    AsyncSQLClient(JMySQLClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))//2 createNonShared
   }
 
   /**
@@ -97,7 +97,7 @@ object MySQLClient {
    * @return the client
    */
   def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject,poolName: String): AsyncSQLClient = {
-    AsyncSQLClient(JMySQLClient.createShared(vertx.asJava.asInstanceOf[JVertx], config, poolName.asInstanceOf[java.lang.String]))
+    AsyncSQLClient(JMySQLClient.createShared(vertx.asJava.asInstanceOf[JVertx], config, poolName.asInstanceOf[java.lang.String]))//2 createShared
   }
 
   /**
@@ -106,7 +106,7 @@ object MySQLClient {
    * @return the client
    */
   def createShared(vertx: Vertx,config: io.vertx.core.json.JsonObject): AsyncSQLClient = {
-    AsyncSQLClient(JMySQLClient.createShared(vertx.asJava.asInstanceOf[JVertx], config))
+    AsyncSQLClient(JMySQLClient.createShared(vertx.asJava.asInstanceOf[JVertx], config))//2 createShared
   }
 
 }
