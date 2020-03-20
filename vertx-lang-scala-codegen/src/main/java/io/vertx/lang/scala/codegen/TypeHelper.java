@@ -91,7 +91,7 @@ public class TypeHelper {
         return "scala.Option(" + name + ")";
       }
       return name;
-    } else if (kind == ClassKind.DATA_OBJECT) {
+    } else if (type.getDataObject() != null) {
       if (nullable) {
         return "scala.Option(" + name + ")";
       }
@@ -174,7 +174,7 @@ public class TypeHelper {
       return "Throwable";
     } else if (kind.basic) {
       return wrapInOptionIfNullable(nullable, typeNameForPrimitiveScala(type));
-    } else if (kind == ClassKind.DATA_OBJECT) {
+    } else if (type.getDataObject() != null) {
       return wrapInOptionIfNullable(nullable, type.getName());
     } else if (kind == ClassKind.LIST){
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
@@ -311,7 +311,7 @@ public class TypeHelper {
       return "Throwable";
     } else if (type.getKind().basic) {
       return typeNameForBasicJava(type);
-    } else if (type.getKind() == ClassKind.DATA_OBJECT) {
+    } else if (type.getDataObject() != null) {
       return getNonGenericType(type.getName());
     } else if (type.getKind() == ClassKind.LIST){
       String ret = "java.util.List";
@@ -409,7 +409,7 @@ public class TypeHelper {
       return "Throwable";
     } else if (type.getKind().basic) {
       return typeNameForBasicJava(type);
-    } else if (type.getKind() == ClassKind.DATA_OBJECT) {
+    } else if (type.getDataObject() != null) {
       return getNonGenericType(type.getName());
     } else if (type.getKind() == ClassKind.LIST){
       String ret = "java.util.List";
@@ -537,7 +537,7 @@ public class TypeHelper {
         ret = name + ".map(x => x).orNull";
       }
       return ret;
-    } else if (type.getKind() == ClassKind.DATA_OBJECT) {
+    } else if (type.getDataObject() != null) {
       String ret = name;
       if (nullable) {
         ret = name + ".map(" + name +" => " + ret + ").orNull";
@@ -624,7 +624,7 @@ public class TypeHelper {
       return type.getSimpleName();
     } else if (type.getKind() == ClassKind.OBJECT) {
       return type.getSimpleName();
-    } else if (type.getKind() == ClassKind.DATA_OBJECT) {
+    } else if (type.getDataObject() != null) {
       return type.getName();
     } else if (type.getKind() == ClassKind.API) {
       String ret = getNonGenericType(type.getName());
@@ -753,7 +753,7 @@ public class TypeHelper {
       type.getKind() == ClassKind.ENUM ||
       type.getName().equals("io.vertx.core.buffer.Buffer")) {
       ret.add(type.getRaw().toString());
-    } else if (type.getKind() == ClassKind.API || type.getKind() == ClassKind.DATA_OBJECT) {
+    } else if (type.getKind() == ClassKind.API || type.getDataObject() != null) {
       if (!Helper.getPackageName(type.getName()).equals(packageName)) {
         ret.add(getNonGenericType(type.getRaw().getPackageName()));
       }
@@ -1004,7 +1004,7 @@ public class TypeHelper {
             doc += commentedIndentation;
             doc += " @param " + param.getName()+ " ";
             doc += convertLink(param.getDescription());
-            if (param.getType().getKind() == ClassKind.DATA_OBJECT) {
+            if (param.getType().getDataObject() != null) {
               doc += " see " + renderDataObjectHtmlLink(type, param.getType());
             }
             doc = doc.replace("{@code ","`").replace("{@literal","`").replace("@literal{","`").replace("@code{","`").replace("}","`");
@@ -1017,7 +1017,7 @@ public class TypeHelper {
             doc += " @return ";
             doc += convertLink(returnDescription);
 
-            if (returnType.getKind() == ClassKind.DATA_OBJECT) {
+            if (returnType.getDataObject() != null) {
               doc += "see " + renderDataObjectHtmlLink(type, returnType);
             }
             doc = doc.replace("{@code ","`").replace("{@literal","`").replace("@literal{","`").replace("@code{","`").replace("}","`");
@@ -1132,7 +1132,7 @@ public class TypeHelper {
       if (rawType.getKind() == ClassKind.ENUM) {
         return "[[" + convertToScalaNotation(rawType.getName()) + "]]";
       }
-      if (rawType.getKind() == ClassKind.DATA_OBJECT) {
+      if (rawType.getDataObject() != null) {
         if (label.length() == 0) {
           label = rawType.getSimpleName();
         }

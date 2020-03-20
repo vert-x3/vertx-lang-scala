@@ -27,18 +27,10 @@ Sets the value to use as the container-id field in the AMQP Open frame. Some ser
 |[[hostnameVerificationAlgorithm]]`@hostnameVerificationAlgorithm`|`String`|-
 |[[idleTimeout]]`@idleTimeout`|`Number (int)`|-
 |[[idleTimeoutUnit]]`@idleTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|-
-|[[jdkSslEngineOptions]]`@jdkSslEngineOptions`|`link:dataobjects.html#JdkSSLEngineOptions[JdkSSLEngineOptions]`|-
-|[[keyStoreOptions]]`@keyStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[localAddress]]`@localAddress`|`String`|-
 |[[logActivity]]`@logActivity`|`Boolean`|-
 |[[maxFrameSize]]`@maxFrameSize`|`Number (int)`|-
 |[[metricsName]]`@metricsName`|`String`|-
-|[[openSslEngineOptions]]`@openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
-|[[pemKeyCertOptions]]`@pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|-
-|[[pemTrustOptions]]`@pemTrustOptions`|`link:dataobjects.html#PemTrustOptions[PemTrustOptions]`|-
-|[[pfxKeyCertOptions]]`@pfxKeyCertOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
-|[[pfxTrustOptions]]`@pfxTrustOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
-|[[proxyOptions]]`@proxyOptions`|`link:dataobjects.html#ProxyOptions[ProxyOptions]`|-
 |[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|-
 |[[reconnectAttempts]]`@reconnectAttempts`|`Number (int)`|-
 |[[reconnectInterval]]`@reconnectInterval`|`Number (long)`|-
@@ -62,7 +54,6 @@ Sets whether the bridge should try to enable support for sending messages with a
 |[[tcpQuickAck]]`@tcpQuickAck`|`Boolean`|-
 |[[trafficClass]]`@trafficClass`|`Number (int)`|-
 |[[trustAll]]`@trustAll`|`Boolean`|-
-|[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
 |[[usePooledBuffers]]`@usePooledBuffers`|`Boolean`|-
 |[[vhost]]`@vhost`|`String`|+++

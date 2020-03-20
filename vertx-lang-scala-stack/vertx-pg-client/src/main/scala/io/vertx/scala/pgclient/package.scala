@@ -141,6 +141,14 @@ package object pgclient{
 
   /**
     * A connection to Postgres.
+    * <P>
+    *   The connection object supports all the operations defined in the  interface,
+    *   it also provides additional support:
+    *   <ul>
+    *     <li>Notification</li>
+    *     <li>Request Cancellation</li>
+    *   </ul>
+    * </P>
     */
 
   implicit class PgConnectionScala(val asJava: io.vertx.pgclient.PgConnection) extends AnyVal {
@@ -154,30 +162,45 @@ package object pgclient{
       promise.future
     }
 
+    /**
+     * Like prepare from [[io.vertx.pgclient.PgConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
     def prepareFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.PreparedQuery] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.PreparedQuery]()
       asJava.prepare(sql, {a:AsyncResult[io.vertx.sqlclient.PreparedQuery] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
+    /**
+     * Like preparedQuery from [[io.vertx.pgclient.PgConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
     def preparedQueryFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
       asJava.preparedQuery(sql, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
+    /**
+     * Like query from [[io.vertx.pgclient.PgConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
     def queryFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
       asJava.query(sql, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
+    /**
+     * Like preparedQuery from [[io.vertx.pgclient.PgConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
     def preparedQueryFuture(sql: java.lang.String,arguments: io.vertx.sqlclient.Tuple): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
       asJava.preparedQuery(sql, arguments, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
+    /**
+     * Like preparedBatch from [[io.vertx.pgclient.PgConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
     def preparedBatchFuture(sql: java.lang.String,batch: java.util.List[io.vertx.sqlclient.Tuple]): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
       asJava.preparedBatch(sql, batch, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
@@ -198,29 +221,41 @@ package object pgclient{
 
 
   /**
-    * A pool of PostgreSQL connections.
+    * A  of [[io.vertx.pgclient.PgConnection]].
     */
 
   implicit class PgPoolScala(val asJava: io.vertx.pgclient.PgPool) extends AnyVal {
 
+    /**
+     * Like preparedQuery from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
     def preparedQueryFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
       asJava.preparedQuery(sql, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
+    /**
+     * Like query from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
     def queryFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
       asJava.query(sql, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
+    /**
+     * Like preparedQuery from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
     def preparedQueryFuture(sql: java.lang.String,arguments: io.vertx.sqlclient.Tuple): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
       asJava.preparedQuery(sql, arguments, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
+    /**
+     * Like preparedBatch from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
     def preparedBatchFuture(sql: java.lang.String,batch: java.util.List[io.vertx.sqlclient.Tuple]): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
       asJava.preparedBatch(sql, batch, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})

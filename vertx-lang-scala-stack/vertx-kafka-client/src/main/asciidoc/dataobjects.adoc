@@ -12,9 +12,6 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[entries]]`@entries`|`Array of link:dataobjects.html#ConfigEntry[ConfigEntry]`|+++
-Set the configuration entries for a resource
-+++
 |===
 
 [[ConfigEntry]]
@@ -43,9 +40,6 @@ Set whether the config value is sensitive. The value is always set to null by th
 +++
 |[[source]]`@source`|`link:enums.html#ConfigSource[ConfigSource]`|+++
 Set the source of this configuration entry
-+++
-|[[synonyms]]`@synonyms`|`Array of link:dataobjects.html#ConfigSynonym[ConfigSynonym]`|+++
-Set all config values that may be used as the value of this config along with their source, in the order of precedence
 +++
 |[[value]]`@value`|`String`|+++
 Set the value or null. Null is returned if the config is unset or if isSensitive is true
@@ -110,14 +104,8 @@ Set the value of this configuration, which may be null if the configuration is s
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[coordinator]]`@coordinator`|`link:dataobjects.html#Node[Node]`|+++
-Set the consumer group coordinator, or null if the coordinator is not known
-+++
 |[[groupId]]`@groupId`|`String`|+++
 Set the id of the consumer group
-+++
-|[[members]]`@members`|`Array of link:dataobjects.html#MemberDescription[MemberDescription]`|+++
-Set a list of the members of the consumer group
 +++
 |[[partitionAssignor]]`@partitionAssignor`|`String`|+++
 Set the consumer group partition assignor
@@ -162,9 +150,6 @@ Set if consumer group is simple or not
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[topicPartitions]]`@topicPartitions`|`Array of link:dataobjects.html#TopicPartition[TopicPartition]`|+++
-Set the list of topic partitions
-+++
 |===
 
 [[MemberDescription]]
@@ -179,9 +164,6 @@ Set the list of topic partitions
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[assignment]]`@assignment`|`link:dataobjects.html#MemberAssignment[MemberAssignment]`|+++
-Set the assignment of the group member
-+++
 |[[clientId]]`@clientId`|`String`|+++
 Set the client id of the group member
 +++
@@ -309,17 +291,8 @@ Set the timestamp
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[inSyncReplicas]]`@inSyncReplicas`|`Array of link:dataobjects.html#Node[Node]`|+++
-Set the subset of the replicas that are in sync
-+++
-|[[leader]]`@leader`|`link:dataobjects.html#Node[Node]`|+++
-Set the node id of the node currently acting as a leader
-+++
 |[[partition]]`@partition`|`Number (int)`|+++
 Set the partition id
-+++
-|[[replicas]]`@replicas`|`Array of link:dataobjects.html#Node[Node]`|+++
-Set the complete set of replicas for this partition
 +++
 |[[topic]]`@topic`|`String`|+++
 Set the topic name
@@ -373,10 +346,6 @@ Set whether the topic is internal to Kafka.
 |[[name]]`@name`|`String`|+++
 Set the name of the topic.
 +++
-|[[partitions]]`@partitions`|`Array of link:dataobjects.html#TopicPartitionInfo[TopicPartitionInfo]`|+++
-Set A list of partitions where the index represents the partition id and the element
- contains leadership and replica information for that partition.
-+++
 |===
 
 [[TopicPartition]]
@@ -411,17 +380,8 @@ Set the topic name
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[isr]]`@isr`|`Array of link:dataobjects.html#Node[Node]`|+++
-Set the subset of the replicas that are in sync
-+++
-|[[leader]]`@leader`|`link:dataobjects.html#Node[Node]`|+++
-Set the node id of the node currently acting as a leader
-+++
 |[[partition]]`@partition`|`Number (int)`|+++
 Set the partition id
-+++
-|[[replicas]]`@replicas`|`Array of link:dataobjects.html#Node[Node]`|+++
-Set the complete set of replicas for this partition
 +++
 |===
 

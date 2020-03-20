@@ -18,9 +18,6 @@
 |[[columnNames]]`@columnNames`|`Array of String`|+++
 Get the column names
 +++
-|[[next]]`@next`|`link:dataobjects.html#ResultSet[ResultSet]`|+++
-Get the next result set
-+++
 |[[numColumns]]`@numColumns`|`Number (int)`|+++
 Return the number of columns in the result set
 +++

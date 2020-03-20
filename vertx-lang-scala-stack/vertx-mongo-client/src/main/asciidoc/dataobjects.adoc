@@ -139,9 +139,6 @@ Set the sort document
 |[[key]]`@key`|`Json object`|+++
 Get the index key
 +++
-|[[options]]`@options`|`link:dataobjects.html#IndexOptions[IndexOptions]`|+++
-Get the index options
-+++
 |===
 
 [[IndexOptions]]

@@ -26,21 +26,6 @@ Set the JMX domain to use when JMX metrics are enabled.
 |[[jmxEnabled]]`@jmxEnabled`|`Boolean`|+++
 Set whether JMX will be enabled on the Vert.x instance.
 +++
-|[[monitoredEventBusHandlers]]`@monitoredEventBusHandlers`|`Array of link:dataobjects.html#Match[Match]`|+++
-Add a monitored event bus handler.
-+++
-|[[monitoredHttpClientEndpoint]]`@monitoredHttpClientEndpoint`|`Array of link:dataobjects.html#Match[Match]`|+++
-
-+++
-|[[monitoredHttpClientEndpoints]]`@monitoredHttpClientEndpoints`|`Array of link:dataobjects.html#Match[Match]`|+++
-Add an monitored http client endpoint.
-+++
-|[[monitoredHttpClientUris]]`@monitoredHttpClientUris`|`Array of link:dataobjects.html#Match[Match]`|+++
-Add an monitored http client uri.
-+++
-|[[monitoredHttpServerUris]]`@monitoredHttpServerUris`|`Array of link:dataobjects.html#Match[Match]`|+++
-Add an monitored http server uri.
-+++
 |[[registryName]]`@registryName`|`String`|+++
 Set the name used for registering the metrics in the Dropwizard shared registry.
 +++

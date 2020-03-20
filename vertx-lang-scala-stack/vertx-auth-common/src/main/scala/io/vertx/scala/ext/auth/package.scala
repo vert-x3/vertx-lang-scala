@@ -41,8 +41,6 @@ package object auth{
 
 
 
-
-
   /**
     *
     * User-facing interface for authenticating users.

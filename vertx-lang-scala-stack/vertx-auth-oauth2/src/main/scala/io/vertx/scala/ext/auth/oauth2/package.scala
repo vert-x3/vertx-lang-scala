@@ -149,10 +149,10 @@ package object oauth2{
      * With this provider, if the given configuration is using the flow type  then
      * the extra parameters object will include `requested_token_use = on_behalf_of` as required by
      * <a href="https://docs.microsoft.com/en-us/azure/active-directory/develop/v1-oauth2-on-behalf-of-flow">https://docs.microsoft.com/en-us/azure/active-directory</a>.     * @param vertx the vertx instance
-     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2ClientOptions.html">OAuth2ClientOptions</a>
+     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2Options.html">OAuth2Options</a>
      * @param handler the instantiated Oauth2 provider instance handler
      */
-    def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2ClientOptions,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
+    def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.AzureADAuth.discover(vertx, config, {p:AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => handler(p)})
     }
   }
@@ -297,10 +297,10 @@ package object oauth2{
      * 
      * If the discovered config includes a json web key url, it will be also fetched and the JWKs will be loaded
      * into the OAuth provider so tokens can be decoded.     * @param vertx the vertx instance
-     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2ClientOptions.html">OAuth2ClientOptions</a>
+     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2Options.html">OAuth2Options</a>
      * @param handler the instantiated Oauth2 provider instance handler
      */
-    def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2ClientOptions,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
+    def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.GoogleAuth.discover(vertx, config, {p:AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => handler(p)})
     }
     /**
@@ -393,10 +393,10 @@ package object oauth2{
      * 
      * If the discovered config includes a json web key url, it will be also fetched and the JWKs will be loaded
      * into the OAuth provider so tokens can be decoded.     * @param vertx the vertx instance
-     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2ClientOptions.html">OAuth2ClientOptions</a>
+     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2Options.html">OAuth2Options</a>
      * @param handler the instantiated Oauth2 provider instance handler
      */
-    def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2ClientOptions,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
+    def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.KeycloakAuth.discover(vertx, config, {p:AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => handler(p)})
     }
   }
@@ -482,7 +482,7 @@ package object oauth2{
     /**
      * Factory method to create a RBAC handler for tokens adhering to the Keycloak token format.     * @return a RBAC validator
      */
-    def create(options: io.vertx.ext.auth.oauth2.OAuth2ClientOptions) = {
+    def create(options: io.vertx.ext.auth.oauth2.OAuth2Options) = {
       io.vertx.ext.auth.oauth2.rbac.KeycloakRBAC.create(options)
     }
   }
@@ -656,6 +656,15 @@ package object oauth2{
 
 
 
+  type OAuth2Options = io.vertx.ext.auth.oauth2.OAuth2Options
+  object OAuth2Options {
+    def apply() = new OAuth2Options()
+    def apply(json: JsonObject) = new OAuth2Options(json)
+  }
+
+
+
+
   /**
     * Functional interface that allows users to implement custom RBAC verifiers for OAuth2/OpenId Connect.
     *
@@ -691,10 +700,10 @@ package object oauth2{
      * 
      * If the discovered config includes a json web key url, it will be also fetched and the JWKs will be loaded
      * into the OAuth provider so tokens can be decoded.     * @param vertx the vertx instance
-     * @param config the initial config, it should contain a site url see <a href="../../../../../../../../../cheatsheet/OAuth2ClientOptions.html">OAuth2ClientOptions</a>
+     * @param config the initial config, it should contain a site url see <a href="../../../../../../../../../cheatsheet/OAuth2Options.html">OAuth2Options</a>
      * @param handler the instantiated Oauth2 provider instance handler
      */
-    def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2ClientOptions,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
+    def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.OpenIDConnectAuth.discover(vertx, config, {p:AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => handler(p)})
     }
   }
@@ -723,10 +732,10 @@ package object oauth2{
      * 
      * If the discovered config includes a json web key url, it will be also fetched and the JWKs will be loaded
      * into the OAuth provider so tokens can be decoded.     * @param vertx the vertx instance
-     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2ClientOptions.html">OAuth2ClientOptions</a>
+     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2Options.html">OAuth2Options</a>
      * @param handler the instantiated Oauth2 provider instance handler
      */
-    def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2ClientOptions,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
+    def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.SalesforceAuth.discover(vertx, config, {p:AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => handler(p)})
     }
   }

@@ -68,7 +68,7 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-codegen</artifactId>
       <classifier>tck</classifier>
-      <scope>test</scope>
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
@@ -98,6 +98,11 @@
       <groupId>org.scala-lang.modules</groupId>
       <artifactId>scala-java8-compat_2.13</artifactId>
       <version>0.9.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.scala-lang.modules</groupId>
+      <artifactId>scala-collection-compat_2.13</artifactId>
+      <version>2.1.4</version>
     </dependency>
   </dependencies>
 
@@ -204,7 +209,7 @@
                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
               </processors>
               <optionMap>
-                <outputDirectory>${project.basedir}/src/main</outputDirectory>
+                <codegen.output>${project.basedir}/src/main</codegen.output>
                 <docgen.output>${asciidoc.dir}/scala</docgen.output>
               </optionMap>
               <sourceDirectory>${project.build.directory}/sources/vertx-core</sourceDirectory>
@@ -222,7 +227,7 @@
                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
               </processors>
               <optionMap>
-                <outputDirectory>${project.basedir}/src/test</outputDirectory>
+                <codegen.output>${project.basedir}/src/test</codegen.output>
               </optionMap>
               <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory>
             </configuration>
@@ -239,7 +244,7 @@
                 <processor>io.vertx.docgen.DocGenProcessor</processor>
               </processors>
               <optionMap>
-                <outputDirectory>${project.basedir}/src/main</outputDirectory>
+                <codegen.output>${project.basedir}/src/main</codegen.output>
                 <docgen.output>${asciidoc.dir}/scala</docgen.output>
                 <maven.groupId>${project.groupId}</maven.groupId>
                 <maven.artifactId>${project.artifactId}</maven.artifactId>
@@ -260,7 +265,7 @@
                 <processor>io.vertx.docgen.DocGenProcessor</processor>
               </processors>
               <optionMap>
-                <outputDirectory>${project.basedir}/src/main</outputDirectory>
+                <codegen.output>${project.basedir}/src/main</codegen.output>
                 <docgen.output>${asciidoc.dir}/scala</docgen.output>
                 <maven.groupId>${project.groupId}</maven.groupId>
                 <maven.artifactId>${project.artifactId}</maven.artifactId>

@@ -197,11 +197,29 @@ package object rabbitmq{
     }
 
     /**
+     * Like exchangeBind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def exchangeBindFuture(destination: java.lang.String,source: java.lang.String,routingKey: java.lang.String,arguments: java.util.Map[String, AnyRef]): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.exchangeBind(destination, source, routingKey, arguments, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
      * Like exchangeUnbind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
     def exchangeUnbindFuture(destination: java.lang.String,source: java.lang.String,routingKey: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.exchangeUnbind(destination, source, routingKey, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like exchangeUnbind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def exchangeUnbindFuture(destination: java.lang.String,source: java.lang.String,routingKey: java.lang.String,arguments: java.util.Map[String, AnyRef]): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.exchangeUnbind(destination, source, routingKey, arguments, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -220,6 +238,33 @@ package object rabbitmq{
     def queueBindFuture(queue: java.lang.String,exchange: java.lang.String,routingKey: java.lang.String): scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.queueBind(queue, exchange, routingKey, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like queueBind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def queueBindFuture(queue: java.lang.String,exchange: java.lang.String,routingKey: java.lang.String,arguments: java.util.Map[String, AnyRef]): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.queueBind(queue, exchange, routingKey, arguments, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like queueUnbind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def queueUnbindFuture(queue: java.lang.String,exchange: java.lang.String,routingKey: java.lang.String): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.queueUnbind(queue, exchange, routingKey, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like queueUnbind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def queueUnbindFuture(queue: java.lang.String,exchange: java.lang.String,routingKey: java.lang.String,arguments: java.util.Map[String, AnyRef]): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.queueUnbind(queue, exchange, routingKey, arguments, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 

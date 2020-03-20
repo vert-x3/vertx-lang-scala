@@ -101,9 +101,6 @@ Set the status of check
 |[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested list of checks
 +++
-|[[list]]`@list`|`Array of link:dataobjects.html#Check[Check]`|+++
-Set list of checks
-+++
 |===
 
 [[CheckOptions]]
@@ -185,9 +182,6 @@ Set Time to Live of check.
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[blockingOptions]]`@blockingOptions`|`link:dataobjects.html#BlockingQueryOptions[BlockingQueryOptions]`|+++
-Set options for blocking query
-+++
 |[[near]]`@near`|`String`|+++
 Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
 +++
@@ -284,17 +278,10 @@ Set the idle timeout, in seconds. zero means don't timeout.
 |[[idleTimeoutUnit]]`@idleTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|+++
 Set the idle timeout unit. If not specified, default is seconds.
 +++
-|[[initialSettings]]`@initialSettings`|`link:dataobjects.html#Http2Settings[Http2Settings]`|+++
-Set the HTTP/2 connection settings immediately sent by to the server when the client connects.
-+++
-|[[jdkSslEngineOptions]]`@jdkSslEngineOptions`|`link:dataobjects.html#JdkSSLEngineOptions[JdkSSLEngineOptions]`|-
 |[[keepAlive]]`@keepAlive`|`Boolean`|+++
 Set whether keep alive is enabled on the client
 +++
 |[[keepAliveTimeout]]`@keepAliveTimeout`|`Number (int)`|-
-|[[keyStoreOptions]]`@keyStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|+++
-Set the key/cert options in jks format, aka Java keystore.
-+++
 |[[localAddress]]`@localAddress`|`String`|+++
 Set the local interface to bind for network connections. When the local address is null,
  it will pick any local address, the default local address is null.
@@ -331,19 +318,6 @@ Set the max websocket message size
 Set the metrics name identifying the reported metrics, useful for grouping metrics
  with the same name.
 +++
-|[[openSslEngineOptions]]`@openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
-|[[pemKeyCertOptions]]`@pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|+++
-Set the key/cert store options in pem format.
-+++
-|[[pemTrustOptions]]`@pemTrustOptions`|`link:dataobjects.html#PemTrustOptions[PemTrustOptions]`|+++
-Set the trust options.
-+++
-|[[pfxKeyCertOptions]]`@pfxKeyCertOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|+++
-Set the key/cert options in pfx format.
-+++
-|[[pfxTrustOptions]]`@pfxTrustOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|+++
-Set the trust options in pfx format
-+++
 |[[pipelining]]`@pipelining`|`Boolean`|+++
 Set whether pipe-lining is enabled on the client
 +++
@@ -353,9 +327,6 @@ Set the limit of pending requests a pipe-lined HTTP/1 connection can send.
 |[[poolCleanerPeriod]]`@poolCleanerPeriod`|`Number (int)`|-
 |[[protocolVersion]]`@protocolVersion`|`link:enums.html#HttpVersion[HttpVersion]`|+++
 Set the protocol version.
-+++
-|[[proxyOptions]]`@proxyOptions`|`link:dataobjects.html#ProxyOptions[ProxyOptions]`|+++
-Set proxy options for connections via CONNECT proxy (e.g. Squid) or a SOCKS proxy.
 +++
 |[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|+++
 Set the TCP receive buffer size
@@ -408,9 +379,6 @@ Set the value of traffic class
 +++
 |[[trustAll]]`@trustAll`|`Boolean`|+++
 Set whether all server certificates should be trusted
-+++
-|[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|+++
-Set the trust options in jks format, aka Java truststore
 +++
 |[[tryUseCompression]]`@tryUseCompression`|`Boolean`|+++
 Set whether compression is enabled
@@ -479,9 +447,6 @@ Set vector
 |[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested coordinates
 +++
-|[[list]]`@list`|`Array of link:dataobjects.html#Coordinate[Coordinate]`|+++
-Set list of coordinates
-+++
 |===
 
 [[DcCoordinates]]
@@ -498,9 +463,6 @@ Set list of coordinates
 ^|Name | Type ^| Description
 |[[datacenter]]`@datacenter`|`String`|+++
 Set datacenter
-+++
-|[[servers]]`@servers`|`Array of link:dataobjects.html#Coordinate[Coordinate]`|+++
-Set list of servers in datacenter
 +++
 |===
 
@@ -557,9 +519,6 @@ Set version
 |[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested events
 +++
-|[[list]]`@list`|`Array of link:dataobjects.html#Event[Event]`|+++
-Set list of events
-+++
 |===
 
 [[EventListOptions]]
@@ -574,9 +533,6 @@ Set list of events
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[blockingOptions]]`@blockingOptions`|`link:dataobjects.html#BlockingQueryOptions[BlockingQueryOptions]`|+++
-Set options for blocking query
-+++
 |[[name]]`@name`|`String`|+++
 Set event name for filtering on events
 +++
@@ -657,9 +613,6 @@ Set the value
 ^|Name | Type ^| Description
 |[[index]]`@index`|`Number (long)`|+++
 Set Consul index
-+++
-|[[list]]`@list`|`Array of link:dataobjects.html#KeyValue[KeyValue]`|+++
-Set list of key/value pairs
 +++
 |===
 
@@ -759,9 +712,6 @@ Set node wan address
 |[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested list of nodes
 +++
-|[[list]]`@list`|`Array of link:dataobjects.html#Node[Node]`|+++
-Set list of nodes
-+++
 |===
 
 [[NodeQueryOptions]]
@@ -776,9 +726,6 @@ Set list of nodes
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[blockingOptions]]`@blockingOptions`|`link:dataobjects.html#BlockingQueryOptions[BlockingQueryOptions]`|+++
-Set options for blocking query
-+++
 |[[near]]`@near`|`String`|+++
 Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
 +++
@@ -894,9 +841,6 @@ Set the TTL duration when query results are served over DNS. If this is specifie
 |[[failovers]]`@failovers`|`Number (int)`|+++
 Set the number of remote datacenters that were queried while executing the query.
 +++
-|[[nodes]]`@nodes`|`Array of link:dataobjects.html#ServiceEntry[ServiceEntry]`|+++
-Set the list of healthy nodes providing the given service, as specified by the constraints of the prepared query.
-+++
 |[[service]]`@service`|`String`|+++
 Set the service name that the query was selecting.
  This is useful for context in case an empty list of nodes is returned.
@@ -953,15 +897,6 @@ Set list of service tags
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[checks]]`@checks`|`Array of link:dataobjects.html#Check[Check]`|+++
-Set list of checks
-+++
-|[[node]]`@node`|`link:dataobjects.html#Node[Node]`|+++
-Set node
-+++
-|[[service]]`@service`|`link:dataobjects.html#Service[Service]`|+++
-Set service
-+++
 |===
 
 [[ServiceEntryList]]
@@ -978,9 +913,6 @@ Set service
 ^|Name | Type ^| Description
 |[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested list of services
-+++
-|[[list]]`@list`|`Array of link:dataobjects.html#ServiceEntry[ServiceEntry]`|+++
-Set list of services
 +++
 |===
 
@@ -999,9 +931,6 @@ Set list of services
 |[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested list of services
 +++
-|[[list]]`@list`|`Array of link:dataobjects.html#Service[Service]`|+++
-Set list of services
-+++
 |===
 
 [[ServiceOptions]]
@@ -1018,9 +947,6 @@ Set list of services
 ^|Name | Type ^| Description
 |[[address]]`@address`|`String`|+++
 Set service address
-+++
-|[[checkOptions]]`@checkOptions`|`link:dataobjects.html#CheckOptions[CheckOptions]`|+++
-Set check options of service
 +++
 |[[id]]`@id`|`String`|+++
 Set the ID of session
@@ -1051,9 +977,6 @@ Set list of tags associated with service
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[blockingOptions]]`@blockingOptions`|`link:dataobjects.html#BlockingQueryOptions[BlockingQueryOptions]`|+++
-Set options for blocking query
-+++
 |[[near]]`@near`|`String`|+++
 Set node name for sorting the list in ascending order based on the estimated round trip time from that node.
 +++
@@ -1108,9 +1031,6 @@ Set the ID of node
 ^|Name | Type ^| Description
 |[[index]]`@index`|`Number (long)`|+++
 Set Consul index, a unique identifier representing the current state of the requested list of sessions
-+++
-|[[list]]`@list`|`Array of link:dataobjects.html#Session[Session]`|+++
-Set list of sessions
 +++
 |===
 
@@ -1237,9 +1157,6 @@ Returns the number of operations in this request
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[errors]]`@errors`|`Array of link:dataobjects.html#TxnError[TxnError]`|+++
-Adds error to this response
-+++
 |[[errorsSize]]`@errorsSize`|`Number (int)`|+++
 Returns the number of errors in this response
 +++

@@ -23,7 +23,7 @@ package object ${moduleName}{
   <#include "extensions/Json.ftl">
 </#if>
 </#if>
-<#if type.kind == CLASS_DATA_OBJECT>
+<#if type.dataObject??>
   <#include "implicit_dataobject.ftl">
 <#elseif !type.name?contains("Handler") && futureMethods?has_content>
   <#include "class.ftl">

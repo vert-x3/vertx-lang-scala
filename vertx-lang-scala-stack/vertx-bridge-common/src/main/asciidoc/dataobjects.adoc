@@ -12,12 +12,6 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[inboundPermitteds]]`@inboundPermitteds`|`Array of link:dataobjects.html#PermittedOptions[PermittedOptions]`|+++
-Sets the list of inbound permitted options.
-+++
-|[[outboundPermitteds]]`@outboundPermitteds`|`Array of link:dataobjects.html#PermittedOptions[PermittedOptions]`|+++
-Sets the list of outbound permitted options.
-+++
 |===
 
 [[PermittedOptions]]

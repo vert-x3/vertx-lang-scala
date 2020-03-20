@@ -26,7 +26,6 @@
 |===
 ^|Name | Type ^| Description
 |[[booleanValues]]`@booleanValues`|`Array of Boolean`|-
-|[[dataObjectValues]]`@dataObjectValues`|`Array of link:dataobjects.html#TestDataObject[TestDataObject]`|-
 |[[doubleValues]]`@doubleValues`|`Array of Number (Double)`|-
 |[[enumValues]]`@enumValues`|`Array of link:enums.html#TestEnum[TestEnum]`|-
 |[[floatValues]]`@floatValues`|`Array of Number (Float)`|-
@@ -52,7 +51,6 @@
 |===
 ^|Name | Type ^| Description
 |[[booleanValues]]`@booleanValues`|`Array of Boolean`|-
-|[[dataObjectValues]]`@dataObjectValues`|`Array of link:dataobjects.html#TestDataObject[TestDataObject]`|-
 |[[doubleValues]]`@doubleValues`|`Array of Number (Double)`|-
 |[[enumValues]]`@enumValues`|`Array of link:enums.html#TestEnum[TestEnum]`|-
 |[[floatValues]]`@floatValues`|`Array of Number (Float)`|-
@@ -78,7 +76,6 @@
 |===
 ^|Name | Type ^| Description
 |[[booleanValues]]`@booleanValues`|`Boolean`|-
-|[[dataObjectValues]]`@dataObjectValues`|`link:dataobjects.html#TestDataObject[TestDataObject]`|-
 |[[doubleValues]]`@doubleValues`|`Number (Double)`|-
 |[[enumValues]]`@enumValues`|`link:enums.html#TestEnum[TestEnum]`|-
 |[[floatValues]]`@floatValues`|`Number (Float)`|-
@@ -104,7 +101,6 @@
 |===
 ^|Name | Type ^| Description
 |[[booleanValues]]`@booleanValues`|`Boolean`|-
-|[[dataObjectValues]]`@dataObjectValues`|`link:dataobjects.html#TestDataObject[TestDataObject]`|-
 |[[doubleValues]]`@doubleValues`|`Number (Double)`|-
 |[[enumValues]]`@enumValues`|`link:enums.html#TestEnum[TestEnum]`|-
 |[[floatValues]]`@floatValues`|`Number (Float)`|-
@@ -131,7 +127,6 @@
 ^|Name | Type ^| Description
 |[[buffer]]`@buffer`|`Buffer`|-
 |[[buffers]]`@buffers`|`Array of Buffer`|-
-|[[nested]]`@nested`|`link:dataobjects.html#DataObjectWithBuffer[DataObjectWithBuffer]`|-
 |===
 
 [[DataObjectWithOnlyJsonObjectConstructor]]
@@ -160,7 +155,6 @@
 |===
 ^|Name | Type ^| Description
 |[[data]]`@data`|`String`|-
-|[[next]]`@next`|`link:dataobjects.html#DataObjectWithRecursion[DataObjectWithRecursion]`|-
 |===
 
 [[DataObjectWithValues]]
@@ -181,7 +175,6 @@
 |[[boxedIntValue]]`@boxedIntValue`|`Number (Integer)`|-
 |[[boxedLongValue]]`@boxedLongValue`|`Number (Long)`|-
 |[[boxedShortValue]]`@boxedShortValue`|`Number (Short)`|-
-|[[dataObjectValue]]`@dataObjectValue`|`link:dataobjects.html#TestDataObject[TestDataObject]`|-
 |[[doubleValue]]`@doubleValue`|`Number (double)`|-
 |[[enumValue]]`@enumValue`|`link:enums.html#TestEnum[TestEnum]`|-
 |[[floatValue]]`@floatValue`|`Number (float)`|-
