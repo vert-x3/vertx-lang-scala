@@ -35,25 +35,17 @@ Set the charset used for encoding / decoding text data from/to SockJS
 |[[http2ConnectionWindowSize]]`@http2ConnectionWindowSize`|`Number (int)`|-
 |[[idleTimeout]]`@idleTimeout`|`Number (int)`|-
 |[[idleTimeoutUnit]]`@idleTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|-
-|[[initialSettings]]`@initialSettings`|`link:dataobjects.html#Http2Settings[Http2Settings]`|-
 |[[intputrc]]`@intputrc`|`String`|+++
 The path of the <i>inputrc</i> config.
 +++
-|[[jdkSslEngineOptions]]`@jdkSslEngineOptions`|`link:dataobjects.html#JdkSSLEngineOptions[JdkSSLEngineOptions]`|-
-|[[keyStoreOptions]]`@keyStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[logActivity]]`@logActivity`|`Boolean`|-
 |[[maxChunkSize]]`@maxChunkSize`|`Number (int)`|-
 |[[maxHeaderSize]]`@maxHeaderSize`|`Number (int)`|-
 |[[maxInitialLineLength]]`@maxInitialLineLength`|`Number (int)`|-
 |[[maxWebSocketFrameSize]]`@maxWebSocketFrameSize`|`Number (int)`|-
 |[[maxWebSocketMessageSize]]`@maxWebSocketMessageSize`|`Number (int)`|-
-|[[openSslEngineOptions]]`@openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
-|[[pemKeyCertOptions]]`@pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|-
-|[[pemTrustOptions]]`@pemTrustOptions`|`link:dataobjects.html#PemTrustOptions[PemTrustOptions]`|-
 |[[perFrameWebSocketCompressionSupported]]`@perFrameWebSocketCompressionSupported`|`Boolean`|-
 |[[perMessageWebSocketCompressionSupported]]`@perMessageWebSocketCompressionSupported`|`Boolean`|-
-|[[pfxKeyCertOptions]]`@pfxKeyCertOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
-|[[pfxTrustOptions]]`@pfxTrustOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
 |[[port]]`@port`|`Number (int)`|-
 |[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|-
 |[[reuseAddress]]`@reuseAddress`|`Boolean`|-
@@ -64,9 +56,6 @@ Set <code>shell.html</code> resource to use.
 +++
 |[[sni]]`@sni`|`Boolean`|-
 |[[soLinger]]`@soLinger`|`Number (int)`|-
-|[[sockJSHandlerOptions]]`@sockJSHandlerOptions`|`link:dataobjects.html#SockJSHandlerOptions[SockJSHandlerOptions]`|+++
-The SockJS handler options.
-+++
 |[[sockJSPath]]`@sockJSPath`|`String`|+++
 Configure the SockJS path, the default value is <code>/term/*</code>.
 +++
@@ -82,7 +71,6 @@ Configure the SockJS path, the default value is <code>/term/*</code>.
 Set <code>term.js</code> resource to use.
 +++
 |[[trafficClass]]`@trafficClass`|`Number (int)`|-
-|[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
 |[[vertsShellJsResource]]`@vertsShellJsResource`|`Buffer`|+++
 Set <code>vertxshell.js</code> resource to use.
@@ -116,15 +104,6 @@ Set the host
 +++
 |[[intputrc]]`@intputrc`|`String`|+++
 The path of the <i>inputrc</i> config.
-+++
-|[[keyPairOptions]]`@keyPairOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|+++
-Set the key pair options in jks format, aka Java keystore.
-+++
-|[[pemKeyPairOptions]]`@pemKeyPairOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|+++
-Set the key pair store options in pem format.
-+++
-|[[pfxKeyPairOptions]]`@pfxKeyPairOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|+++
-Set the key pair options in pfx format.
 +++
 |[[port]]`@port`|`Number (int)`|+++
 Set the port
@@ -167,18 +146,11 @@ Set the shell welcome message, i.e the message displayed in the user console whe
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[httpOptions]]`@httpOptions`|`link:dataobjects.html#HttpTermOptions[HttpTermOptions]`|-
 |[[reaperInterval]]`@reaperInterval`|`Number (long)`|+++
 Set the repear interval, i.e the period at which session eviction is performed.
 +++
 |[[sessionTimeout]]`@sessionTimeout`|`Number (long)`|+++
 Set the session timeout.
-+++
-|[[sshOptions]]`@sshOptions`|`link:dataobjects.html#SSHTermOptions[SSHTermOptions]`|+++
-Set the SSH options, if the option is null, SSH will not be started.
-+++
-|[[telnetOptions]]`@telnetOptions`|`link:dataobjects.html#TelnetTermOptions[TelnetTermOptions]`|+++
-Set the Telnet options, if the option is null, Telnet will not be started.
 +++
 |[[welcomeMessage]]`@welcomeMessage`|`String`|+++
 Set the shell welcome message, i.e the message displayed in the user console when he connects to the shell.
@@ -216,18 +188,11 @@ Set the telnet connection to negociate binary data format when receiving from th
 |[[intputrc]]`@intputrc`|`String`|+++
 The path of the <i>inputrc</i> config.
 +++
-|[[jdkSslEngineOptions]]`@jdkSslEngineOptions`|`link:dataobjects.html#JdkSSLEngineOptions[JdkSSLEngineOptions]`|-
-|[[keyStoreOptions]]`@keyStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[logActivity]]`@logActivity`|`Boolean`|-
-|[[openSslEngineOptions]]`@openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
 |[[outBinary]]`@outBinary`|`Boolean`|+++
 Set the telnet connection to negociate binary data format when sending to the client, the default value is true. This
  allows to send data in 8 bit format and thus charset like UTF-8.
 +++
-|[[pemKeyCertOptions]]`@pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|-
-|[[pemTrustOptions]]`@pemTrustOptions`|`link:dataobjects.html#PemTrustOptions[PemTrustOptions]`|-
-|[[pfxKeyCertOptions]]`@pfxKeyCertOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
-|[[pfxTrustOptions]]`@pfxTrustOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
 |[[port]]`@port`|`Number (int)`|-
 |[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|-
 |[[reuseAddress]]`@reuseAddress`|`Boolean`|-
@@ -244,7 +209,6 @@ Set the telnet connection to negociate binary data format when sending to the cl
 |[[tcpNoDelay]]`@tcpNoDelay`|`Boolean`|-
 |[[tcpQuickAck]]`@tcpQuickAck`|`Boolean`|-
 |[[trafficClass]]`@trafficClass`|`Number (int)`|-
-|[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
 |===
 

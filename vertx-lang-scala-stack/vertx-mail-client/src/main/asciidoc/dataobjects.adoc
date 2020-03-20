@@ -18,8 +18,8 @@
 |[[auid]]`@auid`|`String`|+++
 Sets the Agent or User Identifier(AUID)
 +++
-|[[bodyCanonic]]`@bodyCanonic`|`link:enums.html#MessageCanonic[MessageCanonic]`|+++
-Sets the message canonicalization for email body.
+|[[bodyCanonAlgo]]`@bodyCanonAlgo`|`link:enums.html#CanonicalizationAlgorithm[CanonicalizationAlgorithm]`|+++
+Sets the canonicalization algorithm for mail body.
 +++
 |[[bodyLimit]]`@bodyLimit`|`Number (int)`|+++
 Sets the body limit to sign.
@@ -32,8 +32,8 @@ Sets the expire time in seconds when the signature sign will be expired.
 
  Success call of this method indicates that the signature sign timestamp is enabled.
 +++
-|[[headerCanonic]]`@headerCanonic`|`link:enums.html#MessageCanonic[MessageCanonic]`|+++
-Sets the message canonicalization for email signedHeaders.
+|[[headerCanonAlgo]]`@headerCanonAlgo`|`link:enums.html#CanonicalizationAlgorithm[CanonicalizationAlgorithm]`|+++
+Sets the canonicalization algorithm for signed headers.
 +++
 |[[privateKey]]`@privateKey`|`String`|+++
 Sets the PKCS#8 format private key used to sign the email.
@@ -98,12 +98,6 @@ set if ESMTP should be tried as first command (EHLO)
  in that way, the property has to be set to false.
  <p>
 +++
-|[[dkimSignOption]]`@dkimSignOption`|`link:dataobjects.html#DKIMSignOptions[DKIMSignOptions]`|+++
-Sets one DKIMSignOptions for convenient.
-+++
-|[[dkimSignOptions]]`@dkimSignOptions`|`Array of link:dataobjects.html#DKIMSignOptions[DKIMSignOptions]`|+++
-Sets DKIMSignOptions.
-+++
 |[[enableDKIM]]`@enableDKIM`|`Boolean`|+++
 Sets true to enable DKIM Signatures, sets false to disable it.
 
@@ -119,7 +113,6 @@ Set the hostname of the smtp server.
 |[[hostnameVerificationAlgorithm]]`@hostnameVerificationAlgorithm`|`String`|-
 |[[idleTimeout]]`@idleTimeout`|`Number (int)`|-
 |[[idleTimeoutUnit]]`@idleTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|-
-|[[jdkSslEngineOptions]]`@jdkSslEngineOptions`|`link:dataobjects.html#JdkSSLEngineOptions[JdkSSLEngineOptions]`|-
 |[[keepAlive]]`@keepAlive`|`Boolean`|+++
 set if connection pool is enabled
  default is true
@@ -133,7 +126,6 @@ get the key store filename to be used when opening SMTP connections
  if not set, an options object will be created based on other settings (ssl
  and trustAll)
 +++
-|[[keyStoreOptions]]`@keyStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[keyStorePassword]]`@keyStorePassword`|`String`|+++
 get the key store password to be used when opening SMTP connections
 +++
@@ -149,21 +141,15 @@ set the max allowed number of open connections to the mail server
  if not set the default is 10
 +++
 |[[metricsName]]`@metricsName`|`String`|-
-|[[openSslEngineOptions]]`@openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
 |[[ownHostname]]`@ownHostname`|`String`|+++
 set the hostname to be used for HELO/EHLO and the Message-ID
 +++
 |[[password]]`@password`|`String`|+++
 Set the password for the login.
 +++
-|[[pemKeyCertOptions]]`@pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|-
-|[[pemTrustOptions]]`@pemTrustOptions`|`link:dataobjects.html#PemTrustOptions[PemTrustOptions]`|-
-|[[pfxKeyCertOptions]]`@pfxKeyCertOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
-|[[pfxTrustOptions]]`@pfxTrustOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
 |[[port]]`@port`|`Number (int)`|+++
 Set the port of the smtp server.
 +++
-|[[proxyOptions]]`@proxyOptions`|`link:dataobjects.html#ProxyOptions[ProxyOptions]`|-
 |[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|-
 |[[reconnectAttempts]]`@reconnectAttempts`|`Number (int)`|-
 |[[reconnectInterval]]`@reconnectInterval`|`Number (long)`|-
@@ -186,7 +172,6 @@ Set the tls security mode for the connection.
 |[[tcpQuickAck]]`@tcpQuickAck`|`Boolean`|-
 |[[trafficClass]]`@trafficClass`|`Number (int)`|-
 |[[trustAll]]`@trustAll`|`Boolean`|-
-|[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
 |[[userAgent]]`@userAgent`|`String`|+++
 Sets the Mail User Agent(MUA) name.

@@ -24,12 +24,12 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import io.vertx.sqlclient
-import io.vertx.ext.auth.sql.{SqlAuthenticationOptions => JSqlAuthenticationOptions}
 import io.vertx.sqlclient.{SqlClient => JSqlClient}
-import io.vertx.ext.auth.authentication.{AuthenticationProvider => JAuthenticationProvider}
-import io.vertx.ext.auth.authentication
-import scala.collection.JavaConverters._
-import io.vertx.ext.auth.sql.{SqlAuthentication => JSqlAuthentication}
+import io.vertx.core
+import io.vertx.core.{Future => JFuture}
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.ext.auth.sql.{SqlUserUtil => JSqlUserUtil}
 
 package object sql{
 
@@ -87,6 +87,55 @@ package object sql{
     def apply(json: JsonObject) = new SqlAuthorizationOptions(json)
   }
 
+
+
+
+  /**
+    * Utility to create users/roles/permissions. This is a helper class and not intended to be a full user
+    * management utility. While the standard authentication and authorization interfaces will require usually
+    * read only access to the database, in order to use this API a full read/write access must be granted.
+
+    */
+
+  implicit class SqlUserUtilScala(val asJava: io.vertx.ext.auth.sql.SqlUserUtil) extends AnyVal {
+
+    /**
+     * Like createUser from [[io.vertx.ext.auth.sql.SqlUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def createUserFuture(username: java.lang.String,password: java.lang.String): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.createUser(username, password, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like createHashedUser from [[io.vertx.ext.auth.sql.SqlUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def createHashedUserFuture(username: java.lang.String,hash: java.lang.String): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.createHashedUser(username, hash, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like createUserRole from [[io.vertx.ext.auth.sql.SqlUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def createUserRoleFuture(username: java.lang.String,role: java.lang.String): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.createUserRole(username, role, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like createRolePermission from [[io.vertx.ext.auth.sql.SqlUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def createRolePermissionFuture(role: java.lang.String,permission: java.lang.String): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.createRolePermission(role, permission, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
 
 
 }

@@ -12,8 +12,6 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[inboundPermitteds]]`@inboundPermitteds`|`Array of link:dataobjects.html#PermittedOptions[PermittedOptions]`|-
-|[[outboundPermitteds]]`@outboundPermitteds`|`Array of link:dataobjects.html#PermittedOptions[PermittedOptions]`|-
 |[[pointToPoint]]`@pointToPoint`|`Boolean`|-
 |===
 
@@ -94,26 +92,18 @@ Sets the STOMP server host. <code>0.0.0.0</code> by default.
 |[[hostnameVerificationAlgorithm]]`@hostnameVerificationAlgorithm`|`String`|-
 |[[idleTimeout]]`@idleTimeout`|`Number (int)`|-
 |[[idleTimeoutUnit]]`@idleTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|-
-|[[jdkSslEngineOptions]]`@jdkSslEngineOptions`|`link:dataobjects.html#JdkSSLEngineOptions[JdkSSLEngineOptions]`|-
-|[[keyStoreOptions]]`@keyStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[localAddress]]`@localAddress`|`String`|-
 |[[logActivity]]`@logActivity`|`Boolean`|-
 |[[login]]`@login`|`String`|+++
 Sets the login to use if the STOMP server is secured.
 +++
 |[[metricsName]]`@metricsName`|`String`|-
-|[[openSslEngineOptions]]`@openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
 |[[passcode]]`@passcode`|`String`|+++
 Sets the passcode to use if the STOMP server is secured.
 +++
-|[[pemKeyCertOptions]]`@pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|-
-|[[pemTrustOptions]]`@pemTrustOptions`|`link:dataobjects.html#PemTrustOptions[PemTrustOptions]`|-
-|[[pfxKeyCertOptions]]`@pfxKeyCertOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
-|[[pfxTrustOptions]]`@pfxTrustOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
 |[[port]]`@port`|`Number (int)`|+++
 Sets the STOMP server port. <code>61613</code> by default.
 +++
-|[[proxyOptions]]`@proxyOptions`|`link:dataobjects.html#ProxyOptions[ProxyOptions]`|-
 |[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|-
 |[[reconnectAttempts]]`@reconnectAttempts`|`Number (int)`|-
 |[[reconnectInterval]]`@reconnectInterval`|`Number (long)`|-
@@ -135,7 +125,6 @@ Sets whether or not an empty line should be appended to the written STOMP frame.
  default. This option is not compliant with the STOMP specification, and so is not documented on purpose.
 +++
 |[[trustAll]]`@trustAll`|`Boolean`|-
-|[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
 |[[useStompFrame]]`@useStompFrame`|`Boolean`|+++
 Sets whether or not the connection is made using the <code>STOMP</code> command instead of the <code>CONNECT</code> command.
@@ -172,8 +161,6 @@ Sets the heartbeat configuration.
 |[[host]]`@host`|`String`|-
 |[[idleTimeout]]`@idleTimeout`|`Number (int)`|-
 |[[idleTimeoutUnit]]`@idleTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|-
-|[[jdkSslEngineOptions]]`@jdkSslEngineOptions`|`link:dataobjects.html#JdkSSLEngineOptions[JdkSSLEngineOptions]`|-
-|[[keyStoreOptions]]`@keyStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[logActivity]]`@logActivity`|`Boolean`|-
 |[[maxBodyLength]]`@maxBodyLength`|`Number (int)`|+++
 Sets the max body length accepted by the server. 10 Mb by default.
@@ -193,11 +180,6 @@ Sets the maximum number of headers. 1000 by default.
 Sets the maximum of subscriptions a client is allowed to register. If a client exceeds this number, it receives
  an error and the connection is closed.
 +++
-|[[openSslEngineOptions]]`@openSslEngineOptions`|`link:dataobjects.html#OpenSSLEngineOptions[OpenSSLEngineOptions]`|-
-|[[pemKeyCertOptions]]`@pemKeyCertOptions`|`link:dataobjects.html#PemKeyCertOptions[PemKeyCertOptions]`|-
-|[[pemTrustOptions]]`@pemTrustOptions`|`link:dataobjects.html#PemTrustOptions[PemTrustOptions]`|-
-|[[pfxKeyCertOptions]]`@pfxKeyCertOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
-|[[pfxTrustOptions]]`@pfxTrustOptions`|`link:dataobjects.html#PfxOptions[PfxOptions]`|-
 |[[port]]`@port`|`Number (int)`|+++
 Sets the port on which the server is going to listen for TCP connection.
 +++
@@ -237,7 +219,6 @@ Sets whether or not an empty line should be appended to the written STOMP frame.
 Sets the chunk size when replaying a transaction. To avoid blocking the event loop for too long, large
  transactions are split into chunks, replayed one by one. This settings sets the chunk size.
 +++
-|[[trustStoreOptions]]`@trustStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
 |[[websocketBridge]]`@websocketBridge`|`Boolean`|+++
 Enables or disables the web socket bridge.

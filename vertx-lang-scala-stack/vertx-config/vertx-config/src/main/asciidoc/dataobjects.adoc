@@ -38,9 +38,6 @@ Enables or disables the inclusion of the default stored in the configuration.
 |[[scanPeriod]]`@scanPeriod`|`Number (long)`|+++
 Configures the scan period, in ms. This is the time amount between two checks of the configuration updates.
 +++
-|[[stores]]`@stores`|`Array of link:dataobjects.html#ConfigStoreOptions[ConfigStoreOptions]`|+++
-Sets the configuration stores.
-+++
 |===
 
 [[ConfigStoreOptions]]

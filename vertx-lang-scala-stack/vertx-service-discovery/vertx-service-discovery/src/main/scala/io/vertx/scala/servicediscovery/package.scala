@@ -66,6 +66,20 @@ package object servicediscovery{
      * This is a convenient method to avoid explicit lookup and then retrieval of the service. This method requires to
      * have the `clientClass` set with the expected set of client. This is important for usages not using Java so
      * you can pass the expected type.     * @param discovery the service discovery
+     * @param filter the filter
+     * @param clientClass the client class
+     * @param conf the configuration for message delivery
+     * @param resultHandler the result handler
+     * @return `null` - do not use
+     */
+    def getServiceProxy[T](discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,clientClass: Class[T],conf: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[T] => Unit) = {
+      io.vertx.servicediscovery.types.EventBusService.getServiceProxy[T](discovery, a => filter(a), clientClass, conf, {p:AsyncResult[T] => resultHandler(p)})
+    }
+    /**
+     * Lookup for a service record and if found, retrieve it and return the service object (used to consume the service).
+     * This is a convenient method to avoid explicit lookup and then retrieval of the service. This method requires to
+     * have the `clientClass` set with the expected set of client. This is important for usages not using Java so
+     * you can pass the expected type.     * @param discovery the service discovery
      * @param filter the filter as json object
      * @param clientClass the client class
      * @param resultHandler the result handler
@@ -73,6 +87,20 @@ package object servicediscovery{
      */
     def getServiceProxyWithJsonFilter[T](discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,clientClass: Class[T],resultHandler: AsyncResult[T] => Unit) = {
       io.vertx.servicediscovery.types.EventBusService.getServiceProxyWithJsonFilter[T](discovery, filter, clientClass, {p:AsyncResult[T] => resultHandler(p)})
+    }
+    /**
+     * Lookup for a service record and if found, retrieve it and return the service object (used to consume the service).
+     * This is a convenient method to avoid explicit lookup and then retrieval of the service. This method requires to
+     * have the `clientClass` set with the expected set of client. This is important for usages not using Java so
+     * you can pass the expected type.     * @param discovery the service discovery
+     * @param filter the filter as json object
+     * @param clientClass the client class
+     * @param conf the configuration for message delivery
+     * @param resultHandler the result handler
+     * @return `null` - do not use
+     */
+    def getServiceProxyWithJsonFilter[T](discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.core.json.JsonObject,clientClass: Class[T],conf: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[T] => Unit) = {
+      io.vertx.servicediscovery.types.EventBusService.getServiceProxyWithJsonFilter[T](discovery, filter, clientClass, conf, {p:AsyncResult[T] => resultHandler(p)})
     }
     /**
      * Creates a record based on the parameters.     * @param name the service name

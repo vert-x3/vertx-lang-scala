@@ -115,4 +115,44 @@ package object mongo{
 
 
 
+
+  /**
+    * Utility to create users/roles/permissions. This is a helper class and not intended to be a full user
+    * management utility. While the standard authentication and authorization interfaces will require usually
+    * read only access to the database, in order to use this API a full read/write access must be granted.
+
+    */
+
+  implicit class MongoUserUtilScala(val asJava: io.vertx.ext.auth.mongo.MongoUserUtil) extends AnyVal {
+
+    /**
+     * Like createUser from [[io.vertx.ext.auth.mongo.MongoUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def createUserFuture(username: java.lang.String,password: java.lang.String): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.createUser(username, password, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like createHashedUser from [[io.vertx.ext.auth.mongo.MongoUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def createHashedUserFuture(username: java.lang.String,hash: java.lang.String): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.createHashedUser(username, hash, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+    /**
+     * Like createUserRolesAndPermissions from [[io.vertx.ext.auth.mongo.MongoUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+    def createUserRolesAndPermissionsFuture(username: java.lang.String,roles: java.util.List[java.lang.String],permissions: java.util.List[java.lang.String]): scala.concurrent.Future[Unit] = {
+      val promise = concurrent.Promise[Unit]()
+      asJava.createUserRolesAndPermissions(username, roles, permissions, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      promise.future
+    }
+
+  }
+
+
 }

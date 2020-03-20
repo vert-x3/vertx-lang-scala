@@ -62,7 +62,7 @@ public class ScalaDocGenerator implements DocGenerator {
       else baselink = "../../" + coordinate.getArtifactId() + "/";
       return baselink + "enums.html#" + elt.getSimpleName().toString();
     }
-    if (type.getKind().equals(ClassKind.DATA_OBJECT)) {
+    if (type.getDataObject() != null) {
       String baselink = null;
       if (coordinate == null) baselink = "../";
       else baselink = "../../" + coordinate.getArtifactId() + "/";
@@ -115,7 +115,7 @@ public class ScalaDocGenerator implements DocGenerator {
   public String resolveLabel(Element elt, String defaultLabel) {
     if (elt.getKind().equals(ElementKind.METHOD)) {
       TypeInfo type = factory.create(elt.getEnclosingElement().asType());
-      if (type.getKind().equals(ClassKind.DATA_OBJECT)) {
+      if (type.getDataObject() != null) {
         String name = elt.getSimpleName().toString();
         if (name.startsWith("set") && name.length() > 3 && Character.isUpperCase(name.charAt(3))) name = java.beans.Introspector.decapitalize(name.substring(3));
         return name;

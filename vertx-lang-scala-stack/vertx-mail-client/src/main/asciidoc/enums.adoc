@@ -1,5 +1,22 @@
 = Enums
 
+[[CanonicalizationAlgorithm]]
+== CanonicalizationAlgorithm
+
+++++
+
+ Canonicalization Algorithm for DKIM.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[SIMPLE]]`SIMPLE`|-
+|[[RELAXED]]`RELAXED`|-
+|===
+
 [[DKIMSignAlgorithm]]
 == DKIMSignAlgorithm
 
@@ -43,23 +60,6 @@
 |[[NONE]]`NONE`|-
 |[[REQUIRED]]`REQUIRED`|-
 |[[XOAUTH2]]`XOAUTH2`|-
-|===
-
-[[MessageCanonic]]
-== MessageCanonic
-
-++++
-
- Message canonicalization for DKIM.
-++++
-'''
-
-[cols=">25%,75%"]
-[frame="topbot"]
-|===
-^|Name | Description
-|[[SIMPLE]]`SIMPLE`|-
-|[[RELAXED]]`RELAXED`|-
 |===
 
 [[StartTLSOptions]]
