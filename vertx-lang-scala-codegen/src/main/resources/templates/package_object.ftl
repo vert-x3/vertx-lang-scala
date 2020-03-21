@@ -3,7 +3,7 @@
 
 package ${modulePackage}
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -34,7 +34,7 @@ package object ${moduleName}{
 ${typeHelper.methodDoc(type, method, "    ", false)}
       </#if>
     def ${typeHelper.escapeIfKeyword(method.name)}<#if method.returnType.nullable>Option</#if>${typeHelper.assembleTypeParams(method.typeParams, true)}(<#list method.params as param>${typeHelper.escapeIfKeyword(param.name)}: ${typeHelper.wrapInOptionIfNullable(param.type.nullable, typeHelper.toScalaMethodParam(param.type))}<#sep>,</#list>) = {
-      <#if method.returnType.nullable>scala.Option(</#if>${typeHelper.invokeMethodWithoutConvertingReturn(type.name, type, method)}<#if method.returnType.nullable>)</#if>
+      <#if method.returnType.nullable>scala.Option(</#if>${typeHelper.invokeMethodWithoutConvertingReturn(type.name, method)}<#if method.returnType.nullable>)</#if>
     }
   </#list>
   }

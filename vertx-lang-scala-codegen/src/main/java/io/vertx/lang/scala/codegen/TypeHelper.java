@@ -32,10 +32,6 @@ public class TypeHelper {
     basicToWrapper = Collections.unmodifiableMap(writable);
   }
 
-  public static boolean doesTypeRequireConversion(TypeInfo type){
-    return type.getKind() != ClassKind.JSON_OBJECT && type.getKind() != ClassKind.JSON_ARRAY && type.getKind() != ClassKind.ENUM && !type.getName().equals("io.vertx.core.buffer.Buffer");
-  }
-
 
   public static String convertArgListToString(TypeInfo type, Function<TypeInfo,String> conversion) {
     if (type.isParameterized()) {
@@ -52,106 +48,26 @@ public class TypeHelper {
     return "";
   }
 
-  public static String convertScalaArgListToString(TypeInfo type) {
-    return convertArgListToString(type, TypeHelper::toScalaType);
-  }
-
   public static String convertJavaArgListToString(TypeInfo type) {
     return convertArgListToString(type, TypeHelper::toJavaType);
   }
 
+
   /**
-   * Generate conversion code to convert a given instance from Java to Scala.
-   * 'scala.Int.asInstanceOf[java.lang.Integer]' becomes 'scala.Int'
+   *
+   * NEW
    */
-  public static String toScalaWithConversion(String name, TypeInfo type,  Collection<TypeParamInfo>typeParams,  Collection<? extends TypeParamInfo> methodTypeParams) {
+  public static String toScalaWithConversion(String name, TypeInfo type) {
     boolean nullable = type.isNullable();
     ClassKind kind = type.getKind();
-    if (kind.basic) {
-      if (nullable) {
-        return "scala.Option(" + name + ".asInstanceOf[" + typeNameForPrimitiveScala(type) + "])";
-      }
-      return name + ".asInstanceOf[" + typeNameForPrimitiveScala(type) + "]";
-    } else if (kind == ClassKind.THROWABLE) {
-      return name;
-    } else if (kind == ClassKind.OBJECT) {
-      String ret = name;
-      if (type.isVariable()) {
-        ret = "toScala[" + type.getName() + "](" + name + ")";
-        if (nullable) {
-          ret = "scala.Option(" + ret + ")";
-        }
-        return ret;
-      }
-      return ret;
-    } else if (kind == ClassKind.VOID || type.getName().equals("java.lang.Void") || type.getName().equals("void")) {
-      return name;
-    } else if (kind == ClassKind.JSON_OBJECT || kind == ClassKind.JSON_ARRAY || kind == ClassKind.ENUM || type.getName().equals("io.vertx.core.buffer.Buffer")) {
-      if (nullable) {
-        return "scala.Option(" + name + ")";
-      }
-      return name;
-    } else if (type.getDataObject() != null) {
-      if (nullable) {
-        return "scala.Option(" + name + ")";
-      }
-      return type.getSimpleName();
-    } else if (kind == ClassKind.API) {
-      String args = convertScalaArgListToString(type);
-      if (nullable) {
-        return "scala.Option(" + name + ")";
-      }
-      return type.getSimpleName();
-    } else if (kind == ClassKind.HANDLER) {
-      ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-      return "{x: " + toScalaType(parameterizedType.getArg(0)) + " => " + name + ".handle(" + toJavaWithConversion("x", parameterizedType.getArg(0), typeParams, methodTypeParams) + ")}";
-    } else if (kind == ClassKind.ASYNC_RESULT) {
-      ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-      return "AsyncResultWrapper[" + toJavaType(parameterizedType.getArg(0)) + ", " + toScalaType(parameterizedType.getArg(0)) + "](x, a => " + toScalaWithConversion("a", parameterizedType.getArg(0), typeParams, methodTypeParams) + ")";
-    } else if (kind.collection) {
-      if (kind == ClassKind.LIST){
-        ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-        String conversion = ".asScala";
-        if(parameterizedType.getArg(0).isNullable() && !doesTypeRequireConversion(parameterizedType.getArg(0))) {
-          conversion += ".map(Option(_))";
-        }
-        else if (doesTypeRequireConversion(parameterizedType.getArg(0))) {
-          conversion += ".map(x => "+ toScalaWithConversion("x", parameterizedType.getArg(0), typeParams, methodTypeParams) +")";
-        }
-        if (nullable) {
-          return "scala.Option(" + name + ").map(_" + conversion + ")";
-        }
-        return name + conversion;
-      } else if (kind == ClassKind.SET){
-        ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-        String conversion = ".asScala";
-        if(parameterizedType.getArg(0).isNullable() && !doesTypeRequireConversion(parameterizedType.getArg(0))) {
-          conversion += ".map(Option(_))";
-        }
-        else if (doesTypeRequireConversion(parameterizedType.getArg(0))) {
-          conversion += ".map(x => "+ toScalaWithConversion("x", parameterizedType.getArg(0), typeParams, methodTypeParams) +")";
-        }
-        if (nullable) {
-          return "scala.Option(" + name + ").map(_" + conversion + ")";
-        }
-        return name + conversion;
-      } else if (kind == ClassKind.MAP){
-        /*TODO: this feels very expensive*/
-        ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-        String conversion = ".asScala";
-        if(parameterizedType.getArg(1).isNullable() && !doesTypeRequireConversion(parameterizedType.getArg(1))) {
-          conversion += ".mapValues(Option(_))";
-        }
-        else if (doesTypeRequireConversion(parameterizedType.getArg(1))) {
-          conversion += ".mapValues(x => " + toScalaWithConversion("x", parameterizedType.getArg(1), typeParams, methodTypeParams) + ")";
-        }
-        if (nullable) {
-          return "scala.Option(" + name + ").map(x => collection.mutable.Map(x" + conversion +".toSeq: _*))";
-        }
-        return "collection.mutable.Map("+ name + conversion + ".toSeq: _*)";
-      }
+    String typeName = type.getName();
+    String conversion = "";
+
+    if (kind.collection){
+     conversion = ".asScala";
     }
-    return "Unknown type for toScalaWithConversion "+type.getName()+" "+kind;
+
+    return name + conversion;
   }
 
   /**
@@ -314,17 +230,17 @@ public class TypeHelper {
     } else if (type.getDataObject() != null) {
       return getNonGenericType(type.getName());
     } else if (type.getKind() == ClassKind.LIST){
-      String ret = "java.util.List";
+      String ret = "scala.collection.mutable.Buffer";
       if (!((ParameterizedTypeInfo)type).getArgs().isEmpty())
         ret += "[" + toReturnType(((ParameterizedTypeInfo)type).getArgs().get(0)) + "]";
       return ret;
     } else if (type.getKind() == ClassKind.SET){
-      String ret = "java.util.Set";
+      String ret = "scala.collection.mutable.Set";
       if (!((ParameterizedTypeInfo)type).getArgs().isEmpty())
         ret += "[" + toReturnType(((ParameterizedTypeInfo)type).getArgs().get(0)) + "]";
       return ret;
     } else if (type.getKind() == ClassKind.MAP){
-      String ret = "java.util.Map";
+      String ret = "scala.collection.mutable.Map";
       if (!((ParameterizedTypeInfo)type).getArgs().isEmpty())
         ret += "[String, " + toReturnType(((ParameterizedTypeInfo)type).getArgs().get(1)) + "]";
       return ret;
@@ -498,24 +414,24 @@ public class TypeHelper {
    * Generate conversion code to convert a given instance from Scala to Java:
    * 'scala.Int' becomes 'scala.Int.asInstanceOf[java.lang.Integer]'
    */
-  public static String toJavaWithConversion(String name, TypeInfo type, Collection<TypeParamInfo> typeParams, Collection<? extends TypeParamInfo> methodTypeParams) {
+  public static String toJavaWithConversion(String name, TypeInfo type) {
     boolean nullable = type.isNullable();
     if (type.getKind().basic) {
-      return name;
+      String ret = name;
+      if (nullable) {
+        ret = name + ".getOrElse(null)";
+      }
+      return ret;
     } else if (type.getKind() == ClassKind.THROWABLE) {
       String ret = name;
       if (nullable) {
-        ret = name + ".map(x => x).orNull";
+        ret = name + ".getOrElse(null)";
       }
       return ret;
     } else if (type.getKind() == ClassKind.OBJECT) {
       String ret = name;
-      if (type.isVariable()) {
-        if (nullable) {
-          ret = name + ".map(x => x).orNull";
-        } else {
-          ret = name;
-        }
+      if (nullable) {
+        ret += ".getOrElse(null)";
       }
       return ret;
     } else if (type.getKind() == ClassKind.CLASS_TYPE) {
@@ -551,10 +467,10 @@ public class TypeHelper {
       return ret;
     } else if (type.getKind() == ClassKind.HANDLER) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-      return "{x: " + toJavaType(parameterizedType.getArg(0)) + " => " + name + "(x)}";
+      return name + ".asInstanceOf[" + type.toString().replace("<", "[").replace(">", "]") + "]";
     } else if (type.getKind() == ClassKind.ASYNC_RESULT) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-      String ret = "AsyncResultWrapper[" + toScalaType(parameterizedType.getArg(0)) + ", " + toJavaType(parameterizedType.getArg(0)) + "](x, a => " + toJavaWithConversion("a", parameterizedType.getArg(0), typeParams, methodTypeParams) + ")";
+      String ret = "AsyncResultWrapper[" + toScalaType(parameterizedType.getArg(0)) + ", " + toJavaType(parameterizedType.getArg(0)) + "](x, a => " + toJavaWithConversion("a", parameterizedType.getArg(0)) + ")";
       if (nullable) {
         ret = name + ".map(" + name +" => " + ret + ").orNull";
       }
@@ -593,7 +509,7 @@ public class TypeHelper {
       } else {
         executed = executed + "(x)";
       }
-      executed = toJavaWithConversion(executed, parameterizedType.getArg(1), typeParams, methodTypeParams);
+      executed = toJavaWithConversion(executed, parameterizedType.getArg(1));
       String ret = "{x: " + toJavaType(parameterizedType.getArg(0)) + " => " + executed + "}";
       if (nullable) {
         ret = name + ".map(" + name +" => " + ret + ").orNull";
@@ -758,8 +674,6 @@ public class TypeHelper {
         ret.add(getNonGenericType(type.getRaw().getPackageName()));
       }
       ret.add(convertTypeToAliasedType(type));
-    } else if (type.getKind().collection) {
-      ret.add("scala.collection.JavaConverters._");
     } else if (type.getKind() == ClassKind.HANDLER) {
       ret.add(type.getRaw().toString());
       if (type.isParameterized()) {
@@ -907,18 +821,6 @@ public class TypeHelper {
     return size > 0 && isLastParamAsyncResultHandler(method) && !(method.getReturnType().getKind() == ClassKind.HANDLER);
   }
 
-  public static String invokeMethod(String target, TypeInfo type, MethodInfo method, Collection<TypeParamInfo> typeParams) {
-    if (method.getReturnType().getKind() == ClassKind.OBJECT) {
-      String ret = "toScala[" + method.getReturnType().getName() + "](" + invokeMethodWithoutConvertingReturn(target, type, method, typeParams) + ")";
-
-      if (method.getReturnType().isNullable())
-        return "scala.Option(" + ret + ")";
-      return ret;
-    } else {
-      return toScalaWithConversion(invokeMethodWithoutConvertingReturn(target, type, method, typeParams), method.getReturnType(), typeParams, method.getTypeParams());
-    }
-  }
-
   public static String assembleTypeParamString(MethodInfo method) {
     if (!method.getTypeParams().isEmpty()) {
       String args = String.join(", ", method.getTypeParams().stream()
@@ -928,28 +830,24 @@ public class TypeHelper {
     return "";
   }
 
-  public static String invokeMethodWithoutConvertingReturn(String target, TypeInfo type, MethodInfo method, Collection<TypeParamInfo> typeParams) {
+  public static String invokeMethodWithoutConvertingReturn(String target, MethodInfo method) {
     String paramString = String.join(", ", method.getParams().stream()
-      .map(param -> toJavaWithConversion(escapeIfKeyword(param.getName()), param.getType(), typeParams, method.getTypeParams()))
+      .map(param -> toJavaWithConversion(escapeIfKeyword(param.getName()), param.getType()))
       .collect(Collectors.toList()));
 
     return target + "." + escapeIfKeyword(method.getName()) + assembleTypeParamString(method) + "(" + paramString + ")";
   }
 
-  public static String invokeMethodAndUseProvidedHandler(String target, TypeInfo type, MethodInfo method, Collection<TypeParamInfo> typeParams, String handler) {
+  public static String invokeMethodAndUseProvidedHandler(String target, MethodInfo method, String handler) {
     String typeParamString = assembleTypeParamString(method);
 
-    String paramString = "";
-    for (ParamInfo param : method.getParams()) {
-      if (!paramString.equals("")) {
-        paramString += ", ";
-      }
+    String paramString = method.getParams().stream().map(param -> {
       if (isAsyncResultHandler(param.getType())) {
-        paramString += handler;
+        return handler;
       } else {
-        paramString += toJavaWithConversion(escapeIfKeyword(param.getName()), param.getType(), typeParams, method.getTypeParams());
+        return toJavaWithConversion(escapeIfKeyword(param.getName()), param.getType());
       }
-    }
+    }).collect(Collectors.joining(", "));
 
     return target + "." + escapeIfKeyword(method.getName()) + typeParamString + "(" + paramString + ")";
   }
@@ -1200,6 +1098,25 @@ public class TypeHelper {
       }
     }
     return output.toString().replace("<p>", "");
+  }
+
+
+
+  //New stuff
+
+  public static String renderFutureMethod(TypeInfo type, List<TypeParamInfo> typeParams, MethodInfo method) {
+    List<ParamInfo> params = method.getParams();
+    params = params.subList(0, params.size() - 1);
+    String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + wrapInOptionIfNullable(param.getType().isNullable(), toScalaMethodParam(param.getType()))).collect(Collectors.joining(","));
+
+    String asyncType = typeOfReturnedFuture(method).getName().replace('<', '[').replace('>', ']');
+
+    String ret ="def "+ createNameForMethodReturningAFuture(method) + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList()), true) + "(" + paramList + ") : scala.concurrent.Future[" + toReturnType(typeOfReturnedFuture(method)) + "] = {\n" +
+      "      val promise = concurrent.Promise[" + toReturnType(typeOfReturnedFuture(method))+ "]()\n" +
+      "      " + invokeMethodAndUseProvidedHandler("asJava", method, "new Handler[AsyncResult[" + asyncType + "]] { override def handle(event: AsyncResult[" + asyncType + "]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(" + toScalaWithConversion("event.result()", typeOfReturnedFuture(method))) + "}})\n" +
+      "      promise.future\n" +
+      "}";
+    return ret;
   }
 
 }
