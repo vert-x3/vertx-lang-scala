@@ -28,7 +28,7 @@ ${typeHelper.renderDoc(type, "    *", doc)}
 ${typeHelper.methodDoc(type, method, "    ", true)}
       </#if>
     def ${method.name}<#if method.returnType.nullable>Option</#if>${typeHelper.assembleTypeParams(method.typeParams, true)}(<#list method.params as param>${typeHelper.escapeIfKeyword(param.name)}: ${typeHelper.wrapInOptionIfNullable(param.type.nullable, typeHelper.toScalaMethodParam(param.type))}<#sep>,</#list>): ${typeHelper.wrapInOptionIfNullable(method.returnType.nullable, typeHelper.toReturnType(method.returnType))} = {
-      <#if method.returnType.nullable>scala.Option(</#if>${typeHelper.invokeMethodWithoutConvertingReturn('asJava', type, method)}<#if method.returnType.nullable>)</#if>
+      <#if method.returnType.nullable>scala.Option(</#if>${typeHelper.invokeMethodWithoutConvertingReturn('asJava', method)}<#if method.returnType.nullable>)</#if>
     }
 
     </#if>
@@ -38,11 +38,7 @@ ${typeHelper.methodDoc(type, method, "    ", true)}
       <#if method.doc??>
 ${typeHelper.methodDoc(type, method, "    ", true)}
       </#if>
-    def ${typeHelper.createNameForMethodReturningAFuture(method)}${typeHelper.assembleTypeParams(method.typeParams, true)}(<#list typeHelper.removeLastParam(method.params) as param>${typeHelper.escapeIfKeyword(param.name)}: ${typeHelper.wrapInOptionIfNullable(param.type.nullable, typeHelper.toScalaMethodParam(param.type))}<#sep>,</#list>): scala.concurrent.Future[${typeHelper.toReturnType(typeHelper.typeOfReturnedFuture(method))}] = {
-      val promise = concurrent.Promise[${typeHelper.toReturnType(typeHelper.typeOfReturnedFuture(method))}]()
-      ${typeHelper.invokeMethodAndUseProvidedHandler('asJava', type, method, typeParams, '{a:AsyncResult[' + typeHelper.typeOfReturnedFuture(method).getName()?replace('<', '[')?replace('>', ']') + '] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()}')?replace('<', '[')?replace('>]', ']]')}
-      promise.future
-    }
+${typeHelper.renderFutureMethod(type, typeParams, method)}
 
     </#if>
   </#list>
