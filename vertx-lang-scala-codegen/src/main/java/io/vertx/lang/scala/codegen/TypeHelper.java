@@ -403,7 +403,7 @@ public class TypeHelper {
       }
       return ret;
     } else if (type.getKind() == ClassKind.HANDLER) {
-      return name + ".asInstanceOf[" + type.toString().replace("<", "[").replace(">", "]") + "]";
+      return name + ".asInstanceOf[" + convertToScalaNotation(type.toString()) + "]";
     } else if (type.getKind() == ClassKind.ASYNC_RESULT) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String ret = "AsyncResultWrapper[" + toScalaTypeString(parameterizedType.getArg(0)) + ", " + toJavaType(parameterizedType.getArg(0)) + "](x, a => " + fromScalatoJavaWithConversion("a", parameterizedType.getArg(0)) + ")";
@@ -869,19 +869,9 @@ public class TypeHelper {
     }
   }
 
-  public static String getFullNameWithScalaNotation(TypeInfo type) {
-    List<String> paramNames = ((ClassTypeInfo) type).getParams().stream().map(TypeParamInfo.Class::getName).collect(Collectors.toList());
-    String scalaNotation = type.getName();
-    if(paramNames.size() > 0 ){
-      scalaNotation += "[" + String.join(",", paramNames) + "]";
-    }
-    return scalaNotation;
-  }
-
   public static String convertToScalaNotation(String type) {
     return  type
-      .replace("<", "[").replace(">", "]")
-      .replace("java.lang.", "");
+      .replace("<", "[").replace(">", "]");
   }
 
   /**
