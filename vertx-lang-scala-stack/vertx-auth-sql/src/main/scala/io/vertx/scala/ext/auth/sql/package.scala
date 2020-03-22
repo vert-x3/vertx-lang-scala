@@ -48,8 +48,7 @@ package object sql{
   }
 
 
-
-  type SqlAuthenticationOptions = io.vertx.ext.auth.sql.SqlAuthenticationOptions
+    type SqlAuthenticationOptions = io.vertx.ext.auth.sql.SqlAuthenticationOptions
   object SqlAuthenticationOptions {
     def apply() = new SqlAuthenticationOptions()
     def apply(json: JsonObject) = new SqlAuthenticationOptions(json)
@@ -71,8 +70,7 @@ package object sql{
   }
 
 
-
-  type SqlAuthorizationOptions = io.vertx.ext.auth.sql.SqlAuthorizationOptions
+    type SqlAuthorizationOptions = io.vertx.ext.auth.sql.SqlAuthorizationOptions
   object SqlAuthorizationOptions {
     def apply() = new SqlAuthorizationOptions()
     def apply(json: JsonObject) = new SqlAuthorizationOptions(json)

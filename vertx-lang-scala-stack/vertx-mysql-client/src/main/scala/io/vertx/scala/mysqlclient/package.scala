@@ -30,12 +30,10 @@ import io.vertx.mysqlclient.{MySQLClient => JMySQLClient}
 
 package object mysqlclient{
 
+  
 
 
-
-
-
-  type GeometryCollection = io.vertx.mysqlclient.data.spatial.GeometryCollection
+    type GeometryCollection = io.vertx.mysqlclient.data.spatial.GeometryCollection
   object GeometryCollection {
     def apply() = new GeometryCollection()
     def apply(json: JsonObject) = new GeometryCollection(json)
@@ -43,8 +41,7 @@ package object mysqlclient{
 
 
 
-
-  type LineString = io.vertx.mysqlclient.data.spatial.LineString
+    type LineString = io.vertx.mysqlclient.data.spatial.LineString
   object LineString {
     def apply() = new LineString()
     def apply(json: JsonObject) = new LineString(json)
@@ -52,8 +49,7 @@ package object mysqlclient{
 
 
 
-
-  type MultiLineString = io.vertx.mysqlclient.data.spatial.MultiLineString
+    type MultiLineString = io.vertx.mysqlclient.data.spatial.MultiLineString
   object MultiLineString {
     def apply() = new MultiLineString()
     def apply(json: JsonObject) = new MultiLineString(json)
@@ -61,8 +57,7 @@ package object mysqlclient{
 
 
 
-
-  type MultiPoint = io.vertx.mysqlclient.data.spatial.MultiPoint
+    type MultiPoint = io.vertx.mysqlclient.data.spatial.MultiPoint
   object MultiPoint {
     def apply() = new MultiPoint()
     def apply(json: JsonObject) = new MultiPoint(json)
@@ -70,8 +65,7 @@ package object mysqlclient{
 
 
 
-
-  type MultiPolygon = io.vertx.mysqlclient.data.spatial.MultiPolygon
+    type MultiPolygon = io.vertx.mysqlclient.data.spatial.MultiPolygon
   object MultiPolygon {
     def apply() = new MultiPolygon()
     def apply(json: JsonObject) = new MultiPolygon(json)
@@ -79,8 +73,7 @@ package object mysqlclient{
 
 
 
-
-  type MySQLAuthOptions = io.vertx.mysqlclient.MySQLAuthOptions
+    type MySQLAuthOptions = io.vertx.mysqlclient.MySQLAuthOptions
   object MySQLAuthOptions {
     def apply() = new MySQLAuthOptions()
     def apply(json: JsonObject) = new MySQLAuthOptions(json)
@@ -90,8 +83,7 @@ package object mysqlclient{
 
 
 
-
-  type MySQLConnectOptions = io.vertx.mysqlclient.MySQLConnectOptions
+    type MySQLConnectOptions = io.vertx.mysqlclient.MySQLConnectOptions
   object MySQLConnectOptions {
     def apply() = new MySQLConnectOptions()
     def apply(json: JsonObject) = new MySQLConnectOptions(json)
@@ -262,8 +254,7 @@ package object mysqlclient{
   }
 
 
-
-  type Point = io.vertx.mysqlclient.data.spatial.Point
+    type Point = io.vertx.mysqlclient.data.spatial.Point
   object Point {
     def apply() = new Point()
     def apply(json: JsonObject) = new Point(json)
@@ -271,8 +262,7 @@ package object mysqlclient{
 
 
 
-
-  type Polygon = io.vertx.mysqlclient.data.spatial.Polygon
+    type Polygon = io.vertx.mysqlclient.data.spatial.Polygon
   object Polygon {
     def apply() = new Polygon()
     def apply(json: JsonObject) = new Polygon(json)

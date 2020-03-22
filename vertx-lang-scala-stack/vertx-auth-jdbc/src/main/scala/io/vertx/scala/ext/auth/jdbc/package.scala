@@ -43,8 +43,7 @@ package object jdbc{
   }
 
 
-
-  type JDBCAuthOptions = io.vertx.ext.auth.jdbc.JDBCAuthOptions
+    type JDBCAuthOptions = io.vertx.ext.auth.jdbc.JDBCAuthOptions
   object JDBCAuthOptions {
     def apply() = new JDBCAuthOptions()
     def apply(json: JsonObject) = new JDBCAuthOptions(json)
@@ -66,8 +65,7 @@ package object jdbc{
   }
 
 
-
-  type JDBCAuthenticationOptions = io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions
+    type JDBCAuthenticationOptions = io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions
   object JDBCAuthenticationOptions {
     def apply() = new JDBCAuthenticationOptions()
     def apply(json: JsonObject) = new JDBCAuthenticationOptions(json)
@@ -84,8 +82,7 @@ package object jdbc{
   }
 
 
-
-  type JDBCAuthorizationOptions = io.vertx.ext.auth.jdbc.JDBCAuthorizationOptions
+    type JDBCAuthorizationOptions = io.vertx.ext.auth.jdbc.JDBCAuthorizationOptions
   object JDBCAuthorizationOptions {
     def apply() = new JDBCAuthorizationOptions()
     def apply(json: JsonObject) = new JDBCAuthorizationOptions(json)

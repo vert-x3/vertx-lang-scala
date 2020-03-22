@@ -24,7 +24,7 @@ ${typeHelper.renderFile("extensions/Json.ftl")}
 </#if>
 </#if>
 <#if type.dataObject??>
-  <#include "implicit_dataobject.ftl">
+  ${typeHelper.renderDataobject(className, type, concrete, hasEmptyConstructor, helper)}
 <#elseif !type.name?contains("Handler") && futureMethods?has_content>
   <#include "class.ftl">
 <#elseif !type.name?contains("Handler") && helper.getSimpleName(type.name) != 'Message' && staticMethods?has_content>

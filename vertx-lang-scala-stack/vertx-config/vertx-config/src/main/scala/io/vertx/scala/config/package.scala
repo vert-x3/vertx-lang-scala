@@ -38,8 +38,7 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object config{
 
-
-  type ConfigChange = io.vertx.config.ConfigChange
+    type ConfigChange = io.vertx.config.ConfigChange
   object ConfigChange {
     def apply() = new ConfigChange()
     def apply(json: JsonObject) = new ConfigChange(json)
@@ -67,8 +66,7 @@ package object config{
   }
 
 
-
-  type ConfigRetrieverOptions = io.vertx.config.ConfigRetrieverOptions
+    type ConfigRetrieverOptions = io.vertx.config.ConfigRetrieverOptions
   object ConfigRetrieverOptions {
     def apply() = new ConfigRetrieverOptions()
     def apply(json: JsonObject) = new ConfigRetrieverOptions(json)
@@ -76,8 +74,7 @@ package object config{
 
 
 
-
-  type ConfigStoreOptions = io.vertx.config.ConfigStoreOptions
+    type ConfigStoreOptions = io.vertx.config.ConfigStoreOptions
   object ConfigStoreOptions {
     def apply() = new ConfigStoreOptions()
     def apply(json: JsonObject) = new ConfigStoreOptions(json)

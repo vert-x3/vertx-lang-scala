@@ -59,8 +59,7 @@ package object mongo{
   }
 
 
-
-  type MongoAuthOptions = io.vertx.ext.auth.mongo.MongoAuthOptions
+    type MongoAuthOptions = io.vertx.ext.auth.mongo.MongoAuthOptions
   object MongoAuthOptions {
     def apply() = new MongoAuthOptions()
     def apply(json: JsonObject) = new MongoAuthOptions(json)
@@ -80,8 +79,7 @@ def create(mongoClient: io.vertx.ext.mongo.MongoClient,hashStrategy: io.vertx.ex
   }
 
 
-
-  type MongoAuthenticationOptions = io.vertx.ext.auth.mongo.MongoAuthenticationOptions
+    type MongoAuthenticationOptions = io.vertx.ext.auth.mongo.MongoAuthenticationOptions
   object MongoAuthenticationOptions {
     def apply() = new MongoAuthenticationOptions()
     def apply(json: JsonObject) = new MongoAuthenticationOptions(json)
@@ -98,8 +96,7 @@ def create(mongoClient: io.vertx.ext.mongo.MongoClient,hashStrategy: io.vertx.ex
   }
 
 
-
-  type MongoAuthorizationOptions = io.vertx.ext.auth.mongo.MongoAuthorizationOptions
+    type MongoAuthorizationOptions = io.vertx.ext.auth.mongo.MongoAuthorizationOptions
   object MongoAuthorizationOptions {
     def apply() = new MongoAuthorizationOptions()
     def apply(json: JsonObject) = new MongoAuthorizationOptions(json)

@@ -121,8 +121,7 @@ def create() = {
   }
 
 
-
-  type KeyStoreOptions = io.vertx.ext.auth.KeyStoreOptions
+    type KeyStoreOptions = io.vertx.ext.auth.KeyStoreOptions
   object KeyStoreOptions {
     def apply() = new KeyStoreOptions()
     def apply(json: JsonObject) = new KeyStoreOptions(json)
@@ -151,8 +150,7 @@ def create(permission: java.lang.String) = {
   }
 
 
-
-  type PubSecKeyOptions = io.vertx.ext.auth.PubSecKeyOptions
+    type PubSecKeyOptions = io.vertx.ext.auth.PubSecKeyOptions
   object PubSecKeyOptions {
     def apply() = new PubSecKeyOptions()
     def apply(json: JsonObject) = new PubSecKeyOptions(json)

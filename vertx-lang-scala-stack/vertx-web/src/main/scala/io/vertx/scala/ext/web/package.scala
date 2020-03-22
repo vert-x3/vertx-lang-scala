@@ -46,8 +46,7 @@ package object web{
 
 
 
-
-  type BridgeOptions = io.vertx.ext.web.handler.sockjs.BridgeOptions
+    type BridgeOptions = io.vertx.ext.web.handler.sockjs.BridgeOptions
   object BridgeOptions {
     def apply() = new BridgeOptions()
     def apply(json: JsonObject) = new BridgeOptions(json)
@@ -95,8 +94,7 @@ package object web{
 
 
 
-
-  type Http2PushMapping = io.vertx.ext.web.Http2PushMapping
+    type Http2PushMapping = io.vertx.ext.web.Http2PushMapping
   object Http2PushMapping {
     def apply() = new Http2PushMapping()
     def apply(json: JsonObject) = new Http2PushMapping(json)
@@ -216,8 +214,7 @@ package object web{
 
 
 
-
-  type SockJSHandlerOptions = io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions
+    type SockJSHandlerOptions = io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions
   object SockJSHandlerOptions {
     def apply() = new SockJSHandlerOptions()
     def apply(json: JsonObject) = new SockJSHandlerOptions(json)

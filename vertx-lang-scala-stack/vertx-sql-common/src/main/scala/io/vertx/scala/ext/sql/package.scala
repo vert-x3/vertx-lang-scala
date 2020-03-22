@@ -34,8 +34,7 @@ import io.vertx.core.Handler
 
 package object sql{
 
-
-  type ResultSet = io.vertx.ext.sql.ResultSet
+    type ResultSet = io.vertx.ext.sql.ResultSet
   object ResultSet {
     def apply() = new ResultSet()
     def apply(json: JsonObject) = new ResultSet(json)
@@ -409,8 +408,7 @@ package object sql{
   }
 
 
-
-  type SQLOptions = io.vertx.ext.sql.SQLOptions
+    type SQLOptions = io.vertx.ext.sql.SQLOptions
   object SQLOptions {
     def apply() = new SQLOptions()
     def apply(json: JsonObject) = new SQLOptions(json)
@@ -460,8 +458,7 @@ def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.json.JsonA
   }
 
 
-
-  type UpdateResult = io.vertx.ext.sql.UpdateResult
+    type UpdateResult = io.vertx.ext.sql.UpdateResult
   object UpdateResult {
     def apply() = new UpdateResult()
     def apply(json: JsonObject) = new UpdateResult(json)

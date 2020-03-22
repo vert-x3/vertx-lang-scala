@@ -36,8 +36,7 @@ import io.vertx.pgclient.pubsub.{PgChannel => JPgChannel}
 
 package object pgclient{
 
-
-  type Box = io.vertx.pgclient.data.Box
+    type Box = io.vertx.pgclient.data.Box
   object Box {
     def apply() = new Box()
     def apply(json: JsonObject) = new Box(json)
@@ -45,8 +44,7 @@ package object pgclient{
 
 
 
-
-  type Circle = io.vertx.pgclient.data.Circle
+    type Circle = io.vertx.pgclient.data.Circle
   object Circle {
     def apply() = new Circle()
     def apply(json: JsonObject) = new Circle(json)
@@ -54,8 +52,7 @@ package object pgclient{
 
 
 
-
-  type Interval = io.vertx.pgclient.data.Interval
+    type Interval = io.vertx.pgclient.data.Interval
   object Interval {
     def apply() = new Interval()
     def apply(json: JsonObject) = new Interval(json)
@@ -63,8 +60,7 @@ package object pgclient{
 
 
 
-
-  type Line = io.vertx.pgclient.data.Line
+    type Line = io.vertx.pgclient.data.Line
   object Line {
     def apply() = new Line()
     def apply(json: JsonObject) = new Line(json)
@@ -72,8 +68,7 @@ package object pgclient{
 
 
 
-
-  type LineSegment = io.vertx.pgclient.data.LineSegment
+    type LineSegment = io.vertx.pgclient.data.LineSegment
   object LineSegment {
     def apply() = new LineSegment()
     def apply(json: JsonObject) = new LineSegment(json)
@@ -81,8 +76,7 @@ package object pgclient{
 
 
 
-
-  type Path = io.vertx.pgclient.data.Path
+    type Path = io.vertx.pgclient.data.Path
   object Path {
     def apply() = new Path()
     def apply(json: JsonObject) = new Path(json)
@@ -125,8 +119,7 @@ def pipeToFuture(dst: io.vertx.core.streams.WriteStream[java.lang.String]) : sca
   }
 
 
-
-  type PgConnectOptions = io.vertx.pgclient.PgConnectOptions
+    type PgConnectOptions = io.vertx.pgclient.PgConnectOptions
   object PgConnectOptions {
     def apply() = new PgConnectOptions()
     def apply(json: JsonObject) = new PgConnectOptions(json)
@@ -200,8 +193,7 @@ def pipeToFuture(dst: io.vertx.core.streams.WriteStream[java.lang.String]) : sca
   }
 
 
-
-  type PgNotification = io.vertx.pgclient.PgNotification
+    type PgNotification = io.vertx.pgclient.PgNotification
   object PgNotification {
     def apply() = new PgNotification()
     def apply(json: JsonObject) = new PgNotification(json)
@@ -272,8 +264,7 @@ def pipeToFuture(dst: io.vertx.core.streams.WriteStream[java.lang.String]) : sca
   }
 
 
-
-  type Point = io.vertx.pgclient.data.Point
+    type Point = io.vertx.pgclient.data.Point
   object Point {
     def apply() = new Point()
     def apply(json: JsonObject) = new Point(json)
@@ -281,8 +272,7 @@ def pipeToFuture(dst: io.vertx.core.streams.WriteStream[java.lang.String]) : sca
 
 
 
-
-  type Polygon = io.vertx.pgclient.data.Polygon
+    type Polygon = io.vertx.pgclient.data.Polygon
   object Polygon {
     def apply() = new Polygon()
     def apply(json: JsonObject) = new Polygon(json)

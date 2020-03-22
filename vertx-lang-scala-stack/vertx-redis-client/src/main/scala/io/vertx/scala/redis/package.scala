@@ -1736,8 +1736,7 @@ def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.redis.client.Re
   }
 
 
-
-  type RedisOptions = io.vertx.redis.client.RedisOptions
+    type RedisOptions = io.vertx.redis.client.RedisOptions
   object RedisOptions {
     def apply() = new RedisOptions()
     def apply(json: JsonObject) = new RedisOptions(json)

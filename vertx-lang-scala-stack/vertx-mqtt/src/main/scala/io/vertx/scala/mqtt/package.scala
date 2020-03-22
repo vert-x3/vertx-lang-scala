@@ -35,10 +35,8 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object mqtt{
 
-
-  type MqttAuth = io.vertx.mqtt.MqttAuth
+    type MqttAuth = io.vertx.mqtt.MqttAuth
   object MqttAuth {
-    
     def apply(json: JsonObject) = new MqttAuth(json)
   }
 
@@ -111,8 +109,7 @@ package object mqtt{
   }
 
 
-
-  type MqttClientOptions = io.vertx.mqtt.MqttClientOptions
+    type MqttClientOptions = io.vertx.mqtt.MqttClientOptions
   object MqttClientOptions {
     def apply() = new MqttClientOptions()
     def apply(json: JsonObject) = new MqttClientOptions(json)
@@ -208,8 +205,7 @@ package object mqtt{
   }
 
 
-
-  type MqttServerOptions = io.vertx.mqtt.MqttServerOptions
+    type MqttServerOptions = io.vertx.mqtt.MqttServerOptions
   object MqttServerOptions {
     def apply() = new MqttServerOptions()
     def apply(json: JsonObject) = new MqttServerOptions(json)
@@ -225,10 +221,8 @@ package object mqtt{
 
 
 
-
-  type MqttWill = io.vertx.mqtt.MqttWill
+    type MqttWill = io.vertx.mqtt.MqttWill
   object MqttWill {
-    
     def apply(json: JsonObject) = new MqttWill(json)
   }
 

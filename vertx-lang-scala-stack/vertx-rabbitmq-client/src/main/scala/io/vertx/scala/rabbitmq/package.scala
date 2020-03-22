@@ -37,8 +37,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 
 package object rabbitmq{
 
-
-  type QueueOptions = io.vertx.rabbitmq.QueueOptions
+    type QueueOptions = io.vertx.rabbitmq.QueueOptions
   object QueueOptions {
     def apply() = new QueueOptions()
     def apply(json: JsonObject) = new QueueOptions(json)
@@ -317,8 +316,7 @@ def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.rabbitmq.Rabbit
 
 
 
-
-  type RabbitMQOptions = io.vertx.rabbitmq.RabbitMQOptions
+    type RabbitMQOptions = io.vertx.rabbitmq.RabbitMQOptions
   object RabbitMQOptions {
     def apply() = new RabbitMQOptions()
     def apply(json: JsonObject) = new RabbitMQOptions(json)

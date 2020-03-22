@@ -30,8 +30,7 @@ import io.vertx.kafka.client.producer.{KafkaProducerRecord => JKafkaProducerReco
 
 package object client{
 
-
-  type ConfigResource = io.vertx.kafka.client.common.ConfigResource
+    type ConfigResource = io.vertx.kafka.client.common.ConfigResource
   object ConfigResource {
     def apply() = new ConfigResource()
     def apply(json: JsonObject) = new ConfigResource(json)
@@ -420,8 +419,7 @@ def abortTransactionFuture() : scala.concurrent.Future[Unit] = {
   }
 
 
-
-  type Node = io.vertx.kafka.client.common.Node
+    type Node = io.vertx.kafka.client.common.Node
   object Node {
     def apply() = new Node()
     def apply(json: JsonObject) = new Node(json)
@@ -429,8 +427,7 @@ def abortTransactionFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
-  type OffsetAndMetadata = io.vertx.kafka.client.consumer.OffsetAndMetadata
+    type OffsetAndMetadata = io.vertx.kafka.client.consumer.OffsetAndMetadata
   object OffsetAndMetadata {
     def apply() = new OffsetAndMetadata()
     def apply(json: JsonObject) = new OffsetAndMetadata(json)
@@ -438,8 +435,7 @@ def abortTransactionFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
-  type OffsetAndTimestamp = io.vertx.kafka.client.consumer.OffsetAndTimestamp
+    type OffsetAndTimestamp = io.vertx.kafka.client.consumer.OffsetAndTimestamp
   object OffsetAndTimestamp {
     def apply() = new OffsetAndTimestamp()
     def apply(json: JsonObject) = new OffsetAndTimestamp(json)
@@ -447,8 +443,7 @@ def abortTransactionFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
-  type PartitionInfo = io.vertx.kafka.client.common.PartitionInfo
+    type PartitionInfo = io.vertx.kafka.client.common.PartitionInfo
   object PartitionInfo {
     def apply() = new PartitionInfo()
     def apply(json: JsonObject) = new PartitionInfo(json)
@@ -456,8 +451,7 @@ def abortTransactionFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
-  type RecordMetadata = io.vertx.kafka.client.producer.RecordMetadata
+    type RecordMetadata = io.vertx.kafka.client.producer.RecordMetadata
   object RecordMetadata {
     def apply() = new RecordMetadata()
     def apply(json: JsonObject) = new RecordMetadata(json)
@@ -465,8 +459,7 @@ def abortTransactionFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
-  type TopicPartition = io.vertx.kafka.client.common.TopicPartition
+    type TopicPartition = io.vertx.kafka.client.common.TopicPartition
   object TopicPartition {
     def apply() = new TopicPartition()
     def apply(json: JsonObject) = new TopicPartition(json)
@@ -474,8 +467,7 @@ def abortTransactionFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
-  type TopicPartitionInfo = io.vertx.kafka.client.common.TopicPartitionInfo
+    type TopicPartitionInfo = io.vertx.kafka.client.common.TopicPartitionInfo
   object TopicPartitionInfo {
     def apply() = new TopicPartitionInfo()
     def apply(json: JsonObject) = new TopicPartitionInfo(json)

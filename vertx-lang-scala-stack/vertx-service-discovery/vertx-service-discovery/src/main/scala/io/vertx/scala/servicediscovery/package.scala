@@ -134,8 +134,7 @@ package object servicediscovery{
   }
 
 
-
-  type HttpLocation = io.vertx.servicediscovery.types.HttpLocation
+    type HttpLocation = io.vertx.servicediscovery.types.HttpLocation
   object HttpLocation {
     def apply() = new HttpLocation()
     def apply(json: JsonObject) = new HttpLocation(json)
@@ -223,8 +222,7 @@ def createRecord(name: java.lang.String,location: io.vertx.core.json.JsonObject,
   }
 
 
-
-  type Record = io.vertx.servicediscovery.Record
+    type Record = io.vertx.servicediscovery.Record
   object Record {
     def apply() = new Record()
     def apply(json: JsonObject) = new Record(json)
@@ -389,8 +387,7 @@ def createRecord(name: java.lang.String,location: io.vertx.core.json.JsonObject,
   }
 
 
-
-  type ServiceDiscoveryOptions = io.vertx.servicediscovery.ServiceDiscoveryOptions
+    type ServiceDiscoveryOptions = io.vertx.servicediscovery.ServiceDiscoveryOptions
   object ServiceDiscoveryOptions {
     def apply() = new ServiceDiscoveryOptions()
     def apply(json: JsonObject) = new ServiceDiscoveryOptions(json)

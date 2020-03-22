@@ -42,8 +42,7 @@ package object ldap{
   }
 
 
-
-  type LdapAuthenticationOptions = io.vertx.ext.auth.ldap.LdapAuthenticationOptions
+    type LdapAuthenticationOptions = io.vertx.ext.auth.ldap.LdapAuthenticationOptions
   object LdapAuthenticationOptions {
     def apply() = new LdapAuthenticationOptions()
     def apply(json: JsonObject) = new LdapAuthenticationOptions(json)

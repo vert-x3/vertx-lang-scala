@@ -506,8 +506,7 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   }
 
 
-
-  type OAuth2ClientOptions = io.vertx.ext.auth.oauth2.OAuth2ClientOptions
+    type OAuth2ClientOptions = io.vertx.ext.auth.oauth2.OAuth2ClientOptions
   object OAuth2ClientOptions {
     def apply() = new OAuth2ClientOptions()
     def apply(json: JsonObject) = new OAuth2ClientOptions(json)
@@ -515,8 +514,7 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
 
 
 
-
-  type OAuth2Options = io.vertx.ext.auth.oauth2.OAuth2Options
+    type OAuth2Options = io.vertx.ext.auth.oauth2.OAuth2Options
   object OAuth2Options {
     def apply() = new OAuth2Options()
     def apply(json: JsonObject) = new OAuth2Options(json)

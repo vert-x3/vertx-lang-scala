@@ -122,8 +122,7 @@ package object sqlclient{
   }
 
 
-
-  type PoolOptions = io.vertx.sqlclient.PoolOptions
+    type PoolOptions = io.vertx.sqlclient.PoolOptions
   object PoolOptions {
     def apply() = new PoolOptions()
     def apply(json: JsonObject) = new PoolOptions(json)
@@ -262,8 +261,7 @@ def pipeToFuture(dst: io.vertx.core.streams.WriteStream[T]) : scala.concurrent.F
   }
 
 
-
-
+  
 
 
 
