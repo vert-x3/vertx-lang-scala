@@ -36,13 +36,12 @@ public class TypeHelper {
     basicToWrapper = Collections.unmodifiableMap(writable);
   }
 
-
-  public static String convertArgListToString(TypeInfo type, Function<TypeInfo,String> conversion) {
+  public static String convertJavaArgListToString(TypeInfo type) {
     if (type.isParameterized()) {
       String ret = String.join(", ",
         ((ParameterizedTypeInfo)type)
           .getArgs().stream()
-          .map(arg -> conversion.apply(arg))
+          .map(TypeHelper::toJavaType)
           .collect(Collectors.toList()));
 
       if (!ret.isEmpty()) {
@@ -52,19 +51,8 @@ public class TypeHelper {
     return "";
   }
 
-  public static String convertJavaArgListToString(TypeInfo type) {
-    return convertArgListToString(type, TypeHelper::toJavaType);
-  }
-
-
-  /**
-   *
-   * NEW
-   */
   public static String toScalaWithConversion(String name, TypeInfo type) {
-    boolean nullable = type.isNullable();
     ClassKind kind = type.getKind();
-    String typeName = type.getName();
     String conversion = "";
 
     if (kind.collection){
@@ -411,29 +399,28 @@ public class TypeHelper {
       || type.getName().equals("io.vertx.core.buffer.Buffer")) {
       String ret = name;
       if (nullable) {
-        ret = name + ".map(x => x).orNull";
+        ret = name + ".getOrElse(null)";
       }
       return ret;
     } else if (type.getDataObject() != null) {
       String ret = name;
       if (nullable) {
-        ret = name + ".map(" + name +" => " + ret + ").orNull";
+        ret = name + ".getOrElse(null)";
       }
       return ret;
     } else if (type.getKind() == ClassKind.API) {
       String ret = name;
       if (nullable) {
-        ret = name + ".map(" + name +" => " + ret + ").orNull";
+        ret = name + ".getOrElse(null)";
       }
       return ret;
     } else if (type.getKind() == ClassKind.HANDLER) {
-      ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       return name + ".asInstanceOf[" + type.toString().replace("<", "[").replace(">", "]") + "]";
     } else if (type.getKind() == ClassKind.ASYNC_RESULT) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String ret = "AsyncResultWrapper[" + toScalaType(parameterizedType.getArg(0)) + ", " + toJavaType(parameterizedType.getArg(0)) + "](x, a => " + toJavaWithConversion("a", parameterizedType.getArg(0)) + ")";
       if (nullable) {
-        ret = name + ".map(" + name +" => " + ret + ").orNull";
+        ret = name + ".getOrElse(null)";
       }
       return ret;
     } else if (type.getKind().collection) {
@@ -444,17 +431,17 @@ public class TypeHelper {
       if (type.getKind() == ClassKind.LIST) {
         ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
         if(parameterizedType.getArg(0).isNullable()) {
-          ret += ".map{case Some(x) => x;case None => null}";
+          ret += ".getOrElse(null)";
         }
       } else if (type.getKind() == ClassKind.SET){
         ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
         if(parameterizedType.getArg(0).isNullable()) {
-          ret += ".map{case Some(x) => x;case None => null}";
+          ret += ".getOrElse(null)";
         }
       } else if (type.getKind() == ClassKind.MAP){
         ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
         if(parameterizedType.getArg(1).isNullable()) {
-          ret += ".mapValues{case Some(x) => x;case None => null}";
+          ret += ".getOrElse(null)";
         }
       }
 
@@ -969,10 +956,21 @@ public class TypeHelper {
       .replace("java.lang.", "");
   }
 
+  /**
+   * Checks if the given Element is an AsyncResultHandler
+   * @param type
+   * @return
+   */
   public static boolean isAsyncResultHandlerHandler(Element type) {
     return type.toString().contains("io.vertx.core.Handler") && type.toString().contains("io.vertx.core.AsyncResult");
   }
 
+
+  //Rendering output
+
+  /**
+   * Render fixed Doc-Links
+   */
   public static String renderDocLink(TypeInfo type, Tag.Link link) {
     ClassTypeInfo rawType = link.getTargetType().getRaw();
     if (rawType.getModule() != null) {
@@ -1015,6 +1013,9 @@ public class TypeHelper {
     return null;
   }
 
+  /**
+   * Render an adjusted Docs-header.
+   */
   public static String renderDoc(TypeInfo type, String margin, Doc doc) {
     boolean need = true;
     StringBuilder output = new StringBuilder();
@@ -1049,10 +1050,6 @@ public class TypeHelper {
     }
     return output.toString().replace("<p>", "");
   }
-
-
-
-  //New stuff
 
   public static String renderFutureMethod(TypeInfo type, MethodInfo method) {
     List<ParamInfo> params = method.getParams();
@@ -1115,6 +1112,9 @@ public class TypeHelper {
     return ret;
   }
 
+  /**
+   * Takes care of rendering DataObjects.
+   */
   public static String renderDataobject(String className, ClassTypeInfo type, boolean concrete, boolean hasEmptyConstructor, Helper helper) {
     if (concrete) {
         return "  type " +className + " = "+ helper.getNonGenericType(type.getName()) +"\n" +
@@ -1126,6 +1126,9 @@ public class TypeHelper {
     return "";
   }
 
+  /**
+   * Takes care of rendering all APP-classes except DataObjects.
+   */
   public static String renderClass(ClassTypeInfo type, Doc doc, String className, List<MethodInfo> nullableMethods, List<MethodInfo> futureMethods, String nonGenericType, Collection<TypeParamInfo> typeParams) throws IOException{
 
     String docs = doc != null ? "  /**\n" +
@@ -1160,6 +1163,10 @@ public class TypeHelper {
   }
 
 
+  /**
+   * Main entry point which renders the packagae-object.
+   * It takes care of the incremental rendering part.
+   */
   public static String renderPackageObject(ClassTypeInfo type, int incrementalIndex, int incrementalSize, Set<String> imps, Boolean concrete, Boolean hasEmptyConstructor, Doc doc, List<MethodInfo> instanceMethods, List<MethodInfo> staticMethods, Collection<TypeParamInfo> typeParams) throws IOException{
     Helper helper = new Helper();
     String nonGenericType = Helper.getNonGenericType(type.toString());
@@ -1219,12 +1226,24 @@ public class TypeHelper {
 
   //HELPER STUFF
 
+  /**
+   * Read template-file from the classpath and return contents as string.
+   * @param fileName
+   * @return
+   * @throws IOException
+   */
   public static String renderFile(String fileName) throws IOException{
     Class clazz = TypeHelper.class;
     InputStream inputStream = clazz.getResourceAsStream("/templates/"+ fileName);
     return readFromInputStream(inputStream);
   }
 
+  /**
+   * Helper for converting an InputStream to a String.
+   * @param inputStream
+   * @return
+   * @throws IOException
+   */
   public static String readFromInputStream(InputStream inputStream) throws IOException {
     StringBuilder resultStringBuilder = new StringBuilder();
     try (BufferedReader br

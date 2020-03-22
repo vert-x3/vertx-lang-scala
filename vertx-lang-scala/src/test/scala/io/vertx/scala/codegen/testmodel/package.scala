@@ -557,37 +557,37 @@ def methodWithNullableCharReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableCharReturn(notNull))
 }
 def methodWithNullableJsonObjectParam(expectNull: java.lang.Boolean,param: scala.Option[io.vertx.core.json.JsonObject]) = {
-      scala.Option(asJava.methodWithNullableJsonObjectParam(expectNull, param.map(x => x).orNull))
+      scala.Option(asJava.methodWithNullableJsonObjectParam(expectNull, param.getOrElse(null)))
 }
 def methodWithNullableJsonObjectReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableJsonObjectReturn(notNull))
 }
 def methodWithNullableJsonArrayParam(expectNull: java.lang.Boolean,param: scala.Option[io.vertx.core.json.JsonArray]) = {
-      scala.Option(asJava.methodWithNullableJsonArrayParam(expectNull, param.map(x => x).orNull))
+      scala.Option(asJava.methodWithNullableJsonArrayParam(expectNull, param.getOrElse(null)))
 }
 def methodWithNullableJsonArrayReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableJsonArrayReturn(notNull))
 }
 def methodWithNullableApiParam(expectNull: java.lang.Boolean,param: scala.Option[io.vertx.codegen.testmodel.RefedInterface1]) = {
-      scala.Option(asJava.methodWithNullableApiParam(expectNull, param.map(param => param).orNull))
+      scala.Option(asJava.methodWithNullableApiParam(expectNull, param.getOrElse(null)))
 }
 def methodWithNullableApiReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableApiReturn(notNull))
 }
 def methodWithNullableDataObjectParam(expectNull: java.lang.Boolean,param: scala.Option[io.vertx.codegen.testmodel.TestDataObject]) = {
-      scala.Option(asJava.methodWithNullableDataObjectParam(expectNull, param.map(param => param).orNull))
+      scala.Option(asJava.methodWithNullableDataObjectParam(expectNull, param.getOrElse(null)))
 }
 def methodWithNullableDataObjectReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableDataObjectReturn(notNull))
 }
 def methodWithNullableEnumParam(expectNull: java.lang.Boolean,param: scala.Option[io.vertx.codegen.testmodel.TestEnum]) = {
-      scala.Option(asJava.methodWithNullableEnumParam(expectNull, param.map(x => x).orNull))
+      scala.Option(asJava.methodWithNullableEnumParam(expectNull, param.getOrElse(null)))
 }
 def methodWithNullableEnumReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableEnumReturn(notNull))
 }
 def methodWithNullableGenEnumParam(expectNull: java.lang.Boolean,param: scala.Option[io.vertx.codegen.testmodel.TestGenEnum]) = {
-      scala.Option(asJava.methodWithNullableGenEnumParam(expectNull, param.map(x => x).orNull))
+      scala.Option(asJava.methodWithNullableGenEnumParam(expectNull, param.getOrElse(null)))
 }
 def methodWithNullableGenEnumReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableGenEnumReturn(notNull))
@@ -1399,7 +1399,7 @@ def methodWithGenericParam[U](`type`: java.lang.String,u: U) = {
       scala.Option(asJava.methodWithGenericParam[U](`type`, u))
 }
 def methodWithNullJsonParams(jsonObject: scala.Option[io.vertx.core.json.JsonObject],jsonArray: scala.Option[io.vertx.core.json.JsonArray]) = {
-      scala.Option(asJava.methodWithNullJsonParams(jsonObject.map(x => x).orNull, jsonArray.map(x => x).orNull))
+      scala.Option(asJava.methodWithNullJsonParams(jsonObject.getOrElse(null), jsonArray.getOrElse(null)))
 }
 def methodWithHandlerAsyncResultByteFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Byte] = {
       val promise = concurrent.Promise[java.lang.Byte]()
