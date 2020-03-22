@@ -50,12 +50,14 @@ package object client{
   object ErrorConverter {
     /**
      * Like create from [[io.vertx.ext.web.client.predicate.ErrorConverter]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(converter: io.vertx.ext.web.client.predicate.ResponsePredicateResult => Throwable) = {
+     */
+def create(converter: io.vertx.ext.web.client.predicate.ResponsePredicateResult => Throwable) = {
       io.vertx.ext.web.client.predicate.ErrorConverter.create({x: io.vertx.ext.web.client.predicate.ResponsePredicateResult => converter(x)})
 }
     /**
      * Like createFullBody from [[io.vertx.ext.web.client.predicate.ErrorConverter]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def createFullBody(converter: io.vertx.ext.web.client.predicate.ResponsePredicateResult => Throwable) = {
+     */
+def createFullBody(converter: io.vertx.ext.web.client.predicate.ResponsePredicateResult => Throwable) = {
       io.vertx.ext.web.client.predicate.ErrorConverter.createFullBody({x: io.vertx.ext.web.client.predicate.ResponsePredicateResult => converter(x)})
 }
   }
@@ -97,67 +99,67 @@ package object client{
 
     /**
      * Like sendJson from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def sendJson(body: scala.Option[AnyRef],handler: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => Unit) = {
+     */
+def sendJson(body: scala.Option[AnyRef],handler: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]] => Unit) = {
       scala.Option(asJava.sendJson(body.getOrElse(null), handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]]]))
 }
-
     /**
      * Like sendStream from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def sendStreamFuture(body: io.vertx.core.streams.ReadStream[io.vertx.core.buffer.Buffer]) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
+     */
+def sendStreamFuture(body: io.vertx.core.streams.ReadStream[io.vertx.core.buffer.Buffer]) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
       val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendStream(body, new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like sendBuffer from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def sendBufferFuture(body: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
+     */
+def sendBufferFuture(body: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
       val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendBuffer(body, new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like sendJsonObject from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def sendJsonObjectFuture(body: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
+     */
+def sendJsonObjectFuture(body: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
       val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendJsonObject(body, new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like sendJson from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def sendJsonFuture(body: scala.Option[AnyRef]) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
+     */
+def sendJsonFuture(body: scala.Option[AnyRef]) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
       val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendJson(body.getOrElse(null), new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like sendForm from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def sendFormFuture(body: io.vertx.core.MultiMap) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
+     */
+def sendFormFuture(body: io.vertx.core.MultiMap) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
       val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendForm(body, new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like sendMultipartForm from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def sendMultipartFormFuture(body: io.vertx.ext.web.multipart.MultipartForm) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
+     */
+def sendMultipartFormFuture(body: io.vertx.ext.web.multipart.MultipartForm) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
       val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.sendMultipartForm(body, new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like send from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def sendFuture() : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
+     */
+def sendFuture() : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
       val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
       asJava.send(new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+}  }
 
-  }
 
 
 
@@ -165,32 +167,38 @@ package object client{
   object ResponsePredicate {
     /**
      * Like status from [[io.vertx.ext.web.client.predicate.ResponsePredicate]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def status(statusCode: java.lang.Integer) = {
+     */
+def status(statusCode: java.lang.Integer) = {
       io.vertx.ext.web.client.predicate.ResponsePredicate.status(statusCode)
 }
     /**
      * Like status from [[io.vertx.ext.web.client.predicate.ResponsePredicate]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def status(min: java.lang.Integer,max: java.lang.Integer) = {
+     */
+def status(min: java.lang.Integer,max: java.lang.Integer) = {
       io.vertx.ext.web.client.predicate.ResponsePredicate.status(min, max)
 }
     /**
      * Like contentType from [[io.vertx.ext.web.client.predicate.ResponsePredicate]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def contentType(mimeType: java.lang.String) = {
+     */
+def contentType(mimeType: java.lang.String) = {
       io.vertx.ext.web.client.predicate.ResponsePredicate.contentType(mimeType)
 }
     /**
      * Like contentType from [[io.vertx.ext.web.client.predicate.ResponsePredicate]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def contentType(mimeTypes: java.util.List[java.lang.String]) = {
+     */
+def contentType(mimeTypes: java.util.List[java.lang.String]) = {
       io.vertx.ext.web.client.predicate.ResponsePredicate.contentType(mimeTypes)
 }
     /**
      * Like create from [[io.vertx.ext.web.client.predicate.ResponsePredicate]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(test: io.vertx.ext.web.client.HttpResponse[Void] => io.vertx.ext.web.client.predicate.ResponsePredicateResult) = {
+     */
+def create(test: io.vertx.ext.web.client.HttpResponse[Void] => io.vertx.ext.web.client.predicate.ResponsePredicateResult) = {
       io.vertx.ext.web.client.predicate.ResponsePredicate.create({x: io.vertx.ext.web.client.HttpResponse[Void] => test(x)})
 }
     /**
      * Like create from [[io.vertx.ext.web.client.predicate.ResponsePredicate]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(test: io.vertx.ext.web.client.HttpResponse[Void] => io.vertx.ext.web.client.predicate.ResponsePredicateResult,errorConverter: io.vertx.ext.web.client.predicate.ErrorConverter) = {
+     */
+def create(test: io.vertx.ext.web.client.HttpResponse[Void] => io.vertx.ext.web.client.predicate.ResponsePredicateResult,errorConverter: io.vertx.ext.web.client.predicate.ErrorConverter) = {
       io.vertx.ext.web.client.predicate.ResponsePredicate.create({x: io.vertx.ext.web.client.HttpResponse[Void] => test(x)}, errorConverter)
 }
   }
@@ -199,12 +207,14 @@ package object client{
   object ResponsePredicateResult {
     /**
      * Like success from [[io.vertx.ext.web.client.predicate.ResponsePredicateResult]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def success() = {
+     */
+def success() = {
       io.vertx.ext.web.client.predicate.ResponsePredicateResult.success()
 }
     /**
      * Like failure from [[io.vertx.ext.web.client.predicate.ResponsePredicateResult]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def failure(message: java.lang.String) = {
+     */
+def failure(message: java.lang.String) = {
       io.vertx.ext.web.client.predicate.ResponsePredicateResult.failure(message)
 }
   }
@@ -213,22 +223,26 @@ package object client{
   object WebClient {
     /**
      * Like create from [[io.vertx.ext.web.client.WebClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx) = {
+     */
+def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.client.WebClient.create(vertx)
 }
     /**
      * Like create from [[io.vertx.ext.web.client.WebClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.web.client.WebClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.web.client.WebClientOptions) = {
       io.vertx.ext.web.client.WebClient.create(vertx, options)
 }
     /**
      * Like wrap from [[io.vertx.ext.web.client.WebClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def wrap(httpClient: io.vertx.core.http.HttpClient) = {
+     */
+def wrap(httpClient: io.vertx.core.http.HttpClient) = {
       io.vertx.ext.web.client.WebClient.wrap(httpClient)
 }
     /**
      * Like wrap from [[io.vertx.ext.web.client.WebClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def wrap(httpClient: io.vertx.core.http.HttpClient,options: io.vertx.ext.web.client.WebClientOptions) = {
+     */
+def wrap(httpClient: io.vertx.core.http.HttpClient,options: io.vertx.ext.web.client.WebClientOptions) = {
       io.vertx.ext.web.client.WebClient.wrap(httpClient, options)
 }
   }
