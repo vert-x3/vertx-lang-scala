@@ -47,8 +47,7 @@ package object tcp{
 
     /**
      * Like listen from [[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def listenFuture() : scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] = {
+     */def listenFuture() : scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] = {
       val promise = concurrent.Promise[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]()
       asJava.listen(new Handler[AsyncResult[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]] { override def handle(event: AsyncResult[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -56,8 +55,7 @@ def listenFuture() : scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.Tc
 
     /**
      * Like listen from [[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def listenFuture(port: java.lang.Integer,address: java.lang.String) : scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] = {
+     */def listenFuture(port: java.lang.Integer,address: java.lang.String) : scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] = {
       val promise = concurrent.Promise[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]()
       asJava.listen(port, address, new Handler[AsyncResult[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]] { override def handle(event: AsyncResult[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -65,8 +63,7 @@ def listenFuture(port: java.lang.Integer,address: java.lang.String) : scala.conc
 
     /**
      * Like listen from [[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def listenFuture(port: java.lang.Integer) : scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] = {
+     */def listenFuture(port: java.lang.Integer) : scala.concurrent.Future[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge] = {
       val promise = concurrent.Promise[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]()
       asJava.listen(port, new Handler[AsyncResult[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]] { override def handle(event: AsyncResult[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -74,8 +71,7 @@ def listenFuture(port: java.lang.Integer) : scala.concurrent.Future[io.vertx.ext
 
     /**
      * Like close from [[io.vertx.ext.eventbus.bridge.tcp.TcpEventBusBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def closeFuture() : scala.concurrent.Future[Unit] = {
+     */def closeFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future

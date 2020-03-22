@@ -33,15 +33,13 @@ package object handlebars{
 
   object HandlebarsTemplateEngine {
     /**
-     * Create a template engine using defaults     * @return the engine
-     */
-def create(vertx: io.vertx.core.Vertx) = {
+     * Like create from [[io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine.create(vertx)
 }
     /**
-     * Create a template engine using defaults     * @return the engine
-     */
-def create(vertx: io.vertx.core.Vertx,extension: java.lang.String) = {
+     * Like create from [[io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(vertx: io.vertx.core.Vertx,extension: java.lang.String) = {
       io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine.create(vertx, extension)
 }
   }

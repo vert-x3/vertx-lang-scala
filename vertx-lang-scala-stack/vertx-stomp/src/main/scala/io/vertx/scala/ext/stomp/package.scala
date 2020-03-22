@@ -94,8 +94,7 @@ def ping() = {
 
     /**
      * Like connect from [[io.vertx.ext.stomp.StompClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def connectFuture(port: java.lang.Integer,host: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.StompClientConnection] = {
+     */def connectFuture(port: java.lang.Integer,host: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.StompClientConnection] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompClientConnection]()
       asJava.connect(port, host, new Handler[AsyncResult[io.vertx.ext.stomp.StompClientConnection]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.StompClientConnection]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -103,8 +102,7 @@ def connectFuture(port: java.lang.Integer,host: java.lang.String) : scala.concur
 
     /**
      * Like connect from [[io.vertx.ext.stomp.StompClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def connectFuture(net: io.vertx.core.net.NetClient) : scala.concurrent.Future[io.vertx.ext.stomp.StompClientConnection] = {
+     */def connectFuture(net: io.vertx.core.net.NetClient) : scala.concurrent.Future[io.vertx.ext.stomp.StompClientConnection] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompClientConnection]()
       asJava.connect(net, new Handler[AsyncResult[io.vertx.ext.stomp.StompClientConnection]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.StompClientConnection]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -112,8 +110,7 @@ def connectFuture(net: io.vertx.core.net.NetClient) : scala.concurrent.Future[io
 
     /**
      * Like connect from [[io.vertx.ext.stomp.StompClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def connectFuture(port: java.lang.Integer,host: java.lang.String,net: io.vertx.core.net.NetClient) : scala.concurrent.Future[io.vertx.ext.stomp.StompClientConnection] = {
+     */def connectFuture(port: java.lang.Integer,host: java.lang.String,net: io.vertx.core.net.NetClient) : scala.concurrent.Future[io.vertx.ext.stomp.StompClientConnection] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompClientConnection]()
       asJava.connect(port, host, net, new Handler[AsyncResult[io.vertx.ext.stomp.StompClientConnection]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.StompClientConnection]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -121,8 +118,7 @@ def connectFuture(port: java.lang.Integer,host: java.lang.String,net: io.vertx.c
 
     /**
      * Like connect from [[io.vertx.ext.stomp.StompClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def connectFuture() : scala.concurrent.Future[io.vertx.ext.stomp.StompClientConnection] = {
+     */def connectFuture() : scala.concurrent.Future[io.vertx.ext.stomp.StompClientConnection] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompClientConnection]()
       asJava.connect(new Handler[AsyncResult[io.vertx.ext.stomp.StompClientConnection]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.StompClientConnection]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -141,8 +137,7 @@ def connectFuture() : scala.concurrent.Future[io.vertx.ext.stomp.StompClientConn
 
     /**
      * Like send from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def sendFuture(headers: java.util.Map[String, java.lang.String],body: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def sendFuture(headers: java.util.Map[String, java.lang.String],body: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.send(headers, body, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -150,8 +145,7 @@ def sendFuture(headers: java.util.Map[String, java.lang.String],body: io.vertx.c
 
     /**
      * Like send from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def sendFuture(destination: java.lang.String,body: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def sendFuture(destination: java.lang.String,body: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.send(destination, body, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -159,8 +153,7 @@ def sendFuture(destination: java.lang.String,body: io.vertx.core.buffer.Buffer) 
 
     /**
      * Like send from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def sendFuture(frame: io.vertx.ext.stomp.Frame) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def sendFuture(frame: io.vertx.ext.stomp.Frame) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.send(frame, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -168,8 +161,7 @@ def sendFuture(frame: io.vertx.ext.stomp.Frame) : scala.concurrent.Future[io.ver
 
     /**
      * Like send from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def sendFuture(destination: java.lang.String,headers: java.util.Map[String, java.lang.String],body: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def sendFuture(destination: java.lang.String,headers: java.util.Map[String, java.lang.String],body: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.send(destination, headers, body, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -177,8 +169,7 @@ def sendFuture(destination: java.lang.String,headers: java.util.Map[String, java
 
     /**
      * Like subscribe from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def subscribeFuture(destination: java.lang.String,handler: io.vertx.ext.stomp.Frame => Unit) : scala.concurrent.Future[java.lang.String] = {
+     */def subscribeFuture(destination: java.lang.String,handler: io.vertx.ext.stomp.Frame => Unit) : scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
       asJava.subscribe(destination, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.ext.stomp.Frame]], new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -186,8 +177,7 @@ def subscribeFuture(destination: java.lang.String,handler: io.vertx.ext.stomp.Fr
 
     /**
      * Like subscribe from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def subscribeFuture(destination: java.lang.String,headers: java.util.Map[String, java.lang.String],handler: io.vertx.ext.stomp.Frame => Unit) : scala.concurrent.Future[java.lang.String] = {
+     */def subscribeFuture(destination: java.lang.String,headers: java.util.Map[String, java.lang.String],handler: io.vertx.ext.stomp.Frame => Unit) : scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
       asJava.subscribe(destination, headers, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.ext.stomp.Frame]], new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -195,8 +185,7 @@ def subscribeFuture(destination: java.lang.String,headers: java.util.Map[String,
 
     /**
      * Like unsubscribe from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def unsubscribeFuture(destination: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def unsubscribeFuture(destination: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.unsubscribe(destination, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -204,8 +193,7 @@ def unsubscribeFuture(destination: java.lang.String) : scala.concurrent.Future[i
 
     /**
      * Like unsubscribe from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def unsubscribeFuture(destination: java.lang.String,headers: java.util.Map[String, java.lang.String]) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def unsubscribeFuture(destination: java.lang.String,headers: java.util.Map[String, java.lang.String]) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.unsubscribe(destination, headers, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -213,8 +201,7 @@ def unsubscribeFuture(destination: java.lang.String,headers: java.util.Map[Strin
 
     /**
      * Like beginTX from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def beginTXFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def beginTXFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.beginTX(id, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -222,8 +209,7 @@ def beginTXFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.s
 
     /**
      * Like beginTX from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def beginTXFuture(id: java.lang.String,headers: java.util.Map[String, java.lang.String]) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def beginTXFuture(id: java.lang.String,headers: java.util.Map[String, java.lang.String]) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.beginTX(id, headers, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -231,8 +217,7 @@ def beginTXFuture(id: java.lang.String,headers: java.util.Map[String, java.lang.
 
     /**
      * Like commit from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def commitFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def commitFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.commit(id, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -240,8 +225,7 @@ def commitFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.st
 
     /**
      * Like commit from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def commitFuture(id: java.lang.String,headers: java.util.Map[String, java.lang.String]) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def commitFuture(id: java.lang.String,headers: java.util.Map[String, java.lang.String]) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.commit(id, headers, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -249,8 +233,7 @@ def commitFuture(id: java.lang.String,headers: java.util.Map[String, java.lang.S
 
     /**
      * Like abort from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def abortFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def abortFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.abort(id, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -258,8 +241,7 @@ def abortFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.sto
 
     /**
      * Like abort from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def abortFuture(id: java.lang.String,headers: java.util.Map[String, java.lang.String]) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def abortFuture(id: java.lang.String,headers: java.util.Map[String, java.lang.String]) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.abort(id, headers, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -267,8 +249,7 @@ def abortFuture(id: java.lang.String,headers: java.util.Map[String, java.lang.St
 
     /**
      * Like disconnect from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def disconnectFuture() : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def disconnectFuture() : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.disconnect(new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -276,8 +257,7 @@ def disconnectFuture() : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
 
     /**
      * Like disconnect from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def disconnectFuture(frame: io.vertx.ext.stomp.Frame) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def disconnectFuture(frame: io.vertx.ext.stomp.Frame) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.disconnect(frame, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -285,8 +265,7 @@ def disconnectFuture(frame: io.vertx.ext.stomp.Frame) : scala.concurrent.Future[
 
     /**
      * Like ack from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def ackFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def ackFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.ack(id, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -294,8 +273,7 @@ def ackFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp
 
     /**
      * Like nack from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def nackFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def nackFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.nack(id, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -303,8 +281,7 @@ def nackFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stom
 
     /**
      * Like ack from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def ackFuture(id: java.lang.String,txId: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def ackFuture(id: java.lang.String,txId: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.ack(id, txId, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -312,8 +289,7 @@ def ackFuture(id: java.lang.String,txId: java.lang.String) : scala.concurrent.Fu
 
     /**
      * Like nack from [[io.vertx.ext.stomp.StompClientConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def nackFuture(id: java.lang.String,txId: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
+     */def nackFuture(id: java.lang.String,txId: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.Frame] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.Frame]()
       asJava.nack(id, txId, new Handler[AsyncResult[io.vertx.ext.stomp.Frame]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.Frame]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -341,8 +317,7 @@ def nackFuture(id: java.lang.String,txId: java.lang.String) : scala.concurrent.F
 
     /**
      * Like listen from [[io.vertx.ext.stomp.StompServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def listenFuture() : scala.concurrent.Future[io.vertx.ext.stomp.StompServer] = {
+     */def listenFuture() : scala.concurrent.Future[io.vertx.ext.stomp.StompServer] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompServer]()
       asJava.listen(new Handler[AsyncResult[io.vertx.ext.stomp.StompServer]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.StompServer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -350,8 +325,7 @@ def listenFuture() : scala.concurrent.Future[io.vertx.ext.stomp.StompServer] = {
 
     /**
      * Like listen from [[io.vertx.ext.stomp.StompServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def listenFuture(port: java.lang.Integer) : scala.concurrent.Future[io.vertx.ext.stomp.StompServer] = {
+     */def listenFuture(port: java.lang.Integer) : scala.concurrent.Future[io.vertx.ext.stomp.StompServer] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompServer]()
       asJava.listen(port, new Handler[AsyncResult[io.vertx.ext.stomp.StompServer]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.StompServer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -359,8 +333,7 @@ def listenFuture(port: java.lang.Integer) : scala.concurrent.Future[io.vertx.ext
 
     /**
      * Like listen from [[io.vertx.ext.stomp.StompServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def listenFuture(port: java.lang.Integer,host: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.StompServer] = {
+     */def listenFuture(port: java.lang.Integer,host: java.lang.String) : scala.concurrent.Future[io.vertx.ext.stomp.StompServer] = {
       val promise = concurrent.Promise[io.vertx.ext.stomp.StompServer]()
       asJava.listen(port, host, new Handler[AsyncResult[io.vertx.ext.stomp.StompServer]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.StompServer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -368,8 +341,7 @@ def listenFuture(port: java.lang.Integer,host: java.lang.String) : scala.concurr
 
     /**
      * Like close from [[io.vertx.ext.stomp.StompServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def closeFuture() : scala.concurrent.Future[Unit] = {
+     */def closeFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future

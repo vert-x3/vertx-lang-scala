@@ -23,19 +23,12 @@ ${typeHelper.renderDoc(type, "    *", doc)}
 <#if className != "CompositeFuture" && className != "Future" >
   <#list nullableMethods as method>
     <#if method.name != "executeBlocking">
-
-      <#if method.doc??>
-${typeHelper.methodDoc(type, method, "    ", true)}
-      </#if>
 ${typeHelper.renderNullableMethod(type, method)}
 
     </#if>
   </#list>
   <#list futureMethods as method>
     <#if method.name != "executeBlocking">
-      <#if method.doc??>
-${typeHelper.methodDoc(type, method, "    ", true)}
-      </#if>
 ${typeHelper.renderFutureMethod(type, typeParams, method)}
 
     </#if>
