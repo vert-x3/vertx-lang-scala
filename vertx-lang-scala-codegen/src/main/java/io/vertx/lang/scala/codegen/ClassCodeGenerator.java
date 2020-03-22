@@ -62,27 +62,21 @@ public class ClassCodeGenerator extends Generator<Model> {
 
   @Override
   public String render(Model model, int index, int size, Map<String, Object> session) {
-    ClassTypeInfo type = ((ClassTypeInfo)model.getVars().get("type"));
+    Map<String, Object> modelVars = model.getVars();
+    ClassTypeInfo type = ((ClassTypeInfo) modelVars.get("type"));
     if(!ignoredPackages.contains(type.getPackageName()) && !ignoreClassname.contains(type.getSimpleName())) {
       try {
-        String translatedPackage = type.getModule().translatePackageName("scala");
         return TypeHelper.renderPackageObject(
           type,
           index,
           size,
-          translatedPackage.substring(0, translatedPackage.lastIndexOf('.')),
-          translatedPackage.substring(translatedPackage.lastIndexOf('.') + 1),
           fileToImports.get(filenameForModel(model)),
-          type.getSimpleName(),
-          (Boolean)model.getVars().get("concrete"),
-          (Boolean)model.getVars().get("hasEmptyConstructor"),
-          new Helper(),
-          (Doc)model.getVars().get("doc"),
-          TypeHelper.findNullableMethods((List<MethodInfo>)model.getVars().get("instanceMethods")),
-          TypeHelper.findFutureMethods((List<MethodInfo>)model.getVars().get("instanceMethods")),
-          (List<MethodInfo>)model.getVars().get("staticMethods"),
-          Helper.getNonGenericType(type.toString()),
-          (Collection<TypeParamInfo>)model.getVars().get("typeParams")
+          (Boolean) modelVars.get("concrete"),
+          (Boolean) modelVars.get("hasEmptyConstructor"),
+          (Doc) modelVars.get("doc"),
+          (List<MethodInfo>) modelVars.get("instanceMethods"),
+          (List<MethodInfo>) modelVars.get("staticMethods"),
+          (Collection<TypeParamInfo>) modelVars.get("typeParams")
           );
       }
       catch (IOException ioe) {

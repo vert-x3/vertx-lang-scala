@@ -1160,7 +1160,15 @@ public class TypeHelper {
   }
 
 
-  public static String renderPackageObject(ClassTypeInfo type, int incrementalIndex, int incrementalSize, String modulePackage, String moduleName, Set<String> imps, String className, Boolean concrete, Boolean hasEmptyConstructor, Helper helper, Doc doc, List<MethodInfo> nullableMethods, List<MethodInfo> futureMethods, List<MethodInfo> staticMethods, String nonGenericType, Collection<TypeParamInfo> typeParams) throws IOException{
+  public static String renderPackageObject(ClassTypeInfo type, int incrementalIndex, int incrementalSize, Set<String> imps, Boolean concrete, Boolean hasEmptyConstructor, Doc doc, List<MethodInfo> instanceMethods, List<MethodInfo> staticMethods, Collection<TypeParamInfo> typeParams) throws IOException{
+    Helper helper = new Helper();
+    String nonGenericType = Helper.getNonGenericType(type.toString());
+    String translatedPackage = type.getModule().translatePackageName("scala");
+    String modulePackage = translatedPackage.substring(0, translatedPackage.lastIndexOf('.'));
+    String moduleName = translatedPackage.substring(translatedPackage.lastIndexOf('.') + 1);
+
+    List<MethodInfo> nullableMethods = findNullableMethods(instanceMethods);
+    List<MethodInfo> futureMethods = findFutureMethods(instanceMethods);
 
     String header = "";
     if (incrementalIndex == 0) {
@@ -1187,13 +1195,13 @@ public class TypeHelper {
 
     String body = "";
     if(type.getDataObject() != null) {
-      body = renderDataobject(className, type, concrete, hasEmptyConstructor, helper) + "\n";
+      body = renderDataobject(type.getSimpleName(), type, concrete, hasEmptyConstructor, helper) + "\n";
     }
     else if (!type.getName().contains("Handler") && !futureMethods.isEmpty()) {
-      body = renderClass(type, doc, className, nullableMethods, futureMethods, nonGenericType, typeParams) + "\n";
+      body = renderClass(type, doc, type.getSimpleName(), nullableMethods, futureMethods, nonGenericType, typeParams) + "\n";
     }
-    else if (!type.getName().contains("Handler") && (staticMethods != null && !staticMethods.isEmpty()) &&  !"Message".equals(helper.getSimpleName(type.getName()))) {
-      body = "  object " + helper.getSimpleName(type.getName()) + " {\n" +
+    else if (!type.getName().contains("Handler") && (staticMethods != null && !staticMethods.isEmpty()) &&  !"Message".equals(type.getSimpleName())) {
+      body = "  object " + type.getSimpleName() + " {\n" +
         (staticMethods.stream().map(method -> renderStaticMethod(type, method)).collect(Collectors.joining("\n"))) +
         "  }\n";
     }
@@ -1202,7 +1210,7 @@ public class TypeHelper {
       header +
       body +
       "\n" +
-        ("Message".equals(helper.getSimpleName(type.getName())) ? renderFile("extensions/Message.ftl") : "") +
+        ("Message".equals(type.getSimpleName()) ? renderFile("extensions/Message.ftl") : "") +
       "\n" +
         (incrementalIndex == incrementalSize-1 ? "}\n" : "");
   }
