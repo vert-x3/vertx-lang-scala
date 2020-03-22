@@ -9,6 +9,10 @@ import io.vertx.codegen.type.*;
 
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -1108,4 +1112,32 @@ public class TypeHelper {
     return ret;
   }
 
+
+
+
+
+
+
+
+
+
+  //HELPER STUFF
+
+  public static String renderFile(String fileName) throws IOException{
+    Class clazz = TypeHelper.class;
+    InputStream inputStream = clazz.getResourceAsStream("/templates/"+ fileName);
+    return readFromInputStream(inputStream);
+  }
+
+  public static String readFromInputStream(InputStream inputStream) throws IOException {
+    StringBuilder resultStringBuilder = new StringBuilder();
+    try (BufferedReader br
+           = new BufferedReader(new InputStreamReader(inputStream))) {
+      String line;
+      while ((line = br.readLine()) != null) {
+        resultStringBuilder.append(line).append("\n");
+      }
+    }
+    return resultStringBuilder.toString();
+  }
 }

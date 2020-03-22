@@ -14,6 +14,7 @@
  * under the License.
  */
 
+
 package io.vertx.scala
 
 import scala.jdk.CollectionConverters._
@@ -64,6 +65,7 @@ package object core{
   }
 
   private def listToJsArr(a: Seq[_]) = JsonArray(a: _*)
+
 
   type AddressResolverOptions = io.vertx.core.dns.AddressResolverOptions
   object AddressResolverOptions {
@@ -420,6 +422,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
       asJava.executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if (h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
       promise.future
     }
+
 
 
     /**
@@ -2761,6 +2764,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
 
 
 
+
   /**
     * An event bus consumer object representing a stream of message to an [[io.vertx.core.eventbus.EventBus]] address that can
     * be read from.
@@ -3808,6 +3812,7 @@ def endHandler(endHandler: scala.Option[Void => Unit]) = {
       scala.Option(io.vertx.core.Vertx.currentContext())
   }
 
+
   implicit class VertxScala(val asJava: io.vertx.core.Vertx) extends AnyVal {
 
     import io.vertx.lang.scala.ScalaVerticle
@@ -3853,6 +3858,7 @@ def endHandler(endHandler: scala.Option[Void => Unit]) = {
       asJava.deployVerticle(verticle.asJava(),options , {a:AsyncResult[String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
+
     /**
       * Safely execute some blocking code.
       *
@@ -3873,6 +3879,7 @@ def endHandler(endHandler: scala.Option[Void => Unit]) = {
       asJava.executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if (h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
       promise.future
     }
+
 
 
     /**
@@ -4329,6 +4336,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
       asJava.executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if (h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
       promise.future
     }
+
 
 
   }
