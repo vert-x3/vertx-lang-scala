@@ -44,13 +44,11 @@ package object pgclient{
 
 
 
-
   type Circle = io.vertx.pgclient.data.Circle
   object Circle {
     def apply() = new Circle()
     def apply(json: JsonObject) = new Circle(json)
   }
-
 
 
 
@@ -62,13 +60,11 @@ package object pgclient{
 
 
 
-
   type Line = io.vertx.pgclient.data.Line
   object Line {
     def apply() = new Line()
     def apply(json: JsonObject) = new Line(json)
   }
-
 
 
 
@@ -80,13 +76,11 @@ package object pgclient{
 
 
 
-
   type Path = io.vertx.pgclient.data.Path
   object Path {
     def apply() = new Path()
     def apply(json: JsonObject) = new Path(json)
   }
-
 
 
 
@@ -123,13 +117,11 @@ def pipeToFuture(dst: io.vertx.core.streams.WriteStream[java.lang.String]) : sca
 
 
 
-
   type PgConnectOptions = io.vertx.pgclient.PgConnectOptions
   object PgConnectOptions {
     def apply() = new PgConnectOptions()
     def apply(json: JsonObject) = new PgConnectOptions(json)
   }
-
 
 
 
@@ -200,13 +192,11 @@ def preparedBatchFuture(sql: java.lang.String,batch: java.util.List[io.vertx.sql
 
 
 
-
   type PgNotification = io.vertx.pgclient.PgNotification
   object PgNotification {
     def apply() = new PgNotification()
     def apply(json: JsonObject) = new PgNotification(json)
   }
-
 
 
 
@@ -254,7 +244,6 @@ def preparedBatchFuture(sql: java.lang.String,batch: java.util.List[io.vertx.sql
 
 
 
-
   /**
     * A class for managing subscriptions using `LISTEN/UNLISTEN` to Postgres channels.
     * <p/>
@@ -276,13 +265,11 @@ def connectFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
   type Point = io.vertx.pgclient.data.Point
   object Point {
     def apply() = new Point()
     def apply(json: JsonObject) = new Point(json)
   }
-
 
 
 
@@ -295,4 +282,3 @@ def connectFuture() : scala.concurrent.Future[Unit] = {
 
 
 }
-

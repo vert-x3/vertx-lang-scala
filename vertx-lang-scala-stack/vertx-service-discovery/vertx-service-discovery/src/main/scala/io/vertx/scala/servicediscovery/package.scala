@@ -75,7 +75,6 @@ def createRecord(name: java.lang.String,address: java.lang.String,classname: jav
 }  }
 
 
-
   object HttpEndpoint {
     /**
      * Like createRecord from [[io.vertx.servicediscovery.types.HttpEndpoint]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -151,13 +150,11 @@ def getWebClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: i
 }  }
 
 
-
   type HttpLocation = io.vertx.servicediscovery.types.HttpLocation
   object HttpLocation {
     def apply() = new HttpLocation()
     def apply(json: JsonObject) = new HttpLocation(json)
   }
-
 
 
 
@@ -189,7 +186,6 @@ def getJDBCClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: 
 def getJDBCClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.ext.jdbc.JDBCClient] => Unit) = {
       io.vertx.servicediscovery.types.JDBCDataSource.getJDBCClient(discovery, {x: io.vertx.servicediscovery.Record => filter(x)}, consumerConfiguration, resultHandler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.jdbc.JDBCClient]]])
 }  }
-
 
 
   object MessageSource {
@@ -225,7 +221,6 @@ def getConsumer[T](discovery: io.vertx.servicediscovery.ServiceDiscovery,filter:
 }  }
 
 
-
   object MongoDataSource {
     /**
      * Like createRecord from [[io.vertx.servicediscovery.types.MongoDataSource]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -253,13 +248,11 @@ def getMongoClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter:
 }  }
 
 
-
   type Record = io.vertx.servicediscovery.Record
   object Record {
     def apply() = new Record()
     def apply(json: JsonObject) = new Record(json)
   }
-
 
 
 
@@ -294,7 +287,6 @@ def getRedisClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter:
 def getRedisClient(discovery: io.vertx.servicediscovery.ServiceDiscovery,filter: io.vertx.servicediscovery.Record => java.lang.Boolean,consumerConfiguration: io.vertx.core.json.JsonObject,resultHandler: AsyncResult[io.vertx.redis.client.Redis] => Unit) = {
       io.vertx.servicediscovery.types.RedisDataSource.getRedisClient(discovery, {x: io.vertx.servicediscovery.Record => filter(x)}, consumerConfiguration, resultHandler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.redis.client.Redis]]])
 }  }
-
 
 
 
@@ -426,15 +418,11 @@ def updateFuture(record: io.vertx.servicediscovery.Record) : scala.concurrent.Fu
 
 
 
-
   type ServiceDiscoveryOptions = io.vertx.servicediscovery.ServiceDiscoveryOptions
   object ServiceDiscoveryOptions {
     def apply() = new ServiceDiscoveryOptions()
     def apply(json: JsonObject) = new ServiceDiscoveryOptions(json)
   }
-
-
-
 
 
 
@@ -479,6 +467,4 @@ def updateFuture(record: io.vertx.servicediscovery.Record) : scala.concurrent.Fu
 
 
 
-
 }
-

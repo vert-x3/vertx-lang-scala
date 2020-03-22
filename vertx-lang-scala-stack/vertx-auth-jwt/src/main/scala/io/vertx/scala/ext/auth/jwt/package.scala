@@ -45,13 +45,11 @@ def create(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.jwt.JWTAuthOptio
 }  }
 
 
-
   type JWTAuthOptions = io.vertx.ext.auth.jwt.JWTAuthOptions
   object JWTAuthOptions {
     def apply() = new JWTAuthOptions()
     def apply(json: JsonObject) = new JWTAuthOptions(json)
   }
-
 
 
 
@@ -64,7 +62,6 @@ def create(rootClaim: java.lang.String) = {
 }  }
 
 
-
   object MicroProfileAuthorization {
     /**
      * Like create from [[io.vertx.ext.auth.jwt.authorization.MicroProfileAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -75,4 +72,3 @@ def create() = {
 
 
 }
-

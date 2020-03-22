@@ -35,13 +35,11 @@ package object bridge{
 
 
 
-
   type BridgeOptions = io.vertx.ext.bridge.BridgeOptions
   object BridgeOptions {
     def apply() = new BridgeOptions()
     def apply(json: JsonObject) = new BridgeOptions(json)
   }
-
 
 
 
@@ -54,4 +52,3 @@ package object bridge{
 
 
 }
-

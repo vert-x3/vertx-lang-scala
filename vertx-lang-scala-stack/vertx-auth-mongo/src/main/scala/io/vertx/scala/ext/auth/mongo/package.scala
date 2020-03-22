@@ -42,7 +42,6 @@ package object mongo{
 
 
 
-
   /**
     * An extension of AuthProvider which is using  as store
     */
@@ -61,13 +60,11 @@ def insertUserFuture(username: java.lang.String,password: java.lang.String,roles
 
 
 
-
   type MongoAuthOptions = io.vertx.ext.auth.mongo.MongoAuthOptions
   object MongoAuthOptions {
     def apply() = new MongoAuthOptions()
     def apply(json: JsonObject) = new MongoAuthOptions(json)
   }
-
 
 
 
@@ -83,13 +80,11 @@ def create(mongoClient: io.vertx.ext.mongo.MongoClient,hashStrategy: io.vertx.ex
 }  }
 
 
-
   type MongoAuthenticationOptions = io.vertx.ext.auth.mongo.MongoAuthenticationOptions
   object MongoAuthenticationOptions {
     def apply() = new MongoAuthenticationOptions()
     def apply(json: JsonObject) = new MongoAuthenticationOptions(json)
   }
-
 
 
 
@@ -102,13 +97,11 @@ def create(providerId: java.lang.String,mongoClient: io.vertx.ext.mongo.MongoCli
 }  }
 
 
-
   type MongoAuthorizationOptions = io.vertx.ext.auth.mongo.MongoAuthorizationOptions
   object MongoAuthorizationOptions {
     def apply() = new MongoAuthorizationOptions()
     def apply(json: JsonObject) = new MongoAuthorizationOptions(json)
   }
-
 
 
 
@@ -151,4 +144,3 @@ def createUserRolesAndPermissionsFuture(username: java.lang.String,roles: java.u
 
 
 }
-

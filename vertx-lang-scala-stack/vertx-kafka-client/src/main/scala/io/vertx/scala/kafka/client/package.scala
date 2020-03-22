@@ -39,7 +39,6 @@ package object client{
 
 
 
-
   /**
     * Vert.x Kafka consumer.
     * 
@@ -284,9 +283,6 @@ def pollFuture(timeout: java.lang.Long) : scala.concurrent.Future[io.vertx.kafka
 
 
 
-
-
-
   object KafkaHeader {
 def header(key: java.lang.String,value: io.vertx.core.buffer.Buffer) = {
       io.vertx.kafka.client.producer.KafkaHeader.header(key, value)
@@ -294,7 +290,6 @@ def header(key: java.lang.String,value: io.vertx.core.buffer.Buffer) = {
 def header(key: java.lang.String,value: java.lang.String) = {
       io.vertx.kafka.client.producer.KafkaHeader.header(key, value)
 }  }
-
 
 
 
@@ -391,7 +386,6 @@ def closeFuture(timeout: java.lang.Long) : scala.concurrent.Future[Unit] = {
 
 
 
-
   object KafkaProducerRecord {
     /**
      * Like create from [[io.vertx.kafka.client.producer.KafkaProducerRecord]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -413,13 +407,11 @@ def create[K, V](topic: java.lang.String,value: V) = {
 }  }
 
 
-
   type Node = io.vertx.kafka.client.common.Node
   object Node {
     def apply() = new Node()
     def apply(json: JsonObject) = new Node(json)
   }
-
 
 
 
@@ -431,13 +423,11 @@ def create[K, V](topic: java.lang.String,value: V) = {
 
 
 
-
   type OffsetAndTimestamp = io.vertx.kafka.client.consumer.OffsetAndTimestamp
   object OffsetAndTimestamp {
     def apply() = new OffsetAndTimestamp()
     def apply(json: JsonObject) = new OffsetAndTimestamp(json)
   }
-
 
 
 
@@ -449,7 +439,6 @@ def create[K, V](topic: java.lang.String,value: V) = {
 
 
 
-
   type RecordMetadata = io.vertx.kafka.client.producer.RecordMetadata
   object RecordMetadata {
     def apply() = new RecordMetadata()
@@ -458,13 +447,11 @@ def create[K, V](topic: java.lang.String,value: V) = {
 
 
 
-
   type TopicPartition = io.vertx.kafka.client.common.TopicPartition
   object TopicPartition {
     def apply() = new TopicPartition()
     def apply(json: JsonObject) = new TopicPartition(json)
   }
-
 
 
 
@@ -477,4 +464,3 @@ def create[K, V](topic: java.lang.String,value: V) = {
 
 
 }
-

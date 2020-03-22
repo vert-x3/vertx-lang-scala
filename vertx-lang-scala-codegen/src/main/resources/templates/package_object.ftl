@@ -1,1 +1,0 @@
-${typeHelper.renderPackageObject(type, incrementalIndex, incrementalSize, modulePackage, moduleName, imps, className, concrete, hasEmptyConstructor, helper, doc, nullableMethods, futureMethods, staticMethods, nonGenericType, typeParams)}

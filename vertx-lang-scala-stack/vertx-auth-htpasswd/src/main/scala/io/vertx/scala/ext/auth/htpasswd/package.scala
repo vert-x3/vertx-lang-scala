@@ -42,7 +42,6 @@ def create(vertx: io.vertx.core.Vertx,htpasswdAuthOptions: io.vertx.ext.auth.htp
 }  }
 
 
-
   type HtpasswdAuthOptions = io.vertx.ext.auth.htpasswd.HtpasswdAuthOptions
   object HtpasswdAuthOptions {
     def apply() = new HtpasswdAuthOptions()
@@ -52,4 +51,3 @@ def create(vertx: io.vertx.core.Vertx,htpasswdAuthOptions: io.vertx.ext.auth.htp
 
 
 }
-

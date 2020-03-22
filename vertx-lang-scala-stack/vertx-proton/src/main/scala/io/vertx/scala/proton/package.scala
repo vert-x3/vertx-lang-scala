@@ -36,7 +36,6 @@ package object proton{
 
 
 
-
   type ProtonLinkOptions = io.vertx.proton.ProtonLinkOptions
   object ProtonLinkOptions {
     def apply() = new ProtonLinkOptions()
@@ -45,13 +44,11 @@ package object proton{
 
 
 
-
   type ProtonServerOptions = io.vertx.proton.ProtonServerOptions
   object ProtonServerOptions {
     def apply() = new ProtonServerOptions()
     def apply(json: JsonObject) = new ProtonServerOptions(json)
   }
-
 
 
 
@@ -64,4 +61,3 @@ package object proton{
 
 
 }
-

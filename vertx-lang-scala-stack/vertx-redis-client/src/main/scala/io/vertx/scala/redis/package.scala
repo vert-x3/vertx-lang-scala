@@ -40,7 +40,6 @@ def create(command: java.lang.String,arity: java.lang.Integer,firstKey: java.lan
 
 
 
-
   /**
     * A simple Redis client.
 
@@ -73,7 +72,6 @@ def batchFuture(commands: java.util.List[io.vertx.redis.client.Request]) : scala
       asJava.batch(commands, new Handler[AsyncResult[java.util.List[io.vertx.redis.client.Response]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.redis.client.Response]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
 }  }
-
 
 
 
@@ -1690,7 +1688,6 @@ def zunionstoreFuture(args: java.util.List[java.lang.String]) : scala.concurrent
 
 
 
-
   /**
     * A simple Redis client.
 
@@ -1740,13 +1737,11 @@ def batchFuture(commands: java.util.List[io.vertx.redis.client.Request]) : scala
 
 
 
-
   type RedisOptions = io.vertx.redis.client.RedisOptions
   object RedisOptions {
     def apply() = new RedisOptions()
     def apply(json: JsonObject) = new RedisOptions(json)
   }
-
 
 
 
@@ -1758,6 +1753,4 @@ def cmd(command: io.vertx.redis.client.Command) = {
 
 
 
-
 }
-

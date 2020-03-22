@@ -1160,7 +1160,7 @@ public class TypeHelper {
   }
 
 
-  public static String renderPackageObject(ClassTypeInfo type, int incrementalIndex, int incrementalSize, String modulePackage, String moduleName, List<String> imps, String className, Boolean concrete, Boolean hasEmptyConstructor, Helper helper, Doc doc, List<MethodInfo> nullableMethods, List<MethodInfo> futureMethods, List<MethodInfo> staticMethods, String nonGenericType, Collection<TypeParamInfo> typeParams) throws IOException{
+  public static String renderPackageObject(ClassTypeInfo type, int incrementalIndex, int incrementalSize, String modulePackage, String moduleName, Set<String> imps, String className, Boolean concrete, Boolean hasEmptyConstructor, Helper helper, Doc doc, List<MethodInfo> nullableMethods, List<MethodInfo> futureMethods, List<MethodInfo> staticMethods, String nonGenericType, Collection<TypeParamInfo> typeParams) throws IOException{
 
     String header = "";
     if (incrementalIndex == 0) {

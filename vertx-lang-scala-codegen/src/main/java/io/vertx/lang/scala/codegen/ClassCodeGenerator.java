@@ -1,21 +1,13 @@
 package io.vertx.lang.scala.codegen;
 
-import freemarker.cache.ClassTemplateLoader;
-import freemarker.cache.TemplateLoader;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateExceptionHandler;
 import io.vertx.codegen.*;
 import io.vertx.codegen.type.*;
+import io.vertx.codegen.doc.Doc;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.*;
 import java.util.logging.LogManager;
-import java.util.stream.Collectors;
 
 /**
  * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
@@ -24,7 +16,6 @@ public class ClassCodeGenerator extends Generator<Model> {
 
   public String filename;
   public String templateFilename;
-  public Template template;
   public Map<String, Set<String>> fileToImports = new HashMap<>();
 
   public static final List<String> ignoredPackages;
@@ -47,18 +38,6 @@ public class ClassCodeGenerator extends Generator<Model> {
   @Override
   public void load(ProcessingEnvironment processingEnv) {
     super.load(processingEnv);
-    TemplateLoader templateLoader = new ClassTemplateLoader(ClassCodeGenerator.class, "/templates");
-    Configuration cfg = new Configuration(Configuration.VERSION_2_3_27);
-    cfg.setTemplateLoader(templateLoader);
-    cfg.setDefaultEncoding("UTF-8");
-    cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-
-    try {
-      template = cfg.getTemplate("package_object.ftl");
-    } catch (IOException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
-    }
   }
 
   @Override
@@ -113,14 +92,28 @@ public class ClassCodeGenerator extends Generator<Model> {
       vars.putAll(Case.vars());
       vars.put("incrementalIndex", index);
       vars.put("incrementalSize", size);
-
-      Writer writer = new StringWriter();
       try {
-        template.process(vars, writer);
-        return writer.toString();
-      } catch (TemplateException | IOException e) {
-        e.printStackTrace();
-        throw new RuntimeException(e);
+        return TypeHelper.renderPackageObject(
+          type,
+          index,
+          size,
+          translatedPackage.substring(0, translatedPackage.lastIndexOf('.')),
+          translatedPackage.substring(translatedPackage.lastIndexOf('.') + 1),
+          fileToImports.get(filenameForModel(model)),
+          type.getSimpleName(),
+          (Boolean)vars.get("concrete"),
+          (Boolean)vars.get("hasEmptyConstructor"),
+          new Helper(),
+          (Doc)vars.get("doc"),
+          TypeHelper.findNullableMethods((List<MethodInfo>)vars.get("instanceMethods")),
+          TypeHelper.findFutureMethods((List<MethodInfo>)vars.get("instanceMethods")),
+          (List<MethodInfo>)vars.get("staticMethods"),
+          Helper.getNonGenericType(type.toString()),
+          (Collection<TypeParamInfo>)vars.get("typeParams")
+          );
+      }
+      catch (IOException ioe) {
+        throw new RuntimeException(ioe);
       }
     }
     return "";

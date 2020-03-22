@@ -48,4 +48,3 @@ def create(vertx: io.vertx.core.Vertx,htfile: java.lang.String) = {
 
 
 }
-

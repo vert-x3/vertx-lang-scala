@@ -63,7 +63,6 @@ def createFullBody(converter: io.vertx.ext.web.client.predicate.ResponsePredicat
 
 
 
-
   /**
     * A client-side HTTP request.
     * 
@@ -164,8 +163,6 @@ def sendFuture() : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[
 
 
 
-
-
   object ResponsePredicate {
     /**
      * Like status from [[io.vertx.ext.web.client.predicate.ResponsePredicate]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -205,7 +202,6 @@ def create(test: io.vertx.ext.web.client.HttpResponse[Void] => io.vertx.ext.web.
 }  }
 
 
-
   object ResponsePredicateResult {
     /**
      * Like success from [[io.vertx.ext.web.client.predicate.ResponsePredicateResult]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -219,7 +215,6 @@ def success() = {
 def failure(message: java.lang.String) = {
       io.vertx.ext.web.client.predicate.ResponsePredicateResult.failure(message)
 }  }
-
 
 
   object WebClient {
@@ -249,7 +244,6 @@ def wrap(httpClient: io.vertx.core.http.HttpClient,options: io.vertx.ext.web.cli
 }  }
 
 
-
   type WebClientOptions = io.vertx.ext.web.client.WebClientOptions
   object WebClientOptions {
     def apply() = new WebClientOptions()
@@ -259,4 +253,3 @@ def wrap(httpClient: io.vertx.core.http.HttpClient,options: io.vertx.ext.web.cli
 
 
 }
-

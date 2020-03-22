@@ -46,20 +46,11 @@ package object web{
 
 
 
-
-
-
-
-
-
   type BridgeOptions = io.vertx.ext.web.handler.sockjs.BridgeOptions
   object BridgeOptions {
     def apply() = new BridgeOptions()
     def apply(json: JsonObject) = new BridgeOptions(json)
   }
-
-
-
 
 
 
@@ -106,21 +97,11 @@ def create(vertx: io.vertx.core.Vertx,retryTimeout: java.lang.Long) = {
 
 
 
-
-
-
-
-
-
-
   type Http2PushMapping = io.vertx.ext.web.Http2PushMapping
   object Http2PushMapping {
     def apply() = new Http2PushMapping()
     def apply(json: JsonObject) = new Http2PushMapping(json)
   }
-
-
-
 
 
 
@@ -171,18 +152,6 @@ def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String,reaperInt
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
   object Router {
     /**
      * Like router from [[io.vertx.ext.web.Router]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -190,10 +159,6 @@ def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String,reaperInt
 def router(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.Router.router(vertx)
 }  }
-
-
-
-
 
 
 
@@ -255,14 +220,11 @@ def sizeFuture() : scala.concurrent.Future[java.lang.Integer] = {
 
 
 
-
-
   type SockJSHandlerOptions = io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions
   object SockJSHandlerOptions {
     def apply() = new SockJSHandlerOptions()
     def apply(json: JsonObject) = new SockJSHandlerOptions(json)
   }
-
 
 
 
@@ -343,11 +305,4 @@ def writeFuture(data: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[Uni
 
 
 
-
-
-
-
-
-
 }
-

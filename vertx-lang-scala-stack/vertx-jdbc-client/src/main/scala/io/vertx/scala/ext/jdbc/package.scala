@@ -59,4 +59,3 @@ def querySingleWithParamsFuture(sql: java.lang.String,arguments: io.vertx.core.j
 
 
 }
-
