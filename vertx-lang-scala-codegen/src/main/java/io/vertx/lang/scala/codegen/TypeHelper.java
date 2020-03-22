@@ -21,18 +21,52 @@ import static io.vertx.codegen.Helper.getNonGenericType;
 public class TypeHelper {
 
 
-  public static final Map<String,String> basicToWrapper;
+  public static final Map<String,String> javaBasicToWrapperTyper;
   static {
     Map<String, String> writable = new HashMap<>();
     writable.put("byte", "java.lang.Byte");
+    writable.put("java.lang.Byte", "java.lang.Byte");
     writable.put("short", "java.lang.Short");
+    writable.put("java.lang.Short", "java.lang.Short");
     writable.put("int", "java.lang.Integer");
+    writable.put("java.lang.Integer", "java.lang.Integer");
     writable.put("long", "java.lang.Long");
+    writable.put("java.lang.Long", "java.lang.Long");
     writable.put("float", "java.lang.Float");
+    writable.put("java.lang.Float", "java.lang.Float");
     writable.put("double", "java.lang.Double");
+    writable.put("java.lang.Double", "java.lang.Double");
     writable.put("boolean", "java.lang.Boolean");
+    writable.put("java.lang.Boolean", "java.lang.Boolean");
     writable.put("char", "java.lang.Character");
-    basicToWrapper = Collections.unmodifiableMap(writable);
+    writable.put("java.lang.Character", "java.lang.Character");
+    writable.put("String", "java.lang.String");
+    writable.put("java.lang.String", "java.lang.String");
+    javaBasicToWrapperTyper = Collections.unmodifiableMap(writable);
+  }
+
+  public static final Map<String,String> javaBasicToScalaType;
+  static {
+    Map<String, String> writable = new HashMap<>();
+    writable.put("byte", "Byte");
+    writable.put("java.lang.Byte", "Byte");
+    writable.put("short", "Short");
+    writable.put("java.lang.Short", "Short");
+    writable.put("int", "Int");
+    writable.put("java.lang.Integer", "Int");
+    writable.put("long", "Long");
+    writable.put("java.lang.Long", "Long");
+    writable.put("float", "Float");
+    writable.put("java.lang.Float", "Float");
+    writable.put("double", "Double");
+    writable.put("java.lang.Double", "Double");
+    writable.put("boolean", "Boolean");
+    writable.put("java.lang.Boolean", "Boolean");
+    writable.put("char", "Char");
+    writable.put("java.lang.Character", "Char");
+    writable.put("String", "String");
+    writable.put("java.lang.String", "String");
+    javaBasicToScalaType = Collections.unmodifiableMap(writable);
   }
 
   public static String convertJavaArgListToString(TypeInfo type) {
@@ -80,7 +114,7 @@ public class TypeHelper {
     } else if (kind == ClassKind.THROWABLE) {
       return "Throwable";
     } else if (kind.basic) {
-      return wrapInOptionIfNullable(nullable, typeNameForPrimitiveScala(type));
+      return wrapInOptionIfNullable(nullable, javaBasicToScalaType.get(type.getName()));
     } else if (type.getDataObject() != null) {
       return wrapInOptionIfNullable(nullable, type.getName());
     } else if (kind == ClassKind.LIST){
@@ -174,7 +208,7 @@ public class TypeHelper {
     } else if (type.getKind() == ClassKind.THROWABLE) {
       return "Throwable";
     } else if (type.getKind().basic) {
-      return typeNameForBasicJava(type);
+      return javaBasicToWrapperTyper.get(type.getName());
     } else if (type.getDataObject() != null) {
       return getNonGenericType(type.getName());
     } else if (type.getKind() == ClassKind.LIST){
@@ -252,7 +286,7 @@ public class TypeHelper {
     } else if (type.getKind() == ClassKind.THROWABLE) {
       return "Throwable";
     } else if (type.getKind().basic) {
-      return typeNameForBasicJava(type);
+      return javaBasicToWrapperTyper.get(type.getName());
     } else if (type.getDataObject() != null) {
       return getNonGenericType(type.getName());
     } else if (type.getKind() == ClassKind.LIST){
@@ -435,7 +469,7 @@ public class TypeHelper {
    */
   public static String toJavaType(TypeInfo type) {
     if (type.getKind().basic) {
-      return basicToWrapper.containsKey(type.getName()) ? basicToWrapper.get(type.getName()) : type.getName();
+      return javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName();
     } else if (type.getKind() == ClassKind.THROWABLE
       || type.getKind() == ClassKind.VOID
       || type.getKind() == ClassKind.JSON_OBJECT
@@ -482,54 +516,6 @@ public class TypeHelper {
     } else {
       return "Unknown type for toJavaType "+type.getName()+" "+type.getKind();
     }
-  }
-
-  public static String typeNameForPrimitiveScala(TypeInfo type) {
-    String typeName = type.getName();
-    if (typeName.equals("byte") || typeName.equals("java.lang.Byte")) {
-      return  "Byte";
-    } else if (typeName.equals("short") || typeName.equals("java.lang.Short")) {
-      return  "Short";
-    } else if (typeName.equals("int") || typeName.equals("java.lang.Integer")) {
-      return  "Int";
-    } else if (typeName.equals("long") || typeName.equals("java.lang.Long")) {
-      return  "Long";
-    } else if (typeName.equals("float") || typeName.equals("java.lang.Float")) {
-      return  "Float";
-    } else if (typeName.equals("double") || typeName.equals("java.lang.Double")) {
-      return  "Double";
-    } else if (typeName.equals("boolean") || typeName.equals("java.lang.Boolean")) {
-      return  "Boolean";
-    } else if (typeName.equals("char") || typeName.equals("java.lang.Character")) {
-      return  "Char";
-    } else if (type.getKind() == ClassKind.STRING) {
-      return  "String";
-    }
-    return "ERROR typeNameForPrimitiveScala unkown type (" + type + ")";
-  }
-
-  public static String typeNameForBasicJava(TypeInfo type) {
-    String typeName = type.getName();
-    if (typeName.equals("byte") || typeName.equals("java.lang.Byte")) {
-      return  "java.lang.Byte";
-    } else if (typeName.equals("short") || typeName.equals("java.lang.Short")) {
-      return  "java.lang.Short";
-    } else if (typeName.equals("int") || typeName.equals("java.lang.Integer")) {
-      return  "java.lang.Integer";
-    } else if (typeName.equals("long") || typeName.equals("java.lang.Long")) {
-      return  "java.lang.Long";
-    } else if (typeName.equals("float") || typeName.equals("java.lang.Float")) {
-      return  "java.lang.Float";
-    } else if (typeName.equals("double") || typeName.equals("java.lang.Double")) {
-      return  "java.lang.Double";
-    } else if (typeName.equals("boolean") || typeName.equals("java.lang.Boolean")) {
-      return  "java.lang.Boolean";
-    } else if (typeName.equals("char") || typeName.equals("java.lang.Character")) {
-      return  "java.lang.Character";
-    } else if (type.getKind() == ClassKind.STRING) {
-      return  "java.lang.String";
-    }
-    return "ERROR typeNameForBasicJava unkown type (" + type + ")";
   }
 
   public static String wrapInOptionIfNullable(boolean nullable, String expression) {
