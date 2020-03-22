@@ -66,8 +66,7 @@ package object core{
 
   private def listToJsArr(a: Seq[_]) = JsonArray(a: _*)
 
-
-  type AddressResolverOptions = io.vertx.core.dns.AddressResolverOptions
+    type AddressResolverOptions = io.vertx.core.dns.AddressResolverOptions
   object AddressResolverOptions {
     def apply() = new AddressResolverOptions()
     def apply(json: JsonObject) = new AddressResolverOptions(json)
@@ -75,8 +74,7 @@ package object core{
 
 
 
-
-  type Argument = io.vertx.core.cli.Argument
+    type Argument = io.vertx.core.cli.Argument
   object Argument {
     def apply() = new Argument()
     def apply(json: JsonObject) = new Argument(json)
@@ -342,8 +340,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
   }
 
 
-
-
+  
 
 
   object CommandLine {
@@ -461,8 +458,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
   }
 
 
-
-  type CopyOptions = io.vertx.core.file.CopyOptions
+    type CopyOptions = io.vertx.core.file.CopyOptions
   object CopyOptions {
     def apply() = new CopyOptions()
     def apply(json: JsonObject) = new CopyOptions(json)
@@ -678,8 +674,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
   }
 
 
-
-  type DatagramSocketOptions = io.vertx.core.datagram.DatagramSocketOptions
+    type DatagramSocketOptions = io.vertx.core.datagram.DatagramSocketOptions
   object DatagramSocketOptions {
     def apply() = new DatagramSocketOptions()
     def apply(json: JsonObject) = new DatagramSocketOptions(json)
@@ -689,8 +684,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
 
 
 
-
-  type DeliveryOptions = io.vertx.core.eventbus.DeliveryOptions
+    type DeliveryOptions = io.vertx.core.eventbus.DeliveryOptions
   object DeliveryOptions {
     def apply() = new DeliveryOptions()
     def apply(json: JsonObject) = new DeliveryOptions(json)
@@ -698,8 +692,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
 
 
 
-
-  type DeploymentOptions = io.vertx.core.DeploymentOptions
+    type DeploymentOptions = io.vertx.core.DeploymentOptions
   object DeploymentOptions {
     def apply() = new DeploymentOptions()
     def apply(json: JsonObject) = new DeploymentOptions(json)
@@ -815,8 +808,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
   }
 
 
-
-  type DnsClientOptions = io.vertx.core.dns.DnsClientOptions
+    type DnsClientOptions = io.vertx.core.dns.DnsClientOptions
   object DnsClientOptions {
     def apply() = new DnsClientOptions()
     def apply(json: JsonObject) = new DnsClientOptions(json)
@@ -893,8 +885,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
   }
 
 
-
-  type EventBusOptions = io.vertx.core.eventbus.EventBusOptions
+    type EventBusOptions = io.vertx.core.eventbus.EventBusOptions
   object EventBusOptions {
     def apply() = new EventBusOptions()
     def apply(json: JsonObject) = new EventBusOptions(json)
@@ -1225,8 +1216,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
   }
 
 
-
-  type FileSystemOptions = io.vertx.core.file.FileSystemOptions
+    type FileSystemOptions = io.vertx.core.file.FileSystemOptions
   object FileSystemOptions {
     def apply() = new FileSystemOptions()
     def apply(json: JsonObject) = new FileSystemOptions(json)
@@ -1247,8 +1237,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
   }
 
 
-
-  type GoAway = io.vertx.core.http.GoAway
+    type GoAway = io.vertx.core.http.GoAway
   object GoAway {
     def apply() = new GoAway()
     def apply(json: JsonObject) = new GoAway(json)
@@ -1256,8 +1245,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
 
 
 
-
-  type Http2Settings = io.vertx.core.http.Http2Settings
+    type Http2Settings = io.vertx.core.http.Http2Settings
   object Http2Settings {
     def apply() = new Http2Settings()
     def apply(json: JsonObject) = new Http2Settings(json)
@@ -1954,8 +1942,7 @@ def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
   }
 
 
-
-  type HttpClientOptions = io.vertx.core.http.HttpClientOptions
+    type HttpClientOptions = io.vertx.core.http.HttpClientOptions
   object HttpClientOptions {
     def apply() = new HttpClientOptions()
     def apply(json: JsonObject) = new HttpClientOptions(json)
@@ -2308,8 +2295,7 @@ def endHandler(endHandler: scala.Option[Void => Unit]) = {
   }
 
 
-
-  type HttpServerOptions = io.vertx.core.http.HttpServerOptions
+    type HttpServerOptions = io.vertx.core.http.HttpServerOptions
   object HttpServerOptions {
     def apply() = new HttpServerOptions()
     def apply(json: JsonObject) = new HttpServerOptions(json)
@@ -2606,8 +2592,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
   }
 
 
-
-  type JdkSSLEngineOptions = io.vertx.core.net.JdkSSLEngineOptions
+    type JdkSSLEngineOptions = io.vertx.core.net.JdkSSLEngineOptions
   object JdkSSLEngineOptions {
     def apply() = new JdkSSLEngineOptions()
     def apply(json: JsonObject) = new JdkSSLEngineOptions(json)
@@ -2615,8 +2600,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
 
 
 
-
-  type JksOptions = io.vertx.core.net.JksOptions
+    type JksOptions = io.vertx.core.net.JksOptions
   object JksOptions {
     def apply() = new JksOptions()
     def apply(json: JsonObject) = new JksOptions(json)
@@ -2881,8 +2865,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
   }
 
 
-
-  type MetricsOptions = io.vertx.core.metrics.MetricsOptions
+    type MetricsOptions = io.vertx.core.metrics.MetricsOptions
   object MetricsOptions {
     def apply() = new MetricsOptions()
     def apply(json: JsonObject) = new MetricsOptions(json)
@@ -2948,8 +2931,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
   }
 
 
-
-  type NetClientOptions = io.vertx.core.net.NetClientOptions
+    type NetClientOptions = io.vertx.core.net.NetClientOptions
   object NetClientOptions {
     def apply() = new NetClientOptions()
     def apply(json: JsonObject) = new NetClientOptions(json)
@@ -3013,8 +2995,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
   }
 
 
-
-  type NetServerOptions = io.vertx.core.net.NetServerOptions
+    type NetServerOptions = io.vertx.core.net.NetServerOptions
   object NetServerOptions {
     def apply() = new NetServerOptions()
     def apply(json: JsonObject) = new NetServerOptions(json)
@@ -3160,12 +3141,10 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
   }
 
 
+  
 
 
-
-
-
-  type OpenOptions = io.vertx.core.file.OpenOptions
+    type OpenOptions = io.vertx.core.file.OpenOptions
   object OpenOptions {
     def apply() = new OpenOptions()
     def apply(json: JsonObject) = new OpenOptions(json)
@@ -3173,8 +3152,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
 
 
 
-
-  type OpenSSLEngineOptions = io.vertx.core.net.OpenSSLEngineOptions
+    type OpenSSLEngineOptions = io.vertx.core.net.OpenSSLEngineOptions
   object OpenSSLEngineOptions {
     def apply() = new OpenSSLEngineOptions()
     def apply(json: JsonObject) = new OpenSSLEngineOptions(json)
@@ -3182,8 +3160,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
 
 
 
-
-  type Option = io.vertx.core.cli.Option
+    type Option = io.vertx.core.cli.Option
   object Option {
     def apply() = new Option()
     def apply(json: JsonObject) = new Option(json)
@@ -3191,8 +3168,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
 
 
 
-
-  type PemKeyCertOptions = io.vertx.core.net.PemKeyCertOptions
+    type PemKeyCertOptions = io.vertx.core.net.PemKeyCertOptions
   object PemKeyCertOptions {
     def apply() = new PemKeyCertOptions()
     def apply(json: JsonObject) = new PemKeyCertOptions(json)
@@ -3200,8 +3176,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
 
 
 
-
-  type PemTrustOptions = io.vertx.core.net.PemTrustOptions
+    type PemTrustOptions = io.vertx.core.net.PemTrustOptions
   object PemTrustOptions {
     def apply() = new PemTrustOptions()
     def apply(json: JsonObject) = new PemTrustOptions(json)
@@ -3209,8 +3184,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
 
 
 
-
-  type PfxOptions = io.vertx.core.net.PfxOptions
+    type PfxOptions = io.vertx.core.net.PfxOptions
   object PfxOptions {
     def apply() = new PfxOptions()
     def apply(json: JsonObject) = new PfxOptions(json)
@@ -3263,8 +3237,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
   }
 
 
-
-  type ProxyOptions = io.vertx.core.net.ProxyOptions
+    type ProxyOptions = io.vertx.core.net.ProxyOptions
   object ProxyOptions {
     def apply() = new ProxyOptions()
     def apply(json: JsonObject) = new ProxyOptions(json)
@@ -3397,8 +3370,7 @@ def endHandler(endHandler: scala.Option[Void => Unit]) = {
   }
 
 
-
-  type RequestOptions = io.vertx.core.http.RequestOptions
+    type RequestOptions = io.vertx.core.http.RequestOptions
   object RequestOptions {
     def apply() = new RequestOptions()
     def apply(json: JsonObject) = new RequestOptions(json)
@@ -3711,8 +3683,7 @@ def writeTextMessageFuture(text: java.lang.String) : scala.concurrent.Future[Uni
 
 
 
-
-  type StreamPriority = io.vertx.core.http.StreamPriority
+    type StreamPriority = io.vertx.core.http.StreamPriority
   object StreamPriority {
     def apply() = new StreamPriority()
     def apply(json: JsonObject) = new StreamPriority(json)
@@ -3720,8 +3691,7 @@ def writeTextMessageFuture(text: java.lang.String) : scala.concurrent.Future[Uni
 
 
 
-
-
+  
 
 
 
@@ -3759,8 +3729,7 @@ def endHandler(endHandler: scala.Option[Void => Unit]) = {
   }
 
 
-
-  type TracingOptions = io.vertx.core.tracing.TracingOptions
+    type TracingOptions = io.vertx.core.tracing.TracingOptions
   object TracingOptions {
     def apply() = new TracingOptions()
     def apply(json: JsonObject) = new TracingOptions(json)
@@ -3923,8 +3892,7 @@ def endHandler(endHandler: scala.Option[Void => Unit]) = {
   }
 
 
-
-  type VertxOptions = io.vertx.core.VertxOptions
+    type VertxOptions = io.vertx.core.VertxOptions
   object VertxOptions {
     def apply() = new VertxOptions()
     def apply(json: JsonObject) = new VertxOptions(json)
@@ -4269,8 +4237,7 @@ def drainHandler(handler: scala.Option[Void => Unit]) = {
   }
 
 
-
-  type WebSocketConnectOptions = io.vertx.core.http.WebSocketConnectOptions
+    type WebSocketConnectOptions = io.vertx.core.http.WebSocketConnectOptions
   object WebSocketConnectOptions {
     def apply() = new WebSocketConnectOptions()
     def apply(json: JsonObject) = new WebSocketConnectOptions(json)

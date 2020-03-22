@@ -71,8 +71,7 @@ package object amqpbridge{
   }
 
 
-
-  type AmqpBridgeOptions = io.vertx.amqpbridge.AmqpBridgeOptions
+    type AmqpBridgeOptions = io.vertx.amqpbridge.AmqpBridgeOptions
   object AmqpBridgeOptions {
     def apply() = new AmqpBridgeOptions()
     def apply(json: JsonObject) = new AmqpBridgeOptions(json)

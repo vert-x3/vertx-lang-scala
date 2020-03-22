@@ -234,8 +234,7 @@ package object client{
   }
 
 
-
-  type WebClientOptions = io.vertx.ext.web.client.WebClientOptions
+    type WebClientOptions = io.vertx.ext.web.client.WebClientOptions
   object WebClientOptions {
     def apply() = new WebClientOptions()
     def apply(json: JsonObject) = new WebClientOptions(json)

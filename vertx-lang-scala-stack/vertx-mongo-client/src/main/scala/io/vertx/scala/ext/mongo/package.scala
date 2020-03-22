@@ -39,8 +39,7 @@ import io.vertx.core.streams.{WriteStream => JWriteStream}
 
 package object mongo{
 
-
-  type AggregateOptions = io.vertx.ext.mongo.AggregateOptions
+    type AggregateOptions = io.vertx.ext.mongo.AggregateOptions
   object AggregateOptions {
     def apply() = new AggregateOptions()
     def apply(json: JsonObject) = new AggregateOptions(json)
@@ -48,17 +47,14 @@ package object mongo{
 
 
 
-
-  type BulkOperation = io.vertx.ext.mongo.BulkOperation
+    type BulkOperation = io.vertx.ext.mongo.BulkOperation
   object BulkOperation {
-    
     def apply(json: JsonObject) = new BulkOperation(json)
   }
 
 
 
-
-  type BulkWriteOptions = io.vertx.ext.mongo.BulkWriteOptions
+    type BulkWriteOptions = io.vertx.ext.mongo.BulkWriteOptions
   object BulkWriteOptions {
     def apply() = new BulkWriteOptions()
     def apply(json: JsonObject) = new BulkWriteOptions(json)
@@ -66,8 +62,7 @@ package object mongo{
 
 
 
-
-  type FindOptions = io.vertx.ext.mongo.FindOptions
+    type FindOptions = io.vertx.ext.mongo.FindOptions
   object FindOptions {
     def apply() = new FindOptions()
     def apply(json: JsonObject) = new FindOptions(json)
@@ -75,8 +70,7 @@ package object mongo{
 
 
 
-
-  type GridFsDownloadOptions = io.vertx.ext.mongo.GridFsDownloadOptions
+    type GridFsDownloadOptions = io.vertx.ext.mongo.GridFsDownloadOptions
   object GridFsDownloadOptions {
     def apply() = new GridFsDownloadOptions()
     def apply(json: JsonObject) = new GridFsDownloadOptions(json)
@@ -84,8 +78,7 @@ package object mongo{
 
 
 
-
-  type GridFsUploadOptions = io.vertx.ext.mongo.GridFsUploadOptions
+    type GridFsUploadOptions = io.vertx.ext.mongo.GridFsUploadOptions
   object GridFsUploadOptions {
     def apply() = new GridFsUploadOptions()
     def apply(json: JsonObject) = new GridFsUploadOptions(json)
@@ -93,17 +86,14 @@ package object mongo{
 
 
 
-
-  type IndexModel = io.vertx.ext.mongo.IndexModel
+    type IndexModel = io.vertx.ext.mongo.IndexModel
   object IndexModel {
-    
     def apply(json: JsonObject) = new IndexModel(json)
   }
 
 
 
-
-  type IndexOptions = io.vertx.ext.mongo.IndexOptions
+    type IndexOptions = io.vertx.ext.mongo.IndexOptions
   object IndexOptions {
     def apply() = new IndexOptions()
     def apply(json: JsonObject) = new IndexOptions(json)
@@ -457,8 +447,7 @@ package object mongo{
   }
 
 
-
-  type MongoClientBulkWriteResult = io.vertx.ext.mongo.MongoClientBulkWriteResult
+    type MongoClientBulkWriteResult = io.vertx.ext.mongo.MongoClientBulkWriteResult
   object MongoClientBulkWriteResult {
     def apply() = new MongoClientBulkWriteResult()
     def apply(json: JsonObject) = new MongoClientBulkWriteResult(json)
@@ -466,8 +455,7 @@ package object mongo{
 
 
 
-
-  type MongoClientDeleteResult = io.vertx.ext.mongo.MongoClientDeleteResult
+    type MongoClientDeleteResult = io.vertx.ext.mongo.MongoClientDeleteResult
   object MongoClientDeleteResult {
     def apply() = new MongoClientDeleteResult()
     def apply(json: JsonObject) = new MongoClientDeleteResult(json)
@@ -475,8 +463,7 @@ package object mongo{
 
 
 
-
-  type MongoClientUpdateResult = io.vertx.ext.mongo.MongoClientUpdateResult
+    type MongoClientUpdateResult = io.vertx.ext.mongo.MongoClientUpdateResult
   object MongoClientUpdateResult {
     def apply() = new MongoClientUpdateResult()
     def apply(json: JsonObject) = new MongoClientUpdateResult(json)
@@ -593,8 +580,7 @@ def uploadByFileNameWithOptionsFuture(stream: io.vertx.core.streams.ReadStream[i
   }
 
 
-
-  type UpdateOptions = io.vertx.ext.mongo.UpdateOptions
+    type UpdateOptions = io.vertx.ext.mongo.UpdateOptions
   object UpdateOptions {
     def apply() = new UpdateOptions()
     def apply(json: JsonObject) = new UpdateOptions(json)

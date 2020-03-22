@@ -1112,7 +1112,16 @@ public class TypeHelper {
     return ret;
   }
 
-
+  public static String renderDataobject(String className, ClassTypeInfo type, boolean concrete, boolean hasEmptyConstructor, Helper helper) {
+    if (concrete) {
+        return "  type " +className + " = "+ helper.getNonGenericType(type.getName()) +"\n" +
+        "  object " + helper.getSimpleName(type.getName()) + " {\n" +
+          (hasEmptyConstructor ? "    def apply() = new " + helper.getSimpleName(type.getName()) + "()\n" : "") +
+        "    def apply(json: JsonObject) = new " + helper.getSimpleName(type.getName()) + "(json)\n" +
+        "  }\n";
+    }
+    return "";
+  }
 
 
 

@@ -113,8 +113,7 @@ package object shell{
 
 
 
-
-  type HttpTermOptions = io.vertx.ext.shell.term.HttpTermOptions
+    type HttpTermOptions = io.vertx.ext.shell.term.HttpTermOptions
   object HttpTermOptions {
     def apply() = new HttpTermOptions()
     def apply(json: JsonObject) = new HttpTermOptions(json)
@@ -142,8 +141,7 @@ package object shell{
   }
 
 
-
-  type SSHTermOptions = io.vertx.ext.shell.term.SSHTermOptions
+    type SSHTermOptions = io.vertx.ext.shell.term.SSHTermOptions
   object SSHTermOptions {
     def apply() = new SSHTermOptions()
     def apply(json: JsonObject) = new SSHTermOptions(json)
@@ -196,8 +194,7 @@ package object shell{
   }
 
 
-
-  type ShellServerOptions = io.vertx.ext.shell.ShellServerOptions
+    type ShellServerOptions = io.vertx.ext.shell.ShellServerOptions
   object ShellServerOptions {
     def apply() = new ShellServerOptions()
     def apply(json: JsonObject) = new ShellServerOptions(json)
@@ -235,8 +232,7 @@ package object shell{
   }
 
 
-
-  type ShellServiceOptions = io.vertx.ext.shell.ShellServiceOptions
+    type ShellServiceOptions = io.vertx.ext.shell.ShellServiceOptions
   object ShellServiceOptions {
     def apply() = new ShellServiceOptions()
     def apply(json: JsonObject) = new ShellServiceOptions(json)
@@ -248,8 +244,7 @@ package object shell{
 
 
 
-
-  type TelnetTermOptions = io.vertx.ext.shell.term.TelnetTermOptions
+    type TelnetTermOptions = io.vertx.ext.shell.term.TelnetTermOptions
   object TelnetTermOptions {
     def apply() = new TelnetTermOptions()
     def apply(json: JsonObject) = new TelnetTermOptions(json)

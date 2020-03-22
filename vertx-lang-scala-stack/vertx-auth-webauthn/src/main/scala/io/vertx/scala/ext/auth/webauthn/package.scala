@@ -69,8 +69,7 @@ package object webauthn{
   }
 
 
-
-  type RelayParty = io.vertx.ext.auth.webauthn.RelayParty
+    type RelayParty = io.vertx.ext.auth.webauthn.RelayParty
   object RelayParty {
     def apply() = new RelayParty()
     def apply(json: JsonObject) = new RelayParty(json)
@@ -116,8 +115,7 @@ def authenticateFuture(authInfo: io.vertx.core.json.JsonObject) : scala.concurre
   }
 
 
-
-  type WebAuthnInfo = io.vertx.ext.auth.webauthn.WebAuthnInfo
+    type WebAuthnInfo = io.vertx.ext.auth.webauthn.WebAuthnInfo
   object WebAuthnInfo {
     def apply() = new WebAuthnInfo()
     def apply(json: JsonObject) = new WebAuthnInfo(json)
@@ -125,8 +123,7 @@ def authenticateFuture(authInfo: io.vertx.core.json.JsonObject) : scala.concurre
 
 
 
-
-  type WebAuthnOptions = io.vertx.ext.auth.webauthn.WebAuthnOptions
+    type WebAuthnOptions = io.vertx.ext.auth.webauthn.WebAuthnOptions
   object WebAuthnOptions {
     def apply() = new WebAuthnOptions()
     def apply(json: JsonObject) = new WebAuthnOptions(json)

@@ -45,8 +45,7 @@ package object jwt{
   }
 
 
-
-  type JWTAuthOptions = io.vertx.ext.auth.jwt.JWTAuthOptions
+    type JWTAuthOptions = io.vertx.ext.auth.jwt.JWTAuthOptions
   object JWTAuthOptions {
     def apply() = new JWTAuthOptions()
     def apply(json: JsonObject) = new JWTAuthOptions(json)

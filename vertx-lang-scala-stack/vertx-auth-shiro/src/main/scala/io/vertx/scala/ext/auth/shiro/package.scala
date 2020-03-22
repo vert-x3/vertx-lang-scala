@@ -42,8 +42,7 @@ package object shiro{
   }
 
 
-
-  type ShiroAuthOptions = io.vertx.ext.auth.shiro.ShiroAuthOptions
+    type ShiroAuthOptions = io.vertx.ext.auth.shiro.ShiroAuthOptions
   object ShiroAuthOptions {
     def apply() = new ShiroAuthOptions()
     def apply(json: JsonObject) = new ShiroAuthOptions(json)

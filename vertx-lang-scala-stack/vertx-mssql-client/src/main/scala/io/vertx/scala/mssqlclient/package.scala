@@ -39,8 +39,7 @@ import io.vertx.core.{Vertx => JVertx}
 
 package object mssqlclient{
 
-
-  type MSSQLConnectOptions = io.vertx.mssqlclient.MSSQLConnectOptions
+    type MSSQLConnectOptions = io.vertx.mssqlclient.MSSQLConnectOptions
   object MSSQLConnectOptions {
     def apply() = new MSSQLConnectOptions()
     def apply(json: JsonObject) = new MSSQLConnectOptions(json)

@@ -35,8 +35,7 @@ package object stomp{
 
 
 
-
-  type BridgeOptions = io.vertx.ext.stomp.BridgeOptions
+    type BridgeOptions = io.vertx.ext.stomp.BridgeOptions
   object BridgeOptions {
     def apply() = new BridgeOptions()
     def apply(json: JsonObject) = new BridgeOptions(json)
@@ -59,8 +58,7 @@ def bridge(vertx: io.vertx.core.Vertx,options: io.vertx.ext.stomp.BridgeOptions)
 
 
 
-
-  type Frame = io.vertx.ext.stomp.Frame
+    type Frame = io.vertx.ext.stomp.Frame
   object Frame {
     def apply() = new Frame()
     def apply(json: JsonObject) = new Frame(json)
@@ -299,8 +297,7 @@ def ping() = {
   }
 
 
-
-  type StompClientOptions = io.vertx.ext.stomp.StompClientOptions
+    type StompClientOptions = io.vertx.ext.stomp.StompClientOptions
   object StompClientOptions {
     def apply() = new StompClientOptions()
     def apply(json: JsonObject) = new StompClientOptions(json)
@@ -355,8 +352,7 @@ def ping() = {
 
 
 
-
-  type StompServerOptions = io.vertx.ext.stomp.StompServerOptions
+    type StompServerOptions = io.vertx.ext.stomp.StompServerOptions
   object StompServerOptions {
     def apply() = new StompServerOptions()
     def apply(json: JsonObject) = new StompServerOptions(json)
