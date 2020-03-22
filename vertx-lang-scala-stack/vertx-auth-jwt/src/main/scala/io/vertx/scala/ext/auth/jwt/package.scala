@@ -16,7 +16,7 @@
 
 package io.vertx.scala.ext.auth
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -41,9 +41,9 @@ package object jwt{
      * @param config the config see <a href="../../../../../../../../cheatsheet/JWTAuthOptions.html">JWTAuthOptions</a>
      * @return the auth provider
      */
-    def create(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.jwt.JWTAuthOptions) = {
+def create(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.jwt.JWTAuthOptions) = {
       io.vertx.ext.auth.jwt.JWTAuth.create(vertx, config)
-    }
+}
   }
 
 
@@ -61,9 +61,9 @@ package object jwt{
      * Factory method to create a Authorization provider for JWT tokens.     * @param rootClaim slash separated string to the json array with the claims.
      * @return a AuthorizationProvider
      */
-    def create(rootClaim: java.lang.String) = {
+def create(rootClaim: java.lang.String) = {
       io.vertx.ext.auth.jwt.authorization.JWTAuthorization.create(rootClaim)
-    }
+}
   }
 
 
@@ -73,9 +73,9 @@ package object jwt{
      * When the user is known to not be a JWT, (e.g.: a OAuth2 response token) then the root claim
      * is expected to be extracted from  under the key `accessToken`.     * @return a AuthorizationProvider
      */
-    def create() = {
+def create() = {
       io.vertx.ext.auth.jwt.authorization.MicroProfileAuthorization.create()
-    }
+}
   }
 
 

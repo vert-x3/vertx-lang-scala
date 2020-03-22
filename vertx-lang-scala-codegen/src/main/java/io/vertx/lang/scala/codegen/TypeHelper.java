@@ -1119,4 +1119,30 @@ public class TypeHelper {
     return ret;
   }
 
+  public static String renderStaticMethod(ClassTypeInfo type, MethodInfo method) {
+    List<ParamInfo> params = method.getParams();
+    String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + wrapInOptionIfNullable(param.getType().isNullable(), toScalaMethodParam(param.getType()))).collect(Collectors.joining(","));
+
+    String option = method.getReturnType().isNullable() ? "Option" : "";
+
+    String exec = method.getReturnType().isNullable() ? "scala.Option(" + invokeMethodWithoutConvertingReturn(type.getName(), method) + ")" : invokeMethodWithoutConvertingReturn(type.getName(), method);
+
+    String ret ="def "+ TypeHelper.escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList()), true) + "(" + paramList + ") = {\n" +
+      "      " + exec + "\n" +
+      "}";
+    return ret;
+  }
+
+  public static String renderNullableMethod(ClassTypeInfo type, MethodInfo method) {
+    List<ParamInfo> params = method.getParams();
+    String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + wrapInOptionIfNullable(param.getType().isNullable(), toScalaMethodParam(param.getType()))).collect(Collectors.joining(","));
+
+    String option = method.getReturnType().isNullable() ? "Option" : "";
+
+    String ret ="def "+ TypeHelper.escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList()), true) + "(" + paramList + ") = {\n" +
+      "      scala.Option(" +invokeMethodWithoutConvertingReturn("asJava", method)+ ")\n" +
+      "}";
+    return ret;
+  }
+
 }

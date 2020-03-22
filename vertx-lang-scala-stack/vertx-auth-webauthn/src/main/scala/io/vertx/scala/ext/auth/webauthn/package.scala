@@ -16,7 +16,7 @@
 
 package io.vertx.scala.ext.auth
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -28,7 +28,6 @@ import io.vertx.core
 import io.vertx.core.{Future => JFuture}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
-import scala.collection.JavaConverters._
 import io.vertx.core.Handler
 
 package object webauthn{
@@ -45,29 +44,29 @@ package object webauthn{
     /**
      * Like getUserCredentialsByName from [[io.vertx.ext.auth.webauthn.CredentialStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def getUserCredentialsByNameFuture(username: java.lang.String): scala.concurrent.Future[java.util.List[io.vertx.core.json.JsonObject]] = {
-      val promise = concurrent.Promise[java.util.List[io.vertx.core.json.JsonObject]]()
-      asJava.getUserCredentialsByName(username, {a:AsyncResult[java.util.List[io.vertx.core.json.JsonObject]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+def getUserCredentialsByNameFuture(username: java.lang.String) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
+      val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]()
+      asJava.getUserCredentialsByName(username, new Handler[AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-    }
+}
 
     /**
      * Like getUserCredentialsById from [[io.vertx.ext.auth.webauthn.CredentialStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def getUserCredentialsByIdFuture(rawId: java.lang.String): scala.concurrent.Future[java.util.List[io.vertx.core.json.JsonObject]] = {
-      val promise = concurrent.Promise[java.util.List[io.vertx.core.json.JsonObject]]()
-      asJava.getUserCredentialsById(rawId, {a:AsyncResult[java.util.List[io.vertx.core.json.JsonObject]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+def getUserCredentialsByIdFuture(rawId: java.lang.String) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
+      val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]()
+      asJava.getUserCredentialsById(rawId, new Handler[AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-    }
+}
 
     /**
      * Like updateUserCredential from [[io.vertx.ext.auth.webauthn.CredentialStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def updateUserCredentialFuture(id: java.lang.String,data: io.vertx.core.json.JsonObject,upsert: java.lang.Boolean): scala.concurrent.Future[Unit] = {
+def updateUserCredentialFuture(id: java.lang.String,data: io.vertx.core.json.JsonObject,upsert: java.lang.Boolean) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.updateUserCredential(id, data, upsert, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.updateUserCredential(id, data, upsert, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 
@@ -92,33 +91,33 @@ package object webauthn{
     /**
      * Like getCredentialsOptions from [[io.vertx.ext.auth.webauthn.WebAuthn]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def getCredentialsOptions(username: scala.Option[java.lang.String],handler: AsyncResult[io.vertx.core.json.JsonObject] => Unit): io.vertx.ext.auth.webauthn.WebAuthn = {
-      asJava.getCredentialsOptions(username.orNull, {p:AsyncResult[io.vertx.core.json.JsonObject] => handler(p)})
-    }
+def getCredentialsOptions(username: scala.Option[java.lang.String],handler: AsyncResult[io.vertx.core.json.JsonObject] => Unit) = {
+      scala.Option(asJava.getCredentialsOptions(username.getOrElse(null), handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.json.JsonObject]]]))
+}
 
     /**
      * Like createCredentialsOptions from [[io.vertx.ext.auth.webauthn.WebAuthn]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def createCredentialsOptionsFuture(user: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+def createCredentialsOptionsFuture(user: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
-      asJava.createCredentialsOptions(user, {a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.createCredentialsOptions(user, new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like getCredentialsOptions from [[io.vertx.ext.auth.webauthn.WebAuthn]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def getCredentialsOptionsFuture(username: scala.Option[java.lang.String]): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+def getCredentialsOptionsFuture(username: scala.Option[java.lang.String]) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
-      asJava.getCredentialsOptions(username, {a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.getCredentialsOptions(username.getOrElse(null), new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
-    def authenticateFuture(authInfo: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.ext.auth.User] = {
+def authenticateFuture(authInfo: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.ext.auth.User] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.User]()
-      asJava.authenticate(authInfo, {a:AsyncResult[io.vertx.ext.auth.User] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.authenticate(authInfo, new Handler[AsyncResult[io.vertx.ext.auth.User]] { override def handle(event: AsyncResult[io.vertx.ext.auth.User]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 

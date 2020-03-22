@@ -27,9 +27,7 @@ ${typeHelper.renderDoc(type, "    *", doc)}
       <#if method.doc??>
 ${typeHelper.methodDoc(type, method, "    ", true)}
       </#if>
-    def ${method.name}<#if method.returnType.nullable>Option</#if>${typeHelper.assembleTypeParams(method.typeParams, true)}(<#list method.params as param>${typeHelper.escapeIfKeyword(param.name)}: ${typeHelper.wrapInOptionIfNullable(param.type.nullable, typeHelper.toScalaMethodParam(param.type))}<#sep>,</#list>): ${typeHelper.wrapInOptionIfNullable(method.returnType.nullable, typeHelper.toReturnType(method.returnType))} = {
-      <#if method.returnType.nullable>scala.Option(</#if>${typeHelper.invokeMethodWithoutConvertingReturn('asJava', method)}<#if method.returnType.nullable>)</#if>
-    }
+${typeHelper.renderNullableMethod(type, method)}
 
     </#if>
   </#list>

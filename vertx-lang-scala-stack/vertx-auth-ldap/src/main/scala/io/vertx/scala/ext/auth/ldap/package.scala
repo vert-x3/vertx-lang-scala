@@ -16,7 +16,7 @@
 
 package io.vertx.scala.ext.auth
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -38,9 +38,9 @@ package object ldap{
      * @param options the ldap options see <a href="../../../../../../../../cheatsheet/LdapAuthenticationOptions.html">LdapAuthenticationOptions</a>
      * @return the authentication provider
      */
-    def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.ldap.LdapAuthenticationOptions) = {
+def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.ldap.LdapAuthenticationOptions) = {
       io.vertx.ext.auth.ldap.LdapAuthentication.create(vertx, options)
-    }
+}
   }
 
 

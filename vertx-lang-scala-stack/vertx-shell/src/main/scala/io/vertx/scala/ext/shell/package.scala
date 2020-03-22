@@ -16,7 +16,7 @@
 
 package io.vertx.scala.ext
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -33,23 +33,23 @@ package object shell{
      * Create a text token.     * @param text the text
      * @return the token
      */
-    def createText(text: java.lang.String) = {
+def createText(text: java.lang.String) = {
       io.vertx.ext.shell.cli.CliToken.createText(text)
-    }
+}
     /**
      * Create a new blank token.     * @param blank the blank value
      * @return the token
      */
-    def createBlank(blank: java.lang.String) = {
+def createBlank(blank: java.lang.String) = {
       io.vertx.ext.shell.cli.CliToken.createBlank(blank)
-    }
+}
     /**
      * Tokenize the string argument and return a list of tokens.     * @param s the tokenized string
      * @return the tokens
      */
-    def tokenize(s: java.lang.String) = {
+def tokenize(s: java.lang.String) = {
       io.vertx.ext.shell.cli.CliToken.tokenize(s)
-    }
+}
   }
 
 
@@ -61,17 +61,17 @@ package object shell{
      * [[io.vertx.ext.shell.command.CommandProcess]].     * @param name the command name
      * @return the command
      */
-    def command(name: java.lang.String) = {
+def command(name: java.lang.String) = {
       io.vertx.ext.shell.command.CommandBuilder.command(name)
-    }
+}
     /**
      * Create a new commmand with its [[io.vertx.core.cli.CLI]] descriptor. This command can then retrieve the parsed
      * [[io.vertx.ext.shell.command.CommandProcess#commandLine]] when it executes to know get the command arguments and options.     * @param cli the cli to use
      * @return the command
      */
-    def command(cli: io.vertx.core.cli.CLI) = {
+def command(cli: io.vertx.core.cli.CLI) = {
       io.vertx.ext.shell.command.CommandBuilder.command(cli)
-    }
+}
   }
 
 
@@ -89,29 +89,29 @@ package object shell{
     /**
      * Like registerCommand from [[io.vertx.ext.shell.command.CommandRegistry]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def registerCommandFuture(command: io.vertx.ext.shell.command.Command): scala.concurrent.Future[io.vertx.ext.shell.command.Command] = {
+def registerCommandFuture(command: io.vertx.ext.shell.command.Command) : scala.concurrent.Future[io.vertx.ext.shell.command.Command] = {
       val promise = concurrent.Promise[io.vertx.ext.shell.command.Command]()
-      asJava.registerCommand(command, {a:AsyncResult[io.vertx.ext.shell.command.Command] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.registerCommand(command, new Handler[AsyncResult[io.vertx.ext.shell.command.Command]] { override def handle(event: AsyncResult[io.vertx.ext.shell.command.Command]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like registerCommands from [[io.vertx.ext.shell.command.CommandRegistry]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def registerCommandsFuture(commands: java.util.List[io.vertx.ext.shell.command.Command]): scala.concurrent.Future[java.util.List[io.vertx.ext.shell.command.Command]] = {
-      val promise = concurrent.Promise[java.util.List[io.vertx.ext.shell.command.Command]]()
-      asJava.registerCommands(commands, {a:AsyncResult[java.util.List[io.vertx.ext.shell.command.Command]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+def registerCommandsFuture(commands: java.util.List[io.vertx.ext.shell.command.Command]) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.ext.shell.command.Command]] = {
+      val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.ext.shell.command.Command]]()
+      asJava.registerCommands(commands, new Handler[AsyncResult[java.util.List[io.vertx.ext.shell.command.Command]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.ext.shell.command.Command]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-    }
+}
 
     /**
      * Like unregisterCommand from [[io.vertx.ext.shell.command.CommandRegistry]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def unregisterCommandFuture(commandName: java.lang.String): scala.concurrent.Future[Unit] = {
+def unregisterCommandFuture(commandName: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.unregisterCommand(commandName, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.unregisterCommand(commandName, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 
@@ -120,9 +120,9 @@ package object shell{
     /**
      * @return the base commands of Vert.x Shell.
      */
-    def baseCommands(vertx: io.vertx.core.Vertx) = {
+def baseCommands(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.shell.command.CommandResolver.baseCommands(vertx)
-    }
+}
   }
 
 
@@ -146,16 +146,16 @@ package object shell{
   object Pty {
     /**
      * Create a new pseudo terminal with no terminal type.     */
-    def create() = {
+def create() = {
       io.vertx.ext.shell.term.Pty.create()
-    }
+}
     /**
      * Create a new pseudo terminal.     * @param terminalType the terminal type, for instance ` vt100`
      * @return the created pseudo terminal
      */
-    def create(terminalType: java.lang.String) = {
+def create(terminalType: java.lang.String) = {
       io.vertx.ext.shell.term.Pty.create(terminalType)
-    }
+}
   }
 
 
@@ -172,9 +172,9 @@ package object shell{
     /**
      * Create a new empty session.     * @return the created session
      */
-    def create() = {
+def create() = {
       io.vertx.ext.shell.session.Session.create()
-    }
+}
   }
 
 
@@ -198,20 +198,20 @@ package object shell{
     /**
      * Like listen from [[io.vertx.ext.shell.ShellServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def listenFuture(): scala.concurrent.Future[Unit] = {
+def listenFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.listen({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.listen(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like close from [[io.vertx.ext.shell.ShellServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def closeFuture(): scala.concurrent.Future[Unit] = {
+def closeFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.close({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 
@@ -239,20 +239,20 @@ package object shell{
     /**
      * Like start from [[io.vertx.ext.shell.ShellService]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def startFuture(): scala.concurrent.Future[Unit] = {
+def startFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.start({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.start(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like stop from [[io.vertx.ext.shell.ShellService]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def stopFuture(): scala.concurrent.Future[Unit] = {
+def stopFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.stop({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.stop(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 
@@ -291,20 +291,20 @@ package object shell{
     /**
      * Like listen from [[io.vertx.ext.shell.term.TermServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def listenFuture(): scala.concurrent.Future[Unit] = {
+def listenFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.listen({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.listen(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like close from [[io.vertx.ext.shell.term.TermServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def closeFuture(): scala.concurrent.Future[Unit] = {
+def closeFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.close({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 

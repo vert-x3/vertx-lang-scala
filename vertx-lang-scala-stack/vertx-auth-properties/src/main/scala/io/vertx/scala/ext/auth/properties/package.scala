@@ -16,7 +16,7 @@
 
 package io.vertx.scala.ext.auth
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -36,9 +36,9 @@ package object properties{
      * Create a File authentication provider     * @param vertx the Vert.x instance
      * @return the authentication provider
      */
-    def create(vertx: io.vertx.core.Vertx,path: java.lang.String) = {
+def create(vertx: io.vertx.core.Vertx,path: java.lang.String) = {
       io.vertx.ext.auth.properties.PropertyFileAuthentication.create(vertx, path)
-    }
+}
   }
 
 
@@ -47,9 +47,9 @@ package object properties{
      * Create a File authentication provider     * @param vertx the Vert.x instance
      * @return the authentication provider
      */
-    def create(vertx: io.vertx.core.Vertx,path: java.lang.String) = {
+def create(vertx: io.vertx.core.Vertx,path: java.lang.String) = {
       io.vertx.ext.auth.properties.PropertyFileAuthorization.create(vertx, path)
-    }
+}
   }
 
 

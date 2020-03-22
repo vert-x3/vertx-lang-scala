@@ -16,7 +16,7 @@
 
 package io.vertx.scala.ext.auth
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -38,9 +38,9 @@ package object shiro{
      * @param options the Shiro configuration options see <a href="../../../../../../../../cheatsheet/ShiroAuthOptions.html">ShiroAuthOptions</a>
      * @return the auth provider
      */
-    def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.shiro.ShiroAuthOptions) = {
+def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.shiro.ShiroAuthOptions) = {
       io.vertx.ext.auth.shiro.ShiroAuth.create(vertx, options)
-    }
+}
   }
 
 

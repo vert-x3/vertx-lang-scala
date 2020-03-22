@@ -16,7 +16,7 @@
 
 package io.vertx.scala.ext
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -25,14 +25,13 @@ import scala.concurrent.Promise
 
 import io.vertx.ext.auth.{HashingStrategy => JHashingStrategy}
 import io.vertx.ext.auth.{HashingAlgorithm => JHashingAlgorithm}
-import scala.collection.JavaConverters._
 
 package object auth{
 
   object AndAuthorization {
-    def create() = {
+def create() = {
       io.vertx.ext.auth.authorization.AndAuthorization.create()
-    }
+}
   }
 
 
@@ -51,11 +50,11 @@ package object auth{
     /**
      * Like authenticate from [[io.vertx.ext.auth.authentication.AuthenticationProvider]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def authenticateFuture(authInfo: io.vertx.core.json.JsonObject): scala.concurrent.Future[io.vertx.ext.auth.User] = {
+def authenticateFuture(authInfo: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.ext.auth.User] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.User]()
-      asJava.authenticate(authInfo, {a:AsyncResult[io.vertx.ext.auth.User] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.authenticate(authInfo, new Handler[AsyncResult[io.vertx.ext.auth.User]] { override def handle(event: AsyncResult[io.vertx.ext.auth.User]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 
@@ -67,9 +66,9 @@ package object auth{
      * Factory for Authorization Context     * @param user a user
      * @return a AuthorizationContext instance
      */
-    def create(user: io.vertx.ext.auth.User) = {
+def create(user: io.vertx.ext.auth.User) = {
       io.vertx.ext.auth.authorization.AuthorizationContext.create(user)
-    }
+}
   }
 
 
@@ -84,11 +83,11 @@ package object auth{
     /**
      * Like getAuthorizations from [[io.vertx.ext.auth.authorization.AuthorizationProvider]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def getAuthorizationsFuture(user: io.vertx.ext.auth.User): scala.concurrent.Future[Unit] = {
+def getAuthorizationsFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.getAuthorizations(user, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.getAuthorizations(user, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 
@@ -99,21 +98,21 @@ package object auth{
     /**
      * Create a Chainable Auth Provider auth provider     * @return the auth provider
      */
-    def create() = {
+def create() = {
       io.vertx.ext.auth.ChainAuth.create()
-    }
+}
     /**
      * Create a Chainable Auth Provider auth provider that will resolve if all auth providers are successful.     * @return the auth provider
      */
-    def all() = {
+def all() = {
       io.vertx.ext.auth.ChainAuth.all()
-    }
+}
     /**
      * Create a Chainable Auth Provider auth provider that will resolve on the first success.     * @return the auth provider
      */
-    def any() = {
+def any() = {
       io.vertx.ext.auth.ChainAuth.any()
-    }
+}
   }
 
 
@@ -123,9 +122,9 @@ package object auth{
     /**
      * Factory method to load the algorithms from the system     * @return a Hashing Strategy capable of hashing using the available algorithms
      */
-    def load() = {
+def load() = {
       io.vertx.ext.auth.HashingStrategy.load()
-    }
+}
   }
 
 
@@ -139,23 +138,23 @@ package object auth{
 
 
   object NotAuthorization {
-    def create(authorization: io.vertx.ext.auth.authorization.Authorization) = {
+def create(authorization: io.vertx.ext.auth.authorization.Authorization) = {
       io.vertx.ext.auth.authorization.NotAuthorization.create(authorization)
-    }
+}
   }
 
 
   object OrAuthorization {
-    def create() = {
+def create() = {
       io.vertx.ext.auth.authorization.OrAuthorization.create()
-    }
+}
   }
 
 
   object PermissionBasedAuthorization {
-    def create(permission: java.lang.String) = {
+def create(permission: java.lang.String) = {
       io.vertx.ext.auth.authorization.PermissionBasedAuthorization.create(permission)
-    }
+}
   }
 
 
@@ -169,9 +168,9 @@ package object auth{
 
 
   object RoleBasedAuthorization {
-    def create(role: java.lang.String) = {
+def create(role: java.lang.String) = {
       io.vertx.ext.auth.authorization.RoleBasedAuthorization.create(role)
-    }
+}
   }
 
 
@@ -187,20 +186,20 @@ package object auth{
     /**
      * Like isAuthorized from [[io.vertx.ext.auth.User]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def isAuthorizedFuture(authority: io.vertx.ext.auth.authorization.Authorization): scala.concurrent.Future[java.lang.Boolean] = {
+def isAuthorizedFuture(authority: io.vertx.ext.auth.authorization.Authorization) : scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
-      asJava.isAuthorized(authority, {a:AsyncResult[java.lang.Boolean] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.isAuthorized(authority, new Handler[AsyncResult[java.lang.Boolean]] { override def handle(event: AsyncResult[java.lang.Boolean]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like isAuthorized from [[io.vertx.ext.auth.User]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def isAuthorizedFuture(authority: java.lang.String): scala.concurrent.Future[java.lang.Boolean] = {
+def isAuthorizedFuture(authority: java.lang.String) : scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
-      asJava.isAuthorized(authority, {a:AsyncResult[java.lang.Boolean] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.isAuthorized(authority, new Handler[AsyncResult[java.lang.Boolean]] { override def handle(event: AsyncResult[java.lang.Boolean]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 
@@ -210,25 +209,25 @@ package object auth{
      * Get or create a secure non blocking random number generator using the current vert.x context. If there is no
      * current context (i.e.: not running on the eventloop) then a IllegalStateException is thrown.     * @return A secure non blocking random number generator.
      */
-    def current() = {
+def current() = {
       io.vertx.ext.auth.VertxContextPRNG.current()
-    }
+}
     /**
      * Get or create a secure non blocking random number generator using the current vert.x instance. Since the context
      * might be different this method will attempt to use the current context first if available and then fall back to
      * create a new instance of the PRNG.     * @param vertx a Vert.x instance.
      * @return A secure non blocking random number generator.
      */
-    def current(vertx: io.vertx.core.Vertx) = {
+def current(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.auth.VertxContextPRNG.current(vertx)
-    }
+}
   }
 
 
   object WildcardPermissionBasedAuthorization {
-    def create(permission: java.lang.String) = {
+def create(permission: java.lang.String) = {
       io.vertx.ext.auth.authorization.WildcardPermissionBasedAuthorization.create(permission)
-    }
+}
   }
 
 

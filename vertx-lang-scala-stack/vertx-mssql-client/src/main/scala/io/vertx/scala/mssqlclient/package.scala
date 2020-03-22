@@ -16,7 +16,7 @@
 
 package io.vertx.scala
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -24,18 +24,17 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import io.vertx.sqlclient
+import io.vertx.sqlclient.{Row => JRow}
 import io.vertx.sqlclient.{RowSet => JRowSet}
 import io.vertx.core
 import io.vertx.mssqlclient.{MSSQLConnectOptions => JMSSQLConnectOptions}
 import io.vertx.sqlclient.{Tuple => JTuple}
-import io.vertx.sqlclient.{Pool => JPool}
-import scala.collection.JavaConverters._
-import io.vertx.core.{Vertx => JVertx}
-import io.vertx.sqlclient.{Row => JRow}
 import io.vertx.sqlclient.{PoolOptions => JPoolOptions}
+import io.vertx.sqlclient.{Pool => JPool}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.mssqlclient.{MSSQLPool => JMSSQLPool}
+import io.vertx.core.{Vertx => JVertx}
 
 package object mssqlclient{
 
@@ -59,47 +58,47 @@ package object mssqlclient{
     /**
      * Like prepare from [[io.vertx.mssqlclient.MSSQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def prepareFuture(s: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.PreparedQuery] = {
+def prepareFuture(s: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.PreparedQuery] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.PreparedQuery]()
-      asJava.prepare(s, {a:AsyncResult[io.vertx.sqlclient.PreparedQuery] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.prepare(s, new Handler[AsyncResult[io.vertx.sqlclient.PreparedQuery]] { override def handle(event: AsyncResult[io.vertx.sqlclient.PreparedQuery]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like preparedQuery from [[io.vertx.mssqlclient.MSSQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def preparedQueryFuture(s: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
+def preparedQueryFuture(s: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.preparedQuery(s, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.preparedQuery(s, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like query from [[io.vertx.mssqlclient.MSSQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def queryFuture(s: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
+def queryFuture(s: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.query(s, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.query(s, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like preparedQuery from [[io.vertx.mssqlclient.MSSQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def preparedQueryFuture(s: java.lang.String,tuple: io.vertx.sqlclient.Tuple): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
+def preparedQueryFuture(s: java.lang.String,tuple: io.vertx.sqlclient.Tuple) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.preparedQuery(s, tuple, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.preparedQuery(s, tuple, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like preparedBatch from [[io.vertx.mssqlclient.MSSQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def preparedBatchFuture(s: java.lang.String,list: java.util.List[io.vertx.sqlclient.Tuple]): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
+def preparedBatchFuture(s: java.lang.String,list: java.util.List[io.vertx.sqlclient.Tuple]) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.preparedBatch(s, list, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.preparedBatch(s, list, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 
@@ -115,38 +114,38 @@ package object mssqlclient{
     /**
      * Like preparedQuery from [[io.vertx.mssqlclient.MSSQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def preparedQueryFuture(s: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
+def preparedQueryFuture(s: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.preparedQuery(s, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.preparedQuery(s, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like query from [[io.vertx.mssqlclient.MSSQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def queryFuture(s: java.lang.String): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
+def queryFuture(s: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.query(s, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.query(s, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like preparedQuery from [[io.vertx.mssqlclient.MSSQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def preparedQueryFuture(s: java.lang.String,tuple: io.vertx.sqlclient.Tuple): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
+def preparedQueryFuture(s: java.lang.String,tuple: io.vertx.sqlclient.Tuple) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.preparedQuery(s, tuple, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.preparedQuery(s, tuple, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like preparedBatch from [[io.vertx.mssqlclient.MSSQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def preparedBatchFuture(s: java.lang.String,list: java.util.List[io.vertx.sqlclient.Tuple]): scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
+def preparedBatchFuture(s: java.lang.String,list: java.util.List[io.vertx.sqlclient.Tuple]) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
       val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.preparedBatch(s, list, {a:AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.preparedBatch(s, list, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 

@@ -16,7 +16,7 @@
 
 package io.vertx.scala.ext
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -43,17 +43,17 @@ package object jdbc{
 
   implicit class JDBCClientScala(val asJava: io.vertx.ext.jdbc.JDBCClient) extends AnyVal {
 
-    def querySingleFuture(sql: java.lang.String): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+def querySingleFuture(sql: java.lang.String) : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
-      asJava.querySingle(sql, {a:AsyncResult[io.vertx.core.json.JsonArray] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.querySingle(sql, new Handler[AsyncResult[io.vertx.core.json.JsonArray]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
-    def querySingleWithParamsFuture(sql: java.lang.String,arguments: io.vertx.core.json.JsonArray): scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+def querySingleWithParamsFuture(sql: java.lang.String,arguments: io.vertx.core.json.JsonArray) : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
-      asJava.querySingleWithParams(sql, arguments, {a:AsyncResult[io.vertx.core.json.JsonArray] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.querySingleWithParams(sql, arguments, new Handler[AsyncResult[io.vertx.core.json.JsonArray]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 
