@@ -69,17 +69,12 @@ public class TypeHelper {
     javaBasicToScalaType = Collections.unmodifiableMap(writable);
   }
 
-  public static String convertJavaArgListToString(TypeInfo type) {
+  public static String convertArgListToScalaFormatedString(TypeInfo type) {
     if (type.isParameterized()) {
-      String ret = String.join(", ",
-        ((ParameterizedTypeInfo)type)
+        return "[" + ((ParameterizedTypeInfo)type)
           .getArgs().stream()
           .map(TypeHelper::toJavaType)
-          .collect(Collectors.toList()));
-
-      if (!ret.isEmpty()) {
-        return "[" + ret + "]";
-      }
+          .collect(Collectors.joining(", ")) + "]";
     }
     return "";
   }
@@ -99,7 +94,7 @@ public class TypeHelper {
    * Generate the Scala type name for a given Java type name.
    * 'java.lang.Integer' becomes 'scala.Int'
    */
-  public static String toScalaType(TypeInfo type) {
+  public static String toScalaTypeString(TypeInfo type) {
     boolean nullable = type.isNullable();
     ClassKind kind = type.getKind();
     String typeName = type.getName();
@@ -121,27 +116,27 @@ public class TypeHelper {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String ret = "scala.collection.mutable.Buffer";
       if (!parameterizedType.getArgs().isEmpty())
-        ret += "[" + toScalaType(parameterizedType.getArg(0)) + "]";
+        ret += "[" + toScalaTypeString(parameterizedType.getArg(0)) + "]";
       return wrapInOptionIfNullable(nullable, ret);
     } else if (kind == ClassKind.SET){
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String ret = "scala.collection.mutable.Set";
       if (!parameterizedType.getArgs().isEmpty())
-        ret += "[" + toScalaType(parameterizedType.getArg(0)) + "]";
+        ret += "[" + toScalaTypeString(parameterizedType.getArg(0)) + "]";
       return wrapInOptionIfNullable(nullable, ret);
     } else if (kind == ClassKind.MAP){
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String ret = "scala.collection.mutable.Map";
       if (!parameterizedType.getArgs().isEmpty())
-        ret += "[" + toScalaType(parameterizedType.getArg(0)) + ", " + toScalaType(parameterizedType.getArg(1)) + "]";
+        ret += "[" + toScalaTypeString(parameterizedType.getArg(0)) + ", " + toScalaTypeString(parameterizedType.getArg(1)) + "]";
       return wrapInOptionIfNullable(nullable, ret);
     } else if (kind == ClassKind.HANDLER) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-      return "Handler[" + toScalaType(parameterizedType.getArg(0)) + "]";
+      return "Handler[" + toScalaTypeString(parameterizedType.getArg(0)) + "]";
     } else if (kind == ClassKind.FUNCTION) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-      String type1 = toScalaType(parameterizedType.getArg(0));
-      String type2 = toScalaType(parameterizedType.getArg(1));
+      String type1 = toScalaTypeString(parameterizedType.getArg(0));
+      String type2 = toScalaTypeString(parameterizedType.getArg(1));
       String ret;
       if (type1.equals("Unit")) {
         ret = "() => "+type2;
@@ -158,7 +153,7 @@ public class TypeHelper {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String ret = "AsyncResult";
       if (!parameterizedType.getArgs().isEmpty())
-        ret += "[" + toScalaType(parameterizedType.getArg(0)) + "]";else
+        ret += "[" + toScalaTypeString(parameterizedType.getArg(0)) + "]";else
         ret += "[_]";
       return wrapInOptionIfNullable(nullable, ret);
     } else if (kind == ClassKind.API) {
@@ -169,7 +164,7 @@ public class TypeHelper {
           ret += "[_]";
         } else {
           String converted = parameterizedType.getArgs().stream()
-            .map(arg -> toScalaType(arg))
+            .map(arg -> toScalaTypeString(arg))
             .collect(Collectors.joining(", "));
           ret += "[" + converted + "]";
         }
@@ -184,7 +179,7 @@ public class TypeHelper {
         ret += "[_]";
       } else {
         String converted = parameterizedType.getArgs().stream()
-          .map(arg -> toScalaType(arg))
+          .map(arg -> toScalaTypeString(arg))
           .collect(Collectors.joining(", "));
         ret += "[" + converted + "]";
       }
@@ -411,7 +406,7 @@ public class TypeHelper {
       return name + ".asInstanceOf[" + type.toString().replace("<", "[").replace(">", "]") + "]";
     } else if (type.getKind() == ClassKind.ASYNC_RESULT) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-      String ret = "AsyncResultWrapper[" + toScalaType(parameterizedType.getArg(0)) + ", " + toJavaType(parameterizedType.getArg(0)) + "](x, a => " + fromScalatoJavaWithConversion("a", parameterizedType.getArg(0)) + ")";
+      String ret = "AsyncResultWrapper[" + toScalaTypeString(parameterizedType.getArg(0)) + ", " + toJavaType(parameterizedType.getArg(0)) + "](x, a => " + fromScalatoJavaWithConversion("a", parameterizedType.getArg(0)) + ")";
       if (nullable) {
         ret = name + ".getOrElse(null)";
       }
@@ -486,7 +481,7 @@ public class TypeHelper {
     } else if (type.getKind() == ClassKind.API) {
       String ret = getNonGenericType(type.getName());
       if (type.isParameterized()) {
-        ret += convertJavaArgListToString(type);
+        ret += convertArgListToScalaFormatedString(type);
       } else if (!type.getRaw().getParams().isEmpty()) {
         String args = type.getRaw().getParams().stream().map(v -> "Object").collect(Collectors.joining(", "));
         ret += "[" + args + "]";
@@ -494,7 +489,7 @@ public class TypeHelper {
       return ret;
     } else if (type.getKind() == ClassKind.CLASS_TYPE) {
       String ret = type.getSimpleName();
-      String args = convertJavaArgListToString(type);
+      String args = convertArgListToScalaFormatedString(type);
       return  ret + "[" + args + "]";
     } else if (type.getKind() == ClassKind.HANDLER) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
