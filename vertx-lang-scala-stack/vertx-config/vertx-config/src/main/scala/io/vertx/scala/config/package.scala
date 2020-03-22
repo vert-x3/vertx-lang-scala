@@ -16,7 +16,7 @@
 
 package io.vertx.scala
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -58,11 +58,11 @@ package object config{
     /**
      * Like getConfig from [[io.vertx.config.ConfigRetriever]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def getConfigFuture(): scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+def getConfigFuture() : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
-      asJava.getConfig({a:AsyncResult[io.vertx.core.json.JsonObject] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.getConfig(new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 

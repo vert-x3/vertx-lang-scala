@@ -16,7 +16,7 @@
 
 package io.vertx.scala
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -42,20 +42,20 @@ package object circuitbreaker{
     /**
      * Like executeWithFallback from [[io.vertx.circuitbreaker.CircuitBreaker]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def executeWithFallbackFuture[T](command: io.vertx.core.Promise[T] => Unit,fallback: Throwable => T): scala.concurrent.Future[T] = {
+def executeWithFallbackFuture[T](command: io.vertx.core.Promise[T] => Unit,fallback: Throwable => T) : scala.concurrent.Future[T] = {
       val promise = concurrent.Promise[T]()
-      asJava.executeWithFallback[T]({x: io.vertx.core.Promise[T] => command(x)}, {x: Throwable => fallback(x)}, {a:AsyncResult[T] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.executeWithFallback[T](command.asInstanceOf[io.vertx.core.Handler[io.vertx.core.Promise[T]]], {x: Throwable => fallback(x)}, new Handler[AsyncResult[T]] { override def handle(event: AsyncResult[T]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like execute from [[io.vertx.circuitbreaker.CircuitBreaker]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def executeFuture[T](command: io.vertx.core.Promise[T] => Unit): scala.concurrent.Future[T] = {
+def executeFuture[T](command: io.vertx.core.Promise[T] => Unit) : scala.concurrent.Future[T] = {
       val promise = concurrent.Promise[T]()
-      asJava.execute[T]({x: io.vertx.core.Promise[T] => command(x)}, {a:AsyncResult[T] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.execute[T](command.asInstanceOf[io.vertx.core.Handler[io.vertx.core.Promise[T]]], new Handler[AsyncResult[T]] { override def handle(event: AsyncResult[T]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 

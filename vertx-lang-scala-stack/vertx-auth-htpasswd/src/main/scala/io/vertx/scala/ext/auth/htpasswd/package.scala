@@ -16,7 +16,7 @@
 
 package io.vertx.scala.ext.auth
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -33,12 +33,12 @@ import io.vertx.core.{Vertx => JVertx}
 package object htpasswd{
 
   object HtpasswdAuth {
-    def create(vertx: io.vertx.core.Vertx) = {
+def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.auth.htpasswd.HtpasswdAuth.create(vertx)
-    }
-    def create(vertx: io.vertx.core.Vertx,htpasswdAuthOptions: io.vertx.ext.auth.htpasswd.HtpasswdAuthOptions) = {
+}
+def create(vertx: io.vertx.core.Vertx,htpasswdAuthOptions: io.vertx.ext.auth.htpasswd.HtpasswdAuthOptions) = {
       io.vertx.ext.auth.htpasswd.HtpasswdAuth.create(vertx, htpasswdAuthOptions)
-    }
+}
   }
 
 

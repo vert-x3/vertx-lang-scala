@@ -16,7 +16,7 @@
 
 package io.vertx.scala
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -46,29 +46,29 @@ package object amqpbridge{
     /**
      * Like start from [[io.vertx.amqpbridge.AmqpBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def startFuture(hostname: java.lang.String,port: java.lang.Integer,username: java.lang.String,password: java.lang.String): scala.concurrent.Future[io.vertx.amqpbridge.AmqpBridge] = {
+def startFuture(hostname: java.lang.String,port: java.lang.Integer,username: java.lang.String,password: java.lang.String) : scala.concurrent.Future[io.vertx.amqpbridge.AmqpBridge] = {
       val promise = concurrent.Promise[io.vertx.amqpbridge.AmqpBridge]()
-      asJava.start(hostname, port, username, password, {a:AsyncResult[io.vertx.amqpbridge.AmqpBridge] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.start(hostname, port, username, password, new Handler[AsyncResult[io.vertx.amqpbridge.AmqpBridge]] { override def handle(event: AsyncResult[io.vertx.amqpbridge.AmqpBridge]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like start from [[io.vertx.amqpbridge.AmqpBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def startFuture(hostname: java.lang.String,port: java.lang.Integer): scala.concurrent.Future[io.vertx.amqpbridge.AmqpBridge] = {
+def startFuture(hostname: java.lang.String,port: java.lang.Integer) : scala.concurrent.Future[io.vertx.amqpbridge.AmqpBridge] = {
       val promise = concurrent.Promise[io.vertx.amqpbridge.AmqpBridge]()
-      asJava.start(hostname, port, {a:AsyncResult[io.vertx.amqpbridge.AmqpBridge] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.start(hostname, port, new Handler[AsyncResult[io.vertx.amqpbridge.AmqpBridge]] { override def handle(event: AsyncResult[io.vertx.amqpbridge.AmqpBridge]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like close from [[io.vertx.amqpbridge.AmqpBridge]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def closeFuture(): scala.concurrent.Future[Unit] = {
+def closeFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.close({a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 

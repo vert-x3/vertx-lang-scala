@@ -16,7 +16,7 @@
 
 package io.vertx.scala.ext.auth
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -38,17 +38,17 @@ package object sql{
      * Create a JDBC auth provider implementation     * @param client the JDBC client instance
      * @return the auth provider
      */
-    def create(client: io.vertx.sqlclient.SqlClient) = {
+def create(client: io.vertx.sqlclient.SqlClient) = {
       io.vertx.ext.auth.sql.SqlAuthentication.create(client)
-    }
+}
     /**
      * Create a JDBC auth provider implementation     * @param client the JDBC client instance
      * @param options authentication options see <a href="../../../../../../../../cheatsheet/SqlAuthenticationOptions.html">SqlAuthenticationOptions</a>
      * @return the auth provider
      */
-    def create(client: io.vertx.sqlclient.SqlClient,options: io.vertx.ext.auth.sql.SqlAuthenticationOptions) = {
+def create(client: io.vertx.sqlclient.SqlClient,options: io.vertx.ext.auth.sql.SqlAuthenticationOptions) = {
       io.vertx.ext.auth.sql.SqlAuthentication.create(client, options)
-    }
+}
   }
 
 
@@ -66,17 +66,17 @@ package object sql{
      * Create a JDBC authorization provider implementation     * @param client the SQL client instance
      * @return the auth provider
      */
-    def create(client: io.vertx.sqlclient.SqlClient) = {
+def create(client: io.vertx.sqlclient.SqlClient) = {
       io.vertx.ext.auth.sql.SqlAuthorization.create(client)
-    }
+}
     /**
      * Create a JDBC authorization provider implementation     * @param client the SQL client instance
      * @param options the SqlAuthorizationOptions see <a href="../../../../../../../../cheatsheet/SqlAuthorizationOptions.html">SqlAuthorizationOptions</a>
      * @return the auth provider
      */
-    def create(client: io.vertx.sqlclient.SqlClient,options: io.vertx.ext.auth.sql.SqlAuthorizationOptions) = {
+def create(client: io.vertx.sqlclient.SqlClient,options: io.vertx.ext.auth.sql.SqlAuthorizationOptions) = {
       io.vertx.ext.auth.sql.SqlAuthorization.create(client, options)
-    }
+}
   }
 
 
@@ -102,38 +102,38 @@ package object sql{
     /**
      * Like createUser from [[io.vertx.ext.auth.sql.SqlUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def createUserFuture(username: java.lang.String,password: java.lang.String): scala.concurrent.Future[Unit] = {
+def createUserFuture(username: java.lang.String,password: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.createUser(username, password, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.createUser(username, password, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like createHashedUser from [[io.vertx.ext.auth.sql.SqlUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def createHashedUserFuture(username: java.lang.String,hash: java.lang.String): scala.concurrent.Future[Unit] = {
+def createHashedUserFuture(username: java.lang.String,hash: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.createHashedUser(username, hash, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.createHashedUser(username, hash, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like createUserRole from [[io.vertx.ext.auth.sql.SqlUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def createUserRoleFuture(username: java.lang.String,role: java.lang.String): scala.concurrent.Future[Unit] = {
+def createUserRoleFuture(username: java.lang.String,role: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.createUserRole(username, role, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.createUserRole(username, role, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
     /**
      * Like createRolePermission from [[io.vertx.ext.auth.sql.SqlUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def createRolePermissionFuture(role: java.lang.String,permission: java.lang.String): scala.concurrent.Future[Unit] = {
+def createRolePermissionFuture(role: java.lang.String,permission: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.createRolePermission(role, permission, {a:AsyncResult[java.lang.Void] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.createRolePermission(role, permission, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-    }
+}
 
   }
 

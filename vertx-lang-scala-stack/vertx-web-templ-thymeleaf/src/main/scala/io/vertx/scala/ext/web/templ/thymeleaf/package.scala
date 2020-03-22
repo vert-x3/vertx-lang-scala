@@ -16,7 +16,7 @@
 
 package io.vertx.scala.ext.web.templ
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -36,9 +36,9 @@ package object thymeleaf{
     /**
      * Create a template engine using defaults     * @return the engine
      */
-    def create(vertx: io.vertx.core.Vertx) = {
+def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine.create(vertx)
-    }
+}
   }
 
 
