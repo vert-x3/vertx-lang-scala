@@ -64,35 +64,8 @@ public class ClassCodeGenerator extends Generator<Model> {
   public String render(Model model, int index, int size, Map<String, Object> session) {
     ClassTypeInfo type = ((ClassTypeInfo)model.getVars().get("type"));
     if(!ignoredPackages.contains(type.getPackageName()) && !ignoreClassname.contains(type.getSimpleName())) {
-      Map<String, Object> vars = new HashMap<>();
-      String translatedPackage = type.getModule().translatePackageName("scala");
-
-      vars.putAll(TypeNameTranslator.vars(name));
-      vars.putAll(model.getVars());
-      vars.put("nonGenericType", Helper.getNonGenericType(type.toString()));
-      vars.put("modulePackage", translatedPackage.substring(0, translatedPackage.lastIndexOf('.')));
-      vars.put("moduleName", translatedPackage.substring(translatedPackage.lastIndexOf('.') + 1));
-
-      vars.put("basicMethods", TypeHelper.findBasicMethods((List<MethodInfo>)vars.get("instanceMethods")));
-      vars.put("staticMethods", vars.get("staticMethods"));
-      vars.put("cacheReturnMethods", TypeHelper.findCacheReturnMethods((List<MethodInfo>)vars.get("instanceMethods")));
-      vars.put("defaultMethods", TypeHelper.findDefaultMethods((List<MethodInfo>)vars.get("instanceMethods")));
-      vars.put("fluentMethods", TypeHelper.findFluentMethods((List<MethodInfo>)vars.get("instanceMethods")));
-      vars.put("futureMethods", TypeHelper.findFutureMethods((List<MethodInfo>)vars.get("instanceMethods")));
-      vars.put("nullableMethods", TypeHelper.findNullableMethods((List<MethodInfo>)vars.get("instanceMethods")));
-
-
-      vars.put("typeHelper", new TypeHelper());
-      vars.put("helper", new Helper());
-      vars.put("className", type.getSimpleName());
-      vars.put("packageName", translatedPackage);
-      vars.put("imps", fileToImports.get(filenameForModel(model)));
-      vars.putAll(ClassKind.vars());
-      vars.putAll(MethodKind.vars());
-      vars.putAll(Case.vars());
-      vars.put("incrementalIndex", index);
-      vars.put("incrementalSize", size);
       try {
+        String translatedPackage = type.getModule().translatePackageName("scala");
         return TypeHelper.renderPackageObject(
           type,
           index,
@@ -101,15 +74,15 @@ public class ClassCodeGenerator extends Generator<Model> {
           translatedPackage.substring(translatedPackage.lastIndexOf('.') + 1),
           fileToImports.get(filenameForModel(model)),
           type.getSimpleName(),
-          (Boolean)vars.get("concrete"),
-          (Boolean)vars.get("hasEmptyConstructor"),
+          (Boolean)model.getVars().get("concrete"),
+          (Boolean)model.getVars().get("hasEmptyConstructor"),
           new Helper(),
-          (Doc)vars.get("doc"),
-          TypeHelper.findNullableMethods((List<MethodInfo>)vars.get("instanceMethods")),
-          TypeHelper.findFutureMethods((List<MethodInfo>)vars.get("instanceMethods")),
-          (List<MethodInfo>)vars.get("staticMethods"),
+          (Doc)model.getVars().get("doc"),
+          TypeHelper.findNullableMethods((List<MethodInfo>)model.getVars().get("instanceMethods")),
+          TypeHelper.findFutureMethods((List<MethodInfo>)model.getVars().get("instanceMethods")),
+          (List<MethodInfo>)model.getVars().get("staticMethods"),
           Helper.getNonGenericType(type.toString()),
-          (Collection<TypeParamInfo>)vars.get("typeParams")
+          (Collection<TypeParamInfo>)model.getVars().get("typeParams")
           );
       }
       catch (IOException ioe) {
