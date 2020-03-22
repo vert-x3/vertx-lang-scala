@@ -34,11 +34,8 @@ package object shiro{
 
   object ShiroAuth {
     /**
-     * Create a Shiro auth provider     * @param vertx the Vert.x instance
-     * @param options the Shiro configuration options see <a href="../../../../../../../../cheatsheet/ShiroAuthOptions.html">ShiroAuthOptions</a>
-     * @return the auth provider
-     */
-def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.shiro.ShiroAuthOptions) = {
+     * Like create from [[io.vertx.ext.auth.shiro.ShiroAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.shiro.ShiroAuthOptions) = {
       io.vertx.ext.auth.shiro.ShiroAuth.create(vertx, options)
 }
   }

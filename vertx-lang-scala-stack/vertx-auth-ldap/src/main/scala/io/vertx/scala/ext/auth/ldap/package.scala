@@ -34,11 +34,8 @@ package object ldap{
 
   object LdapAuthentication {
     /**
-     * Create a LDAP authentication provider     * @param vertx the Vert.x instance
-     * @param options the ldap options see <a href="../../../../../../../../cheatsheet/LdapAuthenticationOptions.html">LdapAuthenticationOptions</a>
-     * @return the authentication provider
-     */
-def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.ldap.LdapAuthenticationOptions) = {
+     * Like create from [[io.vertx.ext.auth.ldap.LdapAuthentication]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.ldap.LdapAuthenticationOptions) = {
       io.vertx.ext.auth.ldap.LdapAuthentication.create(vertx, options)
 }
   }

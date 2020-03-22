@@ -37,11 +37,8 @@ package object jwt{
 
   object JWTAuth {
     /**
-     * Create a JWT auth provider     * @param vertx the Vertx instance
-     * @param config the config see <a href="../../../../../../../../cheatsheet/JWTAuthOptions.html">JWTAuthOptions</a>
-     * @return the auth provider
-     */
-def create(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.jwt.JWTAuthOptions) = {
+     * Like create from [[io.vertx.ext.auth.jwt.JWTAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.jwt.JWTAuthOptions) = {
       io.vertx.ext.auth.jwt.JWTAuth.create(vertx, config)
 }
   }
@@ -58,10 +55,8 @@ def create(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.jwt.JWTAuthOptio
 
   object JWTAuthorization {
     /**
-     * Factory method to create a Authorization provider for JWT tokens.     * @param rootClaim slash separated string to the json array with the claims.
-     * @return a AuthorizationProvider
-     */
-def create(rootClaim: java.lang.String) = {
+     * Like create from [[io.vertx.ext.auth.jwt.authorization.JWTAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(rootClaim: java.lang.String) = {
       io.vertx.ext.auth.jwt.authorization.JWTAuthorization.create(rootClaim)
 }
   }
@@ -69,11 +64,8 @@ def create(rootClaim: java.lang.String) = {
 
   object MicroProfileAuthorization {
     /**
-     * Factory method to create a Authorization provider for tokens adhering to the MP-JWT 1.1 spec.
-     * When the user is known to not be a JWT, (e.g.: a OAuth2 response token) then the root claim
-     * is expected to be extracted from  under the key `accessToken`.     * @return a AuthorizationProvider
-     */
-def create() = {
+     * Like create from [[io.vertx.ext.auth.jwt.authorization.MicroProfileAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create() = {
       io.vertx.ext.auth.jwt.authorization.MicroProfileAuthorization.create()
 }
   }

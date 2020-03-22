@@ -35,10 +35,8 @@ package object jdbc{
 
   object JDBCAuth {
     /**
-     * Create a JDBC auth provider implementation     * @param client the JDBC client instance
-     * @return the auth provider
-     */
-def create(vertx: io.vertx.core.Vertx,client: io.vertx.ext.jdbc.JDBCClient) = {
+     * Like create from [[io.vertx.ext.auth.jdbc.JDBCAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(vertx: io.vertx.core.Vertx,client: io.vertx.ext.jdbc.JDBCClient) = {
       io.vertx.ext.auth.jdbc.JDBCAuth.create(vertx, client)
 }
   }
@@ -55,20 +53,13 @@ def create(vertx: io.vertx.core.Vertx,client: io.vertx.ext.jdbc.JDBCClient) = {
 
   object JDBCAuthentication {
     /**
-     * Create a JDBC auth provider implementation     * @param client the JDBC client instance
-     * @param hashStrategy legacy hashing strategy
-     * @param options authentication options see <a href="../../../../../../../../cheatsheet/JDBCAuthenticationOptions.html">JDBCAuthenticationOptions</a>
-     * @return the auth provider
-     */
-def create(client: io.vertx.ext.jdbc.JDBCClient,hashStrategy: io.vertx.ext.auth.jdbc.JDBCHashStrategy,options: io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions) = {
+     * Like create from [[io.vertx.ext.auth.jdbc.JDBCAuthentication]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(client: io.vertx.ext.jdbc.JDBCClient,hashStrategy: io.vertx.ext.auth.jdbc.JDBCHashStrategy,options: io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions) = {
       io.vertx.ext.auth.jdbc.JDBCAuthentication.create(client, hashStrategy, options)
 }
     /**
-     * Create a JDBC auth provider implementation     * @param client the JDBC client instance
-     * @param options authentication options see <a href="../../../../../../../../cheatsheet/JDBCAuthenticationOptions.html">JDBCAuthenticationOptions</a>
-     * @return the auth provider
-     */
-def create(client: io.vertx.ext.jdbc.JDBCClient,options: io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions) = {
+     * Like create from [[io.vertx.ext.auth.jdbc.JDBCAuthentication]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(client: io.vertx.ext.jdbc.JDBCClient,options: io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions) = {
       io.vertx.ext.auth.jdbc.JDBCAuthentication.create(client, options)
 }
   }
@@ -85,12 +76,8 @@ def create(client: io.vertx.ext.jdbc.JDBCClient,options: io.vertx.ext.auth.jdbc.
 
   object JDBCAuthorization {
     /**
-     * Create a JDBC authorization provider implementation     * @param providerId the provider id
-     * @param client the JDBC client instance
-     * @param options the JDBCAuthorizationOptions see <a href="../../../../../../../../cheatsheet/JDBCAuthorizationOptions.html">JDBCAuthorizationOptions</a>
-     * @return the auth provider
-     */
-def create(providerId: java.lang.String,client: io.vertx.ext.jdbc.JDBCClient,options: io.vertx.ext.auth.jdbc.JDBCAuthorizationOptions) = {
+     * Like create from [[io.vertx.ext.auth.jdbc.JDBCAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(providerId: java.lang.String,client: io.vertx.ext.jdbc.JDBCClient,options: io.vertx.ext.auth.jdbc.JDBCAuthorizationOptions) = {
       io.vertx.ext.auth.jdbc.JDBCAuthorization.create(providerId, client, options)
 }
   }
@@ -107,30 +94,18 @@ def create(providerId: java.lang.String,client: io.vertx.ext.jdbc.JDBCClient,opt
 
   object JDBCHashStrategy {
     /**
-     * This is the current backwards compatible hashing implementation, new applications should prefer the
-     * PBKDF2 implementation, unless the tradeoff between security and CPU usage is an option.     * @param vertx the vert.x instance
-     * @return the implementation.
-     */
-def createSHA512(vertx: io.vertx.core.Vertx) = {
+     * Like createSHA512 from [[io.vertx.ext.auth.jdbc.JDBCHashStrategy]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def createSHA512(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.auth.jdbc.JDBCHashStrategy.createSHA512(vertx)
 }
     /**
-     * Implements a Hashing Strategy as per https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet (2018-01-17).
-     *
-     * New deployments should use this strategy instead of the default one (which was the previous OWASP recommendation).
-     *
-     * The work factor can be updated by using the nonces json array.     * @param vertx the vert.x instance
-     * @return the implementation.
-     */
-def createPBKDF2(vertx: io.vertx.core.Vertx) = {
+     * Like createPBKDF2 from [[io.vertx.ext.auth.jdbc.JDBCHashStrategy]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def createPBKDF2(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.auth.jdbc.JDBCHashStrategy.createPBKDF2(vertx)
 }
     /**
-     * Time constant string comparision to avoid timming attacks.     * @param hasha hash a to compare
-     * @param hashb hash b to compare
-     * @return true if equal
-     */
-def isEqual(hasha: java.lang.String,hashb: java.lang.String) = {
+     * Like isEqual from [[io.vertx.ext.auth.jdbc.JDBCHashStrategy]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def isEqual(hasha: java.lang.String,hashb: java.lang.String) = {
       io.vertx.ext.auth.jdbc.JDBCHashStrategy.isEqual(hasha, hashb)
 }
   }
@@ -148,8 +123,7 @@ def isEqual(hasha: java.lang.String,hashb: java.lang.String) = {
 
     /**
      * Like createUser from [[io.vertx.ext.auth.jdbc.JDBCUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def createUserFuture(username: java.lang.String,password: java.lang.String) : scala.concurrent.Future[Unit] = {
+     */def createUserFuture(username: java.lang.String,password: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.createUser(username, password, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -157,8 +131,7 @@ def createUserFuture(username: java.lang.String,password: java.lang.String) : sc
 
     /**
      * Like createHashedUser from [[io.vertx.ext.auth.jdbc.JDBCUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def createHashedUserFuture(username: java.lang.String,hash: java.lang.String) : scala.concurrent.Future[Unit] = {
+     */def createHashedUserFuture(username: java.lang.String,hash: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.createHashedUser(username, hash, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -166,8 +139,7 @@ def createHashedUserFuture(username: java.lang.String,hash: java.lang.String) : 
 
     /**
      * Like createUserRole from [[io.vertx.ext.auth.jdbc.JDBCUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def createUserRoleFuture(username: java.lang.String,role: java.lang.String) : scala.concurrent.Future[Unit] = {
+     */def createUserRoleFuture(username: java.lang.String,role: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.createUserRole(username, role, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -175,8 +147,7 @@ def createUserRoleFuture(username: java.lang.String,role: java.lang.String) : sc
 
     /**
      * Like createRolePermission from [[io.vertx.ext.auth.jdbc.JDBCUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def createRolePermissionFuture(role: java.lang.String,permission: java.lang.String) : scala.concurrent.Future[Unit] = {
+     */def createRolePermissionFuture(role: java.lang.String,permission: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.createRolePermission(role, permission, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future

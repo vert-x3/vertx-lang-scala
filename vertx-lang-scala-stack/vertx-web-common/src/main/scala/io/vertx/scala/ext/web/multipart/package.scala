@@ -31,9 +31,8 @@ package object multipart{
 
   object MultipartForm {
     /**
-     * @return a multipart form instance
-     */
-def create() = {
+     * Like create from [[io.vertx.ext.web.multipart.MultipartForm]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create() = {
       io.vertx.ext.web.multipart.MultipartForm.create()
 }
   }

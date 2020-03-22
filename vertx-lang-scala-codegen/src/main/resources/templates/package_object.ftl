@@ -30,9 +30,6 @@ package object ${moduleName}{
 <#elseif !type.name?contains("Handler") && helper.getSimpleName(type.name) != 'Message' && staticMethods?has_content>
   object ${helper.getSimpleName(type.name)} {
   <#list staticMethods as method>
-      <#if method.doc??>
-${typeHelper.methodDoc(type, method, "    ", false)}
-      </#if>
 ${typeHelper.renderStaticMethod(type, method)}
   </#list>
   }

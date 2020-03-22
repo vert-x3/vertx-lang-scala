@@ -49,8 +49,7 @@ package object mongo{
 
     /**
      * Like insertUser from [[io.vertx.ext.auth.mongo.MongoAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def insertUserFuture(username: java.lang.String,password: java.lang.String,roles: java.util.List[java.lang.String],permissions: java.util.List[java.lang.String]) : scala.concurrent.Future[java.lang.String] = {
+     */def insertUserFuture(username: java.lang.String,password: java.lang.String,roles: java.util.List[java.lang.String],permissions: java.util.List[java.lang.String]) : scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
       asJava.insertUser(username, password, roles, permissions, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -70,11 +69,8 @@ def insertUserFuture(username: java.lang.String,password: java.lang.String,roles
 
   object MongoAuthentication {
     /**
-     * Creates an instance of MongoAuth by using the given  and configuration object.     * @param mongoClient an instance of MongoClient to be used for data storage and retrival
-     * @param options the configuration object for the current instance. see <a href="../../../../../../../../cheatsheet/MongoAuthenticationOptions.html">MongoAuthenticationOptions</a>
-     * @return the created instance of MongoAuthentication
-     */
-def create(mongoClient: io.vertx.ext.mongo.MongoClient,options: io.vertx.ext.auth.mongo.MongoAuthenticationOptions) = {
+     * Like create from [[io.vertx.ext.auth.mongo.MongoAuthentication]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(mongoClient: io.vertx.ext.mongo.MongoClient,options: io.vertx.ext.auth.mongo.MongoAuthenticationOptions) = {
       io.vertx.ext.auth.mongo.MongoAuthentication.create(mongoClient, options)
 }
 def create(mongoClient: io.vertx.ext.mongo.MongoClient,hashStrategy: io.vertx.ext.auth.mongo.HashStrategy,options: io.vertx.ext.auth.mongo.MongoAuthenticationOptions) = {
@@ -94,12 +90,8 @@ def create(mongoClient: io.vertx.ext.mongo.MongoClient,hashStrategy: io.vertx.ex
 
   object MongoAuthorization {
     /**
-     * Creates an instance of MongoAuthorization by using the given  and configuration object.     * @param providerId the provider ID to differentiate from others
-     * @param mongoClient an instance of MongoClient to be used for data storage and retrival
-     * @param options the configuration object for the current instance. see <a href="../../../../../../../../cheatsheet/MongoAuthorizationOptions.html">MongoAuthorizationOptions</a>
-     * @return the created instance of MongoAuthorization
-     */
-def create(providerId: java.lang.String,mongoClient: io.vertx.ext.mongo.MongoClient,options: io.vertx.ext.auth.mongo.MongoAuthorizationOptions) = {
+     * Like create from [[io.vertx.ext.auth.mongo.MongoAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(providerId: java.lang.String,mongoClient: io.vertx.ext.mongo.MongoClient,options: io.vertx.ext.auth.mongo.MongoAuthorizationOptions) = {
       io.vertx.ext.auth.mongo.MongoAuthorization.create(providerId, mongoClient, options)
 }
   }
@@ -126,8 +118,7 @@ def create(providerId: java.lang.String,mongoClient: io.vertx.ext.mongo.MongoCli
 
     /**
      * Like createUser from [[io.vertx.ext.auth.mongo.MongoUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def createUserFuture(username: java.lang.String,password: java.lang.String) : scala.concurrent.Future[Unit] = {
+     */def createUserFuture(username: java.lang.String,password: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.createUser(username, password, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -135,8 +126,7 @@ def createUserFuture(username: java.lang.String,password: java.lang.String) : sc
 
     /**
      * Like createHashedUser from [[io.vertx.ext.auth.mongo.MongoUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def createHashedUserFuture(username: java.lang.String,hash: java.lang.String) : scala.concurrent.Future[Unit] = {
+     */def createHashedUserFuture(username: java.lang.String,hash: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.createHashedUser(username, hash, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -144,8 +134,7 @@ def createHashedUserFuture(username: java.lang.String,hash: java.lang.String) : 
 
     /**
      * Like createUserRolesAndPermissions from [[io.vertx.ext.auth.mongo.MongoUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def createUserRolesAndPermissionsFuture(username: java.lang.String,roles: java.util.List[java.lang.String],permissions: java.util.List[java.lang.String]) : scala.concurrent.Future[Unit] = {
+     */def createUserRolesAndPermissionsFuture(username: java.lang.String,roles: java.util.List[java.lang.String],permissions: java.util.List[java.lang.String]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.createUserRolesAndPermissions(username, roles, permissions, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future

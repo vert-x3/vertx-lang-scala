@@ -46,22 +46,18 @@ package object mail{
 
   object MailAttachment {
     /**
-     * construct an empty MailAttachment object that can be filled with the
-     * setters
-     */
-def create() = {
+     * Like create from [[io.vertx.ext.mail.MailAttachment]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create() = {
       io.vertx.ext.mail.MailAttachment.create()
 }
     /**
-     * create a MailAttachment object from a JsonObject representation     * @param json object to be copied
-     */
-def create(json: io.vertx.core.json.JsonObject) = {
+     * Like create from [[io.vertx.ext.mail.MailAttachment]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(json: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.mail.MailAttachment.create(json)
 }
     /**
-     * create a copy of a MailAttachment object     * @param other object to be copied
-     */
-def create(other: io.vertx.ext.mail.MailAttachment) = {
+     * Like create from [[io.vertx.ext.mail.MailAttachment]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */def create(other: io.vertx.ext.mail.MailAttachment) = {
       io.vertx.ext.mail.MailAttachment.create(other)
 }
   }
@@ -78,8 +74,7 @@ def create(other: io.vertx.ext.mail.MailAttachment) = {
 
     /**
      * Like sendMail from [[io.vertx.ext.mail.MailClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-def sendMailFuture(email: io.vertx.ext.mail.MailMessage) : scala.concurrent.Future[io.vertx.ext.mail.MailResult] = {
+     */def sendMailFuture(email: io.vertx.ext.mail.MailMessage) : scala.concurrent.Future[io.vertx.ext.mail.MailResult] = {
       val promise = concurrent.Promise[io.vertx.ext.mail.MailResult]()
       asJava.sendMail(email, new Handler[AsyncResult[io.vertx.ext.mail.MailResult]] { override def handle(event: AsyncResult[io.vertx.ext.mail.MailResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future

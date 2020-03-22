@@ -809,12 +809,6 @@ public class TypeHelper {
     return target + "." + escapeIfKeyword(method.getName()) + typeParamString + "(" + paramString + ")";
   }
 
-  public static List<TypeParamInfo> removeLastParam(List<TypeParamInfo> params) {
-    List<TypeParamInfo> ret = new java.util.ArrayList<>(params);
-    ret.remove(params.size() - 1);
-    return ret;
-  }
-
   /**
    * Some method names require special treatment when used in lang-scala. e.g. we have to convert the name
    * of methods where the original version gets replaced with one returning a scala.Future.
@@ -965,11 +959,6 @@ public class TypeHelper {
     return scalaNotation;
   }
 
-  public static String getSimpleNameWithScalaNotation(TypeInfo type) {
-    String scalaNotation = getFullNameWithScalaNotation(type);
-    return scalaNotation.substring(scalaNotation.lastIndexOf(".") + 1);
-  }
-
   public static String convertToScalaNotation(String type) {
     return  type
       .replace("<", "[").replace(">", "]")
@@ -1068,7 +1057,13 @@ public class TypeHelper {
 
     String asyncType = typeOfReturnedFuture(method).getName().replace('<', '[').replace('>', ']');
 
-    String ret ="def "+ createNameForMethodReturningAFuture(method) + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList()), true) + "(" + paramList + ") : scala.concurrent.Future[" + toReturnType(typeOfReturnedFuture(method)) + "] = {\n" +
+    String ret = "";
+
+    if (method.getDoc() != null) {
+      ret += methodDoc(type, method, "    ", true);
+    }
+
+    ret +="def "+ createNameForMethodReturningAFuture(method) + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList()), true) + "(" + paramList + ") : scala.concurrent.Future[" + toReturnType(typeOfReturnedFuture(method)) + "] = {\n" +
       "      val promise = concurrent.Promise[" + toReturnType(typeOfReturnedFuture(method))+ "]()\n" +
       "      " + invokeMethodAndUseProvidedHandler("asJava", method, "new Handler[AsyncResult[" + asyncType + "]] { override def handle(event: AsyncResult[" + asyncType + "]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(" + toScalaWithConversion("event.result()", typeOfReturnedFuture(method))) + "}})\n" +
       "      promise.future\n" +
@@ -1083,8 +1078,13 @@ public class TypeHelper {
     String option = method.getReturnType().isNullable() ? "Option" : "";
 
     String exec = method.getReturnType().isNullable() ? "scala.Option(" + invokeMethodWithoutConvertingReturn(type.getName(), method) + ")" : invokeMethodWithoutConvertingReturn(type.getName(), method);
+    String ret = "";
 
-    String ret ="def "+ TypeHelper.escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList()), true) + "(" + paramList + ") = {\n" +
+    if (method.getDoc() != null) {
+      ret += methodDoc(type, method, "    ", true);
+    }
+
+    ret += "def "+ TypeHelper.escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList()), true) + "(" + paramList + ") = {\n" +
       "      " + exec + "\n" +
       "}";
     return ret;
@@ -1096,7 +1096,13 @@ public class TypeHelper {
 
     String option = method.getReturnType().isNullable() ? "Option" : "";
 
-    String ret ="def "+ TypeHelper.escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList()), true) + "(" + paramList + ") = {\n" +
+    String ret = "";
+
+    if (method.getDoc() != null) {
+      ret += methodDoc(type, method, "    ", true);
+    }
+
+    ret +="def "+ TypeHelper.escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList()), true) + "(" + paramList + ") = {\n" +
       "      scala.Option(" +invokeMethodWithoutConvertingReturn("asJava", method)+ ")\n" +
       "}";
     return ret;
