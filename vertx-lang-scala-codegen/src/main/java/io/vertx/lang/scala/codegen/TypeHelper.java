@@ -171,49 +171,6 @@ public class TypeHelper {
     }
   }
 
-  public static String invokeMethodWithoutConvertingReturn(String target, TypeInfo type, MethodInfo method) {
-    String typeParamString = assembleTypeParamString(method);
-
-    String paramString = "";
-    for (ParamInfo param : method.getParams()) {
-      if (paramString != "") {
-        paramString += ", ";
-      }
-      paramString += conversionForJavaMethodParam(param.getName(), param.getType());
-    }
-
-    String ret = target + "." + escapeIfKeyword(method.getName()) + typeParamString + "(" + paramString + ")";
-
-    return ret;
-  }
-
-  public static String conversionForJavaMethodParam(String name, TypeInfo type) {
-    String conversion = "";
-    if (type.getKind() == ClassKind.HANDLER) {
-      if(type.isNullable()) {
-        conversion = name + " match {case Some(t) => p:" + toScalaMethodParam(((ParameterizedTypeInfo)type).getArg(0)) + " => t(p); case None => null}";
-      } else {
-        conversion = "{p:" + toScalaMethodParam(((ParameterizedTypeInfo)type).getArg(0)) + " => " + name + "(p)}";
-      }
-      return conversion;
-    }
-
-    if(type.getKind() == ClassKind.FUNCTION) {
-      if(((ParameterizedTypeInfo)type).getArg(0).isVariable() || (((ParameterizedTypeInfo)type).getArg(1).isParameterized() && ((ParameterizedTypeInfo)((ParameterizedTypeInfo)type).getArg(1)).getArg(0).isVariable())) {
-        return "asJavaFunction(' + name + ')";
-      }
-      else {
-        String invocation = name + "(a)";
-        return "a => " + conversionForJavaMethodParam(invocation, ((ParameterizedTypeInfo)type).getArg(1));
-      }
-    }
-
-    if(type.isNullable() ) {
-      conversion += ".orNull";
-    }
-    return escapeIfKeyword(name) + conversion;
-  }
-
   //TODO: basically a clone of toScalaMethodParam
   public static String toReturnType(TypeInfo type) {
     if (type.getKind() == ClassKind.VOID || type.getName().equals("java.lang.Void") || type.getName().equals("void")) {
