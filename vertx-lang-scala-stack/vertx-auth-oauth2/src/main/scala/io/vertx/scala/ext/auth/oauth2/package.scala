@@ -46,87 +46,91 @@ package object oauth2{
 
   implicit class AccessTokenScala(val asJava: io.vertx.ext.auth.oauth2.AccessToken) extends AnyVal {
 
+
     /**
      * Like refresh from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def refreshFuture() : scala.concurrent.Future[Unit] = {
+     */
+def refreshFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.refresh(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like revoke from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def revokeFuture(token_type: java.lang.String) : scala.concurrent.Future[Unit] = {
+     */
+def revokeFuture(token_type: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.revoke(token_type, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like logout from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def logoutFuture() : scala.concurrent.Future[Unit] = {
+     */
+def logoutFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.logout(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like introspect from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def introspectFuture() : scala.concurrent.Future[Unit] = {
+     */
+def introspectFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.introspect(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like introspect from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def introspectFuture(tokenType: java.lang.String) : scala.concurrent.Future[Unit] = {
+     */
+def introspectFuture(tokenType: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.introspect(tokenType, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like userInfo from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def userInfoFuture() : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+     */
+def userInfoFuture() : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
       asJava.userInfo(new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like fetch from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def fetchFuture(resource: java.lang.String) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.OAuth2Response] = {
+     */
+def fetchFuture(resource: java.lang.String) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.OAuth2Response] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.OAuth2Response]()
       asJava.fetch(resource, new Handler[AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Response]] { override def handle(event: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like fetch from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def fetchFuture(method: io.vertx.core.http.HttpMethod,resource: java.lang.String,headers: io.vertx.core.json.JsonObject,payload: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.OAuth2Response] = {
+     */
+def fetchFuture(method: io.vertx.core.http.HttpMethod,resource: java.lang.String,headers: io.vertx.core.json.JsonObject,payload: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.OAuth2Response] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.OAuth2Response]()
       asJava.fetch(method, resource, headers, payload, new Handler[AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Response]] { override def handle(event: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+}  }
 
-  }
 
 
   object AzureADAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.AzureADAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,guid: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,guid: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.AzureADAuth.create(vertx, clientId, clientSecret, guid)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.AzureADAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,guid: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,guid: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.AzureADAuth.create(vertx, clientId, clientSecret, guid, httpClientOptions)
 }
     /**
      * Like discover from [[io.vertx.ext.auth.oauth2.providers.AzureADAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
+     */
+def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.AzureADAuth.discover(vertx, config, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth]]])
 }
   }
@@ -135,12 +139,14 @@ package object oauth2{
   object BoxAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.BoxAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.BoxAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.BoxAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.BoxAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }
@@ -149,12 +155,14 @@ package object oauth2{
   object CloudFoundryAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.CloudFoundryAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,uuaURL: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,uuaURL: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.CloudFoundryAuth.create(vertx, clientId, clientSecret, uuaURL)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.CloudFoundryAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,uuaURL: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,uuaURL: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.CloudFoundryAuth.create(vertx, clientId, clientSecret, uuaURL, httpClientOptions)
 }
   }
@@ -163,12 +171,14 @@ package object oauth2{
   object DropboxAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.DropboxAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.DropboxAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.DropboxAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.DropboxAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }
@@ -177,12 +187,14 @@ package object oauth2{
   object FacebookAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.FacebookAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.FacebookAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.FacebookAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.FacebookAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }
@@ -191,12 +203,14 @@ package object oauth2{
   object FoursquareAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.FoursquareAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.FoursquareAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.FoursquareAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.FoursquareAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }
@@ -205,12 +219,14 @@ package object oauth2{
   object GithubAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.GithubAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.GithubAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.GithubAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.GithubAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }
@@ -219,27 +235,32 @@ package object oauth2{
   object GoogleAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.GoogleAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.GoogleAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.GoogleAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.GoogleAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
     /**
      * Like discover from [[io.vertx.ext.auth.oauth2.providers.GoogleAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
+     */
+def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.GoogleAuth.discover(vertx, config, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth]]])
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.GoogleAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,serviceAccountJson: io.vertx.core.json.JsonObject) = {
+     */
+def create(vertx: io.vertx.core.Vertx,serviceAccountJson: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.providers.GoogleAuth.create(vertx, serviceAccountJson)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.GoogleAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,serviceAccountJson: io.vertx.core.json.JsonObject,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,serviceAccountJson: io.vertx.core.json.JsonObject,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.GoogleAuth.create(vertx, serviceAccountJson, httpClientOptions)
 }
   }
@@ -248,12 +269,14 @@ package object oauth2{
   object HerokuAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.HerokuAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.HerokuAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.HerokuAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.HerokuAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }
@@ -262,12 +285,14 @@ package object oauth2{
   object InstagramAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.InstagramAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.InstagramAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.InstagramAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.InstagramAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }
@@ -276,27 +301,32 @@ package object oauth2{
   object KeycloakAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.KeycloakAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,config: io.vertx.core.json.JsonObject) = {
+     */
+def create(vertx: io.vertx.core.Vertx,config: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.providers.KeycloakAuth.create(vertx, config)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.KeycloakAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject) = {
+     */
+def create(vertx: io.vertx.core.Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.providers.KeycloakAuth.create(vertx, flow, config)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.KeycloakAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,config: io.vertx.core.json.JsonObject,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,config: io.vertx.core.json.JsonObject,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.KeycloakAuth.create(vertx, config, httpClientOptions)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.KeycloakAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowType,config: io.vertx.core.json.JsonObject,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.KeycloakAuth.create(vertx, flow, config, httpClientOptions)
 }
     /**
      * Like discover from [[io.vertx.ext.auth.oauth2.providers.KeycloakAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
+     */
+def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.KeycloakAuth.discover(vertx, config, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth]]])
 }
   }
@@ -305,7 +335,8 @@ package object oauth2{
   object KeycloakAuthorization {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.authorization.KeycloakAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create() = {
+     */
+def create() = {
       io.vertx.ext.auth.oauth2.authorization.KeycloakAuthorization.create()
 }
   }
@@ -314,22 +345,26 @@ package object oauth2{
   object KeycloakHelper {
     /**
      * Like rawIdToken from [[io.vertx.ext.auth.oauth2.KeycloakHelper]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def rawIdToken(principal: io.vertx.core.json.JsonObject) = {
+     */
+def rawIdToken(principal: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.KeycloakHelper.rawIdToken(principal)
 }
     /**
      * Like idToken from [[io.vertx.ext.auth.oauth2.KeycloakHelper]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def idToken(principal: io.vertx.core.json.JsonObject) = {
+     */
+def idToken(principal: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.KeycloakHelper.idToken(principal)
 }
     /**
      * Like rawAccessToken from [[io.vertx.ext.auth.oauth2.KeycloakHelper]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def rawAccessToken(principal: io.vertx.core.json.JsonObject) = {
+     */
+def rawAccessToken(principal: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.KeycloakHelper.rawAccessToken(principal)
 }
     /**
      * Like accessToken from [[io.vertx.ext.auth.oauth2.KeycloakHelper]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def accessToken(principal: io.vertx.core.json.JsonObject) = {
+     */
+def accessToken(principal: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.auth.oauth2.KeycloakHelper.accessToken(principal)
 }
 def authTime(principal: io.vertx.core.json.JsonObject) = {
@@ -358,7 +393,8 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
 }
     /**
      * Like parseToken from [[io.vertx.ext.auth.oauth2.KeycloakHelper]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def parseToken(token: java.lang.String) = {
+     */
+def parseToken(token: java.lang.String) = {
       io.vertx.ext.auth.oauth2.KeycloakHelper.parseToken(token)
 }
   }
@@ -367,7 +403,8 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   object KeycloakRBAC {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.rbac.KeycloakRBAC]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(options: io.vertx.ext.auth.oauth2.OAuth2Options) = {
+     */
+def create(options: io.vertx.ext.auth.oauth2.OAuth2Options) = {
       io.vertx.ext.auth.oauth2.rbac.KeycloakRBAC.create(options)
 }
   }
@@ -376,12 +413,14 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   object LinkedInAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.LinkedInAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.LinkedInAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.LinkedInAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.LinkedInAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }
@@ -390,12 +429,14 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   object LiveAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.LiveAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.LiveAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.LiveAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.LiveAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }
@@ -404,12 +445,14 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   object MailchimpAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.MailchimpAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.MailchimpAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.MailchimpAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.MailchimpAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }
@@ -418,7 +461,8 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   object MicroProfileRBAC {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.rbac.MicroProfileRBAC]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create() = {
+     */
+def create() = {
       io.vertx.ext.auth.oauth2.rbac.MicroProfileRBAC.create()
 }
   }
@@ -431,79 +475,80 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
 
   implicit class OAuth2AuthScala(val asJava: io.vertx.ext.auth.oauth2.OAuth2Auth) extends AnyVal {
 
+
     /**
      * Like jWKSet from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def jWKSetFuture() : scala.concurrent.Future[Unit] = {
+     */
+def jWKSetFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.jWKSet(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like refresh from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def refreshFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[io.vertx.ext.auth.User] = {
+     */
+def refreshFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[io.vertx.ext.auth.User] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.User]()
       asJava.refresh(user, new Handler[AsyncResult[io.vertx.ext.auth.User]] { override def handle(event: AsyncResult[io.vertx.ext.auth.User]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like revoke from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def revokeFuture(user: io.vertx.ext.auth.User,tokenType: java.lang.String) : scala.concurrent.Future[Unit] = {
+     */
+def revokeFuture(user: io.vertx.ext.auth.User,tokenType: java.lang.String) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.revoke(user, tokenType, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like revoke from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def revokeFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[Unit] = {
+     */
+def revokeFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.revoke(user, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like userInfo from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def userInfoFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+     */
+def userInfoFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
       asJava.userInfo(user, new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like decodeToken from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def decodeTokenFuture(token: java.lang.String) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
+     */
+def decodeTokenFuture(token: java.lang.String) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.AccessToken]()
       asJava.decodeToken(token, new Handler[AsyncResult[io.vertx.ext.auth.oauth2.AccessToken]] { override def handle(event: AsyncResult[io.vertx.ext.auth.oauth2.AccessToken]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like introspectToken from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def introspectTokenFuture(token: java.lang.String) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
+     */
+def introspectTokenFuture(token: java.lang.String) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.AccessToken]()
       asJava.introspectToken(token, new Handler[AsyncResult[io.vertx.ext.auth.oauth2.AccessToken]] { override def handle(event: AsyncResult[io.vertx.ext.auth.oauth2.AccessToken]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like introspectToken from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def introspectTokenFuture(token: java.lang.String,tokenType: java.lang.String) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
+     */
+def introspectTokenFuture(token: java.lang.String,tokenType: java.lang.String) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
       val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.AccessToken]()
       asJava.introspectToken(token, tokenType, new Handler[AsyncResult[io.vertx.ext.auth.oauth2.AccessToken]] { override def handle(event: AsyncResult[io.vertx.ext.auth.oauth2.AccessToken]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-
     /**
      * Like loadJWK from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def loadJWKFuture() : scala.concurrent.Future[Unit] = {
+     */
+def loadJWKFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.loadJWK(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+}  }
 
-  }
 
 
     type OAuth2ClientOptions = io.vertx.ext.auth.oauth2.OAuth2ClientOptions
@@ -537,15 +582,16 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
 
   implicit class OAuth2RBACScala(val asJava: io.vertx.ext.auth.oauth2.OAuth2RBAC) extends AnyVal {
 
+
     /**
      * Like isAuthorized from [[io.vertx.ext.auth.oauth2.OAuth2RBAC]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def isAuthorizedFuture(user: io.vertx.ext.auth.oauth2.AccessToken,authority: java.lang.String) : scala.concurrent.Future[java.lang.Boolean] = {
+     */
+def isAuthorizedFuture(user: io.vertx.ext.auth.oauth2.AccessToken,authority: java.lang.String) : scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
       asJava.isAuthorized(user, authority, new Handler[AsyncResult[java.lang.Boolean]] { override def handle(event: AsyncResult[java.lang.Boolean]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+}  }
 
-  }
 
 
 
@@ -553,7 +599,8 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   object OpenIDConnectAuth {
     /**
      * Like discover from [[io.vertx.ext.auth.oauth2.providers.OpenIDConnectAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
+     */
+def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.OpenIDConnectAuth.discover(vertx, config, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth]]])
 }
   }
@@ -562,17 +609,20 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   object SalesforceAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.SalesforceAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.SalesforceAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.SalesforceAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.SalesforceAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
     /**
      * Like discover from [[io.vertx.ext.auth.oauth2.providers.SalesforceAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
+     */
+def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.SalesforceAuth.discover(vertx, config, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth]]])
 }
   }
@@ -581,7 +631,8 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   object ScopeAuthorization {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.authorization.ScopeAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(scopeSeparator: java.lang.String) = {
+     */
+def create(scopeSeparator: java.lang.String) = {
       io.vertx.ext.auth.oauth2.authorization.ScopeAuthorization.create(scopeSeparator)
 }
   }
@@ -590,12 +641,14 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   object ShopifyAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.ShopifyAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,shop: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,shop: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.ShopifyAuth.create(vertx, clientId, clientSecret, shop)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.ShopifyAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,shop: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,shop: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.ShopifyAuth.create(vertx, clientId, clientSecret, shop, httpClientOptions)
 }
   }
@@ -604,12 +657,14 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   object SoundcloudAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.SoundcloudAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.SoundcloudAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.SoundcloudAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.SoundcloudAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }
@@ -618,12 +673,14 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   object StripeAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.StripeAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.StripeAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.StripeAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.StripeAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }
@@ -632,12 +689,14 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
   object TwitterAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.TwitterAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String) = {
       io.vertx.ext.auth.oauth2.providers.TwitterAuth.create(vertx, clientId, clientSecret)
 }
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.TwitterAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+     */
+def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.TwitterAuth.create(vertx, clientId, clientSecret, httpClientOptions)
 }
   }

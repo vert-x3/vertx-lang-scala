@@ -594,7 +594,7 @@ public class TypeHelper {
     return expression;
   }
 
-  public static String assembleTypeParams(Collection<TypeParamInfo> typeParams, boolean withTypeParams) {
+  public static String assembleTypeParams(Collection<TypeParamInfo> typeParams) {
     if (!typeParams.isEmpty()){
       String ret = "";
       for (TypeParamInfo param:typeParams){
@@ -1054,7 +1054,7 @@ public class TypeHelper {
 
   //New stuff
 
-  public static String renderFutureMethod(TypeInfo type, List<TypeParamInfo> typeParams, MethodInfo method) {
+  public static String renderFutureMethod(TypeInfo type, MethodInfo method) {
     List<ParamInfo> params = method.getParams();
     params = params.subList(0, params.size() - 1);
     String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + wrapInOptionIfNullable(param.getType().isNullable(), toScalaMethodParam(param.getType()))).collect(Collectors.joining(","));
@@ -1065,9 +1065,10 @@ public class TypeHelper {
 
     if (method.getDoc() != null) {
       ret += methodDoc(type, method, "    ", true);
+      ret += "\n";
     }
 
-    ret +="def "+ createNameForMethodReturningAFuture(method) + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList()), true) + "(" + paramList + ") : scala.concurrent.Future[" + toReturnType(typeOfReturnedFuture(method)) + "] = {\n" +
+    ret +="def "+ createNameForMethodReturningAFuture(method) + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") : scala.concurrent.Future[" + toReturnType(typeOfReturnedFuture(method)) + "] = {\n" +
       "      val promise = concurrent.Promise[" + toReturnType(typeOfReturnedFuture(method))+ "]()\n" +
       "      " + invokeMethodAndUseProvidedHandler("asJava", method, "new Handler[AsyncResult[" + asyncType + "]] { override def handle(event: AsyncResult[" + asyncType + "]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(" + toScalaWithConversion("event.result()", typeOfReturnedFuture(method))) + "}})\n" +
       "      promise.future\n" +
@@ -1086,9 +1087,10 @@ public class TypeHelper {
 
     if (method.getDoc() != null) {
       ret += methodDoc(type, method, "    ", true);
+      ret += "\n";
     }
 
-    ret += "def "+ TypeHelper.escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList()), true) + "(" + paramList + ") = {\n" +
+    ret += "def "+ TypeHelper.escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
       "      " + exec + "\n" +
       "}";
     return ret;
@@ -1104,9 +1106,10 @@ public class TypeHelper {
 
     if (method.getDoc() != null) {
       ret += methodDoc(type, method, "    ", true);
+      ret += "\n";
     }
 
-    ret +="def "+ TypeHelper.escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList()), true) + "(" + paramList + ") = {\n" +
+    ret +="def "+ TypeHelper.escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
       "      scala.Option(" +invokeMethodWithoutConvertingReturn("asJava", method)+ ")\n" +
       "}";
     return ret;
@@ -1123,7 +1126,38 @@ public class TypeHelper {
     return "";
   }
 
+  public static String renderClass(ClassTypeInfo type, Doc doc, String className, List<MethodInfo> nullableMethods, List<MethodInfo> futureMethods, String nonGenericType, Collection<TypeParamInfo> typeParams) throws IOException{
 
+    String docs = doc != null ? "  /**\n" +
+      TypeHelper.renderDoc(type, "    *", doc) + "\n" +
+      "    */\n"
+      : "";
+
+    String nullableMethodsRendered = (!"CompositeFuture".equals(className) && !"Future".equals(className)) ? nullableMethods.stream().filter(method -> !method.getName().equals("executeBlocking"))
+      .map(method -> TypeHelper.renderNullableMethod(type, method))
+      .collect(Collectors.joining("\n"))
+      : "";
+
+    String futureMethodsRendered = futureMethods.stream().filter(method -> !method.getName().equals("executeBlocking"))
+      .map(method -> TypeHelper.renderFutureMethod(type, method))
+      .collect(Collectors.joining("\n"));
+
+    return
+      "\n" +
+      docs +
+      "\n" +
+      ("Vertx".equals(className) ? TypeHelper.renderFile("extensions/VertxObject.ftl")+ "\n" : "") +
+      "  implicit class "+ className + "Scala" + TypeHelper.assembleTypeParams(typeParams) + "(val asJava: " + nonGenericType + TypeHelper.assembleTypeParams(typeParams) + ") extends AnyVal {\n" +
+      ("Vertx".equals(className) ? TypeHelper.renderFile("extensions/Vertx.ftl")+ "\n" : "") +
+      ("Vertx".equals(className) ? TypeHelper.renderFile("extensions/executeblocking.ftl")+ "\n" : "") +
+      ("Context".equals(className) ? TypeHelper.renderFile("extensions/executeblocking.ftl") + "\n" : "") +
+      ("WorkerExecutor".equals(className) ? TypeHelper.renderFile("extensions/executeblocking.ftl") + "\n" : "") +
+      "\n" +
+      nullableMethodsRendered +
+      "\n" +
+      futureMethodsRendered +
+      "  }\n";
+  }
 
 
 

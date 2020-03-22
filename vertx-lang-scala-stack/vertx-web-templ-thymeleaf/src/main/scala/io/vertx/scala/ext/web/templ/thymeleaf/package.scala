@@ -36,7 +36,8 @@ package object thymeleaf{
   object ThymeleafTemplateEngine {
     /**
      * Like create from [[io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx) = {
+     */
+def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine.create(vertx)
 }
   }

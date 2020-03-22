@@ -35,12 +35,14 @@ package object mvel{
   object MVELTemplateEngine {
     /**
      * Like create from [[io.vertx.ext.web.templ.mvel.MVELTemplateEngine]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx) = {
+     */
+def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.templ.mvel.MVELTemplateEngine.create(vertx)
 }
     /**
      * Like create from [[io.vertx.ext.web.templ.mvel.MVELTemplateEngine]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */def create(vertx: io.vertx.core.Vertx,extension: java.lang.String) = {
+     */
+def create(vertx: io.vertx.core.Vertx,extension: java.lang.String) = {
       io.vertx.ext.web.templ.mvel.MVELTemplateEngine.create(vertx, extension)
 }
   }
