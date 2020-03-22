@@ -26,8 +26,8 @@ import scala.concurrent.Promise
 
 import io.vertx.ext.shell.term.{Tty => JTty}
 import io.vertx.core.Handler
-
 package object shell{
+
 
   object CliToken {
     /**
@@ -47,8 +47,9 @@ def createBlank(blank: java.lang.String) = {
      */
 def tokenize(s: java.lang.String) = {
       io.vertx.ext.shell.cli.CliToken.tokenize(s)
-}
-  }
+}  }
+
+
 
 
 
@@ -65,8 +66,9 @@ def command(name: java.lang.String) = {
      */
 def command(cli: io.vertx.core.cli.CLI) = {
       io.vertx.ext.shell.command.CommandBuilder.command(cli)
-}
-  }
+}  }
+
+
 
 
 
@@ -108,23 +110,29 @@ def unregisterCommandFuture(commandName: java.lang.String) : scala.concurrent.Fu
 
 
 
+
   object CommandResolver {
     /**
      * Like baseCommands from [[io.vertx.ext.shell.command.CommandResolver]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
 def baseCommands(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.shell.command.CommandResolver.baseCommands(vertx)
-}
-  }
+}  }
 
 
 
 
-    type HttpTermOptions = io.vertx.ext.shell.term.HttpTermOptions
+
+
+  type HttpTermOptions = io.vertx.ext.shell.term.HttpTermOptions
   object HttpTermOptions {
     def apply() = new HttpTermOptions()
     def apply(json: JsonObject) = new HttpTermOptions(json)
   }
+
+
+
+
 
 
 
@@ -146,15 +154,16 @@ def create() = {
      */
 def create(terminalType: java.lang.String) = {
       io.vertx.ext.shell.term.Pty.create(terminalType)
-}
-  }
+}  }
 
 
-    type SSHTermOptions = io.vertx.ext.shell.term.SSHTermOptions
+
+  type SSHTermOptions = io.vertx.ext.shell.term.SSHTermOptions
   object SSHTermOptions {
     def apply() = new SSHTermOptions()
     def apply(json: JsonObject) = new SSHTermOptions(json)
   }
+
 
 
 
@@ -164,8 +173,9 @@ def create(terminalType: java.lang.String) = {
      */
 def create() = {
       io.vertx.ext.shell.session.Session.create()
-}
-  }
+}  }
+
+
 
 
 
@@ -205,11 +215,13 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-    type ShellServerOptions = io.vertx.ext.shell.ShellServerOptions
+
+  type ShellServerOptions = io.vertx.ext.shell.ShellServerOptions
   object ShellServerOptions {
     def apply() = new ShellServerOptions()
     def apply(json: JsonObject) = new ShellServerOptions(json)
   }
+
 
 
 
@@ -244,7 +256,8 @@ def stopFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-    type ShellServiceOptions = io.vertx.ext.shell.ShellServiceOptions
+
+  type ShellServiceOptions = io.vertx.ext.shell.ShellServiceOptions
   object ShellServiceOptions {
     def apply() = new ShellServiceOptions()
     def apply(json: JsonObject) = new ShellServiceOptions(json)
@@ -256,11 +269,16 @@ def stopFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-    type TelnetTermOptions = io.vertx.ext.shell.term.TelnetTermOptions
+
+
+
+  type TelnetTermOptions = io.vertx.ext.shell.term.TelnetTermOptions
   object TelnetTermOptions {
     def apply() = new TelnetTermOptions()
     def apply(json: JsonObject) = new TelnetTermOptions(json)
   }
+
+
 
 
 
@@ -295,4 +313,6 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 
+
 }
+

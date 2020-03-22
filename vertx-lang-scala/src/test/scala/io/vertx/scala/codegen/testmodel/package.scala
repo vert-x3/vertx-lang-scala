@@ -40,8 +40,10 @@ import io.vertx.codegen.testmodel.{SuperInterface2 => JSuperInterface2}
 import io.vertx.core.Handler
 import io.vertx.codegen.testmodel.{GenericRefedInterface => JGenericRefedInterface}
 import io.vertx.codegen.testmodel.TestGenEnum
-
 package object testmodel{
+
+
+
 
 
 
@@ -166,7 +168,12 @@ def methodWithHandlerAsyncResultSetEnumFuture() : scala.concurrent.Future[scala.
 
 
 
-    type DataObjectWithBuffer = io.vertx.codegen.testmodel.DataObjectWithBuffer
+
+
+
+
+
+  type DataObjectWithBuffer = io.vertx.codegen.testmodel.DataObjectWithBuffer
   object DataObjectWithBuffer {
     def apply() = new DataObjectWithBuffer()
     def apply(json: JsonObject) = new DataObjectWithBuffer(json)
@@ -174,7 +181,8 @@ def methodWithHandlerAsyncResultSetEnumFuture() : scala.concurrent.Future[scala.
 
 
 
-    type DataObjectWithListAdders = io.vertx.codegen.testmodel.DataObjectWithListAdders
+
+  type DataObjectWithListAdders = io.vertx.codegen.testmodel.DataObjectWithListAdders
   object DataObjectWithListAdders {
     def apply() = new DataObjectWithListAdders()
     def apply(json: JsonObject) = new DataObjectWithListAdders(json)
@@ -182,7 +190,8 @@ def methodWithHandlerAsyncResultSetEnumFuture() : scala.concurrent.Future[scala.
 
 
 
-    type DataObjectWithLists = io.vertx.codegen.testmodel.DataObjectWithLists
+
+  type DataObjectWithLists = io.vertx.codegen.testmodel.DataObjectWithLists
   object DataObjectWithLists {
     def apply() = new DataObjectWithLists()
     def apply(json: JsonObject) = new DataObjectWithLists(json)
@@ -190,7 +199,8 @@ def methodWithHandlerAsyncResultSetEnumFuture() : scala.concurrent.Future[scala.
 
 
 
-    type DataObjectWithMapAdders = io.vertx.codegen.testmodel.DataObjectWithMapAdders
+
+  type DataObjectWithMapAdders = io.vertx.codegen.testmodel.DataObjectWithMapAdders
   object DataObjectWithMapAdders {
     def apply() = new DataObjectWithMapAdders()
     def apply(json: JsonObject) = new DataObjectWithMapAdders(json)
@@ -198,7 +208,8 @@ def methodWithHandlerAsyncResultSetEnumFuture() : scala.concurrent.Future[scala.
 
 
 
-    type DataObjectWithMaps = io.vertx.codegen.testmodel.DataObjectWithMaps
+
+  type DataObjectWithMaps = io.vertx.codegen.testmodel.DataObjectWithMaps
   object DataObjectWithMaps {
     def apply() = new DataObjectWithMaps()
     def apply(json: JsonObject) = new DataObjectWithMaps(json)
@@ -206,7 +217,8 @@ def methodWithHandlerAsyncResultSetEnumFuture() : scala.concurrent.Future[scala.
 
 
 
-    type DataObjectWithNestedBuffer = io.vertx.codegen.testmodel.DataObjectWithNestedBuffer
+
+  type DataObjectWithNestedBuffer = io.vertx.codegen.testmodel.DataObjectWithNestedBuffer
   object DataObjectWithNestedBuffer {
     def apply() = new DataObjectWithNestedBuffer()
     def apply(json: JsonObject) = new DataObjectWithNestedBuffer(json)
@@ -214,25 +226,29 @@ def methodWithHandlerAsyncResultSetEnumFuture() : scala.concurrent.Future[scala.
 
 
 
-    type DataObjectWithOnlyJsonObjectConstructor = io.vertx.codegen.testmodel.DataObjectWithOnlyJsonObjectConstructor
+
+  type DataObjectWithOnlyJsonObjectConstructor = io.vertx.codegen.testmodel.DataObjectWithOnlyJsonObjectConstructor
   object DataObjectWithOnlyJsonObjectConstructor {
     def apply(json: JsonObject) = new DataObjectWithOnlyJsonObjectConstructor(json)
   }
 
 
 
-    type DataObjectWithRecursion = io.vertx.codegen.testmodel.DataObjectWithRecursion
+
+  type DataObjectWithRecursion = io.vertx.codegen.testmodel.DataObjectWithRecursion
   object DataObjectWithRecursion {
     def apply(json: JsonObject) = new DataObjectWithRecursion(json)
   }
 
 
 
-    type DataObjectWithValues = io.vertx.codegen.testmodel.DataObjectWithValues
+
+  type DataObjectWithValues = io.vertx.codegen.testmodel.DataObjectWithValues
   object DataObjectWithValues {
     def apply() = new DataObjectWithValues()
     def apply(json: JsonObject) = new DataObjectWithValues(json)
   }
+
 
 
 
@@ -245,8 +261,9 @@ def createAbstractHandlerUserType(handler: io.vertx.codegen.testmodel.RefedInter
 }
 def createConcreteHandlerUserTypeExtension(handler: io.vertx.codegen.testmodel.RefedInterface1 => Unit) = {
       io.vertx.codegen.testmodel.Factory.createConcreteHandlerUserTypeExtension(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.codegen.testmodel.RefedInterface1]])
-}
-  }
+}  }
+
+
 
 
 
@@ -264,6 +281,9 @@ def asyncMethodFuture() : scala.concurrent.Future[Unit] = {
       asJava.asyncMethod(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }  }
+
+
+
 
 
 
@@ -390,6 +410,10 @@ def methodWithHandlerAsyncResultParamInferedFuture[T](param: io.vertx.codegen.te
 
 
 
+
+
+
+
   implicit class JsonMapperTCKScala(val asJava: io.vertx.codegen.testmodel.JsonMapperTCK) extends AnyVal {
 
 
@@ -493,6 +517,7 @@ def methodWithHandlerAsyncResultMapOfFunctionMappedFuture() : scala.concurrent.F
       asJava.methodWithHandlerAsyncResultMapOfFunctionMapped(new Handler[AsyncResult[java.util.Map[java.lang.String,java.util.Locale]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.util.Locale]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
 }  }
+
 
 
 
@@ -1369,11 +1394,17 @@ def methodWithNullableHandlerAsyncResultFuture(expectNull: java.lang.Boolean) : 
 
 
 
-    type TestDataObject = io.vertx.codegen.testmodel.TestDataObject
+
+
+
+
+
+  type TestDataObject = io.vertx.codegen.testmodel.TestDataObject
   object TestDataObject {
     def apply() = new TestDataObject()
     def apply(json: JsonObject) = new TestDataObject(json)
   }
+
 
 
 
@@ -1506,3 +1537,4 @@ def methodWithHandlerAsyncResultComplexJsonArrayFuture() : scala.concurrent.Futu
 
 
 }
+

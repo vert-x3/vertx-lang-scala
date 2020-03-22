@@ -26,10 +26,10 @@ import scala.concurrent.Promise
 
 import io.vertx.ext.jwt.{JWTOptions => JJWTOptions}
 import io.vertx.core.json.JsonObject
-
 package object jwt{
 
-    type JWTOptions = io.vertx.ext.jwt.JWTOptions
+
+  type JWTOptions = io.vertx.ext.jwt.JWTOptions
   object JWTOptions {
     def apply() = new JWTOptions()
     def apply(json: JsonObject) = new JWTOptions(json)
@@ -38,3 +38,4 @@ package object jwt{
 
 
 }
+

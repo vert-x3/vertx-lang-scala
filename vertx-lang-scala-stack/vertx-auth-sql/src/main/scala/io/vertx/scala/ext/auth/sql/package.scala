@@ -31,8 +31,8 @@ import io.vertx.core.{Future => JFuture}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.ext.auth.sql.{SqlUserUtil => JSqlUserUtil}
-
 package object sql{
+
 
   object SqlAuthentication {
     /**
@@ -46,15 +46,16 @@ def create(client: io.vertx.sqlclient.SqlClient) = {
      */
 def create(client: io.vertx.sqlclient.SqlClient,options: io.vertx.ext.auth.sql.SqlAuthenticationOptions) = {
       io.vertx.ext.auth.sql.SqlAuthentication.create(client, options)
-}
-  }
+}  }
 
 
-    type SqlAuthenticationOptions = io.vertx.ext.auth.sql.SqlAuthenticationOptions
+
+  type SqlAuthenticationOptions = io.vertx.ext.auth.sql.SqlAuthenticationOptions
   object SqlAuthenticationOptions {
     def apply() = new SqlAuthenticationOptions()
     def apply(json: JsonObject) = new SqlAuthenticationOptions(json)
   }
+
 
 
 
@@ -70,15 +71,16 @@ def create(client: io.vertx.sqlclient.SqlClient) = {
      */
 def create(client: io.vertx.sqlclient.SqlClient,options: io.vertx.ext.auth.sql.SqlAuthorizationOptions) = {
       io.vertx.ext.auth.sql.SqlAuthorization.create(client, options)
-}
-  }
+}  }
 
 
-    type SqlAuthorizationOptions = io.vertx.ext.auth.sql.SqlAuthorizationOptions
+
+  type SqlAuthorizationOptions = io.vertx.ext.auth.sql.SqlAuthorizationOptions
   object SqlAuthorizationOptions {
     def apply() = new SqlAuthorizationOptions()
     def apply(json: JsonObject) = new SqlAuthorizationOptions(json)
   }
+
 
 
 
@@ -129,3 +131,4 @@ def createRolePermissionFuture(role: java.lang.String,permission: java.lang.Stri
 
 
 }
+

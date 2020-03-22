@@ -31,14 +31,15 @@ import io.vertx.ext.sql.{UpdateResult => JUpdateResult}
 import io.vertx.ext.sql.{SQLRowStream => JSQLRowStream}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
-
 package object sql{
 
-    type ResultSet = io.vertx.ext.sql.ResultSet
+
+  type ResultSet = io.vertx.ext.sql.ResultSet
   object ResultSet {
     def apply() = new ResultSet()
     def apply(json: JsonObject) = new ResultSet(json)
   }
+
 
 
 
@@ -146,6 +147,7 @@ def callWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonAr
       asJava.callWithParams(sql, params, outputs, new Handler[AsyncResult[io.vertx.ext.sql.ResultSet]] { override def handle(event: AsyncResult[io.vertx.ext.sql.ResultSet]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }  }
+
 
 
 
@@ -321,6 +323,7 @@ def getTransactionIsolationFuture() : scala.concurrent.Future[io.vertx.ext.sql.T
 
 
 
+
   /**
     * Represents a SQL query interface to a database
     */
@@ -411,11 +414,13 @@ def callWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonAr
 
 
 
-    type SQLOptions = io.vertx.ext.sql.SQLOptions
+
+  type SQLOptions = io.vertx.ext.sql.SQLOptions
   object SQLOptions {
     def apply() = new SQLOptions()
     def apply(json: JsonObject) = new SQLOptions(json)
   }
+
 
 
 
@@ -457,7 +462,8 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-    type UpdateResult = io.vertx.ext.sql.UpdateResult
+
+  type UpdateResult = io.vertx.ext.sql.UpdateResult
   object UpdateResult {
     def apply() = new UpdateResult()
     def apply(json: JsonObject) = new UpdateResult(json)
@@ -466,3 +472,4 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 }
+

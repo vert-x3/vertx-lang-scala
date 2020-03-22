@@ -36,8 +36,8 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.ext.auth.oauth2.{OAuth2Response => JOAuth2Response}
 import io.vertx.core.http
-
 package object oauth2{
+
 
 
   /**
@@ -114,6 +114,7 @@ def fetchFuture(method: io.vertx.core.http.HttpMethod,resource: java.lang.String
 
 
 
+
   object AzureADAuth {
     /**
      * Like create from [[io.vertx.ext.auth.oauth2.providers.AzureADAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -132,8 +133,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.AzureADAuth.discover(vertx, config, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth]]])
-}
-  }
+}  }
+
 
 
   object BoxAuth {
@@ -148,8 +149,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.BoxAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object CloudFoundryAuth {
@@ -164,8 +165,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,uuaURL: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.CloudFoundryAuth.create(vertx, clientId, clientSecret, uuaURL, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object DropboxAuth {
@@ -180,8 +181,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.DropboxAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object FacebookAuth {
@@ -196,8 +197,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.FacebookAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object FoursquareAuth {
@@ -212,8 +213,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.FoursquareAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object GithubAuth {
@@ -228,8 +229,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.GithubAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object GoogleAuth {
@@ -262,8 +263,8 @@ def create(vertx: io.vertx.core.Vertx,serviceAccountJson: io.vertx.core.json.Jso
      */
 def create(vertx: io.vertx.core.Vertx,serviceAccountJson: io.vertx.core.json.JsonObject,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.GoogleAuth.create(vertx, serviceAccountJson, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object HerokuAuth {
@@ -278,8 +279,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.HerokuAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object InstagramAuth {
@@ -294,8 +295,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.InstagramAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object KeycloakAuth {
@@ -328,8 +329,8 @@ def create(vertx: io.vertx.core.Vertx,flow: io.vertx.ext.auth.oauth2.OAuth2FlowT
      */
 def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.KeycloakAuth.discover(vertx, config, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth]]])
-}
-  }
+}  }
+
 
 
   object KeycloakAuthorization {
@@ -338,8 +339,8 @@ def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2O
      */
 def create() = {
       io.vertx.ext.auth.oauth2.authorization.KeycloakAuthorization.create()
-}
-  }
+}  }
+
 
 
   object KeycloakHelper {
@@ -396,8 +397,8 @@ def allowedOrigins(principal: io.vertx.core.json.JsonObject) = {
      */
 def parseToken(token: java.lang.String) = {
       io.vertx.ext.auth.oauth2.KeycloakHelper.parseToken(token)
-}
-  }
+}  }
+
 
 
   object KeycloakRBAC {
@@ -406,8 +407,8 @@ def parseToken(token: java.lang.String) = {
      */
 def create(options: io.vertx.ext.auth.oauth2.OAuth2Options) = {
       io.vertx.ext.auth.oauth2.rbac.KeycloakRBAC.create(options)
-}
-  }
+}  }
+
 
 
   object LinkedInAuth {
@@ -422,8 +423,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.LinkedInAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object LiveAuth {
@@ -438,8 +439,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.LiveAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object MailchimpAuth {
@@ -454,8 +455,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.MailchimpAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object MicroProfileRBAC {
@@ -464,8 +465,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create() = {
       io.vertx.ext.auth.oauth2.rbac.MicroProfileRBAC.create()
-}
-  }
+}  }
+
 
 
 
@@ -551,7 +552,8 @@ def loadJWKFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-    type OAuth2ClientOptions = io.vertx.ext.auth.oauth2.OAuth2ClientOptions
+
+  type OAuth2ClientOptions = io.vertx.ext.auth.oauth2.OAuth2ClientOptions
   object OAuth2ClientOptions {
     def apply() = new OAuth2ClientOptions()
     def apply(json: JsonObject) = new OAuth2ClientOptions(json)
@@ -559,11 +561,13 @@ def loadJWKFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-    type OAuth2Options = io.vertx.ext.auth.oauth2.OAuth2Options
+
+  type OAuth2Options = io.vertx.ext.auth.oauth2.OAuth2Options
   object OAuth2Options {
     def apply() = new OAuth2Options()
     def apply(json: JsonObject) = new OAuth2Options(json)
   }
+
 
 
 
@@ -596,14 +600,16 @@ def isAuthorizedFuture(user: io.vertx.ext.auth.oauth2.AccessToken,authority: jav
 
 
 
+
+
   object OpenIDConnectAuth {
     /**
      * Like discover from [[io.vertx.ext.auth.oauth2.providers.OpenIDConnectAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
 def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.OpenIDConnectAuth.discover(vertx, config, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth]]])
-}
-  }
+}  }
+
 
 
   object SalesforceAuth {
@@ -624,8 +630,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2Options,handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
       io.vertx.ext.auth.oauth2.providers.SalesforceAuth.discover(vertx, config, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth]]])
-}
-  }
+}  }
+
 
 
   object ScopeAuthorization {
@@ -634,8 +640,8 @@ def discover(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.oauth2.OAuth2O
      */
 def create(scopeSeparator: java.lang.String) = {
       io.vertx.ext.auth.oauth2.authorization.ScopeAuthorization.create(scopeSeparator)
-}
-  }
+}  }
+
 
 
   object ShopifyAuth {
@@ -650,8 +656,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,shop: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.ShopifyAuth.create(vertx, clientId, clientSecret, shop, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object SoundcloudAuth {
@@ -666,8 +672,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.SoundcloudAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object StripeAuth {
@@ -682,8 +688,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.StripeAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
+
 
 
   object TwitterAuth {
@@ -698,8 +704,8 @@ def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: j
      */
 def create(vertx: io.vertx.core.Vertx,clientId: java.lang.String,clientSecret: java.lang.String,httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.TwitterAuth.create(vertx, clientId, clientSecret, httpClientOptions)
-}
-  }
+}  }
 
 
 }
+

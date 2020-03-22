@@ -34,10 +34,10 @@ import io.vertx.core.Handler
 import io.vertx.kafka.admin.{KafkaAdminClient => JKafkaAdminClient}
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.kafka.admin.{TopicDescription => JTopicDescription}
-
 package object admin{
 
-    type Config = io.vertx.kafka.admin.Config
+
+  type Config = io.vertx.kafka.admin.Config
   object Config {
     def apply() = new Config()
     def apply(json: JsonObject) = new Config(json)
@@ -45,7 +45,8 @@ package object admin{
 
 
 
-    type ConfigEntry = io.vertx.kafka.admin.ConfigEntry
+
+  type ConfigEntry = io.vertx.kafka.admin.ConfigEntry
   object ConfigEntry {
     def apply() = new ConfigEntry()
     def apply(json: JsonObject) = new ConfigEntry(json)
@@ -53,7 +54,8 @@ package object admin{
 
 
 
-    type ConfigSynonym = io.vertx.kafka.admin.ConfigSynonym
+
+  type ConfigSynonym = io.vertx.kafka.admin.ConfigSynonym
   object ConfigSynonym {
     def apply() = new ConfigSynonym()
     def apply(json: JsonObject) = new ConfigSynonym(json)
@@ -61,7 +63,8 @@ package object admin{
 
 
 
-    type ConsumerGroupDescription = io.vertx.kafka.admin.ConsumerGroupDescription
+
+  type ConsumerGroupDescription = io.vertx.kafka.admin.ConsumerGroupDescription
   object ConsumerGroupDescription {
     def apply() = new ConsumerGroupDescription()
     def apply(json: JsonObject) = new ConsumerGroupDescription(json)
@@ -69,11 +72,13 @@ package object admin{
 
 
 
-    type ConsumerGroupListing = io.vertx.kafka.admin.ConsumerGroupListing
+
+  type ConsumerGroupListing = io.vertx.kafka.admin.ConsumerGroupListing
   object ConsumerGroupListing {
     def apply() = new ConsumerGroupListing()
     def apply(json: JsonObject) = new ConsumerGroupListing(json)
   }
+
 
 
 
@@ -137,7 +142,8 @@ def describeConsumerGroupsFuture(groupIds: java.util.List[java.lang.String]) : s
 
 
 
-    type MemberAssignment = io.vertx.kafka.admin.MemberAssignment
+
+  type MemberAssignment = io.vertx.kafka.admin.MemberAssignment
   object MemberAssignment {
     def apply() = new MemberAssignment()
     def apply(json: JsonObject) = new MemberAssignment(json)
@@ -145,7 +151,8 @@ def describeConsumerGroupsFuture(groupIds: java.util.List[java.lang.String]) : s
 
 
 
-    type MemberDescription = io.vertx.kafka.admin.MemberDescription
+
+  type MemberDescription = io.vertx.kafka.admin.MemberDescription
   object MemberDescription {
     def apply() = new MemberDescription()
     def apply(json: JsonObject) = new MemberDescription(json)
@@ -153,7 +160,8 @@ def describeConsumerGroupsFuture(groupIds: java.util.List[java.lang.String]) : s
 
 
 
-    type NewTopic = io.vertx.kafka.admin.NewTopic
+
+  type NewTopic = io.vertx.kafka.admin.NewTopic
   object NewTopic {
     def apply() = new NewTopic()
     def apply(json: JsonObject) = new NewTopic(json)
@@ -161,7 +169,8 @@ def describeConsumerGroupsFuture(groupIds: java.util.List[java.lang.String]) : s
 
 
 
-    type TopicDescription = io.vertx.kafka.admin.TopicDescription
+
+  type TopicDescription = io.vertx.kafka.admin.TopicDescription
   object TopicDescription {
     def apply() = new TopicDescription()
     def apply(json: JsonObject) = new TopicDescription(json)
@@ -170,3 +179,4 @@ def describeConsumerGroupsFuture(groupIds: java.util.List[java.lang.String]) : s
 
 
 }
+

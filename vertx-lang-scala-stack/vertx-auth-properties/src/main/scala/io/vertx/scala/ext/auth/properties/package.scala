@@ -29,8 +29,8 @@ import io.vertx.ext.auth.authorization
 import io.vertx.ext.auth.properties.{PropertyFileAuthorization => JPropertyFileAuthorization}
 import io.vertx.ext.auth.authorization.{AuthorizationProvider => JAuthorizationProvider}
 import io.vertx.core.{Vertx => JVertx}
-
 package object properties{
+
 
   object PropertyFileAuthentication {
     /**
@@ -38,8 +38,8 @@ package object properties{
      */
 def create(vertx: io.vertx.core.Vertx,path: java.lang.String) = {
       io.vertx.ext.auth.properties.PropertyFileAuthentication.create(vertx, path)
-}
-  }
+}  }
+
 
 
   object PropertyFileAuthorization {
@@ -48,8 +48,8 @@ def create(vertx: io.vertx.core.Vertx,path: java.lang.String) = {
      */
 def create(vertx: io.vertx.core.Vertx,path: java.lang.String) = {
       io.vertx.ext.auth.properties.PropertyFileAuthorization.create(vertx, path)
-}
-  }
+}  }
 
 
 }
+

@@ -30,8 +30,8 @@ import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.core
 import io.vertx.ext.auth.shiro.{ShiroAuth => JShiroAuth}
 import io.vertx.core.{Vertx => JVertx}
-
 package object shiro{
+
 
   object ShiroAuth {
     /**
@@ -39,11 +39,11 @@ package object shiro{
      */
 def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.shiro.ShiroAuthOptions) = {
       io.vertx.ext.auth.shiro.ShiroAuth.create(vertx, options)
-}
-  }
+}  }
 
 
-    type ShiroAuthOptions = io.vertx.ext.auth.shiro.ShiroAuthOptions
+
+  type ShiroAuthOptions = io.vertx.ext.auth.shiro.ShiroAuthOptions
   object ShiroAuthOptions {
     def apply() = new ShiroAuthOptions()
     def apply(json: JsonObject) = new ShiroAuthOptions(json)
@@ -52,3 +52,4 @@ def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.shiro.ShiroAuth
 
 
 }
+

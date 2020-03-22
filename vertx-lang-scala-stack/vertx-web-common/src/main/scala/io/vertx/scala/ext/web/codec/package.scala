@@ -32,8 +32,8 @@ import io.vertx.core.parsetools.{JsonParser => JJsonParser}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.core.parsetools
-
 package object codec{
+
 
   object BodyCodec {
     /**
@@ -101,8 +101,8 @@ def pipe(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer],
      */
 def jsonStream(parser: io.vertx.core.parsetools.JsonParser) = {
       io.vertx.ext.web.codec.BodyCodec.jsonStream(parser)
-}
-  }
+}  }
 
 
 }
+

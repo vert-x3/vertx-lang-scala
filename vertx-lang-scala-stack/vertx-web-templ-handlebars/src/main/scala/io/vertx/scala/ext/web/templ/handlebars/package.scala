@@ -29,8 +29,8 @@ import io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}
 import io.vertx.ext.web.common.template
 import io.vertx.ext.web.templ.handlebars.{HandlebarsTemplateEngine => JHandlebarsTemplateEngine}
 import io.vertx.core.{Vertx => JVertx}
-
 package object handlebars{
+
 
   object HandlebarsTemplateEngine {
     /**
@@ -44,8 +44,8 @@ def create(vertx: io.vertx.core.Vertx) = {
      */
 def create(vertx: io.vertx.core.Vertx,extension: java.lang.String) = {
       io.vertx.ext.web.templ.handlebars.HandlebarsTemplateEngine.create(vertx, extension)
-}
-  }
+}  }
 
 
 }
+

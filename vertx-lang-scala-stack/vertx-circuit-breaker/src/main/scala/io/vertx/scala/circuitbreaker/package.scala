@@ -30,8 +30,8 @@ import io.vertx.core
 import io.vertx.circuitbreaker.{HystrixMetricHandler => JHystrixMetricHandler}
 import io.vertx.core.Handler
 import io.vertx.core.{Vertx => JVertx}
-
 package object circuitbreaker{
+
 
 
   /**
@@ -60,7 +60,8 @@ def executeFuture[T](command: io.vertx.core.Promise[T] => Unit) : scala.concurre
 
 
 
-    type CircuitBreakerOptions = io.vertx.circuitbreaker.CircuitBreakerOptions
+
+  type CircuitBreakerOptions = io.vertx.circuitbreaker.CircuitBreakerOptions
   object CircuitBreakerOptions {
     def apply() = new CircuitBreakerOptions()
     def apply(json: JsonObject) = new CircuitBreakerOptions(json)
@@ -70,4 +71,6 @@ def executeFuture[T](command: io.vertx.core.Promise[T] => Unit) : scala.concurre
 
 
 
+
 }
+

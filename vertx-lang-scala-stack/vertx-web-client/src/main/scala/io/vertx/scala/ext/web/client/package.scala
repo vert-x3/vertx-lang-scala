@@ -44,8 +44,8 @@ import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.json.JsonObject
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
-
 package object client{
+
 
   object ErrorConverter {
     /**
@@ -59,8 +59,8 @@ def create(converter: io.vertx.ext.web.client.predicate.ResponsePredicateResult 
      */
 def createFullBody(converter: io.vertx.ext.web.client.predicate.ResponsePredicateResult => Throwable) = {
       io.vertx.ext.web.client.predicate.ErrorConverter.createFullBody({x: io.vertx.ext.web.client.predicate.ResponsePredicateResult => converter(x)})
-}
-  }
+}  }
+
 
 
 
@@ -164,6 +164,8 @@ def sendFuture() : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[
 
 
 
+
+
   object ResponsePredicate {
     /**
      * Like status from [[io.vertx.ext.web.client.predicate.ResponsePredicate]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -200,8 +202,8 @@ def create(test: io.vertx.ext.web.client.HttpResponse[Void] => io.vertx.ext.web.
      */
 def create(test: io.vertx.ext.web.client.HttpResponse[Void] => io.vertx.ext.web.client.predicate.ResponsePredicateResult,errorConverter: io.vertx.ext.web.client.predicate.ErrorConverter) = {
       io.vertx.ext.web.client.predicate.ResponsePredicate.create({x: io.vertx.ext.web.client.HttpResponse[Void] => test(x)}, errorConverter)
-}
-  }
+}  }
+
 
 
   object ResponsePredicateResult {
@@ -216,8 +218,8 @@ def success() = {
      */
 def failure(message: java.lang.String) = {
       io.vertx.ext.web.client.predicate.ResponsePredicateResult.failure(message)
-}
-  }
+}  }
+
 
 
   object WebClient {
@@ -244,11 +246,11 @@ def wrap(httpClient: io.vertx.core.http.HttpClient) = {
      */
 def wrap(httpClient: io.vertx.core.http.HttpClient,options: io.vertx.ext.web.client.WebClientOptions) = {
       io.vertx.ext.web.client.WebClient.wrap(httpClient, options)
-}
-  }
+}  }
 
 
-    type WebClientOptions = io.vertx.ext.web.client.WebClientOptions
+
+  type WebClientOptions = io.vertx.ext.web.client.WebClientOptions
   object WebClientOptions {
     def apply() = new WebClientOptions()
     def apply(json: JsonObject) = new WebClientOptions(json)
@@ -257,3 +259,4 @@ def wrap(httpClient: io.vertx.core.http.HttpClient,options: io.vertx.ext.web.cli
 
 
 }
+

@@ -25,8 +25,8 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import io.vertx.ext.web.common.{WebEnvironment => JWebEnvironment}
-
 package object common{
+
 
 
   /**
@@ -49,6 +49,7 @@ def renderFuture(context: io.vertx.core.json.JsonObject,templateFileName: java.l
 
 
 
+
   object WebEnvironment {
     /**
      * Like development from [[io.vertx.ext.web.common.WebEnvironment]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -61,8 +62,8 @@ def development() = {
      */
 def modeOption() = {
       scala.Option(io.vertx.ext.web.common.WebEnvironment.mode())
-}
-  }
+}  }
 
 
 }
+

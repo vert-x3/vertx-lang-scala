@@ -30,8 +30,8 @@ import org.thymeleaf.templatemode.TemplateMode
 import io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}
 import io.vertx.ext.web.common.template
 import io.vertx.core.{Vertx => JVertx}
-
 package object thymeleaf{
+
 
   object ThymeleafTemplateEngine {
     /**
@@ -39,8 +39,8 @@ package object thymeleaf{
      */
 def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine.create(vertx)
-}
-  }
+}  }
 
 
 }
+

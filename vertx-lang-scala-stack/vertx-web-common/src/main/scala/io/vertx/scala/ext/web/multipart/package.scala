@@ -25,8 +25,9 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import io.vertx.ext.web.multipart.{FormDataPart => JFormDataPart}
-
 package object multipart{
+
+
 
 
 
@@ -36,8 +37,8 @@ package object multipart{
      */
 def create() = {
       io.vertx.ext.web.multipart.MultipartForm.create()
-}
-  }
+}  }
 
 
 }
+

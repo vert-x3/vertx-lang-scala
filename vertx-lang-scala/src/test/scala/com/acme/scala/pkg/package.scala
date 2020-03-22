@@ -25,16 +25,17 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import com.acme.pkg.sub.{SubInterface => JSubInterface}
-
 package object pkg{
+
 
   object MyInterface {
 def create() = {
       com.acme.pkg.MyInterface.create()
+}  }
+
+
+
+
+
 }
-  }
 
-
-
-
-}

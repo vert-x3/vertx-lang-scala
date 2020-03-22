@@ -30,12 +30,13 @@ import io.vertx.core
 import io.vertx.core.{Future => JFuture}
 import io.vertx.ext.bridge.BridgeEventType
 import io.vertx.core.json.JsonObject
-
 package object bridge{
 
 
 
-    type BridgeOptions = io.vertx.ext.bridge.BridgeOptions
+
+
+  type BridgeOptions = io.vertx.ext.bridge.BridgeOptions
   object BridgeOptions {
     def apply() = new BridgeOptions()
     def apply(json: JsonObject) = new BridgeOptions(json)
@@ -43,7 +44,8 @@ package object bridge{
 
 
 
-    type PermittedOptions = io.vertx.ext.bridge.PermittedOptions
+
+  type PermittedOptions = io.vertx.ext.bridge.PermittedOptions
   object PermittedOptions {
     def apply() = new PermittedOptions()
     def apply(json: JsonObject) = new PermittedOptions(json)
@@ -52,3 +54,4 @@ package object bridge{
 
 
 }
+
