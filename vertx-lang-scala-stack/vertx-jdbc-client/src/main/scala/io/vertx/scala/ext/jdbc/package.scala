@@ -34,8 +34,8 @@ import io.vertx.ext.sql
 import io.vertx.core.Handler
 import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
 import io.vertx.core.{Vertx => JVertx}
-
 package object jdbc{
+
 
 
   /**
@@ -59,3 +59,4 @@ def querySingleWithParamsFuture(sql: java.lang.String,arguments: io.vertx.core.j
 
 
 }
+

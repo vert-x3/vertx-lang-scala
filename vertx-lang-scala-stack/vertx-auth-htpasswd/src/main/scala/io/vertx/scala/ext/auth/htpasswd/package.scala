@@ -30,8 +30,8 @@ import io.vertx.ext.auth.authentication.{AuthenticationProvider => JAuthenticati
 import io.vertx.ext.auth.authentication
 import io.vertx.ext.auth.htpasswd.{HtpasswdAuthOptions => JHtpasswdAuthOptions}
 import io.vertx.core.{Vertx => JVertx}
-
 package object htpasswd{
+
 
   object HtpasswdAuth {
 def create(vertx: io.vertx.core.Vertx) = {
@@ -39,11 +39,11 @@ def create(vertx: io.vertx.core.Vertx) = {
 }
 def create(vertx: io.vertx.core.Vertx,htpasswdAuthOptions: io.vertx.ext.auth.htpasswd.HtpasswdAuthOptions) = {
       io.vertx.ext.auth.htpasswd.HtpasswdAuth.create(vertx, htpasswdAuthOptions)
-}
-  }
+}  }
 
 
-    type HtpasswdAuthOptions = io.vertx.ext.auth.htpasswd.HtpasswdAuthOptions
+
+  type HtpasswdAuthOptions = io.vertx.ext.auth.htpasswd.HtpasswdAuthOptions
   object HtpasswdAuthOptions {
     def apply() = new HtpasswdAuthOptions()
     def apply(json: JsonObject) = new HtpasswdAuthOptions(json)
@@ -52,3 +52,4 @@ def create(vertx: io.vertx.core.Vertx,htpasswdAuthOptions: io.vertx.ext.auth.htp
 
 
 }
+

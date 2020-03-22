@@ -27,8 +27,8 @@ import scala.concurrent.Promise
 import io.vertx.core.buffer.Buffer
 import io.vertx.redis.client.{Command => JCommand}
 import io.vertx.redis.client.{Request => JRequest}
-
 package object redis{
+
 
   object Command {
     /**
@@ -36,8 +36,8 @@ package object redis{
      */
 def create(command: java.lang.String,arity: java.lang.Integer,firstKey: java.lang.Integer,lastKey: java.lang.Integer,interval: java.lang.Integer,readOnly: java.lang.Boolean,movable: java.lang.Boolean) = {
       io.vertx.redis.client.Command.create(command, arity, firstKey, lastKey, interval, readOnly, movable)
-}
-  }
+}  }
+
 
 
 
@@ -73,6 +73,7 @@ def batchFuture(commands: java.util.List[io.vertx.redis.client.Request]) : scala
       asJava.batch(commands, new Handler[AsyncResult[java.util.List[io.vertx.redis.client.Response]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.redis.client.Response]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
 }  }
+
 
 
 
@@ -1689,6 +1690,7 @@ def zunionstoreFuture(args: java.util.List[java.lang.String]) : scala.concurrent
 
 
 
+
   /**
     * A simple Redis client.
 
@@ -1738,7 +1740,8 @@ def batchFuture(commands: java.util.List[io.vertx.redis.client.Request]) : scala
 
 
 
-    type RedisOptions = io.vertx.redis.client.RedisOptions
+
+  type RedisOptions = io.vertx.redis.client.RedisOptions
   object RedisOptions {
     def apply() = new RedisOptions()
     def apply(json: JsonObject) = new RedisOptions(json)
@@ -1746,13 +1749,15 @@ def batchFuture(commands: java.util.List[io.vertx.redis.client.Request]) : scala
 
 
 
+
   object Request {
 def cmd(command: io.vertx.redis.client.Command) = {
       io.vertx.redis.client.Request.cmd(command)
+}  }
+
+
+
+
+
 }
-  }
 
-
-
-
-}

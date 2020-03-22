@@ -33,8 +33,8 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.core.eventbus.{MessageConsumer => JMessageConsumer}
-
 package object amqpbridge{
+
 
 
   /**
@@ -72,7 +72,8 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-    type AmqpBridgeOptions = io.vertx.amqpbridge.AmqpBridgeOptions
+
+  type AmqpBridgeOptions = io.vertx.amqpbridge.AmqpBridgeOptions
   object AmqpBridgeOptions {
     def apply() = new AmqpBridgeOptions()
     def apply(json: JsonObject) = new AmqpBridgeOptions(json)
@@ -81,3 +82,4 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 }
+

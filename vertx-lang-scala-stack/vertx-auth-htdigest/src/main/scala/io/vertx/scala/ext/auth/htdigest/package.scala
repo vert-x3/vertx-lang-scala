@@ -29,8 +29,8 @@ import io.vertx.core
 import io.vertx.ext.auth.authentication.{AuthenticationProvider => JAuthenticationProvider}
 import io.vertx.ext.auth.authentication
 import io.vertx.core.{Vertx => JVertx}
-
 package object htdigest{
+
 
   object HtdigestAuth {
     /**
@@ -44,8 +44,8 @@ def create(vertx: io.vertx.core.Vertx) = {
      */
 def create(vertx: io.vertx.core.Vertx,htfile: java.lang.String) = {
       io.vertx.ext.auth.htdigest.HtdigestAuth.create(vertx, htfile)
-}
-  }
+}  }
 
 
 }
+

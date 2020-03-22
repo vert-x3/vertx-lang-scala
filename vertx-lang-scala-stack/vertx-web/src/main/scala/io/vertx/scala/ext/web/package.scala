@@ -31,7 +31,6 @@ import io.vertx.ext.auth.authorization
 import io.vertx.ext.web.handler.{AuthorizationHandler => JAuthorizationHandler}
 import io.vertx.core.Handler
 import io.vertx.ext.auth.authorization.{AuthorizationProvider => JAuthorizationProvider}
-
 package object web{
 
 
@@ -46,11 +45,21 @@ package object web{
 
 
 
-    type BridgeOptions = io.vertx.ext.web.handler.sockjs.BridgeOptions
+
+
+
+
+
+
+
+  type BridgeOptions = io.vertx.ext.web.handler.sockjs.BridgeOptions
   object BridgeOptions {
     def apply() = new BridgeOptions()
     def apply(json: JsonObject) = new BridgeOptions(json)
   }
+
+
+
 
 
 
@@ -82,8 +91,7 @@ def create(vertx: io.vertx.core.Vertx) = {
      */
 def create(vertx: io.vertx.core.Vertx,retryTimeout: java.lang.Long) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, retryTimeout)
-}
-  }
+}  }
 
 
 
@@ -98,11 +106,21 @@ def create(vertx: io.vertx.core.Vertx,retryTimeout: java.lang.Long) = {
 
 
 
-    type Http2PushMapping = io.vertx.ext.web.Http2PushMapping
+
+
+
+
+
+
+
+  type Http2PushMapping = io.vertx.ext.web.Http2PushMapping
   object Http2PushMapping {
     def apply() = new Http2PushMapping()
     def apply(json: JsonObject) = new Http2PushMapping(json)
   }
+
+
+
 
 
 
@@ -128,8 +146,19 @@ def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String) = {
      */
 def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String,reaperInterval: java.lang.Long) = {
       io.vertx.ext.web.sstore.LocalSessionStore.create(vertx, sessionMapName, reaperInterval)
-}
-  }
+}  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -160,8 +189,11 @@ def create(vertx: io.vertx.core.Vertx,sessionMapName: java.lang.String,reaperInt
      */
 def router(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.Router.router(vertx)
-}
-  }
+}  }
+
+
+
+
 
 
 
@@ -223,11 +255,14 @@ def sizeFuture() : scala.concurrent.Future[java.lang.Integer] = {
 
 
 
-    type SockJSHandlerOptions = io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions
+
+
+  type SockJSHandlerOptions = io.vertx.ext.web.handler.sockjs.SockJSHandlerOptions
   object SockJSHandlerOptions {
     def apply() = new SockJSHandlerOptions()
     def apply(json: JsonObject) = new SockJSHandlerOptions(json)
   }
+
 
 
 
@@ -308,4 +343,11 @@ def writeFuture(data: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[Uni
 
 
 
+
+
+
+
+
+
 }
+

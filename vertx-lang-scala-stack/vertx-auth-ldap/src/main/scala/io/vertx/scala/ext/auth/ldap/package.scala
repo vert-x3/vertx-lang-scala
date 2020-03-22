@@ -30,8 +30,8 @@ import io.vertx.ext.auth.authentication.{AuthenticationProvider => JAuthenticati
 import io.vertx.ext.auth.authentication
 import io.vertx.ext.auth.ldap.{LdapAuthentication => JLdapAuthentication}
 import io.vertx.core.{Vertx => JVertx}
-
 package object ldap{
+
 
   object LdapAuthentication {
     /**
@@ -39,11 +39,11 @@ package object ldap{
      */
 def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.ldap.LdapAuthenticationOptions) = {
       io.vertx.ext.auth.ldap.LdapAuthentication.create(vertx, options)
-}
-  }
+}  }
 
 
-    type LdapAuthenticationOptions = io.vertx.ext.auth.ldap.LdapAuthenticationOptions
+
+  type LdapAuthenticationOptions = io.vertx.ext.auth.ldap.LdapAuthenticationOptions
   object LdapAuthenticationOptions {
     def apply() = new LdapAuthenticationOptions()
     def apply(json: JsonObject) = new LdapAuthenticationOptions(json)
@@ -52,3 +52,4 @@ def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.ldap.LdapAuthen
 
 
 }
+

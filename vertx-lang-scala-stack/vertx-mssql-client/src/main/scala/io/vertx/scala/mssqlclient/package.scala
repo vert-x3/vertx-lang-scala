@@ -36,14 +36,15 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.mssqlclient.{MSSQLPool => JMSSQLPool}
 import io.vertx.core.{Vertx => JVertx}
-
 package object mssqlclient{
 
-    type MSSQLConnectOptions = io.vertx.mssqlclient.MSSQLConnectOptions
+
+  type MSSQLConnectOptions = io.vertx.mssqlclient.MSSQLConnectOptions
   object MSSQLConnectOptions {
     def apply() = new MSSQLConnectOptions()
     def apply(json: JsonObject) = new MSSQLConnectOptions(json)
   }
+
 
 
 
@@ -100,6 +101,7 @@ def preparedBatchFuture(s: java.lang.String,list: java.util.List[io.vertx.sqlcli
 
 
 
+
   /**
     * A  of [[io.vertx.mssqlclient.MSSQLConnection]].
 
@@ -144,3 +146,4 @@ def preparedBatchFuture(s: java.lang.String,list: java.util.List[io.vertx.sqlcli
 
 
 }
+

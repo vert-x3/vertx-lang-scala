@@ -36,8 +36,9 @@ import io.vertx.ext.auth.mongo.{HashStrategy => JHashStrategy}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.ext.mongo
-
 package object mongo{
+
+
 
 
 
@@ -60,11 +61,13 @@ def insertUserFuture(username: java.lang.String,password: java.lang.String,roles
 
 
 
-    type MongoAuthOptions = io.vertx.ext.auth.mongo.MongoAuthOptions
+
+  type MongoAuthOptions = io.vertx.ext.auth.mongo.MongoAuthOptions
   object MongoAuthOptions {
     def apply() = new MongoAuthOptions()
     def apply(json: JsonObject) = new MongoAuthOptions(json)
   }
+
 
 
 
@@ -77,15 +80,16 @@ def create(mongoClient: io.vertx.ext.mongo.MongoClient,options: io.vertx.ext.aut
 }
 def create(mongoClient: io.vertx.ext.mongo.MongoClient,hashStrategy: io.vertx.ext.auth.mongo.HashStrategy,options: io.vertx.ext.auth.mongo.MongoAuthenticationOptions) = {
       io.vertx.ext.auth.mongo.MongoAuthentication.create(mongoClient, hashStrategy, options)
-}
-  }
+}  }
 
 
-    type MongoAuthenticationOptions = io.vertx.ext.auth.mongo.MongoAuthenticationOptions
+
+  type MongoAuthenticationOptions = io.vertx.ext.auth.mongo.MongoAuthenticationOptions
   object MongoAuthenticationOptions {
     def apply() = new MongoAuthenticationOptions()
     def apply(json: JsonObject) = new MongoAuthenticationOptions(json)
   }
+
 
 
 
@@ -95,15 +99,16 @@ def create(mongoClient: io.vertx.ext.mongo.MongoClient,hashStrategy: io.vertx.ex
      */
 def create(providerId: java.lang.String,mongoClient: io.vertx.ext.mongo.MongoClient,options: io.vertx.ext.auth.mongo.MongoAuthorizationOptions) = {
       io.vertx.ext.auth.mongo.MongoAuthorization.create(providerId, mongoClient, options)
-}
-  }
+}  }
 
 
-    type MongoAuthorizationOptions = io.vertx.ext.auth.mongo.MongoAuthorizationOptions
+
+  type MongoAuthorizationOptions = io.vertx.ext.auth.mongo.MongoAuthorizationOptions
   object MongoAuthorizationOptions {
     def apply() = new MongoAuthorizationOptions()
     def apply(json: JsonObject) = new MongoAuthorizationOptions(json)
   }
+
 
 
 
@@ -146,3 +151,4 @@ def createUserRolesAndPermissionsFuture(username: java.lang.String,roles: java.u
 
 
 }
+

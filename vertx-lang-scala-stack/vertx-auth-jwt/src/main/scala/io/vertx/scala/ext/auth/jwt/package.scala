@@ -33,8 +33,8 @@ import io.vertx.ext.auth.authentication.{AuthenticationProvider => JAuthenticati
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.auth.authentication
 import io.vertx.core.{Vertx => JVertx}
-
 package object jwt{
+
 
   object JWTAuth {
     /**
@@ -42,15 +42,16 @@ package object jwt{
      */
 def create(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.jwt.JWTAuthOptions) = {
       io.vertx.ext.auth.jwt.JWTAuth.create(vertx, config)
-}
-  }
+}  }
 
 
-    type JWTAuthOptions = io.vertx.ext.auth.jwt.JWTAuthOptions
+
+  type JWTAuthOptions = io.vertx.ext.auth.jwt.JWTAuthOptions
   object JWTAuthOptions {
     def apply() = new JWTAuthOptions()
     def apply(json: JsonObject) = new JWTAuthOptions(json)
   }
+
 
 
 
@@ -60,8 +61,8 @@ def create(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.jwt.JWTAuthOptio
      */
 def create(rootClaim: java.lang.String) = {
       io.vertx.ext.auth.jwt.authorization.JWTAuthorization.create(rootClaim)
-}
-  }
+}  }
+
 
 
   object MicroProfileAuthorization {
@@ -70,8 +71,8 @@ def create(rootClaim: java.lang.String) = {
      */
 def create() = {
       io.vertx.ext.auth.jwt.authorization.MicroProfileAuthorization.create()
-}
-  }
+}  }
 
 
 }
+

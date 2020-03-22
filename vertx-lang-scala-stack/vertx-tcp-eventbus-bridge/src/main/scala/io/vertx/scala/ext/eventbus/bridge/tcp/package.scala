@@ -34,8 +34,9 @@ import io.vertx.core.Handler
 import io.vertx.core.net
 import io.vertx.core.net.{NetServerOptions => JNetServerOptions}
 import io.vertx.core.{Vertx => JVertx}
-
 package object tcp{
+
+
 
 
 
@@ -83,3 +84,4 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 }
+

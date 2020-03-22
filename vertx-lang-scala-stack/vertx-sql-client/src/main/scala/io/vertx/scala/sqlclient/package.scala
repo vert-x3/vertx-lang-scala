@@ -34,8 +34,8 @@ import io.vertx.sqlclient.{Transaction => JTransaction}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.sqlclient.{PreparedQuery => JPreparedQuery}
-
 package object sqlclient{
+
 
 
   /**
@@ -62,6 +62,7 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }  }
+
 
 
 
@@ -124,11 +125,13 @@ def beginFuture() : scala.concurrent.Future[io.vertx.sqlclient.Transaction] = {
 
 
 
-    type PoolOptions = io.vertx.sqlclient.PoolOptions
+
+  type PoolOptions = io.vertx.sqlclient.PoolOptions
   object PoolOptions {
     def apply() = new PoolOptions()
     def apply(json: JsonObject) = new PoolOptions(json)
   }
+
 
 
 
@@ -186,6 +189,11 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 
+
+
+
+
+
   /**
     * A row oriented stream.
 
@@ -215,6 +223,7 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }  }
+
 
 
 
@@ -261,7 +270,9 @@ def preparedBatchFuture(sql: java.lang.String,batch: java.util.List[io.vertx.sql
 
 
 
-  
+
+
+
 
 
 
@@ -300,6 +311,8 @@ def preparedBatchFuture(sql: java.lang.String,batch: java.util.List[io.vertx.sql
       asJava.preparedBatch(sql, batch, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }  }
+
+
 
 
 
@@ -361,6 +374,7 @@ def preparedBatchFuture(sql: java.lang.String,batch: java.util.List[io.vertx.sql
 
 
 
+
   object Tuple {
     /**
      * Like tuple from [[io.vertx.sqlclient.Tuple]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -415,8 +429,8 @@ def of(elt1: AnyRef,elt2: AnyRef,elt3: AnyRef,elt4: AnyRef,elt5: AnyRef,elt6: An
      */
 def tuple(elements: java.util.List[AnyRef]) = {
       io.vertx.sqlclient.Tuple.tuple(elements)
-}
-  }
+}  }
 
 
 }
+

@@ -29,8 +29,8 @@ import io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}
 import io.vertx.ext.web.templ.pebble.{PebbleTemplateEngine => JPebbleTemplateEngine}
 import io.vertx.ext.web.common.template
 import io.vertx.core.{Vertx => JVertx}
-
 package object pebble{
+
 
   object PebbleTemplateEngine {
     /**
@@ -44,8 +44,8 @@ def create(vertx: io.vertx.core.Vertx) = {
      */
 def create(vertx: io.vertx.core.Vertx,extension: java.lang.String) = {
       io.vertx.ext.web.templ.pebble.PebbleTemplateEngine.create(vertx, extension)
-}
-  }
+}  }
 
 
 }
+

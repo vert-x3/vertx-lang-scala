@@ -25,10 +25,10 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import io.vertx.proton.{ProtonTransportOptions => JProtonTransportOptions}
-
 package object proton{
 
-    type ProtonClientOptions = io.vertx.proton.ProtonClientOptions
+
+  type ProtonClientOptions = io.vertx.proton.ProtonClientOptions
   object ProtonClientOptions {
     def apply() = new ProtonClientOptions()
     def apply(json: JsonObject) = new ProtonClientOptions(json)
@@ -36,7 +36,8 @@ package object proton{
 
 
 
-    type ProtonLinkOptions = io.vertx.proton.ProtonLinkOptions
+
+  type ProtonLinkOptions = io.vertx.proton.ProtonLinkOptions
   object ProtonLinkOptions {
     def apply() = new ProtonLinkOptions()
     def apply(json: JsonObject) = new ProtonLinkOptions(json)
@@ -44,7 +45,8 @@ package object proton{
 
 
 
-    type ProtonServerOptions = io.vertx.proton.ProtonServerOptions
+
+  type ProtonServerOptions = io.vertx.proton.ProtonServerOptions
   object ProtonServerOptions {
     def apply() = new ProtonServerOptions()
     def apply(json: JsonObject) = new ProtonServerOptions(json)
@@ -52,7 +54,8 @@ package object proton{
 
 
 
-    type ProtonTransportOptions = io.vertx.proton.ProtonTransportOptions
+
+  type ProtonTransportOptions = io.vertx.proton.ProtonTransportOptions
   object ProtonTransportOptions {
     def apply() = new ProtonTransportOptions()
     def apply(json: JsonObject) = new ProtonTransportOptions(json)
@@ -61,3 +64,4 @@ package object proton{
 
 
 }
+

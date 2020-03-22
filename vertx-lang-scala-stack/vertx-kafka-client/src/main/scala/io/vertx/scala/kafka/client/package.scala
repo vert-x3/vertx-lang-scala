@@ -27,14 +27,15 @@ import scala.concurrent.Promise
 import io.vertx.core.buffer.Buffer
 import io.vertx.kafka.client.producer.{KafkaHeader => JKafkaHeader}
 import io.vertx.kafka.client.producer.{KafkaProducerRecord => JKafkaProducerRecord}
-
 package object client{
 
-    type ConfigResource = io.vertx.kafka.client.common.ConfigResource
+
+  type ConfigResource = io.vertx.kafka.client.common.ConfigResource
   object ConfigResource {
     def apply() = new ConfigResource()
     def apply(json: JsonObject) = new ConfigResource(json)
   }
+
 
 
 
@@ -283,14 +284,17 @@ def pollFuture(timeout: java.lang.Long) : scala.concurrent.Future[io.vertx.kafka
 
 
 
+
+
+
   object KafkaHeader {
 def header(key: java.lang.String,value: io.vertx.core.buffer.Buffer) = {
       io.vertx.kafka.client.producer.KafkaHeader.header(key, value)
 }
 def header(key: java.lang.String,value: java.lang.String) = {
       io.vertx.kafka.client.producer.KafkaHeader.header(key, value)
-}
-  }
+}  }
+
 
 
 
@@ -387,6 +391,7 @@ def closeFuture(timeout: java.lang.Long) : scala.concurrent.Future[Unit] = {
 
 
 
+
   object KafkaProducerRecord {
     /**
      * Like create from [[io.vertx.kafka.client.producer.KafkaProducerRecord]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -405,11 +410,11 @@ def create[K, V](topic: java.lang.String,key: K,value: V) = {
      */
 def create[K, V](topic: java.lang.String,value: V) = {
       io.vertx.kafka.client.producer.KafkaProducerRecord.create[K, V](topic, value)
-}
-  }
+}  }
 
 
-    type Node = io.vertx.kafka.client.common.Node
+
+  type Node = io.vertx.kafka.client.common.Node
   object Node {
     def apply() = new Node()
     def apply(json: JsonObject) = new Node(json)
@@ -417,7 +422,8 @@ def create[K, V](topic: java.lang.String,value: V) = {
 
 
 
-    type OffsetAndMetadata = io.vertx.kafka.client.consumer.OffsetAndMetadata
+
+  type OffsetAndMetadata = io.vertx.kafka.client.consumer.OffsetAndMetadata
   object OffsetAndMetadata {
     def apply() = new OffsetAndMetadata()
     def apply(json: JsonObject) = new OffsetAndMetadata(json)
@@ -425,7 +431,8 @@ def create[K, V](topic: java.lang.String,value: V) = {
 
 
 
-    type OffsetAndTimestamp = io.vertx.kafka.client.consumer.OffsetAndTimestamp
+
+  type OffsetAndTimestamp = io.vertx.kafka.client.consumer.OffsetAndTimestamp
   object OffsetAndTimestamp {
     def apply() = new OffsetAndTimestamp()
     def apply(json: JsonObject) = new OffsetAndTimestamp(json)
@@ -433,7 +440,8 @@ def create[K, V](topic: java.lang.String,value: V) = {
 
 
 
-    type PartitionInfo = io.vertx.kafka.client.common.PartitionInfo
+
+  type PartitionInfo = io.vertx.kafka.client.common.PartitionInfo
   object PartitionInfo {
     def apply() = new PartitionInfo()
     def apply(json: JsonObject) = new PartitionInfo(json)
@@ -441,7 +449,8 @@ def create[K, V](topic: java.lang.String,value: V) = {
 
 
 
-    type RecordMetadata = io.vertx.kafka.client.producer.RecordMetadata
+
+  type RecordMetadata = io.vertx.kafka.client.producer.RecordMetadata
   object RecordMetadata {
     def apply() = new RecordMetadata()
     def apply(json: JsonObject) = new RecordMetadata(json)
@@ -449,7 +458,8 @@ def create[K, V](topic: java.lang.String,value: V) = {
 
 
 
-    type TopicPartition = io.vertx.kafka.client.common.TopicPartition
+
+  type TopicPartition = io.vertx.kafka.client.common.TopicPartition
   object TopicPartition {
     def apply() = new TopicPartition()
     def apply(json: JsonObject) = new TopicPartition(json)
@@ -457,7 +467,8 @@ def create[K, V](topic: java.lang.String,value: V) = {
 
 
 
-    type TopicPartitionInfo = io.vertx.kafka.client.common.TopicPartitionInfo
+
+  type TopicPartitionInfo = io.vertx.kafka.client.common.TopicPartitionInfo
   object TopicPartitionInfo {
     def apply() = new TopicPartitionInfo()
     def apply(json: JsonObject) = new TopicPartitionInfo(json)
@@ -466,3 +477,4 @@ def create[K, V](topic: java.lang.String,value: V) = {
 
 
 }
+

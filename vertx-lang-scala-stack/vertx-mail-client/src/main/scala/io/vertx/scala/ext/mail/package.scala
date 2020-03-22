@@ -33,14 +33,15 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.ext.mail.{MailMessage => JMailMessage}
-
 package object mail{
 
-    type DKIMSignOptions = io.vertx.ext.mail.DKIMSignOptions
+
+  type DKIMSignOptions = io.vertx.ext.mail.DKIMSignOptions
   object DKIMSignOptions {
     def apply() = new DKIMSignOptions()
     def apply(json: JsonObject) = new DKIMSignOptions(json)
   }
+
 
 
 
@@ -62,8 +63,8 @@ def create(json: io.vertx.core.json.JsonObject) = {
      */
 def create(other: io.vertx.ext.mail.MailAttachment) = {
       io.vertx.ext.mail.MailAttachment.create(other)
-}
-  }
+}  }
+
 
 
 
@@ -87,7 +88,8 @@ def sendMailFuture(email: io.vertx.ext.mail.MailMessage) : scala.concurrent.Futu
 
 
 
-    type MailConfig = io.vertx.ext.mail.MailConfig
+
+  type MailConfig = io.vertx.ext.mail.MailConfig
   object MailConfig {
     def apply() = new MailConfig()
     def apply(json: JsonObject) = new MailConfig(json)
@@ -95,7 +97,8 @@ def sendMailFuture(email: io.vertx.ext.mail.MailMessage) : scala.concurrent.Futu
 
 
 
-    type MailMessage = io.vertx.ext.mail.MailMessage
+
+  type MailMessage = io.vertx.ext.mail.MailMessage
   object MailMessage {
     def apply() = new MailMessage()
     def apply(json: JsonObject) = new MailMessage(json)
@@ -103,7 +106,8 @@ def sendMailFuture(email: io.vertx.ext.mail.MailMessage) : scala.concurrent.Futu
 
 
 
-    type MailResult = io.vertx.ext.mail.MailResult
+
+  type MailResult = io.vertx.ext.mail.MailResult
   object MailResult {
     def apply() = new MailResult()
     def apply(json: JsonObject) = new MailResult(json)
@@ -112,3 +116,4 @@ def sendMailFuture(email: io.vertx.ext.mail.MailMessage) : scala.concurrent.Futu
 
 
 }
+

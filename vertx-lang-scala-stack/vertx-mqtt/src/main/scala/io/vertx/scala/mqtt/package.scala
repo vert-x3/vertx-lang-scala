@@ -32,13 +32,14 @@ import io.vertx.mqtt.{MqttServer => JMqttServer}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.{Vertx => JVertx}
-
 package object mqtt{
 
-    type MqttAuth = io.vertx.mqtt.MqttAuth
+
+  type MqttAuth = io.vertx.mqtt.MqttAuth
   object MqttAuth {
     def apply(json: JsonObject) = new MqttAuth(json)
   }
+
 
 
 
@@ -110,11 +111,13 @@ def unsubscribeFuture(topic: java.lang.String) : scala.concurrent.Future[java.la
 
 
 
-    type MqttClientOptions = io.vertx.mqtt.MqttClientOptions
+
+  type MqttClientOptions = io.vertx.mqtt.MqttClientOptions
   object MqttClientOptions {
     def apply() = new MqttClientOptions()
     def apply(json: JsonObject) = new MqttClientOptions(json)
   }
+
 
 
 
@@ -124,8 +127,8 @@ def unsubscribeFuture(topic: java.lang.String) : scala.concurrent.Future[java.la
      */
 def create(code: io.netty.handler.codec.mqtt.MqttConnectReturnCode,isSessionPresent: java.lang.Boolean) = {
       io.vertx.mqtt.messages.MqttConnAckMessage.create(code, isSessionPresent)
-}
-  }
+}  }
+
 
 
 
@@ -153,6 +156,9 @@ def publishFuture(topic: java.lang.String,payload: io.vertx.core.buffer.Buffer,q
       asJava.publish(topic, payload, qosLevel, isDup, isRetain, messageId, new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }  }
+
+
+
 
 
 
@@ -209,7 +215,8 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-    type MqttServerOptions = io.vertx.mqtt.MqttServerOptions
+
+  type MqttServerOptions = io.vertx.mqtt.MqttServerOptions
   object MqttServerOptions {
     def apply() = new MqttServerOptions()
     def apply(json: JsonObject) = new MqttServerOptions(json)
@@ -225,7 +232,12 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-    type MqttWill = io.vertx.mqtt.MqttWill
+
+
+
+
+
+  type MqttWill = io.vertx.mqtt.MqttWill
   object MqttWill {
     def apply(json: JsonObject) = new MqttWill(json)
   }
@@ -233,3 +245,4 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 }
+

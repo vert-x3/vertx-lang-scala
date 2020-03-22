@@ -31,8 +31,8 @@ import io.vertx.ext.jdbc.{JDBCClient => JJDBCClient}
 import io.vertx.ext.jdbc
 import io.vertx.ext.auth.jdbc.{JDBCHashStrategy => JJDBCHashStrategy}
 import io.vertx.ext.auth.jdbc.{JDBCAuthenticationOptions => JJDBCAuthenticationOptions}
-
 package object jdbc{
+
 
   object JDBCAuth {
     /**
@@ -40,15 +40,16 @@ package object jdbc{
      */
 def create(vertx: io.vertx.core.Vertx,client: io.vertx.ext.jdbc.JDBCClient) = {
       io.vertx.ext.auth.jdbc.JDBCAuth.create(vertx, client)
-}
-  }
+}  }
 
 
-    type JDBCAuthOptions = io.vertx.ext.auth.jdbc.JDBCAuthOptions
+
+  type JDBCAuthOptions = io.vertx.ext.auth.jdbc.JDBCAuthOptions
   object JDBCAuthOptions {
     def apply() = new JDBCAuthOptions()
     def apply(json: JsonObject) = new JDBCAuthOptions(json)
   }
+
 
 
 
@@ -64,15 +65,16 @@ def create(client: io.vertx.ext.jdbc.JDBCClient,hashStrategy: io.vertx.ext.auth.
      */
 def create(client: io.vertx.ext.jdbc.JDBCClient,options: io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions) = {
       io.vertx.ext.auth.jdbc.JDBCAuthentication.create(client, options)
-}
-  }
+}  }
 
 
-    type JDBCAuthenticationOptions = io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions
+
+  type JDBCAuthenticationOptions = io.vertx.ext.auth.jdbc.JDBCAuthenticationOptions
   object JDBCAuthenticationOptions {
     def apply() = new JDBCAuthenticationOptions()
     def apply(json: JsonObject) = new JDBCAuthenticationOptions(json)
   }
+
 
 
 
@@ -82,15 +84,16 @@ def create(client: io.vertx.ext.jdbc.JDBCClient,options: io.vertx.ext.auth.jdbc.
      */
 def create(providerId: java.lang.String,client: io.vertx.ext.jdbc.JDBCClient,options: io.vertx.ext.auth.jdbc.JDBCAuthorizationOptions) = {
       io.vertx.ext.auth.jdbc.JDBCAuthorization.create(providerId, client, options)
-}
-  }
+}  }
 
 
-    type JDBCAuthorizationOptions = io.vertx.ext.auth.jdbc.JDBCAuthorizationOptions
+
+  type JDBCAuthorizationOptions = io.vertx.ext.auth.jdbc.JDBCAuthorizationOptions
   object JDBCAuthorizationOptions {
     def apply() = new JDBCAuthorizationOptions()
     def apply(json: JsonObject) = new JDBCAuthorizationOptions(json)
   }
+
 
 
 
@@ -112,8 +115,8 @@ def createPBKDF2(vertx: io.vertx.core.Vertx) = {
      */
 def isEqual(hasha: java.lang.String,hashb: java.lang.String) = {
       io.vertx.ext.auth.jdbc.JDBCHashStrategy.isEqual(hasha, hashb)
-}
-  }
+}  }
+
 
 
 
@@ -163,3 +166,4 @@ def createRolePermissionFuture(role: java.lang.String,permission: java.lang.Stri
 
 
 }
+

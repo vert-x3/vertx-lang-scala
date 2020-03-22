@@ -1090,7 +1090,7 @@ public class TypeHelper {
       ret += "\n";
     }
 
-    ret += "def "+ TypeHelper.escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
+    ret += "def "+ escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
       "      " + exec + "\n" +
       "}";
     return ret;
@@ -1109,7 +1109,7 @@ public class TypeHelper {
       ret += "\n";
     }
 
-    ret +="def "+ TypeHelper.escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
+    ret +="def "+ escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
       "      scala.Option(" +invokeMethodWithoutConvertingReturn("asJava", method)+ ")\n" +
       "}";
     return ret;
@@ -1129,29 +1129,29 @@ public class TypeHelper {
   public static String renderClass(ClassTypeInfo type, Doc doc, String className, List<MethodInfo> nullableMethods, List<MethodInfo> futureMethods, String nonGenericType, Collection<TypeParamInfo> typeParams) throws IOException{
 
     String docs = doc != null ? "  /**\n" +
-      TypeHelper.renderDoc(type, "    *", doc) + "\n" +
+      renderDoc(type, "    *", doc) + "\n" +
       "    */\n"
       : "";
 
     String nullableMethodsRendered = (!"CompositeFuture".equals(className) && !"Future".equals(className)) ? nullableMethods.stream().filter(method -> !method.getName().equals("executeBlocking"))
-      .map(method -> TypeHelper.renderNullableMethod(type, method))
+      .map(method -> renderNullableMethod(type, method))
       .collect(Collectors.joining("\n"))
       : "";
 
     String futureMethodsRendered = futureMethods.stream().filter(method -> !method.getName().equals("executeBlocking"))
-      .map(method -> TypeHelper.renderFutureMethod(type, method))
+      .map(method -> renderFutureMethod(type, method))
       .collect(Collectors.joining("\n"));
 
     return
       "\n" +
       docs +
       "\n" +
-      ("Vertx".equals(className) ? TypeHelper.renderFile("extensions/VertxObject.ftl")+ "\n" : "") +
-      "  implicit class "+ className + "Scala" + TypeHelper.assembleTypeParams(typeParams) + "(val asJava: " + nonGenericType + TypeHelper.assembleTypeParams(typeParams) + ") extends AnyVal {\n" +
-      ("Vertx".equals(className) ? TypeHelper.renderFile("extensions/Vertx.ftl")+ "\n" : "") +
-      ("Vertx".equals(className) ? TypeHelper.renderFile("extensions/executeblocking.ftl")+ "\n" : "") +
-      ("Context".equals(className) ? TypeHelper.renderFile("extensions/executeblocking.ftl") + "\n" : "") +
-      ("WorkerExecutor".equals(className) ? TypeHelper.renderFile("extensions/executeblocking.ftl") + "\n" : "") +
+      ("Vertx".equals(className) ? renderFile("extensions/VertxObject.ftl")+ "\n" : "") +
+      "  implicit class "+ className + "Scala" + assembleTypeParams(typeParams) + "(val asJava: " + nonGenericType + assembleTypeParams(typeParams) + ") extends AnyVal {\n" +
+      ("Vertx".equals(className) ? renderFile("extensions/Vertx.ftl")+ "\n" : "") +
+      ("Vertx".equals(className) ? renderFile("extensions/executeblocking.ftl")+ "\n" : "") +
+      ("Context".equals(className) ? renderFile("extensions/executeblocking.ftl") + "\n" : "") +
+      ("WorkerExecutor".equals(className) ? renderFile("extensions/executeblocking.ftl") + "\n" : "") +
       "\n" +
       nullableMethodsRendered +
       "\n" +
@@ -1160,7 +1160,52 @@ public class TypeHelper {
   }
 
 
+  public static String renderPackageObject(ClassTypeInfo type, int incrementalIndex, int incrementalSize, String modulePackage, String moduleName, List<String> imps, String className, Boolean concrete, Boolean hasEmptyConstructor, Helper helper, Doc doc, List<MethodInfo> nullableMethods, List<MethodInfo> futureMethods, List<MethodInfo> staticMethods, String nonGenericType, Collection<TypeParamInfo> typeParams) throws IOException{
 
+    String header = "";
+    if (incrementalIndex == 0) {
+      header =
+        renderFile("extensions/LicenseHeader.ftl")+ "\n" +
+        "\n" +
+        "package " + modulePackage +"\n" +
+        "\n" +
+        "import scala.jdk.CollectionConverters._\n" +
+        "import io.vertx.core.json.JsonObject\n" +
+        "import io.vertx.core.json.JsonArray\n" +
+        "import io.vertx.core.AsyncResult\n" +
+        "import io.vertx.core.Handler\n" +
+        "import scala.concurrent.Promise\n" +
+          ("io.vertx.core.Vertx".equals(type.getName()) ? "import io.vertx.lang.scala.ScalaVerticle\n" : "") +
+        "\n" +
+          (imps.stream().map(imp -> "import " + imp).collect(Collectors.joining("\n"))) +
+        "\n" +
+        "package object " + moduleName +"{\n" +
+        "\n" +
+          ("core".equals(moduleName) ? renderFile("extensions/Json.ftl") + "\n" : "") +
+        "\n";
+    }
+
+    String body = "";
+    if(type.getDataObject() != null) {
+      body = renderDataobject(className, type, concrete, hasEmptyConstructor, helper) + "\n";
+    }
+    else if (!type.getName().contains("Handler") && !futureMethods.isEmpty()) {
+      body = renderClass(type, doc, className, nullableMethods, futureMethods, nonGenericType, typeParams) + "\n";
+    }
+    else if (!type.getName().contains("Handler") && (staticMethods != null && !staticMethods.isEmpty()) &&  !"Message".equals(helper.getSimpleName(type.getName()))) {
+      body = "  object " + helper.getSimpleName(type.getName()) + " {\n" +
+        (staticMethods.stream().map(method -> renderStaticMethod(type, method)).collect(Collectors.joining("\n"))) +
+        "  }\n";
+    }
+
+    return
+      header +
+      body +
+      "\n" +
+        ("Message".equals(helper.getSimpleName(type.getName())) ? renderFile("extensions/Message.ftl") : "") +
+      "\n" +
+        (incrementalIndex == incrementalSize-1 ? "}\n" : "");
+  }
 
 
 

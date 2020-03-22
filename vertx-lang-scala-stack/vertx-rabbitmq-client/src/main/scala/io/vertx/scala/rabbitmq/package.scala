@@ -34,14 +34,15 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.core.streams.{Pipe => JPipe}
 import io.vertx.core.streams.{WriteStream => JWriteStream}
-
 package object rabbitmq{
 
-    type QueueOptions = io.vertx.rabbitmq.QueueOptions
+
+  type QueueOptions = io.vertx.rabbitmq.QueueOptions
   object QueueOptions {
     def apply() = new QueueOptions()
     def apply(json: JsonObject) = new QueueOptions(json)
   }
+
 
 
 
@@ -273,6 +274,7 @@ def stopFuture() : scala.concurrent.Future[Unit] = {
 
 
 
+
   /**
     * A stream of messages from a rabbitmq queue.
 
@@ -316,7 +318,9 @@ def cancelFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-    type RabbitMQOptions = io.vertx.rabbitmq.RabbitMQOptions
+
+
+  type RabbitMQOptions = io.vertx.rabbitmq.RabbitMQOptions
   object RabbitMQOptions {
     def apply() = new RabbitMQOptions()
     def apply(json: JsonObject) = new RabbitMQOptions(json)
@@ -325,3 +329,4 @@ def cancelFuture() : scala.concurrent.Future[Unit] = {
 
 
 }
+

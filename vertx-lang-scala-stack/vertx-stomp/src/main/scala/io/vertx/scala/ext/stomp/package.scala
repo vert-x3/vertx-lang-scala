@@ -30,16 +30,18 @@ import io.vertx.ext.stomp.{Frame => JFrame}
 import io.vertx.ext.stomp.{StompServerConnection => JStompServerConnection}
 import io.vertx.core.Handler
 import io.vertx.ext.stomp.{StompServerHandler => JStompServerHandler}
-
 package object stomp{
 
 
 
-    type BridgeOptions = io.vertx.ext.stomp.BridgeOptions
+
+
+  type BridgeOptions = io.vertx.ext.stomp.BridgeOptions
   object BridgeOptions {
     def apply() = new BridgeOptions()
     def apply(json: JsonObject) = new BridgeOptions(json)
   }
+
 
 
 
@@ -52,17 +54,19 @@ def queue(vertx: io.vertx.core.Vertx,destination: java.lang.String) = {
 }
 def bridge(vertx: io.vertx.core.Vertx,options: io.vertx.ext.stomp.BridgeOptions) = {
       io.vertx.ext.stomp.Destination.bridge(vertx, options)
-}
-  }
+}  }
 
 
 
 
-    type Frame = io.vertx.ext.stomp.Frame
+
+
+  type Frame = io.vertx.ext.stomp.Frame
   object Frame {
     def apply() = new Frame()
     def apply(json: JsonObject) = new Frame(json)
   }
+
 
 
 
@@ -78,8 +82,9 @@ def handleReceipt(frame: io.vertx.ext.stomp.Frame,connection: io.vertx.ext.stomp
 }
 def ping() = {
       io.vertx.ext.stomp.Frames.ping()
-}
-  }
+}  }
+
+
 
 
 
@@ -124,6 +129,7 @@ def connectFuture() : scala.concurrent.Future[io.vertx.ext.stomp.StompClientConn
       asJava.connect(new Handler[AsyncResult[io.vertx.ext.stomp.StompClientConnection]] { override def handle(event: AsyncResult[io.vertx.ext.stomp.StompClientConnection]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }  }
+
 
 
 
@@ -299,11 +305,13 @@ def nackFuture(id: java.lang.String,txId: java.lang.String) : scala.concurrent.F
 
 
 
-    type StompClientOptions = io.vertx.ext.stomp.StompClientOptions
+
+  type StompClientOptions = io.vertx.ext.stomp.StompClientOptions
   object StompClientOptions {
     def apply() = new StompClientOptions()
     def apply(json: JsonObject) = new StompClientOptions(json)
   }
+
 
 
 
@@ -355,7 +363,10 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-    type StompServerOptions = io.vertx.ext.stomp.StompServerOptions
+
+
+
+  type StompServerOptions = io.vertx.ext.stomp.StompServerOptions
   object StompServerOptions {
     def apply() = new StompServerOptions()
     def apply(json: JsonObject) = new StompServerOptions(json)
@@ -364,3 +375,4 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 }
+
