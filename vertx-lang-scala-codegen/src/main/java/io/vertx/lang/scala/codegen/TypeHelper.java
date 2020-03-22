@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static io.vertx.codegen.Helper.getNonGenericType;
@@ -135,9 +134,9 @@ public class TypeHelper {
         if (parameterizedType.getArgs().isEmpty()) {
           ret += "[_]";
         } else {
-          String converted = String.join(", ", parameterizedType.getArgs().stream()
+          String converted = parameterizedType.getArgs().stream()
             .map(arg -> toScalaType(arg))
-            .collect(Collectors.toList()));
+            .collect(Collectors.joining(", "));
           ret += "[" + converted + "]";
         }
       } else if (typeName.contains("io.vertx.core.Future")) {
@@ -150,9 +149,9 @@ public class TypeHelper {
       if (parameterizedType.getArgs().isEmpty()) {
         ret += "[_]";
       } else {
-        String converted = String.join(", ", parameterizedType.getArgs().stream()
+        String converted = parameterizedType.getArgs().stream()
           .map(arg -> toScalaType(arg))
-          .collect(Collectors.toList()));
+          .collect(Collectors.joining(", "));
         ret += "[" + converted + "]";
       }
       return ret;
@@ -223,17 +222,7 @@ public class TypeHelper {
         if (((ParameterizedTypeInfo)type).getArgs().isEmpty()) {
           ret += "[_]";
         } else {
-          ret += "[";
-          boolean first = true;
-          for (TypeInfo arg : ((ParameterizedTypeInfo)type).getArgs()) {
-            if (first) {
-              first = false;
-            } else {
-              ret += ", ";
-            }
-            ret += toReturnType(arg);
-          }
-          ret += "]";
+          ret += "[" + ((ParameterizedTypeInfo)type).getArgs().stream().map(TypeHelper::toReturnType).collect(Collectors.joining(", ")) + "]";
         }
         return ret;
       }
@@ -243,17 +232,7 @@ public class TypeHelper {
       if (((ParameterizedTypeInfo)type).getArgs().isEmpty()) {
         ret += "[_]";
       } else {
-        ret += "[";
-        boolean first = true;
-        for (TypeInfo arg : ((ParameterizedTypeInfo)type).getArgs()) {
-          if (first) {
-            first = false;
-          } else {
-            ret += ", ";
-          }
-          ret += toReturnType(arg);
-        }
-        ret += "]";
+        ret += "[" + ((ParameterizedTypeInfo)type).getArgs().stream().map(TypeHelper::toReturnType).collect(Collectors.joining(", ")) + "]";
       }
       return ret;
     } else {
@@ -321,17 +300,7 @@ public class TypeHelper {
         if (((ParameterizedTypeInfo)type).getArgs().isEmpty()) {
           ret += "[_]";
         } else {
-          ret += "[";
-          boolean first = true;
-          for (TypeInfo arg : ((ParameterizedTypeInfo)type).getArgs()) {
-            if (first) {
-              first = false;
-            } else {
-              ret += ", ";
-            }
-            ret += toScalaMethodParam(arg);
-          }
-          ret += "]";
+          ret += "[" + ((ParameterizedTypeInfo)type).getArgs().stream().map(TypeHelper::toScalaMethodParam).collect(Collectors.joining(", ")) + "]";
         }
         return ret;
       }
@@ -341,17 +310,7 @@ public class TypeHelper {
       if (((ParameterizedTypeInfo)type).getArgs().isEmpty()) {
         ret += "[_]";
       } else {
-        ret += "[";
-        boolean first = true;
-        for (TypeInfo arg : ((ParameterizedTypeInfo)type).getArgs()) {
-          if (first) {
-            first = false;
-          } else {
-            ret += ", ";
-          }
-          ret += toScalaMethodParam(arg);
-        }
-        ret += "]";
+        ret += "[" + ((ParameterizedTypeInfo)type).getArgs().stream().map(TypeHelper::toScalaMethodParam).collect(Collectors.joining(", ")) + "]";
       }
       return ret;
     } else {
@@ -363,7 +322,7 @@ public class TypeHelper {
    * Generate conversion code to convert a given instance from Scala to Java:
    * 'scala.Int' becomes 'scala.Int.asInstanceOf[java.lang.Integer]'
    */
-  public static String toJavaWithConversion(String name, TypeInfo type) {
+  public static String fromScalatoJavaWithConversion(String name, TypeInfo type) {
     boolean nullable = type.isNullable();
     if (type.getKind().basic) {
       String ret = name;
@@ -418,7 +377,7 @@ public class TypeHelper {
       return name + ".asInstanceOf[" + type.toString().replace("<", "[").replace(">", "]") + "]";
     } else if (type.getKind() == ClassKind.ASYNC_RESULT) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-      String ret = "AsyncResultWrapper[" + toScalaType(parameterizedType.getArg(0)) + ", " + toJavaType(parameterizedType.getArg(0)) + "](x, a => " + toJavaWithConversion("a", parameterizedType.getArg(0)) + ")";
+      String ret = "AsyncResultWrapper[" + toScalaType(parameterizedType.getArg(0)) + ", " + toJavaType(parameterizedType.getArg(0)) + "](x, a => " + fromScalatoJavaWithConversion("a", parameterizedType.getArg(0)) + ")";
       if (nullable) {
         ret = name + ".getOrElse(null)";
       }
@@ -457,7 +416,7 @@ public class TypeHelper {
       } else {
         executed = executed + "(x)";
       }
-      executed = toJavaWithConversion(executed, parameterizedType.getArg(1));
+      executed = fromScalatoJavaWithConversion(executed, parameterizedType.getArg(1));
       String ret = "{x: " + toJavaType(parameterizedType.getArg(0)) + " => " + executed + "}";
       if (nullable) {
         ret = name + ".map(" + name +" => " + ret + ").orNull";
@@ -495,8 +454,7 @@ public class TypeHelper {
       if (type.isParameterized()) {
         ret += convertJavaArgListToString(type);
       } else if (!type.getRaw().getParams().isEmpty()) {
-        String args = String.join(", ", type.getRaw().getParams().stream()
-          .map(v -> "Object").collect(Collectors.toList()));
+        String args = type.getRaw().getParams().stream().map(v -> "Object").collect(Collectors.joining(", "));
         ret += "[" + args + "]";
       }
       return ret;
@@ -583,28 +541,17 @@ public class TypeHelper {
 
   public static String assembleTypeParams(Collection<TypeParamInfo> typeParams) {
     if (!typeParams.isEmpty()){
-      String ret = "";
-      for (TypeParamInfo param:typeParams){
-        if (!ret.isEmpty()) {
-          ret += ", ";
-        }
-        ret += param.getName();
-      }
-      return "[" + ret + "]";
+      return "[" + typeParams.stream().map(TypeParamInfo::getName).collect(Collectors.joining(", ")) + "]";
     } else {
       return "";
     }
   }
 
   public static String escapeIfKeyword(String possibleKeyword) {
-    if (isKeyword(possibleKeyword)) {
+    if (possibleKeyword.equals("type") || possibleKeyword.equals("object")) {
       return "`" + possibleKeyword + "`";
     }
     return possibleKeyword;
-  }
-
-  public static boolean isKeyword(String possibleKeyword) {
-    return (possibleKeyword.equals("type") || possibleKeyword.equals("object"));
   }
 
 
@@ -780,7 +727,7 @@ public class TypeHelper {
 
   public static String invokeMethodWithoutConvertingReturn(String target, MethodInfo method) {
     String paramString = String.join(", ", method.getParams().stream()
-      .map(param -> toJavaWithConversion(escapeIfKeyword(param.getName()), param.getType()))
+      .map(param -> fromScalatoJavaWithConversion(escapeIfKeyword(param.getName()), param.getType()))
       .collect(Collectors.toList()));
 
     return target + "." + escapeIfKeyword(method.getName()) + assembleTypeParamString(method) + "(" + paramString + ")";
@@ -793,7 +740,7 @@ public class TypeHelper {
       if (isAsyncResultHandler(param.getType())) {
         return handler;
       } else {
-        return toJavaWithConversion(escapeIfKeyword(param.getName()), param.getType());
+        return fromScalatoJavaWithConversion(escapeIfKeyword(param.getName()), param.getType());
       }
     }).collect(Collectors.joining(", "));
 
