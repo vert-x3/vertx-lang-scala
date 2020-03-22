@@ -14,6 +14,7 @@
  * under the License.
  */
 
+
 package io.vertx.scala.codegen
 
 import scala.jdk.CollectionConverters._

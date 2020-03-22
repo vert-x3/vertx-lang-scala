@@ -6,18 +6,18 @@ ${typeHelper.renderDoc(type, "    *", doc)}
 </#if>
 
 <#if className == "Vertx">
-  <#include "extensions/VertxObject.ftl">
+${typeHelper.renderFile("extensions/VertxObject.ftl")}
 </#if>
   implicit class ${className}Scala${typeHelper.assembleTypeParams(typeParams, true)}(val asJava: ${nonGenericType}${typeHelper.assembleTypeParams(typeParams, true)}) extends AnyVal {
 <#if className == "Vertx">
-  <#include "extensions/Vertx.ftl">
-  <#include "extensions/executeblocking.ftl">
+${typeHelper.renderFile("extensions/Vertx.ftl")}
+${typeHelper.renderFile("extensions/executeblocking.ftl")}
 </#if>
 <#if className == "Context">
-  <#include "extensions/executeblocking.ftl">
+${typeHelper.renderFile("extensions/executeblocking.ftl")}
 </#if>
 <#if className == "WorkerExecutor">
-  <#include "extensions/executeblocking.ftl">
+${typeHelper.renderFile("extensions/executeblocking.ftl")}
 </#if>
 
 <#if className != "CompositeFuture" && className != "Future" >

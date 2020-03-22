@@ -14,6 +14,7 @@
  * under the License.
  */
 
+
 package io.vertx.scala.ext.eventbus.bridge
 
 import scala.jdk.CollectionConverters._

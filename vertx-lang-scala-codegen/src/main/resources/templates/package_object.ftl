@@ -1,5 +1,5 @@
 <#if incrementalIndex == 0>
-  <#include "extensions/LicenseHeader.ftl">
+${typeHelper.renderFile("extensions/LicenseHeader.ftl")}
 
 package ${modulePackage}
 
@@ -20,7 +20,7 @@ import ${imp}
 package object ${moduleName}{
 
 <#if moduleName=="core">
-  <#include "extensions/Json.ftl">
+${typeHelper.renderFile("extensions/Json.ftl")}
 </#if>
 </#if>
 <#if type.dataObject??>
@@ -36,7 +36,7 @@ ${typeHelper.renderStaticMethod(type, method)}
 </#if>
 
 <#if helper.getSimpleName(type.name) == 'Message'>
-  <#include "extensions/Message.ftl">
+${typeHelper.renderFile("extensions/Message.ftl")}
 </#if>
 
 <#if incrementalIndex == incrementalSize-1>
