@@ -46,7 +46,6 @@ package object rabbitmq{
 
 
 
-
   /**
 
     */
@@ -274,7 +273,6 @@ def stopFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
   /**
     * A stream of messages from a rabbitmq queue.
 
@@ -318,8 +316,6 @@ def cancelFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
-
   type RabbitMQOptions = io.vertx.rabbitmq.RabbitMQOptions
   object RabbitMQOptions {
     def apply() = new RabbitMQOptions()
@@ -329,4 +325,3 @@ def cancelFuture() : scala.concurrent.Future[Unit] = {
 
 
 }
-

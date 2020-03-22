@@ -72,7 +72,6 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
   type AmqpBridgeOptions = io.vertx.amqpbridge.AmqpBridgeOptions
   object AmqpBridgeOptions {
     def apply() = new AmqpBridgeOptions()
@@ -82,4 +81,3 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 }
-

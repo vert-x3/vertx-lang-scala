@@ -41,13 +41,11 @@ package object dropwizard{
 
 
 
-
   type Match = io.vertx.ext.dropwizard.Match
   object Match {
     def apply() = new Match()
     def apply(json: JsonObject) = new Match(json)
   }
-
 
 
 
@@ -61,4 +59,3 @@ def create(vertx: io.vertx.core.Vertx) = {
 
 
 }
-

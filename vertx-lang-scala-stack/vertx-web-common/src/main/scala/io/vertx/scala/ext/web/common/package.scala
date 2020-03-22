@@ -49,7 +49,6 @@ def renderFuture(context: io.vertx.core.json.JsonObject,templateFileName: java.l
 
 
 
-
   object WebEnvironment {
     /**
      * Like development from [[io.vertx.ext.web.common.WebEnvironment]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -66,4 +65,3 @@ def modeOption() = {
 
 
 }
-

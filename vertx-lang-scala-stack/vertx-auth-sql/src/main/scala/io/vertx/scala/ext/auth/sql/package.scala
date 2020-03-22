@@ -49,13 +49,11 @@ def create(client: io.vertx.sqlclient.SqlClient,options: io.vertx.ext.auth.sql.S
 }  }
 
 
-
   type SqlAuthenticationOptions = io.vertx.ext.auth.sql.SqlAuthenticationOptions
   object SqlAuthenticationOptions {
     def apply() = new SqlAuthenticationOptions()
     def apply(json: JsonObject) = new SqlAuthenticationOptions(json)
   }
-
 
 
 
@@ -74,13 +72,11 @@ def create(client: io.vertx.sqlclient.SqlClient,options: io.vertx.ext.auth.sql.S
 }  }
 
 
-
   type SqlAuthorizationOptions = io.vertx.ext.auth.sql.SqlAuthorizationOptions
   object SqlAuthorizationOptions {
     def apply() = new SqlAuthorizationOptions()
     def apply(json: JsonObject) = new SqlAuthorizationOptions(json)
   }
-
 
 
 
@@ -131,4 +127,3 @@ def createRolePermissionFuture(role: java.lang.String,permission: java.lang.Stri
 
 
 }
-

@@ -76,13 +76,11 @@ package object consul{
 
 
 
-
   type BlockingQueryOptions = io.vertx.ext.consul.BlockingQueryOptions
   object BlockingQueryOptions {
     def apply() = new BlockingQueryOptions()
     def apply(json: JsonObject) = new BlockingQueryOptions(json)
   }
-
 
 
 
@@ -94,13 +92,11 @@ package object consul{
 
 
 
-
   type CheckList = io.vertx.ext.consul.CheckList
   object CheckList {
     def apply() = new CheckList()
     def apply(json: JsonObject) = new CheckList(json)
   }
-
 
 
 
@@ -112,13 +108,11 @@ package object consul{
 
 
 
-
   type CheckQueryOptions = io.vertx.ext.consul.CheckQueryOptions
   object CheckQueryOptions {
     def apply() = new CheckQueryOptions()
     def apply(json: JsonObject) = new CheckQueryOptions(json)
   }
-
 
 
 
@@ -725,13 +719,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type ConsulClientOptions = io.vertx.ext.consul.ConsulClientOptions
   object ConsulClientOptions {
     def apply() = new ConsulClientOptions()
     def apply(json: JsonObject) = new ConsulClientOptions(json)
   }
-
 
 
 
@@ -743,13 +735,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type CoordinateList = io.vertx.ext.consul.CoordinateList
   object CoordinateList {
     def apply() = new CoordinateList()
     def apply(json: JsonObject) = new CoordinateList(json)
   }
-
 
 
 
@@ -761,13 +751,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type Event = io.vertx.ext.consul.Event
   object Event {
     def apply() = new Event()
     def apply(json: JsonObject) = new Event(json)
   }
-
 
 
 
@@ -779,13 +767,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type EventListOptions = io.vertx.ext.consul.EventListOptions
   object EventListOptions {
     def apply() = new EventListOptions()
     def apply(json: JsonObject) = new EventListOptions(json)
   }
-
 
 
 
@@ -797,13 +783,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type KeyValue = io.vertx.ext.consul.KeyValue
   object KeyValue {
     def apply() = new KeyValue()
     def apply(json: JsonObject) = new KeyValue(json)
   }
-
 
 
 
@@ -815,13 +799,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type KeyValueOptions = io.vertx.ext.consul.KeyValueOptions
   object KeyValueOptions {
     def apply() = new KeyValueOptions()
     def apply(json: JsonObject) = new KeyValueOptions(json)
   }
-
 
 
 
@@ -833,13 +815,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type Node = io.vertx.ext.consul.Node
   object Node {
     def apply() = new Node()
     def apply(json: JsonObject) = new Node(json)
   }
-
 
 
 
@@ -851,13 +831,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type NodeQueryOptions = io.vertx.ext.consul.NodeQueryOptions
   object NodeQueryOptions {
     def apply() = new NodeQueryOptions()
     def apply(json: JsonObject) = new NodeQueryOptions(json)
   }
-
 
 
 
@@ -869,13 +847,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type PreparedQueryExecuteOptions = io.vertx.ext.consul.PreparedQueryExecuteOptions
   object PreparedQueryExecuteOptions {
     def apply() = new PreparedQueryExecuteOptions()
     def apply(json: JsonObject) = new PreparedQueryExecuteOptions(json)
   }
-
 
 
 
@@ -887,13 +863,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type Service = io.vertx.ext.consul.Service
   object Service {
     def apply() = new Service()
     def apply(json: JsonObject) = new Service(json)
   }
-
 
 
 
@@ -905,13 +879,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type ServiceEntryList = io.vertx.ext.consul.ServiceEntryList
   object ServiceEntryList {
     def apply() = new ServiceEntryList()
     def apply(json: JsonObject) = new ServiceEntryList(json)
   }
-
 
 
 
@@ -923,13 +895,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type ServiceOptions = io.vertx.ext.consul.ServiceOptions
   object ServiceOptions {
     def apply() = new ServiceOptions()
     def apply(json: JsonObject) = new ServiceOptions(json)
   }
-
 
 
 
@@ -941,13 +911,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type Session = io.vertx.ext.consul.Session
   object Session {
     def apply() = new Session()
     def apply(json: JsonObject) = new Session(json)
   }
-
 
 
 
@@ -959,13 +927,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type SessionOptions = io.vertx.ext.consul.SessionOptions
   object SessionOptions {
     def apply() = new SessionOptions()
     def apply(json: JsonObject) = new SessionOptions(json)
   }
-
 
 
 
@@ -977,13 +943,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type TxnKVOperation = io.vertx.ext.consul.TxnKVOperation
   object TxnKVOperation {
     def apply() = new TxnKVOperation()
     def apply(json: JsonObject) = new TxnKVOperation(json)
   }
-
 
 
 
@@ -995,13 +959,11 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
 
 
 
-
   type TxnResponse = io.vertx.ext.consul.TxnResponse
   object TxnResponse {
     def apply() = new TxnResponse()
     def apply(json: JsonObject) = new TxnResponse(json)
   }
-
 
 
 
@@ -1082,6 +1044,4 @@ def nodes(vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOp
 
 
 
-
 }
-

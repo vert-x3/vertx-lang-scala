@@ -44,7 +44,6 @@ package object mail{
 
 
 
-
   object MailAttachment {
     /**
      * Like create from [[io.vertx.ext.mail.MailAttachment]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -64,7 +63,6 @@ def create(json: io.vertx.core.json.JsonObject) = {
 def create(other: io.vertx.ext.mail.MailAttachment) = {
       io.vertx.ext.mail.MailAttachment.create(other)
 }  }
-
 
 
 
@@ -88,7 +86,6 @@ def sendMailFuture(email: io.vertx.ext.mail.MailMessage) : scala.concurrent.Futu
 
 
 
-
   type MailConfig = io.vertx.ext.mail.MailConfig
   object MailConfig {
     def apply() = new MailConfig()
@@ -97,13 +94,11 @@ def sendMailFuture(email: io.vertx.ext.mail.MailMessage) : scala.concurrent.Futu
 
 
 
-
   type MailMessage = io.vertx.ext.mail.MailMessage
   object MailMessage {
     def apply() = new MailMessage()
     def apply(json: JsonObject) = new MailMessage(json)
   }
-
 
 
 
@@ -116,4 +111,3 @@ def sendMailFuture(email: io.vertx.ext.mail.MailMessage) : scala.concurrent.Futu
 
 
 }
-

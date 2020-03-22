@@ -43,7 +43,6 @@ package object sql{
 
 
 
-
   /**
     * A common asynchronous client interface for interacting with SQL compliant database
     */
@@ -147,7 +146,6 @@ def callWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonAr
       asJava.callWithParams(sql, params, outputs, new Handler[AsyncResult[io.vertx.ext.sql.ResultSet]] { override def handle(event: AsyncResult[io.vertx.ext.sql.ResultSet]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }  }
-
 
 
 
@@ -323,7 +321,6 @@ def getTransactionIsolationFuture() : scala.concurrent.Future[io.vertx.ext.sql.T
 
 
 
-
   /**
     * Represents a SQL query interface to a database
     */
@@ -414,13 +411,11 @@ def callWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonAr
 
 
 
-
   type SQLOptions = io.vertx.ext.sql.SQLOptions
   object SQLOptions {
     def apply() = new SQLOptions()
     def apply(json: JsonObject) = new SQLOptions(json)
   }
-
 
 
 
@@ -462,7 +457,6 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
   type UpdateResult = io.vertx.ext.sql.UpdateResult
   object UpdateResult {
     def apply() = new UpdateResult()
@@ -472,4 +466,3 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 }
-

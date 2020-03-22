@@ -45,13 +45,11 @@ package object admin{
 
 
 
-
   type ConfigEntry = io.vertx.kafka.admin.ConfigEntry
   object ConfigEntry {
     def apply() = new ConfigEntry()
     def apply(json: JsonObject) = new ConfigEntry(json)
   }
-
 
 
 
@@ -63,7 +61,6 @@ package object admin{
 
 
 
-
   type ConsumerGroupDescription = io.vertx.kafka.admin.ConsumerGroupDescription
   object ConsumerGroupDescription {
     def apply() = new ConsumerGroupDescription()
@@ -72,13 +69,11 @@ package object admin{
 
 
 
-
   type ConsumerGroupListing = io.vertx.kafka.admin.ConsumerGroupListing
   object ConsumerGroupListing {
     def apply() = new ConsumerGroupListing()
     def apply(json: JsonObject) = new ConsumerGroupListing(json)
   }
-
 
 
 
@@ -142,13 +137,11 @@ def describeConsumerGroupsFuture(groupIds: java.util.List[java.lang.String]) : s
 
 
 
-
   type MemberAssignment = io.vertx.kafka.admin.MemberAssignment
   object MemberAssignment {
     def apply() = new MemberAssignment()
     def apply(json: JsonObject) = new MemberAssignment(json)
   }
-
 
 
 
@@ -160,13 +153,11 @@ def describeConsumerGroupsFuture(groupIds: java.util.List[java.lang.String]) : s
 
 
 
-
   type NewTopic = io.vertx.kafka.admin.NewTopic
   object NewTopic {
     def apply() = new NewTopic()
     def apply(json: JsonObject) = new NewTopic(json)
   }
-
 
 
 
@@ -179,4 +170,3 @@ def describeConsumerGroupsFuture(groupIds: java.util.List[java.lang.String]) : s
 
 
 }
-

@@ -42,7 +42,6 @@ def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.shiro.ShiroAuth
 }  }
 
 
-
   type ShiroAuthOptions = io.vertx.ext.auth.shiro.ShiroAuthOptions
   object ShiroAuthOptions {
     def apply() = new ShiroAuthOptions()
@@ -52,4 +51,3 @@ def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.shiro.ShiroAuth
 
 
 }
-

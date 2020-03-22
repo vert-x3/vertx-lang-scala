@@ -60,7 +60,6 @@ def executeFuture[T](command: io.vertx.core.Promise[T] => Unit) : scala.concurre
 
 
 
-
   type CircuitBreakerOptions = io.vertx.circuitbreaker.CircuitBreakerOptions
   object CircuitBreakerOptions {
     def apply() = new CircuitBreakerOptions()
@@ -71,6 +70,4 @@ def executeFuture[T](command: io.vertx.core.Promise[T] => Unit) : scala.concurre
 
 
 
-
 }
-

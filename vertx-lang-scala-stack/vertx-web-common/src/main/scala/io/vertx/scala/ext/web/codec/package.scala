@@ -105,4 +105,3 @@ def jsonStream(parser: io.vertx.core.parsetools.JsonParser) = {
 
 
 }
-

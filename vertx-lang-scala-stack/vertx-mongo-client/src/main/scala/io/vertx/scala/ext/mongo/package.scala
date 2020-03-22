@@ -47,12 +47,10 @@ package object mongo{
 
 
 
-
   type BulkOperation = io.vertx.ext.mongo.BulkOperation
   object BulkOperation {
     def apply(json: JsonObject) = new BulkOperation(json)
   }
-
 
 
 
@@ -64,13 +62,11 @@ package object mongo{
 
 
 
-
   type FindOptions = io.vertx.ext.mongo.FindOptions
   object FindOptions {
     def apply() = new FindOptions()
     def apply(json: JsonObject) = new FindOptions(json)
   }
-
 
 
 
@@ -82,13 +78,11 @@ package object mongo{
 
 
 
-
   type GridFsUploadOptions = io.vertx.ext.mongo.GridFsUploadOptions
   object GridFsUploadOptions {
     def apply() = new GridFsUploadOptions()
     def apply(json: JsonObject) = new GridFsUploadOptions(json)
   }
-
 
 
 
@@ -99,13 +93,11 @@ package object mongo{
 
 
 
-
   type IndexOptions = io.vertx.ext.mongo.IndexOptions
   object IndexOptions {
     def apply() = new IndexOptions()
     def apply(json: JsonObject) = new IndexOptions(json)
   }
-
 
 
 
@@ -455,13 +447,11 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
   type MongoClientBulkWriteResult = io.vertx.ext.mongo.MongoClientBulkWriteResult
   object MongoClientBulkWriteResult {
     def apply() = new MongoClientBulkWriteResult()
     def apply(json: JsonObject) = new MongoClientBulkWriteResult(json)
   }
-
 
 
 
@@ -473,13 +463,11 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 
-
   type MongoClientUpdateResult = io.vertx.ext.mongo.MongoClientUpdateResult
   object MongoClientUpdateResult {
     def apply() = new MongoClientUpdateResult()
     def apply(json: JsonObject) = new MongoClientUpdateResult(json)
   }
-
 
 
 
@@ -588,7 +576,6 @@ def uploadFileWithOptionsFuture(fileName: java.lang.String,options: io.vertx.ext
 
 
 
-
   type UpdateOptions = io.vertx.ext.mongo.UpdateOptions
   object UpdateOptions {
     def apply() = new UpdateOptions()
@@ -598,4 +585,3 @@ def uploadFileWithOptionsFuture(fileName: java.lang.String,options: io.vertx.ext
 
 
 }
-

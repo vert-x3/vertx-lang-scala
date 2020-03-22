@@ -43,4 +43,3 @@ def create(vertx: io.vertx.core.Vertx) = {
 
 
 }
-

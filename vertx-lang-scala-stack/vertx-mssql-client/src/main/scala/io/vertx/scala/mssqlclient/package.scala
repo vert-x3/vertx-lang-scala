@@ -48,7 +48,6 @@ package object mssqlclient{
 
 
 
-
   /**
     * A connection to Microsoft SQL Server.
 
@@ -101,7 +100,6 @@ def preparedBatchFuture(s: java.lang.String,list: java.util.List[io.vertx.sqlcli
 
 
 
-
   /**
     * A  of [[io.vertx.mssqlclient.MSSQLConnection]].
 
@@ -146,4 +144,3 @@ def preparedBatchFuture(s: java.lang.String,list: java.util.List[io.vertx.sqlcli
 
 
 }
-

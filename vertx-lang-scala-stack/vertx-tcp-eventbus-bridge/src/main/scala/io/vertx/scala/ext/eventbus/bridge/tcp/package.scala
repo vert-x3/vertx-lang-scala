@@ -40,7 +40,6 @@ package object tcp{
 
 
 
-
   /**
     * TCP EventBus bridge for Vert.x
     */
@@ -84,4 +83,3 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
 
 
 }
-

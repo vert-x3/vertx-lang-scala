@@ -41,7 +41,6 @@ def create(vertx: io.vertx.core.Vertx,path: java.lang.String) = {
 }  }
 
 
-
   object PropertyFileAuthorization {
     /**
      * Like create from [[io.vertx.ext.auth.properties.PropertyFileAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -52,4 +51,3 @@ def create(vertx: io.vertx.core.Vertx,path: java.lang.String) = {
 
 
 }
-

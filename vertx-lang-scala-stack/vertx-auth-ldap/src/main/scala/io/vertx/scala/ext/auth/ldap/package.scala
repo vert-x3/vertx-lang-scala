@@ -42,7 +42,6 @@ def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.ldap.LdapAuthen
 }  }
 
 
-
   type LdapAuthenticationOptions = io.vertx.ext.auth.ldap.LdapAuthenticationOptions
   object LdapAuthenticationOptions {
     def apply() = new LdapAuthenticationOptions()
@@ -52,4 +51,3 @@ def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.ldap.LdapAuthen
 
 
 }
-

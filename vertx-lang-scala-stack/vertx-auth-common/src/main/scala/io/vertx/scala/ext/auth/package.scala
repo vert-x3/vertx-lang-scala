@@ -40,9 +40,6 @@ def create() = {
 
 
 
-
-
-
   /**
     *
     * User-facing interface for authenticating users.
@@ -64,8 +61,6 @@ def authenticateFuture(authInfo: io.vertx.core.json.JsonObject) : scala.concurre
 
 
 
-
-
   object AuthorizationContext {
     /**
      * Like create from [[io.vertx.ext.auth.authorization.AuthorizationContext]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -73,7 +68,6 @@ def authenticateFuture(authInfo: io.vertx.core.json.JsonObject) : scala.concurre
 def create(user: io.vertx.ext.auth.User) = {
       io.vertx.ext.auth.authorization.AuthorizationContext.create(user)
 }  }
-
 
 
 
@@ -93,8 +87,6 @@ def getAuthorizationsFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Fut
       asJava.getAuthorizations(user, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }  }
-
-
 
 
 
@@ -123,8 +115,6 @@ def any() = {
 
 
 
-
-
   object HashingStrategy {
     /**
      * Like load from [[io.vertx.ext.auth.HashingStrategy]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -132,7 +122,6 @@ def any() = {
 def load() = {
       io.vertx.ext.auth.HashingStrategy.load()
 }  }
-
 
 
   type KeyStoreOptions = io.vertx.ext.auth.KeyStoreOptions
@@ -143,12 +132,10 @@ def load() = {
 
 
 
-
   object NotAuthorization {
 def create(authorization: io.vertx.ext.auth.authorization.Authorization) = {
       io.vertx.ext.auth.authorization.NotAuthorization.create(authorization)
 }  }
-
 
 
   object OrAuthorization {
@@ -157,12 +144,10 @@ def create() = {
 }  }
 
 
-
   object PermissionBasedAuthorization {
 def create(permission: java.lang.String) = {
       io.vertx.ext.auth.authorization.PermissionBasedAuthorization.create(permission)
 }  }
-
 
 
   type PubSecKeyOptions = io.vertx.ext.auth.PubSecKeyOptions
@@ -173,12 +158,10 @@ def create(permission: java.lang.String) = {
 
 
 
-
   object RoleBasedAuthorization {
 def create(role: java.lang.String) = {
       io.vertx.ext.auth.authorization.RoleBasedAuthorization.create(role)
 }  }
-
 
 
 
@@ -210,7 +193,6 @@ def isAuthorizedFuture(authority: java.lang.String) : scala.concurrent.Future[ja
 
 
 
-
   object VertxContextPRNG {
     /**
      * Like current from [[io.vertx.ext.auth.VertxContextPRNG]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -226,7 +208,6 @@ def current(vertx: io.vertx.core.Vertx) = {
 }  }
 
 
-
   object WildcardPermissionBasedAuthorization {
 def create(permission: java.lang.String) = {
       io.vertx.ext.auth.authorization.WildcardPermissionBasedAuthorization.create(permission)
@@ -234,4 +215,3 @@ def create(permission: java.lang.String) = {
 
 
 }
-

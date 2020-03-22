@@ -70,13 +70,11 @@ def updateUserCredentialFuture(id: java.lang.String,data: io.vertx.core.json.Jso
 
 
 
-
   type RelayParty = io.vertx.ext.auth.webauthn.RelayParty
   object RelayParty {
     def apply() = new RelayParty()
     def apply(json: JsonObject) = new RelayParty(json)
   }
-
 
 
 
@@ -117,13 +115,11 @@ def authenticateFuture(authInfo: io.vertx.core.json.JsonObject) : scala.concurre
 
 
 
-
   type WebAuthnInfo = io.vertx.ext.auth.webauthn.WebAuthnInfo
   object WebAuthnInfo {
     def apply() = new WebAuthnInfo()
     def apply(json: JsonObject) = new WebAuthnInfo(json)
   }
-
 
 
 
@@ -136,4 +132,3 @@ def authenticateFuture(authInfo: io.vertx.core.json.JsonObject) : scala.concurre
 
 
 }
-

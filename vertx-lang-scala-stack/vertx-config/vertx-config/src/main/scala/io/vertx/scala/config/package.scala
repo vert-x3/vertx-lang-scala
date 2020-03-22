@@ -47,7 +47,6 @@ package object config{
 
 
 
-
   /**
     * Defines a configuration retriever that read configuration from
     * 
@@ -68,13 +67,11 @@ def getConfigFuture() : scala.concurrent.Future[io.vertx.core.json.JsonObject] =
 
 
 
-
   type ConfigRetrieverOptions = io.vertx.config.ConfigRetrieverOptions
   object ConfigRetrieverOptions {
     def apply() = new ConfigRetrieverOptions()
     def apply(json: JsonObject) = new ConfigRetrieverOptions(json)
   }
-
 
 
 
@@ -87,4 +84,3 @@ def getConfigFuture() : scala.concurrent.Future[io.vertx.core.json.JsonObject] =
 
 
 }
-
