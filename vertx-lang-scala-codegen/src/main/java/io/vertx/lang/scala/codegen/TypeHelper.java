@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static io.vertx.codegen.Helper.getNonGenericType;
@@ -69,6 +70,8 @@ public class TypeHelper {
     javaBasicToScalaType = Collections.unmodifiableMap(writable);
   }
 
+
+
   public static String convertArgListToScalaFormatedString(TypeInfo type) {
     if (type.isParameterized()) {
         return "[" + ((ParameterizedTypeInfo)type)
@@ -102,34 +105,34 @@ public class TypeHelper {
       return "Unit";
     } else if (kind == ClassKind.OBJECT) {
       if (typeName.contains("Object")){
-        return wrapInOptionIfNullable(nullable, "AnyRef");
+        return convertToOptionIfNullable(nullable, "AnyRef");
       } else {
-        return wrapInOptionIfNullable(nullable, typeName);
+        return convertToOptionIfNullable(nullable, typeName);
       }
     } else if (kind == ClassKind.THROWABLE) {
       return "Throwable";
     } else if (kind.basic) {
-      return wrapInOptionIfNullable(nullable, javaBasicToScalaType.get(type.getName()));
+      return convertToOptionIfNullable(nullable, javaBasicToScalaType.get(type.getName()));
     } else if (type.getDataObject() != null) {
-      return wrapInOptionIfNullable(nullable, type.getName());
+      return convertToOptionIfNullable(nullable, type.getName());
     } else if (kind == ClassKind.LIST){
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String ret = "scala.collection.mutable.Buffer";
       if (!parameterizedType.getArgs().isEmpty())
         ret += "[" + toScalaTypeString(parameterizedType.getArg(0)) + "]";
-      return wrapInOptionIfNullable(nullable, ret);
+      return convertToOptionIfNullable(nullable, ret);
     } else if (kind == ClassKind.SET){
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String ret = "scala.collection.mutable.Set";
       if (!parameterizedType.getArgs().isEmpty())
         ret += "[" + toScalaTypeString(parameterizedType.getArg(0)) + "]";
-      return wrapInOptionIfNullable(nullable, ret);
+      return convertToOptionIfNullable(nullable, ret);
     } else if (kind == ClassKind.MAP){
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String ret = "scala.collection.mutable.Map";
       if (!parameterizedType.getArgs().isEmpty())
         ret += "[" + toScalaTypeString(parameterizedType.getArg(0)) + ", " + toScalaTypeString(parameterizedType.getArg(1)) + "]";
-      return wrapInOptionIfNullable(nullable, ret);
+      return convertToOptionIfNullable(nullable, ret);
     } else if (kind == ClassKind.HANDLER) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       return "Handler[" + toScalaTypeString(parameterizedType.getArg(0)) + "]";
@@ -143,19 +146,19 @@ public class TypeHelper {
       } else {
         ret = type1 + " => " + type2;
       }
-      return wrapInOptionIfNullable(nullable, ret);
+      return convertToOptionIfNullable(nullable, ret);
     } else if (kind == ClassKind.JSON_OBJECT ||
       kind == ClassKind.JSON_ARRAY ||
       kind == ClassKind.ENUM  ||
       typeName.equals("io.vertx.core.buffer.Buffer")) {
-      return wrapInOptionIfNullable(nullable, typeName);
+      return convertToOptionIfNullable(nullable, typeName);
     } else if (kind == ClassKind.ASYNC_RESULT) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String ret = "AsyncResult";
       if (!parameterizedType.getArgs().isEmpty())
         ret += "[" + toScalaTypeString(parameterizedType.getArg(0)) + "]";else
         ret += "[_]";
-      return wrapInOptionIfNullable(nullable, ret);
+      return convertToOptionIfNullable(nullable, ret);
     } else if (kind == ClassKind.API) {
       String ret = getNonGenericType(type.getSimpleName());
       if (type instanceof io.vertx.codegen.type.ParameterizedTypeInfo) {
@@ -171,7 +174,7 @@ public class TypeHelper {
       } else if (typeName.contains("io.vertx.core.Future")) {
         ret += "[_]";
       }
-      return wrapInOptionIfNullable(nullable, ret);
+      return convertToOptionIfNullable(nullable, ret);
     } else if (kind == ClassKind.CLASS_TYPE) {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String ret = "Class";
@@ -269,81 +272,59 @@ public class TypeHelper {
     }
   }
 
-  //TODO: this is sooooo ugly
-  public static String toScalaMethodParam(TypeInfo type) {
-    if (type.getKind() == ClassKind.VOID || type.getName().equals("java.lang.Void") || type.getName().equals("void")) {
-      return "Void";
-    } else if (type.getKind() == ClassKind.OBJECT) {
-      if(type.isVariable()) {
-        return type.getName();
-      }
-      return "AnyRef";
-    } else if (type.getKind() == ClassKind.THROWABLE) {
-      return "Throwable";
-    } else if (type.getKind().basic) {
-      return javaBasicToWrapperTyper.get(type.getName());
-    } else if (type.getDataObject() != null) {
-      return getNonGenericType(type.getName());
-    } else if (type.getKind() == ClassKind.LIST){
-      String ret = "java.util.List";
-      if (!((ParameterizedTypeInfo)type).getArgs().isEmpty())
-        ret += "[" + toScalaMethodParam(((ParameterizedTypeInfo)type).getArgs().get(0)) + "]";
-      return ret;
-    } else if (type.getKind() == ClassKind.SET){
-      String ret = "java.util.Set";
-      if (!((ParameterizedTypeInfo)type).getArgs().isEmpty())
-        ret += "[" + toScalaMethodParam(((ParameterizedTypeInfo)type).getArgs().get(0)) + "]";
-      return ret;
-    } else if (type.getKind() == ClassKind.MAP){
-      String ret = "java.util.Map";
-      if (!((ParameterizedTypeInfo)type).getArgs().isEmpty())
-        ret += "[String, " + toScalaMethodParam(((ParameterizedTypeInfo)type).getArgs().get(1)) + "]";
-      return ret;
-    } else if (type.getKind() == ClassKind.HANDLER) {
-      return toScalaMethodParam(((ParameterizedTypeInfo)type).getArgs().get(0)) + " => Unit";
-    } else if (type.getKind() == ClassKind.FUNCTION) {
-      String type1 = toScalaMethodParam(((ParameterizedTypeInfo)type).getArgs().get(0));
-      String type2 = toScalaMethodParam(((ParameterizedTypeInfo)type).getArgs().get(1));
-      String ret = "";
-      if (type1.equals("Unit")) {
-        ret = "() => " + type2;
-      } else {
-        ret = type1 + " => " + type2;
-      }
-      return ret;
-    } else if (type.getKind() == ClassKind.JSON_OBJECT ||
-        type.getKind() == ClassKind.JSON_ARRAY ||
-        type.getKind() == ClassKind.ENUM  ||
-        type.getName().equals("io.vertx.core.buffer.Buffer")){
-      return type.getName();
-    } else if (type.getKind() == ClassKind.ASYNC_RESULT) {
-      String ret = "AsyncResult";
-      if (!((ParameterizedTypeInfo)type).getArgs().isEmpty())
-        ret += "[" + toScalaMethodParam(((ParameterizedTypeInfo)type).getArgs().get(0)) + "]";
-      else
-        ret += "[_]";
-      return ret;
-    } else if (type.getKind() == ClassKind.API) {
-      String ret = getNonGenericType(type.getName());
-      if(type.isParameterized()) {
-        if (((ParameterizedTypeInfo)type).getArgs().isEmpty()) {
+
+  public static final Map<ClassKind, Function<TypeInfo,String>> toScalaMethodParam;
+  static {
+    Map<ClassKind, Function<TypeInfo,String>> writable = new HashMap<>();
+    writable.put(ClassKind.VOID, t -> "Void");
+    writable.put(ClassKind.OBJECT, t -> t.isVariable() ? t.getName() : "AnyRef");
+    writable.put(ClassKind.THROWABLE, t -> "Throwable");
+    writable.put(ClassKind.STRING, t -> javaBasicToWrapperTyper.get(t.getName()));
+    writable.put(ClassKind.PRIMITIVE, t -> javaBasicToWrapperTyper.get(t.getName()));
+    writable.put(ClassKind.BOXED_PRIMITIVE, t -> javaBasicToWrapperTyper.get(t.getName()));
+    writable.put(ClassKind.LIST, t -> "scala.collection.mutable.Buffer" +  ((!((ParameterizedTypeInfo)t).getArgs().isEmpty()) ? "[" + toScalaMethodParam(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : ""));
+    writable.put(ClassKind.SET, t -> "scala.collection.mutable.Set" +  ((!((ParameterizedTypeInfo)t).getArgs().isEmpty()) ? "[" + toScalaMethodParam(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : ""));
+    writable.put(ClassKind.MAP, t -> "scala.collection.mutable.Map" +  ((!((ParameterizedTypeInfo)t).getArgs().isEmpty()) ? "[String, " + toScalaMethodParam(((ParameterizedTypeInfo)t).getArgs().get(1)) + "]" : ""));
+    writable.put(ClassKind.HANDLER, t -> toScalaMethodParam(((ParameterizedTypeInfo)t).getArgs().get(0)) + " => Unit");
+    writable.put(ClassKind.JSON_OBJECT, TypeInfo::getName);
+    writable.put(ClassKind.JSON_ARRAY, TypeInfo::getName);
+    writable.put(ClassKind.ENUM, TypeInfo::getName);
+    writable.put(ClassKind.ASYNC_RESULT, t -> "AsyncResult" + (!((ParameterizedTypeInfo)t).getArgs().isEmpty() ? "[" + toScalaMethodParam(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : "[_]"));
+    writable.put(ClassKind.CLASS_TYPE, t -> "Class" + (((ParameterizedTypeInfo)t).getArgs().isEmpty() ? "[_]" : "[" + ((ParameterizedTypeInfo)t).getArgs().stream().map(TypeHelper::toScalaMethodParam).collect(Collectors.joining(", ")) + "]"));
+
+    writable.put(ClassKind.API, t -> {
+      String ret = getNonGenericType(t.getName());
+      if(t.isParameterized()) {
+        if (((ParameterizedTypeInfo)t).getArgs().isEmpty()) {
           ret += "[_]";
         } else {
-          ret += "[" + ((ParameterizedTypeInfo)type).getArgs().stream().map(TypeHelper::toScalaMethodParam).collect(Collectors.joining(", ")) + "]";
+          ret += "[" + ((ParameterizedTypeInfo)t).getArgs().stream().map(TypeHelper::toScalaMethodParam).collect(Collectors.joining(", ")) + "]";
         }
         return ret;
       }
       return ret;
-    } else if (type.getKind() == ClassKind.CLASS_TYPE) {
-      String ret = "Class";
-      if (((ParameterizedTypeInfo)type).getArgs().isEmpty()) {
-        ret += "[_]";
+    });
+
+    writable.put(ClassKind.FUNCTION, t -> {
+      String type1 = toScalaMethodParam(((ParameterizedTypeInfo)t).getArgs().get(0));
+      String type2 = toScalaMethodParam(((ParameterizedTypeInfo)t).getArgs().get(1));
+      if (type1.equals("Unit")) {
+        return "() => " + type2;
       } else {
-        ret += "[" + ((ParameterizedTypeInfo)type).getArgs().stream().map(TypeHelper::toScalaMethodParam).collect(Collectors.joining(", ")) + "]";
+        return type1 + " => " + type2;
       }
-      return ret;
-    } else {
-      return "Unknown type for toScalaMethodParam "+type.getName()+" "+type.getKind();
+    });
+
+    toScalaMethodParam = Collections.unmodifiableMap(writable);
+  }
+
+  //TODO: this is sooooo ugly
+  public static String toScalaMethodParam(TypeInfo type) {
+    if (type.getDataObject() != null) {
+      return getNonGenericType(type.getName());
+    }
+    else {
+      return toScalaMethodParam.get(type.getKind()).apply(type);
     }
   }
 
@@ -414,27 +395,9 @@ public class TypeHelper {
     } else if (type.getKind().collection) {
       String ret = name;
       if(nullable) {
-        ret = "res";
-      }
-      if (type.getKind() == ClassKind.LIST) {
-        ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-        if(parameterizedType.getArg(0).isNullable()) {
-          ret += ".getOrElse(null)";
-        }
-      } else if (type.getKind() == ClassKind.SET){
-        ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-        if(parameterizedType.getArg(0).isNullable()) {
-          ret += ".getOrElse(null)";
-        }
-      } else if (type.getKind() == ClassKind.MAP){
-        ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
-        if(parameterizedType.getArg(1).isNullable()) {
-          ret += ".getOrElse(null)";
-        }
-      }
-
-      if (nullable) {
-        ret = name + ".flatMap(res => Some(" + ret + ")).orNull";
+        ret += ".map(_.asJava).getOrElse(null)";
+      } else {
+        ret += ".asJava";
       }
       return ret;
     } else if (type.getKind() == ClassKind.FUNCTION) {
@@ -513,9 +476,16 @@ public class TypeHelper {
     }
   }
 
-  public static String wrapInOptionIfNullable(boolean nullable, String expression) {
+  public static String convertToOptionIfNullable(boolean nullable, String expression) {
     if (nullable) {
       return "scala.Option[" + expression + "]";
+    }
+    return expression;
+  }
+
+  public static String wrapInOptionIfNullable(boolean nullable, String expression) {
+    if (nullable) {
+      return "scala.Option(" + expression + ")";
     }
     return expression;
   }
@@ -599,21 +569,21 @@ public class TypeHelper {
 
 
 
-  /*TODO: some methods lack necessary type infos for scala*/
-  /*see https://github.com/vert-x3/vertx-lang-scala/issues/23 */
+  /**
+   * Since some methods lack necessary type infos for scala we
+   * will exclude these from rendering.
+   *
+   * @see <a href="https://github.com/vert-x3/vertx-lang-scala/issues/23">Issue</a>
+   */
   public static boolean skipMethod(MethodInfo method) {
     return method.getName().equals("addInterceptor") || method.getName().equals("removeInterceptor");
   }
 
-  public static List<MethodInfo> findStaticMethods(List<MethodInfo> methods) {
-    if(methods == null)
-      return Collections.emptyList();
-    return methods.stream()
-      .filter(method -> !skipMethod(method))
-      .filter(method -> method.isStaticMethod())
-      .collect(Collectors.toList());
-  }
-
+  /**
+   * Find methods which don't fall into any other category.
+   * @param methods
+   * @return
+   */
   public static List<MethodInfo> findBasicMethods(List<MethodInfo> methods) {
     if(methods == null)
       return Collections.emptyList();
@@ -623,6 +593,11 @@ public class TypeHelper {
       .collect(Collectors.toList());
   }
 
+  /**
+   * Find methods which are default methods.
+   * @param methods
+   * @return
+   */
   public static List<MethodInfo> findDefaultMethods(List<MethodInfo> methods) {
     if(methods == null)
       return Collections.emptyList();
@@ -632,6 +607,11 @@ public class TypeHelper {
       .collect(Collectors.toList());
   }
 
+  /**
+   * Find methods which implement the fluent API-style.
+   * @param methods
+   * @return
+   */
   public static List<MethodInfo> findFluentMethods(List<MethodInfo> methods) {
     if(methods == null)
       return Collections.emptyList();
@@ -641,6 +621,11 @@ public class TypeHelper {
       .collect(Collectors.toList());
   }
 
+  /**
+   * Find methods which return a value that can be cached.
+   * @param methods
+   * @return
+   */
   public static List<MethodInfo> findCacheReturnMethods(List<MethodInfo> methods) {
     if(methods == null)
       return Collections.emptyList();
@@ -969,10 +954,16 @@ public class TypeHelper {
     return output.toString().replace("<p>", "");
   }
 
+  /**
+   * Render a method that accepts a AsyncResult-Handler into one that returns a Scala-Future.
+   * @param type
+   * @param method
+   * @return
+   */
   public static String renderFutureMethod(TypeInfo type, MethodInfo method) {
     List<ParamInfo> params = method.getParams();
     params = params.subList(0, params.size() - 1);
-    String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + wrapInOptionIfNullable(param.getType().isNullable(), toScalaMethodParam(param.getType()))).collect(Collectors.joining(","));
+    String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), toScalaMethodParam(param.getType()))).collect(Collectors.joining(","));
 
     String asyncType = typeOfReturnedFuture(method).getName().replace('<', '[').replace('>', ']');
 
@@ -991,9 +982,15 @@ public class TypeHelper {
     return ret;
   }
 
+  /**
+   * Render a static method.
+   * @param type
+   * @param method
+   * @return
+   */
   public static String renderStaticMethod(ClassTypeInfo type, MethodInfo method) {
     List<ParamInfo> params = method.getParams();
-    String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + wrapInOptionIfNullable(param.getType().isNullable(), toScalaMethodParam(param.getType()))).collect(Collectors.joining(","));
+    String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), toScalaMethodParam(param.getType()))).collect(Collectors.joining(", "));
 
     String option = method.getReturnType().isNullable() ? "Option" : "";
 
@@ -1011,9 +1008,15 @@ public class TypeHelper {
     return ret;
   }
 
+  /**
+   * Render methods with a nullable return-type so they return a scala.Option instead.
+   * @param type
+   * @param method
+   * @return
+   */
   public static String renderNullableMethod(ClassTypeInfo type, MethodInfo method) {
     List<ParamInfo> params = method.getParams();
-    String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + wrapInOptionIfNullable(param.getType().isNullable(), toScalaMethodParam(param.getType()))).collect(Collectors.joining(","));
+    String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), toScalaMethodParam(param.getType()))).collect(Collectors.joining(", "));
 
     String option = method.getReturnType().isNullable() ? "Option" : "";
 
@@ -1024,8 +1027,10 @@ public class TypeHelper {
       ret += "\n";
     }
 
+    String exec =
+
     ret +="def "+ escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
-      "      scala.Option(" +invokeMethodWithoutConvertingReturn("asJava", method)+ ")\n" +
+      "      " + wrapInOptionIfNullable(method.getReturnType().isNullable(), invokeMethodWithoutConvertingReturn("asJava", method)) + "\n" +
       "}";
     return ret;
   }
@@ -1077,6 +1082,7 @@ public class TypeHelper {
       nullableMethodsRendered +
       "\n" +
       futureMethodsRendered +
+      "\n" +
       "  }\n";
   }
 

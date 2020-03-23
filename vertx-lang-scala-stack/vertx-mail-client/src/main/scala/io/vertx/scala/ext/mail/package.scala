@@ -82,7 +82,8 @@ def sendMailFuture(email: io.vertx.ext.mail.MailMessage) : scala.concurrent.Futu
       val promise = concurrent.Promise[io.vertx.ext.mail.MailResult]()
       asJava.sendMail(email, new Handler[AsyncResult[io.vertx.ext.mail.MailResult]] { override def handle(event: AsyncResult[io.vertx.ext.mail.MailResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 

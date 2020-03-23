@@ -113,32 +113,32 @@ package object mongo{
     /**
      * Like saveWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def saveWithOptions(collection: java.lang.String,document: io.vertx.core.json.JsonObject,writeOption: scala.Option[io.vertx.ext.mongo.WriteOption],resultHandler: AsyncResult[java.lang.String] => Unit) = {
-      scala.Option(asJava.saveWithOptions(collection, document, writeOption.getOrElse(null), resultHandler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]]))
+def saveWithOptions(collection: java.lang.String, document: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption], resultHandler: AsyncResult[java.lang.String] => Unit) = {
+      asJava.saveWithOptions(collection, document, writeOption.getOrElse(null), resultHandler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
 }
     /**
      * Like insertWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def insertWithOptions(collection: java.lang.String,document: io.vertx.core.json.JsonObject,writeOption: scala.Option[io.vertx.ext.mongo.WriteOption],resultHandler: AsyncResult[java.lang.String] => Unit) = {
-      scala.Option(asJava.insertWithOptions(collection, document, writeOption.getOrElse(null), resultHandler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]]))
+def insertWithOptions(collection: java.lang.String, document: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption], resultHandler: AsyncResult[java.lang.String] => Unit) = {
+      asJava.insertWithOptions(collection, document, writeOption.getOrElse(null), resultHandler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
 }
     /**
      * Like findOne from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def findOne(collection: java.lang.String,query: io.vertx.core.json.JsonObject,fields: scala.Option[io.vertx.core.json.JsonObject],resultHandler: AsyncResult[io.vertx.core.json.JsonObject] => Unit) = {
-      scala.Option(asJava.findOne(collection, query, fields.getOrElse(null), resultHandler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.json.JsonObject]]]))
+def findOne(collection: java.lang.String, query: io.vertx.core.json.JsonObject, fields: scala.Option[io.vertx.core.json.JsonObject], resultHandler: AsyncResult[io.vertx.core.json.JsonObject] => Unit) = {
+      asJava.findOne(collection, query, fields.getOrElse(null), resultHandler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.json.JsonObject]]])
 }
     /**
      * Like removeDocumentsWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def removeDocumentsWithOptions(collection: java.lang.String,query: io.vertx.core.json.JsonObject,writeOption: scala.Option[io.vertx.ext.mongo.WriteOption],resultHandler: AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult] => Unit) = {
-      scala.Option(asJava.removeDocumentsWithOptions(collection, query, writeOption.getOrElse(null), resultHandler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult]]]))
+def removeDocumentsWithOptions(collection: java.lang.String, query: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption], resultHandler: AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult] => Unit) = {
+      asJava.removeDocumentsWithOptions(collection, query, writeOption.getOrElse(null), resultHandler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult]]])
 }
     /**
      * Like removeDocumentWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def removeDocumentWithOptions(collection: java.lang.String,query: io.vertx.core.json.JsonObject,writeOption: scala.Option[io.vertx.ext.mongo.WriteOption],resultHandler: AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult] => Unit) = {
-      scala.Option(asJava.removeDocumentWithOptions(collection, query, writeOption.getOrElse(null), resultHandler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult]]]))
+def removeDocumentWithOptions(collection: java.lang.String, query: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption], resultHandler: AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult] => Unit) = {
+      asJava.removeDocumentWithOptions(collection, query, writeOption.getOrElse(null), resultHandler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult]]])
 }
     /**
      * Like save from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -207,17 +207,17 @@ def replaceDocumentsWithOptionsFuture(collection: java.lang.String,query: io.ver
     /**
      * Like bulkWrite from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def bulkWriteFuture(collection: java.lang.String,operations: java.util.List[io.vertx.ext.mongo.BulkOperation]) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientBulkWriteResult] = {
+def bulkWriteFuture(collection: java.lang.String,operations: scala.collection.mutable.Buffer[io.vertx.ext.mongo.BulkOperation]) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientBulkWriteResult] = {
       val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientBulkWriteResult]()
-      asJava.bulkWrite(collection, operations, new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientBulkWriteResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientBulkWriteResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.bulkWrite(collection, operations.asJava, new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientBulkWriteResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientBulkWriteResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like bulkWriteWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def bulkWriteWithOptionsFuture(collection: java.lang.String,operations: java.util.List[io.vertx.ext.mongo.BulkOperation],bulkWriteOptions: io.vertx.ext.mongo.BulkWriteOptions) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientBulkWriteResult] = {
+def bulkWriteWithOptionsFuture(collection: java.lang.String,operations: scala.collection.mutable.Buffer[io.vertx.ext.mongo.BulkOperation],bulkWriteOptions: io.vertx.ext.mongo.BulkWriteOptions) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientBulkWriteResult] = {
       val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientBulkWriteResult]()
-      asJava.bulkWriteWithOptions(collection, operations, bulkWriteOptions, new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientBulkWriteResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientBulkWriteResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.bulkWriteWithOptions(collection, operations.asJava, bulkWriteOptions, new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientBulkWriteResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientBulkWriteResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -375,9 +375,9 @@ def createIndexWithOptionsFuture(collection: java.lang.String,key: io.vertx.core
     /**
      * Like createIndexes from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def createIndexesFuture(collection: java.lang.String,indexes: java.util.List[io.vertx.ext.mongo.IndexModel]) : scala.concurrent.Future[Unit] = {
+def createIndexesFuture(collection: java.lang.String,indexes: scala.collection.mutable.Buffer[io.vertx.ext.mongo.IndexModel]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.createIndexes(collection, indexes, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.createIndexes(collection, indexes.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -443,7 +443,8 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -572,7 +573,8 @@ def uploadFileWithOptionsFuture(fileName: java.lang.String,options: io.vertx.ext
       val promise = concurrent.Promise[java.lang.String]()
       asJava.uploadFileWithOptions(fileName, options, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 

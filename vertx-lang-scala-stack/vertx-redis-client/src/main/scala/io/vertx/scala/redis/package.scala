@@ -34,7 +34,7 @@ package object redis{
     /**
      * Like create from [[io.vertx.redis.client.Command]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(command: java.lang.String,arity: java.lang.Integer,firstKey: java.lang.Integer,lastKey: java.lang.Integer,interval: java.lang.Integer,readOnly: java.lang.Boolean,movable: java.lang.Boolean) = {
+def create(command: java.lang.String, arity: java.lang.Integer, firstKey: java.lang.Integer, lastKey: java.lang.Integer, interval: java.lang.Integer, readOnly: java.lang.Boolean, movable: java.lang.Boolean) = {
       io.vertx.redis.client.Command.create(command, arity, firstKey, lastKey, interval, readOnly, movable)
 }  }
 
@@ -67,11 +67,12 @@ def sendFuture(command: io.vertx.redis.client.Request) : scala.concurrent.Future
     /**
      * Like batch from [[io.vertx.redis.client.Redis]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def batchFuture(commands: java.util.List[io.vertx.redis.client.Request]) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.redis.client.Response]] = {
+def batchFuture(commands: scala.collection.mutable.Buffer[io.vertx.redis.client.Request]) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.redis.client.Response]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.redis.client.Response]]()
-      asJava.batch(commands, new Handler[AsyncResult[java.util.List[io.vertx.redis.client.Response]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.redis.client.Response]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
+      asJava.batch(commands.asJava, new Handler[AsyncResult[java.util.List[io.vertx.redis.client.Response]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.redis.client.Response]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -119,57 +120,57 @@ def bgrewriteaofFuture() : scala.concurrent.Future[io.vertx.redis.client.Respons
     /**
      * Like bgsave from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def bgsaveFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def bgsaveFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.bgsave(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.bgsave(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like bitcount from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def bitcountFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def bitcountFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.bitcount(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.bitcount(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like bitfield from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def bitfieldFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def bitfieldFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.bitfield(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.bitfield(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like bitop from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def bitopFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def bitopFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.bitop(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.bitop(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like bitpos from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def bitposFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def bitposFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.bitpos(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.bitpos(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like blpop from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def blpopFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def blpopFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.blpop(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.blpop(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like brpop from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def brpopFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def brpopFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.brpop(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.brpop(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -183,33 +184,33 @@ def brpoplpushFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.la
     /**
      * Like bzpopmax from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def bzpopmaxFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def bzpopmaxFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.bzpopmax(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.bzpopmax(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like bzpopmin from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def bzpopminFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def bzpopminFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.bzpopmin(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.bzpopmin(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like client from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def clientFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def clientFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.client(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.client(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like cluster from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def clusterFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def clusterFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.cluster(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.cluster(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -223,9 +224,9 @@ def commandFuture() : scala.concurrent.Future[io.vertx.redis.client.Response] = 
     /**
      * Like config from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def configFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def configFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.config(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.config(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -239,9 +240,9 @@ def dbsizeFuture() : scala.concurrent.Future[io.vertx.redis.client.Response] = {
     /**
      * Like debug from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def debugFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def debugFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.debug(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.debug(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -263,9 +264,9 @@ def decrbyFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concurre
     /**
      * Like del from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def delFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def delFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.del(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.del(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -295,17 +296,17 @@ def echoFuture(arg0: java.lang.String) : scala.concurrent.Future[io.vertx.redis.
     /**
      * Like eval from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def evalFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def evalFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.eval(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.eval(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like evalsha from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def evalshaFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def evalshaFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.evalsha(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.evalsha(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -319,9 +320,9 @@ def execFuture() : scala.concurrent.Future[io.vertx.redis.client.Response] = {
     /**
      * Like exists from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def existsFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def existsFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.exists(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.exists(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -343,81 +344,81 @@ def expireatFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concur
     /**
      * Like flushall from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def flushallFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def flushallFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.flushall(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.flushall(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like flushdb from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def flushdbFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def flushdbFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.flushdb(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.flushdb(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like geoadd from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def geoaddFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def geoaddFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.geoadd(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.geoadd(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like geodist from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def geodistFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def geodistFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.geodist(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.geodist(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like geohash from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def geohashFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def geohashFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.geohash(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.geohash(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like geopos from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def geoposFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def geoposFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.geopos(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.geopos(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like georadius from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def georadiusFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def georadiusFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.georadius(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.georadius(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like georadiusRo from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def georadiusRoFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def georadiusRoFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.georadiusRo(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.georadiusRo(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like georadiusbymember from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def georadiusbymemberFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def georadiusbymemberFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.georadiusbymember(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.georadiusbymember(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like georadiusbymemberRo from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def georadiusbymemberRoFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def georadiusbymemberRoFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.georadiusbymemberRo(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.georadiusbymemberRo(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -455,9 +456,9 @@ def getsetFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concurre
     /**
      * Like hdel from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def hdelFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def hdelFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.hdel(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.hdel(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -519,41 +520,41 @@ def hlenFuture(arg0: java.lang.String) : scala.concurrent.Future[io.vertx.redis.
     /**
      * Like hmget from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def hmgetFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def hmgetFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.hmget(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.hmget(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like hmset from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def hmsetFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def hmsetFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.hmset(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.hmset(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like host from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def hostFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def hostFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.host(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.host(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like hscan from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def hscanFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def hscanFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.hscan(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.hscan(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like hset from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def hsetFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def hsetFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.hset(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.hset(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -607,9 +608,9 @@ def incrbyfloatFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.con
     /**
      * Like info from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def infoFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def infoFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.info(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.info(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -631,9 +632,9 @@ def lastsaveFuture() : scala.concurrent.Future[io.vertx.redis.client.Response] =
     /**
      * Like latency from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def latencyFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def latencyFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.latency(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.latency(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -663,9 +664,9 @@ def llenFuture(arg0: java.lang.String) : scala.concurrent.Future[io.vertx.redis.
     /**
      * Like lolwut from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def lolwutFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def lolwutFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.lolwut(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.lolwut(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -679,17 +680,17 @@ def lpopFuture(arg0: java.lang.String) : scala.concurrent.Future[io.vertx.redis.
     /**
      * Like lpush from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def lpushFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def lpushFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.lpush(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.lpush(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like lpushx from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def lpushxFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def lpushxFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.lpushx(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.lpushx(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -727,33 +728,33 @@ def ltrimFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.St
     /**
      * Like memory from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def memoryFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def memoryFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.memory(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.memory(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like mget from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def mgetFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def mgetFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.mget(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.mget(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like migrate from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def migrateFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def migrateFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.migrate(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.migrate(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like module from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def moduleFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def moduleFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.module(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.module(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -775,17 +776,17 @@ def moveFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concurrent
     /**
      * Like mset from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def msetFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def msetFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.mset(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.mset(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like msetnx from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def msetnxFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def msetnxFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.msetnx(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.msetnx(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -799,9 +800,9 @@ def multiFuture() : scala.concurrent.Future[io.vertx.redis.client.Response] = {
     /**
      * Like object from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def objectFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def objectFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.`object`(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.`object`(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -831,33 +832,33 @@ def pexpireatFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concu
     /**
      * Like pfadd from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def pfaddFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def pfaddFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.pfadd(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.pfadd(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like pfcount from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def pfcountFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def pfcountFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.pfcount(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.pfcount(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like pfdebug from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def pfdebugFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def pfdebugFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.pfdebug(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.pfdebug(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like pfmerge from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def pfmergeFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def pfmergeFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.pfmerge(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.pfmerge(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -871,17 +872,17 @@ def pfselftestFuture() : scala.concurrent.Future[io.vertx.redis.client.Response]
     /**
      * Like ping from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def pingFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def pingFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.ping(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.ping(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like post from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def postFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def postFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.post(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.post(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -895,9 +896,9 @@ def psetexFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.S
     /**
      * Like psubscribe from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def psubscribeFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def psubscribeFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.psubscribe(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.psubscribe(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -927,17 +928,17 @@ def publishFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concurr
     /**
      * Like pubsub from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def pubsubFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def pubsubFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.pubsub(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.pubsub(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like punsubscribe from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def punsubscribeFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def punsubscribeFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.punsubscribe(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.punsubscribe(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -983,9 +984,9 @@ def renamenxFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concur
     /**
      * Like replconf from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def replconfFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def replconfFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.replconf(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.replconf(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -999,17 +1000,17 @@ def replicaofFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concu
     /**
      * Like restore from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def restoreFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def restoreFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.restore(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.restore(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like restoreAsking from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def restoreAskingFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def restoreAskingFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.restoreAsking(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.restoreAsking(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1039,25 +1040,25 @@ def rpoplpushFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concu
     /**
      * Like rpush from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def rpushFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def rpushFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.rpush(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.rpush(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like rpushx from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def rpushxFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def rpushxFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.rpushx(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.rpushx(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like sadd from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def saddFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def saddFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.sadd(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.sadd(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1071,9 +1072,9 @@ def saveFuture() : scala.concurrent.Future[io.vertx.redis.client.Response] = {
     /**
      * Like scan from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def scanFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def scanFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.scan(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.scan(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1087,25 +1088,25 @@ def scardFuture(arg0: java.lang.String) : scala.concurrent.Future[io.vertx.redis
     /**
      * Like script from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def scriptFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def scriptFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.script(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.script(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like sdiff from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def sdiffFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def sdiffFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.sdiff(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.sdiff(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like sdiffstore from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def sdiffstoreFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def sdiffstoreFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.sdiffstore(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.sdiffstore(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1119,9 +1120,9 @@ def selectFuture(arg0: java.lang.String) : scala.concurrent.Future[io.vertx.redi
     /**
      * Like set from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def setFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def setFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.set(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.set(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1159,25 +1160,25 @@ def setrangeFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang
     /**
      * Like shutdown from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def shutdownFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def shutdownFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.shutdown(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.shutdown(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like sinter from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def sinterFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def sinterFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.sinter(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.sinter(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like sinterstore from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def sinterstoreFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def sinterstoreFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.sinterstore(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.sinterstore(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1199,9 +1200,9 @@ def slaveofFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concurr
     /**
      * Like slowlog from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def slowlogFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def slowlogFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.slowlog(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.slowlog(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1223,41 +1224,41 @@ def smoveFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.St
     /**
      * Like sort from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def sortFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def sortFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.sort(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.sort(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like spop from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def spopFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def spopFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.spop(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.spop(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like srandmember from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def srandmemberFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def srandmemberFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.srandmember(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.srandmember(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like srem from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def sremFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def sremFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.srem(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.srem(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like sscan from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def sscanFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def sscanFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.sscan(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.sscan(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1271,9 +1272,9 @@ def strlenFuture(arg0: java.lang.String) : scala.concurrent.Future[io.vertx.redi
     /**
      * Like subscribe from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def subscribeFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def subscribeFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.subscribe(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.subscribe(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1287,17 +1288,17 @@ def substrFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.S
     /**
      * Like sunion from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def sunionFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def sunionFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.sunion(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.sunion(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like sunionstore from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def sunionstoreFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def sunionstoreFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.sunionstore(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.sunionstore(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1327,9 +1328,9 @@ def timeFuture() : scala.concurrent.Future[io.vertx.redis.client.Response] = {
     /**
      * Like touch from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def touchFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def touchFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.touch(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.touch(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1351,17 +1352,17 @@ def typeFuture(arg0: java.lang.String) : scala.concurrent.Future[io.vertx.redis.
     /**
      * Like unlink from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def unlinkFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def unlinkFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.unlink(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.unlink(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like unsubscribe from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def unsubscribeFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def unsubscribeFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.unsubscribe(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.unsubscribe(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1383,57 +1384,57 @@ def waitFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concurrent
     /**
      * Like watch from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def watchFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def watchFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.watch(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.watch(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like xack from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def xackFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def xackFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.xack(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.xack(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like xadd from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def xaddFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def xaddFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.xadd(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.xadd(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like xclaim from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def xclaimFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def xclaimFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.xclaim(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.xclaim(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like xdel from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def xdelFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def xdelFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.xdel(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.xdel(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like xgroup from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def xgroupFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def xgroupFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.xgroup(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.xgroup(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like xinfo from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def xinfoFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def xinfoFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.xinfo(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.xinfo(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1447,41 +1448,41 @@ def xlenFuture(arg0: java.lang.String) : scala.concurrent.Future[io.vertx.redis.
     /**
      * Like xpending from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def xpendingFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def xpendingFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.xpending(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.xpending(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like xrange from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def xrangeFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def xrangeFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.xrange(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.xrange(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like xread from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def xreadFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def xreadFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.xread(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.xread(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like xreadgroup from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def xreadgroupFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def xreadgroupFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.xreadgroup(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.xreadgroup(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like xrevrange from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def xrevrangeFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def xrevrangeFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.xrevrange(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.xrevrange(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1495,17 +1496,17 @@ def xsetidFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concurre
     /**
      * Like xtrim from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def xtrimFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def xtrimFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.xtrim(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.xtrim(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like zadd from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zaddFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zaddFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zadd(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zadd(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1535,9 +1536,9 @@ def zincrbyFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lang.
     /**
      * Like zinterstore from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zinterstoreFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zinterstoreFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zinterstore(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zinterstore(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1551,41 +1552,41 @@ def zlexcountFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: java.lan
     /**
      * Like zpopmax from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zpopmaxFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zpopmaxFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zpopmax(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zpopmax(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like zpopmin from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zpopminFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zpopminFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zpopmin(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zpopmin(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like zrange from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zrangeFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zrangeFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zrange(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zrange(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like zrangebylex from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zrangebylexFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zrangebylexFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zrangebylex(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zrangebylex(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like zrangebyscore from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zrangebyscoreFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zrangebyscoreFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zrangebyscore(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zrangebyscore(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1599,9 +1600,9 @@ def zrankFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concurren
     /**
      * Like zrem from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zremFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zremFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zrem(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zrem(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1631,25 +1632,25 @@ def zremrangebyscoreFuture(arg0: java.lang.String,arg1: java.lang.String,arg2: j
     /**
      * Like zrevrange from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zrevrangeFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zrevrangeFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zrevrange(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zrevrange(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like zrevrangebylex from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zrevrangebylexFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zrevrangebylexFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zrevrangebylex(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zrevrangebylex(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like zrevrangebyscore from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zrevrangebyscoreFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zrevrangebyscoreFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zrevrangebyscore(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zrevrangebyscore(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1663,9 +1664,9 @@ def zrevrankFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concur
     /**
      * Like zscan from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zscanFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zscanFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zscan(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zscan(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -1679,11 +1680,12 @@ def zscoreFuture(arg0: java.lang.String,arg1: java.lang.String) : scala.concurre
     /**
      * Like zunionstore from [[io.vertx.redis.client.RedisAPI]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def zunionstoreFuture(args: java.util.List[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
+def zunionstoreFuture(args: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[io.vertx.redis.client.Response] = {
       val promise = concurrent.Promise[io.vertx.redis.client.Response]()
-      asJava.zunionstore(args, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.zunionstore(args.asJava, new Handler[AsyncResult[io.vertx.redis.client.Response]] { override def handle(event: AsyncResult[io.vertx.redis.client.Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -1699,19 +1701,19 @@ def zunionstoreFuture(args: java.util.List[java.lang.String]) : scala.concurrent
      * Like exceptionHandler from [[io.vertx.redis.client.RedisConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
 def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
-      scala.Option(asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]]))
+      asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
 }
     /**
      * Like handler from [[io.vertx.redis.client.RedisConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
 def handler(handler: scala.Option[io.vertx.redis.client.Response => Unit]) = {
-      scala.Option(asJava.handler(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.redis.client.Response]]))
+      asJava.handler(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.redis.client.Response]])
 }
     /**
      * Like endHandler from [[io.vertx.redis.client.RedisConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
 def endHandler(endHandler: scala.Option[Void => Unit]) = {
-      scala.Option(asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]]))
+      asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
 }
 def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.redis.client.Response]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -1729,11 +1731,12 @@ def sendFuture(command: io.vertx.redis.client.Request) : scala.concurrent.Future
     /**
      * Like batch from [[io.vertx.redis.client.RedisConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def batchFuture(commands: java.util.List[io.vertx.redis.client.Request]) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.redis.client.Response]] = {
+def batchFuture(commands: scala.collection.mutable.Buffer[io.vertx.redis.client.Request]) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.redis.client.Response]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.redis.client.Response]]()
-      asJava.batch(commands, new Handler[AsyncResult[java.util.List[io.vertx.redis.client.Response]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.redis.client.Response]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
+      asJava.batch(commands.asJava, new Handler[AsyncResult[java.util.List[io.vertx.redis.client.Response]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.redis.client.Response]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}  }
+}
+  }
 
 
 

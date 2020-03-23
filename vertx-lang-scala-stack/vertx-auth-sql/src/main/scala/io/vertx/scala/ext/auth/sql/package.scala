@@ -44,7 +44,7 @@ def create(client: io.vertx.sqlclient.SqlClient) = {
     /**
      * Like create from [[io.vertx.ext.auth.sql.SqlAuthentication]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(client: io.vertx.sqlclient.SqlClient,options: io.vertx.ext.auth.sql.SqlAuthenticationOptions) = {
+def create(client: io.vertx.sqlclient.SqlClient, options: io.vertx.ext.auth.sql.SqlAuthenticationOptions) = {
       io.vertx.ext.auth.sql.SqlAuthentication.create(client, options)
 }  }
 
@@ -67,7 +67,7 @@ def create(client: io.vertx.sqlclient.SqlClient) = {
     /**
      * Like create from [[io.vertx.ext.auth.sql.SqlAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(client: io.vertx.sqlclient.SqlClient,options: io.vertx.ext.auth.sql.SqlAuthorizationOptions) = {
+def create(client: io.vertx.sqlclient.SqlClient, options: io.vertx.ext.auth.sql.SqlAuthorizationOptions) = {
       io.vertx.ext.auth.sql.SqlAuthorization.create(client, options)
 }  }
 
@@ -122,7 +122,8 @@ def createRolePermissionFuture(role: java.lang.String,permission: java.lang.Stri
       val promise = concurrent.Promise[Unit]()
       asJava.createRolePermission(role, permission, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 

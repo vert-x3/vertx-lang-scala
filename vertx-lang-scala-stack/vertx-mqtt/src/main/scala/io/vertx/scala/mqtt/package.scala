@@ -94,9 +94,9 @@ def subscribeFuture(topic: java.lang.String,qos: java.lang.Integer) : scala.conc
     /**
      * Like subscribe from [[io.vertx.mqtt.MqttClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def subscribeFuture(topics: java.util.Map[String, java.lang.Integer]) : scala.concurrent.Future[java.lang.Integer] = {
+def subscribeFuture(topics: scala.collection.mutable.Map[String, java.lang.Integer]) : scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
-      asJava.subscribe(topics, new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.subscribe(topics.asJava, new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -106,7 +106,8 @@ def unsubscribeFuture(topic: java.lang.String) : scala.concurrent.Future[java.la
       val promise = concurrent.Promise[java.lang.Integer]()
       asJava.unsubscribe(topic, new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -122,7 +123,7 @@ def unsubscribeFuture(topic: java.lang.String) : scala.concurrent.Future[java.la
     /**
      * Like create from [[io.vertx.mqtt.messages.MqttConnAckMessage]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(code: io.netty.handler.codec.mqtt.MqttConnectReturnCode,isSessionPresent: java.lang.Boolean) = {
+def create(code: io.netty.handler.codec.mqtt.MqttConnectReturnCode, isSessionPresent: java.lang.Boolean) = {
       io.vertx.mqtt.messages.MqttConnAckMessage.create(code, isSessionPresent)
 }  }
 
@@ -151,7 +152,8 @@ def publishFuture(topic: java.lang.String,payload: io.vertx.core.buffer.Buffer,q
       val promise = concurrent.Promise[java.lang.Integer]()
       asJava.publish(topic, payload, qosLevel, isDup, isRetain, messageId, new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -204,7 +206,8 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 

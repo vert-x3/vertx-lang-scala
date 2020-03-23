@@ -55,13 +55,13 @@ package object client{
   implicit class KafkaConsumerScala[K, V](val asJava: io.vertx.kafka.client.consumer.KafkaConsumer[K, V]) extends AnyVal {
 
 def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
-      scala.Option(asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]]))
+      asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
 }
 def handler(handler: scala.Option[io.vertx.kafka.client.consumer.KafkaConsumerRecord[K, V] => Unit]) = {
-      scala.Option(asJava.handler(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.kafka.client.consumer.KafkaConsumerRecord[K,V]]]))
+      asJava.handler(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.kafka.client.consumer.KafkaConsumerRecord[K,V]]])
 }
 def endHandler(endHandler: scala.Option[Void => Unit]) = {
-      scala.Option(asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]]))
+      asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
 }
 def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.kafka.client.consumer.KafkaConsumerRecord[K, V]]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -79,9 +79,9 @@ def subscribeFuture(topic: java.lang.String) : scala.concurrent.Future[Unit] = {
     /**
      * Like subscribe from [[io.vertx.kafka.client.consumer.KafkaConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def subscribeFuture(topics: java.util.Set[java.lang.String]) : scala.concurrent.Future[Unit] = {
+def subscribeFuture(topics: scala.collection.mutable.Set[java.lang.String]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.subscribe(topics, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.subscribe(topics.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -95,9 +95,9 @@ def assignFuture(topicPartition: io.vertx.kafka.client.common.TopicPartition) : 
     /**
      * Like assign from [[io.vertx.kafka.client.consumer.KafkaConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def assignFuture(topicPartitions: java.util.Set[io.vertx.kafka.client.common.TopicPartition]) : scala.concurrent.Future[Unit] = {
+def assignFuture(topicPartitions: scala.collection.mutable.Set[io.vertx.kafka.client.common.TopicPartition]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.assign(topicPartitions, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.assign(topicPartitions.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -135,9 +135,9 @@ def pauseFuture(topicPartition: io.vertx.kafka.client.common.TopicPartition) : s
     /**
      * Like pause from [[io.vertx.kafka.client.consumer.KafkaConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def pauseFuture(topicPartitions: java.util.Set[io.vertx.kafka.client.common.TopicPartition]) : scala.concurrent.Future[Unit] = {
+def pauseFuture(topicPartitions: scala.collection.mutable.Set[io.vertx.kafka.client.common.TopicPartition]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.pause(topicPartitions, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.pause(topicPartitions.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -159,9 +159,9 @@ def resumeFuture(topicPartition: io.vertx.kafka.client.common.TopicPartition) : 
     /**
      * Like resume from [[io.vertx.kafka.client.consumer.KafkaConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def resumeFuture(topicPartitions: java.util.Set[io.vertx.kafka.client.common.TopicPartition]) : scala.concurrent.Future[Unit] = {
+def resumeFuture(topicPartitions: scala.collection.mutable.Set[io.vertx.kafka.client.common.TopicPartition]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.resume(topicPartitions, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.resume(topicPartitions.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -183,9 +183,9 @@ def seekToBeginningFuture(topicPartition: io.vertx.kafka.client.common.TopicPart
     /**
      * Like seekToBeginning from [[io.vertx.kafka.client.consumer.KafkaConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def seekToBeginningFuture(topicPartitions: java.util.Set[io.vertx.kafka.client.common.TopicPartition]) : scala.concurrent.Future[Unit] = {
+def seekToBeginningFuture(topicPartitions: scala.collection.mutable.Set[io.vertx.kafka.client.common.TopicPartition]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.seekToBeginning(topicPartitions, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.seekToBeginning(topicPartitions.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -199,9 +199,9 @@ def seekToEndFuture(topicPartition: io.vertx.kafka.client.common.TopicPartition)
     /**
      * Like seekToEnd from [[io.vertx.kafka.client.consumer.KafkaConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def seekToEndFuture(topicPartitions: java.util.Set[io.vertx.kafka.client.common.TopicPartition]) : scala.concurrent.Future[Unit] = {
+def seekToEndFuture(topicPartitions: scala.collection.mutable.Set[io.vertx.kafka.client.common.TopicPartition]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.seekToEnd(topicPartitions, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.seekToEnd(topicPartitions.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -275,7 +275,8 @@ def pollFuture(timeout: java.lang.Long) : scala.concurrent.Future[io.vertx.kafka
       val promise = concurrent.Promise[io.vertx.kafka.client.consumer.KafkaConsumerRecords[K, V]]()
       asJava.poll(timeout, new Handler[AsyncResult[io.vertx.kafka.client.consumer.KafkaConsumerRecords[K,V]]] { override def handle(event: AsyncResult[io.vertx.kafka.client.consumer.KafkaConsumerRecords[K,V]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -284,10 +285,10 @@ def pollFuture(timeout: java.lang.Long) : scala.concurrent.Future[io.vertx.kafka
 
 
   object KafkaHeader {
-def header(key: java.lang.String,value: io.vertx.core.buffer.Buffer) = {
+def header(key: java.lang.String, value: io.vertx.core.buffer.Buffer) = {
       io.vertx.kafka.client.producer.KafkaHeader.header(key, value)
 }
-def header(key: java.lang.String,value: java.lang.String) = {
+def header(key: java.lang.String, value: java.lang.String) = {
       io.vertx.kafka.client.producer.KafkaHeader.header(key, value)
 }  }
 
@@ -303,10 +304,10 @@ def header(key: java.lang.String,value: java.lang.String) = {
   implicit class KafkaProducerScala[K, V](val asJava: io.vertx.kafka.client.producer.KafkaProducer[K, V]) extends AnyVal {
 
 def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
-      scala.Option(asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]]))
+      asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
 }
 def drainHandler(handler: scala.Option[Void => Unit]) = {
-      scala.Option(asJava.drainHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]]))
+      asJava.drainHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
 }
 def writeFuture(arg0: io.vertx.kafka.client.producer.KafkaProducerRecord[K, V]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -382,7 +383,8 @@ def closeFuture(timeout: java.lang.Long) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.close(timeout, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -390,19 +392,19 @@ def closeFuture(timeout: java.lang.Long) : scala.concurrent.Future[Unit] = {
     /**
      * Like create from [[io.vertx.kafka.client.producer.KafkaProducerRecord]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create[K, V](topic: java.lang.String,key: K,value: V,timestamp: java.lang.Long,partition: java.lang.Integer) = {
+def create[K, V](topic: java.lang.String, key: K, value: V, timestamp: java.lang.Long, partition: java.lang.Integer) = {
       io.vertx.kafka.client.producer.KafkaProducerRecord.create[K, V](topic, key, value, timestamp, partition)
 }
     /**
      * Like create from [[io.vertx.kafka.client.producer.KafkaProducerRecord]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create[K, V](topic: java.lang.String,key: K,value: V) = {
+def create[K, V](topic: java.lang.String, key: K, value: V) = {
       io.vertx.kafka.client.producer.KafkaProducerRecord.create[K, V](topic, key, value)
 }
     /**
      * Like create from [[io.vertx.kafka.client.producer.KafkaProducerRecord]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create[K, V](topic: java.lang.String,value: V) = {
+def create[K, V](topic: java.lang.String, value: V) = {
       io.vertx.kafka.client.producer.KafkaProducerRecord.create[K, V](topic, value)
 }  }
 

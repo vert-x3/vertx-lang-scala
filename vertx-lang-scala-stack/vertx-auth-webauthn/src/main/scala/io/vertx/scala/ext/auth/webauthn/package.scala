@@ -66,7 +66,8 @@ def updateUserCredentialFuture(id: java.lang.String,data: io.vertx.core.json.Jso
       val promise = concurrent.Promise[Unit]()
       asJava.updateUserCredential(id, data, upsert, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -88,8 +89,8 @@ def updateUserCredentialFuture(id: java.lang.String,data: io.vertx.core.json.Jso
     /**
      * Like getCredentialsOptions from [[io.vertx.ext.auth.webauthn.WebAuthn]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def getCredentialsOptions(username: scala.Option[java.lang.String],handler: AsyncResult[io.vertx.core.json.JsonObject] => Unit) = {
-      scala.Option(asJava.getCredentialsOptions(username.getOrElse(null), handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.json.JsonObject]]]))
+def getCredentialsOptions(username: scala.Option[java.lang.String], handler: AsyncResult[io.vertx.core.json.JsonObject] => Unit) = {
+      asJava.getCredentialsOptions(username.getOrElse(null), handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.json.JsonObject]]])
 }
     /**
      * Like createCredentialsOptions from [[io.vertx.ext.auth.webauthn.WebAuthn]] but returns a Scala Future instead of taking an AsyncResultHandler.
@@ -111,7 +112,8 @@ def authenticateFuture(authInfo: io.vertx.core.json.JsonObject) : scala.concurre
       val promise = concurrent.Promise[io.vertx.ext.auth.User]()
       asJava.authenticate(authInfo, new Handler[AsyncResult[io.vertx.ext.auth.User]] { override def handle(event: AsyncResult[io.vertx.ext.auth.User]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
