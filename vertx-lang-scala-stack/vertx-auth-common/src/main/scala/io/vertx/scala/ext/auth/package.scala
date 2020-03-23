@@ -55,7 +55,8 @@ def authenticateFuture(authInfo: io.vertx.core.json.JsonObject) : scala.concurre
       val promise = concurrent.Promise[io.vertx.ext.auth.User]()
       asJava.authenticate(authInfo, new Handler[AsyncResult[io.vertx.ext.auth.User]] { override def handle(event: AsyncResult[io.vertx.ext.auth.User]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -86,7 +87,8 @@ def getAuthorizationsFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Fut
       val promise = concurrent.Promise[Unit]()
       asJava.getAuthorizations(user, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -189,7 +191,8 @@ def isAuthorizedFuture(authority: java.lang.String) : scala.concurrent.Future[ja
       val promise = concurrent.Promise[java.lang.Boolean]()
       asJava.isAuthorized(authority, new Handler[AsyncResult[java.lang.Boolean]] { override def handle(event: AsyncResult[java.lang.Boolean]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 

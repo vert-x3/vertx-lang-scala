@@ -97,25 +97,25 @@ def listTopicsFuture() : scala.concurrent.Future[scala.collection.mutable.Set[ja
     /**
      * Like describeTopics from [[io.vertx.kafka.admin.KafkaAdminClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def describeTopicsFuture(topicNames: java.util.List[java.lang.String]) : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.kafka.admin.TopicDescription]] = {
+def describeTopicsFuture(topicNames: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.kafka.admin.TopicDescription]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, io.vertx.kafka.admin.TopicDescription]]()
-      asJava.describeTopics(topicNames, new Handler[AsyncResult[java.util.Map[java.lang.String,io.vertx.kafka.admin.TopicDescription]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,io.vertx.kafka.admin.TopicDescription]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
+      asJava.describeTopics(topicNames.asJava, new Handler[AsyncResult[java.util.Map[java.lang.String,io.vertx.kafka.admin.TopicDescription]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,io.vertx.kafka.admin.TopicDescription]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
 }
     /**
      * Like createTopics from [[io.vertx.kafka.admin.KafkaAdminClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def createTopicsFuture(topics: java.util.List[io.vertx.kafka.admin.NewTopic]) : scala.concurrent.Future[Unit] = {
+def createTopicsFuture(topics: scala.collection.mutable.Buffer[io.vertx.kafka.admin.NewTopic]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.createTopics(topics, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.createTopics(topics.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like deleteTopics from [[io.vertx.kafka.admin.KafkaAdminClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def deleteTopicsFuture(topicNames: java.util.List[java.lang.String]) : scala.concurrent.Future[Unit] = {
+def deleteTopicsFuture(topicNames: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
-      asJava.deleteTopics(topicNames, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+      asJava.deleteTopics(topicNames.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
@@ -129,11 +129,12 @@ def listConsumerGroupsFuture() : scala.concurrent.Future[scala.collection.mutabl
     /**
      * Like describeConsumerGroups from [[io.vertx.kafka.admin.KafkaAdminClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def describeConsumerGroupsFuture(groupIds: java.util.List[java.lang.String]) : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.kafka.admin.ConsumerGroupDescription]] = {
+def describeConsumerGroupsFuture(groupIds: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.kafka.admin.ConsumerGroupDescription]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, io.vertx.kafka.admin.ConsumerGroupDescription]]()
-      asJava.describeConsumerGroups(groupIds, new Handler[AsyncResult[java.util.Map[java.lang.String,io.vertx.kafka.admin.ConsumerGroupDescription]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,io.vertx.kafka.admin.ConsumerGroupDescription]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
+      asJava.describeConsumerGroups(groupIds.asJava, new Handler[AsyncResult[java.util.Map[java.lang.String,io.vertx.kafka.admin.ConsumerGroupDescription]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,io.vertx.kafka.admin.ConsumerGroupDescription]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}  }
+}
+  }
 
 
 

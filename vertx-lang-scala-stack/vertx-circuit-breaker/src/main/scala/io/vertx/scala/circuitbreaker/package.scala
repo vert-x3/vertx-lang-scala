@@ -56,7 +56,8 @@ def executeFuture[T](command: io.vertx.core.Promise[T] => Unit) : scala.concurre
       val promise = concurrent.Promise[T]()
       asJava.execute[T](command.asInstanceOf[io.vertx.core.Handler[io.vertx.core.Promise[T]]], new Handler[AsyncResult[T]] { override def handle(event: AsyncResult[T]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 

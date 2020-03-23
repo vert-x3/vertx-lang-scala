@@ -715,7 +715,8 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
       val promise = concurrent.Promise[io.vertx.ext.consul.PreparedQueryExecuteResponse]()
       asJava.executePreparedQueryWithOptions(query, options, new Handler[AsyncResult[io.vertx.ext.consul.PreparedQueryExecuteResponse]] { override def handle(event: AsyncResult[io.vertx.ext.consul.PreparedQueryExecuteResponse]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -971,25 +972,25 @@ def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.ve
     /**
      * Like key from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def key(key: java.lang.String,vertx: io.vertx.core.Vertx) = {
+def key(key: java.lang.String, vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.consul.Watch.key(key, vertx)
 }
     /**
      * Like key from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def key(key: java.lang.String,vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOptions) = {
+def key(key: java.lang.String, vertx: io.vertx.core.Vertx, options: io.vertx.ext.consul.ConsulClientOptions) = {
       io.vertx.ext.consul.Watch.key(key, vertx, options)
 }
     /**
      * Like keyPrefix from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def keyPrefix(keyPrefix: java.lang.String,vertx: io.vertx.core.Vertx) = {
+def keyPrefix(keyPrefix: java.lang.String, vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.consul.Watch.keyPrefix(keyPrefix, vertx)
 }
     /**
      * Like keyPrefix from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def keyPrefix(keyPrefix: java.lang.String,vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOptions) = {
+def keyPrefix(keyPrefix: java.lang.String, vertx: io.vertx.core.Vertx, options: io.vertx.ext.consul.ConsulClientOptions) = {
       io.vertx.ext.consul.Watch.keyPrefix(keyPrefix, vertx, options)
 }
     /**
@@ -1001,31 +1002,31 @@ def services(vertx: io.vertx.core.Vertx) = {
     /**
      * Like services from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def services(vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOptions) = {
+def services(vertx: io.vertx.core.Vertx, options: io.vertx.ext.consul.ConsulClientOptions) = {
       io.vertx.ext.consul.Watch.services(vertx, options)
 }
     /**
      * Like service from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def service(service: java.lang.String,vertx: io.vertx.core.Vertx) = {
+def service(service: java.lang.String, vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.consul.Watch.service(service, vertx)
 }
     /**
      * Like service from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def service(service: java.lang.String,vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOptions) = {
+def service(service: java.lang.String, vertx: io.vertx.core.Vertx, options: io.vertx.ext.consul.ConsulClientOptions) = {
       io.vertx.ext.consul.Watch.service(service, vertx, options)
 }
     /**
      * Like events from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def events(event: java.lang.String,vertx: io.vertx.core.Vertx) = {
+def events(event: java.lang.String, vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.consul.Watch.events(event, vertx)
 }
     /**
      * Like events from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def events(event: java.lang.String,vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOptions) = {
+def events(event: java.lang.String, vertx: io.vertx.core.Vertx, options: io.vertx.ext.consul.ConsulClientOptions) = {
       io.vertx.ext.consul.Watch.events(event, vertx, options)
 }
     /**
@@ -1037,7 +1038,7 @@ def nodes(vertx: io.vertx.core.Vertx) = {
     /**
      * Like nodes from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def nodes(vertx: io.vertx.core.Vertx,options: io.vertx.ext.consul.ConsulClientOptions) = {
+def nodes(vertx: io.vertx.core.Vertx, options: io.vertx.ext.consul.ConsulClientOptions) = {
       io.vertx.ext.consul.Watch.nodes(vertx, options)
 }  }
 

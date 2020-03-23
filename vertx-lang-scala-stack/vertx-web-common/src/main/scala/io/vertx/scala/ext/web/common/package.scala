@@ -45,7 +45,8 @@ def renderFuture(context: io.vertx.core.json.JsonObject,templateFileName: java.l
       val promise = concurrent.Promise[io.vertx.core.buffer.Buffer]()
       asJava.render(context, templateFileName, new Handler[AsyncResult[io.vertx.core.buffer.Buffer]] { override def handle(event: AsyncResult[io.vertx.core.buffer.Buffer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 

@@ -40,7 +40,7 @@ package object jwt{
     /**
      * Like create from [[io.vertx.ext.auth.jwt.JWTAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.jwt.JWTAuthOptions) = {
+def create(vertx: io.vertx.core.Vertx, config: io.vertx.ext.auth.jwt.JWTAuthOptions) = {
       io.vertx.ext.auth.jwt.JWTAuth.create(vertx, config)
 }  }
 

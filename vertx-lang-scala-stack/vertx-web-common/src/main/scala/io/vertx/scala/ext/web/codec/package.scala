@@ -93,7 +93,7 @@ def pipe(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer])
     /**
      * Like pipe from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def pipe(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer],close: java.lang.Boolean) = {
+def pipe(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer], close: java.lang.Boolean) = {
       io.vertx.ext.web.codec.BodyCodec.pipe(stream, close)
 }
     /**

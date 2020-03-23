@@ -145,7 +145,8 @@ def callWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonAr
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
       asJava.callWithParams(sql, params, outputs, new Handler[AsyncResult[io.vertx.ext.sql.ResultSet]] { override def handle(event: AsyncResult[io.vertx.ext.sql.ResultSet]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -280,25 +281,25 @@ def rollbackFuture() : scala.concurrent.Future[Unit] = {
     /**
      * Like batch from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def batchFuture(sqlStatements: java.util.List[java.lang.String]) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Integer]] = {
+def batchFuture(sqlStatements: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Integer]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Integer]]()
-      asJava.batch(sqlStatements, new Handler[AsyncResult[java.util.List[java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
+      asJava.batch(sqlStatements.asJava, new Handler[AsyncResult[java.util.List[java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
 }
     /**
      * Like batchWithParams from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def batchWithParamsFuture(sqlStatement: java.lang.String,args: java.util.List[io.vertx.core.json.JsonArray]) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Integer]] = {
+def batchWithParamsFuture(sqlStatement: java.lang.String,args: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Integer]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Integer]]()
-      asJava.batchWithParams(sqlStatement, args, new Handler[AsyncResult[java.util.List[java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
+      asJava.batchWithParams(sqlStatement, args.asJava, new Handler[AsyncResult[java.util.List[java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
 }
     /**
      * Like batchCallableWithParams from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def batchCallableWithParamsFuture(sqlStatement: java.lang.String,inArgs: java.util.List[io.vertx.core.json.JsonArray],outArgs: java.util.List[io.vertx.core.json.JsonArray]) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Integer]] = {
+def batchCallableWithParamsFuture(sqlStatement: java.lang.String,inArgs: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray],outArgs: scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Integer]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Integer]]()
-      asJava.batchCallableWithParams(sqlStatement, inArgs, outArgs, new Handler[AsyncResult[java.util.List[java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
+      asJava.batchCallableWithParams(sqlStatement, inArgs.asJava, outArgs.asJava, new Handler[AsyncResult[java.util.List[java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
 }
     /**
@@ -316,7 +317,8 @@ def getTransactionIsolationFuture() : scala.concurrent.Future[io.vertx.ext.sql.T
       val promise = concurrent.Promise[io.vertx.ext.sql.TransactionIsolation]()
       asJava.getTransactionIsolation(new Handler[AsyncResult[io.vertx.ext.sql.TransactionIsolation]] { override def handle(event: AsyncResult[io.vertx.ext.sql.TransactionIsolation]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -407,7 +409,8 @@ def callWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonAr
       val promise = concurrent.Promise[io.vertx.ext.sql.ResultSet]()
       asJava.callWithParams(sql, params, outputs, new Handler[AsyncResult[io.vertx.ext.sql.ResultSet]] { override def handle(event: AsyncResult[io.vertx.ext.sql.ResultSet]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
@@ -433,13 +436,13 @@ def callWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonAr
   implicit class SQLRowStreamScala(val asJava: io.vertx.ext.sql.SQLRowStream) extends AnyVal {
 
 def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
-      scala.Option(asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]]))
+      asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
 }
 def handler(handler: scala.Option[io.vertx.core.json.JsonArray => Unit]) = {
-      scala.Option(asJava.handler(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.json.JsonArray]]))
+      asJava.handler(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.json.JsonArray]])
 }
 def endHandler(endHandler: scala.Option[Void => Unit]) = {
-      scala.Option(asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]]))
+      asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
 }
 def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.json.JsonArray]) : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
@@ -453,7 +456,8 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
       val promise = concurrent.Promise[Unit]()
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}  }
+}
+  }
 
 
 
