@@ -3,6 +3,8 @@ package io.vertx.lang.scala.codegen;
 import io.vertx.codegen.*;
 import io.vertx.codegen.type.*;
 import io.vertx.codegen.doc.Doc;
+import io.vertx.lang.scala.codegen.gen.Imports;
+import io.vertx.lang.scala.codegen.gen.Templates;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import java.io.IOException;

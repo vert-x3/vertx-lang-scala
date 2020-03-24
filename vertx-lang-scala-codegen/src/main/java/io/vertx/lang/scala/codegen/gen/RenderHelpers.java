@@ -1,4 +1,4 @@
-package io.vertx.lang.scala.codegen;
+package io.vertx.lang.scala.codegen.gen;
 
 import java.io.BufferedReader;
 import java.io.IOException;

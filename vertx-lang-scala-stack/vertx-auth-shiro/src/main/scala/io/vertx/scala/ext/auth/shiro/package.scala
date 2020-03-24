@@ -37,9 +37,10 @@ package object shiro{
     /**
      * Like create from [[io.vertx.ext.auth.shiro.ShiroAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(vertx: io.vertx.core.Vertx, options: io.vertx.ext.auth.shiro.ShiroAuthOptions) = {
+  def create(vertx: io.vertx.core.Vertx, options: io.vertx.ext.auth.shiro.ShiroAuthOptions) = {
       io.vertx.ext.auth.shiro.ShiroAuth.create(vertx, options)
-}  }
+  }
+  }
 
 
   type ShiroAuthOptions = io.vertx.ext.auth.shiro.ShiroAuthOptions

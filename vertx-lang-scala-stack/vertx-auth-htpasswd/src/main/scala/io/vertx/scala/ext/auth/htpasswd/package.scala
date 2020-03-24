@@ -34,12 +34,14 @@ package object htpasswd{
 
 
   object HtpasswdAuth {
-def create(vertx: io.vertx.core.Vertx) = {
+  def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.auth.htpasswd.HtpasswdAuth.create(vertx)
-}
-def create(vertx: io.vertx.core.Vertx, htpasswdAuthOptions: io.vertx.ext.auth.htpasswd.HtpasswdAuthOptions) = {
+  }
+
+  def create(vertx: io.vertx.core.Vertx, htpasswdAuthOptions: io.vertx.ext.auth.htpasswd.HtpasswdAuthOptions) = {
       io.vertx.ext.auth.htpasswd.HtpasswdAuth.create(vertx, htpasswdAuthOptions)
-}  }
+  }
+  }
 
 
   type HtpasswdAuthOptions = io.vertx.ext.auth.htpasswd.HtpasswdAuthOptions

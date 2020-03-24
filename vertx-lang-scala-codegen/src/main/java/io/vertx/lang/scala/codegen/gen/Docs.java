@@ -1,4 +1,4 @@
-package io.vertx.lang.scala.codegen;
+package io.vertx.lang.scala.codegen.gen;
 
 import io.vertx.codegen.Case;
 import io.vertx.codegen.MethodInfo;
@@ -32,7 +32,7 @@ public class Docs {
 
       if (future) {
         doc += commentedIndentation;
-        String params = method.getParams().stream().map(param -> Templates.convertToScalaNotation(param.getType().getSimpleName())).collect(Collectors.joining(","));
+        String params = method.getParams().stream().map(param -> Templates.convertToScalaGenericsNotation(param.getType().getSimpleName())).collect(Collectors.joining(","));
         if (params != "") {
           params = "(" + params +")";
         }
@@ -125,7 +125,7 @@ public class Docs {
     } else if (type.equals("Handler") || type.equals("io.vertx.core.Handler")) {
       return "scala-function";
     } else if (type.contains("io.vertx") && !type.endsWith("Exception")) {
-      return Templates.convertToScalaNotation(type).replace("io.vertx.", "io.vertx.scala.");
+      return Templates.convertToScalaGenericsNotation(type).replace("io.vertx.", "io.vertx.scala.");
     } else {
       return type;
     }
@@ -160,7 +160,7 @@ public class Docs {
     if (rawType.getModule() != null) {
       String label = link.getLabel().trim();
       if (rawType.getKind() == ClassKind.ENUM) {
-        return "[[" + Templates.convertToScalaNotation(rawType.getName()) + "]]";
+        return "[[" + Templates.convertToScalaGenericsNotation(rawType.getName()) + "]]";
       }
       if (rawType.getDataObject() != null) {
         if (label.length() == 0) {

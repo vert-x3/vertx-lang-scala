@@ -29,9 +29,10 @@ package object pkg{
 
 
   object MyInterface {
-def create() = {
+  def create() = {
       com.acme.pkg.MyInterface.create()
-}  }
+  }
+  }
 
 
 

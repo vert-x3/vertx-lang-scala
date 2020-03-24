@@ -62,27 +62,31 @@ package object web{
     /**
      * Like create from [[io.vertx.ext.web.sstore.ClusteredSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String) = {
+  def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, sessionMapName)
-}
+  }
+
     /**
      * Like create from [[io.vertx.ext.web.sstore.ClusteredSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String, retryTimeout: java.lang.Long) = {
+  def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String, retryTimeout: java.lang.Long) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, sessionMapName, retryTimeout)
-}
+  }
+
     /**
      * Like create from [[io.vertx.ext.web.sstore.ClusteredSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(vertx: io.vertx.core.Vertx) = {
+  def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx)
-}
+  }
+
     /**
      * Like create from [[io.vertx.ext.web.sstore.ClusteredSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(vertx: io.vertx.core.Vertx, retryTimeout: java.lang.Long) = {
+  def create(vertx: io.vertx.core.Vertx, retryTimeout: java.lang.Long) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, retryTimeout)
-}  }
+  }
+  }
 
 
 
@@ -113,21 +117,24 @@ def create(vertx: io.vertx.core.Vertx, retryTimeout: java.lang.Long) = {
     /**
      * Like create from [[io.vertx.ext.web.sstore.LocalSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(vertx: io.vertx.core.Vertx) = {
+  def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.sstore.LocalSessionStore.create(vertx)
-}
+  }
+
     /**
      * Like create from [[io.vertx.ext.web.sstore.LocalSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String) = {
+  def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String) = {
       io.vertx.ext.web.sstore.LocalSessionStore.create(vertx, sessionMapName)
-}
+  }
+
     /**
      * Like create from [[io.vertx.ext.web.sstore.LocalSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String, reaperInterval: java.lang.Long) = {
+  def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String, reaperInterval: java.lang.Long) = {
       io.vertx.ext.web.sstore.LocalSessionStore.create(vertx, sessionMapName, reaperInterval)
-}  }
+  }
+  }
 
 
 
@@ -156,9 +163,10 @@ def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String, reaperI
     /**
      * Like router from [[io.vertx.ext.web.Router]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def router(vertx: io.vertx.core.Vertx) = {
+  def router(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.Router.router(vertx)
-}  }
+  }
+  }
 
 
 
@@ -178,43 +186,48 @@ def router(vertx: io.vertx.core.Vertx) = {
     /**
      * Like get from [[io.vertx.ext.web.sstore.SessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def getFuture(cookieValue: java.lang.String) : scala.concurrent.Future[io.vertx.ext.web.Session] = {
+  def getFuture(cookieValue: java.lang.String) : scala.concurrent.Future[io.vertx.ext.web.Session] = {
       val promise = concurrent.Promise[io.vertx.ext.web.Session]()
       asJava.get(cookieValue, new Handler[AsyncResult[io.vertx.ext.web.Session]] { override def handle(event: AsyncResult[io.vertx.ext.web.Session]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+  }
+
     /**
      * Like delete from [[io.vertx.ext.web.sstore.SessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def deleteFuture(id: java.lang.String) : scala.concurrent.Future[Void] = {
+  def deleteFuture(id: java.lang.String) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.delete(id, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+  }
+
     /**
      * Like put from [[io.vertx.ext.web.sstore.SessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def putFuture(session: io.vertx.ext.web.Session) : scala.concurrent.Future[Void] = {
+  def putFuture(session: io.vertx.ext.web.Session) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.put(session, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+  }
+
     /**
      * Like clear from [[io.vertx.ext.web.sstore.SessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def clearFuture() : scala.concurrent.Future[Void] = {
+  def clearFuture() : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.clear(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+  }
+
     /**
      * Like size from [[io.vertx.ext.web.sstore.SessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def sizeFuture() : scala.concurrent.Future[java.lang.Integer] = {
+  def sizeFuture() : scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
       asJava.size(new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+  }
+
   }
 
 
@@ -242,55 +255,66 @@ def sizeFuture() : scala.concurrent.Future[java.lang.Integer] = {
 
   implicit class SockJSSocketScala(val asJava: io.vertx.ext.web.handler.sockjs.SockJSSocket) extends AnyVal {
 
-def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
+  def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
       asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
-}
-def handler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]) = {
+  }
+
+  def handler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]) = {
       asJava.handler(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]])
-}
-def endHandler(endHandler: scala.Option[Void => Unit]) = {
+  }
+
+  def endHandler(endHandler: scala.Option[Void => Unit]) = {
       asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
-}
-def drainHandler(handler: scala.Option[Void => Unit]) = {
+  }
+
+  def drainHandler(handler: scala.Option[Void => Unit]) = {
       asJava.drainHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
-}
+  }
+
     /**
      * Like webSession from [[io.vertx.ext.web.handler.sockjs.SockJSSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def webSessionOption() = {
+  def webSessionOption() = {
       scala.Option(asJava.webSession())
-}
+  }
+
     /**
      * Like webUser from [[io.vertx.ext.web.handler.sockjs.SockJSSocket]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def webUserOption() = {
+  def webUserOption() = {
       scala.Option(asJava.webUser())
-}
-def endFuture() : scala.concurrent.Future[Void] = {
+  }
+
+  def endFuture() : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.end(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def endFuture(data: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[Void] = {
+  }
+
+  def endFuture(data: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.end(data, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]) : scala.concurrent.Future[Void] = {
+  }
+
+  def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.pipeTo(dst, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def writeFuture(data: java.lang.String) : scala.concurrent.Future[Void] = {
+  }
+
+  def writeFuture(data: java.lang.String) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.write(data, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def writeFuture(data: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[Void] = {
+  }
+
+  def writeFuture(data: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.write(data, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+  }
+
   }
 
 

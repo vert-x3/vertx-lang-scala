@@ -55,106 +55,126 @@ package object testmodel{
   implicit class CollectionTCKScala(val asJava: io.vertx.codegen.testmodel.CollectionTCK) extends AnyVal {
 
 
-def methodWithHandlerAsyncResultListStringFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.String]] = {
+  def methodWithHandlerAsyncResultListStringFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.String]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.String]]()
       asJava.methodWithHandlerAsyncResultListString(new Handler[AsyncResult[java.util.List[java.lang.String]]] { override def handle(event: AsyncResult[java.util.List[java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultListIntegerFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Integer]] = {
+  }
+
+  def methodWithHandlerAsyncResultListIntegerFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Integer]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Integer]]()
       asJava.methodWithHandlerAsyncResultListInteger(new Handler[AsyncResult[java.util.List[java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetStringFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.String]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetStringFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.String]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.String]]()
       asJava.methodWithHandlerAsyncResultSetString(new Handler[AsyncResult[java.util.Set[java.lang.String]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetIntegerFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Integer]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetIntegerFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Integer]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Integer]]()
       asJava.methodWithHandlerAsyncResultSetInteger(new Handler[AsyncResult[java.util.Set[java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultListVertxGenFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface1]] = {
+  }
+
+  def methodWithHandlerAsyncResultListVertxGenFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface1]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface1]]()
       asJava.methodWithHandlerAsyncResultListVertxGen(new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.RefedInterface1]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.RefedInterface1]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultListAbstractVertxGenFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface2]] = {
+  }
+
+  def methodWithHandlerAsyncResultListAbstractVertxGenFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface2]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface2]]()
       asJava.methodWithHandlerAsyncResultListAbstractVertxGen(new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.RefedInterface2]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.RefedInterface2]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultListJsonObjectFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
+  }
+
+  def methodWithHandlerAsyncResultListJsonObjectFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]()
       asJava.methodWithHandlerAsyncResultListJsonObject(new Handler[AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultListComplexJsonObjectFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
+  }
+
+  def methodWithHandlerAsyncResultListComplexJsonObjectFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]()
       asJava.methodWithHandlerAsyncResultListComplexJsonObject(new Handler[AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultListJsonArrayFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
+  }
+
+  def methodWithHandlerAsyncResultListJsonArrayFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]()
       asJava.methodWithHandlerAsyncResultListJsonArray(new Handler[AsyncResult[java.util.List[io.vertx.core.json.JsonArray]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.core.json.JsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultListComplexJsonArrayFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
+  }
+
+  def methodWithHandlerAsyncResultListComplexJsonArrayFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]()
       asJava.methodWithHandlerAsyncResultListComplexJsonArray(new Handler[AsyncResult[java.util.List[io.vertx.core.json.JsonArray]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.core.json.JsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultListDataObjectFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestDataObject]] = {
+  }
+
+  def methodWithHandlerAsyncResultListDataObjectFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestDataObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestDataObject]]()
       asJava.methodWithHandlerAsyncResultListDataObject(new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestDataObject]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestDataObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultListEnumFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]] = {
+  }
+
+  def methodWithHandlerAsyncResultListEnumFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]()
       asJava.methodWithHandlerAsyncResultListEnum(new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestEnum]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestEnum]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetVertxGenFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface1]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetVertxGenFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface1]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface1]]()
       asJava.methodWithHandlerAsyncResultSetVertxGen(new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetAbstractVertxGenFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface2]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetAbstractVertxGenFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface2]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface2]]()
       asJava.methodWithHandlerAsyncResultSetAbstractVertxGen(new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.RefedInterface2]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.RefedInterface2]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetJsonObjectFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetJsonObjectFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]()
       asJava.methodWithHandlerAsyncResultSetJsonObject(new Handler[AsyncResult[java.util.Set[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetComplexJsonObjectFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetComplexJsonObjectFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]()
       asJava.methodWithHandlerAsyncResultSetComplexJsonObject(new Handler[AsyncResult[java.util.Set[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetJsonArrayFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetJsonArrayFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]()
       asJava.methodWithHandlerAsyncResultSetJsonArray(new Handler[AsyncResult[java.util.Set[io.vertx.core.json.JsonArray]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.core.json.JsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetComplexJsonArrayFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetComplexJsonArrayFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]()
       asJava.methodWithHandlerAsyncResultSetComplexJsonArray(new Handler[AsyncResult[java.util.Set[io.vertx.core.json.JsonArray]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.core.json.JsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetDataObjectFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestDataObject]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetDataObjectFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestDataObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestDataObject]]()
       asJava.methodWithHandlerAsyncResultSetDataObject(new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestDataObject]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestDataObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetEnumFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetEnumFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]()
       asJava.methodWithHandlerAsyncResultSetEnum(new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestEnum]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestEnum]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
+  }
+
   }
 
 
@@ -238,15 +258,18 @@ def methodWithHandlerAsyncResultSetEnumFuture() : scala.concurrent.Future[scala.
 
 
   object Factory {
-def createConcreteHandlerUserType(handler: io.vertx.codegen.testmodel.RefedInterface1 => Unit) = {
+  def createConcreteHandlerUserType(handler: io.vertx.codegen.testmodel.RefedInterface1 => Unit) = {
       io.vertx.codegen.testmodel.Factory.createConcreteHandlerUserType(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.codegen.testmodel.RefedInterface1]])
-}
-def createAbstractHandlerUserType(handler: io.vertx.codegen.testmodel.RefedInterface1 => Unit) = {
+  }
+
+  def createAbstractHandlerUserType(handler: io.vertx.codegen.testmodel.RefedInterface1 => Unit) = {
       io.vertx.codegen.testmodel.Factory.createAbstractHandlerUserType(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.codegen.testmodel.RefedInterface1]])
-}
-def createConcreteHandlerUserTypeExtension(handler: io.vertx.codegen.testmodel.RefedInterface1 => Unit) = {
+  }
+
+  def createConcreteHandlerUserTypeExtension(handler: io.vertx.codegen.testmodel.RefedInterface1 => Unit) = {
       io.vertx.codegen.testmodel.Factory.createConcreteHandlerUserTypeExtension(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.codegen.testmodel.RefedInterface1]])
-}  }
+  }
+  }
 
 
 
@@ -259,11 +282,12 @@ def createConcreteHandlerUserTypeExtension(handler: io.vertx.codegen.testmodel.R
   implicit class FutureTCKScala(val asJava: io.vertx.codegen.testmodel.FutureTCK) extends AnyVal {
 
 
-def asyncMethodFuture() : scala.concurrent.Future[Void] = {
+  def asyncMethodFuture() : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.asyncMethod(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+  }
+
   }
 
 
@@ -279,107 +303,128 @@ def asyncMethodFuture() : scala.concurrent.Future[Void] = {
 
   implicit class GenericsTCKScala(val asJava: io.vertx.codegen.testmodel.GenericsTCK) extends AnyVal {
 
-def methodWithClassTypeParam[U](`type`: Class[U], u: U) = {
+  def methodWithClassTypeParam[U](`type`: Class[U], u: U) = {
       asJava.methodWithClassTypeParam[U](`type`, u)
-}
-def interfaceWithVariableArg[T, U](value1: T, `type`: Class[U], value2: U) = {
+  }
+
+  def interfaceWithVariableArg[T, U](value1: T, `type`: Class[U], value2: U) = {
       asJava.interfaceWithVariableArg[T, U](value1, `type`, value2)
-}
-def methodWithHandlerAsyncResultByteParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Byte]] = {
+  }
+
+  def methodWithHandlerAsyncResultByteParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Byte]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Byte]]()
       asJava.methodWithHandlerAsyncResultByteParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Byte]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Byte]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultShortParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Short]] = {
+  }
+
+  def methodWithHandlerAsyncResultShortParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Short]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Short]]()
       asJava.methodWithHandlerAsyncResultShortParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Short]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Short]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultIntegerParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Integer]] = {
+  }
+
+  def methodWithHandlerAsyncResultIntegerParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Integer]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Integer]]()
       asJava.methodWithHandlerAsyncResultIntegerParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Integer]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultLongParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Long]] = {
+  }
+
+  def methodWithHandlerAsyncResultLongParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Long]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Long]]()
       asJava.methodWithHandlerAsyncResultLongParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Long]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Long]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultFloatParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Float]] = {
+  }
+
+  def methodWithHandlerAsyncResultFloatParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Float]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Float]]()
       asJava.methodWithHandlerAsyncResultFloatParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Float]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Float]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultDoubleParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Double]] = {
+  }
+
+  def methodWithHandlerAsyncResultDoubleParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Double]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Double]]()
       asJava.methodWithHandlerAsyncResultDoubleParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Double]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Double]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultBooleanParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Boolean]] = {
+  }
+
+  def methodWithHandlerAsyncResultBooleanParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Boolean]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Boolean]]()
       asJava.methodWithHandlerAsyncResultBooleanParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Boolean]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Boolean]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultCharacterParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Character]] = {
+  }
+
+  def methodWithHandlerAsyncResultCharacterParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Character]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Character]]()
       asJava.methodWithHandlerAsyncResultCharacterParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Character]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.Character]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultStringParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.String]] = {
+  }
+
+  def methodWithHandlerAsyncResultStringParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.String]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.String]]()
       asJava.methodWithHandlerAsyncResultStringParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.String]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultJsonObjectParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.core.json.JsonObject]] = {
+  }
+
+  def methodWithHandlerAsyncResultJsonObjectParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.core.json.JsonObject]]()
       asJava.methodWithHandlerAsyncResultJsonObjectParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultJsonArrayParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.core.json.JsonArray]] = {
+  }
+
+  def methodWithHandlerAsyncResultJsonArrayParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.core.json.JsonArray]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.core.json.JsonArray]]()
       asJava.methodWithHandlerAsyncResultJsonArrayParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.core.json.JsonArray]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.core.json.JsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultDataObjectParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestDataObject]] = {
+  }
+
+  def methodWithHandlerAsyncResultDataObjectParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestDataObject]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestDataObject]]()
       asJava.methodWithHandlerAsyncResultDataObjectParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestDataObject]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestDataObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultEnumParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum]] = {
+  }
+
+  def methodWithHandlerAsyncResultEnumParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum]]()
       asJava.methodWithHandlerAsyncResultEnumParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestEnum]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultGenEnumParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum]] = {
+  }
+
+  def methodWithHandlerAsyncResultGenEnumParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum]]()
       asJava.methodWithHandlerAsyncResultGenEnumParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultUserTypeParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.RefedInterface1]] = {
+  }
+
+  def methodWithHandlerAsyncResultUserTypeParameterizedFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.RefedInterface1]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.RefedInterface1]]()
       asJava.methodWithHandlerAsyncResultUserTypeParameterized(new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.RefedInterface1]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[io.vertx.codegen.testmodel.RefedInterface1]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultClassTypeParameterizedFuture[U](`type`: Class[U]) : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[U]] = {
+  }
+
+  def methodWithHandlerAsyncResultClassTypeParameterizedFuture[U](`type`: Class[U]) : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[U]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[U]]()
       asJava.methodWithHandlerAsyncResultClassTypeParameterized[U](`type`, new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[U]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[U]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithClassTypeHandlerAsyncResultFuture[U](`type`: Class[U]) : scala.concurrent.Future[U] = {
+  }
+
+  def methodWithClassTypeHandlerAsyncResultFuture[U](`type`: Class[U]) : scala.concurrent.Future[U] = {
       val promise = concurrent.Promise[U]()
       asJava.methodWithClassTypeHandlerAsyncResult[U](`type`, new Handler[AsyncResult[U]] { override def handle(event: AsyncResult[U]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultGenericNullableApiFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericNullableRefedInterface[io.vertx.codegen.testmodel.RefedInterface1]] = {
+  }
+
+  def methodWithHandlerAsyncResultGenericNullableApiFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericNullableRefedInterface[io.vertx.codegen.testmodel.RefedInterface1]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericNullableRefedInterface[io.vertx.codegen.testmodel.RefedInterface1]]()
       asJava.methodWithHandlerAsyncResultGenericNullableApi(notNull, new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericNullableRefedInterface[io.vertx.codegen.testmodel.RefedInterface1]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericNullableRefedInterface[io.vertx.codegen.testmodel.RefedInterface1]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultParamInferedFuture[T](param: io.vertx.codegen.testmodel.GenericRefedInterface[T]) : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[T]] = {
+  }
+
+  def methodWithHandlerAsyncResultParamInferedFuture[T](param: io.vertx.codegen.testmodel.GenericRefedInterface[T]) : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[T]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[T]]()
       asJava.methodWithHandlerAsyncResultParamInfered[T](param, new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[T]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+  }
+
   }
 
 
@@ -395,106 +440,126 @@ def methodWithHandlerAsyncResultParamInferedFuture[T](param: io.vertx.codegen.te
   implicit class JsonMapperTCKScala(val asJava: io.vertx.codegen.testmodel.JsonMapperTCK) extends AnyVal {
 
 
-def methodWithHandlerAsyncResultTypeToIntegerParamFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.MyPojoToInteger] = {
+  def methodWithHandlerAsyncResultTypeToIntegerParamFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.MyPojoToInteger] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.MyPojoToInteger]()
       asJava.methodWithHandlerAsyncResultTypeToIntegerParam(new Handler[AsyncResult[io.vertx.codegen.testmodel.MyPojoToInteger]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.MyPojoToInteger]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultListOfTypeToIntegerParamFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.MyPojoToInteger]] = {
+  }
+
+  def methodWithHandlerAsyncResultListOfTypeToIntegerParamFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.MyPojoToInteger]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.MyPojoToInteger]]()
       asJava.methodWithHandlerAsyncResultListOfTypeToIntegerParam(new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.MyPojoToInteger]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.MyPojoToInteger]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetOfTypeToIntegerParamFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.MyPojoToInteger]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetOfTypeToIntegerParamFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.MyPojoToInteger]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.MyPojoToInteger]]()
       asJava.methodWithHandlerAsyncResultSetOfTypeToIntegerParam(new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.MyPojoToInteger]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.MyPojoToInteger]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultMapOfTypeToIntegerParamFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.MyPojoToInteger]] = {
+  }
+
+  def methodWithHandlerAsyncResultMapOfTypeToIntegerParamFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.MyPojoToInteger]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.MyPojoToInteger]]()
       asJava.methodWithHandlerAsyncResultMapOfTypeToIntegerParam(new Handler[AsyncResult[java.util.Map[java.lang.String,io.vertx.codegen.testmodel.MyPojoToInteger]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,io.vertx.codegen.testmodel.MyPojoToInteger]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultTypeToStringParamFuture() : scala.concurrent.Future[java.time.ZonedDateTime] = {
+  }
+
+  def methodWithHandlerAsyncResultTypeToStringParamFuture() : scala.concurrent.Future[java.time.ZonedDateTime] = {
       val promise = concurrent.Promise[java.time.ZonedDateTime]()
       asJava.methodWithHandlerAsyncResultTypeToStringParam(new Handler[AsyncResult[java.time.ZonedDateTime]] { override def handle(event: AsyncResult[java.time.ZonedDateTime]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultListOfTypeToStringParamFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.time.ZonedDateTime]] = {
+  }
+
+  def methodWithHandlerAsyncResultListOfTypeToStringParamFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.time.ZonedDateTime]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.time.ZonedDateTime]]()
       asJava.methodWithHandlerAsyncResultListOfTypeToStringParam(new Handler[AsyncResult[java.util.List[java.time.ZonedDateTime]]] { override def handle(event: AsyncResult[java.util.List[java.time.ZonedDateTime]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetOfTypeToStringParamFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.time.ZonedDateTime]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetOfTypeToStringParamFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.time.ZonedDateTime]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.time.ZonedDateTime]]()
       asJava.methodWithHandlerAsyncResultSetOfTypeToStringParam(new Handler[AsyncResult[java.util.Set[java.time.ZonedDateTime]]] { override def handle(event: AsyncResult[java.util.Set[java.time.ZonedDateTime]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultMapOfTypeToStringParamFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.time.ZonedDateTime]] = {
+  }
+
+  def methodWithHandlerAsyncResultMapOfTypeToStringParamFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.time.ZonedDateTime]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.time.ZonedDateTime]]()
       asJava.methodWithHandlerAsyncResultMapOfTypeToStringParam(new Handler[AsyncResult[java.util.Map[java.lang.String,java.time.ZonedDateTime]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.time.ZonedDateTime]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultTypeToJsonArrayParamFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.MyPojoToJsonArray] = {
+  }
+
+  def methodWithHandlerAsyncResultTypeToJsonArrayParamFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.MyPojoToJsonArray] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.MyPojoToJsonArray]()
       asJava.methodWithHandlerAsyncResultTypeToJsonArrayParam(new Handler[AsyncResult[io.vertx.codegen.testmodel.MyPojoToJsonArray]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.MyPojoToJsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultListOfTypeToJsonArrayParamFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.MyPojoToJsonArray]] = {
+  }
+
+  def methodWithHandlerAsyncResultListOfTypeToJsonArrayParamFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.MyPojoToJsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.MyPojoToJsonArray]]()
       asJava.methodWithHandlerAsyncResultListOfTypeToJsonArrayParam(new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.MyPojoToJsonArray]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.MyPojoToJsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetOfTypeToJsonArrayParamFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.MyPojoToJsonArray]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetOfTypeToJsonArrayParamFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.MyPojoToJsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.MyPojoToJsonArray]]()
       asJava.methodWithHandlerAsyncResultSetOfTypeToJsonArrayParam(new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.MyPojoToJsonArray]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.MyPojoToJsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultMapOfTypeToJsonArrayParamFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.MyPojoToJsonArray]] = {
+  }
+
+  def methodWithHandlerAsyncResultMapOfTypeToJsonArrayParamFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.MyPojoToJsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.MyPojoToJsonArray]]()
       asJava.methodWithHandlerAsyncResultMapOfTypeToJsonArrayParam(new Handler[AsyncResult[java.util.Map[java.lang.String,io.vertx.codegen.testmodel.MyPojoToJsonArray]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,io.vertx.codegen.testmodel.MyPojoToJsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultTypeToJsonObjectParamFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.MyPojoToJsonObject] = {
+  }
+
+  def methodWithHandlerAsyncResultTypeToJsonObjectParamFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.MyPojoToJsonObject] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.MyPojoToJsonObject]()
       asJava.methodWithHandlerAsyncResultTypeToJsonObjectParam(new Handler[AsyncResult[io.vertx.codegen.testmodel.MyPojoToJsonObject]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.MyPojoToJsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultListOfTypeToJsonObjectParamFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.MyPojoToJsonObject]] = {
+  }
+
+  def methodWithHandlerAsyncResultListOfTypeToJsonObjectParamFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.MyPojoToJsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.MyPojoToJsonObject]]()
       asJava.methodWithHandlerAsyncResultListOfTypeToJsonObjectParam(new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.MyPojoToJsonObject]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.MyPojoToJsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetOfTypeToJsonObjectParamFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.MyPojoToJsonObject]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetOfTypeToJsonObjectParamFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.MyPojoToJsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.MyPojoToJsonObject]]()
       asJava.methodWithHandlerAsyncResultSetOfTypeToJsonObjectParam(new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.MyPojoToJsonObject]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.MyPojoToJsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultMapOfTypeToJsonObjectParamFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.MyPojoToJsonObject]] = {
+  }
+
+  def methodWithHandlerAsyncResultMapOfTypeToJsonObjectParamFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.MyPojoToJsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.MyPojoToJsonObject]]()
       asJava.methodWithHandlerAsyncResultMapOfTypeToJsonObjectParam(new Handler[AsyncResult[java.util.Map[java.lang.String,io.vertx.codegen.testmodel.MyPojoToJsonObject]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,io.vertx.codegen.testmodel.MyPojoToJsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultFunctionMappedFuture() : scala.concurrent.Future[java.util.Locale] = {
+  }
+
+  def methodWithHandlerAsyncResultFunctionMappedFuture() : scala.concurrent.Future[java.util.Locale] = {
       val promise = concurrent.Promise[java.util.Locale]()
       asJava.methodWithHandlerAsyncResultFunctionMapped(new Handler[AsyncResult[java.util.Locale]] { override def handle(event: AsyncResult[java.util.Locale]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultListOfFunctionMappedFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.util.Locale]] = {
+  }
+
+  def methodWithHandlerAsyncResultListOfFunctionMappedFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.util.Locale]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.util.Locale]]()
       asJava.methodWithHandlerAsyncResultListOfFunctionMapped(new Handler[AsyncResult[java.util.List[java.util.Locale]]] { override def handle(event: AsyncResult[java.util.List[java.util.Locale]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultSetOfFunctionMappedFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.util.Locale]] = {
+  }
+
+  def methodWithHandlerAsyncResultSetOfFunctionMappedFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.util.Locale]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.util.Locale]]()
       asJava.methodWithHandlerAsyncResultSetOfFunctionMapped(new Handler[AsyncResult[java.util.Set[java.util.Locale]]] { override def handle(event: AsyncResult[java.util.Set[java.util.Locale]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithHandlerAsyncResultMapOfFunctionMappedFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.util.Locale]] = {
+  }
+
+  def methodWithHandlerAsyncResultMapOfFunctionMappedFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.util.Locale]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.util.Locale]]()
       asJava.methodWithHandlerAsyncResultMapOfFunctionMapped(new Handler[AsyncResult[java.util.Map[java.lang.String,java.util.Locale]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.util.Locale]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
+  }
+
   }
 
 
@@ -506,861 +571,1080 @@ def methodWithHandlerAsyncResultMapOfFunctionMappedFuture() : scala.concurrent.F
 
   implicit class NullableTCKScala(val asJava: io.vertx.codegen.testmodel.NullableTCK) extends AnyVal {
 
-def methodWithNullableByteParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Byte]) = {
+  def methodWithNullableByteParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Byte]) = {
       asJava.methodWithNullableByteParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableByteReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableByteReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableByteReturn(notNull))
-}
-def methodWithNullableShortParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Short]) = {
+  }
+
+  def methodWithNullableShortParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Short]) = {
       asJava.methodWithNullableShortParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableShortReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableShortReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableShortReturn(notNull))
-}
-def methodWithNullableIntegerParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Integer]) = {
+  }
+
+  def methodWithNullableIntegerParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Integer]) = {
       asJava.methodWithNullableIntegerParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableIntegerReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableIntegerReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableIntegerReturn(notNull))
-}
-def methodWithNullableLongParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Long]) = {
+  }
+
+  def methodWithNullableLongParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Long]) = {
       asJava.methodWithNullableLongParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableLongReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableLongReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableLongReturn(notNull))
-}
-def methodWithNullableFloatParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Float]) = {
+  }
+
+  def methodWithNullableFloatParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Float]) = {
       asJava.methodWithNullableFloatParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableFloatReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableFloatReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableFloatReturn(notNull))
-}
-def methodWithNullableDoubleParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Double]) = {
+  }
+
+  def methodWithNullableDoubleParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Double]) = {
       asJava.methodWithNullableDoubleParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableDoubleReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableDoubleReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableDoubleReturn(notNull))
-}
-def methodWithNullableBooleanParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Boolean]) = {
+  }
+
+  def methodWithNullableBooleanParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Boolean]) = {
       asJava.methodWithNullableBooleanParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableBooleanReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableBooleanReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableBooleanReturn(notNull))
-}
-def methodWithNullableStringParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.String]) = {
+  }
+
+  def methodWithNullableStringParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.String]) = {
       asJava.methodWithNullableStringParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableStringReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableStringReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableStringReturn(notNull))
-}
-def methodWithNullableCharParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Character]) = {
+  }
+
+  def methodWithNullableCharParam(expectNull: java.lang.Boolean, param: scala.Option[java.lang.Character]) = {
       asJava.methodWithNullableCharParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableCharReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableCharReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableCharReturn(notNull))
-}
-def methodWithNullableJsonObjectParam(expectNull: java.lang.Boolean, param: scala.Option[io.vertx.core.json.JsonObject]) = {
+  }
+
+  def methodWithNullableJsonObjectParam(expectNull: java.lang.Boolean, param: scala.Option[io.vertx.core.json.JsonObject]) = {
       asJava.methodWithNullableJsonObjectParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableJsonObjectReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableJsonObjectReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableJsonObjectReturn(notNull))
-}
-def methodWithNullableJsonArrayParam(expectNull: java.lang.Boolean, param: scala.Option[io.vertx.core.json.JsonArray]) = {
+  }
+
+  def methodWithNullableJsonArrayParam(expectNull: java.lang.Boolean, param: scala.Option[io.vertx.core.json.JsonArray]) = {
       asJava.methodWithNullableJsonArrayParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableJsonArrayReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableJsonArrayReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableJsonArrayReturn(notNull))
-}
-def methodWithNullableApiParam(expectNull: java.lang.Boolean, param: scala.Option[io.vertx.codegen.testmodel.RefedInterface1]) = {
+  }
+
+  def methodWithNullableApiParam(expectNull: java.lang.Boolean, param: scala.Option[io.vertx.codegen.testmodel.RefedInterface1]) = {
       asJava.methodWithNullableApiParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableApiReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableApiReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableApiReturn(notNull))
-}
-def methodWithNullableDataObjectParam(expectNull: java.lang.Boolean, param: scala.Option[io.vertx.codegen.testmodel.TestDataObject]) = {
+  }
+
+  def methodWithNullableDataObjectParam(expectNull: java.lang.Boolean, param: scala.Option[io.vertx.codegen.testmodel.TestDataObject]) = {
       asJava.methodWithNullableDataObjectParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableDataObjectReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableDataObjectReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableDataObjectReturn(notNull))
-}
-def methodWithNullableEnumParam(expectNull: java.lang.Boolean, param: scala.Option[io.vertx.codegen.testmodel.TestEnum]) = {
+  }
+
+  def methodWithNullableEnumParam(expectNull: java.lang.Boolean, param: scala.Option[io.vertx.codegen.testmodel.TestEnum]) = {
       asJava.methodWithNullableEnumParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableEnumReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableEnumReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableEnumReturn(notNull))
-}
-def methodWithNullableGenEnumParam(expectNull: java.lang.Boolean, param: scala.Option[io.vertx.codegen.testmodel.TestGenEnum]) = {
+  }
+
+  def methodWithNullableGenEnumParam(expectNull: java.lang.Boolean, param: scala.Option[io.vertx.codegen.testmodel.TestGenEnum]) = {
       asJava.methodWithNullableGenEnumParam(expectNull, param.getOrElse(null))
-}
-def methodWithNullableGenEnumReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableGenEnumReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableGenEnumReturn(notNull))
-}
-def methodWithNullableTypeVariableParam[T](expectNull: java.lang.Boolean, param: T) = {
+  }
+
+  def methodWithNullableTypeVariableParam[T](expectNull: java.lang.Boolean, param: T) = {
       asJava.methodWithNullableTypeVariableParam[T](expectNull, param)
-}
-def methodWithNullableTypeVariableHandler[T](notNull: java.lang.Boolean, value: T, handler: T => Unit) = {
+  }
+
+  def methodWithNullableTypeVariableHandler[T](notNull: java.lang.Boolean, value: T, handler: T => Unit) = {
       asJava.methodWithNullableTypeVariableHandler[T](notNull, value, handler.asInstanceOf[io.vertx.core.Handler[T]])
-}
-def methodWithNullableTypeVariableHandlerAsyncResult[T](notNull: java.lang.Boolean, value: T, handler: AsyncResult[T] => Unit) = {
+  }
+
+  def methodWithNullableTypeVariableHandlerAsyncResult[T](notNull: java.lang.Boolean, value: T, handler: AsyncResult[T] => Unit) = {
       asJava.methodWithNullableTypeVariableHandlerAsyncResult[T](notNull, value, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[T]]])
-}
-def methodWithNullableTypeVariableReturnOption[T](notNull: java.lang.Boolean, value: T) = {
+  }
+
+  def methodWithNullableTypeVariableReturnOption[T](notNull: java.lang.Boolean, value: T) = {
       scala.Option(asJava.methodWithNullableTypeVariableReturn[T](notNull, value))
-}
-def methodWithNullableObjectParam(expectNull: java.lang.Boolean, param: AnyRef) = {
+  }
+
+  def methodWithNullableObjectParam(expectNull: java.lang.Boolean, param: AnyRef) = {
       asJava.methodWithNullableObjectParam(expectNull, param)
-}
-def methodWithNullableListByteParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Byte]]) = {
+  }
+
+  def methodWithNullableListByteParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Byte]]) = {
       asJava.methodWithNullableListByteParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListByteReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListByteReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListByteReturn(notNull))
-}
-def methodWithNullableListShortParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Short]]) = {
+  }
+
+  def methodWithNullableListShortParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Short]]) = {
       asJava.methodWithNullableListShortParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListShortReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListShortReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListShortReturn(notNull))
-}
-def methodWithNullableListIntegerParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Integer]]) = {
+  }
+
+  def methodWithNullableListIntegerParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Integer]]) = {
       asJava.methodWithNullableListIntegerParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListIntegerReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListIntegerReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListIntegerReturn(notNull))
-}
-def methodWithNullableListLongParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Long]]) = {
+  }
+
+  def methodWithNullableListLongParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Long]]) = {
       asJava.methodWithNullableListLongParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListLongReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListLongReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListLongReturn(notNull))
-}
-def methodWithNullableListFloatParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Float]]) = {
+  }
+
+  def methodWithNullableListFloatParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Float]]) = {
       asJava.methodWithNullableListFloatParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListFloatReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListFloatReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListFloatReturn(notNull))
-}
-def methodWithNullableListDoubleParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Double]]) = {
+  }
+
+  def methodWithNullableListDoubleParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Double]]) = {
       asJava.methodWithNullableListDoubleParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListDoubleReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListDoubleReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListDoubleReturn(notNull))
-}
-def methodWithNullableListBooleanParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Boolean]]) = {
+  }
+
+  def methodWithNullableListBooleanParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Boolean]]) = {
       asJava.methodWithNullableListBooleanParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListBooleanReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListBooleanReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListBooleanReturn(notNull))
-}
-def methodWithNullableListStringParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.String]]) = {
+  }
+
+  def methodWithNullableListStringParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.String]]) = {
       asJava.methodWithNullableListStringParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListStringReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListStringReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListStringReturn(notNull))
-}
-def methodWithNullableListCharParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Character]]) = {
+  }
+
+  def methodWithNullableListCharParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[java.lang.Character]]) = {
       asJava.methodWithNullableListCharParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListCharReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListCharReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListCharReturn(notNull))
-}
-def methodWithNullableListJsonObjectParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]) = {
+  }
+
+  def methodWithNullableListJsonObjectParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]) = {
       asJava.methodWithNullableListJsonObjectParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListJsonObjectReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListJsonObjectReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListJsonObjectReturn(notNull))
-}
-def methodWithNullableListJsonArrayParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]) = {
+  }
+
+  def methodWithNullableListJsonArrayParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]) = {
       asJava.methodWithNullableListJsonArrayParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListJsonArrayReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListJsonArrayReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListJsonArrayReturn(notNull))
-}
-def methodWithNullableListApiParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface1]]) = {
+  }
+
+  def methodWithNullableListApiParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface1]]) = {
       asJava.methodWithNullableListApiParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListApiReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListApiReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListApiReturn(notNull))
-}
-def methodWithNullableListDataObjectParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestDataObject]]) = {
+  }
+
+  def methodWithNullableListDataObjectParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestDataObject]]) = {
       asJava.methodWithNullableListDataObjectParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListDataObjectReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListDataObjectReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListDataObjectReturn(notNull))
-}
-def methodWithNullableListEnumParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]) = {
+  }
+
+  def methodWithNullableListEnumParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]) = {
       asJava.methodWithNullableListEnumParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListEnumReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListEnumReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListEnumReturn(notNull))
-}
-def methodWithNullableListGenEnumParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]]) = {
+  }
+
+  def methodWithNullableListGenEnumParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]]) = {
       asJava.methodWithNullableListGenEnumParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableListGenEnumReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableListGenEnumReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableListGenEnumReturn(notNull))
-}
-def methodWithNullableSetByteParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Byte]]) = {
+  }
+
+  def methodWithNullableSetByteParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Byte]]) = {
       asJava.methodWithNullableSetByteParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetByteReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetByteReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetByteReturn(notNull))
-}
-def methodWithNullableSetShortParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Short]]) = {
+  }
+
+  def methodWithNullableSetShortParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Short]]) = {
       asJava.methodWithNullableSetShortParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetShortReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetShortReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetShortReturn(notNull))
-}
-def methodWithNullableSetIntegerParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Integer]]) = {
+  }
+
+  def methodWithNullableSetIntegerParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Integer]]) = {
       asJava.methodWithNullableSetIntegerParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetIntegerReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetIntegerReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetIntegerReturn(notNull))
-}
-def methodWithNullableSetLongParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Long]]) = {
+  }
+
+  def methodWithNullableSetLongParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Long]]) = {
       asJava.methodWithNullableSetLongParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetLongReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetLongReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetLongReturn(notNull))
-}
-def methodWithNullableSetFloatParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Float]]) = {
+  }
+
+  def methodWithNullableSetFloatParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Float]]) = {
       asJava.methodWithNullableSetFloatParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetFloatReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetFloatReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetFloatReturn(notNull))
-}
-def methodWithNullableSetDoubleParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Double]]) = {
+  }
+
+  def methodWithNullableSetDoubleParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Double]]) = {
       asJava.methodWithNullableSetDoubleParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetDoubleReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetDoubleReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetDoubleReturn(notNull))
-}
-def methodWithNullableSetBooleanParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Boolean]]) = {
+  }
+
+  def methodWithNullableSetBooleanParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Boolean]]) = {
       asJava.methodWithNullableSetBooleanParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetBooleanReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetBooleanReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetBooleanReturn(notNull))
-}
-def methodWithNullableSetStringParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.String]]) = {
+  }
+
+  def methodWithNullableSetStringParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.String]]) = {
       asJava.methodWithNullableSetStringParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetStringReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetStringReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetStringReturn(notNull))
-}
-def methodWithNullableSetCharParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Character]]) = {
+  }
+
+  def methodWithNullableSetCharParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[java.lang.Character]]) = {
       asJava.methodWithNullableSetCharParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetCharReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetCharReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetCharReturn(notNull))
-}
-def methodWithNullableSetJsonObjectParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]) = {
+  }
+
+  def methodWithNullableSetJsonObjectParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]) = {
       asJava.methodWithNullableSetJsonObjectParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetJsonObjectReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetJsonObjectReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetJsonObjectReturn(notNull))
-}
-def methodWithNullableSetJsonArrayParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]) = {
+  }
+
+  def methodWithNullableSetJsonArrayParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]) = {
       asJava.methodWithNullableSetJsonArrayParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetJsonArrayReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetJsonArrayReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetJsonArrayReturn(notNull))
-}
-def methodWithNullableSetApiParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface1]]) = {
+  }
+
+  def methodWithNullableSetApiParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface1]]) = {
       asJava.methodWithNullableSetApiParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetApiReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetApiReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetApiReturn(notNull))
-}
-def methodWithNullableSetDataObjectParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestDataObject]]) = {
+  }
+
+  def methodWithNullableSetDataObjectParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestDataObject]]) = {
       asJava.methodWithNullableSetDataObjectParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetDataObjectReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetDataObjectReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetDataObjectReturn(notNull))
-}
-def methodWithNullableSetEnumParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]) = {
+  }
+
+  def methodWithNullableSetEnumParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]) = {
       asJava.methodWithNullableSetEnumParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetEnumReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetEnumReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetEnumReturn(notNull))
-}
-def methodWithNullableSetGenEnumParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]]) = {
+  }
+
+  def methodWithNullableSetGenEnumParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]]) = {
       asJava.methodWithNullableSetGenEnumParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableSetGenEnumReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableSetGenEnumReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableSetGenEnumReturn(notNull))
-}
-def methodWithNullableMapByteParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Byte]]) = {
+  }
+
+  def methodWithNullableMapByteParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Byte]]) = {
       asJava.methodWithNullableMapByteParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableMapByteReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableMapByteReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableMapByteReturn(notNull))
-}
-def methodWithNullableMapShortParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Short]]) = {
+  }
+
+  def methodWithNullableMapShortParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Short]]) = {
       asJava.methodWithNullableMapShortParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableMapShortReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableMapShortReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableMapShortReturn(notNull))
-}
-def methodWithNullableMapIntegerParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Integer]]) = {
+  }
+
+  def methodWithNullableMapIntegerParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Integer]]) = {
       asJava.methodWithNullableMapIntegerParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableMapIntegerReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableMapIntegerReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableMapIntegerReturn(notNull))
-}
-def methodWithNullableMapLongParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Long]]) = {
+  }
+
+  def methodWithNullableMapLongParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Long]]) = {
       asJava.methodWithNullableMapLongParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableMapLongReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableMapLongReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableMapLongReturn(notNull))
-}
-def methodWithNullableMapFloatParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Float]]) = {
+  }
+
+  def methodWithNullableMapFloatParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Float]]) = {
       asJava.methodWithNullableMapFloatParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableMapFloatReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableMapFloatReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableMapFloatReturn(notNull))
-}
-def methodWithNullableMapDoubleParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Double]]) = {
+  }
+
+  def methodWithNullableMapDoubleParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Double]]) = {
       asJava.methodWithNullableMapDoubleParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableMapDoubleReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableMapDoubleReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableMapDoubleReturn(notNull))
-}
-def methodWithNullableMapBooleanParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Boolean]]) = {
+  }
+
+  def methodWithNullableMapBooleanParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Boolean]]) = {
       asJava.methodWithNullableMapBooleanParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableMapBooleanReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableMapBooleanReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableMapBooleanReturn(notNull))
-}
-def methodWithNullableMapStringParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.String]]) = {
+  }
+
+  def methodWithNullableMapStringParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.String]]) = {
       asJava.methodWithNullableMapStringParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableMapStringReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableMapStringReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableMapStringReturn(notNull))
-}
-def methodWithNullableMapCharParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Character]]) = {
+  }
+
+  def methodWithNullableMapCharParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, java.lang.Character]]) = {
       asJava.methodWithNullableMapCharParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableMapCharReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableMapCharReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableMapCharReturn(notNull))
-}
-def methodWithNullableMapJsonObjectParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]) = {
+  }
+
+  def methodWithNullableMapJsonObjectParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]) = {
       asJava.methodWithNullableMapJsonObjectParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableMapJsonObjectReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableMapJsonObjectReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableMapJsonObjectReturn(notNull))
-}
-def methodWithNullableMapJsonArrayParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]) = {
+  }
+
+  def methodWithNullableMapJsonArrayParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]) = {
       asJava.methodWithNullableMapJsonArrayParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableMapJsonArrayReturnOption(notNull: java.lang.Boolean) = {
+  }
+
+  def methodWithNullableMapJsonArrayReturnOption(notNull: java.lang.Boolean) = {
       scala.Option(asJava.methodWithNullableMapJsonArrayReturn(notNull))
-}
-def methodWithNullableMapApiParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.RefedInterface1]]) = {
+  }
+
+  def methodWithNullableMapApiParam(expectNull: java.lang.Boolean, param: scala.Option[scala.collection.mutable.Map[String, io.vertx.codegen.testmodel.RefedInterface1]]) = {
       asJava.methodWithNullableMapApiParam(expectNull, param.map(_.asJava).getOrElse(null))
-}
-def methodWithNullableHandler(expectNull: java.lang.Boolean, handler: scala.Option[java.lang.String => Unit]) = {
+  }
+
+  def methodWithNullableHandler(expectNull: java.lang.Boolean, handler: scala.Option[java.lang.String => Unit]) = {
       asJava.methodWithNullableHandler(expectNull, handler.asInstanceOf[io.vertx.core.Handler[java.lang.String]])
-}
-def methodWithNullableHandlerAsyncResult(expectNull: java.lang.Boolean, handler: scala.Option[AsyncResult[java.lang.String] => Unit]) = {
+  }
+
+  def methodWithNullableHandlerAsyncResult(expectNull: java.lang.Boolean, handler: scala.Option[AsyncResult[java.lang.String] => Unit]) = {
       asJava.methodWithNullableHandlerAsyncResult(expectNull, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
-}
-def methodWithNullableByteHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Byte] = {
+  }
+
+  def methodWithNullableByteHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Byte] = {
       val promise = concurrent.Promise[java.lang.Byte]()
       asJava.methodWithNullableByteHandlerAsyncResult(notNull, new Handler[AsyncResult[java.lang.Byte]] { override def handle(event: AsyncResult[java.lang.Byte]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableShortHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Short] = {
+  }
+
+  def methodWithNullableShortHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Short] = {
       val promise = concurrent.Promise[java.lang.Short]()
       asJava.methodWithNullableShortHandlerAsyncResult(notNull, new Handler[AsyncResult[java.lang.Short]] { override def handle(event: AsyncResult[java.lang.Short]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableIntegerHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Integer] = {
+  }
+
+  def methodWithNullableIntegerHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
       asJava.methodWithNullableIntegerHandlerAsyncResult(notNull, new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableLongHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Long] = {
+  }
+
+  def methodWithNullableLongHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Long] = {
       val promise = concurrent.Promise[java.lang.Long]()
       asJava.methodWithNullableLongHandlerAsyncResult(notNull, new Handler[AsyncResult[java.lang.Long]] { override def handle(event: AsyncResult[java.lang.Long]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableFloatHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Float] = {
+  }
+
+  def methodWithNullableFloatHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Float] = {
       val promise = concurrent.Promise[java.lang.Float]()
       asJava.methodWithNullableFloatHandlerAsyncResult(notNull, new Handler[AsyncResult[java.lang.Float]] { override def handle(event: AsyncResult[java.lang.Float]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableDoubleHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Double] = {
+  }
+
+  def methodWithNullableDoubleHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Double] = {
       val promise = concurrent.Promise[java.lang.Double]()
       asJava.methodWithNullableDoubleHandlerAsyncResult(notNull, new Handler[AsyncResult[java.lang.Double]] { override def handle(event: AsyncResult[java.lang.Double]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableBooleanHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Boolean] = {
+  }
+
+  def methodWithNullableBooleanHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
       asJava.methodWithNullableBooleanHandlerAsyncResult(notNull, new Handler[AsyncResult[java.lang.Boolean]] { override def handle(event: AsyncResult[java.lang.Boolean]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableStringHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.String] = {
+  }
+
+  def methodWithNullableStringHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
       asJava.methodWithNullableStringHandlerAsyncResult(notNull, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableCharHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Character] = {
+  }
+
+  def methodWithNullableCharHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Character] = {
       val promise = concurrent.Promise[java.lang.Character]()
       asJava.methodWithNullableCharHandlerAsyncResult(notNull, new Handler[AsyncResult[java.lang.Character]] { override def handle(event: AsyncResult[java.lang.Character]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableJsonObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  }
+
+  def methodWithNullableJsonObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
       asJava.methodWithNullableJsonObjectHandlerAsyncResult(notNull, new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableJsonArrayHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+  }
+
+  def methodWithNullableJsonArrayHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
       asJava.methodWithNullableJsonArrayHandlerAsyncResult(notNull, new Handler[AsyncResult[io.vertx.core.json.JsonArray]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableApiHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.codegen.testmodel.RefedInterface1] = {
+  }
+
+  def methodWithNullableApiHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.codegen.testmodel.RefedInterface1] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.RefedInterface1]()
       asJava.methodWithNullableApiHandlerAsyncResult(notNull, new Handler[AsyncResult[io.vertx.codegen.testmodel.RefedInterface1]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.RefedInterface1]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableDataObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.codegen.testmodel.TestDataObject] = {
+  }
+
+  def methodWithNullableDataObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.codegen.testmodel.TestDataObject] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.TestDataObject]()
       asJava.methodWithNullableDataObjectHandlerAsyncResult(notNull, new Handler[AsyncResult[io.vertx.codegen.testmodel.TestDataObject]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.TestDataObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableEnumHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.codegen.testmodel.TestEnum] = {
+  }
+
+  def methodWithNullableEnumHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.codegen.testmodel.TestEnum] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.TestEnum]()
       asJava.methodWithNullableEnumHandlerAsyncResult(notNull, new Handler[AsyncResult[io.vertx.codegen.testmodel.TestEnum]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.TestEnum]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableGenEnumHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.codegen.testmodel.TestGenEnum] = {
+  }
+
+  def methodWithNullableGenEnumHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[io.vertx.codegen.testmodel.TestGenEnum] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.TestGenEnum]()
       asJava.methodWithNullableGenEnumHandlerAsyncResult(notNull, new Handler[AsyncResult[io.vertx.codegen.testmodel.TestGenEnum]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.TestGenEnum]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableTypeVariableHandlerAsyncResultFuture[T](notNull: java.lang.Boolean,value: T) : scala.concurrent.Future[T] = {
+  }
+
+  def methodWithNullableTypeVariableHandlerAsyncResultFuture[T](notNull: java.lang.Boolean,value: T) : scala.concurrent.Future[T] = {
       val promise = concurrent.Promise[T]()
       asJava.methodWithNullableTypeVariableHandlerAsyncResult[T](notNull, value, new Handler[AsyncResult[T]] { override def handle(event: AsyncResult[T]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithNullableListByteHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Byte]] = {
+  }
+
+  def methodWithNullableListByteHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Byte]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Byte]]()
       asJava.methodWithNullableListByteHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[java.lang.Byte]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Byte]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListShortHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Short]] = {
+  }
+
+  def methodWithNullableListShortHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Short]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Short]]()
       asJava.methodWithNullableListShortHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[java.lang.Short]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Short]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListIntegerHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Integer]] = {
+  }
+
+  def methodWithNullableListIntegerHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Integer]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Integer]]()
       asJava.methodWithNullableListIntegerHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListLongHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Long]] = {
+  }
+
+  def methodWithNullableListLongHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Long]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Long]]()
       asJava.methodWithNullableListLongHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[java.lang.Long]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Long]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListFloatHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Float]] = {
+  }
+
+  def methodWithNullableListFloatHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Float]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Float]]()
       asJava.methodWithNullableListFloatHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[java.lang.Float]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Float]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListDoubleHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Double]] = {
+  }
+
+  def methodWithNullableListDoubleHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Double]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Double]]()
       asJava.methodWithNullableListDoubleHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[java.lang.Double]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Double]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListBooleanHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Boolean]] = {
+  }
+
+  def methodWithNullableListBooleanHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Boolean]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Boolean]]()
       asJava.methodWithNullableListBooleanHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[java.lang.Boolean]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Boolean]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListStringHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.String]] = {
+  }
+
+  def methodWithNullableListStringHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.String]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.String]]()
       asJava.methodWithNullableListStringHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[java.lang.String]]] { override def handle(event: AsyncResult[java.util.List[java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListCharHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Character]] = {
+  }
+
+  def methodWithNullableListCharHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Character]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Character]]()
       asJava.methodWithNullableListCharHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[java.lang.Character]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Character]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListJsonObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
+  }
+
+  def methodWithNullableListJsonObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]()
       asJava.methodWithNullableListJsonObjectHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListJsonArrayHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
+  }
+
+  def methodWithNullableListJsonArrayHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]()
       asJava.methodWithNullableListJsonArrayHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[io.vertx.core.json.JsonArray]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.core.json.JsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListApiHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface1]] = {
+  }
+
+  def methodWithNullableListApiHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface1]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface1]]()
       asJava.methodWithNullableListApiHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.RefedInterface1]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.RefedInterface1]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListDataObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestDataObject]] = {
+  }
+
+  def methodWithNullableListDataObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestDataObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestDataObject]]()
       asJava.methodWithNullableListDataObjectHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestDataObject]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestDataObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListEnumHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]] = {
+  }
+
+  def methodWithNullableListEnumHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]()
       asJava.methodWithNullableListEnumHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestEnum]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestEnum]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableListGenEnumHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]] = {
+  }
+
+  def methodWithNullableListGenEnumHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]]()
       asJava.methodWithNullableListGenEnumHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestGenEnum]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetByteHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Byte]] = {
+  }
+
+  def methodWithNullableSetByteHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Byte]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Byte]]()
       asJava.methodWithNullableSetByteHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[java.lang.Byte]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Byte]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetShortHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Short]] = {
+  }
+
+  def methodWithNullableSetShortHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Short]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Short]]()
       asJava.methodWithNullableSetShortHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[java.lang.Short]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Short]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetIntegerHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Integer]] = {
+  }
+
+  def methodWithNullableSetIntegerHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Integer]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Integer]]()
       asJava.methodWithNullableSetIntegerHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetLongHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Long]] = {
+  }
+
+  def methodWithNullableSetLongHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Long]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Long]]()
       asJava.methodWithNullableSetLongHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[java.lang.Long]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Long]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetFloatHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Float]] = {
+  }
+
+  def methodWithNullableSetFloatHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Float]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Float]]()
       asJava.methodWithNullableSetFloatHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[java.lang.Float]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Float]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetDoubleHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Double]] = {
+  }
+
+  def methodWithNullableSetDoubleHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Double]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Double]]()
       asJava.methodWithNullableSetDoubleHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[java.lang.Double]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Double]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetBooleanHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Boolean]] = {
+  }
+
+  def methodWithNullableSetBooleanHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Boolean]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Boolean]]()
       asJava.methodWithNullableSetBooleanHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[java.lang.Boolean]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Boolean]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetStringHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.String]] = {
+  }
+
+  def methodWithNullableSetStringHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.String]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.String]]()
       asJava.methodWithNullableSetStringHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[java.lang.String]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetCharHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Character]] = {
+  }
+
+  def methodWithNullableSetCharHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Character]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Character]]()
       asJava.methodWithNullableSetCharHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[java.lang.Character]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Character]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetJsonObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
+  }
+
+  def methodWithNullableSetJsonObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]()
       asJava.methodWithNullableSetJsonObjectHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetJsonArrayHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
+  }
+
+  def methodWithNullableSetJsonArrayHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]()
       asJava.methodWithNullableSetJsonArrayHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[io.vertx.core.json.JsonArray]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.core.json.JsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetApiHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface1]] = {
+  }
+
+  def methodWithNullableSetApiHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface1]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface1]]()
       asJava.methodWithNullableSetApiHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetDataObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestDataObject]] = {
+  }
+
+  def methodWithNullableSetDataObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestDataObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestDataObject]]()
       asJava.methodWithNullableSetDataObjectHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestDataObject]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestDataObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetEnumHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]] = {
+  }
+
+  def methodWithNullableSetEnumHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]()
       asJava.methodWithNullableSetEnumHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestEnum]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestEnum]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableSetGenEnumHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]] = {
+  }
+
+  def methodWithNullableSetGenEnumHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]]()
       asJava.methodWithNullableSetGenEnumHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestGenEnum]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableMapByteHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Byte]] = {
+  }
+
+  def methodWithNullableMapByteHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Byte]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Byte]]()
       asJava.methodWithNullableMapByteHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Byte]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Byte]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableMapShortHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Short]] = {
+  }
+
+  def methodWithNullableMapShortHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Short]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Short]]()
       asJava.methodWithNullableMapShortHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Short]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Short]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableMapIntegerHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Integer]] = {
+  }
+
+  def methodWithNullableMapIntegerHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Integer]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Integer]]()
       asJava.methodWithNullableMapIntegerHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableMapLongHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Long]] = {
+  }
+
+  def methodWithNullableMapLongHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Long]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Long]]()
       asJava.methodWithNullableMapLongHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Long]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Long]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableMapFloatHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Float]] = {
+  }
+
+  def methodWithNullableMapFloatHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Float]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Float]]()
       asJava.methodWithNullableMapFloatHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Float]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Float]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableMapDoubleHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Double]] = {
+  }
+
+  def methodWithNullableMapDoubleHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Double]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Double]]()
       asJava.methodWithNullableMapDoubleHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Double]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Double]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableMapBooleanHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Boolean]] = {
+  }
+
+  def methodWithNullableMapBooleanHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Boolean]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Boolean]]()
       asJava.methodWithNullableMapBooleanHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Boolean]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Boolean]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableMapStringHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.String]] = {
+  }
+
+  def methodWithNullableMapStringHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.String]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.String]]()
       asJava.methodWithNullableMapStringHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.String]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableMapCharHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Character]] = {
+  }
+
+  def methodWithNullableMapCharHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Character]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Character]]()
       asJava.methodWithNullableMapCharHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Character]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Character]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableMapJsonObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]] = {
+  }
+
+  def methodWithNullableMapJsonObjectHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]()
       asJava.methodWithNullableMapJsonObjectHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableMapJsonArrayHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]] = {
+  }
+
+  def methodWithNullableMapJsonArrayHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]()
       asJava.methodWithNullableMapJsonArrayHandlerAsyncResult(notNull, new Handler[AsyncResult[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableByteHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Byte]] = {
+  }
+
+  def methodWithListNullableByteHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Byte]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Byte]]()
       asJava.methodWithListNullableByteHandlerAsyncResult(new Handler[AsyncResult[java.util.List[java.lang.Byte]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Byte]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableShortHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Short]] = {
+  }
+
+  def methodWithListNullableShortHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Short]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Short]]()
       asJava.methodWithListNullableShortHandlerAsyncResult(new Handler[AsyncResult[java.util.List[java.lang.Short]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Short]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableIntegerHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Integer]] = {
+  }
+
+  def methodWithListNullableIntegerHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Integer]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Integer]]()
       asJava.methodWithListNullableIntegerHandlerAsyncResult(new Handler[AsyncResult[java.util.List[java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableLongHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Long]] = {
+  }
+
+  def methodWithListNullableLongHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Long]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Long]]()
       asJava.methodWithListNullableLongHandlerAsyncResult(new Handler[AsyncResult[java.util.List[java.lang.Long]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Long]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableBooleanHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Boolean]] = {
+  }
+
+  def methodWithListNullableBooleanHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Boolean]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Boolean]]()
       asJava.methodWithListNullableBooleanHandlerAsyncResult(new Handler[AsyncResult[java.util.List[java.lang.Boolean]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Boolean]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableFloatHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Float]] = {
+  }
+
+  def methodWithListNullableFloatHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Float]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Float]]()
       asJava.methodWithListNullableFloatHandlerAsyncResult(new Handler[AsyncResult[java.util.List[java.lang.Float]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Float]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableDoubleHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Double]] = {
+  }
+
+  def methodWithListNullableDoubleHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Double]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Double]]()
       asJava.methodWithListNullableDoubleHandlerAsyncResult(new Handler[AsyncResult[java.util.List[java.lang.Double]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Double]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableStringHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.String]] = {
+  }
+
+  def methodWithListNullableStringHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.String]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.String]]()
       asJava.methodWithListNullableStringHandlerAsyncResult(new Handler[AsyncResult[java.util.List[java.lang.String]]] { override def handle(event: AsyncResult[java.util.List[java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableCharHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Character]] = {
+  }
+
+  def methodWithListNullableCharHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.Character]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.Character]]()
       asJava.methodWithListNullableCharHandlerAsyncResult(new Handler[AsyncResult[java.util.List[java.lang.Character]]] { override def handle(event: AsyncResult[java.util.List[java.lang.Character]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableJsonObjectHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
+  }
+
+  def methodWithListNullableJsonObjectHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]()
       asJava.methodWithListNullableJsonObjectHandlerAsyncResult(new Handler[AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableJsonArrayHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
+  }
+
+  def methodWithListNullableJsonArrayHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonArray]]()
       asJava.methodWithListNullableJsonArrayHandlerAsyncResult(new Handler[AsyncResult[java.util.List[io.vertx.core.json.JsonArray]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.core.json.JsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableApiHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface1]] = {
+  }
+
+  def methodWithListNullableApiHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface1]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.RefedInterface1]]()
       asJava.methodWithListNullableApiHandlerAsyncResult(new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.RefedInterface1]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.RefedInterface1]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableDataObjectHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestDataObject]] = {
+  }
+
+  def methodWithListNullableDataObjectHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestDataObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestDataObject]]()
       asJava.methodWithListNullableDataObjectHandlerAsyncResult(new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestDataObject]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestDataObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableEnumHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]] = {
+  }
+
+  def methodWithListNullableEnumHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestEnum]]()
       asJava.methodWithListNullableEnumHandlerAsyncResult(new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestEnum]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestEnum]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithListNullableGenEnumHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]] = {
+  }
+
+  def methodWithListNullableGenEnumHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.codegen.testmodel.TestGenEnum]]()
       asJava.methodWithListNullableGenEnumHandlerAsyncResult(new Handler[AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestGenEnum]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableByteHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Byte]] = {
+  }
+
+  def methodWithSetNullableByteHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Byte]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Byte]]()
       asJava.methodWithSetNullableByteHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[java.lang.Byte]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Byte]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableShortHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Short]] = {
+  }
+
+  def methodWithSetNullableShortHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Short]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Short]]()
       asJava.methodWithSetNullableShortHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[java.lang.Short]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Short]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableIntegerHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Integer]] = {
+  }
+
+  def methodWithSetNullableIntegerHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Integer]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Integer]]()
       asJava.methodWithSetNullableIntegerHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableLongHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Long]] = {
+  }
+
+  def methodWithSetNullableLongHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Long]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Long]]()
       asJava.methodWithSetNullableLongHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[java.lang.Long]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Long]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableBooleanHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Boolean]] = {
+  }
+
+  def methodWithSetNullableBooleanHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Boolean]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Boolean]]()
       asJava.methodWithSetNullableBooleanHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[java.lang.Boolean]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Boolean]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableFloatHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Float]] = {
+  }
+
+  def methodWithSetNullableFloatHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Float]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Float]]()
       asJava.methodWithSetNullableFloatHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[java.lang.Float]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Float]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableDoubleHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Double]] = {
+  }
+
+  def methodWithSetNullableDoubleHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Double]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Double]]()
       asJava.methodWithSetNullableDoubleHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[java.lang.Double]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Double]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableStringHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.String]] = {
+  }
+
+  def methodWithSetNullableStringHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.String]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.String]]()
       asJava.methodWithSetNullableStringHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[java.lang.String]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableCharHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Character]] = {
+  }
+
+  def methodWithSetNullableCharHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[java.lang.Character]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[java.lang.Character]]()
       asJava.methodWithSetNullableCharHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[java.lang.Character]]] { override def handle(event: AsyncResult[java.util.Set[java.lang.Character]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableJsonObjectHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
+  }
+
+  def methodWithSetNullableJsonObjectHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.core.json.JsonObject]]()
       asJava.methodWithSetNullableJsonObjectHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableJsonArrayHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
+  }
+
+  def methodWithSetNullableJsonArrayHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.core.json.JsonArray]]()
       asJava.methodWithSetNullableJsonArrayHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[io.vertx.core.json.JsonArray]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.core.json.JsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableApiHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface1]] = {
+  }
+
+  def methodWithSetNullableApiHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface1]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.RefedInterface1]]()
       asJava.methodWithSetNullableApiHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.RefedInterface1]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableDataObjectHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestDataObject]] = {
+  }
+
+  def methodWithSetNullableDataObjectHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestDataObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestDataObject]]()
       asJava.methodWithSetNullableDataObjectHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestDataObject]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestDataObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableEnumHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]] = {
+  }
+
+  def methodWithSetNullableEnumHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestEnum]]()
       asJava.methodWithSetNullableEnumHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestEnum]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestEnum]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithSetNullableGenEnumHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]] = {
+  }
+
+  def methodWithSetNullableGenEnumHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Set[io.vertx.codegen.testmodel.TestGenEnum]]()
       asJava.methodWithSetNullableGenEnumHandlerAsyncResult(new Handler[AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestGenEnum]]] { override def handle(event: AsyncResult[java.util.Set[io.vertx.codegen.testmodel.TestGenEnum]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithMapNullableByteHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Byte]] = {
+  }
+
+  def methodWithMapNullableByteHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Byte]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Byte]]()
       asJava.methodWithMapNullableByteHandlerAsyncResult(new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Byte]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Byte]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithMapNullableShortHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Short]] = {
+  }
+
+  def methodWithMapNullableShortHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Short]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Short]]()
       asJava.methodWithMapNullableShortHandlerAsyncResult(new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Short]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Short]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithMapNullableIntegerHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Integer]] = {
+  }
+
+  def methodWithMapNullableIntegerHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Integer]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Integer]]()
       asJava.methodWithMapNullableIntegerHandlerAsyncResult(new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Integer]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Integer]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithMapNullableLongHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Long]] = {
+  }
+
+  def methodWithMapNullableLongHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Long]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Long]]()
       asJava.methodWithMapNullableLongHandlerAsyncResult(new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Long]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Long]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithMapNullableBooleanHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Boolean]] = {
+  }
+
+  def methodWithMapNullableBooleanHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Boolean]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Boolean]]()
       asJava.methodWithMapNullableBooleanHandlerAsyncResult(new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Boolean]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Boolean]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithMapNullableFloatHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Float]] = {
+  }
+
+  def methodWithMapNullableFloatHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Float]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Float]]()
       asJava.methodWithMapNullableFloatHandlerAsyncResult(new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Float]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Float]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithMapNullableDoubleHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Double]] = {
+  }
+
+  def methodWithMapNullableDoubleHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Double]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Double]]()
       asJava.methodWithMapNullableDoubleHandlerAsyncResult(new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Double]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Double]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithMapNullableStringHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.String]] = {
+  }
+
+  def methodWithMapNullableStringHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.String]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.String]]()
       asJava.methodWithMapNullableStringHandlerAsyncResult(new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.String]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithMapNullableCharHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Character]] = {
+  }
+
+  def methodWithMapNullableCharHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, java.lang.Character]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, java.lang.Character]]()
       asJava.methodWithMapNullableCharHandlerAsyncResult(new Handler[AsyncResult[java.util.Map[java.lang.String,java.lang.Character]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.lang.Character]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithMapNullableJsonObjectHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]] = {
+  }
+
+  def methodWithMapNullableJsonObjectHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, io.vertx.core.json.JsonObject]]()
       asJava.methodWithMapNullableJsonObjectHandlerAsyncResult(new Handler[AsyncResult[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithMapNullableJsonArrayHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]] = {
+  }
+
+  def methodWithMapNullableJsonArrayHandlerAsyncResultFuture() : scala.concurrent.Future[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Map[String, io.vertx.core.json.JsonArray]]()
       asJava.methodWithMapNullableJsonArrayHandlerAsyncResult(new Handler[AsyncResult[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,io.vertx.core.json.JsonArray]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
-}
-def methodWithNullableHandlerAsyncResultFuture(expectNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.String] = {
+  }
+
+  def methodWithNullableHandlerAsyncResultFuture(expectNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
       asJava.methodWithNullableHandlerAsyncResult(expectNull, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+  }
+
   }
 
 
@@ -1388,124 +1672,150 @@ def methodWithNullableHandlerAsyncResultFuture(expectNull: java.lang.Boolean) : 
 
   implicit class TestInterfaceScala(val asJava: io.vertx.codegen.testmodel.TestInterface) extends AnyVal {
 
-def methodWithObjectParam(str: java.lang.String, obj: AnyRef) = {
+  def methodWithObjectParam(str: java.lang.String, obj: AnyRef) = {
       asJava.methodWithObjectParam(str, obj)
-}
-def methodWithHandlerGenericUserType[U](value: U, handler: io.vertx.codegen.testmodel.GenericRefedInterface[U] => Unit) = {
+  }
+
+  def methodWithHandlerGenericUserType[U](value: U, handler: io.vertx.codegen.testmodel.GenericRefedInterface[U] => Unit) = {
       asJava.methodWithHandlerGenericUserType[U](value, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.codegen.testmodel.GenericRefedInterface[U]]])
-}
-def methodWithHandlerAsyncResultGenericUserType[U](value: U, handler: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[U]] => Unit) = {
+  }
+
+  def methodWithHandlerAsyncResultGenericUserType[U](value: U, handler: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[U]] => Unit) = {
       asJava.methodWithHandlerAsyncResultGenericUserType[U](value, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[U]]]])
-}
-def methodWithGenericUserTypeReturn[U](value: U) = {
+  }
+
+  def methodWithGenericUserTypeReturn[U](value: U) = {
       asJava.methodWithGenericUserTypeReturn[U](value)
-}
-def methodWithGenericParam[U](`type`: java.lang.String, u: U) = {
+  }
+
+  def methodWithGenericParam[U](`type`: java.lang.String, u: U) = {
       asJava.methodWithGenericParam[U](`type`, u)
-}
-def methodWithNullJsonParams(jsonObject: scala.Option[io.vertx.core.json.JsonObject], jsonArray: scala.Option[io.vertx.core.json.JsonArray]) = {
+  }
+
+  def methodWithNullJsonParams(jsonObject: scala.Option[io.vertx.core.json.JsonObject], jsonArray: scala.Option[io.vertx.core.json.JsonArray]) = {
       asJava.methodWithNullJsonParams(jsonObject.getOrElse(null), jsonArray.getOrElse(null))
-}
-def methodWithHandlerAsyncResultByteFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Byte] = {
+  }
+
+  def methodWithHandlerAsyncResultByteFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Byte] = {
       val promise = concurrent.Promise[java.lang.Byte]()
       asJava.methodWithHandlerAsyncResultByte(sendFailure, new Handler[AsyncResult[java.lang.Byte]] { override def handle(event: AsyncResult[java.lang.Byte]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultShortFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Short] = {
+  }
+
+  def methodWithHandlerAsyncResultShortFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Short] = {
       val promise = concurrent.Promise[java.lang.Short]()
       asJava.methodWithHandlerAsyncResultShort(sendFailure, new Handler[AsyncResult[java.lang.Short]] { override def handle(event: AsyncResult[java.lang.Short]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultIntegerFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Integer] = {
+  }
+
+  def methodWithHandlerAsyncResultIntegerFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
       asJava.methodWithHandlerAsyncResultInteger(sendFailure, new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultLongFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Long] = {
+  }
+
+  def methodWithHandlerAsyncResultLongFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Long] = {
       val promise = concurrent.Promise[java.lang.Long]()
       asJava.methodWithHandlerAsyncResultLong(sendFailure, new Handler[AsyncResult[java.lang.Long]] { override def handle(event: AsyncResult[java.lang.Long]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultFloatFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Float] = {
+  }
+
+  def methodWithHandlerAsyncResultFloatFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Float] = {
       val promise = concurrent.Promise[java.lang.Float]()
       asJava.methodWithHandlerAsyncResultFloat(sendFailure, new Handler[AsyncResult[java.lang.Float]] { override def handle(event: AsyncResult[java.lang.Float]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultDoubleFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Double] = {
+  }
+
+  def methodWithHandlerAsyncResultDoubleFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Double] = {
       val promise = concurrent.Promise[java.lang.Double]()
       asJava.methodWithHandlerAsyncResultDouble(sendFailure, new Handler[AsyncResult[java.lang.Double]] { override def handle(event: AsyncResult[java.lang.Double]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultBooleanFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Boolean] = {
+  }
+
+  def methodWithHandlerAsyncResultBooleanFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
       asJava.methodWithHandlerAsyncResultBoolean(sendFailure, new Handler[AsyncResult[java.lang.Boolean]] { override def handle(event: AsyncResult[java.lang.Boolean]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultCharacterFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Character] = {
+  }
+
+  def methodWithHandlerAsyncResultCharacterFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.Character] = {
       val promise = concurrent.Promise[java.lang.Character]()
       asJava.methodWithHandlerAsyncResultCharacter(sendFailure, new Handler[AsyncResult[java.lang.Character]] { override def handle(event: AsyncResult[java.lang.Character]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultStringFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.String] = {
+  }
+
+  def methodWithHandlerAsyncResultStringFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[java.lang.String] = {
       val promise = concurrent.Promise[java.lang.String]()
       asJava.methodWithHandlerAsyncResultString(sendFailure, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultDataObjectFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[io.vertx.codegen.testmodel.TestDataObject] = {
+  }
+
+  def methodWithHandlerAsyncResultDataObjectFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[io.vertx.codegen.testmodel.TestDataObject] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.TestDataObject]()
       asJava.methodWithHandlerAsyncResultDataObject(sendFailure, new Handler[AsyncResult[io.vertx.codegen.testmodel.TestDataObject]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.TestDataObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultUserTypesFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.RefedInterface1] = {
+  }
+
+  def methodWithHandlerAsyncResultUserTypesFuture() : scala.concurrent.Future[io.vertx.codegen.testmodel.RefedInterface1] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.RefedInterface1]()
       asJava.methodWithHandlerAsyncResultUserTypes(new Handler[AsyncResult[io.vertx.codegen.testmodel.RefedInterface1]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.RefedInterface1]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultVoidFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[Void] = {
+  }
+
+  def methodWithHandlerAsyncResultVoidFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.methodWithHandlerAsyncResultVoid(sendFailure, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultGenericUserTypeFuture[U](value: U) : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[U]] = {
+  }
+
+  def methodWithHandlerAsyncResultGenericUserTypeFuture[U](value: U) : scala.concurrent.Future[io.vertx.codegen.testmodel.GenericRefedInterface[U]] = {
       val promise = concurrent.Promise[io.vertx.codegen.testmodel.GenericRefedInterface[U]]()
       asJava.methodWithHandlerAsyncResultGenericUserType[U](value, new Handler[AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[U]]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.GenericRefedInterface[U]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithGenericHandlerAsyncResultFuture[U](`type`: java.lang.String) : scala.concurrent.Future[U] = {
+  }
+
+  def methodWithGenericHandlerAsyncResultFuture[U](`type`: java.lang.String) : scala.concurrent.Future[U] = {
       val promise = concurrent.Promise[U]()
       asJava.methodWithGenericHandlerAsyncResult[U](`type`, new Handler[AsyncResult[U]] { override def handle(event: AsyncResult[U]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultJsonObjectFuture() : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  }
+
+  def methodWithHandlerAsyncResultJsonObjectFuture() : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
       asJava.methodWithHandlerAsyncResultJsonObject(new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultNullJsonObjectFuture() : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  }
+
+  def methodWithHandlerAsyncResultNullJsonObjectFuture() : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
       asJava.methodWithHandlerAsyncResultNullJsonObject(new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultComplexJsonObjectFuture() : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
+  }
+
+  def methodWithHandlerAsyncResultComplexJsonObjectFuture() : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
       asJava.methodWithHandlerAsyncResultComplexJsonObject(new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultJsonArrayFuture() : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+  }
+
+  def methodWithHandlerAsyncResultJsonArrayFuture() : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
       asJava.methodWithHandlerAsyncResultJsonArray(new Handler[AsyncResult[io.vertx.core.json.JsonArray]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultNullJsonArrayFuture() : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+  }
+
+  def methodWithHandlerAsyncResultNullJsonArrayFuture() : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
       asJava.methodWithHandlerAsyncResultNullJsonArray(new Handler[AsyncResult[io.vertx.core.json.JsonArray]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
-def methodWithHandlerAsyncResultComplexJsonArrayFuture() : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
+  }
+
+  def methodWithHandlerAsyncResultComplexJsonArrayFuture() : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
       val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
       asJava.methodWithHandlerAsyncResultComplexJsonArray(new Handler[AsyncResult[io.vertx.core.json.JsonArray]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
-}
+  }
+
   }
 
 
