@@ -50,40 +50,40 @@ package object oauth2{
     /**
      * Like refresh from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def refreshFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def refreshFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.refresh(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like revoke from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def revokeFuture(token_type: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def revokeFuture(token_type: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.revoke(token_type, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like logout from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def logoutFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def logoutFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.logout(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like introspect from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def introspectFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def introspectFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.introspect(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like introspect from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def introspectFuture(tokenType: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def introspectFuture(tokenType: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.introspect(tokenType, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -462,8 +462,8 @@ def create() = {
     /**
      * Like jWKSet from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def jWKSetFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def jWKSetFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.jWKSet(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -478,16 +478,16 @@ def refreshFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[io.ver
     /**
      * Like revoke from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def revokeFuture(user: io.vertx.ext.auth.User,tokenType: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def revokeFuture(user: io.vertx.ext.auth.User,tokenType: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.revoke(user, tokenType, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like revoke from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def revokeFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def revokeFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.revoke(user, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -526,8 +526,8 @@ def introspectTokenFuture(token: java.lang.String,tokenType: java.lang.String) :
     /**
      * Like loadJWK from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def loadJWKFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def loadJWKFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.loadJWK(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }

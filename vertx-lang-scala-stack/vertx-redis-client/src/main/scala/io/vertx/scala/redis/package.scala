@@ -1715,8 +1715,8 @@ def handler(handler: scala.Option[io.vertx.redis.client.Response => Unit]) = {
 def endHandler(endHandler: scala.Option[Void => Unit]) = {
       asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
 }
-def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.redis.client.Response]) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.redis.client.Response]) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.pipeTo(dst, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }

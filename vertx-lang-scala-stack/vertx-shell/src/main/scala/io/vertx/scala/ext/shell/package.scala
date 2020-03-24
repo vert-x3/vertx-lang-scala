@@ -98,8 +98,8 @@ def registerCommandsFuture(commands: scala.collection.mutable.Buffer[io.vertx.ex
     /**
      * Like unregisterCommand from [[io.vertx.ext.shell.command.CommandRegistry]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def unregisterCommandFuture(commandName: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def unregisterCommandFuture(commandName: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.unregisterCommand(commandName, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -185,16 +185,16 @@ def create() = {
     /**
      * Like listen from [[io.vertx.ext.shell.ShellServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def listenFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def listenFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.listen(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like close from [[io.vertx.ext.shell.ShellServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def closeFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def closeFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -225,16 +225,16 @@ def closeFuture() : scala.concurrent.Future[Unit] = {
     /**
      * Like start from [[io.vertx.ext.shell.ShellService]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def startFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def startFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.start(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like stop from [[io.vertx.ext.shell.ShellService]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def stopFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def stopFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.stop(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -275,16 +275,16 @@ def stopFuture() : scala.concurrent.Future[Unit] = {
     /**
      * Like listen from [[io.vertx.ext.shell.term.TermServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def listenFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def listenFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.listen(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like close from [[io.vertx.ext.shell.term.TermServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def closeFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def closeFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }

@@ -77,8 +77,8 @@ def getConnectionFuture() : scala.concurrent.Future[io.vertx.ext.sql.SQLConnecti
     /**
      * Like close from [[io.vertx.ext.sql.SQLClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def closeFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def closeFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -177,16 +177,16 @@ def querySingleWithParamsFuture(sql: java.lang.String,arguments: io.vertx.core.j
     /**
      * Like setAutoCommit from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def setAutoCommitFuture(autoCommit: java.lang.Boolean) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def setAutoCommitFuture(autoCommit: java.lang.Boolean) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.setAutoCommit(autoCommit, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like execute from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def executeFuture(sql: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def executeFuture(sql: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.execute(sql, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -257,24 +257,24 @@ def callWithParamsFuture(sql: java.lang.String,params: io.vertx.core.json.JsonAr
     /**
      * Like close from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def closeFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def closeFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like commit from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def commitFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def commitFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.commit(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like rollback from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def rollbackFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def rollbackFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.rollback(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -305,8 +305,8 @@ def batchCallableWithParamsFuture(sqlStatement: java.lang.String,inArgs: scala.c
     /**
      * Like setTransactionIsolation from [[io.vertx.ext.sql.SQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def setTransactionIsolationFuture(isolation: io.vertx.ext.sql.TransactionIsolation) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def setTransactionIsolationFuture(isolation: io.vertx.ext.sql.TransactionIsolation) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.setTransactionIsolation(isolation, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -444,16 +444,16 @@ def handler(handler: scala.Option[io.vertx.core.json.JsonArray => Unit]) = {
 def endHandler(endHandler: scala.Option[Void => Unit]) = {
       asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
 }
-def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.json.JsonArray]) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.core.json.JsonArray]) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.pipeTo(dst, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like close from [[io.vertx.ext.sql.SQLRowStream]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def closeFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def closeFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }

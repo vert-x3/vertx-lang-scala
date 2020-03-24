@@ -191,8 +191,8 @@ def getValueWithOptionsFuture(key: java.lang.String,options: io.vertx.ext.consul
     /**
      * Like deleteValue from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def deleteValueFuture(key: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def deleteValueFuture(key: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.deleteValue(key, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -215,8 +215,8 @@ def getValuesWithOptionsFuture(keyPrefix: java.lang.String,options: io.vertx.ext
     /**
      * Like deleteValues from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def deleteValuesFuture(keyPrefix: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def deleteValuesFuture(keyPrefix: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.deleteValues(keyPrefix, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -287,8 +287,8 @@ def infoAclTokenFuture(id: java.lang.String) : scala.concurrent.Future[io.vertx.
     /**
      * Like destroyAclToken from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def destroyAclTokenFuture(id: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def destroyAclTokenFuture(id: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.destroyAclToken(id, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -327,24 +327,24 @@ def listEventsWithOptionsFuture(options: io.vertx.ext.consul.EventListOptions) :
     /**
      * Like registerService from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def registerServiceFuture(serviceOptions: io.vertx.ext.consul.ServiceOptions) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def registerServiceFuture(serviceOptions: io.vertx.ext.consul.ServiceOptions) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.registerService(serviceOptions, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like maintenanceService from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def maintenanceServiceFuture(maintenanceOptions: io.vertx.ext.consul.MaintenanceOptions) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def maintenanceServiceFuture(maintenanceOptions: io.vertx.ext.consul.MaintenanceOptions) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.maintenanceService(maintenanceOptions, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like deregisterService from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def deregisterServiceFuture(id: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def deregisterServiceFuture(id: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.deregisterService(id, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -487,80 +487,80 @@ def localChecksFuture() : scala.concurrent.Future[scala.collection.mutable.Buffe
     /**
      * Like registerCheck from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def registerCheckFuture(checkOptions: io.vertx.ext.consul.CheckOptions) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def registerCheckFuture(checkOptions: io.vertx.ext.consul.CheckOptions) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.registerCheck(checkOptions, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like deregisterCheck from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def deregisterCheckFuture(checkId: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def deregisterCheckFuture(checkId: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.deregisterCheck(checkId, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like passCheck from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def passCheckFuture(checkId: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def passCheckFuture(checkId: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.passCheck(checkId, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like passCheckWithNote from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def passCheckWithNoteFuture(checkId: java.lang.String,note: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def passCheckWithNoteFuture(checkId: java.lang.String,note: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.passCheckWithNote(checkId, note, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like warnCheck from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def warnCheckFuture(checkId: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def warnCheckFuture(checkId: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.warnCheck(checkId, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like warnCheckWithNote from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def warnCheckWithNoteFuture(checkId: java.lang.String,note: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def warnCheckWithNoteFuture(checkId: java.lang.String,note: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.warnCheckWithNote(checkId, note, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like failCheck from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def failCheckFuture(checkId: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def failCheckFuture(checkId: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.failCheck(checkId, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like failCheckWithNote from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def failCheckWithNoteFuture(checkId: java.lang.String,note: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def failCheckWithNoteFuture(checkId: java.lang.String,note: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.failCheckWithNote(checkId, note, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like updateCheck from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def updateCheckFuture(checkId: java.lang.String,status: io.vertx.ext.consul.CheckStatus) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def updateCheckFuture(checkId: java.lang.String,status: io.vertx.ext.consul.CheckStatus) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.updateCheck(checkId, status, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like updateCheckWithNote from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def updateCheckWithNoteFuture(checkId: java.lang.String,status: io.vertx.ext.consul.CheckStatus,note: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def updateCheckWithNoteFuture(checkId: java.lang.String,status: io.vertx.ext.consul.CheckStatus,note: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.updateCheckWithNote(checkId, status, note, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -655,8 +655,8 @@ def listNodeSessionsWithOptionsFuture(nodeId: java.lang.String,options: io.vertx
     /**
      * Like destroySession from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def destroySessionFuture(id: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def destroySessionFuture(id: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.destroySession(id, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -687,16 +687,16 @@ def getAllPreparedQueriesFuture() : scala.concurrent.Future[scala.collection.mut
     /**
      * Like updatePreparedQuery from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def updatePreparedQueryFuture(definition: io.vertx.ext.consul.PreparedQueryDefinition) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def updatePreparedQueryFuture(definition: io.vertx.ext.consul.PreparedQueryDefinition) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.updatePreparedQuery(definition, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like deletePreparedQuery from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def deletePreparedQueryFuture(id: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def deletePreparedQueryFuture(id: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.deletePreparedQuery(id, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }

@@ -259,8 +259,8 @@ def createConcreteHandlerUserTypeExtension(handler: io.vertx.codegen.testmodel.R
   implicit class FutureTCKScala(val asJava: io.vertx.codegen.testmodel.FutureTCK) extends AnyVal {
 
 
-def asyncMethodFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def asyncMethodFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.asyncMethod(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -1461,8 +1461,8 @@ def methodWithHandlerAsyncResultUserTypesFuture() : scala.concurrent.Future[io.v
       asJava.methodWithHandlerAsyncResultUserTypes(new Handler[AsyncResult[io.vertx.codegen.testmodel.RefedInterface1]] { override def handle(event: AsyncResult[io.vertx.codegen.testmodel.RefedInterface1]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
-def methodWithHandlerAsyncResultVoidFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def methodWithHandlerAsyncResultVoidFuture(sendFailure: java.lang.Boolean) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.methodWithHandlerAsyncResultVoid(sendFailure, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
