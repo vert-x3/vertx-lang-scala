@@ -83,8 +83,8 @@ def create(user: io.vertx.ext.auth.User) = {
     /**
      * Like getAuthorizations from [[io.vertx.ext.auth.authorization.AuthorizationProvider]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def getAuthorizationsFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def getAuthorizationsFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.getAuthorizations(user, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }

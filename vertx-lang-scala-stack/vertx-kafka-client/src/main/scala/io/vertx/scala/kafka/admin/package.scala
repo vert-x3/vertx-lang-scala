@@ -105,16 +105,16 @@ def describeTopicsFuture(topicNames: scala.collection.mutable.Buffer[java.lang.S
     /**
      * Like createTopics from [[io.vertx.kafka.admin.KafkaAdminClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def createTopicsFuture(topics: scala.collection.mutable.Buffer[io.vertx.kafka.admin.NewTopic]) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def createTopicsFuture(topics: scala.collection.mutable.Buffer[io.vertx.kafka.admin.NewTopic]) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.createTopics(topics.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like deleteTopics from [[io.vertx.kafka.admin.KafkaAdminClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def deleteTopicsFuture(topicNames: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def deleteTopicsFuture(topicNames: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.deleteTopics(topicNames.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }

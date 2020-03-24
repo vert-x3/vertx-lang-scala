@@ -156,16 +156,16 @@ def preparedBatchFuture(sql: java.lang.String,batch: scala.collection.mutable.Bu
     /**
      * Like ping from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def pingFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def pingFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.ping(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like specifySchema from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def specifySchemaFuture(schemaName: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def specifySchemaFuture(schemaName: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.specifySchema(schemaName, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -180,32 +180,32 @@ def getInternalStatisticsFuture() : scala.concurrent.Future[java.lang.String] = 
     /**
      * Like setOption from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def setOptionFuture(option: io.vertx.mysqlclient.MySQLSetOption) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def setOptionFuture(option: io.vertx.mysqlclient.MySQLSetOption) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.setOption(option, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like resetConnection from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def resetConnectionFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def resetConnectionFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.resetConnection(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like debug from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def debugFuture() : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def debugFuture() : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.debug(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like changeUser from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def changeUserFuture(options: io.vertx.mysqlclient.MySQLAuthOptions) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def changeUserFuture(options: io.vertx.mysqlclient.MySQLAuthOptions) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.changeUser(options, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }

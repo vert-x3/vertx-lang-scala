@@ -330,16 +330,16 @@ def getRedisClient(discovery: io.vertx.servicediscovery.ServiceDiscovery, filter
     /**
      * Like registerServiceImporter from [[io.vertx.servicediscovery.ServiceDiscovery]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def registerServiceImporterFuture(importer: io.vertx.servicediscovery.spi.ServiceImporter,configuration: io.vertx.core.json.JsonObject) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def registerServiceImporterFuture(importer: io.vertx.servicediscovery.spi.ServiceImporter,configuration: io.vertx.core.json.JsonObject) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.registerServiceImporter(importer, configuration, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
     /**
      * Like registerServiceExporter from [[io.vertx.servicediscovery.ServiceDiscovery]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def registerServiceExporterFuture(exporter: io.vertx.servicediscovery.spi.ServiceExporter,configuration: io.vertx.core.json.JsonObject) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def registerServiceExporterFuture(exporter: io.vertx.servicediscovery.spi.ServiceExporter,configuration: io.vertx.core.json.JsonObject) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.registerServiceExporter(exporter, configuration, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -354,8 +354,8 @@ def publishFuture(record: io.vertx.servicediscovery.Record) : scala.concurrent.F
     /**
      * Like unpublish from [[io.vertx.servicediscovery.ServiceDiscovery]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def unpublishFuture(id: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def unpublishFuture(id: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.unpublish(id, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
@@ -450,8 +450,8 @@ def publishFuture(record: io.vertx.servicediscovery.Record) : scala.concurrent.F
     /**
      * Like unpublish from [[io.vertx.servicediscovery.spi.ServicePublisher]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def unpublishFuture(id: java.lang.String) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def unpublishFuture(id: java.lang.String) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.unpublish(id, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }

@@ -62,8 +62,8 @@ def getUserCredentialsByIdFuture(rawId: java.lang.String) : scala.concurrent.Fut
     /**
      * Like updateUserCredential from [[io.vertx.ext.auth.webauthn.CredentialStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def updateUserCredentialFuture(id: java.lang.String,data: io.vertx.core.json.JsonObject,upsert: java.lang.Boolean) : scala.concurrent.Future[Unit] = {
-      val promise = concurrent.Promise[Unit]()
+def updateUserCredentialFuture(id: java.lang.String,data: io.vertx.core.json.JsonObject,upsert: java.lang.Boolean) : scala.concurrent.Future[Void] = {
+      val promise = concurrent.Promise[Void]()
       asJava.updateUserCredential(id, data, upsert, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
 }
