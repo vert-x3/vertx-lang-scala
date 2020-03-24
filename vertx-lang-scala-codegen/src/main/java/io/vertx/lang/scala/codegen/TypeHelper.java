@@ -280,7 +280,7 @@ public class TypeHelper {
     } else if (type.getKind() == ClassKind.CLASS_TYPE) {
       String ret = name;
       if (nullable) {
-        ret = name + ".map(x => x).orNull";
+        ret = name + ".getOrElse(null)";
       }
       return ret;
     } else if (type.getKind() == ClassKind.VOID
