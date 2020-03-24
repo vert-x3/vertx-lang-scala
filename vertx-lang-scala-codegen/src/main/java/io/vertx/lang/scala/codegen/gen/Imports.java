@@ -1,4 +1,4 @@
-package io.vertx.lang.scala.codegen;
+package io.vertx.lang.scala.codegen.gen;
 
 import io.vertx.codegen.Helper;
 import io.vertx.codegen.MethodInfo;

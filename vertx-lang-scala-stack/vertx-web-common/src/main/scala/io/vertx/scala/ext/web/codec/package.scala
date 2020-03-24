@@ -39,69 +39,80 @@ package object codec{
     /**
      * Like string from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def string() = {
+  def string() = {
       io.vertx.ext.web.codec.BodyCodec.string()
-}
+  }
+
     /**
      * Like string from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def string(encoding: java.lang.String) = {
+  def string(encoding: java.lang.String) = {
       io.vertx.ext.web.codec.BodyCodec.string(encoding)
-}
+  }
+
     /**
      * Like buffer from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def buffer() = {
+  def buffer() = {
       io.vertx.ext.web.codec.BodyCodec.buffer()
-}
+  }
+
     /**
      * Like jsonObject from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def jsonObject() = {
+  def jsonObject() = {
       io.vertx.ext.web.codec.BodyCodec.jsonObject()
-}
+  }
+
     /**
      * Like jsonArray from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def jsonArray() = {
+  def jsonArray() = {
       io.vertx.ext.web.codec.BodyCodec.jsonArray()
-}
+  }
+
     /**
      * Like json from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def json[U](`type`: Class[U]) = {
+  def json[U](`type`: Class[U]) = {
       io.vertx.ext.web.codec.BodyCodec.json[U](`type`)
-}
+  }
+
     /**
      * Like none from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def none() = {
+  def none() = {
       io.vertx.ext.web.codec.BodyCodec.none()
-}
+  }
+
     /**
      * Like create from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create[T](decode: io.vertx.core.buffer.Buffer => T) = {
+  def create[T](decode: io.vertx.core.buffer.Buffer => T) = {
       io.vertx.ext.web.codec.BodyCodec.create[T]({x: io.vertx.core.buffer.Buffer => decode(x)})
-}
+  }
+
     /**
      * Like pipe from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def pipe(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]) = {
+  def pipe(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]) = {
       io.vertx.ext.web.codec.BodyCodec.pipe(stream)
-}
+  }
+
     /**
      * Like pipe from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def pipe(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer], close: java.lang.Boolean) = {
+  def pipe(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer], close: java.lang.Boolean) = {
       io.vertx.ext.web.codec.BodyCodec.pipe(stream, close)
-}
+  }
+
     /**
      * Like jsonStream from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def jsonStream(parser: io.vertx.core.parsetools.JsonParser) = {
+  def jsonStream(parser: io.vertx.core.parsetools.JsonParser) = {
       io.vertx.ext.web.codec.BodyCodec.jsonStream(parser)
-}  }
+  }
+  }
 
 
 }

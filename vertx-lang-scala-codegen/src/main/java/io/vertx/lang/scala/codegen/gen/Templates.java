@@ -1,8 +1,9 @@
-package io.vertx.lang.scala.codegen;
+package io.vertx.lang.scala.codegen.gen;
 
 import io.vertx.codegen.*;
 import io.vertx.codegen.doc.Doc;
 import io.vertx.codegen.type.*;
+import io.vertx.codegen.type.ClassKind.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -11,79 +12,71 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static io.vertx.codegen.Helper.getNonGenericType;
+import static io.vertx.codegen.type.ClassKind.*;
 
 public class Templates {
 
+  public static final Map<String,String> javaBasicToWrapperTyper = new HashMap<String,String>() {{
+    put("byte", "java.lang.Byte");
+    put("java.lang.Byte", "java.lang.Byte");
+    put("short", "java.lang.Short");
+    put("java.lang.Short", "java.lang.Short");
+    put("int", "java.lang.Integer");
+    put("java.lang.Integer", "java.lang.Integer");
+    put("long", "java.lang.Long");
+    put("java.lang.Long", "java.lang.Long");
+    put("float", "java.lang.Float");
+    put("java.lang.Float", "java.lang.Float");
+    put("double", "java.lang.Double");
+    put("java.lang.Double", "java.lang.Double");
+    put("boolean", "java.lang.Boolean");
+    put("java.lang.Boolean", "java.lang.Boolean");
+    put("char", "java.lang.Character");
+    put("java.lang.Character", "java.lang.Character");
+    put("String", "java.lang.String");
+    put("java.lang.String", "java.lang.String");
+  }};
 
-  public static final Map<String,String> javaBasicToWrapperTyper;
-  static {
-    Map<String, String> writable = new HashMap<>();
-    writable.put("byte", "java.lang.Byte");
-    writable.put("java.lang.Byte", "java.lang.Byte");
-    writable.put("short", "java.lang.Short");
-    writable.put("java.lang.Short", "java.lang.Short");
-    writable.put("int", "java.lang.Integer");
-    writable.put("java.lang.Integer", "java.lang.Integer");
-    writable.put("long", "java.lang.Long");
-    writable.put("java.lang.Long", "java.lang.Long");
-    writable.put("float", "java.lang.Float");
-    writable.put("java.lang.Float", "java.lang.Float");
-    writable.put("double", "java.lang.Double");
-    writable.put("java.lang.Double", "java.lang.Double");
-    writable.put("boolean", "java.lang.Boolean");
-    writable.put("java.lang.Boolean", "java.lang.Boolean");
-    writable.put("char", "java.lang.Character");
-    writable.put("java.lang.Character", "java.lang.Character");
-    writable.put("String", "java.lang.String");
-    writable.put("java.lang.String", "java.lang.String");
-    javaBasicToWrapperTyper = Collections.unmodifiableMap(writable);
-  }
+  public static final Map<String,String> javaBasicToScalaType = new HashMap<String, String>() {{
+    put("byte", "Byte");
+    put("java.lang.Byte", "Byte");
+    put("short", "Short");
+    put("java.lang.Short", "Short");
+    put("int", "Int");
+    put("java.lang.Integer", "Int");
+    put("long", "Long");
+    put("java.lang.Long", "Long");
+    put("float", "Float");
+    put("java.lang.Float", "Float");
+    put("double", "Double");
+    put("java.lang.Double", "Double");
+    put("boolean", "Boolean");
+    put("java.lang.Boolean", "Boolean");
+    put("char", "Char");
+    put("java.lang.Character", "Char");
+    put("String", "String");
+    put("java.lang.String", "String");
+  }};
 
-  public static final Map<String,String> javaBasicToScalaType;
-  static {
-    Map<String, String> writable = new HashMap<>();
-    writable.put("byte", "Byte");
-    writable.put("java.lang.Byte", "Byte");
-    writable.put("short", "Short");
-    writable.put("java.lang.Short", "Short");
-    writable.put("int", "Int");
-    writable.put("java.lang.Integer", "Int");
-    writable.put("long", "Long");
-    writable.put("java.lang.Long", "Long");
-    writable.put("float", "Float");
-    writable.put("java.lang.Float", "Float");
-    writable.put("double", "Double");
-    writable.put("java.lang.Double", "Double");
-    writable.put("boolean", "Boolean");
-    writable.put("java.lang.Boolean", "Boolean");
-    writable.put("char", "Char");
-    writable.put("java.lang.Character", "Char");
-    writable.put("String", "String");
-    writable.put("java.lang.String", "String");
-    javaBasicToScalaType = Collections.unmodifiableMap(writable);
-  }
+  public static final Map<ClassKind, Function<TypeInfo,String>> toScalaType = new HashMap<ClassKind, Function<TypeInfo,String>>() {{
+    put(VOID, t -> "Void");
+    put(OBJECT, t -> t.isVariable() ? t.getName() : "AnyRef");
+    put(THROWABLE, t -> "Throwable");
+    put(STRING, t -> javaBasicToWrapperTyper.get(t.getName()));
+    put(PRIMITIVE, t -> javaBasicToWrapperTyper.get(t.getName()));
+    put(BOXED_PRIMITIVE, t -> javaBasicToWrapperTyper.get(t.getName()));
+    put(LIST, t -> "scala.collection.mutable.Buffer" +  ((!((ParameterizedTypeInfo)t).getArgs().isEmpty()) ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : ""));
+    put(SET, t -> "scala.collection.mutable.Set" +  ((!((ParameterizedTypeInfo)t).getArgs().isEmpty()) ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : ""));
+    put(MAP, t -> "scala.collection.mutable.Map" +  ((!((ParameterizedTypeInfo)t).getArgs().isEmpty()) ? "[String, " + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(1)) + "]" : ""));
+    put(HANDLER, t -> fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + " => Unit");
+    put(JSON_OBJECT, TypeInfo::getName);
+    put(JSON_ARRAY, TypeInfo::getName);
+    put(ENUM, TypeInfo::getName);
+    put(OTHER, type -> getNonGenericType(type.getName()));
+    put(ASYNC_RESULT, t -> "AsyncResult" + (!((ParameterizedTypeInfo)t).getArgs().isEmpty() ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : "[_]"));
+    put(CLASS_TYPE, t -> "Class" + (((ParameterizedTypeInfo)t).getArgs().isEmpty() ? "[_]" : "[" + ((ParameterizedTypeInfo)t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]"));
 
-  public static final Map<ClassKind, Function<TypeInfo,String>> toScalaType;
-  static {
-    Map<ClassKind, Function<TypeInfo,String>> writable = new HashMap<>();
-    writable.put(ClassKind.VOID, t -> "Void");
-    writable.put(ClassKind.OBJECT, t -> t.isVariable() ? t.getName() : "AnyRef");
-    writable.put(ClassKind.THROWABLE, t -> "Throwable");
-    writable.put(ClassKind.STRING, t -> javaBasicToWrapperTyper.get(t.getName()));
-    writable.put(ClassKind.PRIMITIVE, t -> javaBasicToWrapperTyper.get(t.getName()));
-    writable.put(ClassKind.BOXED_PRIMITIVE, t -> javaBasicToWrapperTyper.get(t.getName()));
-    writable.put(ClassKind.LIST, t -> "scala.collection.mutable.Buffer" +  ((!((ParameterizedTypeInfo)t).getArgs().isEmpty()) ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : ""));
-    writable.put(ClassKind.SET, t -> "scala.collection.mutable.Set" +  ((!((ParameterizedTypeInfo)t).getArgs().isEmpty()) ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : ""));
-    writable.put(ClassKind.MAP, t -> "scala.collection.mutable.Map" +  ((!((ParameterizedTypeInfo)t).getArgs().isEmpty()) ? "[String, " + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(1)) + "]" : ""));
-    writable.put(ClassKind.HANDLER, t -> fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + " => Unit");
-    writable.put(ClassKind.JSON_OBJECT, TypeInfo::getName);
-    writable.put(ClassKind.JSON_ARRAY, TypeInfo::getName);
-    writable.put(ClassKind.ENUM, TypeInfo::getName);
-    writable.put(ClassKind.OTHER, type -> getNonGenericType(type.getName()));
-    writable.put(ClassKind.ASYNC_RESULT, t -> "AsyncResult" + (!((ParameterizedTypeInfo)t).getArgs().isEmpty() ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : "[_]"));
-    writable.put(ClassKind.CLASS_TYPE, t -> "Class" + (((ParameterizedTypeInfo)t).getArgs().isEmpty() ? "[_]" : "[" + ((ParameterizedTypeInfo)t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]"));
-
-    writable.put(ClassKind.API, t -> {
+    put(API, t -> {
       String ret = getNonGenericType(t.getName());
       if(t.isParameterized()) {
         if (((ParameterizedTypeInfo)t).getArgs().isEmpty()) {
@@ -91,12 +84,11 @@ public class Templates {
         } else {
           ret += "[" + ((ParameterizedTypeInfo)t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]";
         }
-        return ret;
       }
       return ret;
     });
 
-    writable.put(ClassKind.FUNCTION, t -> {
+    put(FUNCTION, t -> {
       String type1 = fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0));
       String type2 = fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(1));
       if (type1.equals("Void")) {
@@ -105,34 +97,30 @@ public class Templates {
         return type1 + " => " + type2;
       }
     });
+  }};
 
-    toScalaType = Collections.unmodifiableMap(writable);
-  }
-
-  public static final Map<ClassKind, BiFunction<String, TypeInfo, String>> toJavaWithConversionFromScala;
-  static {
-    Map<ClassKind, BiFunction<String, TypeInfo,String>> writable = new HashMap<>();
-    writable.put(ClassKind.VOID, (name, type) -> name);
-    writable.put(ClassKind.STRING, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    writable.put(ClassKind.PRIMITIVE, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    writable.put(ClassKind.BOXED_PRIMITIVE, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    writable.put(ClassKind.THROWABLE, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    writable.put(ClassKind.OBJECT, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    writable.put(ClassKind.CLASS_TYPE, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    writable.put(ClassKind.JSON_OBJECT, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    writable.put(ClassKind.JSON_ARRAY, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    writable.put(ClassKind.ENUM, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    writable.put(ClassKind.API, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    writable.put(ClassKind.HANDLER, (name, type) ->  name + ".asInstanceOf[" + convertToScalaNotation(type.toString()) + "]");
-    writable.put(ClassKind.ASYNC_RESULT, (name, type) ->  "AsyncResultWrapper[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)type).getArg(0)) + ", " + toJavaType(((ParameterizedTypeInfo)type).getArg(0)) + "](x, a => " + fromScalatoJavaWithConversion("a", ((ParameterizedTypeInfo)type).getArg(0)) + ")" + (type.isNullable() ? ".getOrElse(null)" : ""));
-    writable.put(ClassKind.SET, (name, type) ->  name + (type.isNullable() ? ".map(_.asJava).getOrElse(null)" : ".asJava"));
-    writable.put(ClassKind.LIST, (name, type) ->  name + (type.isNullable() ? ".map(_.asJava).getOrElse(null)" : ".asJava"));
-    writable.put(ClassKind.MAP, (name, type) ->  name + (type.isNullable() ? ".map(_.asJava).getOrElse(null)" : ".asJava"));
-    writable.put(ClassKind.OTHER, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    writable.put(ClassKind.FUNCTION, (name, type) ->  {
+  public static final Map<ClassKind, BiFunction<String, TypeInfo, String>> toJavaWithConversionFromScala = new HashMap<ClassKind, BiFunction<String, TypeInfo,String>>() {{
+    put(VOID, (name, type) -> name);
+    put(STRING, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(PRIMITIVE, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(BOXED_PRIMITIVE, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(THROWABLE, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(OBJECT, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(CLASS_TYPE, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(JSON_OBJECT, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(JSON_ARRAY, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(ENUM, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(API, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(HANDLER, (name, type) ->  name + ".asInstanceOf[" + convertToScalaGenericsNotation(type.toString()) + "]");
+    put(ASYNC_RESULT, (name, type) ->  "AsyncResultWrapper[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)type).getArg(0)) + ", " + toJavaType(((ParameterizedTypeInfo)type).getArg(0)) + "](x, a => " + fromScalatoJavaWithConversion("a", ((ParameterizedTypeInfo)type).getArg(0)) + ")" + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(SET, (name, type) ->  name + (type.isNullable() ? ".map(_.asJava).getOrElse(null)" : ".asJava"));
+    put(LIST, (name, type) ->  name + (type.isNullable() ? ".map(_.asJava).getOrElse(null)" : ".asJava"));
+    put(MAP, (name, type) ->  name + (type.isNullable() ? ".map(_.asJava).getOrElse(null)" : ".asJava"));
+    put(OTHER, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(FUNCTION, (name, type) ->  {
       ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
       String executed = name;
-      if (parameterizedType.getArg(0).getKind() == ClassKind.VOID) {
+      if (parameterizedType.getArg(0).getKind() == VOID) {
         executed = executed + "()";
       } else {
         executed = executed + "(x)";
@@ -144,32 +132,26 @@ public class Templates {
       }
       return ret;
     });
+  }};
 
-
-    toJavaWithConversionFromScala = Collections.unmodifiableMap(writable);
-  }
-
-
-  public static final Map<ClassKind, Function<TypeInfo, String>> toJavaString;
-  static {
-    Map<ClassKind, Function<TypeInfo, String>> writable = new HashMap<>();
-    writable.put(ClassKind.PRIMITIVE, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
-    writable.put(ClassKind.BOXED_PRIMITIVE, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
-    writable.put(ClassKind.STRING, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
-    writable.put(ClassKind.THROWABLE, TypeInfo::getSimpleName);
-    writable.put(ClassKind.VOID, TypeInfo::getSimpleName);
-    writable.put(ClassKind.JSON_OBJECT, TypeInfo::getSimpleName);
-    writable.put(ClassKind.JSON_ARRAY, TypeInfo::getSimpleName);
-    writable.put(ClassKind.ENUM, TypeInfo::getSimpleName);
-    writable.put(ClassKind.OBJECT, TypeInfo::getSimpleName);
-    writable.put(ClassKind.CLASS_TYPE, type -> type.getSimpleName() + "[" + convertArgListToScalaFormatedString(type) + "]");
-    writable.put(ClassKind.HANDLER, type -> "Handler["+ toJavaType(((ParameterizedTypeInfo)type).getArg(0)) +"]");
-    writable.put(ClassKind.ASYNC_RESULT, type -> getNonGenericType(type.getSimpleName()) + "["+ toJavaType(((ParameterizedTypeInfo)type).getArg(0)) +"]");
-    writable.put(ClassKind.LIST, type -> "java.util.List["+ toJavaType(((ParameterizedTypeInfo)type).getArg(0)) +"]");
-    writable.put(ClassKind.SET, type -> "java.util.Set["+ toJavaType(((ParameterizedTypeInfo)type).getArg(0)) +"]");
-    writable.put(ClassKind.MAP, type -> "java.util.Map[String, "+ toJavaType(((ParameterizedTypeInfo)type).getArg(1)) +"]");
-    writable.put(ClassKind.OTHER, TypeInfo::getName);
-    writable.put(ClassKind.API, type -> {
+  public static final Map<ClassKind, Function<TypeInfo, String>> toJavaString = new HashMap<ClassKind, Function<TypeInfo, String>>() {{
+    put(PRIMITIVE, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
+    put(BOXED_PRIMITIVE, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
+    put(STRING, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
+    put(THROWABLE, TypeInfo::getSimpleName);
+    put(VOID, TypeInfo::getSimpleName);
+    put(JSON_OBJECT, TypeInfo::getSimpleName);
+    put(JSON_ARRAY, TypeInfo::getSimpleName);
+    put(ENUM, TypeInfo::getSimpleName);
+    put(OBJECT, TypeInfo::getSimpleName);
+    put(CLASS_TYPE, type -> type.getSimpleName() + "[" + convertArgListToScalaFormatedString(type) + "]");
+    put(HANDLER, type -> "Handler["+ toJavaType(((ParameterizedTypeInfo)type).getArg(0)) +"]");
+    put(ASYNC_RESULT, type -> getNonGenericType(type.getSimpleName()) + "["+ toJavaType(((ParameterizedTypeInfo)type).getArg(0)) +"]");
+    put(LIST, type -> "java.util.List["+ toJavaType(((ParameterizedTypeInfo)type).getArg(0)) +"]");
+    put(SET, type -> "java.util.Set["+ toJavaType(((ParameterizedTypeInfo)type).getArg(0)) +"]");
+    put(MAP, type -> "java.util.Map[String, "+ toJavaType(((ParameterizedTypeInfo)type).getArg(1)) +"]");
+    put(OTHER, TypeInfo::getName);
+    put(API, type -> {
       String ret = getNonGenericType(type.getName());
       if (type.isParameterized()) {
         ret += convertArgListToScalaFormatedString(type);
@@ -179,18 +161,19 @@ public class Templates {
       }
       return ret;
     });
-
-    toJavaString = Collections.unmodifiableMap(writable);
-  }
+  }};
 
   public static String convertArgListToScalaFormatedString(TypeInfo type) {
-    if (type.isParameterized()) {
-        return "[" + ((ParameterizedTypeInfo)type)
-          .getArgs().stream()
-          .map(Templates::toJavaType)
-          .collect(Collectors.joining(", ")) + "]";
-    }
-    return "";
+    return type.isParameterized() ? "[" + ((ParameterizedTypeInfo)type).getArgs().stream().map(Templates::toJavaType).collect(Collectors.joining(", ")) + "]" : "";
+  }
+
+  /**
+   * Convert a given type parameter list into a Scala String representation.
+   * @param typeParams
+   * @return
+   */
+  public static String assembleTypeParamsForScala(Collection<TypeParamInfo> typeParams) {
+    return typeParams.isEmpty() ? "" : "[" + typeParams.stream().map(TypeParamInfo::getName).collect(Collectors.joining(", ")) + "]";
   }
 
   public static String toScalaWithConversion(String name, TypeInfo type) {
@@ -231,25 +214,37 @@ public class Templates {
     return expression;
   }
 
-  public static String wrapInOptionIfNullable(boolean nullable, String expression) {
+  /**
+   *
+   * @param nullable
+   * @param expression
+   * @return
+   */
+  public static String convertExpressionToOptionIfNullable(boolean nullable, String expression) {
     if (nullable) {
       return "scala.Option(" + expression + ")";
     }
     return expression;
   }
 
-  public static String assembleTypeParams(Collection<TypeParamInfo> typeParams) {
-    return typeParams.isEmpty() ? "" : "[" + typeParams.stream().map(TypeParamInfo::getName).collect(Collectors.joining(", ")) + "]";
-  }
-
-  public static String escapeIfKeyword(String possibleKeyword) {
+  /**
+   * Some keywords that are legal in Java can only be used when quoted in Scala
+   * @param possibleKeyword
+   * @return
+   */
+  public static String quoteIfScalaKeyword(String possibleKeyword) {
     if (possibleKeyword.equals("type") || possibleKeyword.equals("object")) {
       return "`" + possibleKeyword + "`";
     }
     return possibleKeyword;
   }
 
-  public static String convertToScalaNotation(String type) {
+  /**
+   * Convert a String containing generics to the Scala notation.
+   * @param type
+   * @return
+   */
+  public static String convertToScalaGenericsNotation(String type) {
     return  type
       .replace("<", "[").replace(">", "]");
   }
@@ -319,7 +314,7 @@ public class Templates {
       return Collections.emptyList();
     return methods.stream()
       .filter(method -> !skipMethod(method))
-      .filter(method -> method.isCacheReturn())
+      .filter(MethodInfo::isCacheReturn)
       .collect(Collectors.toList());
   }
 
@@ -328,7 +323,7 @@ public class Templates {
       return Collections.emptyList();
     return methods.stream()
       .filter(method -> !skipMethod(method))
-      .filter(method -> shouldMethodReturnAFuture(method))
+      .filter(Templates::shouldMethodReturnAFuture)
       .collect(Collectors.toList());
   }
 
@@ -358,19 +353,17 @@ public class Templates {
 
   public static String assembleTypeParamString(MethodInfo method) {
     if (!method.getTypeParams().isEmpty()) {
-      String args = String.join(", ", method.getTypeParams().stream()
-        .map(v -> v.getName()).collect(Collectors.toList()));
-      return "[" + args + "]";
+      return "[" + method.getTypeParams().stream().map(v -> v.getName()).collect(Collectors.joining(", ")) + "]";
     }
     return "";
   }
 
   public static String invokeMethodWithoutConvertingReturn(String target, MethodInfo method) {
-    String paramString = String.join(", ", method.getParams().stream()
-      .map(param -> fromScalatoJavaWithConversion(escapeIfKeyword(param.getName()), param.getType()))
-      .collect(Collectors.toList()));
+    String paramString = method.getParams().stream()
+      .map(param -> fromScalatoJavaWithConversion(quoteIfScalaKeyword(param.getName()), param.getType()))
+      .collect(Collectors.joining(", "));
 
-    return target + "." + escapeIfKeyword(method.getName()) + assembleTypeParamString(method) + "(" + paramString + ")";
+    return target + "." + quoteIfScalaKeyword(method.getName()) + assembleTypeParamString(method) + "(" + paramString + ")";
   }
 
   public static String invokeMethodAndUseProvidedHandler(String target, MethodInfo method, String handler) {
@@ -380,14 +373,27 @@ public class Templates {
       if (isAsyncResultHandler(param.getType())) {
         return handler;
       } else {
-        return fromScalatoJavaWithConversion(escapeIfKeyword(param.getName()), param.getType());
+        return fromScalatoJavaWithConversion(quoteIfScalaKeyword(param.getName()), param.getType());
       }
     }).collect(Collectors.joining(", "));
 
-    return target + "." + escapeIfKeyword(method.getName()) + typeParamString + "(" + paramString + ")";
+    return target + "." + quoteIfScalaKeyword(method.getName()) + typeParamString + "(" + paramString + ")";
   }
 
+
   //Rendering output
+
+  public static String renderMethodDocs(TypeInfo type, MethodInfo method) {
+    String ret = "";
+
+    if (method.getDoc() != null) {
+      ret += Docs.methodDoc(type, method, "    ", true);
+      ret += "\n";
+    }
+
+    return ret;
+  }
+
 
   /**
    * Render a method that accepts a AsyncResult-Handler into one that returns a Scala-Future.
@@ -400,29 +406,18 @@ public class Templates {
 
     List<ParamInfo> params = method.getParams();
     params = params.subList(0, params.size() - 1);
-    String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(","));
+    String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(","));
 
     TypeInfo typeOfReturnedFuture = ((ParameterizedTypeInfo)((ParameterizedTypeInfo)method.getParam(method.getParams().size()-1).getType()).getArg(0)).getArg(0);
     String asyncType = typeOfReturnedFuture.getName().replace('<', '[').replace('>', ']');
 
-    String methodName = escapeIfKeyword((method.getName().endsWith("Handler") ? method.getName().substring(0, method.getName().length()-7) : method.getName()) + "Future");
+    String methodName = quoteIfScalaKeyword((method.getName().endsWith("Handler") ? method.getName().substring(0, method.getName().length()-7) : method.getName()) + "Future");
 
-    ret +="def "+ methodName + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") : scala.concurrent.Future[" + fromTypeToScalaTypeString(typeOfReturnedFuture) + "] = {\n" +
+    ret +="  def "+ methodName + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") : scala.concurrent.Future[" + fromTypeToScalaTypeString(typeOfReturnedFuture) + "] = {\n" +
       "      val promise = concurrent.Promise[" + fromTypeToScalaTypeString(typeOfReturnedFuture)+ "]()\n" +
       "      " + invokeMethodAndUseProvidedHandler("asJava", method, "new Handler[AsyncResult[" + asyncType + "]] { override def handle(event: AsyncResult[" + asyncType + "]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(" + toScalaWithConversion("event.result()", typeOfReturnedFuture)) + "}})\n" +
       "      promise.future\n" +
-      "}";
-    return ret;
-  }
-
-  public static String renderMethodDocs(TypeInfo type, MethodInfo method) {
-    String ret = "";
-
-    if (method.getDoc() != null) {
-      ret += Docs.methodDoc(type, method, "    ", true);
-      ret += "\n";
-    }
-
+      "  }\n";
     return ret;
   }
 
@@ -436,16 +431,16 @@ public class Templates {
     String ret = renderMethodDocs(type, method);
 
     List<ParamInfo> params = method.getParams();
-    String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
+    String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
 
     String option = method.getReturnType().isNullable() ? "Option" : "";
 
     String exec = method.getReturnType().isNullable() ? "scala.Option(" + invokeMethodWithoutConvertingReturn(type.getName(), method) + ")" : invokeMethodWithoutConvertingReturn(type.getName(), method);
 
 
-    ret += "def "+ escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
+    ret += "  def "+ quoteIfScalaKeyword(method.getName())+ option + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
       "      " + exec + "\n" +
-      "}";
+      "  }\n";
     return ret;
   }
 
@@ -459,13 +454,13 @@ public class Templates {
     String ret = renderMethodDocs(type, method);
 
     List<ParamInfo> params = method.getParams();
-    String paramList = params.stream().map(param -> escapeIfKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
+    String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
 
     String option = method.getReturnType().isNullable() ? "Option" : "";
 
-    ret +="def "+ escapeIfKeyword(method.getName())+ option + assembleTypeParams(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
-      "      " + wrapInOptionIfNullable(method.getReturnType().isNullable(), invokeMethodWithoutConvertingReturn("asJava", method)) + "\n" +
-      "}";
+    ret +="  def "+ quoteIfScalaKeyword(method.getName())+ option + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
+      "      " + convertExpressionToOptionIfNullable(method.getReturnType().isNullable(), invokeMethodWithoutConvertingReturn("asJava", method)) + "\n" +
+      "  }\n";
     return ret;
   }
 
@@ -507,7 +502,7 @@ public class Templates {
       docs +
       "\n" +
       ("Vertx".equals(className) ? RenderHelpers.renderFile("extensions/VertxObject.ftl")+ "\n" : "") +
-      "  implicit class "+ className + "Scala" + assembleTypeParams(typeParams) + "(val asJava: " + nonGenericType + assembleTypeParams(typeParams) + ") extends AnyVal {\n" +
+      "  implicit class "+ className + "Scala" + assembleTypeParamsForScala(typeParams) + "(val asJava: " + nonGenericType + assembleTypeParamsForScala(typeParams) + ") extends AnyVal {\n" +
       ("Vertx".equals(className) ? RenderHelpers.renderFile("extensions/Vertx.ftl")+ "\n" : "") +
       ("Vertx".equals(className) ? RenderHelpers.renderFile("extensions/executeblocking.ftl")+ "\n" : "") +
       ("Context".equals(className) ? RenderHelpers.renderFile("extensions/executeblocking.ftl") + "\n" : "") +

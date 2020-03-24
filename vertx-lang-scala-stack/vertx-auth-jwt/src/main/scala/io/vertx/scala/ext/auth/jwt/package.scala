@@ -40,9 +40,10 @@ package object jwt{
     /**
      * Like create from [[io.vertx.ext.auth.jwt.JWTAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(vertx: io.vertx.core.Vertx, config: io.vertx.ext.auth.jwt.JWTAuthOptions) = {
+  def create(vertx: io.vertx.core.Vertx, config: io.vertx.ext.auth.jwt.JWTAuthOptions) = {
       io.vertx.ext.auth.jwt.JWTAuth.create(vertx, config)
-}  }
+  }
+  }
 
 
   type JWTAuthOptions = io.vertx.ext.auth.jwt.JWTAuthOptions
@@ -57,18 +58,20 @@ def create(vertx: io.vertx.core.Vertx, config: io.vertx.ext.auth.jwt.JWTAuthOpti
     /**
      * Like create from [[io.vertx.ext.auth.jwt.authorization.JWTAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create(rootClaim: java.lang.String) = {
+  def create(rootClaim: java.lang.String) = {
       io.vertx.ext.auth.jwt.authorization.JWTAuthorization.create(rootClaim)
-}  }
+  }
+  }
 
 
   object MicroProfileAuthorization {
     /**
      * Like create from [[io.vertx.ext.auth.jwt.authorization.MicroProfileAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-def create() = {
+  def create() = {
       io.vertx.ext.auth.jwt.authorization.MicroProfileAuthorization.create()
-}  }
+  }
+  }
 
 
 }
