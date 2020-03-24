@@ -82,7 +82,7 @@ def none() = {
      * Like create from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
 def create[T](decode: io.vertx.core.buffer.Buffer => T) = {
-      io.vertx.ext.web.codec.BodyCodec.create[T]({x: Buffer => decode(x)})
+      io.vertx.ext.web.codec.BodyCodec.create[T]({x: io.vertx.core.buffer.Buffer => decode(x)})
 }
     /**
      * Like pipe from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
