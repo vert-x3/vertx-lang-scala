@@ -66,7 +66,7 @@ public class ClassCodeGenerator extends Generator<Model> {
     ClassTypeInfo type = ((ClassTypeInfo) modelVars.get("type"));
     if(!ignoredPackages.contains(type.getPackageName()) && !ignoreClassname.contains(type.getSimpleName())) {
       try {
-        return TypeHelper.renderPackageObject(
+        return Templates.renderPackageObject(
           type,
           index,
           size,
@@ -87,7 +87,7 @@ public class ClassCodeGenerator extends Generator<Model> {
   }
 
   public Set<String> adjustedImports(ClassTypeInfo type, Set<TypeInfo> importedTypes) {
-    Set<String> imps = TypeHelper.generateImports(type, importedTypes, Collections.emptyList());
+    Set<String> imps = Imports.generateImports(type, importedTypes, Collections.emptyList());
 
     //Change
     //import io.vertx.scala.ext.web.common.template.TemplateEngine
