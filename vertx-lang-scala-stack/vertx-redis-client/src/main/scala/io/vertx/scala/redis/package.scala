@@ -76,6 +76,7 @@ package object redis{
       promise.future
   }
 
+
   }
 
 
@@ -1889,6 +1890,7 @@ package object redis{
       promise.future
   }
 
+
   }
 
 
@@ -1945,6 +1947,7 @@ package object redis{
       asJava.batch(commands.asJava, new Handler[AsyncResult[java.util.List[io.vertx.redis.client.Response]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.redis.client.Response]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
   }
+
 
   }
 

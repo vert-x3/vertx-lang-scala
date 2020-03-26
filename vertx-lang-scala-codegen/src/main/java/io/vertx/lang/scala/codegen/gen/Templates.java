@@ -3,7 +3,6 @@ package io.vertx.lang.scala.codegen.gen;
 import io.vertx.codegen.*;
 import io.vertx.codegen.doc.Doc;
 import io.vertx.codegen.type.*;
-import io.vertx.codegen.type.ClassKind.*;
 
 import java.io.IOException;
 import java.util.*;
@@ -263,16 +262,17 @@ public class Templates {
   }
 
   /**
-   * Find methods which don't fall into any other category.
+   * Find methods accepting collections.
    * @param methods
    * @return
    */
-  public static List<MethodInfo> findBasicMethods(List<MethodInfo> methods) {
+  public static List<MethodInfo> findMethodsAcceptingCollections(List<MethodInfo> methods) {
     if(methods == null)
       return Collections.emptyList();
     return methods.stream()
       .filter(method -> !skipMethod(method))
-      .filter(method -> !method.isFluent() && !method.isCacheReturn() && !method.isStaticMethod() && !method.isDefaultMethod())
+      .filter(method -> !shouldMethodReturnAFuture(method) && method.isFluent() && !method.isCacheReturn() && !method.isStaticMethod() && !method.isDefaultMethod())
+      .filter(method -> method.getParams().stream().anyMatch(param -> param.getType().getKind().collection))
       .collect(Collectors.toList());
   }
 
@@ -341,7 +341,6 @@ public class Templates {
       .collect(Collectors.toList());
   }
 
-
   public static boolean isAsyncResultHandler(TypeInfo type) {
     return type.getKind() == ClassKind.HANDLER && ((ParameterizedTypeInfo)type).getArg(0).getKind() == ClassKind.ASYNC_RESULT;
   }
@@ -394,6 +393,25 @@ public class Templates {
     return ret;
   }
 
+
+
+  /**
+   * Render methods that take a convertable argument..
+   * @param type
+   * @param method
+   * @return
+   */
+  public static String renderBasicMethod(TypeInfo type, MethodInfo method) {
+    String ret = renderMethodDocs(type, method);
+
+    List<ParamInfo> params = method.getParams();
+    String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
+
+    ret += "  def "+ quoteIfScalaKeyword(method.getName()) + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
+      "      " + invokeMethodWithoutConvertingReturn("asJava", method) + "\n" +
+      "  }\n";
+    return ret;
+  }
 
   /**
    * Render a method that accepts a AsyncResult-Handler into one that returns a Scala-Future.
@@ -481,7 +499,7 @@ public class Templates {
   /**
    * Takes care of rendering all APP-classes except DataObjects.
    */
-  public static String renderClass(ClassTypeInfo type, Doc doc, String className, List<MethodInfo> nullableMethods, List<MethodInfo> futureMethods, String nonGenericType, Collection<TypeParamInfo> typeParams) throws IOException{
+  public static String renderClass(ClassTypeInfo type, Doc doc, String className, List<MethodInfo> nullableMethods, List<MethodInfo> futureMethods, List<MethodInfo> basicMethods, String nonGenericType, Collection<TypeParamInfo> typeParams) throws IOException{
 
     String docs = doc != null ? "  /**\n" +
       Docs.renderDoc(type, "    *", doc) + "\n" +
@@ -497,6 +515,11 @@ public class Templates {
       .map(method -> renderFutureMethod(type, method))
       .collect(Collectors.joining("\n"));
 
+    String basicMethodsRendered = basicMethods.stream().filter(method -> !method.getName().equals("executeBlocking"))
+      .map(method -> renderBasicMethod(type, method))
+      .collect(Collectors.joining("\n"));
+
+
     return
       "\n" +
       docs +
@@ -511,6 +534,8 @@ public class Templates {
       nullableMethodsRendered +
       "\n" +
       futureMethodsRendered +
+      "\n" +
+      basicMethodsRendered +
       "\n" +
       "  }\n";
   }
@@ -528,6 +553,7 @@ public class Templates {
 
     List<MethodInfo> nullableMethods = findNullableMethods(instanceMethods);
     List<MethodInfo> futureMethods = findFutureMethods(instanceMethods);
+    List<MethodInfo> basicMethods = findMethodsAcceptingCollections(instanceMethods);
 
     String header = "";
     if (incrementalIndex == 0) {
@@ -557,7 +583,7 @@ public class Templates {
       body = renderDataobject(type.getSimpleName(), type, concrete, hasEmptyConstructor) + "\n";
     }
     else if (!type.getName().contains("Handler") && !futureMethods.isEmpty()) {
-      body = renderClass(type, doc, type.getSimpleName(), nullableMethods, futureMethods, nonGenericType, typeParams) + "\n";
+      body = renderClass(type, doc, type.getSimpleName(), nullableMethods, futureMethods, basicMethods, nonGenericType, typeParams) + "\n";
     }
     else if (!type.getName().contains("Handler") && (staticMethods != null && !staticMethods.isEmpty()) &&  !"Message".equals(type.getSimpleName())) {
       body = "  object " + type.getSimpleName() + " {\n" +

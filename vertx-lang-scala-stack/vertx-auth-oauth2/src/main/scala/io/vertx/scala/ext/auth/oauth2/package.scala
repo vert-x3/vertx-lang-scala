@@ -119,6 +119,7 @@ package object oauth2{
       promise.future
   }
 
+
   }
 
 
@@ -599,6 +600,7 @@ package object oauth2{
       promise.future
   }
 
+
   }
 
 
@@ -643,6 +645,7 @@ package object oauth2{
       asJava.isAuthorized(user, authority, new Handler[AsyncResult[java.lang.Boolean]] { override def handle(event: AsyncResult[java.lang.Boolean]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
+
 
   }
 

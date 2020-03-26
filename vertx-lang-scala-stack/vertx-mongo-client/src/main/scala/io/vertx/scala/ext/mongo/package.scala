@@ -487,6 +487,7 @@ package object mongo{
       promise.future
   }
 
+
   }
 
 
@@ -630,6 +631,7 @@ package object mongo{
       asJava.uploadFileWithOptions(fileName, options, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
+
 
   }
 

@@ -31,6 +31,11 @@
       <artifactId>${vertx-module}</artifactId>
       <version>${stack.version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sql-client</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
   </dependencies>
 
   <build>

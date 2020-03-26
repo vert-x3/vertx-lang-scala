@@ -58,6 +58,7 @@ package object mongo{
       promise.future
   }
 
+
   }
 
 
@@ -147,6 +148,7 @@ package object mongo{
       asJava.createUserRolesAndPermissions(username, roles.asJava, permissions.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
+
 
   }
 

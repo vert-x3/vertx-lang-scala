@@ -72,6 +72,7 @@ package object amqpbridge{
       promise.future
   }
 
+
   }
 
 

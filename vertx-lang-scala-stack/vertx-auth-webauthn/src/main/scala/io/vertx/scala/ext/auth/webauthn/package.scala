@@ -70,6 +70,7 @@ package object webauthn{
       promise.future
   }
 
+
   }
 
 
@@ -119,6 +120,7 @@ package object webauthn{
       asJava.authenticate(authInfo, new Handler[AsyncResult[io.vertx.ext.auth.User]] { override def handle(event: AsyncResult[io.vertx.ext.auth.User]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
+
 
   }
 
