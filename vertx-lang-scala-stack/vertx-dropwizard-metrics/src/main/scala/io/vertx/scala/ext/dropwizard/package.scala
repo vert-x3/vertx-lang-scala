@@ -14,9 +14,10 @@
  * under the License.
  */
 
+
 package io.vertx.scala.ext
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -28,9 +29,7 @@ import io.vertx.core
 import io.vertx.core.metrics
 import io.vertx.ext.dropwizard.{MetricsService => JMetricsService}
 import io.vertx.core.json.JsonObject
-import scala.collection.JavaConverters._
 import io.vertx.core.{Vertx => JVertx}
-
 package object dropwizard{
 
 
@@ -39,7 +38,6 @@ package object dropwizard{
     def apply() = new DropwizardMetricsOptions()
     def apply(json: JsonObject) = new DropwizardMetricsOptions(json)
   }
-
 
 
 
@@ -53,12 +51,11 @@ package object dropwizard{
 
   object MetricsService {
     /**
-     * Creates a metric service for a given [[io.vertx.core.Vertx]] instance.     * @param vertx the vertx instance
-     * @return the metrics service
+     * Like create from [[io.vertx.ext.dropwizard.MetricsService]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def create(vertx: io.vertx.core.Vertx) = {
+  def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.dropwizard.MetricsService.create(vertx)
-    }
+  }
   }
 
 

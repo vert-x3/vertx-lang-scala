@@ -14,9 +14,10 @@
  * under the License.
  */
 
+
 package io.vertx.scala.ext.auth
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -29,20 +30,17 @@ import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import io.vertx.core
 import io.vertx.ext.auth.shiro.{ShiroAuth => JShiroAuth}
 import io.vertx.core.{Vertx => JVertx}
-
 package object shiro{
+
 
   object ShiroAuth {
     /**
-     * Create a Shiro auth provider     * @param vertx the Vert.x instance
-     * @param options the Shiro configuration options see <a href="../../../../../../../../cheatsheet/ShiroAuthOptions.html">ShiroAuthOptions</a>
-     * @return the auth provider
+     * Like create from [[io.vertx.ext.auth.shiro.ShiroAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.shiro.ShiroAuthOptions) = {
+  def create(vertx: io.vertx.core.Vertx, options: io.vertx.ext.auth.shiro.ShiroAuthOptions) = {
       io.vertx.ext.auth.shiro.ShiroAuth.create(vertx, options)
-    }
   }
-
+  }
 
 
   type ShiroAuthOptions = io.vertx.ext.auth.shiro.ShiroAuthOptions

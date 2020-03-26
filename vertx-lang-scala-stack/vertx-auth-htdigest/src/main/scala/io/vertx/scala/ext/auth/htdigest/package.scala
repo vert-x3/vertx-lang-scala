@@ -14,9 +14,10 @@
  * under the License.
  */
 
+
 package io.vertx.scala.ext.auth
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -28,23 +29,23 @@ import io.vertx.core
 import io.vertx.ext.auth.authentication.{AuthenticationProvider => JAuthenticationProvider}
 import io.vertx.ext.auth.authentication
 import io.vertx.core.{Vertx => JVertx}
-
 package object htdigest{
+
 
   object HtdigestAuth {
     /**
-     * Creates an instance of HtdigestAuth.     * @return the created instance of HtdigestAuths
+     * Like create from [[io.vertx.ext.auth.htdigest.HtdigestAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def create(vertx: io.vertx.core.Vertx) = {
+  def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.auth.htdigest.HtdigestAuth.create(vertx)
-    }
+  }
+
     /**
-     * Creates an instance of HtdigestAuth by using the given htfile file.     * @param htfile the existing htfile.
-     * @return the created instance of HtdigestAuths
+     * Like create from [[io.vertx.ext.auth.htdigest.HtdigestAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def create(vertx: io.vertx.core.Vertx,htfile: java.lang.String) = {
+  def create(vertx: io.vertx.core.Vertx, htfile: java.lang.String) = {
       io.vertx.ext.auth.htdigest.HtdigestAuth.create(vertx, htfile)
-    }
+  }
   }
 
 

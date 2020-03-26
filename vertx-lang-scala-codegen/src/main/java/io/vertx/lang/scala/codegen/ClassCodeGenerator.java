@@ -1,21 +1,15 @@
 package io.vertx.lang.scala.codegen;
 
-import freemarker.cache.ClassTemplateLoader;
-import freemarker.cache.TemplateLoader;
-import freemarker.template.Configuration;
-import freemarker.template.Template;
-import freemarker.template.TemplateException;
-import freemarker.template.TemplateExceptionHandler;
 import io.vertx.codegen.*;
 import io.vertx.codegen.type.*;
+import io.vertx.codegen.doc.Doc;
+import io.vertx.lang.scala.codegen.gen.Imports;
+import io.vertx.lang.scala.codegen.gen.Templates;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.*;
 import java.util.logging.LogManager;
-import java.util.stream.Collectors;
 
 /**
  * @author <a href="mailto:julien@julienviet.com">Julien Viet</a>
@@ -24,7 +18,6 @@ public class ClassCodeGenerator extends Generator<Model> {
 
   public String filename;
   public String templateFilename;
-  public Template template;
   public Map<String, Set<String>> fileToImports = new HashMap<>();
 
   public static final List<String> ignoredPackages;
@@ -47,18 +40,6 @@ public class ClassCodeGenerator extends Generator<Model> {
   @Override
   public void load(ProcessingEnvironment processingEnv) {
     super.load(processingEnv);
-    TemplateLoader templateLoader = new ClassTemplateLoader(ClassCodeGenerator.class, "/templates");
-    Configuration cfg = new Configuration(Configuration.VERSION_2_3_27);
-    cfg.setTemplateLoader(templateLoader);
-    cfg.setDefaultEncoding("UTF-8");
-    cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-
-    try {
-      template = cfg.getTemplate("package_object.ftl");
-    } catch (IOException e) {
-      e.printStackTrace();
-      throw new RuntimeException(e);
-    }
   }
 
   @Override
@@ -83,51 +64,32 @@ public class ClassCodeGenerator extends Generator<Model> {
 
   @Override
   public String render(Model model, int index, int size, Map<String, Object> session) {
-    ClassTypeInfo type = ((ClassTypeInfo)model.getVars().get("type"));
+    Map<String, Object> modelVars = model.getVars();
+    ClassTypeInfo type = ((ClassTypeInfo) modelVars.get("type"));
     if(!ignoredPackages.contains(type.getPackageName()) && !ignoreClassname.contains(type.getSimpleName())) {
-      Map<String, Object> vars = new HashMap<>();
-      String translatedPackage = type.getModule().translatePackageName("scala");
-
-      vars.putAll(TypeNameTranslator.vars(name));
-      vars.putAll(model.getVars());
-      vars.put("nonGenericType", Helper.getNonGenericType(type.toString()));
-      vars.put("modulePackage", translatedPackage.substring(0, translatedPackage.lastIndexOf('.')));
-      vars.put("moduleName", translatedPackage.substring(translatedPackage.lastIndexOf('.') + 1));
-
-      vars.put("basicMethods", TypeHelper.findBasicMethods((List<MethodInfo>)vars.get("instanceMethods")));
-      vars.put("staticMethods", vars.get("staticMethods"));
-      vars.put("cacheReturnMethods", TypeHelper.findCacheReturnMethods((List<MethodInfo>)vars.get("instanceMethods")));
-      vars.put("defaultMethods", TypeHelper.findDefaultMethods((List<MethodInfo>)vars.get("instanceMethods")));
-      vars.put("fluentMethods", TypeHelper.findFluentMethods((List<MethodInfo>)vars.get("instanceMethods")));
-      vars.put("futureMethods", TypeHelper.findFutureMethods((List<MethodInfo>)vars.get("instanceMethods")));
-      vars.put("nullableMethods", TypeHelper.findNullableMethods((List<MethodInfo>)vars.get("instanceMethods")));
-
-
-      vars.put("typeHelper", new TypeHelper());
-      vars.put("helper", new Helper());
-      vars.put("className", type.getSimpleName());
-      vars.put("packageName", translatedPackage);
-      vars.put("imps", fileToImports.get(filenameForModel(model)));
-      vars.putAll(ClassKind.vars());
-      vars.putAll(MethodKind.vars());
-      vars.putAll(Case.vars());
-      vars.put("incrementalIndex", index);
-      vars.put("incrementalSize", size);
-
-      Writer writer = new StringWriter();
       try {
-        template.process(vars, writer);
-        return writer.toString();
-      } catch (TemplateException | IOException e) {
-        e.printStackTrace();
-        throw new RuntimeException(e);
+        return Templates.renderPackageObject(
+          type,
+          index,
+          size,
+          fileToImports.get(filenameForModel(model)),
+          (Boolean) modelVars.get("concrete"),
+          (Boolean) modelVars.get("hasEmptyConstructor"),
+          (Doc) modelVars.get("doc"),
+          (List<MethodInfo>) modelVars.get("instanceMethods"),
+          (List<MethodInfo>) modelVars.get("staticMethods"),
+          (Collection<TypeParamInfo>) modelVars.get("typeParams")
+          );
+      }
+      catch (IOException ioe) {
+        throw new RuntimeException(ioe);
       }
     }
     return "";
   }
 
   public Set<String> adjustedImports(ClassTypeInfo type, Set<TypeInfo> importedTypes) {
-    Set<String> imps = TypeHelper.generateImports(type, importedTypes, Collections.emptyList());
+    Set<String> imps = Imports.generateImports(type, importedTypes, Collections.emptyList());
 
     //Change
     //import io.vertx.scala.ext.web.common.template.TemplateEngine

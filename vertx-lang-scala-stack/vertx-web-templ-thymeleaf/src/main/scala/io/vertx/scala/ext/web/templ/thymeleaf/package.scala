@@ -14,9 +14,10 @@
  * under the License.
  */
 
+
 package io.vertx.scala.ext.web.templ
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -29,16 +30,16 @@ import org.thymeleaf.templatemode.TemplateMode
 import io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}
 import io.vertx.ext.web.common.template
 import io.vertx.core.{Vertx => JVertx}
-
 package object thymeleaf{
+
 
   object ThymeleafTemplateEngine {
     /**
-     * Create a template engine using defaults     * @return the engine
+     * Like create from [[io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def create(vertx: io.vertx.core.Vertx) = {
+  def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine.create(vertx)
-    }
+  }
   }
 
 

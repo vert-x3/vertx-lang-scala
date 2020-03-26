@@ -14,9 +14,10 @@
  * under the License.
  */
 
+
 package io.vertx.scala.ext.auth
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -32,20 +33,17 @@ import io.vertx.ext.auth.authentication.{AuthenticationProvider => JAuthenticati
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.auth.authentication
 import io.vertx.core.{Vertx => JVertx}
-
 package object jwt{
+
 
   object JWTAuth {
     /**
-     * Create a JWT auth provider     * @param vertx the Vertx instance
-     * @param config the config see <a href="../../../../../../../../cheatsheet/JWTAuthOptions.html">JWTAuthOptions</a>
-     * @return the auth provider
+     * Like create from [[io.vertx.ext.auth.jwt.JWTAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def create(vertx: io.vertx.core.Vertx,config: io.vertx.ext.auth.jwt.JWTAuthOptions) = {
+  def create(vertx: io.vertx.core.Vertx, config: io.vertx.ext.auth.jwt.JWTAuthOptions) = {
       io.vertx.ext.auth.jwt.JWTAuth.create(vertx, config)
-    }
   }
-
+  }
 
 
   type JWTAuthOptions = io.vertx.ext.auth.jwt.JWTAuthOptions
@@ -58,24 +56,21 @@ package object jwt{
 
   object JWTAuthorization {
     /**
-     * Factory method to create a Authorization provider for JWT tokens.     * @param rootClaim slash separated string to the json array with the claims.
-     * @return a AuthorizationProvider
+     * Like create from [[io.vertx.ext.auth.jwt.authorization.JWTAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def create(rootClaim: java.lang.String) = {
+  def create(rootClaim: java.lang.String) = {
       io.vertx.ext.auth.jwt.authorization.JWTAuthorization.create(rootClaim)
-    }
+  }
   }
 
 
   object MicroProfileAuthorization {
     /**
-     * Factory method to create a Authorization provider for tokens adhering to the MP-JWT 1.1 spec.
-     * When the user is known to not be a JWT, (e.g.: a OAuth2 response token) then the root claim
-     * is expected to be extracted from  under the key `accessToken`.     * @return a AuthorizationProvider
+     * Like create from [[io.vertx.ext.auth.jwt.authorization.MicroProfileAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def create() = {
+  def create() = {
       io.vertx.ext.auth.jwt.authorization.MicroProfileAuthorization.create()
-    }
+  }
   }
 
 

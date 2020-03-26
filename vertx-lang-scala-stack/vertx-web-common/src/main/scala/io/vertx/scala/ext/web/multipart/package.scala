@@ -14,9 +14,10 @@
  * under the License.
  */
 
+
 package io.vertx.scala.ext.web
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -24,18 +25,18 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import io.vertx.ext.web.multipart.{FormDataPart => JFormDataPart}
-
 package object multipart{
+
 
 
 
   object MultipartForm {
     /**
-     * @return a multipart form instance
+     * Like create from [[io.vertx.ext.web.multipart.MultipartForm]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def create() = {
+  def create() = {
       io.vertx.ext.web.multipart.MultipartForm.create()
-    }
+  }
   }
 
 

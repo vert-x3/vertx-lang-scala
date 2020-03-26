@@ -32,6 +32,11 @@
       <version>${stack.version}</version>
     </dependency>
     <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-sql-client</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+    <dependency>
       <groupId>com.ongres.scram</groupId>
       <artifactId>client</artifactId>
       <version>1.0.0-beta.2</version>
