@@ -175,6 +175,7 @@ package object testmodel{
       promise.future
   }
 
+
   }
 
 
@@ -287,6 +288,7 @@ package object testmodel{
       asJava.asyncMethod(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
+
 
   }
 
@@ -425,6 +427,7 @@ package object testmodel{
       promise.future
   }
 
+
   }
 
 
@@ -559,6 +562,7 @@ package object testmodel{
       asJava.methodWithHandlerAsyncResultMapOfFunctionMapped(new Handler[AsyncResult[java.util.Map[java.lang.String,java.util.Locale]]] { override def handle(event: AsyncResult[java.util.Map[java.lang.String,java.util.Locale]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
   }
+
 
   }
 
@@ -1645,6 +1649,7 @@ package object testmodel{
       promise.future
   }
 
+
   }
 
 
@@ -1815,6 +1820,7 @@ package object testmodel{
       asJava.methodWithHandlerAsyncResultComplexJsonArray(new Handler[AsyncResult[io.vertx.core.json.JsonArray]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
+
 
   }
 

@@ -114,6 +114,7 @@ package object mqtt{
       promise.future
   }
 
+
   }
 
 
@@ -161,6 +162,13 @@ package object mqtt{
       val promise = concurrent.Promise[java.lang.Integer]()
       asJava.publish(topic, payload, qosLevel, isDup, isRetain, messageId, new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
+  }
+
+    /**
+     * Like subscribeAcknowledge from [[io.vertx.mqtt.MqttEndpoint]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+  def subscribeAcknowledge(subscribeMessageId: java.lang.Integer, grantedQoSLevels: scala.collection.mutable.Buffer[io.netty.handler.codec.mqtt.MqttQoS]) = {
+      asJava.subscribeAcknowledge(subscribeMessageId, grantedQoSLevels.asJava)
   }
 
   }
@@ -220,6 +228,7 @@ package object mqtt{
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
+
 
   }
 

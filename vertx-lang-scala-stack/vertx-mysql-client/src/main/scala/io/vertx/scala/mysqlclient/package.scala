@@ -116,45 +116,9 @@ package object mysqlclient{
     /**
      * Like prepare from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def prepareFuture(sql: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.PreparedQuery] = {
-      val promise = concurrent.Promise[io.vertx.sqlclient.PreparedQuery]()
-      asJava.prepare(sql, new Handler[AsyncResult[io.vertx.sqlclient.PreparedQuery]] { override def handle(event: AsyncResult[io.vertx.sqlclient.PreparedQuery]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
-      promise.future
-  }
-
-    /**
-     * Like preparedQuery from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-  def preparedQueryFuture(sql: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
-      val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.preparedQuery(sql, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
-      promise.future
-  }
-
-    /**
-     * Like query from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-  def queryFuture(sql: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
-      val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.query(sql, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
-      promise.future
-  }
-
-    /**
-     * Like preparedQuery from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-  def preparedQueryFuture(sql: java.lang.String,arguments: io.vertx.sqlclient.Tuple) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
-      val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.preparedQuery(sql, arguments, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
-      promise.future
-  }
-
-    /**
-     * Like preparedBatch from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-  def preparedBatchFuture(sql: java.lang.String,batch: scala.collection.mutable.Buffer[io.vertx.sqlclient.Tuple]) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
-      val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.preparedBatch(sql, batch.asJava, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+  def prepareFuture(sql: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.PreparedStatement] = {
+      val promise = concurrent.Promise[io.vertx.sqlclient.PreparedStatement]()
+      asJava.prepare(sql, new Handler[AsyncResult[io.vertx.sqlclient.PreparedStatement]] { override def handle(event: AsyncResult[io.vertx.sqlclient.PreparedStatement]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
 
@@ -221,57 +185,54 @@ package object mysqlclient{
       promise.future
   }
 
+
   }
 
 
 
-
-  /**
-    * A  of [[io.vertx.mysqlclient.MySQLConnection]].
-
-    */
-
-  implicit class MySQLPoolScala(val asJava: io.vertx.mysqlclient.MySQLPool) extends AnyVal {
-
-
+  object MySQLPool {
     /**
-     * Like preparedQuery from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like pool from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def preparedQueryFuture(sql: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
-      val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.preparedQuery(sql, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
-      promise.future
+  def pool(connectionUri: java.lang.String) = {
+      io.vertx.mysqlclient.MySQLPool.pool(connectionUri)
   }
 
     /**
-     * Like query from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like pool from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def queryFuture(sql: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
-      val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.query(sql, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
-      promise.future
+  def pool(connectionUri: java.lang.String, poolOptions: io.vertx.sqlclient.PoolOptions) = {
+      io.vertx.mysqlclient.MySQLPool.pool(connectionUri, poolOptions)
   }
 
     /**
-     * Like preparedQuery from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like pool from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def preparedQueryFuture(sql: java.lang.String,arguments: io.vertx.sqlclient.Tuple) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
-      val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.preparedQuery(sql, arguments, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
-      promise.future
+  def pool(vertx: io.vertx.core.Vertx, connectionUri: java.lang.String) = {
+      io.vertx.mysqlclient.MySQLPool.pool(vertx, connectionUri)
   }
 
     /**
-     * Like preparedBatch from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like pool from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def preparedBatchFuture(sql: java.lang.String,batch: scala.collection.mutable.Buffer[io.vertx.sqlclient.Tuple]) : scala.concurrent.Future[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]] = {
-      val promise = concurrent.Promise[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]()
-      asJava.preparedBatch(sql, batch.asJava, new Handler[AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]] { override def handle(event: AsyncResult[io.vertx.sqlclient.RowSet[io.vertx.sqlclient.Row]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
-      promise.future
+  def pool(vertx: io.vertx.core.Vertx, connectionUri: java.lang.String, poolOptions: io.vertx.sqlclient.PoolOptions) = {
+      io.vertx.mysqlclient.MySQLPool.pool(vertx, connectionUri, poolOptions)
   }
 
+    /**
+     * Like pool from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+  def pool(connectOptions: io.vertx.mysqlclient.MySQLConnectOptions, poolOptions: io.vertx.sqlclient.PoolOptions) = {
+      io.vertx.mysqlclient.MySQLPool.pool(connectOptions, poolOptions)
   }
 
+    /**
+     * Like pool from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     */
+  def pool(vertx: io.vertx.core.Vertx, connectOptions: io.vertx.mysqlclient.MySQLConnectOptions, poolOptions: io.vertx.sqlclient.PoolOptions) = {
+      io.vertx.mysqlclient.MySQLPool.pool(vertx, connectOptions, poolOptions)
+  }
+  }
 
 
   type Point = io.vertx.mysqlclient.data.spatial.Point

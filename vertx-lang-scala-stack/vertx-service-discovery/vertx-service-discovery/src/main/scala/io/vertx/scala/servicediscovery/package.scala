@@ -463,6 +463,7 @@ package object servicediscovery{
       promise.future
   }
 
+
   }
 
 
@@ -513,6 +514,7 @@ package object servicediscovery{
       asJava.update(record, new Handler[AsyncResult[io.vertx.servicediscovery.Record]] { override def handle(event: AsyncResult[io.vertx.servicediscovery.Record]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
+
 
   }
 

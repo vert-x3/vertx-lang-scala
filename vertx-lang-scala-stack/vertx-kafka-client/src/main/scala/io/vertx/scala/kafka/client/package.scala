@@ -306,6 +306,7 @@ package object client{
       promise.future
   }
 
+
   }
 
 
@@ -429,6 +430,7 @@ package object client{
       asJava.close(timeout, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
+
 
   }
 
