@@ -14,9 +14,10 @@
  * under the License.
  */
 
+
 package com.acme.scala
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -24,13 +25,13 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import com.acme.pkg.sub.{SubInterface => JSubInterface}
-
 package object pkg{
 
+
   object MyInterface {
-    def create() = {
+  def create() = {
       com.acme.pkg.MyInterface.create()
-    }
+  }
   }
 
 

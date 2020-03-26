@@ -14,9 +14,10 @@
  * under the License.
  */
 
+
 package io.vertx.scala.ext
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -25,7 +26,6 @@ import scala.concurrent.Promise
 
 import io.vertx.ext.jwt.{JWTOptions => JJWTOptions}
 import io.vertx.core.json.JsonObject
-
 package object jwt{
 
 

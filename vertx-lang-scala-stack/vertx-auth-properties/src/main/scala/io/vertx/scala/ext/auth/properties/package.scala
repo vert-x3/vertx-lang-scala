@@ -14,9 +14,10 @@
  * under the License.
  */
 
+
 package io.vertx.scala.ext.auth
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -28,28 +29,26 @@ import io.vertx.ext.auth.authorization
 import io.vertx.ext.auth.properties.{PropertyFileAuthorization => JPropertyFileAuthorization}
 import io.vertx.ext.auth.authorization.{AuthorizationProvider => JAuthorizationProvider}
 import io.vertx.core.{Vertx => JVertx}
-
 package object properties{
+
 
   object PropertyFileAuthentication {
     /**
-     * Create a File authentication provider     * @param vertx the Vert.x instance
-     * @return the authentication provider
+     * Like create from [[io.vertx.ext.auth.properties.PropertyFileAuthentication]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def create(vertx: io.vertx.core.Vertx,path: java.lang.String) = {
+  def create(vertx: io.vertx.core.Vertx, path: java.lang.String) = {
       io.vertx.ext.auth.properties.PropertyFileAuthentication.create(vertx, path)
-    }
+  }
   }
 
 
   object PropertyFileAuthorization {
     /**
-     * Create a File authentication provider     * @param vertx the Vert.x instance
-     * @return the authentication provider
+     * Like create from [[io.vertx.ext.auth.properties.PropertyFileAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def create(vertx: io.vertx.core.Vertx,path: java.lang.String) = {
+  def create(vertx: io.vertx.core.Vertx, path: java.lang.String) = {
       io.vertx.ext.auth.properties.PropertyFileAuthorization.create(vertx, path)
-    }
+  }
   }
 
 

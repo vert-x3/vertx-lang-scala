@@ -14,9 +14,10 @@
  * under the License.
  */
 
+
 package io.vertx.scala.ext.auth
 
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -29,20 +30,17 @@ import io.vertx.ext.auth.authentication.{AuthenticationProvider => JAuthenticati
 import io.vertx.ext.auth.authentication
 import io.vertx.ext.auth.ldap.{LdapAuthentication => JLdapAuthentication}
 import io.vertx.core.{Vertx => JVertx}
-
 package object ldap{
+
 
   object LdapAuthentication {
     /**
-     * Create a LDAP authentication provider     * @param vertx the Vert.x instance
-     * @param options the ldap options see <a href="../../../../../../../../cheatsheet/LdapAuthenticationOptions.html">LdapAuthenticationOptions</a>
-     * @return the authentication provider
+     * Like create from [[io.vertx.ext.auth.ldap.LdapAuthentication]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def create(vertx: io.vertx.core.Vertx,options: io.vertx.ext.auth.ldap.LdapAuthenticationOptions) = {
+  def create(vertx: io.vertx.core.Vertx, options: io.vertx.ext.auth.ldap.LdapAuthenticationOptions) = {
       io.vertx.ext.auth.ldap.LdapAuthentication.create(vertx, options)
-    }
   }
-
+  }
 
 
   type LdapAuthenticationOptions = io.vertx.ext.auth.ldap.LdapAuthenticationOptions
