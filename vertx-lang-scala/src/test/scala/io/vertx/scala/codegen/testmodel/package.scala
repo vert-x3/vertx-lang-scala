@@ -1048,11 +1048,11 @@ package object testmodel{
   }
 
   def methodWithNullableHandler(expectNull: java.lang.Boolean, handler: scala.Option[java.lang.String => Unit]) = {
-      asJava.methodWithNullableHandler(expectNull, handler.asInstanceOf[io.vertx.core.Handler[java.lang.String]])
+      asJava.methodWithNullableHandler(expectNull, handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.String]]).getOrElse(null))
   }
 
   def methodWithNullableHandlerAsyncResult(expectNull: java.lang.Boolean, handler: scala.Option[AsyncResult[java.lang.String] => Unit]) = {
-      asJava.methodWithNullableHandlerAsyncResult(expectNull, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]])
+      asJava.methodWithNullableHandlerAsyncResult(expectNull, handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[java.lang.String]]]).getOrElse(null))
   }
 
   def methodWithNullableByteHandlerAsyncResultFuture(notNull: java.lang.Boolean) : scala.concurrent.Future[java.lang.Byte] = {
@@ -1145,7 +1145,7 @@ package object testmodel{
       promise.future
   }
 
-  def methodWithNullableTypeVariableHandlerAsyncResultFuture[T](notNull: java.lang.Boolean,value: T) : scala.concurrent.Future[T] = {
+  def methodWithNullableTypeVariableHandlerAsyncResultFuture[T](notNull: java.lang.Boolean, value: T) : scala.concurrent.Future[T] = {
       val promise = concurrent.Promise[T]()
       asJava.methodWithNullableTypeVariableHandlerAsyncResult[T](notNull, value, new Handler[AsyncResult[T]] { override def handle(event: AsyncResult[T]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future

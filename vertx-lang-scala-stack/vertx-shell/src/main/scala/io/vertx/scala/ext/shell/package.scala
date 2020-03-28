@@ -31,21 +31,24 @@ package object shell{
 
   object CliToken {
     /**
-     * Like createText from [[io.vertx.ext.shell.cli.CliToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a text token.     * @param text the text
+     * @return the token
      */
   def createText(text: java.lang.String) = {
       io.vertx.ext.shell.cli.CliToken.createText(text)
   }
 
     /**
-     * Like createBlank from [[io.vertx.ext.shell.cli.CliToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a new blank token.     * @param blank the blank value
+     * @return the token
      */
   def createBlank(blank: java.lang.String) = {
       io.vertx.ext.shell.cli.CliToken.createBlank(blank)
   }
 
     /**
-     * Like tokenize from [[io.vertx.ext.shell.cli.CliToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Tokenize the string argument and return a list of tokens.     * @param s the tokenized string
+     * @return the tokens
      */
   def tokenize(s: java.lang.String) = {
       io.vertx.ext.shell.cli.CliToken.tokenize(s)
@@ -57,14 +60,18 @@ package object shell{
 
   object CommandBuilder {
     /**
-     * Like command from [[io.vertx.ext.shell.command.CommandBuilder]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a new commmand builder, the command is responsible for managing the options and arguments via the
+     * [[io.vertx.ext.shell.command.CommandProcess]].     * @param name the command name
+     * @return the command
      */
   def command(name: java.lang.String) = {
       io.vertx.ext.shell.command.CommandBuilder.command(name)
   }
 
     /**
-     * Like command from [[io.vertx.ext.shell.command.CommandBuilder]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a new commmand with its [[io.vertx.core.cli.CLI]] descriptor. This command can then retrieve the parsed
+     * [[io.vertx.ext.shell.command.CommandProcess#commandLine]] when it executes to know get the command arguments and options.     * @param cli the cli to use
+     * @return the command
      */
   def command(cli: io.vertx.core.cli.CLI) = {
       io.vertx.ext.shell.command.CommandBuilder.command(cli)
@@ -118,7 +125,7 @@ package object shell{
 
   object CommandResolver {
     /**
-     * Like baseCommands from [[io.vertx.ext.shell.command.CommandResolver]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * @return the base commands of Vert.x Shell.
      */
   def baseCommands(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.shell.command.CommandResolver.baseCommands(vertx)
@@ -144,14 +151,14 @@ package object shell{
 
   object Pty {
     /**
-     * Like create from [[io.vertx.ext.shell.term.Pty]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
+     * Create a new pseudo terminal with no terminal type.     */
   def create() = {
       io.vertx.ext.shell.term.Pty.create()
   }
 
     /**
-     * Like create from [[io.vertx.ext.shell.term.Pty]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a new pseudo terminal.     * @param terminalType the terminal type, for instance ` vt100`
+     * @return the created pseudo terminal
      */
   def create(terminalType: java.lang.String) = {
       io.vertx.ext.shell.term.Pty.create(terminalType)
@@ -169,7 +176,7 @@ package object shell{
 
   object Session {
     /**
-     * Like create from [[io.vertx.ext.shell.session.Session]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a new empty session.     * @return the created session
      */
   def create() = {
       io.vertx.ext.shell.session.Session.create()

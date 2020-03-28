@@ -67,14 +67,16 @@ package object mssqlclient{
 
   object MSSQLPool {
     /**
-     * Like pool from [[io.vertx.mssqlclient.MSSQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a connection pool to the SQL server configured with the given `connectOptions` and `poolOptions`.     * @param connectOptions the options for the connection see <a href="../../../../../../cheatsheet/MSSQLConnectOptions.html">MSSQLConnectOptions</a>
+     * @param poolOptions the options for creating the pool see <a href="../../../../../../cheatsheet/PoolOptions.html">PoolOptions</a>
+     * @return the connection pool
      */
   def pool(connectOptions: io.vertx.mssqlclient.MSSQLConnectOptions, poolOptions: io.vertx.sqlclient.PoolOptions) = {
       io.vertx.mssqlclient.MSSQLPool.pool(connectOptions, poolOptions)
   }
 
     /**
-     * Like pool from [[io.vertx.mssqlclient.MSSQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.mssqlclient.MSSQLPool#pool]] with a specific  instance.
      */
   def pool(vertx: io.vertx.core.Vertx, connectOptions: io.vertx.mssqlclient.MSSQLConnectOptions, poolOptions: io.vertx.sqlclient.PoolOptions) = {
       io.vertx.mssqlclient.MSSQLPool.pool(vertx, connectOptions, poolOptions)

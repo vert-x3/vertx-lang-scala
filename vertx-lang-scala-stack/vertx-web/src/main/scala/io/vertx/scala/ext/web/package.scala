@@ -60,28 +60,42 @@ package object web{
 
   object ClusteredSessionStore {
     /**
-     * Like create from [[io.vertx.ext.web.sstore.ClusteredSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a session store     * @param vertx the Vert.x instance
+     * @param sessionMapName the session map name
+     * @return the session store
      */
   def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, sessionMapName)
   }
 
     /**
-     * Like create from [[io.vertx.ext.web.sstore.ClusteredSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a session store.<p/>
+     *
+     * The retry timeout value, configures how long the session handler will retry to get a session from the store
+     * when it is not found.     * @param vertx the Vert.x instance
+     * @param sessionMapName the session map name
+     * @param retryTimeout the store retry timeout, in ms
+     * @return the session store
      */
   def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String, retryTimeout: java.lang.Long) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, sessionMapName, retryTimeout)
   }
 
     /**
-     * Like create from [[io.vertx.ext.web.sstore.ClusteredSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a session store     * @param vertx the Vert.x instance
+     * @return the session store
      */
   def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx)
   }
 
     /**
-     * Like create from [[io.vertx.ext.web.sstore.ClusteredSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a session store.<p/>
+     *
+     * The retry timeout value, configures how long the session handler will retry to get a session from the store
+     * when it is not found.     * @param vertx the Vert.x instance
+     * @param retryTimeout the store retry timeout, in ms
+     * @return the session store
      */
   def create(vertx: io.vertx.core.Vertx, retryTimeout: java.lang.Long) = {
       io.vertx.ext.web.sstore.ClusteredSessionStore.create(vertx, retryTimeout)
@@ -115,21 +129,27 @@ package object web{
 
   object LocalSessionStore {
     /**
-     * Like create from [[io.vertx.ext.web.sstore.LocalSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a session store     * @param vertx the Vert.x instance
+     * @return the session store
      */
   def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.sstore.LocalSessionStore.create(vertx)
   }
 
     /**
-     * Like create from [[io.vertx.ext.web.sstore.LocalSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a session store     * @param vertx the Vert.x instance
+     * @param sessionMapName name for map used to store sessions
+     * @return the session store
      */
   def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String) = {
       io.vertx.ext.web.sstore.LocalSessionStore.create(vertx, sessionMapName)
   }
 
     /**
-     * Like create from [[io.vertx.ext.web.sstore.LocalSessionStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a session store     * @param vertx the Vert.x instance
+     * @param sessionMapName name for map used to store sessions
+     * @param reaperInterval how often, in ms, to check for expired sessions
+     * @return the session store
      */
   def create(vertx: io.vertx.core.Vertx, sessionMapName: java.lang.String, reaperInterval: java.lang.Long) = {
       io.vertx.ext.web.sstore.LocalSessionStore.create(vertx, sessionMapName, reaperInterval)
@@ -161,7 +181,8 @@ package object web{
 
   object Router {
     /**
-     * Like router from [[io.vertx.ext.web.Router]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a router     * @param vertx the Vert.x instance
+     * @return the router
      */
   def router(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.Router.router(vertx)
@@ -257,19 +278,19 @@ package object web{
   implicit class SockJSSocketScala(val asJava: io.vertx.ext.web.handler.sockjs.SockJSSocket) extends AnyVal {
 
   def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
-      asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+      asJava.exceptionHandler(handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]]).getOrElse(null))
   }
 
   def handler(handler: scala.Option[io.vertx.core.buffer.Buffer => Unit]) = {
-      asJava.handler(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]])
+      asJava.handler(handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[io.vertx.core.buffer.Buffer]]).getOrElse(null))
   }
 
   def endHandler(endHandler: scala.Option[Void => Unit]) = {
-      asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+      asJava.endHandler(endHandler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Void]]).getOrElse(null))
   }
 
   def drainHandler(handler: scala.Option[Void => Unit]) = {
-      asJava.drainHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+      asJava.drainHandler(handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Void]]).getOrElse(null))
   }
 
     /**

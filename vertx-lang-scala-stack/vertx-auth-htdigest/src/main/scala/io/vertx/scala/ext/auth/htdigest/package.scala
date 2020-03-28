@@ -34,14 +34,15 @@ package object htdigest{
 
   object HtdigestAuth {
     /**
-     * Like create from [[io.vertx.ext.auth.htdigest.HtdigestAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates an instance of HtdigestAuth.     * @return the created instance of HtdigestAuths
      */
   def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.auth.htdigest.HtdigestAuth.create(vertx)
   }
 
     /**
-     * Like create from [[io.vertx.ext.auth.htdigest.HtdigestAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates an instance of HtdigestAuth by using the given htfile file.     * @param htfile the existing htfile.
+     * @return the created instance of HtdigestAuths
      */
   def create(vertx: io.vertx.core.Vertx, htfile: java.lang.String) = {
       io.vertx.ext.auth.htdigest.HtdigestAuth.create(vertx, htfile)

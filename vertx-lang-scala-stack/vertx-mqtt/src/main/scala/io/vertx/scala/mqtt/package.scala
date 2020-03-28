@@ -54,7 +54,7 @@ package object mqtt{
     /**
      * Like connect from [[io.vertx.mqtt.MqttClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def connectFuture(port: java.lang.Integer,host: java.lang.String) : scala.concurrent.Future[io.vertx.mqtt.messages.MqttConnAckMessage] = {
+  def connectFuture(port: java.lang.Integer, host: java.lang.String) : scala.concurrent.Future[io.vertx.mqtt.messages.MqttConnAckMessage] = {
       val promise = concurrent.Promise[io.vertx.mqtt.messages.MqttConnAckMessage]()
       asJava.connect(port, host, new Handler[AsyncResult[io.vertx.mqtt.messages.MqttConnAckMessage]] { override def handle(event: AsyncResult[io.vertx.mqtt.messages.MqttConnAckMessage]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -63,7 +63,7 @@ package object mqtt{
     /**
      * Like connect from [[io.vertx.mqtt.MqttClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def connectFuture(port: java.lang.Integer,host: java.lang.String,serverName: java.lang.String) : scala.concurrent.Future[io.vertx.mqtt.messages.MqttConnAckMessage] = {
+  def connectFuture(port: java.lang.Integer, host: java.lang.String, serverName: java.lang.String) : scala.concurrent.Future[io.vertx.mqtt.messages.MqttConnAckMessage] = {
       val promise = concurrent.Promise[io.vertx.mqtt.messages.MqttConnAckMessage]()
       asJava.connect(port, host, serverName, new Handler[AsyncResult[io.vertx.mqtt.messages.MqttConnAckMessage]] { override def handle(event: AsyncResult[io.vertx.mqtt.messages.MqttConnAckMessage]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -81,7 +81,7 @@ package object mqtt{
     /**
      * Like publish from [[io.vertx.mqtt.MqttClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def publishFuture(topic: java.lang.String,payload: io.vertx.core.buffer.Buffer,qosLevel: io.netty.handler.codec.mqtt.MqttQoS,isDup: java.lang.Boolean,isRetain: java.lang.Boolean) : scala.concurrent.Future[java.lang.Integer] = {
+  def publishFuture(topic: java.lang.String, payload: io.vertx.core.buffer.Buffer, qosLevel: io.netty.handler.codec.mqtt.MqttQoS, isDup: java.lang.Boolean, isRetain: java.lang.Boolean) : scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
       asJava.publish(topic, payload, qosLevel, isDup, isRetain, new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -90,7 +90,7 @@ package object mqtt{
     /**
      * Like subscribe from [[io.vertx.mqtt.MqttClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def subscribeFuture(topic: java.lang.String,qos: java.lang.Integer) : scala.concurrent.Future[java.lang.Integer] = {
+  def subscribeFuture(topic: java.lang.String, qos: java.lang.Integer) : scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
       asJava.subscribe(topic, qos, new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -129,7 +129,9 @@ package object mqtt{
 
   object MqttConnAckMessage {
     /**
-     * Like create from [[io.vertx.mqtt.messages.MqttConnAckMessage]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a concrete instance of a Vert.x connack message     * @param code return code from the connection request
+     * @param isSessionPresent is an old session is present
+     * @return 
      */
   def create(code: io.netty.handler.codec.mqtt.MqttConnectReturnCode, isSessionPresent: java.lang.Boolean) = {
       io.vertx.mqtt.messages.MqttConnAckMessage.create(code, isSessionPresent)
@@ -149,7 +151,7 @@ package object mqtt{
     /**
      * Like publish from [[io.vertx.mqtt.MqttEndpoint]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def publishFuture(topic: java.lang.String,payload: io.vertx.core.buffer.Buffer,qosLevel: io.netty.handler.codec.mqtt.MqttQoS,isDup: java.lang.Boolean,isRetain: java.lang.Boolean) : scala.concurrent.Future[java.lang.Integer] = {
+  def publishFuture(topic: java.lang.String, payload: io.vertx.core.buffer.Buffer, qosLevel: io.netty.handler.codec.mqtt.MqttQoS, isDup: java.lang.Boolean, isRetain: java.lang.Boolean) : scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
       asJava.publish(topic, payload, qosLevel, isDup, isRetain, new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -158,14 +160,16 @@ package object mqtt{
     /**
      * Like publish from [[io.vertx.mqtt.MqttEndpoint]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def publishFuture(topic: java.lang.String,payload: io.vertx.core.buffer.Buffer,qosLevel: io.netty.handler.codec.mqtt.MqttQoS,isDup: java.lang.Boolean,isRetain: java.lang.Boolean,messageId: java.lang.Integer) : scala.concurrent.Future[java.lang.Integer] = {
+  def publishFuture(topic: java.lang.String, payload: io.vertx.core.buffer.Buffer, qosLevel: io.netty.handler.codec.mqtt.MqttQoS, isDup: java.lang.Boolean, isRetain: java.lang.Boolean, messageId: java.lang.Integer) : scala.concurrent.Future[java.lang.Integer] = {
       val promise = concurrent.Promise[java.lang.Integer]()
       asJava.publish(topic, payload, qosLevel, isDup, isRetain, messageId, new Handler[AsyncResult[java.lang.Integer]] { override def handle(event: AsyncResult[java.lang.Integer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
 
     /**
-     * Like subscribeAcknowledge from [[io.vertx.mqtt.MqttEndpoint]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Sends the SUBACK message to the remote MQTT client     * @param subscribeMessageId identifier of the SUBSCRIBE message to acknowledge
+     * @param grantedQoSLevels granted QoS levels for the requested topics
+     * @return a reference to this, so the API can be used fluently
      */
   def subscribeAcknowledge(subscribeMessageId: java.lang.Integer, grantedQoSLevels: scala.collection.mutable.Buffer[io.netty.handler.codec.mqtt.MqttQoS]) = {
       asJava.subscribeAcknowledge(subscribeMessageId, grantedQoSLevels.asJava)
@@ -196,7 +200,7 @@ package object mqtt{
     /**
      * Like listen from [[io.vertx.mqtt.MqttServer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def listenFuture(port: java.lang.Integer,host: java.lang.String) : scala.concurrent.Future[io.vertx.mqtt.MqttServer] = {
+  def listenFuture(port: java.lang.Integer, host: java.lang.String) : scala.concurrent.Future[io.vertx.mqtt.MqttServer] = {
       val promise = concurrent.Promise[io.vertx.mqtt.MqttServer]()
       asJava.listen(port, host, new Handler[AsyncResult[io.vertx.mqtt.MqttServer]] { override def handle(event: AsyncResult[io.vertx.mqtt.MqttServer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
