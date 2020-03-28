@@ -216,15 +216,15 @@ package object sqlclient{
   implicit class RowStreamScala[T](val asJava: io.vertx.sqlclient.RowStream[T]) extends AnyVal {
 
   def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
-      asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+      asJava.exceptionHandler(handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]]).getOrElse(null))
   }
 
   def handler(handler: scala.Option[T => Unit]) = {
-      asJava.handler(handler.asInstanceOf[io.vertx.core.Handler[T]])
+      asJava.handler(handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[T]]).getOrElse(null))
   }
 
   def endHandler(endHandler: scala.Option[Void => Unit]) = {
-      asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+      asJava.endHandler(endHandler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Void]]).getOrElse(null))
   }
 
   def pipeToFuture(dst: io.vertx.core.streams.WriteStream[T]) : scala.concurrent.Future[Void] = {
@@ -319,63 +319,89 @@ package object sqlclient{
 
   object Tuple {
     /**
-     * Like tuple from [[io.vertx.sqlclient.Tuple]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * @return a new empty tuple
      */
   def tuple() = {
       io.vertx.sqlclient.Tuple.tuple()
   }
 
     /**
-     * Like wrap from [[io.vertx.sqlclient.Tuple]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Wrap the provided `list` with a tuple.
+     * <br/>
+     * The list is not copied and is used as store for tuple elements.     * @return the list wrapped as a tuple
      */
   def wrap(list: scala.collection.mutable.Buffer[AnyRef]) = {
       io.vertx.sqlclient.Tuple.wrap(list.asJava)
   }
 
     /**
-     * Like of from [[io.vertx.sqlclient.Tuple]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a tuple of one element.     * @param elt1 the first value
+     * @return the tuple
      */
   def of(elt1: AnyRef) = {
       io.vertx.sqlclient.Tuple.of(elt1)
   }
 
     /**
-     * Like of from [[io.vertx.sqlclient.Tuple]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a tuple of two elements.     * @param elt1 the first value
+     * @param elt2 the second value
+     * @return the tuple
      */
   def of(elt1: AnyRef, elt2: AnyRef) = {
       io.vertx.sqlclient.Tuple.of(elt1, elt2)
   }
 
     /**
-     * Like of from [[io.vertx.sqlclient.Tuple]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a tuple of three elements.     * @param elt1 the first value
+     * @param elt2 the second value
+     * @param elt3 the third value
+     * @return the tuple
      */
   def of(elt1: AnyRef, elt2: AnyRef, elt3: AnyRef) = {
       io.vertx.sqlclient.Tuple.of(elt1, elt2, elt3)
   }
 
     /**
-     * Like of from [[io.vertx.sqlclient.Tuple]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a tuple of four elements.     * @param elt1 the first value
+     * @param elt2 the second value
+     * @param elt3 the third value
+     * @param elt4 the fourth value
+     * @return the tuple
      */
   def of(elt1: AnyRef, elt2: AnyRef, elt3: AnyRef, elt4: AnyRef) = {
       io.vertx.sqlclient.Tuple.of(elt1, elt2, elt3, elt4)
   }
 
     /**
-     * Like of from [[io.vertx.sqlclient.Tuple]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a tuple of five elements.     * @param elt1 the first value
+     * @param elt2 the second value
+     * @param elt3 the third value
+     * @param elt4 the fourth value
+     * @param elt5 the fifth value
+     * @return the tuple
      */
   def of(elt1: AnyRef, elt2: AnyRef, elt3: AnyRef, elt4: AnyRef, elt5: AnyRef) = {
       io.vertx.sqlclient.Tuple.of(elt1, elt2, elt3, elt4, elt5)
   }
 
     /**
-     * Like of from [[io.vertx.sqlclient.Tuple]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a tuple of six elements.     * @param elt1 the first value
+     * @param elt2 the second valueg
+     * @param elt3 the third value
+     * @param elt4 the fourth value
+     * @param elt5 the fifth value
+     * @param elt6 the sixth value
+     * @return the tuple
      */
   def of(elt1: AnyRef, elt2: AnyRef, elt3: AnyRef, elt4: AnyRef, elt5: AnyRef, elt6: AnyRef) = {
       io.vertx.sqlclient.Tuple.of(elt1, elt2, elt3, elt4, elt5, elt6)
   }
 
     /**
-     * Like tuple from [[io.vertx.sqlclient.Tuple]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a tuple with the provided `elements` list.
+     * <p/>
+     * The `elements` list is not modified.     * @param elements the list of elements
+     * @return the tuple
      */
   def tuple(elements: scala.collection.mutable.Buffer[AnyRef]) = {
       io.vertx.sqlclient.Tuple.tuple(elements.asJava)

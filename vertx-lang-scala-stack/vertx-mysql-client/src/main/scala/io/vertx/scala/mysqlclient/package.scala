@@ -192,42 +192,44 @@ package object mysqlclient{
 
   object MySQLPool {
     /**
-     * Like pool from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.mysqlclient.MySQLPool#pool]] with a default `poolOptions`.
      */
   def pool(connectionUri: java.lang.String) = {
       io.vertx.mysqlclient.MySQLPool.pool(connectionUri)
   }
 
     /**
-     * Like pool from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.mysqlclient.MySQLPool#pool]] with `connectOptions` build from `connectionUri`.
      */
   def pool(connectionUri: java.lang.String, poolOptions: io.vertx.sqlclient.PoolOptions) = {
       io.vertx.mysqlclient.MySQLPool.pool(connectionUri, poolOptions)
   }
 
     /**
-     * Like pool from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.mysqlclient.MySQLPool#pool]] with a default `poolOptions`..
      */
   def pool(vertx: io.vertx.core.Vertx, connectionUri: java.lang.String) = {
       io.vertx.mysqlclient.MySQLPool.pool(vertx, connectionUri)
   }
 
     /**
-     * Like pool from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.mysqlclient.MySQLPool#pool]] with `connectOptions` build from `connectionUri`.
      */
   def pool(vertx: io.vertx.core.Vertx, connectionUri: java.lang.String, poolOptions: io.vertx.sqlclient.PoolOptions) = {
       io.vertx.mysqlclient.MySQLPool.pool(vertx, connectionUri, poolOptions)
   }
 
     /**
-     * Like pool from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a connection pool to the MySQL server configured with the given `connectOptions` and `poolOptions`.     * @param connectOptions the options for the connection see <a href="../../../../../../cheatsheet/MySQLConnectOptions.html">MySQLConnectOptions</a>
+     * @param poolOptions the options for creating the pool see <a href="../../../../../../cheatsheet/PoolOptions.html">PoolOptions</a>
+     * @return the connection pool
      */
   def pool(connectOptions: io.vertx.mysqlclient.MySQLConnectOptions, poolOptions: io.vertx.sqlclient.PoolOptions) = {
       io.vertx.mysqlclient.MySQLPool.pool(connectOptions, poolOptions)
   }
 
     /**
-     * Like pool from [[io.vertx.mysqlclient.MySQLPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.mysqlclient.MySQLPool#pool]] with a specific  instance.
      */
   def pool(vertx: io.vertx.core.Vertx, connectOptions: io.vertx.mysqlclient.MySQLConnectOptions, poolOptions: io.vertx.sqlclient.PoolOptions) = {
       io.vertx.mysqlclient.MySQLPool.pool(vertx, connectOptions, poolOptions)
