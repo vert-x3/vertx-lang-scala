@@ -44,7 +44,7 @@ package object circuitbreaker{
     /**
      * Like executeWithFallback from [[io.vertx.circuitbreaker.CircuitBreaker]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def executeWithFallbackFuture[T](command: io.vertx.core.Promise[T] => Unit,fallback: Throwable => T) : scala.concurrent.Future[T] = {
+  def executeWithFallbackFuture[T](command: io.vertx.core.Promise[T] => Unit, fallback: Throwable => T) : scala.concurrent.Future[T] = {
       val promise = concurrent.Promise[T]()
       asJava.executeWithFallback[T](command.asInstanceOf[io.vertx.core.Handler[io.vertx.core.Promise[T]]], {x: Throwable => fallback(x)}, new Handler[AsyncResult[T]] { override def handle(event: AsyncResult[T]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future

@@ -56,7 +56,7 @@ package object rabbitmq{
     /**
      * Like basicAck from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def basicAckFuture(deliveryTag: java.lang.Long,multiple: java.lang.Boolean) : scala.concurrent.Future[Void] = {
+  def basicAckFuture(deliveryTag: java.lang.Long, multiple: java.lang.Boolean) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.basicAck(deliveryTag, multiple, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -65,7 +65,7 @@ package object rabbitmq{
     /**
      * Like basicNack from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def basicNackFuture(deliveryTag: java.lang.Long,multiple: java.lang.Boolean,requeue: java.lang.Boolean) : scala.concurrent.Future[Void] = {
+  def basicNackFuture(deliveryTag: java.lang.Long, multiple: java.lang.Boolean, requeue: java.lang.Boolean) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.basicNack(deliveryTag, multiple, requeue, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -74,7 +74,7 @@ package object rabbitmq{
     /**
      * Like basicGet from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def basicGetFuture(queue: java.lang.String,autoAck: java.lang.Boolean) : scala.concurrent.Future[io.vertx.rabbitmq.RabbitMQMessage] = {
+  def basicGetFuture(queue: java.lang.String, autoAck: java.lang.Boolean) : scala.concurrent.Future[io.vertx.rabbitmq.RabbitMQMessage] = {
       val promise = concurrent.Promise[io.vertx.rabbitmq.RabbitMQMessage]()
       asJava.basicGet(queue, autoAck, new Handler[AsyncResult[io.vertx.rabbitmq.RabbitMQMessage]] { override def handle(event: AsyncResult[io.vertx.rabbitmq.RabbitMQMessage]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -92,7 +92,7 @@ package object rabbitmq{
     /**
      * Like basicConsumer from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def basicConsumerFuture(queue: java.lang.String,options: io.vertx.rabbitmq.QueueOptions) : scala.concurrent.Future[io.vertx.rabbitmq.RabbitMQConsumer] = {
+  def basicConsumerFuture(queue: java.lang.String, options: io.vertx.rabbitmq.QueueOptions) : scala.concurrent.Future[io.vertx.rabbitmq.RabbitMQConsumer] = {
       val promise = concurrent.Promise[io.vertx.rabbitmq.RabbitMQConsumer]()
       asJava.basicConsumer(queue, options, new Handler[AsyncResult[io.vertx.rabbitmq.RabbitMQConsumer]] { override def handle(event: AsyncResult[io.vertx.rabbitmq.RabbitMQConsumer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -101,7 +101,7 @@ package object rabbitmq{
     /**
      * Like basicPublish from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def basicPublishFuture(exchange: java.lang.String,routingKey: java.lang.String,body: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[Void] = {
+  def basicPublishFuture(exchange: java.lang.String, routingKey: java.lang.String, body: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.basicPublish(exchange, routingKey, body, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -146,7 +146,7 @@ package object rabbitmq{
     /**
      * Like basicQos from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def basicQosFuture(prefetchCount: java.lang.Integer,global: java.lang.Boolean) : scala.concurrent.Future[Void] = {
+  def basicQosFuture(prefetchCount: java.lang.Integer, global: java.lang.Boolean) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.basicQos(prefetchCount, global, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -155,7 +155,7 @@ package object rabbitmq{
     /**
      * Like basicQos from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def basicQosFuture(prefetchSize: java.lang.Integer,prefetchCount: java.lang.Integer,global: java.lang.Boolean) : scala.concurrent.Future[Void] = {
+  def basicQosFuture(prefetchSize: java.lang.Integer, prefetchCount: java.lang.Integer, global: java.lang.Boolean) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.basicQos(prefetchSize, prefetchCount, global, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -164,7 +164,7 @@ package object rabbitmq{
     /**
      * Like exchangeDeclare from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def exchangeDeclareFuture(exchange: java.lang.String,`type`: java.lang.String,durable: java.lang.Boolean,autoDelete: java.lang.Boolean) : scala.concurrent.Future[Void] = {
+  def exchangeDeclareFuture(exchange: java.lang.String, `type`: java.lang.String, durable: java.lang.Boolean, autoDelete: java.lang.Boolean) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.exchangeDeclare(exchange, `type`, durable, autoDelete, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -173,7 +173,7 @@ package object rabbitmq{
     /**
      * Like exchangeDeclare from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def exchangeDeclareFuture(exchange: java.lang.String,`type`: java.lang.String,durable: java.lang.Boolean,autoDelete: java.lang.Boolean,config: io.vertx.core.json.JsonObject) : scala.concurrent.Future[Void] = {
+  def exchangeDeclareFuture(exchange: java.lang.String, `type`: java.lang.String, durable: java.lang.Boolean, autoDelete: java.lang.Boolean, config: io.vertx.core.json.JsonObject) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.exchangeDeclare(exchange, `type`, durable, autoDelete, config, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -191,7 +191,7 @@ package object rabbitmq{
     /**
      * Like exchangeBind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def exchangeBindFuture(destination: java.lang.String,source: java.lang.String,routingKey: java.lang.String) : scala.concurrent.Future[Void] = {
+  def exchangeBindFuture(destination: java.lang.String, source: java.lang.String, routingKey: java.lang.String) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.exchangeBind(destination, source, routingKey, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -200,7 +200,7 @@ package object rabbitmq{
     /**
      * Like exchangeBind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def exchangeBindFuture(destination: java.lang.String,source: java.lang.String,routingKey: java.lang.String,arguments: scala.collection.mutable.Map[String, AnyRef]) : scala.concurrent.Future[Void] = {
+  def exchangeBindFuture(destination: java.lang.String, source: java.lang.String, routingKey: java.lang.String, arguments: scala.collection.mutable.Map[String, AnyRef]) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.exchangeBind(destination, source, routingKey, arguments.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -209,7 +209,7 @@ package object rabbitmq{
     /**
      * Like exchangeUnbind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def exchangeUnbindFuture(destination: java.lang.String,source: java.lang.String,routingKey: java.lang.String) : scala.concurrent.Future[Void] = {
+  def exchangeUnbindFuture(destination: java.lang.String, source: java.lang.String, routingKey: java.lang.String) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.exchangeUnbind(destination, source, routingKey, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -218,7 +218,7 @@ package object rabbitmq{
     /**
      * Like exchangeUnbind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def exchangeUnbindFuture(destination: java.lang.String,source: java.lang.String,routingKey: java.lang.String,arguments: scala.collection.mutable.Map[String, AnyRef]) : scala.concurrent.Future[Void] = {
+  def exchangeUnbindFuture(destination: java.lang.String, source: java.lang.String, routingKey: java.lang.String, arguments: scala.collection.mutable.Map[String, AnyRef]) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.exchangeUnbind(destination, source, routingKey, arguments.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -236,7 +236,7 @@ package object rabbitmq{
     /**
      * Like queueBind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def queueBindFuture(queue: java.lang.String,exchange: java.lang.String,routingKey: java.lang.String) : scala.concurrent.Future[Void] = {
+  def queueBindFuture(queue: java.lang.String, exchange: java.lang.String, routingKey: java.lang.String) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.queueBind(queue, exchange, routingKey, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -245,7 +245,7 @@ package object rabbitmq{
     /**
      * Like queueBind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def queueBindFuture(queue: java.lang.String,exchange: java.lang.String,routingKey: java.lang.String,arguments: scala.collection.mutable.Map[String, AnyRef]) : scala.concurrent.Future[Void] = {
+  def queueBindFuture(queue: java.lang.String, exchange: java.lang.String, routingKey: java.lang.String, arguments: scala.collection.mutable.Map[String, AnyRef]) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.queueBind(queue, exchange, routingKey, arguments.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -254,7 +254,7 @@ package object rabbitmq{
     /**
      * Like queueUnbind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def queueUnbindFuture(queue: java.lang.String,exchange: java.lang.String,routingKey: java.lang.String) : scala.concurrent.Future[Void] = {
+  def queueUnbindFuture(queue: java.lang.String, exchange: java.lang.String, routingKey: java.lang.String) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.queueUnbind(queue, exchange, routingKey, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -263,7 +263,7 @@ package object rabbitmq{
     /**
      * Like queueUnbind from [[io.vertx.rabbitmq.RabbitMQClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def queueUnbindFuture(queue: java.lang.String,exchange: java.lang.String,routingKey: java.lang.String,arguments: scala.collection.mutable.Map[String, AnyRef]) : scala.concurrent.Future[Void] = {
+  def queueUnbindFuture(queue: java.lang.String, exchange: java.lang.String, routingKey: java.lang.String, arguments: scala.collection.mutable.Map[String, AnyRef]) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.queueUnbind(queue, exchange, routingKey, arguments.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -310,24 +310,25 @@ package object rabbitmq{
   implicit class RabbitMQConsumerScala(val asJava: io.vertx.rabbitmq.RabbitMQConsumer) extends AnyVal {
 
     /**
-     * Like exceptionHandler from [[io.vertx.rabbitmq.RabbitMQConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Set an exception handler on the read stream.     * @param exceptionHandler the exception handler
+     * @return a reference to this, so the API can be used fluently
      */
   def exceptionHandler(exceptionHandler: scala.Option[Throwable => Unit]) = {
-      asJava.exceptionHandler(exceptionHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+      asJava.exceptionHandler(exceptionHandler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]]).getOrElse(null))
   }
 
     /**
-     * Like handler from [[io.vertx.rabbitmq.RabbitMQConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Set a message handler. As message appear in a queue, the handler will be called with the message.     * @return a reference to this, so the API can be used fluently
      */
   def handler(messageArrived: scala.Option[io.vertx.rabbitmq.RabbitMQMessage => Unit]) = {
-      asJava.handler(messageArrived.asInstanceOf[io.vertx.core.Handler[io.vertx.rabbitmq.RabbitMQMessage]])
+      asJava.handler(messageArrived.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[io.vertx.rabbitmq.RabbitMQMessage]]).getOrElse(null))
   }
 
     /**
-     * Like endHandler from [[io.vertx.rabbitmq.RabbitMQConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Set an end handler. Once the stream has canceled successfully, the handler will be called.     * @return a reference to this, so the API can be used fluently
      */
   def endHandler(endHandler: scala.Option[Void => Unit]) = {
-      asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+      asJava.endHandler(endHandler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Void]]).getOrElse(null))
   }
 
   def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.rabbitmq.RabbitMQMessage]) : scala.concurrent.Future[Void] = {

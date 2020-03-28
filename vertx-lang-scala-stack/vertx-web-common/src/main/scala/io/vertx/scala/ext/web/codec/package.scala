@@ -37,77 +37,85 @@ package object codec{
 
   object BodyCodec {
     /**
-     * Like string from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * @return the UTF-8 string codec
      */
   def string() = {
       io.vertx.ext.web.codec.BodyCodec.string()
   }
 
     /**
-     * Like string from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * A codec for strings using a specific `encoding`.     * @param encoding the encoding
+     * @return the codec
      */
   def string(encoding: java.lang.String) = {
       io.vertx.ext.web.codec.BodyCodec.string(encoding)
   }
 
     /**
-     * Like buffer from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * @return the Buffer codec
      */
   def buffer() = {
       io.vertx.ext.web.codec.BodyCodec.buffer()
   }
 
     /**
-     * Like jsonObject from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * @return the JsonObject codec
      */
   def jsonObject() = {
       io.vertx.ext.web.codec.BodyCodec.jsonObject()
   }
 
     /**
-     * Like jsonArray from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * @return the JsonArray codec
      */
   def jsonArray() = {
       io.vertx.ext.web.codec.BodyCodec.jsonArray()
   }
 
     /**
-     * Like json from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create and return a codec for Java objects encoded using Jackson mapper.     * @return a codec for mapping POJO to Json
      */
   def json[U](`type`: Class[U]) = {
       io.vertx.ext.web.codec.BodyCodec.json[U](`type`)
   }
 
     /**
-     * Like none from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * @return a codec that simply discards the response
      */
   def none() = {
       io.vertx.ext.web.codec.BodyCodec.none()
   }
 
     /**
-     * Like create from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a codec that buffers the entire body and then apply the `decode` function and returns the result.     * @param decode the decode function
+     * @return the created codec
      */
   def create[T](decode: io.vertx.core.buffer.Buffer => T) = {
       io.vertx.ext.web.codec.BodyCodec.create[T]({x: io.vertx.core.buffer.Buffer => decode(x)})
   }
 
     /**
-     * Like pipe from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * A body codec that pipes the body to a write stream.
+     * </p>
+     * Same as pipe(stream, true).     * @param stream the destination stream
+     * @return the body codec for a write stream
      */
   def pipe(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer]) = {
       io.vertx.ext.web.codec.BodyCodec.pipe(stream)
   }
 
     /**
-     * Like pipe from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * A body codec that pipes the body to a write stream.     * @param stream the destination stream
+     * @param close whether the destination stream should be closed
+     * @return the body codec for a write stream
      */
   def pipe(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer], close: java.lang.Boolean) = {
       io.vertx.ext.web.codec.BodyCodec.pipe(stream, close)
   }
 
     /**
-     * Like jsonStream from [[io.vertx.ext.web.codec.BodyCodec]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * A body codec that parse the response as a JSON stream.     * @param parser the non-null JSON parser to emits the JSON object. The parser must be configured for the stream. Not e that you need to keep a reference on the parser to retrieved the JSON events.
+     * @return the body codec for a write stream
      */
   def jsonStream(parser: io.vertx.core.parsetools.JsonParser) = {
       io.vertx.ext.web.codec.BodyCodec.jsonStream(parser)

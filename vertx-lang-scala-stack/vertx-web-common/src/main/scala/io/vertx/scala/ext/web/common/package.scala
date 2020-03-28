@@ -41,7 +41,7 @@ package object common{
     /**
      * Like render from [[io.vertx.ext.web.common.template.TemplateEngine]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def renderFuture(context: io.vertx.core.json.JsonObject,templateFileName: java.lang.String) : scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
+  def renderFuture(context: io.vertx.core.json.JsonObject, templateFileName: java.lang.String) : scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
       val promise = concurrent.Promise[io.vertx.core.buffer.Buffer]()
       asJava.render(context, templateFileName, new Handler[AsyncResult[io.vertx.core.buffer.Buffer]] { override def handle(event: AsyncResult[io.vertx.core.buffer.Buffer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -54,7 +54,7 @@ package object common{
 
   object WebEnvironment {
     /**
-     * Like development from [[io.vertx.ext.web.common.WebEnvironment]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Will return true if the mode is not null and equals ignoring case the string "dev"     * @return always boolean
      */
   def development() = {
       io.vertx.ext.web.common.WebEnvironment.development()

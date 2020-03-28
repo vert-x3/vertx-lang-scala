@@ -172,7 +172,7 @@ package object consul{
     /**
      * Like getKeysWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def getKeysWithOptionsFuture(keyPrefix: java.lang.String,options: io.vertx.ext.consul.BlockingQueryOptions) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.String]] = {
+  def getKeysWithOptionsFuture(keyPrefix: java.lang.String, options: io.vertx.ext.consul.BlockingQueryOptions) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.String]] = {
       val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.String]]()
       asJava.getKeysWithOptions(keyPrefix, options, new Handler[AsyncResult[java.util.List[java.lang.String]]] { override def handle(event: AsyncResult[java.util.List[java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
@@ -190,7 +190,7 @@ package object consul{
     /**
      * Like getValueWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def getValueWithOptionsFuture(key: java.lang.String,options: io.vertx.ext.consul.BlockingQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.KeyValue] = {
+  def getValueWithOptionsFuture(key: java.lang.String, options: io.vertx.ext.consul.BlockingQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.KeyValue] = {
       val promise = concurrent.Promise[io.vertx.ext.consul.KeyValue]()
       asJava.getValueWithOptions(key, options, new Handler[AsyncResult[io.vertx.ext.consul.KeyValue]] { override def handle(event: AsyncResult[io.vertx.ext.consul.KeyValue]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -217,7 +217,7 @@ package object consul{
     /**
      * Like getValuesWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def getValuesWithOptionsFuture(keyPrefix: java.lang.String,options: io.vertx.ext.consul.BlockingQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.KeyValueList] = {
+  def getValuesWithOptionsFuture(keyPrefix: java.lang.String, options: io.vertx.ext.consul.BlockingQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.KeyValueList] = {
       val promise = concurrent.Promise[io.vertx.ext.consul.KeyValueList]()
       asJava.getValuesWithOptions(keyPrefix, options, new Handler[AsyncResult[io.vertx.ext.consul.KeyValueList]] { override def handle(event: AsyncResult[io.vertx.ext.consul.KeyValueList]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -235,7 +235,7 @@ package object consul{
     /**
      * Like putValue from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def putValueFuture(key: java.lang.String,value: java.lang.String) : scala.concurrent.Future[java.lang.Boolean] = {
+  def putValueFuture(key: java.lang.String, value: java.lang.String) : scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
       asJava.putValue(key, value, new Handler[AsyncResult[java.lang.Boolean]] { override def handle(event: AsyncResult[java.lang.Boolean]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -244,7 +244,7 @@ package object consul{
     /**
      * Like putValueWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def putValueWithOptionsFuture(key: java.lang.String,value: java.lang.String,options: io.vertx.ext.consul.KeyValueOptions) : scala.concurrent.Future[java.lang.Boolean] = {
+  def putValueWithOptionsFuture(key: java.lang.String, value: java.lang.String, options: io.vertx.ext.consul.KeyValueOptions) : scala.concurrent.Future[java.lang.Boolean] = {
       val promise = concurrent.Promise[java.lang.Boolean]()
       asJava.putValueWithOptions(key, value, options, new Handler[AsyncResult[java.lang.Boolean]] { override def handle(event: AsyncResult[java.lang.Boolean]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -325,7 +325,7 @@ package object consul{
     /**
      * Like fireEventWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def fireEventWithOptionsFuture(name: java.lang.String,options: io.vertx.ext.consul.EventOptions) : scala.concurrent.Future[io.vertx.ext.consul.Event] = {
+  def fireEventWithOptionsFuture(name: java.lang.String, options: io.vertx.ext.consul.EventOptions) : scala.concurrent.Future[io.vertx.ext.consul.Event] = {
       val promise = concurrent.Promise[io.vertx.ext.consul.Event]()
       asJava.fireEventWithOptions(name, options, new Handler[AsyncResult[io.vertx.ext.consul.Event]] { override def handle(event: AsyncResult[io.vertx.ext.consul.Event]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -388,7 +388,7 @@ package object consul{
     /**
      * Like catalogServiceNodesWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def catalogServiceNodesWithOptionsFuture(service: java.lang.String,options: io.vertx.ext.consul.ServiceQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.ServiceList] = {
+  def catalogServiceNodesWithOptionsFuture(service: java.lang.String, options: io.vertx.ext.consul.ServiceQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.ServiceList] = {
       val promise = concurrent.Promise[io.vertx.ext.consul.ServiceList]()
       asJava.catalogServiceNodesWithOptions(service, options, new Handler[AsyncResult[io.vertx.ext.consul.ServiceList]] { override def handle(event: AsyncResult[io.vertx.ext.consul.ServiceList]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -433,7 +433,7 @@ package object consul{
     /**
      * Like healthChecksWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def healthChecksWithOptionsFuture(service: java.lang.String,options: io.vertx.ext.consul.CheckQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.CheckList] = {
+  def healthChecksWithOptionsFuture(service: java.lang.String, options: io.vertx.ext.consul.CheckQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.CheckList] = {
       val promise = concurrent.Promise[io.vertx.ext.consul.CheckList]()
       asJava.healthChecksWithOptions(service, options, new Handler[AsyncResult[io.vertx.ext.consul.CheckList]] { override def handle(event: AsyncResult[io.vertx.ext.consul.CheckList]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -451,7 +451,7 @@ package object consul{
     /**
      * Like healthStateWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def healthStateWithOptionsFuture(healthState: io.vertx.ext.consul.HealthState,options: io.vertx.ext.consul.CheckQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.CheckList] = {
+  def healthStateWithOptionsFuture(healthState: io.vertx.ext.consul.HealthState, options: io.vertx.ext.consul.CheckQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.CheckList] = {
       val promise = concurrent.Promise[io.vertx.ext.consul.CheckList]()
       asJava.healthStateWithOptions(healthState, options, new Handler[AsyncResult[io.vertx.ext.consul.CheckList]] { override def handle(event: AsyncResult[io.vertx.ext.consul.CheckList]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -460,7 +460,7 @@ package object consul{
     /**
      * Like healthServiceNodes from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def healthServiceNodesFuture(service: java.lang.String,passing: java.lang.Boolean) : scala.concurrent.Future[io.vertx.ext.consul.ServiceEntryList] = {
+  def healthServiceNodesFuture(service: java.lang.String, passing: java.lang.Boolean) : scala.concurrent.Future[io.vertx.ext.consul.ServiceEntryList] = {
       val promise = concurrent.Promise[io.vertx.ext.consul.ServiceEntryList]()
       asJava.healthServiceNodes(service, passing, new Handler[AsyncResult[io.vertx.ext.consul.ServiceEntryList]] { override def handle(event: AsyncResult[io.vertx.ext.consul.ServiceEntryList]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -469,7 +469,7 @@ package object consul{
     /**
      * Like healthServiceNodesWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def healthServiceNodesWithOptionsFuture(service: java.lang.String,passing: java.lang.Boolean,options: io.vertx.ext.consul.ServiceQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.ServiceEntryList] = {
+  def healthServiceNodesWithOptionsFuture(service: java.lang.String, passing: java.lang.Boolean, options: io.vertx.ext.consul.ServiceQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.ServiceEntryList] = {
       val promise = concurrent.Promise[io.vertx.ext.consul.ServiceEntryList]()
       asJava.healthServiceNodesWithOptions(service, passing, options, new Handler[AsyncResult[io.vertx.ext.consul.ServiceEntryList]] { override def handle(event: AsyncResult[io.vertx.ext.consul.ServiceEntryList]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -505,7 +505,7 @@ package object consul{
     /**
      * Like catalogNodeServicesWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def catalogNodeServicesWithOptionsFuture(node: java.lang.String,options: io.vertx.ext.consul.BlockingQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.ServiceList] = {
+  def catalogNodeServicesWithOptionsFuture(node: java.lang.String, options: io.vertx.ext.consul.BlockingQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.ServiceList] = {
       val promise = concurrent.Promise[io.vertx.ext.consul.ServiceList]()
       asJava.catalogNodeServicesWithOptions(node, options, new Handler[AsyncResult[io.vertx.ext.consul.ServiceList]] { override def handle(event: AsyncResult[io.vertx.ext.consul.ServiceList]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -559,7 +559,7 @@ package object consul{
     /**
      * Like passCheckWithNote from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def passCheckWithNoteFuture(checkId: java.lang.String,note: java.lang.String) : scala.concurrent.Future[Void] = {
+  def passCheckWithNoteFuture(checkId: java.lang.String, note: java.lang.String) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.passCheckWithNote(checkId, note, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -577,7 +577,7 @@ package object consul{
     /**
      * Like warnCheckWithNote from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def warnCheckWithNoteFuture(checkId: java.lang.String,note: java.lang.String) : scala.concurrent.Future[Void] = {
+  def warnCheckWithNoteFuture(checkId: java.lang.String, note: java.lang.String) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.warnCheckWithNote(checkId, note, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -595,7 +595,7 @@ package object consul{
     /**
      * Like failCheckWithNote from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def failCheckWithNoteFuture(checkId: java.lang.String,note: java.lang.String) : scala.concurrent.Future[Void] = {
+  def failCheckWithNoteFuture(checkId: java.lang.String, note: java.lang.String) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.failCheckWithNote(checkId, note, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -604,7 +604,7 @@ package object consul{
     /**
      * Like updateCheck from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def updateCheckFuture(checkId: java.lang.String,status: io.vertx.ext.consul.CheckStatus) : scala.concurrent.Future[Void] = {
+  def updateCheckFuture(checkId: java.lang.String, status: io.vertx.ext.consul.CheckStatus) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.updateCheck(checkId, status, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -613,7 +613,7 @@ package object consul{
     /**
      * Like updateCheckWithNote from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def updateCheckWithNoteFuture(checkId: java.lang.String,status: io.vertx.ext.consul.CheckStatus,note: java.lang.String) : scala.concurrent.Future[Void] = {
+  def updateCheckWithNoteFuture(checkId: java.lang.String, status: io.vertx.ext.consul.CheckStatus, note: java.lang.String) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.updateCheckWithNote(checkId, status, note, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -667,7 +667,7 @@ package object consul{
     /**
      * Like infoSessionWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def infoSessionWithOptionsFuture(id: java.lang.String,options: io.vertx.ext.consul.BlockingQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.Session] = {
+  def infoSessionWithOptionsFuture(id: java.lang.String, options: io.vertx.ext.consul.BlockingQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.Session] = {
       val promise = concurrent.Promise[io.vertx.ext.consul.Session]()
       asJava.infoSessionWithOptions(id, options, new Handler[AsyncResult[io.vertx.ext.consul.Session]] { override def handle(event: AsyncResult[io.vertx.ext.consul.Session]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -712,7 +712,7 @@ package object consul{
     /**
      * Like listNodeSessionsWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def listNodeSessionsWithOptionsFuture(nodeId: java.lang.String,options: io.vertx.ext.consul.BlockingQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.SessionList] = {
+  def listNodeSessionsWithOptionsFuture(nodeId: java.lang.String, options: io.vertx.ext.consul.BlockingQueryOptions) : scala.concurrent.Future[io.vertx.ext.consul.SessionList] = {
       val promise = concurrent.Promise[io.vertx.ext.consul.SessionList]()
       asJava.listNodeSessionsWithOptions(nodeId, options, new Handler[AsyncResult[io.vertx.ext.consul.SessionList]] { override def handle(event: AsyncResult[io.vertx.ext.consul.SessionList]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -784,7 +784,7 @@ package object consul{
     /**
      * Like executePreparedQueryWithOptions from [[io.vertx.ext.consul.ConsulClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def executePreparedQueryWithOptionsFuture(query: java.lang.String,options: io.vertx.ext.consul.PreparedQueryExecuteOptions) : scala.concurrent.Future[io.vertx.ext.consul.PreparedQueryExecuteResponse] = {
+  def executePreparedQueryWithOptionsFuture(query: java.lang.String, options: io.vertx.ext.consul.PreparedQueryExecuteOptions) : scala.concurrent.Future[io.vertx.ext.consul.PreparedQueryExecuteResponse] = {
       val promise = concurrent.Promise[io.vertx.ext.consul.PreparedQueryExecuteResponse]()
       asJava.executePreparedQueryWithOptions(query, options, new Handler[AsyncResult[io.vertx.ext.consul.PreparedQueryExecuteResponse]] { override def handle(event: AsyncResult[io.vertx.ext.consul.PreparedQueryExecuteResponse]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -1045,84 +1045,130 @@ package object consul{
 
   object Watch {
     /**
-     * Like key from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates `Watch` to monitoring a specific key in the KV store.
+     * The underlying Consul client will be created with default options.
+     * This maps to the <a href="https://www.consul.io/api/kv.html">/v1/kv/</a> API internally.     * @param key the key
+     * @param vertx the `Vertx` instance
+     * @return the `Watch` instance
      */
   def key(key: java.lang.String, vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.consul.Watch.key(key, vertx)
   }
 
     /**
-     * Like key from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates `Watch` to monitoring a specific key in the KV store.
+     * This maps to the <a href="https://www.consul.io/api/kv.html">/v1/kv/</a> API internally.     * @param key the key
+     * @param vertx the `Vertx` instance
+     * @param options the options to create underlying Consul client see <a href="../../../../../../../cheatsheet/ConsulClientOptions.html">ConsulClientOptions</a>
+     * @return the `Watch` instance
      */
   def key(key: java.lang.String, vertx: io.vertx.core.Vertx, options: io.vertx.ext.consul.ConsulClientOptions) = {
       io.vertx.ext.consul.Watch.key(key, vertx, options)
   }
 
     /**
-     * Like keyPrefix from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates `Watch` to monitoring a prefix of keys in the KV store.
+     * The underlying Consul client will be created with default options.
+     * This maps to the <a href="https://www.consul.io/api/kv.html">/v1/kv/</a> API internally.     * @param keyPrefix the key
+     * @param vertx the `Vertx` instance
+     * @return the `Watch` instance
      */
   def keyPrefix(keyPrefix: java.lang.String, vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.consul.Watch.keyPrefix(keyPrefix, vertx)
   }
 
     /**
-     * Like keyPrefix from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates `Watch` to monitoring a prefix of keys in the KV store.
+     * This maps to the <a href="https://www.consul.io/api/kv.html">/v1/kv/</a> API internally.     * @param keyPrefix the key
+     * @param vertx the `Vertx` instance
+     * @param options the options to create underlying Consul client see <a href="../../../../../../../cheatsheet/ConsulClientOptions.html">ConsulClientOptions</a>
+     * @return the `Watch` instance
      */
   def keyPrefix(keyPrefix: java.lang.String, vertx: io.vertx.core.Vertx, options: io.vertx.ext.consul.ConsulClientOptions) = {
       io.vertx.ext.consul.Watch.keyPrefix(keyPrefix, vertx, options)
   }
 
     /**
-     * Like services from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates `Watch` to monitoring the list of available services.
+     * The underlying Consul client will be created with default options.
+     * This maps to the <a href="https://www.consul.io/docs/agent/http/catalog.html#catalog_services">/v1/catalog/services</a> API internally.     * @param vertx the `Vertx` instance
+     * @return the `Watch` instance
      */
   def services(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.consul.Watch.services(vertx)
   }
 
     /**
-     * Like services from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates `Watch` to monitoring the list of available services.
+     * This maps to the <a href="https://www.consul.io/docs/agent/http/catalog.html#catalog_services">/v1/catalog/services</a> API internally.     * @param vertx the `Vertx` instance
+     * @param options the options to create underlying Consul client see <a href="../../../../../../../cheatsheet/ConsulClientOptions.html">ConsulClientOptions</a>
+     * @return the `Watch` instance
      */
   def services(vertx: io.vertx.core.Vertx, options: io.vertx.ext.consul.ConsulClientOptions) = {
       io.vertx.ext.consul.Watch.services(vertx, options)
   }
 
     /**
-     * Like service from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates `Watch` to monitoring the nodes providing the service.
+     * Nodes will be sorted by distance from the consul agent.
+     * The underlying Consul client will be created with default options.
+     * This maps to the <a href="https://www.consul.io/docs/agent/http/health.html#health_service">/v1/health/service/&lt;service&gt;</a> API internally.     * @param service the service name
+     * @param vertx the `Vertx` instance
+     * @return the `Watch` instance
      */
   def service(service: java.lang.String, vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.consul.Watch.service(service, vertx)
   }
 
     /**
-     * Like service from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates `Watch` to monitoring the nodes providing the service.
+     * Nodes will be sorted by distance from the consul agent.
+     * This maps to the <a href="https://www.consul.io/docs/agent/http/health.html#health_service">/v1/health/service/&lt;service&gt;</a> API internally.     * @param service the service name
+     * @param vertx the `Vertx` instance
+     * @param options the options to create underlying Consul client see <a href="../../../../../../../cheatsheet/ConsulClientOptions.html">ConsulClientOptions</a>
+     * @return the `Watch` instance
      */
   def service(service: java.lang.String, vertx: io.vertx.core.Vertx, options: io.vertx.ext.consul.ConsulClientOptions) = {
       io.vertx.ext.consul.Watch.service(service, vertx, options)
   }
 
     /**
-     * Like events from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates `Watch` to monitoring the custom user events.
+     * The underlying Consul client will be created with default options.
+     * This maps to the <a href="https://www.consul.io/docs/agent/http/event.html#event_list">/v1/event/list</a> API internally.     * @param event the event name
+     * @param vertx the `Vertx` instance
+     * @return the `Watch` instance
      */
   def events(event: java.lang.String, vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.consul.Watch.events(event, vertx)
   }
 
     /**
-     * Like events from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates `Watch` to monitoring the custom user events.
+     * This maps to the <a href="https://www.consul.io/docs/agent/http/event.html#event_list">/v1/event/list</a> API internally.     * @param event the event name
+     * @param vertx the `Vertx` instance
+     * @param options the options to create underlying Consul client see <a href="../../../../../../../cheatsheet/ConsulClientOptions.html">ConsulClientOptions</a>
+     * @return the `Watch` instance
      */
   def events(event: java.lang.String, vertx: io.vertx.core.Vertx, options: io.vertx.ext.consul.ConsulClientOptions) = {
       io.vertx.ext.consul.Watch.events(event, vertx, options)
   }
 
     /**
-     * Like nodes from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates `Watch` to monitoring the list of available nodes.
+     * The underlying Consul client will be created with default options.
+     * This maps to the <a href="https://www.consul.io/api/catalog.html#list-nodes">/v1/catalog/nodes</a> API internally.     * @param vertx the `Vertx` instance
+     * @return the `Watch` instance
      */
   def nodes(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.consul.Watch.nodes(vertx)
   }
 
     /**
-     * Like nodes from [[io.vertx.ext.consul.Watch]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Creates `Watch` to monitoring the list of available nodes.
+     * This maps to the <a href="https://www.consul.io/api/catalog.html#list-nodes">/v1/catalog/nodes</a> API internally.     * @param vertx the `Vertx` instance
+     * @param options the options to create underlying Consul client see <a href="../../../../../../../cheatsheet/ConsulClientOptions.html">ConsulClientOptions</a>
+     * @return the `Watch` instance
      */
   def nodes(vertx: io.vertx.core.Vertx, options: io.vertx.ext.consul.ConsulClientOptions) = {
       io.vertx.ext.consul.Watch.nodes(vertx, options)

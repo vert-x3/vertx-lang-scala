@@ -34,7 +34,8 @@ package object properties{
 
   object PropertyFileAuthentication {
     /**
-     * Like create from [[io.vertx.ext.auth.properties.PropertyFileAuthentication]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a File authentication provider     * @param vertx the Vert.x instance
+     * @return the authentication provider
      */
   def create(vertx: io.vertx.core.Vertx, path: java.lang.String) = {
       io.vertx.ext.auth.properties.PropertyFileAuthentication.create(vertx, path)
@@ -44,7 +45,8 @@ package object properties{
 
   object PropertyFileAuthorization {
     /**
-     * Like create from [[io.vertx.ext.auth.properties.PropertyFileAuthorization]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a File authentication provider     * @param vertx the Vert.x instance
+     * @return the authentication provider
      */
   def create(vertx: io.vertx.core.Vertx, path: java.lang.String) = {
       io.vertx.ext.auth.properties.PropertyFileAuthorization.create(vertx, path)

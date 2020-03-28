@@ -67,7 +67,8 @@ package object auth{
 
   object AuthorizationContext {
     /**
-     * Like create from [[io.vertx.ext.auth.authorization.AuthorizationContext]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Factory for Authorization Context     * @param user a user
+     * @return a AuthorizationContext instance
      */
   def create(user: io.vertx.ext.auth.User) = {
       io.vertx.ext.auth.authorization.AuthorizationContext.create(user)
@@ -102,21 +103,21 @@ package object auth{
 
   object ChainAuth {
     /**
-     * Like create from [[io.vertx.ext.auth.ChainAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a Chainable Auth Provider auth provider     * @return the auth provider
      */
   def create() = {
       io.vertx.ext.auth.ChainAuth.create()
   }
 
     /**
-     * Like all from [[io.vertx.ext.auth.ChainAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a Chainable Auth Provider auth provider that will resolve if all auth providers are successful.     * @return the auth provider
      */
   def all() = {
       io.vertx.ext.auth.ChainAuth.all()
   }
 
     /**
-     * Like any from [[io.vertx.ext.auth.ChainAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a Chainable Auth Provider auth provider that will resolve on the first success.     * @return the auth provider
      */
   def any() = {
       io.vertx.ext.auth.ChainAuth.any()
@@ -128,7 +129,7 @@ package object auth{
 
   object HashingStrategy {
     /**
-     * Like load from [[io.vertx.ext.auth.HashingStrategy]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Factory method to load the algorithms from the system     * @return a Hashing Strategy capable of hashing using the available algorithms
      */
   def load() = {
       io.vertx.ext.auth.HashingStrategy.load()
@@ -215,14 +216,18 @@ package object auth{
 
   object VertxContextPRNG {
     /**
-     * Like current from [[io.vertx.ext.auth.VertxContextPRNG]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Get or create a secure non blocking random number generator using the current vert.x context. If there is no
+     * current context (i.e.: not running on the eventloop) then a IllegalStateException is thrown.     * @return A secure non blocking random number generator.
      */
   def current() = {
       io.vertx.ext.auth.VertxContextPRNG.current()
   }
 
     /**
-     * Like current from [[io.vertx.ext.auth.VertxContextPRNG]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Get or create a secure non blocking random number generator using the current vert.x instance. Since the context
+     * might be different this method will attempt to use the current context first if available and then fall back to
+     * create a new instance of the PRNG.     * @param vertx a Vert.x instance.
+     * @return A secure non blocking random number generator.
      */
   def current(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.auth.VertxContextPRNG.current(vertx)
