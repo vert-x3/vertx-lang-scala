@@ -95,21 +95,28 @@ package object pgclient{
   implicit class PgChannelScala(val asJava: io.vertx.pgclient.pubsub.PgChannel) extends AnyVal {
 
     /**
-     * Like handler from [[io.vertx.pgclient.pubsub.PgChannel]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Set or unset an handler to be called when a the channel is notified by Postgres.
+     * <p/>
+     * <ul>
+     *   <li>when the handler is set, the subscriber sends a `LISTEN` command if needed</li>
+     *   <li>when the handler is unset, the subscriber sends a `UNLISTEN` command if needed</li>
+     * </ul>     * @param handler the handler
+     * @return a reference to this, so the API can be used fluently
      */
   def handler(handler: scala.Option[java.lang.String => Unit]) = {
-      asJava.handler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.String]])
+      asJava.handler(handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.String]]).getOrElse(null))
   }
 
     /**
-     * Like endHandler from [[io.vertx.pgclient.pubsub.PgChannel]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Set an handler to be called when no more notifications will be received.     * @param endHandler the handler
+     * @return a reference to this, so the API can be used fluently
      */
   def endHandler(endHandler: scala.Option[Void => Unit]) = {
-      asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+      asJava.endHandler(endHandler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Void]]).getOrElse(null))
   }
 
   def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
-      asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+      asJava.exceptionHandler(handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]]).getOrElse(null))
   }
 
   def pipeToFuture(dst: io.vertx.core.streams.WriteStream[java.lang.String]) : scala.concurrent.Future[Void] = {
@@ -180,63 +187,64 @@ package object pgclient{
 
   object PgPool {
     /**
-     * Like pool from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.pgclient.PgPool#pool]] with a default `poolOptions`.
      */
   def pool() = {
       io.vertx.pgclient.PgPool.pool()
   }
 
     /**
-     * Like pool from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.pgclient.PgPool#pool]] with `connectOptions` build from the environment variables.
      */
   def pool(poolOptions: io.vertx.sqlclient.PoolOptions) = {
       io.vertx.pgclient.PgPool.pool(poolOptions)
   }
 
     /**
-     * Like pool from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.pgclient.PgPool#pool]] with a default `poolOptions`.
      */
   def pool(connectionUri: java.lang.String) = {
       io.vertx.pgclient.PgPool.pool(connectionUri)
   }
 
     /**
-     * Like pool from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.pgclient.PgPool#pool]] with `connectOptions` build from `connectionUri`.
      */
   def pool(connectionUri: java.lang.String, poolOptions: io.vertx.sqlclient.PoolOptions) = {
       io.vertx.pgclient.PgPool.pool(connectionUri, poolOptions)
   }
 
     /**
-     * Like pool from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.pgclient.PgPool#pool]] with a default `poolOptions`.
      */
   def pool(vertx: io.vertx.core.Vertx, connectionUri: java.lang.String) = {
       io.vertx.pgclient.PgPool.pool(vertx, connectionUri)
   }
 
     /**
-     * Like pool from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.pgclient.PgPool#pool]] with `connectOptions` build from the environment variables.
      */
   def pool(vertx: io.vertx.core.Vertx, poolOptions: io.vertx.sqlclient.PoolOptions) = {
       io.vertx.pgclient.PgPool.pool(vertx, poolOptions)
   }
 
     /**
-     * Like pool from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.pgclient.PgPool#pool]] with `connectOptions` build from `connectionUri`.
      */
   def pool(vertx: io.vertx.core.Vertx, connectionUri: java.lang.String, poolOptions: io.vertx.sqlclient.PoolOptions) = {
       io.vertx.pgclient.PgPool.pool(vertx, connectionUri, poolOptions)
   }
 
     /**
-     * Like pool from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a connection pool to the database configured with the given `connectOptions` and `poolOptions`.     * @param poolOptions the options for creating the pool see <a href="../../../../../../cheatsheet/PoolOptions.html">PoolOptions</a>
+     * @return the connection pool
      */
   def pool(connectOptions: io.vertx.pgclient.PgConnectOptions, poolOptions: io.vertx.sqlclient.PoolOptions) = {
       io.vertx.pgclient.PgPool.pool(connectOptions, poolOptions)
   }
 
     /**
-     * Like pool from [[io.vertx.pgclient.PgPool]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Like [[io.vertx.pgclient.PgPool#pool]] with a specific  instance.
      */
   def pool(vertx: io.vertx.core.Vertx, connectOptions: io.vertx.pgclient.PgConnectOptions, poolOptions: io.vertx.sqlclient.PoolOptions) = {
       io.vertx.pgclient.PgPool.pool(vertx, connectOptions, poolOptions)

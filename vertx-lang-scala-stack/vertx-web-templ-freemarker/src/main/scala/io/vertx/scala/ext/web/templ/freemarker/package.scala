@@ -34,14 +34,14 @@ package object freemarker{
 
   object FreeMarkerTemplateEngine {
     /**
-     * Like create from [[io.vertx.ext.web.templ.freemarker.FreeMarkerTemplateEngine]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a template engine using defaults     * @return the engine
      */
   def create(vertx: io.vertx.core.Vertx) = {
       io.vertx.ext.web.templ.freemarker.FreeMarkerTemplateEngine.create(vertx)
   }
 
     /**
-     * Like create from [[io.vertx.ext.web.templ.freemarker.FreeMarkerTemplateEngine]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a template engine using defaults     * @return the engine
      */
   def create(vertx: io.vertx.core.Vertx, extension: java.lang.String) = {
       io.vertx.ext.web.templ.freemarker.FreeMarkerTemplateEngine.create(vertx, extension)

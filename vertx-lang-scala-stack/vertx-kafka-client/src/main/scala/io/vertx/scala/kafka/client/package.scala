@@ -55,15 +55,15 @@ package object client{
   implicit class KafkaConsumerScala[K, V](val asJava: io.vertx.kafka.client.consumer.KafkaConsumer[K, V]) extends AnyVal {
 
   def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
-      asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+      asJava.exceptionHandler(handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]]).getOrElse(null))
   }
 
   def handler(handler: scala.Option[io.vertx.kafka.client.consumer.KafkaConsumerRecord[K, V] => Unit]) = {
-      asJava.handler(handler.asInstanceOf[io.vertx.core.Handler[io.vertx.kafka.client.consumer.KafkaConsumerRecord[K,V]]])
+      asJava.handler(handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[io.vertx.kafka.client.consumer.KafkaConsumerRecord[K,V]]]).getOrElse(null))
   }
 
   def endHandler(endHandler: scala.Option[Void => Unit]) = {
-      asJava.endHandler(endHandler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+      asJava.endHandler(endHandler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Void]]).getOrElse(null))
   }
 
   def pipeToFuture(dst: io.vertx.core.streams.WriteStream[io.vertx.kafka.client.consumer.KafkaConsumerRecord[K, V]]) : scala.concurrent.Future[Void] = {
@@ -183,7 +183,7 @@ package object client{
     /**
      * Like seek from [[io.vertx.kafka.client.consumer.KafkaConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def seekFuture(topicPartition: io.vertx.kafka.client.common.TopicPartition,offset: java.lang.Long) : scala.concurrent.Future[Void] = {
+  def seekFuture(topicPartition: io.vertx.kafka.client.common.TopicPartition, offset: java.lang.Long) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.seek(topicPartition, offset, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -273,7 +273,7 @@ package object client{
     /**
      * Like offsetsForTimes from [[io.vertx.kafka.client.consumer.KafkaConsumer]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def offsetsForTimesFuture(topicPartition: io.vertx.kafka.client.common.TopicPartition,timestamp: java.lang.Long) : scala.concurrent.Future[io.vertx.kafka.client.consumer.OffsetAndTimestamp] = {
+  def offsetsForTimesFuture(topicPartition: io.vertx.kafka.client.common.TopicPartition, timestamp: java.lang.Long) : scala.concurrent.Future[io.vertx.kafka.client.consumer.OffsetAndTimestamp] = {
       val promise = concurrent.Promise[io.vertx.kafka.client.consumer.OffsetAndTimestamp]()
       asJava.offsetsForTimes(topicPartition, timestamp, new Handler[AsyncResult[io.vertx.kafka.client.consumer.OffsetAndTimestamp]] { override def handle(event: AsyncResult[io.vertx.kafka.client.consumer.OffsetAndTimestamp]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -337,11 +337,11 @@ package object client{
   implicit class KafkaProducerScala[K, V](val asJava: io.vertx.kafka.client.producer.KafkaProducer[K, V]) extends AnyVal {
 
   def exceptionHandler(handler: scala.Option[Throwable => Unit]) = {
-      asJava.exceptionHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]])
+      asJava.exceptionHandler(handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]]).getOrElse(null))
   }
 
   def drainHandler(handler: scala.Option[Void => Unit]) = {
-      asJava.drainHandler(handler.asInstanceOf[io.vertx.core.Handler[java.lang.Void]])
+      asJava.drainHandler(handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Void]]).getOrElse(null))
   }
 
   def writeFuture(arg0: io.vertx.kafka.client.producer.KafkaProducerRecord[K, V]) : scala.concurrent.Future[Void] = {
@@ -438,21 +438,31 @@ package object client{
 
   object KafkaProducerRecord {
     /**
-     * Like create from [[io.vertx.kafka.client.producer.KafkaProducerRecord]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a concrete instance of a Vert.x producer record     * @param topic the topic this record is being sent to
+     * @param key the key (or null if no key is specified)
+     * @param value the value
+     * @param timestamp the timestamp of this record
+     * @param partition the partition to which the record will be sent (or null if no partition was specified)
+     * @return Vert.x producer record
      */
   def create[K, V](topic: java.lang.String, key: K, value: V, timestamp: java.lang.Long, partition: java.lang.Integer) = {
       io.vertx.kafka.client.producer.KafkaProducerRecord.create[K, V](topic, key, value, timestamp, partition)
   }
 
     /**
-     * Like create from [[io.vertx.kafka.client.producer.KafkaProducerRecord]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a concrete instance of a Vert.x producer record     * @param topic the topic this record is being sent to
+     * @param key the key (or null if no key is specified)
+     * @param value the value
+     * @return Vert.x producer record
      */
   def create[K, V](topic: java.lang.String, key: K, value: V) = {
       io.vertx.kafka.client.producer.KafkaProducerRecord.create[K, V](topic, key, value)
   }
 
     /**
-     * Like create from [[io.vertx.kafka.client.producer.KafkaProducerRecord]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Create a concrete instance of a Vert.x producer record     * @param topic the topic this record is being sent to
+     * @param value the value
+     * @return Vert.x producer record
      */
   def create[K, V](topic: java.lang.String, value: V) = {
       io.vertx.kafka.client.producer.KafkaProducerRecord.create[K, V](topic, value)

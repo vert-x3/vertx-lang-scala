@@ -64,7 +64,7 @@ package object webauthn{
     /**
      * Like updateUserCredential from [[io.vertx.ext.auth.webauthn.CredentialStore]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def updateUserCredentialFuture(id: java.lang.String,data: io.vertx.core.json.JsonObject,upsert: java.lang.Boolean) : scala.concurrent.Future[Void] = {
+  def updateUserCredentialFuture(id: java.lang.String, data: io.vertx.core.json.JsonObject, upsert: java.lang.Boolean) : scala.concurrent.Future[Void] = {
       val promise = concurrent.Promise[Void]()
       asJava.updateUserCredential(id, data, upsert, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
@@ -91,7 +91,10 @@ package object webauthn{
   implicit class WebAuthnScala(val asJava: io.vertx.ext.auth.webauthn.WebAuthn) extends AnyVal {
 
     /**
-     * Like getCredentialsOptions from [[io.vertx.ext.auth.webauthn.WebAuthn]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * Generates getAssertion request. If the auth provider is configured with `RequireResidentKey` and
+     * the username is null then the generated assertion will be a RK assertion (Usernameless).     * @param username the unique user identified
+     * @param handler server encoded get assertion request
+     * @return fluent self.
      */
   def getCredentialsOptions(username: scala.Option[java.lang.String], handler: AsyncResult[io.vertx.core.json.JsonObject] => Unit) = {
       asJava.getCredentialsOptions(username.getOrElse(null), handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.core.json.JsonObject]]])

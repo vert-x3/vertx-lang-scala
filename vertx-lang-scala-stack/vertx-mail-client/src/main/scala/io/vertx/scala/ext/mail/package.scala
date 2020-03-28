@@ -46,21 +46,22 @@ package object mail{
 
   object MailAttachment {
     /**
-     * Like create from [[io.vertx.ext.mail.MailAttachment]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * construct an empty MailAttachment object that can be filled with the
+     * setters
      */
   def create() = {
       io.vertx.ext.mail.MailAttachment.create()
   }
 
     /**
-     * Like create from [[io.vertx.ext.mail.MailAttachment]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * create a MailAttachment object from a JsonObject representation     * @param json object to be copied
      */
   def create(json: io.vertx.core.json.JsonObject) = {
       io.vertx.ext.mail.MailAttachment.create(json)
   }
 
     /**
-     * Like create from [[io.vertx.ext.mail.MailAttachment]] but returns a Scala Future instead of taking an AsyncResultHandler.
+     * create a copy of a MailAttachment object     * @param other object to be copied
      */
   def create(other: io.vertx.ext.mail.MailAttachment) = {
       io.vertx.ext.mail.MailAttachment.create(other)
