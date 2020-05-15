@@ -71,6 +71,28 @@ class KafkaAdminClient(private val _asJava: Object) {
     asJava.asInstanceOf[JKafkaAdminClient].listConsumerGroups((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JConsumerGroupListing]]]{def handle(x: AsyncResult[java.util.List[JConsumerGroupListing]]) {completionHandler.handle(AsyncResultWrapper[java.util.List[JConsumerGroupListing], scala.collection.mutable.Buffer[ConsumerGroupListing]](x, a => a.asScala.map(x => ConsumerGroupListing(x))))}}))
   }
 
+  /**
+   * Close the admin client
+   */
+  def close (): Unit = {
+    asJava.asInstanceOf[JKafkaAdminClient].close()
+  }
+
+  /**
+   * Close the admin client   * @param completionHandler handler called on operation completed
+   */
+  def close (completionHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JKafkaAdminClient].close((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+  }
+
+  /**
+   * Close the admin client   * @param timeout timeout to wait for closing
+   * @param completionHandler handler called on operation completed
+   */
+  def close (timeout: Long, completionHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JKafkaAdminClient].close(timeout.asInstanceOf[java.lang.Long], (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+  }
+
 
  /**
   * Like [[listTopics]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
@@ -109,6 +131,26 @@ class KafkaAdminClient(private val _asJava: Object) {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JConsumerGroupListing], scala.collection.mutable.Buffer[ConsumerGroupListing]](x => x.asScala.map(x => ConsumerGroupListing(x)))
     asJava.asInstanceOf[JKafkaAdminClient].listConsumerGroups(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def closeFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JKafkaAdminClient].close(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[close]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def closeFuture (timeout: Long): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JKafkaAdminClient].close(timeout.asInstanceOf[java.lang.Long], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

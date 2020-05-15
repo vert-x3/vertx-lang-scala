@@ -677,7 +677,7 @@ HTML page, or as an npm module (https://www.npmjs.com/package/stompjs).
 
 To achieve the first step, you would need a HTTP server, and pass the
 `link:../../scaladocs/io/vertx/scala/ext/stomp/StompServer.html#webSocketHandler()[webSocketHandler]` result to
-`link:../../scaladocs/io/vertx/scala/core/http/HttpServer.html#websocketHandler()[websocketHandler]`:
+`link:../../scaladocs/io/vertx/scala/core/http/HttpServer.html#webSocketHandler()[webSocketHandler]`:
 
 [source,scala]
 ----
@@ -688,8 +688,8 @@ var server = StompServer.create(vertx, StompServerOptions()
 ).handler(StompServerHandler.create(vertx))
 
 var http = vertx.createHttpServer(HttpServerOptions()
-  .setWebsocketSubProtocols("v10.stomp, v11.stomp")
-).websocketHandler(server.webSocketHandler()).listen(8080)
+  .setWebSocketSubProtocols(List("v10.stomp, v11.stomp"))
+).webSocketHandler(server.webSocketHandler()).listen(8080)
 
 ----
 

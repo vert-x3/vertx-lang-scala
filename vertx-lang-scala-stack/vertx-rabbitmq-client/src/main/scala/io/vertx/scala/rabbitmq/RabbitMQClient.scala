@@ -16,10 +16,11 @@
 
 package io.vertx.scala.rabbitmq
 
-import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.rabbitmq.{RabbitMQConsumer => JRabbitMQConsumer}
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.rabbitmq.{QueueOptions => JQueueOptions}
 import scala.reflect.runtime.universe._
+import scala.collection.JavaConverters._
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.Converter._
@@ -205,9 +206,21 @@ class RabbitMQClient(private val _asJava: Object) {
   }
 
   /**
+   * Bind an exchange to an exchange.   */
+  def exchangeBind (destination: String, source: String, routingKey: String, arguments: scala.collection.mutable.Map[String, AnyRef], resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].exchangeBind(destination.asInstanceOf[java.lang.String], source.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], arguments.mapValues(x => x).asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+  }
+
+  /**
    * Unbind an exchange from an exchange.   */
   def exchangeUnbind (destination: String, source: String, routingKey: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JRabbitMQClient].exchangeUnbind(destination.asInstanceOf[java.lang.String], source.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+  }
+
+  /**
+   * Unbind an exchange from an exchange.   */
+  def exchangeUnbind (destination: String, source: String, routingKey: String, arguments: scala.collection.mutable.Map[String, AnyRef], resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].exchangeUnbind(destination.asInstanceOf[java.lang.String], source.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], arguments.mapValues(x => x).asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -244,6 +257,24 @@ class RabbitMQClient(private val _asJava: Object) {
    * Bind a queue to an exchange   */
   def queueBind (queue: String, exchange: String, routingKey: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JRabbitMQClient].queueBind(queue.asInstanceOf[java.lang.String], exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+  }
+
+  /**
+   * Bind a queue to an exchange   */
+  def queueBind (queue: String, exchange: String, routingKey: String, arguments: scala.collection.mutable.Map[String, AnyRef], resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].queueBind(queue.asInstanceOf[java.lang.String], exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], arguments.mapValues(x => x).asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+  }
+
+  /**
+   * Unbind a queue from an exchange   */
+  def queueUnbind (queue: String, exchange: String, routingKey: String, resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].queueUnbind(queue.asInstanceOf[java.lang.String], exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+  }
+
+  /**
+   * Unbind a queue from an exchange   */
+  def queueUnbind (queue: String, exchange: String, routingKey: String, arguments: scala.collection.mutable.Map[String, AnyRef], resultHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JRabbitMQClient].queueUnbind(queue.asInstanceOf[java.lang.String], exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], arguments.mapValues(x => x).asJava, (if (resultHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {resultHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -470,12 +501,32 @@ class RabbitMQClient(private val _asJava: Object) {
   }
 
  /**
+  * Like [[exchangeBind]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def exchangeBindFuture (destination: String, source: String, routingKey: String, arguments: scala.collection.mutable.Map[String, AnyRef]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRabbitMQClient].exchangeBind(destination.asInstanceOf[java.lang.String], source.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], arguments.mapValues(x => x).asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
   * Like [[exchangeUnbind]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
   def exchangeUnbindFuture (destination: String, source: String, routingKey: String): scala.concurrent.Future[Unit] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JRabbitMQClient].exchangeUnbind(destination.asInstanceOf[java.lang.String], source.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[exchangeUnbind]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def exchangeUnbindFuture (destination: String, source: String, routingKey: String, arguments: scala.collection.mutable.Map[String, AnyRef]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRabbitMQClient].exchangeUnbind(destination.asInstanceOf[java.lang.String], source.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], arguments.mapValues(x => x).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
@@ -536,6 +587,36 @@ class RabbitMQClient(private val _asJava: Object) {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JRabbitMQClient].queueBind(queue.asInstanceOf[java.lang.String], exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[queueBind]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def queueBindFuture (queue: String, exchange: String, routingKey: String, arguments: scala.collection.mutable.Map[String, AnyRef]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRabbitMQClient].queueBind(queue.asInstanceOf[java.lang.String], exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], arguments.mapValues(x => x).asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[queueUnbind]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def queueUnbindFuture (queue: String, exchange: String, routingKey: String): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRabbitMQClient].queueUnbind(queue.asInstanceOf[java.lang.String], exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[queueUnbind]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def queueUnbindFuture (queue: String, exchange: String, routingKey: String, arguments: scala.collection.mutable.Map[String, AnyRef]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRabbitMQClient].queueUnbind(queue.asInstanceOf[java.lang.String], exchange.asInstanceOf[java.lang.String], routingKey.asInstanceOf[java.lang.String], arguments.mapValues(x => x).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

@@ -1449,6 +1449,11 @@ var store = ClusteredSessionStore.create(vertx)
 
 var sessionHandler = SessionHandler.create(store)
 
+// the session handler controls the cookie used for the session
+// this includes configuring, for example, the same site policy
+// like this, for strict same site policy.
+sessionHandler.setCookieSameSite(CookieSameSite.STRICT)
+
 // Make sure all requests are routed through the session handler too
 router.route().handler(sessionHandler)
 
@@ -2552,7 +2557,7 @@ SockJS handler.
 var router = Router.router(vertx)
 
 var sockJSHandler = SockJSHandler.create(vertx)
-var options = BridgeOptions()
+var options = SockJSBridgeOptions()
 // mount the bridge on the router
 router.mountSubRouter("/eventbus", sockJSHandler.bridge(options))
 
@@ -2673,7 +2678,7 @@ In other words the bridge acts like a kind of firewall which has a default _deny
 Configuring the bridge to tell it what messages it should pass through is easy.
 
 You can specify which _matches_ you want to allow for inbound and outbound traffic using the
-`link:../dataobjects.html#BridgeOptions[BridgeOptions]` that you pass in when calling bridge.
+`link:../dataobjects.html#SockJSBridgeOptions[SockJSBridgeOptions]` that you pass in when calling bridge.
 
 Each match is a `link:../dataobjects.html#PermittedOptions[PermittedOptions]` object:
 
@@ -2742,7 +2747,7 @@ var outboundPermitted2 = PermittedOptions()
 
 
 // Let's define what we're going to allow from client -> server
-var options = BridgeOptions()
+var options = SockJSBridgeOptions()
   .setInboundPermitteds(Set(inboundPermitted1, inboundPermitted1, inboundPermitted3))
   .setOutboundPermitteds(Set(outboundPermitted1, outboundPermitted2))
 
@@ -2776,7 +2781,7 @@ var inboundPermitted = PermittedOptions()
 // But only if the user is logged in and has the authority "place_orders"
 inboundPermitted.setRequiredAuthority("place_orders")
 
-var options = BridgeOptions()
+var options = SockJSBridgeOptions()
   .setInboundPermitteds(Set(inboundPermitted))
 
 
@@ -2810,7 +2815,7 @@ var basicAuthHandler = BasicAuthHandler.create(authProvider)
 router.route("/eventbus/*").handler(basicAuthHandler)
 
 // mount the bridge on the router
-router.mountSubRouter("/eventbus", sockJSHandler.bridge(BridgeOptions()
+router.mountSubRouter("/eventbus", sockJSHandler.bridge(SockJSBridgeOptions()
   .setInboundPermitteds(Set(inboundPermitted))
 ))
 
@@ -2819,7 +2824,7 @@ router.mountSubRouter("/eventbus", sockJSHandler.bridge(BridgeOptions()
 === Handling event bus bridge events
 
 If you want to be notified when an event occurs on the bridge you can provide a handler when calling
-`link:../../scaladocs/io/vertx/scala/ext/web/handler/sockjs/SockJSHandler.html#bridge(io.vertx.ext.web.handler.sockjs.BridgeOptions)[bridge]`.
+`link:../../scaladocs/io/vertx/scala/ext/web/handler/sockjs/SockJSHandler.html#bridge(io.vertx.ext.web.handler.sockjs.SockJSBridgeOptions)[bridge]`.
 
 Whenever an event occurs on the bridge it will be passed to the handler. The event is described by an instance of
 `link:../../scaladocs/io/vertx/scala/ext/web/handler/sockjs/BridgeEvent.html[BridgeEvent]`.
@@ -2869,7 +2874,7 @@ var inboundPermitted = PermittedOptions()
 
 
 var sockJSHandler = SockJSHandler.create(vertx)
-var options = BridgeOptions()
+var options = SockJSBridgeOptions()
   .setInboundPermitteds(Set(inboundPermitted))
 
 
@@ -2897,7 +2902,7 @@ var router = Router.router(vertx)
 
 // Initialize SockJS handler
 var sockJSHandler = SockJSHandler.create(vertx)
-var options = BridgeOptions()
+var options = SockJSBridgeOptions()
   .setInboundPermitteds(Set(inboundPermitted))
   .setPingTimeout(5000)
 
@@ -2963,7 +2968,7 @@ var inboundPermitted = PermittedOptions()
 
 
 var sockJSHandler = SockJSHandler.create(vertx)
-var options = BridgeOptions()
+var options = SockJSBridgeOptions()
   .setInboundPermitteds(Set(inboundPermitted))
 
 

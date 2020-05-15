@@ -47,7 +47,7 @@ class HttpConnection(private val _asJava: Object) {
 
 
   /**
-   * @return the remote address for this connection
+   * @return the remote address for this connection, possibly `null` (e.g a server bound on a domain socket)
    */
   def remoteAddress(): SocketAddress = {
     if (cached_0 == None) {
@@ -58,7 +58,7 @@ class HttpConnection(private val _asJava: Object) {
   }
 
   /**
-   * @return the remote address for this connection
+   * @return the local address for this connection, possibly `null` (e.g a server bound on a domain socket)
    */
   def localAddress(): SocketAddress = {
     if (cached_1 == None) {

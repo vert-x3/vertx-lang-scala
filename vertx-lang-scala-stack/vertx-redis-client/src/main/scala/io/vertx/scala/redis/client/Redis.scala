@@ -18,24 +18,17 @@ package io.vertx.scala.redis.client
 
 import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.redis.client.{RedisOptions => JRedisOptions}
-import io.vertx.scala.core.streams.Pipe
 import io.vertx.redis.client.{Redis => JRedis}
-import io.vertx.core.streams.{ReadStream => JReadStream}
 import scala.reflect.runtime.universe._
+import io.vertx.redis.client.{RedisConnection => JRedisConnection}
 import scala.collection.JavaConverters._
-import io.vertx.core.streams.{WriteStream => JWriteStream}
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.redis.client.{Request => JRequest}
 import io.vertx.lang.scala.Converter._
 import io.vertx.redis.client.{Response => JResponse}
-import io.vertx.scala.core.streams.ReadStream
-import io.vertx.scala.core.streams.WriteStream
-import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
-import io.vertx.core.streams.{Pipe => JPipe}
-import io.vertx.scala.core.net.SocketAddress
 import io.vertx.lang.scala.HandlerOps._
 
 /**
@@ -43,7 +36,7 @@ import io.vertx.lang.scala.HandlerOps._
 
   */
 
-class Redis(private val _asJava: Object) extends ReadStream[Response] {
+class Redis(private val _asJava: Object) {
   def asJava = _asJava
 
 
@@ -53,135 +46,57 @@ class Redis(private val _asJava: Object) extends ReadStream[Response] {
    * @return a reference to this, so the API can be used fluently
    */
   
-  def connect(handler: Handler[AsyncResult[Redis]]): Redis = {
-    asJava.asInstanceOf[JRedis].connect((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRedis]]{def handle(x: AsyncResult[JRedis]) {handler.handle(AsyncResultWrapper[JRedis, Redis](x, a => Redis(a)))}}))
+  def connect(handler: Handler[AsyncResult[RedisConnection]]): Redis = {
+    asJava.asInstanceOf[JRedis].connect((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRedisConnection]]{def handle(x: AsyncResult[JRedisConnection]) {handler.handle(AsyncResultWrapper[JRedisConnection, RedisConnection](x, a => RedisConnection(a)))}}))
     this
   }
 
   /**
-   * Set an exception handler on the read stream.   * @param handler the exception handler
-   * @return a reference to this, so the API can be used fluently
+   * Send the given command to the redis server or cluster.   * @param command the command to send
+   * @param onSend the asynchronous result handler.
+   * @return fluent self.
    */
-  override 
-  def exceptionHandler(handler: Handler[Throwable]): Redis = {
-    asJava.asInstanceOf[JRedis].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
-    this
-  }
-
-  /**
-   * Set a data handler. As data is read, the handler will be called with the data.   * @return a reference to this, so the API can be used fluently
-   */
-  override 
-  def handler(handler: Handler[Response]): Redis = {
-    asJava.asInstanceOf[JRedis].handler((if (handler == null) null else new io.vertx.core.Handler[JResponse]{def handle(x: JResponse) {handler.handle(Response(x))}}))
-    this
-  }
-
-  /**
-   * Pause the `ReadStream`, it sets the buffer in `fetch` mode and clears the actual demand.
-   * 
-   * While it's paused, no data will be sent to the data `handler`.   * @return a reference to this, so the API can be used fluently
-   */
-  override 
-  def pause(): Redis = {
-    asJava.asInstanceOf[JRedis].pause()
-    this
-  }
-
-  /**
-   * Resume reading, and sets the buffer in `flowing` mode.
-   * <p/>
-   * If the `ReadStream` has been paused, reading will recommence on it.   * @return a reference to this, so the API can be used fluently
-   */
-  override 
-  def resume(): Redis = {
-    asJava.asInstanceOf[JRedis].resume()
-    this
-  }
-
-  /**
-   * Fetch the specified `amount` of elements. If the `ReadStream` has been paused, reading will
-   * recommence with the specified `amount` of items, otherwise the specified `amount` will
-   * be added to the current stream demand.   * @return a reference to this, so the API can be used fluently
-   */
-  override 
-  def fetch(amount: Long): Redis = {
-    asJava.asInstanceOf[JRedis].fetch(amount.asInstanceOf[java.lang.Long])
-    this
-  }
-
-  /**
-   * Set an end handler. Once the stream has ended, and there is no more data to be read, this handler will be called.   * @return a reference to this, so the API can be used fluently
-   */
-  override 
-  def endHandler(endHandler: Handler[Unit]): Redis = {
-    asJava.asInstanceOf[JRedis].endHandler((if (endHandler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {endHandler.handle(x)}}))
-    this
-  }
-
-
   
   def send(command: Request, onSend: Handler[AsyncResult[scala.Option[Response]]]): Redis = {
     asJava.asInstanceOf[JRedis].send(command.asJava.asInstanceOf[JRequest], (if (onSend == null) null else new io.vertx.core.Handler[AsyncResult[JResponse]]{def handle(x: AsyncResult[JResponse]) {onSend.handle(AsyncResultWrapper[JResponse, scala.Option[Response]](x, a => scala.Option(a).map(Response(_))))}}))
     this
   }
 
-
+  /**
+   * Sends a list of commands in a single IO operation, this prevents any inter twinning to happen from other
+   * client users.   * @param commands list of command to send
+   * @param onSend the asynchronous result handler.
+   * @return fluent self.
+   */
   
-  def batch(commands: scala.collection.mutable.Buffer[Request], handler: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[Response]]]]): Redis = {
-    asJava.asInstanceOf[JRedis].batch(commands.map(x => x.asJava.asInstanceOf[JRequest]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JResponse]]]{def handle(x: AsyncResult[java.util.List[JResponse]]) {handler.handle(AsyncResultWrapper[java.util.List[JResponse], scala.collection.mutable.Buffer[scala.Option[Response]]](x, a => a.asScala.map(x => scala.Option(x).map(Response(_)))))}}))
+  def batch(commands: scala.collection.mutable.Buffer[Request], onSend: Handler[AsyncResult[scala.collection.mutable.Buffer[scala.Option[Response]]]]): Redis = {
+    asJava.asInstanceOf[JRedis].batch(commands.map(x => x.asJava.asInstanceOf[JRequest]).asJava, (if (onSend == null) null else new io.vertx.core.Handler[AsyncResult[java.util.List[JResponse]]]{def handle(x: AsyncResult[java.util.List[JResponse]]) {onSend.handle(AsyncResultWrapper[java.util.List[JResponse], scala.collection.mutable.Buffer[scala.Option[Response]]](x, a => a.asScala.map(x => scala.Option(x).map(Response(_)))))}}))
     this
   }
 
 
 
-  override def pipe(): Pipe[Response] = {
-    Pipe[Response](asJava.asInstanceOf[JRedis].pipe())
-  }
-
-
-  override def pipeTo(dst: WriteStream[Response]): Unit = {
-    asJava.asInstanceOf[JRedis].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JResponse]])
-  }
-
-
-  override def pipeTo(dst: WriteStream[Response], handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JRedis].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JResponse]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
-  }
-
-
   /**
-   * Returns the address associated with this client.   * @return the address.
+   * Closes the client and terminates any connection.
    */
-  def socketAddress (): SocketAddress = {
-    SocketAddress(asJava.asInstanceOf[JRedis].socketAddress())
-  }
-
-
   def close (): Unit = {
     asJava.asInstanceOf[JRedis].close()
   }
 
 
-
-  override def pipeToFuture (dst: WriteStream[Response]): scala.concurrent.Future[Unit] = {
-    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JRedis].pipeTo(dst.asJava.asInstanceOf[JWriteStream[JResponse]], promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
  /**
   * Like [[connect]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-  def connectFuture (): scala.concurrent.Future[Redis] = {
+  def connectFuture (): scala.concurrent.Future[RedisConnection] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRedis, Redis](x => Redis(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JRedisConnection, RedisConnection](x => RedisConnection(x))
     asJava.asInstanceOf[JRedis].connect(promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
-
+ /**
+  * Like [[send]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
   def sendFuture (command: Request): scala.concurrent.Future[scala.Option[Response]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[JResponse, scala.Option[Response]](x => scala.Option(x).map(Response(_)))
@@ -189,7 +104,9 @@ class Redis(private val _asJava: Object) extends ReadStream[Response] {
     promiseAndHandler._2.future
   }
 
-
+ /**
+  * Like [[batch]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
   def batchFuture (commands: scala.collection.mutable.Buffer[Request]): scala.concurrent.Future[scala.collection.mutable.Buffer[scala.Option[Response]]] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JResponse], scala.collection.mutable.Buffer[scala.Option[Response]]](x => x.asScala.map(x => scala.Option(x).map(Response(_))))
@@ -203,17 +120,26 @@ object Redis {
   def apply(asJava: JRedis) = new Redis(asJava)
 
   /**
-   * Connect to redis, the `onConnect` will get the [[io.vertx.scala.redis.client.Redis]] instance.
-   *
-   * This connection will use the default options which are connect
-   * to a standalone server on the default port on "localhost".
+   * Create a new redis client using the default client options.   * @param vertx the vertx instance
+   * @return the client
    */
-  def createClient(vertx: Vertx,address: SocketAddress): Redis = {
-    Redis(JRedis.createClient(vertx.asJava.asInstanceOf[JVertx], address.asJava.asInstanceOf[JSocketAddress]))//2 createClient
+  def createClient(vertx: Vertx): Redis = {
+    Redis(JRedis.createClient(vertx.asJava.asInstanceOf[JVertx]))//2 createClient
   }
 
   /**
-   * Connect to redis, the `onConnect` will get the [[io.vertx.scala.redis.client.Redis]] instance.
+   * Create a new redis client using the default client options. Does not support rediss (redis over ssl scheme) for now.   * @param vertx the vertx instance
+   * @param connectionString a string URI following the scheme: redis://[username:password@][host][:port][/database]
+   * @return the client
+   */
+  def createClient(vertx: Vertx,connectionString: String): Redis = {
+    Redis(JRedis.createClient(vertx.asJava.asInstanceOf[JVertx], connectionString.asInstanceOf[java.lang.String]))//2 createClient
+  }
+
+  /**
+   * Create a new redis client using the given client options.   * @param vertx the vertx instance
+   * @param options the user provided options see <a href="../../../../../../../cheatsheet/RedisOptions.html">RedisOptions</a>
+   * @return the client
    */
   def createClient(vertx: Vertx,options: RedisOptions): Redis = {
     Redis(JRedis.createClient(vertx.asJava.asInstanceOf[JVertx], options.asJava))//2 createClient

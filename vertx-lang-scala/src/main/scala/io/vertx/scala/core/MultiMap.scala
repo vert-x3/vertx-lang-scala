@@ -55,9 +55,9 @@ class MultiMap(private val _asJava: Object) {
   }
 
   /**
-   * Sets a value under the specified name.
+   * Sets a `value` under the specified `name`.
    * 
-   * If there is an existing header with the same name, it is removed.   * @param name The name
+   * If there is an existing header with the same name, it is removed. Setting a `null` value removes the entry.   * @param name The name
    * @param value The value
    * @return a reference to this, so the API can be used fluently
    */

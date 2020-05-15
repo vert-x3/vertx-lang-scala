@@ -34,7 +34,9 @@ import io.vertx.lang.scala.HandlerOps._
 
 /**
   * Watches are a way of specifying a view of data (e.g. list of nodes, KV pairs, health checks)
-  * which is monitored for updates. When an update is detected, an `Handler` with `AsyncResult` is invoked.
+  * which is monitored for updates. When an update is detected, an `Handler` with `WatchResult` is invoked.
+  * All errors, except `java.util.concurrent.TimeoutException`, will be handled, with resubscribing with a progressive delay.
+  * All timeout errors will be ignored, with resubscribing without any delay.
   * As an example, you could watch the status of health checks and notify when a check is critical.
   */
 
@@ -143,6 +145,7 @@ object Watch {
 
   /**
    * Creates `Watch` to monitoring the nodes providing the service.
+   * Nodes will be sorted by distance from the consul agent.
    * The underlying Consul client will be created with default options.
    * This maps to the <a href="https://www.consul.io/docs/agent/http/health.html#health_service">/v1/health/service/&lt;service&gt;</a> API internally.   * @param service the service name
    * @param vertx the `Vertx` instance
@@ -154,6 +157,7 @@ object Watch {
 
   /**
    * Creates `Watch` to monitoring the nodes providing the service.
+   * Nodes will be sorted by distance from the consul agent.
    * This maps to the <a href="https://www.consul.io/docs/agent/http/health.html#health_service">/v1/health/service/&lt;service&gt;</a> API internally.   * @param service the service name
    * @param vertx the `Vertx` instance
    * @param options the options to create underlying Consul client see <a href="../../../../../../../cheatsheet/ConsulClientOptions.html">ConsulClientOptions</a>

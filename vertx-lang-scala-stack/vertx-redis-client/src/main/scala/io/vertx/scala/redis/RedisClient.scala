@@ -64,6 +64,11 @@ import io.vertx.redis.op.{KillFilter => JKillFilter}
 import io.vertx.core.Handler
 import io.vertx.lang.scala.HandlerOps._
 
+/**
+  * This factory is deprecated use [[io.vertx.scala.redis.client.Redis]] instead,
+  * or for a typed API [[io.vertx.scala.redis.client.RedisAPI]].
+
+  */
 
 class RedisClient(private val _asJava: Object) {
   def asJava = _asJava

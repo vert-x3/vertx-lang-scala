@@ -73,6 +73,11 @@ class Command(private val _asJava: Object) {
   }
 
 
+  def isVoid (): Boolean = {
+    asJava.asInstanceOf[JCommand].isVoid().asInstanceOf[Boolean]
+  }
+
+
 }
 
 object Command {

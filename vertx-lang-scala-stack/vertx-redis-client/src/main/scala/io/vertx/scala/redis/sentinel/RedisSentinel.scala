@@ -29,7 +29,8 @@ import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 
 /**
-  * Interface for sentinel commands
+  * This factory is deprecated use [[io.vertx.scala.redis.client.Redis]] instead,
+  * or for a typed API [[io.vertx.scala.redis.client.RedisAPI]].
 
   */
 

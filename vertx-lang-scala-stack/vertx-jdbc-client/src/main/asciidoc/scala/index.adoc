@@ -80,12 +80,12 @@ interacting with different databases.
 In most cases you will want to share a data source between different client instances.
 However, it's possible you want to create a client instance that doesn't share its data source with any other client.
 
-In that case you can use `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html#createNonShared(io.vertx.core.Vertx)[JDBCClient.createNonShared]`.
+In that case you can use `link:../../scaladocs/io/vertx/scala/ext/jdbc/JDBCClient.html#create(io.vertx.core.Vertx)[JDBCClient.create]`.
 
 [source,java]
 ----
 
-var client = JDBCClient.createNonShared(vertx, config)
+var client = JDBCClient.create(vertx, config)
 
 
 ----

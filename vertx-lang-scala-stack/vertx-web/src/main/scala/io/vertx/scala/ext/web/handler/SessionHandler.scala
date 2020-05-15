@@ -21,6 +21,7 @@ import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import scala.reflect.runtime.universe._
+import io.vertx.core.http.CookieSameSite
 import io.vertx.scala.ext.web.RoutingContext
 import io.vertx.core.Handler
 import io.vertx.ext.web.handler.{SessionHandler => JSessionHandler}
@@ -136,6 +137,14 @@ class SessionHandler(private val _asJava: Object) extends io.vertx.core.Handler[
 
   override def handle (arg0: RoutingContext): Unit = {
     asJava.asInstanceOf[JSessionHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
+  }
+
+  /**
+   * Set the session cookie SameSite policy to use.   * @param policy to use, `null` for no policy.
+   * @return a reference to this, so the API can be used fluently
+   */
+  def setCookieSameSite (policy: io.vertx.core.http.CookieSameSite): SessionHandler = {
+    SessionHandler(asJava.asInstanceOf[JSessionHandler].setCookieSameSite(policy))
   }
 
 

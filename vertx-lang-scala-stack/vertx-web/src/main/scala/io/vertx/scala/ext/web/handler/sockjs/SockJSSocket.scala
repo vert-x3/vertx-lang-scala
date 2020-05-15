@@ -136,6 +136,16 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
 
+  override def end(data: io.vertx.core.buffer.Buffer): Unit = {
+    asJava.asInstanceOf[JSockJSSocket].end(data)
+  }
+
+
+  override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JSockJSSocket].end(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+  }
+
+
   override def pipe(): Pipe[io.vertx.core.buffer.Buffer] = {
     Pipe[io.vertx.core.buffer.Buffer](asJava.asInstanceOf[JSockJSSocket].pipe())
   }
@@ -148,16 +158,6 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
   override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JSockJSSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
-  }
-
-
-  override def end(data: io.vertx.core.buffer.Buffer): Unit = {
-    asJava.asInstanceOf[JSockJSSocket].end(data)
-  }
-
-
-  override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JSockJSSocket].end(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -255,14 +255,6 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
 
 
 
-  override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
-    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JSockJSSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
-
   override def endFuture (): scala.concurrent.Future[Unit] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
@@ -275,6 +267,14 @@ class SockJSSocket(private val _asJava: Object) extends ReadStream[io.vertx.core
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JSockJSSocket].end(data, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+
+  override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JSockJSSocket].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

@@ -21,6 +21,9 @@ import io.vertx.core.json.JsonObject
 import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 
+/**
+
+ */
 
 class BitFieldIncrbyCommand(private val _asJava: JBitFieldIncrbyCommand) {
   def asJava = _asJava

@@ -21,6 +21,9 @@ import io.vertx.core.json.JsonObject
 import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 
+/**
+
+ */
 
 class BitFieldOptions(private val _asJava: JBitFieldOptions) {
   def asJava = _asJava

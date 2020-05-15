@@ -40,6 +40,18 @@ class ServiceOptions(private val _asJava: JServiceOptions) {
   }
 
   /**
+   * Set checks options of service
+   */
+  def setCheckListOptions(value: scala.collection.mutable.Buffer[CheckOptions]) = {
+    asJava.setCheckListOptions(value.map(_.asJava).asJava)
+    this
+  }
+
+  def getCheckListOptions: scala.collection.mutable.Buffer[CheckOptions] = {
+    asJava.getCheckListOptions().asScala.map(x => CheckOptions(x))
+  }
+
+  /**
    * Set check options of service
    */
   def setCheckOptions(value: CheckOptions) = {

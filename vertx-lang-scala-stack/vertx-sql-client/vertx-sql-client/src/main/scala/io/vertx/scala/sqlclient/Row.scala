@@ -34,6 +34,78 @@ class Row(private val _asJava: Object) extends Tuple (_asJava) {
 
 
 
+  /**
+   * Get an object value at `pos`.   * @param name the column
+   * @return the value or `null`
+   */
+  def getValue(name: String): AnyRef = {
+    toScala[java.lang.Object](asJava.asInstanceOf[JRow].getValue(name.asInstanceOf[java.lang.String]))
+  }
+
+  /**
+   * Get a boolean value at `pos`.   * @param name the column
+   * @return the value or `null`
+   */
+  def getBoolean(name: String): Boolean = {
+    asJava.asInstanceOf[JRow].getBoolean(name.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
+  }
+
+  /**
+   * Get a short value at `pos`.   * @param name the column
+   * @return the value or `null`
+   */
+  def getShort(name: String): Short = {
+    asJava.asInstanceOf[JRow].getShort(name.asInstanceOf[java.lang.String]).asInstanceOf[Short]
+  }
+
+  /**
+   * Get an integer value at `pos`.   * @param name the column
+   * @return the value or `null`
+   */
+  def getInteger(name: String): Int = {
+    asJava.asInstanceOf[JRow].getInteger(name.asInstanceOf[java.lang.String]).asInstanceOf[Int]
+  }
+
+  /**
+   * Get a long value at `pos`.   * @param name the column
+   * @return the value or `null`
+   */
+  def getLong(name: String): Long = {
+    asJava.asInstanceOf[JRow].getLong(name.asInstanceOf[java.lang.String]).asInstanceOf[Long]
+  }
+
+  /**
+   * Get a float value at `pos`.   * @param name the column
+   * @return the value or `null`
+   */
+  def getFloat(name: String): Float = {
+    asJava.asInstanceOf[JRow].getFloat(name.asInstanceOf[java.lang.String]).asInstanceOf[Float]
+  }
+
+  /**
+   * Get a double value at `pos`.   * @param name the column
+   * @return the value or `null`
+   */
+  def getDouble(name: String): Double = {
+    asJava.asInstanceOf[JRow].getDouble(name.asInstanceOf[java.lang.String]).asInstanceOf[Double]
+  }
+
+  /**
+   * Get a string value at `pos`.   * @param name the column
+   * @return the value or `null`
+   */
+  def getString(name: String): String = {
+    asJava.asInstanceOf[JRow].getString(name.asInstanceOf[java.lang.String]).asInstanceOf[String]
+  }
+
+  /**
+   * Get a buffer value at `pos`.   * @param name the column
+   * @return the value or `null`
+   */
+  def getBuffer(name: String): io.vertx.core.buffer.Buffer = {
+    asJava.asInstanceOf[JRow].getBuffer(name.asInstanceOf[java.lang.String])
+  }
+
 
   /**
    * Get a column name at `pos`.   * @param pos the column position
@@ -49,78 +121,6 @@ class Row(private val _asJava: Object) extends Tuple (_asJava) {
    */
   def getColumnIndex (name: String): Int = {
     asJava.asInstanceOf[JRow].getColumnIndex(name.asInstanceOf[java.lang.String]).asInstanceOf[Int]
-  }
-
-  /**
-   * Get a boolean value at `pos`.   * @param name the column
-   * @return the value or `null`
-   */
-  def getBoolean (name: String): Boolean = {
-    asJava.asInstanceOf[JRow].getBoolean(name.asInstanceOf[java.lang.String]).asInstanceOf[Boolean]
-  }
-
-  /**
-   * Get an object value at `pos`.   * @param name the column
-   * @return the value or `null`
-   */
-  def getValue (name: String): AnyRef = {
-    toScala[java.lang.Object](asJava.asInstanceOf[JRow].getValue(name.asInstanceOf[java.lang.String]))
-  }
-
-  /**
-   * Get a short value at `pos`.   * @param name the column
-   * @return the value or `null`
-   */
-  def getShort (name: String): Short = {
-    asJava.asInstanceOf[JRow].getShort(name.asInstanceOf[java.lang.String]).asInstanceOf[Short]
-  }
-
-  /**
-   * Get an integer value at `pos`.   * @param name the column
-   * @return the value or `null`
-   */
-  def getInteger (name: String): Int = {
-    asJava.asInstanceOf[JRow].getInteger(name.asInstanceOf[java.lang.String]).asInstanceOf[Int]
-  }
-
-  /**
-   * Get a long value at `pos`.   * @param name the column
-   * @return the value or `null`
-   */
-  def getLong (name: String): Long = {
-    asJava.asInstanceOf[JRow].getLong(name.asInstanceOf[java.lang.String]).asInstanceOf[Long]
-  }
-
-  /**
-   * Get a float value at `pos`.   * @param name the column
-   * @return the value or `null`
-   */
-  def getFloat (name: String): Float = {
-    asJava.asInstanceOf[JRow].getFloat(name.asInstanceOf[java.lang.String]).asInstanceOf[Float]
-  }
-
-  /**
-   * Get a double value at `pos`.   * @param name the column
-   * @return the value or `null`
-   */
-  def getDouble (name: String): Double = {
-    asJava.asInstanceOf[JRow].getDouble(name.asInstanceOf[java.lang.String]).asInstanceOf[Double]
-  }
-
-  /**
-   * Get a string value at `pos`.   * @param name the column
-   * @return the value or `null`
-   */
-  def getString (name: String): String = {
-    asJava.asInstanceOf[JRow].getString(name.asInstanceOf[java.lang.String]).asInstanceOf[String]
-  }
-
-  /**
-   * Get a buffer value at `pos`.   * @param name the column
-   * @return the value or `null`
-   */
-  def getBuffer (name: String): io.vertx.core.buffer.Buffer = {
-    asJava.asInstanceOf[JRow].getBuffer(name.asInstanceOf[java.lang.String])
   }
 
 

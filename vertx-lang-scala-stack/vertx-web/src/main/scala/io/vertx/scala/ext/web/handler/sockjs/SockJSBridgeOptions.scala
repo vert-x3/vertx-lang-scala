@@ -17,106 +17,104 @@
 package io.vertx.scala.ext.web.handler.sockjs
 
 import io.vertx.scala.ext.bridge.PermittedOptions
-import io.vertx.scala.ext.web.handler.sockjs.{SockJSBridgeOptions => ExtSockJSBridgeOptions}
-import io.vertx.ext.web.handler.sockjs.{BridgeOptions => JBridgeOptions}
 import io.vertx.ext.bridge.{PermittedOptions => JPermittedOptions}
+import io.vertx.ext.web.handler.sockjs.{SockJSBridgeOptions => JSockJSBridgeOptions}
 import io.vertx.core.json.JsonObject
 import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 
 /**
- * Deprecated: use <a href="../../../../../../../../../cheatsheet/SockJSBridgeOptions.html">SockJSBridgeOptions</a> instead.
-
+ * Options for configuring the event bus bridge.
  */
 
-class BridgeOptions(private val _asJava: JBridgeOptions) extends ExtSockJSBridgeOptions(_asJava) {
-  override def asJava = _asJava
-  override def setInboundPermitted(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
+class SockJSBridgeOptions(private val _asJava: JSockJSBridgeOptions) {
+  def asJava = _asJava
+  def setInboundPermitted(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
     asJava.setInboundPermitted(value.map(_.asJava).asJava)
     this
   }
 
-  override def addInboundPermitted(value: PermittedOptions) = {
+  def addInboundPermitted(value: PermittedOptions) = {
     asJava.addInboundPermitted(value.asJava)
     this
   }
 
-  override def getInboundPermitteds: scala.collection.mutable.Buffer[PermittedOptions] = {
+  def getInboundPermitteds: scala.collection.mutable.Buffer[PermittedOptions] = {
     asJava.getInboundPermitteds().asScala.map(x => PermittedOptions(x))
   }
 
-  override def setMaxAddressLength(value: Int) = {
+  def setMaxAddressLength(value: Int) = {
     asJava.setMaxAddressLength(value)
     this
   }
 
-  override def getMaxAddressLength: Int = {
+  def getMaxAddressLength: Int = {
     asJava.getMaxAddressLength().asInstanceOf[Int]
   }
 
-  override def setMaxHandlersPerSocket(value: Int) = {
+  def setMaxHandlersPerSocket(value: Int) = {
     asJava.setMaxHandlersPerSocket(value)
     this
   }
 
-  override def getMaxHandlersPerSocket: Int = {
+  def getMaxHandlersPerSocket: Int = {
     asJava.getMaxHandlersPerSocket().asInstanceOf[Int]
   }
 
-  override def setOutboundPermitted(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
+  def setOutboundPermitted(value: scala.collection.mutable.Buffer[PermittedOptions]) = {
     asJava.setOutboundPermitted(value.map(_.asJava).asJava)
     this
   }
 
-  override def addOutboundPermitted(value: PermittedOptions) = {
+  def addOutboundPermitted(value: PermittedOptions) = {
     asJava.addOutboundPermitted(value.asJava)
     this
   }
 
-  override def getOutboundPermitteds: scala.collection.mutable.Buffer[PermittedOptions] = {
+  def getOutboundPermitteds: scala.collection.mutable.Buffer[PermittedOptions] = {
     asJava.getOutboundPermitteds().asScala.map(x => PermittedOptions(x))
   }
 
-  override def setPingTimeout(value: Long) = {
+  def setPingTimeout(value: Long) = {
     asJava.setPingTimeout(value)
     this
   }
 
-  override def getPingTimeout: Long = {
+  def getPingTimeout: Long = {
     asJava.getPingTimeout().asInstanceOf[Long]
   }
 
-  override def setReplyTimeout(value: Long) = {
+  def setReplyTimeout(value: Long) = {
     asJava.setReplyTimeout(value)
     this
   }
 
-  override def getReplyTimeout: Long = {
+  def getReplyTimeout: Long = {
     asJava.getReplyTimeout().asInstanceOf[Long]
   }
 
 }
 
 
-object BridgeOptions {
+object SockJSBridgeOptions {
 
   def apply() = {
-    new BridgeOptions(new JBridgeOptions(emptyObj()))
+    new SockJSBridgeOptions(new JSockJSBridgeOptions(emptyObj()))
   }
 
-  def apply(t: JBridgeOptions) = {
+  def apply(t: JSockJSBridgeOptions) = {
     if (t != null) {
-      new BridgeOptions(t)
+      new SockJSBridgeOptions(t)
     } else {
-      new BridgeOptions(new JBridgeOptions(emptyObj()))
+      new SockJSBridgeOptions(new JSockJSBridgeOptions(emptyObj()))
     }
   }
 
-  def fromJson(json: JsonObject): BridgeOptions = {
+  def fromJson(json: JsonObject): SockJSBridgeOptions = {
     if (json != null) {
-      new BridgeOptions(new JBridgeOptions(json))
+      new SockJSBridgeOptions(new JSockJSBridgeOptions(json))
     } else {
-      new BridgeOptions(new JBridgeOptions(emptyObj()))
+      new SockJSBridgeOptions(new JSockJSBridgeOptions(emptyObj()))
     }
   }
 }

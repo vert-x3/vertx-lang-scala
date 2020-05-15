@@ -21,6 +21,9 @@ import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 import io.vertx.redis.op.{BitFieldGetCommand => JBitFieldGetCommand}
 
+/**
+
+ */
 
 class BitFieldGetCommand(private val _asJava: JBitFieldGetCommand) {
   def asJava = _asJava

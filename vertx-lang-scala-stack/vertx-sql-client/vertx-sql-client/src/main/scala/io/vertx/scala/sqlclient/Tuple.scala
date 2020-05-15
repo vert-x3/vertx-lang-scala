@@ -34,22 +34,22 @@ class Tuple(private val _asJava: Object) {
 
 
   /**
-   * Add a boolean value at the end of the tuple.   * @param value the value
-   * @return a reference to this, so the API can be used fluently
-   */
-  
-  def addBoolean(value: Boolean): Tuple = {
-    asJava.asInstanceOf[JTuple].addBoolean(value.asInstanceOf[java.lang.Boolean])
-    this
-  }
-
-  /**
    * Add an object value at the end of the tuple.   * @param value the value
    * @return a reference to this, so the API can be used fluently
    */
   
   def addValue(value: AnyRef): Tuple = {
     asJava.asInstanceOf[JTuple].addValue(value)
+    this
+  }
+
+  /**
+   * Add a boolean value at the end of the tuple.   * @param value the value
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def addBoolean(value: Boolean): Tuple = {
+    asJava.asInstanceOf[JTuple].addBoolean(value.asInstanceOf[java.lang.Boolean])
     this
   }
 

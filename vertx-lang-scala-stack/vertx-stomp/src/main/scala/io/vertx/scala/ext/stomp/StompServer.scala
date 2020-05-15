@@ -185,7 +185,7 @@ class StompServer(private val _asJava: Object) {
 
   /**
    * Gets the  able to manage web socket connections. If the web socket bridge is disabled, it returns
-   * `null`.   * @return the handler that can be passed to io.vertx.scala.core.http.HttpServer#websocketHandler(Handler).
+   * `null`.   * @return the handler that can be passed to io.vertx.scala.core.http.HttpServer#webSocketHandler(Handler).
    */
   def webSocketHandler (): Handler[ServerWebSocket] = {
     if (asJava.asInstanceOf[JStompServer].webSocketHandler() == null) null else {x: ServerWebSocket => asJava.asInstanceOf[JStompServer].webSocketHandler().handle(x.asJava.asInstanceOf[JServerWebSocket])}

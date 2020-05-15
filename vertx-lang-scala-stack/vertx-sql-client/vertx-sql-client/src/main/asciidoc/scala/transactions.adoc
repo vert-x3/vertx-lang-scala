@@ -12,7 +12,7 @@ Or you can use the transaction API of `link:../../scaladocs/io/vertx/scala/sqlcl
 `transaction01`
 ----
 
-When PostgreSQL reports the current transaction is failed (e.g the infamous _current transaction is aborted, commands ignored until
+When the database server reports the current transaction is failed (e.g the infamous _current transaction is aborted, commands ignored until
 end of transaction block_), the transaction is rollbacked and the `link:../../scaladocs/io/vertx/scala/sqlclient/Transaction.html#abortHandler()[abortHandler]`
 is called:
 

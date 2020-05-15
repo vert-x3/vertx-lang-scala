@@ -22,7 +22,8 @@ import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 
 /**
-  * Container for a script and its sha1 hash.
+  * This factory is deprecated use [[io.vertx.scala.redis.client.Redis]] instead,
+  * or for a typed API [[io.vertx.scala.redis.client.RedisAPI]].
 
   */
 

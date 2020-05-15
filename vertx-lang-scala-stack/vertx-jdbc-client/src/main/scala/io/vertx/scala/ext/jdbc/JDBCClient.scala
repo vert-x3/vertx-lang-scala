@@ -80,12 +80,18 @@ object JDBCClient {
   def apply(asJava: JJDBCClient) = new JDBCClient(asJava)
 
   /**
+   */
+  def createNonShared(vertx: Vertx,config: io.vertx.core.json.JsonObject): JDBCClient = {
+    JDBCClient(JJDBCClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))//2 createNonShared
+  }
+
+  /**
    * Create a JDBC client which maintains its own data source.   * @param vertx the Vert.x instance
    * @param config the configuration
    * @return the client
    */
-  def createNonShared(vertx: Vertx,config: io.vertx.core.json.JsonObject): JDBCClient = {
-    JDBCClient(JJDBCClient.createNonShared(vertx.asJava.asInstanceOf[JVertx], config))//2 createNonShared
+  def create(vertx: Vertx,config: io.vertx.core.json.JsonObject): JDBCClient = {
+    JDBCClient(JJDBCClient.create(vertx.asJava.asInstanceOf[JVertx], config))//2 create
   }
 
   /**

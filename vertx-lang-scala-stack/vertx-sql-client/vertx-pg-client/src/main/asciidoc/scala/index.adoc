@@ -69,7 +69,7 @@ var poolOptions = PoolOptions()
 var client = PgPool.pool(connectOptions, poolOptions)
 
 // A simple query
-client.queryFuture("SELECT * FROM users WHERE id='julien'").onComplete{
+client.query("SELECT * FROM users WHERE id='julien'").executeFuture().onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -173,9 +173,9 @@ client.getConnectionFuture().onComplete{
     var conn = result
 
     // All operations execute on the same connection
-    conn.queryFuture("SELECT * FROM users WHERE id='julien'").onComplete{
+    conn.query("SELECT * FROM users WHERE id='julien'").executeFuture().onComplete{
       case Success(result) => {
-        conn.queryFuture("SELECT * FROM users WHERE id='emad'").onComplete{
+        conn.query("SELECT * FROM users WHERE id='emad'").executeFuture().onComplete{
           case Success(result) => println("Success")
           case Failure(cause) => println("Failure")
         }
@@ -347,13 +347,39 @@ PgConnection.connect(vertx, {
 
 ----
 
+=== SASL SCRAM-SHA-256 authentication mechanism.
+
+To use the sasl SCRAM-SHA-256 authentication add the following dependency to the _dependencies_ section of your build descriptor:
+
+* Maven (in your `pom.xml`):
+
+[source,xml]
+----
+<dependency>
+ <groupId>com.ongres.scram</groupId>
+ <artifactId>client</artifactId>
+ <version>1.0.0-beta.2</version>
+</dependency>
+----
+* Gradle (in your `build.gradle` file):
+
+[source,groovy]
+----
+dependencies {
+ compile 'com.ongres.scram:client:1.0.0-beta.2'
+}
+----
+
+Note that SCRAM-SHA-256-PLUS (added in Postgresql 11) is not supported.
+
+
 include::queries.adoc[]
 
 You can fetch generated keys with a 'RETURNING' clause in your query:
 
 [source,scala]
 ----
-client.preparedQueryFuture("INSERT INTO color (color_name) VALUES ($1), ($2), ($3) RETURNING color_id", Tuple.of("white", "red", "blue")).onComplete{
+client.preparedQuery("INSERT INTO color (color_name) VALUES ($1), ($2), ($3) RETURNING color_id").executeFuture(Tuple.of("white", "red", "blue")).onComplete{
   case Success(result) => {
     var rows = result
     println(rows.rowCount())
@@ -421,7 +447,7 @@ Tuple decoding uses the above types when storing values, it also performs on the
 
 [source,scala]
 ----
-pool.queryFuture("SELECT 1::BIGINT \"VAL\"").onComplete{
+pool.query("SELECT 1::BIGINT \"VAL\"").executeFuture().onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -432,7 +458,7 @@ Tuple encoding uses the above type mapping for encoding, unless the type is nume
 
 [source,scala]
 ----
-pool.queryFuture("SELECT 1::BIGINT \"VAL\"").onComplete{
+pool.query("SELECT 1::BIGINT \"VAL\"").executeFuture().onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -489,7 +515,7 @@ You can read from PostgreSQL and get the custom type as a string
 
 [source,scala]
 ----
-client.preparedQueryFuture("SELECT address, (address).city FROM address_book WHERE id=$1", Tuple.of(3)).onComplete{
+client.preparedQuery("SELECT address, (address).city FROM address_book WHERE id=$1").executeFuture(Tuple.of(3)).onComplete{
   case Success(result) => {
     var rows = result
     rows.foreach(row => {
@@ -508,7 +534,7 @@ You can also write to PostgreSQL by providing a string
 
 [source,scala]
 ----
-client.preparedQueryFuture("INSERT INTO address_book (id, address) VALUES ($1, $2)", Tuple.of(3, "('Anytown', 'Second Ave', false)")).onComplete{
+client.preparedQuery("INSERT INTO address_book (id, address) VALUES ($1, $2)").executeFuture(Tuple.of(3, "('Anytown', 'Second Ave', false)")).onComplete{
   case Success(result) => {
     var rows = result
     println(rows.rowCount())
@@ -526,7 +552,7 @@ Text search is handling using java `String`
 
 [source,scala]
 ----
-client.preparedQueryFuture("SELECT to_tsvector( $1 ) @@ to_tsquery( $2 )", Tuple.of("fat cats ate fat rats", "fat & rat")).onComplete{
+client.preparedQuery("SELECT to_tsvector( $1 ) @@ to_tsquery( $2 )").executeFuture(Tuple.of("fat cats ate fat rats", "fat & rat")).onComplete{
   case Success(result) => {
     var rows = result
     rows.foreach(row => {
@@ -545,7 +571,7 @@ client.preparedQueryFuture("SELECT to_tsvector( $1 ) @@ to_tsquery( $2 )", Tuple
 
 [source,scala]
 ----
-client.preparedQueryFuture("SELECT to_tsvector( $1 ), to_tsquery( $2 )", Tuple.of("fat cats ate fat rats", "fat & rat")).onComplete{
+client.preparedQuery("SELECT to_tsvector( $1 ), to_tsquery( $2 )").executeFuture(Tuple.of("fat cats ate fat rats", "fat & rat")).onComplete{
   case Success(result) => {
     var rows = result
     rows.foreach(row => {
@@ -594,7 +620,7 @@ connection.notificationHandler((notification: io.vertx.scala.pgclient.PgNotifica
   println(s"Received ${todo-renderDataObjectMemberSelect} on channel ${todo-renderDataObjectMemberSelect}")
 })
 
-connection.queryFuture("LISTEN some-channel").onComplete{
+connection.query("LISTEN some-channel").executeFuture().onComplete{
   case Success(result) => println("Success")
   case Failure(cause) => println("Failure")
 }
@@ -655,7 +681,7 @@ subscriber.connectFuture().onComplete{
       println(s"Received ${payload}")
     })
     subscriber.channel("Complex.Channel.Name").subscribeHandler((subscribed: java.lang.Void) => {
-      subscriber.actualConnection().queryFuture("NOTIFY \"Complex.Channel.Name\", 'msg'").onComplete{
+      subscriber.actualConnection().query("NOTIFY \"Complex.Channel.Name\", 'msg'").executeFuture().onComplete{
         case Success(result) => println("Success")
         case Failure(cause) => println("Failure")
       }
@@ -667,7 +693,7 @@ subscriber.connectFuture().onComplete{
     })
     subscriber.channel("simple_channel").subscribeHandler((subscribed: java.lang.Void) => {
       // The following simple channel identifier is forced to lower case
-      subscriber.actualConnection().queryFuture("NOTIFY Simple_CHANNEL, 'msg'").onComplete{
+      subscriber.actualConnection().query("NOTIFY Simple_CHANNEL, 'msg'").executeFuture().onComplete{
         case Success(result) => println("Success")
         case Failure(cause) => println("Failure")
       }
@@ -720,7 +746,7 @@ PostgreSQL supports cancellation of requests in progress. You can cancel infligh
 
 [source,scala]
 ----
-connection.queryFuture("SELECT pg_sleep(20)").onComplete{
+connection.query("SELECT pg_sleep(20)").executeFuture().onComplete{
   case Success(result) => {
     // imagine this is a long query and is still running
     println("Query success")

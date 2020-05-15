@@ -26,7 +26,7 @@ import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.Converter._
 import io.vertx.ext.web.handler.sockjs.{SockJSHandlerOptions => JSockJSHandlerOptions}
-import io.vertx.ext.web.handler.sockjs.{BridgeOptions => JBridgeOptions}
+import io.vertx.ext.web.handler.sockjs.{SockJSBridgeOptions => JSockJSBridgeOptions}
 import io.vertx.ext.web.handler.sockjs.{BridgeEvent => JBridgeEvent}
 import io.vertx.scala.ext.web.Router
 import io.vertx.core.Handler
@@ -59,20 +59,20 @@ class SockJSHandler(private val _asJava: Object) extends io.vertx.core.Handler[R
   /**
    * Bridge the SockJS handler to the Vert.x event bus. This basically installs a built-in SockJS socket handler
    * which takes SockJS traffic and bridges it to the event bus, thus allowing you to extend the server-side
-   * Vert.x event bus to browsers   * @param bridgeOptions options to configure the bridge with see <a href="../../../../../../../../../cheatsheet/BridgeOptions.html">BridgeOptions</a>
+   * Vert.x event bus to browsers   * @param bridgeOptions options to configure the bridge with see <a href="../../../../../../../../../cheatsheet/SockJSBridgeOptions.html">SockJSBridgeOptions</a>
    * @return a router to be mounted on an existing router
    */
-  def bridge (bridgeOptions: BridgeOptions): Router = {
+  def bridge (bridgeOptions: SockJSBridgeOptions): Router = {
     Router(asJava.asInstanceOf[JSockJSHandler].bridge(bridgeOptions.asJava))
   }
 
   /**
    * Like [[io.vertx.scala.ext.web.handler.sockjs.SockJSHandler#bridge]] but specifying a handler
-   * that will receive bridge events.   * @param bridgeOptions options to configure the bridge with see <a href="../../../../../../../../../cheatsheet/BridgeOptions.html">BridgeOptions</a>
+   * that will receive bridge events.   * @param bridgeOptions options to configure the bridge with see <a href="../../../../../../../../../cheatsheet/SockJSBridgeOptions.html">SockJSBridgeOptions</a>
    * @param bridgeEventHandler handler to receive bridge events
    * @return a router to be mounted on an existing router
    */
-  def bridge (bridgeOptions: BridgeOptions, bridgeEventHandler: Handler[BridgeEvent]): Router = {
+  def bridge (bridgeOptions: SockJSBridgeOptions, bridgeEventHandler: Handler[BridgeEvent]): Router = {
     Router(asJava.asInstanceOf[JSockJSHandler].bridge(bridgeOptions.asJava, (if (bridgeEventHandler == null) null else new io.vertx.core.Handler[JBridgeEvent]{def handle(x: JBridgeEvent) {bridgeEventHandler.handle(BridgeEvent(x))}})))
   }
 

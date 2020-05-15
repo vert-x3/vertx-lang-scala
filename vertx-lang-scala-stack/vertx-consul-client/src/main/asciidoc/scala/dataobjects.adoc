@@ -1030,6 +1030,9 @@ Options used to register service.
 |[[address]]`@address`|`String`|+++
 Set service address
 +++
+|[[checkListOptions]]`@checkListOptions`|`Array of link:dataobjects.html#CheckOptions[CheckOptions]`|+++
+Set checks options of service
++++
 |[[checkOptions]]`@checkOptions`|`link:dataobjects.html#CheckOptions[CheckOptions]`|+++
 Set check options of service
 +++

@@ -104,7 +104,7 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
   }
 
   /**
-   * @return the remote (client side) address of the request
+   * @return the remote address for this connection, possibly `null` (e.g a server bound on a domain socket)
    */
   def remoteAddress(): SocketAddress = {
     if (cached_3 == None) {
@@ -115,7 +115,7 @@ class HttpServerRequest(private val _asJava: Object) extends ReadStream[io.vertx
   }
 
   /**
-   * @return the local (server side) address of the server that handles the request
+   * @return the local address for this connection, possibly `null` (e.g a server bound on a domain socket)
    */
   def localAddress(): SocketAddress = {
     if (cached_4 == None) {

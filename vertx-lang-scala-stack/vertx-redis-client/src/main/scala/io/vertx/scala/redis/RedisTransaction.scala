@@ -56,7 +56,8 @@ import io.vertx.core.Handler
 import io.vertx.lang.scala.HandlerOps._
 
 /**
-  * This Interface represents a TX
+  * This factory is deprecated use [[io.vertx.scala.redis.client.Redis]] instead,
+  * or for a typed API [[io.vertx.scala.redis.client.RedisAPI]].
 
   */
 

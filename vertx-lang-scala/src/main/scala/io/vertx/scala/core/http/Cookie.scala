@@ -18,6 +18,7 @@ package io.vertx.scala.core.http
 
 import io.vertx.core.http.{Cookie => JCookie}
 import scala.reflect.runtime.universe._
+import io.vertx.core.http.CookieSameSite
 import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
 
@@ -97,6 +98,16 @@ class Cookie(private val _asJava: Object) {
   
   def setHttpOnly(httpOnly: Boolean): Cookie = {
     asJava.asInstanceOf[JCookie].setHttpOnly(httpOnly.asInstanceOf[java.lang.Boolean])
+    this
+  }
+
+  /**
+   * Sets the same site of this cookie.   * @param policy The policy should be one of CookieSameSite.
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def setSameSite(policy: io.vertx.core.http.CookieSameSite): Cookie = {
+    asJava.asInstanceOf[JCookie].setSameSite(policy)
     this
   }
 

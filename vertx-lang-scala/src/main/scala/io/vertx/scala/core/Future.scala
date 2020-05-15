@@ -48,8 +48,7 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
 
   /**
-   * Like [[io.vertx.scala.core.Future#onComplete]].
-   */
+   * Like [[io.vertx.scala.core.Future#onComplete]].   */
   
   def setHandler(handler: Handler[AsyncResult[T]]): Future[T] = {
     asJava.asInstanceOf[JFuture[Object]].setHandler((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Object]]{def handle(x: AsyncResult[Object]) {handler.handle(AsyncResultWrapper[Object, T](x, a => toScala[T](a)))}}))

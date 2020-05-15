@@ -358,6 +358,9 @@ Base name: `vertx.eventbus`
 * `messages.pending` - A <<counter>> of the number of messages received but not yet processed by an handler
 * `messages.pending-local` - A <<counter>> of the number of messages locally received but not yet processed by an handler
 * `messages.pending-remote` - A <<counter>> of the number of messages remotely received but not yet processed by an handler
+* `messages.discarded` - A <<counter>> of the number of messages discarded by an handler
+* `messages.discarded-local` - A <<counter>> of the number of messages locally discarded by an handler
+* `messages.discarded-remote` - A <<counter>> of the number of messages remotely discarded by an handler
 * `messages.received` - A <<throughput_meter>> representing the rate of which messages are being received
 * `messages.received-local` - A <<throughput_meter>> representing the rate of which local messages are being received
 * `messages.received-remote` - A <<throughput_meter>> representing the rate of which remote messages are being received

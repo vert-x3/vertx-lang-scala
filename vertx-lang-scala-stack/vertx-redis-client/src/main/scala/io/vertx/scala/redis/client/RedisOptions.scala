@@ -19,11 +19,9 @@ package io.vertx.scala.redis.client
 import io.vertx.redis.client.{RedisOptions => JRedisOptions}
 import io.vertx.core.net.{NetClientOptions => JNetClientOptions}
 import io.vertx.scala.core.net.NetClientOptions
-import io.vertx.core.net.{SocketAddress => JSocketAddress}
 import io.vertx.core.json.JsonObject
 import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
-import io.vertx.scala.core.net.SocketAddress
 
 /**
  * Redis Client Configuration options.
@@ -32,33 +30,56 @@ import io.vertx.scala.core.net.SocketAddress
 class RedisOptions(private val _asJava: JRedisOptions) {
   def asJava = _asJava
   /**
-   * Sets a single endpoint to use while connecting to the redis server. Will replace the previously configured endpoints.
+   * Sets a single connection string (endpoint) to use while connecting to the redis server.
+   * Will replace the previously configured connection strings.
+   * 
+   * Does not support rediss (redis over ssl scheme) for now.
    */
-  def setEndpoint(value: SocketAddress) = {
-    asJava.setEndpoint(value.asInstanceOf[JSocketAddress])
+  def setConnectionString(value: String) = {
+    asJava.setConnectionString(value)
     this
   }
 
-  def getEndpoint: SocketAddress = {
-    SocketAddress(asJava.getEndpoint())
+  /**
+   * Adds a connection string (endpoint) to use while connecting to the redis server. Only the cluster mode will
+   * consider more than 1 element. If more are provided, they are not considered by the client when in single server mode.
+   * 
+   * Does not support rediss (redis over ssl scheme) for now.
+   */
+  def addConnectionString(value: String) = {
+    asJava.addConnectionString(value)
+    this
+  }
+
+  /**
+   * Sets a single connection string to use while connecting to the redis server.
+   * Will replace the previously configured connection strings.
+   */
+  def setEndpoint(value: String) = {
+    asJava.setEndpoint(value)
+    this
+  }
+
+  def getEndpoint: String = {
+    asJava.getEndpoint().asInstanceOf[String]
   }
 
   /**
    * Set the endpoints to use while connecting to the redis server. Only the cluster mode will consider more than
    * 1 element. If more are provided, they are not considered by the client when in single server mode.
    */
-  def addEndpoint(value: SocketAddress) = {
-    asJava.addEndpoint(value.asInstanceOf)
+  def addEndpoint(value: String) = {
+    asJava.addEndpoint(value)
     this
   }
 
-  def setEndpoints(value: scala.collection.mutable.Buffer[SocketAddress]) = {
-    asJava.setEndpoints(value.map(_.asJava.asInstanceOf[JSocketAddress]).asJava)
+  def setEndpoints(value: scala.collection.mutable.Buffer[String]) = {
+    asJava.setEndpoints(value.asJava)
     this
   }
 
-  def getEndpoints: scala.collection.mutable.Buffer[SocketAddress] = {
-    asJava.getEndpoints().asScala.map(x => SocketAddress(x))
+  def getEndpoints: scala.collection.mutable.Buffer[String] = {
+    asJava.getEndpoints().asScala.map(x => x.asInstanceOf[String])
   }
 
   /**
@@ -83,6 +104,31 @@ class RedisOptions(private val _asJava: JRedisOptions) {
 
   def getMaxNestedArrays: Int = {
     asJava.getMaxNestedArrays().asInstanceOf[Int]
+  }
+
+  /**
+   * Tune the maximum size of the connection pool. When working with cluster or sentinel
+   * this value should be atleast the total number of cluster member (or number of sentinels + 1)
+   */
+  def setMaxPoolSize(value: Int) = {
+    asJava.setMaxPoolSize(value)
+    this
+  }
+
+  def getMaxPoolSize: Int = {
+    asJava.getMaxPoolSize().asInstanceOf[Int]
+  }
+
+  /**
+   * Tune the maximum waiting requests for a connection from the pool.
+   */
+  def setMaxPoolWaiting(value: Int) = {
+    asJava.setMaxPoolWaiting(value)
+    this
+  }
+
+  def getMaxPoolWaiting: Int = {
+    asJava.getMaxPoolWaiting().asInstanceOf[Int]
   }
 
   /**
@@ -111,15 +157,27 @@ class RedisOptions(private val _asJava: JRedisOptions) {
   }
 
   /**
-   * Set the provided password to be used when establishing a connection to the server.
+   * Tune how often in milliseconds should the connection pool cleaner execute.
    */
-  def setPassword(value: String) = {
-    asJava.setPassword(value)
+  def setPoolCleanerInterval(value: Int) = {
+    asJava.setPoolCleanerInterval(value)
     this
   }
 
-  def getPassword: String = {
-    asJava.getPassword().asInstanceOf[String]
+  def getPoolCleanerInterval: Int = {
+    asJava.getPoolCleanerInterval().asInstanceOf[Int]
+  }
+
+  /**
+   * Tune when a connection should be recycled in milliseconds.
+   */
+  def setPoolRecycleTimeout(value: Int) = {
+    asJava.setPoolRecycleTimeout(value)
+    this
+  }
+
+  def getPoolRecycleTimeout: Int = {
+    asJava.getPoolRecycleTimeout().asInstanceOf[Int]
   }
 
   /**
@@ -132,18 +190,6 @@ class RedisOptions(private val _asJava: JRedisOptions) {
 
   def getRole: io.vertx.redis.client.RedisRole = {
     asJava.getRole()
-  }
-
-  /**
-   * Set the provided database to be selected when establishing a connection to the server.
-   */
-  def setSelect(value: Int) = {
-    asJava.setSelect(value)
-    this
-  }
-
-  def getSelect: Int = {
-    asJava.getSelect().asInstanceOf[Int]
   }
 
   /**

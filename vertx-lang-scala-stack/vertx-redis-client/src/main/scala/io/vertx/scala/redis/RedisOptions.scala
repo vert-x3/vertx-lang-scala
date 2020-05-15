@@ -39,25 +39,6 @@ import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.core.net.{JksOptions => JJksOptions}
 
 /**
- * This object controls the connection setting to the Redis Server. There is no need to specify most of the settings
- * since it has built the following sensible defaults:
- * 
- * * `encoding`: `UTF-8`
- * * `host`: `localhost`
- * * `port`: 6379
- * * `tcpKeepAlive`: true
- * * `tcpNoDelay`: true
- * * `binary`: false
- * 
- * However there are two extra properties that have no defaults since they are optional:
- * 
- * * `auth`
- * * `select`
- * 
- * The usage of this two extra properties is to setup required authentication and optionally the selection of the active
- * database at connection time. If you define this extra properties on every connection to Redis server this client
- * will perform the authentication handshake and database selection, however if you don't do this and call [[io.vertx.scala.redis.RedisClient]]
- * yourself in case of connection failure the client will not be able to perform the correct authentication handshake.
 
  */
 

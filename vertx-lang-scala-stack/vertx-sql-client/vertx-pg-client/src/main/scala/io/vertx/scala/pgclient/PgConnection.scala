@@ -17,28 +17,29 @@
 package io.vertx.scala.pgclient
 
 import io.vertx.lang.scala.AsyncResultWrapper
-import io.vertx.scala.sqlclient.RowSet
-import io.vertx.sqlclient.{RowSet => JRowSet}
 import io.vertx.scala.sqlclient.PreparedQuery
 import scala.reflect.runtime.universe._
 import io.vertx.pgclient.{PgConnection => JPgConnection}
-import io.vertx.sqlclient.{Tuple => JTuple}
-import io.vertx.scala.sqlclient.Row
 import io.vertx.pgclient.{PgNotification => JPgNotification}
-import scala.collection.JavaConverters._
 import io.vertx.scala.core.Vertx
+import io.vertx.sqlclient.{Row => JRow}
+import io.vertx.scala.sqlclient.Transaction
+import io.vertx.sqlclient.{Query => JQuery}
+import io.vertx.pgclient.{PgConnectOptions => JPgConnectOptions}
+import io.vertx.core.AsyncResult
+import io.vertx.sqlclient.{SqlConnection => JSqlConnection}
+import io.vertx.sqlclient.{PreparedQuery => JPreparedQuery}
+import io.vertx.scala.sqlclient.PreparedStatement
+import io.vertx.scala.sqlclient.RowSet
+import io.vertx.sqlclient.{RowSet => JRowSet}
+import io.vertx.sqlclient.{PreparedStatement => JPreparedStatement}
+import io.vertx.scala.sqlclient.Row
 import io.vertx.scala.sqlclient.SqlConnection
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.Converter._
-import io.vertx.scala.sqlclient.Tuple
-import io.vertx.sqlclient.{Row => JRow}
-import io.vertx.scala.sqlclient.Transaction
-import io.vertx.pgclient.{PgConnectOptions => JPgConnectOptions}
 import io.vertx.sqlclient.{Transaction => JTransaction}
-import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
-import io.vertx.sqlclient.{SqlConnection => JSqlConnection}
-import io.vertx.sqlclient.{PreparedQuery => JPreparedQuery}
+import io.vertx.scala.sqlclient.Query
 import io.vertx.lang.scala.HandlerOps._
 
 /**
@@ -63,14 +64,18 @@ class PgConnection(private val _asJava: Object) extends SqlConnection (_asJava) 
     this
   }
 
-
+  /**
+   * 
+   */
   override 
-  def prepare(sql: String, handler: Handler[AsyncResult[PreparedQuery]]): PgConnection = {
-    asJava.asInstanceOf[JPgConnection].prepare(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JPreparedQuery]]{def handle(x: AsyncResult[JPreparedQuery]) {handler.handle(AsyncResultWrapper[JPreparedQuery, PreparedQuery](x, a => PreparedQuery(a)))}}))
+  def prepare(sql: String, handler: Handler[AsyncResult[PreparedStatement]]): PgConnection = {
+    asJava.asInstanceOf[JPgConnection].prepare(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JPreparedStatement]]{def handle(x: AsyncResult[JPreparedStatement]) {handler.handle(AsyncResultWrapper[JPreparedStatement, PreparedStatement](x, a => PreparedStatement(a)))}}))
     this
   }
 
-
+  /**
+   * 
+   */
   override 
   def exceptionHandler(handler: Handler[Throwable]): PgConnection = {
     asJava.asInstanceOf[JPgConnection].exceptionHandler((if (handler == null) null else new io.vertx.core.Handler[Throwable]{def handle(x: Throwable) {handler.handle(x)}}))
@@ -81,34 +86,6 @@ class PgConnection(private val _asJava: Object) extends SqlConnection (_asJava) 
   override 
   def closeHandler(handler: Handler[Unit]): PgConnection = {
     asJava.asInstanceOf[JPgConnection].closeHandler((if (handler == null) null else new io.vertx.core.Handler[Void]{def handle(x: Void) {handler.handle(x)}}))
-    this
-  }
-
-
-  override 
-  def preparedQuery(sql: String, handler: Handler[AsyncResult[RowSet[Row]]]): PgConnection = {
-    asJava.asInstanceOf[JPgConnection].preparedQuery(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
-    this
-  }
-
-
-  override 
-  def query(sql: String, handler: Handler[AsyncResult[RowSet[Row]]]): PgConnection = {
-    asJava.asInstanceOf[JPgConnection].query(sql.asInstanceOf[java.lang.String], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
-    this
-  }
-
-
-  override 
-  def preparedQuery(sql: String, arguments: Tuple, handler: Handler[AsyncResult[RowSet[Row]]]): PgConnection = {
-    asJava.asInstanceOf[JPgConnection].preparedQuery(sql.asInstanceOf[java.lang.String], arguments.asJava.asInstanceOf[JTuple], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
-    this
-  }
-
-
-  override 
-  def preparedBatch(sql: String, batch: scala.collection.mutable.Buffer[Tuple], handler: Handler[AsyncResult[RowSet[Row]]]): PgConnection = {
-    asJava.asInstanceOf[JPgConnection].preparedBatch(sql.asInstanceOf[java.lang.String], batch.map(x => x.asJava.asInstanceOf[JTuple]).asJava, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[JRowSet[JRow]]]{def handle(x: AsyncResult[JRowSet[JRow]]) {handler.handle(AsyncResultWrapper[JRowSet[JRow], RowSet[Row]](x, a => RowSet[Row](a)))}}))
     this
   }
 
@@ -148,43 +125,13 @@ class PgConnection(private val _asJava: Object) extends SqlConnection (_asJava) 
     promiseAndHandler._2.future
   }
 
-
-  override def prepareFuture (sql: String): scala.concurrent.Future[PreparedQuery] = {
+ /**
+  * Like [[prepare]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def prepareFuture (sql: String): scala.concurrent.Future[PreparedStatement] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JPreparedQuery, PreparedQuery](x => PreparedQuery(x))
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JPreparedStatement, PreparedStatement](x => PreparedStatement(x))
     asJava.asInstanceOf[JPgConnection].prepare(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
-
-  override def preparedQueryFuture (sql: String): scala.concurrent.Future[RowSet[Row]] = {
-    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
-    asJava.asInstanceOf[JPgConnection].preparedQuery(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
-
-  override def queryFuture (sql: String): scala.concurrent.Future[RowSet[Row]] = {
-    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
-    asJava.asInstanceOf[JPgConnection].query(sql.asInstanceOf[java.lang.String], promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
-
-  override def preparedQueryFuture (sql: String, arguments: Tuple): scala.concurrent.Future[RowSet[Row]] = {
-    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
-    asJava.asInstanceOf[JPgConnection].preparedQuery(sql.asInstanceOf[java.lang.String], arguments.asJava.asInstanceOf[JTuple], promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
-
-  override def preparedBatchFuture (sql: String, batch: scala.collection.mutable.Buffer[Tuple]): scala.concurrent.Future[RowSet[Row]] = {
-    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[JRowSet[JRow], RowSet[Row]](x => RowSet[Row](x))
-    asJava.asInstanceOf[JPgConnection].preparedBatch(sql.asInstanceOf[java.lang.String], batch.map(x => x.asJava.asInstanceOf[JTuple]).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 
