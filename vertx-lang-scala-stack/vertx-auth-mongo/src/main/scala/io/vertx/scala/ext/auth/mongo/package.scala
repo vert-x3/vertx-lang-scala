@@ -53,7 +53,7 @@ package object mongo{
      * Like insertUser from [[io.vertx.ext.auth.mongo.MongoAuth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def insertUserFuture(username: java.lang.String, password: java.lang.String, roles: scala.collection.mutable.Buffer[java.lang.String], permissions: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[java.lang.String] = {
-      val promise = concurrent.Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
       asJava.insertUser(username, password, roles.asJava, permissions.asJava, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -130,27 +130,27 @@ package object mongo{
     /**
      * Like createUser from [[io.vertx.ext.auth.mongo.MongoUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def createUserFuture(username: java.lang.String, password: java.lang.String) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
-      asJava.createUser(username, password, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+  def createUserFuture(username: java.lang.String, password: java.lang.String) : scala.concurrent.Future[java.lang.String] = {
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
+      asJava.createUser(username, password, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
 
     /**
      * Like createHashedUser from [[io.vertx.ext.auth.mongo.MongoUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def createHashedUserFuture(username: java.lang.String, hash: java.lang.String) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
-      asJava.createHashedUser(username, hash, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+  def createHashedUserFuture(username: java.lang.String, hash: java.lang.String) : scala.concurrent.Future[java.lang.String] = {
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
+      asJava.createHashedUser(username, hash, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
 
     /**
      * Like createUserRolesAndPermissions from [[io.vertx.ext.auth.mongo.MongoUserUtil]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-  def createUserRolesAndPermissionsFuture(username: java.lang.String, roles: scala.collection.mutable.Buffer[java.lang.String], permissions: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
-      asJava.createUserRolesAndPermissions(username, roles.asJava, permissions.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
+  def createUserRolesAndPermissionsFuture(username: java.lang.String, roles: scala.collection.mutable.Buffer[java.lang.String], permissions: scala.collection.mutable.Buffer[java.lang.String]) : scala.concurrent.Future[java.lang.String] = {
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
+      asJava.createUserRolesAndPermissions(username, roles.asJava, permissions.asJava, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
 

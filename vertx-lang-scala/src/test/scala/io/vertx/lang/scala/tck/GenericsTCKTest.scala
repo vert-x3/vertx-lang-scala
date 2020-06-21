@@ -3,17 +3,16 @@ package io.vertx.lang.scala.tck
 import io.vertx.codegen.testmodel.{GenericsTCKImpl, TestEnum, TestGenEnum}
 import io.vertx.lang.scala.json.Json
 import io.vertx.scala.codegen.testmodel._
-import org.junit.runner.RunWith
-import org.scalatestplus.junit.JUnitRunner
-import org.scalatest.{FlatSpec, Matchers, OptionValues}
+import org.scalatest.OptionValues
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.ExecutionContext
 
 /**
   * Created by jochen on 30.12.16.
   */
-@RunWith(classOf[JUnitRunner])
-class GenericsTCKTest extends FlatSpec with Matchers with OptionValues {
+class GenericsTCKTest extends AnyFlatSpec with Matchers with OptionValues {
   implicit val execCtx = new ExecutionContext {
     override def reportFailure(cause: Throwable): Unit = ???
 

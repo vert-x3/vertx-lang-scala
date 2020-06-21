@@ -260,7 +260,6 @@
     <module>vertx-pg-client</module>
     <module>vertx-mysql-client</module>
     <module>vertx-mssql-client</module>
-    <module>vertx-sql-common</module>
     <module>vertx-bridge-common</module>
     <module>vertx-jdbc-client</module>
     <module>vertx-proton</module>

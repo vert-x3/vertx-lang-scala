@@ -170,7 +170,7 @@ package object mongo{
      * Like save from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def saveFuture(collection: java.lang.String, document: io.vertx.core.json.JsonObject) : scala.concurrent.Future[java.lang.String] = {
-      val promise = concurrent.Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
       asJava.save(collection, document, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -179,7 +179,7 @@ package object mongo{
      * Like saveWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def saveWithOptionsFuture(collection: java.lang.String, document: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption]) : scala.concurrent.Future[java.lang.String] = {
-      val promise = concurrent.Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
       asJava.saveWithOptions(collection, document, writeOption.getOrElse(null), new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -188,7 +188,7 @@ package object mongo{
      * Like insert from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def insertFuture(collection: java.lang.String, document: io.vertx.core.json.JsonObject) : scala.concurrent.Future[java.lang.String] = {
-      val promise = concurrent.Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
       asJava.insert(collection, document, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -197,7 +197,7 @@ package object mongo{
      * Like insertWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def insertWithOptionsFuture(collection: java.lang.String, document: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption]) : scala.concurrent.Future[java.lang.String] = {
-      val promise = concurrent.Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
       asJava.insertWithOptions(collection, document, writeOption.getOrElse(null), new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -206,7 +206,7 @@ package object mongo{
      * Like updateCollection from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def updateCollectionFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientUpdateResult] = {
-      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientUpdateResult]()
+      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientUpdateResult]/*io.vertx.ext.mongo.MongoClientUpdateResult OTHER*/()
       asJava.updateCollection(collection, query, update, new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientUpdateResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientUpdateResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -215,7 +215,7 @@ package object mongo{
      * Like updateCollectionWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def updateCollectionWithOptionsFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, options: io.vertx.ext.mongo.UpdateOptions) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientUpdateResult] = {
-      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientUpdateResult]()
+      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientUpdateResult]/*io.vertx.ext.mongo.MongoClientUpdateResult OTHER*/()
       asJava.updateCollectionWithOptions(collection, query, update, options, new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientUpdateResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientUpdateResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -224,7 +224,7 @@ package object mongo{
      * Like replaceDocuments from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def replaceDocumentsFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientUpdateResult] = {
-      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientUpdateResult]()
+      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientUpdateResult]/*io.vertx.ext.mongo.MongoClientUpdateResult OTHER*/()
       asJava.replaceDocuments(collection, query, replace, new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientUpdateResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientUpdateResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -233,7 +233,7 @@ package object mongo{
      * Like replaceDocumentsWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def replaceDocumentsWithOptionsFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, options: io.vertx.ext.mongo.UpdateOptions) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientUpdateResult] = {
-      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientUpdateResult]()
+      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientUpdateResult]/*io.vertx.ext.mongo.MongoClientUpdateResult OTHER*/()
       asJava.replaceDocumentsWithOptions(collection, query, replace, options, new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientUpdateResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientUpdateResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -242,7 +242,7 @@ package object mongo{
      * Like bulkWrite from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def bulkWriteFuture(collection: java.lang.String, operations: scala.collection.mutable.Buffer[io.vertx.ext.mongo.BulkOperation]) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientBulkWriteResult] = {
-      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientBulkWriteResult]()
+      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientBulkWriteResult]/*io.vertx.ext.mongo.MongoClientBulkWriteResult OTHER*/()
       asJava.bulkWrite(collection, operations.asJava, new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientBulkWriteResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientBulkWriteResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -251,7 +251,7 @@ package object mongo{
      * Like bulkWriteWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def bulkWriteWithOptionsFuture(collection: java.lang.String, operations: scala.collection.mutable.Buffer[io.vertx.ext.mongo.BulkOperation], bulkWriteOptions: io.vertx.ext.mongo.BulkWriteOptions) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientBulkWriteResult] = {
-      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientBulkWriteResult]()
+      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientBulkWriteResult]/*io.vertx.ext.mongo.MongoClientBulkWriteResult OTHER*/()
       asJava.bulkWriteWithOptions(collection, operations.asJava, bulkWriteOptions, new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientBulkWriteResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientBulkWriteResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -260,7 +260,7 @@ package object mongo{
      * Like find from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def findFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
-      val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]()
+      val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]/*java.util.List[io.vertx.core.json.JsonObject] LIST*/()
       asJava.find(collection, query, new Handler[AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
   }
@@ -269,7 +269,7 @@ package object mongo{
      * Like findWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def findWithOptionsFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, options: io.vertx.ext.mongo.FindOptions) : scala.concurrent.Future[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]] = {
-      val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]()
+      val promise = concurrent.Promise[scala.collection.mutable.Buffer[io.vertx.core.json.JsonObject]]/*java.util.List[io.vertx.core.json.JsonObject] LIST*/()
       asJava.findWithOptions(collection, query, options, new Handler[AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]] { override def handle(event: AsyncResult[java.util.List[io.vertx.core.json.JsonObject]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
   }
@@ -278,7 +278,7 @@ package object mongo{
      * Like findOne from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def findOneFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, fields: scala.Option[io.vertx.core.json.JsonObject]) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]/*io.vertx.core.json.JsonObject JSON_OBJECT*/()
       asJava.findOne(collection, query, fields.getOrElse(null), new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -287,7 +287,7 @@ package object mongo{
      * Like findOneAndUpdate from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def findOneAndUpdateFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]/*io.vertx.core.json.JsonObject JSON_OBJECT*/()
       asJava.findOneAndUpdate(collection, query, update, new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -296,7 +296,7 @@ package object mongo{
      * Like findOneAndUpdateWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def findOneAndUpdateWithOptionsFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, update: io.vertx.core.json.JsonObject, findOptions: io.vertx.ext.mongo.FindOptions, updateOptions: io.vertx.ext.mongo.UpdateOptions) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]/*io.vertx.core.json.JsonObject JSON_OBJECT*/()
       asJava.findOneAndUpdateWithOptions(collection, query, update, findOptions, updateOptions, new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -305,7 +305,7 @@ package object mongo{
      * Like findOneAndReplace from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def findOneAndReplaceFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]/*io.vertx.core.json.JsonObject JSON_OBJECT*/()
       asJava.findOneAndReplace(collection, query, replace, new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -314,7 +314,7 @@ package object mongo{
      * Like findOneAndReplaceWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def findOneAndReplaceWithOptionsFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, replace: io.vertx.core.json.JsonObject, findOptions: io.vertx.ext.mongo.FindOptions, updateOptions: io.vertx.ext.mongo.UpdateOptions) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]/*io.vertx.core.json.JsonObject JSON_OBJECT*/()
       asJava.findOneAndReplaceWithOptions(collection, query, replace, findOptions, updateOptions, new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -323,7 +323,7 @@ package object mongo{
      * Like findOneAndDelete from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def findOneAndDeleteFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]/*io.vertx.core.json.JsonObject JSON_OBJECT*/()
       asJava.findOneAndDelete(collection, query, new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -332,7 +332,7 @@ package object mongo{
      * Like findOneAndDeleteWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def findOneAndDeleteWithOptionsFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, findOptions: io.vertx.ext.mongo.FindOptions) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]/*io.vertx.core.json.JsonObject JSON_OBJECT*/()
       asJava.findOneAndDeleteWithOptions(collection, query, findOptions, new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -341,7 +341,7 @@ package object mongo{
      * Like count from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def countFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject) : scala.concurrent.Future[java.lang.Long] = {
-      val promise = concurrent.Promise[java.lang.Long]()
+      val promise = concurrent.Promise[java.lang.Long]/*java.lang.Long BOXED_PRIMITIVE*/()
       asJava.count(collection, query, new Handler[AsyncResult[java.lang.Long]] { override def handle(event: AsyncResult[java.lang.Long]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -350,7 +350,7 @@ package object mongo{
      * Like removeDocuments from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def removeDocumentsFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientDeleteResult] = {
-      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientDeleteResult]()
+      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientDeleteResult]/*io.vertx.ext.mongo.MongoClientDeleteResult OTHER*/()
       asJava.removeDocuments(collection, query, new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -359,7 +359,7 @@ package object mongo{
      * Like removeDocumentsWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def removeDocumentsWithOptionsFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption]) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientDeleteResult] = {
-      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientDeleteResult]()
+      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientDeleteResult]/*io.vertx.ext.mongo.MongoClientDeleteResult OTHER*/()
       asJava.removeDocumentsWithOptions(collection, query, writeOption.getOrElse(null), new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -368,7 +368,7 @@ package object mongo{
      * Like removeDocument from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def removeDocumentFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientDeleteResult] = {
-      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientDeleteResult]()
+      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientDeleteResult]/*io.vertx.ext.mongo.MongoClientDeleteResult OTHER*/()
       asJava.removeDocument(collection, query, new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -377,7 +377,7 @@ package object mongo{
      * Like removeDocumentWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def removeDocumentWithOptionsFuture(collection: java.lang.String, query: io.vertx.core.json.JsonObject, writeOption: scala.Option[io.vertx.ext.mongo.WriteOption]) : scala.concurrent.Future[io.vertx.ext.mongo.MongoClientDeleteResult] = {
-      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientDeleteResult]()
+      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoClientDeleteResult]/*io.vertx.ext.mongo.MongoClientDeleteResult OTHER*/()
       asJava.removeDocumentWithOptions(collection, query, writeOption.getOrElse(null), new Handler[AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoClientDeleteResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -386,7 +386,7 @@ package object mongo{
      * Like createCollection from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def createCollectionFuture(collectionName: java.lang.String) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.createCollection(collectionName, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -395,7 +395,7 @@ package object mongo{
      * Like getCollections from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def getCollectionsFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.String]] = {
-      val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.String]]()
+      val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.String]]/*java.util.List[java.lang.String] LIST*/()
       asJava.getCollections(new Handler[AsyncResult[java.util.List[java.lang.String]]] { override def handle(event: AsyncResult[java.util.List[java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
   }
@@ -404,7 +404,7 @@ package object mongo{
      * Like dropCollection from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def dropCollectionFuture(collection: java.lang.String) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.dropCollection(collection, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -413,7 +413,7 @@ package object mongo{
      * Like createIndex from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def createIndexFuture(collection: java.lang.String, key: io.vertx.core.json.JsonObject) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.createIndex(collection, key, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -422,7 +422,7 @@ package object mongo{
      * Like createIndexWithOptions from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def createIndexWithOptionsFuture(collection: java.lang.String, key: io.vertx.core.json.JsonObject, options: io.vertx.ext.mongo.IndexOptions) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.createIndexWithOptions(collection, key, options, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -431,7 +431,7 @@ package object mongo{
      * Like createIndexes from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def createIndexesFuture(collection: java.lang.String, indexes: scala.collection.mutable.Buffer[io.vertx.ext.mongo.IndexModel]) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.createIndexes(collection, indexes.asJava, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -440,7 +440,7 @@ package object mongo{
      * Like listIndexes from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def listIndexesFuture(collection: java.lang.String) : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonArray]/*io.vertx.core.json.JsonArray JSON_ARRAY*/()
       asJava.listIndexes(collection, new Handler[AsyncResult[io.vertx.core.json.JsonArray]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -449,7 +449,7 @@ package object mongo{
      * Like dropIndex from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def dropIndexFuture(collection: java.lang.String, indexName: java.lang.String) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.dropIndex(collection, indexName, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -458,7 +458,7 @@ package object mongo{
      * Like runCommand from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def runCommandFuture(commandName: java.lang.String, command: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]/*io.vertx.core.json.JsonObject JSON_OBJECT*/()
       asJava.runCommand(commandName, command, new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -467,7 +467,7 @@ package object mongo{
      * Like distinct from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def distinctFuture(collection: java.lang.String, fieldName: java.lang.String, resultClassname: java.lang.String) : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonArray]/*io.vertx.core.json.JsonArray JSON_ARRAY*/()
       asJava.distinct(collection, fieldName, resultClassname, new Handler[AsyncResult[io.vertx.core.json.JsonArray]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -476,7 +476,7 @@ package object mongo{
      * Like distinctWithQuery from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def distinctWithQueryFuture(collection: java.lang.String, fieldName: java.lang.String, resultClassname: java.lang.String, query: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonArray]/*io.vertx.core.json.JsonArray JSON_ARRAY*/()
       asJava.distinctWithQuery(collection, fieldName, resultClassname, query, new Handler[AsyncResult[io.vertx.core.json.JsonArray]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -485,7 +485,7 @@ package object mongo{
      * Like createDefaultGridFsBucketService from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def createDefaultGridFsBucketServiceFuture() : scala.concurrent.Future[io.vertx.ext.mongo.MongoGridFsClient] = {
-      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoGridFsClient]()
+      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoGridFsClient]/*io.vertx.ext.mongo.MongoGridFsClient API*/()
       asJava.createDefaultGridFsBucketService(new Handler[AsyncResult[io.vertx.ext.mongo.MongoGridFsClient]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoGridFsClient]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -494,7 +494,7 @@ package object mongo{
      * Like createGridFsBucketService from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def createGridFsBucketServiceFuture(bucketName: java.lang.String) : scala.concurrent.Future[io.vertx.ext.mongo.MongoGridFsClient] = {
-      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoGridFsClient]()
+      val promise = concurrent.Promise[io.vertx.ext.mongo.MongoGridFsClient]/*io.vertx.ext.mongo.MongoGridFsClient API*/()
       asJava.createGridFsBucketService(bucketName, new Handler[AsyncResult[io.vertx.ext.mongo.MongoGridFsClient]] { override def handle(event: AsyncResult[io.vertx.ext.mongo.MongoGridFsClient]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -503,7 +503,7 @@ package object mongo{
      * Like close from [[io.vertx.ext.mongo.MongoClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def closeFuture() : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -546,25 +546,25 @@ package object mongo{
      * Like delete from [[io.vertx.ext.mongo.MongoGridFsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def deleteFuture(id: java.lang.String) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.delete(id, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
 
   def downloadByFileNameFuture(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer], fileName: java.lang.String) : scala.concurrent.Future[java.lang.Long] = {
-      val promise = concurrent.Promise[java.lang.Long]()
+      val promise = concurrent.Promise[java.lang.Long]/*java.lang.Long BOXED_PRIMITIVE*/()
       asJava.downloadByFileName(stream, fileName, new Handler[AsyncResult[java.lang.Long]] { override def handle(event: AsyncResult[java.lang.Long]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
 
   def downloadByFileNameWithOptionsFuture(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer], fileName: java.lang.String, options: io.vertx.ext.mongo.GridFsDownloadOptions) : scala.concurrent.Future[java.lang.Long] = {
-      val promise = concurrent.Promise[java.lang.Long]()
+      val promise = concurrent.Promise[java.lang.Long]/*java.lang.Long BOXED_PRIMITIVE*/()
       asJava.downloadByFileNameWithOptions(stream, fileName, options, new Handler[AsyncResult[java.lang.Long]] { override def handle(event: AsyncResult[java.lang.Long]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
 
   def downloadByIdFuture(stream: io.vertx.core.streams.WriteStream[io.vertx.core.buffer.Buffer], id: java.lang.String) : scala.concurrent.Future[java.lang.Long] = {
-      val promise = concurrent.Promise[java.lang.Long]()
+      val promise = concurrent.Promise[java.lang.Long]/*java.lang.Long BOXED_PRIMITIVE*/()
       asJava.downloadById(stream, id, new Handler[AsyncResult[java.lang.Long]] { override def handle(event: AsyncResult[java.lang.Long]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -573,7 +573,7 @@ package object mongo{
      * Like downloadFile from [[io.vertx.ext.mongo.MongoGridFsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def downloadFileFuture(fileName: java.lang.String) : scala.concurrent.Future[java.lang.Long] = {
-      val promise = concurrent.Promise[java.lang.Long]()
+      val promise = concurrent.Promise[java.lang.Long]/*java.lang.Long BOXED_PRIMITIVE*/()
       asJava.downloadFile(fileName, new Handler[AsyncResult[java.lang.Long]] { override def handle(event: AsyncResult[java.lang.Long]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -582,7 +582,7 @@ package object mongo{
      * Like downloadFileAs from [[io.vertx.ext.mongo.MongoGridFsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def downloadFileAsFuture(fileName: java.lang.String, newFileName: java.lang.String) : scala.concurrent.Future[java.lang.Long] = {
-      val promise = concurrent.Promise[java.lang.Long]()
+      val promise = concurrent.Promise[java.lang.Long]/*java.lang.Long BOXED_PRIMITIVE*/()
       asJava.downloadFileAs(fileName, newFileName, new Handler[AsyncResult[java.lang.Long]] { override def handle(event: AsyncResult[java.lang.Long]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -591,7 +591,7 @@ package object mongo{
      * Like downloadFileByID from [[io.vertx.ext.mongo.MongoGridFsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def downloadFileByIDFuture(id: java.lang.String, fileName: java.lang.String) : scala.concurrent.Future[java.lang.Long] = {
-      val promise = concurrent.Promise[java.lang.Long]()
+      val promise = concurrent.Promise[java.lang.Long]/*java.lang.Long BOXED_PRIMITIVE*/()
       asJava.downloadFileByID(id, fileName, new Handler[AsyncResult[java.lang.Long]] { override def handle(event: AsyncResult[java.lang.Long]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -600,7 +600,7 @@ package object mongo{
      * Like drop from [[io.vertx.ext.mongo.MongoGridFsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def dropFuture() : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.drop(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -609,7 +609,7 @@ package object mongo{
      * Like findAllIds from [[io.vertx.ext.mongo.MongoGridFsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def findAllIdsFuture() : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.String]] = {
-      val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.String]]()
+      val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.String]]/*java.util.List[java.lang.String] LIST*/()
       asJava.findAllIds(new Handler[AsyncResult[java.util.List[java.lang.String]]] { override def handle(event: AsyncResult[java.util.List[java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
   }
@@ -618,19 +618,19 @@ package object mongo{
      * Like findIds from [[io.vertx.ext.mongo.MongoGridFsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def findIdsFuture(query: io.vertx.core.json.JsonObject) : scala.concurrent.Future[scala.collection.mutable.Buffer[java.lang.String]] = {
-      val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.String]]()
+      val promise = concurrent.Promise[scala.collection.mutable.Buffer[java.lang.String]]/*java.util.List[java.lang.String] LIST*/()
       asJava.findIds(query, new Handler[AsyncResult[java.util.List[java.lang.String]]] { override def handle(event: AsyncResult[java.util.List[java.lang.String]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result().asScala)}})
       promise.future
   }
 
   def uploadByFileNameFuture(stream: io.vertx.core.streams.ReadStream[io.vertx.core.buffer.Buffer], fileName: java.lang.String) : scala.concurrent.Future[java.lang.String] = {
-      val promise = concurrent.Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
       asJava.uploadByFileName(stream, fileName, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
 
   def uploadByFileNameWithOptionsFuture(stream: io.vertx.core.streams.ReadStream[io.vertx.core.buffer.Buffer], fileName: java.lang.String, options: io.vertx.ext.mongo.GridFsUploadOptions) : scala.concurrent.Future[java.lang.String] = {
-      val promise = concurrent.Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
       asJava.uploadByFileNameWithOptions(stream, fileName, options, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -639,7 +639,7 @@ package object mongo{
      * Like uploadFile from [[io.vertx.ext.mongo.MongoGridFsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def uploadFileFuture(fileName: java.lang.String) : scala.concurrent.Future[java.lang.String] = {
-      val promise = concurrent.Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
       asJava.uploadFile(fileName, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -648,7 +648,7 @@ package object mongo{
      * Like uploadFileWithOptions from [[io.vertx.ext.mongo.MongoGridFsClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def uploadFileWithOptionsFuture(fileName: java.lang.String, options: io.vertx.ext.mongo.GridFsUploadOptions) : scala.concurrent.Future[java.lang.String] = {
-      val promise = concurrent.Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
       asJava.uploadFileWithOptions(fileName, options, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }

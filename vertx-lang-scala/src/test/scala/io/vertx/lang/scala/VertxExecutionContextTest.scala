@@ -3,14 +3,13 @@ package io.vertx.lang.scala
 import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
 import io.vertx.core.Vertx
 import io.vertx.scala.core._
-import org.junit.runner.RunWith
-import org.scalatestplus.junit.JUnitRunner
-import org.scalatest.{Assertions, AsyncFlatSpec, Matchers}
+import org.scalatest.Assertions
+import org.scalatest.flatspec.AsyncFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.{Failure, Success}
 
-@RunWith(classOf[JUnitRunner])
 class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Assertions {
 
   "Using Promise to complete a Vertx-Future" should "work with a VertxExecutionContext" in {

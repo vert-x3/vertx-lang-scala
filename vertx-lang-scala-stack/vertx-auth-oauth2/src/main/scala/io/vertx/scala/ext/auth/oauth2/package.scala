@@ -51,7 +51,7 @@ package object oauth2{
      * Like refresh from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def refreshFuture() : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.refresh(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -60,7 +60,7 @@ package object oauth2{
      * Like revoke from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def revokeFuture(token_type: java.lang.String) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.revoke(token_type, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -69,7 +69,7 @@ package object oauth2{
      * Like logout from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def logoutFuture() : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.logout(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -78,7 +78,7 @@ package object oauth2{
      * Like introspect from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def introspectFuture() : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.introspect(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -87,7 +87,7 @@ package object oauth2{
      * Like introspect from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def introspectFuture(tokenType: java.lang.String) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.introspect(tokenType, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -96,7 +96,7 @@ package object oauth2{
      * Like userInfo from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def userInfoFuture() : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]/*io.vertx.core.json.JsonObject JSON_OBJECT*/()
       asJava.userInfo(new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -105,7 +105,7 @@ package object oauth2{
      * Like fetch from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def fetchFuture(resource: java.lang.String) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.OAuth2Response] = {
-      val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.OAuth2Response]()
+      val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.OAuth2Response]/*io.vertx.ext.auth.oauth2.OAuth2Response API*/()
       asJava.fetch(resource, new Handler[AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Response]] { override def handle(event: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -114,7 +114,7 @@ package object oauth2{
      * Like fetch from [[io.vertx.ext.auth.oauth2.AccessToken]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def fetchFuture(method: io.vertx.core.http.HttpMethod, resource: java.lang.String, headers: io.vertx.core.json.JsonObject, payload: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.OAuth2Response] = {
-      val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.OAuth2Response]()
+      val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.OAuth2Response]/*io.vertx.ext.auth.oauth2.OAuth2Response API*/()
       asJava.fetch(method, resource, headers, payload, new Handler[AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Response]] { override def handle(event: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Response]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -122,6 +122,44 @@ package object oauth2{
 
   }
 
+
+
+  object AmazonCognitoAuth {
+    /**
+     * Create a OAuth2Auth provider for Amazon Cognito     * @param region the region to use
+     * @param clientId the client id given to you by Amazon Cognito
+     * @param clientSecret the client secret given to you by Amazon Cognito
+     * @param guid the guid of your application given to you by Amazon Cognito
+     */
+  def create(vertx: io.vertx.core.Vertx, region: java.lang.String, clientId: java.lang.String, clientSecret: java.lang.String, guid: java.lang.String) = {
+      io.vertx.ext.auth.oauth2.providers.AmazonCognitoAuth.create(vertx, region, clientId, clientSecret, guid)
+  }
+
+    /**
+     * Create a OAuth2Auth provider for Amazon Cognito     * @param region the region to use
+     * @param clientId the client id given to you by Amazon Cognito
+     * @param clientSecret the client secret given to you by Amazon Cognito
+     * @param userPoolId the userPoolId of your application given to you by Amazon Cognito
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
+     */
+  def create(vertx: io.vertx.core.Vertx, region: java.lang.String, clientId: java.lang.String, clientSecret: java.lang.String, userPoolId: java.lang.String, httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+      io.vertx.ext.auth.oauth2.providers.AmazonCognitoAuth.create(vertx, region, clientId, clientSecret, userPoolId, httpClientOptions)
+  }
+
+    /**
+     * Create a OAuth2Auth provider for OpenID Connect Discovery. The discovery will use the default site in the
+     * configuration options and attempt to load the well known descriptor. If a site is provided (for example when
+     * running on a custom instance) that site will be used to do the lookup.
+     * 
+     * If the discovered config includes a json web key url, it will be also fetched and the JWKs will be loaded
+     * into the OAuth provider so tokens can be decoded.     * @param vertx the vertx instance
+     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2Options.html">OAuth2Options</a>
+     * @param handler the instantiated Oauth2 provider instance handler
+     */
+  def discover(vertx: io.vertx.core.Vertx, config: io.vertx.ext.auth.oauth2.OAuth2Options, handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
+      io.vertx.ext.auth.oauth2.providers.AmazonCognitoAuth.discover(vertx, config, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth]]])
+  }
+  }
 
 
   object AzureADAuth {
@@ -351,6 +389,44 @@ package object oauth2{
      */
   def create(vertx: io.vertx.core.Vertx, clientId: java.lang.String, clientSecret: java.lang.String, httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
       io.vertx.ext.auth.oauth2.providers.HerokuAuth.create(vertx, clientId, clientSecret, httpClientOptions)
+  }
+  }
+
+
+  object IBMCloudAuth {
+    /**
+     * Create a OAuth2Auth provider for IBM Cloud     * @param region the region to use
+     * @param clientId the client id given to you by IBM Cloud
+     * @param clientSecret the client secret given to you by IBM Cloud
+     * @param guid the guid of your application given to you by IBM Cloud
+     */
+  def create(vertx: io.vertx.core.Vertx, region: java.lang.String, clientId: java.lang.String, clientSecret: java.lang.String, guid: java.lang.String) = {
+      io.vertx.ext.auth.oauth2.providers.IBMCloudAuth.create(vertx, region, clientId, clientSecret, guid)
+  }
+
+    /**
+     * Create a OAuth2Auth provider for IBM Cloud     * @param region the region to use
+     * @param clientId the client id given to you by IBM Cloud
+     * @param clientSecret the client secret given to you by IBM Cloud
+     * @param guid the guid of your application given to you by IBM Cloud
+     * @param httpClientOptions custom http client options see <a href="../../../../../../../../../cheatsheet/HttpClientOptions.html">HttpClientOptions</a>
+     */
+  def create(vertx: io.vertx.core.Vertx, region: java.lang.String, clientId: java.lang.String, clientSecret: java.lang.String, guid: java.lang.String, httpClientOptions: io.vertx.core.http.HttpClientOptions) = {
+      io.vertx.ext.auth.oauth2.providers.IBMCloudAuth.create(vertx, region, clientId, clientSecret, guid, httpClientOptions)
+  }
+
+    /**
+     * Create a OAuth2Auth provider for OpenID Connect Discovery. The discovery will use the default site in the
+     * configuration options and attempt to load the well known descriptor. If a site is provided (for example when
+     * running on a custom instance) that site will be used to do the lookup.
+     * 
+     * If the discovered config includes a json web key url, it will be also fetched and the JWKs will be loaded
+     * into the OAuth provider so tokens can be decoded.     * @param vertx the vertx instance
+     * @param config the initial config see <a href="../../../../../../../../../cheatsheet/OAuth2Options.html">OAuth2Options</a>
+     * @param handler the instantiated Oauth2 provider instance handler
+     */
+  def discover(vertx: io.vertx.core.Vertx, config: io.vertx.ext.auth.oauth2.OAuth2Options, handler: AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth] => Unit) = {
+      io.vertx.ext.auth.oauth2.providers.IBMCloudAuth.discover(vertx, config, handler.asInstanceOf[io.vertx.core.Handler[io.vertx.core.AsyncResult[io.vertx.ext.auth.oauth2.OAuth2Auth]]])
   }
   }
 
@@ -604,7 +680,7 @@ package object oauth2{
      * Like jWKSet from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def jWKSetFuture() : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.jWKSet(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -613,7 +689,7 @@ package object oauth2{
      * Like refresh from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def refreshFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[io.vertx.ext.auth.User] = {
-      val promise = concurrent.Promise[io.vertx.ext.auth.User]()
+      val promise = concurrent.Promise[io.vertx.ext.auth.User]/*io.vertx.ext.auth.User API*/()
       asJava.refresh(user, new Handler[AsyncResult[io.vertx.ext.auth.User]] { override def handle(event: AsyncResult[io.vertx.ext.auth.User]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -622,7 +698,7 @@ package object oauth2{
      * Like revoke from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def revokeFuture(user: io.vertx.ext.auth.User, tokenType: java.lang.String) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.revoke(user, tokenType, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -631,7 +707,7 @@ package object oauth2{
      * Like revoke from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def revokeFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.revoke(user, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -640,7 +716,7 @@ package object oauth2{
      * Like userInfo from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def userInfoFuture(user: io.vertx.ext.auth.User) : scala.concurrent.Future[io.vertx.core.json.JsonObject] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonObject]/*io.vertx.core.json.JsonObject JSON_OBJECT*/()
       asJava.userInfo(user, new Handler[AsyncResult[io.vertx.core.json.JsonObject]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonObject]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -649,7 +725,7 @@ package object oauth2{
      * Like decodeToken from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def decodeTokenFuture(token: java.lang.String) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
-      val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.AccessToken]()
+      val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.AccessToken]/*io.vertx.ext.auth.oauth2.AccessToken API*/()
       asJava.decodeToken(token, new Handler[AsyncResult[io.vertx.ext.auth.oauth2.AccessToken]] { override def handle(event: AsyncResult[io.vertx.ext.auth.oauth2.AccessToken]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -658,7 +734,7 @@ package object oauth2{
      * Like introspectToken from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def introspectTokenFuture(token: java.lang.String) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
-      val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.AccessToken]()
+      val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.AccessToken]/*io.vertx.ext.auth.oauth2.AccessToken API*/()
       asJava.introspectToken(token, new Handler[AsyncResult[io.vertx.ext.auth.oauth2.AccessToken]] { override def handle(event: AsyncResult[io.vertx.ext.auth.oauth2.AccessToken]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -667,7 +743,7 @@ package object oauth2{
      * Like introspectToken from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def introspectTokenFuture(token: java.lang.String, tokenType: java.lang.String) : scala.concurrent.Future[io.vertx.ext.auth.oauth2.AccessToken] = {
-      val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.AccessToken]()
+      val promise = concurrent.Promise[io.vertx.ext.auth.oauth2.AccessToken]/*io.vertx.ext.auth.oauth2.AccessToken API*/()
       asJava.introspectToken(token, tokenType, new Handler[AsyncResult[io.vertx.ext.auth.oauth2.AccessToken]] { override def handle(event: AsyncResult[io.vertx.ext.auth.oauth2.AccessToken]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -676,20 +752,12 @@ package object oauth2{
      * Like loadJWK from [[io.vertx.ext.auth.oauth2.OAuth2Auth]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def loadJWKFuture() : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.loadJWK(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
 
 
-  }
-
-
-
-  type OAuth2ClientOptions = io.vertx.ext.auth.oauth2.OAuth2ClientOptions
-  object OAuth2ClientOptions {
-    def apply() = new OAuth2ClientOptions()
-    def apply(json: JsonObject) = new OAuth2ClientOptions(json)
   }
 
 
@@ -722,7 +790,7 @@ package object oauth2{
      * Like isAuthorized from [[io.vertx.ext.auth.oauth2.OAuth2RBAC]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def isAuthorizedFuture(user: io.vertx.ext.auth.oauth2.AccessToken, authority: java.lang.String) : scala.concurrent.Future[java.lang.Boolean] = {
-      val promise = concurrent.Promise[java.lang.Boolean]()
+      val promise = concurrent.Promise[java.lang.Boolean]/*java.lang.Boolean BOXED_PRIMITIVE*/()
       asJava.isAuthorized(user, authority, new Handler[AsyncResult[java.lang.Boolean]] { override def handle(event: AsyncResult[java.lang.Boolean]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -731,6 +799,14 @@ package object oauth2{
   }
 
 
+
+
+
+  type Oauth2Credentials = io.vertx.ext.auth.oauth2.Oauth2Credentials
+  object Oauth2Credentials {
+    def apply() = new Oauth2Credentials()
+    def apply(json: JsonObject) = new Oauth2Credentials(json)
+  }
 
 
 

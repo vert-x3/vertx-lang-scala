@@ -36,54 +36,6 @@ import io.vertx.pgclient.pubsub.{PgChannel => JPgChannel}
 package object pgclient{
 
 
-  type Box = io.vertx.pgclient.data.Box
-  object Box {
-    def apply() = new Box()
-    def apply(json: JsonObject) = new Box(json)
-  }
-
-
-
-  type Circle = io.vertx.pgclient.data.Circle
-  object Circle {
-    def apply() = new Circle()
-    def apply(json: JsonObject) = new Circle(json)
-  }
-
-
-
-  type Interval = io.vertx.pgclient.data.Interval
-  object Interval {
-    def apply() = new Interval()
-    def apply(json: JsonObject) = new Interval(json)
-  }
-
-
-
-  type Line = io.vertx.pgclient.data.Line
-  object Line {
-    def apply() = new Line()
-    def apply(json: JsonObject) = new Line(json)
-  }
-
-
-
-  type LineSegment = io.vertx.pgclient.data.LineSegment
-  object LineSegment {
-    def apply() = new LineSegment()
-    def apply(json: JsonObject) = new LineSegment(json)
-  }
-
-
-
-  type Path = io.vertx.pgclient.data.Path
-  object Path {
-    def apply() = new Path()
-    def apply(json: JsonObject) = new Path(json)
-  }
-
-
-
 
   /**
     * A channel to Postgres that tracks the subscription to a given Postgres channel using the `LISTEN/UNLISTEN` commands.
@@ -120,7 +72,7 @@ package object pgclient{
   }
 
   def pipeToFuture(dst: io.vertx.core.streams.WriteStream[java.lang.String]) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.pipeTo(dst, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -158,7 +110,7 @@ package object pgclient{
      * Like cancelRequest from [[io.vertx.pgclient.PgConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def cancelRequestFuture() : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.cancelRequest(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -167,7 +119,7 @@ package object pgclient{
      * Like prepare from [[io.vertx.pgclient.PgConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def prepareFuture(sql: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.PreparedStatement] = {
-      val promise = concurrent.Promise[io.vertx.sqlclient.PreparedStatement]()
+      val promise = concurrent.Promise[io.vertx.sqlclient.PreparedStatement]/*io.vertx.sqlclient.PreparedStatement API*/()
       asJava.prepare(sql, new Handler[AsyncResult[io.vertx.sqlclient.PreparedStatement]] { override def handle(event: AsyncResult[io.vertx.sqlclient.PreparedStatement]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -267,28 +219,12 @@ package object pgclient{
      * Like connect from [[io.vertx.pgclient.pubsub.PgSubscriber]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def connectFuture() : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.connect(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
 
 
-  }
-
-
-
-  type Point = io.vertx.pgclient.data.Point
-  object Point {
-    def apply() = new Point()
-    def apply(json: JsonObject) = new Point(json)
-  }
-
-
-
-  type Polygon = io.vertx.pgclient.data.Polygon
-  object Polygon {
-    def apply() = new Polygon()
-    def apply(json: JsonObject) = new Polygon(json)
   }
 
 

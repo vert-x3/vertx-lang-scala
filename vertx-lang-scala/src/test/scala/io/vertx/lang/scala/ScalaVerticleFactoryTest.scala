@@ -6,16 +6,14 @@ import java.util.concurrent.Callable
 
 import io.vertx.core
 import io.vertx.core.{AsyncResult, Handler, Verticle, Vertx}
-import org.junit.runner.RunWith
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.time.SpanSugar._
 import org.scalatest.concurrent.ScalaFutures.whenReady
-import org.scalatestplus.junit.JUnitRunner
-import org.scalatest.{AsyncFlatSpec, Matchers}
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.flatspec.AsyncFlatSpec
 
 import scala.concurrent.Promise
 
-@RunWith(classOf[JUnitRunner])
 class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
 
   val defaultPatience = Timeout(2 seconds)

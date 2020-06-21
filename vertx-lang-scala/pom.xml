@@ -76,22 +76,36 @@
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
+
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
+      <groupId>co.helmethair</groupId>
+      <artifactId>scalatest-junit-runner</artifactId>
+      <version>0.1.5</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>5.6.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.6.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_2.13</artifactId>
-      <version>3.1.0-SNAP13</version>
+      <version>3.1.2</version>
       <scope>test</scope>
     </dependency>
+
     <dependency>
       <groupId>org.scalactic</groupId>
       <artifactId>scalactic_2.13</artifactId>
-      <version>3.1.0-SNAP13</version>
+      <version>3.2.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>

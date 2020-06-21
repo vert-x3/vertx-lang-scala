@@ -407,6 +407,14 @@ Set the accept back log.
 |[[clientAuth]]`@clientAuth`|`link:enums.html#ClientAuth[ClientAuth]`|+++
 Set whether client auth is required
 +++
+|[[clusterNodeMetadata]]`@clusterNodeMetadata`|`Json object`|+++
+Set information about this node when Vert.x is clustered.
+ <p>
+ The data may be used by the link to select a node for a given message.
+ For example, it could be used to implement a partioning strategy.
+ <p>
+ The default link does not use the node metadata.
++++
 |[[clusterPingInterval]]`@clusterPingInterval`|`Number (long)`|+++
 Set the value of cluster ping interval, in ms.
 +++
@@ -424,9 +432,6 @@ Set the public facing hostname to be used for clustering.
 +++
 |[[clusterPublicPort]]`@clusterPublicPort`|`Number (int)`|+++
 See link for an explanation.
-+++
-|[[clustered]]`@clustered`|`Boolean`|+++
-Sets whether or not the event bus is clustered.
 +++
 |[[connectTimeout]]`@connectTimeout`|`Number (int)`|+++
 Sets the connect timeout
@@ -669,6 +674,8 @@ Set the default HTTP/2 connection window size. It overrides the initial window
 Set the keep alive timeout for HTTP/2 connections, in seconds.
  <p/>
  This value determines how long a connection remains unused in the pool before being evicted and closed.
+ <p/>
+ A timeout of <code>0</code> means there is no timeout.
 +++
 |[[http2MaxPoolSize]]`@http2MaxPoolSize`|`Number (int)`|+++
 Set the maximum pool size for HTTP/2 connections
@@ -697,6 +704,8 @@ Set whether keep alive is enabled on the client
 Set the keep alive timeout for HTTP/1.x, in seconds.
  <p/>
  This value determines how long a connection remains unused in the pool before being evicted and closed.
+ <p/>
+ A timeout of <code>0</code> means there is no timeout.
 +++
 |[[localAddress]]`@localAddress`|`String`|+++
 Set the local interface to bind for network connections. When the local address is null,
@@ -833,6 +842,20 @@ Set whether the <code>server_no_context_takeover</code> parameter of the WebSock
 +++
 |===
 
+[[HttpMethod]]
+== HttpMethod
+
+++++
+ Represents an HTTP method.
+++++
+'''
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|===
+
 [[HttpServerOptions]]
 == HttpServerOptions
 
@@ -953,6 +976,12 @@ Enable or disable support for WebSocket per-message deflate compression extensio
 |[[port]]`@port`|`Number (int)`|+++
 Set the port
 +++
+|[[proxyProtocolTimeout]]`@proxyProtocolTimeout`|`Number (long)`|+++
+Set the Proxy protocol timeout, default time unit is seconds.
++++
+|[[proxyProtocolTimeoutUnit]]`@proxyProtocolTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|+++
+Set the Proxy protocol timeout unit. If not specified, default is seconds.
++++
 |[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|+++
 Set the TCP receive buffer size
 +++
@@ -1002,6 +1031,9 @@ Set the value of traffic class
 +++
 |[[useAlpn]]`@useAlpn`|`Boolean`|+++
 Set the ALPN usage.
++++
+|[[useProxyProtocol]]`@useProxyProtocol`|`Boolean`|+++
+Set whether the server uses the HA Proxy protocol
 +++
 |[[webSocketAllowServerNoContext]]`@webSocketAllowServerNoContext`|`Boolean`|+++
 Set whether the WebSocket server will accept the <code>server_no_context_takeover</code> parameter of the per-message
@@ -1053,7 +1085,7 @@ Set the WebSocket list of sub-protocol supported by the server.
  <p>
 
  <pre>
- Buffer store = vertx.fileSystem().readFileSync("/mykeystore.jks");
+ Buffer store = vertx.fileSystem().readFileBlocking("/mykeystore.jks");
  options.setKeyStore(new JKSOptions().setValue(store).setPassword("foo"));
  </pre>
 ++++
@@ -1249,6 +1281,12 @@ Set to true to enabled network activity logging: Netty's pipeline is configured 
 |[[port]]`@port`|`Number (int)`|+++
 Set the port
 +++
+|[[proxyProtocolTimeout]]`@proxyProtocolTimeout`|`Number (long)`|+++
+Set the Proxy protocol timeout, default time unit is seconds.
++++
+|[[proxyProtocolTimeoutUnit]]`@proxyProtocolTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|+++
+Set the Proxy protocol timeout unit. If not specified, default is seconds.
++++
 |[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|+++
 Set the TCP receive buffer size
 +++
@@ -1298,6 +1336,9 @@ Set the value of traffic class
 +++
 |[[useAlpn]]`@useAlpn`|`Boolean`|+++
 Set the ALPN usage.
++++
+|[[useProxyProtocol]]`@useProxyProtocol`|`Boolean`|+++
+Set whether the server uses the HA Proxy protocol
 +++
 |===
 
@@ -1512,8 +1553,8 @@ Sets whether or not this option can receive a value.
  Or directly provided as a buffer:<p>
 
  <pre>
- Buffer key = vertx.fileSystem().readFileSync("/mykey.pem");
- Buffer cert = vertx.fileSystem().readFileSync("/mycert.pem");
+ Buffer key = vertx.fileSystem().readFileBlocking("/mykey.pem");
+ Buffer cert = vertx.fileSystem().readFileBlocking("/mycert.pem");
  options.setPemKeyCertOptions(new PemKeyCertOptions().setKeyValue(key).setCertValue(cert));
  </pre>
 
@@ -1587,7 +1628,7 @@ Set all the keys as a list of buffer
  <p>
 
  <pre>
- Buffer cert = vertx.fileSystem().readFileSync("/cert.pem");
+ Buffer cert = vertx.fileSystem().readFileBlocking("/cert.pem");
  HttpServerOptions options = new HttpServerOptions();
  options.setPemTrustOptions(new PemTrustOptions().addCertValue(cert));
  </pre>
@@ -1626,7 +1667,7 @@ Add a certificate value
  Or directly provided as a buffer:<p>
 
  <pre>
- Buffer store = vertx.fileSystem().readFileSync("/mykeystore.p12");
+ Buffer store = vertx.fileSystem().readFileBlocking("/mykeystore.p12");
  options.setPfxKeyCertOptions(new PfxOptions().setValue(store).setPassword("foo"));
  </pre>
 ++++
@@ -1840,9 +1881,6 @@ Set the ALPN usage.
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[enabled]]`@enabled`|`Boolean`|+++
-Set whether tracing will be enabled on the Vert.x instance.
-+++
 |===
 
 [[VertxOptions]]
@@ -1864,31 +1902,6 @@ Sets the value of blocked thread check period, in link.
 +++
 |[[blockedThreadCheckIntervalUnit]]`@blockedThreadCheckIntervalUnit`|`link:enums.html#TimeUnit[TimeUnit]`|+++
 Set the time unit of <code>blockedThreadCheckInterval</code>.
-+++
-|[[clusterHost]]`@clusterHost`|`String`|+++
-Set the hostname to be used for clustering.
-+++
-|[[clusterPingInterval]]`@clusterPingInterval`|`Number (long)`|+++
-Set the value of cluster ping interval, in ms.
-+++
-|[[clusterPingReplyInterval]]`@clusterPingReplyInterval`|`Number (long)`|+++
-Set the value of cluster ping reply interval, in ms.
-+++
-|[[clusterPort]]`@clusterPort`|`Number (int)`|+++
-Set the port to be used for clustering.
-+++
-|[[clusterPublicHost]]`@clusterPublicHost`|`String`|+++
-Set the public facing hostname to be used for clustering.
- Sometimes, e.g. when running on certain clouds, the local address the server listens on for clustering is not the same
- address that other nodes connect to it at, as the OS / cloud infrastructure does some kind of proxying.
- If this is the case you can specify a public hostname which is different from the hostname the server listens at.
- The default value is null which means use the same as the cluster hostname.
-+++
-|[[clusterPublicPort]]`@clusterPublicPort`|`Number (int)`|+++
-See link for an explanation.
-+++
-|[[clustered]]`@clustered`|`Boolean`|+++
-Set whether or not the Vert.x instance will be clustered.
 +++
 |[[eventLoopPoolSize]]`@eventLoopPoolSize`|`Number (int)`|+++
 Set the number of event loop threads to be used by the Vert.x instance.

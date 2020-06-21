@@ -45,7 +45,7 @@ package object circuitbreaker{
      * Like executeWithFallback from [[io.vertx.circuitbreaker.CircuitBreaker]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def executeWithFallbackFuture[T](command: io.vertx.core.Promise[T] => Unit, fallback: Throwable => T) : scala.concurrent.Future[T] = {
-      val promise = concurrent.Promise[T]()
+      val promise = concurrent.Promise[T]/*T OBJECT*/()
       asJava.executeWithFallback[T](command.asInstanceOf[io.vertx.core.Handler[io.vertx.core.Promise[T]]], {x: Throwable => fallback(x)}, new Handler[AsyncResult[T]] { override def handle(event: AsyncResult[T]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -54,7 +54,7 @@ package object circuitbreaker{
      * Like execute from [[io.vertx.circuitbreaker.CircuitBreaker]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def executeFuture[T](command: io.vertx.core.Promise[T] => Unit) : scala.concurrent.Future[T] = {
-      val promise = concurrent.Promise[T]()
+      val promise = concurrent.Promise[T]/*T OBJECT*/()
       asJava.execute[T](command.asInstanceOf[io.vertx.core.Handler[io.vertx.core.Promise[T]]], new Handler[AsyncResult[T]] { override def handle(event: AsyncResult[T]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -72,6 +72,24 @@ package object circuitbreaker{
 
 
 
+  object HystrixMetricHandler {
+    /**
+     * Creates the handler, using the default notification address.     * @param vertx the Vert.x instance
+     * @return the handler
+     */
+  def create(vertx: io.vertx.core.Vertx) = {
+      io.vertx.circuitbreaker.HystrixMetricHandler.create(vertx)
+  }
+
+    /**
+     * Creates the handler.     * @param vertx the Vert.x instance
+     * @param address the address to listen on the event bus
+     * @return the handler
+     */
+  def create(vertx: io.vertx.core.Vertx, address: java.lang.String) = {
+      io.vertx.circuitbreaker.HystrixMetricHandler.create(vertx, address)
+  }
+  }
 
 
 }

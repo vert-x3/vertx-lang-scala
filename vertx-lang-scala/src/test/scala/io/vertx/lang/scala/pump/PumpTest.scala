@@ -3,15 +3,13 @@ package io.vertx.lang.scala.pump
 import java.util.ArrayList
 
 import io.vertx.core.streams.Pump
-import org.junit.runner.RunWith
-import org.scalatestplus.junit.JUnitRunner
-import org.scalatest.{FlatSpec, Matchers}
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 /**
   * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
-@RunWith(classOf[JUnitRunner])
-class PumpTest extends FlatSpec with Matchers {
+class PumpTest extends AnyFlatSpec with Matchers {
 
   "A Pump" should "be able to pump results between a ReadStream and a WriteStream" in {
     val jrs = new JavaFakeReadStream[MyClass]()

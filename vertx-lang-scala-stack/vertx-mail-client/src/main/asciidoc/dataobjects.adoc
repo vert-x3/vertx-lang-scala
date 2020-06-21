@@ -147,6 +147,9 @@ set the hostname to be used for HELO/EHLO and the Message-ID
 |[[password]]`@password`|`String`|+++
 Set the password for the login.
 +++
+|[[pipelining]]`@pipelining`|`Boolean`|+++
+Sets to enable/disable the pipelining capability if SMTP server supports it.
++++
 |[[port]]`@port`|`Number (int)`|+++
 Set the port of the smtp server.
 +++

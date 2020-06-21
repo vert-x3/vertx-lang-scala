@@ -1,12 +1,12 @@
 package io.vertx.lang.scala.codegen.gen;
 
-import io.vertx.codegen.Case;
 import io.vertx.codegen.MethodInfo;
 import io.vertx.codegen.ParamInfo;
 import io.vertx.codegen.doc.Doc;
 import io.vertx.codegen.doc.Tag;
 import io.vertx.codegen.doc.Text;
 import io.vertx.codegen.doc.Token;
+import io.vertx.codegen.format.QualifiedCase;
 import io.vertx.codegen.type.ClassKind;
 import io.vertx.codegen.type.ClassTypeInfo;
 import io.vertx.codegen.type.TypeInfo;
@@ -144,7 +144,7 @@ public class Docs {
 
   public static String renderDataObjectHtmlLink(TypeInfo type, TypeInfo dataObjectType) {
     StringBuilder link = new StringBuilder();
-    for (String name : Case.QUALIFIED.parse(type.getRaw().getPackageName())) {
+    for (String name : QualifiedCase.QUALIFIED.parse(type.getRaw().getPackageName())) {
       link.append("../");
     }
 

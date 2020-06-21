@@ -4,19 +4,17 @@ import java.util.concurrent.CountDownLatch
 
 import io.vertx.core.Vertx
 import io.vertx.scala.core._
-import org.junit.runner.RunWith
+import org.scalatest.FlatSpec
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.concurrent.Waiters.{Waiter, _}
-import org.scalatestplus.junit.JUnitRunner
+import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Span}
-import org.scalatest.{FlatSpec, Matchers}
 
 import scala.util.{Failure, Success}
 
 /**
   * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
-@RunWith(classOf[JUnitRunner])
 class VertxTest extends FlatSpec with Matchers {
 
   "Vert.x executeBlocking" should "should perform on a different thread" in {
