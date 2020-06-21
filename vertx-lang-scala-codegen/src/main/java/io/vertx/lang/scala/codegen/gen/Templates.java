@@ -88,9 +88,10 @@ public class Templates {
     });
 
     put(FUNCTION, t -> {
+      boolean paramIsVoid = ((ParameterizedTypeInfo)t).getArgs().get(0).getKind() == VOID;
       String type1 = fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0));
       String type2 = fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(1));
-      if (type1.equals("Void")) {
+      if (paramIsVoid) {
         return "() => " + type2;
       } else {
         return type1 + " => " + type2;
