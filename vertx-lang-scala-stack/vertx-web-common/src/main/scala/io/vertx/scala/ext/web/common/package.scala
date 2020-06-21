@@ -42,7 +42,7 @@ package object common{
      * Like render from [[io.vertx.ext.web.common.template.TemplateEngine]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def renderFuture(context: io.vertx.core.json.JsonObject, templateFileName: java.lang.String) : scala.concurrent.Future[io.vertx.core.buffer.Buffer] = {
-      val promise = concurrent.Promise[io.vertx.core.buffer.Buffer]()
+      val promise = concurrent.Promise[io.vertx.core.buffer.Buffer]/*io.vertx.core.buffer.Buffer API*/()
       asJava.render(context, templateFileName, new Handler[AsyncResult[io.vertx.core.buffer.Buffer]] { override def handle(event: AsyncResult[io.vertx.core.buffer.Buffer]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }

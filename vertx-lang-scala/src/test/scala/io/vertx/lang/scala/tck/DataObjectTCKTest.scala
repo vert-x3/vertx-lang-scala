@@ -3,16 +3,15 @@ package io.vertx.lang.scala.tck
 import io.vertx.codegen.testmodel.DataObjectTCKImpl
 import io.vertx.lang.scala.json.Json
 import io.vertx.scala.codegen.testmodel._
-import org.junit.runner.RunWith
-import org.scalatestplus.junit.JUnitRunner
-import org.scalatest.{FlatSpec, Matchers}
 import java.time.Instant
+
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 /**
   * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
-@RunWith(classOf[JUnitRunner])
-class DataObjectTCKTest extends FlatSpec with Matchers {
+class DataObjectTCKTest extends AnyFlatSpec with Matchers {
   val dataObjectTCK = new DataObjectTCKImpl()
 
   "testReadDataObjectWithValues" should "work" in {

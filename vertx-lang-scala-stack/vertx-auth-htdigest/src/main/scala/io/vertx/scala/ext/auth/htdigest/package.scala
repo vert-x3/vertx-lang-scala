@@ -50,4 +50,12 @@ package object htdigest{
   }
 
 
+  type HtdigestCredentials = io.vertx.ext.auth.htdigest.HtdigestCredentials
+  object HtdigestCredentials {
+    def apply() = new HtdigestCredentials()
+    def apply(json: JsonObject) = new HtdigestCredentials(json)
+  }
+
+
+
 }

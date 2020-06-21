@@ -431,8 +431,10 @@ public class Templates {
 
     String methodName = quoteIfScalaKeyword((method.getName().endsWith("Handler") ? method.getName().substring(0, method.getName().length()-7) : method.getName()) + "Future");
 
-    ret +="  def "+ methodName + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") : scala.concurrent.Future[" + fromTypeToScalaTypeString(typeOfReturnedFuture) + "] = {\n" +
-      "      val promise = concurrent.Promise[" + fromTypeToScalaTypeString(typeOfReturnedFuture)+ "]()\n" +
+    String typeToBeReturned = typeOfReturnedFuture.getKind() != API ? fromTypeToScalaTypeString(typeOfReturnedFuture) : asyncType;
+
+    ret +="  def "+ methodName + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") : scala.concurrent.Future[" + typeToBeReturned + "] = {\n" +
+      "      val promise = concurrent.Promise[" + typeToBeReturned + "]/*"+asyncType+" "+typeOfReturnedFuture.getKind()+"*/()\n" +
       "      " + invokeMethodAndUseProvidedHandler("asJava", method, "new Handler[AsyncResult[" + asyncType + "]] { override def handle(event: AsyncResult[" + asyncType + "]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(" + toScalaWithConversion("event.result()", typeOfReturnedFuture)) + "}})\n" +
       "      promise.future\n" +
       "  }\n";
@@ -485,12 +487,13 @@ public class Templates {
   /**
    * Takes care of rendering DataObjects.
    */
-  public static String renderDataobject(String className, ClassTypeInfo type, boolean concrete, boolean hasEmptyConstructor) {
-    if (concrete) {
+  public static String renderDataobject(DataObjectModel model, String className, ClassTypeInfo type) {
+    if (model.isConcrete()) {
         return "  type " +className + " = "+ getNonGenericType(type.getName()) +"\n" +
         "  object " + Helper.getSimpleName(type.getName()) + " {\n" +
-          (hasEmptyConstructor ? "    def apply() = new " + Helper.getSimpleName(type.getName()) + "()\n" : "") +
-        "    def apply(json: JsonObject) = new " + Helper.getSimpleName(type.getName()) + "(json)\n" +
+          (model.hasEmptyConstructor() ? "    def apply() = new " + Helper.getSimpleName(type.getName()) + "()\n" : "") +
+          (model.hasJsonConstructor() ? "    def apply(json: JsonObject) = new " + Helper.getSimpleName(type.getName()) + "(json)\n" : "") +
+          (model.hasStringConstructor() ? "    def apply(str: String) = new " + Helper.getSimpleName(type.getName()) + "(str)\n" : "") +
         "  }\n";
     }
     return "";
@@ -545,7 +548,7 @@ public class Templates {
    * Main entry point which renders the packagae-object.
    * It takes care of the incremental rendering part.
    */
-  public static String renderPackageObject(ClassTypeInfo type, int incrementalIndex, int incrementalSize, Set<String> imps, Boolean concrete, Boolean hasEmptyConstructor, Doc doc, List<MethodInfo> instanceMethods, List<MethodInfo> staticMethods, Collection<TypeParamInfo> typeParams) throws IOException{
+  public static String renderPackageObject(Model model, ClassTypeInfo type, int incrementalIndex, int incrementalSize, Set<String> imps, Boolean concrete, Boolean hasEmptyConstructor, Doc doc, List<MethodInfo> instanceMethods, List<MethodInfo> staticMethods, Collection<TypeParamInfo> typeParams) throws IOException{
     String nonGenericType = getNonGenericType(type.toString());
     String translatedPackage = type.getModule().translatePackageName("scala");
     String modulePackage = translatedPackage.substring(0, translatedPackage.lastIndexOf('.'));
@@ -579,13 +582,13 @@ public class Templates {
     }
 
     String body = "";
-    if(type.getDataObject() != null) {
-      body = renderDataobject(type.getSimpleName(), type, concrete, hasEmptyConstructor) + "\n";
+    if (model instanceof DataObjectModel) {
+      body = renderDataobject((DataObjectModel) model, type.getSimpleName(), type) + "\n";
     }
-    else if (!type.getName().contains("Handler") && !futureMethods.isEmpty()) {
+    else if (type.getKind() != HANDLER && !futureMethods.isEmpty()) {
       body = renderClass(type, doc, type.getSimpleName(), nullableMethods, futureMethods, basicMethods, nonGenericType, typeParams) + "\n";
     }
-    else if (!type.getName().contains("Handler") && (staticMethods != null && !staticMethods.isEmpty()) &&  !"Message".equals(type.getSimpleName())) {
+    else if (type.getKind() != HANDLER && (staticMethods != null && !staticMethods.isEmpty()) &&  !"Message".equals(type.getSimpleName())) {
       body = "  object " + type.getSimpleName() + " {\n" +
         (staticMethods.stream().map(method -> renderStaticMethod(type, method)).collect(Collectors.joining("\n"))) +
         "  }\n";

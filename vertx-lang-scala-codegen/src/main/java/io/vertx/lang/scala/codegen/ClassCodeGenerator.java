@@ -69,6 +69,7 @@ public class ClassCodeGenerator extends Generator<Model> {
     if(!ignoredPackages.contains(type.getPackageName()) && !ignoreClassname.contains(type.getSimpleName())) {
       try {
         return Templates.renderPackageObject(
+          model,
           type,
           index,
           size,

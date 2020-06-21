@@ -8,9 +8,9 @@ import io.vertx.lang.scala.json.Json
 import io.vertx.scala.codegen.testmodel.TestDataObject
 import io.vertx.scala.codegen.testmodel._
 import io.vertx.codegen.testmodel.{RefedInterface1 => JRefedInterface1}
-import org.junit.runner.RunWith
-import org.scalatestplus.junit.JUnitRunner
-import org.scalatest.{FlatSpec, Matchers, OptionValues}
+import org.scalatest.OptionValues
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
 import scala.collection.mutable
 import scala.concurrent.ExecutionContext
@@ -20,8 +20,7 @@ import scala.util.{Failure, Success}
 /**
   * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
-@RunWith(classOf[JUnitRunner])
-class NullableTCKTest extends FlatSpec with Matchers with OptionValues {
+class NullableTCKTest extends AnyFlatSpec with Matchers with OptionValues {
   implicit val execCtx = new ExecutionContext {
     override def reportFailure(cause: Throwable): Unit = ???
 

@@ -129,6 +129,8 @@ Sets the maximum frame size for connections.
  Setting this property to a negative value will result in no maximum frame size being announced at all.
 +++
 |[[port]]`@port`|`Number (int)`|-
+|[[proxyProtocolTimeout]]`@proxyProtocolTimeout`|`Number (long)`|-
+|[[proxyProtocolTimeoutUnit]]`@proxyProtocolTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|-
 |[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|-
 |[[reuseAddress]]`@reuseAddress`|`Boolean`|-
 |[[reusePort]]`@reusePort`|`Boolean`|-
@@ -145,6 +147,7 @@ Sets the maximum frame size for connections.
 |[[tcpQuickAck]]`@tcpQuickAck`|`Boolean`|-
 |[[trafficClass]]`@trafficClass`|`Number (int)`|-
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
+|[[useProxyProtocol]]`@useProxyProtocol`|`Boolean`|-
 |===
 
 [[ProtonTransportOptions]]

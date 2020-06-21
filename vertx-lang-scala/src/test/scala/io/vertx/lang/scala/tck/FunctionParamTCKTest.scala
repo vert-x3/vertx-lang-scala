@@ -6,18 +6,16 @@ import io.vertx.codegen.testmodel.{FunctionParamTCKImpl, RefedInterface1Impl, Te
 import io.vertx.lang.scala.json.Json
 import io.vertx.lang.scala.json.Json.arr
 import io.vertx.scala.codegen.testmodel.TestDataObject
-import org.junit.runner.RunWith
-import org.scalatest.{FlatSpec, Matchers}
-import org.scalatestplus.junit.JUnitRunner
-import scala.collection.JavaConverters._
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 
+import scala.collection.JavaConverters._
 import scala.collection.mutable
 
 /**
   * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
-@RunWith(classOf[JUnitRunner])
-class FunctionParamTCKTest extends FlatSpec with Matchers {
+class FunctionParamTCKTest extends AnyFlatSpec with Matchers {
   val obj = new FunctionParamTCKImpl()
   "testBasicParam" should "work" in {
     val ret = obj.methodWithBasicParam(

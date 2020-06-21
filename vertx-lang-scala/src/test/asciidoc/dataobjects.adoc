@@ -204,3 +204,17 @@
 |[[wibble]]`@wibble`|`Number (double)`|-
 |===
 
+[[TestStringDataObject]]
+== TestStringDataObject
+
+++++
+++++
+'''
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[value]]`@value`|`String`|-
+|===
+

@@ -30,49 +30,6 @@ import io.vertx.mysqlclient.{MySQLClient => JMySQLClient}
 package object mysqlclient{
 
 
-
-
-
-  type GeometryCollection = io.vertx.mysqlclient.data.spatial.GeometryCollection
-  object GeometryCollection {
-    def apply() = new GeometryCollection()
-    def apply(json: JsonObject) = new GeometryCollection(json)
-  }
-
-
-
-  type LineString = io.vertx.mysqlclient.data.spatial.LineString
-  object LineString {
-    def apply() = new LineString()
-    def apply(json: JsonObject) = new LineString(json)
-  }
-
-
-
-  type MultiLineString = io.vertx.mysqlclient.data.spatial.MultiLineString
-  object MultiLineString {
-    def apply() = new MultiLineString()
-    def apply(json: JsonObject) = new MultiLineString(json)
-  }
-
-
-
-  type MultiPoint = io.vertx.mysqlclient.data.spatial.MultiPoint
-  object MultiPoint {
-    def apply() = new MultiPoint()
-    def apply(json: JsonObject) = new MultiPoint(json)
-  }
-
-
-
-  type MultiPolygon = io.vertx.mysqlclient.data.spatial.MultiPolygon
-  object MultiPolygon {
-    def apply() = new MultiPolygon()
-    def apply(json: JsonObject) = new MultiPolygon(json)
-  }
-
-
-
   type MySQLAuthOptions = io.vertx.mysqlclient.MySQLAuthOptions
   object MySQLAuthOptions {
     def apply() = new MySQLAuthOptions()
@@ -117,7 +74,7 @@ package object mysqlclient{
      * Like prepare from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def prepareFuture(sql: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.PreparedStatement] = {
-      val promise = concurrent.Promise[io.vertx.sqlclient.PreparedStatement]()
+      val promise = concurrent.Promise[io.vertx.sqlclient.PreparedStatement]/*io.vertx.sqlclient.PreparedStatement API*/()
       asJava.prepare(sql, new Handler[AsyncResult[io.vertx.sqlclient.PreparedStatement]] { override def handle(event: AsyncResult[io.vertx.sqlclient.PreparedStatement]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -126,7 +83,7 @@ package object mysqlclient{
      * Like ping from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def pingFuture() : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.ping(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -135,7 +92,7 @@ package object mysqlclient{
      * Like specifySchema from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def specifySchemaFuture(schemaName: java.lang.String) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.specifySchema(schemaName, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -144,7 +101,7 @@ package object mysqlclient{
      * Like getInternalStatistics from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def getInternalStatisticsFuture() : scala.concurrent.Future[java.lang.String] = {
-      val promise = concurrent.Promise[java.lang.String]()
+      val promise = concurrent.Promise[java.lang.String]/*java.lang.String STRING*/()
       asJava.getInternalStatistics(new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -153,7 +110,7 @@ package object mysqlclient{
      * Like setOption from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def setOptionFuture(option: io.vertx.mysqlclient.MySQLSetOption) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.setOption(option, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -162,7 +119,7 @@ package object mysqlclient{
      * Like resetConnection from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def resetConnectionFuture() : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.resetConnection(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -171,7 +128,7 @@ package object mysqlclient{
      * Like debug from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def debugFuture() : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.debug(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -180,7 +137,7 @@ package object mysqlclient{
      * Like changeUser from [[io.vertx.mysqlclient.MySQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def changeUserFuture(options: io.vertx.mysqlclient.MySQLAuthOptions) : scala.concurrent.Future[Void] = {
-      val promise = concurrent.Promise[Void]()
+      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
       asJava.changeUser(options, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -235,22 +192,6 @@ package object mysqlclient{
       io.vertx.mysqlclient.MySQLPool.pool(vertx, connectOptions, poolOptions)
   }
   }
-
-
-  type Point = io.vertx.mysqlclient.data.spatial.Point
-  object Point {
-    def apply() = new Point()
-    def apply(json: JsonObject) = new Point(json)
-  }
-
-
-
-  type Polygon = io.vertx.mysqlclient.data.spatial.Polygon
-  object Polygon {
-    def apply() = new Polygon()
-    def apply(json: JsonObject) = new Polygon(json)
-  }
-
 
 
 }

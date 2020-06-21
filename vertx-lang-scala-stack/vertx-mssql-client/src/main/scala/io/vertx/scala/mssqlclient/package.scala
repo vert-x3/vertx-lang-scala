@@ -55,7 +55,7 @@ package object mssqlclient{
      * Like prepare from [[io.vertx.mssqlclient.MSSQLConnection]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def prepareFuture(s: java.lang.String) : scala.concurrent.Future[io.vertx.sqlclient.PreparedStatement] = {
-      val promise = concurrent.Promise[io.vertx.sqlclient.PreparedStatement]()
+      val promise = concurrent.Promise[io.vertx.sqlclient.PreparedStatement]/*io.vertx.sqlclient.PreparedStatement API*/()
       asJava.prepare(s, new Handler[AsyncResult[io.vertx.sqlclient.PreparedStatement]] { override def handle(event: AsyncResult[io.vertx.sqlclient.PreparedStatement]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }

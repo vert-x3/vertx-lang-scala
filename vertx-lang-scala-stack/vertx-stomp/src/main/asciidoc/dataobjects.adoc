@@ -183,6 +183,8 @@ Sets the maximum of subscriptions a client is allowed to register. If a client e
 |[[port]]`@port`|`Number (int)`|+++
 Sets the port on which the server is going to listen for TCP connection.
 +++
+|[[proxyProtocolTimeout]]`@proxyProtocolTimeout`|`Number (long)`|-
+|[[proxyProtocolTimeoutUnit]]`@proxyProtocolTimeoutUnit`|`link:enums.html#TimeUnit[TimeUnit]`|-
 |[[receiveBufferSize]]`@receiveBufferSize`|`Number (int)`|-
 |[[reuseAddress]]`@reuseAddress`|`Boolean`|-
 |[[reusePort]]`@reusePort`|`Boolean`|-
@@ -220,6 +222,7 @@ Sets the chunk size when replaying a transaction. To avoid blocking the event lo
  transactions are split into chunks, replayed one by one. This settings sets the chunk size.
 +++
 |[[useAlpn]]`@useAlpn`|`Boolean`|-
+|[[useProxyProtocol]]`@useProxyProtocol`|`Boolean`|-
 |[[websocketBridge]]`@websocketBridge`|`Boolean`|+++
 Enables or disables the web socket bridge.
 +++

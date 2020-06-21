@@ -114,7 +114,7 @@ package object client{
      * Like sendStream from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def sendStreamFuture(body: io.vertx.core.streams.ReadStream[io.vertx.core.buffer.Buffer]) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]/*io.vertx.ext.web.client.HttpResponse[T] API*/()
       asJava.sendStream(body, new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -123,7 +123,7 @@ package object client{
      * Like sendBuffer from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def sendBufferFuture(body: io.vertx.core.buffer.Buffer) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]/*io.vertx.ext.web.client.HttpResponse[T] API*/()
       asJava.sendBuffer(body, new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -132,7 +132,7 @@ package object client{
      * Like sendJsonObject from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def sendJsonObjectFuture(body: io.vertx.core.json.JsonObject) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]/*io.vertx.ext.web.client.HttpResponse[T] API*/()
       asJava.sendJsonObject(body, new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -141,7 +141,7 @@ package object client{
      * Like sendJson from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def sendJsonFuture(body: scala.Option[AnyRef]) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]/*io.vertx.ext.web.client.HttpResponse[T] API*/()
       asJava.sendJson(body.getOrElse(null), new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -150,7 +150,7 @@ package object client{
      * Like sendForm from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def sendFormFuture(body: io.vertx.core.MultiMap) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]/*io.vertx.ext.web.client.HttpResponse[T] API*/()
       asJava.sendForm(body, new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -159,7 +159,7 @@ package object client{
      * Like sendMultipartForm from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def sendMultipartFormFuture(body: io.vertx.ext.web.multipart.MultipartForm) : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]/*io.vertx.ext.web.client.HttpResponse[T] API*/()
       asJava.sendMultipartForm(body, new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -168,7 +168,7 @@ package object client{
      * Like send from [[io.vertx.ext.web.client.HttpRequest]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def sendFuture() : scala.concurrent.Future[io.vertx.ext.web.client.HttpResponse[T]] = {
-      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]()
+      val promise = concurrent.Promise[io.vertx.ext.web.client.HttpResponse[T]]/*io.vertx.ext.web.client.HttpResponse[T] API*/()
       asJava.send(new Handler[AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]] { override def handle(event: AsyncResult[io.vertx.ext.web.client.HttpResponse[T]]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }

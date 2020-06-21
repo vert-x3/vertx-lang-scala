@@ -46,13 +46,13 @@ package object jdbc{
 
 
   def querySingleFuture(sql: java.lang.String) : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonArray]/*io.vertx.core.json.JsonArray JSON_ARRAY*/()
       asJava.querySingle(sql, new Handler[AsyncResult[io.vertx.core.json.JsonArray]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
 
   def querySingleWithParamsFuture(sql: java.lang.String, arguments: io.vertx.core.json.JsonArray) : scala.concurrent.Future[io.vertx.core.json.JsonArray] = {
-      val promise = concurrent.Promise[io.vertx.core.json.JsonArray]()
+      val promise = concurrent.Promise[io.vertx.core.json.JsonArray]/*io.vertx.core.json.JsonArray JSON_ARRAY*/()
       asJava.querySingleWithParams(sql, arguments, new Handler[AsyncResult[io.vertx.core.json.JsonArray]] { override def handle(event: AsyncResult[io.vertx.core.json.JsonArray]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }

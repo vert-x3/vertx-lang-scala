@@ -83,7 +83,7 @@ package object mail{
      * Like sendMail from [[io.vertx.ext.mail.MailClient]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
   def sendMailFuture(email: io.vertx.ext.mail.MailMessage) : scala.concurrent.Future[io.vertx.ext.mail.MailResult] = {
-      val promise = concurrent.Promise[io.vertx.ext.mail.MailResult]()
+      val promise = concurrent.Promise[io.vertx.ext.mail.MailResult]/*io.vertx.ext.mail.MailResult OTHER*/()
       asJava.sendMail(email, new Handler[AsyncResult[io.vertx.ext.mail.MailResult]] { override def handle(event: AsyncResult[io.vertx.ext.mail.MailResult]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
       promise.future
   }
@@ -97,6 +97,7 @@ package object mail{
   object MailConfig {
     def apply() = new MailConfig()
     def apply(json: JsonObject) = new MailConfig(json)
+    def apply(str: String) = new MailConfig(str)
   }
 
 

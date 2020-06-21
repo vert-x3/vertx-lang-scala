@@ -2,19 +2,16 @@ package io.vertx.lang.scala.verticle
 
 import io.vertx.scala.core._
 import io.vertx.core.Vertx
-import org.junit.runner.RunWith
-import org.scalatestplus.junit.JUnitRunner
-import org.scalatest.{AsyncFlatSpec, Matchers}
 import io.vertx.lang.scala.ScalaVerticle._
 import io.vertx.lang.scala.{ScalaVerticle, VertxExecutionContext}
 import org.scalatest.concurrent.ScalaFutures
-import org.scalatest.concurrent.ScalaFutures.whenReady
+import org.scalatest.flatspec.AsyncFlatSpec
+import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Seconds, Span}
 
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success}
 
-@RunWith(classOf[JUnitRunner])
 class ScalaVerticleTest extends AsyncFlatSpec with Matchers with ScalaFutures{
 
   implicit val defaultPatience =
