@@ -207,7 +207,7 @@ public class Templates {
     return toJavaString.get(type.getKind()).apply(type);
   }
 
-  public static String convertToOptionIfNullable(boolean nullable, String expression) {
+  public static String makeTypeOptionIfNullable(boolean nullable, String expression) {
     if (nullable) {
       return "scala.Option[" + expression + "]";
     }
@@ -220,7 +220,7 @@ public class Templates {
    * @param expression
    * @return
    */
-  public static String convertExpressionToOptionIfNullable(boolean nullable, String expression) {
+  public static String convertToOptionIfNullable(boolean nullable, String expression) {
     if (nullable) {
       return "scala.Option(" + expression + ")";
     }
@@ -406,7 +406,7 @@ public class Templates {
     String ret = renderMethodDocs(type, method, false);
 
     List<ParamInfo> params = method.getParams();
-    String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
+    String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + makeTypeOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
 
     ret += "  def "+ quoteIfScalaKeyword(method.getName()) + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
       "      " + invokeMethodWithoutConvertingReturn("asJava", method) + "\n" +
@@ -425,10 +425,10 @@ public class Templates {
 
     List<ParamInfo> params = method.getParams();
     params = params.subList(0, params.size() - 1);
-    String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
+    String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + makeTypeOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
 
     TypeInfo typeOfReturnedFuture = ((ParameterizedTypeInfo)((ParameterizedTypeInfo)method.getParam(method.getParams().size()-1).getType()).getArg(0)).getArg(0);
-    String asyncType = typeOfReturnedFuture.getName().replace('<', '[').replace('>', ']');
+    String asyncType = convertToScalaGenericsNotation(typeOfReturnedFuture.getName());
 
     String methodName = quoteIfScalaKeyword((method.getName().endsWith("Handler") ? method.getName().substring(0, method.getName().length()-7) : method.getName()) + "Future");
 
@@ -452,7 +452,7 @@ public class Templates {
     String ret = renderMethodDocs(type, method, method.getReturnType().isNullable());
 
     List<ParamInfo> params = method.getParams();
-    String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
+    String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + makeTypeOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
 
     String option = method.getReturnType().isNullable() ? "Option" : "";
 
@@ -475,12 +475,12 @@ public class Templates {
     String ret = renderMethodDocs(type, method, method.getReturnType().isNullable());
 
     List<ParamInfo> params = method.getParams();
-    String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + convertToOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
+    String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + makeTypeOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
 
     String option = method.getReturnType().isNullable() ? "Option" : "";
 
     ret +="  def "+ quoteIfScalaKeyword(method.getName())+ option + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
-      "      " + convertExpressionToOptionIfNullable(method.getReturnType().isNullable(), invokeMethodWithoutConvertingReturn("asJava", method)) + "\n" +
+      "      " + convertToOptionIfNullable(method.getReturnType().isNullable(), invokeMethodWithoutConvertingReturn("asJava", method)) + "\n" +
       "  }\n";
     return ret;
   }
