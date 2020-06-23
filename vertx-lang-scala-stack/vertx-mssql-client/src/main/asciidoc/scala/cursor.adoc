@@ -1,0 +1,81 @@
+== Cursors and streaming
+
+By default prepared query execution fetches all rows, you can use a
+`link:../../scaladocs/io/vertx/scala/sqlclient/Cursor.html[Cursor]` to control the amount of rows you want to read:
+
+[source,scala]
+----
+connection.prepareFuture("SELECT * FROM users WHERE age > @p1").onComplete{
+  case Success(result) => {
+    var pq = result
+
+    // Create a cursor
+    var cursor = pq.cursor(Tuple.of(18))
+
+    // Read 50 rows
+    cursor.readFuture(50).onComplete{
+      case Success(result) => {
+        var rows = result
+
+        // Check for more ?
+        if (cursor.hasMore()) {
+          // Repeat the process...
+        } else {
+          // No more rows - close the cursor
+          cursor.close()
+        }
+      }
+      case Failure(cause) => println("Failure")
+    }
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+Cursors shall be closed when they are released prematurely:
+
+[source,scala]
+----
+cursor.readFuture(50).onComplete{
+  case Success(result) => {
+    // Close the cursor
+    cursor.close()
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+A stream API is also available for cursors, which can be more convenient, specially with the Rxified version.
+
+[source,scala]
+----
+connection.prepareFuture("SELECT * FROM users WHERE age > @p1").onComplete{
+  case Success(result) => {
+    var pq = result
+
+    // Fetch 50 rows at a time
+    var stream = pq.createStream(50, Tuple.of(18))
+
+    // Use the stream
+    stream.exceptionHandler((err: java.lang.Throwable) => {
+      println(s"Error: ${err.getMessage()}")
+    })
+    stream.endHandler((v: java.lang.Void) => {
+      println("End of stream")
+    })
+    stream.handler((row: io.vertx.scala.sqlclient.Row) => {
+      println(s"User: ${row.getString("last_name")}")
+    })
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+The stream read the rows by batch of `50` and stream them, when the rows have been passed to the handler,
+a new batch of `50` is read and so on.
+
+The stream can be resumed or paused, the loaded rows will remain in memory until they are delivered and the cursor
+will stop iterating.

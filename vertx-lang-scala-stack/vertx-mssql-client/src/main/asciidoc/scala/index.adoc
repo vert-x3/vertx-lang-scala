@@ -1,0 +1,284 @@
+= Reactive MSSQL Client
+
+The Reactive MSSQL Client is a client for Microsoft SQL Server with a straightforward API focusing on
+scalability and low overhead.
+
+*Features*
+
+* Event driven
+* Lightweight
+* Built-in connection pooling
+* Direct memory to object without unnecessary copies
+* Java 8 Date and Time
+
+== Usage
+
+To use the Reactive MSSQL Client add the following dependency to the _dependencies_ section of your build descriptor:
+
+* Maven (in your `pom.xml`):
+
+[source,xml]
+----
+<dependency>
+ <groupId>${maven.groupId}</groupId>
+ <artifactId>${maven.artifactId}</artifactId>
+ <version>${maven.version}</version>
+</dependency>
+----
+* Gradle (in your `build.gradle` file):
+
+[source,groovy]
+----
+dependencies {
+ compile '${maven.groupId}:${maven.artifactId}:${maven.version}'
+}
+----
+
+== Getting started
+
+Here is the simplest way to connect, query and disconnect
+
+[source,scala]
+----
+
+// Connect options
+var connectOptions = MSSQLConnectOptions()
+  .setPort(1433)
+  .setHost("the-host")
+  .setDatabase("the-db")
+  .setUser("user")
+  .setPassword("secret")
+
+
+// Pool options
+var poolOptions = PoolOptions()
+  .setMaxSize(5)
+
+
+// Create the client pool
+var client = MSSQLPool.pool(connectOptions, poolOptions)
+
+// A simple query
+client.query("SELECT * FROM users WHERE id='julien'").executeFuture().onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+== Connecting to SQL Server
+
+Most of the time you will use a pool to connect to MSSQL:
+
+[source,scala]
+----
+
+// Connect options
+var connectOptions = MSSQLConnectOptions()
+  .setPort(1433)
+  .setHost("the-host")
+  .setDatabase("the-db")
+  .setUser("user")
+  .setPassword("secret")
+
+
+// Pool options
+var poolOptions = PoolOptions()
+  .setMaxSize(5)
+
+
+// Create the pooled client
+var client = MSSQLPool.pool(connectOptions, poolOptions)
+
+----
+
+The pooled client uses a connection pool and any operation will borrow a connection from the pool
+to execute the operation and release it to the pool.
+
+If you are running with Vert.x you can pass it your Vertx instance:
+
+[source,scala]
+----
+
+// Connect options
+var connectOptions = MSSQLConnectOptions()
+  .setPort(1433)
+  .setHost("the-host")
+  .setDatabase("the-db")
+  .setUser("user")
+  .setPassword("secret")
+
+
+// Pool options
+var poolOptions = PoolOptions()
+  .setMaxSize(5)
+
+// Create the pooled client
+var client = MSSQLPool.pool(vertx, connectOptions, poolOptions)
+
+----
+
+You need to release the pool when you don't need it anymore:
+
+[source,scala]
+----
+
+// Close the pool and all the associated resources
+pool.close()
+
+----
+
+When you need to execute several operations on the same connection, you need to use a client
+`link:../../scaladocs/io/vertx/scala/mssqlclient/MSSQLConnection.html[connection]`.
+
+You can easily get one from the pool:
+
+[source,scala]
+----
+
+// Connect options
+var connectOptions = MSSQLConnectOptions()
+  .setPort(1433)
+  .setHost("the-host")
+  .setDatabase("the-db")
+  .setUser("user")
+  .setPassword("secret")
+
+
+// Pool options
+var poolOptions = PoolOptions()
+  .setMaxSize(5)
+
+
+// Create the pooled client
+var client = MSSQLPool.pool(vertx, connectOptions, poolOptions)
+
+// Get a connection from the pool
+client.getConnection().compose((conn: io.vertx.scala.sqlclient.SqlConnection) => {
+  println("Got a connection from the pool")
+
+  // All operations execute on the same connection
+  conn.query("SELECT * FROM users WHERE id='julien'").execute().compose((res: io.vertx.scala.sqlclient.RowSet<io.vertx.scala.sqlclient.Row>) => {
+    conn.query("SELECT * FROM users WHERE id='emad'").execute()
+  }).onCompleteFuture().onComplete{
+    case Success(result) => println("Success")
+    case Failure(cause) => println("Failure")
+  }
+}).onCompleteFuture().onComplete{
+  case Success(result) => {
+
+    println("Done")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+Once you are done with the connection you must close it to release it to the pool, so it can be reused.
+
+== Configuration
+
+=== Data Object
+
+A simple way to configure the client is to specify a `MSSQLConnectOptions` data object.
+
+[source,scala]
+----
+
+// Data object
+var connectOptions = MSSQLConnectOptions()
+  .setPort(1433)
+  .setHost("the-host")
+  .setDatabase("the-db")
+  .setUser("user")
+  .setPassword("secret")
+
+
+// Pool Options
+var poolOptions = PoolOptions()
+  .setMaxSize(5)
+
+
+// Create the pool from the data object
+var pool = MSSQLPool.pool(vertx, connectOptions, poolOptions)
+
+pool.getConnectionFuture().onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+include::queries.adoc[]
+
+== DATATYPE support
+
+Currently the client supports the following SQL Server types
+
+* TINYINT(`java.lang.Short`)
+* SMALLINT(`java.lang.Short`)
+* INT(`java.lang.Integer`)
+* BIGINT(`java.lang.Long`)
+* BIT(`java.lang.Boolean`)
+* REAL(`java.lang.Float`)
+* DOUBLE(`java.lang.Double`)
+* CHAR(`java.lang.String`)
+* VARCHAR(`java.lang.String`)
+* DATE(`java.time.LocalDate`)
+* TIME(`java.time.LocalTime`)
+
+Tuple decoding uses the above types when storing values
+
+=== Handling ENUM
+
+SQL Server does not have ENUM data type but the client can map the retrieved string/numeric data type to enum.
+
+You can encode Java enums as String like this:
+
+[source,scala]
+----
+client.preparedQuery("INSERT INTO colors VALUES (@p1)").executeFuture(Tuple.of(Color.red)).onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+You can retrieve the ENUM column as Java enums like this:
+
+[source,scala]
+----
+client.preparedQuery("SELECT color FROM colors").execute().onCompleteFuture().onComplete{
+  case Success(result) => {
+    var rows = result
+    rows.foreach(row => {
+      println(row.get(Color.class, "color"))
+    })
+
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+== Collector queries
+
+You can use Java collectors with the query API:
+
+[source,scala]
+----
+Code not translatable
+----
+
+The collector processing must not keep a reference on the `link:../../scaladocs/io/vertx/scala/sqlclient/Row.html[Row]` as
+there is a single row used for processing the entire set.
+
+The Java `Collectors` provides many interesting predefined collectors, for example you can
+create easily create a string directly from the row set:
+
+[source,scala]
+----
+Code not translatable
+----

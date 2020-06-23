@@ -1,0 +1,1148 @@
+= Vert.x MongoDB Client
+
+A Vert.x client allowing applications to interact with a MongoDB instance, whether that's
+saving, retrieving, searching, or deleting documents. Mongo is a great match for persisting data in a Vert.x application
+as it natively handles JSON (BSON) documents.
+
+*Features*
+
+* Completely non-blocking
+* Custom codec to support fast serialization to/from Vert.x JSON
+* Supports a majority of the configuration options from the MongoDB Java Driver
+
+This client is based on the
+http://mongodb.github.io/mongo-java-driver/3.2/driver-async/getting-started[MongoDB Async Driver].
+
+== Using Vert.x MongoDB Client
+
+To use this project, add the following dependency to the _dependencies_ section of your build descriptor:
+
+* Maven (in your `pom.xml`):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+ <groupId>io.vertx</groupId>
+ <artifactId>vertx-mongo-client</artifactId>
+ <version>${maven.version}</version>
+</dependency>
+----
+
+* Gradle (in your `build.gradle` file):
+
+[source,groovy,subs="+attributes"]
+----
+compile 'io.vertx:vertx-mongo-client:${maven.version}'
+----
+
+
+== Creating a client
+
+You can create a client in several ways:
+
+=== Using the default shared pool
+
+In most cases you will want to share a pool between different client instances.
+
+E.g. you scale your application by deploying multiple instances of your verticle and you want each verticle instance
+to share the same pool so you don't end up with multiple pools
+
+The simplest way to do this is as follows:
+
+[source,scala]
+----
+var client = MongoClient.createShared(vertx, config)
+
+----
+
+The first call to `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createShared(io.vertx.core.Vertx)[MongoClient.createShared]`
+will actually create the pool, and the specified config will be used.
+
+Subsequent calls will return a new client instance that uses the same pool, so the configuration won't be used.
+
+=== Specifying a pool source name
+
+You can create a client specifying a pool source name as follows
+
+[source,scala]
+----
+var client = MongoClient.createShared(vertx, config, "MyPoolName")
+
+----
+
+If different clients are created using the same Vert.x instance and specifying the same pool name, they will
+share the same pool.
+
+The first call to `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createShared(io.vertx.core.Vertx)[MongoClient.createShared]`
+will actually create the pool, and the specified config will be used.
+
+Subsequent calls will return a new client instance that uses the same pool, so the configuration won't be used.
+
+Use this way of creating if you wish different groups of clients to have different pools, e.g. they're
+interacting with different databases.
+
+=== Creating a client with a non shared data pool
+
+In most cases you will want to share a pool between different client instances.
+However, it's possible you want to create a client instance that doesn't share its pool with any other client.
+
+In that case you can use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#create(io.vertx.core.Vertx)[MongoClient.create]`.
+
+[source,scala]
+----
+var client = MongoClient.create(vertx, config)
+
+----
+
+This is equivalent to calling `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createShared(io.vertx.core.Vertx,%20io.vertx.core.json.JsonObject)[MongoClient.createShared]`
+with a unique pool name each time.
+
+
+== Using the API
+
+The client API is represented by `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html[MongoClient]`.
+
+=== Saving documents
+
+To save a document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#save(java.lang.String,%20io.vertx.core.json.JsonObject)[save]`.
+
+If the document has no `\_id` field, it is inserted, otherwise, it is __upserted__.
+Upserted means it is inserted if it doesn't already exist, otherwise it is updated.
+
+If the document is inserted and has no id, then the id field generated will be returned to the result handler.
+
+Here's an example of saving a document and getting the id back
+
+[source,scala]
+----
+// Document has no id
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
+mongoClient.saveFuture("books", document).onComplete{
+  case Success(result) => {
+    var id = result
+    println(s"Saved book with id ${id}")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+And here's an example of saving a document which already has an id.
+
+[source,scala]
+----
+// Document has an id already
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("_id", "123244")
+mongoClient.saveFuture("books", document).onComplete{
+  case Success(result) => {
+    // ...
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Inserting documents
+
+To insert a document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#insert(java.lang.String,%20io.vertx.core.json.JsonObject)[insert]`.
+
+If the document is inserted and has no id, then the id field generated will be returned to the result handler.
+
+[source,scala]
+----
+// Document has an id already
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
+mongoClient.insertFuture("books", document).onComplete{
+  case Success(result) => {
+    var id = result
+    println(s"Inserted book with id ${id}")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+If a document is inserted with an id, and a document with that id already exists, the insert will fail:
+
+[source,scala]
+----
+// Document has an id already
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("_id", "123244")
+mongoClient.insertFuture("books", document).onComplete{
+  case Success(result) => {
+    //...
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Updating documents
+
+To update a documents you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#updateCollection(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject)[updateCollection]`.
+
+This updates one or multiple documents in a collection.
+The json object that is passed in the `updateCollection` parameter must contain
+http://docs.mongodb.org/manual/reference/operator/update-field/[Update Operators]
+and determines how the object is updated.
+
+The json object specified in the query parameter determines which documents in the collection will be updated.
+
+Here's an example of updating a document in the books collection:
+
+[source,scala]
+----
+// Match any documents with title=The Hobbit
+var query = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
+// Set the author field
+var update = new io.vertx.core.json.JsonObject().put("$set", new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien"))
+mongoClient.updateCollectionFuture("books", query, update).onComplete{
+  case Success(result) => {
+    println("Book updated !")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+To specify if the update should upsert or update multiple documents, use
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#updateCollectionWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.UpdateOptions)[updateCollectionWithOptions]`
+and pass in an instance of `link:../dataobjects.html#UpdateOptions[UpdateOptions]`.
+
+This has the following fields:
+
+`multi`:: set to true to update multiple documents
+`upsert`:: set to true to insert the document if the query doesn't match
+`writeConcern`:: the write concern for this operation
+
+[source,scala]
+----
+// Match any documents with title=The Hobbit
+var query = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
+// Set the author field
+var update = new io.vertx.core.json.JsonObject().put("$set", new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien"))
+var options = UpdateOptions()
+  .setMulti(true)
+
+mongoClient.updateCollectionWithOptionsFuture("books", query, update, options).onComplete{
+  case Success(result) => {
+    println("Book updated !")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Replacing documents
+
+To replace documents you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#replaceDocuments(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject)[replaceDocuments]`.
+
+This is similar to the update operation, however it does not take any operator.
+Instead it replaces the entire document with the one provided.
+
+Here's an example of replacing a document in the books collection
+
+[source,scala]
+----
+var query = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
+var replace = new io.vertx.core.json.JsonObject().put("title", "The Lord of the Rings").put("author", "J. R. R. Tolkien")
+mongoClient.replaceDocumentsFuture("books", query, replace).onComplete{
+  case Success(result) => {
+    println("Book replaced !")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Bulk operations
+
+To execute multiple insert, update, replace, or delete operations at once, use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#bulkWrite(java.lang.String,%20java.util.List)[bulkWrite]`.
+
+You can pass a list of `link:../dataobjects.html#BulkOperation[BulkOperations]`, with each working similar to the matching single operation.
+You can pass as many operations, even of the same type, as you wish.
+
+To specify if the bulk operation should be executed in order, and with what write option, use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#bulkWriteWithOptions(java.lang.String,%20java.util.List,%20io.vertx.ext.mongo.BulkWriteOptions)[bulkWriteWithOptions]`
+and pass an instance of `link:../dataobjects.html#BulkWriteOptions[BulkWriteOptions]`.
+For more explanation what ordered means, see
+https://docs.mongodb.com/manual/reference/method/db.collection.bulkWrite/#execution-of-operations[Execution of Operations].
+
+=== Finding documents
+
+To find documents you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject)[find]`.
+
+The `query` parameter is used to match the documents in the collection.
+
+Here's a simple example with an empty query that will match all books:
+
+[source,scala]
+----
+// empty query = match any
+var query = new io.vertx.core.json.JsonObject()
+mongoClient.findFuture("books", query).onComplete{
+  case Success(result) => {
+    result.foreach(json => {
+      println(json.encode())
+    })
+
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+Here's another example that will match all books by Tolkien:
+
+[source,scala]
+----
+// will match all Tolkien books
+var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
+mongoClient.findFuture("books", query).onComplete{
+  case Success(result) => {
+    result.foreach(json => {
+      println(json.encode())
+    })
+
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+The matching documents are returned as a list of json objects in the result handler.
+
+To specify things like what fields to return, how many results to return, etc use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.FindOptions)[findWithOptions]`
+and pass in the an instance of `link:../dataobjects.html#FindOptions[FindOptions]`.
+
+This has the following fields:
+
+`fields`:: The fields to return in the results. Defaults to `null`, meaning all fields will be returned
+`sort`:: The fields to sort by. Defaults to `null`.
+`limit`:: The limit of the number of results to return. Default to `-1`, meaning all results will be returned.
+`skip`:: The number of documents to skip before returning the results. Defaults to `0`.
+
+=== Finding documents in batches
+
+When dealing with large data sets, it is not advised to use the
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject)[find]` and
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findWithOptions(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.ext.mongo.FindOptions)[findWithOptions]` methods.
+In order to avoid inflating the whole response into memory, use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findBatch(java.lang.String)[findBatch]`:
+
+[source,scala]
+----
+// will match all Tolkien books
+var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
+mongoClient.findBatch("book", query).exceptionHandler((throwable: java.lang.Throwable) => {
+  throwable.printStackTrace()
+}).endHandler((v: java.lang.Void) => {
+  println("End of research")
+}).handler((doc: io.vertx.scala.core.json.JsonObject) => {
+  println(s"Found doc: ${doc.encode()}")
+})
+
+----
+
+The matching documents are emitted one by one by the `link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` handler.
+
+`link:../dataobjects.html#FindOptions[FindOptions]` has an extra parameter `batchSize` which you can use to set the number of documents to load at once:
+
+[source,scala]
+----
+// will match all Tolkien books
+var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
+var options = FindOptions()
+  .setBatchSize(100)
+
+mongoClient.findBatchWithOptions("book", query, options).exceptionHandler((throwable: java.lang.Throwable) => {
+  throwable.printStackTrace()
+}).endHandler((v: java.lang.Void) => {
+  println("End of research")
+}).handler((doc: io.vertx.scala.core.json.JsonObject) => {
+  println(s"Found doc: ${doc.encode()}")
+})
+
+----
+
+By default, `batchSize` is set to 20.
+
+=== Finding a single document
+
+To find a single document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#findOne(java.lang.String,%20io.vertx.core.json.JsonObject,%20io.vertx.core.json.JsonObject)[findOne]`.
+
+This works just like `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#find(java.lang.String,%20io.vertx.core.json.JsonObject)[find]` but it returns just the first matching document.
+
+=== Removing documents
+
+To remove documents use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#removeDocuments(java.lang.String,%20io.vertx.core.json.JsonObject)[removeDocuments]`.
+
+The `query` parameter is used to match the documents in the collection to determine which ones to remove.
+
+Here's an example of removing all Tolkien books:
+
+[source,scala]
+----
+var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
+mongoClient.removeDocumentsFuture("books", query).onComplete{
+  case Success(result) => {
+    println("Never much liked Tolkien stuff!")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Removing a single document
+
+To remove a single document you use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#removeDocument(java.lang.String,%20io.vertx.core.json.JsonObject)[removeDocument]`.
+
+This works just like `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#removeDocuments(java.lang.String,%20io.vertx.core.json.JsonObject)[removeDocuments]` but it removes just the first matching document.
+
+=== Counting documents
+
+To count documents use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#count(java.lang.String,%20io.vertx.core.json.JsonObject)[count]`.
+
+Here's an example that counts the number of Tolkien books. The number is passed to the result handler.
+
+[source,scala]
+----
+var query = new io.vertx.core.json.JsonObject().put("author", "J. R. R. Tolkien")
+mongoClient.countFuture("books", query).onComplete{
+  case Success(result) => {
+    var num = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Managing MongoDB collections
+
+All MongoDB documents are stored in collections.
+
+To get a list of all collections you can use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#getCollections()[getCollections]`
+
+[source,scala]
+----
+mongoClient.getCollectionsFuture().onComplete{
+  case Success(result) => {
+    var collections = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+To create a new collection you can use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createCollection(java.lang.String)[createCollection]`
+
+[source,scala]
+----
+mongoClient.createCollectionFuture("mynewcollectionr").onComplete{
+  case Success(result) => {
+    // Created ok!
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+To drop a collection you can use `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#dropCollection(java.lang.String)[dropCollection]`
+
+NOTE: Dropping a collection will delete all documents within it!
+
+[source,scala]
+----
+mongoClient.dropCollectionFuture("mynewcollectionr").onComplete{
+  case Success(result) => {
+    // Dropped ok!
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Running other MongoDB commands
+
+You can run arbitrary MongoDB commands with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#runCommand(java.lang.String,%20io.vertx.core.json.JsonObject)[runCommand]`.
+
+Commands can be used to run more advanced MongoDB features, such as using MapReduce.
+For more information see the mongo docs for supported http://docs.mongodb.org/manual/reference/command[Commands].
+
+Here's an example of running an aggregate command. Note that the command name must be specified as a parameter
+and also be contained in the JSON that represents the command. This is because JSON is not ordered but BSON is
+ordered and MongoDB expects the first BSON entry to be the name of the command. In order for us to know which
+of the entries in the JSON is the command name it must be specified as a parameter.
+
+[source,scala]
+----
+var command = new io.vertx.core.json.JsonObject().put("aggregate", "collection_name").put("pipeline", new io.vertx.core.json.JsonArray())
+mongoClient.runCommandFuture("aggregate", command).onComplete{
+  case Success(result) => {
+    var resArr = result.getValue("result")
+    // etc
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== MongoDB Extended JSON support
+
+For now, only `date`, `oid` and `binary` types are supported
+(see http://docs.mongodb.org/manual/reference/mongodb-extended-json[MongoDB Extended JSON]).
+
+Here's an example of inserting a document with a `date` field:
+
+[source,scala]
+----
+Code not translatable
+----
+
+Here's an example (in Java) of inserting a document with a binary field and reading it back
+
+[source,scala]
+----
+Code not translatable
+----
+
+Here's an example of inserting a base 64 encoded string, typing it as binary a binary field, and reading it back
+
+[source,scala]
+----
+Code not translatable
+----
+Here's an example of inserting an object ID and reading it back
+
+[source,scala]
+----
+Code not translatable
+----
+
+=== Getting distinct values
+
+Here's an example of getting distinct value
+
+[source,scala]
+----
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
+mongoClient.save("books", document).compose((v: java.lang.String) => {
+  mongoClient.distinct("books", "title", java.lang.String.class.getName())
+}).onCompleteFuture().onComplete{
+  case Success(result) => {
+    println(s"Title is : ${result.getValue(0)}")
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+Here's an example of getting distinct value in batch mode
+
+[source,scala]
+----
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit")
+mongoClient.saveFuture("books", document).onComplete{
+  case Success(result) => {
+    mongoClient.distinctBatch("books", "title", java.lang.String.class.getName()).handler((book: io.vertx.scala.core.json.JsonObject) => {
+      println(s"Title is : ${book.getValue("title")}")
+    })
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+* Here's an example of getting distinct value with query
+
+[source,scala]
+----
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("publicationDate", new io.vertx.core.json.JsonObject().put("$date", "1937-09-21T00:00:00+00:00"))
+var query = new io.vertx.core.json.JsonObject().put("publicationDate", new io.vertx.core.json.JsonObject().put("$gte", new io.vertx.core.json.JsonObject().put("$date", "1937-09-21T00:00:00+00:00")))
+mongoClient.save("books", document).compose((v: java.lang.String) => {
+  mongoClient.distinctWithQuery("books", "title", java.lang.String.class.getName(), query)
+}).onCompleteFuture().onComplete{
+  case Success(result) => {
+    println(s"Title is : ${result.getValue(0)}")
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+Here's an example of getting distinct value in batch mode with query
+
+[source,scala]
+----
+var document = new io.vertx.core.json.JsonObject().put("title", "The Hobbit").put("publicationDate", new io.vertx.core.json.JsonObject().put("$date", "1937-09-21T00:00:00+00:00"))
+var query = new io.vertx.core.json.JsonObject().put("publicationDate", new io.vertx.core.json.JsonObject().put("$gte", new io.vertx.core.json.JsonObject().put("$date", "1937-09-21T00:00:00+00:00")))
+mongoClient.saveFuture("books", document).onComplete{
+  case Success(result) => {
+    mongoClient.distinctBatchWithQuery("books", "title", java.lang.String.class.getName(), query).handler((book: io.vertx.scala.core.json.JsonObject) => {
+      println(s"Title is : ${book.getValue("title")}")
+    })
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+== Storing/Retrieving files and binary data
+
+The client can store and retrieve files and binary data using MongoDB GridFS. The
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html[MongoGridFsClient]` can be used to upload or download files
+and streams to GridFS.
+
+=== Get the MongoGridFsClient to interact with GridFS.
+
+The `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html[MongoGridFsClient]` is created by calling
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createGridFsBucketService(java.lang.String)[createGridFsBucketService]` and providing a bucket name. In GridFS, the bucket name
+ends up being a collection that contains references to all of the objects that are stored.
+You can segregate objects into distinct buckets by providing a unique name.
+
+This has the following fields:
+
+`bucketName` : The name of the bucket to create
+
+Here's an example of getting a `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html[MongoGridFsClient]` with the a custom bucket
+name
+
+[source,scala]
+----
+mongoClient.createGridFsBucketServiceFuture("bakeke").onComplete{
+  case Success(result) => {
+    //Interact with the GridFS client...
+    var client = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+GridFS uses a default bucket named "fs". If you prefer to get the default bucket instead of naming your own,
+call `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoClient.html#createDefaultGridFsBucketService()[createDefaultGridFsBucketService]`
+
+Here's an example of getting a `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html[MongoGridFsClient]` with the default bucket name.
+
+[source,scala]
+----
+mongoClient.createDefaultGridFsBucketServiceFuture().onComplete{
+  case Success(result) => {
+    //Interact with the GridFS client...
+    var client = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+
+----
+
+=== Drop an entire file bucket from GridFS.
+
+An entire file bucket along with all of its contents can be dropped with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#drop()[drop]`. It will
+drop the bucket that was specified when the MongoGridFsClient was created.
+
+Here is an example of dropping a file bucket.
+
+[source,scala]
+----
+gridFsClient.dropFuture().onComplete{
+  case Success(result) => {
+    //The file bucket is dropped and all files in it, erased
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Find all file IDs in a GridFS bucket.
+
+A list of all of the file IDs in a bucket can be found with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#findAllIds()[findAllIds]`.
+The files can be downloaded by ID using `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadFileByID(java.lang.String,%20java.lang.String)[downloadFileByID]`.
+
+Here is an example of retrieving the list of file IDs.
+
+[source,scala]
+----
+gridFsClient.findAllIdsFuture().onComplete{
+  case Success(result) => {
+    var ids = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Find file IDs in a GridFS bucket matching a query.
+
+A query can be specified to match files in the GridFS bucket. `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#findIds(io.vertx.core.json.JsonObject)[findIds]`
+will return a list of file IDs that match the query.
+
+This has the following fields:
+
+`query` : The is a json object that can match any of the file's metadata using standard MongoDB query operators. An empty
+json object will match all documents. You can query on attributes of the GridFS files collection as described
+in the GridFS manual. https://docs.mongodb.com/manual/core/gridfs/#the-files-collection
+
+The files can be downloaded by ID using `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadFileByID(java.lang.String,%20java.lang.String)[downloadFileByID]`.
+
+Here is an example of retrieving the list of file IDs based on a metadata query.
+
+[source,scala]
+----
+var query = new io.vertx.core.json.JsonObject().put("metadata.nick_name", "Puhi the eel")
+gridFsClient.findIdsFuture(query).onComplete{
+  case Success(result) => {
+    var ids = result
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Delete a file in GridFS based on its ID.
+
+A file previously stored in GridFS can be deleted with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#delete(java.lang.String)[delete]` by providing
+the ID of the file. The file IDs can be retrieved with a query using `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#findIds(io.vertx.core.json.JsonObject)[findIds]`.
+
+This has the following fields:
+`id` : The ID generated by GridFS when the file was stored
+
+Here is an example of deleting a file by ID.
+
+[source,scala]
+----
+var id = "56660b074cedfd000570839c"
+gridFsClient.deleteFuture(id).onComplete(res: io.vertx.scala.core.AsyncResult<java.lang.Void>) => {
+  if (res.succeeded()) {
+    //File deleted
+  } else {
+    //Something went wrong
+    res.cause().printStackTrace()
+  }
+}
+
+----
+
+=== Upload a file in GridFS
+
+A file can be stored by name with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#uploadFile(java.lang.String)[uploadFile]`. When it
+succeeds, the ID generated by GridFS will be returned. This ID can be used to retrieve the file later.
+
+This has the following fields:
+
+`fileName` : this is name used to save the file in GridFS
+
+[source,scala]
+----
+gridFsClient.uploadFileFuture("file.name").onComplete{
+  case Success(result) => {
+    var id = result
+    //The ID of the stored object in Grid FS
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Upload a file in GridFS with options.
+
+A file can be stored with additional options with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#uploadFileWithOptions(java.lang.String,%20io.vertx.ext.mongo.GridFsUploadOptions)[uploadFileWithOptions]`
+passing in an instance of `link:../dataobjects.html#GridFsUploadOptions[GridFsUploadOptions]`. When it
+succeeds, the ID generated by GridFS will be returned.
+
+This has the following fields:
+
+`metadata` : this is a json object that includes any metadata that may be useful in a later search
+`chunkSizeBytes` : GridFS will break up the file into chunks of this size
+
+Here is an example of a file uploadByFileName that specifies the chunk size and metadata.
+
+[source,scala]
+----
+var metadata = new io.vertx.core.json.JsonObject()
+metadata.put("nick_name", "Puhi the Eel")
+
+var options = GridFsUploadOptions()
+options.setChunkSizeBytes(1024)
+options.setMetadata(metadata)
+
+gridFsClient.uploadFileWithOptionsFuture("file.name", options).onComplete{
+  case Success(result) => {
+    var id = result
+    //The ID of the stored object in Grid FS
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Download a file previously stored in GridFS
+
+A file can be downloaded by its original name with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadFile(java.lang.String)[downloadFile]`.
+When the download is complete, the result handler will return the length of the download as a Long.
+
+This has the following fields:
+
+`fileName`:: the name of the file that was previously stored
+
+Here is an example of downloading a file using the name that it was stored with in GridFS.
+
+[source,scala]
+----
+gridFsClient.downloadFileFuture("file.name").onComplete{
+  case Success(result) => {
+    var fileLength = result
+    //The length of the file stored in fileName
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Download a file previously stored in GridFS given its ID
+
+A file can be downloaded to a given file name by its ID with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadFileByID(java.lang.String,%20java.lang.String)[downloadFileByID]`.
+When the download succeeds, the result handler will return the length of the download as a Long.
+
+This has the following fields:
+
+`id` : The ID generated by GridFS when the file was stored
+
+Here is an example of downloading a file using the ID that it was given when stored in GridFS.
+
+[source,scala]
+----
+var id = "56660b074cedfd000570839c"
+var filename = "puhi.fil"
+gridFsClient.downloadFileByIDFuture(id, filename).onComplete{
+  case Success(result) => {
+    var fileLength = result
+    //The length of the file stored in fileName
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Download a file from GridFS to a new name
+
+A file can be resolved using its original name and then downloaded to a new name
+with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadFileAs(java.lang.String,%20java.lang.String)[downloadFileAs]`.
+When the download succeeds, the result handler will return the length of the download as a Long.
+
+This has the following fields:
+
+`fileName` : the name of the file that was previously stored
+`newFileName` : the new name for which the file will be stored
+
+[source,scala]
+----
+gridFsClient.downloadFileAsFuture("file.name", "new_file.name").onComplete{
+  case Success(result) => {
+    var fileLength = result
+    //The length of the file stored in fileName
+  }
+  case Failure(cause) => {
+    println(s"$cause")
+  }
+}
+
+----
+
+=== Upload a Stream to GridFS
+
+Streams can be uploaded to GridFS using `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#uploadByFileName(io.vertx.core.streams.ReadStream,%20java.lang.String)[uploadByFileName]`.
+Once the stream is uploaded, the result handler will be called with the ID generated by GridFS.
+
+This has the following fields:
+
+`stream` : the `link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` to upload
+`fileName` : the name for which the stream will be stored
+
+Here is an example of uploading a file stream to GridFS:
+
+[source,scala]
+----
+gridFsStreamClient.uploadByFileNameFuture(asyncFile, "kanaloa").onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+=== Upload a Stream to GridFS with Options
+
+Streams can be uploaded to GridFS using `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#uploadByFileNameWithOptions(io.vertx.core.streams.ReadStream,%20java.lang.String,%20io.vertx.ext.mongo.GridFsUploadOptions)[uploadByFileNameWithOptions]`
+passing in an instance of `link:../dataobjects.html#GridFsUploadOptions[GridFsUploadOptions]`.
+Once the stream is uploaded, the result handler will be called with the ID generated by GridFS.
+
+This has the following fields:
+
+`stream` : the `link:../../scaladocs/io/vertx/scala/core/streams/ReadStream.html[ReadStream]` to upload
+`fileName` : the name for which the stream will be stored
+`options' : the UploadOptions
+
+`link:../dataobjects.html#GridFsUploadOptions[GridFsUploadOptions]` has the following fields:
+
+`metadata` : this is a json object that includes any metadata that may be useful in a later search
+`chunkSizeBytes` : GridFS will break up the file into chunks of this size
+
+Here is an example of uploading a file stream with options to GridFS:
+
+[source,scala]
+----
+var options = GridFsUploadOptions()
+options.setChunkSizeBytes(2048)
+options.setMetadata(new io.vertx.core.json.JsonObject().put("catagory", "Polynesian gods"))
+gridFsStreamClient.uploadByFileNameWithOptionsFuture(asyncFile, "kanaloa", options).onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+
+----
+
+=== Download a Stream from GridFS using File Name
+
+Streams can be downloaded from GridFS using a file name with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadByFileName(io.vertx.core.streams.WriteStream,%20java.lang.String)[downloadByFileName]`.
+Once the stream is downloaded a result handler will be called with the length of the stream as a Long.
+
+This has the following fields:
+
+`stream` : the `link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]` to download to
+`fileName` : the name of the file that will be downloaded to the stream.
+
+Here is an example of downloading a file to a stream:
+
+[source,scala]
+----
+gridFsStreamClient.downloadByFileNameFuture(asyncFile, "kamapuaa.fil").onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+=== Download a Stream with Options from GridFS using File Name
+
+Streams can be downloaded from GridFS using a file name and download options with
+`link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadByFileNameWithOptions(io.vertx.core.streams.WriteStream,%20java.lang.String,%20io.vertx.ext.mongo.GridFsDownloadOptions)[downloadByFileNameWithOptions]` passing in an instance of `link:../dataobjects.html#GridFsDownloadOptions[GridFsDownloadOptions]`.
+Once the stream is downloaded a result handler will be called with the length of the stream as a Long.
+
+This has the following fields:
+
+`stream` : the `link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]` to download to
+`fileName` : the name of the file that will be downloaded to the stream
+`options` : an instance of `link:../dataobjects.html#GridFsDownloadOptions[GridFsDownloadOptions]`
+
+DownloadOptions has the following field:
+
+`revision` : the revision of the file to download
+
+Here is an example of downloading a file to a stream with options:
+
+[source,scala]
+----
+var options = GridFsDownloadOptions()
+options.setRevision(0)
+gridFsStreamClient.downloadByFileNameWithOptionsFuture(asyncFile, "kamapuaa.fil", options).onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+=== Download a Stream from GridFS using ID
+
+Streams can be downloaded using the ID generated by GridFS with `link:../../scaladocs/io/vertx/scala/ext/mongo/MongoGridFsClient.html#downloadById(io.vertx.core.streams.WriteStream,%20java.lang.String)[downloadById]`.
+Once the stream is downloaded a result handler will be called with the length of the stream as a Long.
+
+This has the following fields:
+
+`stream` : the `link:../../scaladocs/io/vertx/scala/core/streams/WriteStream.html[WriteStream]` to download to
+`id` : the string represendation of the ID generated by GridFS
+
+Here is an example of downloading a file to a stream using the object's ID:
+
+[source,scala]
+----
+var id = "58f61bf84cedfd000661af06"
+gridFsStreamClient.downloadByIdFuture(asyncFile, id).onComplete{
+  case Success(result) => println("Success")
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+== Configuring the client
+
+The client is configured with a json object.
+
+The following configuration is supported by the mongo client:
+
+
+`db_name`:: Name of the database in the MongoDB instance to use. Defaults to `default_db`
+`useObjectId`:: Toggle this option to support persisting and retrieving ObjectId's as strings. If `true`, hex-strings will
+be saved as native Mongodb ObjectId types in the document collection. This will allow the sorting of documents based on creation
+time. You can also derive the creation time from the hex-string using ObjectId::getDate(). Set to `false` for other types of your choosing.
+If set to false, or left to default, hex strings will be generated as the document _id if the _id is omitted from the document.
+Defaults to `false`.
+
+The mongo client tries to support most options that are allowed by the driver. There are two ways to configure mongo
+for use by the driver, either by a connection string or by separate configuration options.
+
+NOTE: If the connection string is used the mongo client will ignore any driver configuration options.
+
+`connection_string`:: The connection string the driver uses to create the client. E.g. `mongodb://localhost:27017`.
+For more information on the format of the connection string please consult the driver documentation.
+
+*Specific driver configuration options*
+
+[source,js]
+----
+{
+ // Single Cluster Settings
+ "host" : "127.0.0.1", // string
+ "port" : 27017,      // int
+
+ // Multiple Cluster Settings
+ "hosts" : [
+   {
+     "host" : "cluster1", // string
+     "port" : 27000       // int
+   },
+   {
+     "host" : "cluster2", // string
+     "port" : 28000       // int
+   },
+   ...
+ ],
+ "replicaSet" :  "foo",    // string
+ "serverSelectionTimeoutMS" : 30000, // long
+
+ // Connection Pool Settings
+ "maxPoolSize" : 50,                // int
+ "minPoolSize" : 25,                // int
+ "maxIdleTimeMS" : 300000,          // long
+ "maxLifeTimeMS" : 3600000,         // long
+ "waitQueueTimeoutMS" : 10000,      // long
+ "maintenanceFrequencyMS" : 2000,   // long
+ "maintenanceInitialDelayMS" : 500, // long
+
+ // Credentials / Auth
+ "username"   : "john",     // string
+ "password"   : "passw0rd", // string
+ "authSource" : "some.db"   // string
+ // Auth mechanism
+ "authMechanism"     : "GSSAPI",        // string
+ "gssapiServiceName" : "myservicename", // string
+
+ // Socket Settings
+ "connectTimeoutMS" : 300000, // int
+ "socketTimeoutMS"  : 100000, // int
+ "sendBufferSize"    : 8192,  // int
+ "receiveBufferSize" : 8192,  // int
+
+ // Server Settings
+ "heartbeatFrequencyMS"    : 1000, // long
+ "minHeartbeatFrequencyMS" :  500, // long
+
+ // SSL Settings
+ "ssl" : false,                       // boolean
+ "sslInvalidHostNameAllowed" : false, // boolean
+ "trustAll" : false,                  // boolean
+ "keyPath" : "key.pem",               // string
+ "certPath" : "cert.pem",             // string
+ "caPath" : "ca.pem"                  // string
+}
+----
+
+*Driver option descriptions*
+
+`host`:: The host the MongoDB instance is running. Defaults to `127.0.0.1`. This is ignored if `hosts` is specified
+`port`:: The port the MongoDB instance is listening on. Defaults to `27017`. This is ignored if `hosts` is specified
+`hosts`:: An array representing the hosts and ports to support a MongoDB cluster (sharding / replication)
+`host`:: A host in the cluster
+`port`:: The port a host in the cluster is listening on
+`replicaSet`:: The name of the replica set, if the MongoDB instance is a member of a replica set
+`serverSelectionTimeoutMS`:: The time in milliseconds that the mongo driver will wait to select a server for an operation before raising an error.
+`maxPoolSize`:: The maximum number of connections in the connection pool. The default value is `100`
+`minPoolSize`:: The minimum number of connections in the connection pool. The default value is `0`
+`maxIdleTimeMS`:: The maximum idle time of a pooled connection. The default value is `0` which means there is no limit
+`maxLifeTimeMS`:: The maximum time a pooled connection can live for. The default value is `0` which means there is no limit
+`waitQueueTimeoutMS`:: The maximum time that a thread may wait for a connection to become available. Default value is `120000` (2 minutes)
+`maintenanceFrequencyMS`:: The time period between runs of the maintenance job. Default is `0`.
+`maintenanceInitialDelayMS`:: The period of time to wait before running the first maintenance job on the connection pool. Default is `0`.
+`username`:: The username to authenticate. Default is `null` (meaning no authentication required)
+`password`:: The password to use to authenticate.
+`authSource`:: The database name associated with the user's credentials. Default value is the `db_name` value.
+`authMechanism`:: The authentication mechanism to use. See [Authentication](http://docs.mongodb.org/manual/core/authentication/) for more details.
+`gssapiServiceName`:: The Kerberos service name if `GSSAPI` is specified as the `authMechanism`.
+`connectTimeoutMS`:: The time in milliseconds to attempt a connection before timing out. Default is `10000` (10 seconds)
+`socketTimeoutMS`:: The time in milliseconds to attempt a send or receive on a socket before the attempt times out. Default is `0` meaning there is no timeout
+`sendBufferSize`:: Sets the send buffer size (SO_SNDBUF) for the socket. Default is `0`, meaning it will use the OS default for this option.
+`receiveBufferSize`:: Sets the receive buffer size (SO_RCVBUF) for the socket. Default is `0`, meaning it will use the OS default for this option.
+`heartbeatFrequencyMS`:: The frequency that the cluster monitor attempts to reach each server. Default is `5000` (5 seconds)
+`minHeartbeatFrequencyMS`:: The minimum heartbeat frequency. The default value is `1000` (1 second)
+`ssl`:: Enable ssl between the vertx-mongo-client and mongo
+`sslInvalidHostNameAllowed`:: Accept hostnames not included in the servers certificate
+`trustAll`:: When using ssl, trust _ALL_ certificates. *WARNING* - Trusting _ALL_ certificates will open you up to potential security issues such as MITM attacks.
+`keyPath`:: Set a path to a file that contains the client key that will be used to authenticate against the server when making SSL connections to mongo.
+`certPath`:: Set a path to a file that contains the certificate that will be used to authenticate against the server when making SSL connections to mongo.
+`caPath`:: Set a path to a file that contains a certificate that will be used as a source of trust when making SSL connections to mongo.
+
+
+NOTE: Most of the default values listed above use the default values of the MongoDB Java Driver.
+Please consult the driver documentation for up to date information.
+
+ifeval::["scala" == "java"]
+include::override/rxjava2.adoc[]
+endif::[]

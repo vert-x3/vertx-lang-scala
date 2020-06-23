@@ -1,0 +1,17 @@
+= Enums
+
+[[MatchType]]
+== MatchType
+
+++++
+The type of match.
+++++
+'''
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[EQUALS]]`EQUALS`|-
+|[[REGEX]]`REGEX`|-
+|===
