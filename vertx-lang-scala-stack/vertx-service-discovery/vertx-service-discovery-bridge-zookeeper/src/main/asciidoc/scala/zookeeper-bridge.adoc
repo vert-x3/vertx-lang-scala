@@ -1,0 +1,55 @@
+=== Zookeeper bridge
+
+This discovery bridge imports services from https://zookeeper.apache.org/[Apache Zookeeper] into the Vert.x service
+discovery. The bridge uses the http://curator.apache.org/curator-x-discovery/[Curator extension for service discovery].
+
+Service description are read as JSON Object (merged in the Vert.x service record metadata). The service type is
+deduced from this description by reading the `service-type`.
+
+==== Using the bridge
+
+To use this Vert.x discovery bridge, add the following dependency to the _dependencies_ section of your build
+descriptor:
+
+* Maven (in your `pom.xml`):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+ <groupId>io.vertx</groupId>
+ <artifactId>vertx-service-discovery-bridge-zookeeper</artifactId>
+ <version>${maven.version}</version>
+</dependency>
+----
+
+* Gradle (in your `build.gradle` file):
+
+[source,groovy,subs="+attributes"]
+----
+compile 'io.vertx:vertx-service-discovery-bridge-zookeeper:${maven.version}'
+----
+
+Then, when creating the service discovery registers this bridge as follows:
+
+[source, scala]
+----
+ServiceDiscovery.create(vertx).registerServiceImporter(new io.vertx.servicediscovery.zookeeper.ZookeeperServiceImporter(), new io.vertx.core.json.JsonObject().put("connection", "127.0.0.1:2181"))
+
+----
+
+Only the `connection` configuration is mandatory. It's the connection _string_ of the Zookeeper server.
+
+In addition you can configure:
+
+* `maxRetries`: the number of connection attempt, 3 by default
+* `baseSleepTimeBetweenRetries`: the amount of milliseconds to wait between retries (exponential backoff strategy).
+1000 ms by default.
+* `basePath`: the Zookeeper path in which the service are stored. Default to `/discovery`.
+* `connectionTimeoutMs`: the connection timeout in milliseconds. Defaults to 1000.
+* `canBeReadOnly` : whether or not the backend support the _read-only_ mode (defaults to true)
+
+[source,scala]
+----
+ServiceDiscovery.create(vertx).registerServiceImporter(new io.vertx.servicediscovery.zookeeper.ZookeeperServiceImporter(), new io.vertx.core.json.JsonObject().put("connection", "127.0.0.1:2181").put("maxRetries", 5).put("baseSleepTimeBetweenRetries", 2000).put("basePath", "/services"))
+
+----

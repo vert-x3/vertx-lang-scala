@@ -156,7 +156,7 @@
               <configuration>
                 <processors>
                   <processor>io.vertx.codegen.CodeGenProcessor</processor>
-<!--                  <processor>io.vertx.docgen.DocGenProcessor</processor>-->
+                  <processor>io.vertx.docgen.DocGenProcessor</processor>
                 </processors>
                 <optionMap>
                   <codegen.output>${project.basedir}/src/main</codegen.output>
@@ -179,52 +179,51 @@
                 </processors>
                 <optionMap>
                   <codegen.output>${project.basedir}/src/test</codegen.output>
+                  <codegen.generators>scala</codegen.generators>
                 </optionMap>
                 <sourceDirectory>${project.build.directory}/sources/codegen</sourceDirectory>
               </configuration>
             </execution>
-            <!-- We have to run the annotation processor again to process docs -->
-<!--            <execution>-->
-<!--              <id>docgen-docs</id>-->
-<!--              <goals>-->
-<!--                <goal>process</goal>-->
-<!--              </goals>-->
-<!--              <phase>prepare-package</phase>-->
-<!--              <configuration>-->
-<!--                <processors>-->
-<!--                  <processor>io.vertx.docgen.DocGenProcessor</processor>-->
-<!--                </processors>-->
-<!--                <optionMap>-->
-<!--                  <outputDirectory>${project.basedir}/src/main</outputDirectory>-->
-<!--                  <docgen.output>${asciidoc.dir}/scala</docgen.output>-->
-<!--                  <maven.groupId>${project.groupId}</maven.groupId>-->
-<!--                  <maven.artifactId>${project.artifactId}</maven.artifactId>-->
-<!--                  <maven.version>${project.version}</maven.version>-->
-<!--                </optionMap>-->
-<!--                <sourceDirectory>${project.build.directory}/sources/vertx</sourceDirectory>-->
-<!--              </configuration>-->
-<!--            </execution>-->
-<!--            &lt;!&ndash; We have to run the annotation processor again to process docoverride &ndash;&gt;-->
-<!--            <execution>-->
-<!--              <id>docgen-docoverride</id>-->
-<!--              <goals>-->
-<!--                <goal>process</goal>-->
-<!--              </goals>-->
-<!--              <phase>prepare-package</phase>-->
-<!--              <configuration>-->
-<!--                <processors>-->
-<!--                  <processor>io.vertx.docgen.DocGenProcessor</processor>-->
-<!--                </processors>-->
-<!--                <optionMap>-->
-<!--                  <outputDirectory>${project.basedir}/src/main</outputDirectory>-->
-<!--                  <docgen.output>${asciidoc.dir}/scala</docgen.output>-->
-<!--                  <maven.groupId>${project.groupId}</maven.groupId>-->
-<!--                  <maven.artifactId>${project.artifactId}</maven.artifactId>-->
-<!--                  <maven.version>${project.version}</maven.version>-->
-<!--                </optionMap>-->
-<!--                <sourceDirectory>${project.basedir}/src/main/docoverride</sourceDirectory>-->
-<!--              </configuration>-->
-<!--            </execution>-->
+<!--             We have to run the annotation processor again to process docs-->
+            <execution>
+              <id>docgen-docs</id>
+              <goals>
+                <goal>process</goal>
+              </goals>
+              <phase>prepare-package</phase>
+              <configuration>
+                <processors>
+                  <processor>io.vertx.docgen.DocGenProcessor</processor>
+                </processors>
+                <optionMap>
+                  <codegen.output>${project.basedir}/src/main</codegen.output>
+                  <codegen.generators>scala</codegen.generators>
+                  <docgen.output>${asciidoc.dir}/scala</docgen.output>
+                </optionMap>
+                <sourceDirectory>${project.build.directory}/sources/vertx</sourceDirectory>
+              </configuration>
+            </execution>
+            <!-- We have to run the annotation processor again to process docoverride -->
+            <execution>
+              <id>docgen-docoverride</id>
+              <goals>
+                <goal>process</goal>
+              </goals>
+              <phase>prepare-package</phase>
+              <configuration>
+                <processors>
+                  <processor>io.vertx.docgen.DocGenProcessor</processor>
+                </processors>
+                <optionMap>
+                  <codegen.output>${project.basedir}/src/main</codegen.output>
+                  <docgen.output>${asciidoc.dir}/scala</docgen.output>
+                  <maven.groupId>${project.groupId}</maven.groupId>
+                  <maven.artifactId>${project.artifactId}</maven.artifactId>
+                  <maven.version>${project.version}</maven.version>
+                </optionMap>
+                <sourceDirectory>${project.basedir}/src/main/docoverride</sourceDirectory>
+              </configuration>
+            </execution>
           </executions>
           <dependencies>
             <dependency>

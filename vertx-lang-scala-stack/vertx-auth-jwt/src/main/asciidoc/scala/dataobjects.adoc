@@ -1,0 +1,17 @@
+= Cheatsheets
+
+[[JWTAuthOptions]]
+== JWTAuthOptions
+
+++++
+Options describing how an JWT Auth should behave.
+++++
+'''
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[jwks]]`@jwks`|`Array of Json object`|-
+|[[permissionsClaimKey]]`@permissionsClaimKey`|`String`|-
+|===

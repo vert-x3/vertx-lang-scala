@@ -1,0 +1,16 @@
+= Enums
+
+[[KeyType]]
+== KeyType
+
+
+[cols=">25%,75%"]
+[frame="topbot"]
+|===
+^|Name | Description
+|[[SYMMETRIC]]`SYMMETRIC`|-
+|[[PUBLIC]]`PUBLIC`|-
+|[[SECRET]]`SECRET`|-
+|[[PUBSEC]]`PUBSEC`|-
+|[[CERTIFICATE]]`CERTIFICATE`|-
+|===
