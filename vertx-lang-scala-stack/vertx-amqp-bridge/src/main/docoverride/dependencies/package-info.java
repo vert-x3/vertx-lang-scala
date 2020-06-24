@@ -22,7 +22,7 @@
  *
  * [source,scala,subs="+attributes"]
  * ----
- * libraryDependencies += "io.vertx" %% "vertx-lang-scala" % "${maven.version}"
+ * libraryDependencies += "${maven.groupId}" %% "${maven.module}" % "${maven.version}"
  * ----
  *
  * * Maven (in your `pom.xml`):
