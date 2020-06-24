@@ -220,6 +220,7 @@
                   <maven.groupId>${project.groupId}</maven.groupId>
                   <maven.artifactId>${project.artifactId}</maven.artifactId>
                   <maven.version>${project.version}</maven.version>
+                  <maven.module>${vertx-module}</maven.module>
                 </optionMap>
                 <sourceDirectory>${project.basedir}/src/main/docoverride</sourceDirectory>
               </configuration>
