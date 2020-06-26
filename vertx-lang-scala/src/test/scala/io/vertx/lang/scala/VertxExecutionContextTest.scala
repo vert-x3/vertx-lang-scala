@@ -14,7 +14,7 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
 
   "Using Promise to complete a Vertx-Future" should "work with a VertxExecutionContext" in {
     val vertx = Vertx.vertx
-    implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
+    implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     vertx.deployVerticleFuture(nameForVerticle[SuccessVerticle])
       .map(res => res should not be empty)
   }
@@ -25,7 +25,7 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
     val idBackInEventLoopPromise = Promise[Long]
     val vertx = Vertx.vertx
     val ctx = vertx.getOrCreateContext()
-    implicit val exec = VertxExecutionContext(ctx)
+    implicit val exec = VertxExecutionContext(vertx, ctx)
     vertx.deployVerticleFuture(nameForVerticle[SuccessVerticle])
       .map(res => {
         idInEventLoopPromise.success(Thread.currentThread().getId)
@@ -50,7 +50,7 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
 
   "A deployment" should "fail if the deployed verticle fails" in {
     val vertx = Vertx.vertx
-    implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
+    implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     vertx.deployVerticleFuture(nameForVerticle[FailVerticle])
       .transformWith {
         case Failure(t) => t.getMessage should equal("wuha")

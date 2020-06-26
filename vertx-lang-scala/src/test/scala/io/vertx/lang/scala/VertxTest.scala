@@ -19,7 +19,7 @@ class VertxTest extends FlatSpec with Matchers {
 
   "Vert.x executeBlocking" should "should perform on a different thread" in {
     val vertx = Vertx.vertx
-    implicit val exec = VertxExecutionContext(vertx.getOrCreateContext())
+    implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     val waiter = new Waiter()
     vertx.executeBlockingFuture[Long](() => Thread.currentThread().getId).onComplete(s => {
       assert(s.get != Thread.currentThread().getId)
@@ -58,7 +58,7 @@ class VertxTest extends FlatSpec with Matchers {
   "Vert.x" should "deploy a preinstantiated ScalaVerticle and return a Future" in {
     val cl = new CountDownLatch(1)
     val vertx = Vertx.vertx()
-    implicit val ctx = VertxExecutionContext(vertx.getOrCreateContext())
+    implicit val ctx = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     val waiter = new Waiter()
     val futureWaiter = new Waiter()
 
@@ -78,7 +78,7 @@ class VertxTest extends FlatSpec with Matchers {
   "Vert.x" should "deploy a preinstantiated ScalaVerticle using the provided options and return a Future" in {
     val cl = new CountDownLatch(1)
     val vertx = Vertx.vertx()
-    implicit val ctx = VertxExecutionContext(vertx.getOrCreateContext())
+    implicit val ctx = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     val waiter = new Waiter()
     val futureWaiter = new Waiter()
 

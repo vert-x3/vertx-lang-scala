@@ -46,7 +46,7 @@ abstract class ScalaVerticle {
     this.vertx = vertx
     this.ctx = context
     this.javaVerticle = verticle
-    this.executionContext = VertxExecutionContext(this.vertx.getOrCreateContext())
+    this.executionContext = VertxExecutionContext(vertx, this.vertx.getOrCreateContext())
   }
 
   /**
