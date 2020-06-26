@@ -16,7 +16,7 @@
 
 package io.vertx.lang.scala
 
-import io.vertx.core.Context
+import io.vertx.core.{Context, Vertx}
 
 import scala.concurrent.ExecutionContext
 
@@ -30,11 +30,16 @@ import scala.concurrent.ExecutionContext
   * https://github.com/vert-x/mod-lang-scala/blob/master/src/main/scala/org/vertx/scala/core/VertxExecutionContext.scala
   *
   */
-class VertxExecutionContext(val ctx:Context) extends ExecutionContext{
+class VertxExecutionContext(val vertx: Vertx, val ctx:Context) extends ExecutionContext{
   private val Log = ScalaLogger.getLogger(classOf[VertxExecutionContext].getName)
 
   override def execute(runnable: Runnable): Unit = {
-    ctx.runOnContext((_:Void) => runnable.run())
+    if (vertx.getOrCreateContext() != ctx) {
+      ctx.runOnContext((_:Void) => runnable.run())
+    }
+    else {
+      runnable.run()
+    }
   }
 
   override def reportFailure(cause: Throwable): Unit = {
@@ -43,5 +48,5 @@ class VertxExecutionContext(val ctx:Context) extends ExecutionContext{
 }
 
 object VertxExecutionContext {
-  def apply(ctx: Context): VertxExecutionContext = new VertxExecutionContext(ctx)
+  def apply(vertx: Vertx, ctx: Context): VertxExecutionContext = new VertxExecutionContext(vertx, ctx)
 }
