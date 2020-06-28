@@ -12,7 +12,7 @@ object Main {
     val router = Router.router(vertx)
     router.get("/").handler(r => r.end("hello world"))
 
-    implicit val ec = VertxExecutionContext(vertx.getOrCreateContext())
+    implicit val ec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     vertx
       .createHttpServer()
       .requestHandler(router)
