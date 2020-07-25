@@ -17,8 +17,8 @@
 package io.vertx.scala.ext.auth.jwt
 
 import io.vertx.ext.auth.jwt.{JWTOptions => JJWTOptions}
+import io.vertx.scala.ext.auth.{JWTOptions => ExtJWTOptions}
 import io.vertx.core.json.JsonObject
-import io.vertx.scala.ext.jwt.{JWTOptions => ExtJWTOptions}
 import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
 

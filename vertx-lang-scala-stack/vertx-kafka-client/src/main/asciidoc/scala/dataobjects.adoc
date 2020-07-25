@@ -1,5 +1,28 @@
 = Cheatsheets
 
+[[ClusterDescription]]
+== ClusterDescription
+
+++++
+A detailed description of the cluster
+++++
+'''
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[clusterId]]`@clusterId`|`String`|+++
+Set the cluster ID
++++
+|[[controller]]`@controller`|`link:dataobjects.html#Node[Node]`|+++
+Set the controller node.
++++
+|[[nodes]]`@nodes`|`Array of link:dataobjects.html#Node[Node]`|+++
+Set the nodes belonging to this cluster
++++
+|===
+
 [[Config]]
 == Config
 
@@ -148,6 +171,16 @@ Set the consumer group id
 |[[simpleConsumerGroup]]`@simpleConsumerGroup`|`Boolean`|+++
 Set if consumer group is simple or not
 +++
+|===
+
+[[ListConsumerGroupOffsetsOptions]]
+== ListConsumerGroupOffsetsOptions
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
 |===
 
 [[MemberAssignment]]

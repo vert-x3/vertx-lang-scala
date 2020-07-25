@@ -53,7 +53,7 @@ import io.vertx.lang.scala.HandlerOps._
   * <ul>
   *   <li>[[io.vertx.scala.ext.web.client.HttpRequest#send]]</li>
   *   <li>[[io.vertx.scala.ext.web.client.HttpRequest#sendStream]]</li>
-  *   <li> ()}</li>
+  *   <li>[[io.vertx.scala.ext.web.client.HttpRequest#sendJson]] ()}</li>
   *   <li>[[io.vertx.scala.ext.web.client.HttpRequest#sendForm]]</li>
   * </ul>
   * can be called.

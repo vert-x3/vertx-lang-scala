@@ -96,6 +96,21 @@ class OAuth2Auth(private val _asJava: Object) extends AuthProvider (_asJava) {
     this
   }
 
+  /**
+   * Handled to be called when a key (mentioned on a JWT) is missing from the current config.
+   * Users are advised to call [[io.vertx.scala.ext.auth.oauth2.OAuth2Auth#loadJWK]] but being careful to implement
+   * some rate limiting function.
+   *
+   * This method isn't generic for several reasons. The provider is not aware of the capabilities
+   * of the backend IdP in terms of max allowed API calls. Some validation could be done at the
+   * key id, which only the end user is aware of.   * @return Future result.
+   */
+  
+  def missingKeyHandler(handler: Handler[String]): OAuth2Auth = {
+    asJava.asInstanceOf[JOAuth2Auth].missingKeyHandler((if (handler == null) null else new io.vertx.core.Handler[java.lang.String]{def handle(x: java.lang.String) {handler.handle(x.asInstanceOf[String])}}))
+    this
+  }
+
 
 
   /**

@@ -29,6 +29,11 @@ import scala.collection.JavaConverters._
 
 class Polygon(private val _asJava: JPolygon) {
   def asJava = _asJava
+  def addPoint(value: Point) = {
+    asJava.addPoint(value.asJava)
+    this
+  }
+
   def setPoints(value: scala.collection.mutable.Buffer[Point]) = {
     asJava.setPoints(value.map(_.asJava).asJava)
     this

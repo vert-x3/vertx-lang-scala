@@ -142,6 +142,27 @@ class Cookie(private val _asJava: Object) {
   }
 
   /**
+   * @return the security status of this cookie
+   */
+  def isSecure (): Boolean = {
+    asJava.asInstanceOf[JCookie].isSecure().asInstanceOf[Boolean]
+  }
+
+  /**
+   * @return the http only status of this cookie
+   */
+  def isHttpOnly (): Boolean = {
+    asJava.asInstanceOf[JCookie].isHttpOnly().asInstanceOf[Boolean]
+  }
+
+  /**
+   * @return the SameSite policy of this cookie
+   */
+  def getSameSite (): scala.Option[io.vertx.core.http.CookieSameSite] = {
+    scala.Option(asJava.asInstanceOf[JCookie].getSameSite())
+  }
+
+  /**
    * Encode the cookie to a string. This is what is used in the Set-Cookie header   * @return the encoded cookie
    */
   def encode (): String = {

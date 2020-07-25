@@ -741,6 +741,8 @@ Set the default HTTP/2 connection window size. It overrides the initial window
 Set the keep alive timeout for HTTP/2 connections, in seconds.
  <p/>
  This value determines how long a connection remains unused in the pool before being evicted and closed.
+ <p/>
+ A timeout of <code>0</code> means there is no timeout and the connection can remain indefinitely in the pool.
 +++
 |[[http2MaxPoolSize]]`@http2MaxPoolSize`|`Number (int)`|+++
 Set the maximum pool size for HTTP/2 connections
@@ -773,6 +775,8 @@ Set whether keep alive is enabled on the client
 Set the keep alive timeout for HTTP/1.x, in seconds.
  <p/>
  This value determines how long a connection remains unused in the pool before being evicted and closed.
+ <p/>
+ A timeout of <code>0</code> means there is no timeout and the connection can remain indefinitely in the pool.
 +++
 |[[keyStoreOptions]]`@keyStoreOptions`|`link:dataobjects.html#JksOptions[JksOptions]`|+++
 Set the key/cert options in jks format, aka Java keystore.
@@ -1235,7 +1239,7 @@ Set the WebSocket sub-protocols supported by the server.
  <p>
 
  <pre>
- Buffer store = vertx.fileSystem().readFileSync("/mykeystore.jks");
+ Buffer store = vertx.fileSystem().readFileBlocking("/mykeystore.jks");
  options.setKeyStore(new JKSOptions().setValue(store).setPassword("foo"));
  </pre>
 ++++
@@ -1746,8 +1750,8 @@ Sets whether or not this option can receive a value.
  Or directly provided as a buffer:<p>
 
  <pre>
- Buffer key = vertx.fileSystem().readFileSync("/mykey.pem");
- Buffer cert = vertx.fileSystem().readFileSync("/mycert.pem");
+ Buffer key = vertx.fileSystem().readFileBlocking("/mykey.pem");
+ Buffer cert = vertx.fileSystem().readFileBlocking("/mycert.pem");
  options.setPemKeyCertOptions(new PemKeyCertOptions().setKeyValue(key).setCertValue(cert));
  </pre>
 
@@ -1821,7 +1825,7 @@ Set all the keys as a list of buffer
  <p>
 
  <pre>
- Buffer cert = vertx.fileSystem().readFileSync("/cert.pem");
+ Buffer cert = vertx.fileSystem().readFileBlocking("/cert.pem");
  HttpServerOptions options = new HttpServerOptions();
  options.setPemTrustOptions(new PemTrustOptions().addCertValue(cert));
  </pre>
@@ -1860,7 +1864,7 @@ Add a certificate value
  Or directly provided as a buffer:<p>
 
  <pre>
- Buffer store = vertx.fileSystem().readFileSync("/mykeystore.p12");
+ Buffer store = vertx.fileSystem().readFileBlocking("/mykeystore.p12");
  options.setPfxKeyCertOptions(new PfxOptions().setValue(store).setPassword("foo"));
  </pre>
 ++++

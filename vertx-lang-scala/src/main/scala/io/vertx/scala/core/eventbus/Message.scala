@@ -69,7 +69,7 @@ class Message[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
-   * Like  but specifying `options` that can be used
+   * Like [[io.vertx.scala.core.eventbus.Message#replyAndRequest]] but specifying `options` that can be used
    * to configure the delivery.   * @param message the message body, may be `null`
    * @param options delivery options see <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
    * @param replyHandler reply handler will be called when any reply from the recipient is received

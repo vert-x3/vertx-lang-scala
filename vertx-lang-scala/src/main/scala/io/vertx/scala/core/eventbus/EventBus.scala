@@ -108,7 +108,7 @@ class EventBus(private val _asJava: Object) extends Measured {
   }
 
   /**
-   * Like  but specifying a `replyHandler` that will be called if the recipient
+   * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying a `replyHandler` that will be called if the recipient
    * subsequently replies to the message.   * @param address the address to send it to
    * @param message the message, may be `null`
    * @param replyHandler reply handler will be called when any reply from the recipient is received, may be `null`
@@ -121,7 +121,7 @@ class EventBus(private val _asJava: Object) extends Measured {
   }
 
   /**
-   * Like  but specifying `options` that can be used to configure the delivery.   * @param address the address to send it to
+   * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying `options` that can be used to configure the delivery.   * @param address the address to send it to
    * @param message the message, may be `null`
    * @param options delivery options see <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
    * @return a reference to this, so the API can be used fluently
@@ -133,7 +133,7 @@ class EventBus(private val _asJava: Object) extends Measured {
   }
 
   /**
-   * Like  but specifying a `replyHandler` that will be called if the recipient
+   * Like [[io.vertx.scala.core.eventbus.EventBus#send]] but specifying a `replyHandler` that will be called if the recipient
    * subsequently replies to the message.   * @param address the address to send it to
    * @param message the message, may be `null`
    * @param options delivery options see <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
@@ -162,7 +162,7 @@ class EventBus(private val _asJava: Object) extends Measured {
   }
 
   /**
-   * Like  but specifying `options` that can be used to configure the delivery.   * @param address the address to send it to
+   * Like [[io.vertx.scala.core.eventbus.EventBus#request]] but specifying `options` that can be used to configure the delivery.   * @param address the address to send it to
    * @param message the message body, may be `null`
    * @param options delivery options see <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
    * @param replyHandler reply handler will be called when any reply from the recipient is received
@@ -187,7 +187,7 @@ class EventBus(private val _asJava: Object) extends Measured {
   }
 
   /**
-   * Like  but specifying `options` that can be used to configure the delivery.   * @param address the address to publish it to
+   * Like [[io.vertx.scala.core.eventbus.EventBus#publish]] but specifying `options` that can be used to configure the delivery.   * @param address the address to publish it to
    * @param message the message, may be `null`
    * @param options the delivery options see <a href="../../../../../../../cheatsheet/DeliveryOptions.html">DeliveryOptions</a>
    * @return a reference to this, so the API can be used fluently
@@ -288,7 +288,7 @@ class EventBus(private val _asJava: Object) extends Measured {
   /**
    * Create a message sender against the specified address.
    * 
-   * The returned sender will invoke the 
+   * The returned sender will invoke the [[io.vertx.scala.core.eventbus.EventBus#send]]
    * method when the stream [[io.vertx.scala.core.streams.WriteStream#write]] method is called with the sender
    * address and the provided data.   * @param address the address to send it to
    * @return The sender
@@ -310,7 +310,7 @@ class EventBus(private val _asJava: Object) extends Measured {
   /**
    * Create a message publisher against the specified address.
    * 
-   * The returned publisher will invoke the 
+   * The returned publisher will invoke the [[io.vertx.scala.core.eventbus.EventBus#publish]]
    * method when the stream [[io.vertx.scala.core.streams.WriteStream#write]] method is called with the publisher
    * address and the provided data.   * @param address The address to publish it to
    * @return The publisher

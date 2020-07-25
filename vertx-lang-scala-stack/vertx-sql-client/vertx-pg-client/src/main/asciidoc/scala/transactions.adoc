@@ -1,0 +1,104 @@
+== Using transactions
+
+=== Transactions with connections
+
+You can execute transaction using SQL `BEGIN`/`COMMIT`/`ROLLBACK`, if you do so you must use
+a `link:../../scaladocs/io/vertx/scala/sqlclient/SqlConnection.html[SqlConnection]` and manage it yourself.
+
+Or you can use the transaction API of `link:../../scaladocs/io/vertx/scala/sqlclient/SqlConnection.html[SqlConnection]`:
+
+[source,scala]
+----
+pool.getConnectionFuture().onComplete{
+  case Success(result) => {
+
+    // Transaction must use a connection
+    var conn = result
+
+    // Begin the transaction
+    var tx = conn.begin()
+
+    // Various statements
+    conn.query("INSERT INTO Users (first_name,last_name) VALUES ('Julien','Viet')").executeFuture().onComplete{
+      case Success(result) => {
+        conn.query("INSERT INTO Users (first_name,last_name) VALUES ('Emad','Alblueshi')").executeFuture().onComplete{
+          case Success(result) => {
+            // Commit the transaction
+            tx.commitFuture().onComplete{
+              case Success(result) => println("Success")
+              case Failure(cause) => println("Failure")
+            }
+          }
+          case Failure(cause) => {
+            println(s"$cause")
+          }
+        }
+      }
+      case Failure(cause) => {
+        println(s"$cause")
+      }
+    }
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+When the database server reports the current transaction is failed (e.g the infamous _current transaction is aborted, commands ignored until
+end of transaction block_), the transaction is rollbacked and the `link:../../scaladocs/io/vertx/scala/sqlclient/Transaction.html#abortHandler()[abortHandler]`
+is called:
+
+[source,scala]
+----
+tx.abortHandler((v: java.lang.Void) => {
+  println("Transaction failed => rollbacked")
+})
+
+----
+
+=== Simplified transaction API
+
+When you use a pool, you can start a transaction directly on the pool.
+
+It borrows a connection from the pool, begins the transaction and releases the connection to the pool when the transaction ends.
+
+[source,scala]
+----
+
+// Acquire a transaction and begin the transaction
+pool.beginFuture().onComplete{
+  case Success(result) => {
+
+    // Get the transaction
+    var tx = result
+
+    // Various statements
+    tx.query("INSERT INTO Users (first_name,last_name) VALUES ('Julien','Viet')").executeFuture().onComplete{
+      case Success(result) => {
+        tx.query("INSERT INTO Users (first_name,last_name) VALUES ('Emad','Alblueshi')").executeFuture().onComplete{
+          case Success(result) => {
+            // Commit the transaction
+            // the connection will automatically to the pool
+            tx.commitFuture().onComplete{
+              case Success(result) => {
+                println("Transaction succeeded")
+              }
+              case Failure(cause) => {
+                println(s"$cause")
+              }
+            }
+          }
+          case Failure(cause) => println("Failure")
+        }
+      }
+      case Failure(cause) => {
+        println(s"$cause")
+      }
+    }
+  }
+  case Failure(cause) => println("Failure")
+}
+
+----
+
+NOTE: this code will not close the connection because it will always be released back to the pool when the transaction

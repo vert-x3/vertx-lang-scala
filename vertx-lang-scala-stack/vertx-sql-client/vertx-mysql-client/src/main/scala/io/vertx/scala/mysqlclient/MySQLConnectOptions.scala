@@ -307,10 +307,6 @@ class MySQLConnectOptions(private val _asJava: JMySQLConnectOptions) extends Ext
     this
   }
 
-  override def getPreparedStatementCacheSqlLimit: Int = {
-    asJava.getPreparedStatementCacheSqlLimit().asInstanceOf[Int]
-  }
-
   override def setProperties(value: Map[String, String]) = {
     asJava.setProperties(value.asJava)
     this

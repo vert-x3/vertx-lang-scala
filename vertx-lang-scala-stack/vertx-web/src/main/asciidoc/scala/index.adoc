@@ -318,6 +318,22 @@ var route = router.route().path("/some/path/")
 route.handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
   // This handler will be called for the following request paths:
 
+  // `/some/path/`
+  // `/some/path//`
+  //
+  // but not:
+  // `/some/path` the end slash in the path makes it strict
+  // `/some/path/subdir`
+})
+
+// paths that do not end with slash are not strict
+// this means that the trailing slash is optional
+// and they match regardless
+var route2 = router.route().path("/some/path")
+
+route2.handler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
+  // This handler will be called for the following request paths:
+
   // `/some/path`
   // `/some/path/`
   // `/some/path//`
@@ -325,6 +341,7 @@ route.handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
   // but not:
   // `/some/path/subdir`
 })
+
 
 
 ----
@@ -348,12 +365,12 @@ route.handler((routingContext: io.vertx.scala.ext.web.RoutingContext) => {
   // This handler will be called for any path that starts with
   // `/some/path/`, e.g.
 
-  // `/some/path`
   // `/some/path/`
   // `/some/path/subdir`
   // `/some/path/subdir/blah.html`
   //
   // but not:
+  // `/some/path` the path is strict because it ends with slash
   // `/some/bath`
 })
 
@@ -1343,6 +1360,29 @@ on a matching route before your application logic.
 
 The session handler handles the creation of session cookies and the lookup of the session so you don't have to do
 that yourself.
+
+Sessions data is saved to a session store automatically after the response headers have been sent to the client.
+But note that, with this mechanism, there is no guarantee the data is fully persisted before the client receives the response.
+There are occasions though when this guarantee is needed.
+In this case you can force a flush.
+This will disable the automatic saving process, unless the flushing operation failed.
+This allows to control the state before completing the response like:
+
+[source,scala]
+----
+
+router.route().handler((ctx: io.vertx.scala.ext.web.RoutingContext) => {
+  sessionHandler.flushFuture(ctx).onComplete{
+    case Success(result) => {
+      ctx.response().end("Success!")
+    }
+    case Failure(cause) => {
+      println(s"$cause")
+    }
+  }
+})
+
+----
 
 === Session stores
 

@@ -20,14 +20,17 @@ import io.vertx.lang.scala.AsyncResultWrapper
 import scala.reflect.runtime.universe._
 import io.vertx.kafka.admin.{ConsumerGroupListing => JConsumerGroupListing}
 import io.vertx.kafka.admin.{NewTopic => JNewTopic}
-import io.vertx.core.AsyncResult
 import scala.collection.JavaConverters._
-import io.vertx.core.Handler
-import io.vertx.kafka.admin.{KafkaAdminClient => JKafkaAdminClient}
 import io.vertx.scala.core.Vertx
+import io.vertx.kafka.client.common.{TopicPartition => JTopicPartition}
 import io.vertx.core.{Vertx => JVertx}
-import io.vertx.lang.scala.HandlerOps._
 import io.vertx.lang.scala.Converter._
+import io.vertx.core.AsyncResult
+import io.vertx.core.Handler
+import io.vertx.kafka.admin.{ClusterDescription => JClusterDescription}
+import io.vertx.kafka.admin.{KafkaAdminClient => JKafkaAdminClient}
+import io.vertx.scala.kafka.client.common.TopicPartition
+import io.vertx.lang.scala.HandlerOps._
 
 /**
   * Vert.x Kafka Admin client implementation
@@ -76,6 +79,31 @@ class KafkaAdminClient(private val _asJava: Object) {
    */
   def close (): Unit = {
     asJava.asInstanceOf[JKafkaAdminClient].close()
+  }
+
+  /**
+   * Describe the nodes in the cluster with the default options   * @param completionHandler handler called on operation completed with the cluster description
+   */
+  def describeCluster (completionHandler: Handler[AsyncResult[ClusterDescription]]): Unit = {
+    asJava.asInstanceOf[JKafkaAdminClient].describeCluster((if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[JClusterDescription]]{def handle(x: AsyncResult[JClusterDescription]) {completionHandler.handle(AsyncResultWrapper[JClusterDescription, ClusterDescription](x, a => ClusterDescription(a)))}}))
+  }
+
+  /**
+   * Delete consumer groups from the cluster.   * @param groupIds the ids of the groups to delete
+   * @param completionHandler handler called on operation completed
+   */
+  def deleteConsumerGroups (groupIds: scala.collection.mutable.Buffer[String], completionHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JKafkaAdminClient].deleteConsumerGroups(groupIds.map(x => x.asInstanceOf[java.lang.String]).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+  }
+
+  /**
+   * Delete committed offsets for a set of partitions in a consumer group. This will
+   * succeed at the partition level only if the group is not actively subscribed
+   * to the corresponding topic.   * @param groupId The group id of the group whose offsets will be listed
+   * @param partitions The set of partitions in the consumer group whose offsets will be deleted
+   */
+  def deleteConsumerGroupOffsets (groupId: String, partitions: scala.collection.mutable.Set[TopicPartition], completionHandler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JKafkaAdminClient].deleteConsumerGroupOffsets(groupId.asInstanceOf[java.lang.String], partitions.map(x => x.asJava).asJava, (if (completionHandler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {completionHandler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
   /**
@@ -131,6 +159,36 @@ class KafkaAdminClient(private val _asJava: Object) {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[java.util.List[JConsumerGroupListing], scala.collection.mutable.Buffer[ConsumerGroupListing]](x => x.asScala.map(x => ConsumerGroupListing(x)))
     asJava.asInstanceOf[JKafkaAdminClient].listConsumerGroups(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[describeCluster]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def describeClusterFuture (): scala.concurrent.Future[ClusterDescription] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[JClusterDescription, ClusterDescription](x => ClusterDescription(x))
+    asJava.asInstanceOf[JKafkaAdminClient].describeCluster(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[deleteConsumerGroups]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def deleteConsumerGroupsFuture (groupIds: scala.collection.mutable.Buffer[String]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JKafkaAdminClient].deleteConsumerGroups(groupIds.map(x => x.asInstanceOf[java.lang.String]).asJava, promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[deleteConsumerGroupOffsets]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def deleteConsumerGroupOffsetsFuture (groupId: String, partitions: scala.collection.mutable.Set[TopicPartition]): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JKafkaAdminClient].deleteConsumerGroupOffsets(groupId.asInstanceOf[java.lang.String], partitions.map(x => x.asJava).asJava, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

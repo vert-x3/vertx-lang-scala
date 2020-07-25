@@ -20,11 +20,13 @@ import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.sqlclient.{RowSet => JRowSet}
 import scala.reflect.runtime.universe._
 import io.vertx.sqlclient.{PreparedStatement => JPreparedStatement}
+import io.vertx.sqlclient.spi.{DatabaseMetadata => JDatabaseMetadata}
 import io.vertx.lang.scala.Converter._
 import io.vertx.sqlclient.{Row => JRow}
 import io.vertx.sqlclient.{SqlClient => JSqlClient}
 import io.vertx.sqlclient.{Query => JQuery}
 import io.vertx.sqlclient.{Transaction => JTransaction}
+import io.vertx.scala.sqlclient.spi.DatabaseMetadata
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.sqlclient.{SqlConnection => JSqlConnection}
@@ -94,6 +96,13 @@ class SqlConnection(private val _asJava: Object) extends SqlClient (_asJava) {
    */
   override def close (): Unit = {
     asJava.asInstanceOf[JSqlConnection].close()
+  }
+
+  /**
+   * @return The static metadata about the backend database server for this connection
+   */
+  def databaseMetadata (): DatabaseMetadata = {
+    DatabaseMetadata(asJava.asInstanceOf[JSqlConnection].databaseMetadata())
   }
 
 

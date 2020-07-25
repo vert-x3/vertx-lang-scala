@@ -28,18 +28,18 @@ import io.vertx.core.net.{PemKeyCertOptions => JPemKeyCertOptions}
 import io.vertx.core.net.{ProxyOptions => JProxyOptions}
 import io.vertx.core.net.{JksOptions => JJksOptions}
 import io.vertx.scala.ext.auth.PubSecKeyOptions
+import io.vertx.ext.auth.{JWTOptions => JJWTOptions}
 import io.vertx.scala.core.http.Http2Settings
 import io.vertx.ext.auth.{PubSecKeyOptions => JPubSecKeyOptions}
-import io.vertx.scala.ext.jwt.JWTOptions
 import io.vertx.scala.core.http.{HttpClientOptions => ExtHttpClientOptions}
 import io.vertx.core.net.{PfxOptions => JPfxOptions}
 import io.vertx.scala.core.net.PemTrustOptions
 import io.vertx.scala.core.net.PfxOptions
 import scala.collection.JavaConverters._
 import io.vertx.ext.auth.oauth2.{OAuth2ClientOptions => JOAuth2ClientOptions}
+import io.vertx.scala.ext.auth.JWTOptions
 import java.util.concurrent.TimeUnit
 import io.vertx.core.buffer.Buffer
-import io.vertx.ext.jwt.{JWTOptions => JJWTOptions}
 import io.vertx.core.net.{OpenSSLEngineOptions => JOpenSSLEngineOptions}
 import io.vertx.core.net.{JdkSSLEngineOptions => JJdkSSLEngineOptions}
 import io.vertx.scala.core.net.OpenSSLEngineOptions

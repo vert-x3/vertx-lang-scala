@@ -279,10 +279,6 @@ class PgConnectOptions(private val _asJava: JPgConnectOptions) extends ExtSqlCon
     this
   }
 
-  override def getPreparedStatementCacheSqlLimit: Int = {
-    asJava.getPreparedStatementCacheSqlLimit().asInstanceOf[Int]
-  }
-
   override def setProperties(value: Map[String, String]) = {
     asJava.setProperties(value.asJava)
     this

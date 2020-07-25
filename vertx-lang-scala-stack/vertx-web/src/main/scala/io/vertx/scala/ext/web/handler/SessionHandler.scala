@@ -16,18 +16,20 @@
 
 package io.vertx.scala.ext.web.handler
 
-import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.ext.web.sstore.{SessionStore => JSessionStore}
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
-import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import scala.reflect.runtime.universe._
-import io.vertx.core.http.CookieSameSite
 import io.vertx.scala.ext.web.RoutingContext
+import io.vertx.scala.ext.web.sstore.SessionStore
+import io.vertx.lang.scala.Converter._
+import io.vertx.scala.ext.auth.AuthProvider
+import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
+import io.vertx.core.http.CookieSameSite
+import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import io.vertx.ext.web.handler.{SessionHandler => JSessionHandler}
-import io.vertx.scala.ext.web.sstore.SessionStore
 import io.vertx.lang.scala.HandlerOps._
-import io.vertx.lang.scala.Converter._
 
 /**
   * A handler that maintains a [[io.vertx.scala.ext.web.Session]] for each browser
@@ -123,12 +125,45 @@ class SessionHandler(private val _asJava: Object) extends io.vertx.core.Handler[
   }
 
   /**
+   * Set the session cookie SameSite policy to use.   * @param policy to use, `null` for no policy.
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def setCookieSameSite(policy: io.vertx.core.http.CookieSameSite): SessionHandler = {
+    asJava.asInstanceOf[JSessionHandler].setCookieSameSite(policy)
+    this
+  }
+
+  /**
+   * Use a lazy session creation mechanism. The session will only be created when accessed from the context. Thus the
+   * session cookie is set only if the session was accessed.   * @param lazySession true to have a lazy session creation.
+   * @return a reference to this, so the API can be used fluently
+   */
+  
+  def setLazySession(lazySession: Boolean): SessionHandler = {
+    asJava.asInstanceOf[JSessionHandler].setLazySession(lazySession.asInstanceOf[java.lang.Boolean])
+    this
+  }
+
+  /**
    * Set an auth provider that will allow retrieving the User object from the session to the current routing context.   * @param authProvider any auth provider.
    * @return a reference to this, so the API can be used fluently
    */
   
   def setAuthProvider(authProvider: AuthProvider): SessionHandler = {
     asJava.asInstanceOf[JSessionHandler].setAuthProvider(authProvider.asJava.asInstanceOf[JAuthProvider])
+    this
+  }
+
+  /**
+   * Flush a context session earlier to the store, this will allow the end user to have full control on the event of
+   * a failure at the store level. Once a session is flushed no automatic save will be performed at end of request.   * @param ctx the current context
+   * @param handler the event handler to signal a asynchronous response.
+   * @return fluent self
+   */
+  
+  def flush(ctx: RoutingContext, handler: Handler[AsyncResult[Unit]]): SessionHandler = {
+    asJava.asInstanceOf[JSessionHandler].flush(ctx.asJava.asInstanceOf[JRoutingContext], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
     this
   }
 
@@ -139,14 +174,16 @@ class SessionHandler(private val _asJava: Object) extends io.vertx.core.Handler[
     asJava.asInstanceOf[JSessionHandler].handle(arg0.asJava.asInstanceOf[JRoutingContext])
   }
 
-  /**
-   * Set the session cookie SameSite policy to use.   * @param policy to use, `null` for no policy.
-   * @return a reference to this, so the API can be used fluently
-   */
-  def setCookieSameSite (policy: io.vertx.core.http.CookieSameSite): SessionHandler = {
-    SessionHandler(asJava.asInstanceOf[JSessionHandler].setCookieSameSite(policy))
-  }
 
+ /**
+  * Like [[flush]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def flushFuture (ctx: RoutingContext): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JSessionHandler].flush(ctx.asJava.asInstanceOf[JRoutingContext], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 

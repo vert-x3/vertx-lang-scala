@@ -16,16 +16,16 @@
 
 package io.vertx.scala.ext.auth.jwt
 
+import io.vertx.ext.auth.{JWTOptions => JJWTOptions}
 import io.vertx.ext.auth.jwt.{JWTAuthOptions => JJWTAuthOptions}
 import io.vertx.ext.auth.{PubSecKeyOptions => JPubSecKeyOptions}
-import io.vertx.scala.ext.jwt.JWTOptions
-import io.vertx.ext.jwt.{JWTOptions => JJWTOptions}
 import io.vertx.ext.auth.{SecretOptions => JSecretOptions}
 import io.vertx.scala.ext.auth.SecretOptions
 import io.vertx.core.json.JsonObject
 import io.vertx.scala.ext.auth.KeyStoreOptions
 import io.vertx.lang.scala.json.Json._
 import scala.collection.JavaConverters._
+import io.vertx.scala.ext.auth.JWTOptions
 import io.vertx.scala.ext.auth.PubSecKeyOptions
 import io.vertx.ext.auth.{KeyStoreOptions => JKeyStoreOptions}
 
@@ -54,8 +54,8 @@ class JWTAuthOptions(private val _asJava: JJWTAuthOptions) {
     this
   }
 
-  def getJWTOptions: io.vertx.scala.ext.jwt.JWTOptions = {
-    io.vertx.scala.ext.jwt.JWTOptions(asJava.getJWTOptions())
+  def getJWTOptions: io.vertx.scala.ext.auth.JWTOptions = {
+    io.vertx.scala.ext.auth.JWTOptions(asJava.getJWTOptions())
   }
 
   def setKeyStore(value: KeyStoreOptions) = {

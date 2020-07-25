@@ -47,15 +47,6 @@ trait WebSocketBase extends ReadStream[io.vertx.core.buffer.Buffer]with WriteStr
   def asJava: java.lang.Object
 
     /**
-   * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.   * @param data the data to write
-   */
-override def end ( data: io.vertx.core.buffer.Buffer): Unit    /**
-   * Same as  but with an `handler` called when the operation completes
-   */
-override def end ( data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit    /**
-   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]   * @return true if write queue is full
-   */
-override def writeQueueFull ( ): Boolean    /**
    * Pause this stream and return a  to transfer the elements of this stream to a destination .
    * <p/>
    * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
@@ -71,7 +62,16 @@ override def pipeTo ( dst: WriteStream[io.vertx.core.buffer.Buffer]): Unit    /*
    * Once this stream has ended or failed, the write stream will be ended and the `handler` will be
    * called with the result.   * @param dst the destination write stream
    */
-override def pipeTo ( dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit  
+override def pipeTo ( dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit    /**
+   * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.   * @param data the data to write
+   */
+override def end ( data: io.vertx.core.buffer.Buffer): Unit    /**
+   * Same as  but with an `handler` called when the operation completes
+   */
+override def end ( data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit    /**
+   * This will return `true` if there are more bytes in the write queue than the value set using [[io.vertx.scala.core.http.WebSocketBase#setWriteQueueMaxSize]]   * @return true if write queue is full
+   */
+override def writeQueueFull ( ): Boolean  
 override def exceptionHandler ( handler: Handler[Throwable]): WebSocketBase  
 override def handler ( handler: Handler[io.vertx.core.buffer.Buffer]): WebSocketBase  
 override def pause ( ): WebSocketBase  
@@ -185,7 +185,7 @@ def closeHandler ( handler: Handler[Unit]): WebSocketBase    /**
    */
 def frameHandler ( handler: Handler[WebSocketFrame]): WebSocketBase    /**
    * Set a text message handler on the connection. This handler will be called similar to the
-   * , but the buffer will be converted to a String first   * @param handler the handler
+   * [[io.vertx.scala.core.http.WebSocketBase#binaryMessageHandler]], but the buffer will be converted to a String first   * @param handler the handler
    * @return a reference to this, so the API can be used fluently
    */
 def textMessageHandler ( handler: Handler[String]): WebSocketBase    /**
@@ -237,7 +237,7 @@ def close ( statusCode: Short, handler: Handler[AsyncResult[Unit]]): Unit    /**
    * @param reason reason of closure
    */
 def close ( statusCode: Short, reason: scala.Option[String]): Unit    /**
-   * Same as  but with an `handler` called when the operation completes
+   * Same as [[io.vertx.scala.core.http.WebSocketBase#close]] but with an `handler` called when the operation completes
    */
 def close ( statusCode: Short, reason: scala.Option[String], handler: Handler[AsyncResult[Unit]]): Unit    /**
    * @return the remote address for this connection, possibly `null` (e.g a server bound on a domain socket)
@@ -254,12 +254,12 @@ def isSsl ( ): Boolean    /**
 def isClosed ( ): Boolean
 
    /**
-  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-  */
-override def endFuture ( data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit]   /**
   * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
-override def pipeToFuture ( dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit]  
+override def pipeToFuture ( dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit]   /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+override def endFuture ( data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit]  
 override def writeFuture ( data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit]   /**
   * Like [[writeFrame]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
@@ -546,7 +546,7 @@ object WebSocketBase {
 
   /**
    * Set a text message handler on the connection. This handler will be called similar to the
-   * , but the buffer will be converted to a String first   * @param handler the handler
+   * [[io.vertx.scala.core.http.WebSocketBase#binaryMessageHandler]], but the buffer will be converted to a String first   * @param handler the handler
    * @return a reference to this, so the API can be used fluently
    */
   
@@ -587,20 +587,6 @@ object WebSocketBase {
 
 
   /**
-   * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.   * @param data the data to write
-   */
-  override def end(data: io.vertx.core.buffer.Buffer): Unit = {
-    asJava.asInstanceOf[JWebSocketBase].end(data)
-  }
-
-  /**
-   * Same as  but with an `handler` called when the operation completes
-   */
-  override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
-    asJava.asInstanceOf[JWebSocketBase].end(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
-  }
-
-  /**
    * Pause this stream and return a  to transfer the elements of this stream to a destination .
    * <p/>
    * The stream will be resumed when the pipe will be wired to a `WriteStream`.   * @return a pipe
@@ -626,6 +612,20 @@ object WebSocketBase {
    */
   override def pipeTo(dst: WriteStream[io.vertx.core.buffer.Buffer], handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JWebSocketBase].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
+  }
+
+  /**
+   * Same as [[io.vertx.scala.core.http.WebSocketBase#end]] but writes some data to the stream before ending.   * @param data the data to write
+   */
+  override def end(data: io.vertx.core.buffer.Buffer): Unit = {
+    asJava.asInstanceOf[JWebSocketBase].end(data)
+  }
+
+  /**
+   * Same as  but with an `handler` called when the operation completes
+   */
+  override def end(data: io.vertx.core.buffer.Buffer, handler: Handler[AsyncResult[Unit]]): Unit = {
+    asJava.asInstanceOf[JWebSocketBase].end(data, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
   }
 
 
@@ -752,7 +752,7 @@ object WebSocketBase {
   }
 
   /**
-   * Same as  but with an `handler` called when the operation completes
+   * Same as [[io.vertx.scala.core.http.WebSocketBase#close]] but with an `handler` called when the operation completes
    */
   def close (statusCode: Short, reason: scala.Option[String], handler: Handler[AsyncResult[Unit]]): Unit = {
     asJava.asInstanceOf[JWebSocketBase].close(statusCode.asInstanceOf[java.lang.Short], reason.map(x => x.asInstanceOf[java.lang.String]).orNull, (if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}}))
@@ -774,22 +774,22 @@ object WebSocketBase {
 
 
  /**
-  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
-  */
-  override def endFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
-    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
-    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
-    asJava.asInstanceOf[JWebSocketBase].end(data, promiseAndHandler._1)
-    promiseAndHandler._2.future
-  }
-
- /**
   * Like [[pipeTo]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
   */
   override def pipeToFuture (dst: WriteStream[io.vertx.core.buffer.Buffer]): scala.concurrent.Future[Unit] = {
     //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
     val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
     asJava.asInstanceOf[JWebSocketBase].pipeTo(dst.asJava.asInstanceOf[JWriteStream[Buffer]], promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
+
+ /**
+  * Like [[end]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  override def endFuture (data: io.vertx.core.buffer.Buffer): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JWebSocketBase].end(data, promiseAndHandler._1)
     promiseAndHandler._2.future
   }
 

@@ -72,8 +72,8 @@ import scala.collection.JavaConverters._
  * Or directly provided as a buffer:
  *
  * <pre>
- * Buffer key = vertx.fileSystem().readFileSync("/mykey.pem");
- * Buffer cert = vertx.fileSystem().readFileSync("/mycert.pem");
+ * Buffer key = vertx.fileSystem().readFileBlocking("/mykey.pem");
+ * Buffer cert = vertx.fileSystem().readFileBlocking("/mycert.pem");
  * options.setPemKeyCertOptions(new PemKeyCertOptions().setKeyValue(key).setCertValue(cert));
  * </pre>
  *

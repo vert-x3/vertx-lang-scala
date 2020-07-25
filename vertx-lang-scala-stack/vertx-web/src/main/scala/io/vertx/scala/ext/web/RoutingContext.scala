@@ -16,6 +16,7 @@
 
 package io.vertx.scala.ext.web
 
+import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.core.http.{HttpServerResponse => JHttpServerResponse}
 import io.vertx.scala.core.http.HttpServerResponse
 import io.vertx.scala.core.http.Cookie
@@ -30,6 +31,7 @@ import io.vertx.ext.web.{ParsedHeaderValues => JParsedHeaderValues}
 import io.vertx.ext.web.{Session => JSession}
 import io.vertx.core.{MultiMap => JMultiMap}
 import io.vertx.core.json.JsonObject
+import io.vertx.core.AsyncResult
 import io.vertx.ext.web.{RoutingContext => JRoutingContext}
 import io.vertx.scala.core.http.HttpServerRequest
 import scala.collection.JavaConverters._
@@ -432,6 +434,14 @@ class RoutingContext(private val _asJava: Object) {
   }
 
   /**
+   * Whether the [[io.vertx.scala.ext.web.RoutingContext#session]] has been already called or not. This is usually used by the
+   * [[io.vertx.scala.ext.web.handler.SessionHandler]].   * @return true if the session has been accessed.
+   */
+  def isSessionAccessed (): Boolean = {
+    asJava.asInstanceOf[JRoutingContext].isSessionAccessed().asInstanceOf[Boolean]
+  }
+
+  /**
    * Get the authenticated user (if any). This will usually be injected by an auth handler if authentication if successful.   * @return the user, or null if the current user is not authenticated.
    */
   def user (): scala.Option[User] = {
@@ -480,6 +490,24 @@ class RoutingContext(private val _asJava: Object) {
    */
   def removeBodyEndHandler (handlerID: Int): Boolean = {
     asJava.asInstanceOf[JRoutingContext].removeBodyEndHandler(handlerID.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
+  }
+
+  /**
+   * Add an end handler for the request/response context. This will be called when the response is disposed or an
+   * exception has been encountered to allow consistent cleanup. The handler is called asynchronously of when the
+   * response has been received by the client.   * @param handler the handler that will be called with either a success or failure result.
+   * @return the id of the handler. This can be used if you later want to remove the handler.
+   */
+  def addEndHandler (handler: Handler[AsyncResult[Unit]]): Int = {
+    asJava.asInstanceOf[JRoutingContext].addEndHandler((if (handler == null) null else new io.vertx.core.Handler[AsyncResult[Void]]{def handle(x: AsyncResult[Void]) {handler.handle(AsyncResultWrapper[Void, Unit](x, a => a))}})).asInstanceOf[Int]
+  }
+
+  /**
+   * Remove an end handler   * @param handlerID the id as returned from io.vertx.scala.ext.web.RoutingContext#addEndHandler(Handler).
+   * @return true if the handler existed and was removed, false otherwise
+   */
+  def removeEndHandler (handlerID: Int): Boolean = {
+    asJava.asInstanceOf[JRoutingContext].removeEndHandler(handlerID.asInstanceOf[java.lang.Integer]).asInstanceOf[Boolean]
   }
 
   /**
@@ -566,6 +594,16 @@ class RoutingContext(private val _asJava: Object) {
     asJava.asInstanceOf[JRoutingContext].queryParam(name.asInstanceOf[java.lang.String]).asScala.map(x => x.asInstanceOf[String])
   }
 
+
+ /**
+  * Like [[addEndHandler]] but returns a [[scala.concurrent.Future]] instead of taking an AsyncResultHandler.
+  */
+  def addEndFuture (): scala.concurrent.Future[Unit] = {
+    //TODO: https://github.com/vert-x3/vertx-codegen/issues/111
+    val promiseAndHandler = handlerForAsyncResultWithConversion[Void, Unit](x => x)
+    asJava.asInstanceOf[JRoutingContext].addEndHandler(promiseAndHandler._1)
+    promiseAndHandler._2.future
+  }
 
 }
 

@@ -16,14 +16,14 @@
 
 package io.vertx.scala.ext.auth.jwt
 
+import io.vertx.ext.auth.{JWTOptions => JJWTOptions}
 import io.vertx.scala.ext.auth.AuthProvider
 import io.vertx.ext.auth.jwt.{JWTAuthOptions => JJWTAuthOptions}
-import io.vertx.scala.ext.jwt.JWTOptions
 import io.vertx.ext.auth.{AuthProvider => JAuthProvider}
 import scala.reflect.runtime.universe._
-import io.vertx.ext.jwt.{JWTOptions => JJWTOptions}
 import io.vertx.ext.auth.jwt.{JWTAuth => JJWTAuth}
 import io.vertx.core.json.JsonObject
+import io.vertx.scala.ext.auth.JWTOptions
 import io.vertx.scala.core.Vertx
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.HandlerOps._

@@ -20,10 +20,14 @@ import io.vertx.lang.scala.AsyncResultWrapper
 import io.vertx.sqlclient.{RowSet => JRowSet}
 import scala.reflect.runtime.universe._
 import io.vertx.sqlclient.{Pool => JPool}
+import io.vertx.scala.core.Vertx
+import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.Converter._
 import io.vertx.sqlclient.{Row => JRow}
+import io.vertx.sqlclient.{SqlConnectOptions => JSqlConnectOptions}
 import io.vertx.sqlclient.{SqlClient => JSqlClient}
 import io.vertx.sqlclient.{Query => JQuery}
+import io.vertx.sqlclient.{PoolOptions => JPoolOptions}
 import io.vertx.sqlclient.{Transaction => JTransaction}
 import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
@@ -109,5 +113,32 @@ class Pool(private val _asJava: Object) extends SqlClient (_asJava) {
 
 object Pool {
   def apply(asJava: JPool) = new Pool(asJava)
+
+  /**
+   * Create a connection pool to the database configured with the given `connectOptions` and default <a href="../../../../../../cheatsheet/PoolOptions.html">PoolOptions</a>   * @param connectOptions the options used to create the connection pool, such as database hostname see <a href="../../../../../../cheatsheet/SqlConnectOptions.html">SqlConnectOptions</a>
+   * @return the connection pool
+   */
+  def pool(connectOptions: SqlConnectOptions): Pool = {
+    Pool(JPool.pool(connectOptions.asJava))//2 pool
+  }
+
+  /**
+   * Create a connection pool to the database configured with the given `connectOptions` and `poolOptions`.   * @param connectOptions the options used to create the connection pool, such as database hostname see <a href="../../../../../../cheatsheet/SqlConnectOptions.html">SqlConnectOptions</a>
+   * @param poolOptions the options for creating the pool see <a href="../../../../../../cheatsheet/PoolOptions.html">PoolOptions</a>
+   * @return the connection pool
+   */
+  def pool(connectOptions: SqlConnectOptions,poolOptions: PoolOptions): Pool = {
+    Pool(JPool.pool(connectOptions.asJava, poolOptions.asJava))//2 pool
+  }
+
+  /**
+   * Create a connection pool to the database configured with the given `connectOptions` and `poolOptions`.   * @param vertx the Vertx instance to be used with the connection pool
+   * @param connectOptions the options used to create the connection pool, such as database hostname see <a href="../../../../../../cheatsheet/SqlConnectOptions.html">SqlConnectOptions</a>
+   * @param poolOptions the options for creating the pool see <a href="../../../../../../cheatsheet/PoolOptions.html">PoolOptions</a>
+   * @return the connection pool
+   */
+  def pool(vertx: Vertx,connectOptions: SqlConnectOptions,poolOptions: PoolOptions): Pool = {
+    Pool(JPool.pool(vertx.asJava.asInstanceOf[JVertx], connectOptions.asJava, poolOptions.asJava))//2 pool
+  }
 
 }

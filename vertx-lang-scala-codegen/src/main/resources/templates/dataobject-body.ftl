@@ -78,8 +78,8 @@ ${typeHelper.renderDoc(type, "   *", property.doc)}
   </#if>
   <#if (property.setter || property.adder) && property.getterMethod??>
     <#if className == "JWTAuthOptions" && property.getterMethod == "getJWTOptions">
-      <#lt>${"  "}def getJWTOptions: io.vertx.scala.ext.jwt.JWTOptions = {
-      <#lt>${"    "}io.vertx.scala.ext.jwt.JWTOptions(asJava.getJWTOptions())
+      <#lt>${"  "}def getJWTOptions: io.vertx.scala.ext.auth.JWTOptions = {
+      <#lt>${"    "}io.vertx.scala.ext.auth.JWTOptions(asJava.getJWTOptions())
       <#lt>${"  "}}
     <#else>
       <#lt>${"  "}<#if !property.declared && superTypes?hasContent>override </#if>def ${property.getterMethod}: ${typeHelper.fromPropertyInfoToScala(property)} = {

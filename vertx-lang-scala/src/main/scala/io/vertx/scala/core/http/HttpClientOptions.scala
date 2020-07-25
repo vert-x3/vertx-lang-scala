@@ -209,6 +209,8 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
    * Set the keep alive timeout for HTTP/2 connections, in seconds.
    * <p/>
    * This value determines how long a connection remains unused in the pool before being evicted and closed.
+   * <p/>
+   * A timeout of <code>0</code> means there is no timeout and the connection can remain indefinitely in the pool.
    */
   def setHttp2KeepAliveTimeout(value: Int) = {
     asJava.setHttp2KeepAliveTimeout(value)
@@ -312,6 +314,8 @@ class HttpClientOptions(private val _asJava: JHttpClientOptions) extends ExtClie
    * Set the keep alive timeout for HTTP/1.x, in seconds.
    * <p/>
    * This value determines how long a connection remains unused in the pool before being evicted and closed.
+   * <p/>
+   * A timeout of <code>0</code> means there is no timeout and the connection can remain indefinitely in the pool.
    */
   def setKeepAliveTimeout(value: Int) = {
     asJava.setKeepAliveTimeout(value)

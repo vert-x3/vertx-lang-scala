@@ -349,7 +349,7 @@ consumer.subscribeFuture("test").onComplete{
 
     vertx.setPeriodic(1000, (timerId: java.lang.Long) => {
 
-      consumer.pollFuture(100).onComplete{
+      consumer.pollFuture(java.time.Duration.ofMillis(100)).onComplete{
         case Success(result) => {
 
           var records = result

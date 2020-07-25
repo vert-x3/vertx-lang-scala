@@ -48,7 +48,7 @@ import scala.collection.JavaConverters._
  * 
  *
  * <pre>
- * Buffer cert = vertx.fileSystem().readFileSync("/cert.pem");
+ * Buffer cert = vertx.fileSystem().readFileBlocking("/cert.pem");
  * HttpServerOptions options = new HttpServerOptions();
  * options.setPemTrustOptions(new PemTrustOptions().addCertValue(cert));
  * </pre>

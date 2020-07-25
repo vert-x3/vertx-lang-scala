@@ -548,11 +548,7 @@ class KafkaConsumer[K: TypeTag, V: TypeTag](private val _asJava: Object) extends
   }
 
   /**
-   * Sets the poll timeout (in ms) for the underlying native Kafka Consumer. Defaults to 1000.
-   * Setting timeout to a lower value results in a more 'responsive' client, because it will block for a shorter period
-   * if no data is available in the assigned partition and therefore allows subsequent actions to be executed with a shorter
-   * delay. At the same time, the client will poll more frequently and thus will potentially create a higher load on the Kafka Broker.   * @param timeout The time, in milliseconds, spent waiting in poll if data is not available in the buffer. If 0, returns immediately with any records that are available currently in the native Kafka consumer's buffer, else returns empty. Must not be negative.
-   */
+   * Sets the poll timeout (in ms) for the underlying native Kafka Consumer. Defaults to 1000.   */
   
   def pollTimeout(timeout: Long): KafkaConsumer[K, V] = {
     asJava.asInstanceOf[JKafkaConsumer[Object, Object]].pollTimeout(timeout.asInstanceOf[java.lang.Long])

@@ -87,13 +87,13 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
 
   /**
    * Compose this future with a `mapper` function.
-   *
+   * 
    * When this future (the one on which `compose` is called) succeeds, the `mapper` will be called with
    * the completed value and this mapper returns another future object. This returned future completion will complete
    * the future returned by this method call.
-   *
+   * 
    * If the `mapper` throws an exception, the returned future will be failed with this exception.
-   *
+   * 
    * When this future fails, the failure will be propagated to the returned future and the `mapper`
    * will not be called.   * @param mapper the mapper function
    * @return the composed future
@@ -104,15 +104,15 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
 
   /**
    * Compose this future with a `successMapper` and `failureMapper` functions.
-   *
+   * 
    * When this future (the one on which `compose` is called) succeeds, the `successMapper` will be called with
    * the completed value and this mapper returns another future object. This returned future completion will complete
    * the future returned by this method call.
-   *
+   * 
    * When this future (the one on which `compose` is called) fails, the `failureMapper` will be called with
    * the failure and this mapper returns another future object. This returned future completion will complete
    * the future returned by this method call.
-   *
+   * 
    * If any mapper function throws an exception, the returned future will be failed with this exception.   * @param successMapper the function mapping the success
    * @param failureMapper the function mapping the failure
    * @return the composed future
@@ -123,12 +123,12 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
 
   /**
    * Apply a `mapper` function on this future.
-   *
+   * 
    * When this future succeeds, the `mapper` will be called with the completed value and this mapper
    * returns a value. This value will complete the future returned by this method call.
-   *
+   * 
    * If the `mapper` throws an exception, the returned future will be failed with this exception.
-   *
+   * 
    * When this future fails, the failure will be propagated to the returned future and the `mapper`
    * will not be called.   * @param mapper the mapper function
    * @return the mapped future
@@ -148,12 +148,12 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
 
   /**
    * Apply a `mapper` function on this future.
-   *
+   * 
    * When this future fails, the `mapper` will be called with the completed value and this mapper
    * returns a value. This value will complete the future returned by this method call.
-   *
+   * 
    * If the `mapper` throws an exception, the returned future will be failed with this exception.
-   *
+   * 
    * When this future succeeds, the result will be propagated to the returned future and the `mapper`
    * will not be called.   * @param mapper the mapper function
    * @return the mapped future
@@ -164,9 +164,9 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
 
   /**
    * Map the failure of a future to a specific `value`.
-   *
+   * 
    * When this future fails, this `value` will complete the future returned by this method call.
-   *
+   * 
    * When this future succeeds, the result will be propagated to the returned future.   * @param value the value that eventually completes the mapped future
    * @return the mapped future
    */
@@ -176,11 +176,11 @@ class CompositeFuture(private val _asJava: Object) extends Future[CompositeFutur
 
   /**
    * Map the failure of a future to `null`.
-   *
+   * 
    * This is a convenience for `future.otherwise((T) null)`.
-   *
+   * 
    * When this future fails, the `null` value will complete the future returned by this method call.
-   *
+   * 
    * When this future succeeds, the result will be propagated to the returned future.   * @return the mapped future
    */
   override def otherwiseEmpty(): Future[CompositeFuture] = {

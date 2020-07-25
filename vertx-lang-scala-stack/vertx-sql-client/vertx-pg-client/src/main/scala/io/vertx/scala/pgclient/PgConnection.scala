@@ -22,6 +22,7 @@ import scala.reflect.runtime.universe._
 import io.vertx.pgclient.{PgConnection => JPgConnection}
 import io.vertx.pgclient.{PgNotification => JPgNotification}
 import io.vertx.scala.core.Vertx
+import io.vertx.sqlclient.spi.{DatabaseMetadata => JDatabaseMetadata}
 import io.vertx.sqlclient.{Row => JRow}
 import io.vertx.scala.sqlclient.Transaction
 import io.vertx.sqlclient.{Query => JQuery}
@@ -38,6 +39,7 @@ import io.vertx.scala.sqlclient.SqlConnection
 import io.vertx.core.{Vertx => JVertx}
 import io.vertx.lang.scala.Converter._
 import io.vertx.sqlclient.{Transaction => JTransaction}
+import io.vertx.scala.sqlclient.spi.DatabaseMetadata
 import io.vertx.core.Handler
 import io.vertx.scala.sqlclient.Query
 import io.vertx.lang.scala.HandlerOps._

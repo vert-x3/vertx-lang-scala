@@ -50,10 +50,17 @@ class PreparedStatement(private val _asJava: Object) {
 
 
   /**
-   * @return create a query cursor with a `fetch` size and empty arguments
+   * Like [[io.vertx.scala.sqlclient.PreparedStatement#cursor]] but with empty arguments.
    */
   def cursor(): Cursor = {
     Cursor(asJava.asInstanceOf[JPreparedStatement].cursor())
+  }
+
+  /**
+   * Like [[io.vertx.scala.sqlclient.PreparedStatement#createStream]] but with empty arguments.
+   */
+  def createStream(fetch: Int): RowStream[Row] = {
+    RowStream[Row](asJava.asInstanceOf[JPreparedStatement].createStream(fetch.asInstanceOf[java.lang.Integer]))
   }
 
 

@@ -39,6 +39,11 @@ class Path(private val _asJava: JPath) {
     asJava.isOpen().asInstanceOf[Boolean]
   }
 
+  def addPoint(value: Point) = {
+    asJava.addPoint(value.asJava)
+    this
+  }
+
   def setPoints(value: scala.collection.mutable.Buffer[Point]) = {
     asJava.setPoints(value.map(_.asJava).asJava)
     this

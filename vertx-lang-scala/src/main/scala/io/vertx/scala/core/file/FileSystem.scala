@@ -237,7 +237,7 @@ class FileSystem(private val _asJava: Object) {
   }
 
   /**
-   * Blocking version of 
+   * Blocking version of [[io.vertx.scala.core.file.FileSystem#chown]]
    *
    */
   

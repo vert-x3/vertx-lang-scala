@@ -193,6 +193,13 @@ class Tuple(private val _asJava: Object) {
     toScala[T](asJava.asInstanceOf[JTuple].get[Object](toJavaClass(`type`), pos.asInstanceOf[java.lang.Integer]))
   }
 
+  /**
+   * @return A String containing the Object#toString value of each element, separated by a comma (,) character
+   */
+  def deepToString(): String = {
+    asJava.asInstanceOf[JTuple].deepToString().asInstanceOf[String]
+  }
+
 
   /**
    * Get an object value at `pos`.   * @param pos the position

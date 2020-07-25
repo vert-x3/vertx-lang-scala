@@ -14,13 +14,3 @@ Prepared queries can be created:
 ----
 `usingConnections02`
 ----
-
-NOTE: prepared query caching depends on the `link:../dataobjects.html#SqlConnectOptions#setCachePreparedStatements()[cachePreparedStatements]` and
-does not depend on whether you are creating prepared queries or use `link:../../scaladocs/io/vertx/scala/sqlclient/SqlClient.html#preparedQuery()[direct prepared queries]`
-
-`link:../../scaladocs/io/vertx/scala/sqlclient/PreparedStatement.html[can perform efficient batching:
-
-[source,scala]
-----
-{@link examples.SqlClientExamples#usingConnections03(io.vertx.sqlclient.SqlConnection)]`
-----

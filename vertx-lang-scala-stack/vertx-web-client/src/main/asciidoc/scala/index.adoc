@@ -252,7 +252,7 @@ client.post(8080, "myserver.mycompany.com", "/some-uri").sendJsonObjectFuture(ne
 
 ----
 
-In Java, Groovy or Kotlin, you can use the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendJson(java.lang.Object))[sendJson]` method that maps
+In Java, Groovy or Kotlin, you can use the `link:../../scaladocs/io/vertx/scala/ext/web/client/HttpRequest.html#sendJson(java.lang.Object)[sendJson]` method that maps
 a POJO (Plain Old Java Object) to a Json object using `Json.encode`
 method
 

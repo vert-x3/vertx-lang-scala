@@ -98,13 +98,13 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
   /**
    * Compose this future with a `mapper` function.
-   *
+   * 
    * When this future (the one on which `compose` is called) succeeds, the `mapper` will be called with
    * the completed value and this mapper returns another future object. This returned future completion will complete
    * the future returned by this method call.
-   *
+   * 
    * If the `mapper` throws an exception, the returned future will be failed with this exception.
-   *
+   * 
    * When this future fails, the failure will be propagated to the returned future and the `mapper`
    * will not be called.   * @param mapper the mapper function
    * @return the composed future
@@ -115,15 +115,15 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
   /**
    * Compose this future with a `successMapper` and `failureMapper` functions.
-   *
+   * 
    * When this future (the one on which `compose` is called) succeeds, the `successMapper` will be called with
    * the completed value and this mapper returns another future object. This returned future completion will complete
    * the future returned by this method call.
-   *
+   * 
    * When this future (the one on which `compose` is called) fails, the `failureMapper` will be called with
    * the failure and this mapper returns another future object. This returned future completion will complete
    * the future returned by this method call.
-   *
+   * 
    * If any mapper function throws an exception, the returned future will be failed with this exception.   * @param successMapper the function mapping the success
    * @param failureMapper the function mapping the failure
    * @return the composed future
@@ -134,12 +134,12 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
   /**
    * Apply a `mapper` function on this future.
-   *
+   * 
    * When this future succeeds, the `mapper` will be called with the completed value and this mapper
    * returns a value. This value will complete the future returned by this method call.
-   *
+   * 
    * If the `mapper` throws an exception, the returned future will be failed with this exception.
-   *
+   * 
    * When this future fails, the failure will be propagated to the returned future and the `mapper`
    * will not be called.   * @param mapper the mapper function
    * @return the mapped future
@@ -150,9 +150,9 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
   /**
    * Map the result of a future to a specific `value`.
-   *
+   * 
    * When this future succeeds, this `value` will complete the future returned by this method call.
-   *
+   * 
    * When this future fails, the failure will be propagated to the returned future.   * @param value the value that eventually completes the mapped future
    * @return the mapped future
    */
@@ -162,11 +162,11 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
   /**
    * Map the result of a future to `null`.
-   *
+   * 
    * This is a conveniency for `future.map((T) null)` or `future.map((Void) null)`.
-   *
+   * 
    * When this future succeeds, `null` will complete the future returned by this method call.
-   *
+   * 
    * When this future fails, the failure will be propagated to the returned future.   * @return the mapped future
    */
   def mapEmpty[V: TypeTag](): Future[V] = {
@@ -184,12 +184,12 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
   /**
    * Apply a `mapper` function on this future.
-   *
+   * 
    * When this future fails, the `mapper` will be called with the completed value and this mapper
    * returns a value. This value will complete the future returned by this method call.
-   *
+   * 
    * If the `mapper` throws an exception, the returned future will be failed with this exception.
-   *
+   * 
    * When this future succeeds, the result will be propagated to the returned future and the `mapper`
    * will not be called.   * @param mapper the mapper function
    * @return the mapped future
@@ -200,9 +200,9 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
   /**
    * Map the failure of a future to a specific `value`.
-   *
+   * 
    * When this future fails, this `value` will complete the future returned by this method call.
-   *
+   * 
    * When this future succeeds, the result will be propagated to the returned future.   * @param value the value that eventually completes the mapped future
    * @return the mapped future
    */
@@ -212,11 +212,11 @@ class Future[T: TypeTag](private val _asJava: Object) {
 
   /**
    * Map the failure of a future to `null`.
-   *
+   * 
    * This is a convenience for `future.otherwise((T) null)`.
-   *
+   * 
    * When this future fails, the `null` value will complete the future returned by this method call.
-   *
+   * 
    * When this future succeeds, the result will be propagated to the returned future.   * @return the mapped future
    */
   def otherwiseEmpty(): Future[T] = {
@@ -241,7 +241,7 @@ class Future[T: TypeTag](private val _asJava: Object) {
   }
 
   /**
-   *  Set a null result. Any handler will be called, if there is one, and the future will be marked as completed.   */
+   * Set a null result. Any handler will be called, if there is one, and the future will be marked as completed.   */
   def complete (): Unit = {
     asJava.asInstanceOf[JFuture[Object]].complete()
   }
