@@ -22,6 +22,7 @@ import io.vertx.core.{AbstractVerticle, Context, Future, Promise, Verticle, Vert
 import scala.util.{Failure, Success}
 import scala.collection.JavaConverters._
 import scala.collection.mutable
+import scala.reflect.ClassTag
 import scala.reflect.runtime.universe._
 
 /**
@@ -132,7 +133,7 @@ object ScalaVerticle {
   private val Log = ScalaLogger.getLogger(classOf[ScalaVerticle].getName)
   Log.trace("Loaded logger to initialize Json-registration.")
 
-  def nameForVerticle[A <: ScalaVerticle: TypeTag]():String = {
-    "scala:"+implicitly[TypeTag[A]].tpe.typeSymbol.fullName
+  def nameForVerticle[A <: ScalaVerticle: ClassTag]():String = {
+    "scala:"+implicitly[ClassTag[A]].runtimeClass.getTypeName
   }
 }
