@@ -6,6 +6,7 @@
 .settings
 .yardoc
 .yardopts
+.sdkmanrc
 bin
 build
 target

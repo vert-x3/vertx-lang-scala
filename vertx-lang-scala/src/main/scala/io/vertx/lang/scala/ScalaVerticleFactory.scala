@@ -53,14 +53,14 @@ class ScalaVerticleFactory extends VerticleFactory {
   private def verticleFromSource(verticleName: String, classLoader: ClassLoader): Verticle = {
     val compiler = new OnTheFlyCompiler(None)
     compiler.tryToCompileClass(verticleName) match {
-      case Some(clazz) => clazz.newInstance().asInstanceOf[ScalaVerticle].asJava()
+      case Some(clazz) => clazz.getDeclaredConstructor().newInstance().asInstanceOf[ScalaVerticle].asJava()
       case None        => throw new RuntimeException(s"Failed to compile $verticleName")
     }
   }
 
   private def verticleFromClass(verticleName: String, classLoader: ClassLoader): Verticle = {
     val clazz = classLoader.loadClass(verticleName.replace("scala:",""))
-    val instance = clazz.newInstance().asInstanceOf[ScalaVerticle]
+    val instance = clazz.getDeclaredConstructor().newInstance().asInstanceOf[ScalaVerticle]
     instance.asJava
   }
 }

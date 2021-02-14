@@ -5,12 +5,12 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-parent</artifactId>
-    <version>14</version>
+    <version>17</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>vertx-lang-scala-parent_2.13</artifactId>
-  <version>4.0.0-SNAPSHOT</version>
+  <version>4.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <inceptionYear>2016</inceptionYear>
   <organization>
@@ -30,7 +30,7 @@
     </license>
   </licenses>
   <properties>
-    <scala.version>2.13.2</scala.version>
+    <scala.version>2.13.4</scala.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <stack.version>${project.version}</stack.version>
@@ -53,7 +53,7 @@
         <plugin>
           <groupId>net.alchim31.maven</groupId>
           <artifactId>scala-maven-plugin</artifactId>
-          <version>4.3.0</version>
+          <version>4.4.0</version>
           <configuration>
             <args>
               <arg>-target:jvm-1.8</arg>
@@ -64,11 +64,7 @@
     </pluginManagement>
   </build>
   <modules>
-    <module>vertx-lang-scala-codegen</module>
     <module>vertx-lang-scala</module>
-    <module>vertx-lang-scala-stack</module>
     <module>vertx-lang-scala-on-the-fly</module>
-    <module>vertx-lang-scala-demo</module>
-    <module>vertx-lang-scala-docs</module>
   </modules>
 </project>

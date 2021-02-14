@@ -1,7 +1,7 @@
 package io.vertx.lang.scala.http
 
-import io.vertx.core.Vertx
-import io.vertx.scala.core._
+import io.vertx.core.{Vertx, http}
+import io.vertx.lang.scala.conv._
 import org.scalatest.flatspec.AsyncFlatSpec
 import org.scalatest.matchers.should.Matchers
 
@@ -14,12 +14,15 @@ class HttpClientTest extends AsyncFlatSpec with Matchers {
     vertx
       .createHttpServer()
       .requestHandler(req => req.response().end(payload))
-      .listenFuture(port)
+      .listen(port)
+      .asScala()
       .flatMap { _ =>
         vertx.createHttpClient()
-          .getFuture(port, "127.0.0.1", "/")
-          .flatMap(_.bodyFuture())
-          .map(_.toString("UTF-8") should equal(payload))
+          .request(http.HttpMethod.GET, port, "127.0.0.1", "/")
+          .asScala()
+          .flatMap(req => req.send().asScala())
+          .flatMap(_.body().asScala())
+          .map(_.toString() should equal(payload))
       }
   }
 
