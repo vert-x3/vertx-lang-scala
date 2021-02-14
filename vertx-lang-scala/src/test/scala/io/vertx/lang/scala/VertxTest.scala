@@ -1,27 +1,26 @@
 package io.vertx.lang.scala
 
 import java.util.concurrent.CountDownLatch
-
-import io.vertx.core.Vertx
-import io.vertx.scala.core._
-import org.scalatest.FlatSpec
+import io.vertx.core.{DeploymentOptions, Vertx}
+import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.concurrent.Waiters.{Waiter, _}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Span}
+import io.vertx.lang.scala.conv._
 
 import scala.util.{Failure, Success}
 
 /**
   * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
-class VertxTest extends FlatSpec with Matchers {
+class VertxTest extends AnyFlatSpec with Matchers {
 
   "Vert.x executeBlocking" should "should perform on a different thread" in {
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     val waiter = new Waiter()
-    vertx.executeBlockingFuture[Long](() => Thread.currentThread().getId).onComplete(s => {
+    vertx.executeBlockingScala[Long](() => Thread.currentThread().getId).onComplete(s => {
       assert(s.get != Thread.currentThread().getId)
       Thread.sleep(1000)
       waiter.dismiss()
@@ -51,7 +50,7 @@ class VertxTest extends FlatSpec with Matchers {
           waiter.dismiss()
         }
       }
-    }, DeploymentOptions().setWorker(true))
+    }, new DeploymentOptions().setWorker(true))
     waiter.await(dismissals(1))
   }
 
@@ -62,7 +61,7 @@ class VertxTest extends FlatSpec with Matchers {
     val waiter = new Waiter()
     val futureWaiter = new Waiter()
 
-    val future = vertx.deployVerticleFuture(new ScalaVerticle {
+    val future = vertx.deployVerticle(new ScalaVerticle {
       override def start(): Unit = {
         waiter.dismiss()
       }
@@ -82,13 +81,13 @@ class VertxTest extends FlatSpec with Matchers {
     val waiter = new Waiter()
     val futureWaiter = new Waiter()
 
-    val future = vertx.deployVerticleFuture(new ScalaVerticle {
+    val future = vertx.deployVerticle(new ScalaVerticle {
       override def start(): Unit = {
         if(vertx.getOrCreateContext().isWorkerContext()) {
           waiter.dismiss()
         }
       }
-    }, DeploymentOptions().setWorker(true))
+    }, new DeploymentOptions().setWorker(true))
     future.onComplete {
       case Success(s) => futureWaiter.dismiss()
       case Failure(t) => t.printStackTrace()

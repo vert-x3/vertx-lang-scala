@@ -17,13 +17,12 @@
 package io.vertx.lang.scala
 
 import io.vertx.core.json.JsonObject
-import io.vertx.core.{AbstractVerticle, Context, Future, Promise, Verticle, Vertx}
+import io.vertx.core.{AbstractVerticle, Context, Promise, Verticle, Vertx}
 
 import scala.util.{Failure, Success}
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import scala.collection.mutable
 import scala.reflect.ClassTag
-import scala.reflect.runtime.universe._
 
 /**
   * Base class for verticle implementations.
@@ -130,9 +129,6 @@ abstract class ScalaVerticle {
 }
 
 object ScalaVerticle {
-  private val Log = ScalaLogger.getLogger(classOf[ScalaVerticle].getName)
-  Log.trace("Loaded logger to initialize Json-registration.")
-
   def nameForVerticle[A <: ScalaVerticle: ClassTag]():String = {
     "scala:"+implicitly[ClassTag[A]].runtimeClass.getTypeName
   }

@@ -1,6 +1,6 @@
 package io.vertx.lang.scala.verticle
 
-import io.vertx.scala.core._
+import io.vertx.lang.scala.conv._
 import io.vertx.core.Vertx
 import io.vertx.lang.scala.ScalaVerticle._
 import io.vertx.lang.scala.{ScalaVerticle, VertxExecutionContext}
@@ -47,7 +47,8 @@ class ScalaVerticleTest extends AsyncFlatSpec with Matchers with ScalaFutures{
     implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     val result = Promise[String]
 
-    vertx.deployVerticleFuture(nameForVerticle[StartFailVerticle])
+    vertx.deployVerticle(nameForVerticle[StartFailVerticle])
+      .asScala()
       .transformWith{
         case Success(_) => fail("Shouldn't succeed")
         case Failure(t) => t.getMessage should equal("Failed in start")
@@ -62,8 +63,9 @@ class ScalaVerticleTest extends AsyncFlatSpec with Matchers with ScalaFutures{
       .localConsumer[String]("stopMethod")
       .handler(m => result.success(m.body()))
 
-    vertx.deployVerticleFuture(nameForVerticle[StopFutureVerticle])
-        .map(depId => vertx.undeploy(depId))
+    vertx.deployVerticle(nameForVerticle[StopFutureVerticle])
+      .asScala()
+      .map(depId => vertx.undeploy(depId))
     whenReady(result.future) {_ should equal("stopFuture")}
   }
 
@@ -75,7 +77,8 @@ class ScalaVerticleTest extends AsyncFlatSpec with Matchers with ScalaFutures{
       .localConsumer[String]("stopMethod")
       .handler(m => result.success(m.body()))
 
-    vertx.deployVerticleFuture(nameForVerticle[StopVerticle])
+    vertx.deployVerticle(nameForVerticle[StopVerticle])
+      .asScala()
       .map(depId => vertx.undeploy(depId))
     whenReady(result.future) {_ should equal("stop")}
   }
@@ -84,9 +87,10 @@ class ScalaVerticleTest extends AsyncFlatSpec with Matchers with ScalaFutures{
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
 
-    vertx.deployVerticleFuture(nameForVerticle[StopFailVerticle])
+    vertx.deployVerticle(nameForVerticle[StopFailVerticle])
+      .asScala()
       .transformWith{
-        case Success(s) => vertx.undeployFuture(s)
+        case Success(s) => vertx.undeploy(s).asScala()
       }
       .transformWith{
         case Failure(t) => t.getMessage should equal("Failed in stop")

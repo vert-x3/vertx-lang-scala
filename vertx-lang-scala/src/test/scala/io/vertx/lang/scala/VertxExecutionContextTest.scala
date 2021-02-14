@@ -2,20 +2,20 @@ package io.vertx.lang.scala
 
 import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
 import io.vertx.core.Vertx
-import io.vertx.scala.core._
 import org.scalatest.Assertions
 import org.scalatest.flatspec.AsyncFlatSpec
 import org.scalatest.matchers.should.Matchers
 
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.{Failure, Success}
+import io.vertx.lang.scala.conv._
 
 class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Assertions {
 
   "Using Promise to complete a Vertx-Future" should "work with a VertxExecutionContext" in {
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
-    vertx.deployVerticleFuture(nameForVerticle[SuccessVerticle])
+    vertx.deployVerticle(nameForVerticle[SuccessVerticle]).asScala()
       .map(res => res should not be empty)
   }
 
@@ -26,7 +26,7 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
     val vertx = Vertx.vertx
     val ctx = vertx.getOrCreateContext()
     implicit val exec = VertxExecutionContext(vertx, ctx)
-    vertx.deployVerticleFuture(nameForVerticle[SuccessVerticle])
+    vertx.deployVerticle(nameForVerticle[SuccessVerticle]).asScala()
       .map(res => {
         idInEventLoopPromise.success(Thread.currentThread().getId)
               Future {
@@ -51,7 +51,7 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
   "A deployment" should "fail if the deployed verticle fails" in {
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
-    vertx.deployVerticleFuture(nameForVerticle[FailVerticle])
+    vertx.deployVerticle(nameForVerticle[FailVerticle]).asScala()
       .transformWith {
         case Failure(t) => t.getMessage should equal("wuha")
         case Success(_) => fail("Deployment shouldn't succeed!")
@@ -63,18 +63,42 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
 class SuccessVerticle extends ScalaVerticle {
 
   override def startFuture(): Future[_] = {
+    val p1 = Promise[Void]()
+    val p2 = Promise[Void]()
+    vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionHandler(ar => {
+      if (ar.failed()) {
+        p1.failure(ar.cause())
+      } else {
+        p1.success(null)
+      }
+    })
+    vertx.eventBus().consumer[String]("asd2").handler(a => println(a)).completionHandler(ar => {
+      if (ar.failed()) {
+        p2.failure(ar.cause())
+      } else {
+        p2.success(null)
+      }
+    })
     Future.sequence(Seq(
-      vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionFuture(),
-      vertx.eventBus().consumer[String]("asd2").handler(a => println(a)).completionFuture())
-    )
+      p1.future,
+      p2.future
+    ))
   }
 }
 
 class FailVerticle extends ScalaVerticle {
 
   override def startFuture(): Future[_] = {
+    val p1 = Promise[Void]()
+    vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionHandler(ar => {
+      if (ar.failed()) {
+        p1.failure(ar.cause())
+      } else {
+        p1.success(null)
+      }
+    })
     Future.sequence(Seq(
-      vertx.eventBus().consumer[String]("asd").handler(a => println(a)).completionFuture(),
+      p1.future,
       Future.failed(new java.lang.Exception("wuha")))
     )
   }
