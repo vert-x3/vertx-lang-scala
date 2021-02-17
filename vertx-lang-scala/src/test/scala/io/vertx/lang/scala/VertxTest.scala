@@ -7,7 +7,6 @@ import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.concurrent.Waiters.{Waiter, _}
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Span}
-import io.vertx.lang.scala.conv._
 
 import scala.util.{Failure, Success}
 

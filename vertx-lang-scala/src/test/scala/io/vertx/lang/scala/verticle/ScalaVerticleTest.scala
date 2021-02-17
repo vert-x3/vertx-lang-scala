@@ -1,6 +1,6 @@
 package io.vertx.lang.scala.verticle
 
-import io.vertx.lang.scala.conv._
+import io.vertx.lang.scala._
 import io.vertx.core.Vertx
 import io.vertx.lang.scala.ScalaVerticle._
 import io.vertx.lang.scala.{ScalaVerticle, VertxExecutionContext}

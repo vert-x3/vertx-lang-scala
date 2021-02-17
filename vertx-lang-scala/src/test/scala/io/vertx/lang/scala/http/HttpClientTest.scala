@@ -1,7 +1,7 @@
 package io.vertx.lang.scala.http
 
 import io.vertx.core.{Vertx, http}
-import io.vertx.lang.scala.conv._
+import io.vertx.lang.scala._
 import org.scalatest.flatspec.AsyncFlatSpec
 import org.scalatest.matchers.should.Matchers
 

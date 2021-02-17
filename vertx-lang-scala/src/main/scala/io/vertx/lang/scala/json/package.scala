@@ -32,7 +32,7 @@ package object json {
   implicit def toJsonObject(js: JsObject): JsonObject = js.internal
 
   implicit class JsObject(val internal: JsonObject) extends AnyVal {
-    import scala.collection.JavaConverters._
+    import scala.jdk.CollectionConverters._
     def asMap: Map[String, AnyRef] = internal.getMap.asScala
   }
 
