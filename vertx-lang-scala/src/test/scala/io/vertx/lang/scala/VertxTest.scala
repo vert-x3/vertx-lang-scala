@@ -12,7 +12,7 @@ import scala.util.{Failure, Success}
 /**
   * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
-class VertxTest extends AnyFlatSpec with Matchers {OnTheFlyCompilerTest
+class VertxTest extends AnyFlatSpec with Matchers {
 
   "Vert.x executeBlocking" should "should perform on a different thread" in {
     val vertx = Vertx.vertx
