@@ -12,7 +12,7 @@ import org.scalatest.time.{Millis, Seconds, Span}
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success}
 
-class ScalaVerticleTest extends AsyncFlatSpec with Matchers with ScalaFutures{
+class ScalaVerticleTest extends AsyncFlatSpec with Matchers with ScalaFutures {
 
   implicit val defaultPatience =
     PatienceConfig(timeout = Span(5, Seconds), interval = Span(500, Millis))

@@ -1,0 +1,73 @@
+= Vert.x for Scala
+
+If you are using Maven or Gradle, add the following dependency to the _dependencies_ section of your
+project descriptor to access the Vert.x Core API and enable the Kotlin support:
+
+* Maven (in your `pom.xml`):
+
+[source,xml,subs="+attributes"]
+----
+<dependency>
+ <groupId>io.vertx</groupId>
+ <artifactId>vertx-core</artifactId>
+ <version>${maven.version}</version>
+</dependency>
+<dependency>
+  <groupId>io.vertx</groupId>
+  <artifactId>vertx-lang-scala</artifactId>
+  <version>${maven.version}</version>
+</dependency>
+----
+
+* Gradle (in your `build.gradle` file):
+
+[source,groovy,subs="+attributes"]
+----
+compile "io.vertx:vertx-core:${maven.version}"
+compile "io.vertx:vertx-lang-scala:${maven.version}"
+----
+
+* SBT (in your `build.sbt` file):
+
+[source,scala,subs="+attributes"]
+----
+libraryDependencies += "io.vertx" % "vertx-core" % "${maven.version}"
+libraryDependencies += "io.vertx" %% "vertx-lang-scala" % "${maven.version}"
+----
+
+== Verticles
+
+=== Writing Verticles
+
+Writing a Verticle with Scala is slightly different from doing it with Java. The main difference is in the base class. Where in Java you would extend {@link io.vertx.core.AbstractVerticle} we have a dedicated base class called {@link io.vertx.lang.scala.ScalaVerticle}.
+
+Here's an example verticle:
+
+[source, scala]
+----
+import io.vertx.lang.scala.verticle.ScalaVerticle
+import io.vertx.lang.scala.conv._
+
+class StartVerticle extends ScalaVerticle{
+  override def start(): Unit = {
+  }
+
+  override def stop(): Unit = {
+  }
+}
+----
+
+[source, scala]
+----
+import io.vertx.lang.scala.verticle.ScalaVerticle
+import io.vertx.lang.scala.conv._
+
+class StartVerticle extends ScalaVerticle{
+  override def startFuture(): Unit = {
+  }
+
+  override def stop(): Unit = {
+  }
+}
+----
+

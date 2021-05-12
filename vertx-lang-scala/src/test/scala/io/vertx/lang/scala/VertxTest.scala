@@ -1,6 +1,5 @@
 package io.vertx.lang.scala
 
-import java.util.concurrent.CountDownLatch
 import io.vertx.core.{DeploymentOptions, Vertx}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
@@ -13,7 +12,7 @@ import scala.util.{Failure, Success}
 /**
   * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */
-class VertxTest extends AnyFlatSpec with Matchers {
+class VertxTest extends AnyFlatSpec with Matchers {OnTheFlyCompilerTest
 
   "Vert.x executeBlocking" should "should perform on a different thread" in {
     val vertx = Vertx.vertx
@@ -28,7 +27,6 @@ class VertxTest extends AnyFlatSpec with Matchers {
   }
 
   "Vert.x" should "deploy a preinstantiated ScalaVerticle with DefaultOptions" in {
-    val cl = new CountDownLatch(1)
     val vertx = Vertx.vertx()
     val waiter = new Waiter()
     vertx.deployVerticle(new ScalaVerticle {
@@ -40,7 +38,6 @@ class VertxTest extends AnyFlatSpec with Matchers {
   }
 
   "Vert.x" should "deploy a preinstantiated ScalaVerticle using the provided options" in {
-    val cl = new CountDownLatch(1)
     val vertx = Vertx.vertx()
     val waiter = new Waiter()
     vertx.deployVerticle(new ScalaVerticle {
@@ -54,7 +51,6 @@ class VertxTest extends AnyFlatSpec with Matchers {
   }
 
   "Vert.x" should "deploy a preinstantiated ScalaVerticle and return a Future" in {
-    val cl = new CountDownLatch(1)
     val vertx = Vertx.vertx()
     implicit val ctx = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     val waiter = new Waiter()
@@ -74,7 +70,6 @@ class VertxTest extends AnyFlatSpec with Matchers {
   }
 
   "Vert.x" should "deploy a preinstantiated ScalaVerticle using the provided options and return a Future" in {
-    val cl = new CountDownLatch(1)
     val vertx = Vertx.vertx()
     implicit val ctx = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     val waiter = new Waiter()
