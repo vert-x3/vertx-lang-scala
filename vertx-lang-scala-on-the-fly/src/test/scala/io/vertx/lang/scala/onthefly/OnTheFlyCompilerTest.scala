@@ -1,16 +1,16 @@
 package io.vertx.lang.scala.onthefly
 
-import java.io.{BufferedWriter, File, FileWriter}
+import java.io.File
 import java.nio.file.Files
-
 import org.junit.runner.RunWith
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.matchers.should.Matchers
 import org.scalatestplus.junit.JUnitRunner
-import org.scalatest.{FlatSpec, Matchers}
 
 @RunWith(classOf[JUnitRunner])
-class OnTheFlyCompilerTest extends FlatSpec with Matchers {
+class OnTheFlyCompilerTest extends AnyFlatSpec with Matchers {
 
-  "A simple test class" should "should be compiled" in {
+"A simple test class" should "should be compiled" in {
     val compiler = new OnTheFlyCompiler(None)
     val script   = "class Test{}"
     compiler.compileClass(script)
