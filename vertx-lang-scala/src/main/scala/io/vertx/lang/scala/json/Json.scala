@@ -15,6 +15,9 @@
  */
 package io.vertx.lang.scala.json
 
+import java.util
+import scala.jdk.CollectionConverters.ListHasAsScala
+
 /**
  * Helper to construct JsonObjects and JsonArrays.
  *
@@ -29,29 +32,44 @@ object Json {
    * @param json The JSON string.
    * @return The decoded JsonArray.
    */
-  def fromArrayString(json: String): JsonArray = new JsonArray(json)
+  def arr(json: String): JsonArray = new JsonArray(json)
 
   /**
    * Creates a JsonObject from an encoded JSON string.
    * @param json The JSON string.
    * @return The decoded JsonObject.
    */
-  def fromObjectString(json: String): JsonObject = new JsonObject(json)
+  def obj(json: String): JsonObject = new JsonObject(json)
 
   /**
    * Creates an empty JsonArray.
    *
    * @return An empty JsonArray.
    */
-  def emptyArr(): JsonArray = new JsonArray()
+  def arr(): JsonArray = new JsonArray()
 
   /**
    * Creates an empty JsonObject.
    *
    * @return An empty JsonObject.
    */
-  def emptyObj(): JsonObject = new JsonObject()
+  def obj(): JsonObject = new JsonObject()
 
+  /**
+   * Constructs a JsonObject from a fieldName -> value pairs.
+   *
+   * @param map The scala map that will be converted to a JsonObject
+   * @return
+   */
+  def obj(map: Map[String, Any]): JsonObject = obj(map.toSeq: _*)
+
+  /**
+   * Constructs a JsonObject from a fieldName -> value pairs.
+   *
+   * @param map The scala map that will be converted to a JsonObject
+   * @return
+   */
+  def obj(map: util.Map[String, Object]): JsonObject = new JsonObject(map)
   /**
    * Constructs a JsonObject from a fieldName -> value pairs.
    *
@@ -82,6 +100,17 @@ object Json {
       case f => a.add(f)
     }
     a
+  }
+
+  def arr(list: List[Any]): JsonArray = {
+    listToJsArr(list)
+  }
+
+  implicit class JsArray(val internal: JsonArray) extends AnyVal {
+
+    def list: List[_ >: Any] = {
+      internal.getList.asScala.toList
+    }
   }
 
   private def listToJsArr(a: Seq[_]) = Json.arr(a: _*)
