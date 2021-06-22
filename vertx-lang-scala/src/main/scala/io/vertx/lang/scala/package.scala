@@ -112,6 +112,5 @@ package object scala {
       promise.future
     }
 
-
   }
 }

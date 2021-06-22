@@ -34,40 +34,61 @@ compile "io.vertx:vertx-lang-scala:${maven.version}"
 libraryDependencies += "io.vertx" % "vertx-core" % "${maven.version}"
 libraryDependencies += "io.vertx" %% "vertx-lang-scala" % "${maven.version}"
 ----
+== Vert.x and Scala
+For Vert.x 4 we completely reworked Scala-integration works. In the past we had a heavy wrapping layer around every single part of the Vert.x-API which added a lot of indirections and increased the allocastion rate quite a bit.
+Since then a lot of things have changed. Vert.x and Scala moved quite a bit closer. The usage of fluent APIs, Futures and the likes finally made it into the core. Many idioms from the Scala world were finally available and made it way easier to integrate the both.
+The current approach relies on a few conversions and a small set of helper classes to bridge the gap.
 
-== Verticles
+== Quickstart
 
-=== Writing Verticles
+== Helpers
 
-Writing a Verticle with Scala is slightly different from doing it with Java. The main difference is in the base class. Where in Java you would extend {@link io.vertx.core.AbstractVerticle} we have a dedicated base class called {@link io.vertx.lang.scala.ScalaVerticle}.
-
-Here's an example verticle:
+Whether you are using Verticles or plain Vert.x, when using Scala you should always have *io.vertx.lang.scala._* imported.
 
 [source, scala]
 ----
-import io.vertx.lang.scala.verticle.ScalaVerticle
-import io.vertx.lang.scala.conv._
+import io.vertx.lang.scala._
+----
 
-class StartVerticle extends ScalaVerticle{
-  override def start(): Unit = {
+That package provides conversions between VertxFutures and their Scala counterparts.
+
+== Using Verticles
+
+For Scala-based verticles we provide {@link io.vertx.lang.scala.ScalaVerticle}. Extending this class
+gives you everything needed.
+
+[source, scala]
+----
+import scala.concurrent.Future
+
+import io.vertx.lang.scala.ScalaVerticle
+import io.vertx.lang.scala._
+
+class StartFutureVerticle extends ScalaVerticle{
+  override def startFuture(): Future[Unit] = {
+    Future.successful()
   }
 
-  override def stop(): Unit = {
+  override def stopFuture(): Future[Unit] = {
+    Future.successful()
+  }
+
+  def start(): Unit = {
+  }
+
+  def stop(): Unit = {
   }
 }
 ----
 
-[source, scala]
-----
-import io.vertx.lang.scala.verticle.ScalaVerticle
-import io.vertx.lang.scala.conv._
+The biggest differences between this and {@link io.vertx.core.AbstractVerticle} are the addition of startFuture/stopFuture and the existence of an implicit {@link io.vertx.lang.scala.VertxExecutionContext}.
 
-class StartVerticle extends ScalaVerticle{
-  override def startFuture(): Unit = {
-  }
+== Using Vert.x without Verticles
 
-  override def stop(): Unit = {
-  }
-}
-----
+
+== JSON
+
+====
+
+====
 
