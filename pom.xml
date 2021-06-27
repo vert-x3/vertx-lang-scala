@@ -65,6 +65,7 @@
   </build>
   <modules>
     <module>vertx-lang-scala</module>
+    <module>vertx-lang-scala-codegen</module>
     <module>vertx-lang-scala-on-the-fly</module>
   </modules>
 </project>
