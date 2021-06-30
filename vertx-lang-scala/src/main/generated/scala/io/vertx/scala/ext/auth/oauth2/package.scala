@@ -38,6 +38,31 @@ package object oauth2{
   object OAuth2Options {
     def apply() = new OAuth2Options()
     def apply(json: JsonObject) = new OAuth2Options(json)
+    def apply( authorizationPath: java.lang.String = null, clientID: java.lang.String = null, clientSecret: java.lang.String = null, extraParameters: io.vertx.core.json.JsonObject = null, flow: io.vertx.ext.auth.oauth2.OAuth2FlowType = null, headers: io.vertx.core.json.JsonObject = null, httpClientOptions: io.vertx.core.http.HttpClientOptions = null, introspectionPath: java.lang.String = null, jwkPath: java.lang.String = null, jwtOptions: io.vertx.ext.auth.JWTOptions = null, logoutPath: java.lang.String = null, pubSecKeys: scala.collection.immutable.List[io.vertx.ext.auth.PubSecKeyOptions] = null, revocationPath: java.lang.String = null, scopeSeparator: java.lang.String = null, site: java.lang.String = null, tenant: java.lang.String = null, tokenPath: java.lang.String = null, userAgent: java.lang.String = null, userInfoParameters: io.vertx.core.json.JsonObject = null, userInfoPath: java.lang.String = null, validateIssuer: java.lang.Boolean = null): OAuth2Options = {
+      val ret = new OAuth2Options(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (authorizationPath != null) ret.setAuthorizationPath(authorizationPath) 
+      if (clientID != null) ret.setClientID(clientID) 
+      if (clientSecret != null) ret.setClientSecret(clientSecret) 
+      if (extraParameters != null) ret.setExtraParameters(extraParameters) 
+      if (flow != null) ret.setFlow(flow) 
+      if (headers != null) ret.setHeaders(headers) 
+      if (httpClientOptions != null) ret.setHttpClientOptions(httpClientOptions) 
+      if (introspectionPath != null) ret.setIntrospectionPath(introspectionPath) 
+      if (jwkPath != null) ret.setJwkPath(jwkPath) 
+      if (jwtOptions != null) ret.setJWTOptions(jwtOptions) 
+      if (logoutPath != null) ret.setLogoutPath(logoutPath) 
+      if (pubSecKeys != null) ret.setPubSecKeys(pubSecKeys.asJava) 
+      if (revocationPath != null) ret.setRevocationPath(revocationPath) 
+      if (scopeSeparator != null) ret.setScopeSeparator(scopeSeparator) 
+      if (site != null) ret.setSite(site) 
+      if (tenant != null) ret.setTenant(tenant) 
+      if (tokenPath != null) ret.setTokenPath(tokenPath) 
+      if (userAgent != null) ret.setUserAgent(userAgent) 
+      if (userInfoParameters != null) ret.setUserInfoParameters(userInfoParameters) 
+      if (userInfoPath != null) ret.setUserInfoPath(userInfoPath) 
+      if (validateIssuer != null) ret.setValidateIssuer(validateIssuer) 
+      ret
+    }
   }
 
 
@@ -46,6 +71,13 @@ package object oauth2{
   object Oauth2Credentials {
     def apply() = new Oauth2Credentials()
     def apply(json: JsonObject) = new Oauth2Credentials(json)
+    def apply( code: java.lang.String = null, extra: io.vertx.core.json.JsonObject = null, redirectUri: java.lang.String = null): Oauth2Credentials = {
+      val ret = new Oauth2Credentials(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (code != null) ret.setCode(code) 
+      if (extra != null) ret.setExtra(extra) 
+      if (redirectUri != null) ret.setRedirectUri(redirectUri) 
+      ret
+    }
   }
 
 

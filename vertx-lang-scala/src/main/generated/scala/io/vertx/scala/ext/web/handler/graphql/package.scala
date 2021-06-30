@@ -32,6 +32,11 @@ package object graphql{
   object ApolloWSOptions {
     def apply() = new ApolloWSOptions()
     def apply(json: JsonObject) = new ApolloWSOptions(json)
+    def apply( keepAlive: java.lang.Long = null): ApolloWSOptions = {
+      val ret = new ApolloWSOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (keepAlive != null) ret.setKeepAlive(keepAlive) 
+      ret
+    }
   }
 
 
@@ -40,6 +45,12 @@ package object graphql{
   object GraphQLHandlerOptions {
     def apply() = new GraphQLHandlerOptions()
     def apply(json: JsonObject) = new GraphQLHandlerOptions(json)
+    def apply( requestBatchingEnabled: java.lang.Boolean = null, requestMultipartEnabled: java.lang.Boolean = null): GraphQLHandlerOptions = {
+      val ret = new GraphQLHandlerOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (requestBatchingEnabled != null) ret.setRequestBatchingEnabled(requestBatchingEnabled) 
+      if (requestMultipartEnabled != null) ret.setRequestMultipartEnabled(requestMultipartEnabled) 
+      ret
+    }
   }
 
 
@@ -48,6 +59,15 @@ package object graphql{
   object GraphiQLHandlerOptions {
     def apply() = new GraphiQLHandlerOptions()
     def apply(json: JsonObject) = new GraphiQLHandlerOptions(json)
+    def apply( enabled: java.lang.Boolean = null, graphQLUri: java.lang.String = null, headers: scala.collection.immutable.Map[String,java.lang.String] = null, query: java.lang.String = null, variables: io.vertx.core.json.JsonObject = null): GraphiQLHandlerOptions = {
+      val ret = new GraphiQLHandlerOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (enabled != null) ret.setEnabled(enabled) 
+      if (graphQLUri != null) ret.setGraphQLUri(graphQLUri) 
+      if (headers != null) ret.setHeaders(headers.asJava) 
+      if (query != null) ret.setQuery(query) 
+      if (variables != null) ret.setVariables(variables) 
+      ret
+    }
   }
 
 

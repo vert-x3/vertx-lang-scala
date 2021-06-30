@@ -35,6 +35,12 @@ package object shiro{
   object ShiroAuthOptions {
     def apply() = new ShiroAuthOptions()
     def apply(json: JsonObject) = new ShiroAuthOptions(json)
+    def apply( config: io.vertx.core.json.JsonObject = null, `type`: io.vertx.ext.auth.shiro.ShiroAuthRealmType = null): ShiroAuthOptions = {
+      val ret = new ShiroAuthOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (config != null) ret.setConfig(config) 
+      if (`type` != null) ret.setType(`type`) 
+      ret
+    }
   }
 
 

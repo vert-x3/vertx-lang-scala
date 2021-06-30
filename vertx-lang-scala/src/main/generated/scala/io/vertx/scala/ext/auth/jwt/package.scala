@@ -37,6 +37,15 @@ package object jwt{
   object JWTAuthOptions {
     def apply() = new JWTAuthOptions()
     def apply(json: JsonObject) = new JWTAuthOptions(json)
+    def apply( jwks: scala.collection.immutable.List[io.vertx.core.json.JsonObject] = null, jwtOptions: io.vertx.ext.auth.JWTOptions = null, keyStore: io.vertx.ext.auth.KeyStoreOptions = null, permissionsClaimKey: java.lang.String = null, pubSecKeys: scala.collection.immutable.List[io.vertx.ext.auth.PubSecKeyOptions] = null): JWTAuthOptions = {
+      val ret = new JWTAuthOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (jwks != null) ret.setJwks(jwks.asJava) 
+      if (jwtOptions != null) ret.setJWTOptions(jwtOptions) 
+      if (keyStore != null) ret.setKeyStore(keyStore) 
+      if (permissionsClaimKey != null) ret.setPermissionsClaimKey(permissionsClaimKey) 
+      if (pubSecKeys != null) ret.setPubSecKeys(pubSecKeys.asJava) 
+      ret
+    }
   }
 
 

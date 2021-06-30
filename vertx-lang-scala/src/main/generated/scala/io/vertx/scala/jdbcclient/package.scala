@@ -33,6 +33,19 @@ package object jdbcclient{
   object JDBCConnectOptions {
     def apply() = new JDBCConnectOptions()
     def apply(json: JsonObject) = new JDBCConnectOptions(json)
+    def apply( connectTimeout: java.lang.Integer = null, dataSourceImplementation: java.lang.String = null, database: java.lang.String = null, idleTimeout: java.lang.Integer = null, jdbcUrl: java.lang.String = null, metricsEnabled: java.lang.Boolean = null, password: java.lang.String = null, tracingPolicy: io.vertx.core.tracing.TracingPolicy = null, user: java.lang.String = null): JDBCConnectOptions = {
+      val ret = new JDBCConnectOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (connectTimeout != null) ret.setConnectTimeout(connectTimeout) 
+      if (dataSourceImplementation != null) ret.setDataSourceImplementation(dataSourceImplementation) 
+      if (database != null) ret.setDatabase(database) 
+      if (idleTimeout != null) ret.setIdleTimeout(idleTimeout) 
+      if (jdbcUrl != null) ret.setJdbcUrl(jdbcUrl) 
+      if (metricsEnabled != null) ret.setMetricsEnabled(metricsEnabled) 
+      if (password != null) ret.setPassword(password) 
+      if (tracingPolicy != null) ret.setTracingPolicy(tracingPolicy) 
+      if (user != null) ret.setUser(user) 
+      ret
+    }
   }
 
 

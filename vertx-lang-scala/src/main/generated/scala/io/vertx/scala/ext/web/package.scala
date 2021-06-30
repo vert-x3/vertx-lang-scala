@@ -32,6 +32,13 @@ package object web{
   object Http2PushMapping {
     def apply() = new Http2PushMapping()
     def apply(json: JsonObject) = new Http2PushMapping(json)
+    def apply( extensionTarget: java.lang.String = null, filePath: java.lang.String = null, noPush: java.lang.Boolean = null): Http2PushMapping = {
+      val ret = new Http2PushMapping(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (extensionTarget != null) ret.setExtensionTarget(extensionTarget) 
+      if (filePath != null) ret.setFilePath(filePath) 
+      if (noPush != null) ret.setNoPush(noPush) 
+      ret
+    }
   }
 
 
@@ -40,6 +47,16 @@ package object web{
   object SockJSBridgeOptions {
     def apply() = new SockJSBridgeOptions()
     def apply(json: JsonObject) = new SockJSBridgeOptions(json)
+    def apply( inboundPermitteds: scala.collection.immutable.List[io.vertx.ext.bridge.PermittedOptions] = null, maxAddressLength: java.lang.Integer = null, maxHandlersPerSocket: java.lang.Integer = null, outboundPermitteds: scala.collection.immutable.List[io.vertx.ext.bridge.PermittedOptions] = null, pingTimeout: java.lang.Long = null, replyTimeout: java.lang.Long = null): SockJSBridgeOptions = {
+      val ret = new SockJSBridgeOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (inboundPermitteds != null) ret.setInboundPermitteds(inboundPermitteds.asJava) 
+      if (maxAddressLength != null) ret.setMaxAddressLength(maxAddressLength) 
+      if (maxHandlersPerSocket != null) ret.setMaxHandlersPerSocket(maxHandlersPerSocket) 
+      if (outboundPermitteds != null) ret.setOutboundPermitteds(outboundPermitteds.asJava) 
+      if (pingTimeout != null) ret.setPingTimeout(pingTimeout) 
+      if (replyTimeout != null) ret.setReplyTimeout(replyTimeout) 
+      ret
+    }
   }
 
 
@@ -48,6 +65,17 @@ package object web{
   object SockJSHandlerOptions {
     def apply() = new SockJSHandlerOptions()
     def apply(json: JsonObject) = new SockJSHandlerOptions(json)
+    def apply( heartbeatInterval: java.lang.Long = null, insertJSESSIONID: java.lang.Boolean = null, libraryURL: java.lang.String = null, localWriteHandler: java.lang.Boolean = null, maxBytesStreaming: java.lang.Integer = null, registerWriteHandler: java.lang.Boolean = null, sessionTimeout: java.lang.Long = null): SockJSHandlerOptions = {
+      val ret = new SockJSHandlerOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (heartbeatInterval != null) ret.setHeartbeatInterval(heartbeatInterval) 
+      if (insertJSESSIONID != null) ret.setInsertJSESSIONID(insertJSESSIONID) 
+      if (libraryURL != null) ret.setLibraryURL(libraryURL) 
+      if (localWriteHandler != null) ret.setLocalWriteHandler(localWriteHandler) 
+      if (maxBytesStreaming != null) ret.setMaxBytesStreaming(maxBytesStreaming) 
+      if (registerWriteHandler != null) ret.setRegisterWriteHandler(registerWriteHandler) 
+      if (sessionTimeout != null) ret.setSessionTimeout(sessionTimeout) 
+      ret
+    }
   }
 
 

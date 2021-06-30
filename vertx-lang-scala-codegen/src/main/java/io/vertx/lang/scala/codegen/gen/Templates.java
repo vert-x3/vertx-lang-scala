@@ -176,6 +176,13 @@ public class Templates {
     return typeParams.isEmpty() ? "" : "[" + typeParams.stream().map(TypeParamInfo::getName).collect(Collectors.joining(", ")) + "]";
   }
 
+  public static String capitalize(String str) {
+    if(str == null || str.isEmpty()) {
+      return str;
+    }
+    return str.substring(0, 1).toUpperCase() + str.substring(1);
+  }
+
   public static String toScalaWithConversion(String name, TypeInfo type) {
     ClassKind kind = type.getKind();
     String conversion = "";
@@ -233,7 +240,7 @@ public class Templates {
    * @return
    */
   public static String quoteIfScalaKeyword(String possibleKeyword) {
-    if (possibleKeyword.equals("type") || possibleKeyword.equals("object")) {
+    if (possibleKeyword.equals("type") || possibleKeyword.equals("object") || possibleKeyword.equals("match")) {
       return "`" + possibleKeyword + "`";
     }
     return possibleKeyword;
@@ -489,15 +496,85 @@ public class Templates {
    * Takes care of rendering DataObjects.
    */
   public static String renderDataobject(DataObjectModel model, String className, ClassTypeInfo type) {
+    String constructor = "";
+
+    if((model.hasEmptyConstructor() || model.hasJsonConstructor()) && model.getPropertyMap().entrySet().stream().anyMatch(entry -> entry.getValue().isSetter())) {
+      if (model.hasJsonConstructor()) {
+        constructor =
+          applyDataObject(model, type) + " = {\n" +
+            "      val ret = new " + Helper.getSimpleName(type.getName()) + "(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))\n" +
+            dataObjectSetters(model, type) + "\n" +
+            "      ret\n" +
+            "    }";
+      } else {
+        constructor =
+          applyDataObject(model, type) + " = {\n" +
+            "      val ret = new " + Helper.getSimpleName(type.getName()) + "()\n" +
+            dataObjectSetters(model, type) + "\n" +
+            "      ret\n" +
+            "    }";
+      }
+
+    }
+
     if (model.isConcrete()) {
         return "  type " +className + " = "+ getNonGenericType(type.getName()) +"\n" +
         "  object " + Helper.getSimpleName(type.getName()) + " {\n" +
           (model.hasEmptyConstructor() ? "    def apply() = new " + Helper.getSimpleName(type.getName()) + "()\n" : "") +
           (model.hasJsonConstructor() ? "    def apply(json: JsonObject) = new " + Helper.getSimpleName(type.getName()) + "(json)\n" : "") +
           (model.hasStringConstructor() ? "    def apply(str: String) = new " + Helper.getSimpleName(type.getName()) + "(str)\n" : "") +
+          constructor + "\n" +
         "  }\n";
     }
     return "";
+  }
+
+  private static String applyDataObject(DataObjectModel model, ClassTypeInfo type) {
+    return "    def apply( " + model.getPropertyMap().entrySet().stream()
+      .map(entry -> {
+        String propertyName = entry.getKey();
+        PropertyInfo propertyType = entry.getValue();
+        if (propertyType.isList()) {
+          if (propertyType.isSetter()) {
+            return quoteIfScalaKeyword(propertyName) + ": scala.collection.immutable.List[" + propertyType.getType().getName() + "] = null";
+          }
+        } else if (propertyType.isSet()) {
+          if (propertyType.isSetter()) {
+            return quoteIfScalaKeyword(propertyName) + ": scala.collection.immutable.Set[" + propertyType.getType().getName() + "] = null";
+          }
+        } else if (propertyType.isMap()) {
+          if (propertyType.isSetter()) {
+            return quoteIfScalaKeyword(propertyName) + ": scala.collection.immutable.Map[String," + propertyType.getType().getName() + "] = null";
+          }
+        } else {
+          return quoteIfScalaKeyword(propertyName) + ": " + toScalaType.get(propertyType.getType().getKind()).apply(propertyType.getType()) + " = null";
+        }
+        return null;
+      })
+      .filter(Objects::nonNull)
+      .collect(Collectors.joining(", ")) + "): " + Helper.getSimpleName(type.getName()) + "";
+  }
+
+  private static String dataObjectSetters(DataObjectModel model, ClassTypeInfo type) {
+    return model.getPropertyMap().entrySet().stream()
+      .map(entry -> {
+        String propertyName = entry.getKey();
+        PropertyInfo propertyType = entry.getValue();
+        if (propertyType.isSetter()) {
+          String conv = "";
+          if (propertyType.isList()) {
+            conv = ".asJava";
+          } else if (propertyType.isSet()) {
+            conv = ".asJava";
+          } else if (propertyType.isMap()) {
+            conv = ".asJava";
+          }
+          return "      if (" + quoteIfScalaKeyword(propertyName) + " != null) ret." + entry.getValue().getSetterMethod() + "(" + quoteIfScalaKeyword(propertyName) + conv + ") ";
+        }
+        return null;
+      })
+      .filter(Objects::nonNull)
+      .collect(Collectors.joining("\n"));
   }
 
   /**

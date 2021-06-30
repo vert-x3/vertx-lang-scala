@@ -32,6 +32,17 @@ package object jdbc{
   object JDBCAuthOptions {
     def apply() = new JDBCAuthOptions()
     def apply(json: JsonObject) = new JDBCAuthOptions(json)
+    def apply( authenticationQuery: java.lang.String = null, config: io.vertx.core.json.JsonObject = null, datasourceName: java.lang.String = null, permissionsQuery: java.lang.String = null, rolesPrefix: java.lang.String = null, rolesQuery: java.lang.String = null, shared: java.lang.Boolean = null): JDBCAuthOptions = {
+      val ret = new JDBCAuthOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (authenticationQuery != null) ret.setAuthenticationQuery(authenticationQuery) 
+      if (config != null) ret.setConfig(config) 
+      if (datasourceName != null) ret.setDatasourceName(datasourceName) 
+      if (permissionsQuery != null) ret.setPermissionsQuery(permissionsQuery) 
+      if (rolesPrefix != null) ret.setRolesPrefix(rolesPrefix) 
+      if (rolesQuery != null) ret.setRolesQuery(rolesQuery) 
+      if (shared != null) ret.setShared(shared) 
+      ret
+    }
   }
 
 
@@ -40,6 +51,11 @@ package object jdbc{
   object JDBCAuthenticationOptions {
     def apply() = new JDBCAuthenticationOptions()
     def apply(json: JsonObject) = new JDBCAuthenticationOptions(json)
+    def apply( authenticationQuery: java.lang.String = null): JDBCAuthenticationOptions = {
+      val ret = new JDBCAuthenticationOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (authenticationQuery != null) ret.setAuthenticationQuery(authenticationQuery) 
+      ret
+    }
   }
 
 
@@ -48,6 +64,12 @@ package object jdbc{
   object JDBCAuthorizationOptions {
     def apply() = new JDBCAuthorizationOptions()
     def apply(json: JsonObject) = new JDBCAuthorizationOptions(json)
+    def apply( permissionsQuery: java.lang.String = null, rolesQuery: java.lang.String = null): JDBCAuthorizationOptions = {
+      val ret = new JDBCAuthorizationOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (permissionsQuery != null) ret.setPermissionsQuery(permissionsQuery) 
+      if (rolesQuery != null) ret.setRolesQuery(rolesQuery) 
+      ret
+    }
   }
 
 

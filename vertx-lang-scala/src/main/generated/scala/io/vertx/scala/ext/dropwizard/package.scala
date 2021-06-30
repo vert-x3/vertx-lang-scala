@@ -32,6 +32,18 @@ package object dropwizard{
   object DropwizardMetricsOptions {
     def apply() = new DropwizardMetricsOptions()
     def apply(json: JsonObject) = new DropwizardMetricsOptions(json)
+    def apply( baseName: java.lang.String = null, configPath: java.lang.String = null, enabled: java.lang.Boolean = null, factory: io.vertx.core.spi.VertxMetricsFactory = null, jmxDomain: java.lang.String = null, jmxEnabled: java.lang.Boolean = null, metricRegistry: com.codahale.metrics.MetricRegistry = null, registryName: java.lang.String = null): DropwizardMetricsOptions = {
+      val ret = new DropwizardMetricsOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (baseName != null) ret.setBaseName(baseName) 
+      if (configPath != null) ret.setConfigPath(configPath) 
+      if (enabled != null) ret.setEnabled(enabled) 
+      if (factory != null) ret.setFactory(factory) 
+      if (jmxDomain != null) ret.setJmxDomain(jmxDomain) 
+      if (jmxEnabled != null) ret.setJmxEnabled(jmxEnabled) 
+      if (metricRegistry != null) ret.setMetricRegistry(metricRegistry) 
+      if (registryName != null) ret.setRegistryName(registryName) 
+      ret
+    }
   }
 
 
@@ -40,6 +52,13 @@ package object dropwizard{
   object Match {
     def apply() = new Match()
     def apply(json: JsonObject) = new Match(json)
+    def apply( alias: java.lang.String = null, `type`: io.vertx.ext.dropwizard.MatchType = null, value: java.lang.String = null): Match = {
+      val ret = new Match(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (alias != null) ret.setAlias(alias) 
+      if (`type` != null) ret.setType(`type`) 
+      if (value != null) ret.setValue(value) 
+      ret
+    }
   }
 
 

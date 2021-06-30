@@ -32,6 +32,13 @@ package object healthchecks{
   type CheckResult = io.vertx.ext.healthchecks.CheckResult
   object CheckResult {
     def apply() = new CheckResult()
+    def apply( checks: scala.collection.immutable.List[io.vertx.ext.healthchecks.CheckResult] = null, data: io.vertx.core.json.JsonObject = null, id: java.lang.String = null, status: io.vertx.ext.healthchecks.Status = null, up: java.lang.Boolean = null): CheckResult = {
+      val ret = new CheckResult()
+      if (checks != null) ret.setChecks(checks.asJava) 
+      if (id != null) ret.setId(id) 
+      if (status != null) ret.setStatus(status) 
+      ret
+    }
   }
 
 
@@ -40,6 +47,13 @@ package object healthchecks{
   object Status {
     def apply() = new Status()
     def apply(json: JsonObject) = new Status(json)
+    def apply( data: io.vertx.core.json.JsonObject = null, ok: java.lang.Boolean = null, procedureInError: java.lang.Boolean = null): Status = {
+      val ret = new Status(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (data != null) ret.setData(data) 
+      if (ok != null) ret.setOk(ok) 
+      if (procedureInError != null) ret.setProcedureInError(procedureInError) 
+      ret
+    }
   }
 
 

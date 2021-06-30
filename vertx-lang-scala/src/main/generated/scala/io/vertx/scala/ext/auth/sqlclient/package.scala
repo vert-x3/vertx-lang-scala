@@ -32,6 +32,11 @@ package object sqlclient{
   object SqlAuthenticationOptions {
     def apply() = new SqlAuthenticationOptions()
     def apply(json: JsonObject) = new SqlAuthenticationOptions(json)
+    def apply( authenticationQuery: java.lang.String = null): SqlAuthenticationOptions = {
+      val ret = new SqlAuthenticationOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (authenticationQuery != null) ret.setAuthenticationQuery(authenticationQuery) 
+      ret
+    }
   }
 
 
@@ -40,6 +45,12 @@ package object sqlclient{
   object SqlAuthorizationOptions {
     def apply() = new SqlAuthorizationOptions()
     def apply(json: JsonObject) = new SqlAuthorizationOptions(json)
+    def apply( permissionsQuery: java.lang.String = null, rolesQuery: java.lang.String = null): SqlAuthorizationOptions = {
+      val ret = new SqlAuthorizationOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (permissionsQuery != null) ret.setPermissionsQuery(permissionsQuery) 
+      if (rolesQuery != null) ret.setRolesQuery(rolesQuery) 
+      ret
+    }
   }
 
 

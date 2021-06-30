@@ -32,6 +32,12 @@ package object unit{
   object ReportOptions {
     def apply() = new ReportOptions()
     def apply(json: JsonObject) = new ReportOptions(json)
+    def apply( format: java.lang.String = null, to: java.lang.String = null): ReportOptions = {
+      val ret = new ReportOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (format != null) ret.setFormat(format) 
+      if (to != null) ret.setTo(to) 
+      ret
+    }
   }
 
 
@@ -40,6 +46,11 @@ package object unit{
   object ReportingOptions {
     def apply() = new ReportingOptions()
     def apply(json: JsonObject) = new ReportingOptions(json)
+    def apply( reporters: scala.collection.immutable.List[io.vertx.ext.unit.report.ReportOptions] = null): ReportingOptions = {
+      val ret = new ReportingOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (reporters != null) ret.setReporters(reporters.asJava) 
+      ret
+    }
   }
 
 
@@ -48,6 +59,13 @@ package object unit{
   object TestOptions {
     def apply() = new TestOptions()
     def apply(json: JsonObject) = new TestOptions(json)
+    def apply( reporters: scala.collection.immutable.List[io.vertx.ext.unit.report.ReportOptions] = null, timeout: java.lang.Long = null, useEventLoop: java.lang.Boolean = null): TestOptions = {
+      val ret = new TestOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (reporters != null) ret.setReporters(reporters.asJava) 
+      if (timeout != null) ret.setTimeout(timeout) 
+      if (useEventLoop != null) ret.setUseEventLoop(useEventLoop) 
+      ret
+    }
   }
 
 

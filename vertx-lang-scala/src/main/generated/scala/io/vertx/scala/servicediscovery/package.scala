@@ -33,6 +33,15 @@ package object servicediscovery{
   object HttpLocation {
     def apply() = new HttpLocation()
     def apply(json: JsonObject) = new HttpLocation(json)
+    def apply( endpoint: java.lang.String = null, host: java.lang.String = null, port: java.lang.Integer = null, root: java.lang.String = null, ssl: java.lang.Boolean = null): HttpLocation = {
+      val ret = new HttpLocation(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (endpoint != null) ret.setEndpoint(endpoint) 
+      if (host != null) ret.setHost(host) 
+      if (port != null) ret.setPort(port) 
+      if (root != null) ret.setRoot(root) 
+      if (ssl != null) ret.setSsl(ssl) 
+      ret
+    }
   }
 
 
@@ -41,6 +50,16 @@ package object servicediscovery{
   object Record {
     def apply() = new Record()
     def apply(json: JsonObject) = new Record(json)
+    def apply( location: io.vertx.core.json.JsonObject = null, metadata: io.vertx.core.json.JsonObject = null, name: java.lang.String = null, registration: java.lang.String = null, status: io.vertx.servicediscovery.Status = null, `type`: java.lang.String = null): Record = {
+      val ret = new Record(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (location != null) ret.setLocation(location) 
+      if (metadata != null) ret.setMetadata(metadata) 
+      if (name != null) ret.setName(name) 
+      if (registration != null) ret.setRegistration(registration) 
+      if (status != null) ret.setStatus(status) 
+      if (`type` != null) ret.setType(`type`) 
+      ret
+    }
   }
 
 
@@ -49,6 +68,15 @@ package object servicediscovery{
   object ServiceDiscoveryOptions {
     def apply() = new ServiceDiscoveryOptions()
     def apply(json: JsonObject) = new ServiceDiscoveryOptions(json)
+    def apply( announceAddress: java.lang.String = null, autoRegistrationOfImporters: java.lang.Boolean = null, backendConfiguration: io.vertx.core.json.JsonObject = null, name: java.lang.String = null, usageAddress: java.lang.String = null): ServiceDiscoveryOptions = {
+      val ret = new ServiceDiscoveryOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (announceAddress != null) ret.setAnnounceAddress(announceAddress) 
+      if (autoRegistrationOfImporters != null) ret.setAutoRegistrationOfImporters(autoRegistrationOfImporters) 
+      if (backendConfiguration != null) ret.setBackendConfiguration(backendConfiguration) 
+      if (name != null) ret.setName(name) 
+      if (usageAddress != null) ret.setUsageAddress(usageAddress) 
+      ret
+    }
   }
 
 

@@ -32,6 +32,13 @@ package object mongo{
   object AggregateOptions {
     def apply() = new AggregateOptions()
     def apply(json: JsonObject) = new AggregateOptions(json)
+    def apply( allowDiskUse: java.lang.Boolean = null, batchSize: java.lang.Integer = null, maxTime: java.lang.Long = null): AggregateOptions = {
+      val ret = new AggregateOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (allowDiskUse != null) ret.setAllowDiskUse(allowDiskUse) 
+      if (batchSize != null) ret.setBatchSize(batchSize) 
+      if (maxTime != null) ret.setMaxTime(maxTime) 
+      ret
+    }
   }
 
 
@@ -39,6 +46,15 @@ package object mongo{
   type BulkOperation = io.vertx.ext.mongo.BulkOperation
   object BulkOperation {
     def apply(json: JsonObject) = new BulkOperation(json)
+    def apply( document: io.vertx.core.json.JsonObject = null, filter: io.vertx.core.json.JsonObject = null, multi: java.lang.Boolean = null, `type`: io.vertx.ext.mongo.BulkOperationType = null, upsert: java.lang.Boolean = null): BulkOperation = {
+      val ret = new BulkOperation(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (document != null) ret.setDocument(document) 
+      if (filter != null) ret.setFilter(filter) 
+      if (multi != null) ret.setMulti(multi) 
+      if (`type` != null) ret.setType(`type`) 
+      if (upsert != null) ret.setUpsert(upsert) 
+      ret
+    }
   }
 
 
@@ -47,6 +63,12 @@ package object mongo{
   object BulkWriteOptions {
     def apply() = new BulkWriteOptions()
     def apply(json: JsonObject) = new BulkWriteOptions(json)
+    def apply( ordered: java.lang.Boolean = null, writeOption: io.vertx.ext.mongo.WriteOption = null): BulkWriteOptions = {
+      val ret = new BulkWriteOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (ordered != null) ret.setOrdered(ordered) 
+      if (writeOption != null) ret.setWriteOption(writeOption) 
+      ret
+    }
   }
 
 
@@ -55,6 +77,15 @@ package object mongo{
   object FindOptions {
     def apply() = new FindOptions()
     def apply(json: JsonObject) = new FindOptions(json)
+    def apply( batchSize: java.lang.Integer = null, fields: io.vertx.core.json.JsonObject = null, limit: java.lang.Integer = null, skip: java.lang.Integer = null, sort: io.vertx.core.json.JsonObject = null): FindOptions = {
+      val ret = new FindOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (batchSize != null) ret.setBatchSize(batchSize) 
+      if (fields != null) ret.setFields(fields) 
+      if (limit != null) ret.setLimit(limit) 
+      if (skip != null) ret.setSkip(skip) 
+      if (sort != null) ret.setSort(sort) 
+      ret
+    }
   }
 
 
@@ -63,6 +94,11 @@ package object mongo{
   object GridFsDownloadOptions {
     def apply() = new GridFsDownloadOptions()
     def apply(json: JsonObject) = new GridFsDownloadOptions(json)
+    def apply( revision: java.lang.Integer = null): GridFsDownloadOptions = {
+      val ret = new GridFsDownloadOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (revision != null) ret.setRevision(revision) 
+      ret
+    }
   }
 
 
@@ -71,6 +107,12 @@ package object mongo{
   object GridFsUploadOptions {
     def apply() = new GridFsUploadOptions()
     def apply(json: JsonObject) = new GridFsUploadOptions(json)
+    def apply( chunkSizeBytes: java.lang.Integer = null, metadata: io.vertx.core.json.JsonObject = null): GridFsUploadOptions = {
+      val ret = new GridFsUploadOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (chunkSizeBytes != null) ret.setChunkSizeBytes(chunkSizeBytes) 
+      if (metadata != null) ret.setMetadata(metadata) 
+      ret
+    }
   }
 
 
@@ -78,6 +120,7 @@ package object mongo{
   type IndexModel = io.vertx.ext.mongo.IndexModel
   object IndexModel {
     def apply(json: JsonObject) = new IndexModel(json)
+
   }
 
 
@@ -86,6 +129,7 @@ package object mongo{
   object IndexOptions {
     def apply() = new IndexOptions()
     def apply(json: JsonObject) = new IndexOptions(json)
+
   }
 
 
@@ -94,6 +138,7 @@ package object mongo{
   object MongoClientBulkWriteResult {
     def apply() = new MongoClientBulkWriteResult()
     def apply(json: JsonObject) = new MongoClientBulkWriteResult(json)
+
   }
 
 
@@ -102,6 +147,7 @@ package object mongo{
   object MongoClientDeleteResult {
     def apply() = new MongoClientDeleteResult()
     def apply(json: JsonObject) = new MongoClientDeleteResult(json)
+
   }
 
 
@@ -110,6 +156,7 @@ package object mongo{
   object MongoClientUpdateResult {
     def apply() = new MongoClientUpdateResult()
     def apply(json: JsonObject) = new MongoClientUpdateResult(json)
+
   }
 
 
@@ -118,6 +165,15 @@ package object mongo{
   object UpdateOptions {
     def apply() = new UpdateOptions()
     def apply(json: JsonObject) = new UpdateOptions(json)
+    def apply( arrayFilters: io.vertx.core.json.JsonArray = null, multi: java.lang.Boolean = null, returningNewDocument: java.lang.Boolean = null, upsert: java.lang.Boolean = null, writeOption: io.vertx.ext.mongo.WriteOption = null): UpdateOptions = {
+      val ret = new UpdateOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (arrayFilters != null) ret.setArrayFilters(arrayFilters) 
+      if (multi != null) ret.setMulti(multi) 
+      if (returningNewDocument != null) ret.setReturningNewDocument(returningNewDocument) 
+      if (upsert != null) ret.setUpsert(upsert) 
+      if (writeOption != null) ret.setWriteOption(writeOption) 
+      ret
+    }
   }
 
 

@@ -32,6 +32,11 @@ package object cassandra{
   object CassandraClientOptions {
     def apply() = new CassandraClientOptions()
     def apply(json: JsonObject) = new CassandraClientOptions(json)
+    def apply( keyspace: java.lang.String = null): CassandraClientOptions = {
+      val ret = new CassandraClientOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (keyspace != null) ret.setKeyspace(keyspace) 
+      ret
+    }
   }
 
 

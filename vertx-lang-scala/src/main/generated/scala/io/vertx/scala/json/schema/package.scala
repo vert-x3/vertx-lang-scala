@@ -32,6 +32,7 @@ package object schema{
   object SchemaRouterOptions {
     def apply() = new SchemaRouterOptions()
     def apply(json: JsonObject) = new SchemaRouterOptions(json)
+
   }
 
 

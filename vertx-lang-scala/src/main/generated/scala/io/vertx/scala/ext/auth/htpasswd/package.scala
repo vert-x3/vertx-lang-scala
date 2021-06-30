@@ -32,6 +32,12 @@ package object htpasswd{
   object HtpasswdAuthOptions {
     def apply() = new HtpasswdAuthOptions()
     def apply(json: JsonObject) = new HtpasswdAuthOptions(json)
+    def apply( htpasswdFile: java.lang.String = null, plainTextEnabled: java.lang.Boolean = null): HtpasswdAuthOptions = {
+      val ret = new HtpasswdAuthOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (htpasswdFile != null) ret.setHtpasswdFile(htpasswdFile) 
+      if (plainTextEnabled != null) ret.setPlainTextEnabled(plainTextEnabled) 
+      ret
+    }
   }
 
 

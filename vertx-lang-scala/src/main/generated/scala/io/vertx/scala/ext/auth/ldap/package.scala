@@ -32,6 +32,14 @@ package object ldap{
   object LdapAuthenticationOptions {
     def apply() = new LdapAuthenticationOptions()
     def apply(json: JsonObject) = new LdapAuthenticationOptions(json)
+    def apply( authenticationMechanism: java.lang.String = null, authenticationQuery: java.lang.String = null, referral: java.lang.String = null, url: java.lang.String = null): LdapAuthenticationOptions = {
+      val ret = new LdapAuthenticationOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (authenticationMechanism != null) ret.setAuthenticationMechanism(authenticationMechanism) 
+      if (authenticationQuery != null) ret.setAuthenticationQuery(authenticationQuery) 
+      if (referral != null) ret.setReferral(referral) 
+      if (url != null) ret.setUrl(url) 
+      ret
+    }
   }
 
 

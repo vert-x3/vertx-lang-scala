@@ -35,6 +35,21 @@ package object mongo{
   object MongoAuthOptions {
     def apply() = new MongoAuthOptions()
     def apply(json: JsonObject) = new MongoAuthOptions(json)
+    def apply( collectionName: java.lang.String = null, config: io.vertx.core.json.JsonObject = null, datasourceName: java.lang.String = null, passwordField: java.lang.String = null, permissionField: java.lang.String = null, roleField: java.lang.String = null, saltField: java.lang.String = null, saltStyle: io.vertx.ext.auth.mongo.HashSaltStyle = null, shared: java.lang.Boolean = null, usernameCredentialField: java.lang.String = null, usernameField: java.lang.String = null): MongoAuthOptions = {
+      val ret = new MongoAuthOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (collectionName != null) ret.setCollectionName(collectionName) 
+      if (config != null) ret.setConfig(config) 
+      if (datasourceName != null) ret.setDatasourceName(datasourceName) 
+      if (passwordField != null) ret.setPasswordField(passwordField) 
+      if (permissionField != null) ret.setPermissionField(permissionField) 
+      if (roleField != null) ret.setRoleField(roleField) 
+      if (saltField != null) ret.setSaltField(saltField) 
+      if (saltStyle != null) ret.setSaltStyle(saltStyle) 
+      if (shared != null) ret.setShared(shared) 
+      if (usernameCredentialField != null) ret.setUsernameCredentialField(usernameCredentialField) 
+      if (usernameField != null) ret.setUsernameField(usernameField) 
+      ret
+    }
   }
 
 
@@ -43,6 +58,15 @@ package object mongo{
   object MongoAuthenticationOptions {
     def apply() = new MongoAuthenticationOptions()
     def apply(json: JsonObject) = new MongoAuthenticationOptions(json)
+    def apply( collectionName: java.lang.String = null, passwordCredentialField: java.lang.String = null, passwordField: java.lang.String = null, usernameCredentialField: java.lang.String = null, usernameField: java.lang.String = null): MongoAuthenticationOptions = {
+      val ret = new MongoAuthenticationOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (collectionName != null) ret.setCollectionName(collectionName) 
+      if (passwordCredentialField != null) ret.setPasswordCredentialField(passwordCredentialField) 
+      if (passwordField != null) ret.setPasswordField(passwordField) 
+      if (usernameCredentialField != null) ret.setUsernameCredentialField(usernameCredentialField) 
+      if (usernameField != null) ret.setUsernameField(usernameField) 
+      ret
+    }
   }
 
 
@@ -51,6 +75,14 @@ package object mongo{
   object MongoAuthorizationOptions {
     def apply() = new MongoAuthorizationOptions()
     def apply(json: JsonObject) = new MongoAuthorizationOptions(json)
+    def apply( collectionName: java.lang.String = null, permissionField: java.lang.String = null, roleField: java.lang.String = null, usernameField: java.lang.String = null): MongoAuthorizationOptions = {
+      val ret = new MongoAuthorizationOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (collectionName != null) ret.setCollectionName(collectionName) 
+      if (permissionField != null) ret.setPermissionField(permissionField) 
+      if (roleField != null) ret.setRoleField(roleField) 
+      if (usernameField != null) ret.setUsernameField(usernameField) 
+      ret
+    }
   }
 
 

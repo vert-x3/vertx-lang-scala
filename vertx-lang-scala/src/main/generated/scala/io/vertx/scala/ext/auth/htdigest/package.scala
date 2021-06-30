@@ -34,6 +34,22 @@ package object htdigest{
   object HtdigestCredentials {
     def apply() = new HtdigestCredentials()
     def apply(json: JsonObject) = new HtdigestCredentials(json)
+    def apply( algorithm: java.lang.String = null, cnonce: java.lang.String = null, method: java.lang.String = null, nc: java.lang.String = null, nonce: java.lang.String = null, opaque: java.lang.String = null, password: java.lang.String = null, qop: java.lang.String = null, realm: java.lang.String = null, response: java.lang.String = null, uri: java.lang.String = null, username: java.lang.String = null): HtdigestCredentials = {
+      val ret = new HtdigestCredentials(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (algorithm != null) ret.setAlgorithm(algorithm) 
+      if (cnonce != null) ret.setCnonce(cnonce) 
+      if (method != null) ret.setMethod(method) 
+      if (nc != null) ret.setNc(nc) 
+      if (nonce != null) ret.setNonce(nonce) 
+      if (opaque != null) ret.setOpaque(opaque) 
+      if (password != null) ret.setPassword(password) 
+      if (qop != null) ret.setQop(qop) 
+      if (realm != null) ret.setRealm(realm) 
+      if (response != null) ret.setResponse(response) 
+      if (uri != null) ret.setUri(uri) 
+      if (username != null) ret.setUsername(username) 
+      ret
+    }
   }
 
 
