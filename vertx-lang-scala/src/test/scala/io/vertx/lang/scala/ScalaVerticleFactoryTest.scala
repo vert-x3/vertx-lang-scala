@@ -19,7 +19,7 @@ class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
   val defaultPatience = Timeout(2 seconds)
 
   "A bare Scala-Verticle" should "compile and deploy on the fly" in {
-    val promise = Promise[String]
+    val promise = Promise[String]()
     val vertx = Vertx.vertx()
     val dir = Files.createTempDirectory("clazzes")
     val file = new File(dir.toString, "ScalaTestVerticle.scala")
@@ -39,7 +39,7 @@ class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
   }
 
   "A bare Scala-Verticle from the classpath" should "compile and deploy on the fly" in {
-    val promise = Promise[String]
+    val promise = Promise[String]()
     val vertx = Vertx.vertx()
     val scalaVerticleFactory = new ScalaVerticleFactory
 

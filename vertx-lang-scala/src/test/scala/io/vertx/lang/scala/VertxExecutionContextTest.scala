@@ -15,18 +15,18 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
   "Using Promise to complete a Vertx-Future" should "work with a VertxExecutionContext" in {
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
-    vertx.deployVerticle(nameForVerticle[SuccessVerticle]).asScala()
+    vertx.deployVerticle(nameForVerticle[SuccessVerticle]()).asScala()
       .map(res => res should not be empty)
   }
 
   "Switching back to the event loop execution context" should "work even when another context is used in between" in {
-    val idInEventLoopPromise = Promise[Long]
-    val idInGlobalPromise = Promise[Long]
-    val idBackInEventLoopPromise = Promise[Long]
+    val idInEventLoopPromise = Promise[Long]()
+    val idInGlobalPromise = Promise[Long]()
+    val idBackInEventLoopPromise = Promise[Long]()
     val vertx = Vertx.vertx
     val ctx = vertx.getOrCreateContext()
     implicit val exec = VertxExecutionContext(vertx, ctx)
-    vertx.deployVerticle(nameForVerticle[SuccessVerticle]).asScala()
+    vertx.deployVerticle(nameForVerticle[SuccessVerticle]()).asScala()
       .map(res => {
         idInEventLoopPromise.success(Thread.currentThread().getId)
               Future {
@@ -51,7 +51,7 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
   "A deployment" should "fail if the deployed verticle fails" in {
     val vertx = Vertx.vertx
     implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
-    vertx.deployVerticle(nameForVerticle[FailVerticle]).asScala()
+    vertx.deployVerticle(nameForVerticle[FailVerticle]()).asScala()
       .transformWith {
         case Failure(t) => t.getMessage should equal("wuha")
         case Success(_) => fail("Deployment shouldn't succeed!")

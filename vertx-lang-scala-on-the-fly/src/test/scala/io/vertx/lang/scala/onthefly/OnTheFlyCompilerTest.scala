@@ -27,6 +27,7 @@ class OnTheFlyCompilerTest extends AnyFlatSpec with Matchers {
     compiler
       .findClass("Test")
       .get
+      .getDeclaredConstructor()
       .newInstance()
       .asInstanceOf[Extendthis]
       .hello() shouldBe "hello"
@@ -43,6 +44,7 @@ class OnTheFlyCompilerTest extends AnyFlatSpec with Matchers {
     compiler
       .findClass("Test")
       .get
+      .getDeclaredConstructor()
       .newInstance()
       .asInstanceOf[Extendthis]
       .hello() shouldBe "hello"
@@ -104,7 +106,7 @@ class OnTheFlyCompilerTest extends AnyFlatSpec with Matchers {
       .get
 
     val method = clazz.getDeclaredMethod("doIt")
-    val inst = clazz.newInstance()
+    val inst = clazz.getDeclaredConstructor().newInstance()
     method.invoke(inst) should equal("works")
   }
 
@@ -115,7 +117,7 @@ class OnTheFlyCompilerTest extends AnyFlatSpec with Matchers {
       .get
 
     val method = clazz.getDeclaredMethod("doIt")
-    val inst = clazz.newInstance()
+    val inst = clazz.getDeclaredConstructor().newInstance()
     method.invoke(inst) should equal("works2")
   }
 }

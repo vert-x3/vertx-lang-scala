@@ -25,7 +25,7 @@ import org.junit.jupiter.api.Assertions._
 class JsonTest {
 
   @Test
-  def jsonObjectTest() {
+  def jsonObjectTest(): Unit = {
 
     val enc = """{"foo":"foo text","bar":3.45,"baz":false,"myInt":2147483647}"""
 
@@ -45,7 +45,7 @@ class JsonTest {
   }
 
   @Test
-  def wrapperConversionTest() {
+  def wrapperConversionTest(): Unit =  {
 
     val obj = Json.obj("foo" -> "foo text", "optional" -> true)
 
@@ -61,7 +61,7 @@ class JsonTest {
   }
 
   @Test
-  def jsonArrayTest() {
+  def jsonArrayTest(): Unit =  {
 
     val enc = """["f",3,"b",7,35.4,true]"""
     val array = Json.arr("f", 3, "b", 7, 35.4f, true)
@@ -82,7 +82,7 @@ class JsonTest {
   }
 */
   @Test
-  def nestedObjectsTest() {
+  def nestedObjectsTest(): Unit =  {
     val obj =
       Json.obj(
         "webappconf" -> Json.obj(
@@ -107,7 +107,7 @@ class JsonTest {
   }
 
   @Test
-  def nestedObjectsWithListsTest() {
+  def nestedObjectsWithListsTest(): Unit =  {
     val obj =
       Json.obj(
         "webappconf" -> Json.obj(
@@ -131,7 +131,7 @@ class JsonTest {
   }
 
   @Test
-  def nestedObjectsWithArraysTest() {
+  def nestedObjectsWithArraysTest(): Unit =  {
     val obj =
       Json.obj(
         "webappconf" -> Json.obj(
@@ -155,7 +155,7 @@ class JsonTest {
   }
 
   @Test
-  def mixedNestedObjectsTest() {
+  def mixedNestedObjectsTest(): Unit =  {
     val obj =
       Json.obj(
         "webappconf" -> Json.obj(

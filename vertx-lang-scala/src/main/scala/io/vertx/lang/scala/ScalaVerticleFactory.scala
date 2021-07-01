@@ -61,6 +61,6 @@ class ScalaVerticleFactory extends VerticleFactory {
   private def verticleFromClass(verticleName: String, classLoader: ClassLoader): Verticle = {
     val clazz = classLoader.loadClass(verticleName.replace("scala:",""))
     val instance = clazz.getDeclaredConstructor().newInstance().asInstanceOf[ScalaVerticle]
-    instance.asJava
+    instance.asJava()
   }
 }

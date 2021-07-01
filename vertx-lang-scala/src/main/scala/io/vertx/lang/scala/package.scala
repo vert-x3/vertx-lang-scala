@@ -57,7 +57,7 @@ package object scala {
      * @return a Future representing the result of the blocking operation
      */
     def executeBlockingScala[T](blockingFunction: () => T, ordered: Boolean = true): concurrent.Future[T] = {
-      val promise = concurrent.Promise[T]
+      val promise = concurrent.Promise[T]()
       val h: Handler[io.vertx.core.Promise[T]] = { f => util.Try(blockingFunction()) match {
         case util.Success(s) => f.complete(s)
         case util.Failure(t) => f.fail(t)
