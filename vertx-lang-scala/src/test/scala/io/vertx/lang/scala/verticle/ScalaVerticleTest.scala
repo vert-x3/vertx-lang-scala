@@ -61,7 +61,8 @@ class ScalaVerticleTest extends AsyncFlatSpec with Matchers with ScalaFutures {
     val result = Promise[String]()
     vertx.eventBus()
       .localConsumer[String]("stopMethod")
-      .handler(m => result.success(m.body()))
+      .handler(m => result.success(m.body())
+      )
 
     vertx.deployVerticle(nameForVerticle[StopFutureVerticle]())
       .asScala()
@@ -105,11 +106,13 @@ class ScalaVerticleTest extends AsyncFlatSpec with Matchers with ScalaFutures {
 }
 
 class StartFutureVerticle extends ScalaVerticle{
-  override def startFuture(): Future[Unit] = {
+
+  override def start(promise: Promise[Unit]): Unit = {
     vertx.eventBus
       .send("startMethod", "startFuture")
-    Future.successful((): Unit)
+    promise.complete(Success())
   }
+
 }
 
 class StartVerticle extends ScalaVerticle{
@@ -125,10 +128,14 @@ class StartFailVerticle extends ScalaVerticle{
 }
 
 class StopFutureVerticle extends ScalaVerticle{
-  override def stopFuture(): Future[Unit] = {
+
+  /**
+   * Stop the verticle.
+   */
+  override def stop(promise: Promise[Unit]): Unit = {
     vertx.eventBus
       .send("stopMethod", "stopFuture")
-    Future.successful((): Unit)
+    promise.complete(Success())
   }
 }
 

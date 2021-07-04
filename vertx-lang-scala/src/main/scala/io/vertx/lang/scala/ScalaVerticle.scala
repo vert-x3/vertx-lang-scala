@@ -18,6 +18,7 @@ package io.vertx.lang.scala
 
 import io.vertx.core.json.JsonObject
 import io.vertx.core.{AbstractVerticle, Context, Promise, Verticle, Vertx}
+import io.vertx.lang.scala.conv.newPromise
 
 import scala.util.{Failure, Success}
 import scala.jdk.CollectionConverters._
@@ -61,26 +62,22 @@ abstract class ScalaVerticle {
   def stop(): Unit = {
   }
 
-  /**
-    * Stop the verticle.<p>
-    * This is called by Vert.x when the verticle instance is un-deployed. Don't call it yourself.<p>
-    * If your verticle does things in it's shut-down which take some time then you can override this method
-    * and complete the future some time later when clean-up is complete.
-    *
-    * @return a future which should be completed when verticle clean-up is complete.
-    */
-  def stopFuture(): concurrent.Future[_] = concurrent.Future(stop())
 
   /**
-    * Start the verticle.<p>
-    * This is called by Vert.x when the verticle instance is deployed. Don't call it yourself.<p>
-    * If your verticle does things in it's startup which take some time then you can override this method
-    * and complete the future some time later when start up is complete.
-    *
-    * @return a future which should be completed when verticle start-up is complete.
-    */
-  def startFuture(): concurrent.Future[_] = concurrent.Future(start())
+   * Start the verticle.
+   */
+  def start(promise: concurrent.Promise[Unit]) {
+    start()
+    promise.complete(Success(()))
+  }
 
+  /**
+   * Stop the verticle.
+   */
+  def stop(promise: concurrent.Promise[Unit]) {
+    stop()
+    promise.complete(Success(()))
+  }
 
   /**
     * Get the deployment ID of the verticle deployment
@@ -112,18 +109,30 @@ abstract class ScalaVerticle {
       ScalaVerticle.this.init(vertx, context, this)
     }
 
-    override final def start(startFuture: Promise[Void]): Unit = {
-      that.startFuture().onComplete{
-        case Success(_) => startFuture.complete()
-        case Failure(throwable) => startFuture.fail(throwable)
-      }
+    override final def start(startPromise: Promise[Void]): Unit = {
+      that.start(toScalaPromiseUnit(startPromise))
     }
 
-    override final def stop(stopFuture: Promise[Void]): Unit = {
-      that.stopFuture().onComplete{
-        case Success(_) => stopFuture.complete()
-        case Failure(throwable) => stopFuture.fail(throwable)
-      }
+    override final def stop(stopPromise: Promise[Void]): Unit = {
+      that.stop(toScalaPromiseUnit(stopPromise))
+    }
+
+    private def toScalaPromiseUnit(promise: Promise[Void]) = {
+      val scalaPromise = newPromise[Unit]()
+
+      scalaPromise.future.onComplete(scalaTry => {
+        //Not doing pattern matching because of import shenanigans when
+        //getting stuff from scala-package
+        try {
+          //get without exception is a success
+          scalaTry.get
+          promise.complete()
+        } catch {
+          case e: Throwable => promise.fail(e)
+        }
+      })
+
+      scalaPromise
     }
   }
 }

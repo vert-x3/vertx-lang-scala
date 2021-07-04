@@ -1,6 +1,6 @@
 package io.vertx.lang
 
-import io.vertx.lang.scala.conv.{ScalaFuture, ScalaOption, ScalaPromise, scalaFutureToVertxFuture, succScalaSuccess, vertxFutureToScalaFuture}
+import io.vertx.lang.scala.conv.{ScalaFuture, ScalaOption, ScalaPromise, ScalaSuccess, newPromise, scalaFutureToVertxFuture, succScalaSuccess, vertxFutureToScalaFuture}
 import io.vertx.core.{AsyncResult, DeploymentOptions, Handler, Future => VertxFuture, Promise => VertxPromise}
 
 package object scala {
@@ -22,6 +22,24 @@ package object scala {
 
         override def future(): VertxFuture[T] = scalaFutureToVertxFuture(promise.future)
       }
+    }
+  }
+
+  implicit class ScalaPromiseConverter[T](promise: VertxPromise[T])(implicit executor: VertxExecutionContext) {
+    def asScala(): ScalaPromise[T] = {
+      val scalaPromise = newPromise[T]()
+
+      scalaPromise.future.onComplete(scalaTry => {
+        //Not doing pattern matching because of import shenanigans when
+        // getting stuff from scala-package
+        try {
+          promise.complete(scalaTry.get)
+        } catch {
+          case e: Throwable => promise.fail(e)
+        }
+      })
+
+      scalaPromise
     }
   }
 
