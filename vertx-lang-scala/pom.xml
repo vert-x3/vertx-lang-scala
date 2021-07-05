@@ -364,34 +364,24 @@
     <dependency>
       <groupId>co.helmethair</groupId>
       <artifactId>scalatest-junit-runner</artifactId>
-      <version>0.1.5</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.6.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.6.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_2.13</artifactId>
-      <version>3.2.3</version>
       <scope>test</scope>
     </dependency>
 
-    <dependency>
-      <groupId>org.scalactic</groupId>
-      <artifactId>scalactic_2.13</artifactId>
-      <version>3.2.2</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <build>
