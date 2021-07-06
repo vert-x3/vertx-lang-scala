@@ -104,6 +104,35 @@ import io.vertx.lang.scala._
 
 This package provides several converters, especially for converting back and forth between *io.vertx.core.Future* and *scala.concurrent.Future*.
 
+== Vert.x without Verticles
+
+Vert.x can be used without Verticles and doing so in Scala is just as easy as in Java.
+The most important thing is to declare an implicit ExecutionContext for Scala.
+There is the *io.vertx.lang.scala.VertxExecutionContext* which you should use. It takes care to move all code to the correct Vert.x thread bound by the Vert.x-context.
+The following examples shows how to bootstrap a simple Hello-World-HTTP-server without the use of Verticles.
+
+[source, scala]
+----
+import io.vertx.scala.core.HttpServerOptions
+import io.vertx.lang.scala._
+object VertxDemo {
+  def main(args: Array[String]): Unit = {
+    val vertx = Vertx.vertx
+    implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
+    vertx
+      .createHttpServer(HttpServerOptions(port = 8080))
+      .requestHandler(req => {
+        req.response().end("Hello world!")
+      })
+      .listen().asScala()
+      .onComplete{
+        case Success(_) => println("Success")
+        case Failure(_) => println("Failure")
+      }
+  }
+}
+----
+
 == Data Objects with a Scala flavor
 Data objects are heavily used all across the Vert.x API. To make things feel more native to Scala devs we generated their Scala counterparts with some additional functions.
 For each Vert.x module the included data objects have been extended and can be found by simply adding a *scala* to the package name:

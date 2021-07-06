@@ -2,6 +2,8 @@ package io.vertx.lang.scala
 
 import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
 import io.vertx.core.Vertx
+import io.vertx.core.http.HttpServerOptions
+import io.vertx.scala.core.NetServerOptions
 import org.scalatest.Assertions
 import org.scalatest.flatspec.AsyncFlatSpec
 import org.scalatest.matchers.should.Matchers
@@ -58,6 +60,31 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
       }
   }
 
+  "eventbus" should "bla" in {
+
+
+
+  }
+
+}
+
+import io.vertx.scala.core.HttpServerOptions
+import io.vertx.lang.scala._
+object VertxDemo {
+  def main(args: Array[String]): Unit = {
+    val vertx = Vertx.vertx
+    implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
+    vertx
+      .createHttpServer(HttpServerOptions(port = 8080))
+      .requestHandler(req => {
+        req.response().end("Hello world!")
+      })
+      .listen().asScala()
+      .onComplete{
+        case Success(_) => println("Success")
+        case Failure(_) => println("Failure")
+      }
+  }
 }
 
 class SuccessVerticle extends ScalaVerticle {
