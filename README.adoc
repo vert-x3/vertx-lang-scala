@@ -1,0 +1,17 @@
+= Vert.x Scala
+
+image:https://github.com/vert-x3/vertx-lang-scala/workflows/CI/badge.svg?branch=master["Build Status",link="https://github.com/vert-x3/vertx-lang-scala/actions?query=workflow%3ACI"]
+image:https://img.shields.io/maven-central/v/io.vertx/vertx-lang-scala.svg["Maven Central"]
+
+Vert.x-Scala provides language bindings and helpers for using Scala with Vert.x.
+
+Please see the main documentation on the web-site for a full description:
+
+* https://vertx.io/docs/#scala[Web-site documentation]
+
+== Structure
+
+- vertx-lang-scala: The main module containing the actual language implementation
+- vertx-lang-scala-test: Test helpers for Vert.x-Scala unit tests
+- vertx-lang-scala-codegen: codegen for Scala
+- vertx-lang-scala-on-the-fly: A compiler-implementation that allows to compile Scala-code from source/classpath.
