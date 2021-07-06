@@ -144,7 +144,7 @@ public class Docs {
 
   public static String renderDataObjectHtmlLink(TypeInfo type, TypeInfo dataObjectType) {
     StringBuilder link = new StringBuilder();
-    for (String name : QualifiedCase.QUALIFIED.parse(type.getRaw().getPackageName())) {
+    for (String name : QualifiedCase.INSTANCE.parse(type.getRaw().getPackageName())) {
       link.append("../");
     }
 

@@ -28,14 +28,31 @@ import io.vertx.ext.auth.webauthn.{RelyingParty => JRelyingParty}
 package object webauthn{
 
 
+  type AttestationCertificates = io.vertx.ext.auth.webauthn.AttestationCertificates
+  object AttestationCertificates {
+    def apply() = new AttestationCertificates()
+    def apply(json: JsonObject) = new AttestationCertificates(json)
+    def apply( alg: io.vertx.ext.auth.webauthn.PublicKeyCredential = null, x5c: scala.collection.immutable.List[java.lang.String] = null): AttestationCertificates = {
+      val ret = new AttestationCertificates(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (alg != null) ret.setAlg(alg) 
+      if (x5c != null) ret.setX5c(x5c.asJava) 
+      ret
+    }
+  }
+
+
+
   type Authenticator = io.vertx.ext.auth.webauthn.Authenticator
   object Authenticator {
     def apply() = new Authenticator()
     def apply(json: JsonObject) = new Authenticator(json)
-    def apply( counter: java.lang.Long = null, credID: java.lang.String = null, publicKey: java.lang.String = null, `type`: java.lang.String = null, userName: java.lang.String = null): Authenticator = {
+    def apply( aaguid: java.lang.String = null, attestationCertificates: io.vertx.ext.auth.webauthn.AttestationCertificates = null, counter: java.lang.Long = null, credID: java.lang.String = null, fmt: java.lang.String = null, publicKey: java.lang.String = null, `type`: java.lang.String = null, userName: java.lang.String = null): Authenticator = {
       val ret = new Authenticator(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (aaguid != null) ret.setAaguid(aaguid) 
+      if (attestationCertificates != null) ret.setAttestationCertificates(attestationCertificates) 
       if (counter != null) ret.setCounter(counter) 
       if (credID != null) ret.setCredID(credID) 
+      if (fmt != null) ret.setFmt(fmt) 
       if (publicKey != null) ret.setPublicKey(publicKey) 
       if (`type` != null) ret.setType(`type`) 
       if (userName != null) ret.setUserName(userName) 

@@ -68,10 +68,9 @@ package object servicediscovery{
   object ServiceDiscoveryOptions {
     def apply() = new ServiceDiscoveryOptions()
     def apply(json: JsonObject) = new ServiceDiscoveryOptions(json)
-    def apply( announceAddress: java.lang.String = null, autoRegistrationOfImporters: java.lang.Boolean = null, backendConfiguration: io.vertx.core.json.JsonObject = null, name: java.lang.String = null, usageAddress: java.lang.String = null): ServiceDiscoveryOptions = {
+    def apply( announceAddress: java.lang.String = null, backendConfiguration: io.vertx.core.json.JsonObject = null, name: java.lang.String = null, usageAddress: java.lang.String = null): ServiceDiscoveryOptions = {
       val ret = new ServiceDiscoveryOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (announceAddress != null) ret.setAnnounceAddress(announceAddress) 
-      if (autoRegistrationOfImporters != null) ret.setAutoRegistrationOfImporters(autoRegistrationOfImporters) 
       if (backendConfiguration != null) ret.setBackendConfiguration(backendConfiguration) 
       if (name != null) ret.setName(name) 
       if (usageAddress != null) ret.setUsageAddress(usageAddress) 

@@ -58,9 +58,10 @@ package object mail{
     def apply() = new MailConfig()
     def apply(json: JsonObject) = new MailConfig(json)
     def apply(str: String) = new MailConfig(str)
-    def apply( allowRcptErrors: java.lang.Boolean = null, authMethods: java.lang.String = null, connectTimeout: java.lang.Integer = null, disableEsmtp: java.lang.Boolean = null, dkimSignOption: io.vertx.ext.mail.DKIMSignOptions = null, dkimSignOptions: scala.collection.immutable.List[io.vertx.ext.mail.DKIMSignOptions] = null, enableDKIM: java.lang.Boolean = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, hostname: java.lang.String = null, hostnameVerificationAlgorithm: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keepAlive: java.lang.Boolean = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStore: java.lang.String = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, keyStorePassword: java.lang.String = null, localAddress: java.lang.String = null, logActivity: java.lang.Boolean = null, login: io.vertx.ext.mail.LoginOption = null, maxPoolSize: java.lang.Integer = null, metricsName: java.lang.String = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, ownHostname: java.lang.String = null, password: java.lang.String = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, pipelining: java.lang.Boolean = null, port: java.lang.Integer = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, receiveBufferSize: java.lang.Integer = null, reconnectAttempts: java.lang.Integer = null, reconnectInterval: java.lang.Long = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, starttls: io.vertx.ext.mail.StartTLSOptions = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, userAgent: java.lang.String = null, username: java.lang.String = null): MailConfig = {
+    def apply( allowRcptErrors: java.lang.Boolean = null, applicationLayerProtocols: scala.collection.immutable.List[java.lang.String] = null, authMethods: java.lang.String = null, connectTimeout: java.lang.Integer = null, disableEsmtp: java.lang.Boolean = null, dkimSignOption: io.vertx.ext.mail.DKIMSignOptions = null, dkimSignOptions: scala.collection.immutable.List[io.vertx.ext.mail.DKIMSignOptions] = null, enableDKIM: java.lang.Boolean = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, hostname: java.lang.String = null, hostnameVerificationAlgorithm: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keepAlive: java.lang.Boolean = null, keepAliveTimeout: java.lang.Integer = null, keepAliveTimeoutUnit: java.util.concurrent.TimeUnit = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStore: java.lang.String = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, keyStorePassword: java.lang.String = null, localAddress: java.lang.String = null, logActivity: java.lang.Boolean = null, login: io.vertx.ext.mail.LoginOption = null, maxPoolSize: java.lang.Integer = null, metricsName: java.lang.String = null, multiPartOnly: java.lang.Boolean = null, nonProxyHosts: scala.collection.immutable.List[java.lang.String] = null, ntDomain: java.lang.String = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, ownHostname: java.lang.String = null, password: java.lang.String = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, pipelining: java.lang.Boolean = null, poolCleanerPeriod: java.lang.Integer = null, poolCleanerPeriodUnit: java.util.concurrent.TimeUnit = null, port: java.lang.Integer = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, receiveBufferSize: java.lang.Integer = null, reconnectAttempts: java.lang.Integer = null, reconnectInterval: java.lang.Long = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, starttls: io.vertx.ext.mail.StartTLSOptions = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, userAgent: java.lang.String = null, username: java.lang.String = null, workstation: java.lang.String = null): MailConfig = {
       val ret = new MailConfig(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (allowRcptErrors != null) ret.setAllowRcptErrors(allowRcptErrors) 
+      if (applicationLayerProtocols != null) ret.setApplicationLayerProtocols(applicationLayerProtocols.asJava) 
       if (authMethods != null) ret.setAuthMethods(authMethods) 
       if (connectTimeout != null) ret.setConnectTimeout(connectTimeout) 
       if (disableEsmtp != null) ret.setDisableEsmtp(disableEsmtp) 
@@ -74,6 +75,8 @@ package object mail{
       if (idleTimeoutUnit != null) ret.setIdleTimeoutUnit(idleTimeoutUnit) 
       if (jdkSslEngineOptions != null) ret.setJdkSslEngineOptions(jdkSslEngineOptions) 
       if (keepAlive != null) ret.setKeepAlive(keepAlive) 
+      if (keepAliveTimeout != null) ret.setKeepAliveTimeout(keepAliveTimeout) 
+      if (keepAliveTimeoutUnit != null) ret.setKeepAliveTimeoutUnit(keepAliveTimeoutUnit) 
       if (keyCertOptions != null) ret.setKeyCertOptions(keyCertOptions) 
       if (keyStore != null) ret.setKeyStore(keyStore) 
       if (keyStoreOptions != null) ret.setKeyStoreOptions(keyStoreOptions) 
@@ -83,6 +86,9 @@ package object mail{
       if (login != null) ret.setLogin(login) 
       if (maxPoolSize != null) ret.setMaxPoolSize(maxPoolSize) 
       if (metricsName != null) ret.setMetricsName(metricsName) 
+      if (multiPartOnly != null) ret.setMultiPartOnly(multiPartOnly) 
+      if (nonProxyHosts != null) ret.setNonProxyHosts(nonProxyHosts.asJava) 
+      if (ntDomain != null) ret.setNtDomain(ntDomain) 
       if (openSslEngineOptions != null) ret.setOpenSslEngineOptions(openSslEngineOptions) 
       if (ownHostname != null) ret.setOwnHostname(ownHostname) 
       if (password != null) ret.setPassword(password) 
@@ -91,6 +97,8 @@ package object mail{
       if (pfxKeyCertOptions != null) ret.setPfxKeyCertOptions(pfxKeyCertOptions) 
       if (pfxTrustOptions != null) ret.setPfxTrustOptions(pfxTrustOptions) 
       if (pipelining != null) ret.setPipelining(pipelining) 
+      if (poolCleanerPeriod != null) ret.setPoolCleanerPeriod(poolCleanerPeriod) 
+      if (poolCleanerPeriodUnit != null) ret.setPoolCleanerPeriodUnit(poolCleanerPeriodUnit) 
       if (port != null) ret.setPort(port) 
       if (proxyOptions != null) ret.setProxyOptions(proxyOptions) 
       if (receiveBufferSize != null) ret.setReceiveBufferSize(receiveBufferSize) 
@@ -117,6 +125,7 @@ package object mail{
       if (useAlpn != null) ret.setUseAlpn(useAlpn) 
       if (userAgent != null) ret.setUserAgent(userAgent) 
       if (username != null) ret.setUsername(username) 
+      if (workstation != null) ret.setWorkstation(workstation) 
       ret
     }
   }

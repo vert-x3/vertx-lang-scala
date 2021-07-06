@@ -23,6 +23,7 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-codetrans</artifactId>
+      <version>4.0.3</version>
     </dependency>
   </dependencies>
 </project>

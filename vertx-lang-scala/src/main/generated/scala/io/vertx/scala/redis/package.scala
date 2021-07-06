@@ -34,7 +34,7 @@ package object redis{
   object RedisOptions {
     def apply() = new RedisOptions()
     def apply(json: JsonObject) = new RedisOptions(json)
-    def apply( connectionString: java.lang.String = null, endpoint: java.lang.String = null, endpoints: scala.collection.immutable.List[java.lang.String] = null, masterName: java.lang.String = null, maxNestedArrays: java.lang.Integer = null, maxPoolSize: java.lang.Integer = null, maxPoolWaiting: java.lang.Integer = null, maxWaitingHandlers: java.lang.Integer = null, netClientOptions: io.vertx.core.net.NetClientOptions = null, password: java.lang.String = null, poolCleanerInterval: java.lang.Integer = null, poolRecycleTimeout: java.lang.Integer = null, role: io.vertx.redis.client.RedisRole = null, `type`: io.vertx.redis.client.RedisClientType = null, useReplicas: io.vertx.redis.client.RedisReplicas = null): RedisOptions = {
+    def apply( connectionString: java.lang.String = null, endpoint: java.lang.String = null, endpoints: scala.collection.immutable.List[java.lang.String] = null, masterName: java.lang.String = null, maxNestedArrays: java.lang.Integer = null, maxPoolSize: java.lang.Integer = null, maxPoolWaiting: java.lang.Integer = null, maxWaitingHandlers: java.lang.Integer = null, netClientOptions: io.vertx.core.net.NetClientOptions = null, password: java.lang.String = null, poolCleanerInterval: java.lang.Integer = null, poolName: java.lang.String = null, poolRecycleTimeout: java.lang.Integer = null, protocolNegotiation: java.lang.Boolean = null, role: io.vertx.redis.client.RedisRole = null, `type`: io.vertx.redis.client.RedisClientType = null, useReplicas: io.vertx.redis.client.RedisReplicas = null): RedisOptions = {
       val ret = new RedisOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (connectionString != null) ret.setConnectionString(connectionString) 
       if (endpoint != null) ret.setEndpoint(endpoint) 
@@ -47,7 +47,9 @@ package object redis{
       if (netClientOptions != null) ret.setNetClientOptions(netClientOptions) 
       if (password != null) ret.setPassword(password) 
       if (poolCleanerInterval != null) ret.setPoolCleanerInterval(poolCleanerInterval) 
+      if (poolName != null) ret.setPoolName(poolName) 
       if (poolRecycleTimeout != null) ret.setPoolRecycleTimeout(poolRecycleTimeout) 
+      if (protocolNegotiation != null) ret.setProtocolNegotiation(protocolNegotiation) 
       if (role != null) ret.setRole(role) 
       if (`type` != null) ret.setType(`type`) 
       if (useReplicas != null) ret.setUseReplicas(useReplicas) 

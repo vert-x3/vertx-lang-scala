@@ -77,10 +77,11 @@ package object mongo{
   object FindOptions {
     def apply() = new FindOptions()
     def apply(json: JsonObject) = new FindOptions(json)
-    def apply( batchSize: java.lang.Integer = null, fields: io.vertx.core.json.JsonObject = null, limit: java.lang.Integer = null, skip: java.lang.Integer = null, sort: io.vertx.core.json.JsonObject = null): FindOptions = {
+    def apply( batchSize: java.lang.Integer = null, fields: io.vertx.core.json.JsonObject = null, hint: java.lang.String = null, limit: java.lang.Integer = null, skip: java.lang.Integer = null, sort: io.vertx.core.json.JsonObject = null): FindOptions = {
       val ret = new FindOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (batchSize != null) ret.setBatchSize(batchSize) 
       if (fields != null) ret.setFields(fields) 
+      if (hint != null) ret.setHint(hint) 
       if (limit != null) ret.setLimit(limit) 
       if (skip != null) ret.setSkip(skip) 
       if (sort != null) ret.setSort(sort) 
@@ -119,8 +120,14 @@ package object mongo{
 
   type IndexModel = io.vertx.ext.mongo.IndexModel
   object IndexModel {
+    def apply() = new IndexModel()
     def apply(json: JsonObject) = new IndexModel(json)
-
+    def apply( key: io.vertx.core.json.JsonObject = null, options: io.vertx.ext.mongo.IndexOptions = null): IndexModel = {
+      val ret = new IndexModel(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (key != null) ret.setKey(key) 
+      if (options != null) ret.setOptions(options) 
+      ret
+    }
   }
 
 

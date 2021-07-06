@@ -36,7 +36,7 @@ package object auth{
   object JWTOptions {
     def apply() = new JWTOptions()
     def apply(json: JsonObject) = new JWTOptions(json)
-    def apply( algorithm: java.lang.String = null, audience: scala.collection.immutable.List[java.lang.String] = null, expiresInMinutes: java.lang.Integer = null, expiresInSeconds: java.lang.Integer = null, header: io.vertx.core.json.JsonObject = null, ignoreExpiration: java.lang.Boolean = null, issuer: java.lang.String = null, leeway: java.lang.Integer = null, noTimestamp: java.lang.Boolean = null, nonceAlgorithm: java.lang.String = null, permissions: scala.collection.immutable.List[java.lang.String] = null, scopeDelimiter: java.lang.String = null, scopes: scala.collection.immutable.List[java.lang.String] = null, subject: java.lang.String = null): JWTOptions = {
+    def apply( algorithm: java.lang.String = null, audience: scala.collection.immutable.List[java.lang.String] = null, expiresInMinutes: java.lang.Integer = null, expiresInSeconds: java.lang.Integer = null, header: io.vertx.core.json.JsonObject = null, ignoreExpiration: java.lang.Boolean = null, issuer: java.lang.String = null, leeway: java.lang.Integer = null, noTimestamp: java.lang.Boolean = null, nonceAlgorithm: java.lang.String = null, permissions: scala.collection.immutable.List[java.lang.String] = null, subject: java.lang.String = null): JWTOptions = {
       val ret = new JWTOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (algorithm != null) ret.setAlgorithm(algorithm) 
       if (audience != null) ret.setAudience(audience.asJava) 
@@ -49,7 +49,6 @@ package object auth{
       if (noTimestamp != null) ret.setNoTimestamp(noTimestamp) 
       if (nonceAlgorithm != null) ret.setNonceAlgorithm(nonceAlgorithm) 
       if (permissions != null) ret.setPermissions(permissions.asJava) 
-      if (scopes != null) ret.setScopes(scopes.asJava) 
       if (subject != null) ret.setSubject(subject) 
       ret
     }

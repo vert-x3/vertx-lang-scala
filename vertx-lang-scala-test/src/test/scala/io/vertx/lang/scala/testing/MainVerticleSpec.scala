@@ -10,7 +10,7 @@ class MainVerticleSpec extends VerticleTesting[MainVerticle] with Matchers {
     val client = vertx.createHttpClient()
 
     client
-      .request(RequestOptions(absoluteURI = "http://127.0.0.1:8888", method = io.vertx.core.http.HttpMethod.GET))
+      .request(RequestOptions(absoluteURI = "http://127.0.0.1:8888"))
       .asScala()
       .flatMap(req => req.send().asScala())
       .flatMap(res => res.body().asScala())

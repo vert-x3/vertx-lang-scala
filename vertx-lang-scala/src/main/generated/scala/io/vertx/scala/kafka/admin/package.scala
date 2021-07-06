@@ -176,6 +176,19 @@ package object admin{
 
 
 
+  type NewPartitions = io.vertx.kafka.admin.NewPartitions
+  object NewPartitions {
+    def apply() = new NewPartitions()
+    def apply(json: JsonObject) = new NewPartitions(json)
+    def apply( totalCount: java.lang.Integer = null): NewPartitions = {
+      val ret = new NewPartitions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (totalCount != null) ret.setTotalCount(totalCount) 
+      ret
+    }
+  }
+
+
+
   type NewTopic = io.vertx.kafka.admin.NewTopic
   object NewTopic {
     def apply() = new NewTopic()
