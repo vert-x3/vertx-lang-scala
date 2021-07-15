@@ -95,6 +95,7 @@ package object auth{
 
   type TokenCredentials = io.vertx.ext.auth.authentication.TokenCredentials
   object TokenCredentials {
+    def apply() = new TokenCredentials()
     def apply(json: JsonObject) = new TokenCredentials(json)
     def apply(str: String) = new TokenCredentials(str)
     def apply( scopes: scala.collection.immutable.List[java.lang.String] = null, token: java.lang.String = null): TokenCredentials = {

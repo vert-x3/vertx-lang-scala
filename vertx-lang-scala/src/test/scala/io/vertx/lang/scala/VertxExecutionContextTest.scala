@@ -2,8 +2,6 @@ package io.vertx.lang.scala
 
 import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
 import io.vertx.core.Vertx
-import io.vertx.core.http.HttpServerOptions
-import io.vertx.scala.core.NetServerOptions
 import org.scalatest.Assertions
 import org.scalatest.flatspec.AsyncFlatSpec
 import org.scalatest.matchers.should.Matchers
@@ -58,12 +56,6 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
         case Failure(t) => t.getMessage should equal("wuha")
         case Success(_) => fail("Deployment shouldn't succeed!")
       }
-  }
-
-  "eventbus" should "bla" in {
-
-
-
   }
 
 }
