@@ -25,6 +25,7 @@ import io.vertx.core.Handler
 import scala.concurrent.Promise
 
 import io.vertx.cassandra.{CassandraClientOptions => JCassandraClientOptions}
+import io.vertx.core.tracing.TracingPolicy
 package object cassandra{
 
 
@@ -32,9 +33,12 @@ package object cassandra{
   object CassandraClientOptions {
     def apply() = new CassandraClientOptions()
     def apply(json: JsonObject) = new CassandraClientOptions(json)
-    def apply( keyspace: java.lang.String = null): CassandraClientOptions = {
+    def apply( keyspace: java.lang.String = null, password: java.lang.String = null, tracingPolicy: io.vertx.core.tracing.TracingPolicy = null, username: java.lang.String = null): CassandraClientOptions = {
       val ret = new CassandraClientOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (keyspace != null) ret.setKeyspace(keyspace) 
+      if (password != null) ret.setPassword(password) 
+      if (tracingPolicy != null) ret.setTracingPolicy(tracingPolicy) 
+      if (username != null) ret.setUsername(username) 
       ret
     }
   }

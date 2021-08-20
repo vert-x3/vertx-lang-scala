@@ -3,7 +3,6 @@ package io.vertx.lang.scala.codegen;
 import io.vertx.codegen.type.*;
 import io.vertx.codetrans.CodeTranslator;
 import io.vertx.codetrans.lang.scala.ScalaLang;
-import io.vertx.docgen.Coordinate;
 import io.vertx.docgen.DocGenerator;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.type.ExecutableType;
@@ -46,7 +45,7 @@ public class ScalaDocGenerator implements DocGenerator {
   }
 
   @Override
-  public String resolveTypeLink(TypeElement elt, Coordinate coordinate) {
+  public String resolveTypeLink(TypeElement elt) {
     TypeInfo type = null;
     try {
       type = factory.create(elt.asType());
@@ -57,15 +56,11 @@ public class ScalaDocGenerator implements DocGenerator {
       return null;
     }
     if (type.getKind().equals(ClassKind.ENUM) && ((EnumTypeInfo)type).isGen()) {
-      String baselink = null;
-      if (coordinate == null) baselink = "../";
-      else baselink = "../../" + coordinate.getArtifactId() + "/";
+      String baselink = "../";
       return baselink + "enums.html#" + elt.getSimpleName().toString();
     }
     if (type.getDataObject() != null) {
-      String baselink = null;
-      if (coordinate == null) baselink = "../";
-      else baselink = "../../" + coordinate.getArtifactId() + "/";
+      String baselink = "../";
       return baselink + "dataobjects.html#" + elt.getSimpleName().toString();
     }
     if (type.getKind().equals(ClassKind.API)) {
@@ -76,14 +71,14 @@ public class ScalaDocGenerator implements DocGenerator {
   }
 
   @Override
-  public String resolveConstructorLink(ExecutableElement executableElement, Coordinate coordinate) {
+  public String resolveConstructorLink(ExecutableElement executableElement) {
     return "todo";
   }
 
   @Override
-  public String resolveMethodLink(ExecutableElement elt, Coordinate coordinate) {
+  public String resolveMethodLink(ExecutableElement elt) {
     TypeElement typeElt = (TypeElement)elt.getEnclosingElement();
-    String link = resolveTypeLink(typeElt, coordinate);
+    String link = resolveTypeLink(typeElt);
     if (link != null) if (link.contains("cheatsheet")) link = link + '#' + java.beans.Introspector.decapitalize(elt.getSimpleName().toString().substring(3));
     else {
 
@@ -107,7 +102,7 @@ public class ScalaDocGenerator implements DocGenerator {
   }
 
   @Override
-  public String resolveFieldLink(VariableElement variableElement, Coordinate coordinate) {
+  public String resolveFieldLink(VariableElement variableElement) {
     return "todo";
   }
 

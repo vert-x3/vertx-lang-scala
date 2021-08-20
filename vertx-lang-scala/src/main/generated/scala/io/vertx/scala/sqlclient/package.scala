@@ -48,6 +48,15 @@ package object sqlclient{
 
 
 
+  type PrepareOptions = io.vertx.sqlclient.PrepareOptions
+  object PrepareOptions {
+    def apply() = new PrepareOptions()
+    def apply(json: JsonObject) = new PrepareOptions(json)
+
+  }
+
+
+
   type SqlConnectOptions = io.vertx.sqlclient.SqlConnectOptions
   object SqlConnectOptions {
     def apply() = new SqlConnectOptions()
