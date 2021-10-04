@@ -55,19 +55,6 @@ package object graphql{
 
 
 
-  type GraphQLWSOptions = io.vertx.ext.web.handler.graphql.ws.GraphQLWSOptions
-  object GraphQLWSOptions {
-    def apply() = new GraphQLWSOptions()
-    def apply(json: JsonObject) = new GraphQLWSOptions(json)
-    def apply( connectionInitWaitTimeout: java.lang.Long = null): GraphQLWSOptions = {
-      val ret = new GraphQLWSOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
-      if (connectionInitWaitTimeout != null) ret.setConnectionInitWaitTimeout(connectionInitWaitTimeout) 
-      ret
-    }
-  }
-
-
-
   type GraphiQLHandlerOptions = io.vertx.ext.web.handler.graphql.GraphiQLHandlerOptions
   object GraphiQLHandlerOptions {
     def apply() = new GraphiQLHandlerOptions()

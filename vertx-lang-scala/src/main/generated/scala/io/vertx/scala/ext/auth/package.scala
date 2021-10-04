@@ -24,44 +24,11 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Handler
 import scala.concurrent.Promise
 
-import io.vertx.ext.auth.otp.totp.{TotpAuthOptions => JTotpAuthOptions}
+import io.vertx.ext.auth.{PubSecKeyOptions => JPubSecKeyOptions}
+import io.vertx.core.buffer.Buffer
 package object auth{
 
 
-
-
-
-  type Authenticator = io.vertx.ext.auth.otp.Authenticator
-  object Authenticator {
-    def apply() = new Authenticator()
-    def apply(json: JsonObject) = new Authenticator(json)
-    def apply( algorithm: java.lang.String = null, authAttempts: java.lang.Integer = null, counter: java.lang.Long = null, identifier: java.lang.String = null, key: java.lang.String = null, period: java.lang.Long = null): Authenticator = {
-      val ret = new Authenticator(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
-      if (algorithm != null) ret.setAlgorithm(algorithm) 
-      if (authAttempts != null) ret.setAuthAttempts(authAttempts) 
-      if (counter != null) ret.setCounter(counter) 
-      if (identifier != null) ret.setIdentifier(identifier) 
-      if (key != null) ret.setKey(key) 
-      if (period != null) ret.setPeriod(period) 
-      ret
-    }
-  }
-
-
-
-  type HotpAuthOptions = io.vertx.ext.auth.otp.hotp.HotpAuthOptions
-  object HotpAuthOptions {
-    def apply() = new HotpAuthOptions()
-    def apply(json: JsonObject) = new HotpAuthOptions(json)
-    def apply( authAttemptsLimit: java.lang.Integer = null, counter: java.lang.Long = null, lookAheadWindow: java.lang.Integer = null, passwordLength: java.lang.Integer = null): HotpAuthOptions = {
-      val ret = new HotpAuthOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
-      if (authAttemptsLimit != null) ret.setAuthAttemptsLimit(authAttemptsLimit) 
-      if (counter != null) ret.setCounter(counter) 
-      if (lookAheadWindow != null) ret.setLookAheadWindow(lookAheadWindow) 
-      if (passwordLength != null) ret.setPasswordLength(passwordLength) 
-      ret
-    }
-  }
 
 
 
@@ -107,33 +74,6 @@ package object auth{
 
 
 
-  type OtpCredentials = io.vertx.ext.auth.otp.OtpCredentials
-  object OtpCredentials {
-    def apply(json: JsonObject) = new OtpCredentials(json)
-    def apply( code: java.lang.String = null, identifier: java.lang.String = null): OtpCredentials = {
-      val ret = new OtpCredentials(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
-      if (code != null) ret.setCode(code) 
-      if (identifier != null) ret.setIdentifier(identifier) 
-      ret
-    }
-  }
-
-
-
-  type OtpKey = io.vertx.ext.auth.otp.OtpKey
-  object OtpKey {
-    def apply() = new OtpKey()
-    def apply(json: JsonObject) = new OtpKey(json)
-    def apply( algorithm: java.lang.String = null, key: java.lang.String = null, keyBytes: Array[Byte] = null): OtpKey = {
-      val ret = new OtpKey(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
-      if (algorithm != null) ret.setAlgorithm(algorithm) 
-      if (key != null) ret.setKey(key) 
-      ret
-    }
-  }
-
-
-
   type PubSecKeyOptions = io.vertx.ext.auth.PubSecKeyOptions
   object PubSecKeyOptions {
     def apply() = new PubSecKeyOptions()
@@ -162,21 +102,6 @@ package object auth{
       val ret = new TokenCredentials(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (scopes != null) ret.setScopes(scopes.asJava) 
       if (token != null) ret.setToken(token) 
-      ret
-    }
-  }
-
-
-
-  type TotpAuthOptions = io.vertx.ext.auth.otp.totp.TotpAuthOptions
-  object TotpAuthOptions {
-    def apply() = new TotpAuthOptions()
-    def apply(json: JsonObject) = new TotpAuthOptions(json)
-    def apply( authAttemptsLimit: java.lang.Integer = null, passwordLength: java.lang.Integer = null, period: java.lang.Long = null): TotpAuthOptions = {
-      val ret = new TotpAuthOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
-      if (authAttemptsLimit != null) ret.setAuthAttemptsLimit(authAttemptsLimit) 
-      if (passwordLength != null) ret.setPasswordLength(passwordLength) 
-      if (period != null) ret.setPeriod(period) 
       ret
     }
   }
