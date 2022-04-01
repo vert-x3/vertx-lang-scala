@@ -66,7 +66,7 @@ abstract class ScalaVerticle {
   /**
    * Start the verticle.
    */
-  def start(promise: concurrent.Promise[Unit]) {
+  def start(promise: concurrent.Promise[Unit]): Unit = {
     start()
     promise.complete(Success(()))
   }
@@ -74,7 +74,7 @@ abstract class ScalaVerticle {
   /**
    * Stop the verticle.
    */
-  def stop(promise: concurrent.Promise[Unit]) {
+  def stop(promise: concurrent.Promise[Unit]): Unit = {
     stop()
     promise.complete(Success(()))
   }

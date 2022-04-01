@@ -6,12 +6,12 @@
 
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>vertx-lang-scala-parent_2.13</artifactId>
-    <version>4.2.0-SNAPSHOT</version>
+    <artifactId>vertx-lang-scala3-parent</artifactId>
+    <version>4.2.6</version>
     <relativePath>..</relativePath>
   </parent>
 
-  <artifactId>vertx-lang-scala-test_2.13</artifactId>
+  <artifactId>vertx-lang-scala3-test</artifactId>
 
   <name>Vert.x Scala Testing Support</name>
 
@@ -20,12 +20,12 @@
     <!-- What we need at runtime -->
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-scala_2.13</artifactId>
+      <artifactId>vertx-lang-scala3</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>
-      <artifactId>scala-library</artifactId>
+      <artifactId>scala3-library_3</artifactId>
       <version>${scala.version}</version>
     </dependency>
 
@@ -48,7 +48,8 @@
     </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
-      <artifactId>scalatest_2.13</artifactId>
+      <artifactId>scalatest_3</artifactId>
+      <version>3.2.11</version>
       <optional>true</optional>
     </dependency>
 

@@ -65,13 +65,14 @@ package object web{
   object SockJSHandlerOptions {
     def apply() = new SockJSHandlerOptions()
     def apply(json: JsonObject) = new SockJSHandlerOptions(json)
-    def apply( heartbeatInterval: java.lang.Long = null, insertJSESSIONID: java.lang.Boolean = null, libraryURL: java.lang.String = null, localWriteHandler: java.lang.Boolean = null, maxBytesStreaming: java.lang.Integer = null, registerWriteHandler: java.lang.Boolean = null, sessionTimeout: java.lang.Long = null): SockJSHandlerOptions = {
+    def apply( heartbeatInterval: java.lang.Long = null, insertJSESSIONID: java.lang.Boolean = null, libraryURL: java.lang.String = null, localWriteHandler: java.lang.Boolean = null, maxBytesStreaming: java.lang.Integer = null, origin: java.lang.String = null, registerWriteHandler: java.lang.Boolean = null, sessionTimeout: java.lang.Long = null): SockJSHandlerOptions = {
       val ret = new SockJSHandlerOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (heartbeatInterval != null) ret.setHeartbeatInterval(heartbeatInterval) 
       if (insertJSESSIONID != null) ret.setInsertJSESSIONID(insertJSESSIONID) 
       if (libraryURL != null) ret.setLibraryURL(libraryURL) 
       if (localWriteHandler != null) ret.setLocalWriteHandler(localWriteHandler) 
       if (maxBytesStreaming != null) ret.setMaxBytesStreaming(maxBytesStreaming) 
+      if (origin != null) ret.setOrigin(origin) 
       if (registerWriteHandler != null) ret.setRegisterWriteHandler(registerWriteHandler) 
       if (sessionTimeout != null) ret.setSessionTimeout(sessionTimeout) 
       ret

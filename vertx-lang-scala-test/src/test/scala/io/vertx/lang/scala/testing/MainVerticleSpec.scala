@@ -7,6 +7,7 @@ import org.scalatest.matchers.should.Matchers
 class MainVerticleSpec extends VerticleTesting[MainVerticle] with Matchers {
 
   "MainVerticle" should "bind to 8888 and answer with 'Hello from Vert.x!'" in {
+    println("here")
     val client = vertx.createHttpClient()
 
     client

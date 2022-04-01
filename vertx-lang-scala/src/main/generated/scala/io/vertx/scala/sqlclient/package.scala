@@ -33,15 +33,18 @@ package object sqlclient{
   object PoolOptions {
     def apply() = new PoolOptions()
     def apply(json: JsonObject) = new PoolOptions(json)
-    def apply( connectionTimeout: java.lang.Integer = null, connectionTimeoutUnit: java.util.concurrent.TimeUnit = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, maxSize: java.lang.Integer = null, maxWaitQueueSize: java.lang.Integer = null, poolCleanerPeriod: java.lang.Integer = null): PoolOptions = {
+    def apply( connectionTimeout: java.lang.Integer = null, connectionTimeoutUnit: java.util.concurrent.TimeUnit = null, eventLoopSize: java.lang.Integer = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, maxSize: java.lang.Integer = null, maxWaitQueueSize: java.lang.Integer = null, name: java.lang.String = null, poolCleanerPeriod: java.lang.Integer = null, shared: java.lang.Boolean = null): PoolOptions = {
       val ret = new PoolOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (connectionTimeout != null) ret.setConnectionTimeout(connectionTimeout) 
       if (connectionTimeoutUnit != null) ret.setConnectionTimeoutUnit(connectionTimeoutUnit) 
+      if (eventLoopSize != null) ret.setEventLoopSize(eventLoopSize) 
       if (idleTimeout != null) ret.setIdleTimeout(idleTimeout) 
       if (idleTimeoutUnit != null) ret.setIdleTimeoutUnit(idleTimeoutUnit) 
       if (maxSize != null) ret.setMaxSize(maxSize) 
       if (maxWaitQueueSize != null) ret.setMaxWaitQueueSize(maxWaitQueueSize) 
+      if (name != null) ret.setName(name) 
       if (poolCleanerPeriod != null) ret.setPoolCleanerPeriod(poolCleanerPeriod) 
+      if (shared != null) ret.setShared(shared) 
       ret
     }
   }
@@ -61,8 +64,9 @@ package object sqlclient{
   object SqlConnectOptions {
     def apply() = new SqlConnectOptions()
     def apply(json: JsonObject) = new SqlConnectOptions(json)
-    def apply( applicationLayerProtocols: scala.collection.immutable.List[java.lang.String] = null, cachePreparedStatements: java.lang.Boolean = null, connectTimeout: java.lang.Integer = null, database: java.lang.String = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, host: java.lang.String = null, hostnameVerificationAlgorithm: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, localAddress: java.lang.String = null, logActivity: java.lang.Boolean = null, metricsName: java.lang.String = null, nonProxyHosts: scala.collection.immutable.List[java.lang.String] = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, password: java.lang.String = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, port: java.lang.Integer = null, preparedStatementCacheMaxSize: java.lang.Integer = null, preparedStatementCacheSqlLimit: java.lang.Integer = null, properties: scala.collection.immutable.Map[String,java.lang.String] = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, receiveBufferSize: java.lang.Integer = null, reconnectAttempts: java.lang.Integer = null, reconnectInterval: java.lang.Long = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, tracingPolicy: io.vertx.core.tracing.TracingPolicy = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, user: java.lang.String = null): SqlConnectOptions = {
+    def apply( activityLogDataFormat: io.netty.handler.logging.ByteBufFormat = null, applicationLayerProtocols: scala.collection.immutable.List[java.lang.String] = null, cachePreparedStatements: java.lang.Boolean = null, connectTimeout: java.lang.Integer = null, database: java.lang.String = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, host: java.lang.String = null, hostnameVerificationAlgorithm: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, localAddress: java.lang.String = null, logActivity: java.lang.Boolean = null, metricsName: java.lang.String = null, nonProxyHosts: scala.collection.immutable.List[java.lang.String] = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, password: java.lang.String = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, port: java.lang.Integer = null, preparedStatementCacheMaxSize: java.lang.Integer = null, preparedStatementCacheSqlLimit: java.lang.Integer = null, properties: scala.collection.immutable.Map[String,java.lang.String] = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, readIdleTimeout: java.lang.Integer = null, receiveBufferSize: java.lang.Integer = null, reconnectAttempts: java.lang.Integer = null, reconnectInterval: java.lang.Long = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, tracingPolicy: io.vertx.core.tracing.TracingPolicy = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, user: java.lang.String = null, usingDomainSocket: java.lang.Boolean = null, writeIdleTimeout: java.lang.Integer = null): SqlConnectOptions = {
       val ret = new SqlConnectOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (activityLogDataFormat != null) ret.setActivityLogDataFormat(activityLogDataFormat) 
       if (applicationLayerProtocols != null) ret.setApplicationLayerProtocols(applicationLayerProtocols.asJava) 
       if (cachePreparedStatements != null) ret.setCachePreparedStatements(cachePreparedStatements) 
       if (connectTimeout != null) ret.setConnectTimeout(connectTimeout) 
@@ -90,6 +94,7 @@ package object sqlclient{
       if (preparedStatementCacheSqlLimit != null) ret.setPreparedStatementCacheSqlLimit(preparedStatementCacheSqlLimit) 
       if (properties != null) ret.setProperties(properties.asJava) 
       if (proxyOptions != null) ret.setProxyOptions(proxyOptions) 
+      if (readIdleTimeout != null) ret.setReadIdleTimeout(readIdleTimeout) 
       if (receiveBufferSize != null) ret.setReceiveBufferSize(receiveBufferSize) 
       if (reconnectAttempts != null) ret.setReconnectAttempts(reconnectAttempts) 
       if (reconnectInterval != null) ret.setReconnectInterval(reconnectInterval) 
@@ -113,6 +118,7 @@ package object sqlclient{
       if (trustStoreOptions != null) ret.setTrustStoreOptions(trustStoreOptions) 
       if (useAlpn != null) ret.setUseAlpn(useAlpn) 
       if (user != null) ret.setUser(user) 
+      if (writeIdleTimeout != null) ret.setWriteIdleTimeout(writeIdleTimeout) 
       ret
     }
   }

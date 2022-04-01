@@ -133,8 +133,9 @@ package object core{
   object DatagramSocketOptions {
     def apply() = new DatagramSocketOptions()
     def apply(json: JsonObject) = new DatagramSocketOptions(json)
-    def apply( broadcast: java.lang.Boolean = null, ipV6: java.lang.Boolean = null, logActivity: java.lang.Boolean = null, loopbackModeDisabled: java.lang.Boolean = null, multicastNetworkInterface: java.lang.String = null, multicastTimeToLive: java.lang.Integer = null, receiveBufferSize: java.lang.Integer = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, trafficClass: java.lang.Integer = null): DatagramSocketOptions = {
+    def apply( activityLogDataFormat: io.netty.handler.logging.ByteBufFormat = null, broadcast: java.lang.Boolean = null, ipV6: java.lang.Boolean = null, logActivity: java.lang.Boolean = null, loopbackModeDisabled: java.lang.Boolean = null, multicastNetworkInterface: java.lang.String = null, multicastTimeToLive: java.lang.Integer = null, receiveBufferSize: java.lang.Integer = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, trafficClass: java.lang.Integer = null): DatagramSocketOptions = {
       val ret = new DatagramSocketOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (activityLogDataFormat != null) ret.setActivityLogDataFormat(activityLogDataFormat) 
       if (broadcast != null) ret.setBroadcast(broadcast) 
       if (ipV6 != null) ret.setIpV6(ipV6) 
       if (logActivity != null) ret.setLogActivity(logActivity) 
@@ -193,8 +194,9 @@ package object core{
   object DnsClientOptions {
     def apply() = new DnsClientOptions()
     def apply(json: JsonObject) = new DnsClientOptions(json)
-    def apply( host: java.lang.String = null, logActivity: java.lang.Boolean = null, port: java.lang.Integer = null, queryTimeout: java.lang.Long = null, recursionDesired: java.lang.Boolean = null): DnsClientOptions = {
+    def apply( activityLogFormat: io.netty.handler.logging.ByteBufFormat = null, host: java.lang.String = null, logActivity: java.lang.Boolean = null, port: java.lang.Integer = null, queryTimeout: java.lang.Long = null, recursionDesired: java.lang.Boolean = null): DnsClientOptions = {
       val ret = new DnsClientOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (activityLogFormat != null) ret.setActivityLogFormat(activityLogFormat) 
       if (host != null) ret.setHost(host) 
       if (logActivity != null) ret.setLogActivity(logActivity) 
       if (port != null) ret.setPort(port) 
@@ -210,9 +212,10 @@ package object core{
   object EventBusOptions {
     def apply() = new EventBusOptions()
     def apply(json: JsonObject) = new EventBusOptions(json)
-    def apply( acceptBacklog: java.lang.Integer = null, clientAuth: io.vertx.core.http.ClientAuth = null, clusterNodeMetadata: io.vertx.core.json.JsonObject = null, clusterPingInterval: java.lang.Long = null, clusterPingReplyInterval: java.lang.Long = null, clusterPublicHost: java.lang.String = null, clusterPublicPort: java.lang.Integer = null, connectTimeout: java.lang.Integer = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, host: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, logActivity: java.lang.Boolean = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, port: java.lang.Integer = null, receiveBufferSize: java.lang.Integer = null, reconnectAttempts: java.lang.Integer = null, reconnectInterval: java.lang.Long = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null): EventBusOptions = {
+    def apply( acceptBacklog: java.lang.Integer = null, activityLogDataFormat: io.netty.handler.logging.ByteBufFormat = null, clientAuth: io.vertx.core.http.ClientAuth = null, clusterNodeMetadata: io.vertx.core.json.JsonObject = null, clusterPingInterval: java.lang.Long = null, clusterPingReplyInterval: java.lang.Long = null, clusterPublicHost: java.lang.String = null, clusterPublicPort: java.lang.Integer = null, connectTimeout: java.lang.Integer = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, host: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, logActivity: java.lang.Boolean = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, port: java.lang.Integer = null, readIdleTimeout: java.lang.Integer = null, receiveBufferSize: java.lang.Integer = null, reconnectAttempts: java.lang.Integer = null, reconnectInterval: java.lang.Long = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, writeIdleTimeout: java.lang.Integer = null): EventBusOptions = {
       val ret = new EventBusOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (acceptBacklog != null) ret.setAcceptBacklog(acceptBacklog) 
+      if (activityLogDataFormat != null) ret.setActivityLogDataFormat(activityLogDataFormat) 
       if (clientAuth != null) ret.setClientAuth(clientAuth) 
       if (clusterNodeMetadata != null) ret.setClusterNodeMetadata(clusterNodeMetadata) 
       if (clusterPingInterval != null) ret.setClusterPingInterval(clusterPingInterval) 
@@ -233,6 +236,7 @@ package object core{
       if (pfxKeyCertOptions != null) ret.setPfxKeyCertOptions(pfxKeyCertOptions) 
       if (pfxTrustOptions != null) ret.setPfxTrustOptions(pfxTrustOptions) 
       if (port != null) ret.setPort(port) 
+      if (readIdleTimeout != null) ret.setReadIdleTimeout(readIdleTimeout) 
       if (receiveBufferSize != null) ret.setReceiveBufferSize(receiveBufferSize) 
       if (reconnectAttempts != null) ret.setReconnectAttempts(reconnectAttempts) 
       if (reconnectInterval != null) ret.setReconnectInterval(reconnectInterval) 
@@ -254,6 +258,7 @@ package object core{
       if (trustOptions != null) ret.setTrustOptions(trustOptions) 
       if (trustStoreOptions != null) ret.setTrustStoreOptions(trustStoreOptions) 
       if (useAlpn != null) ret.setUseAlpn(useAlpn) 
+      if (writeIdleTimeout != null) ret.setWriteIdleTimeout(writeIdleTimeout) 
       ret
     }
   }
@@ -312,8 +317,9 @@ package object core{
   object HttpClientOptions {
     def apply() = new HttpClientOptions()
     def apply(json: JsonObject) = new HttpClientOptions(json)
-    def apply( alpnVersions: scala.collection.immutable.List[io.vertx.core.http.HttpVersion] = null, connectTimeout: java.lang.Integer = null, decoderInitialBufferSize: java.lang.Integer = null, defaultHost: java.lang.String = null, defaultPort: java.lang.Integer = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, forceSni: java.lang.Boolean = null, http2ClearTextUpgrade: java.lang.Boolean = null, http2ConnectionWindowSize: java.lang.Integer = null, http2KeepAliveTimeout: java.lang.Integer = null, http2MaxPoolSize: java.lang.Integer = null, http2MultiplexingLimit: java.lang.Integer = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, initialSettings: io.vertx.core.http.Http2Settings = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keepAlive: java.lang.Boolean = null, keepAliveTimeout: java.lang.Integer = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, localAddress: java.lang.String = null, logActivity: java.lang.Boolean = null, maxChunkSize: java.lang.Integer = null, maxHeaderSize: java.lang.Integer = null, maxInitialLineLength: java.lang.Integer = null, maxPoolSize: java.lang.Integer = null, maxRedirects: java.lang.Integer = null, maxWaitQueueSize: java.lang.Integer = null, maxWebSocketFrameSize: java.lang.Integer = null, maxWebSocketMessageSize: java.lang.Integer = null, maxWebSockets: java.lang.Integer = null, metricsName: java.lang.String = null, nonProxyHosts: scala.collection.immutable.List[java.lang.String] = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, pipelining: java.lang.Boolean = null, pipeliningLimit: java.lang.Integer = null, poolCleanerPeriod: java.lang.Integer = null, protocolVersion: io.vertx.core.http.HttpVersion = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, receiveBufferSize: java.lang.Integer = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, sendUnmaskedFrames: java.lang.Boolean = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, tracingPolicy: io.vertx.core.tracing.TracingPolicy = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, tryUseCompression: java.lang.Boolean = null, tryUsePerFrameWebSocketCompression: java.lang.Boolean = null, tryUsePerMessageWebSocketCompression: java.lang.Boolean = null, tryWebSocketDeflateFrameCompression: java.lang.Boolean = null, useAlpn: java.lang.Boolean = null, verifyHost: java.lang.Boolean = null, webSocketClosingTimeout: java.lang.Integer = null, webSocketCompressionAllowClientNoContext: java.lang.Boolean = null, webSocketCompressionLevel: java.lang.Integer = null, webSocketCompressionRequestServerNoContext: java.lang.Boolean = null): HttpClientOptions = {
+    def apply( activityLogDataFormat: io.netty.handler.logging.ByteBufFormat = null, alpnVersions: scala.collection.immutable.List[io.vertx.core.http.HttpVersion] = null, connectTimeout: java.lang.Integer = null, decoderInitialBufferSize: java.lang.Integer = null, defaultHost: java.lang.String = null, defaultPort: java.lang.Integer = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, forceSni: java.lang.Boolean = null, http2ClearTextUpgrade: java.lang.Boolean = null, http2ConnectionWindowSize: java.lang.Integer = null, http2KeepAliveTimeout: java.lang.Integer = null, http2MaxPoolSize: java.lang.Integer = null, http2MultiplexingLimit: java.lang.Integer = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, initialSettings: io.vertx.core.http.Http2Settings = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keepAlive: java.lang.Boolean = null, keepAliveTimeout: java.lang.Integer = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, localAddress: java.lang.String = null, logActivity: java.lang.Boolean = null, maxChunkSize: java.lang.Integer = null, maxHeaderSize: java.lang.Integer = null, maxInitialLineLength: java.lang.Integer = null, maxPoolSize: java.lang.Integer = null, maxRedirects: java.lang.Integer = null, maxWaitQueueSize: java.lang.Integer = null, maxWebSocketFrameSize: java.lang.Integer = null, maxWebSocketMessageSize: java.lang.Integer = null, maxWebSockets: java.lang.Integer = null, metricsName: java.lang.String = null, name: java.lang.String = null, nonProxyHosts: scala.collection.immutable.List[java.lang.String] = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, pipelining: java.lang.Boolean = null, pipeliningLimit: java.lang.Integer = null, poolCleanerPeriod: java.lang.Integer = null, poolEventLoopSize: java.lang.Integer = null, protocolVersion: io.vertx.core.http.HttpVersion = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, readIdleTimeout: java.lang.Integer = null, receiveBufferSize: java.lang.Integer = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, sendUnmaskedFrames: java.lang.Boolean = null, shared: java.lang.Boolean = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, tracingPolicy: io.vertx.core.tracing.TracingPolicy = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, tryUseCompression: java.lang.Boolean = null, tryUsePerFrameWebSocketCompression: java.lang.Boolean = null, tryUsePerMessageWebSocketCompression: java.lang.Boolean = null, tryWebSocketDeflateFrameCompression: java.lang.Boolean = null, useAlpn: java.lang.Boolean = null, verifyHost: java.lang.Boolean = null, webSocketClosingTimeout: java.lang.Integer = null, webSocketCompressionAllowClientNoContext: java.lang.Boolean = null, webSocketCompressionLevel: java.lang.Integer = null, webSocketCompressionRequestServerNoContext: java.lang.Boolean = null, writeIdleTimeout: java.lang.Integer = null): HttpClientOptions = {
       val ret = new HttpClientOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (activityLogDataFormat != null) ret.setActivityLogDataFormat(activityLogDataFormat) 
       if (alpnVersions != null) ret.setAlpnVersions(alpnVersions.asJava) 
       if (connectTimeout != null) ret.setConnectTimeout(connectTimeout) 
       if (decoderInitialBufferSize != null) ret.setDecoderInitialBufferSize(decoderInitialBufferSize) 
@@ -346,6 +352,7 @@ package object core{
       if (maxWebSocketMessageSize != null) ret.setMaxWebSocketMessageSize(maxWebSocketMessageSize) 
       if (maxWebSockets != null) ret.setMaxWebSockets(maxWebSockets) 
       if (metricsName != null) ret.setMetricsName(metricsName) 
+      if (name != null) ret.setName(name) 
       if (nonProxyHosts != null) ret.setNonProxyHosts(nonProxyHosts.asJava) 
       if (openSslEngineOptions != null) ret.setOpenSslEngineOptions(openSslEngineOptions) 
       if (pemKeyCertOptions != null) ret.setPemKeyCertOptions(pemKeyCertOptions) 
@@ -355,13 +362,16 @@ package object core{
       if (pipelining != null) ret.setPipelining(pipelining) 
       if (pipeliningLimit != null) ret.setPipeliningLimit(pipeliningLimit) 
       if (poolCleanerPeriod != null) ret.setPoolCleanerPeriod(poolCleanerPeriod) 
+      if (poolEventLoopSize != null) ret.setPoolEventLoopSize(poolEventLoopSize) 
       if (protocolVersion != null) ret.setProtocolVersion(protocolVersion) 
       if (proxyOptions != null) ret.setProxyOptions(proxyOptions) 
+      if (readIdleTimeout != null) ret.setReadIdleTimeout(readIdleTimeout) 
       if (receiveBufferSize != null) ret.setReceiveBufferSize(receiveBufferSize) 
       if (reuseAddress != null) ret.setReuseAddress(reuseAddress) 
       if (reusePort != null) ret.setReusePort(reusePort) 
       if (sendBufferSize != null) ret.setSendBufferSize(sendBufferSize) 
       if (sendUnmaskedFrames != null) ret.setSendUnmaskedFrames(sendUnmaskedFrames) 
+      if (shared != null) ret.setShared(shared) 
       if (soLinger != null) ret.setSoLinger(soLinger) 
       if (ssl != null) ret.setSsl(ssl) 
       if (sslEngineOptions != null) ret.setSslEngineOptions(sslEngineOptions) 
@@ -386,6 +396,7 @@ package object core{
       if (webSocketCompressionAllowClientNoContext != null) ret.setWebSocketCompressionAllowClientNoContext(webSocketCompressionAllowClientNoContext) 
       if (webSocketCompressionLevel != null) ret.setWebSocketCompressionLevel(webSocketCompressionLevel) 
       if (webSocketCompressionRequestServerNoContext != null) ret.setWebSocketCompressionRequestServerNoContext(webSocketCompressionRequestServerNoContext) 
+      if (writeIdleTimeout != null) ret.setWriteIdleTimeout(writeIdleTimeout) 
       ret
     }
   }
@@ -404,10 +415,11 @@ package object core{
   object HttpServerOptions {
     def apply() = new HttpServerOptions()
     def apply(json: JsonObject) = new HttpServerOptions(json)
-    def apply( acceptBacklog: java.lang.Integer = null, acceptUnmaskedFrames: java.lang.Boolean = null, alpnVersions: scala.collection.immutable.List[io.vertx.core.http.HttpVersion] = null, clientAuth: io.vertx.core.http.ClientAuth = null, compressionLevel: java.lang.Integer = null, compressionSupported: java.lang.Boolean = null, decoderInitialBufferSize: java.lang.Integer = null, decompressionSupported: java.lang.Boolean = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, handle100ContinueAutomatically: java.lang.Boolean = null, host: java.lang.String = null, http2ConnectionWindowSize: java.lang.Integer = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, initialSettings: io.vertx.core.http.Http2Settings = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, logActivity: java.lang.Boolean = null, maxChunkSize: java.lang.Integer = null, maxFormAttributeSize: java.lang.Integer = null, maxHeaderSize: java.lang.Integer = null, maxInitialLineLength: java.lang.Integer = null, maxWebSocketFrameSize: java.lang.Integer = null, maxWebSocketMessageSize: java.lang.Integer = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, perFrameWebSocketCompressionSupported: java.lang.Boolean = null, perMessageWebSocketCompressionSupported: java.lang.Boolean = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, port: java.lang.Integer = null, proxyProtocolTimeout: java.lang.Long = null, proxyProtocolTimeoutUnit: java.util.concurrent.TimeUnit = null, receiveBufferSize: java.lang.Integer = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, sni: java.lang.Boolean = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, tracingPolicy: io.vertx.core.tracing.TracingPolicy = null, trafficClass: java.lang.Integer = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, useProxyProtocol: java.lang.Boolean = null, webSocketAllowServerNoContext: java.lang.Boolean = null, webSocketClosingTimeout: java.lang.Integer = null, webSocketCompressionLevel: java.lang.Integer = null, webSocketPreferredClientNoContext: java.lang.Boolean = null, webSocketSubProtocols: scala.collection.immutable.List[java.lang.String] = null): HttpServerOptions = {
+    def apply( acceptBacklog: java.lang.Integer = null, acceptUnmaskedFrames: java.lang.Boolean = null, activityLogDataFormat: io.netty.handler.logging.ByteBufFormat = null, alpnVersions: scala.collection.immutable.List[io.vertx.core.http.HttpVersion] = null, clientAuth: io.vertx.core.http.ClientAuth = null, compressionLevel: java.lang.Integer = null, compressionSupported: java.lang.Boolean = null, decoderInitialBufferSize: java.lang.Integer = null, decompressionSupported: java.lang.Boolean = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, handle100ContinueAutomatically: java.lang.Boolean = null, host: java.lang.String = null, http2ConnectionWindowSize: java.lang.Integer = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, initialSettings: io.vertx.core.http.Http2Settings = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, logActivity: java.lang.Boolean = null, maxChunkSize: java.lang.Integer = null, maxFormAttributeSize: java.lang.Integer = null, maxHeaderSize: java.lang.Integer = null, maxInitialLineLength: java.lang.Integer = null, maxWebSocketFrameSize: java.lang.Integer = null, maxWebSocketMessageSize: java.lang.Integer = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, perFrameWebSocketCompressionSupported: java.lang.Boolean = null, perMessageWebSocketCompressionSupported: java.lang.Boolean = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, port: java.lang.Integer = null, proxyProtocolTimeout: java.lang.Long = null, proxyProtocolTimeoutUnit: java.util.concurrent.TimeUnit = null, readIdleTimeout: java.lang.Integer = null, receiveBufferSize: java.lang.Integer = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, sni: java.lang.Boolean = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, tracingPolicy: io.vertx.core.tracing.TracingPolicy = null, trafficClass: java.lang.Integer = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, useProxyProtocol: java.lang.Boolean = null, webSocketAllowServerNoContext: java.lang.Boolean = null, webSocketClosingTimeout: java.lang.Integer = null, webSocketCompressionLevel: java.lang.Integer = null, webSocketPreferredClientNoContext: java.lang.Boolean = null, webSocketSubProtocols: scala.collection.immutable.List[java.lang.String] = null, writeIdleTimeout: java.lang.Integer = null): HttpServerOptions = {
       val ret = new HttpServerOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (acceptBacklog != null) ret.setAcceptBacklog(acceptBacklog) 
       if (acceptUnmaskedFrames != null) ret.setAcceptUnmaskedFrames(acceptUnmaskedFrames) 
+      if (activityLogDataFormat != null) ret.setActivityLogDataFormat(activityLogDataFormat) 
       if (alpnVersions != null) ret.setAlpnVersions(alpnVersions.asJava) 
       if (clientAuth != null) ret.setClientAuth(clientAuth) 
       if (compressionLevel != null) ret.setCompressionLevel(compressionLevel) 
@@ -441,6 +453,7 @@ package object core{
       if (port != null) ret.setPort(port) 
       if (proxyProtocolTimeout != null) ret.setProxyProtocolTimeout(proxyProtocolTimeout) 
       if (proxyProtocolTimeoutUnit != null) ret.setProxyProtocolTimeoutUnit(proxyProtocolTimeoutUnit) 
+      if (readIdleTimeout != null) ret.setReadIdleTimeout(readIdleTimeout) 
       if (receiveBufferSize != null) ret.setReceiveBufferSize(receiveBufferSize) 
       if (reuseAddress != null) ret.setReuseAddress(reuseAddress) 
       if (reusePort != null) ret.setReusePort(reusePort) 
@@ -467,6 +480,7 @@ package object core{
       if (webSocketCompressionLevel != null) ret.setWebSocketCompressionLevel(webSocketCompressionLevel) 
       if (webSocketPreferredClientNoContext != null) ret.setWebSocketPreferredClientNoContext(webSocketPreferredClientNoContext) 
       if (webSocketSubProtocols != null) ret.setWebSocketSubProtocols(webSocketSubProtocols.asJava) 
+      if (writeIdleTimeout != null) ret.setWriteIdleTimeout(writeIdleTimeout) 
       ret
     }
   }
@@ -536,8 +550,9 @@ package object core{
   object NetClientOptions {
     def apply() = new NetClientOptions()
     def apply(json: JsonObject) = new NetClientOptions(json)
-    def apply( applicationLayerProtocols: scala.collection.immutable.List[java.lang.String] = null, connectTimeout: java.lang.Integer = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, hostnameVerificationAlgorithm: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, localAddress: java.lang.String = null, logActivity: java.lang.Boolean = null, metricsName: java.lang.String = null, nonProxyHosts: scala.collection.immutable.List[java.lang.String] = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, receiveBufferSize: java.lang.Integer = null, reconnectAttempts: java.lang.Integer = null, reconnectInterval: java.lang.Long = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null): NetClientOptions = {
+    def apply( activityLogDataFormat: io.netty.handler.logging.ByteBufFormat = null, applicationLayerProtocols: scala.collection.immutable.List[java.lang.String] = null, connectTimeout: java.lang.Integer = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, hostnameVerificationAlgorithm: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, localAddress: java.lang.String = null, logActivity: java.lang.Boolean = null, metricsName: java.lang.String = null, nonProxyHosts: scala.collection.immutable.List[java.lang.String] = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, readIdleTimeout: java.lang.Integer = null, receiveBufferSize: java.lang.Integer = null, reconnectAttempts: java.lang.Integer = null, reconnectInterval: java.lang.Long = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, writeIdleTimeout: java.lang.Integer = null): NetClientOptions = {
       val ret = new NetClientOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (activityLogDataFormat != null) ret.setActivityLogDataFormat(activityLogDataFormat) 
       if (applicationLayerProtocols != null) ret.setApplicationLayerProtocols(applicationLayerProtocols.asJava) 
       if (connectTimeout != null) ret.setConnectTimeout(connectTimeout) 
       if (enabledSecureTransportProtocols != null) ret.setEnabledSecureTransportProtocols(enabledSecureTransportProtocols.asJava) 
@@ -557,6 +572,7 @@ package object core{
       if (pfxKeyCertOptions != null) ret.setPfxKeyCertOptions(pfxKeyCertOptions) 
       if (pfxTrustOptions != null) ret.setPfxTrustOptions(pfxTrustOptions) 
       if (proxyOptions != null) ret.setProxyOptions(proxyOptions) 
+      if (readIdleTimeout != null) ret.setReadIdleTimeout(readIdleTimeout) 
       if (receiveBufferSize != null) ret.setReceiveBufferSize(receiveBufferSize) 
       if (reconnectAttempts != null) ret.setReconnectAttempts(reconnectAttempts) 
       if (reconnectInterval != null) ret.setReconnectInterval(reconnectInterval) 
@@ -578,6 +594,7 @@ package object core{
       if (trustOptions != null) ret.setTrustOptions(trustOptions) 
       if (trustStoreOptions != null) ret.setTrustStoreOptions(trustStoreOptions) 
       if (useAlpn != null) ret.setUseAlpn(useAlpn) 
+      if (writeIdleTimeout != null) ret.setWriteIdleTimeout(writeIdleTimeout) 
       ret
     }
   }
@@ -588,9 +605,10 @@ package object core{
   object NetServerOptions {
     def apply() = new NetServerOptions()
     def apply(json: JsonObject) = new NetServerOptions(json)
-    def apply( acceptBacklog: java.lang.Integer = null, clientAuth: io.vertx.core.http.ClientAuth = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, host: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, logActivity: java.lang.Boolean = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, port: java.lang.Integer = null, proxyProtocolTimeout: java.lang.Long = null, proxyProtocolTimeoutUnit: java.util.concurrent.TimeUnit = null, receiveBufferSize: java.lang.Integer = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, sni: java.lang.Boolean = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, trafficClass: java.lang.Integer = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, useProxyProtocol: java.lang.Boolean = null): NetServerOptions = {
+    def apply( acceptBacklog: java.lang.Integer = null, activityLogDataFormat: io.netty.handler.logging.ByteBufFormat = null, clientAuth: io.vertx.core.http.ClientAuth = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, host: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, logActivity: java.lang.Boolean = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, port: java.lang.Integer = null, proxyProtocolTimeout: java.lang.Long = null, proxyProtocolTimeoutUnit: java.util.concurrent.TimeUnit = null, readIdleTimeout: java.lang.Integer = null, receiveBufferSize: java.lang.Integer = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, sni: java.lang.Boolean = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, trafficClass: java.lang.Integer = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, useProxyProtocol: java.lang.Boolean = null, writeIdleTimeout: java.lang.Integer = null): NetServerOptions = {
       val ret = new NetServerOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (acceptBacklog != null) ret.setAcceptBacklog(acceptBacklog) 
+      if (activityLogDataFormat != null) ret.setActivityLogDataFormat(activityLogDataFormat) 
       if (clientAuth != null) ret.setClientAuth(clientAuth) 
       if (enabledSecureTransportProtocols != null) ret.setEnabledSecureTransportProtocols(enabledSecureTransportProtocols.asJava) 
       if (host != null) ret.setHost(host) 
@@ -608,6 +626,7 @@ package object core{
       if (port != null) ret.setPort(port) 
       if (proxyProtocolTimeout != null) ret.setProxyProtocolTimeout(proxyProtocolTimeout) 
       if (proxyProtocolTimeoutUnit != null) ret.setProxyProtocolTimeoutUnit(proxyProtocolTimeoutUnit) 
+      if (readIdleTimeout != null) ret.setReadIdleTimeout(readIdleTimeout) 
       if (receiveBufferSize != null) ret.setReceiveBufferSize(receiveBufferSize) 
       if (reuseAddress != null) ret.setReuseAddress(reuseAddress) 
       if (reusePort != null) ret.setReusePort(reusePort) 
@@ -628,6 +647,7 @@ package object core{
       if (trustStoreOptions != null) ret.setTrustStoreOptions(trustStoreOptions) 
       if (useAlpn != null) ret.setUseAlpn(useAlpn) 
       if (useProxyProtocol != null) ret.setUseProxyProtocol(useProxyProtocol) 
+      if (writeIdleTimeout != null) ret.setWriteIdleTimeout(writeIdleTimeout) 
       ret
     }
   }
@@ -764,7 +784,7 @@ package object core{
   object RequestOptions {
     def apply() = new RequestOptions()
     def apply(json: JsonObject) = new RequestOptions(json)
-    def apply( absoluteURI: java.lang.String = null, followRedirects: java.lang.Boolean = null, host: java.lang.String = null, port: java.lang.Integer = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, server: io.vertx.core.net.SocketAddress = null, ssl: java.lang.Boolean = null, timeout: java.lang.Long = null, uri: java.lang.String = null): RequestOptions = {
+    def apply( absoluteURI: java.lang.String = null, followRedirects: java.lang.Boolean = null, host: java.lang.String = null, port: java.lang.Integer = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, server: io.vertx.core.net.SocketAddress = null, ssl: java.lang.Boolean = null, timeout: java.lang.Long = null, traceOperation: java.lang.String = null, uri: java.lang.String = null): RequestOptions = {
       val ret = new RequestOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (absoluteURI != null) ret.setAbsoluteURI(absoluteURI) 
       if (followRedirects != null) ret.setFollowRedirects(followRedirects) 
@@ -774,6 +794,7 @@ package object core{
       if (server != null) ret.setServer(server) 
       if (ssl != null) ret.setSsl(ssl) 
       if (timeout != null) ret.setTimeout(timeout) 
+      if (traceOperation != null) ret.setTraceOperation(traceOperation) 
       if (uri != null) ret.setURI(uri) 
       ret
     }
@@ -850,9 +871,10 @@ package object core{
   object WebSocketConnectOptions {
     def apply() = new WebSocketConnectOptions()
     def apply(json: JsonObject) = new WebSocketConnectOptions(json)
-    def apply( absoluteURI: java.lang.String = null, followRedirects: java.lang.Boolean = null, host: java.lang.String = null, port: java.lang.Integer = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, server: io.vertx.core.net.SocketAddress = null, ssl: java.lang.Boolean = null, subProtocols: scala.collection.immutable.List[java.lang.String] = null, timeout: java.lang.Long = null, uri: java.lang.String = null, version: io.vertx.core.http.WebsocketVersion = null): WebSocketConnectOptions = {
+    def apply( absoluteURI: java.lang.String = null, allowOriginHeader: java.lang.Boolean = null, followRedirects: java.lang.Boolean = null, host: java.lang.String = null, port: java.lang.Integer = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, server: io.vertx.core.net.SocketAddress = null, ssl: java.lang.Boolean = null, subProtocols: scala.collection.immutable.List[java.lang.String] = null, timeout: java.lang.Long = null, traceOperation: java.lang.String = null, uri: java.lang.String = null, version: io.vertx.core.http.WebsocketVersion = null): WebSocketConnectOptions = {
       val ret = new WebSocketConnectOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (absoluteURI != null) ret.setAbsoluteURI(absoluteURI) 
+      if (allowOriginHeader != null) ret.setAllowOriginHeader(allowOriginHeader) 
       if (followRedirects != null) ret.setFollowRedirects(followRedirects) 
       if (host != null) ret.setHost(host) 
       if (port != null) ret.setPort(port) 
@@ -861,6 +883,7 @@ package object core{
       if (ssl != null) ret.setSsl(ssl) 
       if (subProtocols != null) ret.setSubProtocols(subProtocols.asJava) 
       if (timeout != null) ret.setTimeout(timeout) 
+      if (traceOperation != null) ret.setTraceOperation(traceOperation) 
       if (uri != null) ret.setURI(uri) 
       if (version != null) ret.setVersion(version) 
       ret

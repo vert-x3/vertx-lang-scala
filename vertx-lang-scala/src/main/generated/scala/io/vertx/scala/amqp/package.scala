@@ -32,8 +32,9 @@ package object amqp{
   object AmqpClientOptions {
     def apply() = new AmqpClientOptions()
     def apply(json: JsonObject) = new AmqpClientOptions(json)
-    def apply( applicationLayerProtocols: scala.collection.immutable.List[java.lang.String] = null, connectTimeout: java.lang.Integer = null, connectionHostname: java.lang.String = null, containerId: java.lang.String = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, heartbeat: java.lang.Integer = null, host: java.lang.String = null, hostnameVerificationAlgorithm: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, localAddress: java.lang.String = null, logActivity: java.lang.Boolean = null, maxFrameSize: java.lang.Integer = null, metricsName: java.lang.String = null, nonProxyHosts: scala.collection.immutable.List[java.lang.String] = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, password: java.lang.String = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, port: java.lang.Integer = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, receiveBufferSize: java.lang.Integer = null, reconnectAttempts: java.lang.Integer = null, reconnectInterval: java.lang.Long = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, sniServerName: java.lang.String = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, username: java.lang.String = null, virtualHost: java.lang.String = null): AmqpClientOptions = {
+    def apply( activityLogDataFormat: io.netty.handler.logging.ByteBufFormat = null, applicationLayerProtocols: scala.collection.immutable.List[java.lang.String] = null, connectTimeout: java.lang.Integer = null, connectionHostname: java.lang.String = null, containerId: java.lang.String = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, heartbeat: java.lang.Integer = null, host: java.lang.String = null, hostnameVerificationAlgorithm: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, localAddress: java.lang.String = null, logActivity: java.lang.Boolean = null, maxFrameSize: java.lang.Integer = null, metricsName: java.lang.String = null, nonProxyHosts: scala.collection.immutable.List[java.lang.String] = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, password: java.lang.String = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, port: java.lang.Integer = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, readIdleTimeout: java.lang.Integer = null, receiveBufferSize: java.lang.Integer = null, reconnectAttempts: java.lang.Integer = null, reconnectInterval: java.lang.Long = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, sniServerName: java.lang.String = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, username: java.lang.String = null, virtualHost: java.lang.String = null, writeIdleTimeout: java.lang.Integer = null): AmqpClientOptions = {
       val ret = new AmqpClientOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (activityLogDataFormat != null) ret.setActivityLogDataFormat(activityLogDataFormat) 
       if (applicationLayerProtocols != null) ret.setApplicationLayerProtocols(applicationLayerProtocols.asJava) 
       if (connectTimeout != null) ret.setConnectTimeout(connectTimeout) 
       if (connectionHostname != null) ret.setConnectionHostname(connectionHostname) 
@@ -60,6 +61,7 @@ package object amqp{
       if (pfxTrustOptions != null) ret.setPfxTrustOptions(pfxTrustOptions) 
       if (port != null) ret.setPort(port) 
       if (proxyOptions != null) ret.setProxyOptions(proxyOptions) 
+      if (readIdleTimeout != null) ret.setReadIdleTimeout(readIdleTimeout) 
       if (receiveBufferSize != null) ret.setReceiveBufferSize(receiveBufferSize) 
       if (reconnectAttempts != null) ret.setReconnectAttempts(reconnectAttempts) 
       if (reconnectInterval != null) ret.setReconnectInterval(reconnectInterval) 
@@ -84,6 +86,7 @@ package object amqp{
       if (useAlpn != null) ret.setUseAlpn(useAlpn) 
       if (username != null) ret.setUsername(username) 
       if (virtualHost != null) ret.setVirtualHost(virtualHost) 
+      if (writeIdleTimeout != null) ret.setWriteIdleTimeout(writeIdleTimeout) 
       ret
     }
   }
@@ -94,7 +97,7 @@ package object amqp{
   object AmqpReceiverOptions {
     def apply() = new AmqpReceiverOptions()
     def apply(json: JsonObject) = new AmqpReceiverOptions(json)
-    def apply( autoAcknowledgement: java.lang.Boolean = null, capabilities: scala.collection.immutable.List[java.lang.String] = null, durable: java.lang.Boolean = null, dynamic: java.lang.Boolean = null, linkName: java.lang.String = null, maxBufferedMessages: java.lang.Integer = null, qos: java.lang.String = null): AmqpReceiverOptions = {
+    def apply( autoAcknowledgement: java.lang.Boolean = null, capabilities: scala.collection.immutable.List[java.lang.String] = null, durable: java.lang.Boolean = null, dynamic: java.lang.Boolean = null, linkName: java.lang.String = null, maxBufferedMessages: java.lang.Integer = null, noLocal: java.lang.Boolean = null, qos: java.lang.String = null, selector: java.lang.String = null): AmqpReceiverOptions = {
       val ret = new AmqpReceiverOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (autoAcknowledgement != null) ret.setAutoAcknowledgement(autoAcknowledgement) 
       if (capabilities != null) ret.setCapabilities(capabilities.asJava) 
@@ -102,7 +105,9 @@ package object amqp{
       if (dynamic != null) ret.setDynamic(dynamic) 
       if (linkName != null) ret.setLinkName(linkName) 
       if (maxBufferedMessages != null) ret.setMaxBufferedMessages(maxBufferedMessages) 
+      if (noLocal != null) ret.setNoLocal(noLocal) 
       if (qos != null) ret.setQos(qos) 
+      if (selector != null) ret.setSelector(selector) 
       ret
     }
   }

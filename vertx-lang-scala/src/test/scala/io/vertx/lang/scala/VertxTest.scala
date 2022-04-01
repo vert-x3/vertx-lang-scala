@@ -42,7 +42,7 @@ class VertxTest extends AnyFlatSpec with Matchers {
     val waiter = new Waiter()
     vertx.deployVerticle(new ScalaVerticle {
       override def start(): Unit = {
-        if(vertx.getOrCreateContext().isWorkerContext()) {
+        if(this.vertx.getOrCreateContext().isWorkerContext()) {
           waiter.dismiss()
         }
       }
@@ -77,7 +77,7 @@ class VertxTest extends AnyFlatSpec with Matchers {
 
     val future = vertx.deployVerticle(new ScalaVerticle {
       override def start(): Unit = {
-        if(vertx.getOrCreateContext().isWorkerContext()) {
+        if(this.vertx.getOrCreateContext().isWorkerContext()) {
           waiter.dismiss()
         }
       }

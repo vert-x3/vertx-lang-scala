@@ -50,7 +50,7 @@ package object scala {
      */
     def deployVerticle(verticle: ScalaVerticle): ScalaFuture[String] = {
       val promise = concurrent.Promise[String]()
-      asJava.deployVerticle(verticle.asJava(), {a:AsyncResult[String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.deployVerticle(verticle.asJava(), { (a:AsyncResult[String]) => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -59,7 +59,7 @@ package object scala {
      */
     def deployVerticle(verticle: ScalaVerticle, options: DeploymentOptions): ScalaFuture[String] = {
       val promise = concurrent.Promise[String]()
-      asJava.deployVerticle(verticle.asJava(),options , {a:AsyncResult[String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
+      asJava.deployVerticle(verticle.asJava(),options , { (a:AsyncResult[String]) => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
       promise.future
     }
 
@@ -80,7 +80,7 @@ package object scala {
         case util.Success(s) => f.complete(s)
         case util.Failure(t) => f.fail(t)
       }}
-      asJava.executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if (h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
+      asJava.executeBlocking[T](h, ordered, { (h:AsyncResult[T]) => {if (h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
       promise.future
     }
 

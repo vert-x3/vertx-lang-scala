@@ -14,7 +14,7 @@ import scala.util.{Failure, Success}
 
 class ScalaVerticleTest extends AsyncFlatSpec with Matchers with ScalaFutures {
 
-  implicit val defaultPatience =
+  val defaultPatience: PatienceConfig =
     PatienceConfig(timeout = Span(5, Seconds), interval = Span(500, Millis))
 
   "StartFutureVerticle" should "use startFuture to start" in {
@@ -110,7 +110,7 @@ class StartFutureVerticle extends ScalaVerticle{
   override def start(promise: Promise[Unit]): Unit = {
     vertx.eventBus
       .send("startMethod", "startFuture")
-    promise.complete(Success())
+    promise.complete(Success(()))
   }
 
 }
@@ -133,16 +133,14 @@ class StopFutureVerticle extends ScalaVerticle{
    * Stop the verticle.
    */
   override def stop(promise: Promise[Unit]): Unit = {
-    vertx.eventBus
-      .send("stopMethod", "stopFuture")
-    promise.complete(Success())
+    vertx.eventBus.send("stopMethod", "stopFuture")
+    promise.complete(Success(()))
   }
 }
 
 class StopVerticle extends ScalaVerticle{
   override def stop(): Unit = {
-    vertx.eventBus
-      .send("stopMethod", "stop")
+    vertx.eventBus.send("stopMethod", "stop")
   }
 }
 
