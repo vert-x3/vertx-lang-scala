@@ -32,7 +32,7 @@ package object circuitbreaker{
   object CircuitBreakerOptions {
     def apply() = new CircuitBreakerOptions()
     def apply(json: JsonObject) = new CircuitBreakerOptions(json)
-    def apply( failuresRollingWindow: java.lang.Long = null, fallbackOnFailure: java.lang.Boolean = null, maxFailures: java.lang.Integer = null, maxRetries: java.lang.Integer = null, metricsRollingBuckets: java.lang.Integer = null, metricsRollingWindow: java.lang.Long = null, notificationAddress: java.lang.String = null, notificationPeriod: java.lang.Long = null, resetTimeout: java.lang.Long = null, timeout: java.lang.Long = null): CircuitBreakerOptions = {
+    def apply( failuresRollingWindow: java.lang.Long = null, fallbackOnFailure: java.lang.Boolean = null, maxFailures: java.lang.Integer = null, maxRetries: java.lang.Integer = null, metricsRollingBuckets: java.lang.Integer = null, metricsRollingWindow: java.lang.Long = null, notificationAddress: java.lang.String = null, notificationLocalOnly: java.lang.Boolean = null, notificationPeriod: java.lang.Long = null, resetTimeout: java.lang.Long = null, timeout: java.lang.Long = null): CircuitBreakerOptions = {
       val ret = new CircuitBreakerOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (failuresRollingWindow != null) ret.setFailuresRollingWindow(failuresRollingWindow) 
       if (fallbackOnFailure != null) ret.setFallbackOnFailure(fallbackOnFailure) 
@@ -41,6 +41,7 @@ package object circuitbreaker{
       if (metricsRollingBuckets != null) ret.setMetricsRollingBuckets(metricsRollingBuckets) 
       if (metricsRollingWindow != null) ret.setMetricsRollingWindow(metricsRollingWindow) 
       if (notificationAddress != null) ret.setNotificationAddress(notificationAddress) 
+      if (notificationLocalOnly != null) ret.setNotificationLocalOnly(notificationLocalOnly) 
       if (notificationPeriod != null) ret.setNotificationPeriod(notificationPeriod) 
       if (resetTimeout != null) ret.setResetTimeout(resetTimeout) 
       if (timeout != null) ret.setTimeout(timeout) 

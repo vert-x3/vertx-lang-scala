@@ -98,7 +98,7 @@ package object webauthn{
   object WebAuthnOptions {
     def apply() = new WebAuthnOptions()
     def apply(json: JsonObject) = new WebAuthnOptions(json)
-    def apply( attestation: io.vertx.ext.auth.webauthn.Attestation = null, authenticatorAttachment: io.vertx.ext.auth.webauthn.AuthenticatorAttachment = null, challengeLength: java.lang.Integer = null, extensions: io.vertx.core.json.JsonObject = null, pubKeyCredParams: scala.collection.immutable.List[io.vertx.ext.auth.webauthn.PublicKeyCredential] = null, relyingParty: io.vertx.ext.auth.webauthn.RelyingParty = null, requireResidentKey: java.lang.Boolean = null, rootCertificates: scala.collection.immutable.Map[String,java.lang.String] = null, rootCrls: scala.collection.immutable.List[java.lang.String] = null, timeout: java.lang.Long = null, transports: scala.collection.immutable.List[io.vertx.ext.auth.webauthn.AuthenticatorTransport] = null, userVerification: io.vertx.ext.auth.webauthn.UserVerification = null): WebAuthnOptions = {
+    def apply( attestation: io.vertx.ext.auth.webauthn.Attestation = null, authenticatorAttachment: io.vertx.ext.auth.webauthn.AuthenticatorAttachment = null, challengeLength: java.lang.Integer = null, extensions: io.vertx.core.json.JsonObject = null, pubKeyCredParams: scala.collection.immutable.List[io.vertx.ext.auth.webauthn.PublicKeyCredential] = null, relyingParty: io.vertx.ext.auth.webauthn.RelyingParty = null, requireResidentKey: java.lang.Boolean = null, rootCertificates: scala.collection.immutable.Map[String,java.lang.String] = null, rootCrls: scala.collection.immutable.List[java.lang.String] = null, timeoutInMilliseconds: java.lang.Long = null, transports: scala.collection.immutable.List[io.vertx.ext.auth.webauthn.AuthenticatorTransport] = null, userVerification: io.vertx.ext.auth.webauthn.UserVerification = null): WebAuthnOptions = {
       val ret = new WebAuthnOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (attestation != null) ret.setAttestation(attestation) 
       if (authenticatorAttachment != null) ret.setAuthenticatorAttachment(authenticatorAttachment) 
@@ -109,7 +109,7 @@ package object webauthn{
       if (requireResidentKey != null) ret.setRequireResidentKey(requireResidentKey) 
       if (rootCertificates != null) ret.setRootCertificates(rootCertificates.asJava) 
       if (rootCrls != null) ret.setRootCrls(rootCrls.asJava) 
-      if (timeout != null) ret.setTimeout(timeout) 
+      if (timeoutInMilliseconds != null) ret.setTimeoutInMilliseconds(timeoutInMilliseconds) 
       if (transports != null) ret.setTransports(transports.asJava) 
       if (userVerification != null) ret.setUserVerification(userVerification) 
       ret

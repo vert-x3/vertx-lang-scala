@@ -126,9 +126,8 @@ package object client{
   object RecordMetadata {
     def apply() = new RecordMetadata()
     def apply(json: JsonObject) = new RecordMetadata(json)
-    def apply( checksum: java.lang.Long = null, offset: java.lang.Long = null, partition: java.lang.Integer = null, timestamp: java.lang.Long = null, topic: java.lang.String = null): RecordMetadata = {
+    def apply( offset: java.lang.Long = null, partition: java.lang.Integer = null, timestamp: java.lang.Long = null, topic: java.lang.String = null): RecordMetadata = {
       val ret = new RecordMetadata(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
-      if (checksum != null) ret.setChecksum(checksum) 
       if (offset != null) ret.setOffset(offset) 
       if (partition != null) ret.setPartition(partition) 
       if (timestamp != null) ret.setTimestamp(timestamp) 

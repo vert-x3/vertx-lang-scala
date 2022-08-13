@@ -50,11 +50,13 @@ package object mongo{
   type BulkOperation = io.vertx.ext.mongo.BulkOperation
   object BulkOperation {
     def apply(json: JsonObject) = new BulkOperation(json)
-    def apply( collation: io.vertx.ext.mongo.CollationOptions = null, document: io.vertx.core.json.JsonObject = null, filter: io.vertx.core.json.JsonObject = null, multi: java.lang.Boolean = null, `type`: io.vertx.ext.mongo.BulkOperationType = null, upsert: java.lang.Boolean = null): BulkOperation = {
+    def apply( collation: io.vertx.ext.mongo.CollationOptions = null, document: io.vertx.core.json.JsonObject = null, filter: io.vertx.core.json.JsonObject = null, hint: io.vertx.core.json.JsonObject = null, hintString: java.lang.String = null, multi: java.lang.Boolean = null, `type`: io.vertx.ext.mongo.BulkOperationType = null, upsert: java.lang.Boolean = null): BulkOperation = {
       val ret = new BulkOperation(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (collation != null) ret.setCollation(collation) 
       if (document != null) ret.setDocument(document) 
       if (filter != null) ret.setFilter(filter) 
+      if (hint != null) ret.setHint(hint) 
+      if (hintString != null) ret.setHintString(hintString) 
       if (multi != null) ret.setMulti(multi) 
       if (`type` != null) ret.setType(`type`) 
       if (upsert != null) ret.setUpsert(upsert) 
@@ -150,12 +152,13 @@ package object mongo{
   object FindOptions {
     def apply() = new FindOptions()
     def apply(json: JsonObject) = new FindOptions(json)
-    def apply( batchSize: java.lang.Integer = null, collation: io.vertx.ext.mongo.CollationOptions = null, fields: io.vertx.core.json.JsonObject = null, hint: java.lang.String = null, limit: java.lang.Integer = null, skip: java.lang.Integer = null, sort: io.vertx.core.json.JsonObject = null): FindOptions = {
+    def apply( batchSize: java.lang.Integer = null, collation: io.vertx.ext.mongo.CollationOptions = null, fields: io.vertx.core.json.JsonObject = null, hint: io.vertx.core.json.JsonObject = null, hintString: java.lang.String = null, limit: java.lang.Integer = null, skip: java.lang.Integer = null, sort: io.vertx.core.json.JsonObject = null): FindOptions = {
       val ret = new FindOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (batchSize != null) ret.setBatchSize(batchSize) 
       if (collation != null) ret.setCollation(collation) 
       if (fields != null) ret.setFields(fields) 
       if (hint != null) ret.setHint(hint) 
+      if (hintString != null) ret.setHintString(hintString) 
       if (limit != null) ret.setLimit(limit) 
       if (skip != null) ret.setSkip(skip) 
       if (sort != null) ret.setSort(sort) 
@@ -250,10 +253,12 @@ package object mongo{
   object UpdateOptions {
     def apply() = new UpdateOptions()
     def apply(json: JsonObject) = new UpdateOptions(json)
-    def apply( arrayFilters: io.vertx.core.json.JsonArray = null, collation: io.vertx.ext.mongo.CollationOptions = null, multi: java.lang.Boolean = null, returningNewDocument: java.lang.Boolean = null, upsert: java.lang.Boolean = null, writeOption: io.vertx.ext.mongo.WriteOption = null): UpdateOptions = {
+    def apply( arrayFilters: io.vertx.core.json.JsonArray = null, collation: io.vertx.ext.mongo.CollationOptions = null, hint: io.vertx.core.json.JsonObject = null, hintString: java.lang.String = null, multi: java.lang.Boolean = null, returningNewDocument: java.lang.Boolean = null, upsert: java.lang.Boolean = null, writeOption: io.vertx.ext.mongo.WriteOption = null): UpdateOptions = {
       val ret = new UpdateOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (arrayFilters != null) ret.setArrayFilters(arrayFilters) 
       if (collation != null) ret.setCollation(collation) 
+      if (hint != null) ret.setHint(hint) 
+      if (hintString != null) ret.setHintString(hintString) 
       if (multi != null) ret.setMulti(multi) 
       if (returningNewDocument != null) ret.setReturningNewDocument(returningNewDocument) 
       if (upsert != null) ret.setUpsert(upsert) 

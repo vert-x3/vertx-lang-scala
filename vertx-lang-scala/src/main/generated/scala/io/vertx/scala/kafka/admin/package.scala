@@ -124,6 +124,33 @@ package object admin{
 
 
 
+  type DescribeClusterOptions = io.vertx.kafka.admin.DescribeClusterOptions
+  object DescribeClusterOptions {
+    def apply() = new DescribeClusterOptions()
+    def apply(json: JsonObject) = new DescribeClusterOptions(json)
+
+  }
+
+
+
+  type DescribeConsumerGroupsOptions = io.vertx.kafka.admin.DescribeConsumerGroupsOptions
+  object DescribeConsumerGroupsOptions {
+    def apply() = new DescribeConsumerGroupsOptions()
+    def apply(json: JsonObject) = new DescribeConsumerGroupsOptions(json)
+
+  }
+
+
+
+  type DescribeTopicsOptions = io.vertx.kafka.admin.DescribeTopicsOptions
+  object DescribeTopicsOptions {
+    def apply() = new DescribeTopicsOptions()
+    def apply(json: JsonObject) = new DescribeTopicsOptions(json)
+
+  }
+
+
+
   type ListConsumerGroupOffsetsOptions = io.vertx.kafka.admin.ListConsumerGroupOffsetsOptions
   object ListConsumerGroupOffsetsOptions {
     def apply() = new ListConsumerGroupOffsetsOptions()

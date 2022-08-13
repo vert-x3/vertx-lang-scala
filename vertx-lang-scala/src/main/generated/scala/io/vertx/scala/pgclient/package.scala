@@ -46,7 +46,7 @@ package object pgclient{
   object PgConnectOptions {
     def apply() = new PgConnectOptions()
     def apply(json: JsonObject) = new PgConnectOptions(json)
-    def apply( activityLogDataFormat: io.netty.handler.logging.ByteBufFormat = null, applicationLayerProtocols: scala.collection.immutable.List[java.lang.String] = null, cachePreparedStatements: java.lang.Boolean = null, connectTimeout: java.lang.Integer = null, database: java.lang.String = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, host: java.lang.String = null, hostnameVerificationAlgorithm: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, localAddress: java.lang.String = null, logActivity: java.lang.Boolean = null, metricsName: java.lang.String = null, nonProxyHosts: scala.collection.immutable.List[java.lang.String] = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, password: java.lang.String = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, pipeliningLimit: java.lang.Integer = null, port: java.lang.Integer = null, preparedStatementCacheMaxSize: java.lang.Integer = null, preparedStatementCacheSqlLimit: java.lang.Integer = null, properties: scala.collection.immutable.Map[String,java.lang.String] = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, readIdleTimeout: java.lang.Integer = null, receiveBufferSize: java.lang.Integer = null, reconnectAttempts: java.lang.Integer = null, reconnectInterval: java.lang.Long = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, sslMode: io.vertx.pgclient.SslMode = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, tracingPolicy: io.vertx.core.tracing.TracingPolicy = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, user: java.lang.String = null, usingDomainSocket: java.lang.Boolean = null, writeIdleTimeout: java.lang.Integer = null): PgConnectOptions = {
+    def apply( activityLogDataFormat: io.netty.handler.logging.ByteBufFormat = null, applicationLayerProtocols: scala.collection.immutable.List[java.lang.String] = null, cachePreparedStatements: java.lang.Boolean = null, connectTimeout: java.lang.Integer = null, database: java.lang.String = null, enabledSecureTransportProtocols: scala.collection.immutable.Set[java.lang.String] = null, host: java.lang.String = null, hostnameVerificationAlgorithm: java.lang.String = null, idleTimeout: java.lang.Integer = null, idleTimeoutUnit: java.util.concurrent.TimeUnit = null, jdkSslEngineOptions: io.vertx.core.net.JdkSSLEngineOptions = null, keyCertOptions: io.vertx.core.net.KeyCertOptions = null, keyStoreOptions: io.vertx.core.net.JksOptions = null, localAddress: java.lang.String = null, logActivity: java.lang.Boolean = null, metricsName: java.lang.String = null, nonProxyHosts: scala.collection.immutable.List[java.lang.String] = null, openSslEngineOptions: io.vertx.core.net.OpenSSLEngineOptions = null, password: java.lang.String = null, pemKeyCertOptions: io.vertx.core.net.PemKeyCertOptions = null, pemTrustOptions: io.vertx.core.net.PemTrustOptions = null, pfxKeyCertOptions: io.vertx.core.net.PfxOptions = null, pfxTrustOptions: io.vertx.core.net.PfxOptions = null, pipeliningLimit: java.lang.Integer = null, port: java.lang.Integer = null, preparedStatementCacheMaxSize: java.lang.Integer = null, preparedStatementCacheSqlLimit: java.lang.Integer = null, properties: scala.collection.immutable.Map[String,java.lang.String] = null, proxyOptions: io.vertx.core.net.ProxyOptions = null, readIdleTimeout: java.lang.Integer = null, receiveBufferSize: java.lang.Integer = null, reconnectAttempts: java.lang.Integer = null, reconnectInterval: java.lang.Long = null, reuseAddress: java.lang.Boolean = null, reusePort: java.lang.Boolean = null, sendBufferSize: java.lang.Integer = null, soLinger: java.lang.Integer = null, ssl: java.lang.Boolean = null, sslEngineOptions: io.vertx.core.net.SSLEngineOptions = null, sslHandshakeTimeout: java.lang.Long = null, sslHandshakeTimeoutUnit: java.util.concurrent.TimeUnit = null, sslMode: io.vertx.pgclient.SslMode = null, tcpCork: java.lang.Boolean = null, tcpFastOpen: java.lang.Boolean = null, tcpKeepAlive: java.lang.Boolean = null, tcpNoDelay: java.lang.Boolean = null, tcpQuickAck: java.lang.Boolean = null, tcpUserTimeout: java.lang.Integer = null, tracingPolicy: io.vertx.core.tracing.TracingPolicy = null, trafficClass: java.lang.Integer = null, trustAll: java.lang.Boolean = null, trustOptions: io.vertx.core.net.TrustOptions = null, trustStoreOptions: io.vertx.core.net.JksOptions = null, useAlpn: java.lang.Boolean = null, user: java.lang.String = null, usingDomainSocket: java.lang.Boolean = null, writeIdleTimeout: java.lang.Integer = null): PgConnectOptions = {
       val ret = new PgConnectOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (activityLogDataFormat != null) ret.setActivityLogDataFormat(activityLogDataFormat) 
       if (applicationLayerProtocols != null) ret.setApplicationLayerProtocols(applicationLayerProtocols.asJava) 
@@ -95,6 +95,7 @@ package object pgclient{
       if (tcpKeepAlive != null) ret.setTcpKeepAlive(tcpKeepAlive) 
       if (tcpNoDelay != null) ret.setTcpNoDelay(tcpNoDelay) 
       if (tcpQuickAck != null) ret.setTcpQuickAck(tcpQuickAck) 
+      if (tcpUserTimeout != null) ret.setTcpUserTimeout(tcpUserTimeout) 
       if (tracingPolicy != null) ret.setTracingPolicy(tracingPolicy) 
       if (trafficClass != null) ret.setTrafficClass(trafficClass) 
       if (trustAll != null) ret.setTrustAll(trustAll) 
@@ -103,6 +104,35 @@ package object pgclient{
       if (useAlpn != null) ret.setUseAlpn(useAlpn) 
       if (user != null) ret.setUser(user) 
       if (writeIdleTimeout != null) ret.setWriteIdleTimeout(writeIdleTimeout) 
+      ret
+    }
+  }
+
+
+
+  type PgNotice = io.vertx.pgclient.PgNotice
+  object PgNotice {
+    def apply() = new PgNotice()
+    def apply(json: JsonObject) = new PgNotice(json)
+    def apply( code: java.lang.String = null, column: java.lang.String = null, constraint: java.lang.String = null, dataType: java.lang.String = null, detail: java.lang.String = null, file: java.lang.String = null, hint: java.lang.String = null, internalPosition: java.lang.String = null, internalQuery: java.lang.String = null, line: java.lang.String = null, message: java.lang.String = null, position: java.lang.String = null, routine: java.lang.String = null, schema: java.lang.String = null, severity: java.lang.String = null, table: java.lang.String = null, where: java.lang.String = null): PgNotice = {
+      val ret = new PgNotice(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (code != null) ret.setCode(code) 
+      if (column != null) ret.setColumn(column) 
+      if (constraint != null) ret.setConstraint(constraint) 
+      if (dataType != null) ret.setDataType(dataType) 
+      if (detail != null) ret.setDetail(detail) 
+      if (file != null) ret.setFile(file) 
+      if (hint != null) ret.setHint(hint) 
+      if (internalPosition != null) ret.setInternalPosition(internalPosition) 
+      if (internalQuery != null) ret.setInternalQuery(internalQuery) 
+      if (line != null) ret.setLine(line) 
+      if (message != null) ret.setMessage(message) 
+      if (position != null) ret.setPosition(position) 
+      if (routine != null) ret.setRoutine(routine) 
+      if (schema != null) ret.setSchema(schema) 
+      if (severity != null) ret.setSeverity(severity) 
+      if (table != null) ret.setTable(table) 
+      if (where != null) ret.setWhere(where) 
       ret
     }
   }
