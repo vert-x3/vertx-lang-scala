@@ -385,7 +385,7 @@
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_3</artifactId>
-      <version>3.2.11</version>
+      <version>3.2.13</version>
       <scope>test</scope>
     </dependency>
 
@@ -503,7 +503,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.7</version>
         <configuration>
           <skipTests>true</skipTests>
         </configuration>
@@ -511,11 +510,10 @@
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
-        <version>3.2.0</version>
+        <version>4.5-jdk8</version>
         <configuration>
           <systemProperties>
-            <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n
-            </java.util.logging.SimpleFormatter.format>
+            <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
           </systemProperties>
         </configuration>
         <executions>
@@ -537,7 +535,6 @@
               <sourceDirectory>${project.build.directory}/sources/java</sourceDirectory>
             </configuration>
           </execution>
-
         </executions>
         <dependencies>
           <dependency>
@@ -614,10 +611,11 @@
           </dependency>
         </dependencies>
       </plugin>
+
+
       <plugin>
         <groupId>org.scalatest</groupId>
         <artifactId>scalatest-maven-plugin</artifactId>
-        <version>2.0.2</version>
         <configuration>
           <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
           <junitxml>.</junitxml>
@@ -647,7 +645,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>1.3</version>
+        <version>1.8</version>
         <executions>
           <execution>
             <id>add-source</id>
