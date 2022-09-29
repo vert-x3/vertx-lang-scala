@@ -15,7 +15,7 @@ import static io.vertx.codegen.type.ClassKind.*;
 
 public class Templates {
 
-  public static final Map<String,String> javaBasicToWrapperTyper = new HashMap<String,String>() {{
+  private static final Map<String, String> javaBasicToWrapperTyper = new HashMap<String, String>() {{
     put("byte", "java.lang.Byte");
     put("java.lang.Byte", "java.lang.Byte");
     put("short", "java.lang.Short");
@@ -36,7 +36,7 @@ public class Templates {
     put("java.lang.String", "java.lang.String");
   }};
 
-  public static final Map<String,String> javaBasicToScalaType = new HashMap<String, String>() {{
+  private static final Map<String, String> javaBasicToScalaType = new HashMap<String, String>() {{
     put("byte", "Byte");
     put("java.lang.Byte", "Byte");
     put("short", "Short");
@@ -57,40 +57,40 @@ public class Templates {
     put("java.lang.String", "String");
   }};
 
-  public static final Map<ClassKind, Function<TypeInfo,String>> toScalaType = new HashMap<ClassKind, Function<TypeInfo,String>>() {{
+  private static final Map<ClassKind, Function<TypeInfo, String>> toScalaType = new HashMap<ClassKind, Function<TypeInfo, String>>() {{
     put(VOID, t -> "Void");
     put(OBJECT, t -> t.isVariable() ? t.getName() : "AnyRef");
     put(THROWABLE, t -> "Throwable");
     put(STRING, t -> javaBasicToWrapperTyper.get(t.getName()));
     put(PRIMITIVE, t -> javaBasicToWrapperTyper.get(t.getName()));
     put(BOXED_PRIMITIVE, t -> javaBasicToWrapperTyper.get(t.getName()));
-    put(LIST, t -> "scala.collection.mutable.Buffer" +  ((!((ParameterizedTypeInfo)t).getArgs().isEmpty()) ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : ""));
-    put(SET, t -> "scala.collection.mutable.Set" +  ((!((ParameterizedTypeInfo)t).getArgs().isEmpty()) ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : ""));
-    put(MAP, t -> "scala.collection.mutable.Map" +  ((!((ParameterizedTypeInfo)t).getArgs().isEmpty()) ? "[String, " + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(1)) + "]" : ""));
-    put(HANDLER, t -> fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + " => Unit");
+    put(LIST, t -> "scala.collection.mutable.Buffer" + ((!((ParameterizedTypeInfo) t).getArgs().isEmpty()) ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo) t).getArgs().get(0)) + "]" : ""));
+    put(SET, t -> "scala.collection.mutable.Set" + ((!((ParameterizedTypeInfo) t).getArgs().isEmpty()) ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo) t).getArgs().get(0)) + "]" : ""));
+    put(MAP, t -> "scala.collection.mutable.Map" + ((!((ParameterizedTypeInfo) t).getArgs().isEmpty()) ? "[String, " + fromTypeToScalaTypeString(((ParameterizedTypeInfo) t).getArgs().get(1)) + "]" : ""));
+    put(HANDLER, t -> fromTypeToScalaTypeString(((ParameterizedTypeInfo) t).getArgs().get(0)) + " => Unit");
     put(JSON_OBJECT, TypeInfo::getName);
     put(JSON_ARRAY, TypeInfo::getName);
     put(ENUM, TypeInfo::getName);
     put(OTHER, type -> getNonGenericType(type.getName()));
-    put(ASYNC_RESULT, t -> "AsyncResult" + (!((ParameterizedTypeInfo)t).getArgs().isEmpty() ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : "[_]"));
-    put(CLASS_TYPE, t -> "Class" + (((ParameterizedTypeInfo)t).getArgs().isEmpty() ? "[_]" : "[" + ((ParameterizedTypeInfo)t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]"));
+    put(ASYNC_RESULT, t -> "AsyncResult" + (!((ParameterizedTypeInfo) t).getArgs().isEmpty() ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo) t).getArgs().get(0)) + "]" : "[_]"));
+    put(CLASS_TYPE, t -> "Class" + (((ParameterizedTypeInfo) t).getArgs().isEmpty() ? "[_]" : "[" + ((ParameterizedTypeInfo) t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]"));
 
     put(API, t -> {
       String ret = getNonGenericType(t.getName());
-      if(t.isParameterized()) {
-        if (((ParameterizedTypeInfo)t).getArgs().isEmpty()) {
+      if (t.isParameterized()) {
+        if (((ParameterizedTypeInfo) t).getArgs().isEmpty()) {
           ret += "[_]";
         } else {
-          ret += "[" + ((ParameterizedTypeInfo)t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]";
+          ret += "[" + ((ParameterizedTypeInfo) t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]";
         }
       }
       return ret;
     });
 
     put(FUNCTION, t -> {
-      boolean paramIsVoid = ((ParameterizedTypeInfo)t).getArgs().get(0).getKind() == VOID;
-      String type1 = fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0));
-      String type2 = fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(1));
+      boolean paramIsVoid = ((ParameterizedTypeInfo) t).getArgs().get(0).getKind() == VOID;
+      String type1 = fromTypeToScalaTypeString(((ParameterizedTypeInfo) t).getArgs().get(0));
+      String type2 = fromTypeToScalaTypeString(((ParameterizedTypeInfo) t).getArgs().get(1));
       if (paramIsVoid) {
         return "() => " + type2;
       } else {
@@ -99,26 +99,26 @@ public class Templates {
     });
   }};
 
-  public static final Map<ClassKind, BiFunction<String, TypeInfo, String>> toJavaWithConversionFromScala = new HashMap<ClassKind, BiFunction<String, TypeInfo,String>>() {{
+  private static final Map<ClassKind, BiFunction<String, TypeInfo, String>> toJavaWithConversionFromScala = new HashMap<ClassKind, BiFunction<String, TypeInfo, String>>() {{
     put(VOID, (name, type) -> name);
-    put(STRING, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    put(PRIMITIVE, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    put(BOXED_PRIMITIVE, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    put(THROWABLE, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    put(OBJECT, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    put(CLASS_TYPE, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    put(JSON_OBJECT, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    put(JSON_ARRAY, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    put(ENUM, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    put(API, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    put(HANDLER, (name, type) ->  name + (type.isNullable() ? ".map(hdlr => hdlr" : "") + ".asInstanceOf[" + convertToScalaGenericsNotation(type.toString()) + "]" + (type.isNullable() ? ").getOrElse(null)" : ""));
-    put(ASYNC_RESULT, (name, type) ->  "AsyncResultWrapper[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)type).getArg(0)) + ", " + toJavaType(((ParameterizedTypeInfo)type).getArg(0)) + "](x, a => " + fromScalatoJavaWithConversion("a", ((ParameterizedTypeInfo)type).getArg(0)) + ")" + (type.isNullable() ? ".getOrElse(null)" : ""));
-    put(SET, (name, type) ->  name + (type.isNullable() ? ".map(_.asJava).getOrElse(null)" : ".asJava"));
-    put(LIST, (name, type) ->  name + (type.isNullable() ? ".map(_.asJava).getOrElse(null)" : ".asJava"));
-    put(MAP, (name, type) ->  name + (type.isNullable() ? ".map(_.asJava).getOrElse(null)" : ".asJava"));
-    put(OTHER, (name, type) ->  name + (type.isNullable() ? ".getOrElse(null)" : ""));
-    put(FUNCTION, (name, type) ->  {
-      ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo)type;
+    put(STRING, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(PRIMITIVE, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(BOXED_PRIMITIVE, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(THROWABLE, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(OBJECT, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(CLASS_TYPE, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(JSON_OBJECT, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(JSON_ARRAY, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(ENUM, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(API, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(HANDLER, (name, type) -> name + (type.isNullable() ? ".map(hdlr => hdlr" : "") + ".asInstanceOf[" + convertToScalaGenericsNotation(type.toString()) + "]" + (type.isNullable() ? ").getOrElse(null)" : ""));
+    put(ASYNC_RESULT, (name, type) -> "AsyncResultWrapper[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo) type).getArg(0)) + ", " + toJavaType(((ParameterizedTypeInfo) type).getArg(0)) + "](x, a => " + fromScalatoJavaWithConversion("a", ((ParameterizedTypeInfo) type).getArg(0)) + ")" + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(SET, (name, type) -> name + (type.isNullable() ? ".map(_.asJava).getOrElse(null)" : ".asJava"));
+    put(LIST, (name, type) -> name + (type.isNullable() ? ".map(_.asJava).getOrElse(null)" : ".asJava"));
+    put(MAP, (name, type) -> name + (type.isNullable() ? ".map(_.asJava).getOrElse(null)" : ".asJava"));
+    put(OTHER, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
+    put(FUNCTION, (name, type) -> {
+      ParameterizedTypeInfo parameterizedType = (ParameterizedTypeInfo) type;
       String executed = name;
       if (parameterizedType.getArg(0).getKind() == VOID) {
         executed = executed + "()";
@@ -128,13 +128,13 @@ public class Templates {
       executed = fromScalatoJavaWithConversion(executed, parameterizedType.getArg(1));
       String ret = "{x: " + toJavaType(parameterizedType.getArg(0)) + " => " + executed + "}";
       if (type.isNullable()) {
-        ret = name + ".map(" + name +" => " + ret + ").orNull";
+        ret = name + ".map(" + name + " => " + ret + ").orNull";
       }
       return ret;
     });
   }};
 
-  public static final Map<ClassKind, Function<TypeInfo, String>> toJavaString = new HashMap<ClassKind, Function<TypeInfo, String>>() {{
+  private static final Map<ClassKind, Function<TypeInfo, String>> toJavaString = new HashMap<ClassKind, Function<TypeInfo, String>>() {{
     put(PRIMITIVE, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
     put(BOXED_PRIMITIVE, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
     put(STRING, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
@@ -145,11 +145,11 @@ public class Templates {
     put(ENUM, TypeInfo::getSimpleName);
     put(OBJECT, TypeInfo::getSimpleName);
     put(CLASS_TYPE, type -> type.getSimpleName() + "[" + convertArgListToScalaFormatedString(type) + "]");
-    put(HANDLER, type -> "Handler["+ toJavaType(((ParameterizedTypeInfo)type).getArg(0)) +"]");
-    put(ASYNC_RESULT, type -> getNonGenericType(type.getSimpleName()) + "["+ toJavaType(((ParameterizedTypeInfo)type).getArg(0)) +"]");
-    put(LIST, type -> "java.util.List["+ toJavaType(((ParameterizedTypeInfo)type).getArg(0)) +"]");
-    put(SET, type -> "java.util.Set["+ toJavaType(((ParameterizedTypeInfo)type).getArg(0)) +"]");
-    put(MAP, type -> "java.util.Map[String, "+ toJavaType(((ParameterizedTypeInfo)type).getArg(1)) +"]");
+    put(HANDLER, type -> "Handler[" + toJavaType(((ParameterizedTypeInfo) type).getArg(0)) + "]");
+    put(ASYNC_RESULT, type -> getNonGenericType(type.getSimpleName()) + "[" + toJavaType(((ParameterizedTypeInfo) type).getArg(0)) + "]");
+    put(LIST, type -> "java.util.List[" + toJavaType(((ParameterizedTypeInfo) type).getArg(0)) + "]");
+    put(SET, type -> "java.util.Set[" + toJavaType(((ParameterizedTypeInfo) type).getArg(0)) + "]");
+    put(MAP, type -> "java.util.Map[String, " + toJavaType(((ParameterizedTypeInfo) type).getArg(1)) + "]");
     put(OTHER, TypeInfo::getName);
     put(API, type -> {
       String ret = getNonGenericType(type.getName());
@@ -163,38 +163,29 @@ public class Templates {
     });
   }};
 
-  public static String convertArgListToScalaFormatedString(TypeInfo type) {
-    return type.isParameterized() ? "[" + ((ParameterizedTypeInfo)type).getArgs().stream().map(Templates::toJavaType).collect(Collectors.joining(", ")) + "]" : "";
+  private static String convertArgListToScalaFormatedString(TypeInfo type) {
+    return type.isParameterized() ? "[" + ((ParameterizedTypeInfo) type).getArgs().stream().map(Templates::toJavaType).collect(Collectors.joining(", ")) + "]" : "";
   }
 
   /**
    * Convert a given type parameter list into a Scala String representation.
-   * @param typeParams
-   * @return
    */
-  public static String assembleTypeParamsForScala(Collection<TypeParamInfo> typeParams) {
+  private static String assembleTypeParamsForScala(Collection<TypeParamInfo> typeParams) {
     return typeParams.isEmpty() ? "" : "[" + typeParams.stream().map(TypeParamInfo::getName).collect(Collectors.joining(", ")) + "]";
   }
 
-  public static String capitalize(String str) {
-    if(str == null || str.isEmpty()) {
-      return str;
-    }
-    return str.substring(0, 1).toUpperCase() + str.substring(1);
-  }
-
-  public static String toScalaWithConversion(String name, TypeInfo type) {
+  private static String toScalaWithConversion(String name, TypeInfo type) {
     ClassKind kind = type.getKind();
     String conversion = "";
 
-    if (kind.collection){
-     conversion = ".asScala";
+    if (kind.collection) {
+      conversion = ".asScala";
     }
 
     return name + conversion;
   }
 
-  public static String fromTypeToScalaTypeString(TypeInfo type) {
+  private static String fromTypeToScalaTypeString(TypeInfo type) {
     return toScalaType.get(type.getKind()).apply(type);
   }
 
@@ -202,7 +193,7 @@ public class Templates {
    * Generate conversion code to convert a given instance from Scala to Java:
    * 'scala.Int' becomes 'scala.Int.asInstanceOf[java.lang.Integer]'
    */
-  public static String fromScalatoJavaWithConversion(String name, TypeInfo type) {
+  private static String fromScalatoJavaWithConversion(String name, TypeInfo type) {
     return toJavaWithConversionFromScala.get(type.getKind()).apply(name, type);
   }
 
@@ -210,36 +201,30 @@ public class Templates {
    * Generate the Java type name for a given Scala type name:
    * "scala.Int" becomes "java.lang.Integer"
    */
-  public static String toJavaType(TypeInfo type) {
+  private static String toJavaType(TypeInfo type) {
     return toJavaString.get(type.getKind()).apply(type);
   }
 
-  public static String makeTypeOptionIfNullable(boolean nullable, String expression) {
+  private static String makeTypeOptionIfNullable(boolean nullable, String expression) {
     if (nullable) {
       return "scala.Option[" + expression + "]";
+    } else {
+      return expression;
     }
-    return expression;
   }
 
-  /**
-   *
-   * @param nullable
-   * @param expression
-   * @return
-   */
-  public static String convertToOptionIfNullable(boolean nullable, String expression) {
+  private static String convertToOptionIfNullable(boolean nullable, String expression) {
     if (nullable) {
       return "scala.Option(" + expression + ")";
+    } else {
+      return expression;
     }
-    return expression;
   }
 
   /**
    * Some keywords that are legal in Java can only be used when quoted in Scala
-   * @param possibleKeyword
-   * @return
    */
-  public static String quoteIfScalaKeyword(String possibleKeyword) {
+  private static String quoteIfScalaKeyword(String possibleKeyword) {
     if (possibleKeyword.equals("type") || possibleKeyword.equals("object") || possibleKeyword.equals("match")) {
       return "`" + possibleKeyword + "`";
     }
@@ -248,11 +233,9 @@ public class Templates {
 
   /**
    * Convert a String containing generics to the Scala notation.
-   * @param type
-   * @return
    */
   public static String convertToScalaGenericsNotation(String type) {
-    return  type
+    return type
       .replace("<", "[").replace(">", "]");
   }
 
@@ -265,20 +248,18 @@ public class Templates {
    *
    * @see <a href="https://github.com/vert-x3/vertx-lang-scala/issues/23">Issue</a>
    */
-  public static boolean skipMethod(MethodInfo method) {
-    return method.getName().equals("addInterceptor") || method.getName().equals("removeInterceptor");
+  private static boolean keepMethod(MethodInfo method) {
+    return !method.getName().equals("addInterceptor") && !method.getName().equals("removeInterceptor");
   }
 
   /**
    * Find methods accepting collections.
-   * @param methods
-   * @return
    */
-  public static List<MethodInfo> findMethodsAcceptingCollections(List<MethodInfo> methods) {
-    if(methods == null)
+  private static List<MethodInfo> findMethodsAcceptingCollections(List<MethodInfo> methods) {
+    if (methods == null)
       return Collections.emptyList();
     return methods.stream()
-      .filter(method -> !skipMethod(method))
+      .filter(Templates::keepMethod)
       .filter(method -> !shouldMethodReturnAFuture(method) && method.isFluent() && !method.isCacheReturn() && !method.isStaticMethod() && !method.isDefaultMethod())
       .filter(method -> method.getParams().stream().anyMatch(param -> param.getType().getKind().collection))
       .collect(Collectors.toList());
@@ -286,86 +267,80 @@ public class Templates {
 
   /**
    * Find methods which are default methods.
-   * @param methods
-   * @return
    */
-  public static List<MethodInfo> findDefaultMethods(List<MethodInfo> methods) {
-    if(methods == null)
+  private static List<MethodInfo> findDefaultMethods(List<MethodInfo> methods) {
+    if (methods == null)
       return Collections.emptyList();
     return methods.stream()
-      .filter(method -> !skipMethod(method))
+      .filter(Templates::keepMethod)
       .filter(method -> method.isDefaultMethod() && !method.isFluent() && !method.isCacheReturn())
       .collect(Collectors.toList());
   }
 
   /**
    * Find methods which implement the fluent API-style.
-   * @param methods
-   * @return
    */
-  public static List<MethodInfo> findFluentMethods(List<MethodInfo> methods) {
-    if(methods == null)
+  private static List<MethodInfo> findFluentMethods(List<MethodInfo> methods) {
+    if (methods == null)
       return Collections.emptyList();
     return methods.stream()
-      .filter(method -> !skipMethod(method))
+      .filter(Templates::keepMethod)
       .filter(method -> method.isFluent() && !method.isCacheReturn())
       .collect(Collectors.toList());
   }
 
   /**
    * Find methods which return a value that can be cached.
-   * @param methods
-   * @return
    */
-  public static List<MethodInfo> findCacheReturnMethods(List<MethodInfo> methods) {
-    if(methods == null)
+  private static List<MethodInfo> findCacheReturnMethods(List<MethodInfo> methods) {
+    if (methods == null)
       return Collections.emptyList();
     return methods.stream()
-      .filter(method -> !skipMethod(method))
+      .filter(Templates::keepMethod)
       .filter(MethodInfo::isCacheReturn)
       .collect(Collectors.toList());
   }
 
-  public static List<MethodInfo> findFutureMethods(List<MethodInfo> methods) {
-    if(methods == null)
+  private static List<MethodInfo> findFutureMethods(List<MethodInfo> methods) {
+    if (methods == null)
       return Collections.emptyList();
     return methods.stream()
-      .filter(method -> !skipMethod(method))
+      .filter(Templates::keepMethod)
       .filter(Templates::shouldMethodReturnAFuture)
       .collect(Collectors.toList());
   }
 
-  public static List<MethodInfo> findNullableMethods(List<MethodInfo> methods) {
-    if(methods == null)
+  private static List<MethodInfo> findNullableMethods(List<MethodInfo> methods) {
+    if (methods == null)
       return Collections.emptyList();
     return methods.stream()
-      .filter(method -> !skipMethod(method))
+      .filter(Templates::keepMethod)
       .filter(method -> {
-          if (method.getReturnType().isNullable()) {
-            return true;
-          }
-          return method.getParams().stream().anyMatch(ParamInfo::isNullable);
-        })
+        if (method.getReturnType().isNullable()) {
+          return true;
+        }
+        return method.getParams().stream().anyMatch(ParamInfo::isNullable);
+      })
       .collect(Collectors.toList());
   }
 
-  public static boolean isAsyncResultHandler(TypeInfo type) {
-    return type.getKind() == ClassKind.HANDLER && ((ParameterizedTypeInfo)type).getArg(0).getKind() == ClassKind.ASYNC_RESULT;
+  private static boolean isAsyncResultHandler(TypeInfo type) {
+    return type.getKind() == ClassKind.HANDLER && ((ParameterizedTypeInfo) type).getArg(0).getKind() == ClassKind.ASYNC_RESULT;
   }
 
-  public static boolean shouldMethodReturnAFuture(MethodInfo method) {
+  private static boolean shouldMethodReturnAFuture(MethodInfo method) {
     int size = method.getParams().size();
-    return size > 0 && isAsyncResultHandler(method.getParam(size-1).getType()) && !(method.getReturnType().getKind() == ClassKind.HANDLER);
+    return size > 0 && isAsyncResultHandler(method.getParam(size - 1).getType()) && !(method.getReturnType().getKind() == ClassKind.HANDLER);
   }
 
-  public static String assembleTypeParamString(MethodInfo method) {
+  private static String assembleTypeParamString(MethodInfo method) {
     if (!method.getTypeParams().isEmpty()) {
-      return "[" + method.getTypeParams().stream().map(v -> v.getName()).collect(Collectors.joining(", ")) + "]";
+      return "[" + method.getTypeParams().stream().map(TypeParamInfo::getName).collect(Collectors.joining(", ")) + "]";
     }
     return "";
   }
 
-  public static String invokeMethodWithoutConvertingReturn(String target, MethodInfo method) {
+  private static String invokeMethodWithoutConvertingReturn(String target, MethodInfo method) {
     String paramString = method.getParams().stream()
       .map(param -> fromScalatoJavaWithConversion(quoteIfScalaKeyword(param.getName()), param.getType()))
       .collect(Collectors.joining(", "));
@@ -373,7 +348,7 @@ public class Templates {
     return target + "." + quoteIfScalaKeyword(method.getName()) + assembleTypeParamString(method) + "(" + paramString + ")";
   }
 
-  public static String invokeMethodAndUseProvidedHandler(String target, MethodInfo method, String handler) {
+  private static String invokeMethodAndUseProvidedHandler(String target, MethodInfo method, String handler) {
     String typeParamString = assembleTypeParamString(method);
 
     String paramString = method.getParams().stream().map(param -> {
@@ -390,7 +365,7 @@ public class Templates {
 
   //Rendering output
 
-  public static String renderMethodDocs(TypeInfo type, MethodInfo method, boolean future) {
+  private static String renderMethodDocs(TypeInfo type, MethodInfo method, boolean future) {
     String ret = "";
 
     if (method.getDoc() != null) {
@@ -402,20 +377,16 @@ public class Templates {
   }
 
 
-
   /**
    * Render methods that take a convertable argument..
-   * @param type
-   * @param method
-   * @return
    */
-  public static String renderBasicMethod(TypeInfo type, MethodInfo method) {
+  private static String renderBasicMethod(TypeInfo type, MethodInfo method) {
     String ret = renderMethodDocs(type, method, false);
 
     List<ParamInfo> params = method.getParams();
     String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + makeTypeOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
 
-    ret += "  def "+ quoteIfScalaKeyword(method.getName()) + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
+    ret += "  def " + quoteIfScalaKeyword(method.getName()) + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo) p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
       "      " + invokeMethodWithoutConvertingReturn("asJava", method) + "\n" +
       "  }\n";
     return ret;
@@ -423,26 +394,23 @@ public class Templates {
 
   /**
    * Render a method that accepts a AsyncResult-Handler into one that returns a Scala-Future.
-   * @param type
-   * @param method
-   * @return
    */
-  public static String renderFutureMethod(TypeInfo type, MethodInfo method) {
+  private static String renderFutureMethod(TypeInfo type, MethodInfo method) {
     String ret = renderMethodDocs(type, method, true);
 
     List<ParamInfo> params = method.getParams();
     params = params.subList(0, params.size() - 1);
     String paramList = params.stream().map(param -> quoteIfScalaKeyword(param.getName()) + ": " + makeTypeOptionIfNullable(param.getType().isNullable(), fromTypeToScalaTypeString(param.getType()))).collect(Collectors.joining(", "));
 
-    TypeInfo typeOfReturnedFuture = ((ParameterizedTypeInfo)((ParameterizedTypeInfo)method.getParam(method.getParams().size()-1).getType()).getArg(0)).getArg(0);
+    TypeInfo typeOfReturnedFuture = ((ParameterizedTypeInfo) ((ParameterizedTypeInfo) method.getParam(method.getParams().size() - 1).getType()).getArg(0)).getArg(0);
     String asyncType = convertToScalaGenericsNotation(typeOfReturnedFuture.getName());
 
-    String methodName = quoteIfScalaKeyword((method.getName().endsWith("Handler") ? method.getName().substring(0, method.getName().length()-7) : method.getName()) + "Future");
+    String methodName = quoteIfScalaKeyword((method.getName().endsWith("Handler") ? method.getName().substring(0, method.getName().length() - 7) : method.getName()) + "Future");
 
     String typeToBeReturned = typeOfReturnedFuture.getKind() != API ? fromTypeToScalaTypeString(typeOfReturnedFuture) : asyncType;
 
-    ret +="  def "+ methodName + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") : scala.concurrent.Future[" + typeToBeReturned + "] = {\n" +
-      "      val promise = concurrent.Promise[" + typeToBeReturned + "]/*"+asyncType+" "+typeOfReturnedFuture.getKind()+"*/()\n" +
+    ret += "  def " + methodName + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo) p).collect(Collectors.toList())) + "(" + paramList + ") : scala.concurrent.Future[" + typeToBeReturned + "] = {\n" +
+      "      val promise = concurrent.Promise[" + typeToBeReturned + "]/*" + asyncType + " " + typeOfReturnedFuture.getKind() + "*/()\n" +
       "      " + invokeMethodAndUseProvidedHandler("asJava", method, "new Handler[AsyncResult[" + asyncType + "]] { override def handle(event: AsyncResult[" + asyncType + "]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(" + toScalaWithConversion("event.result()", typeOfReturnedFuture)) + "}})\n" +
       "      promise.future\n" +
       "  }\n";
@@ -451,11 +419,8 @@ public class Templates {
 
   /**
    * Render a static method.
-   * @param type
-   * @param method
-   * @return
    */
-  public static String renderStaticMethod(ClassTypeInfo type, MethodInfo method) {
+  private static String renderStaticMethod(ClassTypeInfo type, MethodInfo method) {
     String ret = renderMethodDocs(type, method, method.getReturnType().isNullable());
 
     List<ParamInfo> params = method.getParams();
@@ -466,7 +431,7 @@ public class Templates {
     String exec = method.getReturnType().isNullable() ? "scala.Option(" + invokeMethodWithoutConvertingReturn(type.getName(), method) + ")" : invokeMethodWithoutConvertingReturn(type.getName(), method);
 
 
-    ret += "  def "+ quoteIfScalaKeyword(method.getName())+ option + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
+    ret += "  def " + quoteIfScalaKeyword(method.getName()) + option + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo) p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
       "      " + exec + "\n" +
       "  }\n";
     return ret;
@@ -474,11 +439,8 @@ public class Templates {
 
   /**
    * Render methods with a nullable return-type so they return a scala.Option instead.
-   * @param type
-   * @param method
-   * @return
    */
-  public static String renderNullableMethod(ClassTypeInfo type, MethodInfo method) {
+  private static String renderNullableMethod(ClassTypeInfo type, MethodInfo method) {
     String ret = renderMethodDocs(type, method, method.getReturnType().isNullable());
 
     List<ParamInfo> params = method.getParams();
@@ -486,7 +448,7 @@ public class Templates {
 
     String option = method.getReturnType().isNullable() ? "Option" : "";
 
-    ret +="  def "+ quoteIfScalaKeyword(method.getName())+ option + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo)p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
+    ret += "  def " + quoteIfScalaKeyword(method.getName()) + option + assembleTypeParamsForScala(method.getTypeParams().stream().map(p -> (TypeParamInfo) p).collect(Collectors.toList())) + "(" + paramList + ") = {\n" +
       "      " + convertToOptionIfNullable(method.getReturnType().isNullable(), invokeMethodWithoutConvertingReturn("asJava", method)) + "\n" +
       "  }\n";
     return ret;
@@ -495,10 +457,10 @@ public class Templates {
   /**
    * Takes care of rendering DataObjects.
    */
-  public static String renderDataobject(DataObjectModel model, String className, ClassTypeInfo type) {
+  private static String renderDataobject(DataObjectModel model, String className, ClassTypeInfo type) {
     String constructor = "";
 
-    if((model.hasEmptyConstructor() || model.hasJsonConstructor()) && model.getPropertyMap().entrySet().stream().anyMatch(entry -> entry.getValue().isSetter())) {
+    if ((model.hasEmptyConstructor() || model.hasJsonConstructor()) && model.getPropertyMap().entrySet().stream().anyMatch(entry -> entry.getValue().isSetter())) {
       if (model.hasJsonConstructor()) {
         constructor =
           applyDataObject(model, type) + " = {\n" +
@@ -518,12 +480,12 @@ public class Templates {
     }
 
     if (model.isConcrete()) {
-        return "  type " +className + " = "+ getNonGenericType(type.getName()) +"\n" +
+      return "  type " + className + " = " + getNonGenericType(type.getName()) + "\n" +
         "  object " + Helper.getSimpleName(type.getName()) + " {\n" +
-          (model.hasEmptyConstructor() ? "    def apply() = new " + Helper.getSimpleName(type.getName()) + "()\n" : "") +
-          (model.hasJsonConstructor() ? "    def apply(json: JsonObject) = new " + Helper.getSimpleName(type.getName()) + "(json)\n" : "") +
-          (model.hasStringConstructor() ? "    def apply(str: String) = new " + Helper.getSimpleName(type.getName()) + "(str)\n" : "") +
-          constructor + "\n" +
+        (model.hasEmptyConstructor() ? "    def apply() = new " + Helper.getSimpleName(type.getName()) + "()\n" : "") +
+        (model.hasJsonConstructor() ? "    def apply(json: JsonObject) = new " + Helper.getSimpleName(type.getName()) + "(json)\n" : "") +
+        (model.hasStringConstructor() ? "    def apply(str: String) = new " + Helper.getSimpleName(type.getName()) + "(str)\n" : "") +
+        constructor + "\n" +
         "  }\n";
     }
     return "";
@@ -580,7 +542,7 @@ public class Templates {
   /**
    * Takes care of rendering all APP-classes except DataObjects.
    */
-  public static String renderClass(ClassTypeInfo type, Doc doc, String className, List<MethodInfo> nullableMethods, List<MethodInfo> futureMethods, List<MethodInfo> basicMethods, String nonGenericType, Collection<TypeParamInfo> typeParams) throws IOException{
+  private static String renderClass(ClassTypeInfo type, Doc doc, String className, List<MethodInfo> nullableMethods, List<MethodInfo> futureMethods, List<MethodInfo> basicMethods, String nonGenericType, Collection<TypeParamInfo> typeParams) throws IOException {
 
     String docs = doc != null ? "  /**\n" +
       Docs.renderDoc(type, "    *", doc) + "\n" +
@@ -603,27 +565,27 @@ public class Templates {
 
     return
       "\n" +
-      docs +
-      "\n" +
-      ("Vertx".equals(className) ? RenderHelpers.renderFile("extensions/VertxObject.ftl")+ "\n" : "") +
-      "  implicit class "+ className + "Scala" + assembleTypeParamsForScala(typeParams) + "(val asJava: " + nonGenericType + assembleTypeParamsForScala(typeParams) + ") extends AnyVal {\n" +
-      ("Vertx".equals(className) ? RenderHelpers.renderFile("extensions/Vertx.ftl")+ "\n" : "") +
-      ("Vertx".equals(className) ? RenderHelpers.renderFile("extensions/executeblocking.ftl")+ "\n" : "") +
-      ("Context".equals(className) ? RenderHelpers.renderFile("extensions/executeblocking.ftl") + "\n" : "") +
-      ("WorkerExecutor".equals(className) ? RenderHelpers.renderFile("extensions/executeblocking.ftl") + "\n" : "") +
-      "\n" +
-      nullableMethodsRendered +
-      "\n" +
-      futureMethodsRendered +
-      "\n" +
-      basicMethodsRendered +
-      "\n" +
-      "  }\n";
+        docs +
+        "\n" +
+        ("Vertx".equals(className) ? RenderHelpers.renderFile("extensions/VertxObject.ftl") + "\n" : "") +
+        "  implicit class " + className + "Scala" + assembleTypeParamsForScala(typeParams) + "(val asJava: " + nonGenericType + assembleTypeParamsForScala(typeParams) + ") extends AnyVal {\n" +
+        ("Vertx".equals(className) ? RenderHelpers.renderFile("extensions/Vertx.ftl") + "\n" : "") +
+        ("Vertx".equals(className) ? RenderHelpers.renderFile("extensions/executeblocking.ftl") + "\n" : "") +
+        ("Context".equals(className) ? RenderHelpers.renderFile("extensions/executeblocking.ftl") + "\n" : "") +
+        ("WorkerExecutor".equals(className) ? RenderHelpers.renderFile("extensions/executeblocking.ftl") + "\n" : "") +
+        "\n" +
+        nullableMethodsRendered +
+        "\n" +
+        futureMethodsRendered +
+        "\n" +
+        basicMethodsRendered +
+        "\n" +
+        "  }\n";
   }
 
 
   /**
-   * Main entry point which renders the packagae-object.
+   * Main entry point which renders the package-object.
    * It takes care of the incremental rendering part.
    */
   public static String renderPackageObject(Model model, ClassTypeInfo type, int incrementalIndex, int incrementalSize, Set<String> imps, Boolean concrete, Boolean hasEmptyConstructor, Doc doc, List<MethodInfo> instanceMethods, List<MethodInfo> staticMethods, Collection<TypeParamInfo> typeParams) throws IOException{
@@ -639,34 +601,32 @@ public class Templates {
     String header = "";
     if (incrementalIndex == 0) {
       header =
-        RenderHelpers.renderFile("extensions/LicenseHeader.ftl")+ "\n" +
-        "\n" +
-        "package " + modulePackage +"\n" +
-        "\n" +
-        "import scala.jdk.CollectionConverters._\n" +
-        "import io.vertx.core.json.JsonObject\n" +
-        "import io.vertx.core.json.JsonArray\n" +
-        "import io.vertx.core.AsyncResult\n" +
-        "import io.vertx.core.Handler\n" +
-        "import scala.concurrent.Promise\n" +
+        RenderHelpers.renderFile("extensions/LicenseHeader.ftl") + "\n" +
+          "\n" +
+          "package " + modulePackage + "\n" +
+          "\n" +
+          "import scala.jdk.CollectionConverters._\n" +
+          "import io.vertx.core.json.JsonObject\n" +
+          "import io.vertx.core.json.JsonArray\n" +
+          "import io.vertx.core.AsyncResult\n" +
+          "import io.vertx.core.Handler\n" +
+          "import scala.concurrent.Promise\n" +
           ("io.vertx.core.Vertx".equals(type.getName()) ? "import io.vertx.lang.scala.ScalaVerticle\n" : "") +
-        "\n" +
+          "\n" +
           (imps.stream().map(imp -> "import " + imp).collect(Collectors.joining("\n"))) +
-        "\n" +
-        "package object " + moduleName +"{\n" +
-        "\n" +
+          "\n" +
+          "package object " + moduleName + "{\n" +
+          "\n" +
           ("core".equals(moduleName) ? RenderHelpers.renderFile("extensions/Json.ftl") + "\n" : "") +
-        "\n";
+          "\n";
     }
 
     String body = "";
     if (model instanceof DataObjectModel) {
       body = renderDataobject((DataObjectModel) model, type.getSimpleName(), type) + "\n";
-    }
-    else if (type.getKind() != HANDLER && !futureMethods.isEmpty()) {
+    } else if (type.getKind() != HANDLER && !futureMethods.isEmpty()) {
       body = renderClass(type, doc, type.getSimpleName(), nullableMethods, futureMethods, basicMethods, nonGenericType, typeParams) + "\n";
-    }
-    else if (type.getKind() != HANDLER && (staticMethods != null && !staticMethods.isEmpty()) &&  !"Message".equals(type.getSimpleName())) {
+    } else if (type.getKind() != HANDLER && (staticMethods != null && !staticMethods.isEmpty()) && !"Message".equals(type.getSimpleName())) {
       body = "  object " + type.getSimpleName() + " {\n" +
         (staticMethods.stream().map(method -> renderStaticMethod(type, method)).collect(Collectors.joining("\n"))) +
         "  }\n";
@@ -674,11 +634,11 @@ public class Templates {
 
     return
       header +
-      body +
-      "\n" +
+        body +
+        "\n" +
         ("Message".equals(type.getSimpleName()) ? RenderHelpers.renderFile("extensions/Message.ftl") : "") +
-      "\n" +
-        (incrementalIndex == incrementalSize-1 ? "}\n" : "");
+        "\n" +
+        (incrementalIndex == incrementalSize - 1 ? "}\n" : "");
   }
 
 }
