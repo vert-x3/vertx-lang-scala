@@ -5,6 +5,7 @@ import io.vertx.codegen.GeneratorLoader;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
 public class ScalaGeneratorLoader implements GeneratorLoader {

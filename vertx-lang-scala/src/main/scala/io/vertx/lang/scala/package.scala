@@ -1,13 +1,16 @@
 package io.vertx.lang
 
 import io.vertx.lang.scala.conv.{ScalaFuture, ScalaOption, ScalaPromise, ScalaSuccess, newPromise, scalaFutureToVertxFuture, succScalaSuccess, vertxFutureToScalaFuture}
-import io.vertx.core.{AsyncResult, DeploymentOptions, Handler, Future => VertxFuture, Promise => VertxPromise}
+import io.vertx.core.{AsyncResult, DeploymentOptions, Handler, Verticle, Future as VertxFuture, Promise as VertxPromise}
 
 package object scala {
 
   implicit class VertxFutureConverter[T](vertxFuture: VertxFuture[T]) {
     def asScala(): ScalaFuture[T] = vertxFutureToScalaFuture(vertxFuture)
   }
+
+  given Conversion[VertxFuture[_], ScalaFuture[_]] with
+    def apply(vf: VertxFuture[_]): ScalaFuture[_] = vf.asScala()
 
   implicit class FutureConverter[T](future: ScalaFuture[T]) {
     def asVertx(): VertxFuture[T] = scalaFutureToVertxFuture(future)

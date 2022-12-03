@@ -24,8 +24,7 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
     val idInGlobalPromise = Promise[Long]()
     val idBackInEventLoopPromise = Promise[Long]()
     val vertx = Vertx.vertx
-    val ctx = vertx.getOrCreateContext()
-    implicit val exec: VertxExecutionContext = VertxExecutionContext(vertx, ctx)
+    implicit val exec: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     vertx.deployVerticle(nameForVerticle[SuccessVerticle]()).asScala()
          .map(_ => {
            idInEventLoopPromise.success(Thread.currentThread().getId)

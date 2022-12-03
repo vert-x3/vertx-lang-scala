@@ -124,18 +124,21 @@ package object micrometer{
   object VertxInfluxDbOptions {
     def apply() = new VertxInfluxDbOptions()
     def apply(json: JsonObject) = new VertxInfluxDbOptions(json)
-    def apply( batchSize: java.lang.Integer = null, compressed: java.lang.Boolean = null, connectTimeout: java.lang.Integer = null, db: java.lang.String = null, enabled: java.lang.Boolean = null, numThreads: java.lang.Integer = null, password: java.lang.String = null, readTimeout: java.lang.Integer = null, retentionPolicy: java.lang.String = null, step: java.lang.Integer = null, uri: java.lang.String = null, userName: java.lang.String = null): VertxInfluxDbOptions = {
+    def apply( batchSize: java.lang.Integer = null, bucket: java.lang.String = null, compressed: java.lang.Boolean = null, connectTimeout: java.lang.Integer = null, db: java.lang.String = null, enabled: java.lang.Boolean = null, numThreads: java.lang.Integer = null, org: java.lang.String = null, password: java.lang.String = null, readTimeout: java.lang.Integer = null, retentionPolicy: java.lang.String = null, step: java.lang.Integer = null, token: java.lang.String = null, uri: java.lang.String = null, userName: java.lang.String = null): VertxInfluxDbOptions = {
       val ret = new VertxInfluxDbOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (batchSize != null) ret.setBatchSize(batchSize) 
+      if (bucket != null) ret.setBucket(bucket) 
       if (compressed != null) ret.setCompressed(compressed) 
       if (connectTimeout != null) ret.setConnectTimeout(connectTimeout) 
       if (db != null) ret.setDb(db) 
       if (enabled != null) ret.setEnabled(enabled) 
       if (numThreads != null) ret.setNumThreads(numThreads) 
+      if (org != null) ret.setOrg(org) 
       if (password != null) ret.setPassword(password) 
       if (readTimeout != null) ret.setReadTimeout(readTimeout) 
       if (retentionPolicy != null) ret.setRetentionPolicy(retentionPolicy) 
       if (step != null) ret.setStep(step) 
+      if (token != null) ret.setToken(token) 
       if (uri != null) ret.setUri(uri) 
       if (userName != null) ret.setUserName(userName) 
       ret

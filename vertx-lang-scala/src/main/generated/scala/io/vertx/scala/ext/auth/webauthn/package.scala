@@ -46,12 +46,13 @@ package object webauthn{
   object Authenticator {
     def apply() = new Authenticator()
     def apply(json: JsonObject) = new Authenticator(json)
-    def apply( aaguid: java.lang.String = null, attestationCertificates: io.vertx.ext.auth.webauthn.AttestationCertificates = null, counter: java.lang.Long = null, credID: java.lang.String = null, fmt: java.lang.String = null, publicKey: java.lang.String = null, `type`: java.lang.String = null, userName: java.lang.String = null): Authenticator = {
+    def apply( aaguid: java.lang.String = null, attestationCertificates: io.vertx.ext.auth.webauthn.AttestationCertificates = null, counter: java.lang.Long = null, credID: java.lang.String = null, flags: java.lang.Integer = null, fmt: java.lang.String = null, publicKey: java.lang.String = null, `type`: java.lang.String = null, userName: java.lang.String = null): Authenticator = {
       val ret = new Authenticator(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (aaguid != null) ret.setAaguid(aaguid) 
       if (attestationCertificates != null) ret.setAttestationCertificates(attestationCertificates) 
       if (counter != null) ret.setCounter(counter) 
       if (credID != null) ret.setCredID(credID) 
+      if (flags != null) ret.setFlags(flags) 
       if (fmt != null) ret.setFmt(fmt) 
       if (publicKey != null) ret.setPublicKey(publicKey) 
       if (`type` != null) ret.setType(`type`) 

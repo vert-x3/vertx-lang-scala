@@ -34,8 +34,9 @@ package object admin{
   object ClusterDescription {
     def apply() = new ClusterDescription()
     def apply(json: JsonObject) = new ClusterDescription(json)
-    def apply( clusterId: java.lang.String = null, controller: io.vertx.kafka.client.common.Node = null, nodes: scala.collection.immutable.List[io.vertx.kafka.client.common.Node] = null): ClusterDescription = {
+    def apply( authorizedOperations: scala.collection.immutable.Set[org.apache.kafka.common.acl.AclOperation] = null, clusterId: java.lang.String = null, controller: io.vertx.kafka.client.common.Node = null, nodes: scala.collection.immutable.List[io.vertx.kafka.client.common.Node] = null): ClusterDescription = {
       val ret = new ClusterDescription(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (authorizedOperations != null) ret.setAuthorizedOperations(authorizedOperations.asJava) 
       if (clusterId != null) ret.setClusterId(clusterId) 
       if (controller != null) ret.setController(controller) 
       if (nodes != null) ret.setNodes(nodes.asJava) 
@@ -96,8 +97,9 @@ package object admin{
   object ConsumerGroupDescription {
     def apply() = new ConsumerGroupDescription()
     def apply(json: JsonObject) = new ConsumerGroupDescription(json)
-    def apply( coordinator: io.vertx.kafka.client.common.Node = null, groupId: java.lang.String = null, members: scala.collection.immutable.List[io.vertx.kafka.admin.MemberDescription] = null, partitionAssignor: java.lang.String = null, simpleConsumerGroup: java.lang.Boolean = null, state: org.apache.kafka.common.ConsumerGroupState = null): ConsumerGroupDescription = {
+    def apply( authorizedOperations: scala.collection.immutable.Set[org.apache.kafka.common.acl.AclOperation] = null, coordinator: io.vertx.kafka.client.common.Node = null, groupId: java.lang.String = null, members: scala.collection.immutable.List[io.vertx.kafka.admin.MemberDescription] = null, partitionAssignor: java.lang.String = null, simpleConsumerGroup: java.lang.Boolean = null, state: org.apache.kafka.common.ConsumerGroupState = null): ConsumerGroupDescription = {
       val ret = new ConsumerGroupDescription(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (authorizedOperations != null) ret.setAuthorizedOperations(authorizedOperations.asJava) 
       if (coordinator != null) ret.setCoordinator(coordinator) 
       if (groupId != null) ret.setGroupId(groupId) 
       if (members != null) ret.setMembers(members.asJava) 
@@ -248,11 +250,13 @@ package object admin{
   object TopicDescription {
     def apply() = new TopicDescription()
     def apply(json: JsonObject) = new TopicDescription(json)
-    def apply( internal: java.lang.Boolean = null, name: java.lang.String = null, partitions: scala.collection.immutable.List[io.vertx.kafka.client.common.TopicPartitionInfo] = null): TopicDescription = {
+    def apply( authorizedOperations: scala.collection.immutable.Set[org.apache.kafka.common.acl.AclOperation] = null, internal: java.lang.Boolean = null, name: java.lang.String = null, partitions: scala.collection.immutable.List[io.vertx.kafka.client.common.TopicPartitionInfo] = null, topicId: org.apache.kafka.common.Uuid = null): TopicDescription = {
       val ret = new TopicDescription(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (authorizedOperations != null) ret.setAuthorizedOperations(authorizedOperations.asJava) 
       if (internal != null) ret.setInternal(internal) 
       if (name != null) ret.setName(name) 
       if (partitions != null) ret.setPartitions(partitions.asJava) 
+      if (topicId != null) ret.setTopicId(topicId) 
       ret
     }
   }

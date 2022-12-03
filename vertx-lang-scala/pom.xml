@@ -7,7 +7,7 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-lang-scala3-parent</artifactId>
-    <version>4.3.3</version>
+    <version>4.3.5</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -385,7 +385,6 @@
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_3</artifactId>
-      <version>3.2.13</version>
       <scope>test</scope>
     </dependency>
 

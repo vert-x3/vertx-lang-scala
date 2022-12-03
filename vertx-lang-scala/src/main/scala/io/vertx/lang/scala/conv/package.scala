@@ -18,6 +18,8 @@ package object conv {
   type ScalaOption[T] = scala.Option[T]
   type ScalaSuccess[T] = scala.util.Success[T]
   type ScalaFailure[T] = scala.util.Failure[T]
+  type VertxFuture[T] = io.vertx.core.Future[T]
+  type VertxPromise[T] = io.vertx.core.Promise[T]
 
   def succScalaSuccess[T](s: T): Success[T] = {
     Success(s)
