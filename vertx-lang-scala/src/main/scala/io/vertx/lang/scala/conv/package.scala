@@ -11,15 +11,13 @@ import scala.util.Success
  * That's why this class takes care of abstracting the necessary classes/conversions away so
  * we don't have to import from the scala package directly.
  */
-package object conv {
+package object conv:
 
   type ScalaFuture[T] = scala.concurrent.Future[T]
   type ScalaPromise[T] = scala.concurrent.Promise[T]
   type ScalaOption[T] = scala.Option[T]
   type ScalaSuccess[T] = scala.util.Success[T]
   type ScalaFailure[T] = scala.util.Failure[T]
-  type VertxFuture[T] = io.vertx.core.Future[T]
-  type VertxPromise[T] = io.vertx.core.Promise[T]
 
   def succScalaSuccess[T](s: T): Success[T] = {
     Success(s)
@@ -36,4 +34,3 @@ package object conv {
   def newPromise[T](): ScalaPromise[T] = {
     Promise[T]()
   }
-}

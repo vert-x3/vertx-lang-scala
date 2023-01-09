@@ -20,7 +20,6 @@ import java.util.concurrent.Callable
 
 import io.vertx.core.{Promise, Verticle, Vertx}
 import io.vertx.core.spi.VerticleFactory
-//import io.vertx.lang.scala.onthefly.OnTheFlyCompiler
 
 /**
  * Factory for creating Verticle-Instances from a compiled class or scala source code.
@@ -30,7 +29,7 @@ import io.vertx.core.spi.VerticleFactory
  */
 class ScalaVerticleFactory extends VerticleFactory {
 
-  private var vertx: Vertx = null
+  private var vertx: Vertx = _
 
   override def init(vertx: Vertx): Unit = this.vertx = vertx
 
@@ -44,17 +43,9 @@ class ScalaVerticleFactory extends VerticleFactory {
       verticleFromClass(verticleName, classLoader)
     })
 
-//  private def verticleFromSource(verticleName: String, classLoader: ClassLoader): Verticle = {
-//    val compiler = new OnTheFlyCompiler(None)
-//    compiler.tryToCompileClass(verticleName) match {
-//      case Some(clazz) => clazz.getDeclaredConstructor().newInstance().asInstanceOf[ScalaVerticle].asJava()
-//      case None        => throw new RuntimeException(s"Failed to compile $verticleName")
-//    }
-//  }
-
   private def verticleFromClass(verticleName: String, classLoader: ClassLoader): Verticle = {
     val clazz = classLoader.loadClass(verticleName.replace("scala:",""))
     val instance = clazz.getDeclaredConstructor().newInstance().asInstanceOf[ScalaVerticle]
-    instance.asJava()
+    instance.asJava
   }
 }

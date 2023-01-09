@@ -15,49 +15,42 @@ import scala.quoted.{Expr, Quotes, Type}
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success}
 
-abstract class VerticleTesting[A <: ScalaVerticle](using TypeName[A]) extends AsyncFlatSpec with BeforeAndAfter {
+abstract class VerticleTesting[A <: ScalaVerticle](using TypeName[A]) extends AsyncFlatSpec, BeforeAndAfter:
   val vertx: Vertx = Vertx.vertx()
-  val typeName = TypeUtility.typeName[A]
-  implicit val vertxExecutionContext: VertxExecutionContext = VertxExecutionContext(
-    vertx,
-    vertx.getOrCreateContext()
-  )
-
+  val typeName: String = TypeUtility.typeName[A]
+  given vertxExecutionContext: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
   private var deploymentId = ""
 
   def config(): JsonObject = Json.obj()
 
   before {
+    println(s"Deploying $typeName...")
     deploymentId = Await.result(
       vertx
-        .deployVerticle("scala:" + typeName, DeploymentOptions().setConfig(config()))
-        .asScala()
+        .deployVerticle("scala:" + typeName, DeploymentOptions().setConfig(config())).asScala
         .andThen {
-          case Success(d) => {
-            println(d)
-            d
-          }
-          case Failure(t) => {
-            println(t.getMessage)
+          case Success(id) =>
+            println(s"Deployment of $typeName done, got ID: $id")
+            id
+          case Failure(t)  =>
+            println(s"Deployment of $typeName failed: ${t.getMessage}")
             throw new RuntimeException(t)
-          }
         },
       10000 millis
     )
   }
 
   after {
+    println(s"Undeploying $typeName...")
     Await.result(
-      vertx.undeploy(deploymentId)
-        .asScala()
-        .andThen {
-          case Success(d) => d
-          case Failure(t) => throw new RuntimeException(t)
-        },
+      vertx.undeploy(deploymentId).asScala
+           .andThen {
+             case Success(_) => println(s"$typeName undeployed")
+             case Failure(t) => throw new RuntimeException(t)
+           },
       10000 millis
     )
   }
 
-}
 
 
