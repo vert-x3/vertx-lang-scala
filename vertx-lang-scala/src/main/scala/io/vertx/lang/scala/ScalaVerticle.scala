@@ -18,8 +18,7 @@ package io.vertx.lang.scala
 
 import io.vertx.core.json.JsonObject
 import io.vertx.core.{AbstractVerticle, Context, Promise, Verticle, Vertx}
-import io.vertx.lang.scala.conv.newPromise
-import io.vertx.scala.conv.*
+import io.vertx.lang.scala.VertxExecutionContext
 
 import scala.util.{Failure, Success}
 import scala.jdk.CollectionConverters.*

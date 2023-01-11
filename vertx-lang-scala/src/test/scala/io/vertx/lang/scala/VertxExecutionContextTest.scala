@@ -1,60 +1,54 @@
 package io.vertx.lang.scala
 
-import io.vertx.lang.scala.ScalaVerticle.nameForVerticle
-import io.vertx.core.{AsyncResult, Handler, Vertx}
-import org.scalatest.Assertions
+import io.vertx.core.{AsyncResult, Handler, Vertx, VertxOptions}
+import io.vertx.lang.scala.ThreadIdReplyer.{EVENTBUS_ADDRESS, HANDLER_TYPE_EVENTLOOP, HANDLER_TYPE_VERTXCONTEXT, HANDLER_TYPE_WORKERPOOL}
+import io.vertx.lang.scala.conv.*
+import io.vertx.lang.scala.core.eventbus.Message
+import io.vertx.lang.scala.json.Json
+import io.vertx.scala.core.JsonObject
+import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.flatspec.AsyncFlatSpec
+import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
+import org.scalatest.{Assertions, BeforeAndAfter}
 
 import scala.concurrent.{ExecutionContext, Future, Promise}
 import scala.util.{Failure, Success}
-import io.vertx.lang.scala.conv.*
 
-class VertxExecutionContextTest extends AsyncFlatSpec, Matchers, Assertions:
+class VertxExecutionContextTest extends AsyncFlatSpec, Matchers, Assertions, BeforeAndAfter:
 
-  "Using Promise to complete a Vertx-Future" should "work with a VertxExecutionContext" in {
-    val vertx = Vertx.vertx
-    implicit val exec: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
-    vertx.deployVerticle(nameForVerticle[SuccessVerticle]()).asScala
-         .map(res => res should not be empty)
+  private var vertx: Vertx = _
+  private var vertxExecutionContext: VertxExecutionContext = _
+
+  before {
+    vertx = Vertx.vertx(VertxOptions().setEventLoopPoolSize(1))
+    vertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext)
   }
 
-  "Switching back to the event loop execution context" should "work even when another context is used in between" in {
-    val idInEventLoopPromise = Promise[Long]()
-    val idInGlobalPromise = Promise[Long]()
-    val idBackInEventLoopPromise = Promise[Long]()
-    val vertx = Vertx.vertx
-    implicit val exec: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
-    vertx.deployVerticle(nameForVerticle[SuccessVerticle]()).asScala
-         .map(_ => {
-           idInEventLoopPromise.success(Thread.currentThread().getId)
-           Future {
-             idInGlobalPromise.success(Thread.currentThread().getId)
-             Thread.sleep(1000)
-             "computed"
-           }(ExecutionContext.global).onComplete {
-             case Success(_) => idBackInEventLoopPromise.success(Thread.currentThread().getId)
-             case Failure(t) => idBackInEventLoopPromise.failure(t)
-           }(exec)
-         })
+  "Completing a Vertx-Future in a Scala Future" should "work with the VertxExecutionContext" in {
+    vertx.deployVerticle(SuccessVerticle().asJava).asScala
+         .map(res => res should not be empty)(vertxExecutionContext)
+  }
 
-    val aggFut = for {
-      idInEventLoop <- idInEventLoopPromise.future
-      idInGlobal <- idInGlobalPromise.future
-      idBackInEvent <- idBackInEventLoopPromise.future
-    } yield (idInEventLoop, idInGlobal, idBackInEvent)
-
-    aggFut.map(s => s._1 should equal(s._3) shouldNot equal(s._2))
+  "Switching to the event loop execution context" should "work even when another context is used in between" in {
+    for {
+      _ <- vertx.deployVerticle(ThreadIdReplyer().asJava).asScala
+      idInEventLoopMsg <- vertx.eventBus.request[Long](EVENTBUS_ADDRESS, HANDLER_TYPE_EVENTLOOP).asScala
+      idInWorkerPoolMsg <- vertx.eventBus.request[Long](EVENTBUS_ADDRESS, HANDLER_TYPE_WORKERPOOL).asScala
+      idInContextMsg <- vertx.eventBus.request[Long](EVENTBUS_ADDRESS, HANDLER_TYPE_VERTXCONTEXT).asScala
+      idInEventLoop = idInEventLoopMsg.body
+      idInWorkerPool = idInWorkerPoolMsg.body
+      idInContext = idInContextMsg.body
+      assertion = idInEventLoop should equal(idInContext) shouldNot equal(idInWorkerPool)
+    } yield assertion
   }
 
   "A deployment" should "fail if the deployed verticle fails" in {
-    val vertx = Vertx.vertx
-    implicit val exec: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
-    vertx.deployVerticle(nameForVerticle[FailVerticle]()).asScala
+    vertx.deployVerticle(FailVerticle().asJava).asScala
          .transformWith {
            case Failure(t) => t.getMessage should equal("wuha")
            case Success(_) => fail("Deployment shouldn't succeed!")
-         }
+         }(vertxExecutionContext)
   }
 
 end VertxExecutionContextTest
@@ -62,12 +56,14 @@ end VertxExecutionContextTest
 
 object VertxDemo:
 
+  import io.vertx.lang.scala.*
   import io.vertx.scala.core.HttpServerOptions
-  import io.vertx.lang.scala._
 
   def main(args: Array[String]): Unit =
     val vertx = Vertx.vertx
+
     given exec: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
+
     vertx.createHttpServer(HttpServerOptions(port = 8080))
          .requestHandler(req => req.response.end("Hello world!"))
          .listen.asScala
@@ -75,28 +71,44 @@ object VertxDemo:
            case Success(_) => println("Success")
            case Failure(_) => println("Failure")
          }
+end VertxDemo
 
 
 class SuccessVerticle extends ScalaVerticle:
-
   override def asyncStart: Future[Unit] =
     val consumer1Registered = handleInFuture(vertx.eventBus.consumer[String]("asd")
-                                                  .handler(a => println(a))
+                                                  .handler(println)
                                                   .completionHandler)
     val consumer2Registered = handleInFuture(vertx.eventBus().consumer[String]("asd2")
-                                                  .handler(a => println(a))
+                                                  .handler(println)
                                                   .completionHandler)
     consumer1Registered.zip(consumer2Registered)
-                       .map(_ => ())
+                       .map(_ => ())(executionContext)
+end SuccessVerticle
 
 class FailVerticle extends ScalaVerticle:
-
   override def asyncStart: Future[Unit] =
     val consumerRegistered = handleInFuture(vertx.eventBus().consumer[String]("asd")
                                                  .handler(a => println(a))
                                                  .completionHandler)
     consumerRegistered.zip(Future.failed(new Exception("wuha")))
                       .map(_ => ())
+end FailVerticle
 
-
-
+class ThreadIdReplyer extends ScalaVerticle:
+  override def asyncStart: Future[Unit] = handleInFuture(
+    vertx.eventBus.consumer[String](EVENTBUS_ADDRESS)
+         .handler(msg => msg match
+           case Message(body) if body == HANDLER_TYPE_EVENTLOOP    => msg.reply(Thread.currentThread.getId)
+           case Message(body) if body == HANDLER_TYPE_WORKERPOOL   => vertx.executeBlockingScala(() => Thread.currentThread.getId).onComplete {
+             case Success(threadId) => msg.reply(threadId)
+             case Failure(_)        => msg.reply(-1)
+           }
+           case Message(body) if body == HANDLER_TYPE_VERTXCONTEXT => vertx.runOnContext(_ => msg.reply(Thread.currentThread.getId)))
+         .completionHandler)
+    .map(_ => ())
+object ThreadIdReplyer:
+  val EVENTBUS_ADDRESS = "ThreadIdReplyer"
+  val HANDLER_TYPE_EVENTLOOP = "eventLoop"
+  val HANDLER_TYPE_WORKERPOOL = "workerPool"
+  val HANDLER_TYPE_VERTXCONTEXT = "vertxContext"

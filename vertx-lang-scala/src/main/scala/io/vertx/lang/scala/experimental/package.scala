@@ -18,3 +18,4 @@ package object experimental:
     override def apply(vertxPromise: VertxPromise[T]): ScalaPromise[T] = vertxPromise.asScala
   given scalaPromiseToVertxPromise[T]: Conversion[ScalaPromise[T], VertxPromise[T]] with
     override def apply(scalaPromise: ScalaPromise[T]): VertxPromise[T] = scalaPromise.asVertx
+
