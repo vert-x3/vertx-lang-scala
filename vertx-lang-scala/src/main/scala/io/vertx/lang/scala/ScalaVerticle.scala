@@ -17,14 +17,14 @@
 package io.vertx.lang.scala
 
 import io.vertx.core.json.JsonObject
-import io.vertx.core.{AbstractVerticle, Context, Promise, Verticle, Vertx}
+import io.vertx.core.*
 import io.vertx.lang.scala.VertxExecutionContext
 
-import scala.util.{Failure, Success}
-import scala.jdk.CollectionConverters.*
 import scala.collection.mutable
 import scala.concurrent.Future
+import scala.jdk.CollectionConverters.*
 import scala.reflect.ClassTag
+import scala.util.{Failure, Success}
 
 /**
  * Base class for verticle implementations.

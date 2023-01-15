@@ -83,6 +83,8 @@
           <configuration>
             <args>
               <arg>java-output-version 8</arg>
+              <arg>-feature</arg>
+              <arg>-deprecation</arg>
             </args>
           </configuration>
         </plugin>
