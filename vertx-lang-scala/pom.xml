@@ -29,7 +29,6 @@
     <dependency>
       <groupId>org.scala-lang</groupId>
       <artifactId>scala3-library_3</artifactId>
-      <version>${scala.version}</version>
     </dependency>
 
     <!-- Stack dependencies -->

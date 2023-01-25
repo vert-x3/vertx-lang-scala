@@ -487,7 +487,9 @@ public class Templates {
       return "  type " + className + " = " + getNonGenericType(type.getName()) + "\n" +
         "  object " + Helper.getSimpleName(type.getName()) + " {\n" +
         (model.hasJsonConstructor() ? "    def apply(json: JsonObject) = new " + Helper.getSimpleName(type.getName()) + "(json)\n" : "") +
-        (model.hasStringConstructor() ? "    def apply(str: String) = new " + Helper.getSimpleName(type.getName()) + "(str)\n" : "") +
+        (model.hasStringConstructor()
+          && model.getPropertyMap().values().size() > 1
+          ? "    def apply(str: String) = new " + Helper.getSimpleName(type.getName()) + "(str)\n" : "") +
         constructor + "\n" +
         "  }\n";
     }
