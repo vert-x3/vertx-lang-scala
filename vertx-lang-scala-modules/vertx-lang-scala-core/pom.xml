@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>io.vertx</groupId>
+    <artifactId>vertx-lang-scala-modules</artifactId>
+    <version>4.3.8-SNAPSHOT</version>
+  </parent>
+
+  <artifactId>vertx-lang-scala-core</artifactId>
+
+  <properties>
+    <gen.src.gid>io.vertx</gen.src.gid>
+    <gen.src.aid>vertx-core</gen.src.aid>
+    <gen.src.unpacked.dir>${project.build.directory}/sources/java</gen.src.unpacked.dir>
+    <gen.src.generated.dir>${project.build.directory}/generated-sources/scala</gen.src.generated.dir>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.scala-lang</groupId>
+      <artifactId>scala3-library_3</artifactId>
+    </dependency>
+
+    <!-- Code generation source -->
+    <dependency>
+      <groupId>${gen.src.gid}</groupId>
+      <artifactId>${gen.src.aid}</artifactId>
+      <version>${stack.version}</version>
+      <exclusions>
+        <exclusion>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-core</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <!-- Code generator -->
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-scala-codegen</artifactId>
+      <version>${stack.version}</version>
+    </dependency>
+
+    <!-- Extra dependencies -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.21</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <configuration>
+          <includeGroupIds>${gen.src.gid}</includeGroupIds>
+          <includeArtifactIds>${gen.src.aid}</includeArtifactIds>
+          <classifier>sources</classifier>
+          <includeTypes>jar</includeTypes>
+          <outputDirectory>${gen.src.unpacked.dir}</outputDirectory>
+        </configuration>
+        <executions>
+          <execution>
+            <id>unpack-${gen.src.aid}-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>unpack-dependencies</goal>
+            </goals>
+            <configuration>
+              <includes>io/vertx/**/*.java</includes>
+              <excludes>**/impl/**/*.java,io/vertx/core/logging/**/*.java</excludes>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <!-- declare directory with unpacked sources as additional source dir -->
+        <executions>
+          <execution>
+            <id>add-${gen.src.aid}-sources</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${gen.src.unpacked.dir}</source>
+                <source>${gen.src.generated.dir}</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>generate-${gen.src.aid}-sources</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <configuration>
+              <!-- Important: there are issues with apt and incremental compilation in the maven-compiler-plugin -->
+              <useIncrementalCompilation>false</useIncrementalCompilation>
+              <annotationProcessors>
+                <annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
+              </annotationProcessors>
+              <compilerArgs>
+                <arg>-Acodegen.output=${gen.src.generated.dir}</arg>
+                <arg>-Acodegen.generators=scala</arg>
+              </compilerArgs>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>scala-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>compile-generated-${gen.src.aid}-sources</id>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

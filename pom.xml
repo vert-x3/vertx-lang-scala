@@ -170,5 +170,7 @@
     <module>vertx-lang-scala-codegen</module>
     <module>vertx-lang-scala-test</module>
     <module>vertx-lang-scala-itests</module>
+    <module>vertx-lang-scala-modules</module>
+    <!--    <module>vertx-lang-scala-on-the-fly</module>-->
   </modules>
 </project>
