@@ -9,11 +9,11 @@
     <version>4.3.8-SNAPSHOT</version>
   </parent>
 
-  <artifactId>vertx-lang-scala-mail-client</artifactId>
+  <artifactId>vertx-lang-scala-web</artifactId>
 
   <properties>
     <gen.src.gid>io.vertx</gen.src.gid>
-    <gen.src.aid>vertx-mail-client</gen.src.aid>
+    <gen.src.aid>vertx-web</gen.src.aid>
     <gen.src.unpacked.dir>${project.build.directory}/sources/java</gen.src.unpacked.dir>
     <gen.src.generated.dir>${project.build.directory}/generated-sources</gen.src.generated.dir>
   </properties>
@@ -38,6 +38,57 @@
       <version>${stack.version}</version>
     </dependency>
     <!-- Extra dependencies -->
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>vertx-lang-scala-auth-common</artifactId>
+      <version>${project.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>vertx-lang-scala-auth-htdigest</artifactId>
+      <version>${stack.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>vertx-lang-scala-auth-jwt</artifactId>
+      <version>${stack.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>vertx-lang-scala-auth-oauth2</artifactId>
+      <version>${stack.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>vertx-lang-scala-auth-otp</artifactId>
+      <version>${stack.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>vertx-lang-scala-auth-webauthn</artifactId>
+      <version>${stack.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>vertx-lang-scala-web-common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>vertx-lang-scala-bridge-common</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>vertx-lang-scala-uri-template</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 
   <build>

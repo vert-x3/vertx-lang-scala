@@ -9,11 +9,11 @@
     <version>4.3.8-SNAPSHOT</version>
   </parent>
 
-  <artifactId>vertx-lang-scala-mail-client</artifactId>
+  <artifactId>vertx-lang-scala-service-discovery-bridge-consul</artifactId>
 
   <properties>
     <gen.src.gid>io.vertx</gen.src.gid>
-    <gen.src.aid>vertx-mail-client</gen.src.aid>
+    <gen.src.aid>vertx-service-discovery-bridge-consul</gen.src.aid>
     <gen.src.unpacked.dir>${project.build.directory}/sources/java</gen.src.unpacked.dir>
     <gen.src.generated.dir>${project.build.directory}/generated-sources</gen.src.generated.dir>
   </properties>

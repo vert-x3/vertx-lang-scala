@@ -12,10 +12,74 @@
 
   <artifactId>vertx-lang-scala-modules</artifactId>
   <packaging>pom</packaging>
-
   <modules>
-    <module>vertx-lang-scala-core</module>
+    <module>vertx-lang-scala-auth-properties</module>
+    <module>vertx-lang-scala-web-validation</module>
+    <module>vertx-lang-scala-circuit-breaker</module>
+    <module>vertx-lang-scala-web-templ-jade</module>
+    <module>vertx-lang-scala-web-api-service</module>
+    <module>vertx-lang-scala-shell</module>
+    <module>vertx-lang-scala-web-templ-freemarker</module>
+    <module>vertx-lang-scala-auth-common</module>
+    <module>vertx-lang-scala-auth-ldap</module>
     <module>vertx-lang-scala-mail-client</module>
-  </modules>
+    <module>vertx-lang-scala-service-discovery-bridge-kubernetes</module>
+    <module>vertx-lang-scala-web-sstore-infinispan</module>
+    <module>vertx-lang-scala-mqtt</module>
+    <module>vertx-lang-scala-service-discovery-bridge-docker-links</module>
+    <module>vertx-lang-scala-auth-jwt</module>
+    <module>vertx-lang-scala-web-templ-thymeleaf</module>
+    <module>vertx-lang-scala-json-schema</module>
+    <module>vertx-lang-scala-sql-client-templates</module>
+    <module>vertx-lang-scala-service-discovery-bridge-consul</module>
+    <module>vertx-lang-scala-web-common</module>
+    <module>vertx-lang-scala-auth-htdigest</module>
+    <module>vertx-lang-scala-web-templ-rocker</module>
+    <module>vertx-lang-scala-web-templ-handlebars</module>
+    <module>vertx-lang-scala-web-openapi</module>
+    <module>vertx-lang-scala-auth-sql-client</module>
+    <module>vertx-lang-scala-service-discovery</module>
+    <module>vertx-lang-scala-db2-client</module>
+    <module>vertx-lang-scala-amqp-client</module>
+    <module>vertx-lang-scala-web</module>
+    <module>vertx-lang-scala-mysql-client</module>
+    <module>vertx-lang-scala-health-check</module>
+    <module>vertx-lang-scala-uri-template</module>
+    <module>vertx-lang-scala-auth-shiro</module>
+    <module>vertx-lang-scala-auth-mongo</module>
+    <module>vertx-lang-scala-micrometer-metrics</module>
+    <module>vertx-lang-scala-service-discovery-backend-zookeeper</module>
+    <module>vertx-lang-scala-oracle-client</module>
+    <module>vertx-lang-scala-service-discovery-bridge-docker</module>
+    <module>vertx-lang-scala-web-templ-pebble</module>
+    <module>vertx-lang-scala-auth-htpasswd</module>
+    <module>vertx-lang-scala-mongo-client</module>
+    <module>vertx-lang-scala-redis-client</module>
+    <module>vertx-lang-scala-stomp</module>
+    <module>vertx-lang-scala-web-sstore-cookie</module>
+    <module>vertx-lang-scala-service-discovery-bridge-zookeeper</module>
+    <module>vertx-lang-scala-bridge-common</module>
+    <module>vertx-lang-scala-kafka-client</module>
+    <module>vertx-lang-scala-cassandra-client</module>
+    <module>vertx-lang-scala-auth-oauth2</module>
+    <module>vertx-lang-scala-auth-webauthn</module>
+    <module>vertx-lang-scala-sql-client</module>
+    <module>vertx-lang-scala-service-discovery-backend-redis</module>
+    <module>vertx-lang-scala-pg-client</module>
+    <module>vertx-lang-scala-tcp-eventbus-bridge</module>
+    <module>vertx-lang-scala-web-graphql</module>
+    <module>vertx-lang-scala-jdbc-client</module>
+    <module>vertx-lang-scala-http-proxy</module>
+    <module>vertx-lang-scala-auth-otp</module>
+    <module>vertx-lang-scala-auth-jdbc</module>
+    <module>vertx-lang-scala-config</module>
+    <module>vertx-lang-scala-web-client</module>
+    <module>vertx-lang-scala-service-discovery-backend-consul</module>
+    <module>vertx-lang-scala-mssql-client</module>
+    <module>vertx-lang-scala-web-templ-mvel</module>
+    <module>vertx-lang-scala-core</module>
+    <module>vertx-lang-scala-web-sstore-redis</module>
+    <module>vertx-lang-scala-rabbitmq-client</module>
+    <module>vertx-lang-scala-consul-client</module>  </modules>
 
 </project>

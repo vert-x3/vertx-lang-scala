@@ -515,7 +515,9 @@ public class Templates {
             return quoteIfScalaKeyword(propertyName) + ": scala.collection.immutable.Map[String," + propertyType.getType().getName() + "] = null";
           }
         } else {
-          return quoteIfScalaKeyword(propertyName) + ": " + toScalaType.get(propertyType.getType().getKind()).apply(propertyType.getType()) + " = null";
+          if (propertyType.isSetter()) {
+            return quoteIfScalaKeyword(propertyName) + ": " + toScalaType.get(propertyType.getType().getKind()).apply(propertyType.getType()) + " = null";
+          }
         }
         return null;
       })
