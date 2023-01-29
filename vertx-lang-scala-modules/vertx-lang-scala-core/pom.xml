@@ -16,7 +16,7 @@
     <gen.src.gid>io.vertx</gen.src.gid>
     <gen.src.aid>vertx-core</gen.src.aid>
     <gen.src.unpacked.dir>${project.build.directory}/sources/java</gen.src.unpacked.dir>
-    <gen.src.generated.dir>${project.build.directory}/generated-sources/scala</gen.src.generated.dir>
+    <gen.src.generated.dir>${project.build.directory}/generated-sources</gen.src.generated.dir>
   </properties>
 
   <dependencies>
@@ -92,7 +92,6 @@
             </goals>
             <configuration>
               <sources>
-                <source>${gen.src.unpacked.dir}</source>
                 <source>${gen.src.generated.dir}</source>
               </sources>
             </configuration>
@@ -100,25 +99,31 @@
         </executions>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
+        <groupId>org.bsc.maven</groupId>
+        <artifactId>maven-processor-plugin</artifactId>
+        <configuration>
+          <systemProperties>
+            <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
+            <mvel2.disable.jit>true</mvel2.disable.jit>
+          </systemProperties>
+          <defaultOutputDirectory>${gen.src.generated.dir}</defaultOutputDirectory>
+        </configuration>
         <executions>
           <execution>
             <id>generate-${gen.src.aid}-sources</id>
-            <phase>process-sources</phase>
             <goals>
-              <goal>compile</goal>
+              <goal>process</goal>
             </goals>
+            <phase>generate-sources</phase>
             <configuration>
-              <!-- Important: there are issues with apt and incremental compilation in the maven-compiler-plugin -->
-              <useIncrementalCompilation>false</useIncrementalCompilation>
-              <annotationProcessors>
-                <annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
-              </annotationProcessors>
-              <compilerArgs>
-                <arg>-Acodegen.output=${gen.src.generated.dir}</arg>
-                <arg>-Acodegen.generators=scala</arg>
-              </compilerArgs>
+              <sourceDirectory>${gen.src.unpacked.dir}</sourceDirectory>
+              <processors>
+                <processor>io.vertx.codegen.CodeGenProcessor</processor>
+              </processors>
+              <optionMap>
+                <codegen.generators>scala</codegen.generators>
+                <codegen.output>${gen.src.generated.dir}</codegen.output>
+              </optionMap>
             </configuration>
           </execution>
         </executions>
