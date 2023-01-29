@@ -3,18 +3,17 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-lang-scala-modules</artifactId>
     <version>4.3.8-SNAPSHOT</version>
   </parent>
 
-  <artifactId>vertx-lang-scala-core</artifactId>
+  <artifactId>vertx-lang-scala-mail-client</artifactId>
 
   <properties>
     <gen.src.gid>io.vertx</gen.src.gid>
-    <gen.src.aid>vertx-core</gen.src.aid>
+    <gen.src.aid>vertx-mail-client</gen.src.aid>
     <gen.src.unpacked.dir>${project.build.directory}/sources/java</gen.src.unpacked.dir>
     <gen.src.generated.dir>${project.build.directory}/generated-sources</gen.src.generated.dir>
   </properties>
@@ -30,12 +29,6 @@
       <groupId>${gen.src.gid}</groupId>
       <artifactId>${gen.src.aid}</artifactId>
       <version>${stack.version}</version>
-      <exclusions>
-        <exclusion>
-          <groupId>com.fasterxml.jackson.core</groupId>
-          <artifactId>jackson-core</artifactId>
-        </exclusion>
-      </exclusions>
     </dependency>
 
     <!-- Code generator -->
@@ -44,13 +37,7 @@
       <artifactId>vertx-lang-scala-codegen</artifactId>
       <version>${stack.version}</version>
     </dependency>
-
     <!-- Extra dependencies -->
-    <!-- Log dependencies required by Vert.x -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-    </dependency>
   </dependencies>
 
   <build>
@@ -103,7 +90,8 @@
         <artifactId>maven-processor-plugin</artifactId>
         <configuration>
           <systemProperties>
-            <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
+            <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n
+            </java.util.logging.SimpleFormatter.format>
             <mvel2.disable.jit>true</mvel2.disable.jit>
           </systemProperties>
           <defaultOutputDirectory>${gen.src.generated.dir}</defaultOutputDirectory>
@@ -142,4 +130,5 @@
       </plugin>
     </plugins>
   </build>
+
 </project>

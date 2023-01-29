@@ -15,6 +15,7 @@
 
   <modules>
     <module>vertx-lang-scala-core</module>
+    <module>vertx-lang-scala-mail-client</module>
   </modules>
 
 </project>
