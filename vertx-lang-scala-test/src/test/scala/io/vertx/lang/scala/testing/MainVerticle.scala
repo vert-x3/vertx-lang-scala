@@ -4,11 +4,15 @@ import io.vertx.lang.scala.{ScalaVerticle, *}
 
 import scala.concurrent.{Future, Promise}
 import scala.util.{Failure, Success}
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 class MainVerticle extends ScalaVerticle:
 
+  val log: Logger = LoggerFactory.getLogger(classOf[MainVerticle])
+
   override def asyncStart: Future[Unit] =
-    println("asyncStart!")
+    log.debug("asyncStart!")
     vertx
       .createHttpServer
       .requestHandler(req => {

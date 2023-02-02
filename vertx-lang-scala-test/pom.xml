@@ -28,7 +28,10 @@
       <artifactId>scala3-library_3</artifactId>
       <version>${scala.version}</version>
     </dependency>
-
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
     <!-- Test dependencies -->
 
     <dependency>

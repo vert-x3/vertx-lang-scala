@@ -38,10 +38,15 @@
     <dependencies>
       <dependency>
         <groupId>io.vertx</groupId>
-        <artifactId>vertx-dependencies</artifactId>
+        <artifactId>vertx-stack-depchain</artifactId>
         <version>${stack.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>1.7.21</version>
       </dependency>
       <dependency>
         <groupId>co.helmethair</groupId>

@@ -14,26 +14,29 @@ import scala.language.postfixOps
 import scala.quoted.{Expr, Quotes, Type}
 import scala.reflect.ClassTag
 import scala.util.{Failure, Success}
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 abstract class VerticleTesting[A <: ScalaVerticle](using TypeName[A]) extends AsyncFlatSpec, BeforeAndAfter:
   val vertx: Vertx = Vertx.vertx()
   val typeName: String = TypeUtility.typeName[A]
+  val log: Logger = LoggerFactory.getLogger(typeName)
   given vertxExecutionContext: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
   private var deploymentId = ""
 
   def config(): JsonObject = Json.obj()
 
   before {
-    println(s"Deploying $typeName...")
+    log.info(s"Deploying $typeName...")
     deploymentId = Await.result(
       vertx
         .deployVerticle("scala:" + typeName, DeploymentOptions().setConfig(config())).asScala
         .andThen {
           case Success(id) =>
-            println(s"Deployment of $typeName done, got ID: $id")
+            log.info(s"Deployment of $typeName done, got ID: $id")
             id
           case Failure(t)  =>
-            println(s"Deployment of $typeName failed: ${t.getMessage}")
+            log.error(s"Deployment of $typeName failed: ${t.getMessage}")
             throw new RuntimeException(t)
         },
       10000 millis
@@ -41,11 +44,11 @@ abstract class VerticleTesting[A <: ScalaVerticle](using TypeName[A]) extends As
   }
 
   after {
-    println(s"Undeploying $typeName...")
+    log.info(s"Undeploying $typeName...")
     Await.result(
       vertx.undeploy(deploymentId).asScala
            .andThen {
-             case Success(_) => println(s"$typeName undeployed")
+             case Success(_) => log.info(s"$typeName undeployed")
              case Failure(t) => throw new RuntimeException(t)
            },
       10000 millis
