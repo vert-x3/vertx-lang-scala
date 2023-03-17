@@ -10,7 +10,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>vertx-lang-scala3-parent</artifactId>
-  <version>4.3.8-SNAPSHOT</version>
+  <version>4.4.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <inceptionYear>2016</inceptionYear>
   <organization>
@@ -30,7 +30,7 @@
     </license>
   </licenses>
   <properties>
-    <scala.version>3.2.1</scala.version>
+    <scala.version>3.2.2</scala.version>
     <stack.version>${project.version}</stack.version>
     <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
   </properties>
@@ -42,6 +42,11 @@
         <version>${stack.version}</version>
         <type>pom</type>
         <scope>import</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.scala-lang</groupId>
+        <artifactId>scala3-library_3</artifactId>
+        <version>${scala.version}</version>
       </dependency>
       <dependency>
         <groupId>org.slf4j</groupId>
@@ -92,6 +97,14 @@
               <arg>-deprecation</arg>
             </args>
           </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>compile</goal>
+                <goal>testCompile</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
@@ -117,6 +130,19 @@
           <groupId>org.scalatest</groupId>
           <artifactId>scalatest-maven-plugin</artifactId>
           <version>2.2.0</version>
+          <configuration>
+            <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
+            <junitxml>.</junitxml>
+            <filereports>WDF TestSuite.txt</filereports>
+          </configuration>
+          <executions>
+            <execution>
+              <id>test</id>
+              <goals>
+                <goal>test</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
@@ -125,6 +151,6 @@
     <module>vertx-lang-scala</module>
     <module>vertx-lang-scala-codegen</module>
     <module>vertx-lang-scala-test</module>
-<!--    <module>vertx-lang-scala-on-the-fly</module>-->
+    <module>vertx-lang-scala-itests</module>
   </modules>
 </project>
