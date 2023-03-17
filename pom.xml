@@ -89,7 +89,7 @@
         <plugin>
           <groupId>net.alchim31.maven</groupId>
           <artifactId>scala-maven-plugin</artifactId>
-          <version>4.8.0</version>
+          <version>4.8.1</version>
           <configuration>
             <args>
               <arg>java-output-version 8</arg>
