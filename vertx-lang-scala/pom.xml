@@ -347,6 +347,11 @@
       <artifactId>vertx-json-schema</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-openapi</artifactId>
+      <optional>true</optional>
+    </dependency>
 
     <!-- Test dependencies -->
     <dependency>
@@ -468,7 +473,8 @@
             vertx-shell,
             vertx-micrometer-metrics,
             vertx-tcp-eventbus-bridge,
-            vertx-json-schema
+            vertx-json-schema,
+            vertx-openapi
           </includeArtifactIds>
           <classifier>sources</classifier>
           <includeTypes>jar</includeTypes>
@@ -551,6 +557,11 @@
                 <artifactId>rxjava</artifactId>
               </exclusion>
             </exclusions>
+          </dependency>
+          <dependency>
+            <groupId>io.swagger.parser.v3</groupId>
+            <artifactId>swagger-parser-core</artifactId>
+            <version>2.1.12</version>
           </dependency>
           <dependency>
             <groupId>log4j</groupId>
