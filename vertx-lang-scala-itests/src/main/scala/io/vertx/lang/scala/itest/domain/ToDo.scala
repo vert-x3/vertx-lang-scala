@@ -20,15 +20,18 @@ enum ToDo:
   case Time(val time: LocalTime, val todo: ToDo)
 export ToDo.*
 
-/**
-  * Some smart constructors.
-  */
 object ToDo:
-  def apply(title: String): ToDo = Title(title)
-  def apply(title: String, dateTime: LocalDateTime): ToDo =
-    Date(dateTime.toLocalDate, Time(dateTime.toLocalTime, Title(title)))
-  def apply(title: String, note: String, dateTime: LocalDateTime): ToDo = 
-    Date(dateTime.toLocalDate, Time(dateTime.toLocalTime, Note(note, Title(title))))
+  /**
+    * A smart constructor that evaluates to a [[ToDo]] depending on the [[Option Options]] given.
+    */
+  def apply(title: Title, maybeNotes: Option[String], maybeDate: Option[LocalDate], maybeTime: Option[LocalTime]): ToDo = 
+    @tailrec def combine(acc: ToDo, maybeNotes: Option[String], maybeDate: Option[LocalDate], maybeTime: Option[LocalTime]): ToDo = (maybeNotes, maybeDate, maybeTime) match
+      case (_, _, Some(time)) => combine(Time(time, acc), maybeNotes, maybeDate, None)
+      case (_, Some(date), _) => combine(Date(date, acc), maybeNotes, None, maybeTime)
+      case (Some(note), _, _) => combine(Note(note, acc), None, maybeDate, maybeTime)
+      case (None, None, None) => acc
+    combine(title, maybeNotes, maybeDate, maybeTime)
+  
 
 extension(todo: ToDo)
   def title: String = todo match

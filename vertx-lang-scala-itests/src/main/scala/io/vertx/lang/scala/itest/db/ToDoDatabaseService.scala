@@ -7,6 +7,8 @@ import io.vertx.scala.core.JsonObject
 
 import scala.concurrent.Future
 import scala.concurrent.Promise
+import scala.util.Failure
+import scala.util.Success
 
 class ToDoDatabaseService(db: ToDoDatabase) extends ScalaVerticle:
 
@@ -36,14 +38,12 @@ class ToDoDatabaseService(db: ToDoDatabase) extends ScalaVerticle:
   } yield msg.reply(id)
 
   def handleDelete(msg: Message[JsonObject]): Unit = 
-    (for {
-      idStr  <- Option(msg.headers.get(ID_HEADER))
-      idLong <- idStr.toLongOption
-    } yield ID(idLong)) match
-      case None     => msg.reply(None)
-      case Some(id) => for {
-        id <- db.delete(id)
-      } yield msg.reply(id)
+    Option(msg.headers.get(ID_HEADER)).flatMap(_.toLongOption) match
+      case None     => msg.reply(false)
+      case Some(id) => db.delete(ID(id)).andThen { 
+        case Failure(exception) => msg.reply(false)
+        case Success(isDeleted) => msg.reply(isDeleted)
+      }
     
 
 object ToDoDatabaseService:

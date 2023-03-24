@@ -11,7 +11,7 @@ class ToDoMap(private var map: Map[ID, ToDo] = Map()) extends ToDoDatabase:
     map = map + (nextId -> todo)
     nextId
   })
-  override def delete(id: ID): Future[ID] = Future.successful({
+  override def delete(id: ID): Future[Boolean] = Future.successful({
     map = map - id
-    id
+    true
   })

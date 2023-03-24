@@ -2,6 +2,7 @@ package io.vertx.lang.scala.itest.db
 
 import io.vertx.lang.scala.itest.domain.ToDo
 import scala.concurrent.Future
+import scala.concurrent.ExecutionContext
 
 /**
   * A [[ToDo ToDo's]] identifier in the database.
@@ -37,6 +38,7 @@ trait ToDoDatabase:
 
   /**
     * Delete a [[ToDo]], identified by `id`, from the database.
+    * @return `true` if and only if the [[ToDo]] was deleted
     */
-  def delete(id: ID): Future[ID]
+  def delete(id: ID): Future[Boolean]
   
