@@ -1,67 +1,56 @@
 package io.vertx.lang
 
-import io.vertx.lang.scala.conv.{ScalaFuture, ScalaOption, ScalaPromise, ScalaSuccess, newPromise, scalaFutureToVertxFuture, succScalaSuccess, vertxFutureToScalaFuture}
-import io.vertx.core.{AsyncResult, DeploymentOptions, Handler, Future => VertxFuture, Promise => VertxPromise}
+import concurrent.{Future as ScalaFuture, Promise as ScalaPromise}
+import util.{Try, Success, Failure}
+import io.vertx.lang.scala.conv.{scalaFutureToVertxFuture, vertxFutureToScalaFuture}
+import io.vertx.core.{AsyncResult, DeploymentOptions, Handler, Vertx, Future as VertxFuture, Promise as VertxPromise}
 
-package object scala {
+package object scala:
 
-  implicit class VertxFutureConverter[T](vertxFuture: VertxFuture[T]) {
-    def asScala(): ScalaFuture[T] = vertxFutureToScalaFuture(vertxFuture)
-  }
+  extension[T] (vertxFuture: VertxFuture[T])
+    def asScala: ScalaFuture[T] = vertxFutureToScalaFuture(vertxFuture)
 
-  implicit class FutureConverter[T](future: ScalaFuture[T]) {
-    def asVertx(): VertxFuture[T] = scalaFutureToVertxFuture(future)
-  }
+  extension[T] (scalaFuture: ScalaFuture[T])
+    def asVertx: VertxFuture[T] = scalaFutureToVertxFuture(scalaFuture)
 
-  implicit class PromiseConverter[T](promise: ScalaPromise[T]) {
-    def asVertx(): VertxPromise[T] = {
-      new VertxPromise[T] {
-        override def tryComplete(result: T): Boolean = promise.tryComplete(succScalaSuccess(result))
-
-        override def tryFail(cause: Throwable): Boolean = promise.tryFailure(cause)
-
-        override def future(): VertxFuture[T] = scalaFutureToVertxFuture(promise.future)
-      }
-    }
-  }
-
-  implicit class ScalaPromiseConverter[T](promise: VertxPromise[T])(implicit executor: VertxExecutionContext) {
-    def asScala(): ScalaPromise[T] = {
-      val scalaPromise = newPromise[T]()
-
-      scalaPromise.future.onComplete(scalaTry => {
-        //Not doing pattern matching because of import shenanigans when
-        // getting stuff from scala-package
-        try {
-          promise.complete(scalaTry.get)
-        } catch {
-          case e: Throwable => promise.fail(e)
-        }
-      })
-
+  extension[T] (vertxPromise: VertxPromise[T])
+    def asScala: ScalaPromise[T] =
+      val scalaPromise = ScalaPromise[T]()
+      vertxPromise.future
+                  .onSuccess(scalaPromise.success(_))
+                  .onFailure(scalaPromise.failure(_))
       scalaPromise
-    }
-  }
 
-  implicit class VertxScala(val asJava: io.vertx.core.Vertx) extends AnyVal {
+  extension[T] (scalaPromise: ScalaPromise[T])
+    def asVertx: VertxPromise[T] =
+      val vertxPromise = VertxPromise.promise[T]()
+      scalaPromise.future.asVertx
+                  .onSuccess(vertxPromise.complete(_))
+                  .onFailure(vertxPromise.fail(_))
+      vertxPromise
+
+  /**
+   * Turns a Vert.x callback function into a [[ScalaFuture]].
+   * @param f the callback function; if there are more parameters than just `handler`, you may apply it partially
+   */
+  def handleInFuture[T](f: Handler[AsyncResult[T]] => Unit): ScalaFuture[T] =
+    val promise = ScalaPromise[T]()
+    f(ar => if ar.succeeded then promise.success(ar.result) else promise.failure(ar.cause))
+    promise.future
+
+  extension(asJava: Vertx)
 
     /**
      * Like [[deployVerticle]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def deployVerticle(verticle: ScalaVerticle): ScalaFuture[String] = {
-      val promise = concurrent.Promise[String]()
-      asJava.deployVerticle(verticle.asJava(), {a:AsyncResult[String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
+    def deployVerticle(verticle: ScalaVerticle): ScalaFuture[String] =
+      asJava.deployVerticle(verticle.asJava).asScala
 
     /**
      * Like [[deployVerticle]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def deployVerticle(verticle: ScalaVerticle, options: DeploymentOptions): ScalaFuture[String] = {
-      val promise = concurrent.Promise[String]()
-      asJava.deployVerticle(verticle.asJava(),options , {a:AsyncResult[String] => if(a.failed) promise.failure(a.cause) else promise.success(a.result());()})
-      promise.future
-    }
+    def deployVerticle(verticle: ScalaVerticle, options: DeploymentOptions): ScalaFuture[String] =
+      asJava.deployVerticle(verticle.asJava, options).asScala
 
     /**
      * Safely execute some blocking code.
@@ -71,64 +60,49 @@ package object scala {
      * When the code is complete the returned Future will be completed with the result.
      *
      * @param blockingFunction function containing blocking code
-     * @param ordered if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
+     * @param ordered          if true then if executeBlocking is called several times on the same context, the executions for that context will be executed serially, not in parallel. if false then they will be no ordering guarantees
      * @return a Future representing the result of the blocking operation
      */
-    def executeBlockingScala[T](blockingFunction: () => T, ordered: Boolean = true): concurrent.Future[T] = {
-      val promise = concurrent.Promise[T]()
-      val h: Handler[io.vertx.core.Promise[T]] = { f => util.Try(blockingFunction()) match {
-        case util.Success(s) => f.complete(s)
-        case util.Failure(t) => f.fail(t)
-      }}
-      asJava.executeBlocking[T](h, ordered, {h:AsyncResult[T] => {if (h.succeeded()) promise.success(h.result()) else promise.failure(h.cause());()} })
-      promise.future
-    }
-
+    def executeBlockingScala[T](blockingFunction: () => T, ordered: Boolean = true): concurrent.Future[T] =
+      val h: Handler[VertxPromise[T]] = { p =>
+        Try(blockingFunction()) match {
+          case Success(s) => p.complete(s)
+          case Failure(t) => p.fail(t)
+        }
+      }
+      asJava.executeBlocking[T](h, ordered).asScala
 
 
     /**
      * Set a default exception handler for [[io.vertx.core.Context]], set on [[io.vertx.core.Context#exceptionHandler]] at creation.     * @param handler the exception handler
+     *
      * @return a reference to this, so the API can be used fluently
      */
-    def exceptionHandler(handler: ScalaOption[Throwable => Unit]) = {
-      asJava.exceptionHandler(handler.map(hdlr => hdlr.asInstanceOf[io.vertx.core.Handler[java.lang.Throwable]]).getOrElse(null))
-    }
+    def exceptionHandler(handler: Option[Throwable => Unit]): Vertx =
+      asJava.exceptionHandler(handler.map(hdlr => hdlr.asInstanceOf[Handler[java.lang.Throwable]]).orNull)
 
     /**
      * Like close from [[io.vertx.core.Vertx]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def closeFuture() : ScalaFuture[Void] = {
-      val promise = concurrent.Promise[Void]/*java.lang.Void VOID*/()
-      asJava.close(new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
-      promise.future
-    }
+    def closeFuture(): ScalaFuture[Unit] = asJava.close
+                                                 .map((_: Void) => ())
+                                                 .asScala
 
     /**
      * Like deployVerticle from [[io.vertx.core.Vertx]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def deployVerticle(name: java.lang.String) : ScalaFuture[java.lang.String] = {
-      val promise = concurrent.Promise[java.lang.String]()
-      asJava.deployVerticle(name, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
-      promise.future
-    }
+    def deployVerticle(name: String): ScalaFuture[String] = asJava.deployVerticle(name).asScala
 
     /**
      * Like deployVerticle from [[io.vertx.core.Vertx]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def deployVerticle(name: java.lang.String, options: io.vertx.core.DeploymentOptions) : ScalaFuture[java.lang.String] = {
-      val promise = concurrent.Promise[java.lang.String]()
-      asJava.deployVerticle(name, options, new Handler[AsyncResult[java.lang.String]] { override def handle(event: AsyncResult[java.lang.String]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
-      promise.future
-    }
+    def deployVerticle(name: String, options: DeploymentOptions): ScalaFuture[String] =
+      asJava.deployVerticle(name, options).asScala
 
     /**
      * Like undeploy from [[io.vertx.core.Vertx]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def undeploy(deploymentID: java.lang.String) : ScalaFuture[Void] = {
-      val promise = concurrent.Promise[Void]()
-      asJava.undeploy(deploymentID, new Handler[AsyncResult[java.lang.Void]] { override def handle(event: AsyncResult[java.lang.Void]): Unit = { if(event.failed) promise.failure(event.cause) else promise.success(event.result())}})
-      promise.future
-    }
-
-  }
-}
+    def undeploy(deploymentID: String): ScalaFuture[Unit] =
+      asJava.undeploy(deploymentID)
+            .map(_ => ())
+            .asScala

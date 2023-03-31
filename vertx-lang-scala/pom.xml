@@ -6,12 +6,12 @@
 
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>vertx-lang-scala-parent_2.13</artifactId>
-    <version>4.2.0-SNAPSHOT</version>
-    <relativePath>..</relativePath>
+    <artifactId>vertx-lang-scala3-parent</artifactId>
+    <version>4.4.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>vertx-lang-scala_2.13</artifactId>
+  <artifactId>vertx-lang-scala3</artifactId>
 
   <name>Vert.x Scala Language Support</name>
 
@@ -29,19 +29,8 @@
       <artifactId>vertx-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-scala-on-the-fly_2.13</artifactId>
-      <version>${project.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
       <groupId>org.scala-lang</groupId>
-      <artifactId>scala-library</artifactId>
-      <version>${scala.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.scala-lang</groupId>
-      <artifactId>scala-reflect</artifactId>
+      <artifactId>scala3-library_3</artifactId>
       <version>${scala.version}</version>
     </dependency>
 
@@ -358,6 +347,11 @@
       <artifactId>vertx-json-schema</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-openapi</artifactId>
+      <optional>true</optional>
+    </dependency>
 
     <!-- Test dependencies -->
     <dependency>
@@ -384,7 +378,7 @@
     </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
-      <artifactId>scalatest_2.13</artifactId>
+      <artifactId>scalatest_3</artifactId>
       <scope>test</scope>
     </dependency>
 
@@ -393,6 +387,7 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
         <executions>
           <execution>
@@ -411,8 +406,8 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.0.2</version>
         <configuration>
           <includeGroupIds>io.vertx</includeGroupIds>
           <includeArtifactIds>
@@ -478,7 +473,8 @@
             vertx-shell,
             vertx-micrometer-metrics,
             vertx-tcp-eventbus-bridge,
-            vertx-json-schema
+            vertx-json-schema,
+            vertx-openapi
           </includeArtifactIds>
           <classifier>sources</classifier>
           <includeTypes>jar</includeTypes>
@@ -502,7 +498,6 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.7</version>
         <configuration>
           <skipTests>true</skipTests>
         </configuration>
@@ -510,11 +505,10 @@
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
-        <version>3.2.0</version>
+        <version>4.5-jdk8</version>
         <configuration>
           <systemProperties>
-            <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n
-            </java.util.logging.SimpleFormatter.format>
+            <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
           </systemProperties>
         </configuration>
         <executions>
@@ -536,7 +530,6 @@
               <sourceDirectory>${project.build.directory}/sources/java</sourceDirectory>
             </configuration>
           </execution>
-
         </executions>
         <dependencies>
           <dependency>
@@ -564,6 +557,11 @@
                 <artifactId>rxjava</artifactId>
               </exclusion>
             </exclusions>
+          </dependency>
+          <dependency>
+            <groupId>io.swagger.parser.v3</groupId>
+            <artifactId>swagger-parser-core</artifactId>
+            <version>2.1.12</version>
           </dependency>
           <dependency>
             <groupId>log4j</groupId>
@@ -616,37 +614,15 @@
       <plugin>
         <groupId>org.scalatest</groupId>
         <artifactId>scalatest-maven-plugin</artifactId>
-        <version>1.0</version>
-        <configuration>
-          <reportsDirectory>${project.build.directory}/surefire-reports</reportsDirectory>
-          <junitxml>.</junitxml>
-          <filereports>WDF TestSuite.txt</filereports>
-        </configuration>
-        <executions>
-          <execution>
-            <id>test</id>
-            <goals>
-              <goal>test</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>compile</goal>
-              <goal>testCompile</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>1.3</version>
+        <version>1.8</version>
         <executions>
           <execution>
             <id>add-source</id>
@@ -663,6 +639,7 @@
         </executions>
       </plugin>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-clean-plugin</artifactId>
         <executions>
           <execution>

@@ -15,6 +15,8 @@
  */
 package io.vertx.lang.scala.json
 
+import io.vertx.lang.scala.json.{ JsonArray, JsonObject }
+
 import java.util
 import scala.jdk.CollectionConverters.ListHasAsScala
 
@@ -24,7 +26,7 @@ import scala.jdk.CollectionConverters.ListHasAsScala
  * @author Edgar Chan
  * @author <a href="http://www.campudus.com/">Joern Bernhardt</a>
  */
-object Json {
+object Json:
 
   /**
    * Creates a JsonArray from an encoded JSON string.
@@ -79,7 +81,7 @@ object Json {
   def obj(fields: (String, Any)*): JsonObject = {
     val o = new JsonObject()
     fields.foreach {
-      case (key, l: Array[_]) => o.put(key, listToJsArr(l))
+      case (key, l: Array[_]) => o.put(key, listToJsArr(l.toIndexedSeq))
       case (key, l: Seq[_]) => o.put(key, listToJsArr(l))
       case (key, value) => o.put(key, value)
     }
@@ -95,7 +97,7 @@ object Json {
   def arr(fields: Any*): JsonArray = {
     val a = new JsonArray()
     fields.foreach {
-      case array: Array[_] => a.add(listToJsArr(array))
+      case array: Array[_] => a.add(listToJsArr(array.toIndexedSeq))
       case seq: Seq[_] => a.add(listToJsArr(seq))
       case f => a.add(f)
     }
@@ -106,12 +108,9 @@ object Json {
     listToJsArr(list)
   }
 
-  implicit class JsArray(val internal: JsonArray) extends AnyVal {
-
-    def list: List[_ >: Any] = {
+  extension (internal: JsonArray)
+    def list: List[Any] = {
       internal.getList.asScala.toList
     }
-  }
 
   private def listToJsArr(a: Seq[_]) = Json.arr(a: _*)
-}
