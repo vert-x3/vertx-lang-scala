@@ -10,7 +10,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>vertx-lang-scala3-parent</artifactId>
-  <version>4.4.2-SNAPSHOT</version>
+  <version>4.4.4-SNAPSHOT</version>
   <packaging>pom</packaging>
   <inceptionYear>2016</inceptionYear>
   <organization>
@@ -30,7 +30,7 @@
     </license>
   </licenses>
   <properties>
-    <scala.version>3.2.2</scala.version>
+    <scala.version>3.3.0</scala.version>
     <stack.version>${project.version}</stack.version>
     <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
   </properties>
@@ -71,7 +71,7 @@
       <dependency>
         <groupId>org.scalatest</groupId>
         <artifactId>scalatest_3</artifactId>
-        <version>3.2.15</version>
+        <version>3.2.16</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -109,22 +109,22 @@
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-assembly-plugin</artifactId>
-          <version>3.5.0</version>
+          <version>3.6.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-clean-plugin</artifactId>
-          <version>3.2.0</version>
+          <version>3.3.1</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.5.0</version>
+          <version>3.6.0</version>
         </plugin>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <version>3.0.0</version>
+          <version>3.1.2</version>
         </plugin>
         <plugin>
           <groupId>org.scalatest</groupId>
