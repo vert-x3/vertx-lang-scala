@@ -24,6 +24,7 @@ public class ClassCodeGenerator extends Generator<Model> {
   static {
     List<String> temp = new ArrayList<>();
     temp.add("io.vertx.redis");
+    temp.add("io.vertx.ext.consul.token");
     ignoredPackages = Collections.unmodifiableList(temp);
   }
   public static final List<String> ignoreClassname;
