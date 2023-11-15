@@ -1,4 +1,4 @@
-= Vert.x for Scala
+# Vert.x for Scala
 
 If you are using Maven or Gradle, add the following dependency to the _dependencies_ section of your
 project descriptor to access the Vert.x Core API and enable the Scala support:
