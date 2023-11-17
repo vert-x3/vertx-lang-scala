@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+title: Installation
 ---
 
 # Installation
@@ -7,36 +7,35 @@ sidebar_position: 1
 To use Vert.x for Scala, add the following dependency to the _dependencies_ section of your
 build descriptor:
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
-<Tabs>
-<TabItem value="sbt">
+## sbt
 
-```scala title="build.sbt"
-libraryDependencies += "io.vertx" %  "vertx-lang-scala3" % "@VERSION@"
+```sbt
+libraryDependencies += "io.vertx" % "vertx-core" % "{{projectVersion}}"
+libraryDependencies += "io.vertx" % "vertx-lang-scala3" % "{{projectVersion}}"
 ```
 
-</TabItem>
-<TabItem value="Gradle">
+## Gradle
 
 ```kotlin title="build.gradle"
-implementation "io.vertx:vertx-lang-scala3:@VERSION@"
+implementation "io.vertx:vertx-core:{{projectVersion}}"
+implementation "io.vertx:vertx-lang-scala3:{{projectVersion}}"
 ```
 
-</TabItem>
-<TabItem value="Maven">
+## Maven
 
 ```xml title="pom.xml"
 <dependency>
   <groupId>io.vertx</groupId>
+  <artifactId>vertx-core</artifactId>
+  <version>{{projectVersion}}</version>
+</dependency>
+<dependency>
+  <groupId>io.vertx</groupId>
   <artifactId>vertx-lang-scala3</artifactId>
-  <version>@VERSION@</version>
+  <version>{{projectVersion}}</version>
 </dependency>
 ```
-
-</TabItem>
-</Tabs>
 
 
 ## What is in the package?

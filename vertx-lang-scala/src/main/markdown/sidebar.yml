@@ -1,0 +1,7 @@
+index: index.md
+subsection:
+  - title: Intro
+    index: intro.md
+    subsection:
+      - page: installation.md
+      - page: index.md

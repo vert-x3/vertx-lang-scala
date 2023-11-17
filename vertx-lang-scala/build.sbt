@@ -17,7 +17,9 @@ Compile / doc / scalacOptions ++= Seq(
   "-scastie-configuration", s"""
     |libraryDependencies += "io.vertx" % "vertx-web" % ${version.value},
     |libraryDependencies += "io.vertx" % "vertx-lang-scala3" % ${version.value},
-  """.stripMargin
+  """.stripMargin,
+  "-project-version", version.value,
+  "-project-logo", "src/main/markdown/_assets/images/vertx-logo.png",
 )
 
 lazy val root = project

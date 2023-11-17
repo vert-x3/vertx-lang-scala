@@ -1,8 +1,8 @@
 ---
-sidebar_position: 1
+title: Quick Start
 ---
 
-# Geting started 
+# Quick Start
 
 Let's discover how to get started with a new Vert.x/Scala project.
 
@@ -158,5 +158,5 @@ and Scala, here are some pointers to help guide you further along the journey:
 
   - [Reactive Manifesto](https://www.reactivemanifesto.org) - this page explains what reactive systems are all about and why it is important to follow the principles.
   - [Eclipse Vert.x and reactive in a few words](https://vertx.io/introduction-to-vertx-and-reactive/) - read a few words about how Vert.x helps you build reactive systems.
-  - [Vert.x for Scala Documentation](installation.md) - read a more detailed explanation of all the components that make up Vert.x for Scala
+  - Vert.x for Scala Documentation (installation.md) - read a more detailed explanation of all the components that make up Vert.x for Scala
   - [Vert.x Documentation](https://vertx.io/docs/) - read about all available Vert.x modules
