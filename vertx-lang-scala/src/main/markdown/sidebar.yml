@@ -1,7 +1,16 @@
 index: index.md
 subsection:
-  - title: Intro
-    index: intro.md
+  - title: Quick Start
+    page: quickstart.md
+  - title: Coding
+    index: coding/index.md
     subsection:
-      - page: installation.md
-      - page: index.md
+      - title: Installation
+        page: coding/installation.md
+      - title: Writing Verticles
+        page: coding/writing-verticles.md
+      - title: Working with JSON
+        page: coding/working-with-json.md
+      - title: Working with DataObjects
+        page: coding/working-with-dataobjects.md
+    

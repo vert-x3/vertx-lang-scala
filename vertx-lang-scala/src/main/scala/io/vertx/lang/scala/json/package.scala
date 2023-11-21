@@ -33,6 +33,14 @@ package object json {
 
   implicit class JsObject(val internal: JsonObject) extends AnyVal {
     import scala.jdk.CollectionConverters._
+    /**
+      * Get the underlying Map as `mutable.Map`. This map may contain 
+      * values that are not the types returned by the JsonObject and with 
+      * an unpredictable representation of the value, e.g you might get a 
+      * JSON object as a [[io.vertx.core.json.JsonObject]] or as a Map.
+      *
+      * @return the underlying Map
+      */
     def asMap: Map[String, AnyRef] = internal.getMap.asScala
   }
 

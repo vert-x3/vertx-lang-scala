@@ -1,6 +1,6 @@
 ThisBuild / scalaVersion := "3.3.1"
 ThisBuild / resolvers += Resolver.mavenLocal
-ThisBuild / version := "4.4.6"
+ThisBuild / version := "4.5.0"
 
 lazy val socialLinks = Map(
   "github"        -> "https://github.com/vert-x3/vertx-lang-scala",
@@ -25,6 +25,7 @@ Compile / doc / scalacOptions ++= Seq(
 lazy val root = project
                 .in(file("."))
                 .settings(
+                  name := "Vert.x 4 Scala",
                   libraryDependencies ++= Seq(
                     "io.vertx" % "vertx-web" % version.value,
                   ),
