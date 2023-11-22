@@ -2,13 +2,13 @@
 title: Working with JSON
 ---
 
-## Extensions
+# Extensions
 
 The package [[io.vertx.lang.scala.json]] contains extensions for `io.vertx.core.json.JsonObject`, providing
 
   - [[io.vertx.lang.scala.json.package.JsObject.asMap]] - to easily convert from a `JsonObject` to a Scala `Map`
 
-## Utilities
+# Utilities
 
 The `Json` utility class helps building JSON objects more Scala-like. The following example shows a simple `JsonObject` being created.
 
