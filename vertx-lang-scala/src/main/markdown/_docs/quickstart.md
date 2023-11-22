@@ -45,7 +45,8 @@ Open the project in the editor or IDE of your choice and navigate to the file `H
 `Verticle` (the Vert.x deployment unit) that starts an HTTP server. We're going to modify it to greet whoever performs requests to the server. Let's change the
 code as follows:
 
-```scala mdoc:invisible
+```scala
+//{
 import io.vertx.lang.scala.ScalaVerticle
 import io.vertx.ext.web.Router
 import io.vertx.lang.scala.ImplicitConversions.vertxFutureToScalaFuture
@@ -54,8 +55,7 @@ import scala.concurrent.Future
 import scala.jdk.CollectionConverters.*
 import scala.language.implicitConversions
 import io.vertx.lang.scala.json.Json
-```
-```scala mdoc:nest title="HttpVerticle.scala"
+//}
 class HttpVerticle extends ScalaVerticle:
 
   override def asyncStart: Future[Unit] =
@@ -116,12 +116,6 @@ root[ERROR] Succeeded in deploying verticle
 
 Now that the server is up and running, try to send a request:
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-<Tabs>
-<TabItem value="httpie">
-
 ```shell
 $ http localhost:8666?name=Ernie
 HTTP/1.1 200 OK
@@ -135,9 +129,6 @@ content-type: application/json; charset=utf-8
 }
 ```
 
-</TabItem>
-<TabItem value="curl">
-
 ```shell
 $ curl http://localhost:8666?name=Bert
 {
@@ -146,9 +137,6 @@ $ curl http://localhost:8666?name=Bert
   "message": "Hello Bert connected from 127.0.0.1:54542"
 }
 ```
-
-</TabItem>
-</Tabs>
 
 
 ## 5. Go further

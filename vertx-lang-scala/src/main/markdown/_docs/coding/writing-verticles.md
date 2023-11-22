@@ -139,4 +139,4 @@ import scala.util.{Failure, Success}
     }
 ```
 
-> Also note the `asScala` call which is defined in [[io.vertx.lang.scala]] and is an alternative to the implicit conversion [[io.vertx.lang.scala.ImplicitConversions.vertxFutureToScalaFuture]]. This can be used in situations where implicit conversions cannot be applied, for example the code above.
+> Also note the call to the extension method `asScala` which is defined in package [[io.vertx.lang.scala]]. This is an alternative to the implicit conversion [[io.vertx.lang.scala.ImplicitConversions.vertxFutureToScalaFuture]]. This can be used in situations where implicit conversions cannot be applied, for example the code above.
