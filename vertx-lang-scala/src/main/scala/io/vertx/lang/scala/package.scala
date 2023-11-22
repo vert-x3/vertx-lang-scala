@@ -4,6 +4,7 @@ import concurrent.{Future as ScalaFuture, Promise as ScalaPromise}
 import util.{Try, Success, Failure}
 import io.vertx.lang.scala.conv.{scalaFutureToVertxFuture, vertxFutureToScalaFuture}
 import io.vertx.core.{AsyncResult, DeploymentOptions, Handler, Vertx, Future as VertxFuture, Promise as VertxPromise}
+import java.util.concurrent.Callable
 
 package object scala:
 
@@ -64,13 +65,8 @@ package object scala:
      * @return a Future representing the result of the blocking operation
      */
     def executeBlockingScala[T](blockingFunction: () => T, ordered: Boolean = true): concurrent.Future[T] =
-      val h: Handler[VertxPromise[T]] = { p =>
-        Try(blockingFunction()) match {
-          case Success(s) => p.complete(s)
-          case Failure(t) => p.fail(t)
-        }
-      }
-      asJava.executeBlocking[T](h, ordered).asScala
+      val c: Callable[T] = () => blockingFunction()
+      asJava.executeBlocking[T](c, ordered).asScala
 
 
     /**
