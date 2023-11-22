@@ -28,6 +28,7 @@ lazy val root = project
                   name := "Vert.x 4 Scala",
                   libraryDependencies ++= Seq(
                     "io.vertx" % "vertx-web" % version.value,
+                    "io.vertx" % "vertx-lang-scala3" % version.value,
                   ),
                   scalacOptions ++= Seq("-deprecation", "-feature"),
                 )
