@@ -20,6 +20,7 @@ Compile / doc / scalacOptions ++= Seq(
   """.stripMargin,
   "-project-version", version.value,
   "-project-logo", "src/main/markdown/_assets/images/vertx-logo.png",
+  "-project-footer", "© 2023 Eclipse Vert.x™"
 )
 
 lazy val root = project

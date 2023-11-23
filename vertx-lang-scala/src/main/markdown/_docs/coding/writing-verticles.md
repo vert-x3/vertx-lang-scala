@@ -45,9 +45,9 @@ final class StartFutureVerticle extends ScalaVerticle:
 use the Verticle's name or convert it to a regular `Verticle`, using the [[io.vertx.lang.scala.ScalaVerticle.asJava]] function. 
 
 
-## Deploying via `asJava`
+## Standard Deployment
 
-The following example shows how to deploy two `ScalaVerticles` via the `asJava` function:
+The package [[io.vertx.lang.scala]] provides two extensions for the `io.vertx.core.Vertx` class which allow to deploy `ScalaVerticle` instances _directly_, with or without `DeploymentOptions`:
 
 ```scala
 //{
