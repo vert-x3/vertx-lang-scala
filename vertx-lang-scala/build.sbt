@@ -20,7 +20,6 @@ Compile / doc / scalacOptions ++= Seq(
   """.stripMargin,
   "-project-version", version.value,
   "-project-logo", "src/main/markdown/_assets/images/vertx-logo.png",
-  "-dark-project-logo", "src/main/markdown/_assets/images/vertx-logo-white.png",
 )
 
 lazy val root = project
