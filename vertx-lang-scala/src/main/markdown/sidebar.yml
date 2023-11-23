@@ -11,6 +11,8 @@ subsection:
         page: coding/writing-verticles.md
       - title: Working with JSON
         page: coding/working-with-json.md
-      - title: Working with DataObjects
+      - title: Working with Futures
+        page: coding/working-with-futures.md
+      - title: Working with Data Objects
         page: coding/working-with-dataobjects.md
     

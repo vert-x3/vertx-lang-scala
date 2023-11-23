@@ -20,12 +20,13 @@ Compile / doc / scalacOptions ++= Seq(
   """.stripMargin,
   "-project-version", version.value,
   "-project-logo", "src/main/markdown/_assets/images/vertx-logo.png",
+  "-dark-project-logo", "src/main/markdown/_assets/images/vertx-logo-white.png",
 )
 
 lazy val root = project
                 .in(file("."))
                 .settings(
-                  name := "Vert.x 4 Scala",
+                  name := "Vert.x for Scala",
                   libraryDependencies ++= Seq(
                     "io.vertx" % "vertx-web" % version.value,
                     "io.vertx" % "vertx-lang-scala3" % version.value,

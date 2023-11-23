@@ -127,7 +127,7 @@ import scala.util.{Failure, Success}
 //}
 @main def main: Unit =
   val vertx = Vertx.vertx
-  given exec:VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
+  given exec: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
   
   vertx
     .createHttpServer

@@ -1,5 +1,5 @@
 ---
-title: Working with DataObjects
+title: Working with Data Objects
 ---
 
 # Data Objects with a Scala flavor
