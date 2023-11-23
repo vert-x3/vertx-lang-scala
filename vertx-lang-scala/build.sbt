@@ -30,6 +30,8 @@ lazy val root = project
                   libraryDependencies ++= Seq(
                     "io.vertx" % "vertx-web" % version.value,
                     "io.vertx" % "vertx-lang-scala3" % version.value,
+                    "io.vertx" % "vertx-lang-scala3-test" % version.value,
+                    "org.scalatest" %% "scalatest" % "3.2.17",
                   ),
                   scalacOptions ++= Seq("-deprecation", "-feature"),
                 )
