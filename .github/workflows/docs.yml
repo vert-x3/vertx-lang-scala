@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Scala CI
+name: Documentation
 
 on:
   push:
@@ -25,13 +25,16 @@ jobs:
         distribution: 'temurin'
         cache: 'sbt'
         
+    - name: cd to vertx-lang-scala
+      run: cd vertx-lang-scala
+
     - name: Compile Documentation
       run: sbt doc
 
     - name: Upload GitHub Pages artifact
       uses: actions/upload-pages-artifact@v2.0.0
       with:
-        path: vertx-lang-scala/target/scala-*/api/
+        path: $(find target -name "*scala-3*" -type d -print -quit)/api/
 
     - name: Deploy GitHub Pages site
       uses: actions/deploy-pages@v1.2.9
