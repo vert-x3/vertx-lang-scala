@@ -29,12 +29,12 @@ jobs:
       run: mvn install -DskipTests
 
     - name: Compile Documentation
-      run: cd vertx-lang-scala && sbt doc
+      run: cd vertx-lang-scala && sbt doc && cd ..
 
     - name: Upload GitHub Pages artifact
       uses: actions/upload-pages-artifact@v2.0.0
       with:
-        path: vertx-lang-scala/target/scala-3.1.1/api/
+        path: pwd && vertx-lang-scala/target/scala-3.1.1/api/
 
     - name: Deploy GitHub Pages site
       uses: actions/deploy-pages@v1.2.9
