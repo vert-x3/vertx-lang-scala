@@ -25,6 +25,9 @@ jobs:
         distribution: 'temurin'
         cache: 'sbt'
         
+    - name: Compile Vert.x Lang Scala
+      run: mvn install -DskipTests
+
     - name: Compile Documentation
       run: cd vertx-lang-scala && sbt doc
 
