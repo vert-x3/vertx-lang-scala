@@ -1,7 +1,10 @@
+import java.time.LocalDate
+
 ThisBuild / scalaVersion := "3.3.1"
 ThisBuild / resolvers += Resolver.mavenLocal
 ThisBuild / version := "4.5.1"
 
+lazy val currentYear = LocalDate.now().getYear()
 lazy val socialLinks = Map(
   "github"        -> "https://github.com/vert-x3/vertx-lang-scala",
   "discord"       -> "https://discord.com/invite/6ry7aqPWXy",
@@ -17,10 +20,11 @@ Compile / doc / scalacOptions ++= Seq(
   "-scastie-configuration", s"""
     |libraryDependencies += "io.vertx" % "vertx-web" % ${version.value},
     |libraryDependencies += "io.vertx" % "vertx-lang-scala3" % ${version.value},
-  """.stripMargin,
+  """.stripMargin.replace("\n", " "),
+  "-Ygenerate-inkuire",
   "-project-version", version.value,
   "-project-logo", "src/main/markdown/_assets/images/vertx-logo.png",
-  "-project-footer", "© 2023 Eclipse Vert.x™"
+  "-project-footer", s"© $currentYear Eclipse Vert.x™"
 )
 
 lazy val root = project
