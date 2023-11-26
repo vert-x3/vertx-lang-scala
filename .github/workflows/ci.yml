@@ -4,6 +4,7 @@ on:
     branches:
       - master
       - '[0-9]+.[0-9]+'
+      - 116-fix-ci
   pull_request:
     branches:
       - master
@@ -16,34 +17,37 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        jdk: [8, 11]
+        jdk: [8, 11, 17, 21]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install JDK
-        uses: joschi/setup-jdk@v2
+        uses: actions/checkout@v3
+      - name: Set up JDK ${{ matrix.jdk }}
+        uses: actions/setup-java@v3
         with:
           java-version: ${{ matrix.jdk }}
+          distribution: 'temurin'
+          cache: 'maven'
       - name: Run tests
-        run: mvn -q clean verify -B
-  Deploy:
-    name: Deploy to OSSRH
-    if: ${{ github.repository_owner == 'vert-x3' && (github.event_name == 'push' || github.event_name == 'schedule') }}
-    needs: Test
-    runs-on: ubuntu-latest
-    env:
-      VERTX_NEXUS_USERNAME: ${{ secrets.VERTX_NEXUS_USERNAME }}
-      VERTX_NEXUS_PASSWORD: ${{ secrets.VERTX_NEXUS_PASSWORD }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install JDK
-        uses: joschi/setup-jdk@v2
-        with:
-          java-version: 8
-      - name: Get project version
-        run: echo "PROJECT_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version -B | grep -v '\[')" >> $GITHUB_ENV
-      - name: Maven deploy
-        if: ${{ endsWith(env.PROJECT_VERSION, '-SNAPSHOT') }}
-        run: mvn deploy -s .travis.maven.settings.xml -DskipTests -B
+        run: mvn clean verify -B
+
+  # Deploy:
+  #   name: Deploy to OSSRH
+  #   if: ${{ github.repository_owner == 'vert-x3' && (github.event_name == 'push' || github.event_name == 'schedule') }}
+  #   needs: Test
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     VERTX_NEXUS_USERNAME: ${{ secrets.VERTX_NEXUS_USERNAME }}
+  #     VERTX_NEXUS_PASSWORD: ${{ secrets.VERTX_NEXUS_PASSWORD }}
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - name: Install JDK
+  #       uses: joschi/setup-jdk@v2
+  #       with:
+  #         java-version: 8
+  #     - name: Get project version
+  #       run: echo "PROJECT_VERSION=$(mvn org.apache.maven.plugins:maven-help-plugin:evaluate -Dexpression=project.version -B | grep -v '\[')" >> $GITHUB_ENV
+  #     - name: Maven deploy
+  #       if: ${{ endsWith(env.PROJECT_VERSION, '-SNAPSHOT') }}
+  #       run: mvn deploy -s .travis.maven.settings.xml -DskipTests -B
