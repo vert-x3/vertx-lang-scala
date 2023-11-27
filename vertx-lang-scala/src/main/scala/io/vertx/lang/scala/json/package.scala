@@ -15,33 +15,40 @@
  */
 package io.vertx.lang.scala
 
-import scala.collection.mutable.Map
+import scala.jdk.CollectionConverters.*
+import scala.collection.*
 
 /**
  * @author swilliams
  * @author Edgar Chan
- *
  */
 package object json {
 
   type JsonArray = io.vertx.core.json.JsonArray
   type JsonObject = io.vertx.core.json.JsonObject
 
-  import scala.language.implicitConversions
-
-  implicit def toJsonObject(js: JsObject): JsonObject = js.internal
-
-  implicit class JsObject(val internal: JsonObject) extends AnyVal {
-    import scala.jdk.CollectionConverters._
+  extension (internal: JsonObject)
     /**
-      * Get the underlying Map as `mutable.Map`. This map may contain 
-      * values that are not the types returned by the JsonObject and with 
-      * an unpredictable representation of the value, e.g you might get a 
+      * Get the underlying Map as `mutable.Map`. This map may contain
+      * values that are not the types returned by the JsonObject and with
+      * an unpredictable representation of the value, e.g you might get a
       * JSON object as a [[io.vertx.core.json.JsonObject]] or as a Map.
       *
       * @return the underlying Map
       */
-    def asMap: Map[String, AnyRef] = internal.getMap.asScala
-  }
+    def asMap: mutable.Map[String, AnyRef] = internal.getMap.asScala
+
+
+  extension (internal: JsonArray)
+    /**
+      * Get the underlying List as `mutable.ListBuffer`.
+      *
+      * This list may contain values that are not the types returned by the
+      * JsonArray and with an unpredictable representation of the value, e.g
+      * you might get a JSON object as a JsonObject or as a Map.
+      *
+      * @return the underlying List
+      */
+    def asList: List[Any] = internal.getList.asScala.toList
 
 }

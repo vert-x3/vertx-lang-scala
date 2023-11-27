@@ -15,7 +15,7 @@
  */
 package io.vertx.lang.scala.json
 
-import io.vertx.lang.scala.json.{ JsonArray, JsonObject }
+import io.vertx.core.json.{JsonArray, JsonObject}
 
 import java.util
 import scala.jdk.CollectionConverters.ListHasAsScala
@@ -38,6 +38,7 @@ object Json:
 
   /**
    * Creates a JsonObject from an encoded JSON string.
+   *
    * @param json The JSON string.
    * @return The decoded JsonObject.
    */
@@ -72,6 +73,7 @@ object Json:
    * @return
    */
   def obj(map: util.Map[String, Object]): JsonObject = new JsonObject(map)
+
   /**
    * Constructs a JsonObject from a fieldName -> value pairs.
    *
@@ -82,8 +84,8 @@ object Json:
     val o = new JsonObject()
     fields.foreach {
       case (key, l: Array[_]) => o.put(key, listToJsArr(l.toIndexedSeq))
-      case (key, l: Seq[_]) => o.put(key, listToJsArr(l))
-      case (key, value) => o.put(key, value)
+      case (key, l: Seq[_])   => o.put(key, listToJsArr(l))
+      case (key, value)       => o.put(key, value)
     }
     o
   }
@@ -95,22 +97,26 @@ object Json:
    * @return A JsonArray containing the provided elements.
    */
   def arr(fields: Any*): JsonArray = {
-    val a = new JsonArray()
-    fields.foreach {
-      case array: Array[_] => a.add(listToJsArr(array.toIndexedSeq))
-      case seq: Seq[_] => a.add(listToJsArr(seq))
-      case f => a.add(f)
-    }
-    a
+    if fields.length == 1 then fields(0) match
+      case seq: Seq[_]     => listToJsArr(seq)
+      case array: Array[_] => listToJsArr(array.toIndexedSeq)
+      case value           => arr().add(value)
+    else
+      val a = new JsonArray()
+      fields.foreach {
+        case array: Array[_] => a.add(arr(array))
+        case seq: Seq[_]     => a.add(arr(seq))
+        case f               => a.add(f)
+      }
+      a
   }
 
-  def arr(list: List[Any]): JsonArray = {
-    listToJsArr(list)
-  }
+  private def listToJsArr(a: Seq[_]) = Json.arr(a: _*)
 
   extension (internal: JsonArray)
+    /**
+     * @deprecated see extension for JsonArray in [[io.vertx.lang.scala.package]]
+     */
     def list: List[Any] = {
       internal.getList.asScala.toList
     }
-
-  private def listToJsArr(a: Seq[_]) = Json.arr(a: _*)
