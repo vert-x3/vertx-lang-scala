@@ -169,6 +169,16 @@ class JsonSpec extends AnyFlatSpec, Matchers, Inside:
     jsonArray.encode should equal(enc)
   }
 
+  "JsonObject.asMap" should "return a Map representation of some JsonObject" in :
+    val jsonObject = JsonObject.of("foo", "foo text", "optional", true)
+    jsonObject.asMap("foo") should equal("foo text")
+    jsonObject.asMap("optional") should equal(true)
+
+
+  "JsonArray.asList" should "return a List representation of some JsonArray" in :
+    val jsonArray = JsonArray.of(1, 2, 3)
+    jsonArray.asList should contain inOrderOnly(1, 2, 3)
+
   "json interpolator" should "be able to construct an empty JsonObject" in {
     json"{}" should equal(JsonObject())
   }
@@ -236,17 +246,6 @@ class JsonSpec extends AnyFlatSpec, Matchers, Inside:
       a.getJsonObject(1).getString("location") should equal("London")
     }
   }
-
-
-  "asMap extension" should "return a Map representation of some JsonObject" in :
-    val jsonObject = JsonObject.of("foo", "foo text", "optional", true)
-    jsonObject.asMap("foo") should equal("foo text")
-    jsonObject.asMap("optional") should equal(true)
-
-
-  "asList extension" should "return a List representation of some JsonArray" in :
-    val jsonArray = JsonArray.of(1, 2, 3)
-    jsonArray.asList should contain inOrderOnly(1, 2, 3)
 
 
   private def jsonString = {
