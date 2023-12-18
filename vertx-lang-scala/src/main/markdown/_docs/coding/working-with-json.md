@@ -6,8 +6,8 @@ title: Working with JSON
 
 The package [[io.vertx.lang.scala.json]] contains extensions for `io.vertx.core.json.JsonObject`, providing
 
-  - [[io.vertx.lang.scala.json.package.asMap]] - to easily convert from a `JsonObject` to a Scala `Map`
-  - [[io.vertx.lang.scala.json.package.asList]] - to easily convert from  a `JsonArray` to a Scala `List`
+  - [[io.vertx.lang.scala.json.package.asMap]] - to recursively convert from a `JsonObject` to a Scala `Map`
+  - [[io.vertx.lang.scala.json.package.asList]] - to recursively convert from  a `JsonArray` to a Scala `List`
 
 # Builders & Interpolators
 

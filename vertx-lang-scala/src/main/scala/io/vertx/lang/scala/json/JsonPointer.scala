@@ -2,7 +2,7 @@ package io.vertx.lang.scala.json
 
 import java.net.URI
 
-type JJsonPointer = io.vertx.core.json.pointer.JsonPointer
+private type JJsonPointer = io.vertx.core.json.pointer.JsonPointer
 
 final case class JsonPointer(private val internal: JJsonPointer):
 

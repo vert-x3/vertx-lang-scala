@@ -36,24 +36,41 @@ package object json:
   extension (internal: JsonObject)
 
     /**
-     * Get the underlying Map as `mutable.Map`. This map may contain
-     * values that are not the types returned by the JsonObject and with
-     * an unpredictable representation of the value, e.g you might get a
-     * JSON object as a `JsonObject` or as a `Map`.
+     * Get the underlying Map as an immutable `Map`. Unlike
+     * Vert.x core's [[io.vertx.core.json.JsonObject.getMap]], this method guarantees
+     * to convert every contained [[JsonObject]] or [[JsonArray]] into a [[Map]] or [[List]],
+     * respectively. That's done, however, at the cost of one pass through each contained
+     * [[JsonObject]] or [[JsonArray]].
      */
-    def asMap: mutable.Map[String, AnyRef] = internal.getMap.asScala
+    def asMap: Map[String, AnyRef] = Map.from(
+      for
+        (key, value) <- internal.getMap.asScala
+        mappedValue = value match
+          case j: JsonObject => j.asMap
+          case a: JsonArray  => a.asList
+          case _             => value
+      yield (key, mappedValue))
   end extension
 
 
   extension (internal: JsonArray)
 
     /**
-     * Get the underlying List as `mutable.ListBuffer`. This list may contain
-     * values that are not the types returned by the JsonArray and with an
-     * unpredictable representation of the value, e.g you might get a JSON object
-     * as a JsonObject or as a Map.
+     * Get the underlying List as an immutable [[List]]. Unlike
+     * Vert.x core's [[io.vertx.core.json.JsonArray.getList]], this method guarantees
+     * to convert every contained [[JsonObject]] or [[JsonArray]] into a [[Map]] or [[List]],
+     * respectively. That's done, however, at the cost of one pass through each contained
+     * [[JsonObject]] or [[JsonArray]].
      */
-    def asList: List[Any] = internal.getList.asScala.toList
+    def asList: List[Any] = List.from(
+      for
+        value <- internal.getList.asScala
+        mappedValue = value match
+          case j: JsonObject => j.asMap
+          case a: JsonArray  => a.asList
+          case _             => value
+      yield mappedValue
+    )
   end extension
 
 

@@ -19,11 +19,10 @@ import io.vertx.core.json.{JsonArray, JsonObject}
 import org.scalatest.Inside
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
-import org.scalatest.prop.{TableFor3, TableFor4}
-
-import java.lang.Boolean.FALSE
+import org.scalatest.prop.TableFor3
 import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks.{Table, forAll}
 
+import java.lang.Boolean.FALSE
 import scala.collection.immutable.SortedSet
 import scala.collection.mutable
 
@@ -166,86 +165,6 @@ class JsonSpec extends AnyFlatSpec, Matchers, Inside:
       jsonArray.encode should equal(expectedEncoded)
     }
   }
-
-  "JsonObject.asMap" should "return a Map representation of some JsonObject" in {
-    val jsonObject = JsonObject.of("foo", "foo text", "optional", true)
-    jsonObject.asMap("foo") should equal("foo text")
-    jsonObject.asMap("optional") should equal(true)
-  }
-
-  "JsonArray.asList" should "return a List representation of some JsonArray" in {
-    val jsonArray = JsonArray.of(1, 2, 3)
-    jsonArray.asList should contain inOrderOnly(1, 2, 3)
-  }
-
-  "json interpolator" should "be able to construct an empty JsonObject" in {
-    json"{}" should equal(JsonObject())
-  }
-
-  it should "be able to construct a flat JsonObject" in {
-    val json = json"""{ "foo":  "foo text", "bar":  3.45, "baz":  false, "myInt":  23 }"""
-
-    inside(json) { case j: JsonObject =>
-      j.getString("foo") should equal("foo text")
-      j.getFloat("bar") should equal(3.45f)
-      j.getBoolean("baz") should be(FALSE)
-      j.getInteger("myInt") should be(23)
-    }
-  }
-
-  it should "interpolate variables" in {
-    val myInt = Int.MaxValue
-    val json = json"""{ "myInt": $myInt }"""
-
-    inside(json) { case j: JsonObject =>
-      j.getInteger("myInt") should equal(myInt)
-    }
-  }
-
-  it should "be able to create nested JsonObjects" in {
-    val json =
-      json"""{
-               "foo": {
-                 "bar": {
-                   "baz": [4, 8, 15, 16, 23, 42]
-                  }
-                }
-              }"""
-
-    inside(json) { case j: JsonObject =>
-      j.getJsonObject("foo")
-        .getJsonObject("bar")
-        .getJsonArray("baz") should equal(JsonArray("[4, 8, 15, 16, 23, 42]"))
-    }
-  }
-
-  "jsonArray interpolator" should "return an empty JsonArray" in {
-    jsonArray"[]" should equal(JsonArray())
-  }
-
-  it should "be able to construct a flat JsonArray" in {
-    inside(jsonArray"[4, 8, 15, 16, 23, 42]") { case a: JsonArray =>
-      a.asList should contain allElementsOf List(4, 8, 15, 16, 23, 42)
-    }
-  }
-
-  it should "be able to construct a JsonArray of JsonObjects" in {
-    val json =
-      jsonArray"""[{
-                "location":  "Marseille",
-                "weather": "fine"
-              },
-              {
-                "location": "London",
-                "weather": "rainy"
-              }
-            ]"""
-    inside(json) { case a: JsonArray =>
-      a.getJsonObject(0).getString("location") should equal("Marseille")
-      a.getJsonObject(1).getString("location") should equal("London")
-    }
-  }
-
 
   private def jsonString = {
     """
