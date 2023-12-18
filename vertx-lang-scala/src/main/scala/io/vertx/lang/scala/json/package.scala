@@ -19,12 +19,18 @@ import scala.collection.*
 import scala.jdk.CollectionConverters.*
 
 /**
- * @author swilliams
- * @author Edgar Chan
+ * Scala extensions for more idiomatic handling of [[io.vertx.core.json.JsonObject]]
+ * and [[io.vertx.core.json.JsonArray]].
  */
 package object json:
 
+  /**
+   * Type alias which provides extensions for idiomatic Scala, like [[asList]].
+   */
   type JsonArray = io.vertx.core.json.JsonArray
+  /**
+   * Type alias which provides extensions for idiomatic Scala, like [[asMap]].
+   */
   type JsonObject = io.vertx.core.json.JsonObject
 
   extension (internal: JsonObject)
@@ -33,9 +39,7 @@ package object json:
      * Get the underlying Map as `mutable.Map`. This map may contain
      * values that are not the types returned by the JsonObject and with
      * an unpredictable representation of the value, e.g you might get a
-     * JSON object as a [[io.vertx.core.json.JsonObject]] or as a Map.
-     *
-     * @return the underlying Map
+     * JSON object as a `JsonObject` or as a `Map`.
      */
     def asMap: mutable.Map[String, AnyRef] = internal.getMap.asScala
   end extension
@@ -44,13 +48,10 @@ package object json:
   extension (internal: JsonArray)
 
     /**
-     * Get the underlying List as `mutable.ListBuffer`.
-     *
-     * This list may contain values that are not the types returned by the
-     * JsonArray and with an unpredictable representation of the value, e.g
-     * you might get a JSON object as a JsonObject or as a Map.
-     *
-     * @return the underlying List
+     * Get the underlying List as `mutable.ListBuffer`. This list may contain
+     * values that are not the types returned by the JsonArray and with an
+     * unpredictable representation of the value, e.g you might get a JSON object
+     * as a JsonObject or as a Map.
      */
     def asList: List[Any] = internal.getList.asScala.toList
   end extension
@@ -65,6 +66,9 @@ package object json:
       new JsonObject(interpolated(sc.parts, args))
     }
 
+    /**
+     * Interpolates the given String as a [[JsonArray]].
+     */
     def jsonArray(args: Any*): JsonArray = {
       new JsonArray(interpolated(sc.parts, args))
     }

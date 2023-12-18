@@ -24,7 +24,8 @@ Compile / doc / scalacOptions ++= Seq(
   "-Ygenerate-inkuire",
   "-project-version", version.value,
   "-project-logo", "src/main/markdown/_assets/images/vertx-logo.png",
-  "-project-footer", s"© $currentYear Eclipse Vert.x™"
+  "-project-footer", s"© $currentYear Eclipse Vert.x™",
+  "-project-url", "https://github.com/vert-x3/vertx-lang-scala",
 )
 
 lazy val root = project

@@ -15,16 +15,13 @@
  */
 package io.vertx.lang.scala.json
 
-import io.vertx.core.json.{JsonArray, JsonObject}
+import io.vertx.lang.scala.json.{JsonArray, JsonObject}
 
 import java.util
 import scala.jdk.CollectionConverters.ListHasAsScala
 
 /**
- * Helper to construct JsonObjects and JsonArrays.
- *
- * @author Edgar Chan
- * @author <a href="http://www.campudus.com/">Joern Bernhardt</a>
+ * Builder for constructing [[JsonObject JsonObjects]] and [[JsonArray JsonArrays]].
  */
 object Json:
 
@@ -46,39 +43,26 @@ object Json:
 
   /**
    * Creates an empty JsonArray.
-   *
-   * @return An empty JsonArray.
    */
   def arr(): JsonArray = new JsonArray()
 
   /**
    * Creates an empty JsonObject.
-   *
-   * @return An empty JsonObject.
    */
   def obj(): JsonObject = new JsonObject()
 
   /**
-   * Constructs a JsonObject from a fieldName -> value pairs.
-   *
-   * @param map The scala map that will be converted to a JsonObject
-   * @return
+   * Constructs a JsonObject from a [[Map Scala Map]].
    */
-  def obj(map: Map[String, Any]): JsonObject = obj(map.toSeq: _*)
+  def obj(map: collection.Map[String, Any]): JsonObject = obj(map.toSeq *)
 
   /**
-   * Constructs a JsonObject from a fieldName -> value pairs.
-   *
-   * @param map The scala map that will be converted to a JsonObject
-   * @return
+   * Constructs a JsonObject from a [[java.util.Map Java Map]].
    */
   def obj(map: util.Map[String, Object]): JsonObject = new JsonObject(map)
 
   /**
-   * Constructs a JsonObject from a fieldName -> value pairs.
-   *
-   * @param fields The fieldName -> value pairs
-   * @return A JsonObject containing the name -> value pairs.
+   * Constructs a JsonObject from Scala Tuples.
    */
   def obj(fields: (String, Any)*): JsonObject = {
     val o = new JsonObject()
@@ -98,22 +82,24 @@ object Json:
    */
   def arr(fields: Any*): JsonArray = {
     if fields.length == 1 then fields(0) match
-      case seq: Seq[_]     => listToJsArr(seq)
-      case array: Array[_] => listToJsArr(array.toIndexedSeq)
-      case value           => arr().add(value)
+      case array: Array[_]       => listToJsArr(array.toIndexedSeq)
+      case iterable: Iterable[_] => listToJsArr(iterable)
+      case value                 => arr().add(value)
     else
       val a = new JsonArray()
       fields.foreach {
-        case array: Array[_] => a.add(arr(array))
-        case seq: Seq[_]     => a.add(arr(seq))
-        case f               => a.add(f)
+        case array: Array[_]                => a.add(arr(array))
+        case map: collection.Map[String, _] => a.add(obj(map))
+        case iterable: Iterable[_]          => a.add(arr(iterable))
+        case f                              => a.add(f)
       }
       a
   }
 
-  private def listToJsArr(a: Seq[_]) = Json.arr(a: _*)
+  private def listToJsArr(a: Iterable[_]) = Json.arr(a.toSeq *)
 
   extension (internal: JsonArray)
+
     /**
      * @deprecated see extension for JsonArray in [[io.vertx.lang.scala.package]]
      */

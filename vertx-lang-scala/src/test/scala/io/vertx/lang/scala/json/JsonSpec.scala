@@ -16,11 +16,16 @@
 package io.vertx.lang.scala.json
 
 import io.vertx.core.json.{JsonArray, JsonObject}
-import java.lang.Boolean.FALSE
 import org.scalatest.Inside
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
+import org.scalatest.prop.{TableFor3, TableFor4}
 
+import java.lang.Boolean.FALSE
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks.{Table, forAll}
+
+import scala.collection.immutable.SortedSet
+import scala.collection.mutable
 
 class JsonSpec extends AnyFlatSpec, Matchers, Inside:
 
@@ -29,7 +34,6 @@ class JsonSpec extends AnyFlatSpec, Matchers, Inside:
     jsonObject.isEmpty should be(true)
     jsonObject.encode should equal("{}")
   }
-
 
   it should "construct a flat JsonObject" in {
     val enc = """{"foo":"foo text","bar":3.45,"baz":false,"myInt":2147483647}"""
@@ -91,7 +95,6 @@ class JsonSpec extends AnyFlatSpec, Matchers, Inside:
     obj.encode() should equal(jsonString)
   }
 
-
   it should "convert nested Array to JsonArray" in {
     val obj = Json.obj(
       "webappconf" -> Json.obj(
@@ -112,7 +115,6 @@ class JsonSpec extends AnyFlatSpec, Matchers, Inside:
     obj.getJsonObject("webappconf").getJsonArray("some_list").size should be(3)
     obj.encode() should equal(jsonString)
   }
-
 
   it should "convert mixed nested Arrays/Lists to JsonArray" in {
     val obj = Json.obj(
@@ -136,6 +138,10 @@ class JsonSpec extends AnyFlatSpec, Matchers, Inside:
     obj.encode() should equal(jsonString)
   }
 
+  it should "construct a JsonObject from a mutable Map" in {
+    val jsonObject = Json.obj(mutable.Map("answer" -> 42))
+    jsonObject.encode should equal("""{"answer":42}""")
+  }
 
   "Json.arr()" should "construct an empty JsonArray" in {
     val jsonArray = Json.arr()
@@ -143,41 +149,34 @@ class JsonSpec extends AnyFlatSpec, Matchers, Inside:
     jsonArray.encode() should equal("[]")
   }
 
-  it should "construct a JsonArray of discrete values" in {
-    val enc = """["f",3,"b",7,35.4,true]"""
-    val array = Json.arr("f", 3, "b", 7, 35.4f, true)
-
-    array.size should be(6)
-    array.encode should equal(enc)
+  val iterables: TableFor3[String, JsonArray, String] = Table(
+    ("name for test", "iterable generator", "expected encoded JSON"),
+    ("discrete values", Json.arr("f", 3, "b", 7, 35.4f, true), """["f",3,"b",7,35.4,true]"""),
+    ("a Seq", Json.arr(Seq(1, 2, 3, 4, 5, 6, 7)), "[1,2,3,4,5,6,7]"),
+    ("a Set", Json.arr(SortedSet(1, 2, 3, 4, 5, 6, 7, 8, 9)), "[1,2,3,4,5,6,7,8,9]"),
+    ("a mutable Seq", Json.arr(mutable.Seq(1, 2, 3, 4, 5)), "[1,2,3,4,5]"),
+    ("a mutable Set", Json.arr(mutable.SortedSet(1, 2, 3)), "[1,2,3]"),
+    ("a Seq containing Seqs", Json.arr(Seq(1, 2, Seq(3, 4), Seq(5, 6))), "[1,2,[3,4],[5,6]]"),
+    ("a mutable Seq containing a mutable Seq", Json.arr(mutable.Seq(1, mutable.Seq(2, 3))), "[1,[2,3]]"),
+    ("a mutable Set containing a mutable Set", Json.arr(mutable.Set(1, mutable.Set(2, 3))), "[1,[2,3]]"),
+    ("values containing a Map", Json.arr(1, 2, 3, Map("k" -> 4)), """[1,2,3,{"k":4}]""")
+  )
+  forAll(iterables) { (name, jsonArray, expectedEncoded) =>
+    it should s"construct a JsonArray from $name" in {
+      jsonArray.encode should equal(expectedEncoded)
+    }
   }
 
-  it should "construct a JsonArray from a List" in {
-    val enc = s"""["A","B","C","D","E","F","G"]"""
-    val list = List("A", "B", "C", "D", "E", "F", "G")
-    val jsonArray = Json.arr(list)
-
-    jsonArray.size should be(7)
-    jsonArray.encode should equal(enc)
-  }
-
-  it should "construct a JsonArray from a Seq" in {
-    val enc = """[1,2,3,4,5,6,7]"""
-    val seq = Seq(1, 2, 3, 4, 5, 6, 7)
-    val jsonArray = Json.arr(seq)
-
-    jsonArray.size should be(7)
-    jsonArray.encode should equal(enc)
-  }
-
-  "JsonObject.asMap" should "return a Map representation of some JsonObject" in :
+  "JsonObject.asMap" should "return a Map representation of some JsonObject" in {
     val jsonObject = JsonObject.of("foo", "foo text", "optional", true)
     jsonObject.asMap("foo") should equal("foo text")
     jsonObject.asMap("optional") should equal(true)
+  }
 
-
-  "JsonArray.asList" should "return a List representation of some JsonArray" in :
+  "JsonArray.asList" should "return a List representation of some JsonArray" in {
     val jsonArray = JsonArray.of(1, 2, 3)
     jsonArray.asList should contain inOrderOnly(1, 2, 3)
+  }
 
   "json interpolator" should "be able to construct an empty JsonObject" in {
     json"{}" should equal(JsonObject())
