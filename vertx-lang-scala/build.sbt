@@ -1,6 +1,6 @@
 ThisBuild / scalaVersion := "3.3.1"
 ThisBuild / resolvers += Resolver.mavenLocal
-ThisBuild / version := "4.5.0"
+ThisBuild / version := "4.5.1"
 
 lazy val socialLinks = Map(
   "github"        -> "https://github.com/vert-x3/vertx-lang-scala",
@@ -11,7 +11,7 @@ lazy val socialLinks = Map(
 )
 
 Compile / doc / scalacOptions ++= Seq(
-  "-siteroot", "src/main/markdown", 
+  "-siteroot", "src/main/markdown",
   "-snippet-compiler:compile",
   "-social-links:" + socialLinks.map { case (site, link) => s"$site::$link" }.mkString(","),
   "-scastie-configuration", s"""
