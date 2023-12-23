@@ -6,19 +6,20 @@
 
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>vertx-lang-scala3-parent</artifactId>
+    <artifactId>vertx-lang-scala-parent</artifactId>
     <version>4.5.1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>vertx-lang-scala3-test</artifactId>
+  <!-- Scala convention is to append an underscore and the major Scala version -->
+  <artifactId>vertx-lang-scala-test_3</artifactId>
 
   <name>Vert.x Scala Testing Support</name>
 
   <dependencies>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-scala3</artifactId>
+      <artifactId>vertx-lang-scala_3</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
