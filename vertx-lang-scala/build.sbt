@@ -16,7 +16,7 @@ Compile / doc / scalacOptions ++= Seq(
   "-social-links:" + socialLinks.map { case (site, link) => s"$site::$link" }.mkString(","),
   "-scastie-configuration", s"""
     |libraryDependencies += "io.vertx" % "vertx-web" % ${version.value},
-    |libraryDependencies += "io.vertx" % "vertx-lang-scala3" % ${version.value},
+    |libraryDependencies += "io.vertx" %% "vertx-lang-scala" % ${version.value},
   """.stripMargin,
   "-project-version", version.value,
   "-project-logo", "src/main/markdown/_assets/images/vertx-logo.png",
@@ -29,8 +29,8 @@ lazy val root = project
                   name := "Vert.x for Scala",
                   libraryDependencies ++= Seq(
                     "io.vertx" % "vertx-web" % version.value,
-                    "io.vertx" % "vertx-lang-scala3" % version.value,
-                    "io.vertx" % "vertx-lang-scala3-test" % version.value,
+                    "io.vertx" %% "vertx-lang-scala" % version.value,
+                    "io.vertx" %% "vertx-lang-scala-test" % version.value,
                     "org.scalatest" %% "scalatest" % "3.2.17",
                   ),
                   scalacOptions ++= Seq("-deprecation", "-feature"),

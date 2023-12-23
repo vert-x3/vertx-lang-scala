@@ -6,12 +6,12 @@
 
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>vertx-lang-scala3-parent</artifactId>
-    <version>4.3.3</version>
+    <artifactId>vertx-lang-scala-parent</artifactId>
+    <version>4.5.1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>vertx-lang-scala3-on-the-fly</artifactId>
+  <artifactId>vertx-lang-scala-on-the-fly</artifactId>
   <name>Scala on the fly compilation</name>
 
   <dependencies>
