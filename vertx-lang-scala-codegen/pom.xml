@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>vertx-lang-scala3-parent</artifactId>
+    <artifactId>vertx-lang-scala-parent</artifactId>
     <version>4.5.2-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>

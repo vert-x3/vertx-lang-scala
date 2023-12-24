@@ -12,14 +12,14 @@ build descriptor:
 
 ```sbt
 libraryDependencies += "io.vertx" % "vertx-core" % "{{projectVersion}}"
-libraryDependencies += "io.vertx" % "vertx-lang-scala3" % "{{projectVersion}}"
+libraryDependencies += "io.vertx" %% "vertx-lang-scala" % "{{projectVersion}}"
 ```
 
 ## Gradle
 
 ```kotlin title="build.gradle"
 implementation "io.vertx:vertx-core:{{projectVersion}}"
-implementation "io.vertx:vertx-lang-scala3:{{projectVersion}}"
+implementation "io.vertx:vertx-lang-scala_3:{{projectVersion}}"
 ```
 
 ## Maven
@@ -32,7 +32,7 @@ implementation "io.vertx:vertx-lang-scala3:{{projectVersion}}"
 </dependency>
 <dependency>
   <groupId>io.vertx</groupId>
-  <artifactId>vertx-lang-scala3</artifactId>
+  <artifactId>vertx-lang-scala_3</artifactId>
   <version>{{projectVersion}}</version>
 </dependency>
 ```
@@ -40,7 +40,7 @@ implementation "io.vertx:vertx-lang-scala3:{{projectVersion}}"
 
 ## What is in the package?
 
-As of now, Vert.x for Scala provides 
+As of now, Vert.x for Scala provides
 
   - implicit conversions between Vert.x Futures/Promises and Scala Futures/Promises
   - a base class for Verticle implementations, [[io.vertx.lang.scala.ScalaVerticle]]

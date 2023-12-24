@@ -9,7 +9,7 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>vertx-lang-scala3-parent</artifactId>
+  <artifactId>vertx-lang-scala-parent</artifactId>
   <version>4.5.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <inceptionYear>2016</inceptionYear>

@@ -7,13 +7,13 @@ Vert.x for Scala also brings a test support artifact, which helps to write [Scal
 
 # Installation
 
-To install, add the `vertx-lang-scala3-test` artifact to your build descriptor. This module does not pin to a specific version of ScalaTest. That's why we additionally need to specify the ScalaTest version we desire:
+To install, add the `vertx-lang-scala-test_3` artifact to your build descriptor. This module does not pin to a specific version of ScalaTest. That's why we additionally need to specify the ScalaTest version we desire:
 
 ## sbt
 
 ```sbt
 libraryDependencies ++= Seq(
-  "io.vertx" % "vertx-lang-scala3-test" % "{{projectVersion}}" % Test,
+  "io.vertx" %% "vertx-lang-scala-test" % "{{projectVersion}}" % Test,
   "org.scalatest" %% "scalatest" % Version.scalaTest % Test,
 )
 ```
@@ -21,7 +21,7 @@ libraryDependencies ++= Seq(
 ## Gradle
 
 ```groovy title="build.gradle"
-testImplementation "io.vertx:vertx-lang-scala3-test:{{projectVersion}}"
+testImplementation "io.vertx:vertx-lang-scala-test_3:{{projectVersion}}"
 testImplementation "org.scalatest:scalatest_3:$scalatestVersion"
 ```
 
@@ -30,7 +30,7 @@ testImplementation "org.scalatest:scalatest_3:$scalatestVersion"
 ```xml title="pom.xml"
 <dependency>
   <groupId>io.vertx</groupId>
-  <artifactId>vertx-lang-scala3-test</artifactId>
+  <artifactId>vertx-lang-scala-test_3</artifactId>
   <version>{{projectVersion}}</version>
   <scope>test</scope>
 </dependency>
@@ -67,7 +67,7 @@ final class MyWebVerticle extends ScalaVerticle:
       .mapEmpty[Unit]()
 ```
 
-Using `vertx-lang-scala3-test`, we can write a ScalaTest spec like this:
+Using `vertx-lang-scala-test`, we can write a ScalaTest spec like this:
 
 ```scala sc:nocompile
 //{
@@ -93,4 +93,4 @@ final class MyWebVerticleSpec extends VerticleTesting[MyWebVerticle], Matchers:
   }
 ```
 
-That's it, `vertx-lang-scala3-test` takes care of deploying `MyVerticle` to a `Vertx` instance and makes it ready for testing.
+That's it, `vertx-lang-scala-test` takes care of deploying `MyVerticle` to a `Vertx` instance and makes it ready for testing.
