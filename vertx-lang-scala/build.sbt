@@ -2,7 +2,7 @@ import java.time.LocalDate
 
 ThisBuild / scalaVersion := "3.3.1"
 ThisBuild / resolvers += Resolver.mavenLocal
-ThisBuild / version := "4.5.1"
+ThisBuild / version := "4.5.2-SNAPSHOT"
 
 lazy val currentYear = LocalDate.now().getYear()
 lazy val socialLinks = Map(
