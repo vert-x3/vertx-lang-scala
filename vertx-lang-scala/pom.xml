@@ -17,12 +17,10 @@
   <name>Vert.x Scala Language Support</name>
 
   <properties>
-    <log4j2.version>2.17.1</log4j2.version>
+    <micrometer.version>1.12.1</micrometer.version>
   </properties>
 
-
   <dependencies>
-
     <!-- What we need at runtime -->
     <dependency>
       <groupId>io.vertx</groupId>
@@ -393,7 +391,6 @@
           <includeGroupIds>io.vertx</includeGroupIds>
           <includeArtifactIds>
             vertx-core,
-            vertx-unit,
             vertx-bridge-common,
             vertx-mongo-client,
             vertx-cassandra-client,
@@ -486,7 +483,7 @@
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
-        <version>4.5-jdk8</version>
+        <version>5.0</version>
         <configuration>
           <systemProperties>
             <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
@@ -519,16 +516,6 @@
             <version>${project.version}</version>
           </dependency>
           <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.1</version>
-          </dependency>
-          <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.7</version>
-          </dependency>
-          <dependency>
             <groupId>com.netflix.hystrix</groupId>
             <artifactId>hystrix-core</artifactId>
             <version>1.5.2</version>
@@ -542,52 +529,37 @@
           <dependency>
             <groupId>io.swagger.parser.v3</groupId>
             <artifactId>swagger-parser-core</artifactId>
-            <version>2.1.12</version>
-          </dependency>
-          <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <version>2.1.19</version>
           </dependency>
           <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>${log4j2.version}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j2.version}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.21</version>
+            <version>2.22.0</version>
           </dependency>
 
           <!-- Transitive dependencies declared as optional in other modules, and needed for instance in docgen -->
           <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
-            <version>1.0.0</version>
+            <version>${micrometer.version}</version>
             <optional>true</optional>
           </dependency>
           <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-influx</artifactId>
-            <version>1.0.0</version>
+            <version>${micrometer.version}</version>
             <optional>true</optional>
           </dependency>
           <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-jmx</artifactId>
-            <version>1.0.0</version>
+            <version>${micrometer.version}</version>
             <optional>true</optional>
           </dependency>
           <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-graphite</artifactId>
-            <version>1.0.0</version>
+            <version>${micrometer.version}</version>
             <optional>true</optional>
           </dependency>
         </dependencies>
