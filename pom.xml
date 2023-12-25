@@ -32,7 +32,6 @@
   <properties>
     <scala.version>3.3.1</scala.version>
     <stack.version>${project.version}</stack.version>
-    <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
   </properties>
   <dependencyManagement>
     <dependencies>
@@ -83,7 +82,8 @@
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.11.0</version>
           <configuration>
-            <target>8</target>
+            <source>11</source>
+            <target>11</target>
           </configuration>
         </plugin>
         <plugin>
@@ -92,7 +92,7 @@
           <version>4.8.1</version>
           <configuration>
             <args>
-              <arg>java-output-version 8</arg>
+              <arg>java-output-version 11</arg>
               <arg>-feature</arg>
               <arg>-deprecation</arg>
             </args>

@@ -498,6 +498,8 @@
             </goals>
             <phase>generate-sources</phase>
             <configuration>
+              <fork>true</fork>
+              <compilerArguments>-source 11 -target 11</compilerArguments>
               <processors>
                 <processor>io.vertx.codegen.CodeGenProcessor</processor>
               </processors>
