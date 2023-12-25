@@ -71,7 +71,7 @@
       <dependency>
         <groupId>org.scalatest</groupId>
         <artifactId>scalatest_3</artifactId>
-        <version>3.2.17</version>
+        <version>3.3.0-SNAP4</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
