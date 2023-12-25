@@ -2,7 +2,6 @@ package io.vertx.lang.scala.codegen.gen;
 
 import io.vertx.codegen.Helper;
 import io.vertx.codegen.MethodInfo;
-import io.vertx.codegen.ParamInfo;
 import io.vertx.codegen.type.ClassKind;
 import io.vertx.codegen.type.ParameterizedTypeInfo;
 import io.vertx.codegen.type.TypeInfo;
@@ -58,11 +57,10 @@ public class Imports {
         importForType(Helper.getPackageName(type.getName()), imported, ret);
       }
     }
-    for (MethodInfo method : methods) {
-      for (ParamInfo param : method.getParams()) {
-        importForType(Helper.getPackageName(type.getName()), param.getType(), ret);
-      }
-    }
+    methods.stream()
+      .filter(methodInfo -> !methodInfo.isDeprecated())
+      .flatMap(methodInfo -> methodInfo.getParams().stream())
+      .forEach(paramInfo -> importForType(Helper.getPackageName(type.getName()), paramInfo.getType(), ret));
     return ret;
   }
 }

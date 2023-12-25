@@ -1,8 +1,12 @@
 package io.vertx.lang.scala.codegen;
 
-import io.vertx.codegen.*;
-import io.vertx.codegen.type.*;
+import io.vertx.codegen.Generator;
+import io.vertx.codegen.MethodInfo;
+import io.vertx.codegen.Model;
+import io.vertx.codegen.TypeParamInfo;
 import io.vertx.codegen.doc.Doc;
+import io.vertx.codegen.type.ClassTypeInfo;
+import io.vertx.codegen.type.TypeInfo;
 import io.vertx.lang.scala.codegen.gen.Imports;
 import io.vertx.lang.scala.codegen.gen.Templates;
 
@@ -21,17 +25,15 @@ public class ClassCodeGenerator extends Generator<Model> {
   public Map<String, Set<String>> fileToImports = new HashMap<>();
 
   public static final List<String> ignoredPackages;
+
   static {
     List<String> temp = new ArrayList<>();
     temp.add("io.vertx.redis");
     temp.add("io.vertx.ext.consul.token");
     ignoredPackages = Collections.unmodifiableList(temp);
   }
-  public static final List<String> ignoreClassname;
-  static {
-    List<String> temp = new ArrayList<>();
-    ignoreClassname = Collections.unmodifiableList(temp);
-  }
+
+  public static final List<String> ignoreClassname = Collections.unmodifiableList(new ArrayList<>());
 
   public ClassCodeGenerator() {
     LogManager.getLogManager().reset();
@@ -45,7 +47,10 @@ public class ClassCodeGenerator extends Generator<Model> {
 
   @Override
   public String filename(Model model) {
-    if(!((TypeInfo)model.getVars().get("type")).getName().equals("io.vertx.core.buffer.Buffer") && !(model.getFqn().contains(".impl.") || model.getFqn().endsWith(".impl"))) {
+    if (!((TypeInfo) model.getVars().get("type")).getName().equals("io.vertx.core.buffer.Buffer")
+      && !(model.getFqn().contains(".impl.") || model.getFqn().endsWith(".impl"))
+      && model.getAnnotations().stream().noneMatch(annotation -> annotation.getSimpleName().equals("Deprecated"))) {
+
       String fileName = filenameForModel(model);
       fileToImports.put(fileName, new HashSet<>());
 
@@ -67,7 +72,7 @@ public class ClassCodeGenerator extends Generator<Model> {
   public String render(Model model, int index, int size, Map<String, Object> session) {
     Map<String, Object> modelVars = model.getVars();
     ClassTypeInfo type = ((ClassTypeInfo) modelVars.get("type"));
-    if(!ignoredPackages.contains(type.getPackageName()) && !ignoreClassname.contains(type.getSimpleName())) {
+    if (!ignoredPackages.contains(type.getPackageName()) && !ignoreClassname.contains(type.getSimpleName())) {
       try {
         return Templates.renderPackageObject(
           model,
@@ -81,9 +86,8 @@ public class ClassCodeGenerator extends Generator<Model> {
           (List<MethodInfo>) modelVars.get("instanceMethods"),
           (List<MethodInfo>) modelVars.get("staticMethods"),
           (Collection<TypeParamInfo>) modelVars.get("typeParams")
-          );
-      }
-      catch (IOException ioe) {
+        );
+      } catch (IOException ioe) {
         throw new RuntimeException(ioe);
       }
     }
@@ -96,14 +100,14 @@ public class ClassCodeGenerator extends Generator<Model> {
     //Change
     //import io.vertx.scala.ext.web.common.template.TemplateEngine
 
-    if(type.getName().equals("io.vertx.ext.web.templ.TemplateEngine")) {
+    if (type.getName().equals("io.vertx.ext.web.templ.TemplateEngine")) {
 
       imps.remove("io.vertx.scala.ext.web.common.template.TemplateEngine");
       imps.add("io.vertx.scala.ext.web.common.template.{TemplateEngine => STemplateEngine}");
       imps.remove("io.vertx.ext.web.common.template.{TemplateEngine => JTemplateEngine}");
     }
 
-    if(type.getName().equals("io.vertx.core.Vertx")) {
+    if (type.getName().equals("io.vertx.core.Vertx")) {
       imps.add("io.vertx.lang.scala.ScalaVerticle");
     }
 

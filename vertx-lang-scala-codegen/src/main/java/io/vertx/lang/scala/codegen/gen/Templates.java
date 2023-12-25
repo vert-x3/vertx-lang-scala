@@ -18,7 +18,7 @@ import static io.vertx.codegen.type.ClassKind.*;
 
 public class Templates {
 
-  private static final Map<String, String> javaBasicToWrapperTyper = new HashMap<String, String>() {{
+  private static final Map<String, String> javaBasicToWrapperTyper = new HashMap<>() {{
     put("byte", "java.lang.Byte");
     put("java.lang.Byte", "java.lang.Byte");
     put("short", "java.lang.Short");
@@ -39,7 +39,7 @@ public class Templates {
     put("java.lang.String", "java.lang.String");
   }};
 
-  private static final Map<String, String> javaBasicToScalaType = new HashMap<String, String>() {{
+  private static final Map<String, String> javaBasicToScalaType = new HashMap<>() {{
     put("byte", "Byte");
     put("java.lang.Byte", "Byte");
     put("short", "Short");
@@ -60,7 +60,7 @@ public class Templates {
     put("java.lang.String", "String");
   }};
 
-  private static final Map<ClassKind, Function<TypeInfo, String>> toScalaType = new HashMap<ClassKind, Function<TypeInfo, String>>() {{
+  private static final Map<ClassKind, Function<TypeInfo, String>> toScalaType = new HashMap<>() {{
     put(VOID, t -> "Void");
     put(OBJECT, t -> t.isVariable() ? t.getName() : "AnyRef");
     put(THROWABLE, t -> "Throwable");
@@ -102,7 +102,7 @@ public class Templates {
     });
   }};
 
-  private static final Map<ClassKind, BiFunction<String, TypeInfo, String>> toJavaWithConversionFromScala = new HashMap<ClassKind, BiFunction<String, TypeInfo, String>>() {{
+  private static final Map<ClassKind, BiFunction<String, TypeInfo, String>> toJavaWithConversionFromScala = new HashMap<>() {{
     put(VOID, (name, type) -> name);
     put(STRING, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
     put(PRIMITIVE, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
@@ -137,7 +137,7 @@ public class Templates {
     });
   }};
 
-  private static final Map<ClassKind, Function<TypeInfo, String>> toJavaString = new HashMap<ClassKind, Function<TypeInfo, String>>() {{
+  private static final Map<ClassKind, Function<TypeInfo, String>> toJavaString = new HashMap<>() {{
     put(PRIMITIVE, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
     put(BOXED_PRIMITIVE, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
     put(STRING, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
@@ -464,8 +464,7 @@ public class Templates {
     String constructor = "";
 
     if ((model.hasEmptyConstructor() || model.hasJsonConstructor())
-      && model.getPropertyMap().entrySet().stream().anyMatch(entry -> entry.getValue().isSetter())
-      && model.getPropertyMap().values().stream().anyMatch(pi -> !pi.isDeprecated())) {
+      && model.getPropertyMap().values().stream().anyMatch(pi -> pi.isSetter() && !pi.isDeprecated())) {
       if (model.hasJsonConstructor()) {
         constructor =
           applyDataObject(model, type) + " = {\n" +
@@ -519,7 +518,7 @@ public class Templates {
         return null;
       })
       .filter(Objects::nonNull)
-      .collect(Collectors.joining(", ")) + "): " + Helper.getSimpleName(type.getName()) + "";
+      .collect(Collectors.joining(", ")) + "): " + Helper.getSimpleName(type.getName());
   }
 
   private static String dataObjectSetters(DataObjectModel model, ClassTypeInfo type) {
@@ -628,7 +627,7 @@ public class Templates {
     }
 
     String body = "";
-    if (model instanceof DataObjectModel) {
+    if (model instanceof DataObjectModel && !((DataObjectModel) model).isDeprecated()) {
       body = renderDataobject((DataObjectModel) model, type.getSimpleName(), type) + "\n";
     } else if (type.getKind() != HANDLER && !futureMethods.isEmpty()) {
       body = renderClass(type, doc, type.getSimpleName(), nullableMethods, futureMethods, basicMethods, nonGenericType, typeParams) + "\n";
