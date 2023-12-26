@@ -18,7 +18,7 @@ import static io.vertx.codegen.type.ClassKind.*;
 
 public class Templates {
 
-  private static final Map<String, String> javaBasicToWrapperTyper = new HashMap<>() {{
+  private static final Map<String, String> javaBasicToWrapperTyper = new HashMap<String, String>() {{
     put("byte", "java.lang.Byte");
     put("java.lang.Byte", "java.lang.Byte");
     put("short", "java.lang.Short");
@@ -39,7 +39,7 @@ public class Templates {
     put("java.lang.String", "java.lang.String");
   }};
 
-  private static final Map<String, String> javaBasicToScalaType = new HashMap<>() {{
+  private static final Map<String, String> javaBasicToScalaType = new HashMap<String, String>() {{
     put("byte", "Byte");
     put("java.lang.Byte", "Byte");
     put("short", "Short");
@@ -60,7 +60,7 @@ public class Templates {
     put("java.lang.String", "String");
   }};
 
-  private static final Map<ClassKind, Function<TypeInfo, String>> toScalaType = new HashMap<>() {{
+  private static final Map<ClassKind, Function<TypeInfo, String>> toScalaType = new HashMap<ClassKind, Function<TypeInfo, String>>() {{
     put(VOID, t -> "Void");
     put(OBJECT, t -> t.isVariable() ? t.getName() : "AnyRef");
     put(THROWABLE, t -> "Throwable");
@@ -102,7 +102,7 @@ public class Templates {
     });
   }};
 
-  private static final Map<ClassKind, BiFunction<String, TypeInfo, String>> toJavaWithConversionFromScala = new HashMap<>() {{
+  private static final Map<ClassKind, BiFunction<String, TypeInfo, String>> toJavaWithConversionFromScala = new HashMap<ClassKind, BiFunction<String, TypeInfo, String>>() {{
     put(VOID, (name, type) -> name);
     put(STRING, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
     put(PRIMITIVE, (name, type) -> name + (type.isNullable() ? ".getOrElse(null)" : ""));
@@ -137,7 +137,7 @@ public class Templates {
     });
   }};
 
-  private static final Map<ClassKind, Function<TypeInfo, String>> toJavaString = new HashMap<>() {{
+  private static final Map<ClassKind, Function<TypeInfo, String>> toJavaString = new HashMap<ClassKind, Function<TypeInfo, String>>() {{
     put(PRIMITIVE, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
     put(BOXED_PRIMITIVE, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
     put(STRING, type -> javaBasicToWrapperTyper.containsKey(type.getName()) ? javaBasicToWrapperTyper.get(type.getName()) : type.getName());
