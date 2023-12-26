@@ -518,7 +518,7 @@
           <dependency>
             <groupId>com.netflix.hystrix</groupId>
             <artifactId>hystrix-core</artifactId>
-            <version>1.5.2</version>
+            <version>1.5.18</version>
             <exclusions>
               <exclusion>
                 <groupId>io.reactivex</groupId>
