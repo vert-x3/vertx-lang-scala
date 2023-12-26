@@ -13,10 +13,12 @@
   <version>4.5.2-SNAPSHOT</version>
   <packaging>pom</packaging>
   <inceptionYear>2016</inceptionYear>
+
   <organization>
     <name>vert.x</name>
     <url>http://vertx.io</url>
   </organization>
+
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -29,11 +31,12 @@
       <distribution>repo</distribution>
     </license>
   </licenses>
+
   <properties>
     <scala.version>3.3.1</scala.version>
     <stack.version>${project.version}</stack.version>
-    <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
   </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -82,9 +85,6 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.11.0</version>
-          <configuration>
-            <target>8</target>
-          </configuration>
         </plugin>
         <plugin>
           <groupId>net.alchim31.maven</groupId>
@@ -92,7 +92,7 @@
           <version>4.8.1</version>
           <configuration>
             <args>
-              <arg>java-output-version 8</arg>
+              <arg>java-output-version 11</arg>
               <arg>-feature</arg>
               <arg>-deprecation</arg>
             </args>

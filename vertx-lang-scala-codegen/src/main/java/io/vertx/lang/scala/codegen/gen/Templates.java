@@ -2,7 +2,10 @@ package io.vertx.lang.scala.codegen.gen;
 
 import io.vertx.codegen.*;
 import io.vertx.codegen.doc.Doc;
-import io.vertx.codegen.type.*;
+import io.vertx.codegen.type.ClassKind;
+import io.vertx.codegen.type.ClassTypeInfo;
+import io.vertx.codegen.type.ParameterizedTypeInfo;
+import io.vertx.codegen.type.TypeInfo;
 
 import java.io.IOException;
 import java.util.*;
@@ -460,7 +463,8 @@ public class Templates {
   private static String renderDataobject(DataObjectModel model, String className, ClassTypeInfo type) {
     String constructor = "";
 
-    if ((model.hasEmptyConstructor() || model.hasJsonConstructor()) && model.getPropertyMap().entrySet().stream().anyMatch(entry -> entry.getValue().isSetter())) {
+    if ((model.hasEmptyConstructor() || model.hasJsonConstructor())
+      && model.getPropertyMap().values().stream().anyMatch(pi -> pi.isSetter() && !pi.isDeprecated())) {
       if (model.hasJsonConstructor()) {
         constructor =
           applyDataObject(model, type) + " = {\n" +
@@ -482,7 +486,6 @@ public class Templates {
     if (model.isConcrete()) {
       return "  type " + className + " = " + getNonGenericType(type.getName()) + "\n" +
         "  object " + Helper.getSimpleName(type.getName()) + " {\n" +
-        (model.hasEmptyConstructor() ? "    def apply() = new " + Helper.getSimpleName(type.getName()) + "()\n" : "") +
         (model.hasJsonConstructor() ? "    def apply(json: JsonObject) = new " + Helper.getSimpleName(type.getName()) + "(json)\n" : "") +
         (model.hasStringConstructor() ? "    def apply(str: String) = new " + Helper.getSimpleName(type.getName()) + "(str)\n" : "") +
         constructor + "\n" +
@@ -493,6 +496,7 @@ public class Templates {
 
   private static String applyDataObject(DataObjectModel model, ClassTypeInfo type) {
     return "    def apply( " + model.getPropertyMap().entrySet().stream()
+      .filter(e -> !e.getValue().isDeprecated())
       .map(entry -> {
         String propertyName = entry.getKey();
         PropertyInfo propertyType = entry.getValue();
@@ -514,11 +518,12 @@ public class Templates {
         return null;
       })
       .filter(Objects::nonNull)
-      .collect(Collectors.joining(", ")) + "): " + Helper.getSimpleName(type.getName()) + "";
+      .collect(Collectors.joining(", ")) + "): " + Helper.getSimpleName(type.getName());
   }
 
   private static String dataObjectSetters(DataObjectModel model, ClassTypeInfo type) {
     return model.getPropertyMap().entrySet().stream()
+      .filter(e -> !e.getValue().isDeprecated())
       .map(entry -> {
         String propertyName = entry.getKey();
         PropertyInfo propertyType = entry.getValue();
@@ -588,7 +593,7 @@ public class Templates {
    * Main entry point which renders the package-object.
    * It takes care of the incremental rendering part.
    */
-  public static String renderPackageObject(Model model, ClassTypeInfo type, int incrementalIndex, int incrementalSize, Set<String> imps, Boolean concrete, Boolean hasEmptyConstructor, Doc doc, List<MethodInfo> instanceMethods, List<MethodInfo> staticMethods, Collection<TypeParamInfo> typeParams) throws IOException{
+  public static String renderPackageObject(Model model, ClassTypeInfo type, int incrementalIndex, int incrementalSize, Set<String> imps, Boolean concrete, Boolean hasEmptyConstructor, Doc doc, List<MethodInfo> instanceMethods, List<MethodInfo> staticMethods, Collection<TypeParamInfo> typeParams) throws IOException {
     String nonGenericType = getNonGenericType(type.toString());
     String translatedPackage = type.getModule().translatePackageName("scala");
     String modulePackage = translatedPackage.substring(0, translatedPackage.lastIndexOf('.'));
@@ -622,7 +627,7 @@ public class Templates {
     }
 
     String body = "";
-    if (model instanceof DataObjectModel) {
+    if (model instanceof DataObjectModel && !((DataObjectModel) model).isDeprecated()) {
       body = renderDataobject((DataObjectModel) model, type.getSimpleName(), type) + "\n";
     } else if (type.getKind() != HANDLER && !futureMethods.isEmpty()) {
       body = renderClass(type, doc, type.getSimpleName(), nullableMethods, futureMethods, basicMethods, nonGenericType, typeParams) + "\n";

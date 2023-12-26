@@ -1,13 +1,12 @@
 package io.vertx.lang.scala
 
-import io.vertx.core.{DeploymentOptions, Vertx}
-import org.scalatest.flatspec.AnyFlatSpec
+import io.vertx.core.{DeploymentOptions, ThreadingModel, Vertx}
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.concurrent.Waiters.{Waiter, *}
+import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.time.{Millis, Span}
 
-import scala.concurrent.Future
 import scala.util.{Failure, Success}
 
 /**
@@ -47,7 +46,7 @@ class VertxTest extends AnyFlatSpec, Matchers:
           waiter.dismiss()
         }
       }
-    }, new DeploymentOptions().setWorker(true))
+    }, new DeploymentOptions().setThreadingModel(ThreadingModel.WORKER))
     waiter.await(dismissals(1))
   }
 
@@ -82,7 +81,7 @@ class VertxTest extends AnyFlatSpec, Matchers:
           waiter.dismiss()
         }
       }
-    }, new DeploymentOptions().setWorker(true))
+    }, new DeploymentOptions().setThreadingModel(ThreadingModel.WORKER))
     future.onComplete {
       case Success(_) => futureWaiter.dismiss()
       case Failure(t) => t.printStackTrace()
