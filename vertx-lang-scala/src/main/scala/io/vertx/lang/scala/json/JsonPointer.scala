@@ -1,6 +1,8 @@
 package io.vertx.lang.scala.json
 
 import java.net.URI
+import scala.annotation.tailrec
+import scala.collection.immutable.{AbstractSeq, LinearSeq}
 
 private type JJsonPointer = io.vertx.core.json.pointer.JsonPointer
 
@@ -25,7 +27,7 @@ final case class JsonPointer(private val internal: JJsonPointer):
   /**
    * Copy a `JsonPointer`
    */
-  def copy(): JsonPointer = JsonPointer(internal.copy())
+  def copy: JsonPointer = JsonPointer(internal.copy())
 
   override def toString: String = internal.toString
 
@@ -40,12 +42,23 @@ final case class JsonPointer(private val internal: JJsonPointer):
   def getURIWithoutFragment: URI = internal.getURIWithoutFragment
 
   /**
-   * Append an unescaped token to this pointer
+   * This pointer appended with String tokens.
    *
-   * @param token the unescaped reference token
-   * @return a reference to this, so the API can be used fluently
+   * @param tokens the tokens to append which must not contain escaped characters
    */
-  def append(token: String): JsonPointer = JsonPointer(internal.append(token))
+  def appended(tokens: String*): JsonPointer =
+    @tailrec def append(ptr: JsonPointer, tokens: String*): JsonPointer = tokens.headOption match
+      case Some(token) => append(JsonPointer(ptr.internal.append(token)), tokens.tail*)
+      case None        => ptr
+    append(this.copy, tokens*)
+
+
+  /**
+   * Append the index as reference token to this JsonPointer.
+   */
+  def appended(index: Int): JsonPointer = JsonPointer(internal.copy.append(index))
+
+
 
 end JsonPointer
 

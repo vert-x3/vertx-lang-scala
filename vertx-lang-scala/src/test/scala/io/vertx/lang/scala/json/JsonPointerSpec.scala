@@ -54,10 +54,25 @@ class JsonPointerSpec extends AnyFunSpec, Matchers, Inside:
 
   describe("Appending to a JsonPointer") {
     val pointer = JsonPointer("/foo/bar")
+
     it("should append an unescaped String") {
-      val appended = pointer.append("baz")
+      // See RFC 6901, No. 5:
+      // Note that before processing a JSON string as a JSON Pointer,
+      // backslash escape sequences must be unescaped
+      val appended = pointer.appended("baz")
       appended.toString should be("/foo/bar/baz")
-      pointer.isParent(appended) should be(true)
-      ??? // isParent nachschauen im RFC
+      pointer.toString should be("/foo/bar")
+    }
+
+    it("should append an index") {
+      val appended = pointer.appended(23)
+      appended.toString should be("/foo/bar/23")
+      pointer.toString should be("/foo/bar")
+    }
+
+    it("should append a sequence of String tokens") {
+      val appended = pointer.appended("baz", "qux", "qax")
+      appended.toString should be("/foo/bar/baz/qux/qax")
+      pointer.toString should be("/foo/bar")
     }
   }
