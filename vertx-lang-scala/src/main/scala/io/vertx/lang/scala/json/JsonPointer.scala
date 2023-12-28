@@ -52,13 +52,20 @@ final case class JsonPointer(private val internal: JJsonPointer):
       case None        => ptr
     append(this.copy, tokens*)
 
-
   /**
-   * Append the index as reference token to this JsonPointer.
+   * This JsonPointer with the given index appended as reference token.
    */
   def appended(index: Int): JsonPointer = JsonPointer(internal.copy.append(index))
 
+  /**
+   * This JsonPointer with the given other JsonPointer appended.
+   */
+  def appended(other: JsonPointer): JsonPointer = JsonPointer(internal.copy.append(other.internal))
 
+  /**
+   * Evaluates to the parent pointer.
+   */
+  def parent: JsonPointer = JsonPointer(this.internal.copy.parent)
 
 end JsonPointer
 
