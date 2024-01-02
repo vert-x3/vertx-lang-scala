@@ -1,10 +1,7 @@
 package io.vertx.lang.scala.json
 
-import jnr.ffi.provider.IntPointer
-
 import java.net.URI
 import scala.annotation.tailrec
-import scala.collection.immutable.{AbstractSeq, LinearSeq}
 import scala.reflect.Typeable
 
 private type JJsonPointer = io.vertx.core.json.pointer.JsonPointer
@@ -71,6 +68,25 @@ final case class JsonPointer(private val internal: JJsonPointer):
    */
   def parent: JsonPointer = JsonPointer(this.internal.copy.parent)
 
+  /**
+   * Query the given `jsonObject`, expecting the result to be of type [[T]].
+   *
+   * Note: If this pointer is a root pointer ("") and [[T]] is [[JsonObject]], this function returns the provided JSON.
+   *
+   * Note: JSON numbers will always result in the [[Double]] Scala type. The following JSON to Scala mappings apply:
+   *
+   * - `true/false` - `Boolean`
+   * - `number` - `Double`
+   * - `string` - `String`
+   * - `array` - [[JsonArray]]
+   * - `object` - [[JsonObject]]
+   * - `null` - will always result in `None`
+   *
+   * @param jsonObject the JSON to query
+   * @tparam T the expected result type of the query
+   * @return `Some[T]` if the requested value exists **and** has the expected type [[T]],
+   *         otherwise `None`
+   */
   def query[T: Typeable](jsonObject: JsonObject): Option[T] = internal.queryJson(jsonObject) match
     case x: T => Some(x)
     case _    => None

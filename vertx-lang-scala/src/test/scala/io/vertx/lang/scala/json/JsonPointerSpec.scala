@@ -107,21 +107,37 @@ class JsonPointerSpec extends AnyFunSpec, Matchers, Inside, ScalaCheckPropertyCh
          "bol": true,
          "num": 4.2,
          "obj": { "foo": "bar" },
-         "arr": [1, 2, 3]
+         "arr": [1, 2, 3],
+         "nul": null
           }""")
     val queriesAndResults = Table(
       ("name", "result", "expectedResult"),
       ("query for an Int", JsonPointer("/int").query[Int](json), 123),
       ("query for a String", JsonPointer("/str").query[String](json), "Foo"),
       ("query for a Boolean", JsonPointer("/bol").query[Boolean](json), true),
-      ("query for a Float", JsonPointer("/num").query[Float](json), 4.2f),
+      ("query for a Double", JsonPointer("/num").query[Double](json), 4.2d),
       ("query for a JsonObject", JsonPointer("/obj").query[JsonObject](json), JsonObject("""{"foo":"bar"}""")),
       ("query for a JsonArray", JsonPointer("/arr").query[JsonArray](json), JsonArray("""[1,2,3]""")),
-      ("wrong query", JsonPointer("/int").query[String](json), None)
     )
     forAll(queriesAndResults) { (name, result, expectedResult) =>
       it(s"$name should result in $expectedResult") {
         result should contain(expectedResult)
       }
+    }
+
+    val wrongQueries = Table(
+      ("name", "result"),
+      ("query for /int with type String", JsonPointer("/int").query[String](json)),
+      ("query for /str with type Int", JsonPointer("/str").query[Int](json)),
+      ("query for /nul", JsonPointer("/nul").query[Any](json)),
+    )
+    forAll(wrongQueries) { (name, result) =>
+      it(s"$name should result in None") {
+        result should be(None)
+      }
+    }
+
+    it("query for root should result in the provided JSON") {
+      JsonPointer().query[JsonObject](json) should contain(json)
     }
   }
