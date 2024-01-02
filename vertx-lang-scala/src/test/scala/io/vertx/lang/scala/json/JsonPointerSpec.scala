@@ -141,3 +141,69 @@ class JsonPointerSpec extends AnyFunSpec, Matchers, Inside, ScalaCheckPropertyCh
       JsonPointer().query[JsonObject](json) should contain(json)
     }
   }
+
+  describe("Writing") {
+    val json = JsonObject(
+      """
+        |{
+        |  "foo": "bar",
+        |  "arr": [1, 2, 3]
+        |}""".stripMargin)
+
+    it("should create a new JsonObject") {
+      val expectedJson = JsonObject("""{ "foo": "bar" }""")
+      JsonPointer().write(JsonObject(), expectedJson) should contain(expectedJson)
+    }
+
+    it("should create a new JsonArray") {
+      val expectedJson = JsonArray("[1, 2, 3]")
+      JsonPointer().write(JsonArray(), expectedJson) should contain(expectedJson)
+    }
+
+    it("should add a value") {
+      val expectedJson = JsonObject(
+        """
+          |{
+          |  "foo": "bar",
+          |  "arr": [1, 2, 3],
+          |  "baz": "qux"
+          |}""".stripMargin)
+      JsonPointer("/baz").write(json, "qux") should contain(expectedJson)
+    }
+
+    it("should replace a value") {
+      val expectedJson = JsonObject(
+        """
+          |{
+          |  "foo": "baz",
+          |  "arr": [1, 2, 3]
+          |}
+          |""".stripMargin)
+      JsonPointer("/foo").write(json, "baz") should contain(expectedJson)
+    }
+
+    it("should append to the end of an array") {
+      val jsonArray = JsonArray("[1, 2, 3]")
+      val expectedJson = JsonArray("[1, 2, 3, 4]")
+      val ptr = JsonPointer("/-")
+      ptr.write(jsonArray, 4) should contain(expectedJson)
+    }
+
+    it("should create a JsonObject if missing") {
+      val ptr = JsonPointer("/obj/baz")
+      val expectedJson = JsonObject(
+        """
+          |{
+          |  "foo": "bar",
+          |  "arr": [1, 2, 3],
+          |  "obj": {
+          |    "baz": "qux"
+          |  }
+          |}""".stripMargin)
+      ptr.write(json, "qux", true) should contain(expectedJson)
+    }
+
+    it("should return null if the pointer is wrong") {
+      JsonPointer("/foo/bar").write(json, "baz") should be(None)
+    }
+  }

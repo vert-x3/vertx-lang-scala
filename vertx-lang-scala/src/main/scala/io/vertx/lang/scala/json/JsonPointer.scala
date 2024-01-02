@@ -6,6 +6,11 @@ import scala.reflect.Typeable
 
 private type JJsonPointer = io.vertx.core.json.pointer.JsonPointer
 
+/**
+ * Implementation of [[https://tools.ietf.org/html/rfc6901 RFC6901 Json Pointers]]. This
+ * wraps [[io.vertx.core.json.pointer.JsonPointer]] and makes it behave more Scala-like.
+ * @param internal the wrapped Vert.x [[io.vertx.core.json.pointer.JsonPointer]]
+ */
 final case class JsonPointer(private val internal: JJsonPointer):
 
   /**
@@ -23,11 +28,6 @@ final case class JsonPointer(private val internal: JJsonPointer):
    *         `"/properties"` pointer is parent pointer of `"/properties/parent"`
    */
   def isParent(child: JsonPointer): Boolean = internal.isParent(child.internal)
-
-  /**
-   * Copy a `JsonPointer`
-   */
-  def copy: JsonPointer = JsonPointer(internal.copy())
 
   override def toString: String = internal.toString
 
@@ -51,15 +51,19 @@ final case class JsonPointer(private val internal: JJsonPointer):
       case Some(token) => append(JsonPointer(ptr.internal.append(token)), tokens.tail *)
       case None        => ptr
 
-    append(this.copy, tokens *)
+    append(JsonPointer(internal.copy()), tokens *)
 
   /**
    * This JsonPointer with the given index appended as reference token.
+   *
+   * Note: This function does not mutate this JsonPointer.
    */
   def appended(index: Int): JsonPointer = JsonPointer(internal.copy.append(index))
 
   /**
    * This JsonPointer with the given other JsonPointer appended.
+   *
+   * Note: This function does not mutate this JsonPointer.
    */
   def appended(other: JsonPointer): JsonPointer = JsonPointer(internal.copy.append(other.internal))
 
@@ -71,30 +75,52 @@ final case class JsonPointer(private val internal: JJsonPointer):
   /**
    * Query the given `jsonObject`, expecting the result to be of type [[T]].
    *
-   * Note: If this pointer is a root pointer ("") and [[T]] is [[JsonObject]], this function returns the provided JSON.
+   * <p>Note: If this pointer is a root pointer ("") and [[T]] is [[JsonObject]], this function returns
+   * the provided JSON.</p>
    *
-   * Note: JSON numbers will always result in the [[Double]] Scala type. The following JSON to Scala mappings apply:
-   *
-   * - `true/false` - `Boolean`
-   * - `number` - `Double`
-   * - `string` - `String`
-   * - `array` - [[JsonArray]]
-   * - `object` - [[JsonObject]]
-   * - `null` - will always result in `None`
+   * <p>Note: JSON numbers will always result in the [[Double]] Scala type. The following JSON to Scala mappings apply:
+   * <ul>
+   * <li>`true/false` - `Boolean`</li>
+   * <li>`number` - `Double`</li>
+   * <li>`string` - `String`</li>
+   * <li>`array` - [[JsonArray]]</li>
+   * <li>`object` - [[JsonObject]]</li>
+   * <li>`null` - will always result in `None`</li>
+   * </ul>
+   * </p>
    *
    * @param jsonObject the JSON to query
    * @tparam T the expected result type of the query
-   * @return `Some[T]` if the requested value exists **and** has the expected type [[T]],
+   * @return `Some[T]` if the requested value exists and has the expected type [[T]],
    *         otherwise `None`
    */
   def query[T: Typeable](jsonObject: JsonObject): Option[T] = internal.queryJson(jsonObject) match
     case x: T => Some(x)
     case _    => None
 
+  /**
+   * Write `newElement` to the given `json` using this pointer. The path token "-" is
+   * handled as append to the end of an array.
+   *
+   * Note: This function does not mutate the given `json`.
+   *
+   * Note: If this is a root pointer, `newElement` will be returned.
+   *
+   * @param json the JSON to write to
+   * @param newElement the new element to write
+   * @param createIfMissing creates a new [[JsonObject]] when the parent object key is missing
+   * @tparam J either a [[JsonObject]] or a [[JsonArray]]
+   * @return `Some[J]` if the write was successful, `None` if not
+   */
+  def write[J <: JsonObject | JsonArray : Typeable](json: J, newElement: Any, createIfMissing: Boolean = false): Option[J] =
+    internal.writeJson(json.copy(), newElement, createIfMissing).asInstanceOf[J] match
+      case o: JsonObject => Some(o)
+      case a: JsonArray  => Some(a)
+      case _             => None
+
 end JsonPointer
 
 object JsonPointer:
-
   /**
    * @return an empty `JsonPointer`
    */
@@ -142,7 +168,7 @@ object JsonPointer:
     try
       Some(JsonPointer(io.vertx.core.json.pointer.JsonPointer.from(pointer)))
     catch
-      case iae: IllegalArgumentException => None
+      case _: IllegalArgumentException => None
 
   /**
    * Builds a [[JsonPointer]] from a URI, returning an [[Option]]. This comes
@@ -156,7 +182,7 @@ object JsonPointer:
     try
       Some(JsonPointer(io.vertx.core.json.pointer.JsonPointer.fromURI(uri)))
     catch
-      case iae: IllegalArgumentException => None
+      case _: IllegalArgumentException => None
 
 end JsonPointer
 
