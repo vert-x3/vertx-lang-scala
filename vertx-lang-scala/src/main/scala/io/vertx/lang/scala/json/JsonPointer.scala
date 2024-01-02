@@ -1,8 +1,11 @@
 package io.vertx.lang.scala.json
 
+import jnr.ffi.provider.IntPointer
+
 import java.net.URI
 import scala.annotation.tailrec
 import scala.collection.immutable.{AbstractSeq, LinearSeq}
+import scala.reflect.Typeable
 
 private type JJsonPointer = io.vertx.core.json.pointer.JsonPointer
 
@@ -48,9 +51,10 @@ final case class JsonPointer(private val internal: JJsonPointer):
    */
   def appended(tokens: String*): JsonPointer =
     @tailrec def append(ptr: JsonPointer, tokens: String*): JsonPointer = tokens.headOption match
-      case Some(token) => append(JsonPointer(ptr.internal.append(token)), tokens.tail*)
+      case Some(token) => append(JsonPointer(ptr.internal.append(token)), tokens.tail *)
       case None        => ptr
-    append(this.copy, tokens*)
+
+    append(this.copy, tokens *)
 
   /**
    * This JsonPointer with the given index appended as reference token.
@@ -67,6 +71,10 @@ final case class JsonPointer(private val internal: JJsonPointer):
    */
   def parent: JsonPointer = JsonPointer(this.internal.copy.parent)
 
+  def query[T: Typeable](jsonObject: JsonObject): Option[T] = internal.queryJson(jsonObject) match
+    case x: T => Some(x)
+    case _    => None
+
 end JsonPointer
 
 object JsonPointer:
@@ -78,6 +86,7 @@ object JsonPointer:
 
   /**
    * Builds a [[JsonPointer]] from a String.
+   *
    * @param pointer the String representing a valid JSON pointer
    * @return the [[JsonPointer]]
    * @throws IllegalArgumentException if the given String is not a valid JSON pointer
@@ -86,6 +95,7 @@ object JsonPointer:
 
   /**
    * Builds a [[JsonPointer]] from a [[java.net.URI]].
+   *
    * @param pointer - the URI representing a valid JSON pointer
    * @return the [[JsonPointer]]
    * @throws IllegalArgumentException if the given URI is not a valid JSON pointer
@@ -99,6 +109,7 @@ object JsonPointer:
 
   /**
    * Same as [[apply apply(pointer)]], for compatibility with Vert.x core.
+   *
    * @see [[apply]]
    */
   def from(pointer: String): JsonPointer = apply(pointer)
@@ -130,7 +141,6 @@ object JsonPointer:
       Some(JsonPointer(io.vertx.core.json.pointer.JsonPointer.fromURI(uri)))
     catch
       case iae: IllegalArgumentException => None
-
 
 end JsonPointer
 

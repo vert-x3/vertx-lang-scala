@@ -3,15 +3,17 @@ package io.vertx.lang.scala.json
 import org.scalatest.Inside
 import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.matchers.should.Matchers
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
+import io.vertx.core.json.{JsonArray, JsonObject}
 
 import java.net.URI
 
-class JsonPointerSpec extends AnyFunSpec, Matchers, Inside:
+class JsonPointerSpec extends AnyFunSpec, Matchers, Inside, ScalaCheckPropertyChecks:
 
   describe("JsonPointer") {
     it("should be constructable from a String") {
       JsonPointer("/foo/bar") shouldBe a[JsonPointer]
-      an [IllegalArgumentException] should be thrownBy JsonPointer("|foo|bar")
+      an[IllegalArgumentException] should be thrownBy JsonPointer("|foo|bar")
     }
 
     it("should be constructable from a String, returning Option for safety") {
@@ -21,7 +23,7 @@ class JsonPointerSpec extends AnyFunSpec, Matchers, Inside:
 
     it("should be constructable from an URI") {
       JsonPointer(URI("/foo/bar")) shouldBe a[JsonPointer]
-      an [IllegalArgumentException] should be thrownBy JsonPointer(URI("https://vertx.io/docs/vertx-core/java/#_json_pointers"))
+      an[IllegalArgumentException] should be thrownBy JsonPointer(URI("https://vertx.io/docs/vertx-core/java/#_json_pointers"))
     }
 
     it("should be constructable from an URI, returning Option for safety") {
@@ -97,4 +99,29 @@ class JsonPointerSpec extends AnyFunSpec, Matchers, Inside:
     }
   }
 
-  describe("Querying") {}
+  describe("Querying") {
+    val json = JsonObject(
+      """{
+         "int": 123,
+         "str": "Foo",
+         "bol": true,
+         "num": 4.2,
+         "obj": { "foo": "bar" },
+         "arr": [1, 2, 3]
+          }""")
+    val queriesAndResults = Table(
+      ("name", "result", "expectedResult"),
+      ("query for an Int", JsonPointer("/int").query[Int](json), 123),
+      ("query for a String", JsonPointer("/str").query[String](json), "Foo"),
+      ("query for a Boolean", JsonPointer("/bol").query[Boolean](json), true),
+      ("query for a Float", JsonPointer("/num").query[Float](json), 4.2f),
+      ("query for a JsonObject", JsonPointer("/obj").query[JsonObject](json), JsonObject("""{"foo":"bar"}""")),
+      ("query for a JsonArray", JsonPointer("/arr").query[JsonArray](json), JsonArray("""[1,2,3]""")),
+      ("wrong query", JsonPointer("/int").query[String](json), None)
+    )
+    forAll(queriesAndResults) { (name, result, expectedResult) =>
+      it(s"$name should result in $expectedResult") {
+        result should contain(expectedResult)
+      }
+    }
+  }
