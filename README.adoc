@@ -7,7 +7,7 @@ Vert.x-Scala provides language bindings and helpers for using Scala with Vert.x.
 
 Please see the main documentation on the web-site for a full description:
 
-* https://vertx.io/docs/#scala[Web-site documentation]
+* http://vert-x3.github.io/vertx-lang-scala/[Web-site documentation]
 
 == Structure
 
