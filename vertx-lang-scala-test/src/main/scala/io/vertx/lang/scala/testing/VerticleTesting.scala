@@ -11,8 +11,6 @@ import org.scalatest.flatspec.AsyncFlatSpec
 import scala.concurrent.Await
 import scala.concurrent.duration.*
 import scala.language.postfixOps
-import scala.quoted.{Expr, Quotes, Type}
-import scala.reflect.ClassTag
 import scala.util.{Failure, Success}
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

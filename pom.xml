@@ -76,6 +76,11 @@
         <artifactId>scalatest_3</artifactId>
         <version>3.3.0-SNAP4</version>
       </dependency>
+      <dependency>
+        <groupId>org.scalatestplus</groupId>
+        <artifactId>scalacheck-1-17_3</artifactId>
+        <version>3.2.17.0</version>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <build>
