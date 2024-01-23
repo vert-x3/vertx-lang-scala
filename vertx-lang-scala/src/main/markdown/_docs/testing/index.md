@@ -2,19 +2,19 @@
 title: Testing
 ---
 
-Vert.x for Scala also brings a test support artifact, which helps to write [ScalaTest](https://www.scalatest.org) specifications. This section shows how to install it and how to use it when writing specs.
+Vert.x for Scala also brings a test support artifact, which helps to write [ScalaTest](https://www.scalatest.org) specifications.
+This section shows how to install it and how to use it when writing specs.
 
 
 # Installation
 
-To install, add the `vertx-lang-scala-test_3` artifact to your build descriptor. This module does not pin to a specific version of ScalaTest. That's why we additionally need to specify the ScalaTest version we desire:
+To install, add the `vertx-lang-scala-test_3` artifact to your build descriptor.
 
 ## sbt
 
 ```sbt
 libraryDependencies ++= Seq(
   "io.vertx" %% "vertx-lang-scala-test" % "{{projectVersion}}" % Test,
-  "org.scalatest" %% "scalatest" % Version.scalaTest % Test,
 )
 ```
 
@@ -22,7 +22,6 @@ libraryDependencies ++= Seq(
 
 ```groovy title="build.gradle"
 testImplementation "io.vertx:vertx-lang-scala-test_3:{{projectVersion}}"
-testImplementation "org.scalatest:scalatest_3:$scalatestVersion"
 ```
 
 ## Maven
@@ -32,12 +31,6 @@ testImplementation "org.scalatest:scalatest_3:$scalatestVersion"
   <groupId>io.vertx</groupId>
   <artifactId>vertx-lang-scala-test_3</artifactId>
   <version>{{projectVersion}}</version>
-  <scope>test</scope>
-</dependency>
-<dependency>
-  <groupId>org.scalatest</groupId>
-  <artifactId>scalatest_3</artifactId>
-  <version>${scalatest.version}</version>
   <scope>test</scope>
 </dependency>
 ```
