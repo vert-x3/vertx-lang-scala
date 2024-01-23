@@ -36,7 +36,7 @@ lazy val root = project
                     "io.vertx" % "vertx-web" % version.value,
                     "io.vertx" %% "vertx-lang-scala" % version.value,
                     "io.vertx" %% "vertx-lang-scala-test" % version.value,
-                    "org.scalatest" %% "scalatest" % "3.2.17",
+                    "org.scalatest" %% "scalatest" % "3.3.0-SNAP4",
                   ),
                   scalacOptions ++= Seq("-deprecation", "-feature"),
                 )

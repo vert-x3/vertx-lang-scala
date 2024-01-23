@@ -34,8 +34,9 @@
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_3</artifactId>
-      <scope>provided</scope>
     </dependency>
+
+    <!-- Test dependencies -->
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web</artifactId>
