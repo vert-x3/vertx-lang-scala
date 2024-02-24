@@ -81,11 +81,6 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-jdbc</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-htdigest</artifactId>
       <optional>true</optional>
     </dependency>
@@ -108,11 +103,6 @@
     <dependency>
       <groupId>io.vertx</groupId>
       <artifactId>vertx-auth-oauth2</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
-      <artifactId>vertx-auth-shiro</artifactId>
       <optional>true</optional>
     </dependency>
     <dependency>
@@ -152,11 +142,6 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-api-contract</artifactId>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>io.vertx</groupId>
       <artifactId>vertx-web-templ-freemarker</artifactId>
       <optional>true</optional>
     </dependency>
@@ -167,7 +152,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-web-templ-jade</artifactId>
+      <artifactId>vertx-web-templ-pug</artifactId>
       <optional>true</optional>
     </dependency>
     <dependency>
@@ -350,6 +335,11 @@
       <artifactId>vertx-openapi</artifactId>
       <optional>true</optional>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-openapi-router</artifactId>
+      <optional>true</optional>
+    </dependency>
 
     <!-- Test dependencies -->
     <dependency>
@@ -386,13 +376,11 @@
             vertx-jdbc-client,
             vertx-auth-common,
             vertx-auth-otp
-            vertx-auth-jdbc,
             vertx-auth-htdigest,
             vertx-auth-htpasswd,
             vertx-auth-jwt,
             vertx-auth-mongo,
             vertx-auth-oauth2,
-            vertx-auth-shiro,
             vertx-auth-webauthn,
             vertx-auth-properties,
             vertx-auth-ldap,
@@ -441,7 +429,8 @@
             vertx-micrometer-metrics,
             vertx-tcp-eventbus-bridge,
             vertx-json-schema,
-            vertx-openapi
+            vertx-openapi,
+            vertx-web-openapi-router
           </includeArtifactIds>
           <classifier>sources</classifier>
           <includeTypes>jar</includeTypes>
