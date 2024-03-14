@@ -17,9 +17,10 @@
 package io.vertx.lang.scala
 
 import java.util.concurrent.Callable
-
 import io.vertx.core.{Promise, Verticle, Vertx}
 import io.vertx.core.spi.VerticleFactory
+
+import scala.compiletime.uninitialized
 
 /**
  * Factory for creating Verticle-Instances from a compiled class or scala source code.
@@ -29,7 +30,7 @@ import io.vertx.core.spi.VerticleFactory
  */
 class ScalaVerticleFactory extends VerticleFactory {
 
-  private var vertx: Vertx = _
+  private var vertx: Vertx = uninitialized
 
   override def init(vertx: Vertx): Unit = this.vertx = vertx
 

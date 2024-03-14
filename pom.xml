@@ -10,7 +10,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>vertx-lang-scala-parent</artifactId>
-  <version>4.5.5-SNAPSHOT</version>
+  <version>4.5.6-SNAPSHOT</version>
   <packaging>pom</packaging>
   <inceptionYear>2016</inceptionYear>
 
@@ -33,7 +33,7 @@
   </licenses>
 
   <properties>
-    <scala.version>3.3.1</scala.version>
+    <scala.version>3.4.0</scala.version>
     <stack.version>${project.version}</stack.version>
   </properties>
 
