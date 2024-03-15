@@ -21,6 +21,7 @@ import io.vertx.core.*
 import io.vertx.lang.scala.VertxExecutionContext
 
 import scala.collection.mutable
+import scala.compiletime.uninitialized
 import scala.concurrent.Future
 import scala.jdk.CollectionConverters.*
 import scala.reflect.ClassTag
@@ -32,11 +33,11 @@ import scala.util.{Failure, Success}
  * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
  */
 abstract class ScalaVerticle:
-  protected var executionContext: VertxExecutionContext = _
+  protected var executionContext: VertxExecutionContext = uninitialized
   given ec: VertxExecutionContext = executionContext
-  protected var vertx: Vertx = _
-  protected var ctx: Context = _
-  private var javaVerticle: AbstractVerticle = _
+  protected var vertx: Vertx = uninitialized
+  protected var ctx: Context = uninitialized
+  private var javaVerticle: AbstractVerticle = uninitialized
 
   /**
    * Initialise the verticle.<p>
@@ -126,7 +127,9 @@ abstract class ScalaVerticle:
    * Get the arguments used when deploying the Vert.x process.
    *
    * @return the list of arguments
+   * @deprecated As of version 5, Vert.x is no longer tightly coupled to the CLI
    */
+  @deprecated("As of version 5, Vert.x is no longer tightly coupled to the CLI", "5.0.0")
   def processArgs: mutable.Buffer[String] = javaVerticle.processArgs().asScala
 
   def asJava: Verticle = new AbstractVerticle {
