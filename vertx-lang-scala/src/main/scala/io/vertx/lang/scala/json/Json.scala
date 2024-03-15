@@ -96,7 +96,7 @@ object Json:
       a
   }
 
-  private def listToJsArr(a: Iterable[_]) = Json.arr(a.toSeq *)
+  private def listToJsArr(a: Iterable[?]) = Json.arr(a.toSeq *)
 
   extension (internal: JsonArray)
 

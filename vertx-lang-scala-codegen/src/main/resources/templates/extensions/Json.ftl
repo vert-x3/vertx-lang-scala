@@ -33,4 +33,4 @@
     }
   }
 
-  private def listToJsArr(a: Seq[_]) = JsonArray(a: _*)
+  private def listToJsArr(a: Seq[?]) = JsonArray(a*)
