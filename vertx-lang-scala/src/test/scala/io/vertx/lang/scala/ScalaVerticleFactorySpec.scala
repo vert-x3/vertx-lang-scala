@@ -1,23 +1,25 @@
 package io.vertx.lang.scala
 
-import java.io.File
-import java.nio.file.Files
-import java.util.concurrent.Callable
-
 import io.vertx.core
-import io.vertx.core.{AsyncResult, Handler, Verticle, Vertx}
+import io.vertx.core.Vertx
+import io.vertx.lang.scala.ImplicitConversions.vertxFutureToScalaFuture
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
-import org.scalatest.time.SpanSugar._
-import org.scalatest.concurrent.ScalaFutures.whenReady
-import org.scalatest.matchers.should.Matchers
 import org.scalatest.flatspec.AsyncFlatSpec
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.time.SpanSugar.*
 
-import scala.concurrent.Promise
-import scala.language.postfixOps
+import scala.language.{implicitConversions, postfixOps}
 
-class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
+class ScalaVerticleFactorySpec extends AsyncFlatSpec, Matchers:
 
-  val defaultPatience = Timeout(2 seconds)
+  val defaultPatience: Timeout = Timeout(2 seconds)
+  val vertx: Vertx             = Vertx.vertx()
+
+  "ScalaVerticleFactory" should "deploy a ScalaVerticle" in:
+    for
+      deploymentId <- vertx.deployVerticle(s"scala:${classOf[TestVerticle].getName}")
+      assertion = deploymentId should not be empty
+    yield assertion
 
 //  "A bare Scala-Verticle" should "compile and deploy on the fly" in {
 //    val promise = Promise[String]()
@@ -54,4 +56,3 @@ class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
 //
 //    whenReady(promise.future, defaultPatience) {_ shouldNot be(null)}
 //  }
-}

@@ -39,10 +39,11 @@ lazy val root = project
   .settings(
     name := "Vert.x for Scala",
     libraryDependencies ++= Seq(
-      "io.vertx"       % "vertx-web"             % version.value,
-      "io.vertx"      %% "vertx-lang-scala"      % version.value,
-      "io.vertx"      %% "vertx-lang-scala-test" % version.value,
-      "org.scalatest" %% "scalatest"             % "3.3.0-SNAP4",
+      "io.vertx"           % "vertx-web"             % version.value,
+      "io.vertx"          %% "vertx-lang-scala"      % version.value,
+      "io.vertx"          %% "vertx-lang-scala-test" % version.value,
+      "org.scalatest"     %% "scalatest"             % "3.3.0-SNAP4" % Test,
+      "org.scalatestplus" %% "scalacheck-1-17"       % "3.2.18.0"    % Test,
     ),
     scalacOptions ++= Seq("-deprecation", "-feature"),
   )

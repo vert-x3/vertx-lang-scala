@@ -13,14 +13,15 @@ import org.scalatest.flatspec.AsyncFlatSpec
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.{Assertions, BeforeAndAfter}
 
+import scala.compiletime.uninitialized
 import scala.concurrent.Future
 import scala.language.implicitConversions
 import scala.util.{Failure, Success}
 
 class VertxExecutionContextTest extends AsyncFlatSpec, Matchers, Assertions, BeforeAndAfter:
 
-  private var vertx: Vertx                                 = _
-  private var vertxExecutionContext: VertxExecutionContext = _
+  private var vertx: Vertx                                 = uninitialized
+  private var vertxExecutionContext: VertxExecutionContext = uninitialized
 
   before {
     vertx = Vertx.vertx(VertxOptions().setEventLoopPoolSize(1))

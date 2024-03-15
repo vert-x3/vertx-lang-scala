@@ -2,27 +2,26 @@ package io.vertx.lang.scala.itest.db.jdbc
 
 import io.vertx.core.Vertx
 import io.vertx.jdbcclient.JDBCPool
-import io.vertx.lang.scala.ImplicitConversions.{vertxFutureToScalaFuture, vertxFutureVoidToScalaFutureUnit}
-import io.vertx.lang.scala.{asScala, VertxExecutionContext}
-import io.vertx.lang.scala.itest.db.{ID, ToDoDatabaseService}
+import io.vertx.lang.scala.ImplicitConversions.vertxFutureToScalaFuture
+import io.vertx.lang.scala.itest.db.ID
 import io.vertx.lang.scala.itest.domain.ToDo.{Date, Note, Time, Title}
 import io.vertx.lang.scala.itest.domain.{title, ToDo}
-import io.vertx.lang.scala.json.Json
+import io.vertx.lang.scala.{asScala, VertxExecutionContext}
 import io.vertx.scala.core.JsonObject
+import io.vertx.scala.jdbcclient.JDBCConnectOptions
+import io.vertx.scala.sqlclient.PoolOptions
 import io.vertx.sqlclient.Pool
 import org.scalatest.Checkpoints.Checkpoint
-import org.scalatest.{BeforeAndAfter, FutureOutcome, ParallelTestExecution, Succeeded}
 import org.scalatest.compatible.Assertion
 import org.scalatest.funspec.FixtureAsyncFunSpec
 import org.scalatest.matchers.should.Matchers
+import org.scalatest.{FutureOutcome, ParallelTestExecution, Succeeded}
 
 import java.util.concurrent.TimeUnit
-import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.concurrent.duration.Duration
+import scala.concurrent.{Await, ExecutionContext, Future}
 import scala.jdk.CollectionConverters.*
 import scala.language.implicitConversions
-import io.vertx.scala.jdbcclient.JDBCConnectOptions
-import io.vertx.scala.sqlclient.PoolOptions
 
 class ToDoDatabaseJdbcSpec extends FixtureAsyncFunSpec, Matchers, ParallelTestExecution:
 

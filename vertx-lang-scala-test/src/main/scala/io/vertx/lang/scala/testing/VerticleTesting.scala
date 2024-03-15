@@ -5,53 +5,48 @@ import io.vertx.lang.scala.*
 import io.vertx.lang.scala.json.{Json, JsonObject}
 import io.vertx.lang.scala.testing.TypeUtility.typeName
 import io.vertx.scala.core.DeploymentOptions
-import org.scalatest.BeforeAndAfter
+import org.scalatest.BeforeAndAfterAll
 import org.scalatest.flatspec.AsyncFlatSpec
+import org.slf4j.{Logger, LoggerFactory}
 
 import scala.concurrent.Await
 import scala.concurrent.duration.*
 import scala.language.postfixOps
 import scala.util.{Failure, Success}
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
-abstract class VerticleTesting[A <: ScalaVerticle](using TypeName[A]) extends AsyncFlatSpec, BeforeAndAfter:
-  val vertx: Vertx = Vertx.vertx()
-  val typeName: String = TypeUtility.typeName[A]
-  val log: Logger = LoggerFactory.getLogger(typeName)
+abstract class VerticleTesting[A <: ScalaVerticle](using TypeName[A]) extends AsyncFlatSpec, BeforeAndAfterAll:
+  val vertx: Vertx                                   = Vertx.vertx()
+  private val typeName: String                       = TypeUtility.typeName[A]
+  private val log: Logger                            = LoggerFactory.getLogger(typeName)
+  private var deploymentId                           = ""
   given vertxExecutionContext: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
-  private var deploymentId = ""
 
-  def config(): JsonObject = Json.obj()
+  private def config(): JsonObject = Json.obj()
 
-  before {
+  override def beforeAll(): Unit = {
     log.info(s"Deploying $typeName...")
     deploymentId = Await.result(
       vertx
-        .deployVerticle("scala:" + typeName, DeploymentOptions().setConfig(config())).asScala
+        .deployVerticle("scala:" + typeName, DeploymentOptions().setConfig(config()))
+        .asScala
         .andThen {
-          case Success(id) =>
-            log.info(s"Deployment of $typeName done, got ID: $id")
-            id
-          case Failure(t)  =>
-            log.error(s"Deployment of $typeName failed: ${t.getMessage}")
-            throw new RuntimeException(t)
+          case Success(id) => log.info("Deployment of {} done, got ID: {}", typeName, id)
+          case Failure(ex) => log.error("Deployment of {} failed: {}", typeName, ex.getMessage)
         },
       10000 millis
     )
   }
 
-  after {
+  override def afterAll(): Unit = {
     log.info(s"Undeploying $typeName...")
     Await.result(
-      vertx.undeploy(deploymentId).asScala
-           .andThen {
-             case Success(_) => log.info(s"$typeName undeployed")
-             case Failure(t) => throw new RuntimeException(t)
-           },
+      vertx
+        .undeploy(deploymentId)
+        .asScala
+        .andThen {
+          case Success(_) => log.info("{} undeployed", typeName)
+          case Failure(t) => log.error("Cannot undeploy {}", typeName, t)
+        },
       10000 millis
     )
   }
-
-
-
