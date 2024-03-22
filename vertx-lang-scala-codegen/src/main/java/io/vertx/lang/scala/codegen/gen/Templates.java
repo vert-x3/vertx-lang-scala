@@ -75,14 +75,14 @@ public class Templates {
     put(JSON_ARRAY, TypeInfo::getName);
     put(ENUM, TypeInfo::getName);
     put(OTHER, type -> getNonGenericType(type.getName()));
-    put(ASYNC_RESULT, t -> "AsyncResult" + (!((ParameterizedTypeInfo) t).getArgs().isEmpty() ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo) t).getArgs().get(0)) + "]" : "[_]"));
-    put(CLASS_TYPE, t -> "Class" + (((ParameterizedTypeInfo) t).getArgs().isEmpty() ? "[_]" : "[" + ((ParameterizedTypeInfo) t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]"));
+    put(ASYNC_RESULT, t -> "AsyncResult" + (!((ParameterizedTypeInfo) t).getArgs().isEmpty() ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo) t).getArgs().get(0)) + "]" : "[?]"));
+    put(CLASS_TYPE, t -> "Class" + (((ParameterizedTypeInfo) t).getArgs().isEmpty() ? "[?]" : "[" + ((ParameterizedTypeInfo) t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]"));
 
     put(API, t -> {
       String ret = getNonGenericType(t.getName());
       if (t.isParameterized()) {
         if (((ParameterizedTypeInfo) t).getArgs().isEmpty()) {
-          ret += "[_]";
+          ret += "[?]";
         } else {
           ret += "[" + ((ParameterizedTypeInfo) t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]";
         }

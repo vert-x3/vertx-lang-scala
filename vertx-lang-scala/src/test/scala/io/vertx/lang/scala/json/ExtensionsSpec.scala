@@ -27,11 +27,11 @@ class ExtensionsSpec extends AnyFunSpec, Matchers, Inside:
           )))
       val map = jsonObject.asMap
       map("foo") should equal("bar")
-      map("baz") shouldBe a[Map[String, _]]
-      val bazMap = map("baz").asInstanceOf[Map[String, _]]
-      bazMap("fooqux") shouldBe a[Map[String, _]]
-      val fooquxMap = bazMap("fooqux").asInstanceOf[Map[String, _]]
-      fooquxMap("barqux") shouldBe a[List[_]]
+      map("baz") shouldBe a[Map[String, ?]]
+      val bazMap = map("baz").asInstanceOf[Map[String, ?]]
+      bazMap("fooqux") shouldBe a[Map[String, ?]]
+      val fooquxMap = bazMap("fooqux").asInstanceOf[Map[String, ?]]
+      fooquxMap("barqux") shouldBe a[List[?]]
     }
   }
 
@@ -53,11 +53,11 @@ class ExtensionsSpec extends AnyFunSpec, Matchers, Inside:
         JsonObject.of("foo", "bar"),
       )
       val list = jsonArray.asList
-      list(3) shouldBe a[List[_]]
-      list(3).asInstanceOf[List[_]].length should be(2)
-      list(5) shouldBe a[List[_]]
-      list(5).asInstanceOf[List[_]](2).asInstanceOf[List[_]](2) shouldBe a[List[_]]
-      list(7) shouldBe a[Map[String, _]]
+      list(3) shouldBe a[List[?]]
+      list(3).asInstanceOf[List[?]].length should be(2)
+      list(5) shouldBe a[List[?]]
+      list(5).asInstanceOf[List[?]](2).asInstanceOf[List[?]](2) shouldBe a[List[?]]
+      list(7) shouldBe a[Map[String, ?]]
     }
   }
 
