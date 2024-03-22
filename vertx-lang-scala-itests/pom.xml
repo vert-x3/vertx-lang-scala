@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-lang-scala-parent</artifactId>
-    <version>4.5.6</version>
+    <version>4.5.7-SNAPSHOT</version>
   </parent>
 
   <artifactId>vertx-lang-scala-itests</artifactId>
