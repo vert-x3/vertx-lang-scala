@@ -1,8 +1,8 @@
 import java.time.LocalDate
 
-ThisBuild / scalaVersion := "3.3.1"
+ThisBuild / scalaVersion := "3.4.1"
 ThisBuild / resolvers += "Sonatype OSS Snapshots" at "https://s01.oss.sonatype.org/content/repositories/snapshots"
-ThisBuild / version      := "4.5.4-SNAPSHOT"
+ThisBuild / version      := "4.5.8-SNAPSHOT"
 
 lazy val currentYear = LocalDate.now().getYear()
 lazy val socialLinks = Map(
