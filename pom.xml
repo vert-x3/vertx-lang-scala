@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-parent</artifactId>
@@ -10,7 +10,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>vertx-lang-scala-parent</artifactId>
-  <version>4.5.8-SNAPSHOT</version>
+  <version>4.5.8</version>
   <packaging>pom</packaging>
   <inceptionYear>2016</inceptionYear>
 
@@ -34,7 +34,7 @@
 
   <properties>
     <junit.version>5.10.2</junit.version>
-    <scala.version>3.4.1</scala.version>
+    <scala.version>3.4.2</scala.version>
     <slf4j.version>2.0.12</slf4j.version>
     <stack.version>${project.version}</stack.version>
   </properties>
@@ -107,7 +107,7 @@
         <plugin>
           <groupId>net.alchim31.maven</groupId>
           <artifactId>scala-maven-plugin</artifactId>
-          <version>4.8.1</version>
+          <version>4.9.1</version>
           <configuration>
             <args>
               <arg>java-output-version 8</arg>
