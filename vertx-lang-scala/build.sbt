@@ -1,6 +1,6 @@
 import java.time.LocalDate
 
-ThisBuild / scalaVersion := "3.4.1"
+ThisBuild / scalaVersion := "3.4.2"
 ThisBuild / resolvers += "Sonatype OSS Snapshots" at "https://s01.oss.sonatype.org/content/repositories/snapshots"
 ThisBuild / version      := "4.5.8-SNAPSHOT"
 
@@ -8,7 +8,6 @@ lazy val currentYear = LocalDate.now().getYear()
 lazy val socialLinks = Map(
   "github"  -> "https://github.com/vert-x3/vertx-lang-scala",
   "discord" -> "https://discord.com/invite/6ry7aqPWXy",
-  // custom social links will re-appear in 3.4.0
   "stackoverflow" -> "https://stackoverflow.com/questions/tagged/vert.x::stackoverflow-icon-white.png::stackoverflow-icon-black.png",
   "vertx" -> "https://vertx.io/community::vertx-icon-16x16.png",
 )
