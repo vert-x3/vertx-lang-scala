@@ -33,7 +33,7 @@
   </licenses>
 
   <properties>
-    <junit.version>5.10.2</junit.version>
+    <junit.version>5.10.3</junit.version>
     <scala.version>3.4.2</scala.version>
     <slf4j.version>2.0.13</slf4j.version>
     <stack.version>${project.version}</stack.version>
