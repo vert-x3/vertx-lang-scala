@@ -1,29 +1,28 @@
 package io.vertx.lang.scala.codegen.gen;
 
-import io.vertx.codegen.MethodInfo;
-import io.vertx.codegen.ParamInfo;
-import io.vertx.codegen.doc.Doc;
-import io.vertx.codegen.doc.Tag;
-import io.vertx.codegen.doc.Text;
-import io.vertx.codegen.doc.Token;
+import io.vertx.codegen.processor.MethodInfo;
+import io.vertx.codegen.processor.ParamInfo;
+import io.vertx.codegen.processor.doc.Doc;
+import io.vertx.codegen.processor.doc.Tag;
+import io.vertx.codegen.processor.doc.Text;
+import io.vertx.codegen.processor.doc.Token;
 import io.vertx.codegen.format.QualifiedCase;
-import io.vertx.codegen.type.ClassKind;
-import io.vertx.codegen.type.ClassTypeInfo;
-import io.vertx.codegen.type.TypeInfo;
-
+import io.vertx.codegen.processor.type.ClassKind;
+import io.vertx.codegen.processor.type.ClassTypeInfo;
+import io.vertx.codegen.processor.type.TypeInfo;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import java.util.stream.Collectors;
 
 public class Docs {
-  //DOCS
+  // DOCS
   public static String methodDoc(TypeInfo type, MethodInfo method, String indentation, boolean future) {
     String doc = "";
 
     String commentedIndentation = indentation;
     commentedIndentation += " *";
 
-    if (method.getDoc()!= null) {
+    if (method.getDoc() != null) {
       TypeInfo returnType = method.getReturnType();
       Text returnDescription = method.getReturnDescription();
 
@@ -32,22 +31,26 @@ public class Docs {
 
       if (future) {
         doc += commentedIndentation;
-        String params = method.getParams().stream().map(param -> Templates.convertToScalaGenericsNotation(param.getType().getSimpleName())).collect(Collectors.joining(","));
+        String params = method.getParams().stream()
+            .map(param -> Templates.convertToScalaGenericsNotation(param.getType().getSimpleName()))
+            .collect(Collectors.joining(","));
         if (params != "") {
-          params = "(" + params +")";
+          params = "(" + params + ")";
         }
-        doc += " Like " +  method.getName() + " from [[" + type.getName() + "]] but returns a Scala Future instead of taking an AsyncResultHandler.\n";
+        doc += " Like " + method.getName() + " from [[" + type.getName()
+            + "]] but returns a Scala Future instead of taking an AsyncResultHandler.\n";
       } else {
         doc += renderDoc(type, commentedIndentation, method.getDoc());
         for (ParamInfo param : method.getParams()) {
           if (param.getDescription() != null) {
             doc += commentedIndentation;
-            doc += " @param " + param.getName()+ " ";
+            doc += " @param " + param.getName() + " ";
             doc += convertLink(param.getDescription());
             if (param.getType().getDataObject() != null) {
               doc += " see " + renderDataObjectHtmlLink(type, param.getType());
             }
-            doc = doc.replace("{@code ","`").replace("{@literal","`").replace("@literal{","`").replace("@code{","`").replace("}","`");
+            doc = doc.replace("{@code ", "`").replace("{@literal", "`").replace("@literal{", "`").replace("@code{", "`")
+                .replace("}", "`");
             doc += "\n";
           }
         }
@@ -60,7 +63,8 @@ public class Docs {
             if (returnType.getDataObject() != null) {
               doc += "see " + renderDataObjectHtmlLink(type, returnType);
             }
-            doc = doc.replace("{@code ","`").replace("{@literal","`").replace("@literal{","`").replace("@code{","`").replace("}","`");
+            doc = doc.replace("{@code ", "`").replace("{@literal", "`").replace("@literal{", "`").replace("@code{", "`")
+                .replace("}", "`");
             doc += "\n";
           }
         }
@@ -79,7 +83,8 @@ public class Docs {
     int index = doc.getValue().indexOf(linkText);
     while (index >= 0) {
       int end = doc.getValue().indexOf("}", index);
-      transformedDoc += doc.getValue().substring(start, index) + toScalaDocType(doc.getValue().substring(index + 1 + linkText.length(), end));
+      transformedDoc += doc.getValue().substring(start, index)
+          + toScalaDocType(doc.getValue().substring(index + 1 + linkText.length(), end));
       start = end + 1;
       index = doc.getValue().indexOf(linkText, start);
     }
@@ -131,10 +136,9 @@ public class Docs {
     }
   }
 
-
-
   /**
    * Checks if the given Element is an AsyncResultHandler
+   * 
    * @param type
    * @return
    */
@@ -181,7 +185,10 @@ public class Docs {
           String eltKind = elt.getKind().name();
           String ret = "[[" + rawType.getRaw();
           if (eltKind.equals("METHOD")) {
-            if (!elt.getSimpleName().toString().equals("executeBlocking") && ((ExecutableElement)elt).getParameters().size() > 0 && isAsyncResultHandler(((ExecutableElement)elt).getParameters().get(((ExecutableElement)elt).getParameters().size()-1))) {
+            if (!elt.getSimpleName().toString().equals("executeBlocking")
+                && ((ExecutableElement) elt).getParameters().size() > 0
+                && isAsyncResultHandler(((ExecutableElement) elt).getParameters()
+                    .get(((ExecutableElement) elt).getParameters().size() - 1))) {
               ret += "#" + elt.getSimpleName().toString() + "Future";
             } else {
               ret += "#" + elt.getSimpleName().toString();
@@ -215,9 +222,9 @@ public class Docs {
         if (token.isText()) {
           output.append(token.getValue());
         } else {
-          Tag tag = ((Token.InlineTag)token).getTag();
+          Tag tag = ((Token.InlineTag) token).getTag();
           if (tag instanceof Tag.Link) {
-            String outputLink = renderDocLink(type, (Tag.Link)tag);
+            String outputLink = renderDocLink(type, (Tag.Link) tag);
             if (outputLink == null || outputLink.trim().isEmpty()) {
               outputLink = ((Tag.Link) tag).getLabel();
             }
@@ -226,8 +233,9 @@ public class Docs {
             }
             output.append(outputLink);
           } else if (tag.getName().equals("code")) {
-            // I have to do the replacement as the replaced code would be interpreted as a comment by scaladoc
-            output.append("`").append(tag.getValue().trim().replace("/*","/\\*")).append("`");
+            // I have to do the replacement as the replaced code would be interpreted as a
+            // comment by scaladoc
+            output.append("`").append(tag.getValue().trim().replace("/*", "/\\*")).append("`");
           }
         }
       }

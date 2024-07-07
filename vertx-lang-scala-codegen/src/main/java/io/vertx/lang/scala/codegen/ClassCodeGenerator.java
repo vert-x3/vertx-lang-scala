@@ -1,12 +1,12 @@
 package io.vertx.lang.scala.codegen;
 
-import io.vertx.codegen.Generator;
-import io.vertx.codegen.MethodInfo;
-import io.vertx.codegen.Model;
-import io.vertx.codegen.TypeParamInfo;
-import io.vertx.codegen.doc.Doc;
-import io.vertx.codegen.type.ClassTypeInfo;
-import io.vertx.codegen.type.TypeInfo;
+import io.vertx.codegen.processor.Generator;
+import io.vertx.codegen.processor.MethodInfo;
+import io.vertx.codegen.processor.Model;
+import io.vertx.codegen.processor.TypeParamInfo;
+import io.vertx.codegen.processor.doc.Doc;
+import io.vertx.codegen.processor.type.ClassTypeInfo;
+import io.vertx.codegen.processor.type.TypeInfo;
 import io.vertx.lang.scala.codegen.gen.Imports;
 import io.vertx.lang.scala.codegen.gen.Templates;
 
@@ -48,14 +48,14 @@ public class ClassCodeGenerator extends Generator<Model> {
   @Override
   public String filename(Model model) {
     if (!((TypeInfo) model.getVars().get("type")).getName().equals("io.vertx.core.buffer.Buffer")
-      && !(model.getFqn().contains(".impl.") || model.getFqn().endsWith(".impl"))
-      && model.getAnnotations().stream().noneMatch(annotation -> annotation.getSimpleName().equals("Deprecated"))) {
+        && !(model.getFqn().contains(".impl.") || model.getFqn().endsWith(".impl"))
+        && model.getAnnotations().stream().noneMatch(annotation -> annotation.getSimpleName().equals("Deprecated"))) {
 
       String fileName = filenameForModel(model);
       fileToImports.put(fileName, new HashSet<>());
 
-      ClassTypeInfo type = ((ClassTypeInfo)model.getVars().get("type"));
-      Set<TypeInfo> importedTypes = (Set<TypeInfo>)model.getVars().get("importedTypes");
+      ClassTypeInfo type = ((ClassTypeInfo) model.getVars().get("type"));
+      Set<TypeInfo> importedTypes = (Set<TypeInfo>) model.getVars().get("importedTypes");
 
       fileToImports.get(fileName).addAll(adjustedImports(type, importedTypes));
 
@@ -75,18 +75,17 @@ public class ClassCodeGenerator extends Generator<Model> {
     if (!ignoredPackages.contains(type.getPackageName()) && !ignoreClassname.contains(type.getSimpleName())) {
       try {
         return Templates.renderPackageObject(
-          model,
-          type,
-          index,
-          size,
-          fileToImports.get(filenameForModel(model)),
-          (Boolean) modelVars.get("concrete"),
-          (Boolean) modelVars.get("hasEmptyConstructor"),
-          (Doc) modelVars.get("doc"),
-          (List<MethodInfo>) modelVars.get("instanceMethods"),
-          (List<MethodInfo>) modelVars.get("staticMethods"),
-          (Collection<TypeParamInfo>) modelVars.get("typeParams")
-        );
+            model,
+            type,
+            index,
+            size,
+            fileToImports.get(filenameForModel(model)),
+            (Boolean) modelVars.get("concrete"),
+            (Boolean) modelVars.get("hasEmptyConstructor"),
+            (Doc) modelVars.get("doc"),
+            (List<MethodInfo>) modelVars.get("instanceMethods"),
+            (List<MethodInfo>) modelVars.get("staticMethods"),
+            (Collection<TypeParamInfo>) modelVars.get("typeParams"));
       } catch (IOException ioe) {
         throw new RuntimeException(ioe);
       }
@@ -97,8 +96,8 @@ public class ClassCodeGenerator extends Generator<Model> {
   public Set<String> adjustedImports(ClassTypeInfo type, Set<TypeInfo> importedTypes) {
     Set<String> imps = Imports.generateImports(type, importedTypes, Collections.emptyList());
 
-    //Change
-    //import io.vertx.scala.ext.web.common.template.TemplateEngine
+    // Change
+    // import io.vertx.scala.ext.web.common.template.TemplateEngine
 
     if (type.getName().equals("io.vertx.ext.web.templ.TemplateEngine")) {
 

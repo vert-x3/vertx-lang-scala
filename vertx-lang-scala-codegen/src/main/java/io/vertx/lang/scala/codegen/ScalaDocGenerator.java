@@ -1,6 +1,9 @@
 package io.vertx.lang.scala.codegen;
 
-import io.vertx.codegen.type.*;
+import io.vertx.codegen.processor.type.ApiTypeInfo;
+import io.vertx.codegen.processor.type.ClassKind;
+import io.vertx.codegen.processor.type.TypeInfo;
+import io.vertx.codegen.processor.type.TypeMirrorFactory;
 import io.vertx.codetrans.CodeTranslator;
 import io.vertx.codetrans.lang.scala.ScalaLang;
 import io.vertx.docgen.DocGenerator;
@@ -36,10 +39,10 @@ public class ScalaDocGenerator implements DocGenerator {
     ScalaLang lang = new ScalaLang();
     try {
       return translator.translate(elt, lang);
-    }
-    catch (Exception e){
+    } catch (Exception e) {
       e.printStackTrace();
-      System.out.println("Cannot generate " + elt.getEnclosingElement().getSimpleName() + "#" + elt.getSimpleName() + " : " + e.getMessage());
+      System.out.println("Cannot generate " + elt.getEnclosingElement().getSimpleName() + "#" + elt.getSimpleName()
+          + " : " + e.getMessage());
       return "Code not translatable";
     }
   }
@@ -55,16 +58,12 @@ public class ScalaDocGenerator implements DocGenerator {
       System.out.println("Could not resolve doc link for type " + elt.getQualifiedName());
       return null;
     }
-    if (type.getKind().equals(ClassKind.ENUM) && ((EnumTypeInfo)type).isGen()) {
-      String baselink = "../";
-      return baselink + "enums.html#" + elt.getSimpleName().toString();
-    }
     if (type.getDataObject() != null) {
       String baselink = "../";
       return baselink + "dataobjects.html#" + elt.getSimpleName().toString();
     }
     if (type.getKind().equals(ClassKind.API)) {
-      ApiTypeInfo api = (ApiTypeInfo)type.getRaw();
+      ApiTypeInfo api = (ApiTypeInfo) type.getRaw();
       return "../../scaladocs/" + api.translateName("scala").replace('.', '/') + ".html";
     }
     return null;
@@ -77,27 +76,30 @@ public class ScalaDocGenerator implements DocGenerator {
 
   @Override
   public String resolveMethodLink(ExecutableElement elt) {
-    TypeElement typeElt = (TypeElement)elt.getEnclosingElement();
+    TypeElement typeElt = (TypeElement) elt.getEnclosingElement();
     String link = resolveTypeLink(typeElt);
-    if (link != null) if (link.contains("cheatsheet")) link = link + '#' + java.beans.Introspector.decapitalize(elt.getSimpleName().toString().substring(3));
-    else {
+    if (link != null)
+      if (link.contains("cheatsheet"))
+        link = link + '#' + java.beans.Introspector.decapitalize(elt.getSimpleName().toString().substring(3));
+      else {
 
-      StringBuilder anchor = new StringBuilder('#' + elt.getSimpleName().toString() + "(");
-      TypeMirror type = elt.asType();
-      ExecutableType methodType = (ExecutableType)env.getTypeUtils().erasure(type);
+        StringBuilder anchor = new StringBuilder('#' + elt.getSimpleName().toString() + "(");
+        TypeMirror type = elt.asType();
+        ExecutableType methodType = (ExecutableType) env.getTypeUtils().erasure(type);
 
-      List<? extends TypeMirror> parameterTypes = methodType.getParameterTypes();
+        List<? extends TypeMirror> parameterTypes = methodType.getParameterTypes();
 
-      IntStream.range(0, parameterTypes.size()-1).forEach(index -> {
-        if(index > 0) anchor.append(",%20");
-        //drop preceding annotations as they mess up linking
-        String[] splitted = parameterTypes.get(index).toString().split(" :: ");
-        anchor.append(splitted[splitted.length - 1]);
-      });
+        IntStream.range(0, parameterTypes.size() - 1).forEach(index -> {
+          if (index > 0)
+            anchor.append(",%20");
+          // drop preceding annotations as they mess up linking
+          String[] splitted = parameterTypes.get(index).toString().split(" :: ");
+          anchor.append(splitted[splitted.length - 1]);
+        });
 
-      anchor.append(')');
-      link = link + anchor.toString();
-    }
+        anchor.append(')');
+        link = link + anchor.toString();
+      }
     return link;
   }
 
@@ -112,7 +114,8 @@ public class ScalaDocGenerator implements DocGenerator {
       TypeInfo type = factory.create(elt.getEnclosingElement().asType());
       if (type.getDataObject() != null) {
         String name = elt.getSimpleName().toString();
-        if (name.startsWith("set") && name.length() > 3 && Character.isUpperCase(name.charAt(3))) name = java.beans.Introspector.decapitalize(name.substring(3));
+        if (name.startsWith("set") && name.length() > 3 && Character.isUpperCase(name.charAt(3)))
+          name = java.beans.Introspector.decapitalize(name.substring(3));
         return name;
       }
     }

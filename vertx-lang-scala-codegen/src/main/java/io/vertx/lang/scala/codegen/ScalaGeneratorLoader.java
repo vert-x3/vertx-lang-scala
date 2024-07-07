@@ -1,11 +1,10 @@
 package io.vertx.lang.scala.codegen;
 
-import io.vertx.codegen.Generator;
-import io.vertx.codegen.GeneratorLoader;
+import io.vertx.codegen.processor.Generator;
+import io.vertx.codegen.processor.GeneratorLoader;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.stream.Stream;
 
 public class ScalaGeneratorLoader implements GeneratorLoader {
@@ -20,10 +19,9 @@ public class ScalaGeneratorLoader implements GeneratorLoader {
     classGen.kinds = classKinds;
     classGen.incremental = true;
     classGen.filename = "if(type.name != 'io.vertx.core.buffer.Buffer'){var pkg = 'scala/' + type.module.translatePackageName('scala').replace('.', '/'); var splitted = pkg.split('/'); return pkg + '/package.scala';}";
-    //TODO: this is wrong
+    // TODO: this is wrong
     classGen.templateFilename = "vertx-scala/template/package_object.ftl";
     generators.add(classGen);
-
 
     return generators.stream();
   }
