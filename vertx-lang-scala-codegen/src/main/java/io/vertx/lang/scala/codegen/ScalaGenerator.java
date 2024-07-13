@@ -329,6 +329,8 @@ public class ScalaGenerator extends Generator<ClassModel> {
         imports.add("import scala.collection.mutable.Set");
         imports.add("import scala.jdk.CollectionConverters.*");
         return "Set";
+      case "java.lang.Object":
+        return "AnyRef";
       default:
         return typeName;
     }
