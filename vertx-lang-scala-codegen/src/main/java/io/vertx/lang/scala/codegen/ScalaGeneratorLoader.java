@@ -2,7 +2,6 @@ package io.vertx.lang.scala.codegen;
 
 import io.vertx.codegen.Generator;
 import io.vertx.codegen.GeneratorLoader;
-import io.vertx.codegen.type.ClassKind;
 
 import javax.annotation.processing.ProcessingEnvironment;
 import java.util.HashSet;

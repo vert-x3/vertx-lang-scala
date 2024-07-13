@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import javax.annotation.processing.ProcessingEnvironment;
 
@@ -19,10 +20,24 @@ import io.vertx.codegen.type.TypeInfo;
 
 import static java.util.stream.Collectors.joining;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 
 public class ScalaGenerator extends Generator<ClassModel> {
+
+  private static final Set<String> genericClasses = new HashSet<>();
+  static {
+    genericClasses.add("io.vertx.core.eventbus.MessageConsumer");
+  }
+
+  private static final Map<String, Predicate<MethodInfo>> overrideMethods = new HashMap<>();
+  private static final Predicate<MethodInfo> noParams = mi -> mi.getParams().isEmpty();
+  static {
+    overrideMethods.put("toString", noParams);
+    overrideMethods.put("hashCode", noParams);
+    overrideMethods.put("equals", noParams);
+  }
 
   @Override
   public void load(ProcessingEnvironment processingEnv) {
@@ -32,16 +47,22 @@ public class ScalaGenerator extends Generator<ClassModel> {
   @Override
   public String filename(ClassModel model) {
 
-    return "scala/" + model.getModule()
+    return "scala/" + model.getType()
         .translatePackageName("scala")
         .replace('.', '/') + "/" + className(model) + ".scala";
   }
 
   @Override
   public String render(ClassModel model, int index, int size, Map<String, Object> session) {
+    // Skip deprecated classes
+    if (model.isDeprecated()) {
+      return null;
+    }
+
     Set<String> imports = new HashSet<>();
     String methods = model.getInstanceMethods().stream()
-        .filter(m -> m.getKind() != MethodKind.CALLBACK)
+        .filter(not(MethodInfo::isDeprecated))
+        .filter(not(m -> m.getKind() == MethodKind.CALLBACK))
         .map(m -> renderMethod(m, imports))
         .collect(joining("\n\n"));
 
@@ -72,15 +93,22 @@ public class ScalaGenerator extends Generator<ClassModel> {
         .reduce((a, b) -> String.join(", ", a, b))
         .orElse("");
 
+    String overrideString = renderOverrideString(m);
+    String methodName = quoteForScala(m.getName());
     String returnType = convertTypeInfo(m.getReturnType(), imports);
-
     String impl = createImplementation(m);
 
     return "  //params: " + m.getParams().stream()
         .map(pi -> pi.getType().getName() + " " + pi.getName())
         .collect(joining("\n    //"))
         + "\n  //returns: " + m.getReturnType().getName()
-        + "\n  def " + m.getName() + typeParamList + "(" + paramList + "): " + returnType + " = " + impl;
+        + "\n  " + overrideString + "def " + methodName + typeParamList + "(" + paramList + "): " + returnType + " = "
+        + impl;
+  }
+
+  private String renderOverrideString(MethodInfo methodInfo) {
+    Predicate<MethodInfo> doesOverride = overrideMethods.getOrDefault(methodInfo.getName(), __ -> false);
+    return doesOverride.test(methodInfo) ? "override " : "";
   }
 
   private String convertTypeInfo(TypeInfo typeInfo, Set<String> imports) {
@@ -111,16 +139,18 @@ public class ScalaGenerator extends Generator<ClassModel> {
           .map(parameterTypeInfo -> convertTypeInfo(parameterTypeInfo, true, toScalaTypeConverter))
           .reduce((a, b) -> String.join(",", a, b))
           .map(til -> pti.getRaw().getName() + "[" + til + "]")
-          .orElse("");
+          .orElse("[?]");
       // All type params of other parameterized types
     } else if (isTypeParam) {
       return typeInfo.getName();
     } else {
-      return toScalaTypeConverter.apply(typeInfo.getName());
+      String wildcardTypeParam = genericClasses.contains(typeInfo.getName()) ? "[?]" : "";
+      return toScalaTypeConverter.apply(typeInfo.getName()) + wildcardTypeParam;
     }
   }
 
   private String createImplementation(MethodInfo methodInfo) {
+    String methodName = quoteForScala(methodInfo.getName());
     if (methodInfo.getKind() == MethodKind.CALLBACK) {
       return "???";
     } else if (methodInfo.getKind() == MethodKind.FUTURE) {
@@ -133,7 +163,7 @@ public class ScalaGenerator extends Generator<ClassModel> {
           .reduce((a, b) -> String.join(", ", a, b))
           .orElse("");
 
-      return "\n    delegate." + methodInfo.getName() + "(" + callParamList + ")"
+      return "\n    delegate." + methodName + "(" + callParamList + ")"
           + addAsScala("", methodInfo.getReturnType())
           + addReturnTypeConversion(methodInfo.getReturnType());
     }
@@ -246,6 +276,10 @@ public class ScalaGenerator extends Generator<ClassModel> {
 
   private String quoteForScala(String name) {
     switch (name) {
+      case "match":
+        return "`match`";
+      case "object":
+        return "`object`";
       case "type":
         return "`type`";
       default:
@@ -304,6 +338,10 @@ public class ScalaGenerator extends Generator<ClassModel> {
     return kind == ClassKind.LIST
         || kind == ClassKind.MAP
         || kind == ClassKind.SET;
+  }
+
+  private <X> Predicate<X> not(Predicate<X> positive) {
+    return x -> !positive.test(x);
   }
 
 }
