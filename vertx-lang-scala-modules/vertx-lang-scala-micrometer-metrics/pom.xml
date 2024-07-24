@@ -16,7 +16,7 @@
     <gen.src.aid>vertx-micrometer-metrics</gen.src.aid>
     <gen.src.unpacked.dir>${project.build.directory}/sources/java</gen.src.unpacked.dir>
     <gen.src.generated.dir>${project.build.directory}/generated-sources</gen.src.generated.dir>
-    <micrometer.version>1.10.3</micrometer.version>
+    <micrometer.version>1.12.4</micrometer.version>
   </properties>
 
   <dependencies>
