@@ -25,7 +25,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-scala-core</artifactId>
+      <artifactId>vertx-lang-scala-core_3</artifactId>
       <version>${stack.version}</version>
     </dependency>
     <dependency>
