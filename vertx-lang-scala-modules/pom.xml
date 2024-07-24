@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>vertx-lang-scala3-parent</artifactId>
-    <version>4.3.8-SNAPSHOT</version>
+    <artifactId>vertx-lang-scala-parent</artifactId>
+    <version>4.5.9-SNAPSHOT</version>
   </parent>
 
   <artifactId>vertx-lang-scala-modules</artifactId>
@@ -80,6 +80,7 @@
     <module>vertx-lang-scala-core</module>
     <module>vertx-lang-scala-web-sstore-redis</module>
     <module>vertx-lang-scala-rabbitmq-client</module>
-    <module>vertx-lang-scala-consul-client</module>  </modules>
+    <module>vertx-lang-scala-consul-client</module>
+  </modules>
 
 </project>

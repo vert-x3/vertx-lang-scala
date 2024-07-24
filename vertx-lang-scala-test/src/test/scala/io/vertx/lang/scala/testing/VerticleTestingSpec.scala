@@ -4,12 +4,13 @@ import io.vertx.core.http.HttpClient
 import io.vertx.lang.scala.*
 import io.vertx.lang.scala.ImplicitConversions.vertxFutureToScalaFuture
 import io.vertx.lang.scala.json.{json, Json}
-import io.vertx.scala.core.*
 import org.scalatest.FutureOutcome
 import org.scalatest.matchers.should.Matchers
 
 import scala.compiletime.uninitialized
 import scala.language.implicitConversions
+import io.vertx.core.http.RequestOptions
+import io.vertx.core.http.HttpMethod
 
 class VerticleTestingSpec extends VerticleTesting[TestVerticle], Matchers:
 
@@ -34,7 +35,7 @@ class VerticleTestingSpec extends VerticleTesting[TestVerticle], Matchers:
 
   "TestVerticle" should "bind to 8888 and answer with 'Hello from Vert.x!'" in {
     for {
-      req  <- httpClient.request(RequestOptions(absoluteURI = "http://127.0.0.1:8888/hello"))
+      req  <- httpClient.request(RequestOptions().setAbsoluteURI("http://127.0.0.1:8888/hello"))
       res  <- req.send
       body <- res.body
       assertion = body.toString("UTF-8") should equal("Hello from Vert.x!")
@@ -43,7 +44,7 @@ class VerticleTestingSpec extends VerticleTesting[TestVerticle], Matchers:
 
   it should "answer with a pong when pinged" in {
     for {
-      req  <- httpClient.request(RequestOptions(absoluteURI = "http://127.0.0.1:8888/ping"))
+      req  <- httpClient.request(RequestOptions().setAbsoluteURI("http://127.0.0.1:8888/ping"))
       res  <- req.send
       body <- res.body
       assertion = body.toJsonValue should equal(Json.obj("""{ "message": "pong" }"""))

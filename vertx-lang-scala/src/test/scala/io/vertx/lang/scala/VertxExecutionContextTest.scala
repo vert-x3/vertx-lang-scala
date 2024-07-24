@@ -61,7 +61,7 @@ end VertxExecutionContextTest
 object VertxDemo:
 
   import io.vertx.lang.scala.*
-  import io.vertx.scala.core.HttpServerOptions
+  import io.vertx.core.http.HttpServerOptions
 
   def main(args: Array[String]): Unit =
     val vertx = Vertx.vertx
@@ -69,7 +69,7 @@ object VertxDemo:
     given exec: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
 
     vertx
-      .createHttpServer(HttpServerOptions(port = 8080))
+      .createHttpServer(HttpServerOptions().setPort(8080))
       .requestHandler(req => req.response.end("Hello world!"))
       .listen
       .asScala

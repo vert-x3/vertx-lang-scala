@@ -4,7 +4,7 @@ import io.vertx.core.Vertx
 import io.vertx.lang.scala.*
 import io.vertx.lang.scala.json.{Json, JsonObject}
 import io.vertx.lang.scala.testing.TypeUtility.typeName
-import io.vertx.scala.core.DeploymentOptions
+import io.vertx.core.DeploymentOptions
 import org.scalatest.BeforeAndAfter
 import org.scalatest.flatspec.AsyncFlatSpec
 import org.slf4j.{Logger, LoggerFactory}

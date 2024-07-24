@@ -282,6 +282,8 @@ public class ScalaGenerator extends Generator<ClassModel> {
         return "`object`";
       case "type":
         return "`type`";
+      case "with":
+        return "`with`";
       default:
         return name;
     }
