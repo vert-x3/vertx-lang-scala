@@ -1,6 +1,6 @@
 import java.time.LocalDate
 
-ThisBuild / scalaVersion := "3.4.2"
+ThisBuild / scalaVersion := "3.5.0"
 ThisBuild / resolvers += "Sonatype OSS Snapshots" at "https://s01.oss.sonatype.org/content/repositories/snapshots"
 ThisBuild / version      := "4.5.10-SNAPSHOT"
 
