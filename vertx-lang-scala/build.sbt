@@ -2,7 +2,7 @@ import java.time.LocalDate
 
 ThisBuild / scalaVersion := "3.5.0"
 ThisBuild / resolvers += "Sonatype OSS Snapshots" at "https://s01.oss.sonatype.org/content/repositories/snapshots"
-ThisBuild / version      := "4.5.8-SNAPSHOT"
+ThisBuild / version      := "4.5.10-SNAPSHOT"
 
 lazy val currentYear = LocalDate.now().getYear()
 lazy val socialLinks = Map(
@@ -38,6 +38,7 @@ lazy val root = project
   .settings(
     name := "Vert.x for Scala",
     libraryDependencies ++= Seq(
+      "io.vertx"           % "vertx-core"            % version.value,
       "io.vertx"           % "vertx-web"             % version.value,
       "io.vertx"          %% "vertx-lang-scala"      % version.value,
       "io.vertx"          %% "vertx-lang-scala-test" % version.value,
