@@ -20,8 +20,8 @@ import io.vertx.core.json.JsonObject
 import io.vertx.core.{AbstractVerticle, Context, Promise, Verticle, Vertx}
 import io.vertx.lang.scala.conv.newPromise
 
-import scala.util.{Failure, Success}
-import scala.jdk.CollectionConverters._
+import scala.util.Success
+import scala.collection.JavaConverters._
 import scala.collection.mutable
 import scala.reflect.ClassTag
 

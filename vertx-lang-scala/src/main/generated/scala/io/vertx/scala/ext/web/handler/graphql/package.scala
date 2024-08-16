@@ -17,7 +17,7 @@
 
 package io.vertx.scala.ext.web.handler
 
-import scala.jdk.CollectionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -32,9 +32,10 @@ package object graphql{
   object ApolloWSOptions {
     def apply() = new ApolloWSOptions()
     def apply(json: JsonObject) = new ApolloWSOptions(json)
-    def apply( keepAlive: java.lang.Long = null): ApolloWSOptions = {
+    def apply( keepAlive: java.lang.Long = null, origin: java.lang.String = null): ApolloWSOptions = {
       val ret = new ApolloWSOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (keepAlive != null) ret.setKeepAlive(keepAlive) 
+      if (origin != null) ret.setOrigin(origin) 
       ret
     }
   }
@@ -49,6 +50,19 @@ package object graphql{
       val ret = new GraphQLHandlerOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (requestBatchingEnabled != null) ret.setRequestBatchingEnabled(requestBatchingEnabled) 
       if (requestMultipartEnabled != null) ret.setRequestMultipartEnabled(requestMultipartEnabled) 
+      ret
+    }
+  }
+
+
+
+  type GraphQLWSOptions = io.vertx.ext.web.handler.graphql.ws.GraphQLWSOptions
+  object GraphQLWSOptions {
+    def apply() = new GraphQLWSOptions()
+    def apply(json: JsonObject) = new GraphQLWSOptions(json)
+    def apply( connectionInitWaitTimeout: java.lang.Long = null): GraphQLWSOptions = {
+      val ret = new GraphQLWSOptions(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
+      if (connectionInitWaitTimeout != null) ret.setConnectionInitWaitTimeout(connectionInitWaitTimeout) 
       ret
     }
   }

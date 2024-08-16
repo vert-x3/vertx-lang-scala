@@ -16,7 +16,7 @@
 package io.vertx.lang.scala.json
 
 import java.util
-import scala.jdk.CollectionConverters.ListHasAsScala
+import scala.collection.JavaConverters._
 
 /**
  * Helper to construct JsonObjects and JsonArrays.

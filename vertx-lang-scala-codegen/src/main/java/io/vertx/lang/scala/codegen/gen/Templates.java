@@ -643,7 +643,7 @@ public class Templates {
         "\n" +
         "package " + modulePackage +"\n" +
         "\n" +
-        "import scala.jdk.CollectionConverters._\n" +
+        "import scala.collection.JavaConverters._\n" +
         "import io.vertx.core.json.JsonObject\n" +
         "import io.vertx.core.json.JsonArray\n" +
         "import io.vertx.core.AsyncResult\n" +

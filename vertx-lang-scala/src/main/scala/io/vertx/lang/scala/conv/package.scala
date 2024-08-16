@@ -3,7 +3,7 @@ package io.vertx.lang.scala
 import io.vertx.core.{Future => VertxFuture}
 
 import scala.concurrent.Promise
-import scala.jdk.FutureConverters._
+import scala.compat.java8.FutureConverters._
 import scala.util.Success
 
 /**
@@ -24,11 +24,11 @@ package object conv {
   }
 
   def vertxFutureToScalaFuture[T](vertxFuture: VertxFuture[T]): ScalaFuture[T] = {
-    vertxFuture.toCompletionStage.asScala
+    vertxFuture.toCompletionStage.toScala
   }
 
   def scalaFutureToVertxFuture[T](scalaFuture: ScalaFuture[T]): VertxFuture[T] = {
-    VertxFuture.fromCompletionStage(scalaFuture.asJava)
+    VertxFuture.fromCompletionStage(scalaFuture.toJava)
   }
 
   def newPromise[T](): ScalaPromise[T] = {

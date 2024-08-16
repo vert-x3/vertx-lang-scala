@@ -9,8 +9,8 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>vertx-lang-scala-parent_2.13</artifactId>
-  <version>4.2.0-SNAPSHOT</version>
+  <artifactId>vertx-lang-scala-parent_2.12</artifactId>
+  <version>4.2.0</version>
   <packaging>pom</packaging>
   <inceptionYear>2016</inceptionYear>
   <organization>
@@ -30,7 +30,8 @@
     </license>
   </licenses>
   <properties>
-    <scala.version>2.13.6</scala.version>
+    <scala.major.version>2.12</scala.major.version>
+    <scala.version>${scala.major.version}.18</scala.version>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <stack.version>${project.version}</stack.version>
@@ -62,7 +63,7 @@
       </dependency>
       <dependency>
         <groupId>org.scalatest</groupId>
-        <artifactId>scalatest_2.13</artifactId>
+        <artifactId>scalatest_${scala.major.version}</artifactId>
         <version>3.2.3</version>
       </dependency>
     </dependencies>

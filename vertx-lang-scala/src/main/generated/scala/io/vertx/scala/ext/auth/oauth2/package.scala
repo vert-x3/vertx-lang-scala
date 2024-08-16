@@ -17,7 +17,7 @@
 
 package io.vertx.scala.ext.auth
 
-import scala.jdk.CollectionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult
@@ -38,7 +38,7 @@ package object oauth2{
   object OAuth2Options {
     def apply() = new OAuth2Options()
     def apply(json: JsonObject) = new OAuth2Options(json)
-    def apply( authorizationPath: java.lang.String = null, clientAssertion: java.lang.String = null, clientAssertionType: java.lang.String = null, clientID: java.lang.String = null, clientId: java.lang.String = null, clientSecret: java.lang.String = null, extraParameters: io.vertx.core.json.JsonObject = null, flow: io.vertx.ext.auth.oauth2.OAuth2FlowType = null, headers: io.vertx.core.json.JsonObject = null, httpClientOptions: io.vertx.core.http.HttpClientOptions = null, introspectionPath: java.lang.String = null, jwkPath: java.lang.String = null, jwtOptions: io.vertx.ext.auth.JWTOptions = null, logoutPath: java.lang.String = null, pubSecKeys: scala.collection.immutable.List[io.vertx.ext.auth.PubSecKeyOptions] = null, revocationPath: java.lang.String = null, scopeSeparator: java.lang.String = null, site: java.lang.String = null, tenant: java.lang.String = null, tokenPath: java.lang.String = null, userAgent: java.lang.String = null, userInfoParameters: io.vertx.core.json.JsonObject = null, userInfoPath: java.lang.String = null, validateIssuer: java.lang.Boolean = null): OAuth2Options = {
+    def apply( authorizationPath: java.lang.String = null, clientAssertion: java.lang.String = null, clientAssertionType: java.lang.String = null, clientID: java.lang.String = null, clientId: java.lang.String = null, clientSecret: java.lang.String = null, extraParameters: io.vertx.core.json.JsonObject = null, flow: io.vertx.ext.auth.oauth2.OAuth2FlowType = null, headers: io.vertx.core.json.JsonObject = null, httpClientOptions: io.vertx.core.http.HttpClientOptions = null, introspectionPath: java.lang.String = null, jwkPath: java.lang.String = null, jwtOptions: io.vertx.ext.auth.JWTOptions = null, logoutPath: java.lang.String = null, pubSecKeys: scala.collection.immutable.List[io.vertx.ext.auth.PubSecKeyOptions] = null, revocationPath: java.lang.String = null, rotateJWKs: java.lang.Boolean = null, scopeSeparator: java.lang.String = null, site: java.lang.String = null, supportedGrantTypes: scala.collection.immutable.List[java.lang.String] = null, tenant: java.lang.String = null, tokenPath: java.lang.String = null, userAgent: java.lang.String = null, userInfoParameters: io.vertx.core.json.JsonObject = null, userInfoPath: java.lang.String = null, validateIssuer: java.lang.Boolean = null): OAuth2Options = {
       val ret = new OAuth2Options(new io.vertx.core.json.JsonObject(java.util.Collections.emptyMap[java.lang.String,java.lang.Object]()))
       if (authorizationPath != null) ret.setAuthorizationPath(authorizationPath) 
       if (clientAssertion != null) ret.setClientAssertion(clientAssertion) 
@@ -56,8 +56,10 @@ package object oauth2{
       if (logoutPath != null) ret.setLogoutPath(logoutPath) 
       if (pubSecKeys != null) ret.setPubSecKeys(pubSecKeys.asJava) 
       if (revocationPath != null) ret.setRevocationPath(revocationPath) 
+      if (rotateJWKs != null) ret.setRotateJWKs(rotateJWKs) 
       if (scopeSeparator != null) ret.setScopeSeparator(scopeSeparator) 
       if (site != null) ret.setSite(site) 
+      if (supportedGrantTypes != null) ret.setSupportedGrantTypes(supportedGrantTypes.asJava) 
       if (tenant != null) ret.setTenant(tenant) 
       if (tokenPath != null) ret.setTokenPath(tokenPath) 
       if (userAgent != null) ret.setUserAgent(userAgent) 

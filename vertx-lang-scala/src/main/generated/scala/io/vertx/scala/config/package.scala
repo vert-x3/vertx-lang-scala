@@ -17,7 +17,7 @@
 
 package io.vertx.scala
 
-import scala.jdk.CollectionConverters._
+import scala.collection.JavaConverters._
 import io.vertx.core.json.JsonObject
 import io.vertx.core.json.JsonArray
 import io.vertx.core.AsyncResult

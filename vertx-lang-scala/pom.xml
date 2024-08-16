@@ -6,12 +6,12 @@
 
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>vertx-lang-scala-parent_2.13</artifactId>
-    <version>4.2.0-SNAPSHOT</version>
+    <artifactId>vertx-lang-scala-parent_2.12</artifactId>
+    <version>4.2.0</version>
     <relativePath>..</relativePath>
   </parent>
 
-  <artifactId>vertx-lang-scala_2.13</artifactId>
+  <artifactId>vertx-lang-scala_2.12</artifactId>
 
   <name>Vert.x Scala Language Support</name>
 
@@ -30,7 +30,7 @@
     </dependency>
     <dependency>
       <groupId>io.vertx</groupId>
-      <artifactId>vertx-lang-scala-on-the-fly_2.13</artifactId>
+      <artifactId>vertx-lang-scala-on-the-fly_2.12</artifactId>
       <version>${project.version}</version>
       <optional>true</optional>
     </dependency>
@@ -384,10 +384,14 @@
     </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
-      <artifactId>scalatest_2.13</artifactId>
+      <artifactId>scalatest_${scala.major.version}</artifactId>
       <scope>test</scope>
     </dependency>
-
+    <dependency>
+      <groupId>org.scala-lang.modules</groupId>
+      <artifactId>scala-java8-compat_${scala.major.version}</artifactId>
+      <version>1.0.2</version>
+    </dependency>
   </dependencies>
 
   <build>
