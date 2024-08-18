@@ -14,12 +14,12 @@ project descriptor to access the Vert.x Core API and enable the Scala support:
 </dependency>
 <dependency>
   <groupId>io.vertx</groupId>
-  <artifactId>vertx-lang-scala_2.13</artifactId>
+  <artifactId>vertx-lang-scala_2.12</artifactId>
   <version>${maven.version}</version>
 </dependency>
 <dependency>
   <groupId>io.vertx</groupId>
-  <artifactId>vertx-lang-scala-test_2.13</artifactId>
+  <artifactId>vertx-lang-scala-test_2.12</artifactId>
   <version>${maven.version}</version>
 </dependency>
 ----
@@ -31,8 +31,8 @@ Or go to [https://start.vertx.io/](https://start.vertx.io/) to generate a fully 
 [source,groovy,subs="+attributes"]
 ----
 compile "io.vertx:vertx-core:${maven.version}"
-compile "io.vertx:vertx-lang-scala_2.13:${maven.version}"
-compile "io.vertx:vertx-lang-scala-test_2.13:${maven.version}"
+compile "io.vertx:vertx-lang-scala_2.12:${maven.version}"
+compile "io.vertx:vertx-lang-scala-test_2.12:${maven.version}"
 ----
 
 And like with Maven, go to [https://start.vertx.io/](https://start.vertx.io/) and generate a project.
@@ -69,7 +69,7 @@ That package provides conversions between VertxFutures and their Scala counterpa
 == Verticles
 
 For Scala-based verticles use {@link io.vertx.lang.scala.ScalaVerticle} as their base class.
-This will take care of providing the correct [ExecutionContext](https://www.scala-lang.org/api/2.13.3/scala/concurrent/ExecutionContext.html) and adds some Scala-specific syntactic sugar.
+This will take care of providing the correct [ExecutionContext](https://www.scala-lang.org/api/2.12.13/scala/concurrent/ExecutionContext.html) and adds some Scala-specific syntactic sugar.
 
 [source, scala]
 ----

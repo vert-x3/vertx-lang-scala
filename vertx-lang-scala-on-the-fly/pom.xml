@@ -6,50 +6,43 @@
 
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>vertx-lang-scala-parent_2.12</artifactId>
-    <version>4.2.0</version>
-    <relativePath>..</relativePath>
+    <artifactId>vertx-lang-scala-parent</artifactId>
+    <version>4.3.8</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>vertx-lang-scala-on-the-fly_2.12</artifactId>
+  <artifactId>vertx-lang-scala-on-the-fly_${scala.major.version}</artifactId>
   <name>Scala on the fly compilation</name>
 
   <dependencies>
-
     <!-- What we need at runtime -->
     <dependency>
       <groupId>org.scala-lang</groupId>
-      <artifactId>scala-library</artifactId>
-      <version>${scala.version}</version>
+      <artifactId>${scala}-library${scala.suffix}</artifactId>
     </dependency>
     <dependency>
       <groupId>org.scala-lang</groupId>
-      <artifactId>scala-compiler</artifactId>
-      <version>${scala.version}</version>
+      <artifactId>${scala}-compiler${scala.suffix}</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
-      <version>5.6.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.6.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_${scala.major.version}</artifactId>
-      <version>3.1.2</version>
       <scope>test</scope>
     </dependency>
     <dependency>
       <groupId>org.scalactic</groupId>
       <artifactId>scalactic_${scala.major.version}</artifactId>
-      <version>3.2.0</version>
+      <version>3.2.11</version>
       <scope>test</scope>
     </dependency>
     <dependency>

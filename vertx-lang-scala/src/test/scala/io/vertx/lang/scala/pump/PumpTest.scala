@@ -1,11 +1,10 @@
 package io.vertx.lang.scala.pump
 
-import java.util.ArrayList
-
 import io.vertx.core.streams.Pump
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 
+import java.util.ArrayList
 /**
   * @author <a href="mailto:jochen@codepitbull.de">Jochen Mader</a
   */

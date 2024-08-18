@@ -15,10 +15,7 @@ import scala.util.{Failure, Success}
 
 abstract class VerticleTesting[A <: ScalaVerticle: TypeTag] extends AsyncFlatSpec with BeforeAndAfter{
   val vertx = Vertx.vertx()
-  implicit val vertxExecutionContext = VertxExecutionContext(
-    vertx,
-    vertx.getOrCreateContext()
-  )
+  implicit val vertxExecutionContext: VertxExecutionContext = VertxExecutionContext( vertx, vertx.getOrCreateContext() )
 
   private var deploymentId = ""
 
@@ -29,7 +26,7 @@ abstract class VerticleTesting[A <: ScalaVerticle: TypeTag] extends AsyncFlatSpe
       vertx
         .deployVerticle("scala:" + implicitly[TypeTag[A]].tpe.typeSymbol.fullName,
           DeploymentOptions().setConfig(config()))
-        .asScala()
+        .asScala
         .andThen {
           case Success(d) => d
           case Failure(t) => throw new RuntimeException(t)
@@ -41,7 +38,7 @@ abstract class VerticleTesting[A <: ScalaVerticle: TypeTag] extends AsyncFlatSpe
   after {
     Await.result(
       vertx.undeploy(deploymentId)
-        .asScala()
+        .asScala
         .andThen {
           case Success(d) => d
           case Failure(t) => throw new RuntimeException(t)

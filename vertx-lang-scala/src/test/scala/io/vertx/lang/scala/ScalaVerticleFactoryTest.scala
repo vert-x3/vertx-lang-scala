@@ -3,15 +3,13 @@ package io.vertx.lang.scala
 import java.io.File
 import java.nio.file.Files
 import java.util.concurrent.Callable
-
-import io.vertx.core
-import io.vertx.core.{AsyncResult, Handler, Verticle, Vertx}
+import io.vertx.core.{AsyncResult, Handler, Verticle, Vertx, Promise => VertxPromise}
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.time.SpanSugar._
 import org.scalatest.concurrent.ScalaFutures.whenReady
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.flatspec.AsyncFlatSpec
-
+import language.postfixOps
 import scala.concurrent.Promise
 
 class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
@@ -27,7 +25,7 @@ class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
     Files.copy(rs, file.toPath)
 
     val scalaVerticleFactory = new ScalaVerticleFactory
-    val verticlePromise:core.Promise[Callable[Verticle]] = core.Promise.promise()
+    val verticlePromise: VertxPromise[Callable[Verticle]] = VertxPromise.promise()
     scalaVerticleFactory.createVerticle(file.toPath.toString, getClass.getClassLoader, verticlePromise)
     verticlePromise.future().onComplete(v => {
       vertx.deployVerticle(v.result().call(), new Handler[AsyncResult[java.lang.String]] {
@@ -43,7 +41,7 @@ class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
     val vertx = Vertx.vertx()
     val scalaVerticleFactory = new ScalaVerticleFactory
 
-    val verticlePromise:core.Promise[Callable[Verticle]] = core.Promise.promise()
+    val verticlePromise: VertxPromise[Callable[Verticle]] = VertxPromise.promise()
     scalaVerticleFactory.createVerticle("ScalaTestVerticle2.scala", getClass.getClassLoader, verticlePromise)
     verticlePromise.future().onComplete(v => {
       vertx.deployVerticle(v.result().call(), new Handler[AsyncResult[java.lang.String]] {

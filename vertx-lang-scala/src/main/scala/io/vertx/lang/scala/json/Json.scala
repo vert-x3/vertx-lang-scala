@@ -95,7 +95,7 @@ object Json {
   def arr(fields: Any*): JsonArray = {
     val a = new JsonArray()
     fields.foreach {
-      case array: Array[_] => a.add(listToJsArr(array))
+      case array: Array[_] => a.add(listToJsArr(array.toIndexedSeq))
       case seq: Seq[_] => a.add(listToJsArr(seq))
       case f => a.add(f)
     }
@@ -108,7 +108,7 @@ object Json {
 
   implicit class JsArray(val internal: JsonArray) extends AnyVal {
 
-    def list: List[_ >: Any] = {
+    def list: List[Any] = {
       internal.getList.asScala.toList
     }
   }

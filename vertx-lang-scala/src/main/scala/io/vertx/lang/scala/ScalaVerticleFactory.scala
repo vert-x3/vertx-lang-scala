@@ -30,7 +30,7 @@ import io.vertx.lang.scala.onthefly.OnTheFlyCompiler
  */
 class ScalaVerticleFactory extends VerticleFactory {
 
-  private var vertx: Vertx = null
+  private var vertx: Vertx = _
 
   override def init(vertx: Vertx): Unit = this.vertx = vertx
 
@@ -53,7 +53,7 @@ class ScalaVerticleFactory extends VerticleFactory {
   private def verticleFromSource(verticleName: String, classLoader: ClassLoader): Verticle = {
     val compiler = new OnTheFlyCompiler(None)
     compiler.tryToCompileClass(verticleName) match {
-      case Some(clazz) => clazz.getDeclaredConstructor().newInstance().asInstanceOf[ScalaVerticle].asJava()
+      case Some(clazz) => clazz.getDeclaredConstructor().newInstance().asInstanceOf[ScalaVerticle].asJava
       case None        => throw new RuntimeException(s"Failed to compile $verticleName")
     }
   }
@@ -61,6 +61,6 @@ class ScalaVerticleFactory extends VerticleFactory {
   private def verticleFromClass(verticleName: String, classLoader: ClassLoader): Verticle = {
     val clazz = classLoader.loadClass(verticleName.replace("scala:",""))
     val instance = clazz.getDeclaredConstructor().newInstance().asInstanceOf[ScalaVerticle]
-    instance.asJava()
+    instance.asJava
   }
 }

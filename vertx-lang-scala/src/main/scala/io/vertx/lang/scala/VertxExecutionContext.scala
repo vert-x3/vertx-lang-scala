@@ -30,14 +30,11 @@ import scala.concurrent.ExecutionContext
   * https://github.com/vert-x/mod-lang-scala/blob/master/src/main/scala/org/vertx/scala/core/VertxExecutionContext.scala
   *
   */
-class VertxExecutionContext(val vertx: Vertx, val ctx:Context) extends ExecutionContext{
+class VertxExecutionContext(val vertx: Vertx, val ctx:Context) extends ExecutionContext {
   override def execute(runnable: Runnable): Unit = {
-    if (vertx.getOrCreateContext() != ctx) {
+    if (vertx.getOrCreateContext() != ctx) 
       ctx.runOnContext((_:Void) => runnable.run())
-    }
-    else {
-      runnable.run()
-    }
+    else runnable.run()
   }
 
   override def reportFailure(cause: Throwable): Unit = cause.printStackTrace()

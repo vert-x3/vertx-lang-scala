@@ -7,6 +7,9 @@
 .yardoc
 .yardopts
 .sdkmanrc
+.bloop
+.metals
+.vscode
 bin
 build
 target
@@ -21,6 +24,7 @@ test-results
 test-tmp
 *.class
 src/gen
+**/src/main/generated/**
 src/test/java/io/vertx/codegen/**
 src/test/java/com/acme/**
 src/test/scala/io/vertx/scala/codegen/**

@@ -26,7 +26,7 @@ class VertxTest extends AnyFlatSpec with Matchers {
     waiter.await(Timeout(Span(1100, Millis)), dismissals(1))
   }
 
-  "Vert.x" should "deploy a preinstantiated ScalaVerticle with DefaultOptions" in {
+  "Vert.x" should "deploy a pre-instantiated ScalaVerticle with DefaultOptions" in {
     val vertx = Vertx.vertx()
     val waiter = new Waiter()
     vertx.deployVerticle(new ScalaVerticle {
@@ -37,12 +37,12 @@ class VertxTest extends AnyFlatSpec with Matchers {
     waiter.await(dismissals(1))
   }
 
-  "Vert.x" should "deploy a preinstantiated ScalaVerticle using the provided options" in {
+  "Vert.x" should "deploy a pre-instantiated ScalaVerticle using the provided options" in {
     val vertx = Vertx.vertx()
     val waiter = new Waiter()
     vertx.deployVerticle(new ScalaVerticle {
       override def start(): Unit = {
-        if(vertx.getOrCreateContext().isWorkerContext()) {
+        if(this.vertx.getOrCreateContext().isWorkerContext) {
           waiter.dismiss()
         }
       }
@@ -50,9 +50,9 @@ class VertxTest extends AnyFlatSpec with Matchers {
     waiter.await(dismissals(1))
   }
 
-  "Vert.x" should "deploy a preinstantiated ScalaVerticle and return a Future" in {
+  "Vert.x" should "deploy a pre-instantiated ScalaVerticle and return a Future" in {
     val vertx = Vertx.vertx()
-    implicit val ctx = VertxExecutionContext(vertx, vertx.getOrCreateContext())
+    implicit val ctx: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     val waiter = new Waiter()
     val futureWaiter = new Waiter()
 
@@ -62,28 +62,28 @@ class VertxTest extends AnyFlatSpec with Matchers {
       }
     })
     future.onComplete {
-      case Success(s) => futureWaiter.dismiss()
+      case Success(_) => futureWaiter.dismiss()
       case Failure(t) => t.printStackTrace()
     }
     futureWaiter.await(dismissals(1))
     waiter.await(dismissals(1))
   }
 
-  "Vert.x" should "deploy a preinstantiated ScalaVerticle using the provided options and return a Future" in {
+  "Vert.x" should "deploy a pre-instantiated ScalaVerticle using the provided options and return a Future" in {
     val vertx = Vertx.vertx()
-    implicit val ctx = VertxExecutionContext(vertx, vertx.getOrCreateContext())
+    implicit val ctx: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     val waiter = new Waiter()
     val futureWaiter = new Waiter()
 
     val future = vertx.deployVerticle(new ScalaVerticle {
       override def start(): Unit = {
-        if(vertx.getOrCreateContext().isWorkerContext()) {
+        if(this.vertx.getOrCreateContext().isWorkerContext) {
           waiter.dismiss()
         }
       }
     }, new DeploymentOptions().setWorker(true))
     future.onComplete {
-      case Success(s) => futureWaiter.dismiss()
+      case Success(_) => futureWaiter.dismiss()
       case Failure(t) => t.printStackTrace()
     }
     futureWaiter.await(dismissals(1))

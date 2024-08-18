@@ -13,7 +13,7 @@ public class ScalaGeneratorLoader implements GeneratorLoader {
     HashSet<Generator<?>> generators = new HashSet<>();
 
     ClassCodeGenerator classGen = new ClassCodeGenerator();
-    HashSet classKinds = new HashSet();
+    HashSet<String> classKinds = new HashSet<>();
     classKinds.add("dataObject");
     classGen.name = "scala";
     classGen.kinds = classKinds;

@@ -1,10 +1,8 @@
 package io.vertx.lang.scala
 
 import io.vertx.core.{Future => VertxFuture}
-
-import scala.concurrent.Promise
 import scala.compat.java8.FutureConverters._
-import scala.util.Success
+import scala.language.implicitConversions
 
 /**
  * Creating a package object scala that imports from the scala package is not possible.
@@ -15,23 +13,12 @@ package object conv {
 
   type ScalaFuture[T] = scala.concurrent.Future[T]
   type ScalaPromise[T] = scala.concurrent.Promise[T]
-  type ScalaOption[T] = scala.Option[T]
-  type ScalaSuccess[T] = scala.util.Success[T]
-  type ScalaFailure[T] = scala.util.Failure[T]
+  type VertxFuture[T] = io.vertx.core.Future[T]
+  type VertxPromise[T] = io.vertx.core.Promise[T]
 
-  def succScalaSuccess[T](s: T): Success[T] = {
-    Success(s)
-  }
-
-  def vertxFutureToScalaFuture[T](vertxFuture: VertxFuture[T]): ScalaFuture[T] = {
+  implicit def vertxFutureToScalaFuture[T](vertxFuture: VertxFuture[T]): ScalaFuture[T] =
     vertxFuture.toCompletionStage.toScala
-  }
 
-  def scalaFutureToVertxFuture[T](scalaFuture: ScalaFuture[T]): VertxFuture[T] = {
+  implicit def scalaFutureToVertxFuture[T](scalaFuture: ScalaFuture[T]): VertxFuture[T] =
     VertxFuture.fromCompletionStage(scalaFuture.toJava)
-  }
-
-  def newPromise[T](): ScalaPromise[T] = {
-    Promise[T]()
-  }
 }

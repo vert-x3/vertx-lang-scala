@@ -5,9 +5,9 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>io.vertx</groupId>
-    <artifactId>vertx-lang-scala-parent_2.12</artifactId>
-    <version>4.2.0</version>
-    <relativePath>..</relativePath>
+    <artifactId>vertx-lang-scala-parent</artifactId>
+    <version>4.3.8</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>vertx-lang-scala-codegen</artifactId>
   <name>Codegen for Scala</name>
