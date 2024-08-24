@@ -22,13 +22,13 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
   }
 
   "Completing a Vertx-Future in a Scala Future" should "work with the VertxExecutionContext" in {
-    vertx.deployVerticle(new SuccessVerticle().asJava).asScala
+    vertx.deployVerticle(new SuccessVerticle())
          .map(res => res should not be empty)(vertxExecutionContext)
   }
 
   "Switching to the event loop execution context" should "work even when another context is used in between" in {
     for {
-      _ <- vertx.deployVerticle(new ThreadIdReplyer().asJava).asScala
+      _ <- vertx.deployVerticle(new ThreadIdReplyer())
       idInEventLoopMsg <- vertx.eventBus.request[Long](EVENTBUS_ADDRESS, HANDLER_TYPE_EVENTLOOP).asScala
       idInWorkerPoolMsg <- vertx.eventBus.request[Long](EVENTBUS_ADDRESS, HANDLER_TYPE_WORKERPOOL).asScala
       idInContextMsg <- vertx.eventBus.request[Long](EVENTBUS_ADDRESS, HANDLER_TYPE_VERTXCONTEXT).asScala
@@ -40,7 +40,7 @@ class VertxExecutionContextTest extends AsyncFlatSpec with Matchers with Asserti
   }
 
   "A deployment" should "fail if the deployed verticle fails" in {
-    vertx.deployVerticle(new FailVerticle().asJava).asScala
+    vertx.deployVerticle(new FailVerticle())
       .transformWith {
         case Failure(t) => t.getMessage should equal("wuha")
         case Success(_) => fail("Deployment shouldn't succeed!")

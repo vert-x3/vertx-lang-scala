@@ -79,7 +79,7 @@ object Json {
   def obj(fields: (String, Any)*): JsonObject = {
     val o = new JsonObject()
     fields.foreach {
-      case (key, l: Array[_]) => o.put(key, listToJsArr(l))
+      case (key, l: Array[_]) => o.put(key, listToJsArr(l.toIndexedSeq))
       case (key, l: Seq[_]) => o.put(key, listToJsArr(l))
       case (key, value) => o.put(key, value)
     }

@@ -1,9 +1,11 @@
 package io.vertx.lang
 
 import concurrent.{Future => ScalaFuture, Promise => ScalaPromise}
-import util.{Try, Success, Failure}
-import io.vertx.lang.scala.conv.{scalaFutureToVertxFuture, vertxFutureToScalaFuture, VertxFuture}
+import util.{Failure, Success, Try}
+import io.vertx.lang.scala.conv.{VertxFuture, scalaFutureToVertxFuture, vertxFutureToScalaFuture}
 import io.vertx.core.{AsyncResult, DeploymentOptions, Handler, Vertx, Promise => VertxPromise}
+import io.vertx.sqlclient.{PreparedQuery, Query, Tuple}
+import io.vertx.sqlclient.impl.ArrayTuple
 
 package object scala {
 
@@ -100,5 +102,23 @@ package object scala {
      */
     def deployVerticle(name: String, options: DeploymentOptions): ScalaFuture[String] =
       asJava.deployVerticle(name, options).asScala
+  }
+
+  def tupleOf(x: Any *): Tuple =
+    x.foldLeft(new ArrayTuple(x.length)){ (a,e) =>
+      a.addValue(e)
+      a
+    }
+
+  implicit class QueryOps[T](q: Query[T]) {
+    def executeS: ScalaFuture[T] = q.execute
+  }
+
+  implicit class PreparedQueryOps[T](q: PreparedQuery[T]) {
+    def execute(params: Any *): ScalaFuture[T] = {
+      q.execute(
+        tupleOf(params)
+      )
+    }
   }
 }

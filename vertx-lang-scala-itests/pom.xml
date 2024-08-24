@@ -3,53 +3,48 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-lang-scala-parent</artifactId>
     <version>4.4.9</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <artifactId>vertx-lang-scala-on-the-fly_${scala.major.version}</artifactId>
-  <name>Scala on the fly compilation</name>
+  <artifactId>vertx-lang-scala-itests</artifactId>
+
+  <name>Vert.x Scala Integration Tests</name>
 
   <dependencies>
-    <!-- What we need at runtime -->
     <dependency>
       <groupId>org.scala-lang</groupId>
       <artifactId>${scala}-library${scala.suffix}</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.scala-lang</groupId>
-      <artifactId>${scala}-compiler${scala.suffix}</artifactId>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-lang-scala_${scala.major.version}</artifactId>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-jdbc-client</artifactId>
     </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
+
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_${scala.major.version}</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.scalactic</groupId>
-      <artifactId>scalactic_${scala.major.version}</artifactId>
-      <version>3.2.11</version>
+      <!-- Using slf4j-simple (without config) to suppress output during tests -->
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
       <scope>test</scope>
     </dependency>
+
     <dependency>
-      <groupId>org.scalatestplus</groupId>
-      <artifactId>junit-4-13_${scala.major.version}</artifactId>
-      <version>3.2.3.0</version>
-      <scope>test</scope>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.1.214</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 
@@ -58,16 +53,12 @@
       <plugin>
         <groupId>net.alchim31.maven</groupId>
         <artifactId>scala-maven-plugin</artifactId>
-        <executions>
-          <execution>
-            <goals>
-              <goal>compile</goal>
-              <goal>testCompile</goal>
-              <goal>doc-jar</goal>
-            </goals>
-          </execution>
-        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.scalatest</groupId>
+        <artifactId>scalatest-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
+
 </project>
