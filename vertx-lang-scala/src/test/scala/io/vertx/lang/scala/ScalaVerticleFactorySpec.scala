@@ -12,9 +12,18 @@ import org.scalatest.flatspec.AsyncFlatSpec
 import language.postfixOps
 import scala.concurrent.Promise
 
-class ScalaVerticleFactoryTest extends AsyncFlatSpec with Matchers {
+class ScalaVerticleFactorySpec extends AsyncFlatSpec with Matchers {
 
   val defaultPatience = Timeout(2 seconds)
+  val vertx: Vertx    = Vertx.vertx
+
+  "ScalaVerticleFactory" should "deploy a ScalaVerticle" in {
+    for {
+      deploymentId <- vertx.deployVerticle(s"scala:${classOf[TestVerticle].getName}").asScala
+      assertion = deploymentId should not be empty
+    }
+    yield assertion
+  }
 
   "A bare Scala-Verticle" should "compile and deploy on the fly" in {
     val promise = Promise[String]()

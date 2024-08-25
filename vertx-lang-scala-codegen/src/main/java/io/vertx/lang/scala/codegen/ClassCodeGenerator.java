@@ -1,8 +1,12 @@
 package io.vertx.lang.scala.codegen;
 
-import io.vertx.codegen.*;
-import io.vertx.codegen.type.*;
+import io.vertx.codegen.Generator;
+import io.vertx.codegen.MethodInfo;
+import io.vertx.codegen.Model;
+import io.vertx.codegen.TypeParamInfo;
 import io.vertx.codegen.doc.Doc;
+import io.vertx.codegen.type.ClassTypeInfo;
+import io.vertx.codegen.type.TypeInfo;
 import io.vertx.lang.scala.codegen.gen.Imports;
 import io.vertx.lang.scala.codegen.gen.Templates;
 
@@ -21,17 +25,15 @@ public class ClassCodeGenerator extends Generator<Model> {
   public Map<String, Set<String>> fileToImports = new HashMap<>();
 
   public static final List<String> ignoredPackages;
+
   static {
     List<String> temp = new ArrayList<>();
     temp.add("io.vertx.redis");
     temp.add("io.vertx.ext.consul.token");
     ignoredPackages = Collections.unmodifiableList(temp);
   }
-  public static final List<String> ignoreClassname;
-  static {
-    List<String> temp = new ArrayList<>();
-    ignoreClassname = Collections.unmodifiableList(temp);
-  }
+
+  public static final List<String> ignoreClassname = Collections.unmodifiableList(new ArrayList<>());
 
   public ClassCodeGenerator() {
     LogManager.getLogManager().reset();
@@ -45,7 +47,10 @@ public class ClassCodeGenerator extends Generator<Model> {
 
   @Override
   public String filename(Model model) {
-    if(!((TypeInfo)model.getVars().get("type")).getName().equals("io.vertx.core.buffer.Buffer") && !(model.getFqn().contains(".impl.") || model.getFqn().endsWith(".impl"))) {
+    if (!((TypeInfo) model.getVars().get("type")).getName().equals("io.vertx.core.buffer.Buffer")
+      && !(model.getFqn().contains(".impl.") || model.getFqn().endsWith(".impl"))
+      && model.getAnnotations().stream().noneMatch(annotation -> annotation.getSimpleName().equals("Deprecated"))) {
+
       String fileName = filenameForModel(model);
       fileToImports.put(fileName, new HashSet<>());
 
@@ -82,8 +87,7 @@ public class ClassCodeGenerator extends Generator<Model> {
           (List<MethodInfo>) modelVars.get("staticMethods"),
           (Collection<TypeParamInfo>) modelVars.get("typeParams")
           );
-      }
-      catch (IOException ioe) {
+      } catch (IOException ioe) {
         throw new RuntimeException(ioe);
       }
     }

@@ -2,7 +2,10 @@ package io.vertx.lang.scala.codegen.gen;
 
 import io.vertx.codegen.*;
 import io.vertx.codegen.doc.Doc;
-import io.vertx.codegen.type.*;
+import io.vertx.codegen.type.ClassKind;
+import io.vertx.codegen.type.ClassTypeInfo;
+import io.vertx.codegen.type.ParameterizedTypeInfo;
+import io.vertx.codegen.type.TypeInfo;
 
 import java.io.IOException;
 import java.util.*;
@@ -72,14 +75,14 @@ public class Templates {
     put(JSON_ARRAY, TypeInfo::getName);
     put(ENUM, TypeInfo::getName);
     put(OTHER, type -> getNonGenericType(type.getName()));
-    put(ASYNC_RESULT, t -> "AsyncResult" + (!((ParameterizedTypeInfo)t).getArgs().isEmpty() ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo)t).getArgs().get(0)) + "]" : "[_]"));
-    put(CLASS_TYPE, t -> "Class" + (((ParameterizedTypeInfo)t).getArgs().isEmpty() ? "[_]" : "[" + ((ParameterizedTypeInfo)t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]"));
+    put(ASYNC_RESULT, t -> "AsyncResult" + (!((ParameterizedTypeInfo) t).getArgs().isEmpty() ? "[" + fromTypeToScalaTypeString(((ParameterizedTypeInfo) t).getArgs().get(0)) + "]" : "[?]"));
+    put(CLASS_TYPE, t -> "Class" + (((ParameterizedTypeInfo) t).getArgs().isEmpty() ? "[?]" : "[" + ((ParameterizedTypeInfo) t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]"));
 
     put(API, t -> {
       String ret = getNonGenericType(t.getName());
       if(t.isParameterized()) {
         if (((ParameterizedTypeInfo)t).getArgs().isEmpty()) {
-          ret += "[_]";
+          ret += "[?]";
         } else {
           ret += "[" + ((ParameterizedTypeInfo)t).getArgs().stream().map(Templates::fromTypeToScalaTypeString).collect(Collectors.joining(", ")) + "]";
         }
@@ -458,7 +461,8 @@ public class Templates {
   private static String renderDataobject(DataObjectModel model, String className, ClassTypeInfo type) {
     String constructor = "";
 
-    if((model.hasEmptyConstructor() || model.hasJsonConstructor()) && model.getPropertyMap().entrySet().stream().anyMatch(entry -> entry.getValue().isSetter())) {
+    if ((model.hasEmptyConstructor() || model.hasJsonConstructor())
+      && model.getPropertyMap().values().stream().anyMatch(pi -> pi.isSetter() && !pi.isDeprecated())) {
       if (model.hasJsonConstructor()) {
         constructor =
           applyDataObject(model, type) + " = {\n" +
@@ -480,7 +484,6 @@ public class Templates {
     if (model.isConcrete()) {
         return "  type " +className + " = "+ getNonGenericType(type.getName()) +"\n" +
         "  object " + Helper.getSimpleName(type.getName()) + " {\n" +
-          (model.hasEmptyConstructor() ? "    def apply() = new " + Helper.getSimpleName(type.getName()) + "()\n" : "") +
           (model.hasJsonConstructor() ? "    def apply(json: JsonObject) = new " + Helper.getSimpleName(type.getName()) + "(json)\n" : "") +
           (model.hasStringConstructor() ? "    def apply(str: String) = new " + Helper.getSimpleName(type.getName()) + "(str)\n" : "") +
           constructor + "\n" +
@@ -491,6 +494,7 @@ public class Templates {
 
   private static String applyDataObject(DataObjectModel model, ClassTypeInfo type) {
     return "    def apply( " + model.getPropertyMap().entrySet().stream()
+      .filter(e -> !e.getValue().isDeprecated())
       .map(entry -> {
         String propertyName = entry.getKey();
         PropertyInfo propertyType = entry.getValue();
@@ -512,11 +516,12 @@ public class Templates {
         return null;
       })
       .filter(Objects::nonNull)
-      .collect(Collectors.joining(", ")) + "): " + Helper.getSimpleName(type.getName()) + "";
+      .collect(Collectors.joining(", ")) + "): " + Helper.getSimpleName(type.getName());
   }
 
   private static String dataObjectSetters(DataObjectModel model, ClassTypeInfo type) {
     return model.getPropertyMap().entrySet().stream()
+      .filter(e -> !e.getValue().isDeprecated())
       .map(entry -> {
         String propertyName = entry.getKey();
         PropertyInfo propertyType = entry.getValue();
@@ -620,7 +625,7 @@ public class Templates {
     }
 
     String body = "";
-    if (model instanceof DataObjectModel) {
+    if (model instanceof DataObjectModel && !((DataObjectModel) model).isDeprecated()) {
       body = renderDataobject((DataObjectModel) model, type.getSimpleName(), type) + "\n";
     }
     else if (type.getKind() != HANDLER && !futureMethods.isEmpty()) {

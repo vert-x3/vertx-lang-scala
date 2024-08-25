@@ -15,25 +15,79 @@
  */
 package io.vertx.lang.scala
 
-import scala.collection.mutable.Map
+import io.vertx.core.json.{JsonArray, JsonObject}
 
+import scala.collection.Map
+import scala.collection.JavaConverters.*
 /**
- * @author swilliams
- * @author Edgar Chan
- *
+ * Scala extensions for more idiomatic handling of [[io.vertx.core.json.JsonObject]]
+ * and [[io.vertx.core.json.JsonArray]].
  */
 package object json {
-
-  type JsonArray = io.vertx.core.json.JsonArray
-  type JsonObject = io.vertx.core.json.JsonObject
 
   import scala.language.implicitConversions
 
   implicit def toJsonObject(js: JsObject): JsonObject = js.internal
 
-  implicit class JsObject(val internal: JsonObject) extends AnyVal {
-    import scala.collection.JavaConverters._
-    def asMap: Map[String, AnyRef] = internal.getMap.asScala
+  implicit class JsObject(val internal: JsonObject) {
+
+    def asMap: Map[String, AnyRef] =
+      (for {
+        (key, value) <- internal.getMap.asScala
+        mappedValue = value match {
+          case j: JsonObject => j.asMap
+          case a: JsonArray => a.asList
+          case _ => value
+        }
+      }
+      yield (key, mappedValue)).toMap
+  }
+
+  implicit class JsArray(val internal: JsonArray) {
+    /**
+     * Get the underlying List as an immutable [[List]]. Unlike
+     * Vert.x core's [[io.vertx.core.json.JsonArray.getList]], this method guarantees
+     * to convert every contained [[JsonObject]] or [[JsonArray]] into a [[Map]] or [[List]],
+     * respectively. That's done, however, at the cost of one pass through each contained
+     * [[JsonObject]] or [[JsonArray]].
+     */
+    def asList: List[Any] = (
+      for {
+        value <- internal.getList.asScala
+        mappedValue = value match {
+          case j: JsonObject => j.asMap
+          case a: JsonArray  => a.asList
+          case _             => value
+        }
+      }
+      yield mappedValue
+    ).toList
+  }
+
+  implicit class JsonString(val sc: StringContext) {
+    /**
+     * Interpolates the given String as a [[JsonObject]].
+     */
+    def json(args: Any*): JsonObject = {
+      new JsonObject(interpolated(sc.parts, args))
+    }
+
+    /**
+     * Interpolates the given String as a [[JsonArray]].
+     */
+    def jsonArray(args: Any*): JsonArray = {
+      new JsonArray(interpolated(sc.parts, args))
+    }
+  }
+
+  private def interpolated(stringParts: Seq[String], args: Seq[Any]): String = {
+    val stringBuilder = new StringBuilder()
+    for (
+      (stringPart, argument) <- stringParts.zipAll(args, "", "")
+    ) {
+      stringBuilder.append(stringPart).append(argument.toString)
+    }
+    stringBuilder.toString.trim
   }
 
 }

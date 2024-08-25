@@ -6,7 +6,7 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-lang-scala-parent</artifactId>
-    <version>4.4.9</version>
+    <version>4.5.8</version>
   </parent>
 
   <artifactId>vertx-lang-scala-itests</artifactId>
@@ -43,7 +43,7 @@
     <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
-      <version>2.1.214</version>
+      <version>2.2.224</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

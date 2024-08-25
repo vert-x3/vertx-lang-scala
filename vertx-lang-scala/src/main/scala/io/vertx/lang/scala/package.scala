@@ -1,16 +1,19 @@
 package io.vertx.lang
 
-import concurrent.{Future => ScalaFuture, Promise => ScalaPromise}
-import util.{Failure, Success, Try}
+import concurrent.{Future as ScalaFuture, Promise as ScalaPromise}
 import io.vertx.lang.scala.conv.{VertxFuture, scalaFutureToVertxFuture, vertxFutureToScalaFuture}
-import io.vertx.core.{AsyncResult, DeploymentOptions, Handler, Vertx, Promise => VertxPromise}
+import io.vertx.core.{AsyncResult, Handler, Vertx, Promise as VertxPromise}
+import io.vertx.scala.core.DeploymentOptions
 import io.vertx.sqlclient.{PreparedQuery, Query, Tuple}
 import io.vertx.sqlclient.impl.ArrayTuple
+
+import java.util.concurrent.Callable
 
 package object scala {
 
   implicit class VertxFutureConverter[T](vertxFuture: VertxFuture[T]) {
     def asScala: ScalaFuture[T] = vertxFutureToScalaFuture(vertxFuture)
+    def map[R](mapper: T => R): ScalaFuture[R] = vertxFuture.map(mapper).asInstanceOf[VertxFuture[R]].asScala
   }
 
   implicit class FutureConverter[T](scalaFuture: ScalaFuture[T]) {
@@ -47,20 +50,18 @@ package object scala {
     promise.future
   }
 
-  implicit class VertxScala(val asJava: Vertx) extends AnyVal {
+  implicit class VertxScala(val asJava: Vertx) {
     /**
      * Like [[deployVerticle]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def deployVerticle(verticle: ScalaVerticle): ScalaFuture[String] = {
+    def deployVerticle(verticle: ScalaVerticle): ScalaFuture[String] =
       asJava.deployVerticle(verticle.asJava).asScala
-    }
 
     /**
      * Like [[deployVerticle]] but returns a Scala Future instead of taking an AsyncResultHandler.
      */
-    def deployVerticle(verticle: ScalaVerticle, options: DeploymentOptions): ScalaFuture[String] = {
+    def deployVerticle(verticle: ScalaVerticle, options: DeploymentOptions): ScalaFuture[String] =
       asJava.deployVerticle(verticle.asJava, options).asScala
-    }
 
     /**
      * Safely execute some blocking code.
@@ -74,19 +75,13 @@ package object scala {
      * @return a Future representing the result of the blocking operation
      */
     def executeBlockingScala[T](blockingFunction: () => T, ordered: Boolean = true): concurrent.Future[T] = {
-      val h: Handler[VertxPromise[T]] = { p =>
-        Try(blockingFunction()) match {
-          case Success(s) => p.complete(s)
-          case Failure(t) => p.fail(t)
-        }
-      }
-      asJava.executeBlocking[T](h, ordered).asScala
+      val c: Callable[T] = () => blockingFunction()
+      asJava.executeBlocking[T](c, ordered).asScala
     }
 
     /**
      * Set a default exception handler for [[io.vertx.core.Context]], set on [[io.vertx.core.Context#exceptionHandler]] at creation.
-     * * @param handler the exception handler
-     *
+     * @param handler the exception handler
      * @return a reference to this, so the API can be used fluently
      */
     def exceptionHandler(handler: Option[Throwable => Unit]): Vertx =
@@ -102,8 +97,12 @@ package object scala {
      */
     def deployVerticle(name: String, options: DeploymentOptions): ScalaFuture[String] =
       asJava.deployVerticle(name, options).asScala
+
   }
 
+  /**
+   * Create a Vertx tuple from var args ( scalac cannot handle Tuple.of() )
+   */
   def tupleOf(x: Any *): Tuple =
     x.foldLeft(new ArrayTuple(x.length)){ (a,e) =>
       a.addValue(e)
@@ -114,6 +113,9 @@ package object scala {
     def executeS: ScalaFuture[T] = q.execute
   }
 
+  /**
+   * Simplified version of `execute` using varargs instead of vertex Tuple
+   */
   implicit class PreparedQueryOps[T](q: PreparedQuery[T]) {
     def execute(params: Any *): ScalaFuture[T] = {
       q.execute(

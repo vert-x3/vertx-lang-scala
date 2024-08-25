@@ -7,7 +7,7 @@
   <parent>
     <groupId>io.vertx</groupId>
     <artifactId>vertx-lang-scala-parent</artifactId>
-    <version>4.4.9</version>
+    <version>4.5.8</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -16,8 +16,7 @@
   <name>Vert.x Scala Language Support</name>
 
   <properties>
-    <asciidoc.dir>${project.basedir}/src/main/asciidoc</asciidoc.dir>
-    <log4j2.version>2.17.1</log4j2.version>
+    <micrometer.version>1.12.4</micrometer.version>
   </properties>
 
   <dependencies>
@@ -36,10 +35,6 @@
       <groupId>org.scala-lang</groupId>
       <artifactId>${scala}-library${scala.suffix}</artifactId>
     </dependency>
-    <!--dependency>
-      <groupId>org.scala-lang</groupId>
-      <artifactId>${scala}-reflect${scala.suffix}</artifactId>
-    </dependency-->
 
     <!-- Stack dependencies -->
     <dependency>
@@ -367,25 +362,15 @@
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
-
-    <dependency>
-      <groupId>co.helmethair</groupId>
-      <artifactId>scalatest-junit-runner</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_${scala.major.version}</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.scalatestplus</groupId>
+      <artifactId>scalacheck-1-17_${scala.major.version}</artifactId>
+      <version>3.2.18.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -399,31 +384,11 @@
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>assemble-docs</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-            <configuration>
-              <attach>true</attach>
-              <descriptors>
-                <descriptor>src/main/assembly/docs.xml</descriptor>
-              </descriptors>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
         <configuration>
           <includeGroupIds>io.vertx</includeGroupIds>
           <includeArtifactIds>
             vertx-core,
-            vertx-unit,
             vertx-bridge-common,
             vertx-mongo-client,
             vertx-cassandra-client,
@@ -484,7 +449,8 @@
             vertx-shell,
             vertx-micrometer-metrics,
             vertx-tcp-eventbus-bridge,
-            vertx-json-schema
+            vertx-json-schema,
+            vertx-openapi
           </includeArtifactIds>
           <classifier>sources</classifier>
           <includeTypes>jar</includeTypes>
@@ -515,7 +481,7 @@
       <plugin>
         <groupId>org.bsc.maven</groupId>
         <artifactId>maven-processor-plugin</artifactId>
-        <version>4.5-jdk8</version>
+        <version>5.0</version>
         <configuration>
           <systemProperties>
             <java.util.logging.SimpleFormatter.format>%4$s: %3$s - %5$s %6$s%n</java.util.logging.SimpleFormatter.format>
@@ -548,19 +514,9 @@
             <version>${project.version}</version>
           </dependency>
           <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.1</version>
-          </dependency>
-          <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>2.4.7</version>
-          </dependency>
-          <dependency>
             <groupId>com.netflix.hystrix</groupId>
             <artifactId>hystrix-core</artifactId>
-            <version>1.5.2</version>
+            <version>1.5.18</version>
             <exclusions>
               <exclusion>
                 <groupId>io.reactivex</groupId>
@@ -571,52 +527,37 @@
           <dependency>
             <groupId>io.swagger.parser.v3</groupId>
             <artifactId>swagger-parser-core</artifactId>
-            <version>2.1.12</version>
-          </dependency>
-          <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
+            <version>2.1.21</version>
           </dependency>
           <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>${log4j2.version}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j2.version}</version>
-          </dependency>
-          <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.21</version>
+            <version>2.23.1</version>
           </dependency>
 
           <!-- Transitive dependencies declared as optional in other modules, and needed for instance in docgen -->
           <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
-            <version>1.0.0</version>
+            <version>${micrometer.version}</version>
             <optional>true</optional>
           </dependency>
           <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-influx</artifactId>
-            <version>1.0.0</version>
+            <version>${micrometer.version}</version>
             <optional>true</optional>
           </dependency>
           <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-jmx</artifactId>
-            <version>1.0.0</version>
+            <version>${micrometer.version}</version>
             <optional>true</optional>
           </dependency>
           <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-graphite</artifactId>
-            <version>1.0.0</version>
+            <version>${micrometer.version}</version>
             <optional>true</optional>
           </dependency>
         </dependencies>
@@ -632,7 +573,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>1.8</version>
+        <version>3.5.0</version>
         <executions>
           <execution>
             <id>add-source</id>

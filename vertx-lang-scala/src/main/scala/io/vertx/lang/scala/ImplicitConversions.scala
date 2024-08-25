@@ -7,7 +7,7 @@ import scala.language.implicitConversions
 
 object ImplicitConversions {
 
-  implicit def vertxFutureVoidToScalaFutureUnit(f: VertxFuture[Void]): Future[Unit] = f.map({}).asInstanceOf[VertxFuture[Unit]].asScala
+  implicit def vertxFutureToScalaFutureUnit[T](f: VertxFuture[T]): Future[Unit] = f.map({}).asInstanceOf[VertxFuture[Unit]].asScala
 
   implicit def vertxPromiseToScalaPromise[T](p: VertxPromise[T]): Promise[T] = p.asScala
 

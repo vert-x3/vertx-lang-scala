@@ -1,6 +1,6 @@
 package io.vertx.lang.scala
 
-import io.vertx.core.{DeploymentOptions, Vertx}
+import io.vertx.core.{DeploymentOptions, ThreadingModel, Vertx}
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.concurrent.PatienceConfiguration.Timeout
 import org.scalatest.concurrent.Waiters.{Waiter, _}
@@ -16,7 +16,7 @@ class VertxTest extends AnyFlatSpec with Matchers {
 
   "Vert.x executeBlocking" should "should perform on a different thread" in {
     val vertx = Vertx.vertx
-    implicit val exec = VertxExecutionContext(vertx, vertx.getOrCreateContext())
+    implicit val exec: VertxExecutionContext = VertxExecutionContext(vertx, vertx.getOrCreateContext())
     val waiter = new Waiter()
     vertx.executeBlockingScala[Long](() => Thread.currentThread().getId).onComplete(s => {
       assert(s.get != Thread.currentThread().getId)
@@ -46,7 +46,7 @@ class VertxTest extends AnyFlatSpec with Matchers {
           waiter.dismiss()
         }
       }
-    }, new DeploymentOptions().setWorker(true))
+    }, new DeploymentOptions().setThreadingModel(ThreadingModel.WORKER))
     waiter.await(dismissals(1))
   }
 
@@ -81,7 +81,7 @@ class VertxTest extends AnyFlatSpec with Matchers {
           waiter.dismiss()
         }
       }
-    }, new DeploymentOptions().setWorker(true))
+    }, new DeploymentOptions().setThreadingModel(ThreadingModel.WORKER))
     future.onComplete {
       case Success(_) => futureWaiter.dismiss()
       case Failure(t) => t.printStackTrace()

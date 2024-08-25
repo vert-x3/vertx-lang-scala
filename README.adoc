@@ -1,13 +1,13 @@
 = Vert.x Scala
 
-image:https://github.com/vert-x3/vertx-lang-scala/workflows/CI/badge.svg?branch=master["Build Status",link="https://github.com/vert-x3/vertx-lang-scala/actions?query=workflow%3ACI"]
+image:https://github.com/vert-x3/vertx-lang-scala/actions/workflows/ci.yml/badge.svg["Build Status",link="https://github.com/vert-x3/vertx-lang-scala/actions/workflows/ci.yml"]
 image:https://img.shields.io/maven-central/v/io.vertx/vertx-lang-scala.svg["Maven Central"]
 
 Vert.x-Scala provides language bindings and helpers for using Scala with Vert.x.
 
 Please see the main documentation on the web-site for a full description:
 
-* https://vertx.io/docs/#scala[Web-site documentation]
+* http://vert-x3.github.io/vertx-lang-scala/[Web-site documentation]
 
 == Structure
 
