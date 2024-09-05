@@ -15,3 +15,12 @@ Please see the main documentation on the web-site for a full description:
 - vertx-lang-scala-test: Test helpers for Vert.x-Scala unit tests
 - vertx-lang-scala-codegen: codegen for Scala
 - vertx-lang-scala-on-the-fly: A compiler-implementation that allows to compile Scala-code from source/classpath.
+
+
+== Releasing
+
+In order to perform a release of this software,
+
+  1. Set the release version in the aggregator `pom.xml` and all modules' `pom.xml` files
+  2. Commit, build and push to Maven Central
+  3. Set the next SNAPSHOT version in the aggregator `pom.xml` and all modules' `pom.xml` files
