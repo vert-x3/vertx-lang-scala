@@ -17,7 +17,7 @@
   <name>Vert.x Scala Language Support</name>
 
   <properties>
-    <micrometer.version>1.13.3</micrometer.version>
+    <micrometer.version>1.13.4</micrometer.version>
   </properties>
 
   <dependencies>
