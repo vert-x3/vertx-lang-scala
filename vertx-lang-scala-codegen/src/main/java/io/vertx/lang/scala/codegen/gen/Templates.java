@@ -96,7 +96,13 @@ public class Templates {
       put(JSON_OBJECT, TypeInfo::getName);
       put(JSON_ARRAY, TypeInfo::getName);
       put(ENUM, TypeInfo::getName);
-      put(OTHER, type -> getNonGenericType(type.getName()));
+      put(OTHER, type -> {
+        if (type.getName().equals("byte[]")) {
+          return "Array[Byte]";
+        } else {
+          return getNonGenericType(type.getName());
+        }
+      });
       put(CLASS_TYPE,
           t -> "Class" + (((ParameterizedTypeInfo) t).getArgs().isEmpty() ? "[?]"
               : "[" + ((ParameterizedTypeInfo) t).getArgs().stream().map(Templates::fromTypeToScalaTypeString)
