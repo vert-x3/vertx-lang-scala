@@ -389,10 +389,12 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>org.junit.vintage</groupId>
       <artifactId>junit-vintage-engine</artifactId>
+      <optional>true</optional>
     </dependency>
     <!-- Transitive dependencies declared as optional in other modules, and needed for
       instance in docgen -->
@@ -557,17 +559,13 @@
                 <annotationProcessorPath>
                   <groupId>io.vertx</groupId>
                   <artifactId>vertx-codegen</artifactId>
+                  <classifier>processor</classifier>
                 </annotationProcessorPath>
                 <annotationProcessorPath>
                   <groupId>io.vertx</groupId>
                   <artifactId>vertx-lang-scala-codegen</artifactId>
                   <version>${project.version}</version>
                 </annotationProcessorPath>
-                <dependency>
-                  <groupId>io.vertx</groupId>
-                  <artifactId>vertx-lang-scala-codegen</artifactId>
-                  <version>${project.version}</version>
-                </dependency>
               </annotationProcessorPaths>
             </configuration>
           </execution>
