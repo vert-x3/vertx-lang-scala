@@ -99,6 +99,8 @@ public class Templates {
       put(OTHER, type -> {
         if (type.getName().equals("byte[]")) {
           return "Array[Byte]";
+        } else if (type.isParameterized()) {
+          return toScalaParameterizedType(type);
         } else {
           return getNonGenericType(type.getName());
         }
@@ -108,18 +110,7 @@ public class Templates {
               : "[" + ((ParameterizedTypeInfo) t).getArgs().stream().map(Templates::fromTypeToScalaTypeString)
                   .collect(Collectors.joining(", ")) + "]"));
 
-      put(API, t -> {
-        String ret = getNonGenericType(t.getName());
-        if (t.isParameterized()) {
-          if (((ParameterizedTypeInfo) t).getArgs().isEmpty()) {
-            ret += "[?]";
-          } else {
-            ret += "[" + ((ParameterizedTypeInfo) t).getArgs().stream().map(Templates::fromTypeToScalaTypeString)
-                .collect(Collectors.joining(", ")) + "]";
-          }
-        }
-        return ret;
-      });
+      put(API, Templates::toScalaParameterizedType);
 
       put(FUNCTION, t -> {
         boolean paramIsVoid = ((ParameterizedTypeInfo) t).getArgs().get(0).getKind() == VOID;
@@ -133,6 +124,17 @@ public class Templates {
       });
     }
   };
+
+  private static final String toScalaParameterizedType(TypeInfo t) {
+    String ret = getNonGenericType(t.getName());
+    if (((ParameterizedTypeInfo) t).getArgs().isEmpty()) {
+      ret += "[?]";
+    } else {
+      ret += "[" + ((ParameterizedTypeInfo) t).getArgs().stream().map(Templates::fromTypeToScalaTypeString)
+          .collect(Collectors.joining(", ")) + "]";
+    }
+    return ret;
+  }
 
   private static final Map<ClassKind, BiFunction<String, TypeInfo, String>> toJavaWithConversionFromScala = new HashMap<ClassKind, BiFunction<String, TypeInfo, String>>() {
     {
