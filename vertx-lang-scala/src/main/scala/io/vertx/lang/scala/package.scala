@@ -83,22 +83,3 @@ package object scala:
     def closeFuture(): ScalaFuture[Unit] = asJava.close
                                                  .map((_: Void) => ())
                                                  .asScala
-
-    /**
-     * Like deployVerticle from [[io.vertx.core.Vertx]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-    def deployVerticle(name: String): ScalaFuture[String] = asJava.deployVerticle(name).asScala
-
-    /**
-     * Like deployVerticle from [[io.vertx.core.Vertx]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-    def deployVerticle(name: String, options: DeploymentOptions): ScalaFuture[String] =
-      asJava.deployVerticle(name, options).asScala
-
-    /**
-     * Like undeploy from [[io.vertx.core.Vertx]] but returns a Scala Future instead of taking an AsyncResultHandler.
-     */
-    def undeploy(deploymentID: String): ScalaFuture[Unit] =
-      asJava.undeploy(deploymentID)
-            .map(_ => ())
-            .asScala
