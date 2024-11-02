@@ -48,6 +48,11 @@
         <scope>import</scope>
       </dependency>
       <dependency>
+        <groupId>io.vertx</groupId>
+        <artifactId>vertx-docgen</artifactId>
+        <version>0.9.4</version>
+      </dependency>
+      <dependency>
         <groupId>org.scala-lang</groupId>
         <artifactId>scala3-library_3</artifactId>
         <version>${scala.version}</version>
