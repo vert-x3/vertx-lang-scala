@@ -10,7 +10,7 @@
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>vertx-lang-scala-parent</artifactId>
-  <version>4.5.10-SNAPSHOT</version>
+  <version>4.5.11-SNAPSHOT</version>
   <packaging>pom</packaging>
   <inceptionYear>2016</inceptionYear>
 
@@ -43,7 +43,7 @@
     <dependencies>
       <dependency>
         <groupId>io.vertx</groupId>
-        <artifactId>vertx-stack-depchain</artifactId>
+        <artifactId>vertx-dependencies</artifactId>
         <version>${stack.version}</version>
         <type>pom</type>
         <scope>import</scope>
