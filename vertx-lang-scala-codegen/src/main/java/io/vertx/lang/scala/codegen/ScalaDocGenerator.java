@@ -3,7 +3,7 @@ package io.vertx.lang.scala.codegen;
 import io.vertx.codegen.type.*;
 import io.vertx.codetrans.CodeTranslator;
 import io.vertx.codetrans.lang.scala.ScalaLang;
-import io.vertx.docgen.DocGenerator;
+import io.vertx.docgen.processor.impl.DocGenerator;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.type.ExecutableType;
 import javax.lang.model.type.TypeMirror;
