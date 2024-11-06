@@ -6,7 +6,7 @@ import io.vertx.codegen.processor.type.TypeInfo;
 import io.vertx.codegen.processor.type.TypeMirrorFactory;
 import io.vertx.codetrans.CodeTranslator;
 import io.vertx.codetrans.lang.scala.ScalaLang;
-import io.vertx.docgen.DocGenerator;
+import io.vertx.docgen.processor.impl.DocGenerator;
 import javax.annotation.processing.ProcessingEnvironment;
 import javax.lang.model.type.ExecutableType;
 import javax.lang.model.type.TypeMirror;
