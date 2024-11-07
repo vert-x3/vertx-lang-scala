@@ -47,7 +47,7 @@ jobs:
     - name: Upload GitHub Pages artifact
       uses: actions/upload-pages-artifact@v2
       with:
-        path: vertx-lang-scala/target/scala-3.5.0/api/
+        path: vertx-lang-scala/target/scala-3.5.2/api/
 
     - name: Deploy to GitHub Pages
       id: deployment
