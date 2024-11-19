@@ -1,24 +1,31 @@
 = Vert.x Scala
 
 image:https://github.com/vert-x3/vertx-lang-scala/actions/workflows/ci.yml/badge.svg["Build Status",link="https://github.com/vert-x3/vertx-lang-scala/actions/workflows/ci.yml"]
-image:https://img.shields.io/maven-central/v/io.vertx/vertx-lang-scala.svg["Maven Central"]
+image:https://img.shields.io/maven-central/v/io.vertx/vertx-lang-scala_3.svg["Maven Central"]
 
-Vert.x-Scala provides language bindings and helpers for using Scala with Vert.x.
+Vert.x-Scala provides language bindings and helpers for a more idiomatic use of Vert.x with Scala.
 
 Please see the main documentation on the web-site for a full description:
 
 * http://vert-x3.github.io/vertx-lang-scala/[Web-site documentation]
 
-== Structure
+=== For Developers
+The following sections explain how to **use** Vert.x-Scala.
 
-- vertx-lang-scala: The main module containing the actual language implementation
-- vertx-lang-scala-test: Test helpers for Vert.x-Scala unit tests
-- vertx-lang-scala-codegen: codegen for Scala
-- vertx-lang-scala-on-the-fly: A compiler-implementation that allows to compile Scala-code from source/classpath.
+=== Getting started with sbt
+There is a Giter8 template to get you started real quickly with sbt:
 
+```shell
+sbt new https://github.com/vert-x3/vertx-scala.g8
+```
 
-== Releasing
+=== Getting started with Maven/Gradle
+We are working on a starter configuration for https://start.vertx.io[start.vertx.io]. You should be able to generate a starter project soon from there.
 
+== For Maintainers
+The following sections are for maintainers of this software.
+
+=== Releasing
 In order to perform a release of this software,
 
   1. Set the release version in the aggregator `pom.xml` and all modules' `pom.xml` files
