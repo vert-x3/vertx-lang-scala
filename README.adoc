@@ -13,7 +13,7 @@ Please see the main documentation on the web-site for a full description:
 The following sections explain how to **use** Vert.x-Scala.
 
 === Getting started with sbt
-There is a Giter8 template to get you started real quickly with sbt:
+There is a https://github.com/vert-x3/vertx-scala.g8[Giter8 template] to get you started real quickly with sbt:
 
 ```shell
 sbt new https://github.com/vert-x3/vertx-scala.g8
