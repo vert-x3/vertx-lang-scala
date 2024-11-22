@@ -116,19 +116,47 @@
           <groupId>net.alchim31.maven</groupId>
           <artifactId>scala-maven-plugin</artifactId>
           <version>4.9.2</version>
-          <configuration>
-            <args>
-              <arg>java-output-version 11</arg>
-              <arg>-feature</arg>
-              <arg>-deprecation</arg>
-            </args>
-          </configuration>
           <executions>
             <execution>
+              <id>add-sources</id>
+              <phase>process-sources</phase>
+              <goals>
+                <goal>add-source</goal>
+              </goals>
+            </execution>
+            <execution>
+              <id>compile</id>
+              <phase>compile</phase>
               <goals>
                 <goal>compile</goal>
-                <goal>testCompile</goal>
               </goals>
+              <configuration>
+                <arg>-java-output-version 11</arg>
+                <arg>-feature</arg>
+                <arg>-deprecation</arg>
+              </configuration>
+            </execution>
+            <execution>
+              <id>package-doc-jar</id>
+              <phase>package</phase>
+              <goals>
+                <goal>doc-jar</goal>
+              </goals>
+              <configuration>
+                <scaladocClassName>dotty.tools.scaladoc.Main</scaladocClassName>
+                <sourceDir>${project.build.outputDirectory}</sourceDir>
+                <args>-nobootcp</args>
+                <includes>
+                  <include>**/*.tasty</include>
+                </includes>
+                <dependencies>
+                  <dependency>
+                    <groupId>org.scala-lang</groupId>
+                    <artifactId>scaladoc_3</artifactId>
+                    <version>${scala.version}</version>
+                  </dependency>
+                </dependencies>
+              </configuration>
             </execution>
           </executions>
         </plugin>
@@ -151,6 +179,21 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>3.5.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.3.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>3.11.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>3.1.3</version>
         </plugin>
         <plugin>
           <groupId>org.scalatest</groupId>
